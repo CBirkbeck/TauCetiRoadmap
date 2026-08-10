@@ -1,9 +1,10 @@
 # Revised arithmetic roadmap portfolio
 
-This directory contains a coordinated rewrite of the thirteen proposals in
-`roed-math/TauCetiRoadmap`, together with the withdrawn Chebotarev roadmap of Tau Ceti PR 181.
-The purpose of this portfolio is to settle ownership and dependency order before the
-roadmaps are submitted separately.
+This directory contains nineteen coordinated roadmaps: a rewrite of the thirteen proposals in
+`roed-math/TauCetiRoadmap`, together with [`Chebotarev`](TauCetiRoadmap/Chebotarev/README.md),
+whose earlier single-roadmap draft is superseded by the version here. The purpose of this
+portfolio is to settle ownership and dependency order before the roadmaps are submitted
+separately. `REVISED_ARITHMETIC_MIGRATION.md` records where each one came from.
 
 The revision follows four rules.
 
@@ -12,7 +13,7 @@ The revision follows four rules.
    which simultaneously depends on the consumer.
 3. Arithmetic carriers are separated from the theorems which classify them.  For example,
    ray class groups and Hecke characters are constructed before class field theory and
-   analytic \(L\)-functions.
+   analytic `L`-functions.
 4. General infrastructure is not hidden inside its first application.  Tate cohomology is
    not local-field theory; Tamagawa measures are not orthogonal-group theory; prime-density
    and Tauberian machinery are not Chebotarev-specific.
@@ -21,27 +22,27 @@ The revision follows four rules.
 
 | Directory | Subject | Principal suppliers |
 |---|---|---|
-| `ProfiniteCohomology` | Continuous cohomology of profinite groups | Mathlib |
-| `ProfiniteProPGroups` | Profinite and pro-\(p\) groups; abstract Demushkin theory | Profinite Cohomology |
-| `LocalFieldsRamification` | Local fields, units, ramification, Hasse–Arf, tame quotient | Profinite/Pro-\(p\) for \(\widehat{\mathbf Z}\) |
-| `NumberFieldArithmetic` | Splitting, Frobenius, differents, discriminants, completions | Mathlib and current Tau Ceti |
-| `GlobalNumberFields` | Adeles, ideles, ray classes, Hecke-character carriers, orders | Number-Field Arithmetic |
-| `ClassFieldTheory` | Abstract class formations, local CFT, global CFT, class fields | Profinite Cohomology; Local and Global Fields |
-| `LocalGaloisGroups` | \(G_K(p)\), Demushkin applications, ranks of \(G_K\) | Pro-\(p\), Local Fields, Class Field Theory |
-| `QuadraticFormInvariants` | Witt theory, local forms, Brauer and cohomological invariants | Local Fields; Profinite Cohomology; CFT |
-| `GlobalQuadraticForms` | Hasse–Minkowski and global classification | Quadratic Forms; CFT; Global Fields |
-| `AlgebraicCurves` | Function fields, divisors, Riemann–Roch, regular projective curves | Mathlib |
-| `AnalyticNumberTheory` | Ideal Euler products, prime density, Abel/Perron, Wiener–Ikehara | Mathlib |
-| `LFunctions` | Dedekind zeta and Hecke \(L\)-functions | Global Fields; Analytic Number Theory |
-| `Chebotarev` | Dirichlet-density and PNT forms of Chebotarev | Number-Field Arithmetic; Analytic Number Theory |
-| `ZerosOfLFunctions` | Growth, zero counts, zero-free regions, explicit formulae | L-functions; Analytic Number Theory; Contour Integration |
-| `PolynomialGaloisGroups` | Blocks, resolvents, cycle types, certificates | Number-Field Arithmetic |
-| `AdelicAlgebraicGroups` | Adelic point groups, strong approximation, Tamagawa measures | Global Fields; Reductive Groups |
-| `OrthogonalSpinGroups` | \(O\), \(SO\), `Spin`, spinor norm, \(\tau(SO)=2\) | Quadratic Forms; Adelic Groups |
-| `IntegralLattices` | Integral and \(p\)-adic lattices, mass, Nikulin, theta series | Quadratic Forms; CFT; Orthogonal Groups; L-functions |
-| `BelyiMaps` | Triples, dessins, Riemann existence, Belyi, Galois action | Algebraic Curves; Profinite Groups; Polynomial Galois |
+| [`ProfiniteCohomology`](TauCetiRoadmap/ProfiniteCohomology/README.md) | Continuous cohomology of profinite groups | Mathlib |
+| [`ProfiniteProPGroups`](TauCetiRoadmap/ProfiniteProPGroups/README.md) | Profinite and pro-`p` groups; abstract Demushkin theory | Profinite Cohomology |
+| [`LocalFieldsRamification`](TauCetiRoadmap/LocalFieldsRamification/README.md) | Local fields, units, ramification, Hasse–Arf, tame quotient | Profinite/Pro-`p` for `Ẑ` |
+| [`NumberFieldArithmetic`](TauCetiRoadmap/NumberFieldArithmetic/README.md) | Splitting, Frobenius, differents, discriminants, completions | Mathlib and current Tau Ceti |
+| [`GlobalNumberFields`](TauCetiRoadmap/GlobalNumberFields/README.md) | Adeles, ideles, ray classes, Hecke-character carriers, orders | Number-Field Arithmetic |
+| [`ClassFieldTheory`](TauCetiRoadmap/ClassFieldTheory/README.md) | Abstract class formations, local CFT, global CFT, class fields | Profinite Cohomology; Local and Global Fields |
+| [`LocalGaloisGroups`](TauCetiRoadmap/LocalGaloisGroups/README.md) | `G_K(p)`, Demushkin applications, ranks of `G_K` | Pro-`p`, Local Fields, Class Field Theory |
+| [`QuadraticFormInvariants`](TauCetiRoadmap/QuadraticFormInvariants/README.md) | Witt theory, local forms, Brauer and cohomological invariants | Local Fields; Profinite Cohomology; CFT |
+| [`GlobalQuadraticForms`](TauCetiRoadmap/GlobalQuadraticForms/README.md) | Hasse–Minkowski and global classification | Quadratic Forms; CFT; Global Fields |
+| [`AlgebraicCurves`](TauCetiRoadmap/AlgebraicCurves/README.md) | Function fields, divisors, Riemann–Roch, regular projective curves | Mathlib |
+| [`AnalyticNumberTheory`](TauCetiRoadmap/AnalyticNumberTheory/README.md) | Ideal Euler products, prime density, Abel/Perron, Wiener–Ikehara | Mathlib |
+| [`LFunctions`](TauCetiRoadmap/LFunctions/README.md) | Dedekind zeta and Hecke `L`-functions | Global Fields; Analytic Number Theory |
+| [`Chebotarev`](TauCetiRoadmap/Chebotarev/README.md) | Dirichlet-density and PNT forms of Chebotarev | Number-Field Arithmetic; Analytic Number Theory |
+| [`ZerosOfLFunctions`](TauCetiRoadmap/ZerosOfLFunctions/README.md) | Growth, zero counts, zero-free regions, explicit formulae | L-functions; Analytic Number Theory; Contour Integration |
+| [`PolynomialGaloisGroups`](TauCetiRoadmap/PolynomialGaloisGroups/README.md) | Blocks, resolvents, cycle types, certificates | Number-Field Arithmetic |
+| [`AdelicAlgebraicGroups`](TauCetiRoadmap/AdelicAlgebraicGroups/README.md) | Adelic point groups, strong approximation, Tamagawa measures | Global Fields; Reductive Groups |
+| [`OrthogonalSpinGroups`](TauCetiRoadmap/OrthogonalSpinGroups/README.md) | `O`, `SO`, `Spin`, spinor norm, `τ(SO) = 2` | Quadratic Forms; Adelic Groups |
+| [`IntegralLattices`](TauCetiRoadmap/IntegralLattices/README.md) | Integral and `p`-adic lattices, mass, Nikulin, theta series | Quadratic Forms; CFT; Orthogonal Groups; L-functions |
+| [`BelyiMaps`](TauCetiRoadmap/BelyiMaps/README.md) | Triples, dessins, Riemann existence, Belyi, Galois action | Algebraic Curves; Profinite Groups; Polynomial Galois |
 
-## Why the original Local Fields and Pro-\(p\) proposals cannot be merged unchanged
+## Why the original Local Fields and Pro-`p` proposals cannot be merged unchanged
 
 The original proposals contained the layer pattern
 
@@ -57,14 +58,14 @@ the rank theorem stated back in Local Fields.
 
 That is an acyclic **layer** graph but a cyclic **roadmap** graph: neither complete roadmap can
 precede the other.  The revision separates the final arithmetic applications into
-`LocalGaloisGroups`.  The abstract pro-\(p\) roadmap can then be accepted before Local Fields,
+`LocalGaloisGroups`.  The abstract pro-`p` roadmap can then be accepted before Local Fields,
 and Local Galois Groups follows both Local Fields and Class Field Theory.
 
 ## Why class field theory is one roadmap
 
 The common theorem is the Artin–Tate class-formation argument.  Tate cohomology,
 fundamental classes, and Tate–Nakayama should be proved once.  The local instance uses
-\(L^\times\); the global instance uses the idèle class group \(C_L\).  The local and global
+`L^×`; the global instance uses the idèle class group `C_L`.  The local and global
 existence theorems remain separate arithmetic layers inside the same roadmap.
 
 The arithmetic substrates are separate:
@@ -77,7 +78,7 @@ The arithmetic substrates are separate:
 
 ## Why a shared analytic-number-theory roadmap is needed
 
-Without `AnalyticNumberTheory`, the proposed \(L\)-functions and Chebotarev roadmaps both own:
+Without `AnalyticNumberTheory`, the proposed `L`-functions and Chebotarev roadmaps both own:
 
 - ideal-indexed Euler products;
 - norm regrouping into `LSeries`;
@@ -97,43 +98,43 @@ parallel.
 
 ### Tier 1
 
-- Profinite Cohomology
-- Number-Field Arithmetic
-- Algebraic Curves
-- Analytic Number Theory
+- [Profinite Cohomology](TauCetiRoadmap/ProfiniteCohomology/README.md)
+- [Number-Field Arithmetic](TauCetiRoadmap/NumberFieldArithmetic/README.md)
+- [Algebraic Curves](TauCetiRoadmap/AlgebraicCurves/README.md)
+- [Analytic Number Theory](TauCetiRoadmap/AnalyticNumberTheory/README.md)
 
 ### Tier 2
 
-- Profinite and Pro-\(p\) Groups
-- Local Fields and Ramification
-- Global Number Fields
-- Polynomial Galois Groups
-- Chebotarev
+- [Profinite and Pro-p Groups](TauCetiRoadmap/ProfiniteProPGroups/README.md)
+- [Local Fields and Ramification](TauCetiRoadmap/LocalFieldsRamification/README.md)
+- [Global Number Fields](TauCetiRoadmap/GlobalNumberFields/README.md)
+- [Polynomial Galois Groups](TauCetiRoadmap/PolynomialGaloisGroups/README.md)
+- [Chebotarev](TauCetiRoadmap/Chebotarev/README.md)
 
 ### Tier 3
 
-- Class Field Theory
-- L-functions
-- Adelic Algebraic Groups
-- Belyi Maps
+- [Class Field Theory](TauCetiRoadmap/ClassFieldTheory/README.md)
+- [L-functions](TauCetiRoadmap/LFunctions/README.md)
+- [Adelic Algebraic Groups](TauCetiRoadmap/AdelicAlgebraicGroups/README.md)
+- [Belyi Maps](TauCetiRoadmap/BelyiMaps/README.md)
 
 ### Tier 4
 
-- Local Galois Groups
-- Quadratic Form Invariants
-- Zeros of \(L\)-functions
+- [Local Galois Groups](TauCetiRoadmap/LocalGaloisGroups/README.md)
+- [Quadratic Form Invariants](TauCetiRoadmap/QuadraticFormInvariants/README.md)
+- [Zeros of L-functions](TauCetiRoadmap/ZerosOfLFunctions/README.md)
 
 ### Tier 5
 
-- Global Quadratic Forms
+- [Global Quadratic Forms](TauCetiRoadmap/GlobalQuadraticForms/README.md)
 
 ### Tier 6
 
-- Orthogonal and Spin Groups
+- [Orthogonal and Spin Groups](TauCetiRoadmap/OrthogonalSpinGroups/README.md)
 
 ### Tier 7
 
-- Integral Lattices
+- [Integral Lattices](TauCetiRoadmap/IntegralLattices/README.md)
 
 One strict linear order is:
 
@@ -170,8 +171,8 @@ The portfolio assumes the following small amendments to already accepted roadmap
   `AlgebraicCurves`.
 - **Spin Representations.** Leave the general-field spinor norm and the arithmetic exact
   sequence to `OrthogonalSpinGroups`.
-- **Modular Forms.** Consume the common analytic \(L\)-function data model from `LFunctions`
-  when its newform \(L\)-functions are compared with Hecke \(L\)-functions.
+- **Modular Forms.** Consume the common analytic `L`-function data model from `LFunctions`
+  when its newform `L`-functions are compared with Hecke `L`-functions.
 - **Chebotarev.** The single-roadmap Tau Ceti draft (PR 181) has been withdrawn in favour of
   the `Chebotarev` directory here, which carries the three corrections recorded in
   `REVISED_ARITHMETIC_MIGRATION.md`. No amendment to an accepted roadmap is outstanding.
