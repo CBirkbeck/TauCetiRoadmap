@@ -8,11 +8,9 @@ it is not a mathematical prerequisite.
   Birkbeck, Riccardo Brasca and Xavier Roblot (AINTLIB `projects/Chebotarev/`, and the
   `development` branch of `CBirkbeck/chebotarev-density`). Brasca and Roblot have consented
   to its being adapted for Tau Ceti.
-- **Immediate predecessor:** [Tau Ceti PR #181](https://github.com/TauCetiProject/TauCetiRoadmap/pull/181),
-  a single-roadmap draft, withdrawn in favour of this portfolio.
-- **Mathematical reorganization:** This revises that draft. It fixes the layer-order gap around the Euler product, adds the missing ideal-congruence counting prerequisite, uses a subtype of nonzero primes, and consumes the Frobenius and analytic interfaces from their revised owners.
+- **Mathematical reorganization:** Relative to an earlier single-roadmap draft, this fixes the layer-order gap around the Euler product, adds the missing ideal-congruence counting prerequisite, uses a subtype of nonzero primes, and consumes the Frobenius and analytic interfaces from their revised owners.
 - **Porting rule:** copy no implementation merely because it overlaps mathematically.  Check
   the licence, coordinate with the authors, and restate the result against current Mathlib and
   accepted Tau Ceti interfaces.
-- **Suggested.lean:** the present file is only an identifier ledger.  It must be replaced by
-  genuine, compiling prototypes before final review.
+- **Suggested.lean:** carries real prototypes, elaborated against the pinned Mathlib rather
+  than an identifier ledger.

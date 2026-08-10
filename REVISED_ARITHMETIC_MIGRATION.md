@@ -15,11 +15,12 @@
 | [#11 Zeros](https://github.com/roed-math/TauCetiRoadmap/pull/11) | [`ZerosOfLFunctions`](TauCetiRoadmap/ZerosOfLFunctions/README.md) | Retain, consuming L-functions and Analytic Number Theory.  Effective prime estimates remain here; qualitative PNT remains in Chebotarev. |
 | [#12 Orthogonal/spin](https://github.com/roed-math/TauCetiRoadmap/pull/12) | [`AdelicAlgebraicGroups`](TauCetiRoadmap/AdelicAlgebraicGroups/README.md), [`OrthogonalSpinGroups`](TauCetiRoadmap/OrthogonalSpinGroups/README.md) | Split general Tamagawa/strong-approximation theory from the orthogonal specialization. |
 | [#13 Belyi maps](https://github.com/roed-math/TauCetiRoadmap/pull/13) | [`BelyiMaps`](TauCetiRoadmap/BelyiMaps/README.md) | Retain, replacing its private curve/profinite/polynomial interfaces by the revised suppliers. |
-| [Tau Ceti #181 Chebotarev](https://github.com/TauCetiProject/TauCetiRoadmap/pull/181) | [`Chebotarev`](TauCetiRoadmap/Chebotarev/README.md) | Withdrawn in favour of this directory, which keeps the cyclotomic-crossing route with the corrections below. |
+| Chebotarev | [`Chebotarev`](TauCetiRoadmap/Chebotarev/README.md) | New in this portfolio; keeps the cyclotomic-crossing route, with the design decisions below. |
 
-## Corrections to Chebotarev PR 181
+## Three design decisions in Chebotarev
 
-The revised file makes three structural corrections.
+These are recorded because each is easy to get wrong, and two of them were got wrong in an
+earlier draft of this roadmap.
 
 1. **The all-prime asymptotic moves after the Euler product.**  
    The residue of `ζ_K` does not by itself prove
@@ -41,7 +42,7 @@ The revised file makes three structural corrections.
    `primeDirichletSum`, `primeTheta`, and `primeCount` should not accept an arbitrary set of
    ideals.  The zero ideal and composite ideals are excluded by the carrier.
 
-The corrections already present in PR 181 are retained:
+Three further conventions the roadmap pins:
 
 - the coefficient detects `Frob_𝔭 ^ j`;
 - the principal regularization is

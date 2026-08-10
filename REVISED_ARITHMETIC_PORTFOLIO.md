@@ -173,9 +173,8 @@ The portfolio assumes the following small amendments to already accepted roadmap
   sequence to `OrthogonalSpinGroups`.
 - **Modular Forms.** Consume the common analytic `L`-function data model from `LFunctions`
   when its newform `L`-functions are compared with Hecke `L`-functions.
-- **Chebotarev.** The single-roadmap Tau Ceti draft (PR 181) has been withdrawn in favour of
-  the `Chebotarev` directory here, which carries the three corrections recorded in
-  `REVISED_ARITHMETIC_MIGRATION.md`. No amendment to an accepted roadmap is outstanding.
+- **Chebotarev.** No amendment to an accepted roadmap is outstanding: the
+  [`Chebotarev`](TauCetiRoadmap/Chebotarev/README.md) directory here is the only owner.
 
 ## Status of `Suggested.lean`
 
