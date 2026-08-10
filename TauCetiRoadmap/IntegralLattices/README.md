@@ -150,7 +150,3 @@ value from a theorem certifying it.
 - O. T. O'Meara, *Introduction to Quadratic Forms*
 - V. Nikulin, papers on integral symmetric bilinear forms
 - Y. Kitaoka, *Arithmetic of Quadratic Forms*
-
-## Source proposals
-
-This is roed-math PR #7 rewritten to consume the revised owners of orders, ring class fields, global quadratic forms, adelic groups, and theta analysis.

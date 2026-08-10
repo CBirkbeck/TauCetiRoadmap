@@ -140,7 +140,3 @@ with the diagonal formula as a computational corollary.
 - O. T. O'Meara, *Introduction to Quadratic Forms*
 - J.-P. Serre, *A Course in Arithmetic*
 - M.-A. Knus, *Quadratic and Hermitian Forms over Rings*
-
-## Source proposals
-
-This is a revised form of roed-math PR #4.  The global Hasse–Minkowski material formerly placed in PR #6 moves to Global Quadratic Forms.

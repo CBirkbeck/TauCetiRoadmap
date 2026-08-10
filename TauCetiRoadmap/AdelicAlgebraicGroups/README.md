@@ -122,7 +122,3 @@ Lattices.
 - A. Weil, *Adeles and Algebraic Groups*
 - T. Ono, papers on Tamagawa numbers
 - J. Oesterlé, Bourbaki exposés on Tamagawa measures
-
-## Source proposals
-
-This is the general adelic and Tamagawa material split out of roed-math PR #12.

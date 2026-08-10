@@ -15,7 +15,7 @@
 | [#11 Zeros](https://github.com/roed-math/TauCetiRoadmap/pull/11) | `ZerosOfLFunctions` | Retain, consuming L-functions and Analytic Number Theory.  Effective prime estimates remain here; qualitative PNT remains in Chebotarev. |
 | [#12 Orthogonal/spin](https://github.com/roed-math/TauCetiRoadmap/pull/12) | `AdelicAlgebraicGroups`, `OrthogonalSpinGroups` | Split general Tamagawa/strong-approximation theory from the orthogonal specialization. |
 | [#13 Belyi maps](https://github.com/roed-math/TauCetiRoadmap/pull/13) | `BelyiMaps` | Retain, replacing its private curve/profinite/polynomial interfaces by the revised suppliers. |
-| [Tau Ceti #181 Chebotarev](https://github.com/TauCetiProject/TauCetiRoadmap/pull/181) | `Chebotarev` | Keep the cyclotomic-crossing route, with the corrections below. |
+| [Tau Ceti #181 Chebotarev](https://github.com/TauCetiProject/TauCetiRoadmap/pull/181) | `Chebotarev` | Withdrawn in favour of this directory, which keeps the cyclotomic-crossing route with the corrections below. |
 
 ## Corrections to Chebotarev PR 181
 

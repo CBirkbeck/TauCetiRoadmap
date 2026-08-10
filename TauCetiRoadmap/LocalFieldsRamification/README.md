@@ -122,7 +122,3 @@ the quotient with a Galois group; that is the local reciprocity theorem of Class
 - J.-P. Serre, *Local Fields*
 - J. Neukirch, *Algebraic Number Theory*, Chapter II
 - I. Fesenko and S. Vostokov, *Local Fields and Their Extensions*
-
-## Source proposals
-
-This is the arithmetic part of roed-math PR #2.  Its class-formation, reciprocity, duality, and absolute-Galois-group layers move elsewhere.

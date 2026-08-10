@@ -139,7 +139,3 @@ zeros is not a certificate.
 - H. Davenport, *Multiplicative Number Theory*
 - H. Iwaniec and E. Kowalski, *Analytic Number Theory*
 - J. Lagarias and A. Odlyzko, *Effective versions of the Chebotarev density theorem*
-
-## Source proposals
-
-This is a revised form of roed-math PR #11, with the qualitative prime-counting endpoint assigned to Chebotarev and the common summation theory assigned to Analytic Number Theory.

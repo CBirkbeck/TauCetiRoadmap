@@ -132,7 +132,3 @@ the Galois group is \(S_n\).
 - H. Cohen, *A Course in Computational Algebraic Number Theory*
 - B. L. van der Waerden, *Modern Algebra*
 - L. Soicher and J. Cannon, computational permutation-group references
-
-## Source proposals
-
-This is roed-math PR #10 after making Number-Field Arithmetic the sole owner of Dedekind factorization and Frobenius specialization.

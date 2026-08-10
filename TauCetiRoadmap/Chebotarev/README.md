@@ -209,13 +209,20 @@ the Dirichlet-density theorem already obtained.
 - a cyclic quartic example detects the required \(\operatorname{Frob}^2\) condition
 - the principal logarithmic-derivative sign is checked against the Riemann zeta function
 
+## Existing formalisation
+
+A `sorry`-free formalisation of the Dirichlet-density form is due to Chris Birkbeck, Riccardo
+Brasca and Xavier Roblot, in the `Chebotarev` project of AINTLIB and on the `development`
+branch of `CBirkbeck/chebotarev-density`, the latter with a blueprint and dependency graph.
+The density layers here may be discharged by adapting it. Any file that does so conforms to
+its licence and credits those authors; the roadmap is met on its own terms rather than by
+canonising the existing file structure. In particular that development predates Mathlib's
+`arithFrobAt`, and the Frobenius class consumed here is the one built on Mathlib's API by
+Number-Field Arithmetic, not a private notion.
+
 ## References
 
 - R. Sharifi, *Algebraic Number Theory*, §§7.1–7.2
 - P. Stevenhagen and H. W. Lenstra, *Chebotarëv and his density theorem*
 - J. Neukirch, *Algebraic Number Theory*, Chapter VII
 - J. Korevaar, *Tauberian Theory*
-
-## Source proposals
-
-This revises Tau Ceti PR #181. It fixes the layer-order gap around the Euler product, adds the missing ideal-congruence counting prerequisite, uses a subtype of nonzero primes, and consumes the Frobenius and analytic interfaces from their revised owners.

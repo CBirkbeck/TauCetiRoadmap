@@ -1,7 +1,7 @@
 # Revised arithmetic roadmap portfolio
 
 This directory contains a coordinated rewrite of the thirteen proposals in
-`roed-math/TauCetiRoadmap`, together with the Chebotarev roadmap of Tau Ceti PR 181.
+`roed-math/TauCetiRoadmap`, together with the withdrawn Chebotarev roadmap of Tau Ceti PR 181.
 The purpose of this portfolio is to settle ownership and dependency order before the
 roadmaps are submitted separately.
 
@@ -172,8 +172,9 @@ The portfolio assumes the following small amendments to already accepted roadmap
   sequence to `OrthogonalSpinGroups`.
 - **Modular Forms.** Consume the common analytic \(L\)-function data model from `LFunctions`
   when its newform \(L\)-functions are compared with Hecke \(L\)-functions.
-- **Chebotarev PR 181.** Replace its README by the revised `Chebotarev/README.md` in this
-  package, or apply the three concrete corrections recorded in `MIGRATION_MAP.md`.
+- **Chebotarev.** The single-roadmap Tau Ceti draft (PR 181) has been withdrawn in favour of
+  the `Chebotarev` directory here, which carries the three corrections recorded in
+  `REVISED_ARITHMETIC_MIGRATION.md`. No amendment to an accepted roadmap is outstanding.
 
 ## Status of `Suggested.lean`
 

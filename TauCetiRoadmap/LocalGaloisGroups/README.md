@@ -117,7 +117,3 @@ e p\) and for \(\ell=p\)
 - J.-P. Serre, *Galois Cohomology*
 - I. Efrat, *Valuations, Orderings, and Milnor K-Theory*
 - J. Labute, papers on Demushkin groups
-
-## Source proposals
-
-This contains the local-field application layers removed from roed-math PRs #2 and #3.

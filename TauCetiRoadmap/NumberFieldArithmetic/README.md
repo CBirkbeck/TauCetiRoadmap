@@ -134,7 +134,3 @@ worked examples.
 - J. Neukirch, *Algebraic Number Theory*
 - D. Marcus, *Number Fields*
 - H. Cohen, *A Course in Computational Algebraic Number Theory*
-
-## Source proposals
-
-This is a revised form of roed-math PR #9.  It must extend, rather than duplicate, the Frobenius API already present in Tau Ceti.

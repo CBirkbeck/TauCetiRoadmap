@@ -159,7 +159,3 @@ identities.
 - J. Neukirch, A. Schmidt, K. Wingberg, *Cohomology of Number Fields*
 - L. Ribes and P. Zalesskii, *Profinite Groups*
 - K. S. Brown, *Cohomology of Groups*
-
-## Source proposals
-
-This replaces the mathematical content of roed-math PR #1, after rebasing its inventory onto current Mathlib and Tau Ceti.

@@ -129,7 +129,3 @@ change-of-variables formulae, without evaluating a global class-field-theoretic 
 - J. Tate, *Fourier analysis in number fields and Hecke's zeta-functions*
 - J. Cassels and A. Fröhlich, *Algebraic Number Theory*
 - A. Weil, *Basic Number Theory*
-
-## Source proposals
-
-This extracts the arithmetic carriers from roed-math PR #6 and the order-theoretic carriers needed by PR #7 and PR #8.

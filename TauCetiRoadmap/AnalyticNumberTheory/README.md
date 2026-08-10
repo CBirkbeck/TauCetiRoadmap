@@ -130,7 +130,3 @@ Define the offset logarithmic integral and prove its standard asymptotic.
 - H. Montgomery and R. Vaughan, *Multiplicative Number Theory I*
 - J. Korevaar, *Tauberian Theory*
 - H. Davenport, *Multiplicative Number Theory*
-
-## Source proposals
-
-This extracts the reusable density, Euler-product, Abel-summation, and Wiener–Ikehara material from roed-math PR #8 and Tau Ceti PR #181.

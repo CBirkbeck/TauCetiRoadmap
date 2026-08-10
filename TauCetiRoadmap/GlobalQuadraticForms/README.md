@@ -102,7 +102,3 @@ angle\) as an anisotropic form over \(\mathbf Q\) with a local obstruction
 - O. T. O'Meara, *Introduction to Quadratic Forms*, §§63–66
 - J. W. S. Cassels, *Rational Quadratic Forms*
 - J.-P. Serre, *A Course in Arithmetic*
-
-## Source proposals
-
-This takes the Hasse–Minkowski block out of roed-math PR #6 and makes its dependence on PR #4 explicit.

@@ -187,7 +187,3 @@ Each numerical field is accompanied by a certificate theorem or marked as unveri
 - J.-P. Serre, *Topics in Galois Theory*
 - F. Köck, papers on fields of moduli of covers
 - J. Stix, *Rational Points and Arithmetic of Fundamental Groups*
-
-## Source proposals
-
-This is roed-math PR #13 rewritten to consume the revised Algebraic Curves, Profinite/Pro-ℓ, and Polynomial Galois owners.

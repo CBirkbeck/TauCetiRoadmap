@@ -145,7 +145,3 @@ the exceptional \(p=2\) families and uniqueness of the marked form.
 - J.-P. Serre, *Galois Cohomology*
 - J. Labute, papers on Demushkin groups
 - J. Neukirch, A. Schmidt, K. Wingberg, *Cohomology of Number Fields*
-
-## Source proposals
-
-This is the abstract part of roed-math PR #3.  All local-field applications in its final layer move to the separate Local Galois Groups roadmap.

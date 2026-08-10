@@ -166,7 +166,3 @@ for the Belyi Maps roadmap.
 - R. Hartshorne, *Algebraic Geometry*, Chapter IV
 - Q. Liu, *Algebraic Geometry and Arithmetic Curves*
 - J.-P. Serre, *Algebraic Groups and Class Fields*
-
-## Source proposals
-
-This is the revised owner of roed-math PR #5. The general place-and-divisor portions of the accepted Elliptic Curves and Jacobian roadmaps should be replaced by specialization interfaces to this roadmap.

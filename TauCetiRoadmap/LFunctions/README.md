@@ -138,7 +138,3 @@ newforms. Do not prove a zero-counting theorem here.
 - J. Tate, *Fourier analysis in number fields and Hecke's zeta-functions*
 - H. Iwaniec and E. Kowalski, *Analytic Number Theory*
 - A. Weil, *Basic Number Theory*
-
-## Source proposals
-
-This is roed-math PR #8 after removing density, Chebotarev, prime counting, and zero-distribution material and after consuming the character carrier from Global Number Fields.

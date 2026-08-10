@@ -116,7 +116,3 @@ regime. No isotropy hypothesis is imposed unless a particular proof step require
 - T. Y. Lam, *Introduction to Quadratic Forms over Fields*
 - V. Platonov and A. Rapinchuk, *Algebraic Groups and Number Theory*
 - M. Kneser, papers on strong approximation and spinor genera
-
-## Source proposals
-
-This is the orthogonal-specific part of roed-math PR #12, with its general adelic and Tamagawa substrate moved to Adelic Algebraic Groups.

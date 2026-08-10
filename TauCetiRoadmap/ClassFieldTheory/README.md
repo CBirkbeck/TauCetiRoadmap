@@ -197,7 +197,3 @@ Include narrow variants and compatibility under change of conductor.
 - J. Neukirch, *Class Field Theory*
 - J. Cassels and A. Fröhlich, *Algebraic Number Theory*
 - A. Weil, *Basic Number Theory*
-
-## Source proposals
-
-This combines the abstract and local class-field-theoretic parts of roed-math PR #2 with the reciprocity and class-field parts of PR #6.  The arithmetic carrier constructions of PR #6 move to Global Number Fields.
