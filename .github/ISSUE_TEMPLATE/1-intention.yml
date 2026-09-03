@@ -25,6 +25,7 @@ body:
         - BelyiMaps
         - CFSGStatement
         - Chebotarev
+        - ClassFieldTheory
         - CombinatorialHeegaardFloer
         - ConformalMapping
         - DGAInfinity
@@ -49,6 +50,7 @@ body:
         - PolynomialGaloisGroups
         - ProfiniteCohomology
         - ProfiniteProPGroups
+        - QuadraticFormInvariants
         - ReductiveGroups
         - RepresentationTheory
         - StandardDistributions
