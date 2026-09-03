@@ -71,6 +71,17 @@ The exact contracts consumed from the Jacobian Challenge are:
 - Riemann–Roch and Serre duality for proper curves over a field;
 - proper-flat coherent cohomology, Grauert's theorem, and arbitrary base change.
 
+⚠ **These are named contracts, not yet importable declarations.** The supplier roadmap is in the
+repository (`TauCetiRoadmap/JacobianChallenge/`), but its `Suggested.lean` states no targets yet —
+it carries the note "no compiled targets yet; see README.md" — so there is nothing for
+`Suggested.lean` here to import and `#check` against. That is why the imports of this roadmap's
+`Suggested.lean` are Mathlib and the Elliptic Curves roadmap only. The moment the Jacobian
+Challenge exports the three contracts above, `Suggested.lean` imports
+`TauCetiRoadmap.JacobianChallenge.Suggested` and `#check`s them, exactly as it already does for the
+Elliptic Curves roadmap in its own §Contracts consumed from the Elliptic Curves roadmap; until then a
+`#check` here would have to invent the supplier's names, which is the failure mode this roadmap
+avoids everywhere else.
+
 The fppf descent statements for line bundles and the additional scheme data used here are proved
 in Layer 0E from the shared descent infrastructure; they are not attributed to the field-valued
 Picard endpoint of the Jacobian Challenge.
@@ -2139,6 +2150,27 @@ curve-cohomology and base-change supplier. Nothing here uses
 characteristic-`N` geometry, the relative regular-differential and duality package of Mazur
 II §3, or any Jacobian; item 3 *does* use Kähler differentials, the global different,
 Riemann–Hurwitz, and the local different formula.
+
+**Representative declarations.** `Suggested.lean` §Layer 10 seeds this layer against Mathlib's
+relative-normalisation API, with genuine scheme maps throughout and no Boolean "is compactified"
+field: `CoarseCurve.compactified` **is** `Scheme.Hom.normalization` of the coarse `j`-map,
+`toJLine` **is** `fromNormalization`, `fromCoarse` **is** `toNormalization`, `cuspLocus` **is** the
+fibre product `X_H ×_{ℙ¹_j} {∞}`, and the universal property (`desc`, `hom_ext`) and the
+extension of a map to the compactifications (`compactifiedMap`, with both of its compatibility
+squares) are *proved*, not `sorry`ed — the milestones are the modular-curve content on top:
+`isFinite_toJLine`, `isOpenImmersion_fromCoarse`, `isProper_structureMap`,
+`smoothOfRelativeDimension_one_structureMap`, `isSchemeTheoreticallyDominant_fromCoarse`,
+`isFinite_cuspLocusOver`, `etale_cuspLocusOver`, `cuspLocus_isRelativeEffectiveCartier`,
+`isIso_normalizationPullback` (item 1's geometric-fibre ⚠, stated in Mathlib's direction),
+`isFinite_compactifiedMap`, and `etale_shimuraCover`/`finrank_shimuraCover` with `shimuraDegree`.
+Since Layer 9's coarse `j`-map does not exist yet — and Mathlib has no relative projective space at
+the pin, only `AffineSpace` and `Proj` of a graded ring — the input is a datum (`JLineDatum`, the
+proper `j`-line with its section at infinity; `CoarseCurve`, a member of the class fixed above at
+`N ≥ 5` prime), in the shape Layer 9 will produce it. Separating the `j`-line from the curve is
+what makes "a map of coarse curves over the same `j`-line" — and hence items 3 and 4 — expressible.
+⚠ The `Γ₀(N)` two-cusp splitting and the six-row ramification table are deliberately **not** seeded:
+both are assertions about particular members of the class rather than about every member, and the
+construction that distinguishes members, `Y_H = Y₁(N)/H`, is Layer 9's and has no carrier yet.
 
 ## The Mazur interface: what *Modular curves and the Eisenstein ideal* consumes
 

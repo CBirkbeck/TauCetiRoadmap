@@ -15,11 +15,18 @@ The declarations seed the carrier and variance boundaries which control the proo
 group schemes, elliptic curves with group-scheme homomorphisms, the two dual-isogeny constructions,
 the category `Ell/R` with its cartesian arrows, relative representability, Katz–Mazur quotient data
 with the exact conditions Q1 and Q2, the regularity axioms Reg. 1–Reg. 4 with a stated universal
-formal deformation, coarse-moduli data, and the Chapter 6 cyclicity space. Relative effective
-Cartier divisors use the single carrier supplied by the Jacobian Challenge; this file deliberately
-does not introduce a second one. The equation-level inputs of Layers 2A and 2E are taken from
+formal deformation, coarse-moduli data, the Chapter 6 cyclicity space, and the Layer 10
+compactification — where the carrier is Mathlib's relative normalisation `Scheme.Hom.normalization`
+itself, so the compactified curve, the finite map to the `j`-line, the map from the affine curve and
+the cusp fibre are genuine scheme morphisms and the universal property is discharged rather than
+restated. Relative effective Cartier divisors use the single carrier supplied by the Jacobian
+Challenge; this file deliberately does not introduce a second one, which is why the cusp-divisor
+milestone of §Layer 10 is stated as the elementwise local-principality condition. The
+equation-level inputs of Layers 2A and 2E are taken from
 `TauCetiRoadmap.EllipticCurves.Suggested`, and the two declarations that roadmap does not yet
-export are pinned in `EllipticCurvesInterface`.
+export are pinned in `EllipticCurvesInterface`. The Jacobian Challenge roadmap is in the repository
+but states no targets yet, so there is nothing there to import and `#check`; see `README.md`
+§Scope for the three contracts that import will carry once it does.
 -/
 
 namespace TauCetiRoadmap.ModularCurves
@@ -1260,6 +1267,289 @@ prime and `ker_baseChange_of_noZeroSMulDivisors_coker` applied over `ℤ[1/3]` a
 theorem coarseJLine (R : CommRingCat.{u}) : IsCoarseJLine R :=
   sorry
 
+/-! ## Layer 10: compactified coarse curves, cusps, and the Shimura covering
+
+The compactification is **by normalisation of the coarse `j`-line** (KM 8.6), so the carrier is
+Mathlib's relative normalisation `Scheme.Hom.normalization` and nothing is introduced here to
+stand in for it: `compactified` is literally `C.jMap.normalization`, the finite map down to the
+`j`-line is literally `fromNormalization`, and the map from the affine curve is literally
+`toNormalization`. The universal property is the one Mathlib proves — `desc` and `hom_ext` below
+are `normalizationDesc` and `normalization.hom_ext`, discharged rather than `sorry`ed, and
+README §Layer 10 item 1 records the ⚠ that nothing stronger is true. Likewise the extension of a
+finite map to the compactifications (`compactifiedMap`) is *constructed* from the universal
+property, with both compatibility squares proved; only its finiteness is a milestone.
+
+Layer 9's coarse `j`-map is not yet available (`coarseJLine` above is a target, and Mathlib has no
+relative projective space at the pin — only `AffineSpace` and `Proj` of a graded ring). So the
+input is taken as a **datum**, in the shape Layer 9 will produce it, exactly as the
+geometric-irreducibility section below takes its curve as an argument: `JLineDatum` is the proper
+smooth `j`-line with its section at infinity, and `CoarseCurve` is a member of the class Layer 10
+quantifies over — a coarse curve over the `j`-line, at the standing hypothesis `N ≥ 5` prime
+(README §Layer 10, "The class quantified over, fixed once"). Splitting the `j`-line off from the
+curve is what makes "a map of coarse curves over the same `j`-line" expressible, and hence item 3's
+extension and item 4's Shimura covering.
+
+⚠ What is **not** seeded here, and why: the `Γ₀(N)` two-section cusp splitting
+(`cuspLocus_gammaZero_equiv`) and the six-row ramification table
+(`ramificationIndex_gammaOneToGammaZero`) both need to *distinguish the members* of the class —
+they are statements about `Y₀(N)` and `Y₁(N)` specifically, not about an arbitrary `Y_H` — and that
+distinction is the Layer 9 quotient construction `Y_H = Y₁(N)/H`, which has no carrier yet. Stating
+them against an unconstrained datum would assert them for every member of the class, which is
+false. They stay in §Layer 10 items 2–3 of the README, with the ramification table's
+Riemann–Hurwitz supplier named there.
+-/
+
+section Layer10
+
+/-- The proper `j`-line over `R` with its section at infinity: `ℙ¹_j` over `ℤ[1/N]`, in the shape
+Layer 9E's `coarseJLine` extends to. The affine coarse `j`-line is `Spec R[j]` (`IsCoarseJLine`
+above); this datum is its proper model, and Mathlib has no relative projective space at the pin to
+build it from, so its defining properties are fields. -/
+structure JLineDatum (R : CommRingCat.{u}) where
+  carrier : Scheme.{u}
+  structureMap : carrier ⟶ Spec R
+  /-- The point at infinity, `j = ∞`, as a section of the structure morphism. -/
+  infty : Spec R ⟶ carrier
+  infty_structureMap : infty ≫ structureMap = 𝟙 _
+  proper : IsProper structureMap
+  smooth : SmoothOfRelativeDimension 1 structureMap
+
+attribute [instance] JLineDatum.proper JLineDatum.smooth
+
+/-- A member of the class Layer 10 quantifies over: for `N ≥ 5` prime, a coarse curve `Y_H` over
+`ℤ[1/N]` together with its coarse `j`-map to the `j`-line (KM 8.2.2, Layer 9D–9E applied to the
+diamond-operator quotient `Y_H = Y₁(N)/H`). The quasi-compactness and quasi-separatedness of the
+`j`-map are what Mathlib's relative normalisation consumes, so they are fields.
+
+⚠ This records membership in the class, not the construction of its members: `Y_H = Y₁(N)/H` is
+Layer 9's, and which subgroup `H` a given datum came from is not visible here. That is why the
+per-member statements listed in the section header are not seeded against this structure. -/
+structure CoarseCurve {R : CommRingCat.{u}} (J : JLineDatum R) (N : ℕ) where
+  carrier : Scheme.{u}
+  /-- The coarse `j`-map of KM 8.2.2. -/
+  jMap : carrier ⟶ J.carrier
+  quasiCompact : QuasiCompact jMap
+  quasiSeparated : QuasiSeparated jMap
+  five_le : 5 ≤ N
+  prime : N.Prime
+
+attribute [instance] CoarseCurve.quasiCompact CoarseCurve.quasiSeparated
+
+namespace CoarseCurve
+
+variable {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ} (C : CoarseCurve J N)
+
+/-- **Item 1, the carrier.** `X_H`, the compactified coarse curve: the normalisation of the
+`j`-line in `Y_H` (KM 8.6). This is Mathlib's relative normalisation at the pin, not a new
+carrier. -/
+noncomputable def compactified : Scheme.{u} :=
+  C.jMap.normalization
+
+/-- **Item 1, the normalisation map.** The finite map `X_H ⟶ ℙ¹_j`, literally
+`Scheme.Hom.fromNormalization`. Integrality is Mathlib's instance; finiteness in this situation is
+the milestone `isFinite_toJLine`. -/
+noncomputable def toJLine : C.compactified ⟶ J.carrier :=
+  C.jMap.fromNormalization
+
+instance : IsIntegralHom C.toJLine :=
+  inferInstanceAs (IsIntegralHom C.jMap.fromNormalization)
+
+/-- The structure morphism of `X_H` over `ℤ[1/N]`. -/
+noncomputable def structureMap : C.compactified ⟶ Spec R :=
+  C.toJLine ≫ J.structureMap
+
+/-- **Item 1, the open immersion.** The canonical map `Y_H ⟶ X_H`, literally
+`Scheme.Hom.toNormalization`; that it is an open immersion with schematically dense image is the
+pair of milestones below. -/
+noncomputable def fromCoarse : C.carrier ⟶ C.compactified :=
+  C.jMap.toNormalization
+
+@[reassoc (attr := simp)]
+theorem fromCoarse_toJLine : C.fromCoarse ≫ C.toJLine = C.jMap :=
+  C.jMap.toNormalization_fromNormalization
+
+@[reassoc (attr := simp)]
+theorem toJLine_structureMap : C.toJLine ≫ J.structureMap = C.structureMap :=
+  rfl
+
+/-- **Item 1's universal property, in full and as Mathlib proves it.** Every factorisation of the
+coarse `j`-map through an integral `T ⟶ ℙ¹_j` receives a map from `X_H` over the `j`-line. Not a
+milestone — this is `normalizationDesc`, available at the pin, and the ⚠ of README §Layer 10
+item 1 is that no isomorphism characterisation follows from it. -/
+noncomputable def desc {T : Scheme.{u}} (g₁ : C.carrier ⟶ T) (g₂ : T ⟶ J.carrier)
+    [IsIntegralHom g₂] (H : C.jMap = g₁ ≫ g₂) : C.compactified ⟶ T :=
+  C.jMap.normalizationDesc g₁ g₂ H
+
+@[reassoc (attr := simp)]
+theorem fromCoarse_desc {T : Scheme.{u}} (g₁ : C.carrier ⟶ T) (g₂ : T ⟶ J.carrier)
+    [IsIntegralHom g₂] (H : C.jMap = g₁ ≫ g₂) : C.fromCoarse ≫ C.desc g₁ g₂ H = g₁ :=
+  C.jMap.toNormalization_normalizationDesc g₁ g₂ H
+
+@[reassoc (attr := simp)]
+theorem desc_comp {T : Scheme.{u}} (g₁ : C.carrier ⟶ T) (g₂ : T ⟶ J.carrier)
+    [IsIntegralHom g₂] (H : C.jMap = g₁ ≫ g₂) : C.desc g₁ g₂ H ≫ g₂ = C.toJLine :=
+  C.jMap.normalizationDesc_comp g₁ g₂ H
+
+/-- The uniqueness half of the universal property, `normalization.hom_ext`: a map out of `X_H` over
+the `j`-line is determined by its restriction to `Y_H`. -/
+theorem hom_ext {T : Scheme.{u}} (φ ψ : C.compactified ⟶ T) (g : T ⟶ J.carrier) [IsAffineHom g]
+    (h : C.fromCoarse ≫ φ = C.fromCoarse ≫ ψ) (hφ : φ ≫ g = C.toJLine)
+    (hψ : ψ ≫ g = C.toJLine) : φ = ψ := by
+  apply Scheme.Hom.normalization.hom_ext (f := C.jMap) (g := g) <;> assumption
+
+/-- **Milestone (item 1).** `fromNormalization` is finite in this situation. The generic map is
+only integral; finiteness is modular-curve input, and everything downstream that calls `X_H` a
+curve finite over the `j`-line uses it. -/
+theorem isFinite_toJLine : IsFinite C.toJLine :=
+  sorry
+
+/-- **Milestone (item 1).** `Y_H ↪ X_H` is an open immersion — `Y_H` is the open complement of the
+fibre over `j = ∞`. -/
+theorem isOpenImmersion_fromCoarse : IsOpenImmersion C.fromCoarse :=
+  sorry
+
+/-- **Milestone (item 1).** `X_H` is proper over `ℤ[1/N]`. With no connectedness or irreducibility
+asserted anywhere (§Scope), this is properness of a possibly disconnected relative curve. -/
+theorem isProper_structureMap : IsProper C.structureMap :=
+  sorry
+
+/-- **Milestone (item 1).** `X_H` is smooth of relative dimension one over `ℤ[1/N]`; in particular
+`X_H` is smooth along the cusps, which is the form item 2 needs. -/
+theorem smoothOfRelativeDimension_one_structureMap :
+    SmoothOfRelativeDimension 1 C.structureMap :=
+  sorry
+
+/-- **Milestone (item 1).** `Y_H` is schematically dense in `X_H`. Stated with Mathlib's
+`IsSchemeTheoreticallyDominant` rather than topological dominance, because step 1 of the
+geometric-fibre comparison below needs it to survive base change to a geometric fibre, where the
+scheme-theoretic form is the one that does. -/
+theorem isSchemeTheoreticallyDominant_fromCoarse :
+    IsSchemeTheoreticallyDominant C.fromCoarse :=
+  sorry
+
+/-- **Item 2, the carrier.** `Cusps_H := X_H ×_{ℙ¹_j} {∞}`, the scheme-theoretic fibre of the
+compactified curve over the point at infinity — a closed subscheme, not "finitely many points". -/
+noncomputable def cuspLocus : Scheme.{u} :=
+  pullback C.toJLine J.infty
+
+/-- The inclusion `Cusps_H ⟶ X_H`. -/
+noncomputable def cuspLocusι : C.cuspLocus ⟶ C.compactified :=
+  pullback.fst C.toJLine J.infty
+
+/-- The structure morphism `Cusps_H ⟶ ℤ[1/N]`, the second leg of the fibre square. -/
+noncomputable def cuspLocusOver : C.cuspLocus ⟶ Spec R :=
+  pullback.snd C.toJLine J.infty
+
+/-- **Milestone (item 2).** The cusps are finite over the base. -/
+theorem isFinite_cuspLocusOver : IsFinite C.cuspLocusOver :=
+  sorry
+
+/-- **Milestone (item 2).** The cusps are finite étale over the base for every member of the
+class — this is where `N ≥ 5` prime is used, and it is false for general finite quotients of
+Layer 9. -/
+theorem etale_cuspLocusOver : Etale C.cuspLocusOver :=
+  sorry
+
+/-- **Milestone (item 2), the Cartier statement.** `Cusps_H` is a relative effective Cartier
+divisor in `X_H`: locally around every point of `X_H` its ideal is generated by a single
+non-zero-divisor. Finite étaleness over the base (above) does not record this, and item 1's
+geometric-fibre comparison stands on it.
+
+The statement is deliberately the elementwise condition rather than a `RelativeEffectiveCartier`
+object: the divisor *carrier* is supplied once by the Jacobian Challenge (see the header of
+§Finite flat group schemes) and this file does not introduce a second one. -/
+theorem cuspLocus_isRelativeEffectiveCartier (x : C.compactified) :
+    ∃ U : C.compactified.affineOpens, x ∈ U.1 ∧
+      ∃ f ∈ nonZeroDivisors Γ(C.compactified, U.1),
+        C.cuspLocusι.ker.ideal U = Ideal.span {f} :=
+  sorry
+
+/-- **Milestone (item 1, the ⚠).** Geometric-fibre base change, stated in Mathlib's direction:
+the comparison from the normalisation of the base change to the base change of the normalisation is
+an isomorphism over every geometric fibre. `Scheme.Hom.normalizationPullback` is that comparison,
+and Mathlib's `IsIso` instance for it covers **smooth** `g` only — passing to a residue
+characteristic is not smooth, so this is a genuine theorem and not an instance lookup. Its proof
+consumes item 2's formal-cusp package, which is why it comes last: the comparison is the identity
+over the schematically dense open `Y_{H,k}`, it is finite, its target is normal because smooth,
+and a finite birational morphism to a normal scheme is an isomorphism. -/
+theorem isIso_normalizationPullback (k : Type u) [Field k] [IsAlgClosed k]
+    (s : Spec (CommRingCat.of k) ⟶ Spec R) :
+    IsIso (C.jMap.normalizationPullback (pullback.fst J.structureMap s)) :=
+  sorry
+
+end CoarseCurve
+
+/-- **Item 3, the carrier: extension of a finite map to the compactifications.** A map of coarse
+curves over the same `j`-line extends to the normalisations. This is *constructed* from the
+universal property, not postulated — which is the point of stating the `j`-line as its own datum —
+and both compatibility squares below are proved. Applied to `Y₁(N) → Y₀(N)` it is the compactified
+covering of item 3, and to `Y₁(N)/H → Y₀(N)` it is the Shimura covering of item 4. -/
+noncomputable def compactifiedMap {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ}
+    (C C' : CoarseCurve J N) (φ : C.carrier ⟶ C'.carrier) (hφ : φ ≫ C'.jMap = C.jMap) :
+    C.compactified ⟶ C'.compactified :=
+  C.desc (φ ≫ C'.fromCoarse) C'.toJLine (by rw [Category.assoc, C'.fromCoarse_toJLine, hφ])
+
+section CompactifiedMap
+
+variable {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ} (C C' : CoarseCurve J N)
+  (φ : C.carrier ⟶ C'.carrier) (hφ : φ ≫ C'.jMap = C.jMap)
+
+/-- The extension lies over the `j`-line. -/
+@[reassoc (attr := simp)]
+theorem compactifiedMap_toJLine : compactifiedMap C C' φ hφ ≫ C'.toJLine = C.toJLine :=
+  C.desc_comp _ _ _
+
+/-- The extension restricts to `φ` on the affine curves. -/
+@[reassoc (attr := simp)]
+theorem fromCoarse_compactifiedMap :
+    C.fromCoarse ≫ compactifiedMap C C' φ hφ = φ ≫ C'.fromCoarse :=
+  C.fromCoarse_desc _ _ _
+
+/-- **Milestone (item 3).** The extension of a finite map is finite. -/
+theorem isFinite_compactifiedMap [IsFinite φ] : IsFinite (compactifiedMap C C' φ hφ) :=
+  sorry
+
+end CompactifiedMap
+
+/-- The degree of the Shimura covering, `n = (N−1)/gcd(N−1, 12) = num((N−1)/12)` (Mazur II,
+Cor. 2.3). -/
+def shimuraDegree (N : ℕ) : ℕ :=
+  (N - 1) / Nat.gcd (N - 1) 12
+
+/-- **Item 4, the carrier.** The Shimura covering `X₂(N) = X₁(N)/H ⟶ X₀(N)`, for `H ≤ (ℤ/N)ˣ/±1`
+the unique subgroup of order `gcd(N−1, 12)/2`: the compactified extension of the Layer 9 covering
+of coarse curves. Which member of the class `C` is — that it is `Y₁(N)/H` for that `H` — is Layer
+9's construction and is supplied here as the hypotheses of the two theorems below. -/
+noncomputable def shimuraCover {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ}
+    (C C₀ : CoarseCurve J N) (φ : C.carrier ⟶ C₀.carrier) (hφ : φ ≫ C₀.jMap = C.jMap) :
+    C.compactified ⟶ C₀.compactified :=
+  compactifiedMap C C₀ φ hφ
+
+/-- **Milestone (item 4, Mazur II Cor. 2.3): the Shimura covering is étale.** ⚠ The content is at
+the cusps and in residue characteristics `2` and `3`: étaleness of the *affine* covering
+`Y₂(N) ⟶ Y₀(N)` is the hypothesis, and what is asserted is that it survives the compactification.
+The two halves are separate — killing inertia (every inertia group of item 3's table is cyclic of
+order `2` or `3`, hence lies in `H`) gives unramifiedness but says nothing about flatness, and the
+degree is not invertible in characteristics `2` and `3`. This roadmap takes the smooth-curves
+route: `X₂(N)` and `X₀(N)` are smooth proper relative curves (item 1), the map is finite (item 3),
+miracle flatness gives flat, and finite + flat + unramified is finite étale. -/
+theorem etale_shimuraCover {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ}
+    (C C₀ : CoarseCurve J N) (φ : C.carrier ⟶ C₀.carrier) (hφ : φ ≫ C₀.jMap = C.jMap)
+    [IsFinite φ] [Etale φ] :
+    Etale (shimuraCover C C₀ φ hφ) :=
+  sorry
+
+/-- **Milestone (item 4).** The Shimura covering has degree `n = num((N−1)/12)`, the numerator
+normalisation of Mazur II Cor. 2.3: `H` has order `gcd(N−1, 12)/2` inside the cyclic group
+`(ℤ/N)ˣ/±1` of order `(N−1)/2`, so the quotient `G/H` is cyclic of order `shimuraDegree N`. -/
+theorem finrank_shimuraCover {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ}
+    (C C₀ : CoarseCurve J N) (φ : C.carrier ⟶ C₀.carrier) (hφ : φ ≫ C₀.jMap = C.jMap)
+    [IsFinite φ] [Etale φ] (hdeg : φ.finrank = fun _ ↦ shimuraDegree N) :
+    (shimuraCover C C₀ φ hφ).finrank = fun _ ↦ shimuraDegree N :=
+  sorry
+
+end Layer10
+
 /-! ## Geometric irreducibility: the algebraic reduction
 
 Layer 5C states the geometric irreducibility of `Y(ρ)` **conditionally**, on geometric
@@ -1421,21 +1711,14 @@ vacuous proposition fields:
 9. the Axiomatic Isomorphism Theorem, the universal property of the cyclicity locus, and the
    finite-flat rank-`φ(N)` map `[Γ₁(N)]⟶[Γ₀(N)]`;
 10. coarse base change KM 8.1.6, KM 8.2.2, and the displayed Borel-quotient chain for `Y₀(N)`;
-11. Layer 10 — **documented in prose only; nothing here is type-checked yet.** The compactified
-    coarse curve (the KM 8.6 normalisation of the `j`-line in `Y_H`), the scheme-theoretic cusp
-    locus `X_H ×_{ℙ¹_j} {∞}` with its `Γ₀(N)` splitting into two sections, the extension of
-    `Y₁(N) → Y₀(N)` to the normalisations with Mazur's six-row ramification table (the
-    rows for characteristics `2` and `3` stated separately, tame pairs and wild collapsed
-    points distinguished), and the étale Shimura covering `X₁(N)/H` for the unique
-    `H ≤ (ℤ/N)ˣ/±1` of order `gcd(N−1,12)/2`. The normalisation carrier itself is Mathlib's
-    `Scheme.Hom.normalization`, already at the pin; these wait on Layer 9's coarse `j`-line and
-    on the finiteness theorem for `fromNormalization`. Representative declarations, once the
-    `j`-map exists:
-    `compactifiedCoarseCurve`, `cuspLocus`, `cuspLocus_gammaZero_equiv`,
-    `gammaOneToGammaZeroCompactified`, `ramificationIndex_gammaOneToGammaZero` (with the
-    cases of characteristics `2` and `3` as separate statements), `shimuraCover`,
-    `isEtale_shimuraCover`. The exact mathematical contracts are in `README.md` §Layer 10 and
-    §The Mazur interface.
+11. the two Layer 10 statements that need to *distinguish* members of the class rather than hold
+    for every member, and so cannot be stated against the §Layer 10 datum above: the `Γ₀(N)`
+    two-section cusp splitting (`cuspLocus_gammaZero_equiv`) and Mazur's six-row ramification
+    table for `X₁(N) → X₀(N)` (`ramificationIndex_gammaOneToGammaZero`, with the rows for
+    characteristics `2` and `3` as separate statements, tame pairs and wild collapsed points
+    distinguished). Both wait on the Layer 9 quotient construction `Y_H = Y₁(N)/H`, which is what
+    names the member; the table additionally waits on the different and Riemann–Hurwitz package
+    named in `README.md` §Layer 10 item 3. The rest of Layer 10 is seeded above.
 -/
 
 end TauCetiRoadmap.ModularCurves
