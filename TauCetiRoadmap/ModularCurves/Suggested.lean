@@ -24,9 +24,9 @@ Challenge; this file deliberately does not introduce a second one, which is why 
 milestone of §Layer 10 is stated as the elementwise local-principality condition. The
 equation-level inputs of Layers 2A and 2E are taken from
 `TauCetiRoadmap.EllipticCurves.Suggested`, and the two declarations that roadmap does not yet
-export are pinned in `EllipticCurvesInterface`. The Jacobian Challenge roadmap is in the repository
-but states no targets yet, so there is nothing there to import and `#check`; see `README.md`
-§Scope for the three contracts that import will carry once it does.
+export are pinned in `EllipticCurvesInterface`. The Jacobian Challenge import is keyed to the same
+rule — a contract becomes an import exactly when its supplier states it; `README.md` §Scope names
+the three contracts that import carries.
 -/
 
 namespace TauCetiRoadmap.ModularCurves
@@ -1279,9 +1279,9 @@ README §Layer 10 item 1 records the ⚠ that nothing stronger is true. Likewise
 finite map to the compactifications (`compactifiedMap`) is *constructed* from the universal
 property, with both compatibility squares proved; only its finiteness is a milestone.
 
-Layer 9's coarse `j`-map is not yet available (`coarseJLine` above is a target, and Mathlib has no
-relative projective space at the pin — only `AffineSpace` and `Proj` of a graded ring). So the
-input is taken as a **datum**, in the shape Layer 9 will produce it, exactly as the
+The coarse `j`-map is Layer 9's to construct (`coarseJLine` above is its target), and Mathlib
+carries no relative projective space at the pin — only `AffineSpace` and `Proj` of a graded ring.
+So the input is taken as a **datum**, in the shape Layer 9 produces it, exactly as the
 geometric-irreducibility section below takes its curve as an argument: `JLineDatum` is the proper
 smooth `j`-line with its section at infinity, and `CoarseCurve` is a member of the class Layer 10
 quantifies over — a coarse curve over the `j`-line, at the standing hypothesis `N ≥ 5` prime
@@ -1293,9 +1293,9 @@ extension and item 4's Shimura covering.
 (`cuspLocus_gammaZero_equiv`) and the six-row ramification table
 (`ramificationIndex_gammaOneToGammaZero`) both need to *distinguish the members* of the class —
 they are statements about `Y₀(N)` and `Y₁(N)` specifically, not about an arbitrary `Y_H` — and that
-distinction is the Layer 9 quotient construction `Y_H = Y₁(N)/H`, which has no carrier yet. Stating
-them against an unconstrained datum would assert them for every member of the class, which is
-false. They stay in §Layer 10 items 2–3 of the README, with the ramification table's
+distinction is the Layer 9 quotient construction `Y_H = Y₁(N)/H`, which this file does not carry.
+Stating them against an unconstrained datum would assert them for every member of the class, which
+is false. They stay in §Layer 10 items 2–3 of the README, with the ramification table's
 Riemann–Hurwitz supplier named there.
 -/
 
