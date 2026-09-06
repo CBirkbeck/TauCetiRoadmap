@@ -2052,8 +2052,10 @@ items 1–2 are asserted for **every** member of the class; item 3 concerns the 
    a finite flat map pulls the Cartier point `∞` back to each cusp with multiplicity its
    ramification index, and the index of `j` at a cusp is the cusp's width, `1` or `N` for prime
    `N` (for `Γ₀(N)` the fibre is `[∞] + N·[0]`, which is the index computation below). The
-   étale statement is about the **reduced** cusp locus: `(Cusps_H)_red` is finite étale over
-   `ℤ[1/N]` for every standard problem of this layer (the class fixed above, `N ≥ 5` prime);
+   étale statement is about the **reduced** cusp locus — Katz–Mazur's *scheme of cusps*, whose
+   definition takes the reduction (KM 8.6.3.2): `(Cusps_H)_red` is finite étale over `ℤ[1/N]` of
+   rank `(N − 1)/|H|`, `m_H := (N − 1)/(2|H|)` geometric cusps of each width, for every standard
+   problem of this layer (the class fixed above, `N ≥ 5` prime);
    **`Cusps_H` is a relative effective Cartier divisor in `X_H`**, and `X_H` is smooth along it
    — finite étaleness alone does not record what the formal-completion and schematic-density
    arguments need, and this is the statement item 1's geometric-fibre comparison stands on
@@ -2078,7 +2080,9 @@ items 1–2 are asserted for **every** member of the class; item 3 concerns the 
    other.
 3. **The ramification table of `X₁(N) → X₀(N)`** (Mazur II §2, Table 1 — all six rows). The
    covering `Y₁(N) → Y₀(N)` is Galois with group `(ℤ/N)ˣ/±1` (Layer 9 quotients); extending it
-   to `X₁(N) → X₀(N)` along the normalisations is itself a milestone. Fibrewise over `ℤ[1/N]`,
+   to `X₁(N) → X₀(N)` along the normalisations is itself a milestone — and the extension is
+   finite with no hypothesis on the affine map (its graph is a closed immersion into the fibre
+   product over `ℙ¹_j`, whose projection is finite). Fibrewise over `ℤ[1/N]`,
    for `k` algebraically closed of characteristic `≠ N`: the covering is unramified at every
    cusp; if `char k ∉ {2, 3}`, the only ramification is at the two points over `j = 1728`
    (inertia cyclic of order `2`, present iff `N ≡ 1 mod 4`) and the two points over `j = 0`
@@ -2124,10 +2128,14 @@ items 1–2 are asserted for **every** member of the class; item 3 concerns the 
    of order `gcd(N−1, 12)/2`, and define `X₂(N) := X₁(N)/H`. Milestones: `X₂(N) → X₀(N)` is
    Galois cyclic of degree `n`; and it is **finite étale over `ℤ[1/N]`**, including at the cusps
    and in residue characteristics `2` and `3`. ⚠ **That is two proofs, not one.**
-   *Unramifiedness*: every inertia subgroup in item 3's table is cyclic of order `2` or `3` and
-   hence lies in `H` — the factors of `2` and `3` that the numerator removes are exactly the
-   inertia orders the quotient kills — so the residual `G/H`-action has trivial geometric
-   stabilisers. *Flatness*: killing inertia proves nothing about flatness, and in residue
+   *Unramifiedness*: at an interior geometric point `(E, C)` the inertia group is
+   `Aut(E, C)/{±1} ↪ G`, cyclic of order `1`, `2` or `3` in **every** characteristic prime to
+   `N` — in characteristics `2` and `3` the automorphism quotients are `A₄` and `S₃`, but the
+   inertia subgroup is still cyclic — with order `2` only if `N ≡ 1 mod 4` and order `3` only if
+   `N ≡ 1 mod 3`, hence contained in `H`; the factors of `2` and `3` that the numerator removes are
+   exactly the inertia orders the quotient kills, so the residual `G/H`-action has trivial
+   geometric stabilisers. At the cusps the inertia is trivial by item 3's cusp unramifiedness —
+   which is item 3's milestone, not a consequence of the affine covering being étale. *Flatness*: killing inertia proves nothing about flatness, and in residue
    characteristics `2` and `3` invertibility of the degree is unavailable as an excuse. This
    roadmap takes the smooth-curves route: `X₂(N)` and `X₀(N)` are smooth proper relative curves
    over `ℤ[1/N]` (items 1–2 applied to their level problems), the quotient morphism is finite,

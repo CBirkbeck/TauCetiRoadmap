@@ -1414,7 +1414,11 @@ theorem isProper_structureMap : IsProper C.structureMap :=
   sorry
 
 /-- **Milestone (item 1).** `X_H` is smooth of relative dimension one over `ℤ[1/N]`; in particular
-`X_H` is smooth along the cusps, which is the form item 2 needs. -/
+`X_H` is smooth along the cusps, which is the form item 2 needs. Route: `X_H = X₁(N)/H` (KM 8.6.4)
+and the theorem of KM's *Notes Added in Proof* on Chapters 8 and 10 (pp. 508–509) that a
+finite-group quotient of a smooth affine relative curve over a regular noetherian base is smooth —
+applied on invariant affine neighbourhoods, wild fixed points in characteristics `2` and `3`
+included; invertibility of `|H|` is not needed. -/
 theorem smoothOfRelativeDimension_one_structureMap :
     SmoothOfRelativeDimension 1 C.structureMap :=
   sorry
@@ -1462,8 +1466,13 @@ theorem flat_cuspLocusOver : Flat C.cuspLocusOver :=
 base for every member of the class — this is where `N ≥ 5` prime is used, and it is false for
 general finite quotients of Layer 9. Stated without a reduced-subscheme constructor: a reduced
 closed subscheme of `Cusps_H` with the same underlying points, finite étale over `ℤ[1/N]`. (Any two
-such are canonically isomorphic, so nothing is lost by the existential.) -/
-theorem exists_cuspReduction_etale :
+such are canonically isomorphic, so nothing is lost by the existential.) This reduced locus is
+Katz–Mazur's *scheme of cusps* — their definition takes the reduction, KM 8.6.3.2 — and its rank
+is `(N − 1)/|H|`: `m_H := (N − 1)/(2|H|)` geometric cusps of width `1` and `m_H` of width `N`,
+against rank `m_H·(N + 1) = deg j` for the fibre itself. -/
+theorem exists_cuspReduction_etale
+    -- rank of the reduced locus: `2·m_H = (N − 1)/|H|` geometric cusps, half of each width
+    :
     ∃ (Z : Scheme.{u}) (incl : Z ⟶ C.cuspLocus), IsClosedImmersion incl ∧ Surjective incl ∧
       IsReduced Z ∧ IsFinite (incl ≫ C.cuspLocusOver) ∧ Etale (incl ≫ C.cuspLocusOver) :=
   sorry
@@ -1523,8 +1532,12 @@ theorem fromCoarse_compactifiedMap :
     C.fromCoarse ≫ compactifiedMap C C' φ hφ = φ ≫ C'.fromCoarse :=
   C.fromCoarse_desc _ _ _
 
-/-- **Milestone (item 3).** The extension of a finite map is finite. -/
-theorem isFinite_compactifiedMap [IsFinite φ] : IsFinite (compactifiedMap C C' φ hφ) :=
+/-- **Milestone (item 3).** The extension is finite — with **no** finiteness hypothesis on `φ`:
+its graph is a closed immersion into `X_H ×_{ℙ¹_j} X_{H'}`, whose projection to `X_{H'}` is the
+base change of the finite map `toJLine`, so the extension is a closed immersion followed by a
+finite map. Finiteness of `φ` itself is a consequence (restrict to the affine curves), not an
+input. -/
+theorem isFinite_compactifiedMap : IsFinite (compactifiedMap C C' φ hφ) :=
   sorry
 
 end CompactifiedMap
@@ -1546,11 +1559,18 @@ noncomputable def shimuraCover {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ
 /-- **Milestone (item 4, Mazur II Cor. 2.3): the Shimura covering is étale.** ⚠ The content is at
 the cusps and in residue characteristics `2` and `3`: étaleness of the *affine* covering
 `Y₂(N) ⟶ Y₀(N)` is the hypothesis, and what is asserted is that it survives the compactification.
-The two halves are separate — killing inertia (every inertia group of item 3's table is cyclic of
-order `2` or `3`, hence lies in `H`) gives unramifiedness but says nothing about flatness, and the
-degree is not invertible in characteristics `2` and `3`. This roadmap takes the smooth-curves
-route: `X₂(N)` and `X₀(N)` are smooth proper relative curves (item 1), the map is finite (item 3),
-miracle flatness gives flat, and finite + flat + unramified is finite étale. -/
+The two halves are separate — killing inertia gives unramifiedness but says nothing about
+flatness, and the degree is not invertible in characteristics `2` and `3`. The inertia input is
+an **all-characteristic** statement: at an interior geometric point `(E, C)` the inertia group is
+`Aut(E, C)/{±1} ↪ Δ`, cyclic of order `1`, `2` or `3` in *every* characteristic prime to `N` —
+in characteristics `2` and `3` the full automorphism quotients are `A₄` and `S₃`, but the inertia
+subgroup is still cyclic — with order `2` only if `N ≡ 1 mod 4` and order `3` only if
+`N ≡ 1 mod 3`, both contained in `H`; and inertia at the cusps is trivial. ⚠ The affine hypothesis
+`[Etale φ]` supplies none of the boundary input: unramifiedness of `X₁(N) → X₀(N)` at every cusp
+over `ℤ[1/N]` (Mazur II §2, p. 64) is item 3's milestone and is what this theorem consumes at the
+cusps. This roadmap then takes the smooth-curves route: `X₂(N)` and `X₀(N)` are smooth proper
+relative curves (item 1), the map is finite (item 3), miracle flatness gives flat, and
+finite + flat + unramified is finite étale. -/
 theorem etale_shimuraCover {R : CommRingCat.{u}} {J : JLineDatum R} {N : ℕ}
     (C C₀ : CoarseCurve J N) (φ : C.carrier ⟶ C₀.carrier) (hφ : φ ≫ C₀.jMap = C.jMap)
     [IsFinite φ] [Etale φ] :
