@@ -1428,7 +1428,9 @@ theorem isSchemeTheoreticallyDominant_fromCoarse :
   sorry
 
 /-- **Item 2, the carrier.** `Cusps_H := X_H ×_{ℙ¹_j} {∞}`, the scheme-theoretic fibre of the
-compactified curve over the point at infinity — a closed subscheme, not "finitely many points". -/
+compactified curve over the point at infinity — a closed subscheme, not "finitely many points",
+and not a reduced one: it carries each cusp with multiplicity its width (see
+`flat_cuspLocusOver`). -/
 noncomputable def cuspLocus : Scheme.{u} :=
   pullback C.toJLine J.infty
 
@@ -1444,10 +1446,26 @@ noncomputable def cuspLocusOver : C.cuspLocus ⟶ Spec R :=
 theorem isFinite_cuspLocusOver : IsFinite C.cuspLocusOver :=
   sorry
 
-/-- **Milestone (item 2).** The cusps are finite étale over the base for every member of the
-class — this is where `N ≥ 5` prime is used, and it is false for general finite quotients of
-Layer 9. -/
-theorem etale_cuspLocusOver : Etale C.cuspLocusOver :=
+/-- **Milestone (item 2).** The cusp fibre is flat over the base; with `isFinite_cuspLocusOver`
+it is finite locally free, of rank `deg j = (N² − 1)/(2·|H|)` (`N + 1` for `Γ₀(N)`).
+
+⚠ **The fibre is not reduced, so it is not étale.** The scheme-theoretic fibre of a finite flat
+map over a Cartier point carries each cusp with multiplicity its ramification index, and the
+ramification index of `j` at a cusp is the cusp's width, which for prime `N` is `1` or `N`
+(KM 10.9; for `Γ₀(N)` the fibre is `[∞] + N·[0]`, degree `N + 1`, exactly item 2's index
+computation). Étaleness is the statement about the *reduced* cusp locus, `exists_cuspReduction_etale`
+below. -/
+theorem flat_cuspLocusOver : Flat C.cuspLocusOver :=
+  sorry
+
+/-- **Milestone (item 2), the étale statement.** The *reduced* cusp locus is finite étale over the
+base for every member of the class — this is where `N ≥ 5` prime is used, and it is false for
+general finite quotients of Layer 9. Stated without a reduced-subscheme constructor: a reduced
+closed subscheme of `Cusps_H` with the same underlying points, finite étale over `ℤ[1/N]`. (Any two
+such are canonically isomorphic, so nothing is lost by the existential.) -/
+theorem exists_cuspReduction_etale :
+    ∃ (Z : Scheme.{u}) (incl : Z ⟶ C.cuspLocus), IsClosedImmersion incl ∧ Surjective incl ∧
+      IsReduced Z ∧ IsFinite (incl ≫ C.cuspLocusOver) ∧ Etale (incl ≫ C.cuspLocusOver) :=
   sorry
 
 /-- **Milestone (item 2), the Cartier statement.** `Cusps_H` is a relative effective Cartier

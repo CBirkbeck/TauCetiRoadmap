@@ -73,8 +73,8 @@ The exact contracts consumed from the Jacobian Challenge are:
 
 ⚠ **These are contracts, and a contract becomes an import exactly when its supplier states it.**
 Where a supplier roadmap states declarations, this roadmap type-checks the boundary against them
-rather than describing it — `Suggested.lean` does so for the Elliptic Curves roadmap in its own
-§Contracts consumed from the Elliptic Curves roadmap. `TauCetiRoadmap.JacobianChallenge.Suggested`
+rather than describing it — `Suggested.lean` does so for the Elliptic Curves roadmap, in that
+file's §Contracts consumed from the Elliptic Curves roadmap. `TauCetiRoadmap.JacobianChallenge.Suggested`
 is imported and the three contracts above are `#check`ed on the same rule, keyed to that roadmap
 stating them; a `#check` against names a supplier has not stated would have to invent them, which
 is the failure mode this roadmap avoids everywhere else. The imports of `Suggested.lean` are
@@ -2047,8 +2047,13 @@ items 1–2 are asserted for **every** member of the class; item 3 concerns the 
    hypotheses sufficient for the first are not automatically sufficient for the second.
 2. **The cusp locus as a closed subscheme, and the formal-cusp package.** Define
    `Cusps_H := X_H ×_{ℙ¹_j} {∞}`, the scheme-theoretic fibre — not "finitely many points".
-   Milestones: `Cusps_H` is finite over `ℤ[1/N]`, and finite étale for every standard problem
-   of this layer (the class fixed above, `N ≥ 5` prime);
+   Milestones: `Cusps_H` is finite locally free over `ℤ[1/N]`, of rank
+   `deg j = (N² − 1)/(2·|H|)` (`N + 1` for `Γ₀(N)`) — ⚠ **it is not reduced, hence not étale**:
+   a finite flat map pulls the Cartier point `∞` back to each cusp with multiplicity its
+   ramification index, and the index of `j` at a cusp is the cusp's width, `1` or `N` for prime
+   `N` (for `Γ₀(N)` the fibre is `[∞] + N·[0]`, which is the index computation below). The
+   étale statement is about the **reduced** cusp locus: `(Cusps_H)_red` is finite étale over
+   `ℤ[1/N]` for every standard problem of this layer (the class fixed above, `N ≥ 5` prime);
    **`Cusps_H` is a relative effective Cartier divisor in `X_H`**, and `X_H` is smooth along it
    — finite étaleness alone does not record what the formal-completion and schematic-density
    arguments need, and this is the statement item 1's geometric-fibre comparison stands on
@@ -2158,7 +2163,8 @@ extension of a map to the compactifications (`compactifiedMap`, with both of its
 squares) are *proved*, not `sorry`ed — the milestones are the modular-curve content on top:
 `isFinite_toJLine`, `isOpenImmersion_fromCoarse`, `isProper_structureMap`,
 `smoothOfRelativeDimension_one_structureMap`, `isSchemeTheoreticallyDominant_fromCoarse`,
-`isFinite_cuspLocusOver`, `etale_cuspLocusOver`, `cuspLocus_isRelativeEffectiveCartier`,
+`isFinite_cuspLocusOver`, `flat_cuspLocusOver`, `exists_cuspReduction_etale` (the reduced
+cusp locus is finite étale; the fibre itself is not reduced), `cuspLocus_isRelativeEffectiveCartier`,
 `isIso_normalizationPullback` (item 1's geometric-fibre ⚠, stated in Mathlib's direction),
 `isFinite_compactifiedMap`, and `etale_shimuraCover`/`finrank_shimuraCover` with `shimuraDegree`.
 The coarse `j`-map is Layer 9's to construct, and Mathlib carries no relative projective space at
