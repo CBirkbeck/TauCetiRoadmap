@@ -239,7 +239,9 @@ This layer contains the general algebraic geometry used by the later layers.
 References: KM 1.1.1, 1.2.2, 1.2.3.
 
 Use the general divisor and invertible-sheaf objects supplied by the Jacobian Challenge. For a
-smooth relative curve `C ⟶ S`, prove the following KM-specific statements.
+separated smooth relative curve `C ⟶ S`, prove the following KM-specific statements.
+Separatedness is needed for a section to have closed image; all elliptic-curve applications
+satisfy it by properness.
 
 1. Use the shared definition: an effective Cartier divisor whose closed subscheme is flat over
    `S`. Do not introduce a second carrier. Prove the fibre criterion in its exact form: if `S` is
@@ -292,8 +294,10 @@ representing schemes of the First Main Theorem and of `[Γ₀(N)]`, the map `[Γ
 and finite étale torsors — carries all three conditions, and `Suggested.lean` registers them as
 instances. For an isogeny of elliptic curves, or any `S`-morphism between schemes locally of
 finite presentation over `S`, local finite presentation is a theorem (Mathlib's cancellation
-lemma), registered as an instance. The general Katz–Mazur quotient projection `𝒫 ⟶ 𝒫/H` of
-KM 7.1.3(4) is finite but need not be flat or locally of finite presentation. For `R = ℤ ⋉ V`,
+lemma), registered as an instance. For the finite-type affine problems used here, the Katz–Mazur quotient projection
+`𝒫 ⟶ 𝒫/H` is finite but need not be flat or locally of finite presentation. Finiteness of
+an arbitrary affine finite-group quotient is not asserted: the finite-type hypothesis in
+Layer 0C and `isFinite_mapRep` is essential. For `R = ℤ ⋉ V`,
 with `V` an infinite-dimensional `𝔽₂`-vector space, let `A = R[ε]/(ε²)` with `C₂` acting by
 `ε ↦ -ε`. Then `A` is finitely presented over `R`, its invariant ring is `B = A^{C₂} = R ⊕ Vε`,
 and `A` is finite but not finitely presented as a `B`-algebra. If the target is locally
@@ -462,8 +466,11 @@ Define base change and prove its functoriality.
 
 The comparison with equation-level points is stated in stages.
 
-1. Over a field, sections of `projModel W ⟶ Spec K` are naturally equivalent to
-   `W.toAffine.Point`, and the point at infinity corresponds to the zero section.
+1. Over a field and under `W.IsElliptic`, sections of `projModel W ⟶ Spec K` are naturally
+   equivalent to `W.toAffine.Point`, with infinity corresponding to the zero section. Without
+   ellipticity the latter type omits singular affine points: for `y² = x³` over `𝔽₅`, the
+   projective cubic has six rational points but `W.toAffine.Point` has five. A dictionary for
+   a singular model must use its full point set or restrict the scheme side to its smooth locus.
 2. Over a local ring, use a globally trivial line bundle and unimodular homogeneous coordinates.
 3. Over a ring with trivial Picard group, use the same description after proving triviality of the
    relevant line bundle.
@@ -1145,8 +1152,10 @@ and KM records it: its Appendix A.4 opens with the
 tautology (A.4.1.2) that `𝒫` is representable exactly when `𝒫̃` is representable and `𝒫` is rigid,
 and Proposition A.4.2 gives the three-way equivalence under the étale-sheaf hypothesis that relative
 representability supplies. The passage from
-representability to a **smooth affine curve over `ℤ`**, which Layers 5B and 5C invoke, is KM
-Corollary 4.7.1.
+representability to a **smooth affine relative curve** also uses that the problem is
+étale over `Ell` and affine over it. The naive problems in Layers 5B and 5C have these
+properties over `ℤ[1/N]` and `ℚ`, respectively; representability alone does not imply smoothness
+or relative dimension one.
 
 **Dependencies.** Layers 0C, 0E, 1E, 2F, 3N, and 4A–4B. The rigidifiers are naive structures, so
 this block does not use the integral Drinfeld loci; its rigidity proof nevertheless reaches Layer
@@ -1173,14 +1182,19 @@ This layer owns the required general scheme-level API:
 - strict henselisation and completion of strict henselisations;
 - comparison of a finite moduli scheme after strict henselisation and completion;
 - regular schemes in terms of regular local rings and Krull dimension at a point;
-- preservation and reflection of regularity and dimension under completion;
+- preservation and reflection of regularity and dimension under completion of noetherian local rings;
 - locality and invariance under isomorphism and étale morphisms;
-- openness of the regular and flat loci;
+- openness of the regular locus for schemes locally of finite type over an excellent base,
+  as in the finite-type integral rigidifiers used here; openness of the flat locus for the
+  finite algebras over locally noetherian bases occurring in the proof. State and verify
+  these hypotheses; there is no unrestricted regular-locus openness theorem;
 - the coherent kernel/cokernel support argument used in the homogeneity theorem;
 - miracle flatness for finite morphisms between regular local schemes of equal dimension;
 - descent of regularity and the corrected dimension condition along the finite faithfully flat
   covers occurring in KM's Notes Added in Proof;
-- constancy of the rank of a finite flat morphism.
+- local constancy of the rank of a finite locally free morphism, and constancy when the
+  target is connected. Over arbitrary bases, keep the local finite-presentation hypothesis
+  from Layer 0B; finite and flat alone does not supply it.
 
 **Dependencies.** Layers 4A and 4C, and Mathlib's regular-local-ring theory.
 
@@ -1251,9 +1265,11 @@ a suitable `a∈(ℤ/Nℤ)ˣ`. This gives a lift of every geometric point of `μ
 geometric-point criterion for surjectivity of schemes to conclude. Equivalently, over a fixed
 elliptic family the relative symplectic-frame carrier is finite étale and surjective over
 `μ_N^prim×Ell`. The fine curve `Y_full(N)` itself is not finite over `ℤ[1/N]`. Its determinant
-fibres are open-and-closed summands,
-permuted by `GL₂` through the determinant. Call them determinant fibres or fixed-pairing loci, not
-connected components. No connectedness or irreducibility theorem is asserted.
+fibres become open-and-closed summands after a base change splitting `μ_N^prim`, for example
+on adjoining a primitive `N`th root of unity; `GL₂` permutes these summands through the
+determinant. They are not asserted to be individual open-and-closed summands over `ℤ[1/N]`
+before that base change. Call them determinant fibres or fixed-pairing loci, not connected
+components. No connectedness or irreducibility theorem is asserted.
 
 **Dependencies.** The representability of `Y_full(N)` uses Layers 2F, 3N, and 4C; through Layer 2F
 it consumes the Picard-duality construction of Layer 2D. The determinant map and fixed-pairing
@@ -1290,25 +1306,25 @@ rigid.
 geometrically irreducible*, and the second half is not decoration: the FLT `3`–`5` switch needs
 enough rational points on the twisted curve, and that argument runs through irreducibility. Stopping
 at "smooth affine curve" would leave this roadmap one theorem short of the interface it advertises.
-So the reduction is stated here and the transcendental input is imported:
+The algebraic reduction is stated here with geometric connectedness as an explicit
+hypothesis; an external contract for a reference proof is recorded below:
 
 7. prove that `Y(ρ) ⊗ ℚ̄` is nonempty and smooth — the base change of a smooth morphism is smooth —
    and prove the leaf that a nonempty connected scheme smooth of relative dimension one over an
-   algebraically closed field is irreducible (smooth gives normal; connected normal gives
-   irreducible). Together these reduce geometric irreducibility of `Y(ρ)` to the single hypothesis
+   algebraically closed field is irreducible (smooth gives local noetherianness and normality;
+   connected locally noetherian normal gives irreducible). Together these reduce geometric irreducibility of `Y(ρ)` to the single hypothesis
    that `Y(ρ) ⊗ ℚ̄` is **connected**. Both are stated in `Suggested.lean` and are owned here.
 
-⚠ **The connectedness hypothesis is imported, not proved, and there is no algebraic route to
-schedule instead.** Katz–Mazur Chapter 10 is the algebraic treatment, but its own connectedness
-corollary 10.9.2 (p. 303) reduces to the geometric generic fibre and then invokes the
-transcendental description of the underlying complex manifold as a quotient of the upper half plane
-by a subgroup of `SL₂(ℤ)`. The algebraic shell therefore only *reduces* the problem; the core is
-analytic, which is also why Buzzard records irreducibility as proved complex-analytically. The
-supplier contract is three named statements, none built here:
+⚠ **Geometric connectedness remains an explicit external hypothesis.** The reference route
+through Katz–Mazur 10.9.2 uses the geometric generic fibre and the complex uniformisation by a
+quotient of the upper half plane. This describes that proof, not an impossibility theorem for
+algebraic alternatives. The required contract consists of three separate statements:
 
 - geometric connectedness is insensitive to the algebraically closed extension `ℚ̄ ↪ ℂ`;
 - the uniformisation `(Y(ρ) ⊗ ℂ)^an ≅ ℍ/Γ̃` as Riemann surfaces;
-- GAGA for connectedness: a `ℂ`-scheme is connected exactly when its analytification is.
+- for this finite-type smooth affine `ℂ`-curve, algebraic connectedness agrees with
+  connectedness of its analytification. This is a scheme–analytic comparison, not an
+  unrestricted statement about arbitrary `ℂ`-schemes.
 
 No roadmap in this repository owns these statements. The in-repository Modular Forms roadmap
 deliberately stops at analytic carriers and takes on no scheme–analytic comparison, and the
@@ -1432,7 +1448,9 @@ classification.
    isomorphisms of finite levels.
 2. **PD-2, connected–étale.** Base: a henselian local ring. Construct the connected–étale
    sequence of a finite locally free commutative group scheme, functorial, compatible with local
-   base change of henselian local rings, split over a perfect residue field. Applied to `E₀[pⁿ]`
+   base change of henselian local rings. Over a perfect field the sequence splits; for a
+   henselian local base with perfect residue field, this is a splitting of the special fibre,
+   not an assertion that the whole sequence over the local ring splits. Applied to `E₀[pⁿ]`
    over a field it defines the dichotomy the chapter turns on: `E₀/k` is **ordinary** if
    `E₀[p]⁰` has rank `p`, **supersingular** if `E₀[p]` is connected (`Suggested.lean`,
    `EllipticCurve.IsSupersingular`).
@@ -1492,9 +1510,11 @@ ordinary/supersingular dichotomy of PD-5.
 
 ### 7G. The three characteristic-`p` calculations
 
-Formalise the rigidity engine and the three rigidity assertions exactly as KM state them
-(5.3.2.1–5.3.2.3). In items 3–5, `k` is an algebraically closed field of characteristic `p` and
-`R` an artinian local `W(k)`-algebra with residue field `k`.
+Formalise the rigidity engine and the three rigidity assertions with `p` prime and `n ≥ 1`
+throughout (KM 5.3.2.1–5.3.2.3). The positive exponent is essential: at `n = 0`, the identity
+subgroup has order one over any base and cannot force `p = 0`. In items 3–5, `k` is an
+algebraically closed field of characteristic `p` and `R` an artinian local `W(k)`-algebra
+with residue field `k`.
 
 1. **The scheme engine, KM 5.3.3 (p. 140).** Base: an arbitrary ring `R`. Hypotheses: `C/R` a
    smooth commutative one-dimensional group scheme, `p` prime, `n ≥ 1`, and the zero section a
@@ -1724,7 +1744,9 @@ universal property to the definition:
    ```
 
 For a relatively representable **affine** problem `𝒫` with a finite `H`-action, construct `𝒫/H`
-and prove all of KM 7.1.3.
+and prove the following explicitly scoped quotient statements. Finiteness uses the additional
+finite-type hypothesis in item 4; invariant base change uses the hypotheses in item 3, not
+flatness of the source scheme.
 
 1. The quotient is relatively representable and affine. The projection is the categorical quotient:
    every equivariant map from `𝒫` to a relatively representable problem on which `H` acts trivially
@@ -1740,12 +1762,23 @@ and prove all of KM 7.1.3.
    `Suggested.lean` states it on nonempty test objects, which is equivalent. If `H` acts freely
    on `𝒫`, then `𝒫⟶𝒫/H` and every fibrewise representing map are étale `H`-torsors, and
    `(𝒫_{E/S})/H≅(𝒫/H)_{E/S}`.
-3. For every `E/S`, construct `(𝒫_{E/S})/H⟶(𝒫/H)_{E/S}`. It is bijective on geometric points,
-   and is an isomorphism if `𝒫_{E/S}⟶S` is flat, if `|H|` is invertible on `S`, or if the action
-   is free.
-4. The projection `𝒫⟶𝒫/H` is finite; it is not in general flat or locally of finite
-   presentation (see the counterexample in Layer 0B), so no such assertion is made outside the
-   free case of item 2 and the regularity theorem of 9C.
+3. For every `E/S`, construct `(𝒫_{E/S})/H⟶(𝒫/H)_{E/S}`. It is bijective on geometric points
+   and is an isomorphism if `|H|` is invertible on `S` or the action is free. When using a
+   flat-base-change argument, exhibit the flat morphism along which the invariant algebra is
+   being base changed. Flatness of `𝒫_{E/S}⟶S` alone is not sufficient: `ℤ[x]` with the action
+   `x ↦ -x` is flat over `ℤ`, but `(ℤ[x]^{C₂}) ⊗ 𝔽₂ = 𝔽₂[x²]` whereas
+   `(ℤ[x] ⊗ 𝔽₂)^{C₂} = 𝔽₂[x]`. This is a regression example, not a new exception to a
+   correctly stated flat-base-change theorem.
+4. If the affine relatively representable problem `𝒫` is also locally of finite type over
+   `Ell/R`, the projection `𝒫⟶𝒫/H` is finite. Prove this on affine rigidifiers by applying
+   the finite-type invariant-ring theorem of 0C, then descend finiteness. This is the extra
+   `hP_ft` hypothesis of `isFinite_mapRep`; the later integral level problems are finite over
+   `Ell/R`, hence satisfy it. Without finite type, a finite-group quotient need only be
+   integral: let `A = ℚ[x₁,x₂,…]` and let `C₂` negate every variable. For `B = A^{C₂}` and
+   its positive-degree ideal `B₊`, `A/B₊A = ℚ ⊕ ⨁ᵢ ℚ xᵢ` is infinite-dimensional, so `A`
+   cannot be module-finite over `B`. Even in the finite-type case the quotient projection
+   need not be flat or locally of finite presentation (Layer 0B); the free case of item 2
+   and the regularity theorem of 9C supply their own stronger conclusions.
 5. If `𝒫` is normal, then `𝒫/H` is normal.
 6. If `R` is noetherian and `𝒫` is finite over `Ell/R`, then `𝒫/H` is finite over `Ell/R`.
 
@@ -1825,12 +1858,13 @@ noetherian regular local ring with perfect residue field when the group fixes al
 parameter and multiplies the last by a unit. Prove Variant 7.5.3 for a product
 `H₁×⋯×H_n` acting diagonally on a regular parameter system. Then prove KM 7.6.1:
 
-- for `p^n`, every quotient of `[Γ(p^n)]` by a subgroup of the semi-Borel, and every quotient by
-  a product subgroup `H₁×H₂` of the diagonal Cartan, is regular of dimension two and finite
-  flat over both `Ell` and the corresponding quotient problem;
+- for `p^n`, the quotients of `[Γ(p^n)]` by subgroups of the semi-Borel or by product
+  subgroups `H₁×H₂` of the diagonal Cartan are regular of dimension two and finite flat
+  over `Ell`; the projections from `[Γ(p^n)]` to those quotients are finite flat;
 - for subgroups `G,H⊆(ℤ/p^nℤ)ˣ`, the quotients of balanced `[Γ₁(p^n)]` by `G×H` and of
-  `[Γ₁(p^n)]` by `G` have the same regularity and finite-flatness properties over `Ell` and
-  over their respective source problems.
+  `[Γ₁(p^n)]` by `G` are regular of dimension two and finite flat over `Ell`, and the
+  projections from the source problems to their quotients are finite flat. The direction
+  is source to quotient; no morphism from a quotient back to its source is asserted.
 
 **Dependencies.** Layers 7, 9A–9B, and the invariant-ring and completed-local-ring API of 4D.
 
@@ -1986,8 +2020,10 @@ elliptic curves, no stacks, and no boundary moduli interpretation are introduced
 diamond-operator quotients of `[Γ₁(N)]` and nothing else: for `N ≥ 5` **prime** and a subgroup
 `H ≤ Δ := (ℤ/Nℤ)ˣ/{±1}`, the coarse scheme `Y_H := Y₁(N)/H` over `ℤ[1/N]` (Layer 9D applied to
 the 9B quotient data), including the two ends `Y₁(N)` (`H = 1`, a fine scheme for `N ≥ 5`) and
-`Y₀(N)` (`H = Δ`), together with the coarse `j`-line `Y(1) = 𝔸¹_j` of Layer 9E. Every
-unqualified `Y_H`, `X_H`, `Cusps_H` in this layer quantifies over exactly this class — not the
+`Y₀(N)` (`H = Δ`). The coarse `j`-line `Y(1) = 𝔸¹_j` of Layer 9E is the auxiliary target,
+not an additional member indexed by `H`; the rank and cusp-count formulae below apply only
+to the diamond quotients. Every unqualified `Y_H`, `X_H`, `Cusps_H` in this layer quantifies
+over exactly this class — not the
 seven identifications of 9B as a list, and not arbitrary finite quotients of Layer 9, for which
 none of the assertions below is made. `N ≥ 5` prime is a standing hypothesis of the whole layer:
 items 3 and 4 use Mazur's normalisation `n = num((N−1)/12)` and his Table 1, which are stated
@@ -2020,8 +2056,14 @@ items 1–2 are asserted for **every** member of the class; item 3 concerns the 
    normal proper model with that open part" — over the relative base `X_H` is a surface, and
    blowing up a closed point of the boundary gives a second normal proper model with the same
    open part. ⚠ **Base change is two separate statements, not bookkeeping**: normalisation
-   does not commute with arbitrary base change (normalise `k[t] ⊆ k[x]`, `t = x²`, then set
-   `t = 0`). (i) **Smooth base change is already supplied**: Mathlib's comparison morphism
+   does not commute with arbitrary base change. For the qcqs open immersion
+   `D(t) ↪ Spec k[t]`, the relative normalisation is `Spec k[t]`, since `k[t]` is integrally
+   closed in `k[t,t⁻¹]`. On base change to `t = 0`, the original source is empty: its relative
+   normalisation is empty, whereas the base change of the previous normalisation is `Spec k`.
+   Thus the comparison is `∅ ⟶ Spec k`, not an isomorphism. The integral extension
+   `k[t] ⊆ k[x]`, `t = x²`, is not a counterexample for relative normalisation: before and
+   after base change its relative normalisation is the source, even when that source is
+   nonreduced. (i) **Smooth base change is already supplied**: Mathlib's comparison morphism
    `normalizationPullback` is an isomorphism for smooth `g`, an instance at the pin. (ii) The
    stronger statement this roadmap needs is exactly one theorem, stated now and **in Mathlib's
    direction**: **geometric-fibre base change** — for every algebraically closed field `k` with
@@ -2039,8 +2081,15 @@ items 1–2 are asserted for **every** member of the class; item 3 concerns the 
    `Cusps_H` is a relative effective Cartier divisor, that `X_H` is smooth along the boundary,
    and hence that `Y_{H,k}` stays schematically dense in every geometric fibre; only then prove
    this comparison, in four explicit steps: the comparison is the identity over the
-   schematically dense open `Y_{H,k}`; it is finite; its target `X_{H,k}` is normal (smooth);
-   and a finite birational morphism to a normal scheme is an isomorphism. "The universal
+   schematically dense open `Y_{H,k}`; it is finite; both schemes are normal, with every
+   component meeting that open; and the resulting finite birational map is an isomorphism
+   component by component. The normality of the source uses normality of `Y_{H,k}` and
+   the relative integral-closure construction; that of the target uses smoothness. Do not
+   apply a finite-birational criterion to an arbitrary nonreduced source or one with extra
+   components. The density statement also needs its relative hypothesis: because the cusp
+   divisor is Cartier and flat over the base, its local nonzerodivisor equations remain
+   nonzerodivisors after base change. Mere schematic dominance of an open immersion does
+   not imply density in every geometric fibre, as `D(t) ↪ Spec k[t]` shows. "The universal
    property applies" produces the morphism — these four steps are what make it an isomorphism.
    No base-change statement for more general `R → R'` is promised — KM 8.5's
    coarse-moduli base change and base change of normalisation are different assertions, and
@@ -2061,15 +2110,29 @@ items 1–2 are asserted for **every** member of the class; item 3 concerns the 
    arguments need, and this is the statement item 1's geometric-fibre comparison stands on
    (from the formal parameters, equivalently from the cusp sections being codimension-one
    regular immersions in a smooth relative curve);
-   for `[Γ₀(N)]` with `N` prime, the splitting `Cusps₀(N) ≅ ℤ[1/N] ⊔ ℤ[1/N]`, giving the two
-   disjoint sections `0` and `∞`, stable under arbitrary base change; the coarse `j`-map has
+   for `[Γ₀(N)]` with `N` prime, the splitting
+   `D₀ := (Cusps₀(N))_red ≅ Spec ℤ[1/N] ⊔ Spec ℤ[1/N]`, giving the two disjoint cusp
+   sections `0` and `∞`. It is this finite étale cusp model and its two sections that commute
+   with arbitrary base change. The full scheme-theoretic fibre is the effective Cartier
+   divisor `Cusps₀(N) = [∞] + N[0]`, not a disjoint union of two reduced sections. After a
+   nonreduced base change `T`, write `D₀ × T` for the base-changed cusp model; do not
+   identify it with the absolute reduction of `Cusps₀(N) × T`, since reduction does not
+   commute with arbitrary base change; the coarse `j`-map has
    ramification index `1` along `∞` and `N` along `0`, computed from the Tate parameter — ⚠
    Mazur states the un/ramifiedness for the **stack** morphism `ℳ₀(N) → ℳ(1)`; what this
    roadmap states and proves is the coarse-index computation, and no stack-to-coarse comparison
    is claimed; and the extension of the Atkin–Lehner involution `w_N` from `Y₀(N)` (Layer 8's
    `[N-Isog]`-transposition) to `X₀(N)`, **a separate normalisation-functoriality theorem** —
-   `w_N` does not lie over `ℙ¹_j`, so this is not automatic — after which `w_N` interchanges
-   the two cusp sections. The computational engine is the **formal-cusp package of KM
+   `w_N` does not lie over `ℙ¹_j`, so this is not automatic. Put `j' = j ∘ w_N` on `Y₀(N)`.
+   Use the formal Tate parameters at both cusps to extend `j'` to a morphism `X₀(N) ⟶ ℙ¹_j`:
+   at a pole extend its reciprocal in the infinity chart, and justify passage from completed
+   local rings by faithful flatness. Prove this extension is finite, using properness and
+   quasi-finiteness on every geometric fibre. Normality and the dense affine open then
+   identify `X₀(N)` also as the relative normalisation for `(Y₀(N),j')`. Now `w_N` is an
+   isomorphism from this source `j'`-map to the original `j`-map, so normalisation functoriality
+   extends it. Prove the involution identity by uniqueness and compute that it interchanges
+   the two reduced cusp sections. These are separate milestones, not consequences of the
+   universal property over a fixed `j`-line. The computational engine is the **formal-cusp package of KM
    8.7–8.11 and 10.8, built here as its own milestone**: the groups `T[N]` and the Tate curve
    over `ℤ[1/N]((q))` with its subgroup schemes and `[Γ₀(N)]`-structures, the integral closure
    of the `q`-adic local ring in the corresponding level cover, and the resulting formal
@@ -2162,27 +2225,30 @@ characteristic-`N` geometry, the relative regular-differential and duality packa
 II §3, or any Jacobian; item 3 *does* use Kähler differentials, the global different,
 Riemann–Hurwitz, and the local different formula.
 
-**Representative declarations.** `Suggested.lean` §Layer 10 seeds this layer against Mathlib's
-relative-normalisation API, with genuine scheme maps throughout and no Boolean "is compactified"
-field: `CoarseCurve.compactified` **is** `Scheme.Hom.normalization` of the coarse `j`-map,
-`toJLine` **is** `fromNormalization`, `fromCoarse` **is** `toNormalization`, `cuspLocus` **is** the
-fibre product `X_H ×_{ℙ¹_j} {∞}`, and the universal property (`desc`, `hom_ext`) and the
-extension of a map to the compactifications (`compactifiedMap`, with both of its compatibility
-squares) are *proved*, not `sorry`ed — the milestones are the modular-curve content on top:
-`isFinite_toJLine`, `isOpenImmersion_fromCoarse`, `isProper_structureMap`,
-`smoothOfRelativeDimension_one_structureMap`, `isSchemeTheoreticallyDominant_fromCoarse`,
-`isFinite_cuspLocusOver`, `flat_cuspLocusOver`, `exists_cuspReduction_etale` (the reduced
-cusp locus is finite étale; the fibre itself is not reduced), `cuspLocus_isRelativeEffectiveCartier`,
-`isIso_normalizationPullback` (item 1's geometric-fibre ⚠, stated in Mathlib's direction),
-`isFinite_compactifiedMap`, and `etale_shimuraCover`/`finrank_shimuraCover` with `shimuraDegree`.
-The coarse `j`-map is Layer 9's to construct, and Mathlib carries no relative projective space at
-the pin (only `AffineSpace` and `Proj` of a graded ring), so §Layer 10 takes both as an input datum
-in the shape Layer 9 produces them: `JLineDatum`, the proper `j`-line with its section at infinity,
-and `CoarseCurve`, a member of the class fixed above, carrying `N ≥ 5` prime as fields. Separating the `j`-line from the curve is
-what makes "a map of coarse curves over the same `j`-line" — and hence items 3 and 4 — expressible.
-⚠ The `Γ₀(N)` two-cusp splitting and the six-row ramification table are deliberately **not** seeded:
-both are assertions about particular members of the class rather than about every member, and the
-construction that distinguishes members, `Y_H = Y₁(N)/H`, is Layer 9's to build.
+**Representative declarations.** `Suggested.lean` §Layer 10 retains the genuine generic
+relative-normalisation constructions in `RelativeNormalization`: the carrier is
+`Scheme.Hom.normalization`, the integral structural map and the map from the source are
+Mathlib's maps, `desc` and `hom_ext` are their actual universal property, `fibre` is a fibre
+product, and `map` is the functorial map between relative normalisations over a common target,
+with both compatibility squares proved.
+
+The modular conclusions of items 1–4 remain precise prose targets until their actual input
+objects can occur in the signatures. Before seeding them, construct the projective `j`-line
+over `ℤ[1/N]` with its affine chart and infinity section, the quotient `Y₁(N)/H` with its
+coarse-moduli/quotient identification, and the corresponding `j`-map. State each theorem on
+those constructed objects, with `N ≥ 5` prime and `H ≤ Δ`, or on data equipped with those
+identifications and all required compatibility squares. A proper smooth relative curve with
+a section does not identify `ℙ¹_j`; arbitrary qcqs maps do not identify modular curves.
+No unused prime-level field or membership docstring can replace these hypotheses.
+
+This applies to every modular conclusion, not just the two exceptional members: finiteness of
+the compactification map, identification of the affine open, properness and smoothness,
+relative Cartier and flatness statements for the full cusp fibre, finite étaleness of its
+reduction, geometric-fibre normalisation comparison, extensions of modular maps, and the
+Shimura covering with degree `shimuraDegree N`. For `X₀(N)`, the two-section statement is about
+the reduced cusp model; the six-row ramification table is about the specified map
+`X₁(N) → X₀(N)` and consumes item 3's named different/Riemann–Hurwitz package. None of these
+claims is asserted for arbitrary generic normalisation data.
 
 ## The Mazur interface: what *Modular curves and the Eisenstein ideal* consumes
 
@@ -2202,8 +2268,11 @@ Mazur proves with them. The split:
 (Layers 5, 8, 9); `[Γ₀(N)]` with cyclicity (Layer 8); the quotient and coarse theory with the
 `j`-line (Layer 9); the compactified coarse curves, the two cusps of `X₀(N)`, the ramification
 table of `X₁(N) → X₀(N)`, and the étale Shimura covering (Layer 10). Mazur's
-`X_split(N)` (Ch. III §6) is a `[Γ_H]`-quotient for the normaliser of a split Cartan, in Layer 9's
-scope, and its compactification is Layer 10 item 1 applied to that `H`.
+split-Cartan-normaliser problem has an affine `[Γ_H]` quotient in Layer 9's scope. Its
+compactification `X_split(N)` (Ch. III §6) is not supplied by Layer 10: that subgroup of
+`GL₂(ℤ/Nℤ)` is not a subgroup of the diamond group `Δ` defining the class above. A separate
+extension would have to state its own compactification and cusp hypotheses; it is not part
+of this Ch. II §§1–2 interface.
 
 **Named supplier contracts, not built here.** Each line is a blocker for the corresponding
 downstream statement, per the portfolio rule that a prose promise is not a closed dependency:
@@ -2250,8 +2319,9 @@ rather than built:
    layer, standing on 1;
 4. the geometric-fibre base-change theorem for the normalisation (item 1, in the four steps
    stated there) — this layer, standing on 3;
-5. the extension of the Galois covering and of `w_N` to the normalisations (items 2–3) —
-   this layer, standing on 2 and the universal property;
+5. extension of the Galois covering over the fixed `j`-line using 2 and the normalisation
+   universal property; separately, extension of `w_N` using the formal-cusp package in 1,
+   the finite extension of `j ∘ w_N`, and the second normalisation identification in item 2;
 6. the characteristic-`2`/`3` automorphism classification and normaliser computations
    (item 3) — this layer, on the elliptic-curves roadmap's `Aut(E)` carrier;
 7. the different and Riemann–Hurwitz package (item 3) — consumed from the
@@ -2275,7 +2345,7 @@ Jacob. Challenge A–C + 0A + 0E + 1A–1B
                                                    ├─► 2E (Weil pairing)
                                                    └─► 2F (rigidity)
 
-2A + 0D + 0F ─► 3N ─► 5A
+2A + 0C + 0D + 0G ─► 3N ─► 5A
 3N + 2F + 4A–4B ─► 4C ─► 5B
 2E + 5B ─► 5C
 
