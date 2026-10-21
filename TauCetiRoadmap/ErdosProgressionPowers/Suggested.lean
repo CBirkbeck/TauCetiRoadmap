@@ -1,4 +1,5 @@
 import Mathlib
+import TauCeti.AlgebraicGeometry.EllipticCurve.PointCount
 
 /-!
 # ErdosProgressionPowers: representative target signatures
@@ -312,6 +313,12 @@ example : (twistedLegendre (0 : ℂ)).Δ = 0 ∧ (twistedLegendre (1 : ℂ)).Δ 
   norm_num [twistedLegendre, WeierstrassCurve.Δ, WeierstrassCurve.b₂,
     WeierstrassCurve.b₄, WeierstrassCurve.b₆, WeierstrassCurve.b₈]
 
+/-- At five the symmetric cubic and its nonsquare twist have counts eight and four. -/
+theorem case_two_counts_five :
+    letI : Fact (Nat.Prime 5) := ⟨by decide⟩
+    (⟨0, 0, 0, -1, 0⟩ : WeierstrassCurve (ZMod 5)).pointCount = 8 ∧
+      (twistedLegendre (-1 : ZMod 5)).pointCount = 4 := by sorry
+
 /-- The two rational-parameter cases are disjoint and exhaust the strict triples. -/
 theorem case_partition_union (k : ℕ) (parameters : Triple → Finset ℚ) :
     (case_partition k parameters).1 ∪ (case_partition k parameters).2 = ap_triples k ∧
@@ -339,6 +346,19 @@ example : case_partition 3 (fun _ => {3}) = ({(0,1,2)},∅) := by
       norm_num at hs
   have ha : ap_triples 3 = {(0,1,2)} := by decide
   simp [case_partition, ha, hn]
+
+/-- The same primitive quadratic character has nontrivial odd support and large half-interval mass. -/
+theorem character_family {n d : ℤ} {k : ℕ} {y : ℤ} {ell : ℕ}
+    (hH : Hplus n d k y ell) (A : Fin k → ℕ) (z : Fin k → ℤ)
+    (hf : SignedFactorization n d k ell A z) (a : Triple) (ha : a ∈ ap_triples k) :
+    ∃ N : ℕ, ∃ _ : NeZero N, ∃ χ : DirichletCharacter ℝ N,
+      χ.IsPrimitive ∧ χ.IsQuadratic ∧ 1 < N ∧ ordCompl[2] N ≠ 1 ∧
+      Squarefree (ordCompl[2] N) ∧ N ≤ 8 * ordCompl[2] N ∧
+      ordCompl[2] N ∣ ∏ i ∈ Finset.univ.filter
+        (fun i : Fin k => i.val = a.1 ∨ i.val = a.2.1 ∨ i.val = a.2.2), A i ∧
+      (1239 / 10000 : ℝ) * k <
+        |∑ m ∈ Finset.Ioc (k/2) k, χ (m : ZMod N) * ArithmeticFunction.vonMangoldt m| := by
+  sorry
 
 /-! ## Layer 3: The original analytic contradiction criteria -/
 
@@ -444,6 +464,16 @@ def valuation_deletion (k : ℕ) (coeff : ℕ → ℕ) (J : Finset ℕ) : Finset
   classical
   exact J \ ((J.biUnion (fun i => (coeff i).primeFactors)).filter (fun p => p < k)).image
     (fun p => removedIndex p coeff J)
+
+/-- Removing one maximal valuation per supported prime leaves a product dividing the factorial. -/
+theorem valuation_deletion_factorial (n d : ℤ) (k : ℕ)
+    (A : ℕ → ℕ) (J : Finset ℕ)
+    (hcop : Int.gcd n d = 1) (hJ : J ⊆ Finset.range k)
+    (hn : ∀ i ∈ J, term n d i ≠ 0)
+    (hA : ∀ i ∈ J, 0 < A i ∧ (A i : ℤ) ∣ term n d i)
+    (hs : ∀ i ∈ J, ∀ p : ℕ, p.Prime → p ∣ A i → p < k) :
+    (∏ i ∈ valuation_deletion k A J, A i) ∣ (k - 1).factorial := by
+  sorry
 
 /-- Primes at most k with reciprocal mass below 0.17.
 The empty set satisfies thinSet_empty; thinSet_subset restricts to a subset,
@@ -686,6 +716,37 @@ def exceptional_indices (n d : ℤ) (k : ℕ) (moduli : Finset ℕ) : Finset ℕ
   exact (Finset.range k).filter (fun i => ∃ q ∈ moduli, 0 < q ∧ ∃ r : ℕ,
     0 < r ∧ r ∣ q ∧ (q : ℝ)^(1/3 : ℝ)/2 ≤ r ∧ (r : ℤ) ∣ term n d i)
 
+/-- The even quadratic character modulo five has a zero at zero inside the length-sixteen region. -/
+theorem exceptional_moduli_five :
+    ∃ χ : DirichletCharacter ℂ 5, χ.IsQuadratic ∧ χ.Even ∧
+      zeroWithin 16 0 χ 0 ∧ hasZeroWithin 16 0 5 ∧ 5 ∈ exceptional_moduli 16 0 := by sorry
+
+/-- No zero modulus or zero length admits a primitive zero in the exceptional region. -/
+example (k q : ℕ) (c : ℝ) : ¬ hasZeroWithin k c 0 ∧ ¬ hasZeroWithin 0 c q := by
+  constructor
+  · rintro ⟨hq, _⟩
+    exact hq.out rfl
+  · rintro ⟨hq, χ, ρ, hz⟩
+    let : NeZero q := hq
+    have hre : 1 < ρ.re := by simpa [zeroWithin] using hz.2.2.2.2
+    exact (χ.LFunction_ne_zero_of_one_le_re hz.2.1.symm hre.le) hz.2.2.1
+
+/-- Increasing c enlarges the permitted height once k is at least three. -/
+example (k q : ℕ) (c c' : ℝ) (hk : 3 ≤ k) (hc : c ≤ c') :
+    hasZeroWithin k c q → hasZeroWithin k c' q := by
+  rintro ⟨hq, χ, ρ, hz⟩
+  let : NeZero q := hq
+  have hk3 : (3 : ℝ) ≤ k := by exact_mod_cast hk
+  have h3 : 1 < Real.log (3 : ℝ) :=
+    (Real.lt_log_iff_exp_lt (by norm_num)).mpr Real.exp_one_lt_three
+  have hl : 1 < Real.log (k : ℝ) :=
+    h3.trans_le (Real.log_le_log (by norm_num) hk3)
+  have hll : 0 < Real.log (Real.log (k : ℝ)) := Real.log_pos hl
+  have hmul := mul_le_mul_of_nonneg_right hc (le_of_lt (lt_trans (by norm_num) hl))
+  have hdiv := div_le_div_of_nonneg_right hmul (by positivity : 0 ≤ 3 * Real.log (Real.log (k : ℝ)))
+  refine ⟨hq, χ, ρ, hz.1, hz.2.1, hz.2.2.1, ?_, hz.2.2.2.2⟩
+  exact hz.2.2.2.1.trans (Real.exp_le_exp.mpr hdiv)
+
 /-- The exceptional moduli are polylogarithmically numerous, large, and unique below the zero height. -/
 theorem exceptional_moduli_bounds (c : ℝ) (hc : 0 < c) (hp : boundedPage c) :
     ∃ K : ℕ, ∃ C : ℝ, 0 < C ∧ ∀ k ≥ K,
@@ -776,6 +837,30 @@ theorem fixed_exponent_finiteness (k ell : ℕ) (hk : 3 ≤ k) (he : 2 ≤ ell)
     {t : ℤ × ℤ × ℤ | Int.gcd t.1 t.2.1 = 1 ∧ t.2.2*t.2.1 ≠ 0 ∧
       (∏ i ∈ Finset.range k, term t.1 t.2.1 i) = t.2.2^ell}.Finite := by sorry
 
+/-- Euler's positive four-term progression product cannot be a square. -/
+theorem four_term_product_not_square (n d y : ℤ) (hn : 0 < n) (hd : 0 < d)
+    (hcop : Int.gcd n d = 1) :
+    (∏ i ∈ Finset.range 4, term n d i) ≠ y^2 := by sorry
+
+/-- Euler's positive three-term progression product cannot be a cube. -/
+theorem three_term_product_not_cube (n d y : ℤ) (hn : 0 < n) (hd : 0 < d)
+    (hcop : Int.gcd n d = 1) :
+    (∏ i ∈ Finset.range 3, term n d i) ≠ y^3 := by sorry
+
+/-- Positive fixed-exponent finiteness includes the two elliptic arithmetic boundary cases. -/
+theorem positive_fixed_exponent_finiteness (k ell : ℕ) (hk : 3 ≤ k) (he : 2 ≤ ell)
+    (hh : 6 ≤ k+ell) :
+    {t : ℤ × ℤ × ℤ | 0 < t.1 ∧ 0 < t.2.1 ∧ 0 < t.2.2 ∧
+      Int.gcd t.1 t.2.1 = 1 ∧
+      (∏ i ∈ Finset.range k, term t.1 t.2.1 i) = t.2.2^ell}.Finite := by sorry
+
+/-- Boundary products retain the shared prime two, and zero difference admits a cube. -/
+example : (∏ i ∈ Finset.range 4, term 1 1 i) = 24 ∧
+    (∏ i ∈ Finset.range 3, term 1 1 i) = 6 ∧
+    (∏ i ∈ Finset.range 3, term 2 1 i) = 24 ∧
+    (∏ i ∈ Finset.range 3, term 1 0 i) = (1 : ℤ)^3 := by
+  norm_num [term, Finset.prod_range_succ]
+
 /-- Every exponent at least two is in the hyperbolic range at lengths at least five. -/
 theorem fixed_exponent_finiteness_length_ge_five (k ell : ℕ) (hk : 5 ≤ k) (he : 2 ≤ ell) :
     {t : ℤ × ℤ × ℤ | Int.gcd t.1 t.2.1 = 1 ∧ t.2.2*t.2.1 ≠ 0 ∧
@@ -838,12 +923,20 @@ example (tau : ℝ) (n d : ℤ) (k : ℕ) (y : ℤ) (ell : ℕ) :
   intro p hp hpeq
   exact (hp.ne_one hpeq).elim
 
-/-- The prime two at k=2 lies above the support threshold when tau < 1/2. -/
-example (tau : ℝ) (h : tau < 1/2) : ¬ smooth_multiplier tau 1 1 2 1 2 2 := by
-  intro hs
-  have hh := hs.2.2.2.2.2.2 2 (by norm_num) (by norm_num)
-  norm_num at hh
-  linarith
+/-- A nonunit multiplier is allowed exactly at and above its closed prime-support endpoint. -/
+example (tau : ℝ) : smooth_multiplier tau 1 1 2 1 2 2 ↔ 1 ≤ tau := by
+  norm_num [smooth_multiplier, term, Finset.prod_range_succ]
+  constructor
+  · intro h
+    have hh := h 2 (by norm_num) (by norm_num)
+    norm_num at hh
+    linarith
+  · intro h p hp hdiv
+    have hp2 : p = 2 := (Nat.dvd_prime (by decide : Nat.Prime 2)).mp hdiv |>.resolve_left hp.ne_one
+    subst p
+    norm_num
+    linarith
+
 
 
 end TauCetiRoadmap.ErdosProgressionPowers

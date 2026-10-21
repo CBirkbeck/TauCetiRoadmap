@@ -46,6 +46,9 @@ Frey equation. EllipticCurves Layer 6 owns the `x − θ` Kummer map with kernel
 and Layer 8 owns the semistable algorithmic–Artin conductor comparison. The first family here differs by its progression normalization;
 the second differs by its equal-sum quadratic identity. ModularForms Layers 2–4, 8
 and 10 own Hecke operators, newforms, coefficient fields and dimension formulas.
+ModularCurves §4C owns the universal Legendre family and its field fibres;
+ArithmeticDynamics §6.35 owns `legendreCurve` and `legendreCurve_Δ`, its native
+field presentation. This roadmap owns the scaled twists and arithmetic adapters.
 ClassicalArithmeticCompletion §§1.51 and 4.41 own squareclass characters and the
 quartic descent. ImaginaryQuadraticClassNumber H3.1 owns CM integrality and the
 complex uniformization comparison. AlgebraicCurves Layers 7 and 12E own Hurwitz and the function-field/scheme genus
@@ -123,8 +126,7 @@ Use `Int.gcd_def`, `Int.gcd_greatest` and
 `Int.dvd_of_dvd_mul_left_of_gcd_one` in `Mathlib/Data/Int/GCD.lean` for
 nonnegative gcds and cancellation. Use `Nat.factorization` in
 `Mathlib/Data/Nat/Factorization/Defs.lean`. For nonzero integer term valuations,
-unfold `padicValInt p z = padicValNat p z.natAbs` and use `Int.natAbs_mul`
-with `padicValNat.mul` in `Mathlib/NumberTheory/Padics/PadicVal/Basic.lean`,
+use `padicValInt.mul` in `Mathlib/NumberTheory/Padics/PadicVal/Basic.lean`,
 retaining `[Fact p.Prime]` and nonzero factors.
 The valuation at a zero argument is never used to deduce exponent divisibility.
 
@@ -140,6 +142,11 @@ Use `DirichletCharacter.conductor`, `DirichletCharacter.IsPrimitive` and
 `Mathlib/NumberTheory/DirichletCharacter/Basic.lean`; use
 `DirichletCharacter.LFunction` from
 `Mathlib/NumberTheory/LSeries/DirichletContinuation.lean` with positive modulus.
+Use `ZMod.LFunction_apply_zero_of_even` in
+`Mathlib/NumberTheory/LSeries/ZMod.lean`: for an even function Φ,
+L(0,Φ)=−Φ(0)/2. For a Dirichlet character of modulus greater than one,
+its value at zero vanishes. Use `DirichletCharacter.LFunction_ne_zero_of_one_le_re`
+in `Mathlib/NumberTheory/LSeries/Nonvanishing.lean` away from the principal pole.
 Use `ArithmeticFunction.vonMangoldt` from
 `Mathlib/NumberTheory/ArithmeticFunction/VonMangoldt.lean` and
 `Nat.maxPrimeFac` from `Mathlib/Data/Nat/MaxPrimeFac.lean`.
@@ -156,7 +163,8 @@ conclusion. Layer 4 proves the stronger numerical cutoff. Use
 
 ### From Tau Ceti
 
-Use `WeierstrassCurve.frobeniusTrace` and
+Use `WeierstrassCurve.pointCount`, `WeierstrassCurve.pointCount_def`,
+`WeierstrassCurve.frobeniusTrace` and
 `WeierstrassCurve.frobeniusTrace_eq_card_point` in
 `TauCeti/AlgebraicGeometry/EllipticCurve/PointCount.lean`: on an elliptic model
 over a finite field of size q, the trace is q+1 minus the number of all projective
@@ -205,6 +213,16 @@ Consume Layers 2–4's Hecke operators and normalized weight-two newforms,
 and Layer 8's coefficient number field, Hecke eigenvalues and coefficient-field embeddings. Consume Layer 10's
 trivial-nebentypus dimension formulas. The newspace dimension used in the Kraus
 threshold is not the full Γ₁ dimension.
+
+### From TauCetiRoadmap.ModularCurves
+
+Consume §4C's universal Legendre family over ℤ[1/2] and its field fibres.
+
+### From TauCetiRoadmap.ArithmeticDynamics
+
+Consume §6.35 `legendreCurve` and `legendreCurve_Δ`: over any field of
+characteristic different from two, the equation has coefficients
+(0,−(1+λ),0,λ,0) and discriminant 16λ²(λ−1)².
 
 ### From TauCetiRoadmap.LocalFieldsRamification
 
@@ -262,7 +280,9 @@ locators are not identified by the available contracts; a gap supplies no theore
 - `gap:newform-coefficient-bound`: supplier `DeligneWeightsAndPurity`; section: eigenvalue bounds (locator unavailable); needs: |c_p|≤2√p at every complex embedding for every normalized weight-two newform and prime p∤N (BS20, Lemma 2.2, p. 359).
 - `gap:rational-isogenies`: supplier `EisensteinIdealAndRationalTorsion`; section: rational cyclic isogenies (locator unavailable); needs: the classification over ℚ of cyclic isogeny degrees sufficient to exclude reducible E[ell] for full rational two-torsion at ell≥7 and rational two-torsion at ell≥11 (Mazur1978, rational-isogeny theorem; BS20, Lemmas 3.3, 3.5).
 - `gap:isogeny-uniformity`: supplier `EllipticCurveModularity`; section: rational-isogeny residual images (locator unavailable); needs: for non-CM E/ℚ admitting a nontrivial rational cyclic isogeny, the mod-ell image is surjective for every prime ell>37 (Lemos2017v2, Theorem 1.1, p. 2).
-- `gap:character-pnt`: supplier `AnalyticNumberTheoryPartII`; section: effective character PNT and exceptional zeros (locator unavailable); needs: the primitive nonprincipal real-character PNT with exceptional term and effective error specified in §3.1, together with pairwise repulsion and the full bounded-height real/simple unique character-and-zero contract of §5.2 (IwaniecKowalski2004, Theorems 5.26–5.28).
+- `gap:character-pnt`: supplier `AnalyticNumberTheoryPartII`; section: effective character PNT (locator unavailable); needs: for a primitive nonprincipal character of conductor N>1 and X≥2, ∑_(m≤X)χ(m)Λ(m)=−X^β/β+O(X exp(−c log X/(√log X+log N))(log N)⁴), with effective absolute c and implied constant and the exceptional term present only if χ has an exceptional real zero β (IwaniecKowalski2004, Theorem 5.27; BS20, Theorem 5).
+- `gap:exceptional-zero-repulsion`: supplier `AnalyticNumberTheoryPartII`; section: exceptional real zeros (locator unavailable); needs: an effective c*>0 such that distinct real primitive quadratic characters of conductors N₁,N₂>1 with real zeros β₁,β₂ satisfy min(β₁,β₂)<1−3c*/log(N₁N₂), and each primitive quadratic character has at most one real zero in (1−c*/log N,1), which is simple (IwaniecKowalski2004, Theorems 5.26, 5.28; BS20, Proposition 7.1).
+- `gap:bounded-height-landau-page`: supplier `AnalyticNumberTheoryPartII`; section: bounded-height Landau–Page theorem (locator unavailable); needs: some effective c>0 satisfies the full real/simple unique character-and-zero `boundedPage c` contract of §5.2 (IwaniecKowalski2004, Theorem 5.28).
 - `gap:small-conductor-zeros`: supplier `AnalyticNumberTheoryPartII`; section: explicit zero exclusion (locator unavailable); needs: unconditional exclusion of exceptional real zeros for primitive nonprincipal quadratic characters of conductor 1<N<400000, for the same fixed small c* as §3.1 (Platt2013v1, Abstract, p. 1; BS20, p. 376). This is a mathematical input, with no computational procedure specified here.
 - `gap:log-free-density`: supplier `AnalyticNumberTheoryPartII`; section: log-free zero density (locator unavailable); needs: the effective primitive-character zero-density inequality for Q,T≥2 and 1/2≤σ≤1 stated in §5.1 (Bombieri1987, discussion after Théorème 14; BS20, p. 386).
 
@@ -332,7 +352,7 @@ Assume S. For prime q≥k and i<k, ell divides padicValInt(q,n+i*d). The valuati
 
 The gcd bound prevents q dividing two distinct terms because their difference of indices is less than q. Apply valuation additivity to the nonzero product and the ell-th power. Only the chosen term contributes.
 
-*Needs:* Layer 0 — gcd of progression terms; Mathlib `padicValInt p z = padicValNat p z.natAbs`, `Int.natAbs_mul` and `padicValNat.mul`, with `[Fact q.Prime]` and nonzero factors.
+*Needs:* Layer 0 — gcd of progression terms; Mathlib `padicValInt.mul` in `Mathlib/NumberTheory/Padics/PadicVal/Basic.lean`, with `[Fact q.Prime]` and both factors nonzero.
 
 ([BS20], Lemma 3.1(ii), p. 360.)
 
@@ -439,7 +459,12 @@ A common prime of r,d cannot divide n. In the coprime case invert d modulo r and
 Prove `explicitPrimeEstimates` with the numerical domains used below:
 θ(x)<1.000081x for every real x>0 (Schoenfeld1976, Note Added in Proof, p. 360), the errors
 |θ(x;8,a)−x/4|≤0.002811x/4 for a=3,5 and x≥10¹⁰ (RamareRumely1996, Theorem 1 and Table 1, modulus eight), and effective
-π(x), reciprocal-prime and ∑(log p)/p bounds with explicit endpoints. In particular, for x≥59 use x/log x·(1+1/(2 log x))<π(x)<x/log x·(1+3/(2 log x)); for x≥286 use |∑_(p≤x)1/p−log log x−B₁|<1/(2(log x)²), with B₁ the prime reciprocal constant.
+π(x), reciprocal-prime and logarithmically weighted reciprocal-prime bounds with explicit endpoints. In particular, for x≥59 use x/log x·(1+1/(2 log x))<π(x)<x/log x·(1+3/(2 log x)); for x≥286 use |∑_(p≤x)1/p−log log x−B₁|<1/(2(log x)²), with B₁ the prime reciprocal constant.
+Prove `weightedPrimeReciprocalBounds`: writing E=−γ−∑_(p prime) log p/(p(p−1))=−1.33258…,
+log x+E−1/(2 log x)<∑_(p≤x)(log p)/p for every real x>1, and
+∑_(p≤x)(log p)/p<log x+E+1/(2 log x) for x≥319
+(RosserSchoenfeld1962, Theorem 6, inequalities (3.21)–(3.22), p. 70).
+Thus the centered expression is ∑_(p≤x)(log p)/p−log x−E; the negative value of E fixes its sign.
 Prove `primePowerTail` strong enough to preserve the strict margin
 0.000045875k between the four-character projection and 0.1239k: for every real
 x>0, 0≤ψ(x)−θ(x)<1.001093√x+3x^(1/3), and for integer k≥2·10¹⁰,
@@ -452,12 +477,17 @@ Prove `explicitPrimeCount`: π(x)<1.1x/log x for real x≥10⁸
 k≥exp(exp(10⁷)). Use the supplied `Chebyshev.theta` and `Chebyshev.psi`.
 Prove `factorialLargePrimeContribution`: for natural k≥exp(exp(10⁷)),
 ∑_(p prime, k^(7/16)<p≤k) v_p((k−1)!) log p≥(9/16)k log k−5k
-(BS20, §9, p. 384; Tenenbaum1995, Theorem 5).
+(BS20, §9, p. 384; Tenenbaum1995, Theorem 5; RosserSchoenfeld1962, Theorem 6).
+For a=k^(7/16), subtract the upper bound at a from the lower bound at k.
+Legendre’s valuation formula and θ(k)<1.000081k then give the explicit lower bound
+(k−1)[(9/16)log k−1/(2 log k)−8/(7 log k)]−1.000081k,
+which is at least (9/16)k log k−5k throughout k≥exp(exp(10⁷)).
+The constant E cancels, and both endpoints exceed 319 in this range.
 
 *Needs:* `primePowerTail` uses the supplied Chebyshev functions and Schoenfeld’s
 explicit estimates; `explicitTotientRatio` uses the indicated prime-product
 estimate; `factorialLargePrimeContribution` uses Legendre’s factorial valuation
-formula and the weighted-prime estimate of Tenenbaum’s Theorem 5. (BS20, equation (10),
+formula, `weightedPrimeReciprocalBounds` and the displayed θ estimate. (BS20, equation (10),
 p. 362; §6, equations (19)–(21), pp. 369–370; §9, pp. 382–384;
 §5, proof of Lemma 5.1, p. 365.)
 
@@ -744,7 +774,9 @@ Partition the six Legendre parameters by -Q^2 union2Q^2. Prove the application-s
 ### 2.1 Native Legendre and residual-image interfaces
 
 For a field K of characteristic different from 2 and λ∈K with λ≠0,1,
-construct the native Legendre equation y²=x(x−1)(x−λ) and its scaled twists.
+use ModularCurves §4C’s universal Legendre family and its field fibres, and
+ArithmeticDynamics §6.35 `legendreCurve` and `legendreCurve_Δ` for its native
+field presentation. Construct the scaled twists and the full-two-torsion adapter here.
 The light model `twistedLegendre lambda` has coefficients (0,−2(1+λ),0,4λ,0)
 and equation y²=x(x−2)(x−2λ), including singular parameters. Prove
 `twistedLegendre_equation`, `twistedLegendre_discriminant` and
@@ -795,7 +827,7 @@ consumed from ImaginaryQuadraticClassNumber H3.1. These statements concern
 actual torsion representations. (BS20, §6, final Case-II argument and
 the rational-isogeny surjectivity result cited there, p. 373, and its cited Lemos theorem.)
 
-*Needs:* EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); `gap:isogeny-uniformity`; Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
+*Needs:* ModularCurves §4C; ArithmeticDynamics §6.35; EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); `gap:isogeny-uniformity`; Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
 
 ### 2.2 Legendre case partition
 
@@ -837,7 +869,11 @@ Prove `case_two_normalization` with the hypotheses and conclusions below.
 
 Under H and CaseII one can choose lambda=2*t^2 and 1-lambda=2*v^2 with positive rational t,v, so 2*t^2+2*v^2=1. For each prime k/2<p≤k with p = 5 mod 8, t and v are p-units and the Legendre symbol of t*v is +1.
 
-Use the six-parameter transformations to place lambda in(0,1) and both lambda,1-lambda in2Q^2. At p = 5 mod 8 compare the first-family reduction to a twist of the CM model with lambda=-1. If tv were nonsquare, the order-four witness and native halving criterion give a subgroup isomorphic to ℤ/2ℤ×ℤ/8ℤ. Its order 16 contradicts the exact 2-part 8 of the comparison point count.
+Use the six-parameter transformations to place lambda in(0,1) and both lambda,1-lambda in2Q^2. At p = 5 mod 8 compare the first-family reduction to a twist of the CM model with lambda=-1. If tv were nonsquare, the order-four witness and native halving criterion give a subgroup isomorphic to ℤ/2ℤ×ℤ/8ℤ. Its order 16 would divide #F′_λ(𝔽_p)=p+1±a_p(F₋₁). By `minusOne_twoPrimary`, 8 exactly divides p+1−a_p(F₋₁); since p≡5 mod 8, a_p(F₋₁)≡6 mod 8 and 4 exactly divides p+1+a_p(F₋₁). Neither possible count is divisible by 16.
+
+**Checks.**
+
+- `case_two_counts_five`: over 𝔽₅ the symmetric curve has eight points and its twist by the nonsquare 2 has four; neither count is divisible by 16. This is a named native-point-count boundary target.
 
 *Needs:* Layer 2 — legendre case partition; Layer 1 — good reduction and forced trace zero; Layer 2, native Legendre interfaces.
 
@@ -869,7 +905,10 @@ Project to primes 5 mod 8 using the previous square test and the explicit theta(
 
 ### 2.7 Simultaneous quadratic character family
 
-Prove `character_family` with the hypotheses and conclusions below.
+Prove `character_family` with the hypotheses and conclusions below. Its Lean
+signature records the same-witness mass and coefficient-support milestone using
+the explicit finite sum; divisibility by the deletion level M_a remains in the
+README target `character_family_support`.
 
 Under Hplus choose for every a in A(k) one pair (N_a,chi_a), with N_a>1 and chi_a a native primitive real quadratic character modulo its conductor N_a. The same choice simultaneously has: |sum over integers k/2<m≤k of chi_a(m)*Lambda(m)|>0.1239*k; N_a^odd squarefree, N_a^odd dividing M_a and A_i*A_j*A_h, N_a^odd≠1; and N_a≤8*N_a^odd. N_a is the actual native character conductor, not a freely assigned modulus.
 
@@ -913,12 +952,12 @@ Define `weightedHalf k value` as ∑_(floor(k/2)<m≤k) value(m)Λ(m). Prove `we
 Fix an effective absolute c* with 0<c*<log 2 small enough for the exceptional-zero
 repulsion contract. For a primitive nonprincipal real quadratic character
 χ of conductor N>1, an exceptional zero means a real β in
-(1−c*/log N,1) with χ.LFunction(β)=0. Consume uniqueness and simplicity of this zero from `gap:character-pnt`.
+(1−c*/log N,1) with χ.LFunction(β)=0. Consume uniqueness and simplicity of this zero from `gap:exceptional-zero-repulsion`.
 The required PNT contract `gap:character-pnt` says: for X≥2 the sum ∑_(m≤X)χ(m)Λ(m)
 is −X^β/β when the exceptional zero exists, plus an error of absolute value at
 most C X exp(−c log X/(sqrt(log X)+log N))(log N)^4, with effective
 absolute c,C>0; without an exceptional zero the exceptional term is zero.
-The same contract supplies pairwise exceptional-conductor repulsion N₂>N₁².
+The repulsion contract `gap:exceptional-zero-repulsion` supplies N₂>N₁².
 Thus Nⱼ≥N₁^(2^(j−1)) for 1≤j≤s, strictly for 2≤j≤s.
 Consume `gap:small-conductor-zeros`:
 no primitive nonprincipal real quadratic character with 1<N<400000 has a
@@ -973,7 +1012,7 @@ the least ratio P/log(8∏p) in this finite list is 3/log 24>0.94.
 - The principal character has a main term of order k and is excluded from a nonprincipal PNT error estimate.
 - Equal characters have diagonal correlation of order k and are excluded from the strict off-diagonal power saving.
 
-*Needs:* `gap:character-pnt`, `gap:small-conductor-zeros`; `smoothModulusCharacterSum` for the correlation specialization; ClassicalArithmeticCompletion §1.51 for quadratic-conductor support; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's explicit prime estimates and divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
+*Needs:* `gap:character-pnt`, `gap:exceptional-zero-repulsion`, `gap:small-conductor-zeros`; `smoothModulusCharacterSum` for the correlation specialization; ClassicalArithmeticCompletion §1.51 for quadratic-conductor support; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's explicit prime estimates and divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
 
 ### 3.2 Harmonic smooth-conductor criterion
 
@@ -983,7 +1022,7 @@ For each fixed 0<c1<1 there is an effectively computable k1(c1) such that under 
 
 For a nonexceptional character use log N<1.07*(log k)^(1-c1) and the supplier effective PNT: the error is O(k*exp(-c*(log k)^min(c1,1/2))*(log k)^4), contradicting the fixed lower bound for effective large k. If all characters are exceptional, order their conductors; repulsion gives N_j≥N_1^(2^(j-1)), strictly for j≥2. The conductor–largest-prime theorem and 1/0.94<1.07, 2/0.94<2.13 give reciprocal mass<2.13/log N_1, so N_1≤373743<400000. Use the checked unconditional small-conductor zero-exclusion theorem, not an assumed GRH statement.
 
-*Needs:* Layer 2 — simultaneous quadratic character family; Layer 0, explicit prime estimates; Layer 3 `quadraticConductor_maxPrime_lower`; `gap:character-pnt`, `gap:small-conductor-zeros`; Mathlib `Nat.maxPrimeFac`.
+*Needs:* Layer 2 — simultaneous quadratic character family; Layer 0, explicit prime estimates; Layer 3 `quadraticConductor_maxPrime_lower`; `gap:character-pnt`, `gap:exceptional-zero-repulsion`, `gap:small-conductor-zeros`; Mathlib `Nat.maxPrimeFac`.
 
 ([BS20], Proposition 7.2, pp. 374-375; §7 proof, p.375; decay exponent for general c1; §7 proof, pp.375–376.)
 
@@ -1017,7 +1056,7 @@ Prove `roth_cutoff_substitution`: 10⁶<132 log(2)·10⁵<10⁷, certifying the 
 Prove `quantitativeThreeAP`: for 0<δ<1, a subset J of range(k) with
 |J|≥δk and k≥exp(exp(132 log(2)/δ)) contains i<j<h with i+h=2j,
 all in J. The proof supplies this displayed bound rather than an unspecified
-qualitative threshold. (RahmanRoth, bound (36); BS20, §9, Theorem 8 and its application in the proof
+qualitative threshold. (RahmanRoth, as quoted in BS20, §9, equation (36), p. 381; BS20, §9, Theorem 8 and its application in the proof
 of Proposition 9.1, pp. 381–384.)
 
 **Checks.**
@@ -1094,9 +1133,9 @@ Prove `survivor_density` with the hypotheses and conclusions below.
 
 Under Hplus, k≥exp(exp(10^7)) and sum over S of 1/p<0.17, the losses from T_pr,U_pr,S are at most k*log(16/7), k*log(1/(1-10^-4))+5*k*log10/loglogk+10^4*logk, and strictly less than 0.17*k+1.1*k/logk. Thus |J|>0.0032*k. Deletion gives |J1|>0.00319*k. Its smooth coefficient product is less than k^(0.44*k), and J2={i in J1:A_i≤k^139} has |J2|>10^-5*k.
 
-Sum the one-residue-class bound over primes, keeping endpoints and the +1 loss. Import explicit reciprocal-prime and prime-count estimates. Apply maximal-valuation deletion. The large-prime part of(k-1)! has log at least(9/16)*k*logk-5*k; combine the local explicit Stirling upper adapter. Markov counting with log A_i>139*logk bounds the complement of J2. The numerical range is strengthened to the certified Roth threshold. For the 0.44 bound one may instead use the weaker native (k-1)!≤k^k: subtracting the large-prime contribution gives log(product A_i)≤(7/16)*k*logk+5*k<0.44*k*logk in the certified range. The sharper Stirling adapter remains a separately covered source item.
+Under Hplus, every prime in (k/2,k] divides d by §1.9, so I_p=∅ there. Sum the one-residue-class bound only over k^(7/16)<p≤k/2, retaining the +1 loss. The main reciprocal difference is log(16/7)+log(1−log 2/log k); the negative second term absorbs π(k/2)<0.6k/log k and the explicit reciprocal-prime errors in the certified range. Apply maximal-valuation deletion. The large-prime part of(k-1)! has log at least(9/16)*k*logk-5*k; combine the local explicit Stirling upper adapter. Markov counting with log A_i>139*logk bounds the complement of J2. The numerical range is strengthened to the certified Roth threshold. For the 0.44 bound one may instead use the weaker native (k-1)!≤k^k: subtracting the large-prime contribution gives log(product A_i)≤(7/16)*k*logk+5*k<0.44*k*logk in the certified range. The sharper Stirling adapter remains a separately covered source item.
 
-*Needs:* Layer 4 — thin-prime sieve survivors; Layer 4 — maximal-valuation deletion; Layer 0 — one-residue-class count; Layer 0, explicit prime estimates; Layer 4 — explicit stirling upper bound; Mathlib `Nat.factorial_le_pow`.
+*Needs:* Layer 1 — half-interval primes divide the difference; Layer 4 — thin-prime sieve survivors; Layer 4 — maximal-valuation deletion; Layer 0 — one-residue-class count; Layer 0, explicit prime estimates; Layer 4 — explicit stirling upper bound; Mathlib `Nat.factorial_le_pow`.
 
 ([BS20], §9 proof, pp. 382–383; §9 proof, pp. 383–384; §9 proof, p. 384; §9 end of proof, p. 384; §9 p.384, reference [43].)
 
@@ -1169,7 +1208,7 @@ For a bounded-height Landau-Page constant c>0 define T=exp(c log k/(3log log k))
 
 ### 5.1 Bounded-height analytic inputs
 
-Prove the native L-function adapter `boundedPage_exists` from `gap:character-pnt`: some c>0 satisfies `boundedPage` in §5.2,
+Prove the native L-function adapter `boundedPage_exists` from `gap:bounded-height-landau-page`: some c>0 satisfies `boundedPage` in §5.2,
 with primitive characters, positive moduli q≤T, T≥2, |Im ρ|≤T and
 Re ρ≥1−c/log T, excluding the principal pole. Every qualifying pair has
 real character values and a real simple zero, and the pair is unique across
@@ -1193,13 +1232,15 @@ and proof, pp. 386–387; Proposition 12.2 and proof, p. 387.)
 - A zero above height T does not violate the bounded-height conclusion; replacing T by Q changes the theorem.
 - The integral at ρ=0 is log 2, while the separate expression 1/|ρ| is singular; this pins the uniform zero-term bound.
 
-*Needs:* `gap:character-pnt`, `gap:log-free-density`; Mathlib `DirichletCharacter.LFunction`; Layer 3's effective real-character estimates and its zero conventions. The definition and API below use these general inputs at Q=k⁴ and the stated zero height.
+*Needs:* `gap:bounded-height-landau-page`, `gap:log-free-density`; Mathlib `DirichletCharacter.LFunction`. The definition and API below use these inputs at Q=k⁴ and the stated zero height.
 
 ### 5.2 Bounded-height exceptional moduli
 
 Define `zeroHeight k c` as T below, `zeroWithin` as the primitive regular-zero witness, `hasZeroWithin` by existential quantification over that character and zero, and `exceptional_moduli` as Q(k,c). Define `pageZero c T χ ρ` as the primitive regular-zero condition with |Im ρ|≤T and Re ρ≥1−c/log T; `pageException c T q` means a positive modulus admitting such χ,ρ. Define `boundedPage c` to assert, for every T≥2 and q≤T, that every such zero is real and simple and χ is real-valued, and that any two qualifying character/zero pairs agree (including their moduli and pulled-back integer values). Modulus uniqueness is a consequence, not a substitute for reality. Their APIs include membership, finite bounds, height projection and invariance under equality of the character and zero, all with the same positive-modulus instance.
 
 The finite-set and zero predicates are total on natural k and real c, using the native total real logarithm and division. Their analytic applications require k≥3 and c>0. For k≥3 and fixed c>0 from the bounded-height Landau-Page theorem put T=exp(c*logk/(3*loglogk)). Q(k,c) consists of integers1≤q≤k^4 for which some native primitive complex Dirichlet character modulo q has a zero rho of its meromorphic LFunction at a regular point (rho≠1 or chi is nonprincipal) with |Im rho|≤T and Re rho>1-3*loglogk/logk. The modulus is positive; LSeries, which is zero outside convergence, is not used.
+
+Prove `exceptional_moduli_five`: there exists an even quadratic character χ modulo 5 such that `zeroWithin 16 0 χ 0`, `hasZeroWithin 16 0 5` and `5 ∈ exceptional_moduli 16 0`. Take the nonprincipal quadratic character, which is primitive and even; the supplied even-function value formula gives L(0,χ)=−χ(0)/2=0. Here `zeroHeight 16 0=1` and 1−3 log(log 16)/log 16<0 (BS20, §12, (40)–(41), p. 386, for the region; the supplied even-function value formula supplies the trivial zero). This named boundary target includes the logarithmic inequality in its proof obligation.
 
 Prove `exceptional_moduli_mem` (characterisation): Membership is equivalent to the displayed positive-modulus bounds and the bounded-height zero witness. A zero witness satisfies rho≠1 or chi≠1, excluding the principal pole. `exceptional_moduli_finite` (structure): The set is finite, contained in{1,..,k^4}. `exceptional_moduli_height` (projection): Every witness zero obeys the same T used in the zero-density estimates.
 
@@ -1218,6 +1259,10 @@ Prove `exceptional_moduli_mem` (characterisation): Membership is equivalent to t
 - The same pair has nonzero L-function derivative; reality alone would not imply simplicity.
 - Two qualifying pairs under `boundedPage c` have equal moduli, integer values and zero; uniqueness of modulus alone does not identify the pair.
 - `pageZero` holds at T=2, c=4 log 2 for the primitive modulus-one character and ρ=−2, and hence `pageException` holds at modulus 1 for that region. This trivial zero distinguishes a wide region from the small positive constant in the theorem.
+- `hasZeroWithin k c 0` is false: there is no `NeZero 0` instance to witness the existential.
+- `hasZeroWithin 0 c q` is false for every q: the strip is Re ρ>1, where the continued L-function is nonzero, and the pole is excluded.
+- For k≥3 and c≤c′, `hasZeroWithin k c q` implies `hasZeroWithin k c′ q`; log log k>0 makes the permitted height increase.
+- `exceptional_moduli_five` (positive boundary): the even nonprincipal quadratic character χ₅ modulo 5 has L(0,χ₅)=0; it gives `zeroWithin 16 0 χ₅ 0`, `hasZeroWithin 16 0 5` and `5 ∈ exceptional_moduli 16 0`. Constantly false predicates would reject this witness.
 - `exceptional_moduli_zero` (non-example): 0 never belongs to Q(k,c), regardless of zero witnesses.
 - `exceptional_moduli_upper` (characterisation): q>k^4 never belongs.
 - `exceptional_moduli_high_zero` (non-example): A zero with |Im rho|>T alone cannot witness membership.
@@ -1226,7 +1271,7 @@ Prove `exceptional_moduli_mem` (characterisation): Membership is equivalent to t
 
 Take a subset of range(k^4+1) using the exact quantified character and complex-zero predicate. Use the native primitive-character and meromorphic continuation vocabulary. The analytic height restriction is essential. Explicitly exclude the principal-character pole at rho=1. Mathlib totalizes the function there; an assigned value is not a meromorphic zero. The same guard belongs in the bounded-height Landau-Page input predicate.
 
-*Needs:* Mathlib `DirichletCharacter.LFunction`; Mathlib `DirichletCharacter.IsPrimitive`.
+*Needs:* Mathlib `DirichletCharacter.LFunction`, `DirichletCharacter.IsPrimitive`, `ZMod.LFunction_apply_zero_of_even` and `DirichletCharacter.LFunction_ne_zero_of_one_le_re`; ClassicalArithmeticCompletion §1.51 for the quadratic character modulo 5 and the coefficient-change contracts above.
 
 ([BS20], Section 12, equations (40)-(41), p. 386.)
 
@@ -1238,7 +1283,7 @@ For the fixed positive Landau-Page constant c, there are effective K,C such that
 
 Apply the supplier log-free density estimate at Q=k^4 and the exact T, with all character/modulus multiplicities. For small q first use the full Landau–Page contract to make the exceptional zero and character real; apply `realExceptionalZero_upper`, then use uniqueness for the remaining moduli. Constants depend only on the fixed analytic input, not on n,d.
 
-*Needs:* Layer 5 — bounded-height exceptional moduli and bounded-height analytic inputs; Layer 3, effective zeros and repulsion.
+*Needs:* Layer 5 — bounded-height exceptional moduli and bounded-height analytic inputs; `gap:bounded-height-landau-page`; `gap:log-free-density`.
 
 ([BS20], Proposition 12.1 first conclusion, p.386; Proposition 12.1 second conclusion, pp.386–387; Proposition 12.1 third conclusion, pp.386–387.)
 
@@ -1250,7 +1295,7 @@ For sufficiently large k, every native primitive nonprincipal character of condu
 
 Subtract the supplier truncated explicit formulas at k and k/2 with the same height T. Bound(k^rho-(k/2)^rho)/rho as an integral, by C*k^Re(rho)*min(1,1/|rho|); a naked sum1/|rho| is not uniform near zero. Use local zero counts for the weighted zero sum and the nonexceptional real-part bound. Track parity constants, trivial zeros and horizontal truncation errors. T, not Q=k^4, belongs in the truncation denominator.
 
-*Needs:* Layer 5 — bounded-height exceptional moduli and bounded-height analytic inputs; Layer 3, effective zeros and repulsion.
+*Needs:* Layer 5 — bounded-height exceptional moduli; §5.1 `truncatedHalfIntervalFormula` and local zero counts.
 
 ([BS20], Proposition 12.2, p.387; nonprincipal hypothesis and uniform zero-sum estimate.)
 
@@ -1282,7 +1327,7 @@ For all sufficiently large k and coprime nonzero n,d, |Bad|≤C*k/(logk)^(1/4), 
 
 For each q sum k/r+1 over its divisors r≥q^(1/3)/2, using the residue count. Split off the at-most-one q<T, where q≥logk and eventual divisor subpower estimates suffice. For remaining q≥T use T decay against the polylogarithmic cardinal bound. The total +1 error is O(k^(1/3)*(logk)^61) after using q≤k^4 and a sufficiently small divisor exponent; it is negligible relative to k/(logk)^(1/4).
 
-*Needs:* Layer 5 — exceptional divisibility indices; Layer 5 — exceptional-modulus bounds; Layer 0 — one-residue-class count; Layer 0, explicit totient and divisor bounds — eventual divisor subpower bound.
+*Needs:* Layer 5 — exceptional divisibility indices; Layer 5 — exceptional-modulus bounds; `gap:bounded-height-landau-page`; Layer 0 — one-residue-class count; Layer 0, explicit totient and divisor bounds — eventual divisor subpower bound.
 
 ([BS20], Proposition 12.3, pp.387–388.)
 
@@ -1367,7 +1412,11 @@ Suppose y*d≠0 and ell>exp(10^k). Taking k0 above10^8 and2*10^10 gives Hplus. E
 
 Prove `fixed_exponent_finiteness` for natural k≥3, ell≥2 and 2*ell+k<k*ell. Prove `fixed_exponent_finiteness_length_ge_five` as its k≥5 specialization.
 
-For every fixed k≥3 and natural ell≥2 with 2*ell+k<k*ell, the set of coprime integer(n,d,y) with y*d≠0 and product over i<k of(n+i*d)=y^ell is finite. For positive n,d,y this is Darmon–Granville Corollary 2.1; the signed extension needs the same finite sign patterns rather than an unsupported appeal to positivity.
+For every fixed k≥3 and natural ell≥2 with 2*ell+k<k*ell, the set of coprime integer(n,d,y) with y*d≠0 and product over i<k of(n+i*d)=y^ell is finite. For positive n,d,y this is the hyperbolic part of Darmon–Granville Corollary 2.1; the signed extension needs the same finite sign patterns rather than an unsupported appeal to positivity. The source also covers positive progressions at (k,ell)=(4,2) and (3,3) by Euler’s arithmetic theorems. Those cases are outside the signed hyperbolic statement: (−3,−1,1,3) is a nontrivial signed four-term progression with square product 9 and diagonal genus one.
+
+Prove `four_term_product_not_square`: for integers n,d>0 with gcd(n,d)=1 and every integer y, ∏_(i<4)(n+i*d)≠y². Prove `three_term_product_not_cube`: under the same hypotheses, ∏_(i<3)(n+i*d)≠y³ (DG95, §2.1, p. 520, Euler boundary cases). These are arithmetic descent targets here. Their elementary inputs are the term-gcd bound, prime valuation factorization and well-founded descent on positive integers; the cubic proof carries out descent for x³+z³=2u³ with nonzero integer variables, retaining mixed signs when the prime 2 divides both endpoints. Track the primes 2 and 3 separately rather than assume pairwise coprimality of all terms. Neither assertion follows from genus one or Faltings.
+
+Prove `positive_fixed_exponent_finiteness`: for k≥3, ell≥2 and k+ell≥6, the set of positive integer triples (n,d,y) with gcd(n,d)=1 and progression product y^ell is finite (DG95, Corollary 2.1, p. 520). Split off (4,2) and (3,3), whose sets are empty by the two arithmetic targets; all remaining pairs satisfy 2*ell+k<k*ell and use `fixed_exponent_finiteness`.
 
 Choose finite small-prime ell-powerfree coefficient classes, including signs. Eliminate n,d to get a diagonal complete intersection in P^(k-1); its projection to the ternary curve has degree ell^(k-3) and the displayed Riemann-Hurwitz computation gives2g-2=k*ell^(k-1)*(1-2/k-1/ell)>0. Prove smoothness, geometric connectedness and ramification of this diagonal intersection; apply the supplied genus comparison and `gap:faltings`. Each rational projective point has only finitely many primitive integral lifts, then only finitely many y. Repeat over finitely many sign patterns. The source version is the author-hosted scan listed in the references. With the source indexing t_i=a+i*d for1≤i≤k, use lambda_j*z_j^ell=(j-1)*lambda_2*z_2^ell-(j-2)*lambda_1*z_1^ell for3≤j≤k. The printed (2.2) coefficients j and j-1 shift the term by d; this local misprint does not change the distinct-branch or genus argument.
 
@@ -1413,7 +1462,9 @@ The effective prime theorem bounds the possible prime divisors p of ell for this
 
 - At (k,ell)=(3,4), 2*ell+k<k*ell and the diagonal genus is 3.
 - At (k,ell)=(4,3), the strict inequality holds and the genus is 10.
-- At (k,ell)=(4,2), equality replaces the strict inequality and the genus is 1, so this proof supplies no finiteness.
+- At (k,ell)=(4,2), equality replaces the strict inequality and the genus is 1. The signed primitive progression (−3,−1,1,3) has product 9; the positive set is empty by `four_term_product_not_square`.
+- At (k,ell)=(3,3), the genus is also one and the positive set is empty by `three_term_product_not_cube`.
+- For n=d=1, the boundary products are 24 and 6. The three terms (2,3,4) have product 24 and share the prime 2 at the endpoints; this branch cannot assume pairwise coprimality. For d=0,n=y=1 the cube identity holds, so the positive-difference hypothesis is essential.
 
 ### Examples
 
@@ -1473,7 +1524,7 @@ Prove `smooth_multiplier_iff` (characterisation): The predicate has exactly the 
 
 - `smooth_multiplier_zero` (non-example): b=0 never gives a SmoothMultiplierSolution.
 - `smooth_multiplier_unit` (computation): tau=0,n=1,d=24,k=3,y=35,ell=2,b=1 gives a solution.
-- `smooth_multiplier_half_boundary` (non-example): n=d=y=1,k=2,ell=2,b=2 satisfies the equation, but cannot satisfy the support bound for tau<1/2.
+- `smooth_multiplier_support_boundary` (computation): for n=d=y=1,k=2,ell=2,b=2, `smooth_multiplier tau 1 1 2 1 2 2` holds exactly when 1≤tau. It holds at tau=1 and fails below 1; this admits a nonunit multiplier and tests the closed endpoint.
 
 Use the explicit equation and native prime-divisor predicate. The zero multiplier is excluded so its prime support cannot make the support condition vacuous. The fixed tau<1/2 restriction does not cover all multipliers supported below k.
 
@@ -1577,7 +1628,7 @@ The general modular and analytic inputs above retain the hypotheses and numerica
 - **RamareRumely1996.** Olivier Ramaré and Robert Rumely, *Primes in arithmetic progressions*, Math. Comp. 65 (1996), Theorem 1 and the modulus-eight bounds, pp. 397–425.
 - **RosserSchoenfeld1962.** J. Barkley Rosser and Lowell Schoenfeld, *Approximate formulas for some functions of prime numbers*, Illinois J. Math. 6 (1962), Theorems 1, 5, 6.
 - **Tenenbaum1995.** Gérald Tenenbaum, *Introduction to Analytic and Probabilistic Number Theory* (1995), Theorems 5, 9 and following remark, as located in BS20, pp. 365, 384.
-- **RahmanRoth.** Mustazee Rahman, *Roth’s theorem on 3-term arithmetic progressions*, bound (36), as cited in BS20, §9, Theorem 8.
+- **RahmanRoth.** Mustazee Rahman, *Roth’s theorem on 3-term arithmetic progressions*, as quoted in BS20, §9, equation (36), p. 381.
 - **Bombieri1971.** Enrico Bombieri, *A note on the large sieve*, Acta Arith. 18 (1971), Proposition 1, pp. 401–404.
 - **Bombieri1987.** Enrico Bombieri, *Le grand crible dans la théorie analytique des nombres*, Astérisque 18 (1987 reprint), discussion after Théorème 14.
 - **Platt2013v1.** David J. Platt, *Numerical computations concerning the GRH*, arXiv:1305.3087v1, Abstract, p. 1; published in Math. Comp. 85 (2016). The required consequence is a supplier gap, not a computation target here.
