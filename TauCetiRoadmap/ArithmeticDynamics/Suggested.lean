@@ -174,8 +174,8 @@ example (φ : S → S) (a : ℝ) (P : S) : tateLimit φ (fun _ ↦ 0) a P = 0 :=
   simp only [tateLimit, zero_div]
   exact Filter.Tendsto.limUnder_eq tendsto_const_nhds
 
-/-- The first two normalized terms at one are one, and the whole sequence is constant. -/
-example (x : ℝ) : tateLimit (fun y : ℝ ↦ 2 * y) id 2 x = x := by
+/-- Real doubling has Tate limit x: every normalized term equals x. -/
+theorem tateLimit_double (x : ℝ) : tateLimit (fun y : ℝ ↦ 2 * y) id 2 x = x := by
   have hi : ∀ n : ℕ, (fun y : ℝ ↦ 2 * y)^[n] x = 2 ^ n * x := by
     intro n
     induction n with
@@ -191,9 +191,6 @@ example (x : ℝ) : tateLimit (fun y : ℝ ↦ 2 * y) id 2 x = x := by
   rw [tateLimit, he]
   exact Filter.Tendsto.limUnder_eq tendsto_const_nhds
 
-/-- Exact exponential growth fixes the height normalization. -/
-theorem tateLimit_double (x : ℝ) :
-    tateLimit (fun y : ℝ ↦ 2 * y) id 2 x = x := sorry
 /-- A stationary orbit has zero Tate limit for every initial height. -/
 theorem tateLimit_id (h : S → ℝ) (P : S) : tateLimit id h 2 P = 0 := sorry
 
@@ -232,6 +229,26 @@ example (a : X) : backwardOrbit id a = {a} := by
 example : exceptionalSet (id : X → X) = Set.univ := by
   ext x
   simp [exceptionalSet, backwardOrbit]
+
+/-- Integer translation has an infinite backward orbit at every point. -/
+example : exceptionalSet (fun z : ℤ ↦ z + 1) = ∅ := by
+  have hi (n : ℕ) (x : ℤ) : (fun z : ℤ ↦ z + 1)^[n] x = x + (n : ℤ) := by
+    induction n with
+    | zero => simp
+    | succ n ih => rw [Function.iterate_succ_apply', ih]; push_cast; ring
+  apply Set.eq_empty_iff_forall_notMem.mpr
+  intro a ha
+  have hsub : Set.range (fun n : ℕ ↦ a - (n : ℤ)) ⊆
+      backwardOrbit (fun z : ℤ ↦ z + 1) a := by
+    rintro _ ⟨n, rfl⟩
+    exact ⟨n, by rw [hi]; ring⟩
+  have hinj : Function.Injective (fun n : ℕ ↦ a - (n : ℤ)) := by
+    intro m n h
+    have he : (m : ℤ) = (n : ℤ) := by
+      change a - (m : ℤ) = a - (n : ℤ) at h
+      linarith
+    exact_mod_cast he
+  exact (Set.infinite_range_of_injective hinj) (ha.subset hsub)
 
 section Uniform
 variable [UniformSpace X]
@@ -371,8 +388,12 @@ example : mortonThreeCycleRotation 3 = -3 ∧ mortonThreeCycleRotation (-3) = 0 
     mortonCycleTrace 3 = 0 ∧ mortonCycleTrace (-3) = 0 ∧ mortonCycleTrace 0 = 0 := by
   norm_num [mortonThreeCycleRotation, mortonCycleTrace]
 
-/-- A genuine affine quotient point satisfies both equations. -/
+/-- All four sign pairs lie on Morton's curve, while the origin does not. -/
 example : mortonThreeCycleEquation (-1) (-1) = 0 ∧
+    mortonThreeCycleEquation (-1) 1 = 0 ∧
+    mortonThreeCycleEquation 1 (-1) = 0 ∧
+    mortonThreeCycleEquation 1 1 = 0 ∧
+    mortonThreeCycleEquation 0 0 = -2 ∧
     mortonEllipticCoordinates (-1) (-1) = (0, 0) := by
   norm_num [mortonThreeCycleEquation, mortonEllipticCoordinates]
 
@@ -452,14 +473,15 @@ example : IsFiniteUnionAP {3, 7} ∧ IsFiniteUnionAP ∅ ∧
     ext n
     simp
 
-/-- A positive-step infinite progression is included without a finiteness hypothesis. -/
-example : IsFiniteUnionAP (Set.range fun k : ℕ => 2 * k) := by
-  refine ⟨{(2, 0)}, ?_⟩
+/-- An isolated odd point can coexist with an infinite even progression. -/
+example : IsFiniteUnionAP ({1} ∪ Set.range (fun k : ℕ => 2 * k)) := by
+  refine ⟨{(0, 1), (2, 0)}, ?_⟩
+  ext n
   simp
 
 /-- Geometrically spaced powers are an infinite set with unbounded gaps. -/
-theorem not_isFiniteUnionAP_powers :
-    ¬ IsFiniteUnionAP (Set.range fun k : ℕ ↦ 2 ^ k) := sorry
+theorem not_isFiniteUnionAP_powers (p : ℕ) (hp : 2 ≤ p) :
+    ¬ IsFiniteUnionAP (Set.range fun k : ℕ ↦ p ^ k) := sorry
 
 /-- A primitive root over an embedded parameter field extends its embedding uniquely. -/
 theorem primitiveRootTransport (F L E : Type*) [Field F] [Field L] [Field E]
@@ -486,12 +508,30 @@ theorem rittCommonIterate (F G : Polynomial ℂ) (hd : 1 < F.natDegree)
         γ ^ s = 1 ∧ γ ^ (∑ k ∈ Finset.range n, F.natDegree ^ k) = 1 := sorry
 
 /-- Infinite synchronized intersection of two nonconstant affine orbits forces a
-common positive iterate; this is the complex-field specialization. -/
-theorem linearSynchronizedIntersection (a b c e x₀ y₀ : ℂ)
+common positive iterate over any characteristic-zero field. -/
+theorem linearSynchronizedIntersection {K : Type*} [Field K] [CharZero K]
+    (a b c e x₀ y₀ : K)
     (ha : a ≠ 0) (hc : c ≠ 0)
-    (hcommon : Set.Infinite {z : ℂ | ∃ n : ℕ,
+    (hcommon : Set.Infinite {z : K | ∃ n : ℕ,
       (fun w => a * w + b)^[n] x₀ = z ∧ (fun w => c * w + e)^[n] y₀ = z}) :
     ∃ m : ℕ, 0 < m ∧
-      (fun w : ℂ => a * w + b)^[m] = (fun w : ℂ => c * w + e)^[m] := sorry
+      (fun w : K => a * w + b)^[m] = (fun w : K => c * w + e)^[m] := sorry
+
+/-- Equal-degree nonlinear polynomial orbits with infinite intersection force a common
+positive compositional iterate (Ghioca–Tucker–Zieve Theorem 1.1; README §6.84). -/
+theorem polynomialOrbits_commonIterate {K : Type*} [Field K] [CharZero K]
+    (F G : K[X]) (x y : K) (hd : F.natDegree = G.natDegree)
+    (hF : 1 < F.natDegree)
+    (hcommon : Set.Infinite
+      (forwardOrbit (fun z : K ↦ F.eval z) x ∩ forwardOrbit (fun z : K ↦ G.eval z) y)) :
+    ∃ n : ℕ, 0 < n ∧ (fun z : K ↦ F.eval z)^[n] =
+      (fun z : K ↦ G.eval z)^[n] := sorry
+
+/-- Return times to any affine line form finitely many progressions, including when
+one or both polynomials are constant (Ghioca–Tucker–Zieve Theorem 1.4; README §6.90). -/
+theorem polynomialLine_returnTimes {K : Type*} [Field K] [CharZero K]
+    (F G : K[X]) (x y A B C : K) (hline : A ≠ 0 ∨ B ≠ 0) :
+    IsFiniteUnionAP {n : ℕ | A * (fun z : K ↦ F.eval z)^[n] x +
+      B * (fun z : K ↦ G.eval z)^[n] y = C} := sorry
 
 end TauCetiRoadmap.ArithmeticDynamics
