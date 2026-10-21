@@ -185,14 +185,14 @@ def gammaZeroIndex (N : ℕ) : ℚ := N * ∏ q ∈ N.primeFactors, (1 + 1/(q : 
 /-- Empty support and dyadic support distinguish the index from the prime product alone. -/
 example : gammaZeroIndex 0 = 0 ∧ gammaZeroIndex 1 = 1 ∧ gammaZeroIndex 4 = 6 := by
   have h4 : (4 : ℕ).primeFactors = {2} := by
-    convert Nat.primeFactors_pow_succ 2 1 using 1 <;> norm_num
+    (convert Nat.primeFactors_pow_succ 2 1 using 1; norm_num)
   norm_num [gammaZeroIndex, h4]
 
 /-- Prime and mixed support give the indices entering the level-eleven Kraus threshold. -/
 example : gammaZeroIndex 11 = 12 ∧ gammaZeroIndex 44 = 72 := by
   have h11 : (11 : ℕ).primeFactors = {11} := (by decide : Nat.Prime 11).primeFactors
   have h4 : (4 : ℕ).primeFactors = {2} := by
-    convert Nat.primeFactors_pow_succ 2 1 using 1 <;> norm_num
+    (convert Nat.primeFactors_pow_succ 2 1 using 1; norm_num)
   have h44 : (44 : ℕ).primeFactors = {2,11} := by
     rw [show 44 = 4*11 from rfl, Nat.primeFactors_mul (by norm_num) (by norm_num), h4, h11]
     decide
@@ -302,9 +302,9 @@ example : (twistedLegendre (1/2 : ℂ)).toAffine.Equation (1+Complex.I) (-1+Comp
     (-1+Complex.I)^2 = -2*Complex.I := by
   constructor
   · rw [WeierstrassCurve.Affine.equation_iff]
-    norm_num [twistedLegendre, pow_succ, Complex.I_sq] <;> ring_nf <;> simp [Complex.I_sq] <;> ring
+    (norm_num [twistedLegendre, pow_succ, Complex.I_sq]; ring_nf; simp [Complex.I_sq]; ring)
   · ring_nf
-    simp [Complex.I_sq] <;> ring
+    (simp [Complex.I_sq]; ring)
 
 /-- The two degenerate parameters have zero discriminant, while one half is nonsingular. -/
 example : (twistedLegendre (0 : ℂ)).Δ = 0 ∧ (twistedLegendre (1 : ℂ)).Δ = 0 ∧
@@ -400,10 +400,10 @@ example : weightedHalf 4 (fun _ => 1) = Real.log 3 + Real.log 2 ∧
   have h02 : Finset.Ioc 0 2 = ({1,2} : Finset ℕ) := by decide
   have h04 : Finset.Ioc 0 4 = ({1,2,3,4} : Finset ℕ) := by decide
   have h24 : Finset.Ioc 2 4 = ({3,4} : Finset ℕ) := by decide
-  norm_num [weightedHalf, Chebyshev.theta, Chebyshev.psi, Finset.sum_Ioc_succ_top,
+  (norm_num [weightedHalf, Chebyshev.theta, Chebyshev.psi, Finset.sum_Ioc_succ_top,
     Finset.filter_insert, Finset.filter_singleton,
     h02, h04, h24, h4, ArithmeticFunction.vonMangoldt_apply_prime (by decide : Nat.Prime 2),
-    ArithmeticFunction.vonMangoldt_apply_prime (by decide : Nat.Prime 3)] <;> ring
+    ArithmeticFunction.vonMangoldt_apply_prime (by decide : Nat.Prime 3)]; ring)
 
 /-! ## Layer 4: Thin-prime sieves and the original proof assembly -/
 
