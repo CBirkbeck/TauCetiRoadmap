@@ -23,7 +23,7 @@ potential theory and Galois theory are consumed through the contracts in the ind
   Layer 2. General projective analytification and adelic intersections are built
   in Layer 4; hybrid spaces and their measures are built in Layer 6.
 - AlgebraicCurves owns function fields, regular projective models, divisors,
-  the different and Hurwitz. SchemeAndStackFoundations, SF.0 and SF.5, supplies
+  the different and Hurwitz. SchemeAndStackFoundations, §§0.3, 0.9 and Layer 5, supplies
   schemes, spreading out and intersection degrees. The dynatomic coordinate
   rings and dynamical ramification calculations belong here.
 - EffectiveDiophantineMethods, ED.0, ED.3 and ED.4, supplies certified height
@@ -283,6 +283,10 @@ Consume §6.37, `projectiveWeilHeight`, `projectivePowerMap`, their affine and i
 Consume Lane C, targets 13–15, for the classical Euclidean harmonic and potential-theory input, with Mathlib’s Laplacian sign. The sphere distributional Laplacian, Riesz measures and logarithmic singularities are constructed in Layer 2 on the stated domain of potentials.
 
 ### From Mathlib and Tau Ceti
+
+`Equiv.conj` (`Mathlib/Logic/Equiv/Defs.lean`) supplies conjugation of self-maps as h∘f∘h⁻¹. Use `Equiv.divRight₀` and `Equiv.addRight` for the rational scaling and translation convention Checks in §§0.36, 2.16 and 3.3; their backward-orbit transport is the specialization of `backwardOrbit_conjugate`.
+
+Consume `Polynomial.dickson 1 a n` over a commutative ring, together with `Polynomial.map_dickson`, `Polynomial.dickson_add_two`, `Polynomial.dickson_one_one_eval_add_inv` and `Polynomial.dickson_one_one_mul`, from `Mathlib/RingTheory/Polynomial/Dickson.lean`. These supply the carrier, coefficient transport, recurrence, parameter-one evaluation and composition identities used in §6.25. Consume also `Polynomial.dickson_sq_mul_eval_mul` from `TauCeti/RingTheory/Polynomial/Dickson.lean`: over a commutative ring, `(dickson k (b^2*a) n).eval (b*t) = b^n*(dickson k a n).eval t`, for every k,n and a,b,t. Applying it over R[X] at X gives D_n(bX,b²a)=bⁿD_n(X,a), the parameter scaling used in §6.25.
 
 The following existing declarations supply the algebraic, topological and height
 interfaces used below. Their statements and ambient hypotheses govern every use.
@@ -1391,7 +1395,7 @@ First prove `projectiveLine_picard_degree`: every line bundle on ℙ¹_K is O(d)
 - (X₀²,X₀X₁) fails to generate O(2) at [0:1]; a pair with a common zero cannot define this degree-two morphism.
 
 
-*Needs:* [Rational self-maps of ℙ¹ over a field](#018-rational-self-maps-of-ℙ¹-over-a-field); [The action of a rational map on ℙ¹(K)](#019-the-action-of-a-rational-map-on-ℙ¹k); [Base change of rational maps and points](#022-base-change-of-rational-maps-and-points); [Iterates of an endomorphism act on points by its powers](#03-iterates-of-an-endomorphism-act-on-points-by-its-powers); `SchemeAndStackFoundations:SF.0`; `CategoryTheory.End`.
+*Needs:* [Rational self-maps of ℙ¹ over a field](#018-rational-self-maps-of-ℙ¹-over-a-field); [The action of a rational map on ℙ¹(K)](#019-the-action-of-a-rational-map-on-ℙ¹k); [Base change of rational maps and points](#022-base-change-of-rational-maps-and-points); [Iterates of an endomorphism act on points by its powers](#03-iterates-of-an-endomorphism-act-on-points-by-its-powers); SchemeAndStackFoundations §0.3; `CategoryTheory.End`.
 
 ([silverman-aws-2010](#silverman-aws-2010), §6.1, p. 19, Supplementary Material — The scheme-theoretic reading of a rational map, which this comparison makes a declaration.)
 
@@ -1442,7 +1446,7 @@ Prove the following basic API.
 
 **Endpoint checks.** P_2 over ℚ: P_2(2) = 4, P_2³(2) = 256, P_2(∞) = ∞, P_2(−1) = 1. P_d ∘ P_e = `P_{de}` holds as an equality of rational maps (of forms up to scaling), not only on points. Res(X^d, Y^d) = 1, so P_d has good reduction at every finite place of every number field.
 
-Applications include Milnor, On Lattès maps, §2 (power maps) — the power maps z^a are the finite quotients of affine maps of the cylinder: the first class of maps with a flat orbifold metric, contrasted with the Lattès maps; ClassicalArithmeticCompletion §6.37 — its canonical height is the absolute Weil height, so the dynamical Lehmer problem for z² is Lehmer's problem; Benedetto et al., Current trends and open problems in arithmetic dynamics, Conjecture 16.2 (p. 39) — the classical Lehmer conjecture is the f(x) = x² case of the dynamical Lehmer conjecture (The dynamical Lehmer conjecture for maps of ℙ¹ (statement)); ArithmeticDynamics roadmap, Layer 6 applications — the complete power-map example: canonical height, preperiodic points, escape rate and canonical measure, multipliers, dynatomic polynomials, preimage tree and critical height; The critical height of a rational map — P_d is postcritically finite (its critical points 0 and ∞ are fixed), the degenerate value ĥ_crit = 0.
+Applications include Milnor, On Lattès maps, §2 (power maps) — the power maps z^a are the finite quotients of affine maps of the cylinder: the first class of maps with a flat orbifold metric, contrasted with the Lattès maps; ClassicalArithmeticCompletion §6.37 — its canonical height is the absolute Weil height, so the dynamical Lehmer problem for z² is Lehmer's problem; Benedetto et al., Current trends and open problems in arithmetic dynamics, Conjecture 16.2 (p. 39) — the classical Lehmer conjecture is the f(x) = x² case of the dynamical Lehmer conjecture (The dynamical Lehmer conjecture for projective space (statement)); ArithmeticDynamics roadmap, Layer 6 applications — the complete power-map example: canonical height, preperiodic points, escape rate and canonical measure, multipliers, dynatomic polynomials, preimage tree and critical height; The critical height of a rational map — P_d is postcritically finite (its critical points 0 and ∞ are fixed), the degenerate value ĥ_crit = 0.
 
 ### 0.27b Admissible absolute values and heights on a rational function field
 
@@ -1694,13 +1698,15 @@ Let K be algebraically closed of characteristic 0 and f of degree 2 over K. Eith
 
 K algebraically closed of characteristic 0; deg f = 2.
 
-Two distinct fixed points: move them to 0 and ∞ by a unit (Units of the monoid of rational maps: PGL₂, 2-transitivity of PGL₂ on ℙ¹, Mathlib's generalLinearGroup_is_two_pretransitive); then f(z) = z(az + b)/(cz + e) with a ≠ 0, e ≠ 0, ae − bc ≠ 0; scale the lift so that e = 1 and conjugate by z ↦ kz to make a = 1. Read off μ₀ = b and μ_∞ = c from The multiplier of a rational map at a fixed point; the condition Res ≠ 0 is 1 − bc ≠ 0. One fixed point: move it to ∞ and its preimage other than ∞ to 0, so f = p(z)/z with f(z) − z = (p(z) − z²)/z having no finite zero, hence f = z + c/z with c ≠ 0; conjugating by z ↦ √c z (characteristic ≠ 2, K closed) gives z + 1/z.
+Two distinct fixed points: move them to 0 and ∞ by a unit (Units of the monoid of rational maps: PGL₂, 2-transitivity of PGL₂ on ℙ¹, Mathlib's generalLinearGroup_is_two_pretransitive); then f(z) = z(az + b)/(cz + e) with a ≠ 0, e ≠ 0, ae − bc ≠ 0; scale the lift so that e = 1 and conjugate by z ↦ kz to make a = 1. Read off μ₀ = b and μ_∞ = c from The multiplier of a rational map at a fixed point; the condition Res ≠ 0 is 1 − bc ≠ 0. One fixed point: move it to ∞ and its preimage other than ∞ to 0, so f = p(z)/z with f(z) − z = (p(z) − z²)/z having no finite zero, hence f = z + c/z with c ≠ 0; choose s with s²=c and conjugate by γ(z)=z/s. Then γ∘f∘γ⁻¹=z+1/z.
 
 *Needs:* [Units of the monoid of rational maps: PGL₂](#021-units-of-the-monoid-of-rational-maps-pgl₂); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂); [The multiplier of a rational map at a fixed point](#033-the-multiplier-of-a-rational-map-at-a-fixed-point); [The fixed points of a rational map, with multiplicity](#030-the-fixed-points-of-a-rational-map-with-multiplicity); `Projectivization.PGL.mk_smul_mk`.
 
 ([milnor-1993](#milnor-1993), §3, proof of Lemma 3.1, pp. 3–4 (arXiv v1) — The first normal form; [milnor-1993](#milnor-1993), §3, p. 4 (arXiv v1) — The second normal form.)
 
 **Endpoint checks.** z² (fixed points 0, ∞, 1) is the normal form with μ₁ = μ₂ = 0. z + 1/z has the triple fixed point ∞.
+
+**Check.** For f(z)=z+4/z, γ(z)=z/2 gives γ∘f∘γ⁻¹=z+1/z; γ(z)=2z instead gives z+16/z. This pins the left conjugation convention.
 
 ### 0.37 Milnor: M₂^cm is the surface A³(A − 1) = BC
 
@@ -1782,7 +1788,7 @@ For z ↦ z² − 1, the orbit of 1 is 1 ↦ 0 ↦ −1 ↦ 0. The diagonal lift
 
 ### Dependencies
 
-Mathlib iteration, periodic-point, projective-space, multivariate-polynomial, resultant and matrix-group APIs; the SF.0 projective-line scheme contract and the stated GIT extension for scheme-level quotients.
+Mathlib iteration, periodic-point, projective-space, multivariate-polynomial, resultant and matrix-group APIs; the SchemeAndStackFoundations §0.3 projective-line scheme contract and the stated GIT extension for scheme-level quotients.
 
 ## Layer 1: Canonical heights
 
@@ -2509,13 +2515,13 @@ Write g = (a₀ + a₁z + …)/(b₀ + b₁z + …) from a normalised lift. Good
 
 ([silverman-aws-2010](#silverman-aws-2010), Proof of Theorem 25, (5), p. 20 — Exactly the expansion, over ℤ_(p); the proof works for any valuation ring.)
 
-**Endpoint checks.** For f(z) = z² − z − 1 at p = 2, conjugate by z ↦ z + 1 so that the 2-adic periodic point 1 moves to 0: h(z) = f(z + 1) − 1 = z² + z − 2, with µ = h(0) = −2 ∈ 2ℤ₂ and λ = h′(0) = 1.
+**Endpoint checks.** For f(z) = z² − z − 1 at p = 2, conjugate by γ(z)=z−1 so that the 2-adic periodic point 1 moves to 0: h(z) = f(z + 1) − 1 = z² + z − 2, with µ = h(0) = −2 ∈ 2ℤ₂ and λ = h′(0) = 1.
 
 ### 2.17 Exceptional points
 
-For a self-map f of X, backwardOrbit(f,a)={x : ∃n≥0, f^n(x)=a} and exceptionalSet(f)={a : backwardOrbit(f,a) is finite}. The n=0 term contains a. For a surjective finite-fibre rational map of degree ≥2 this agrees with finite grand orbit; finiteness of a single fibre does not define exceptional. On the Berkovich line distinguish the classical exceptional set from the set computed on the full analytic carrier.
+For a self-map f of X, backwardOrbit(f,a)={x : ∃n≥0, f^n(x)=a} and exceptionalSet(f)={a : backwardOrbit(f,a) is finite}. The n=0 term contains a. For a surjective self-map this agrees with finite grand orbit; for rational maps of degree ≥2 take K algebraically closed, or assume surjectivity on the chosen point carrier; finiteness of a single fibre does not define exceptional. On the Berkovich line distinguish the classical exceptional set from the set computed on the full analytic carrier.
 
-Use native Nat.iterate and Set.Finite; expose the union of iterated preimages. For rational maps, finite backward orbit is mapped onto itself; hence it is a finite union of cycles and includes its forward orbit. This proves equivalence with the source’s grand-orbit convention.
+Use native Nat.iterate and Set.Finite; expose the union of iterated preimages. For a surjective self-map, each point in a finite backward orbit has a preimage in that set. Counting the available preimages forces the set to be permuted; hence it is a finite union of cycles and includes its forward orbit. A nonconstant rational map is surjective on ℙ¹(K) when K is algebraically closed; over an arbitrary field its action on K-points need not be surjective. This proves equivalence with the source’s grand-orbit convention.
 
 *Needs:* `Nat.iterate`; [The action of a rational map on ℙ¹(K)](#019-the-action-of-a-rational-map-on-ℙ¹k).
 
@@ -2527,7 +2533,7 @@ Prove the following basic API.
 - `self_mem_backwardOrbit`: a∈backwardOrbit f a.
 - `mem_exceptionalSet`: a∈exceptionalSet f iff backwardOrbit f a is finite.
 - `backwardOrbit_conjugate`: For an equivalence h and g=h∘f∘h⁻¹, backwardOrbit g (h a)=h(backwardOrbit f a); exceptional sets transform by h.
-- `exceptional_iff_finite_grandOrbit`: For a surjective self-map (in particular a nonconstant rational map), finite backward orbit iff finite grand orbit {x:∃m,n≥0, f^m(x)=f^n(a)}. Surjectivity forces the finite backward set to be permuted.
+- `exceptional_iff_finite_grandOrbit`: For a surjective self-map, finite backward orbit iff finite grand orbit {x:∃m,n≥0, f^m(x)=f^n(a)}. Surjectivity forces the finite backward set to be permuted.
 - `exceptional_iterate`: For any finite-fibre self-map and m≥1, exceptionalSet(f^m)=exceptionalSet(f). Rational maps have finite fibres; arbitrary self-maps need not satisfy this law.
 
 **Checks.**
@@ -2535,6 +2541,7 @@ Prove the following basic API.
 - **`Exceptional.identity`** (degenerate): For id on any X, E=id’s entire carrier; each backward orbit is a singleton.
 - **`Exceptional.integerTranslation`** (non-example): For f(n)=n+1 on Z, E=∅ because each backward orbit contains a−k for every k≥0.
 - **`Exceptional.powerSphere`** (value): For z↦z^d on P¹(C), d≥2, E={0,∞}; on affine C the same self-map has E={0}.
+- `rationalSquare_two_boundary` (non-example): On ℚ, z↦z² has backward orbit {2} at 2 but infinite forward orbit {2,4,16,…}, contained in its grand orbit. The same holds on ℙ¹(ℚ); this point action is not surjective, so the grand-orbit equivalence requires its stated hypothesis.
 - **`Exceptional.frobenius`** (comparison): On P¹(K), K algebraically closed of characteristic p>0 and r≥1, z↦z^(p^r) has E=P¹(overline(F_p)), an infinite set.
 
 **Endpoint checks.** Do not remove n=0 or confuse degree with the cardinality of a fibre.
@@ -3909,7 +3916,7 @@ For a lift φ = (F, G) over a field K with F(0, 1) = 0 ≠ G(0, 1) (the point 0 
 
 K is a field; F(0, 1) = 0 and G(0, 1) ≠ 0 (for a morphism lift, F(0,1) = 0 already forces G(0,1) ≠ 0). The junk value of Mathlib's power-series inverse is irrelevant because G(0, 1) ≠ 0.
 
-Dehomogenise: F(z, 1), G(z, 1) ∈ K[z] (mathlib:MvPolynomial.aeval), viewed in K[[z]] (mathlib:Polynomial.coeToPowerSeries.ringHom); G(z, 1) has nonzero constant term so is invertible. g_φ := F(z, 1)·G(z, 1)⁻¹; its constant coefficient is F(0,1)/G(0,1) = 0. Iteration uses mathlib:PowerSeries.subst, legitimate since the substituted series has constant coefficient 0 (mathlib:PowerSeries.HasSubst.of_constantCoeff_zero'). The coefficient of z in gⁿ is λⁿ (chain rule for substitution: the linear coefficient of g ∘ h is the product of those of g and h, mathlib:PowerSeries.coeff). Conjugating by z ↦ uz (u ≠ 0) replaces g(z) by u⁻¹g(uz), leaving the linear coefficient unchanged; this is the compatibility with Layer 2's conjugation-invariant multiplier.
+Dehomogenise: F(z, 1), G(z, 1) ∈ K[z] (mathlib:MvPolynomial.aeval), viewed in K[[z]] (mathlib:Polynomial.coeToPowerSeries.ringHom); G(z, 1) has nonzero constant term so is invertible. g_φ := F(z, 1)·G(z, 1)⁻¹; its constant coefficient is F(0,1)/G(0,1) = 0. Iteration uses mathlib:PowerSeries.subst, legitimate since the substituted series has constant coefficient 0 (mathlib:PowerSeries.HasSubst.of_constantCoeff_zero'). The coefficient of z in gⁿ is λⁿ (chain rule for substitution: the linear coefficient of g ∘ h is the product of those of g and h, mathlib:PowerSeries.coeff). Conjugating by z ↦ uz (u ≠ 0) replaces g(z) by u·g(z/u), leaving the linear coefficient unchanged; this is the compatibility with Layer 2's conjugation-invariant multiplier.
 
 *Needs:* [The multiplier of a periodic cycle](#214-the-multiplier-of-a-periodic-cycle); `MvPolynomial.aeval`; `Polynomial.coeToPowerSeries.ringHom`; `PowerSeries.subst`; `PowerSeries.HasSubst.of_constantCoeff_zero'`; `PowerSeries.coeff`.
 
@@ -3932,7 +3939,7 @@ Prove the following basic API.
 - **`TauCeti.ArithmeticDynamics.fixedPointGerm_test_identity`** (degenerate): The identity lift (X, Y) has germ z.
 - **`TauCeti.ArithmeticDynamics.fixedPointGerm_test_superattracting`** (non-example): For z² the linear coefficient is 0: the germ of the lift (X², Y²) is z², not z (a definition using G(z,1)·F(z,1)⁻¹ or forgetting to dehomogenise fails).
 
-**Endpoint checks.** For z² − z: g = −z + z², multiplier −1.
+**Endpoint checks.** For z² − z: g = −z + z², multiplier −1. For g=z² and γ(z)=2z, the conjugate germ is z²/2; using the inverse conjugator would give 2z².
 
 Applications include Morton–Silverman 1995, proof of Lemma 3.4 — the local representation z∘φ = z + z^e g and its iterates (8)–(10); Hutz 2010, §2.2 — iterating a local power-series representation at a fixed point; At a fixed point a_P(n) is the order of gⁿ(z) − z — a_P(n) = ord(gⁿ − z); Which formal periods occur: n ∈ {m, m·r, m·r·pᵉ} — the multiplier and its order r enter the classification.
 
@@ -4825,7 +4832,7 @@ L a number field; S a certified bounded-height enumeration (ED.0). x is preperio
 
 Use the native relative height bound B with gap:ed-bounded-height-candidates at rational radius D ≥ exp(B), and take the union of its two certified lists together with infinity. The chosen integral basis, embedding data and root-enclosure certificate hypotheses remain required. An absolute logarithmic input is first multiplied by [L:ℚ]. Use projective chart transport, and apply [3.40 Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter). The relative-height-candidate-adapter is a downstream specialization of this endpoint, not a prerequisite.
 
-*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); EffectiveDiophantineMethods ED.0, bounded-height-enumeration.
+*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); `gap:ed-bounded-height-candidates` (EffectiveDiophantineMethods, ED.0).
 
 ([hutz15](#hutz15), Abstract, p. 1 — Number-field version of the enumeration; [hutz15](#hutz15), §1, footnote 1, p. 2 — The height-bound-then-enumerate strategy (Doyle–Faber–Krumm), which this theorem certifies.)
 
@@ -4932,7 +4939,7 @@ Degree f≥2; the rational map is defined over K and has no projective base poin
 
 For the native bound exponentiate directly: Height.logHeight(P.rep)≤B_nat≤log D. For an absolute bound first multiply by the positive degree s (The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]), then exponentiate. The affine/projective height dictionary identifies Height.logHeight₁(x)=Height.logHeight![x,1], and NumberField.mulHeight₁_eq identifies the native height with the place product used by ED.0 and by Doyle–Krumm. ED.0 completeness applies to both lists together, including every boundary point; add ∞ of height 0 as in its projective contract. Forward iterates of a preperiodic point remain preperiodic and hence stay in T. The filter correctness theorem supplies both soundness and completeness with finite fuel. No uniform-in-map bound is used.
 
-*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Certified enumeration over a number field from a height enumeration](#347-finite-candidate-sets-over-a-number-field); EffectiveDiophantineMethods ED.0, bounded-height-enumeration; [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); `Height.logHeight₁_eq_logHeight`; `NumberField.mulHeight₁_eq`; [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ).
+*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Certified enumeration over a number field from a height enumeration](#347-finite-candidate-sets-over-a-number-field); `gap:ed-bounded-height-candidates` (EffectiveDiophantineMethods, ED.0); [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); `Height.logHeight₁_eq_logHeight`; `NumberField.mulHeight₁_eq`; [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ).
 
 ([doylekrumm](#doylekrumm), §2 p.2; Algorithm 4 output, §4.3 p.11 — Relative height H_K and the complete two-list contract; H_K is Mathlib's native mulHeight₁, so the factor s enters only when the bound is absolute.)
 
@@ -5387,9 +5394,9 @@ r² + c is the negative of a point of period 3, so (τ, 2τ(τ + 1)r) lies on C 
 
 The named signatures are `mortonThreeCycleInversePoint`, `mortonThreeCycleInverseCoefficient`, `mortonThreeCycleParameter_inverse`.
 
-Define H(t,u)=(t²−1)u³+(t³−2t²−9t+2)u²−9(t²−1)u−(t³−2t²−9t+2) over ℚ, and let the affine Morton curve be H=0. It is symmetric in t,u. With ζ=t+u,υ=tu, its equation is υ²(ζ−2)−υ(6ζ+4)−(ζ³−2ζ²−9ζ+2)=0. Define t(c,x)=1+2c+2x+2x² on a marked period 3 point. For t²≠1, its inverse is x=(t³+t²−t+7)/(4(t²−1)), c=−(t⁶−2t⁵+11t⁴+20t³+23t²−18t+29)/(16(t²−1)²). The rotation sends t to (t+3)/(1−t), and η(t)=(t³−9t)/(t²−1) is constant on the cycle, with c=−(η²−2η+29)/16.
+For a field K, define H(t,u)=(t²−1)u³+(t³−2t²−9t+2)u²−9(t²−1)u−(t³−2t²−9t+2) over K, and let the affine Morton curve be H=0. It is symmetric in t,u. With ζ=t+u,υ=tu, its equation is υ²(ζ−2)−υ(6ζ+4)−(ζ³−2ζ²−9ζ+2)=0. Define t(c,x)=1+2c+2x+2x² on a marked period 3 point. For t²≠1, its inverse is x=(t³+t²−t+7)/(4(t²−1)), c=−(t⁶−2t⁵+11t⁴+20t³+23t²−18t+29)/(16(t²−1)²). Define `mortonThreeCycleRotation` by t↦(t+3)/(1−t), and `mortonCycleTrace` by η(t)=(t³−9t)/(t²−1) is constant on the cycle, with c=−(η²−2η+29)/16.
 
-All explicit coordinates over ℚ; inverses and rotation formulas have their displayed nonzero denominators. Two different cycles at the same c have η values adding to 2; repeating the same cycle does not supply the required symmetric-curve point.
+The polynomial functions are defined over every field K. The inverse-parameter theorem `mortonThreeCycleParameter_inverse` assumes (2:K)≠0 and t²≠1; the cycle parametrization and its rotation/trace comparisons assume char(K)≠2 and their displayed nonzero denominators. The inverse parametrizes the formal period-three equation; exact period remains a separate predicate and can fail at multiplier collisions, including characteristic 3. The ℚ computations and rational-cycle exclusions are specializations. Two different cycles at the same c have η values adding to 2; repeating the same cycle does not supply the required symmetric-curve point.
 
 Use the explicit Φ₃ polynomial of Morton §1 and eliminate c after introducing t; polynomial division gives the inverse formulas. Substitute f_c(x) into t to find the fractional-linear rotation; sum its three orbit values to obtain η and its quadratic parameter relation. For two distinct cycles the two roots η and 2−η of that quadratic give H(t,u)=0. Expand in symmetric functions to obtain the displayed equation.
 
@@ -5403,17 +5410,25 @@ Prove the following basic API.
 - `mortonThreeCycleEquation_swap`: H(t,u)=H(u,t).
 - `mortonThreeCycleEquation_symmetric`: H(t,u)=υ²(ζ−2)−υ(6ζ+4)−(ζ³−2ζ²−9ζ+2) for ζ=t+u,υ=tu.
 - `mortonThreeCycleParameter`: t(c,x)=1+2c+2x+2x² with inverse x(t),c(t) when t²≠1.
+- `mortonThreeCycleInversePoint_map`, `mortonThreeCycleInverseCoefficient_map`: The inverse coordinates commute with field homomorphisms; `mortonThreeCycleInversePoint_pole`, `mortonThreeCycleInverseCoefficient_pole` give the totalized value 0 at t=±1, which is outside the inverse theorem.
 - `mortonThreeCycleRotation_compatibility`: t(c,f_c(x))=(t+3)/(1−t) on exact period 3 points; three applications give identity.
 - `mortonCycleTrace_relation`: η(t) is rotation invariant and c=−(η²−2η+29)/16.
-- `distinctCycles_mortonEquation`: Distinct rational exact 3 cycles supply rational t,u with H=0 and t,u≠±1.
+- `distinctCycles_mortonEquation`: Over a field K of characteristic different from 2, distinct K-rational exact 3 cycles supply t,u∈K with H=0 and t,u≠±1.
 
 **Checks.**
 
 - **`morton_symmetric_three_cycle_curve_1`** (computation): All four sign pairs (t,u)=(±1,±1) satisfy H=0.
 - **`morton_symmetric_three_cycle_curve_2`** (non-example): H(0,0)=−2; the equation is not identically 0.
-- `morton_symmetric_three_cycle_curve_3`: For c=−29/16 the cycle (5/4,−1/4,−7/4) has t-coordinates3,−3,0 respectively, all sharing η=0.
+- `morton_symmetric_three_cycle_curve_3`: For c=−29/16 the cycle (5/4,−1/4,−7/4) has t-coordinates 3,−3,0 respectively, all sharing η=0.
 
-**Endpoint checks.** The excluded t=±1 are poles/cusps of the parameter map; never substitute them into its rational inverse without a guard. The affine H-equation has the four rational solutions (t,u)=(±1,±1) after the arithmetic supplier theorem.
+**Checks.**
+
+- `mortonThreeCycleInversePoint` takes values 5/4,−1/4,−7/4 at t=3,−3,0, while `mortonThreeCycleInverseCoefficient` is −29/16 at each. Distinct markings have the same coefficient, rather than three different maps.
+- In characteristic 3, t=0 gives inverse coordinates c=1,x=2, and x²+c=x. A formal period-three point need not have exact period 3.
+- Both inverse functions take totalized value 0 at t=1 and t=−1; these values cannot be used as inverse coordinates. This distinguishes the functions from the guarded parametrization theorem.
+- Rotation sends 3→−3→0→3 and the trace is 0 at all three. At t=1, totalized rotation and trace are 0; the rotation/trace identities require their denominator guards.
+
+**Endpoint checks.** In characteristic 2, t(c,x)=1 for all c,x, so it cannot parametrize a general point; the inverse theorem requires (2:K)≠0. The excluded t=±1 are poles/cusps of the parameter map; never substitute them into its rational inverse without a guard. The affine H-equation has the four rational solutions (t,u)=(±1,±1) after the arithmetic supplier theorem.
 
 Applications include morton-elliptic-quotient-map — Supplies the symmetric coordinates for the quotient.; [3.88 Reduction excluding two rational 3-cycles](#388-reduction-excluding-two-rational-3-cycles) — Turns two distinct rational cycles into an excluded affine point.
 
@@ -5477,9 +5492,9 @@ Match the explicit polynomial models, known points, base point and Jacobian rank
 
 ### 3.86 Explicit map from Morton’s curve to an elliptic curve
 
-For H(t,u)=0 and ζ=t+u≠0, set υ=tu, X=(ζ+2)/ζ, Y=(υ(ζ−2)−(3ζ+2))/ζ². Then Y²=4X³−11X²+8X. On ζ≠0,2 this defines the quotient by t↔u; the inverse symmetric coordinates are ζ=2/(X−1), υ=(ζ²Y+3ζ+2)/(ζ−2), with t,u the roots of T²−ζT+υ. On the regular projective models this is the degree 2 fixed-field quotient, but the affine point-exclusion proof uses only the guarded formulas. At ζ=0 the H-equation forces υ=−1, and at ζ=2 it forces υ=1; hence these cases have (t,u)=(1,−1),(−1,1), or (1,1).
+Over any field K, for H(t,u)=0 and ζ=t+u≠0, set υ=tu, X=(ζ+2)/ζ, Y=(υ(ζ−2)−(3ζ+2))/ζ². Then Y²=4X³−11X²+8X. On ζ≠0,2 this defines the quotient by t↔u; the inverse symmetric coordinates are ζ=2/(X−1), υ=(ζ²Y+3ζ+2)/(ζ−2), with t,u the roots of T²−ζT+υ. When char(K)≠2,7, on the regular projective models this is the degree 2 fixed-field quotient, but the affine point-exclusion proof uses only the guarded formulas. In characteristic different from 2, at ζ=0 the H-equation forces υ=−1, and at ζ=2 it forces υ=1; hence these cases have (t,u)=(1,−1),(−1,1), or (1,1).
 
-Rational coordinates; affine map requires ζ≠0; inverse requires ζ≠2, equivalently X≠2, and X≠1. Use the actual elliptic equation. Arithmetic rank-zero completeness belongs to ED.3, not this map.
+The coordinate functions and `mortonEllipticEquation` are over any field K; the affine identity requires ζ≠0. The inverse and exceptional-coordinate descriptions require char(K)≠2 and ζ≠2, equivalently X≠2, with X≠1. The smooth elliptic/projective-quotient interpretation requires char(K)≠2,7; in characteristic 7 the cubic is singular. The rational-point application remains over ℚ. Arithmetic rank-zero completeness belongs to ED.3, not this map.
 
 Insert the symmetric H equation and complete the square to derive the elliptic equation after multiplying by ζ⁴. Solve the rational equations for ζ,υ with the guarded denominators; the quadratic T²−ζT+υ recovers the unordered pair. Treat ζ=0,2 by polynomial substitution before division. Field invariants and AlgebraicCurves give the projective quotient if used, without adding its rational point computation.
 
@@ -5495,7 +5510,7 @@ Prove the following basic API.
 - `mortonElliptic_inverse`: Recover ζ and υ by the displayed inverses when ζ≠0,2.
 - `mortonElliptic_fibre`: Away from the branch/exceptional locus equal X,Y gives equal unordered pairs {t,u}.
 - `mortonExceptionalCoordinates`: ζ=0 or 2 implies the listed sign pairs, proved without rational division.
-- `mortonElliptic_baseChange`: The formulas commute with characteristic-zero field homomorphisms on their nonzero-denominator domains.
+- `mortonElliptic_baseChange`: The formulas commute with field homomorphisms on their nonzero-denominator domains.
 
 **Checks.**
 
@@ -5503,7 +5518,7 @@ Prove the following basic API.
 - **`morton_elliptic_quotient_map_2`** (degenerate): (1,−1) has ζ=0 and is outside the affine map domain; its symmetric relation still holds.
 - **`morton_elliptic_quotient_map_3`** (non-example): (0,0) gives (X,Y) undefined by ζ=0 and is not on H=0; denominator guards cannot replace the curve hypothesis.
 
-**Endpoint checks.** The exceptional ζ=0 case cannot be assigned the totalized value of rational division and treated as a valid map value. The unordered pair is encoded by the symmetric coordinates; the double cover needs its quadratic discriminant, not just a rational X,Y.
+**Endpoint checks.** In characteristic 7 the cubic is 4X(X−4)²; the polynomial identity gives no smoothness assertion. The exceptional ζ=0 case cannot be assigned the totalized value of rational division and treated as a valid map value. The unordered pair is encoded by the symmetric coordinates; the double cover needs its quadratic discriminant, not just a rational X,Y.
 
 Applications include [3.88 Reduction excluding two rational 3-cycles](#388-reduction-excluding-two-rational-3-cycles) — Uses ED.3’s exact affine elliptic point list to exclude noncuspidal rational H-points.; Morton Lemma 6 — Identifies the involution fixed field on regular projective models.
 
@@ -5783,9 +5798,9 @@ Let X be a projective variety of dimension n ≥ 1 over a number field K and L̄
 
 X projective, dim X = n ≥ 1; L ample with semipositive adelic metric; (x_m) generic and small.
 
-Reduce to the geometric case over `X_{C_v}^an` and to test functions f that are smooth (infinite v) or model functions (finite v; the model-function density theorem stated in Yuan §3.3, Layer 2 Local mutual energy and test functions), by Stone–Weierstrass (Yuan §3.1–3.3). Variational principle: for ε > 0 twist the metric at v by `e^{−εf},` L̄(εf); then `h_{L̄(εf)}(x_m)` = h_L̄(x_m) + r_v ε ∫ f `dµ_{v,x_m}.` Write O(f) as a difference of two ample metrized line bundles and apply Yuan's arithmetic Siu inequality (Theorem 2.2; Lemma 3.3) to obtain small sections of N·L̄(εf), hence liminf_m `h_{L̄(εf)}(x_m)` ≥ `ĉ₁(L̄(εf))^{n+1}/((n+1)deg_L` X) + O(ε²) for the generic sequence (Zhang's successive-minima inequality). Expand `ĉ₁(L̄(εf))^{n+1}` = `ĉ₁(L̄)^{n+1}` + (n+1)r_v ε ∫ f c₁(L̄_v)^n + O(ε²); divide by ε and let ε → 0⁺, then replace f by −f. The global inputs (adelic intersection numbers, heights of subvarieties, arithmetic Siu, successive minima) are the global intersection and equidistribution contracts in the indicated layers; the local measures and model approximation come from Layer 2 Local mutual energy and test functions, the analytification X_v^an from Layer 2 The native analytic projective line and deg_L X from SF.5.
+Reduce to the geometric case over `X_{C_v}^an` and to test functions f that are smooth (infinite v) or model functions (finite v; the model-function density theorem stated in Yuan §3.3, Layer 2 Local mutual energy and test functions), by Stone–Weierstrass (Yuan §3.1–3.3). Variational principle: for ε > 0 twist the metric at v by `e^{−εf},` L̄(εf); then `h_{L̄(εf)}(x_m)` = h_L̄(x_m) + r_v ε ∫ f `dµ_{v,x_m}.` Write O(f) as a difference of two ample metrized line bundles and apply Yuan's arithmetic Siu inequality (Theorem 2.2; Lemma 3.3) to obtain small sections of N·L̄(εf), hence liminf_m `h_{L̄(εf)}(x_m)` ≥ `ĉ₁(L̄(εf))^{n+1}/((n+1)deg_L` X) + O(ε²) for the generic sequence (Zhang's successive-minima inequality). Expand `ĉ₁(L̄(εf))^{n+1}` = `ĉ₁(L̄)^{n+1}` + (n+1)r_v ε ∫ f c₁(L̄_v)^n + O(ε²); divide by ε and let ε → 0⁺, then replace f by −f. The global inputs (adelic intersection numbers, heights of subvarieties, arithmetic Siu, successive minima) are the global intersection and equidistribution contracts in the indicated layers; the local measures and model approximation come from Layer 2 Local mutual energy and test functions, the analytification X_v^an from Layer 2 The native analytic projective line and deg_L X from SchemeAndStackFoundations Layer 5.
 
-*Needs:* [Generic sequences of algebraic points](#47-generic-sequences-of-algebraic-points); Layer 2, Local mutual energy and test functions; Layer 2, The native analytic projective line; `SchemeAndStackFoundations:SF.5`.
+*Needs:* [Generic sequences of algebraic points](#47-generic-sequences-of-algebraic-points); Layer 2, Local mutual energy and test functions; Layer 2, The native analytic projective line; SchemeAndStackFoundations Layer 5.
 
 ([yuan2008](#yuan2008), Theorem 3.1, pp. 34–35 — The conclusion (Yuan's dim X = n − 1); [yuan2008](#yuan2008), §3.1, p. 33 — The height of X; [yuan2008](#yuan2008), §1.3, p. 7 — The proof strategy.)
 
@@ -6942,7 +6957,7 @@ For power maps the canonical adelic measure agrees with the standard adelic meas
 
 ### Dependencies
 
-Layers 0–2; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SF.5 intersection degrees; RP.0 heights; the specified global adelic intersection and bifurcation contracts for the general-variety and moduli endpoints.
+Layers 0–2; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SchemeAndStackFoundations Layer 5 intersection degrees; RP.0 heights; the specified global adelic intersection and bifurcation contracts for the general-variety and moduli endpoints.
 
 ## Layer 5: Arboreal Galois representations
 
@@ -7101,7 +7116,11 @@ Prove `inertiaRootOrbits`: over algebraically closed k, in a finite Galois split
 
 ([juul-generic-iterates](#juul-generic-iterates), Corollary 2.8, p. 6 — The statement; [juul-generic-iterates](#juul-generic-iterates), Lemma 2.6, p. 6 — The different/discriminant input.)
 
-**Endpoint checks.** P = x² − u over k[u]: 𝔭 = (u) exactly divides Disc = 4u, and inertia swaps ±√u. For 𝔭² ∣ Disc the conclusion can fail (P = x³ − u: inertia is a 3-cycle).
+**Checks.**
+
+- If char(k)≠2, P=x²−u over k[u] has discriminant 4u and inertia at (u) interchanges its two distinct roots.
+- If char(k)≠3, P=x³−u has discriminant −27u² and inertia at (u) is generated by a 3-cycle; discriminant valuation 2 does not force a transposition.
+- In characteristic 2 for x²−u, and in characteristic 3 for x³−u, the discriminant is zero and the polynomial is inseparable. These are excluded by the discriminant hypotheses, rather than examples of the claimed inertia permutations.
 
 **Check.** In characteristic 2, X²+X−u has discriminant 1 and no finite ramification; the transposition conclusion cannot be inferred from degree 2 alone.
 
@@ -8096,7 +8115,7 @@ In all cases −a is not a square. Rescale: g := |a| x² + sgn(a), an even integ
 
 For f = x² + 1 over ℚ and α = 0: (i) the critical point 0 has orbit 1, 2, 5, 26, 677, … which never meets 0, so every fⁿ is separable and T(f, 0; ℚ^sep) ≅ T²; (ii) the adjusted critical orbit is c = −1, 2, 5, 26, 677, 458330, …; (iii) G_1 = Aut(T_1) ≅ C_2, G_2 = Aut(T_2) ≅ D_4 of order 8, G_3 = Aut(T_3) of order 128, and in general G_n = Aut(T_n) of order `2^{2ⁿ−1}` for every n ≥ 1; (iv) ρ : Gal(ℚ^sep/ℚ) → Aut(T²_∞) is surjective. Every level is covered by the proven statement (iii) — nothing is inferred from finitely many computations.
 
-None beyond the data.
+The finite-level headline is `stoll_X_sq_add_one_card_gal`: for every n≥0, `Nat.card (Polynomial.Gal ((X^2+1 : ℚ[X]).comp^[n] X)) = 2^(2^n-1)`. At n=0 the polynomial is X and its Galois group is trivial.
 
 (i): the orbit is positive from index 1 on (critical-orbit-positivity), so no collision (separable-iterates-criterion); preimage-tree-regular. (ii): adjustedCriticalOrbit_X_sq_add_succ. (iii) for all n: stoll-integer-families, case (a) with a = 1. The three first levels also follow directly from stoll-maximality-criterion: −1; −1, 2; −1, 2, 5 are 2-independent (a negative number and distinct primes); orders from [5.29 The order of Aut(T_n)](#529-the-order-of-autt_n). (iv): arboreal-image-inverse-limit.
 
@@ -8498,7 +8517,7 @@ X smooth irreducible quasi-projective over ℂ; Φ unramified. The chosen equati
 
 The locus where the equations of Φ fail to define a morphism, and where α meets the removed closed set, lie over proper closed subsets of Spec R; remove them. Smoothness of the projection and unramifiedness of Φ hold on open sets containing the generic fibre (SchemeAndStackFoundations §0.9 `spreading_out_models`), and geometric irreducibility of fibres holds over a dense open (Bell–Ghioca–Tucker Proposition 4.3 and proof, pp.11–12 of arXiv v1); intersect. The finite-presentation and smoothness descent use SchemeAndStackFoundations §0.9; prove the stated dynamical spreading target with the geometric-fibre openness argument in Bell–Ghioca–Tucker Proposition 4.3.
 
-*Needs:* `SchemeAndStackFoundations:SF.0`; `AlgebraicGeometry.Smooth`; `AlgebraicGeometry.FormallyUnramified`; `Algebra.FiniteType`.
+*Needs:* SchemeAndStackFoundations §0.9 `spreading_out_models`; `AlgebraicGeometry.Smooth`; `AlgebraicGeometry.FormallyUnramified`; `Algebra.FiniteType`.
 
 ([bell-ghioca-tucker-2010](#bell-ghioca-tucker-2010), Proposition 4.3, p. 12 (arXiv v1) — Spreading out; (iii) Φ extends to an unramified endomorphism Φ_U and (iv) α extends to a section U → X_U.)
 
@@ -8512,7 +8531,7 @@ For F,G∈C[X], deg F=d>1 and a positive integer n, `F^{∘n}=G^{∘n}` iff ther
 
 n≥1. Iterate composition is distinct from ordinary polynomial powers.
 
-The backward implication is a direct composition calculation using H(γX)=γ^rH(X) and d≡r modulo s when s>0; for a monomial use d=r. The forward implication is the Ritt classification cited as GTZ Proposition 6.3; prove its necessity using Ritt, On the iteration of rational functions, p. 356; the sufficiency is the displayed composition argument. For coefficients in a characteristic-zero field K, γ is the ratio of leading coefficients and belongs to K. Its order m is coprime to d. Prime-power multiplicative orders give a common-iterate exponent ≤m, yielding the bounded-root-of-unity corollary used in GTZ Proposition 6.1.
+The backward implication is a direct composition calculation using H(γX)=γ^rH(X) and d≡r modulo s when s>0; for a monomial use d=r. The forward implication is the Ritt classification cited as GTZ Proposition 6.3; prove its necessity using [Ritt](#ritt-1920), §IV, p. 356; the sufficiency is the displayed composition argument. For coefficients in a characteristic-zero field K, γ is the ratio of leading coefficients and belongs to K. Its order m is coprime to d. Prime-power multiplicative orders give a common-iterate exponent ≤m, yielding the bounded-root-of-unity corollary used in GTZ Proposition 6.1.
 
 *Needs:* Mathlib polynomial composition; the polynomial-decomposition construction in this layer.
 
@@ -8520,7 +8539,7 @@ The backward implication is a direct composition calculation using H(γX)=γ^rH(
 
 **Endpoint checks.** n=1 forces γ=1. F=−X²,G=X² have no equal positive iterate: d=2 and γ=−1 violate the geometric-sum condition. F=−X³,G=X³ agree at the second iterate.
 
-**Construction.** [Bilu–Tichy and Ritt classification proofs](#625-equal-degree-bilutichy-classification-input).
+**Construction.** [Bilu–Tichy and Ritt classification proofs](#625-bilutichy-polynomial-pair-classification).
 
 ### 6.24 Call–Silverman specialization over a global height field and a curve
 
@@ -8536,57 +8555,63 @@ The relative canonical/Weil-height difference is ≤C₁h_T(t)+C₂ by the gener
 
 **Endpoint checks.** T=P¹, K a number field and η=O(1) recover the specialization theorem. For the constant family f_t(z)=z² on P¹×P¹ over Q, the constant section P_t=2 has generic geometric height 0 and ratio h(2)/h(t)→0. The moving section P_t=t instead has generic height 1 and ratio h(t)/h(t)=1; a constant map alone does not force a zero limit. A degree-e base change multiplies generic degrees and changes the degree-one base-height normalization accordingly.
 
-### 6.25 Equal-degree Bilu–Tichy classification input
+### 6.25 Bilu–Tichy polynomial-pair classification
 
-Use the equal-degree Bilu–Tichy classification (Theorem 10.5) and Ritt's equal-common-iterate classification (p.356) in the exact forms stated in Layer 6. Their elementary consequences are separate targets. Siegel's theorem supplies integral-point finiteness but does not prove the polynomial classifications. The polynomial-decomposition contract includes Dickson-polynomial existence and functional identities, the standard pairs and the stated linear changes of variables.
+For a number field K and a finite set S of places containing the archimedean places, write O_S for the S-integers. Define `HasInfiniteBoundedDenominatorSolutions F G` to mean that some fixed Δ∈O_S, Δ≠0, makes the set of (x,y)∈K² with F(x)=G(y) and Δx,Δy∈O_S infinite. The denominator is shared by the entire infinite set. Prove `boundedDenominatorSolutions_swap`, `boundedDenominatorSolutions_affine_iff` for separate invertible affine substitutions, and `boundedDenominatorSolutions_commonComposition`: bounded-denominator solutions of F(x)=G(y) give such solutions of E(F(x))=E(G(y)), for every nonconstant E∈K[X] (Bilu–Tichy §10, pp.284–286).
 
-If K is a number field, S a finite set of nonarchimedean places, F,G∈K[X] have equal degree >1 and F(x)=G(y) has infinitely many S-integral solutions, then F=E∘F₁∘a and G=E∘G₁∘b for E∈K[X] and affine a,b∈K[X], where, up to interchanging F₁,G₁, the pair is (X,X), (X²,c∘X²) with affine c, (D₂(X,α)/α,D₂(X,β)/β) with nonzero α,β∈K, or (D_n(X,α),−D_n(X cos(π/n),α)) with α∈K and cos(2π/n)∈K. D_n is the Dickson polynomial characterized by D_n(U+V,UV)=Uⁿ+Vⁿ.
+Use D_n(X,a)=`Polynomial.dickson 1 a n`. On this carrier prove `dickson_eval_add_mul`: for any commutative ring R, u,v∈R and n≥0, D_n(u+v,uv)=uⁿ+vⁿ; and `dickson_parameter_comp`: D_m(D_n(X,a),aⁿ)=`D_{mn}`(X,a). No inverses or characteristic restrictions are needed. These extend the imported evaluation and composition identities to general parameters (Bilu–Tichy §3, equations (3)–(6), p.266; induction on the imported recurrence also proves the formulas over commutative rings).
 
-n is a positive integer, parameters are interpreted in a chosen algebraic closure in the fourth case. Only the equal-degree necessity is needed.
+Define `IsBiluTichyStandardPair` over a characteristic-zero field K by the following five families, allowing interchange of the entries. Throughout a,b∈K×, m,n≥1 and p∈K[X] is nonzero, possibly constant: first, (X^m,aX^r p(X)^m), with 0≤r<m, gcd(r,m)=1 and r+deg(p)>0; second, (X²,(aX²+b)p(X)²); third, (D_m(X,a^n),D_n(X,a^m)), with gcd(m,n)=1; fourth, (a^(−m/2)D_m(X,a),−b^(−n/2)D_n(X,b)), with gcd(m,n)=2 (both half-exponents are integers); fifth, ((aX²−1)³,3X⁴−4X³). Define `IsBiluTichySpecificPair` by (D_m(X,a^(n/e)),−D_n(X cos(π/e),a^(m/e))), or its interchange, where e=gcd(m,n)≥3, a∈K and cos(2π/e)∈K. Interpret cos(π/e) algebraically in a chosen algebraic closure via a primitive 2e-th root of unity; prove that the displayed polynomial descends to K. The parameter powers are matched so that both compositions through D_e have parameter a^(mn/e²), as in the proof of Theorem 10.5, p.286. Prove `biluTichyStandardPair_swap`, `biluTichySpecificPair_swap` and coefficient-embedding compatibility for both predicates (Bilu–Tichy §1.1, p.262 and §9, pp.282–283).
 
-Siegel bounds the genus and number of points at infinity of a component with infinitely many S-integral points. Bilu–Tichy classify the resulting genus-zero polynomial pairs through polynomial decomposition. Prove this classification using Bilu–Tichy, Theorem 10.5, with the standard pairs and polynomial-decomposition theory specified in this target; GTZ states this input without reproducing its proof. For the downstream shape corollary, normalize nonzero Dickson parameters by a square root over K̄. Up to affine composition, a common H is Xⁿ or D_n(X,1); the cyclotomic degree bound makes the admissible n finite for fixed K.
+Prove `biluTichy_classification`: for nonconstant F,G∈K[X], `HasInfiniteBoundedDenominatorSolutions F G` is equivalent to the existence of a nonconstant E∈K[X], invertible affine a,b∈K[X], and a standard or specific pair (F₁,G₁) over K such that F=E∘F₁∘a, G=E∘G₁∘b and `HasInfiniteBoundedDenominatorSolutions F₁ G₁`. The last arithmetic condition is part of the equivalence: a pair's shape alone does not ensure rational solvability (Bilu–Tichy Theorem 10.5, pp.285–286).
 
-*Needs:* `HeightsRationalPointsAndObstructions:RP.4/siegel-theorem`; `HeightsRationalPointsAndObstructions:RP.4`.
+Derive `biluTichy_equalDegree` as the equal-degree >1 S-integral necessity: the displayed decompositions can be chosen with (F₁,G₁), up to interchange, equal to (X,X), (X²,c∘X²) for affine c, (D₂(X,α)/α,D₂(X,β)/β) for nonzero α,β, or (D_n(X,α),−D_n(X cos(π/n),α)) with n≥1, α∈K and cos(2π/n)∈K. Derive the affine-normalized shared-shape corollary of GTZ Corollary 2.2; over K̄ the nonzero Dickson parameter is normalized by a square root. The cyclotomic degree bound makes the possible n finite for fixed K (GTZ Theorem 2.1 and Corollary 2.2, pp.5–6).
 
-([ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), Theorem 2.1 and Corollary 2.2 pp.5–6 — States the equal-degree classification and proves the affine-normalized finite list of shared shapes.)
+For the necessity proof, Siegel bounds the genus and number of infinite places of a component carrying infinitely many bounded-denominator points. Develop the polynomial decomposition and exceptional-factor classification of Bilu–Tichy §§4–9, especially Theorem 9.3, using the supplied curve/function-field theory; this is the polynomial-pair theory owned here. For §6.23 prove Ritt's equal-common-iterate classification from §IV, p.356. Neither classification is inferred from Siegel alone.
 
-**Endpoint checks.** For F=G take E=F and (F₁,G₁)=(X,X). Infinitely many complex solutions alone give no arithmetic classification.
+*Needs:* HeightsRationalPointsAndObstructions RP.4 `siegel-theorem`; AlgebraicCurves Layers 3–5, 8 and 12 (divisors, genus, Riemann–Roch and the function-field/curve dictionary); Mathlib polynomial composition, `RatFunc.Luroth.eq_adjoin_generator` (`Mathlib/FieldTheory/RatFunc/Luroth.lean`), and the Dickson declarations in the supplier contract.
 
-### 6.26 The dynamical Lehmer conjecture for maps of ℙ¹ (statement)
-
-For a number field K and a rational map f of ℙ¹ of degree d ≥ 2 over K, the dynamical Lehmer property Lehmer(f) says: there is C(f) > 0 such that ĥ_f(x) ≥ C(f)/[K(x) : K] for every x ∈ ℙ¹(ℚ̄) that is not preperiodic for f, where ĥ_f is the absolute canonical height (The canonical height of a rational map of ℙ¹). The dynamical Lehmer conjecture (for ℙ¹) is the proposition that Lehmer(f) holds for every such K and f. It is a statement, not a theorem; no target of this roadmap assumes it except as an explicit hypothesis.
-
-K a number field; d ≥ 2; x ranges over ℚ̄-points that are wandering. The ℙ^N form of the source is the same statement for morphisms of ℙ^N; Layer 6 states the ℙ¹ case, which is the case its examples use.
-
-The degree [K(x) : K] of the field of definition of x; wandering means not preperiodic. For f = z² the property is Lehmer's conjecture ∃ C > 0, h(α) ≥ C/[ℚ(α) : ℚ] for α ≠ 0 not a root of unity (ClassicalArithmeticCompletion §6.37).
-
-*Needs:* [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); `ClassicalArithmeticCompletion §6.37`; `IntermediateField.adjoin`; `Module.finrank`.
-
-([bijmst18](#bijmst18), Conjecture 16.2, p. 39 (arXiv v2) — The target retains every N ≥ 1.)
-
-Prove the following basic API.
-
-- `DynamicalLehmerProperty`: Lehmer(f): ∃ C > 0, ∀ wandering x ∈ ℙ¹(ℚ̄), ĥ_f(x) ≥ C/[K(x) : K].
-- `DynamicalLehmerConjecture`: The proposition ∀ K f, Lehmer(f).
-- `dynamicalLehmerProperty_conj_iff`: Lehmer(φ⁻¹ ∘ f ∘ φ) ⟺ Lehmer(f) for φ ∈ PGL₂(K).
-- `dynamicalLehmerProperty_iterate_iff`: Lehmer(fⁿ) ⟺ Lehmer(f) for n ≥ 1 `(ĥ_{fⁿ}` = ĥ_f).
+([bilu-tichy-2000](#bilu-tichy-2000), §§1.1, 3, 9–10, Theorems 9.3 and 10.5, pp.262, 266, 282–286; [ritt-1920](#ritt-1920), §IV, pp.353–356; [ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), Theorem 2.1 and Corollary 2.2, pp.5–6.)
 
 **Checks.**
 
-- **`dynamicalLehmer_powerMap_two_example`** (computation): For f = z² and x = 2 (K = ℚ), ĥ_f(2) = log 2 ≥ C(f)/1 for any C(f) ≤ log 2.
-- **`dynamicalLehmer_degree_one_points`** (degenerate): Restricted to x ∈ ℙ¹(K) the bound holds unconditionally: the wandering points of ℙ¹(K) have canonical height bounded below by a positive constant, because there are finitely many points of ℙ¹(K) of height ≤ 1 (Preperiodic points of a polarized morphism form a set of bounded height).
-- `dynamicalLehmer_powerMap_iff_lehmer`: Lehmer(z²) over ℚ is equivalent to Lehmer's conjecture for the absolute Weil height (ClassicalArithmeticCompletion §6.37).
-- **`dynamicalLehmer_needs_degree`** (non-example): The factor 1/[K(x) : K] cannot be dropped: for f = z², `ĥ_f(2^{1/n})` = (log 2)/n → 0 with `2^{1/n}` wandering.
+- For F=X²,G=X³ over ℚ, (x,y)=(r³,r²), r∈ℤ, gives infinitely many solutions with Δ=1. This unequal-degree first-kind pair must be included.
+- For F=G take E=F and (F₁,G₁)=(X,X). Degree-one residual pairs cannot be excluded.
+- The second-kind pair (X²,−X²−1), with p=1 and a=b=−1, has no rational solution: the residual bounded-denominator hypothesis cannot be deleted.
+- Allowing Δ to vary with each point would admit every rational point individually and loses the required arithmetic bound. Separate affine substitutions can change Δ but preserve existence of one common Δ.
+- D₀(X,a)=2, D₁(X,a)=X and D₂(u+v,uv)=u²+v², including u=v=0. The first kind must not be confused with `dickson 2 a n`.
+- D₂(bX,b²a)=b²(X²−2a), including b=0, fixes the parameter scaling b²a. For a=0, D_n(X,0)=X^n for n≥1; at n=0 its value remains 2.
+- The specific-pair choice m=6,n=3,e=3,a=2 uses parameters 2 and 4: D₆(X,2)=D₃(D₂(X,2),4). This pins the crossed parameter exponents.
+- With m=n=e=3 and a=0, the specific pair is (X³,−X³/8), and (x,y)=(−r,2r) gives infinitely many integral solutions. The specific-pair parameter may be zero.
+- A putative specific pair with m=n=2 has e=2 and is excluded, even though its entries can be Dickson polynomials. The condition e≥3 is part of that predicate.
 
-**Endpoint checks.** Invariance: Lehmer(f) ⟺ Lehmer(φ⁻¹fφ) for φ ∈ PGL₂(K) and Lehmer(f) ⟺ Lehmer(fⁿ).
+### 6.26 The dynamical Lehmer conjecture for projective space (statement)
 
-Applications include Benedetto et al., Conjecture 16.2 — the quantitative converse to ĥ_f(P) = 0 ⟺ P preperiodic; ClassicalArithmeticCompletion §6.37 (the power-map comparison) — the power-map case is Lehmer's problem; Dobrowolski's bound is its best unconditional form; ArithmeticDynamics roadmap, Layer 6 applications — general dynamical Lehmer remains conjectural and is consumed only through an explicit hypothesis.
+For every integer N≥1, number field K and morphism f:ℙᴺ→ℙᴺ over K with f*O(1)≅O(d) and d≥2, define `DynamicalLehmerProperty f` by the existence of C(f)>0 such that every wandering P∈ℙᴺ(K̄) satisfies ĥ_f(P)≥C(f)/[K(P):K]. Here ĥ_f is the absolute canonical height of O(1), from Layer 1's polarized-morphism construction, and K(P) is the field generated by projective coordinate ratios, independent of a homogeneous representative. Define `DynamicalLehmerConjecture` to quantify over all N,K,f in these hypotheses. This is a conjectural proposition, consumed only as an explicit hypothesis (Benedetto et al., Conjecture 16.2, p.39).
+
+The ℙ¹ formulation is its specialization to N=1 and rational maps of degree at least two. For f=z² over ℚ it is classical Lehmer: a positive lower bound C/[ℚ(α):ℚ] for h(α) at nonzero algebraic α that are not roots of unity.
+
+Prove `dynamicalLehmerProperty_conj_iff` for γ∈PGL_(N+1)(K): the height and field degree are preserved under P↦γP. Prove `dynamicalLehmerProperty_iterate_iff` for f^n, n≥1: the canonical height and wandering locus are unchanged. Prove `dynamicalLehmer_projectiveLine_specialization`, identifying the N=1 predicate with the displayed rational-map formulation. These do not prove the conjecture.
+
+*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [Zero canonical height iff preperiodic (L ample)](#121-zero-canonical-height-iff-preperiodic-l-ample); [Preperiodic points of a polarized morphism form a set of bounded height](#122-preperiodic-points-of-a-polarized-morphism-form-a-set-of-bounded-height); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); ClassicalArithmeticCompletion §6.37; `IntermediateField.adjoin`; `Module.finrank`.
+
+([bijmst18](#bijmst18), Conjecture 16.2, p.39 (arXiv v2); [call-silverman-1993](#call-silverman-1993), Theorem 1.1 and Corollary 1.1.1, pp.167–168, for the height construction.)
+
+**Checks.**
+
+- `dynamicalLehmer_powerMap_two_example`: for f=z² and P=2 over ℚ, ĥ_f(P)=log 2, requiring C(f)≤log 2.
+- `dynamicalLehmer_degree_one_points`: in every dimension N≥1 the K-rational wandering points have a positive lower bound, by Northcott and height zero iff preperiodic. This is weaker than the conjecture over all algebraic points.
+- `dynamicalLehmer_powerMap_iff_lehmer`: the N=1 power-map case is the classical conjecture.
+- `dynamicalLehmer_needs_degree`: for f=z² and P=2^(1/n), n≥1, height is log(2)/n and [ℚ(P):ℚ]=n, so no degree-independent positive bound holds.
+- In dimension 2, the coordinatewise squaring morphism at [2^(1/n):1:1] has the same height and field degree; the predicate includes this example without identifying ℙ² with ℙ¹.
+
+**Endpoint checks.** Conjugacy uses a K-defined projective transformation; arbitrary transformations over K̄ need not preserve [K(P):K]. Iteration requires n≥1; n=0 is the degree-one identity.
 
 ### 6.27 Dynamically related points of a map over a function field
 
 Let L be a field with algebraic closure L̄, f a rational map of ℙ¹ of degree d ≥ 2 over L with forms (F, G), and a, b ∈ ℙ¹(L̄). The points a and b are f-dynamically related if there is a nonzero squarefree bihomogeneous Q ∈ L̄[X₀, X₁; Y₀, Y₁] of positive total degree (defining a curve C = V(Q) ⊂ ℙ¹ × ℙ¹) with Q(a; b) = 0 and (f × f)(C) ⊆ C, i.e. Q divides Q(F(X₀, X₁), G(X₀, X₁); F(Y₀, Y₁), G(Y₀, Y₁)). For a family over k(t) (Specialisation of a one-parameter family of rational maps and of its points) one takes L = k(t).
 
-L any field; in the dynamical André–Oort conjecture L = k(t) with k algebraically closed of characteristic 0.
+L any field; in the dynamical André–Oort conjecture L=k(T) for a smooth geometrically integral curve T over an algebraically closed characteristic-zero field k. The t-line has L=k(t).
 
 For squarefree Q, the invariance (f × f)(C) ⊆ C is equivalent to Q | Q ∘ (F, G; F, G) by the Nullstellensatz over L̄.
 
@@ -8873,11 +8898,11 @@ The finite-level model-function measures have convergent test integrals across t
 
 For a quasi-projective variety X over ℂ, a morphism Φ : X → X, a closed subvariety V ⊆ X and a point α ∈ X(ℂ), let S(X, Φ, V, α) = {n ∈ ℕ : Φⁿ(α) ∈ V(ℂ)}. The dynamical Mordell–Lang property DML(X, Φ) says that S(X, Φ, V, α) is a finite union of arithmetic progressions (Finite unions of arithmetic progressions in ℕ) for every V and α. The dynamical Mordell–Lang conjecture is the proposition that DML(X, Φ) holds for every quasi-projective X over ℂ and every endomorphism Φ. It is a statement, not a theorem: no target of this roadmap assumes it except as an explicit hypothesis. The affine special case DML_affine(N): for every polynomial map Φ : 𝔸^N_ℂ → 𝔸^N_ℂ, every finite family G of polynomials and every α ∈ ℂ^N, {n : g(Φⁿ(α)) = 0 for all g ∈ G} is a finite union of arithmetic progressions.
 
-Characteristic 0 is essential: The dynamical Mordell–Lang statement fails in positive characteristic (Ghioca Example 1.4). Quasi-projective varieties and their morphisms are those of SchemeAndStackFoundations:SF.0 (the requests list the precise need).
+Characteristic 0 is essential: The dynamical Mordell–Lang statement fails in positive characteristic (Ghioca Example 1.4). Quasi-projective varieties and their morphisms are those of SchemeAndStackFoundations Layer 0 quasi-projective varieties (the exact supplier contract specifies the output).
 
 The two formulations agree: V(ℂ) ∩ O_Φ(α) is a finite union of orbits `O_{Φ^N}(Φ^ℓ(α))` iff S is a finite union of progressions {Nk + ℓ} (Finite unions of arithmetic progressions in ℕ). DML_affine(N) is the case X = 𝔸^N_ℂ, V = V(G).
 
-*Needs:* [Finite unions of arithmetic progressions in ℕ](#614-finite-unions-of-arithmetic-progressions-in-ℕ); `SchemeAndStackFoundations:SF.0`; `AlgebraicGeometry.Scheme`; `MvPolynomial.aeval`.
+*Needs:* [Finite unions of arithmetic progressions in ℕ](#614-finite-unions-of-arithmetic-progressions-in-ℕ); SchemeAndStackFoundations Layer 0 quasi-projective varieties; `AlgebraicGeometry.Scheme`; `MvPolynomial.aeval`.
 
 ([bijmst18](#bijmst18), Conjecture 7.1, p. 14 (arXiv v2) — The statement of the target; [bell-ghioca-tucker-2010](#bell-ghioca-tucker-2010), Conjecture 1.2, p. 2 (arXiv v1) — The same conjecture in orbit form; equivalent to the arithmetic-progression form (API of Finite unions of arithmetic progressions in ℕ).)
 
@@ -8991,28 +9016,30 @@ Take θ in ℚ_p from Algebraically independent finite families in a p-adic fiel
 
 ### 6.50 The dynamical André–Oort conjecture for one-parameter families (statement)
 
-Let k be an algebraically closed field of characteristic 0 and f a rational map of degree d ≥ 2 over k(t) (a family over the t-line, Specialisation of a one-parameter family of rational maps and of its points) that is not isotrivial in moduli: the specialisations `f_{t₀},` t₀ ∈ T⁰(f), are not all conjugate to one another. Let c₁, …, `c_{2d−2}` ∈ ℙ¹ over an algebraic closure of k(t) be the critical points of f with multiplicity (The critical points of a rational map, with multiplicity). DAO(f) is the equivalence: there are infinitely many t₀ ∈ T⁰(f) such that `f_{t₀}` is postcritically finite (Postcritically finite rational maps) if and only if c_i and c_j are f-dynamically related (Dynamically related points of a map over a function field) for all i, j. The dynamical André–Oort conjecture for one-parameter families (Baker–DeMarco) is the proposition that DAO(f) holds for all such families. It is a statement, not a theorem; the higher-dimensional form of Baker–DeMarco is not precise in the sources and is not stated in Layer 6.
+Let k be an algebraically closed field of characteristic 0, T a smooth geometrically integral curve over k, and f a rational map of degree d≥2 over k(T) that is not isotrivial in moduli: the specialisations `f_{t₀},` t₀ ∈ T⁰(f), are not all conjugate to one another. Let c₁, …, `c_{2d−2}` ∈ ℙ¹ over an algebraic closure of k(T) be the critical points of f with multiplicity (The critical points of a rational map, with multiplicity). DAO(f) is the equivalence: there are infinitely many t₀ ∈ T⁰(f) such that `f_{t₀}` is postcritically finite (Postcritically finite rational maps) if and only if c_i and c_j are f-dynamically related (Dynamically related points of a map over a function field) for all i, j. The dynamical André–Oort conjecture for one-parameter families (Baker–DeMarco) is the proposition that DAO(f) holds for all such families. It is a statement, not a theorem; the higher-dimensional form of Baker–DeMarco is not precise in the sources and is not stated in Layer 6.
 
-Base: the t-line, with f defined over k(t); passing to a finite cover of the base on which the critical points are rational does not change either side, so this is the source's statement for families defined over k(t). k algebraically closed of characteristic 0. The non-isotriviality hypothesis is implicit in the source (its families (11.1) are non-constant); without it the statement is false ([Correction 46](#correction-46)).
+Define `curveFamily_specialization` on a nonempty good open T⁰(f) by evaluating the coefficients of a homogeneous lift in local rings of T; remove coefficient poles and zeros of the resultant. Prove lift independence, degree preservation and compatibility with iteration. Define `criticalMark_finiteCover`: a finite dominant cover T′→T with T′ smooth geometrically integral, on which every critical point is a rational mark of the pulled-back map; shrink the good open where necessary. Both sides of DAO are independent of the marking cover. k algebraically closed of characteristic 0. The non-isotriviality hypothesis is implicit in the source (its families (11.1) are non-constant); without it the statement is false ([Correction 46](#correction-46)).
 
-(b) ⟹ (a) is expected from relations forcing simultaneous preperiodicity; (a) ⟹ (b) is the unlikely-intersection content. Neither direction is proved in general. Both sides are unchanged by a finite base change t = φ(s) and by conjugation of the family, so the formulation with critical points over the algebraic closure of k(t) agrees with the marked-critical-point formulation of the source.
+(b) ⟹ (a) is expected from relations forcing simultaneous preperiodicity; (a) ⟹ (b) is the unlikely-intersection content. Neither direction is proved in general. Prove `dynamicalAndreOortProperty_finiteBaseChange_iff` for every finite dominant map T′→T of smooth geometrically integral curves: finite fibres and surjectivity over an algebraically closed field preserve infinitude of PCF fibres, and extension of function fields identifies geometric relatedness. Prove `dynamicalAndreOortProperty_conj_iff` under conjugacy over a finite extension of k(T). Thus the formulation with critical points over the algebraic closure of k(T) agrees with the marked-critical-point formulation of the source.
 
-*Needs:* [Specialisation of a one-parameter family of rational maps and of its points](#67-specialisation-of-a-one-parameter-family-of-rational-maps-and-of-its-points); [The critical points of a rational map, with multiplicity](#031-the-critical-points-of-a-rational-map-with-multiplicity); [Postcritically finite rational maps](#65-postcritically-finite-rational-maps); [Dynamically related points of a map over a function field](#627-dynamically-related-points-of-a-map-over-a-function-field); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂).
+*Needs:* AlgebraicCurves Layer 12 (curve/function-field dictionary and finite covers); [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve), for the general curve evaluation and height carriers when heights are used; [Specialisation of a one-parameter family of rational maps and of its points](#67-specialisation-of-a-one-parameter-family-of-rational-maps-and-of-its-points); [The critical points of a rational map, with multiplicity](#031-the-critical-points-of-a-rational-map-with-multiplicity); [Postcritically finite rational maps](#65-postcritically-finite-rational-maps); [Dynamically related points of a map over a function field](#627-dynamically-related-points-of-a-map-over-a-function-field); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂).
 
-([bijmst18](#bijmst18), Conjecture 11.6, p. 25 (arXiv v2) — The target states it for families over the t-line; [bijmst18](#bijmst18), Conjecture 11.5, p. 25 (arXiv v2) — The general form, which the source itself says is not yet precise; use the precise one-dimensional form.)
+([bijmst18](#bijmst18), Conjecture 11.6, p. 25 (arXiv v2) — The target retains arbitrary nonsingular algebraic base curves; [bijmst18](#bijmst18), Conjecture 11.5, p. 25 (arXiv v2) — The general form, which the source itself says is not yet precise; use the precise one-dimensional form.)
 
 Prove the following basic API.
 
-- `DynamicalAndreOortProperty`: DAO(f) for a non-isotrivial family f over k(t).
-- `DynamicalAndreOortConjecture`: The proposition ∀ f non-isotrivial, DAO(f).
-- `dynamicalAndreOortProperty_of_all_preperiodic`: If all critical points of f are preperiodic over the algebraic closure of k(t), DAO(f) holds.
+- `DynamicalAndreOortProperty`: DAO(f) for a non-isotrivial degree-d≥2 family f over k(T), for every such k,T.
+- `DynamicalAndreOortConjecture`: The proposition ∀ k,T,f in these hypotheses, DAO(f).
+- `dynamicalAndreOortProperty_of_all_preperiodic`: If all critical points of f are preperiodic over the algebraic closure of k(T), DAO(f) holds.
 
 **Checks.**
 
 - **`dao_sq_add_t`** (computation): For f = z² + t over k(t) (critical points 0 and ∞, with ∞ fixed): 0 and ∞ are related because ∞ is preperiodic, and z² + t₀ is PCF for infinitely many t₀ (for instance every root of fⁿ_t(0) = 0), so both sides of DAO(f) hold.
-- **`dao_all_preperiodic`** (degenerate): If every critical point of f is preperiodic over the algebraic closure of k(t), then (b) holds and `f_{t₀}` is PCF for every t₀ ∈ T⁰(f) (preperiodicity specialises), so (a) holds.
+- **`dao_all_preperiodic`** (degenerate): If every critical point of f is preperiodic over the algebraic closure of k(T), then (b) holds and `f_{t₀}` is PCF for every t₀ ∈ T⁰(f) (preperiodicity specialises), so (a) holds.
 - `dao_legendre_family`: For the Legendre Lattès family over k(t), which is non-isotrivial (j(t) is non-constant), every specialisation is PCF (Flexible Lattès maps are postcritically finite) and the critical points are preperiodic (they map to x(E[2])), so both sides hold.
 - **`dao_constant_family`** (non-example): For the constant family f = z² + 1 over k(t), 0 and ∞ are related (∞ is fixed) but no specialisation is PCF: the non-isotriviality hypothesis cannot be dropped.
+
+**Check.** Pull z²+t back along the degree-two map from the smooth projective model of y²=t⁵−t to ℙ¹. The base has genus 2, while both sides of DAO remain true by finite base change. Rational substitutions alone cannot supply this case.
 
 **Endpoint checks.** Families of polynomials: announced by Favre–Gauthier (Benedetto et al., after Conjecture 11.6).
 
@@ -9458,19 +9485,24 @@ The Lattès family f := `f_{E,2}` over K(t) (The Lattès map of multiplication b
 
 **Endpoint checks.** Legendre family E_T over ℚ(T) and a section P: `ĥ_{E_{t₀}}(P_{t₀})` = `ĥ_{E/ℚ(T)}(P)` h(t₀) + o(h(t₀)); for a torsion section the left side is 0.
 
-### 6.78 Ingram's theorem: bounded variation for families of polynomials over the t-line
+### 6.78 Ingram's theorem: divisor-height variation over a curve
 
-Let K be a number field, f ∈ K(t)[z] a polynomial of degree d ≥ 2 in z with coefficients in K(t), and P ∈ ℙ¹(K(t)). There is C(f, P) such that `|ĥ_{f_{t₀}}(P_{t₀})` − `ĥ^{K(t)}_f(P)` · h(t₀)| ≤ C(f, P) for all t₀ ∈ T⁰(f) ∩ ℚ̄ (Ingram, Corollary 2, X = ℙ¹). More generally (Theorem 1), for a family over a smooth projective curve X, `ĥ_{f_t}(P_t)` = `h_{D(f,P)}(t)` + O(1) with D(f, P) = lim_N `d^{−N}` (f^N(P))*(∞) of degree ĥ_f(P).
+Let K be a number field, X/K a smooth projective geometrically integral curve, f∈K(X)[z] a polynomial of degree d≥2, and P∈ℙ¹(K(X)). Construct `polynomialVariationDivisor f P` in Div(X)⊗ℚ by the local geometric escape rates, with degree ĥ_f(P). Prove `ingram_divisorHeightVariation`: on the good specialization locus U⊆X, `|ĥ_{f_t}(P_t)−h_D(t)|≤C(f,P)` for every t∈U(K̄), using absolute heights; the constant is independent of the extension containing t. The point P=∞ has D=0 and both canonical heights zero. For X=ℙ¹ derive `ingram_projectiveLineVariation`: `|ĥ_{f_t}(P_t)−ĥ_f(P)h(t)|≤C(f,P)` (Theorem 1 and Corollary 2, p.2).
 
-f a polynomial in z (not a general rational map); K a number field; base the t-line for the displayed statement.
+Prove `polynomialVariationDivisor_degree`, `polynomialVariationDivisor_iterate` (replacement of P by f(P) multiplies D by d), and `polynomialVariationDivisor_finiteBaseChange`: for a finite dominant map π:Y→X of smooth projective geometrically integral curves, the pulled-back family and section have divisor π*D and generic height deg(π)ĥ_f(P). The divisor construction uses AlgebraicCurves' places and rational divisors, transported through its function-field/curve dictionary; h_D uses the RP.0 height machine. For a general X this theorem compares with h_D itself, not with deg(D) times an arbitrary degree-one height with O(1) error.
 
-Ingram Lemmas 5–6 and 10–11: at a base point β where an iterate of P enters the polynomial escape region B⁰_β, the local canonical height is a nonnegative rational pole order. Define D = Σ_β `λ̂_{f,β}(P)`[β]. Its support is finite, since it is contained in the poles of the coefficients and P. Choose a common iterate N reaching the escape region at every point of Supp D; after iteration, (d−1)D is integral. Rescale the final height identity by d^N. The section P = ∞ is treated separately, with both canonical heights zero. For the t-line choose a rational function g whose pole divisor is d^N(d−1)D, using factorization and partial fractions on ℙ¹ after a finite extension. Compare `λ̂_{f_t,v}(P_t)` with the local Weil function `d^{−N}(d−1)^{−1}log⁺|g(t)|_v.` A general base curve uses Riemann–Roch at this step; this is supporting context and is not an extra general-curve formalization claim. Ingram Lemma 9: if P has pole order m at β and enters B⁰_β, construct the formal Böttcher coordinate G_β in the Laurent series field; w^mG_β is a power-series unit for a uniformizer w. Hensel uniqueness, coefficient bounds and the Schwarz estimate give convergence in a v-adic neighbourhood of β, uniformly outside finitely many places. This uses Laurent series, correcting the power-series-ring slip described below. Ingram Lemma 13: the quotient `G_β^{d−1}a_d/g` is an analytic unit near β (after the chosen iteration). Its logarithm gives the local difference between the canonical and divisor heights there, hence a bounded difference; at all but finitely many places this difference vanishes on the prescribed discs. Lemmas 7–8 and 11 give the coefficient and escape bounds with the same finite exceptional set. For poles of the coefficients or P outside Supp D, bounded formal iterates and the maximum-modulus estimate bound the specialized escape rate. Away from all poles, the coefficients and P are bounded and the geometric escape-rate estimate supplies a uniform local bound. Ingram Lemmas 11–13 and the proof of Theorem 1 on pp. 18–19 patch these regions into a bound b_v, zero for almost all v. The generic-height-zero case of Ingram Lemma 12 uses Benedetto zero-height criterion for nonisotrivial polynomials. Use its explicit local disc and global product-formula inputs; no Northcott theorem over K(t) is assumed. Sum the bounds over places, with r_v = [L_v:ℚ_v]/[L:ℚ] and the extension compatibility of the heights. The bound remains independent of the finite field L containing t. The degree of D is ĥ_f(P); on ℙ¹, the height of D differs from deg(D)h(t) by O(1). This proves the displayed t-line statement.
+Ingram Lemmas 5–6 and 10–11: at a base point β where an iterate of P enters the polynomial escape region B⁰_β, the local canonical height is a nonnegative rational pole order. Define D = Σ_β `λ̂_{f,β}(P)`[β]. Its support is finite, since it is contained in the poles of the coefficients and P. Choose a common iterate N reaching the escape region at every point of Supp D; after iteration, (d−1)D is integral. Rescale the final height identity by d^N. The section P = ∞ is treated separately, with both canonical heights zero. Increase N so that d^N(d−1)D is integral and, when D≠0, has sufficiently large degree. Riemann–Roch supplies a rational function g with exactly this pole divisor: for each support point β the subspace with smaller pole order is proper, and the infinite constant field permits avoiding their finite union, after a finite extension splitting the support. Handle D=0 separately. Compare `λ̂_{f_t,v}(P_t)` with the local Weil function `d^{−N}(d−1)^{−1}log⁺|g(t)|_v.` Ingram Lemma 9: if P has pole order m at β and enters B⁰_β, construct the formal Böttcher coordinate G_β in the Laurent series field; w^mG_β is a power-series unit for a uniformizer w. Hensel uniqueness, coefficient bounds and the Schwarz estimate give convergence in a v-adic neighbourhood of β, uniformly outside finitely many places. This uses Laurent series, correcting the power-series-ring slip described below. Ingram Lemma 13: the quotient `G_β^{d−1}a_d/g` is an analytic unit near β (after the chosen iteration). Its logarithm gives the local difference between the canonical and divisor heights there, hence a bounded difference; at all but finitely many places this difference vanishes on the prescribed discs. Lemmas 7–8 and 11 give the coefficient and escape bounds with the same finite exceptional set. For poles of the coefficients or P outside Supp D, bounded formal iterates and the maximum-modulus estimate bound the specialized escape rate. Away from all poles, the coefficients and P are bounded and the geometric escape-rate estimate supplies a uniform local bound. Ingram Lemmas 11–13 and the proof of Theorem 1 on pp. 18–19 patch these regions into a bound b_v, zero for almost all v. The generic-height-zero case of Ingram Lemma 12 uses Benedetto zero-height criterion for nonisotrivial polynomials. Use its explicit local disc and global product-formula inputs; no Northcott theorem over K(X) is assumed. Sum the bounds over places, with r_v = [L_v:ℚ_v]/[L:ℚ] and the extension compatibility of the heights. The bound remains independent of the finite field L containing t. The degree of D is ĥ_f(P); on ℙ¹, the height of D differs from deg(D)h(t) by O(1). This proves `ingram_divisorHeightVariation`; the last comparison gives `ingram_projectiveLineVariation`.
 
-*Needs:* [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv); [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [Admissible absolute values and heights on a rational function field](#027b-admissible-absolute-values-and-heights-on-a-rational-function-field); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials).
+*Needs:* AlgebraicCurves Layers 3–5 and 12 (places, divisors, Riemann–Roch and regular projective models); HeightsRationalPointsAndObstructions RP.0 curve heights; [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve); [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv); [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [Admissible absolute values and heights on a rational function field](#027b-admissible-absolute-values-and-heights-on-a-rational-function-field); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials).
 
-([ingram-2011-variation](#ingram-2011-variation), §1, Theorem 1, p. 2 (arXiv v3) — Ingram's theorem for polynomial families; [ingram-2011-variation](#ingram-2011-variation), §1, Corollary 2, p. 2 (arXiv v3) — The target is the X = ℙ¹ case; [ingram-2011-variation](#ingram-2011-variation), §§2–4, Lemmas 5–13 and proof of Theorem 1, pp. 5–19 (arXiv v3) — Local escape bounds, the convergent Laurent Böttcher coordinate and the finite collection of exceptional places give the uniform local comparison used in the target proof.)
+([ingram-2011-variation](#ingram-2011-variation), §1, Theorem 1, p. 2 (arXiv v3) — Ingram's theorem for polynomial families; [ingram-2011-variation](#ingram-2011-variation), §1, Corollary 2, p. 2 (arXiv v3) — The X=ℙ¹ corollary has bounded error against the standard height; [ingram-2011-variation](#ingram-2011-variation), §§2–4, Lemmas 5–13 and proof of Theorem 1, pp. 5–19 (arXiv v3) — Local escape bounds, the convergent Laurent Böttcher coordinate and the finite collection of exceptional places give the uniform local comparison used in the target proof.)
 
-**Endpoint checks.** f = z² + t, P = 0: `ĥ_{z²+t₀}(0)` = ½ h(t₀) + O(1).
+**Checks.**
+
+- For X=ℙ¹, f=z²+t and P=0, D=½[∞], so `ĥ_{z²+t₀}(0)=½h(t₀)+O(1)`; this fixes the factor ½.
+- For a constant family f=z² and P=2 on any X, D=0 and the specialized height is the bounded constant log 2. Geometric height zero does not force every specialized height to vanish.
+- For P=∞ on any base, D=0 and the specialized height is zero; the pole-divisor formula for affine iterates must treat this section separately.
+- Pull f=z²+t and P=0 back to the smooth projective genus-2 curve y²=t⁵−t. The function t has pole divisor 2[∞_X], so D=[∞_X] has degree 1, twice the generic height on ℙ¹. This checks ramification weights and the general-curve theorem.
 
 ### 6.79 The only torsion images common to all Legendre curves are 0, 1, ∞ (DeMarco–Wang–Ye Proposition 1.4)
 
@@ -9554,7 +9586,7 @@ char K = 0; deg f = deg g ≥ 2.
 
 Number fields (GTZ §3, Theorem 3.4): if fᵐ(X) = gᵐ(Y) has infinitely many S-integral solutions for every m, the Bilu–Tichy theorem (GTZ Theorem 2.1, using the separate Bilu–Tichy polynomial classification and Siegel input) forces standard-pair decompositions of fᵐ and gᵐ, and GTZ's decomposition results (Proposition 3.3, Lemmas 4.1–4.2) combine them into a common iterate. Reduction from general K to number fields by induction on the transcendence degree (GTZ §6): a specialisation α : R → E′ must keep leading coefficients nonzero, keep f_α^k ≠ g_α^k for all k (Proposition 6.1, from Ritt's classification of polynomials with a common iterate, GTZ Proposition 6.3) and keep x₀ wandering (Proposition 6.2: the case ĥ_f(x₀) > 0 is Non-preperiodic points stay non-preperiodic in specialisations of large height over a number-field base; the isotrivial case uses GTZ Lemma 6.8, and non-isotrivial f use Benedetto's theorem, GTZ Lemma 6.7). The specialisation step of GTZ runs over a base curve C over a finitely generated field E of positive transcendence degree; Use the general-base Call–Silverman specialization target, with its global-height-field and curve-height contracts, for this induction.
 
-*Needs:* [Non-preperiodic points stay non-preperiodic in specialisations of large height](#676-non-preperiodic-points-stay-non-preperiodic-in-specialisations-of-large-height); [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [Equal-degree Bilu–Tichy classification input](#625-equal-degree-bilutichy-classification-input); [Ritt classification for equal common iterates](#623-ritt-classification-for-equal-common-iterates); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials); [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve).
+*Needs:* [Non-preperiodic points stay non-preperiodic in specialisations of large height](#676-non-preperiodic-points-stay-non-preperiodic-in-specialisations-of-large-height); [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [Bilu–Tichy polynomial-pair classification](#625-bilutichy-polynomial-pair-classification); [Ritt classification for equal common iterates](#623-ritt-classification-for-equal-common-iterates); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials); [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve).
 
 ([ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), Theorem 1.5, p. 3 (arXiv v2) — The statement of the target; [ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), Theorem 1.1, p. 1 (arXiv v2) — The case α = 1, β = 0 of Theorem 1.5; [ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), §2, Theorem 2.1, p. 5 (arXiv v2) — The Bilu–Tichy theorem (via Siegel's theorem on integral points), the Diophantine input of the number-field case; specified below as a required construction.)
 
@@ -9646,7 +9678,7 @@ char K = 0; f, g arbitrary polynomials (possibly of different degrees or linear)
 
 GTZ §5, Lemma 5.1 reduces to the diagonal. In the linear case use Common iterates from synchronized affine intersections, with the S-unit/Siegel contract explicitly required there. The degree-at-least-two case uses the following height comparison and common-iterate reduction. Comparing heights of fⁿ(x₀) and gⁿ(y₀) (canonical heights, The canonical height of a rational map of ℙ¹) forces deg f = deg g when there are infinitely many common points (Lemma 5.7). Equal degrees: Orbits of polynomials of equal degree meeting a line (Ghioca–Tucker–Zieve Theorems 1.5 and 1.1) gives f^k = g^k, so the diagonal is (f, g)^k-invariant, i.e. periodic. Periodic L of period k: the return set is a union of the progressions {kj + ℓ} through the first return points, plus finitely many points (Finite unions of arithmetic progressions in ℕ). The first assertion counts distinct orbit points, not indices. If the orbit has only finitely many points, its time sequence is eventually periodic, which gives the return-set conclusion directly even when L is not periodic. If the orbit is infinite but has finitely many points on L, those occur at finitely many times. These cases complete the DML assertion for every orbit.
 
-*Needs:* [Orbits of polynomials of equal degree meeting a line (Ghioca–Tucker–Zieve Theorems 1.5 and 1.1)](#684-orbits-of-polynomials-of-equal-degree-meeting-a-line-ghiocatuckerzieve-theorems-15-and-11); [Finite unions of arithmetic progressions in ℕ](#614-finite-unions-of-arithmetic-progressions-in-ℕ); [The dynamical Mordell–Lang conjecture (statement)](#643-the-dynamical-mordelllang-conjecture-statement); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); [Equal-degree Bilu–Tichy classification input](#625-equal-degree-bilutichy-classification-input); [Ritt classification for equal common iterates](#623-ritt-classification-for-equal-common-iterates); [Common iterates from synchronized affine intersections](#645-common-iterates-from-synchronized-affine-intersections); [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve).
+*Needs:* [Orbits of polynomials of equal degree meeting a line (Ghioca–Tucker–Zieve Theorems 1.5 and 1.1)](#684-orbits-of-polynomials-of-equal-degree-meeting-a-line-ghiocatuckerzieve-theorems-15-and-11); [Finite unions of arithmetic progressions in ℕ](#614-finite-unions-of-arithmetic-progressions-in-ℕ); [The dynamical Mordell–Lang conjecture (statement)](#643-the-dynamical-mordelllang-conjecture-statement); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); [Bilu–Tichy polynomial-pair classification](#625-bilutichy-polynomial-pair-classification); [Ritt classification for equal common iterates](#623-ritt-classification-for-equal-common-iterates); [Common iterates from synchronized affine intersections](#645-common-iterates-from-synchronized-affine-intersections); [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve).
 
 ([ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), Theorem 1.4, pp. 2–3 (arXiv v2) — The statement of the target.)
 
@@ -9800,7 +9832,7 @@ Characteristic 0 (over ℂ); Φ étale (for smooth irreducible X, unramified suf
 
 Reduce using the finite directed graph of irreducible components under Φ: components need not be permuted globally, but each component followed by the orbit is eventually in a cycle. Pass to a suitable iterate on a cyclic component and split the time set into residue classes and a finite prefix. Induct on dimension on the singular locus; étaleness preserves regularity in both directions, and on a component’s smooth open locus apply the smooth irreducible case. Finite unions and affine preimages preserve finite unions of arithmetic progressions. Smooth irreducible case: choose a finitely generated ℤ-algebra R carrying X, Φ, V, α; spread out to a smooth quasi-projective model with unramified Φ over a dense open of Spec R (Spreading out an unramified endomorphism (Bell–Ghioca–Tucker Proposition 4.3)) and embed R into ℤ_p for a prime p ≥ 5 (A p-adic model of an unramified endomorphism (Bell–Ghioca–Tucker Proposition 4.4)). Replace α by an iterate whose residue class is Φ-periodic of period N; on each residue disc, Φ^N is given by power series F_j (Power-series coordinates on a residue disc (Bell–Ghioca–Tucker Propositions 2.1–2.2, Remark 2.3)) and some `F_j^{M_j}` ≡ id mod p (An unramified map returns to the residue class to first order (Bell–Ghioca–Tucker Propositions 2.4 and 2.6)); by p-adic analytic interpolation of orbits (Bell–Ghioca–Tucker Theorem 3.3) there are analytic `U_{j,ℓ}` : ℤ_p → ℤ_p^g with `U_{j,ℓ}(k)` = `ι_j(Φ^{N(M_j k + ℓ) + j}(α)).` For each polynomial h in the ideal of V, h ∘ ι_j⁻¹ ∘ `U_{j,ℓ}` is analytic on ℤ_p; by the imported restricted-series zero theorem it has finitely many zeros or vanishes identically. Hence each subprogression either meets V finitely often or lies in V.
 
-*Needs:* [Finite unions of arithmetic progressions in ℕ](#614-finite-unions-of-arithmetic-progressions-in-ℕ); [The dynamical Mordell–Lang conjecture (statement)](#643-the-dynamical-mordelllang-conjecture-statement); [Spreading out an unramified endomorphism (Bell–Ghioca–Tucker Proposition 4.3)](#622-spreading-out-an-unramified-endomorphism-bellghiocatucker-proposition-43); [A p-adic model of an unramified endomorphism (Bell–Ghioca–Tucker Proposition 4.4)](#697-a-p-adic-model-of-an-unramified-endomorphism-bellghiocatucker-proposition-44); [Power-series coordinates on a residue disc (Bell–Ghioca–Tucker Propositions 2.1–2.2, Remark 2.3)](#646-power-series-coordinates-on-a-residue-disc-bellghiocatucker-propositions-2122-remark-23); [An unramified map returns to the residue class to first order (Bell–Ghioca–Tucker Propositions 2.4 and 2.6)](#661-an-unramified-map-returns-to-the-residue-class-to-first-order-bellghiocatucker-propositions-24-and-26); [p-adic analytic interpolation of orbits (Bell–Ghioca–Tucker Theorem 3.3)](#616-p-adic-analytic-interpolation-of-orbits-bellghiocatucker-theorem-33); [Strassmann's theorem: a nonzero p-adic power series convergent on ℤ_p has finitely many zeros there](#from-taucetiroadmaprestrictedpowerseries--24); `AlgebraicGeometry.Etale`; `SchemeAndStackFoundations:SF.0`.
+*Needs:* [Finite unions of arithmetic progressions in ℕ](#614-finite-unions-of-arithmetic-progressions-in-ℕ); [The dynamical Mordell–Lang conjecture (statement)](#643-the-dynamical-mordelllang-conjecture-statement); [Spreading out an unramified endomorphism (Bell–Ghioca–Tucker Proposition 4.3)](#622-spreading-out-an-unramified-endomorphism-bellghiocatucker-proposition-43); [A p-adic model of an unramified endomorphism (Bell–Ghioca–Tucker Proposition 4.4)](#697-a-p-adic-model-of-an-unramified-endomorphism-bellghiocatucker-proposition-44); [Power-series coordinates on a residue disc (Bell–Ghioca–Tucker Propositions 2.1–2.2, Remark 2.3)](#646-power-series-coordinates-on-a-residue-disc-bellghiocatucker-propositions-2122-remark-23); [An unramified map returns to the residue class to first order (Bell–Ghioca–Tucker Propositions 2.4 and 2.6)](#661-an-unramified-map-returns-to-the-residue-class-to-first-order-bellghiocatucker-propositions-24-and-26); [p-adic analytic interpolation of orbits (Bell–Ghioca–Tucker Theorem 3.3)](#616-p-adic-analytic-interpolation-of-orbits-bellghiocatucker-theorem-33); [Strassmann's theorem: a nonzero p-adic power series convergent on ℤ_p has finitely many zeros there](#from-taucetiroadmaprestrictedpowerseries--24); `AlgebraicGeometry.Etale`; SchemeAndStackFoundations §0.9 `spreading_out_models`.
 
 ([bell-ghioca-tucker-2010](#bell-ghioca-tucker-2010), Theorem 1.3, p. 3 (arXiv v1) — The statement of the target; [bell-ghioca-tucker-2010](#bell-ghioca-tucker-2010), §1, p. 2 (arXiv v1); proof of Theorem 4.1, p. 14 — The finiteness of zeros of a p-adic analytic function on ℤ_p (Strassmann), in the form the proof uses.)
 
@@ -9966,7 +9998,7 @@ The marked set {0,1/6}⊂ℚ tests zero marks and denominators in the parameter 
 
 ### Dependencies
 
-Layers 0–5 as specified per target; elliptic geometry and heights; SF.0 spreading out and the relative Cohen contract; RP.0/RP.4 heights and Siegel; Layer 2 The native analytic projective line hybrid geometry; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
+Layers 0–5 as specified per target; elliptic geometry and heights; SchemeAndStackFoundations §0.9 `spreading_out_models` and the relative Cohen contract; RP.0/RP.4 heights and Siegel; Layer 2 The native analytic projective line hybrid geometry; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
 
 ## Source conventions and corrections
 
@@ -10744,6 +10776,18 @@ Patrick Ingram, *The critical height is a moduli height*. arXiv:1610.07904v3 (15
 Patrick Ingram, *Variation of the canonical height for a family of polynomials*. arXiv:1003.4225v3 (5 May 2011)
 
 [Source](https://arxiv.org/abs/1003.4225v3).
+
+### bilu-tichy-2000
+
+Y. F. Bilu and R. F. Tichy, *The Diophantine equation f(x)=g(y)*. Acta Arithmetica 95 (2000), 261–288; §§1.1, 9 and Theorem 10.5, pp.262, 282, 285–286.
+
+[Source](https://matwbn.icm.edu.pl/ksiazki/aa/aa95/aa9534.pdf).
+
+### ritt-1920
+
+J. F. Ritt, *On the iteration of rational functions*. Transactions of the American Mathematical Society 21 (1920), 348–356; §IV, pp.353–356, especially p.356.
+
+[Source](https://www.ams.org/journals/tran/1920-021-03/S0002-9947-1920-1501149-6/S0002-9947-1920-1501149-6.pdf).
 
 ### ghioca-tucker-zieve-2008
 

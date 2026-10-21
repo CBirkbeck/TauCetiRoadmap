@@ -220,6 +220,40 @@ theorem backwardOrbit_conjugate (f : X → X) (h : X ≃ Y) (a : X) :
     backwardOrbit (fun y ↦ h (f (h.symm y))) (h a) = h '' backwardOrbit f a ∧
       exceptionalSet (fun y ↦ h (f (h.symm y))) = h '' exceptionalSet f := sorry
 
+/-- The left conjugation convention agrees with backward-orbit transport and
+computes the scaling and translation witnesses in README §§0.36, 2.16 and 3.3. -/
+example (z : ℚ) (hz : z ≠ 0) :
+    let γ := Equiv.divRight₀ (2 : ℚ) (by norm_num)
+    let τ := Equiv.addRight (-1 : ℚ)
+    γ.conj (fun w : ℚ ↦ w + 4 / w) z = z + 1 / z ∧
+    γ.symm.conj (fun w : ℚ ↦ w ^ 2) z = z ^ 2 / 2 ∧
+    τ.conj (fun w : ℚ ↦ w ^ 2 - w - 1) z = z ^ 2 + z - 2 ∧
+    backwardOrbit (γ.conj (fun w : ℚ ↦ w + 4 / w)) (γ z) =
+      γ '' backwardOrbit (fun w : ℚ ↦ w + 4 / w) z := by
+  dsimp only
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · simp only [Equiv.conj_apply, Equiv.divRight₀_apply, Equiv.divRight₀_symm_apply]
+    field_simp [hz]
+    ring
+  · simp only [Equiv.conj_apply, Equiv.symm_symm,
+      Equiv.divRight₀_symm_apply, Equiv.divRight₀_apply]
+    ring
+  · simp only [Equiv.conj_apply, Equiv.coe_addRight, Equiv.addRight_symm_apply]
+    ring
+  · have he (e : ℚ ≃ ℚ) (f : ℚ → ℚ) :
+        e.conj f = fun y ↦ e (f (e.symm y)) := by
+      funext y
+      simp only [Equiv.conj_apply]
+    rw [he]
+    exact (backwardOrbit_conjugate (fun w : ℚ ↦ w + 4 / w)
+      (Equiv.divRight₀ (2 : ℚ) (by norm_num)) z).1
+
+/-- Rational squaring at two has finite backward orbit and infinite forward orbit;
+surjectivity on the point carrier is essential to the grand-orbit criterion (README §2.17). -/
+theorem rationalSquare_two_boundary :
+    backwardOrbit (fun z : ℚ ↦ z ^ 2) 2 = {2} ∧
+      (forwardOrbit (fun z : ℚ ↦ z ^ 2) 2).Infinite := sorry
+
 /-- The identity has singleton backward orbits. -/
 example (a : X) : backwardOrbit id a = {a} := by
   ext x
@@ -318,46 +352,51 @@ end LocalDynamics
 
 /-! ## Layer 3: Periodic equations, dynatomic curves and certified arithmetic -/
 
-/-- Morton's symmetric equation for two marked rational three-cycles.
+/-- Morton's symmetric equation for two marked three-cycles over a field.
 `mortonThreeCycleEquation_swap` states symmetry in the two parameters;
 `mortonThreeCycleEquation_symmetric` expresses it using their sum and product. -/
-def mortonThreeCycleEquation (t u : ℚ) : ℚ :=
+def mortonThreeCycleEquation {K : Type*} [Field K] (t u : K) : K :=
   (t ^ 2 - 1) * u ^ 3 + (t ^ 3 - 2 * t ^ 2 - 9 * t + 2) * u ^ 2 -
     9 * (t ^ 2 - 1) * u - (t ^ 3 - 2 * t ^ 2 - 9 * t + 2)
 
 /-- Parameter attached to a point on a quadratic three-cycle. -/
-def mortonThreeCycleParameter (c x : ℚ) : ℚ := 1 + 2 * c + 2 * x + 2 * x ^ 2
+def mortonThreeCycleParameter {K : Type*} [Field K] (c x : K) : K := 1 + 2 * c + 2 * x + 2 * x ^ 2
 
-/-- The inverse point coordinate is used on `t² ≠ 1`. -/
-def mortonThreeCycleInversePoint (t : ℚ) : ℚ :=
+/-- The inverse point coordinate is used on `t² ≠ 1`.
+`mortonThreeCycleInversePoint_map` transports coefficients;
+`mortonThreeCycleInversePoint_pole` records the totalized pole value. -/
+def mortonThreeCycleInversePoint {K : Type*} [Field K] (t : K) : K :=
   (t ^ 3 + t ^ 2 - t + 7) / (4 * (t ^ 2 - 1))
 
-/-- The inverse quadratic parameter is used on `t² ≠ 1`. -/
-def mortonThreeCycleInverseCoefficient (t : ℚ) : ℚ :=
+/-- The inverse quadratic parameter is used on `t² ≠ 1`.
+`mortonThreeCycleInverseCoefficient_map` transports coefficients;
+`mortonThreeCycleInverseCoefficient_pole` records the totalized pole value. -/
+def mortonThreeCycleInverseCoefficient {K : Type*} [Field K] (t : K) : K :=
   -(t ^ 6 - 2 * t ^ 5 + 11 * t ^ 4 + 20 * t ^ 3 + 23 * t ^ 2 - 18 * t + 29) /
     (16 * (t ^ 2 - 1) ^ 2)
 
 /-- Rotating the marked three-cycle changes its parameter by this Möbius map.
 `mortonThreeCycleRotation_compatibility` compares it with the next point of the cycle. -/
-def mortonThreeCycleRotation (t : ℚ) : ℚ := (t + 3) / (1 - t)
+def mortonThreeCycleRotation {K : Type*} [Field K] (t : K) : K := (t + 3) / (1 - t)
 
 /-- The rotation-invariant trace separates the underlying cycle parameter.
 `mortonCycleTrace_relation` recovers the quadratic coefficient from this trace. -/
-def mortonCycleTrace (t : ℚ) : ℚ := (t ^ 3 - 9 * t) / (t ^ 2 - 1)
+def mortonCycleTrace {K : Type*} [Field K] (t : K) : K := (t ^ 3 - 9 * t) / (t ^ 2 - 1)
 
 /-- Coordinates of Morton's elliptic quotient, on the domain `t + u ≠ 0`.
 `mortonEllipticCoordinates_swap` makes the quotient invariant under exchange. -/
-def mortonEllipticCoordinates (t u : ℚ) : ℚ × ℚ :=
+def mortonEllipticCoordinates {K : Type*} [Field K] (t u : K) : K × K :=
   ((t + u + 2) / (t + u),
    (t * u * (t + u - 2) - (3 * (t + u) + 2)) / (t + u) ^ 2)
 
-/-- The displayed inverse recovers the three-cycle parameter away from its poles. -/
-theorem mortonThreeCycleParameter_inverse (t : ℚ) (ht : t ^ 2 ≠ 1) :
+/-- In characteristic different from two, the inverse recovers the parameter away from its poles. -/
+theorem mortonThreeCycleParameter_inverse {K : Type*} [Field K]
+    (h2 : (2 : K) ≠ 0) (t : K) (ht : t ^ 2 ≠ 1) :
     mortonThreeCycleParameter (mortonThreeCycleInverseCoefficient t)
       (mortonThreeCycleInversePoint t) = t := sorry
 
-/-- The quotient lands on the explicit elliptic equation (Morton Lemma 6, p. 363). -/
-theorem mortonEllipticEquation (t u : ℚ)
+/-- The coordinate functions satisfy the cubic equation in every characteristic (Morton Lemma 6, p. 363). -/
+theorem mortonEllipticEquation {K : Type*} [Field K] (t u : K)
     (hH : mortonThreeCycleEquation t u = 0) (hζ : t + u ≠ 0) :
     (mortonEllipticCoordinates t u).2 ^ 2 =
       4 * (mortonEllipticCoordinates t u).1 ^ 3 -
@@ -372,35 +411,72 @@ theorem atMostOneRationalThreeCycle (c x y : ℚ)
 
 /-- The three marked points of `z² - 29/16` have parameters `3, -3, 0`. -/
 example :
-    mortonThreeCycleParameter (-29 / 16) (5 / 4) = 3 ∧
-      mortonThreeCycleParameter (-29 / 16) (-1 / 4) = -3 ∧
-      mortonThreeCycleParameter (-29 / 16) (-7 / 4) = 0 := by
+    mortonThreeCycleParameter (K := ℚ) (-29 / 16) (5 / 4) = 3 ∧
+      mortonThreeCycleParameter (K := ℚ) (-29 / 16) (-1 / 4) = -3 ∧
+      mortonThreeCycleParameter (K := ℚ) (-29 / 16) (-7 / 4) = 0 := by
   norm_num [mortonThreeCycleParameter]
 
+/-- In characteristic two the parameter collapses to one, so the inverse theorem
+requires its explicit nonzero-two hypothesis. -/
+example (c x : ZMod 2) : mortonThreeCycleParameter c x = 1 := by
+  have h2 : (2 : ZMod 2) = 0 := by decide
+  simp [mortonThreeCycleParameter, h2]
+
 /-- The inverse coordinates recover the same map and the first point of the cycle. -/
-example : mortonThreeCycleInversePoint 3 = 5 / 4 ∧
-    mortonThreeCycleInverseCoefficient 3 = -29 / 16 := by
+example : mortonThreeCycleInversePoint (K := ℚ) 3 = 5 / 4 ∧
+    mortonThreeCycleInverseCoefficient (K := ℚ) 3 = -29 / 16 ∧
+    mortonThreeCycleInversePoint (K := ℚ) (-3) = -1 / 4 ∧
+    mortonThreeCycleInversePoint (K := ℚ) 0 = -7 / 4 ∧
+    mortonThreeCycleInverseCoefficient (K := ℚ) (-3) = -29 / 16 ∧
+    mortonThreeCycleInverseCoefficient (K := ℚ) 0 = -29 / 16 ∧
+    mortonThreeCycleInversePoint (K := ℚ) 1 = 0 ∧
+    mortonThreeCycleInversePoint (K := ℚ) (-1) = 0 ∧
+    mortonThreeCycleInverseCoefficient (K := ℚ) 1 = 0 ∧
+    mortonThreeCycleInverseCoefficient (K := ℚ) (-1) = 0 := by
   norm_num [mortonThreeCycleInversePoint, mortonThreeCycleInverseCoefficient]
 
+/-- In characteristic three the inverse can give a fixed point on the formal
+period-three curve, so exact period is a separate condition. -/
+example :
+    mortonThreeCycleInversePoint (K := ZMod 3) 0 = 2 ∧
+    mortonThreeCycleInverseCoefficient (K := ZMod 3) 0 = 1 ∧
+    (mortonThreeCycleInversePoint (K := ZMod 3) 0) ^ 2 +
+      mortonThreeCycleInverseCoefficient (K := ZMod 3) 0 =
+      mortonThreeCycleInversePoint (K := ZMod 3) 0 := by
+  have h4 : (4 : ZMod 3) = 1 := by decide
+  have h7 : (7 : ZMod 3) = 1 := by decide
+  have h16 : (16 : ZMod 3) = 1 := by decide
+  have h29 : (29 : ZMod 3) = 2 := by decide
+  have hp : mortonThreeCycleInversePoint (K := ZMod 3) 0 = 2 := by
+    simp [mortonThreeCycleInversePoint, h4, h7]
+    decide
+  have hc : mortonThreeCycleInverseCoefficient (K := ZMod 3) 0 = 1 := by
+    simp [mortonThreeCycleInverseCoefficient, h16, h29]
+    decide
+  rw [hp, hc]
+  decide
+
 /-- Rotation changes the marking and keeps the cycle trace fixed in this example. -/
-example : mortonThreeCycleRotation 3 = -3 ∧ mortonThreeCycleRotation (-3) = 0 ∧
-    mortonThreeCycleRotation 0 = 3 ∧
-    mortonCycleTrace 3 = 0 ∧ mortonCycleTrace (-3) = 0 ∧ mortonCycleTrace 0 = 0 := by
+example : mortonThreeCycleRotation (K := ℚ) 3 = -3 ∧ mortonThreeCycleRotation (K := ℚ) (-3) = 0 ∧
+    mortonThreeCycleRotation (K := ℚ) 0 = 3 ∧
+    mortonCycleTrace (K := ℚ) 3 = 0 ∧ mortonCycleTrace (K := ℚ) (-3) = 0 ∧
+    mortonCycleTrace (K := ℚ) 0 = 0 ∧ mortonThreeCycleRotation (K := ℚ) 1 = 0 ∧
+    mortonCycleTrace (K := ℚ) 1 = 0 := by
   norm_num [mortonThreeCycleRotation, mortonCycleTrace]
 
 /-- All four sign pairs lie on Morton's curve, while the origin does not. -/
-example : mortonThreeCycleEquation (-1) (-1) = 0 ∧
-    mortonThreeCycleEquation (-1) 1 = 0 ∧
-    mortonThreeCycleEquation 1 (-1) = 0 ∧
-    mortonThreeCycleEquation 1 1 = 0 ∧
-    mortonThreeCycleEquation 0 0 = -2 ∧
-    mortonEllipticCoordinates (-1) (-1) = (0, 0) := by
+example : mortonThreeCycleEquation (K := ℚ) (-1) (-1) = 0 ∧
+    mortonThreeCycleEquation (K := ℚ) (-1) 1 = 0 ∧
+    mortonThreeCycleEquation (K := ℚ) 1 (-1) = 0 ∧
+    mortonThreeCycleEquation (K := ℚ) 1 1 = 0 ∧
+    mortonThreeCycleEquation (K := ℚ) 0 0 = -2 ∧
+    mortonEllipticCoordinates (K := ℚ) (-1) (-1) = (0, 0) := by
   norm_num [mortonThreeCycleEquation, mortonEllipticCoordinates]
 
 /-- Totalized division identifies a point outside the quotient's affine domain with a
 valid image, so the nonzero-denominator guard in `mortonEllipticEquation` is essential. -/
-example : mortonThreeCycleEquation 1 (-1) = 0 ∧ (1 : ℚ) + (-1) = 0 ∧
-    mortonEllipticCoordinates 1 (-1) = mortonEllipticCoordinates (-1) (-1) := by
+example : mortonThreeCycleEquation (K := ℚ) 1 (-1) = 0 ∧ (1 : ℚ) + (-1) = 0 ∧
+    mortonEllipticCoordinates (K := ℚ) 1 (-1) = mortonEllipticCoordinates (K := ℚ) (-1) (-1) := by
   norm_num [mortonThreeCycleEquation, mortonEllipticCoordinates]
 
 /-- Morton: no rational quadratic polynomial has a rational four-cycle. -/
@@ -445,6 +521,12 @@ theorem discr_iterate_sub_succ {K : Type*} [Field K] (f : K[X])
       algebraMap K L (f.comp^[n] X - C α).discr ^ f.natDegree *
       (((derivative f).map (algebraMap K L)).roots.map
         (fun r => aeval r (f.comp^[n + 1] X - C α))).prod := sorry
+
+/-- Stoll's theorem: each iterate of `X² + 1` over ℚ has the full binary-tree
+Galois-group order; level zero is the trivial group (README §5.65). -/
+theorem stoll_X_sq_add_one_card_gal (n : ℕ) :
+    Nat.card (Polynomial.Gal ((X ^ 2 + 1 : ℚ[X]).comp^[n] X)) =
+      2 ^ (2 ^ n - 1) := sorry
 
 /-! ## Layer 6: Families, specialization and orbit intersections -/
 
@@ -518,7 +600,8 @@ theorem linearSynchronizedIntersection {K : Type*} [Field K] [CharZero K]
       (fun w : K => a * w + b)^[m] = (fun w : K => c * w + e)^[m] := sorry
 
 /-- Equal-degree nonlinear polynomial orbits with infinite intersection force a common
-positive compositional iterate (Ghioca–Tucker–Zieve Theorem 1.1; README §6.84). -/
+positive compositional iterate (Ghioca–Tucker–Zieve Theorem 1.5 with α = 1, β = 0;
+Theorem 1.1 is the case K = ℂ; README §6.84). -/
 theorem polynomialOrbits_commonIterate {K : Type*} [Field K] [CharZero K]
     (F G : K[X]) (x y : K) (hd : F.natDegree = G.natDegree)
     (hF : 1 < F.natDegree)
