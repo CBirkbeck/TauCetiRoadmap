@@ -19,7 +19,7 @@ abbrev Triple := ℕ × ℕ × ℕ
 /-- Four natural indices, allowing equal middle entries. -/
 abbrev Quadruple := ℕ × ℕ × ℕ × ℕ
 
-/-- The term at zero-based index i in an integer arithmetic progression. -/
+/-- The zero-based progression term: term_zero gives n at zero, and term_succ adds d. -/
 def term (n d : ℤ) (i : ℕ) : ℤ := n + (i : ℤ) * d
 
 /-- A positive-length primitive progression solution with prime exponent and nonzero y*d. -/
@@ -31,7 +31,8 @@ def primitive_solution (n d : ℤ) (k : ℕ) (y : ℤ) (ell : ℕ) : Prop :=
 def H (n d : ℤ) (k : ℕ) (y : ℤ) (ell : ℕ) : Prop :=
   primitive_solution n d k y ell ∧ 10 ^ 8 ≤ k ∧ (ell : ℝ) > Real.exp (10 ^ k : ℝ)
 
-/-- The large-exponent hypothesis with length at least 2*10^10. -/
+/-- The large-exponent hypothesis with length at least 2*10^10.
+Hplus_implies_H forgets the stronger length bound; Hplus_length retains it. -/
 def Hplus (n d : ℤ) (k : ℕ) (y : ℤ) (ell : ℕ) : Prop :=
   H n d k y ell ∧ 2 * 10 ^ 10 ≤ k
 
@@ -66,6 +67,18 @@ theorem large_prime_valuations {n d : ℤ} {k : ℕ} {y : ℤ} {ell q i : ℕ}
     (hS : primitive_solution n d k y ell) (hq : q.Prime) (hqk : k ≤ q) (hi : i < k) :
     ell ∣ padicValInt q (term n d i) := by sorry
 
+/-- Positive small-prime coefficients and signed large-prime factors of each nonzero term. -/
+def SignedFactorization (n d : ℤ) (k ell : ℕ) (A : Fin k → ℕ) (z : Fin k → ℤ) : Prop :=
+  ∀ i, 0 < A i ∧ z i ≠ 0 ∧ term n d i = (A i : ℤ) * z i ^ ell ∧
+    (∀ p : ℕ, p.Prime → p ∣ A i → p < k) ∧
+    (∀ p : ℕ, p.Prime → p ∣ (z i).natAbs → k ≤ p)
+
+/-- Odd powers give unique signed factors when every large-prime valuation is divisible by ell. -/
+theorem signed_factorization_exists_unique (n d : ℤ) (k ell : ℕ)
+    (he : 0 < ell) (ho : Odd ell) (hn : ∀ i < k, term n d i ≠ 0)
+    (hv : ∀ q : ℕ, q.Prime → k ≤ q → ∀ i < k, ell ∣ padicValInt q (term n d i)) :
+    ∃! f : (Fin k → ℕ) × (Fin k → ℤ), SignedFactorization n d k ell f.1 f.2 := by sorry
+
 /-- Divisible terms occupy at most one residue class, with the rounding term retained. -/
 theorem residue_class_count (n d : ℤ) (k r : ℕ) (h : Int.gcd n d = 1) (hr : 0 < r) :
     (1 < Int.gcd (r : ℤ) d → divisibility_indices n d k r = ∅) ∧
@@ -76,13 +89,68 @@ theorem residue_class_count (n d : ℤ) (k r : ℕ) (h : Int.gcd n d = 1) (hr : 
       |((divisibility_indices n d k p).card : ℝ)-(k : ℝ)/p| < 1 := by sorry
 
 /-- Positive and signed solutions test the product and gcd conventions. -/
-example : primitive_solution 1 24 3 35 2 ∧ primitive_solution (-3) 2 4 3 2 := by
+example : primitive_solution 1 24 3 35 2 ∧ primitive_solution (-3) 2 4 3 2 ∧ ¬ (0 < (-3 : ℤ)) := by
   norm_num [primitive_solution, term, Finset.prod_range_succ]
 
 /-- Zero length and a nonprimitive product are excluded. -/
 example (n d y : ℤ) (ell : ℕ) :
     ¬ primitive_solution n d 0 y ell ∧ ¬ primitive_solution 4 2 1 2 2 := by
   norm_num [primitive_solution]
+
+/-- Zero-based term indices and the two nested large-exponent hypotheses retain their bounds. -/
+example (n d y : ℤ) (k ell : ℕ) :
+    term 2 3 0 = 2 ∧ term 2 3 1 = 5 ∧ term (-3) 2 2 = 1 ∧
+    (Hplus n d k y ell → H n d k y ell) ∧
+    (H n d k y ell → 10^8 ≤ k) ∧
+    (Hplus n d k y ell → 2*10^10 ≤ k) := by
+  simp only [term]
+  norm_num
+  exact ⟨And.left, fun h => h.2.1, And.right⟩
+
+/-- Lengths below three fail both large-length predicates independently of the equation. -/
+example (n d y : ℤ) (ell k : ℕ) (hk : k ≤ 2) :
+    ¬ H n d k y ell ∧ ¬ Hplus n d k y ell := by
+  constructor
+  · intro h; have := h.2.1; omega
+  · intro h; have := h.2; omega
+
+/-- Negative and mixed-sign cube factors retain the sign in the large-prime factor. -/
+example : SignedFactorization (-8) 1 1 3 (fun _ => 1) (fun _ => -2) ∧
+    SignedFactorization (-8) 7 2 3 (fun _ => 1) ![-2,-1] := by
+  constructor
+  · intro i
+    fin_cases i
+    refine ⟨by norm_num, by norm_num, by norm_num [term], ?_, ?_⟩
+    · intro p hp hd
+      exact (hp.ne_one (Nat.dvd_one.mp hd)).elim
+    · intro p hp _
+      exact Nat.le_trans (by decide : 1 ≤ 2) hp.two_le
+  · intro i
+    fin_cases i <;> refine ⟨by norm_num, by norm_num, by norm_num [term], ?_, ?_⟩
+    all_goals intro p hp hd
+    all_goals first | exact hp.two_le | exact (hp.ne_one (Nat.dvd_one.mp hd)).elim
+
+/-- The prime equal to k is large, while all powers of a small prime remain in A. -/
+example : SignedFactorization 8 19 2 3 (fun _ => 1) ![2,3] ∧
+    SignedFactorization 64 0 3 3 (fun _ => 64) (fun _ => 1) ∧
+    ¬ SignedFactorization 64 0 3 3 (fun _ => 1) (fun _ => 4) := by
+  constructor
+  · intro i
+    fin_cases i <;> refine ⟨by norm_num, by norm_num, by norm_num [term], ?_, ?_⟩
+    all_goals intro p hp hd
+    all_goals first | exact hp.two_le | exact (hp.ne_one (Nat.dvd_one.mp hd)).elim
+  · constructor
+    · intro i
+      refine ⟨by norm_num, by norm_num, by simp [term], ?_, ?_⟩
+      · intro p hp hd
+        have h : p ∣ 2 := hp.dvd_of_dvd_pow (show p ∣ 2^6 from hd)
+        have : p = 2 := (Nat.dvd_prime (by decide : Nat.Prime 2)).mp h |>.resolve_left hp.ne_one
+        omega
+      · intro p hp hd
+        exact (hp.ne_one (Nat.dvd_one.mp hd)).elim
+    · intro h
+      have hh := (h 0).2.2.2.2 2 (by decide) (by norm_num)
+      norm_num at hh
 
 /-- The three smallest lengths have no strict triple; length three has one. -/
 example : ap_triples 0 = ∅ ∧ ap_triples 1 = ∅ ∧ ap_triples 2 = ∅ ∧
@@ -96,7 +164,8 @@ example (k i : ℕ) : (ap_triples 5).card = 4 ∧ (i,i,i) ∉ ap_triples k := by
 
 /-- The shortest equal-sum quadruple repeats its middle entry and has negative kappa. -/
 example : equal_sum_quadruples 2 = ∅ ∧ equal_sum_quadruples 3 = {(0,1,1,2)} ∧
-    (0,1,1,2) ∈ equal_sum_quadruples 3 ∧ kappa (0,1,1,2) = -1 := by decide
+    (0,1,1,2) ∈ equal_sum_quadruples 3 ∧ kappa (0,1,1,2) = -1 ∧ (0,1,1,3) ∉ equal_sum_quadruples 4 ∧
+    kappa (0,1,2,3) = -2 ∧ kappa (1,2,2,3) = -1 := by decide
 
 /-- Divisibility indices count the expected residue class and exclude index k. -/
 example : divisibility_indices 1 2 6 3 = {1,4} ∧ divisibility_indices 1 1 3 4 = ∅ := by
@@ -108,6 +177,26 @@ example (n d : ℤ) (r : ℕ) : divisibility_indices n d 0 r = ∅ := by
 
 
 /-! ## Layer 1: Frey families and residual comparisons -/
+
+/-- The Gamma-zero index formula on the natural prime-factor carrier.
+At a prime p, gammaZeroIndex_prime gives p+1. -/
+def gammaZeroIndex (N : ℕ) : ℚ := N * ∏ q ∈ N.primeFactors, (1 + 1/(q : ℚ))
+
+/-- Empty support and dyadic support distinguish the index from the prime product alone. -/
+example : gammaZeroIndex 0 = 0 ∧ gammaZeroIndex 1 = 1 ∧ gammaZeroIndex 4 = 6 := by
+  have h4 : (4 : ℕ).primeFactors = {2} := by
+    convert Nat.primeFactors_pow_succ 2 1 using 1 <;> norm_num
+  norm_num [gammaZeroIndex, h4]
+
+/-- Prime and mixed support give the indices entering the level-eleven Kraus threshold. -/
+example : gammaZeroIndex 11 = 12 ∧ gammaZeroIndex 44 = 72 := by
+  have h11 : (11 : ℕ).primeFactors = {11} := (by decide : Nat.Prime 11).primeFactors
+  have h4 : (4 : ℕ).primeFactors = {2} := by
+    convert Nat.primeFactors_pow_succ 2 1 using 1 <;> norm_num
+  have h44 : (44 : ℕ).primeFactors = {2,11} := by
+    rw [show 44 = 4*11 from rfl, Nat.primeFactors_mul (by norm_num) (by norm_num), h4, h11]
+    decide
+  norm_num [gammaZeroIndex, h11, h44]
 
 /-- The nonnegative common divisor of the endpoint terms and twice the middle term. -/
 def tripleG (n d : ℤ) (a : Triple) : ℕ :=
@@ -176,7 +265,7 @@ example : normalized (-3) 2 (0,1,2) = (-3,2,1) ∧
   norm_num [first_curve, normalized, tripleG, term, Int.gcd_def]
 
 /-- The equal-sum family has a different middle coefficient from the first family. -/
-example : kappa (0,1,1,2) = -1 ∧ secondA 1 1 (0,1,1,2) = 3 ∧
+example : secondA 1 1 (0,1,1,2) = 3 ∧
     secondB 1 1 (0,1,1,2) = 4 ∧ (second_curve 1 1 (0,1,1,2)).a₂ = -2 ∧
     (second_curve 1 1 (0,1,1,2)).a₄ = -3 ∧
     (second_curve 1 1 (0,1,1,2)).a₂ ≠ (first_curve 1 1 (0,1,2)).a₂ := by
@@ -201,6 +290,28 @@ def case_partition (k : ℕ) (parameters : Triple → Finset ℚ) : Finset Tripl
   let first := (ap_triples k).filter (fun a => ∃ u ∈ parameters a, ¬ inCaseSquareclasses u)
   exact (first, ap_triples k \ first)
 
+/-- The twist by two with roots 0, 2 and 2*lambda: twistedLegendre_equation
+is y^2=x*(x-2)*(x-2*lambda), and twistedLegendre_discriminant is
+1024*lambda^2*(1-lambda)^2. Over a field of characteristic different from two,
+twistedLegendre_isElliptic_iff excludes exactly lambda=0,1. -/
+def twistedLegendre {R : Type*} [CommRing R] (lambda : R) : WeierstrassCurve R :=
+  ⟨0, -2*(1+lambda), 0, 4*lambda, 0⟩
+
+/-- The Case-II point at t=v=1/2 lies on the twisted equation, with both sides equal to -2i. -/
+example : (twistedLegendre (1/2 : ℂ)).toAffine.Equation (1+Complex.I) (-1+Complex.I) ∧
+    (-1+Complex.I)^2 = -2*Complex.I := by
+  constructor
+  · rw [WeierstrassCurve.Affine.equation_iff]
+    norm_num [twistedLegendre, pow_succ, Complex.I_sq] <;> ring_nf <;> simp [Complex.I_sq] <;> ring
+  · ring_nf
+    simp [Complex.I_sq] <;> ring
+
+/-- The two degenerate parameters have zero discriminant, while one half is nonsingular. -/
+example : (twistedLegendre (0 : ℂ)).Δ = 0 ∧ (twistedLegendre (1 : ℂ)).Δ = 0 ∧
+    (twistedLegendre (1/2 : ℂ)).Δ ≠ 0 := by
+  norm_num [twistedLegendre, WeierstrassCurve.Δ, WeierstrassCurve.b₂,
+    WeierstrassCurve.b₄, WeierstrassCurve.b₆, WeierstrassCurve.b₈]
+
 /-- The two rational-parameter cases are disjoint and exhaust the strict triples. -/
 theorem case_partition_union (k : ℕ) (parameters : Triple → Finset ℚ) :
     (case_partition k parameters).1 ∪ (case_partition k parameters).2 = ap_triples k ∧
@@ -209,11 +320,15 @@ theorem case_partition_union (k : ℕ) (parameters : Triple → Finset ℚ) :
 /-- The negative unit parameter lies in Case II, and empty ranges give empty cases. -/
 example (parameters : Triple → Finset ℚ) :
     case_partition 3 (fun _ => {-1}) = (∅,{(0,1,2)}) ∧
-    case_partition 0 parameters = (∅,∅) := by
+    case_partition 0 parameters = (∅,∅) ∧
+    inCaseSquareclasses 2 ∧ case_partition 3 (fun _ => {2}) = (∅,{(0,1,2)}) ∧
+    inCaseSquareclasses 0 := by
   have hm : inCaseSquareclasses (-1) := Or.inl ⟨1, by norm_num⟩
   have ha : ap_triples 3 = {(0,1,2)} := by decide
   have hz : ap_triples 0 = ∅ := by decide
-  simp [case_partition, ha, hm, hz]
+  have h2 : inCaseSquareclasses 2 := Or.inr ⟨1, by norm_num⟩
+  have h0 : inCaseSquareclasses 0 := Or.inl ⟨0, by norm_num⟩
+  simp [case_partition, ha, hm, hz, h2, h0]
 
 /-- Three is outside the two squareclasses and therefore gives Case I. -/
 example : case_partition 3 (fun _ => {3}) = ({(0,1,2)},∅) := by
@@ -231,6 +346,36 @@ example : case_partition 3 (fun _ => {3}) = ({(0,1,2)},∅) := by
 def weightedHalf (k : ℕ) (value : ℕ → ℝ) : ℝ :=
   ∑ m ∈ Finset.Ioc (k/2) k, value m * ArithmeticFunction.vonMangoldt m
 
+/-- Primitive quadratic conductors, including dyadic conductors, have a quantitatively large prime factor. -/
+theorem quadraticConductor_maxPrime_lower (N : ℕ) [NeZero N]
+    (χ : DirichletCharacter ℝ N) (hN : 1 < N) (hp : χ.IsPrimitive) (hq : χ.IsQuadratic) :
+    (94/100 : ℝ) * Real.log N < (Nat.maxPrimeFac N : ℝ) := by sorry
+
+/-- The general smooth-modulus product-character estimate, with the squarefree primitive factor distinguished. -/
+theorem smoothModulusCharacterSum (r : ℕ) (hr : 1 ≤ r) (q : Fin r → ℕ)
+    (hq : ∀ i, 0 < q i) (χ : ∀ i, DirichletCharacter ℂ (q i))
+    (hsq : Squarefree (q ⟨0, hr⟩)) (hfirst : 1 < q ⟨0, hr⟩)
+    (hprim : (χ ⟨0, hr⟩).IsPrimitive)
+    (hcop : Nat.Coprime (q ⟨0, hr⟩) (∏ i ∈ Finset.univ.erase ⟨0, hr⟩, q i))
+    (M : ℤ) (R : ℝ)
+    (hR : max (((Finset.univ.erase ⟨0, hr⟩).sup q : ℕ) : ℝ)
+      ((q ⟨0, hr⟩ : ℝ)^(1/4 : ℝ)) * (q ⟨0, hr⟩ : ℝ)^(5/4 : ℝ) ≤ R) :
+    ‖∑ m ∈ Finset.Ioc M ⌊(M : ℝ)+R⌋, ∏ i : Fin r, χ i (m : ZMod (q i))‖ ≤
+      4*R*((((q ⟨0, hr⟩).divisors.card : ℝ)^(r^2))/(q ⟨0, hr⟩ : ℝ))^(1/(2 : ℝ)^r) := by sorry
+
+/-- Smooth primitive quadratic characters at possibly different conductors have uniform off-diagonal cancellation. -/
+theorem smoothCharacterCorrelation (c₂ : ℝ) (hc : 0 < c₂) :
+    ∃ c₃ : ℝ, 0 < c₃ ∧ ∃ K : ℕ, ∀ k ≥ K, ∀ N₁ N₂ : ℕ,
+      ∀ h₁ : NeZero N₁, ∀ h₂ : NeZero N₂,
+      ∀ χ₁ : DirichletCharacter ℝ N₁, ∀ χ₂ : DirichletCharacter ℝ N₂,
+      χ₁.IsPrimitive → χ₂.IsPrimitive → χ₁.IsQuadratic → χ₂.IsQuadratic →
+      (N₁ : ℝ) ≤ (k : ℝ)^c₂ → (N₂ : ℝ) ≤ (k : ℝ)^c₂ →
+      (Nat.maxPrimeFac N₁ : ℝ) ≤ (k : ℝ)^(7/16 : ℝ) →
+      (Nat.maxPrimeFac N₂ : ℝ) ≤ (k : ℝ)^(7/16 : ℝ) →
+      (fun m : ℤ => χ₁ (m : ZMod N₁)) ≠ (fun m : ℤ => χ₂ (m : ZMod N₂)) →
+      |∑ m ∈ Finset.Ioc (k/2) k, χ₁ (m : ZMod N₁) * χ₂ (m : ZMod N₂)| ≤
+        (k : ℝ)^(1-c₃) := by sorry
+
 /-- A nonnegative bound on every absolute Gram row sum bounds the squared correlations. -/
 theorem finiteGramBound {𝕜 E ι : Type*} [RCLike 𝕜] [NormedAddCommGroup E]
     [InnerProductSpace 𝕜 E] [Fintype ι] (x : E) (y : ι → E) (C : ℝ)
@@ -244,7 +389,28 @@ example : weightedHalf 0 (fun _ => 1) = 0 ∧ weightedHalf 1 (fun _ => 1) = 0 �
     ArithmeticFunction.vonMangoldt_apply_prime (by decide : Nat.Prime 2)]
 
 
+/-- The half-interval weight includes prime powers and agrees with the supplied Chebyshev conventions. -/
+example : weightedHalf 4 (fun _ => 1) = Real.log 3 + Real.log 2 ∧
+    Chebyshev.theta 2 = Real.log 2 ∧
+    Chebyshev.psi 4 = Real.log 2 + Real.log 3 + Real.log 2 ∧
+    Chebyshev.theta 1 = 0 ∧ Chebyshev.psi 1 = 0 := by
+  have h4 : ArithmeticFunction.vonMangoldt 4 = Real.log 2 := by
+    rw [show 4 = 2^2 from rfl, ArithmeticFunction.vonMangoldt_apply_pow (by norm_num)]
+    exact ArithmeticFunction.vonMangoldt_apply_prime (by decide)
+  have h02 : Finset.Ioc 0 2 = ({1,2} : Finset ℕ) := by decide
+  have h04 : Finset.Ioc 0 4 = ({1,2,3,4} : Finset ℕ) := by decide
+  have h24 : Finset.Ioc 2 4 = ({3,4} : Finset ℕ) := by decide
+  norm_num [weightedHalf, Chebyshev.theta, Chebyshev.psi, Finset.sum_Ioc_succ_top,
+    Finset.filter_insert, Finset.filter_singleton,
+    h02, h04, h24, h4, ArithmeticFunction.vonMangoldt_apply_prime (by decide : Nat.Prime 2),
+    ArithmeticFunction.vonMangoldt_apply_prime (by decide : Nat.Prime 3)] <;> ring
+
 /-! ## Layer 4: Thin-prime sieves and the original proof assembly -/
+
+/-- The density ten-to-the-minus-five Roth substitution lies strictly between the two numerical cutoffs. -/
+theorem roth_cutoff_substitution : (10 : ℝ)^6 < 132 * Real.log 2 * 10^5 ∧
+    132 * Real.log 2 * 10^5 < (10 : ℝ)^7 := by
+  constructor <;> nlinarith [Real.log_two_gt_d9, Real.log_two_lt_d9]
 
 /-- The explicit density cutoff guarantees a strict three-term progression in the subset. -/
 theorem quantitativeThreeAP (delta : ℝ) (hd : 0 < delta) (hdu : delta < 1)
@@ -279,10 +445,9 @@ def valuation_deletion (k : ℕ) (coeff : ℕ → ℕ) (J : Finset ℕ) : Finset
   exact J \ ((J.biUnion (fun i => (coeff i).primeFactors)).filter (fun p => p < k)).image
     (fun p => removedIndex p coeff J)
 
-/-- The real lower bound exp(exp(10^7)) certifying the quantitative Roth substitution. -/
-def certifiedThreshold (k : ℕ) : Prop := (k : ℝ) ≥ Real.exp (Real.exp (10^7))
-
-/-- A finite set of primes at most k with reciprocal mass strictly below 0.17. -/
+/-- Primes at most k with reciprocal mass below 0.17.
+The empty set satisfies thinSet_empty; thinSet_subset restricts to a subset,
+and thinSet_two_not_mem excludes two by its reciprocal mass one half. -/
 def thinSet (k : ℕ) (s : Finset ℕ) : Prop :=
   (∀ p ∈ s, p.Prime ∧ p ≤ k) ∧ (∑ p ∈ s, 1/(p : ℝ)) < (17/100 : ℝ)
 
@@ -295,11 +460,63 @@ theorem stirling_upper_adapter (m : ℕ) (hm : 1 ≤ m) :
 theorem original_route_bound : ∃ K : ℕ, ∀ (n d : ℤ) (k : ℕ) (y : ℤ) (ell : ℕ),
     Hplus n d k y ell → k ≤ K := by sorry
 
-/-- The sieve is empty at zero length, and the lower smoothness endpoint is open. -/
-example (n d : ℤ) (s : Finset ℕ) (k p : ℕ)
-    (h : (p : ℝ) = (k : ℝ)^(7/16 : ℝ)) :
-    thin_prime_survivors n d 0 s = ∅ ∧ p ∉ Tpr k := by
-  simp [thin_prime_survivors, Tpr, h]
+/-- The actual smoothness prime sets at lengths one and two test primality and the real bound. -/
+example : Tpr 1 = ∅ ∧ Tpr 2 = {2} := by
+  have h : (2 : ℝ)^(7/16 : ℝ) < 2 := Real.rpow_lt_self_of_one_lt (by norm_num) (by norm_num)
+  constructor
+  · norm_num [Tpr, Finset.range_add_one, Finset.filter_insert, Finset.filter_singleton]
+  · change (Finset.range 3).filter (fun p : ℕ => p.Prime ∧ (2 : ℝ)^(7/16 : ℝ) < (p : ℝ)) = {2}
+    rw [show Finset.range 3 = {0,1,2} by decide]
+    norm_num [Finset.filter_insert, Finset.filter_singleton, h]
+
+/-- The lower bound at sixteen lies strictly between three and five. -/
+example : Tpr 16 = {5,7,11,13} := by
+  have hpow : ((16 : ℝ)^(7/16 : ℝ))^16 = (16 : ℝ)^7 := by
+    rw [← Real.rpow_mul_natCast (by norm_num)]
+    norm_num
+  have hlo : 3 < (16 : ℝ)^(7/16 : ℝ) := by
+    by_contra h
+    have hh := pow_le_pow_left₀ (Real.rpow_nonneg (by norm_num) _) (le_of_not_gt h) 16
+    norm_num [hpow] at hh
+  have hhi : (16 : ℝ)^(7/16 : ℝ) < 5 := by
+    by_contra h
+    have hh := pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 5) (le_of_not_gt h) 16
+    norm_num [hpow] at hh
+  have hr : Finset.range 17 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16} := by decide
+  ext p
+  simp only [Tpr, hr, Finset.mem_filter, Finset.mem_insert, Finset.mem_singleton]
+  constructor
+  · rintro ⟨hp, hprime, hgt⟩
+    rcases hp with rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl|rfl <;>
+      norm_num at hprime <;> norm_num <;> linarith
+  · intro hp
+    rcases hp with rfl|rfl|rfl|rfl <;> norm_num <;> linarith
+
+/-- The logarithmic prime set is empty at zero and one, and contains two at length two. -/
+example : Upr 0 = ∅ ∧ Upr 1 = ∅ ∧ 2 ∈ Upr 2 := by
+  have hl : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have hu : Real.log 2 < 1 := lt_trans Real.log_two_lt_d9 (by norm_num)
+  have hp : Real.log 2 ^ (1-(1/10000 : ℝ)) < 1 :=
+    Real.rpow_lt_one hl.le hu (by norm_num)
+  have hb : (2 : ℝ) ≤ 10^4 * Real.log 2 := by linarith [Real.log_two_gt_d9]
+  have hn : 2 < ⌈(10^4 : ℝ) * Real.log 2⌉₊ + 1 := by
+    have := Nat.le_ceil ((10^4 : ℝ) * Real.log 2)
+    have : (2 : ℝ) ≤ (⌈(10^4 : ℝ) * Real.log 2⌉₊ : ℝ) := hb.trans this
+    exact Nat.lt_succ_of_le (by exact_mod_cast this)
+  refine ⟨?_, ?_, ?_⟩
+  · norm_num [Upr]
+  · norm_num [Upr]
+  · simp only [Upr, Finset.mem_filter, Finset.mem_range]
+    exact ⟨hn, by decide, by linarith [hp], hb⟩
+
+/-- Thin sets distinguish reciprocal mass, primality and the bound on their members. -/
+example : thinSet 9 ∅ ∧ thinSet 9 {7} ∧ ¬ thinSet 9 {2} ∧
+    ¬ thinSet 9 {9} ∧ ¬ thinSet 6 {7} := by
+  norm_num [thinSet]
+
+/-- The empty sieve range has no survivor. -/
+example (n d : ℤ) (s : Finset ℕ) : thin_prime_survivors n d 0 s = ∅ := by
+  simp [thin_prime_survivors]
 
 /-- Permuting the forbidden sets does not change the survivor set. -/
 example (n d : ℤ) (k : ℕ) (s : Finset ℕ) : thin_prime_survivors n d k s =
@@ -340,9 +557,16 @@ example :
     Finset.min'_eq_inf', Finset.inf'_insert, f4, v22, v23, v24, v32, v33, v34]
   decide
 
+/-- Empty sets and singleton or tied constant valuations pin the least-maximizer convention. -/
+example (p : ℕ) (coeff : ℕ → ℕ) : removedIndex p coeff ∅ = 0 ∧
+    removedIndex p (fun _ => 0) {3} = 3 ∧ removedIndex p (fun _ => 1) {2,5} = 2 := by
+  simp [removedIndex, Finset.sup_insert, Finset.min'_eq_inf', Finset.inf'_insert]
+
 /-! ## Layer 5: Granville exceptional moduli and a single witness -/
 
-/-- The bounded height exp(c*log(k)/(3*log(log(k)))) in the exceptional-zero definition. -/
+/-- The exceptional-zero height exp(c*log(k)/(3*log(log(k)))).
+zeroHeight_pos follows from positivity of exp; zeroHeight_zero and zeroHeight_one
+give value one at lengths zero and one with the total logarithm convention. -/
 def zeroHeight (k : ℕ) (c : ℝ) : ℝ := Real.exp (c*Real.log k/(3*Real.log (Real.log k)))
 
 /-- A primitive continued L-function zero in the specified strip and height, excluding the principal pole. -/
@@ -360,19 +584,96 @@ def exceptional_moduli (k : ℕ) (c : ℝ) : Finset ℕ := by
   classical
   exact (Finset.range (k^4+1)).filter (fun q => 0 < q ∧ hasZeroWithin k c q)
 
-/-- The bounded-height Landau-Page zero region for an actual primitive character. -/
-def pageException (c T : ℝ) (q : ℕ) : Prop :=
-  ∃ hq : NeZero q, ∃ χ : DirichletCharacter ℂ q, ∃ ρ : ℂ,
-    χ.IsPrimitive ∧ (ρ ≠ 1 ∨ χ ≠ 1) ∧ @DirichletCharacter.LFunction q hq χ ρ = 0 ∧
-      |ρ.im| ≤ T ∧ 1-c/Real.log T ≤ ρ.re
+/-- A primitive regular L-function zero in the closed bounded-height Landau-Page strip. -/
+def pageZero {q : ℕ} [NeZero q] (c T : ℝ) (χ : DirichletCharacter ℂ q) (ρ : ℂ) : Prop :=
+  χ.IsPrimitive ∧ (ρ ≠ 1 ∨ χ ≠ 1) ∧ χ.LFunction ρ = 0 ∧
+    |ρ.im| ≤ T ∧ 1-c/Real.log T ≤ ρ.re
 
-/-- Uniqueness of a modulus with a zero in the Landau-Page strip, uniformly in height T >= 2. -/
+/-- A positive modulus admitting a zero in the Landau-Page region. -/
+def pageException (c T : ℝ) (q : ℕ) : Prop :=
+  ∃ hq : NeZero q, ∃ χ : DirichletCharacter ℂ q, ∃ ρ : ℂ, @pageZero q hq c T χ ρ
+
+/-- Every exceptional pair is real and simple, and the pair is unique across all moduli at most T. -/
 def boundedPage (c : ℝ) : Prop :=
-  ∀ T : ℝ, 2 ≤ T → ∀ q r : ℕ, (q : ℝ) ≤ T → (r : ℝ) ≤ T →
-    pageException c T q → pageException c T r → q=r
+  ∀ T : ℝ, 2 ≤ T →
+    (∀ q : ℕ, ∀ hq : NeZero q, (q : ℝ) ≤ T →
+      ∀ χ : DirichletCharacter ℂ q, ∀ ρ : ℂ, @pageZero q hq c T χ ρ →
+        (∀ a : ZMod q, (χ a).im = 0) ∧ ρ.im = 0 ∧
+          deriv (@DirichletCharacter.LFunction q hq χ) ρ ≠ 0) ∧
+    (∀ q r : ℕ, ∀ hq : NeZero q, ∀ hr : NeZero r, (q : ℝ) ≤ T → (r : ℝ) ≤ T →
+      ∀ χ : DirichletCharacter ℂ q, ∀ ψ : DirichletCharacter ℂ r, ∀ ρ σ : ℂ,
+      @pageZero q hq c T χ ρ → @pageZero r hr c T ψ σ →
+        q = r ∧ (∀ m : ℤ, χ (m : ZMod q) = ψ (m : ZMod r)) ∧ ρ = σ)
+
+/-- Positive real zeros of quadratic characters satisfy the explicit effective upper bound. -/
+theorem realExceptionalZero_upper (q : ℕ) [NeZero q] (hq : 3 ≤ q)
+    (χ : DirichletCharacter ℂ q) (hχ : χ.IsQuadratic) (β : ℝ) (hβ : 0 < β)
+    (hz : χ.LFunction (β : ℂ) = 0) :
+    β ≤ 1 - 40 / (Real.sqrt q * (Real.log q)^2) := by sorry
 
 /-- A positive bounded-height Landau-Page constant exists for the continued L-functions. -/
 theorem boundedPage_exists : ∃ c : ℝ, 0 < c ∧ boundedPage c := by sorry
+
+/-- Smaller c narrows the exceptional strip at every admissible height. -/
+example (c c' : ℝ) (hc : c' ≤ c) (hp : boundedPage c) : boundedPage c' := by
+  intro T hT
+  have hl : 0 < Real.log T := Real.log_pos (by linarith)
+  have inc {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} {ρ : ℂ}
+      (h : pageZero c' T χ ρ) : pageZero c T χ ρ := by
+    refine ⟨h.1, h.2.1, h.2.2.1, h.2.2.2.1, ?_⟩
+    have := div_le_div_of_nonneg_right hc hl.le
+    linarith [h.2.2.2.2]
+  exact ⟨fun q hq hqt χ ρ h => (hp T hT).1 q hq hqt χ ρ (@inc q hq χ ρ h),
+    fun q r hq hr hqt hrt χ ψ ρ σ hχ hψ =>
+      (hp T hT).2 q r hq hr hqt hrt χ ψ ρ σ (@inc q hq χ ρ hχ) (@inc r hr ψ σ hψ)⟩
+
+/-- The full Page hypothesis forces reality and simplicity, and identifies pairs across levels. -/
+example (c T : ℝ) (hp : boundedPage c) (hT : 2 ≤ T) (q r : ℕ)
+    [hq : NeZero q] [hr : NeZero r] (hqt : (q : ℝ) ≤ T) (hrt : (r : ℝ) ≤ T)
+    (χ : DirichletCharacter ℂ q) (ψ : DirichletCharacter ℂ r) (ρ σ : ℂ)
+    (hz : pageZero c T χ ρ) (hw : pageZero c T ψ σ) :
+    ((∀ a : ZMod q, (χ a).im = 0) ∧ ρ.im = 0 ∧ deriv χ.LFunction ρ ≠ 0) ∧
+    (q = r ∧ (∀ m : ℤ, χ (m : ZMod q) = ψ (m : ZMod r)) ∧ ρ = σ) := by
+  exact ⟨(hp T hT).1 q hq hqt χ ρ hz, (hp T hT).2 q r hq hr hqt hrt χ ψ ρ σ hz hw⟩
+
+/-- Zero moduli and negative height bounds are excluded independently of the L-function data. -/
+example (c T : ℝ) : ¬ pageException c T 0 ∧
+    (T < 0 → ∀ q, ¬ pageException c T q) := by
+  constructor
+  · rintro ⟨hq, _⟩
+    exact hq.out rfl
+  · intro hT q
+    rintro ⟨hq, χ, ρ, hz⟩
+    have hh := hz.2.2.2.1
+    exact (not_le_of_gt hT) ((abs_nonneg ρ.im).trans hh)
+
+/-- The Page witness excludes both the principal pole and an above-height candidate. -/
+example {q : ℕ} [NeZero q] (c T : ℝ) (χ : DirichletCharacter ℂ q) (ρ : ℂ)
+    (hh : T < |ρ.im|) :
+    ¬ pageZero c T (1 : DirichletCharacter ℂ q) 1 ∧ ¬ pageZero c T χ ρ := by
+  constructor
+  · simp [pageZero]
+  · intro h
+    exact (not_le_of_gt hh) h.2.2.2.1
+
+/-- A negative-even trivial zero satisfies the region predicate at height two and a wide strip. -/
+example : pageZero (4 * Real.log 2) 2 (1 : DirichletCharacter ℂ 1) (-2) ∧
+    pageException (4 * Real.log 2) 2 1 := by
+  have hz : pageZero (4 * Real.log 2) 2 (1 : DirichletCharacter ℂ 1) (-2) := by
+    refine ⟨DirichletCharacter.isPrimitive_one_level_one, by norm_num, ?_, by norm_num, ?_⟩
+    · have he : DirichletCharacter.Even (1 : DirichletCharacter ℂ 1) := by
+        change (1 : DirichletCharacter ℂ 1) (-1) = 1
+        rw [show (-1 : ZMod 1) = 1 from Subsingleton.elim _ _]
+        exact map_one _
+      simpa using he.LFunction_neg_two_mul_nat_add_one 0
+    · have hlog : Real.log 2 ≠ 0 := ne_of_gt (Real.log_pos (by norm_num))
+      norm_num [hlog]
+  exact ⟨hz, ⟨inferInstance, 1, -2, hz⟩⟩
+
+/-- Zero and unit lengths, zero c and positivity pin the total height convention. -/
+example (k : ℕ) (c : ℝ) : zeroHeight 0 c = 1 ∧ zeroHeight 1 c = 1 ∧
+    zeroHeight k 0 = 1 ∧ 0 < zeroHeight k c := by
+  simp [zeroHeight, Real.exp_pos]
 
 /-- Indices with a term divisible by a divisor r of a specified positive modulus q, with r >= q^(1/3)/2. -/
 def exceptional_indices (n d : ℤ) (k : ℕ) (moduli : Finset ℕ) : Finset ℕ := by
@@ -450,6 +751,10 @@ example : 0 ∈ exceptional_indices 1000 1 3 {1000} ∧
     · intro hi
       exact ⟨hi, by norm_num, 1, by norm_num, by norm_num, by norm_num [h8], by simp [term]⟩
 
+/-- The real scale needed for a single Granville witness holds from sixty-four, with equality there. -/
+theorem granville_scale (x : ℝ) (hx : 64 ≤ x) :
+    8 * x^(7/2 : ℝ) ≤ x^4 ∧ 8 * (64 : ℝ)^(7/2 : ℝ) = (64 : ℝ)^4 := by sorry
+
 /-! ## Layer 6: Effective exponent bound and fixed-length finiteness -/
 
 /-- Above an absolute threshold, a nontrivial primitive progression has prime exponent at most exp(10^k). -/
@@ -458,18 +763,29 @@ theorem effective_prime_bound : ∃ k0 : ℕ, 5 ≤ k0 ∧
       (∏ i ∈ Finset.range k, term n d i) = y^ell →
       y*d=0 ∨ (ell : ℝ) ≤ Real.exp (10^k : ℝ) := by sorry
 
-/-- At each fixed length at least five and exponent at least two there are finitely many nontrivial primitive signed solutions. -/
-theorem fixed_exponent_finiteness (k ell : ℕ) (hk : 5 ≤ k) (he : 2 ≤ ell) :
+/-- Fixed-exponent signed progression finiteness throughout the hyperbolic diagonal-curve range. -/
+theorem fixed_exponent_finiteness (k ell : ℕ) (hk : 3 ≤ k) (he : 2 ≤ ell)
+    (hh : 2*ell+k < k*ell) :
     {t : ℤ × ℤ × ℤ | Int.gcd t.1 t.2.1 = 1 ∧ t.2.2*t.2.1 ≠ 0 ∧
       (∏ i ∈ Finset.range k, term t.1 t.2.1 i) = t.2.2^ell}.Finite := by sorry
 
-/-- Reduction to prime exponents and finiteness of the root/exponent pairs over an integer of absolute value greater than one. -/
-theorem composite_exponent_reduction (y : ℤ) (ell p : ℕ) (he : 2 ≤ ell)
-    (hp : p.Prime) (hpe : p ∣ ell) :
-    y^ell = (y^(ell/p))^p ∧
-    (∀ (k : ℕ) (n d : ℤ), 5 ≤ k → y*d ≠ 0 →
-      (∏ i ∈ Finset.range k, term n d i)=y^ell → 1 < y.natAbs) ∧
-    ∀ Y : ℤ, 1 < Y.natAbs → {t : ℤ × ℕ | 0 < t.2 ∧ t.1^t.2=Y}.Finite := by sorry
+/-- Every exponent at least two is in the hyperbolic range at lengths at least five. -/
+theorem fixed_exponent_finiteness_length_ge_five (k ell : ℕ) (hk : 5 ≤ k) (he : 2 ≤ ell) :
+    {t : ℤ × ℤ × ℤ | Int.gcd t.1 t.2.1 = 1 ∧ t.2.2*t.2.1 ≠ 0 ∧
+      (∏ i ∈ Finset.range k, term t.1 t.2.1 i) = t.2.2^ell}.Finite := by sorry
+
+/-- Exact division by any divisor of the exponent preserves the integer power. -/
+theorem pow_eq_pow_div_prime (y : ℤ) (ell p : ℕ) (hpe : p ∣ ell) :
+    y^ell = (y^(ell/p))^p := by sorry
+
+/-- Three distinct nonzero progression terms already exclude power variables of absolute value one. -/
+theorem primitive_solution_natAbs_y_gt_one (y n d : ℤ) (k ell : ℕ)
+    (hk : 3 ≤ k) (he : 2 ≤ ell) (hne : y*d ≠ 0)
+    (hprod : (∏ i ∈ Finset.range k, term n d i) = y^ell) : 1 < y.natAbs := by sorry
+
+/-- A fixed integer of absolute value greater than one has finitely many root/exponent pairs. -/
+theorem finite_root_exponent_pairs (Y : ℤ) (hY : 1 < Y.natAbs) :
+    {t : ℤ × ℕ | 0 < t.2 ∧ t.1^t.2 = Y}.Finite := by sorry
 
 /-- For each sufficiently large fixed length there are finitely many primitive nontrivial solutions with arbitrary exponent at least two. -/
 theorem fixed_length_finiteness : ∃ k0 : ℕ, 5 ≤ k0 ∧ ∀ k ≥ k0,
@@ -507,10 +823,6 @@ example : ¬ erdos_threshold 0 ∧ ¬ erdos_threshold 3 := by
       (by norm_num) (by norm_num) (by norm_num) (by norm_num) hp
   · exact h 3 1 24 35 2 (by norm_num) (by norm_num) (by norm_num)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num) hp
-
-/-- A signed solution is excluded from the conjecture's positive domain. -/
-example : primitive_solution (-3) 2 4 3 2 ∧ ¬ (0 < (-3 : ℤ)) := by
-  norm_num [primitive_solution, term, Finset.prod_range_succ]
 
 /-- Zero multipliers fail; the unit multiplier recovers the sample primitive solution. -/
 example (tau : ℝ) (n d : ℤ) (k : ℕ) (y : ℤ) (ell : ℕ) :
