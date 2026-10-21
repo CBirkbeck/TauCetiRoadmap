@@ -514,9 +514,13 @@ example : thinSet 9 ∅ ∧ thinSet 9 {7} ∧ ¬ thinSet 9 {2} ∧
     ¬ thinSet 9 {9} ∧ ¬ thinSet 6 {7} := by
   norm_num [thinSet]
 
-/-- The empty sieve range has no survivor. -/
-example (n d : ℤ) (s : Finset ℕ) : thin_prime_survivors n d 0 s = ∅ := by
-  simp [thin_prime_survivors]
+/-- An empty range has no survivor, whereas length one with no forbidden primes retains its index. -/
+example (n d : ℤ) (s : Finset ℕ) : thin_prime_survivors n d 0 s = ∅ ∧
+    thin_prime_survivors 1 1 1 ∅ = {0} := by
+  constructor
+  · simp [thin_prime_survivors]
+  · norm_num [thin_prime_survivors, Tpr, Upr, Finset.range_add_one,
+      Finset.filter_insert, Finset.filter_singleton]
 
 /-- Permuting the forbidden sets does not change the survivor set. -/
 example (n d : ℤ) (k : ℕ) (s : Finset ℕ) : thin_prime_survivors n d k s =
@@ -605,9 +609,10 @@ def boundedPage (c : ℝ) : Prop :=
       @pageZero q hq c T χ ρ → @pageZero r hr c T ψ σ →
         q = r ∧ (∀ m : ℤ, χ (m : ZMod q) = ψ (m : ZMod r)) ∧ ρ = σ)
 
-/-- Positive real zeros of quadratic characters satisfy the explicit effective upper bound. -/
+/-- Positive real zeros of quadratic characters at regular points satisfy the explicit effective upper bound. -/
 theorem realExceptionalZero_upper (q : ℕ) [NeZero q] (hq : 3 ≤ q)
     (χ : DirichletCharacter ℂ q) (hχ : χ.IsQuadratic) (β : ℝ) (hβ : 0 < β)
+    (hregular : (β : ℂ) ≠ 1 ∨ χ ≠ 1)
     (hz : χ.LFunction (β : ℂ) = 0) :
     β ≤ 1 - 40 / (Real.sqrt q * (Real.log q)^2) := by sorry
 
@@ -716,14 +721,16 @@ example (k q : ℕ) (c : ℝ) (h : k^4 < q) :
   · intro hq
     omega
 
-/-- A high zero and the principal pole are excluded before any analytic estimate. -/
+/-- Height, pole and real-part restrictions reject independent invalid zero candidates. -/
 example {k q : ℕ} {c : ℝ} [NeZero q] (χ : DirichletCharacter ℂ q) (ρ : ℂ)
     (h : zeroHeight k c < |ρ.im|) :
-    ¬ zeroWithin k c χ ρ ∧ ¬ zeroWithin k c (1 : DirichletCharacter ℂ q) 1 := by
-  constructor
+    ¬ zeroWithin k c χ ρ ∧ ¬ zeroWithin k c (1 : DirichletCharacter ℂ q) 1 ∧
+    ¬ zeroWithin 0 c χ 0 := by
+  refine ⟨?_, ?_, ?_⟩
   · intro hz
     exact (not_le_of_gt h) hz.2.2.2.1
   · simp [zeroWithin]
+  · norm_num [zeroWithin]
 
 /-- Empty modulus sets yield empty bad-index sets. -/
 example (n d : ℤ) (k : ℕ) : exceptional_indices n d k ∅ = ∅ := by

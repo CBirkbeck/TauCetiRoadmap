@@ -122,8 +122,10 @@ existing inputs; none of these carriers is reconstructed.
 Use `Int.gcd_def`, `Int.gcd_greatest` and
 `Int.dvd_of_dvd_mul_left_of_gcd_one` in `Mathlib/Data/Int/GCD.lean` for
 nonnegative gcds and cancellation. Use `Nat.factorization` in
-`Mathlib/Data/Nat/Factorization/Defs.lean` and `padicValInt`, `padicValInt.mul`
-in `Mathlib/NumberTheory/Padics/PadicVal/Basic.lean` for nonzero term valuations.
+`Mathlib/Data/Nat/Factorization/Defs.lean`. For nonzero integer term valuations,
+unfold `padicValInt p z = padicValNat p z.natAbs` and use `Int.natAbs_mul`
+with `padicValNat.mul` in `Mathlib/NumberTheory/Padics/PadicVal/Basic.lean`,
+retaining `[Fact p.Prime]` and nonzero factors.
 The valuation at a zero argument is never used to deduce exponent divisibility.
 
 Use `WeierstrassCurve`, `WeierstrassCurve.Δ`, `WeierstrassCurve.c₄` and
@@ -159,6 +161,17 @@ Use `WeierstrassCurve.frobeniusTrace` and
 `TauCeti/AlgebraicGeometry/EllipticCurve/PointCount.lean`: on an elliptic model
 over a finite field of size q, the trace is q+1 minus the number of all projective
 points. The identity point is included.
+
+Use `WeierstrassCurve.Affine.μ`, `WeierstrassCurve.Affine.exists_eq_two_smul_iff`
+and `WeierstrassCurve.Affine.ker_μ_eq` in
+`TauCeti/AlgebraicGeometry/EllipticCurve/MordellWeil/XSubT.lean` for descent and
+halving over a field, with the normal-form, ellipticity and decidable-equality
+hypotheses of that API. Layer 2 specializes these to split cubic coordinates.
+Use `CongruenceSubgroup.Gamma0_prime_index` and
+`CongruenceSubgroup.Gamma0_prime_power_index` in
+`TauCeti/NumberTheory/ModularForms/CongruenceSubgroups/Basic.lean` for the
+actual subgroup index at prime and positive prime-power levels. The rational
+prime-product expression `gammaZeroIndex` in §1.1 is compared to that index.
 
 Use `TauCeti.Multiquadratic.fundamentalDiscriminantChar`,
 `TauCeti.Multiquadratic.fundamentalDiscriminantChar_isQuadratic`,
@@ -319,7 +332,7 @@ Assume S. For prime q≥k and i<k, ell divides padicValInt(q,n+i*d). The valuati
 
 The gcd bound prevents q dividing two distinct terms because their difference of indices is less than q. Apply valuation additivity to the nonzero product and the ell-th power. Only the chosen term contributes.
 
-*Needs:* Layer 0 — gcd of progression terms; Mathlib `padicValInt`; Mathlib `padicValInt.mul`, with `[Fact q.Prime]` and nonzero factors.
+*Needs:* Layer 0 — gcd of progression terms; Mathlib `padicValInt p z = padicValNat p z.natAbs`, `Int.natAbs_mul` and `padicValNat.mul`, with `[Fact q.Prime]` and nonzero factors.
 
 ([BS20], Lemma 3.1(ii), p. 360.)
 
@@ -534,7 +547,7 @@ Define `gammaZeroIndex` on all natural N by the rational value N∏_(q∈N.prime
 (μ(lcm(N,4))/6+1)² and `krausH` as their maximum. Prove
 `gammaZeroIndex_prime`, `krausH_ge_f`, `krausH_ge_g` and compatibility
 with ModularForms Layer 10's actual index and newspace dimension.
-Prove `krausRealization`: if E/ℚ has full rational two-torsion,
+Prove `krausRealization`: for a prime ell≥5, if E/ℚ has full rational two-torsion,
 irreducible E[ell], Serre weight 2, prime-to-ell residual conductor N and
 ell>krausH(N), an actual elliptic curve F/ℚ has full rational two-torsion,
 conductor N and the same residual representation. Also prove
@@ -676,7 +689,7 @@ Under H and a in A(k), E_a[ell] is irreducible of Serre weight 2, its prime-to-e
 
 The level bound places ell above all level primes. At ell, use the good or finite-flat multiplicative case of coefficient-prime weight-two lowering, justified by the large-prime discriminant divisibility. Match every local conductor exponent with the deletion level. This is a real theorem, not an equality assigned by definition.
 
-*Needs:* Layer 1 — first-family reduced-level bounds; Layer 0 — large-prime valuation divisibility; Layer 1, coefficient-prime bridge; Layer 1, Artin-conductor interface.
+*Needs:* Layer 1 — first-family reduced-level bounds; Layer 0 — large-prime valuation divisibility; §1.1 `gap:weight-two-lowering` with its coefficient-prime hypotheses; Layer 1, Artin-conductor interface.
 
 ([BS20], §2, Theorem 4, p. 360; §3.1, Lemmas 3.2–3.3, pp. 361–362; §5, Lemma 5.1, p. 365. The weight and conductor comparison is the adapter between these results.)
 
@@ -945,6 +958,10 @@ Prove `quadraticConductor_maxPrime_lower`: for every primitive quadratic
 character over ℝ of positive conductor N>1, 0.94 log N<Nat.maxPrimeFac N.
 Retain dyadic part 1,4,8. The small-conductor range is part of the theorem,
 not an asymptotic hypothesis. (BS20, Lemma 7.3, p. 375.)
+For P=Nat.maxPrimeFac N≥23, use log N≤θ(P)+2 log 2 and
+θ(P)<1.000081P to obtain 0.94 log N<P. For
+P∈{2,3,5,7,11,13,17,19}, use N≤8∏_(3≤p≤P, p prime)p;
+the least ratio P/log(8∏p) in this finite list is 3/log 24>0.94.
 
 **Checks.**
 
@@ -956,7 +973,7 @@ not an asymptotic hypothesis. (BS20, Lemma 7.3, p. 375.)
 - The principal character has a main term of order k and is excluded from a nonprincipal PNT error estimate.
 - Equal characters have diagonal correlation of order k and are excluded from the strict off-diagonal power saving.
 
-*Needs:* `gap:character-pnt`, `gap:small-conductor-zeros`; `smoothModulusCharacterSum` for the correlation specialization; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
+*Needs:* `gap:character-pnt`, `gap:small-conductor-zeros`; `smoothModulusCharacterSum` for the correlation specialization; ClassicalArithmeticCompletion §1.51 for quadratic-conductor support; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's explicit prime estimates and divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
 
 ### 3.2 Harmonic smooth-conductor criterion
 
@@ -1022,6 +1039,7 @@ Prove `thin_prime_survivors_mem` (characterisation): i is in J iff i<k and none 
 **Checks.**
 
 - `thin_prime_survivors_zero` (degenerate): For k=0 the survivor set is empty.
+- At n=d=k=1 and S empty, the survivor set is {0}; an identically empty survivor definition fails this Check.
 - `thin_prime_survivors_union` (characterisation): Deleting S,T_pr,U_pr in any order gives the same finite set.
 - T_pr(2)={2}; T_pr(16)={5,7,11,13}; T_pr(1) is empty. These test the actual prime membership near the lower bound. For natural k and prime p, p=k^(7/16) is impossible: it would imply 7v_p(k)=16. The interval remains open on the left.
 - U_pr(0)=empty, using the total logarithm at zero.
@@ -1157,7 +1175,8 @@ Re ρ≥1−c/log T, excluding the principal pole. Every qualifying pair has
 real character values and a real simple zero, and the pair is unique across
 all such moduli (IwaniecKowalski2004, Theorem 5.28).
 Prove `realExceptionalZero_upper`: for any quadratic character modulo q≥3
-and a positive real zero β, β≤1−40/(√q*(log q)²)
+and a positive real zero β at a regular point (β≠1 or χ≠1),
+β≤1−40/(√q*(log q)²)
 (BMOR2018v3, Proposition 1.11). Consume `gap:log-free-density`:
 ∑_(q≤Q)∑_(χ primitive mod q) N(σ,T,χ)≪_ε
 (Q^(5+ε)T^(3+ε))^(1−σ), for 1/2≤σ≤1 and Q,T≥2,
@@ -1203,6 +1222,7 @@ Prove `exceptional_moduli_mem` (characterisation): Membership is equivalent to t
 - `exceptional_moduli_upper` (characterisation): q>k^4 never belongs.
 - `exceptional_moduli_high_zero` (non-example): A zero with |Im rho|>T alone cannot witness membership.
 - `exceptional_moduli_principal_pole` (non-example): For every positive modulus, the pair chi=1,rho=1 never satisfies the zero-witness predicate, regardless of the totalized LFunction value.
+- `zeroWithin 0 c χ 0` is false: its real-part inequality is 1<0. This tests the strip independently of height and pole exclusion.
 
 Take a subset of range(k^4+1) using the exact quantified character and complex-zero predicate. Use the native primitive-character and meromorphic continuation vocabulary. The analytic height restriction is essential. Explicitly exclude the principal-character pole at rho=1. Mathlib totalizes the function there; an assigned value is not a meromorphic zero. The same guard belongs in the bounded-height Landau-Page input predicate.
 
