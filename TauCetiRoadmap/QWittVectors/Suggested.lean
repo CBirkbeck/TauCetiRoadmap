@@ -9,8 +9,9 @@ headline theorems against the pinned Mathlib and Tau Ceti APIs.
 The headline results, in README order, are:
 * the big Witt ghost-image criterion (§1.2), stated below using its integral
   coordinate polynomials;
-* big Witt construction and étale Frobenius base change (§§1.3, 1.6), and
-  finite-prime arithmetic fracture (§1.8);
+* big Witt construction (§1.3), the finite and inverse-limit big Witt power-series
+  comparisons (§1.4a), étale Frobenius base change (§1.6), and finite-prime
+  arithmetic fracture (§1.8);
 * arithmetic Λ-perfection and perfect coverage (§§2.3–2.4);
 * absolute q-Witt initiality, the Verschiebung resolution and Witt injectivity
   (§§3.2, 3.4, 3.7);
@@ -26,8 +27,11 @@ The headline results, in README order, are:
 * smooth integer torsion-freeness and degreewise completion (§§10.1–10.2).
 
 Apart from the two theorems stated below, these headlines are not statable at the
-pins. The big Witt results need its functorial ring carrier; the arithmetic
-results need the big Witt comonad and its Λ-coalgebra carrier. Finite-prime
+pins. The big Witt results need its functorial ring carrier. In particular, the
+finite and inverse-limit power-series comparisons need the additive group of
+coordinate big Witt vectors on arbitrary truncation sets; the pinned p-typical
+Witt carriers do not provide it. The arithmetic results need the big Witt comonad
+and its Λ-coalgebra carrier. Finite-prime
 arithmetic fracture needs enhanced derived localization and completion diagrams.
 The absolute and relative q-Witt results need the q-FV system categories and their
 initial rings; the differential results, including the smooth torsion and completion

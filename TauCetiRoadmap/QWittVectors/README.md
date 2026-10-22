@@ -6,7 +6,7 @@
 
 ## Scope and ownership
 
-This roadmap owns the following algebraic library: Layers 1–2 give big Witt rings, arithmetic Λ-coalgebras, prime sets, perfection and perfect coverage; Layers 3–5 give absolute and relative q-Witt rings and their exactness, base change and completions; Layer 6 gives the completed coefficient Frobenius; Layer 7 gives positive-degree q-Witt systems; Layer 8 gives complete framed difference calculus; Layers 9–10 supply the algebraic support and smooth torsion conclusions. Arithmetic perfection is not the characteristic-p perfection stated by SchemeAndStackFoundations §§0.24, 0.29.
+This roadmap owns the following algebraic library: Layers 1–2 give big Witt rings, their coordinate-to-power-series comparison (§1.4a), arithmetic Λ-coalgebras, prime sets, perfection and perfect coverage; Layers 3–5 give absolute and relative q-Witt rings and their exactness, base change and completions; Layer 6 gives the completed coefficient Frobenius; Layer 7 gives positive-degree q-Witt systems; Layer 8 gives complete framed difference calculus; Layers 9–10 supply the algebraic support and smooth torsion conclusions. Arithmetic perfection is not the characteristic-p perfection stated by SchemeAndStackFoundations §§0.24, 0.29.
 
 The p-typical carriers and operations, including ghosts, Teichmüller maps, Frobenius, Verschiebung and coordinate extensionality, are already in the pinned Mathlib, and their adic topology is already in pinned Tau Ceti. Layer 1 constructs the distinct big Witt object and proves its comparison with those carriers; it does not rebuild p-typical vectors. Cyclotomic divisor products, prime expansion and characteristic-p power identities are already in Mathlib; their declarations are listed in the supplier contract, and the residual cyclotomic ideal and completion theory belongs to HabiroCyclotomicCompletions. Kähler differentials and their universal derivation are already in Mathlib, and transport of their bases along formally étale extensions is already in Tau Ceti. Scalar Koszul complexes, derived tensor, derived limits, finite-ideal completion and complete flatness are stated by DerivedModuleAlgebra §§0.K.1, 0.2, 1.1–1.9; DG signs and carriers by DGAInfinity Layers 0–1; enhancement and algebra objects by EnhancedDerivedSheaves §0.3 and Layer E5:abstract. Section 1.7 adds only the general commuting-module-action Koszul bridge required by both Verschiebung and framed calculus. Generic ordinary de Rham and prismatic theory belong to DerivedDeRhamCohomology and PrismaticCohomology; their required mathematical interfaces are specified below.
 
@@ -190,6 +190,36 @@ For every n > 0 construct F_n : W_S(R) → `W_{S/n}(R)`, additive V_n in the rev
 - F_1 and V_1 are identities, including S=∅.
 - τ(−1) = −τ(1)+V_2τ(1) in W_Div(2)(ℤ); treating τ as additive fails.
 
+### 1.4a Big Witt power-series comparison
+
+For every commutative unital ring R and integer N≥0, put S_N={d>0 | d≤N} and let U_N(R) be the multiplicative subgroup of units in R[t]/(t^(N+1)) whose constant coefficient is 1. Prove the big Witt power-series comparison: the natural group isomorphism `gamma_N : (W_{S_N}(R), +) ~= U_N(R)` is given by `gamma_N((a_d)) = prod_{d=1}^N (1-a_d*t^d)^(-1) mod t^(N+1)`. Each factor is a unit because a_d t^d is nilpotent in this quotient. Every constant-one truncated series has a unique such factorization. No torsion-freeness or invertibility of positive integers in R is assumed. (Hesselholt v3 Proposition 1.14, pp. 14–15, hesselholt line 589; Addendum 1.16 and Example 1.17, p. 15, hesselholt lines 644–655.)
+
+Taking restriction limits gives the group isomorphism `gamma_infty : (W_{positive integers}(R), +) ~= U_infty(R)`, where U_∞(R) is the multiplicative group of series in R[[t]] with constant coefficient 1 and `gamma_infty((a_d)) = prod_{d>=1}(1-a_d*t^d)^(-1)`. The product means that each coefficient stabilizes in its finite partial products; a factor of index d changes no coefficient of degree less than d. Its reduction to U_N(R) is γ_N of the restriction to S_N. For nonunital R, define U_N(R) as the kernel of U_N(ℤ⋉R)→U_N(ℤ), and similarly U_∞(R); these consist of constant-one truncated or formal series in the unitization with every positive coefficient in R. The comparisons follow by applying the unitization kernel of §1.3. (Hesselholt v3 Proposition 1.14 and proof, pp. 14–15, hesselholt lines 583–628; §1.3.)
+
+- For every coefficient ring map f:R→R′, applying f to the coefficients of γ_N(x) gives `gamma_N(W_{S_N}(f)(x))`; the same identity holds for γ_∞. Identity and composite coefficient maps respect these comparisons.
+
+- For 0≤M≤N, let `rho_{N,M} : U_N(R) -> U_M(R)` be reduction modulo t^(M+1). Then `rho_{N,M}(gamma_N(x)) = gamma_M(x|_{S_M})`; these maps compose and commute with coefficient maps.
+
+- For n>0 and L=⌊N/n⌋, `V_n : W_{S_L}(R) -> W_{S_N}(R)` corresponds to substitution t↦t^n: `gamma_N(V_n(x)) = gamma_L(x)(t^n) mod t^(N+1)`. This substitution is well-defined on the quotient since n(L+1)>N. In particular `V_n : W_{S_m}(R) -> W_{S_{mn}}(R)` has this formula for every m≥0. On full Witt vectors, `gamma_infty(V_n(x)) = gamma_infty(x)(t^n)`.
+
+- For a∈R, γ_N(τ(a))=(1−at)⁻¹ modulo t^(N+1), and γ_∞(τ(a))=(1−at)⁻¹ in R[[t]]. In particular γ_1(a)=1+at modulo t².
+
+The coefficient and restriction laws follow from the product formula (Hesselholt v3 Proposition 1.14 and Addendum 1.16, pp. 14–15, hesselholt lines 598–600 and 644–655); the Verschiebung and Teichmüller laws use their coordinate definitions (Hesselholt v3 §1 before Lemma 1.3, p. 7, hesselholt lines 292–298, and before Lemma 1.5, p. 8, hesselholt lines 338–341).
+
+*Construction and proof.* The coefficient of t^d in the product is a_d plus an integral polynomial in the coordinates of smaller index, so the product determines a bijection over every R. Prove the group law first over the torsion-free universal polynomial ring, where the logarithmic derivative has coefficients w_n, and then specialize the integral identities to R. Restriction gives the finite quotient comparisons, and compatible finite products give the infinite comparison. The coordinate formula for V_n inserts zeros away from multiples of n, which gives substitution directly. Apply the unitization kernel for nonunital coefficients.
+
+*Needs:* Layer 1.3 for the ring, coefficient maps, restrictions, unitization and inverse limits; Layer 1.4 for V_n and τ; Mathlib `Polynomial` and `PowerSeries` for the series carriers; Mathlib `PowerSeries.isUnit_iff_constantCoeff` for constant-one series units.
+
+**Checks.**
+
+- Over ℤ at N=2, (1,0)+(1,0)=(2,−1), and γ_2(2,−1)=(1−2t)⁻¹(1+t²)⁻¹=1+2t+3t² modulo t³, equal to (1−t)⁻². Componentwise addition would give (2,0), whose image is 1+2t+4t²; using the non-inverted product gives 1−2t+t² instead.
+- Over 𝔽₂ at N=2, (0,1) has ghosts (0,0) but γ_2(0,1)=(1−t²)⁻¹=1+t²≠1 modulo t³. Thus ghost equality in R cannot determine this comparison.
+- Over ℤ, γ_1(2)=1+2t modulo t², and γ_2(τ(2))=1+2t+4t² modulo t³. The series 1+2t is a distinct element of U_2(ℤ), with coordinates (2,−4); identifying a Teichmüller class with that linear series fails.
+- Over ℤ with N=4,n=2, x=(1,1) on S_2 has V_2(x)=(0,1,0,1) on S_4. Both γ_4(V_2(x)) and γ_2(x)(t²) are 1+t²+2t⁴ modulo t⁵. For N=3,n=2 the source is S_1 and both sides for x=(1) are 1+t² modulo t⁴. If n>N the source is empty and the image is 1; n=0 is excluded because t↦1 does not preserve the truncation ideal over ℤ.
+- For x=(1,1) over ℤ, γ_2(x)=1+t+2t² modulo t³; reduction to U_1 gives 1+t, and coefficient reduction to 𝔽₂ gives 1+t. These agree with restricting x to (1) and mapping x to (1,1) over 𝔽₂, respectively; retaining the coefficient 2 after coefficient reduction would fail naturality. The identity coefficient map retains (1,1,2) as the three series coefficients.
+- The infinite vector with a_1=1 and all other coordinates zero maps to 1+t+t²+t³+⋯; its reductions at N=1,2,3 are 1+t, 1+t+t², 1+t+t²+t³. Replacing this series by 1+t fails already at N=2. At N=0 the empty vector maps to 1, and for the zero ring both groups have one element.
+- For the nonunital ring (ℤ,+) with zero multiplication, positive-coefficient products vanish in the unitization: γ_2(a,b)=1+at+bt² and γ_2(x+y)=γ_2(x)γ_2(y) has coefficients (a+c,b+d). Introducing a nonzero product ac would change the t² coefficient to b+d+ac.
+
 ### 1.5 Comparison with p-typical Witt vectors
 
 For prime p and a ≥ 0, coordinate reindexing d=p^i gives W_Div(p^a)(R) ≃+* TruncatedWittVector p (a+1) R; the infinite p-power truncation gives WittVector p R. These equivalences preserve ghosts, τ, V and F with their shifted lengths. R is a commutative unital ring; p is prime. (wagner line 471, Remark 2.7, lines 471–473; printed wagner v5 p. 11).
@@ -268,7 +298,7 @@ Divisors of 1, 2, 6 and prime powers distinguish the big indexing from p-typical
 
 ### Dependencies
 
-Layer 1.1 `BigWitt.TruncationSet`; Layer 1.2 `BigWitt.ghost_image`; Layer 1.3; Layer 1.4; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`; Layer 1.5; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §0.K.1; DGAInfinity Layer 0; EnhancedDerivedSheaves §0.3 and Layer E5:spectra-comparison; DerivedModuleAlgebra §1.3; BordismFormalGroups §F6.5.
+Layer 1.1 `BigWitt.TruncationSet`; Layer 1.2 `BigWitt.ghost_image`; Layer 1.3; Layer 1.4; Mathlib `Polynomial`; Mathlib `PowerSeries`; Mathlib `PowerSeries.isUnit_iff_constantCoeff`; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`; Layer 1.5; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §0.K.1; DGAInfinity Layer 0; EnhancedDerivedSheaves §0.3 and Layer E5:spectra-comparison; DerivedModuleAlgebra §1.3; BordismFormalGroups §F6.5.
 
 ## Layer 2: Arithmetic Λ-rings, prime sets and perfection
 
@@ -1296,7 +1326,7 @@ Consumers use the exported algebraic interfaces. Their constructions supply no p
 - **scholze**: Peter Scholze, *Canonical q-deformations in arithmetic geometry* (2016), [arXiv v1](https://arxiv.org/abs/1606.01796v1). Section 3, v1 pp. 6–7, lines 296–340 (framed construction; Conjecture 3.1 remains distinguished).
 - **bhatt-scholze**: Bhargav Bhatt, Peter Scholze, *Prisms and Prismatic Cohomology* (2019), [arXiv v4](https://arxiv.org/abs/1905.08229v4). Lemma 2.11 (v4 p. 15, bhatt-scholze line 594); Remark 2.27 (v4 p. 20, bhatt-scholze line 775); Lemma 2.28 (v4 p. 20, bhatt-scholze line 778); Theorem 15.3 (p. 103, bhatt-scholze line 3898); Constructions 16.19–16.20 and Theorem 16.22 (v4 pp. 114–115, bhatt-scholze lines 4316 and 4378).
 - **wagner-habiro**: Ferdinand Wagner, *q-Hodge complexes over the Habiro ring* (2025), [arXiv v2](https://arxiv.org/abs/2510.04782v2). Section 1.22(e), v2 p. 12, line 493; Section 2.7, pp. 15–16, lines 647–658; proof of Theorem 2.9, pp. 16–17, lines 679–723, with standing etale hypothesis from Section 2.2.
-- **hesselholt**: Lars Hesselholt, *The big de Rham-Witt complex* (2010), [arXiv v3](https://arxiv.org/abs/1006.3125v3). Section 1: Lemma 1.1 (line 223); Proposition 1.2; Lemmas 1.3–1.5 and 1.9; Proposition 1.19; Definitions 1.21 and 1.23; Lemma 1.24; Theorem 1.25 (v3 lines 268, 301, 315, 354, 711, 753, 787, 798, 811); printed v3 pp. 6–11, 17–19.
+- **hesselholt**: Lars Hesselholt, *The big de Rham-Witt complex* (2010), [arXiv v3](https://arxiv.org/abs/1006.3125v3). Section 1: Lemma 1.1 (line 223); Proposition 1.2; Lemmas 1.3–1.5 and 1.9; Proposition 1.14, Addendum 1.16 and Example 1.17 (pp. 14–15, hesselholt lines 589, 644, 652); Proposition 1.19; Definitions 1.21 and 1.23; Lemma 1.24; Theorem 1.25 (v3 lines 268, 301, 315, 354, 711, 753, 787, 798, 811); printed v3 pp. 6–11, 14–15, 17–19.
 - **borger**: James Borger, *The basic geometry of Witt vectors, I: The affine case* (2008), [arXiv v6](https://arxiv.org/abs/0801.1691v6). Sections 1.16–1.18 (v6 pp. 12–13, lines 603–638); Corollary 5.4 (p. 26, line 1323); Theorem 9.2 (p. 39, borger line 1995); Corollary 9.4 (p. 40, borger line 2095).
 - **langer-zink**: Andreas Langer, Thomas Zink, *De Rham-Witt cohomology for a proper and smooth morphism* (2003), [July 2003 author-hosted preprint; Proposition 1.3, lines 453–525; Lemma 1.5, lines 601–645 numbering checked](https://www.math.uni-bielefeld.de/~zink/dRW.pdf). Proposition 1.3 (July 2003 pp. 14–16, langer-zink lines 453–525) and Lemma 1.5 (pp. 19–20, langer-zink lines 601–645).
 
