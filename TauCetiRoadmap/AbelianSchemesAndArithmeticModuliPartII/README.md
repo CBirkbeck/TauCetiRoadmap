@@ -89,7 +89,7 @@ shuffle-product compatibility and degree completion. Mathlib
 coefficient lifting and fixed-size resultant congruence, with arbitrary coefficient ideals.
 Their specializations are inputs to F2. AbelianSchemesAndArithmeticModuli A6.10–A6.11 owns
 integer characteristic polynomials, degree and prime independence; F0 adds reciprocity and
-finite-field product corollaries rather than a second `frobeniusPolynomial_integral`. The integer-character theorem and its finite-equation
+finite-field product corollaries rather than a second integrality theorem. The integer-character theorem and its finite-equation
 consequence have one owner, B2's integer-character construction.
 
 The independent prerequisite extensions belong here: B2 owns uniform torsion closures,
@@ -212,7 +212,9 @@ F4 compares the latter power-basis discriminant with the maximal-order
 number-field discriminant, retaining the square of the order index.
 `TauCeti/AlgebraicGeometry/AbelianVariety/Basic.lean`, `Isogeny.lean` and
 `End/Basic.lean` supply `TauCeti.AlgebraicGeometry.AbelianVariety`, its homomorphisms,
-`TauCeti.AlgebraicGeometry.AbelianVariety.IsIsogeny` and endomorphisms. These field carriers do not
+`TauCeti.AlgebraicGeometry.AbelianVariety.IsIsogeny` and endomorphisms. The dimension used in F6 is
+`TauCeti.AlgebraicGeometry.AbelianVariety.dim`, defined by the topological Krull dimension;
+its finite-value subtype and native quotients require no realization functor. These field carriers do not
 supply the relative universal extensions, completed coefficient sheaves or
 Dieudonné functors required by P1–P4 and F1.
 
@@ -311,6 +313,18 @@ Tate's theorem. Each target gives its source and the interfaces it needs.
 References to targets within a layer refer to the construction order dictated
 by their stated dependencies.
 
+The headline theorems are the shuffle-compatible divided-power comparison (P0.5),
+completed Poincaré cohomology (P2.8), logarithm and smooth comparisons (P3.3–P3.4),
+ordinary CM trivialization (P4.2–P4.3), the Betti-rank, specialness and degeneracy
+criteria and their fibre-power applications (B1.4, B2.3–B2.4, B2.21–B2.23, B3–B4),
+all-prime Tate and Honda–Tate with integral lattice classification (F0.7, F1.8–F1.10,
+F3.2–F3.10), fixed-level isomorphism bounds (F4.8), CM mass and polarization growth
+(F5.7–F5.9), and the counting and proportion theorems (F6.2, F6.4–F6.6). Resultant recognition
+(F2.2) is an independent algebraic endpoint used by the characteristic-prime comparison.
+`Suggested.lean` states `resultantRecognition`, `weilPolynomialCount`,
+`isogenyClassAsymptotic` and `isomorphismClassCount`; its module docstring identifies
+the missing carriers for the other headlines. API facts and Checks remain in this README.
+
 ## Layer P0: Symmetric tensors and moment coefficients
 
 The coefficient objects are built over a commutative ring R and an arbitrary R-module M; freeness and
@@ -320,26 +334,25 @@ these modules, so it remains meaningful in positive characteristic.
 
 ### P0.1 Invariant tensor powers
 
-For a commutative ring R, an R-module M and n≥0, define `tensorSymmetricPower`:
-TSymⁿ_R(M) is the submodule of TensorPower R n
+For a commutative ring R, an R-module M and n≥0, define TSymⁿ_R(M) as the submodule of TensorPower R n
 M fixed by every permutation of Fin n, acting by PiTensorProduct.reindex. It is an invariant
 submodule, not the symmetric-power quotient.
 
-The membership API is `tensorSymmetricPower_mem (n : ℕ) (t : TensorPower R n M)`: t∈TSymⁿ(M) iff reindex σ(t)=t for every σ.
+Its API consists of the following facts and maps.
 
-The diagonal API is `tensorSymmetricPower_diagonal (n : ℕ) (v : M)`: The pure tensor with every factor v lies in TSymⁿ(M).
-
-Define `tensorSymmetricPower_map (f : M →ₗ[R] N)` for f:M→ₗN as the induced map TSymⁿ(M)→ₗTSymⁿ(N) obtained by tensoring every factor; its identity and composition laws follow from those of the native tensor-power functor. Use the native subtype extensionality for equality of invariant tensors.
-
-For this induced map, prove `tensorSymmetricPower_map_id (n : ℕ)`, `tensorSymmetricPower_map_comp (f : M →ₗ[R] N) (g : N →ₗ[R] L)`
-and its diagonal-tensor evaluation from native tensor functoriality, for R-modules M,N,L.
+- A tensor belongs to TSymⁿ(M) exactly when every permutation fixes it.
+- The pure tensor with every factor v lies in TSymⁿ(M).
+- Every R-linear f:M→N induces TSymⁿ(M)→ₗ[R]TSymⁿ(N) by tensoring every factor.
+- The induced maps preserve identities and composition, and send the diagonal tensor of v
+  to the diagonal tensor of f(v), for R-modules M,N,L.
+- Equality uses native subtype extensionality.
 
 **Checks.**
 
 - In degree zero, TSym⁰(M)=⊤ in TensorPower R 0 M.
 - In degree one, TSym¹(M)=⊤ in TensorPower R 1 M, hence agrees with M through the
 `TauCeti.TensorPower.oneEquiv`.
-- `tensorSymmetricPower_nonfixed`: For M=ℤ² the pure tensor e₀⊗e₁ is not in TSym²(M); swapping
+- For M=ℤ² the pure tensor e₀⊗e₁ is not in TSym²(M); swapping
 it gives e₁⊗e₀, distinguished by the coordinate functional.
 - In degree zero the induced map is id_R; the zero map would destroy the empty unit tensor.
 - In degree one the induced map agrees with f under the one-letter equivalence; replacing f by
@@ -354,26 +367,26 @@ it gives e₁⊗e₀, distinguished by the coordinate functional.
 
 ### P0.2 Degree completion of symmetric tensors
 
-Define `degreeCompletion`, the degree-completed module `TSym̂_degree(M)=∏_{n≥0} TSymⁿ(M)`, with the product/degree
+Define the degree-completed module TSym̂_degree(M)=∏_(n≥0)TSymⁿ(M), with the product/degree
 filtration, and finite truncation `∏_{n≤N}TSymⁿ(M)`. No identification with I-adic completion over
 an arbitrary integral base is part of this definition.
 
-Evaluation is the native function application c(n); extensionality and zero
-components use the Pi-module API. Define finite truncation by restriction to
-`Fin (N+1)`: the intended signature is
-`degreeCompletion_truncate (N : ℕ) : degreeCompletion R M →ₗ[R] (∀ j : Fin (N+1), ↥(tensorSymmetricPower R M j.val))`.
-Prove compatibility as N increases.
+Its API is evaluation and finite truncation.
+
+- Evaluation at n is the native R-linear projection to TSymⁿ(M).
+- Extensionality and zero components use the Pi-module API.
+- Restriction to `Fin (N+1)` gives an R-linear map from the completed module to
+  ∏_(j≤N)TSymʲ(M), compatibly as N increases.
 
 **Checks.**
 
-- `degreeCompletion_infiniteSupport`: For R=M=ℤ, let c_n be the invariant tensor
+- For R=M=ℤ, let c_n be the invariant tensor
   1⊗⋯⊗1 in degree n, including the empty tensor in degree zero. Every c_n is
   nonzero and c lies in the product but outside the image of the canonical
   direct-sum inclusion. A direct-sum replacement cannot contain this sequence.
 - Loss under truncation: A nonzero coefficient in degree N+1 gives a
-  nonzero completed sequence whose restriction through N is zero; the proved
-  example distinguishes completion from any fixed finite truncation.
-- `degreeCompletion_nonzero_degree_zero`: A sequence with degree-zero coefficient
+  nonzero completed sequence whose restriction through N is zero; this distinguishes completion from any fixed finite truncation.
+- A sequence with degree-zero coefficient
   1 over ℤ is nonzero, through the native empty-tensor equivalence; the empty tensor detects the coefficient.
 
 ([KS][KS], Equation(2.1.3), PDF p.14).
@@ -386,18 +399,18 @@ For tensors invariant under S_m and S_n, sum over (m,n)-shuffles to obtain
 TSym^m(M)×TSym^n(M)→TSym^(m+n)(M). It is associative and commutative; diagonal divided tensors
 satisfy v^[m]v^[n]=binom(m+n,m)v^[m+n] and v^n=n!v^[n].
 
-Prove `tensorSymmetricAlgebra_mul`: On ⊕n TSym^n(M), multiply degree m,n by the sum over (m,n)-shuffles.
+- Multiplication on ⊕n TSymⁿ(M) is the sum over (m,n)-shuffles in degrees m,n.
 
-Prove `tensorSymmetricAlgebra_unit`: The unit is 1 in degree zero, using the native empty tensor equivalence.
+- The unit is 1 in degree zero, using the native empty tensor equivalence.
 
-Prove `tensorSymmetricAlgebra_divided`: For diagonal tensors v^[n], v^[m]v^[n]=binom(m+n,m)v^[m+n].
+- For diagonal tensors v^[n], v^[m]v^[n]=binom(m+n,m)v^[m+n].
 
 **Checks.**
 
-- `tensorSymmetricAlgebra_zero_degree`: The degree-zero subalgebra is the native base ring R.
-- `tensorSymmetricAlgebra_char_two`: For M=F₂·v, the shuffle square v·v is zero, but v^[2] is
+- The degree-zero subalgebra is the native base ring R.
+- For M=F₂·v, the shuffle square v·v is zero, but v^[2] is
 nonzero; ordinary tensor concatenation would fail this test.
-- `tensorSymmetricAlgebra_mixed_square`: For a free rank-two module with basis x,y,
+- For a free rank-two module with basis x,y,
   `(x+y)^[2]=x^[2]+x*y+y^[2]`; the middle coefficient is 1, including over 𝔽₂.
 
 ([Roby][Roby], Chapter III §§5–6, Proposition III.1, printed pp.251–255
@@ -419,8 +432,7 @@ SymmetricPower quotient integrally.
 
 ### P0.5 Shuffle compatibility of the divided-power comparison
 
-Using DerivedModuleAlgebra §0.DP.2's natural comparison, prove
-`dividedPowerComparison_shuffle`: for a free R-module M the degreewise equivalences give a
+Using DerivedModuleAlgebra §0.DP.2's natural comparison, prove that for a free R-module M the degreewise equivalences give a
 graded algebra equivalence from Mathlib's `DividedPowerAlgebra R M` to ⊕n TSymⁿ_R(M) equipped
 with the shuffle product. For an arbitrary module the natural comparison preserves the graded
 multiplication without asserting invertibility (Roby, Chapter III §6 Proposition III.1 and
@@ -474,7 +486,7 @@ coefficients; the vector extension itself is supplied as specified in Scope and 
 ### P1.1 Connection and cotangent notation
 
 For an abelian scheme A/S over a noetherian base, put A♮=E(A∨) and let
-p:A♮→A∨ be its forgetful map. Prove `completedPoincare_connectionNotation`:
+p:A♮→A∨ be its forgetful map. Prove that
 the pulled-back rigidified bundle `(id_A×p)^*P` with its universal relative
 integrable connection is the P♮ used in P2. Under the duality pairing for A and
 A∨, transport the parent's invariant-form comparison to
@@ -482,10 +494,11 @@ A∨, transport the parent's invariant-form comparison to
 rigidifications and base change. This fixes notation and variance for P2,
 without a new extension or representability construction.
 
-The API is `completedPoincare_connectionNotation_forget` identifies the underlying
-rigidified Poincaré bundle; `completedPoincare_connectionNotation_hodge` fixes
-both cotangent and Lie identifications;
-`completedPoincare_connectionNotation_baseChange` commutes with base change.
+The comparison API has three requirements.
+
+- Forgetting the connection recovers the underlying rigidified Poincaré bundle.
+- The cotangent and Lie identifications agree with both Hodge sequences.
+- These identifications commute with base change.
 
 **Checks.**
 
@@ -523,18 +536,18 @@ its unit ideal J has J^n/J^(n+1)≃Sym^n(ω_G). Iterating the coproduct and proj
 O_G/J²→ω_G gives `mom_n:O_G/J^(n+1)→⊕_{b≤n}TSym^b(ω_G)`, compatible with truncation; their inverse
 limit lands in degree completion. Over a Q-algebra the moment maps are isomorphisms.
 
-Prove `momentMap_truncate`: Projection from the n-th to the m-th formal neighborhood commutes with moments for m≤n.
+- Projection from the n-th to the m-th formal neighborhood commutes with moments for m≤n.
 
-Prove `momentMap_degree_one`: The degree-one component is the canonical projection O_G/J²→ω_G.
+- The degree-one component is the canonical projection O_G/J²→ω_G.
 
-Prove `momentMap_functorial`: A homomorphism of smooth commutative groups commutes with moments through its invariant cotangent map.
+- A homomorphism of smooth commutative groups commutes with moments through its invariant cotangent map.
 
 **Checks.**
 
-- `momentMap_zero`: At n=0 the moment map is the identity of O_S.
-- `momentMap_additive_char_zero`: For G_a over a Q-algebra, x^n maps to n! times the nth
+- At n=0 the moment map is the identity of O_S.
+- For G_a over a Q-algebra, x^n maps to n! times the nth
 invariant divided tensor.
-- `momentMap_additive_char_p`: For G_a over F_p, the degree-p associated-graded map sends x^p to
+- For G_a over F_p, the degree-p associated-graded map sends x^p to
 zero because p!=0; the integral moment map is not automatically an isomorphism.
 
 ([KS][KS], Equation(2.1.2), moment construction and Remark 2.3, PDF pp.13–14).
@@ -558,18 +571,18 @@ O_S → e^*P̂♮ ≃ O_Â♮. Construct the unit-compatible maps P^(n) → P�
 P♮^(n) with P^(n) ⊗_(O_(A×A∨^(n))) O_(A×A♮^(n)). All limits use the specified finite
 pushforwards; tensor interchange with an arbitrary inverse limit is a separate assertion.
 
-Prove `completedPoincare_truncate`: P_hat→P(n) is the projection to the n-th infinitesimal dual neighborhood, and similarly for P♮.
+- P_hat→P(n) is the projection to the n-th infinitesimal dual neighborhood, and similarly for P♮.
 
-Prove `completedPoincare_unit`: Rigidification gives the compatible unit sections O_S→e^*P(n).
+- Rigidification gives the compatible unit sections O_S→e^*P(n).
 
-Prove `completedPoincare_filtration`: The nth kernel is π^*Sym^n(ω_A∨), respectively π^*Sym^n(H) in the connection version.
+- The nth kernel is π^*Sym^n(ω_A∨), respectively π^*Sym^n(H) in the connection version.
 
 **Checks.**
 
-- `completedPoincare_zero`: P(0)≃O_A and P♮(0)≃O_A with trivial relative connection.
-- `completedPoincare_first`: P(1) is an extension of O_A by π^*ω_A∨ with the imported unit
+- P(0)≃O_A and P♮(0)≃O_A with trivial relative connection.
+- P(1) is an extension of O_A by π^*ω_A∨ with the imported unit
 rigidification.
-- `completedPoincare_rank_two`: On an elliptic scheme, P^(2) and P♮^(2) have
+- On an elliptic scheme, P^(2) and P♮^(2) have
 O_A-ranks 3 and 6, while their degree-two truncation kernels have ranks 1 and 3.
 The conormal ranks are respectively 1 and 2; identifying the ordinary and
 connection coefficient sheaves fails this check.
@@ -717,16 +730,19 @@ Log^(1) ≃ P♮^(1), and hence Log ≃ P̂♮. The square-zero tangent comparis
 A♮(k)) ≃ Lie(A♮) ⊗ M ≃ Hom_k(H,M) to the corresponding rigidified Ext class; at M = H it sends
 id_H to the first logarithm class.
 
-The API is `logarithmFirst_class` is id_H, `logarithmFirst_unit` is the chosen
-splitting, and `logarithmFirst_poincare` is the rigidified horizontal comparison.
+The first-logarithm API records three properties.
+
+- The image of its extension class is id_H.
+- Restriction to the unit has the specified splitting.
+- Its comparison with P♮^(1) is horizontal and preserves the rigidification.
 
 **Checks.**
 
-- `logarithmFirst_zero`: For A of dimension zero, H=0 and Log^(1)=O_A with its
+- For A of dimension zero, H=0 and Log^(1)=O_A with its
   unique unit splitting; no positive-rank kernel may be inserted.
-- `logarithmFirst_identity`: For dim A>0, the extension maps to id_H≠0;
+- For dim A>0, the extension maps to id_H≠0;
   its rigidified connection extension is nonsplit.
-- `logarithmFirst_split_not`: The split connection O_A⊕π^*H maps to zero,
+- The split connection O_A⊕π^*H maps to zero,
   so for dim A>0 it fails the defining identity-class condition.
 
 ([KS][KS], Theorem 2.36, PDF pp.28–29).
@@ -793,15 +809,13 @@ before a p-adic inverse limit; no noetherian assertion about O_Cp is used.
 ### P4.2 Ordinary infinitesimal trivialization and projected connection
 
 In the ordinary CM setting over O_Cp, let C_n=A[𝔭_Σ^n] and r≥1.
-Prove `ordinaryTorsionThickeningCofinal`: over O_Cp/p^r the C_n and the
+- over O_Cp/p^r the C_n and the
 unit-ideal thickenings of A are cofinal as formal functors on nilpotent
 unit neighbourhoods. For each finite C_n, its unit ideal is nilpotent after
 reduction modulo p^r; conversely every fixed unit thickening is killed by
 some connected CM power over that base. Dual étaleness of [𝔭_Σ^n] permits
-the diagonal torsion splitting over A×C_n. Prove
-`ordinaryTrivialization_modPow` for the resulting compatible splittings modulo
-p^r and `ordinaryTrivialization_padicLimit` for their inverse limit in r,
-including its comparison with the p-adically completed unit-completed
+the diagonal torsion splitting over A×C_n. Construct the resulting compatible splittings modulo
+p^r and their inverse limit in r, including its comparison with the p-adically completed unit-completed
 coefficient sheaf. Thus P̂ on the p-adic formal unit neighbourhood has the
 coefficient ring O_((A×A∨)^∧) with this double completion understood. The first levels become O_Â ⊗ (O_Cp ⊕ ω_A∨) and O_Â ⊗
 (O_Cp ⊕ H). Moments give integral injections into the corresponding completed invariant-tensor
@@ -812,7 +826,7 @@ symbol for the retraction is distinct from the prime p.
 
 **Checks.**
 
-- `ordinaryTorsion_dualNumbers`: In the multiplicative formal group over
+- In the multiplicative formal group over
   O_Cp[ε]/(ε²), 1+ε belongs to the unit completion but
   `[p^n](1+ε)=1+p^nε≠1` for every n. The torsion union over O_Cp is smaller.
 - Modulo p^r the same point is killed by p^r. In d multiplicative formal
@@ -840,8 +854,8 @@ generic fibre; Lemma 5.12), and ϱ̂_y : `T_y^*𝒫̂|_{𝒜̂}` ≅ `𝒫̂|_{�
 d_Â ∘ ϱ̂_y; (3) for s ∈ `𝒜̂[p^n](𝒪_{ℂ_p})` = `𝒜[𝔭_Σ^n](𝒪_{ℂ_p})`, translation by s intertwines ϱ̂_y
 and `ϱ̂_{y+s}` with (T_s × id)^* (integrally). Integral translation assumes y killed by an isogeny
 with étale dual; the generic-fibre extension here is for torsion y, not for every point.
-Name the three compatibility statements `ordinaryTranslation_moment`, `ordinaryTranslation_connection`
-and `ordinaryTranslation_connectedTorsion`; r is the generic-fibre Hodge retraction of P4.2.
+Retain moment compatibility, compatibility with the projected connection, and connected-torsion
+translation as separate assertions; r is the generic-fibre Hodge retraction of P4.2.
 
 ([KS][KS], Lemmas 5.12/5.14 and Definition 5.13, PDF pp.62–63).
 
@@ -887,20 +901,20 @@ lattice frame of polarization type D=diag(d₁,…,d_g). Its period matrix Z giv
 (a,b,s)↦(Da+Z(s)b,s), and the inverse induces (b_U,π):A_U^an≃(R/Z)^(2g)×U as real analytic
 manifolds. b_U alone is projection to the torus.
 
-Prove `periodCoordinates_betti`: b_U is the torus-coordinate projection, excluding the base coordinate.
+- b_U is the torus-coordinate projection, excluding the base coordinate.
 
-Prove `periodCoordinates_fibre`: The restriction b_U:A_s^an→(R/Z)^(2g) is an analytic group isomorphism.
+- The restriction b_U:A_s^an→(R/Z)^(2g) is an analytic group isomorphism.
 
-Prove `periodCoordinates_leaf`: For fixed torus coordinate β, s↦(b_U,π)^−1(β,s) is holomorphic.
+- For fixed torus coordinate β, s↦(b_U,π)^−1(β,s) is holomorphic.
 
-Prove `periodCoordinates_transition`: Two choices on connected U differ by a constant element of GL_(2g)(Z); these are automorphisms, not arbitrary endomorphisms.
+- Two choices on connected U differ by a constant element of GL_(2g)(Z); these are automorphisms, not arbitrary endomorphisms.
 
 **Checks.**
 
-- `periodCoordinates_point`: Over a point the torus-coordinate map is the imported complex
+- Over a point the torus-coordinate map is the imported complex
 uniformization expressed in real period coordinates.
-- `periodCoordinates_zero`: The zero section has Betti coordinate zero.
-- `periodCoordinates_base_not_counted`: On a constant family over a positive-dimensional U, db_U
+- The zero section has Betti coordinate zero.
+- On a constant family over a positive-dimensional U, db_U
 annihilates the base directions although d(b_U,π) is invertible.
 
 ([DGH][DGH], Proposition 2.1 and PropositionB.2 proof, PDF pp.8–9,41–42).
@@ -949,21 +963,21 @@ w=Da+Zb, the same calculation gives ω=2∑ d_j da_j∧db_j. On each fibre this 
 translation-invariant form representing the polarization class; retain this factor-two
 normalization.
 
-Prove `bettiForm_pullback`: The form on A is the pullback of the universal Betti form in the chosen polarization type.
+- The form on A is the pullback of the universal Betti form in the chosen polarization type.
 
-Prove `bettiForm_closed`: dω=0 and ω has type (1,1).
+- dω=0 and ω has type (1,1).
 
-Prove `bettiForm_nonnegative`: ω is semipositive on each complex tangent space.
+- ω is semipositive on each complex tangent space.
 
-Prove `bettiForm_scale`: For every N∈Z, [N]^*ω=N²ω.
+- For every N∈Z, [N]^*ω=N²ω.
 
 **Checks.**
 
-- `bettiForm_elliptic`: For w=a+τb, the principal elliptic Betti form is 2 da∧db.
-- `bettiForm_zero_multiplication`: [0]^*ω=0, while [−1]^*ω=ω.
-- `bettiForm_single_fibre`: On a single fibre, with the factor-two normalization, ω is twice the
+- For w=a+τb, the principal elliptic Betti form is 2 da∧db.
+- [0]^*ω=0, while [−1]^*ω=ω.
+- On a single fibre, with the factor-two normalization, ω is twice the
 translation-invariant positive (1,1) form representing the principal polarization class.
-- `bettiForm_nonprincipal_type`: For polarization type diag(1,2), in the corresponding period
+- For polarization type diag(1,2), in the corresponding period
 coordinates the two coordinate real two-tori have ω-periods 2 and 4; replacing D by the identity
 fails.
 
@@ -990,19 +1004,19 @@ on this regular-base locus. The dimension is total complex dimension, including 
 For Qbar varieties use the fixed embedding into C. No condition is inferred for a subvariety
 entirely over the singular locus from a nonexistent manifold trivialization there.
 
-Prove `nonDegenerate_rank`: Non-degeneracy iff generic real Betti rank equals twice total complex dimension.
+- Non-degeneracy holds exactly when generic real Betti rank equals twice total complex dimension.
 
-Prove `nonDegenerate_form`: Non-degeneracy iff ω^dim_CX is nonzero on X^sm.
+- Non-degeneracy holds exactly when ω^dim_CX is nonzero on X^sm.
 
-Prove `nonDegenerate_smooth_point`: A non-degenerate X has a smooth nonvanishing point over a smooth point of π(X).
+- A non-degenerate X has a smooth nonvanishing point over a smooth point of π(X).
 
 **Checks.**
 
-- `nonDegenerate_single_fibre`: Every irreducible subvariety of a single polarized abelian
+- Every irreducible subvariety of a single polarized abelian
 variety over a point is non-degenerate.
-- `nonDegenerate_diagonal`: For an elliptic family E over a curve, Δ(E)⊂E×_S E has dim_C=2 and
+- For an elliptic family E over a curve, Δ(E)⊂E×_S E has dim_C=2 and
 real Betti rank≤2, so is degenerate.
-- `nonDegenerate_torsion`: A torsion section over a positive-dimensional base has locally
+- A torsion section over a positive-dimensional base has locally
 constant Betti coordinates and is degenerate.
 
 ([DGH][DGH], Definition 1.5 and DefinitionB.4, PDF pp.5,43).
@@ -1070,18 +1084,18 @@ Y^sm∩A_U. Y is curve-degenerate when these points contain a nonempty relativel
 this smooth locus. The vertical case is included in this definition; any curve-degenerate Y
 necessarily dominates S.
 
-Prove `curveDegenerate_point`: DegenerateAt(x) iff x is nonisolated in its local Betti fibre.
+- DegenerateAt(x) iff x is nonisolated in its local Betti fibre.
 
-Prove `curveDegenerate_open`: CurveDegenerate(Y) iff a nonempty open subset of Y consists of degenerate points.
+- CurveDegenerate(Y) iff a nonempty open subset of Y consists of degenerate points.
 
-Prove `curveDegenerate_rank`: On the smooth generic constant-rank locus curve degeneracy is the failure of the total-dimension Betti rank criterion.
+- On the smooth generic constant-rank locus curve degeneracy is the failure of the total-dimension Betti rank criterion.
 
 **Checks.**
 
-- `curveDegenerate_torsion`: A torsion section over a curve is curve-degenerate.
-- `curveDegenerate_fibre`: A smooth subvariety contained in one fibre has isolated local Betti
+- A torsion section over a curve is curve-degenerate.
+- A smooth subvariety contained in one fibre has isolated local Betti
 fibres and is not curve-degenerate.
-- `curveDegenerate_full_family`: A constant abelian family over a curve is curve-degenerate,
+- A constant abelian family over a curve is curve-degenerate,
 despite positive definite form on each individual fibre.
 
 ([GH][GH], §5 definition and Lemma 6.2, PDF pp.18,31).
@@ -1101,17 +1115,17 @@ Also construct the trace over Kbar/k for a chosen algebraic closure Kbar of K. T
 geometric trace used in Definition 1.2; it can grow after finite extension and is not identified
 with the K/k trace without an explicit descent argument.
 
-Prove `functionFieldTrace_map`: τ:T_K→A is the universal homomorphism from the constant trace.
+- τ:T_K→A is the universal homomorphism from the constant trace.
 
-Prove `functionFieldTrace_universal`: For every B/k, Hom_k(B,T)→Hom_K(B_K,A), f↦τ∘f_K, is a bijection.
+- For every B/k, Hom_k(B,T)→Hom_K(B_K,A), f↦τ∘f_K, is a bijection.
 
-Prove `functionFieldTrace_complement`: In characteristic zero there is an abelian complement B and a K-isogeny T_K×B→A.
+- In characteristic zero there is an abelian complement B and a K-isogeny T_K×B→A.
 
 **Checks.**
 
-- `functionFieldTrace_constant`: The k-trace of a constant B_K is B with identity map.
-- `functionFieldTrace_zero`: The zero abelian variety has zero trace.
-- `functionFieldTrace_nonconstant`: For a non-isotrivial elliptic variety over C(S), the trace
+- The k-trace of a constant B_K is B with identity map.
+- The zero abelian variety has zero trace.
+- For a non-isotrivial elliptic variety over C(S), the trace
 is zero even though its complex fibres are nonzero elliptic curves.
 
 ([ConradTrace][ConradTrace], Definition 6.1 and Theorems 6.2, 6.4,
@@ -1122,9 +1136,9 @@ author version pp.20–21 (ConradTrace line 966, ConradTrace line 1007);
 
 ### B2.3 Uniform torsion closures and Lang–Néron modulo trace
 
-Prove `uniformManinMumfordInFamilies`: for an abelian variety A over an algebraically closed field Ω of characteristic zero, an irreducible quasi-projective Ω-variety V and an irreducible closed Y⊂V×A, there are a finite family of abelian subvarieties B_i⊂A and D≥0 such that, for every v∈V(Ω), the Zariski closure of the torsion points in Y_v is a union of at most D torsion translates of members of that family, including empty fibres; the requirement includes the characteristic-zero Manin–Mumford theorem and its uniform-family proof ([GH][GH], Theorem 3.2, PDF p.13; GH line 546).
+Prove uniform Manin–Mumford in families: for an abelian variety A over an algebraically closed field Ω of characteristic zero, an irreducible quasi-projective Ω-variety V and an irreducible closed Y⊂V×A, there are a finite family of abelian subvarieties B_i⊂A and D≥0 such that, for every v∈V(Ω), the Zariski closure of the torsion points in Y_v is a union of at most D torsion translates of members of that family, including empty fibres; the requirement includes the characteristic-zero Manin–Mumford theorem and its uniform-family proof ([GH][GH], Theorem 3.2, PDF p.13; GH line 546).
 
-Prove `langNeronModuloTrace`: for every finitely generated regular extension K/k of fields, in any characteristic, and abelian variety A/K with K/k-trace (T,τ), the group A(K)/τ(T(k)) is finitely generated; also supply its bounded-degree torsion consequence over curve fields: if k is algebraically closed of characteristic zero, K=k(S) for a smooth irreducible curve, A/K has zero geometric trace and D≥1, then the orders of P∈A(Kbar)_tors with [K(P):K]≤D are bounded in terms of A and D, using the finiteness of finite étale covers of bounded degree of the good-reduction open curve ([ConradTrace][ConradTrace], Theorem 7.1, author version p.23, ConradTrace line 1079; [GH][GH], Proposition 3.1 proof, PDF pp.14–15, GH line 610).
+Prove Lang–Néron modulo trace: for every finitely generated regular extension K/k of fields, in any characteristic, and abelian variety A/K with K/k-trace (T,τ), the group A(K)/τ(T(k)) is finitely generated; also supply its bounded-degree torsion consequence over curve fields: if k is algebraically closed of characteristic zero, K=k(S) for a smooth irreducible curve, A/K has zero geometric trace and D≥1, then the orders of P∈A(Kbar)_tors with [K(P):K]≤D are bounded in terms of A and D, using the finiteness of finite étale covers of bounded degree of the good-reduction open curve ([ConradTrace][ConradTrace], Theorem 7.1, author version p.23, ConradTrace line 1079; [GH][GH], Proposition 3.1 proof, PDF pp.14–15, GH line 610).
 
 Construct the trace over any regular finitely generated extension as the universal map from
 constant abelian varieties, compatible with scalar extension and towers; B2's function-field
@@ -1134,7 +1148,7 @@ finite prime-to-characteristic Kummer quotients, and descent in the trace quotie
 (ConradTrace, Theorem 7.1 and Lemmas 7.3–7.5, pp.23–27). In characteristic zero, obtain uniform
 torsion closures by Manin–Mumford and parameter-uniformity for algebraic families, including a
 uniform bound on fibre components and the finite set of abelian-subvariety directions (GH,
-Theorem 3.2 proof, p.13). Prove `boundedDegreeTorsion_modTrace` using the good-reduction curve's
+Theorem 3.2 proof, p.13). Prove the bounded-degree torsion assertion using the good-reduction curve's
 finitely many finite étale covers of bounded degree and Lang–Néron on each cover. These are
 proof obligations here, with no restriction to one fixed fibre or one bounded-degree level.
 
@@ -1155,7 +1169,6 @@ A6.5 and A6.7; SchemeAndStackFoundations §§2.11,2.16 and algebraic Hom/Hilbert
 
 Prove the fixed-part theorem for polarized integral variations arising from smooth proper complex algebraic families over a smooth connected quasi-projective base S, semisimplicity of their rational monodromy, and the weight −1 abelian-scheme Hom comparison: for polarized abelian schemes A,B/S, integral flat Hodge morphisms R₁π_A,*ℤ→R₁π_B,*ℤ are exactly homomorphisms A→B; after any connected finite étale cover, the invariant subvariation is constant and its abelian realization is the constant part up to isogeny. Use Deligne Corollary 4.1.2, Theorem 4.2.6 and Rappel 4.4.3, printed pp.42,45,51 (Deligne line 1377, Deligne line 1698), with Hodge type required at every fibre.
 
-Prove `polarizedFixedPart`, `rationalMonodromy_semisimple` and `abelianFamily_hodgeHom`.
 The fixed-part construction must exhibit the invariant local system as a Hodge subvariation;
 semisimplicity of a representation alone does not supply that assertion. Algebraize the
 homological weight −1 morphisms using their fibrewise integral Hodge type and flatness,
@@ -1173,10 +1186,9 @@ AbelianSchemesAndArithmeticModuli A5.5–A5.6 and A6.25.
 
 ### B2.5 Integer characters and countably many closed torus subgroups
 
-Define `BettiTorus n = Fin n → AddCircle (1 : ℝ)` and
-`torusCharacter m x = ∑ i, m_i • x_i`; define `torusAnnihilator H` as
-the subgroup of weights vanishing on every x∈H.
-Prove `closedTorusSubgroup_characters` and `countableClosedTorusSubgroups`:
+Use the native real torus Tⁿ=`Fin n → AddCircle (1 : ℝ)`. Its integer characters are
+χ_m(x)=∑_i m_i • x_i, and the annihilator of H is the subgroup of weights
+whose characters vanish on every x∈H. Prove integer-character separation and countability:
 every closed subgroup H of (R/Z)^n is the intersection of kernels of integer characters in its
 annihilator L⊂Z^n. Since subgroups of Z^n are finitely generated, there are countably many such
 H. L need not be saturated: H may be disconnected.
@@ -1188,12 +1200,12 @@ kernel intersection. These use the native subgroup operations.
 **Checks.**
 
 - The weights (1,−1) on (a,b) give a−b, fixing the character convention;
-  the zero weight pairs to zero even for n=0. Both are proved examples.
+  the zero weight pairs to zero even for n=0.
 - The trivial subgroup has annihilator ℤⁿ, including n=0; a zero annihilator would reverse the duality.
-- `torusAnnihilator_top`: the whole torus has annihilator {0}; nonzero weights do not vanish everywhere.
-- `torusAnnihilator_orderTwo`: the subgroup generated by 1/2 in the circle
+- The whole torus has annihilator {0}; nonzero weights do not vanish everywhere.
+- The subgroup generated by 1/2 in the circle
   has annihilator 2ℤ. It is nonsaturated, so a connected-only construction
-  fails this boundary theorem.
+  fails this Check.
 
 ([GH][GH], Lemma 5.2/Proposition 5.3 proofs, PDF pp.20–22).
 
@@ -1201,7 +1213,7 @@ kernel intersection. These use the native subgroup operations.
 
 ### B2.6 Semirational block counting
 
-Prove `semirationalBlockCount` for a definable family Z ⊂ ℝʳ×ℝᵃ×ℝᵇ in a fixed
+Prove the semirational block-counting theorem for a definable family Z ⊂ ℝʳ×ℝᵃ×ℝᵇ in a fixed
 o-minimal expansion of the real field. Let π₁,π₂ be the projections of each fibre Z_t to
 ℝᵃ and ℝᵇ. For every ε>0 there is c_ε>0, uniform in t and T≥1, such that: if a finite set
 Σ ⊂ {z∈Z_t : π₁(z)∈ℚᵃ, H(π₁(z))≤T} and #π₂(Σ)>c_ε T^ε, there exists a continuous
@@ -1227,8 +1239,6 @@ pp.19–20, GH line 931 and GH line 953; Gao–Ax, Theorem 5.2 proof, PDF pp.17�
 
 ### B2.7 Free matrix word growth at bounded height
 
-Prove `freeMatrixWordGrowth` in the following generality.
-
 Let Γ⊂GL_n(Z) be freely generated by two matrices. Fix c>1 bounding the submultiplicative norms
 of both generators and both inverses. There are at least 2^k distinct Γ matrices of norm at most
 c^k, so for sufficiently large T there are at least C T^(log2/logc) matrices of norm at most T
@@ -1241,8 +1251,6 @@ argument.
 
 ### B2.8 Tits: free subgroups of linear groups
 
-Prove `titsFreeSubgroup` in the following generality.
-
 A subgroup of GL_n over a field of characteristic 0 that is not virtually solvable contains a
 free subgroup on two generators; in particular a Zariski-dense subgroup of a non-trivial
 connected semisimple group does.
@@ -1254,8 +1262,6 @@ connected semisimple group does.
 
 ### B2.9 Invariance of domain in equal real dimension
 
-Prove `invarianceOfDomain` in the following generality.
-
 A continuous injective map f:U→ℝ^m from an open subset U⊆ℝ^m is open and is a homeomorphism onto
 its image. Consequently the same local assertion holds between real m-manifolds.
 
@@ -1264,8 +1270,6 @@ its image. Consequently the same local assertion holds between real m-manifolds.
 *Needs:* `Topology.IsOpenEmbedding`.
 
 ### B2.10 Real constant-rank theorem for Betti fibres
-
-Prove `constantRankLocal` in the following generality.
 
 For an open set U⊆ℝ^m and a map f:ℝ^m→ℝ^n that is C^k on U, 1≤k≤ω
 (with ω the real-analytic case), suppose its differential has constant rank r
@@ -1280,7 +1284,7 @@ to the real-analytic Betti map on its smooth maximal-rank locus, where m=2 dim X
 
 ### B2.11 Good-cover refinement on a Riemann surface
 
-Prove `riemannGoodCover` in the following generality. The carrier is a complex-analytic
+The carrier is a complex-analytic
 manifold of dimension one (`IsManifold 𝓘(ℂ) ω S`). Use a Riemannian metric and
 geodesically convex neighbourhoods for the refinement.
 
@@ -1317,20 +1321,20 @@ abelian subvariety of A_Kbar and t is torsion. A Gao special-generically subvari
 degeneracy loci, instead uses a constant section and an abelian subgroup, not a general constant
 Z.
 
-Prove `genericallySpecial_components`: Each geometric generic irreducible component has the stated constant-variety plus torsion-coset description.
+- Each geometric generic irreducible component has the stated constant-variety plus torsion-coset description.
 
-Prove `genericallySpecial_constant`: A constant subvariety of a constant abelian family is generically special.
+- A constant subvariety of a constant abelian family is generically special.
 
-Prove `genericallySpecial_torsion`: A torsion translate of an abelian subvariety is generically special.
+- A torsion translate of an abelian subvariety is generically special.
 
 **Checks.**
 
-- `genericallySpecial_constant_curve`: A constant genus≥2 curve in its constant Jacobian is GH
+- A constant genus≥2 curve in its constant Jacobian is GH
 generically special but is not itself a torsion coset.
-- `genericallySpecial_torsion_point`: A torsion point of the geometric generic fibre gives a
+- A torsion point of the geometric generic fibre gives a
 generically special torsion multisection after closure; its generic fibre is zero-dimensional,
 while its total dimension is one.
-- `genericallySpecial_trace`: For a constant family with identity trace, every subvariety
+- For a constant family with identity trace, every subvariety
 defined over C is supplied by the imported trace map.
 
 ([GH][GH], Definition 1.2, PDF pp.2–3).
@@ -1340,8 +1344,7 @@ part.
 
 ### B2.14 Invariant definable sets of Ax-type
 
-Use `axType_arc` for the defining arc implication, `axType_translate` for
-translation invariance and `axType_subtorus` for torus cosets.
+Its API is the defining arc implication, translation invariance and the torus-coset examples.
 
 Let X ⊆ T^n be closed, definable and of Ax-type, and Γ ⊆ GL_n(ℤ) free on two generators with
 γ(X) = X for all γ ∈ Γ. Then either X lies in a finite union of proper closed subgroups of T^n,
@@ -1370,7 +1373,7 @@ closed torus subgroups; B2, Semirational block counting.
 
 ### B2.15 Algebraic subvarieties and the abelian Ax theorem
 
-Prove the abelian Ax–Lindemann input and its real-period adapter `algebraicSubvariety_bettiAxType`: for every complex abelian variety A of dimension g, a real-linear period identification b:A(ℂ)≃(ℝ/ℤ)^(2g), and closed algebraic Z⊂A, the lift of b(Z(ℂ)) to [0,1]^(2g) is definable in `R_an,exp`, and every continuous semialgebraic arc in this lift, real analytic on (0,1), maps into a coset b(z₀)+G contained in b(Z(ℂ)), for a closed subgroup G; prove the abelian Ax input independently of B3's mixed Ax–Schanuel conclusion ([GH][GH], Ax-type definition and Proposition 5.3 proof, PDF pp.18–21; GH line 1003). For a point G={0} works; for an abelian-subvariety coset its real subtorus works; the curved arc t↦(t,t²) from B2 fails the implication and cannot be such an algebraic Z under a period identification.
+Prove the abelian Ax–Lindemann input and its real-period adapter: for every complex abelian variety A of dimension g, a real-linear period identification b:A(ℂ)≃(ℝ/ℤ)^(2g), and closed algebraic Z⊂A, the lift of b(Z(ℂ)) to [0,1]^(2g) is definable in `R_an,exp`, and every continuous semialgebraic arc in this lift, real analytic on (0,1), maps into a coset b(z₀)+G contained in b(Z(ℂ)), for a closed subgroup G; prove the abelian Ax input independently of B3's mixed Ax–Schanuel conclusion ([GH][GH], Ax-type definition and Proposition 5.3 proof, PDF pp.18–21; GH line 1003). For a point G={0} works; for an abelian-subvariety coset its real subtorus works; the curved arc t↦(t,t²) from B2 fails the implication and cannot be such an algebraic Z under a period identification.
 
 **Checks.**
 
@@ -1457,7 +1460,7 @@ trace.
 
 ### B2.21 Finitely many maximal GH generically special subvarieties
 
-Prove `finiteMaximalGHGenericallySpecial`. Let k be algebraically closed of
+Prove finiteness of maximal GH generically special subvarieties. Let k be algebraically closed of
 characteristic zero, S/k a smooth irreducible curve, A→S an abelian scheme of
 constant relative dimension g≥1, and X⊂A irreducible closed dominating S.
 There are finitely many maximal GH generically special subvarieties of A
@@ -1528,7 +1531,7 @@ Prove existence and the finite-kernel property of the C(S)/C trace and the geome
 their finite-cover descent, and extension over the smooth curve. The trace reduction also needs
 two specific assertions: after making connected monodromy, all fibres outside a countable set
 are extendable (Gao–Habegger, Lemma 5.7, pp.25–26), and
-`finiteMaximalGHGenericallySpecial` supplies the finite union of special closures.
+B2.21's finiteness theorem supplies the finite union of special closures.
 Establish the endomorphism-extension argument for the first and use the precise
 B2’s uniform torsion-closure theorem and B2’s Lang–Néron theorem contracts for the second. The local Néron factor theory
 is not a substitute for either assertion.
@@ -1561,31 +1564,27 @@ every critical point with a degeneracy locus.
 
 ### B3.1 Mixed Kuga uniformization and semirational counting
 
-Define `KugaDatum` on a connected rational linear algebraic group P with vector unipotent
+Define a connected Kuga datum on a connected rational linear algebraic group P with vector unipotent
 radical V and a P(ℝ)⁺-homogeneous component X⁺ of maps from the Deligne torus to P_ℝ.
 Require the adjoint mixed Hodge types (−1,1),(0,0),(1,−1),(−1,0),(0,−1), weight filtration
 W_(−2)=0, W_(−1)=Lie V, W_0=Lie P, and the Cartan involution induced by x(i) on
 G^ad_ℝ for G=P/V, with no rational G^ad-factor compact over ℝ. Require P/P^der to be an
 almost product of a rational split torus and a rational torus compact over ℝ, and require no
 proper rational normal subgroup through which every x∈X⁺ factors. A Levi splitting writes
-P=V⋊G and X⁺ as V(ℝ)×X_G⁺ with its Hodge complex structure. Its API is
-`KugaDatum.pureQuotient`, `.vectorHodge`, `.subdatum` and `.normalQuotient`: pure projection,
+P=V⋊G and X⁺ as V(ℝ)×X_G⁺ with its Hodge complex structure. Its API gives pure projection,
 the weight −1 vector Hodge structure, smallest subdata containing a set, and quotients by
 connected rational normal subgroups with their induced Hodge and complex structures
 (Gao–Ax, Definition 2.1 and Remark 2.2, pp.8–9, Gao-Ax line 359; §2.5, pp.9–10).
 
-Construct `kugaDefinableUniformization` for connected Kuga data (P=V⋊G,X⁺), congruence Γ⊂P(ℚ)⁺, its quasi-projective coarse quotient Γ∖X⁺, and its relative family after a split neat refinement, an `R_an,exp`-definable fundamental set and uniformization, the parameter-uniform semirational Pila–Wilkie block theorem for a definable Z⊂ℝᵃ×ℝᵇ with bounded-height rational coordinates and unrestricted remaining coordinates, and the bi-algebraic/weakly-special closure and connected normal rational quotient dictionary, including algebraic monodromy normality for a Hodge-generic subvariety; these are the carriers and counting inputs to the growth, stabilizer, quotient and finite weakly optimal targets of B3, not those targets' Ax–Schanuel conclusion (GH Lemma 5.2 proof pp.19–20; Gao–Ax §§2–4.1, pp.5–15).
+Construct definable uniformization for connected Kuga data (P=V⋊G,X⁺), congruence Γ⊂P(ℚ)⁺, its quasi-projective coarse quotient Γ∖X⁺, and its relative family after a split neat refinement, an `R_an,exp`-definable fundamental set and uniformization, the parameter-uniform semirational Pila–Wilkie block theorem for a definable Z⊂ℝᵃ×ℝᵇ with bounded-height rational coordinates and unrestricted remaining coordinates, and the bi-algebraic/weakly-special closure and connected normal rational quotient dictionary, including algebraic monodromy normality for a Hodge-generic subvariety; these are the carriers and counting inputs to the growth, stabilizer, quotient and finite weakly optimal targets of B3, not those targets' Ax–Schanuel conclusion (GH Lemma 5.2 proof pp.19–20; Gao–Ax §§2–4.1, pp.5–15).
 
-Use `kugaDefinableUniformization_map`, `kugaDefinableUniformization_frameChange` and
-`kugaDefinableUniformization_quotient` for the definable
-uniformization, compatibility under arithmetic frame change, and connected normal rational
-quotients. Prove `kugaMonodromy_normal` for Hodge-generic algebraic subvarieties. The
-semirational theorem is B2's `semirationalBlockCount`; B3 constructs its mixed application.
+Its API consists of definable uniformization and compatibility with arithmetic frame changes
+and connected normal rational quotients. Prove monodromy normality for Hodge-generic algebraic
+subvarieties. The semirational theorem is B2.6's block-counting theorem; B3 constructs its mixed application.
 For split neat Γ=Γ_V⋊Γ_G, construct the abelian scheme over Γ_G∖X_G⁺ whose fibres are the
 polarized tori V(ℝ)/Γ_V. For a general congruence level, construct a compatible split neat
 normal refinement, its finite descent datum and the resulting quotient stack and coarse
-family; retain translation cocycles and isotropy. Prove `kugaDefinableUniformization_descent`
-for identity, composition and change of refinement. A coarse quotient with isotropy does not
+family; retain translation cocycles and isotropy. Prove descent compatibility for identity, composition and change of refinement. A coarse quotient with isotropy does not
 carry a universal abelian scheme merely from the coarse point set (Gao–Ax §§2.2–2.5,
 pp.6–10; PELModuli M6.7's finite-level descent).
 
@@ -1608,11 +1607,10 @@ complex analytic component of B∩graph(u), B=Z^Zar, for a connected Kuga datum,
 pr_X⁺Z, and let Z_G be the pure projection of pr_X⁺Z. Assume dim Z_G>0, fix z₀∈Z_G,
 and use the invariant hyperbolic metric and height of Gao–Ax §4.2, with a fixed
 open definable fundamental set F_G as in §4.1. Write
-`B_horz(T)={z:d_horz(z,z₀)<log T}` for T>1. Prove
-`purePartHeightBound`: if γF_G meets B_horz(T), then H(γ)≤c₁T^c₂ for
-positive c₁,c₂; `purePartVolumeLowerBound`: for sufficiently large T,
+`B_horz(T)={z:d_horz(z,z₀)<log T}` for T>1. Prove that if γF_G meets B_horz(T), then H(γ)≤c₁T^c₂ for
+positive c₁,c₂; for sufficiently large T,
 vol(Z_G∩B_horz(T))≥c₃T^(c₄ dim Z_G) for positive c₃,c₄; and
-`purePartFundamentalVolumeUpperBound`: vol(Z_G∩γF_G)≤c₅ for every γ∈Γ_G,
+vol(Z_G∩γF_G)≤c₅ for every γ∈Γ_G,
 with c₅>0. Constants depend only on the fixed datum, fundamental set,
 projection and base point. In particular c₅ is independent of γ.
 
@@ -1698,21 +1696,21 @@ with dim⟨Y⟩_sg−dimπ(Y)<dimY+t. Here ⟨Y⟩_sg is the smallest special-ge
 restricted to the reduced closure of π(Y): torsion plus constant section plus abelian subscheme
 after finite cover. X^deg(t) is a set before its Zariski closedness theorem.
 
-Prove `degeneracyLocus_member`: x∈X^deg(t) iff x lies on a positive-dimensional Y satisfying the strict dimension inequality.
+- x∈X^deg(t) iff x lies on a positive-dimensional Y satisfying the strict dimension inequality.
 
-Prove `degeneracyLocus_mono`: For t≤u, X^deg(t)⊂X^deg(u).
+- For t≤u, X^deg(t)⊂X^deg(u).
 
-Prove `degeneracyLocus_zero`: Once closedness is proved, X minus X^deg(0) is a Zariski-open complement of algebraic degeneracy. It is not asserted to be exactly the pointwise full-Betti-rank locus.
+- Once closedness is proved, X minus X^deg(0) is a Zariski-open complement of algebraic degeneracy. It is not asserted to be exactly the pointwise full-Betti-rank locus.
 
 **Checks.**
 
-- `degeneracyLocus_point`: For a zero-dimensional X all t-degeneracy loci are empty because no
+- For a zero-dimensional X all t-degeneracy loci are empty because no
 positive-dimensional Y exists.
-- `degeneracyLocus_torsion_section`: A torsion section over a positive-dimensional base belongs
+- A torsion section over a positive-dimensional base belongs
 to its 0-th degeneracy locus.
-- `degeneracyLocus_strict`: If dim⟨Y⟩_sg−dimπY=dimY+t, that Y is excluded; replacing < with ≤
+- If dim⟨Y⟩_sg−dimπY=dimY+t, that Y is excluded; replacing < with ≤
 changes the definition.
-- `degeneracyLocus_ramified_graph`: For a nonconstant branched map f:C→E from a smooth curve to
+- For a nonconstant branched map f:C→E from a smooth curve to
 an elliptic curve, its graph X⊂E×C has X^deg(0)=∅, while db|X vanishes at ramification points.
 Algebraic degeneracy does not equal the pointwise rank-drop set.
 
@@ -1788,14 +1786,17 @@ then a specialization through the Jacobian and Torelli maps.
 
 ### B4.1 Fine curve moduli with symplectic level
 
-Construct `fineCurveLevelModuli`, the fine quasi-projective scheme M_g[ℓ] of smooth projective genus g≥2 curves with full symplectic level ℓ≥3 in characteristic zero over ℚ(ζ_ℓ), its universal curve, the quasi-finite Torelli map to A_g[ℓ] compatible with the Jacobian and polarization, and finite étale level-change comparisons that allow descent of the level-independent Betti-rank assertion; JacobianChallengePartII §7.2 supplies the difference morphism only once this family is given (DGH §6.1, pp.23–25).
+Construct the fine quasi-projective scheme M_g[ℓ] of smooth projective genus g≥2 curves with full symplectic level ℓ≥3 in characteristic zero over ℚ(ζ_ℓ), its universal curve, the quasi-finite Torelli map to A_g[ℓ] compatible with the Jacobian and polarization, and finite étale level-change comparisons that allow descent of the level-independent Betti-rank assertion; JacobianChallengePartII §7.2 supplies the difference morphism only once this family is given (DGH §6.1, pp.23–25).
 
-Its API is `fineCurveLevelModuli_universal` (families are pullbacks of the universal curve),
-`fineCurveLevelModuli_torelli` (compatibility with Jacobians and their principal polarization),
-and `fineCurveLevelModuli_levelChange` (finite étale refinement, universal-family pullback
-and cocycle laws). Construct the full-level curve scheme through the smooth-curve stack,
+Its API has three requirements.
+
+- Families are pullbacks of the universal curve.
+- The Torelli map agrees with Jacobians and their principal polarization.
+- Level refinement is finite étale and respects universal-family pullback and cocycle laws.
+
+Construct the full-level curve scheme through the smooth-curve stack,
 its level cover and triviality of level-preserving automorphisms; prove the Torelli map
-quasi-finite using `curve_geometricTorelli`: for smooth projective geometrically connected
+quasi-finite using geometric Torelli: for smooth projective geometrically connected
 curves C,C′ of genus g≥2 over an algebraically closed field, an isomorphism of their
 canonically principally polarized Jacobians implies C≃C′. Retain the stronger map statement:
 for pointed Abel embeddings j,j′ and a polarized isomorphism β, there are a curve isomorphism
@@ -1834,9 +1835,9 @@ variety and X⊂A closed irreducible and dominant, of positive relative
 dimension, with every fibre generating A_s. Require X+A′⊄X for each
 non-isotrivial abelian subscheme A′⊂A; a positive-dimensional isotrivial
 stabilizer is allowed. Write ι for the modular map and D_m for fibrewise
-differences. Prove `fibrePowerBettiRank`: for every integer t≥0 and m≥1,
+differences. Prove the fibre-power rank estimate: for every integer t≥0 and m≥1,
 `rank_R(db^[m]|X^[m])≥2(dim ι^[m](X^[m])−t)` if m≥dim S−t.
-Prove `differencePowerBettiRank`:
+Prove the difference-image rank estimate:
 `rank_R(db^[m]|D_m^A(X^[m+1]))≥2(dim D_m(ι^[m+1](X^[m+1]))−t)`
 if m≥dim X−t. The differences commute with the modular maps.
 Apply componentwise after a finite cover when geometric irreducibility is
@@ -1865,7 +1866,7 @@ Fix g≥2 and full symplectic level ℓ≥3 over ℚ(ζ_ℓ). For an irreducible
 ℚ̄-variety S with a quasi-finite morphism S→M_g[ℓ], take the pullback C_S
 of the universal curve from B4’s fine curve-moduli construction. For M≥3g−2,
 `D_M(C_S^[M+1])⊂𝔄_g[ℓ]^[M]×_(A_g[ℓ])S` is non-degenerate after a
-complex embedding. Prove `universalCurveDifference_levelChange`: the rank
+complex embedding. Prove that the rank
 assertion is unchanged under finite étale level refinements and descends
 where a curve family is given without level. A coarse-moduli morphism
 alone does not specify a universal curve.
@@ -1928,7 +1929,7 @@ interface and the Weil absolute-value theorem.
 
 ### F0.1 Compact preimages and exact lattice limits
 
-Prove `compactLatticeImageLimit`. For a prime ℓ, let L be a finite free
+Prove the compact-lattice image-limit theorem. For a prime ℓ, let L be a finite free
 Z_ℓ-lattice and u_j∈End_Zℓ(L) converge to u, with the compact images
 L_j=u_j(L) forming a decreasing sequence. Then u(L)=⋂_j L_j. In Tate Proposition 1, after
 passing to infinitely many isomorphic fixed-polarization models, L=X_n, L_j=X_j=(T∩W)+ℓ^jT along
@@ -1942,7 +1943,7 @@ the models is a separate hypothesis, established over finite fields using polari
 - For `u_n=ℓ^n·id`, the limit is zero and `⋂n ℓ^n L={0}`; replacing
   the intersection by a union would give all of L.
 
-`compactLatticeImageLimit_powers` is the named separatedness target; rank zero and constant maps are boundary Checks of the compact-image theorem.
+Include the separatedness identity ⋂_nℓⁿL={0}; rank zero and constant maps are Checks of the compact-image theorem.
 
 ([Tate][Tate], Hyp(k,A,d,ℓ) and Proposition 1 proof, printed pp.136–137 (PDF pp.3–4)).
 
@@ -1956,16 +1957,16 @@ monic of degree 2g and independent of ℓ≠p, and DWP.1 target 1.4 for the root
 Prove the reciprocity coefficients a_(2g−i)=q^(g−i)a_i for 0≤i≤g, indexed in descending powers:
 P_A=∑_(i=0)^(2g) a_i X^(2g−i), with a_0=1 and a_(2g)=q^g.
 
-Prove `frobeniusPolynomial_reciprocal`: Writing P_A=∑a_i X^(2g−i), a_(2g−i)=q^(g−i)a_i for 0≤i≤g, a_0=1 and a_(2g)=q^g.
+- Writing P_A=∑a_i X^(2g−i), a_(2g−i)=q^(g−i)a_i for 0≤i≤g, a_0=1 and a_(2g)=q^g.
 
-Prove `frobeniusPolynomial_product`: P_(A×B)=P_A P_B.
+- P_(A×B)=P_A P_B.
 
 **Checks.**
 
-- `frobeniusPolynomial_zero`: For the zero-dimensional abelian variety P_A=1 and the point count
+- For the zero-dimensional abelian variety P_A=1 and the point count
 is 1.
-- `frobeniusPolynomial_elliptic`: For an elliptic curve, P_A=X²−tX+q and #A(F_q)=q+1−t.
-- `frobeniusPolynomial_elliptic_product`: For elliptic curves with traces a,b over F_q,
+- For an elliptic curve, P_A=X²−tX+q and #A(F_q)=q+1−t.
+- For elliptic curves with traces a,b over F_q,
   their product has polynomial X⁴−(a+b)X³+(ab+2q)X²−q(a+b)X+q².
   This tests both the descending coefficient order and dimension-two reciprocity.
 
@@ -1982,17 +1983,17 @@ classes of these numbers, not arbitrary reciprocal polynomials of degree 2g. Use
 predicate of DWP.0 together with IsIntegral ℤ; the three interfaces below are its integral
 finite-field specializations, rather than a second purity predicate.
 
-Prove `weilQNumber_norm`: For every embedding σ:Q(π)→C, |σπ|²=q.
+- For every embedding σ:Q(π)→C, |σπ|²=q.
 
-Prove `weilQNumber_conjugate`: Algebraic conjugates of a Weil q-number are Weil q-numbers.
+- Algebraic conjugates of a Weil q-number are Weil q-numbers.
 
-Prove `weilQNumber_power`: π^r is a Weil q^r-number for r≥1.
+- π^r is a Weil q^r-number for r≥1.
 
 **Checks.**
 
-- `weilQNumber_real`: ±sqrt(p) are Weil p-numbers and have minimal polynomial X²−p.
-- `weilQNumber_one`: For q>1 the algebraic integer 1 is not a Weil q-number.
-- `weilQNumber_frobenius`: Every Frobenius eigenvalue of the imported characteristic polynomial
+- ±sqrt(p) are Weil p-numbers and have minimal polynomial X²−p.
+- For q>1 the algebraic integer 1 is not a Weil q-number.
+- Every Frobenius eigenvalue of the imported characteristic polynomial
 of A/F_q is a Weil q-number.
 
 ([Waterhouse][Waterhouse], Chapter 2, printed pp.527–528 (PDF pp.8–9)).
@@ -2014,7 +2015,7 @@ limits.
 
 ### F0.5 Point-count corollaries
 
-Prove `pointCount_isogeny` and `pointCount_product`: for every r≥1,
+Prove isogeny invariance and product compatibility of point counts: for every r≥1,
 F_q-isogenous abelian varieties have the same number of F_(q^r)-points,
 and the point counts multiply on products. Apply the supplied point-count
 identity to the isomorphism of rational Tate modules and to the direct-sum
@@ -2082,8 +2083,6 @@ inseparable factors.
 
 ### F2.1 Multiplicity detected by shifted factors
 
-Prove `shiftedFactorSlope` in the following generality.
-
 Let O be a DVR, R,S monic with gcd(R,S)=1 over Frac(O), d=degR>0, and P=R^e S. If monic
 ψ_n≡R+π^n mod π^(2n) and degψ_n=d, then eventually Res(P,ψ_n)≠0 and v Res(P,ψ_n)=nde+v Res(S,R).
 
@@ -2103,14 +2102,23 @@ equal valuations of every common nonzero resultant with monic polynomials lifted
 is surjective modulo each π^N, then P=Q. Equal degree, completeness, separability,
 characteristic zero and finite residue field are unnecessary.
 
+**Checks.**
+
+- For P=Q=1, every monic test has resultant 1 on both sides and both valuations are 0.
+- For P=X and Q=X+π, take ψ=X+π². The two nonzero resultants have valuations 2 and 1,
+  including in residue characteristic two.
+- For P=X and Q=X², the tests ψ=X+πⁿ, n≥1, give valuations n and 2n;
+  repeated factors are detected rather than discarded.
+- Without density, take D=𝔽₂ inside O=𝔽₂[[t]], P=X+t and Q=X+t+t². Every monic
+  ψ∈𝔽₂[X] has equal resultant valuations against P and Q: both equal the multiplicity
+  of X in ψ. The polynomials P,Q are distinct, so testing only constant-field coefficients fails.
+
 ([Milne][Milne], §1, characteristic-polynomial uniqueness criterion, printed p.65
 (PDF p.3), scan; DVR polynomial adapter).
 
 *Needs:* [F2](#layer-f2-resultant-recognition), Multiplicity detected by shifted factors.
 
 ### F2.3 Integer tests for a p-adic polynomial
-
-Prove `padicResultantRecognition` in the following generality.
 
 For prime p and monic P,Q∈Z_p[X], equality of v_p Res(P,ψ) and v_p Res(Q,ψ) for all monic ψ∈Z[X]
 with both resultants nonzero implies P=Q.
@@ -2195,18 +2203,18 @@ semilinear bijection F on an L-vector space V satisfies m(F^a)=0, the actions of
 U↦F define a B-module structure on V. The coefficient tensor L⊗Q_p K may be étale with several
 factors; preserve the σ action on all factors.
 
-Prove `frobeniusBlock_relation`: U c=σ(c)U and U^a=θ on L⊗_(Q_p)K; θ is the chosen q-Frobenius root.
+- U c=σ(c)U and U^a=θ on L⊗_(Q_p)K; θ is the chosen q-Frobenius root.
 
-Prove `frobeniusBlock_dimension`: The algebra has K-dimension a² after the coefficient étale algebra is handled correctly.
+- The algebra has K-dimension a² after the coefficient étale algebra is handled correctly.
 
-Prove `frobeniusBlock_action`: On the corresponding isocrystal block, the semilinear F gives an action of this cyclic algebra.
+- On the corresponding isocrystal block, the semilinear F gives an action of this cyclic algebra.
 
 **Checks.**
 
-- `frobeniusBlock_prime`: For a=1 the block algebra is K, with U=θ.
-- `frobeniusBlock_split`: After a splitting base extension it is a full a×a matrix algebra, with
+- For a=1 the block algebra is K, with U=θ.
+- After a splitting base extension it is a full a×a matrix algebra, with
 weighted cyclic U and diagonal coefficient action.
-- `frobeniusBlock_product_coeff`: If L⊗Q_p K is a product, the construction retains every
+- If L⊗Q_p K is a product, the construction retains every
 idempotent and its σ-permutation; it is not replaced by one arbitrarily selected coefficient
 field.
 
@@ -2219,7 +2227,7 @@ field.
 
 For A/F_(p^a), identify C(π_A)=F^a on C(A)[1/p], where
 L=W(F_(p^a))[1/p]. Apply A6.21 `frobeniusSemisimple` to its faithful
-End⁰(A)^op action, and prove `isocrystalFrobenius_charpoly` identifying
+End⁰(A)^op action, and prove the isocrystal Frobenius polynomial comparison identifying
 its characteristic polynomial with P_A using the preceding comparison.
 This specializes the supplied semisimplicity theorem; it asserts no
 semisimplicity for arbitrary endomorphisms.
@@ -2339,17 +2347,17 @@ equal to T_ℓ(A₀) almost everywhere. X_p consists of full W(F_q)-lattices in 
 under F and V, where C is the contravariant Dieudonné functor. For Γ=End⁰_Fq(A₀)^× use the left
 action α·(Λ_p,(Λ_ℓ))=(C(α)⁻¹Λ_p,(α_ℓΛ_ℓ)).
 
-Prove `markedLattice_primeToP`: For each ℓ≠p choose a Frobenius-stable full Z_ℓ-lattice in V_ℓA equal to T_ℓA at all but finitely many ℓ.
+- The prime-to-p part consists of a Frobenius-stable full Z_ℓ-lattice in V_ℓA for each ℓ≠p, equal to T_ℓA at all but finitely many ℓ.
 
-Prove `markedLattice_p`: At p choose a full F,V-stable W(F_q)-lattice in the contravariant isocrystal C(A₀)[1/p].
+- The characteristic-prime part is a full F,V-stable W(F_q)-lattice in the contravariant isocrystal C(A₀)[1/p].
 
-Prove `markedLattice_action`: The left action of Γ is α_ℓ at ℓ≠p and C(α)⁻¹ at p. Contravariance reverses composition; taking inverses restores the left action.
+- The left action of Γ is α_ℓ at ℓ≠p and C(α)⁻¹ at p. Contravariance reverses composition; taking inverses restores the left action.
 
 **Checks.**
 
-- `markedLattice_identity`: The identity marking gives exactly T_ℓ(A₀) at ℓ≠p and C(A₀) at p.
-- `markedLattice_zero`: The zero-dimensional abelian variety has one lattice tuple.
-- `markedLattice_support`: A tuple differing from the standard lattice at infinitely many primes
+- The identity marking gives exactly T_ℓ(A₀) at ℓ≠p and C(A₀) at p.
+- The zero-dimensional abelian variety has one lattice tuple.
+- A tuple differing from the standard lattice at infinitely many primes
 is excluded from the finite-support space.
 
 ([Waterhouse][Waterhouse], §1.2 and §3.1, printed pp.524–525,529–531 (PDF pp.5–6,10–12)).
@@ -2394,13 +2402,14 @@ endomorphism algebra; [ClassFieldTheory, layer
 
 ### F3.5 Prime-field p-realization Frobenius polynomial
 
-For A/F_p define `primeFieldLinearDual` by D^lin(A)=Hom_ℤp(C(A),ℤ_p), with transpose F and V.
-For f:A→B its covariant map is the transpose C(f)^*:D^lin(A)→D^lin(B). The API is
-`primeFieldLinearDual_map_comp`, `primeFieldLinearDual_doubleDual`,
-`primeFieldLinearDual_frobenius` and `primeFieldLinearDual_verschiebung`: composition
-is covariant, the finite free double dual recovers C(A), and F,V are transposed without
-interchanging them. Identify these maps after inverting p, including compatibility with
-quasi-isogenies and integral lattices (Waterhouse §§1.2,3.1, pp.524–525,529–531; WM Part II,
+For A/F_p define the prime-field linear dual by D^lin(A)=Hom_ℤp(C(A),ℤ_p), with transpose F and V.
+For f:A→B its covariant map is the transpose C(f)^*:D^lin(A)→D^lin(B). Its API consists of the following laws.
+
+- Composition is covariant.
+- The finite free double dual recovers C(A).
+- Frobenius and Verschiebung are transposed without interchanging them.
+
+Identify these maps after inverting p, including compatibility with quasi-isogenies and integral lattices (Waterhouse §§1.2,3.1, pp.524–525,529–531; WM Part II,
 pp.60–61).
 
 **Checks.**
@@ -2522,18 +2531,18 @@ set. Repeated roots require a discriminant quantity that stays nonzero.
 For G=(End⁰(A₀))^× and an adelic lattice L, the global orbits inside its G(A_fin)-orbit are
 G(Q)\G(A_fin)/Stab(L).
 
-Prove `adelicClassSet_mk`: A finite adele in E^×(A_f) determines its double coset modulo left E^×(Q) and right K.
+- A finite adele in E^×(A_f) determines its double coset modulo left E^×(Q) and right K.
 
-Prove `adelicClassSet_equiv`: g,h have the same class iff h=e g k for e∈E^×(Q),k∈K.
+- g,h have the same class iff h=e g k for e∈E^×(Q),k∈K.
 
-Prove `adelicClassSet_stabilizer`: K is the restricted product of the automorphism groups of the chosen local lattices, including the p-component.
+- K is the restricted product of the automorphism groups of the chosen local lattices, including the p-component.
 
 **Checks.**
 
-- `adelicClassSet_rational`: Any rational unit e∈E^×(Q) has the identity class.
-- `adelicClassSet_compact`: Changing a local lattice by conjugation replaces K by its conjugate
+- Any rational unit e∈E^×(Q) has the identity class.
+- Changing a local lattice by conjugation replaces K by its conjugate
 and induces the corresponding class-set bijection.
-- `adelicClassSet_notPic`: For a nonmaximal order R the entire full-lattice class monoid can
+- For a nonmaximal order R the entire full-lattice class monoid can
 include nonprojective lattices and need not be Pic(R). A single fixed local genus may have its
 own double-coset class set; in the commutative genus of R itself this is Pic(R).
 
@@ -2557,8 +2566,6 @@ lattices.
 
 ### F4.3 Discriminant and ordered-root bounds
 
-Prove `weilGeneratorDiscriminantBound` and `orderedRootProductBound` in the following generality.
-
 If K=Q(π), π is an integral p-Weil number of degree d, then |D_K|≤|disc
 minpoly(π)|≤(2√p)^(d(d−1)). More generally, for an integer q≥1 and a monic integral polynomial of degree m all of
 whose root occurrences λ_i have modulus √q, the positive integer `D_*=|∏_{i,j:λ_i≠λ_j}(λ_i−λ_j)|`
@@ -2571,11 +2578,10 @@ discriminant may vanish.
 
 ### F4.4 Local semisimple stable-lattice bounds
 
-Prove `localSemisimpleLatticeBounds`: for a semisimple operator γ on a finite-dimensional ℚ_ℓ-space with characteristic polynomial `∏f_i^{n_i}`, distinct monic irreducible f_i∈ℤ_ℓ[X], and `Δ_ℓ=Σn_i²v_ℓ(disc f_i)+2Σ_{i<j}n_in_jv_ℓRes(f_i,f_j)`: its linear centralizer has at most `ℓ^{2Δ_ℓ}` orbits of γ-stable full ℤ_ℓ-lattices and each stabilizer lies in a conjugate of a fixed maximal compact with index `≤ℓ^{Δ_ℓ}`; the proof must use successive projected lattices pr_i(M∩V_≤i), including repeated factors and ℓ=2 (LT §§3.1–3.2.1, pp.7–14, especially Lemma 3.1 and (15)–(20), as a strengthened local adaptation).
+Prove the local semisimple stable-lattice bounds: for a semisimple operator γ on a finite-dimensional ℚ_ℓ-space with characteristic polynomial `∏f_i^{n_i}`, distinct monic irreducible f_i∈ℤ_ℓ[X], and `Δ_ℓ=Σn_i²v_ℓ(disc f_i)+2Σ_{i<j}n_in_jv_ℓRes(f_i,f_j)`: its linear centralizer has at most `ℓ^{2Δ_ℓ}` orbits of γ-stable full ℤ_ℓ-lattices and each stabilizer lies in a conjugate of a fixed maximal compact with index `≤ℓ^{Δ_ℓ}`; the proof must use successive projected lattices pr_i(M∩V_≤i), including repeated factors and ℓ=2 (LT §§3.1–3.2.1, pp.7–14, especially Lemma 3.1 and (15)–(20), as a strengthened local adaptation).
 
-The API `localSemisimpleLatticeBounds_orbits` and `localSemisimpleLatticeBounds_stabilizer` states the two bounds separately;
-`localSemisimpleLatticeBounds_unramified` gives one orbit and maximal-compact stabilizer when
-Δ_ℓ=0. Use the primary decomposition and successive projected lattices with their invariant
+Its API separates the orbit bound from the stabilizer bound and gives one orbit with
+maximal-compact stabilizer when Δ_ℓ=0. Use the primary decomposition and successive projected lattices with their invariant
 factor profiles, and retain field-discriminant and cross-resultant contributions separately.
 
 **Checks.**
@@ -2631,8 +2637,6 @@ group; **GeometryOfNumbersAndQuadraticArithmetic**, §2.5; [AdelicAlgebraicGroup
 AA.4](https://github.com/TauCetiProject/TauCetiRoadmap/blob/main/TauCetiRoadmap/AdelicAlgebraicGroups/README.md#layer-4-approximation-neat-levels-and-hecke-maps).
 
 ### F4.7 Conditional rational-orbit bound from local lattices
-
-Prove `rationalOrbitCount` in the following generality.
 
 Let a group G_f with subgroup Γ act on a lattice space X, with at most D_*² G_f-orbits. Suppose
 h=#(Γ\G_f/K₀)<∞ for a fixed compact level K₀. For every orbit representative M assume
@@ -2767,14 +2771,12 @@ field.
 
 ### F5.7 CM Hermitian mass and class asymptotics
 
-Prove `cmHermitianMassAsymptotic` and `cmHermitianUnimodularClassAsymptotic`: for fixed imaginary quadratic class-number-one K and positive-definite unimodular rank-g O_K-Hermitian lattices, with the unitary mass formula under specified measures including all ramified and dyadic local factors, a bound exp(O_K(g²)) for the number of genera and uniform local-factor errors, log M_K(g)=½g²log g+O_K(g²) for the sum of the weighted genus masses, |Aut L|≤exp(O_K(g log(g+1))), and M_K(g)≤H_K(g)≤(max_L|Aut L|)M_K(g) for the unweighted GL_g(O_K)-class count, hence log H_K(g)=½g²log g+O_K(g²) as g→∞; g=0 has one class and mass one (LT §§5.3–5.5, (38)–(40), (42), (50), Lemma 5.8 and (52)–(55), pp.26–33, with the factorial correction specified in F5).
+Prove the CM Hermitian mass and unweighted class asymptotics: for fixed imaginary quadratic class-number-one K and positive-definite unimodular rank-g O_K-Hermitian lattices, with the unitary mass formula under specified measures including all ramified and dyadic local factors, a bound exp(O_K(g²)) for the number of genera and uniform local-factor errors, log M_K(g)=½g²log g+O_K(g²) for the sum of the weighted genus masses, |Aut L|≤exp(O_K(g log(g+1))), and M_K(g)≤H_K(g)≤(max_L|Aut L|)M_K(g) for the unweighted GL_g(O_K)-class count, hence log H_K(g)=½g²log g+O_K(g²) as g→∞; g=0 has one class and mass one (LT §§5.3–5.5, (38)–(40), (42), (50), Lemma 5.8 and (52)–(55), pp.26–33, with the factorial correction specified in F5).
 
 Construct the unitary mass on the imported Hermitian lattice and adelic carriers, normalize
 its Haar measures by the local factors in LT (38)–(40), and prove the all-genus and
-unweighted comparisons with their displayed error terms. Use
-`cmHermitianMassAsymptotic_genera`, `cmHermitianMassAsymptotic_localFactors`,
-`cmHermitianMassAsymptotic_automorphisms` and `cmHermitianMassAsymptotic_unweighted` for
-these four interfaces; no replacement of a unitary group by an orthogonal group enters.
+unweighted comparisons with their displayed error terms. Retain the genus bound, local-factor errors, automorphism bound and unweighted comparison as
+separate interfaces; no replacement of a unitary group by an orthogonal group enters.
 
 **Checks.**
 
@@ -2793,8 +2795,7 @@ Fix a prime p splitting in one of the imaginary quadratic fields K = Q(√−d) 
 {1,2,3,7,11,19,43,67,163}. Construct E/F_p with End_Fp(E) = O_K. If N_p(g) counts
 F_p-isomorphism classes of principal polarizations on E^g, prove log N_p(g) = (1/2)g² log g +
 O_p(g²). The count is unweighted and uses the Hermitian orbit dictionary and its mass
-comparison. The endpoint from F5.7 is
-`cmHermitianUnimodularClassAsymptotic`: for fixed class-number-one K,
+comparison. The endpoint from F5.7 states that for fixed class-number-one K,
 `log H_K(g)=½g²log g+O_K(g²)`. The polarization theorem proves its transport
 through the Rosati/Hermitian orbit dictionary.
 
@@ -2875,9 +2876,68 @@ assemble the local lattice and fixed-level arithmetic estimates uniformly. Polar
 on CM elliptic powers then compares the squarefree nonreal locus with all principally polarized
 classes.
 
-### F6.1 Reconstruction from integer power sums
+### F6.0 Geometric class carriers
 
-Prove `powerSumReconstruction` in the following generality.
+Define `AbelianVarietiesOfDimension k g` as the subtype of the pinned
+`TauCeti.AlgebraicGeometry.AbelianVariety k` with native dimension g, for a field k
+and g∈ℕ. Fix the universe of k and its schemes throughout. The dimension condition
+uses the finite value g in `WithBot ℕ∞`; the zero abelian variety and product dimensions
+use AbelianSchemesAndArithmeticModuli A1.
+
+- Forgetting the dimension proof recovers the original abelian variety over k.
+- Membership is exactly equality of its geometric dimension with g.
+- Equality of members uses native subtype extensionality.
+
+**Checks.**
+
+- The zero abelian variety has dimension 0 and belongs in dimension 0.
+- An elliptic curve has dimension 1 and does not belong in dimension 0.
+- A product of two elliptic curves has dimension 2 and is excluded in dimension 1;
+  counting factors instead of dimension would admit the wrong objects.
+
+Define `AbelianIsogenyClasses k g` as the native quotient of these varieties by the
+relation generated by k-homomorphisms that are finite and surjective. Isogenies
+between abelian varieties form an equivalence relation, so equality of classes
+means existence of a k-isogeny; separability is not imposed (Waterhouse, §1.1,
+printed pp.522–524; Tate, Theorem 1(c), printed p.139).
+
+- The class map has source the dimension-g subtype and target this quotient.
+- Every class has a representative, and two representatives give the same class
+  exactly when they are k-isogenous.
+- Isomorphisms give the same isogeny class; the defining relation includes
+  inseparable isogenies in characteristic p.
+
+**Checks.**
+
+- The identity of a zero-dimensional variety gives its own class, and dimension 0
+  has one class; discarding dimension zero would incorrectly give no class.
+- Multiplication by p on a positive-dimensional abelian variety in characteristic p
+  is an isogeny, even though it is inseparable; a separability condition would exclude it.
+- Over 𝔽₅ the curves y²=x³+x and y²=x³+4x have respectively 4 and 8 rational points,
+  hence distinct 𝔽₅-isogeny classes. Their geometric isomorphism does not identify them here.
+
+Define `AbelianIsomorphismClasses k g` as the native quotient by isomorphisms of
+abelian varieties over k, with no marking or polarization included (Lee, §1,
+PDF p.1; Lee line 20).
+
+- The class map has source the dimension-g subtype and target this quotient.
+- Every class has a representative, and equality of classes means existence of a
+  k-isomorphism.
+- The class ignores a chosen polarization, while retaining the k-group structure.
+
+**Checks.**
+
+- The zero abelian variety contributes one class, with logarithmic count log 1=0.
+- The two preceding elliptic curves give distinct 𝔽₅-isomorphism classes; passing to
+  an algebraic closure would identify their geometric classes and change this count.
+- Changing only the polarization on a fixed abelian variety gives the same unpolarized
+  class; counting polarized pairs instead would count a different object.
+
+*Needs:* Tau Ceti's abelian-variety dimension, homomorphism category and isogeny predicate;
+AbelianSchemesAndArithmeticModuli A3 for symmetry of the isogeny relation;
+native quotients and subtype extensionality.
+
+### F6.1 Reconstruction from integer power sums
 
 For any integers q,g≥0 and a monic degree-2g integer polynomial satisfying the coefficient
 relations a_(2g−i)=q^(g−i)a_i for 0≤i≤g in descending convention, its first g power sums
@@ -2896,6 +2956,15 @@ Prove `weilPolynomialCount` in the following generality.
 
 For q≥2 and g≥1, the number of monic q-reciprocal integer polynomials (q^gP(X)=X^(2g)P(q/X)) of
 degree 2g with constant q^g and all roots of absolute value √q is at most (4g+1)^g q^(g(g+1)/4).
+
+**Checks.**
+
+- For q=2 and g=1, the five polynomials X²−tX+2 with t∈{−2,−1,0,1,2}
+  satisfy the conditions; 5≤5√2. Requiring ordinary realizability would discard t=0,±2.
+- For q=3 and g=1 there are seven such polynomials, and 7≤5√3. A bound
+  omitting the count of integer endpoints need not cover all seven traces.
+- For q=2 and g=2, (X²+2)²=X⁴+4X²+4 is included despite its repeated roots;
+  a squarefree-only polynomial set would change the counting object.
 
 ([LT][LT], Lemma 2.1 and proof, v1 p.5, power-sum counting adaptation).
 
@@ -2917,7 +2986,8 @@ class.
 ### F6.4 Coarse isomorphism counts and conditional numerical assembly
 
 For a fixed prime p let B(p,g) be the number of F_p-isomorphism classes of g-dimensional abelian
-varieties. Prove the coarse asymptotic log B(p,g) = O_p(g²). Also prove the following
+varieties. Prove `isomorphismClassCount`: these classes are finite for every g∈ℕ and
+log B(p,g) = O_p(g²) as g→∞. Also prove the following
 conditional numerical assembly: if the maximal size I_p(g) of a dimension-g isogeny class
 satisfies I_p(g) ≤ 2^(34g²) p^(17g²(1+ε_g)) for an error ε_g → 0 uniform across those classes,
 then B(p,g) ≤ 2^(34g²) p^((69/4)g²(1+o(1))). The first assertion uses coarse uniform lattice and
@@ -2925,7 +2995,8 @@ class-number estimates; the second explicitly assumes the sharper uniform estima
 
 ([Lee][Lee], Theorem 1.1 and §3.1(5)–(10), contrasted with §3.2(11), PDF pp.1–9).
 
-*Needs:* [F6](#layer-f6-counting-isogeny-and-isomorphism-classes), Counting Weil polynomials by
+*Needs:* F6.0, Geometric class carriers;
+[F6](#layer-f6-counting-isogeny-and-isomorphism-classes), Counting Weil polynomials by
 power sums; [F4](#layer-f4-adelic-class-sets-and-local-bounds), Coarse prime-field isomorphism count
 at fixed adelic level; [F4](#layer-f4-adelic-class-sets-and-local-bounds), Class-set comparison by
 reduced norms; [F4](#layer-f4-adelic-class-sets-and-local-bounds), Discriminant and ordered-root
@@ -2936,13 +3007,17 @@ bounds; [Completed/EffectiveBounds, layer
 
 For n ≥ 1 and a prime power q, let O(q,n) be the set of ordinary n-dimensional F_q-isogeny
 classes. Put c₄ = e^(−3/2), c₅ = 2 + √2 and r(q) = φ(q)/q. Prove #O(q,n) > c₄(c₅n)^(−2 log 2/log
-q)(2^n/n!)(r(q)q^(n/2) − n)q^(n(n−1)/4). Combining this with the power-sum upper bound gives log
-#Isog(q,g) = (1/4)g² log q + o_q(g²) for every fixed prime power q as g → ∞.
+q)(2^n/n!)(r(q)q^(n/2) − n)q^(n(n−1)/4). Combining this with the power-sum upper bound proves
+`isogenyClassAsymptotic`: for every fixed finite field k of cardinality q, all dimension-g
+isogeny-class sets are finite and log #Isog(k,g)/g² tends to (log q)/4 as g→∞.
+The value at g=0 is 0 under native total real division, since there is one class and log 1=0;
+the limit concerns g→∞. This is equivalent to log #Isog(q,g) = (1/4)g² log q + o_q(g²).
 
 ([DPH][DPH], Theorem 1.3; Lemmas 2.1.1/2.1.3/2.5.1–3; Proposition 3.1.1; §3.2, PDF
 pp.2,4,13–18).
 
-*Needs:* [F3](#layer-f3-hondatate-and-lattice-classifications), Honda–Tate simple isogeny
+*Needs:* F6.0, Geometric class carriers;
+[F3](#layer-f3-hondatate-and-lattice-classifications), Honda–Tate simple isogeny
 classification; [F6](#layer-f6-counting-isogeny-and-isomorphism-classes), Asymptotic count of isogeny
 classes.
 
