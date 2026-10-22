@@ -45,9 +45,9 @@ The pin is `6b7abb3c7686292736be2955bd3eb9ebf63b456a`.
 - `CategoryTheory.HasExt` and `CategoryTheory.Abelian.Ext` in `Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean` require an abelian category. They are the compatibility target for the general Yoneda supplier, not a construction of exact-category Ext (MathlibExt line 53, MathlibExt line 59, MathlibExt line 122).
 - `BDeRhamPlus R p` and `BDeRham R p` are global declarations in `Mathlib/RingTheory/Perfectoid/BDeRham.lean`. Their binders are `[CommRing R]`, `[Fact p.Prime]`, `[Fact (Not (IsUnit (p : R)))]` and `[IsAdicComplete (Ideal.span {(p : R)}) R]`. They provide the completion and localization carriers; the period-rings contract extends or specializes these carriers with the filtration, comparison and fundamental-sequence API specified in the period-rings contract (MathlibBDeRhamReview line 55, MathlibBDeRhamReview line 79, MathlibBDeRhamReview line 92).
 
-`PadicInt.algebra`, `PadicInt.algebraMap_apply` and `PadicInt.isFractionRing` in `Mathlib/NumberTheory/Padics/PadicIntegers.lean` give the actual ℤ_p-action on ℚ_p for `[Fact p.Prime]` (MathlibPadicLattice line 580–588). The coordinate lattices in §4.1 use `Submodule.span` on these carriers. Coordinate spans use the chosen Tate generator; they do not replace a Tate local system or its Galois action. `LinearEquiv.toSpanNonzeroSingleton` and `Submodule.span_singleton_eq_span_singleton` in `Mathlib/LinearAlgebra/Span/Basic.lean` give generator coordinates and unit invariance (MathlibSpanReview line 241–254, MathlibSpanReview line 895–906). `PadicInt.toZModPow` and `PadicInt.ker_toZModPow` in `Mathlib/NumberTheory/Padics/RingHoms.lean` identify reduction of those coordinates with ℤ_p/(p^n); `ZMod.ringHom_surjective` supplies surjectivity (MathlibPadicReductionReview line 354–355, MathlibPadicReductionReview line 450–464). In the weight-two Check each lattice is identified with ℤ_2 by its nonzero generator, and both reduced lattices are the nonzero model `ZMod 2`; the generator-coordinate square and the zero induced linear map are proved in `Suggested.lean`.
+`PadicInt.algebra`, `PadicInt.algebraMap_apply` and `PadicInt.isFractionRing` in `Mathlib/NumberTheory/Padics/PadicIntegers.lean` give the actual ℤ_p-action on ℚ_p for `[Fact p.Prime]` (MathlibPadicLattice line 580–588). The coordinate lattices in §4.1 use `Submodule.span` on these carriers. Coordinate spans use the chosen Tate generator; they do not replace a Tate local system or its Galois action. `LinearEquiv.toSpanNonzeroSingleton` and `Submodule.span_singleton_eq_span_singleton` in `Mathlib/LinearAlgebra/Span/Basic.lean` give generator coordinates and unit invariance (MathlibSpanReview line 241–254, MathlibSpanReview line 895–906). `PadicInt.toZModPow` and `PadicInt.ker_toZModPow` in `Mathlib/NumberTheory/Padics/RingHoms.lean` identify reduction of those coordinates with ℤ_p/(p^n); `ZMod.ringHom_surjective` supplies surjectivity (MathlibPadicReductionReview line 354–355, MathlibPadicReductionReview line 450–464). In the weight-two Check each lattice is identified with ℤ_2 by its nonzero generator, and both reduced lattices are the nonzero model `ZMod 2`; the inclusion has generator coordinate 2, so its induced linear map is zero modulo 2.
 
-`LinearMap.fst`, `LinearMap.snd` and `LinearMap.prod` in `Mathlib/LinearAlgebra/Prod.lean`, on modules over a semiring, give the product maps used by the coordinate witnesses (MathlibLinearProd line 48–104). Their scalar actions, sums and compositions are the ordinary linear-map operations; the new definitions select the syntomic differential and its signs.
+`LinearMap.fst`, `LinearMap.snd` and `LinearMap.prod` in `Mathlib/LinearAlgebra/Prod.lean`, on modules over a semiring, give the product maps used by the coordinate witnesses (MathlibLinearProd line 48–104). Their scalar actions, sums and compositions are the ordinary linear-map operations; the coordinate formulas in §§1.4,5.2 select the syntomic differentials and their signs.
 
 ### From Tau Ceti
 
@@ -89,7 +89,7 @@ QWittVectors §1.7 `CommutingEndomorphisms.koszulComplex`: Cochain Koszul comple
 
 **`rigid-syntomic-etale-period`.** The horizontal-log period is the map in AM Lemma 3.10, pp. 29–30, AM line 1327–1334. Section 4.2 constructs the finite-level horizontal-log maps on the log-syntomic W(k) domain. This contract supplies their rational period on the horizontal pairs below and its commutation with Besser’s rigid period; the canonical-vertical-log comparison and gluing conclusions of 4.3–4.5 do not provide that rational comparison square. BesserI Corollary 9.10, manuscript p. 32, BesserI line 1209–1216 supplies the rigid period; the square uses the horizontal-log realization morphisms of AM (3.10)–(3.12). The interface consumed from CohomologyComparisons is: For a complete mixed-characteristic DVR V with perfect residue field, smooth quasi-projective X/V, every i and r≥0, supply the functorial product- and pullback-compatible period H^i_rsyn(X,r)→H^i_et(X_K,ℚ_p(r)) of BesserI Corollary 9.10; for Y projective smooth over W(k), relative normal-crossings D, U=Y−D and horizontal log structure M from D alone over trivial-log W(k), supply the rational horizontal-log period H^i_log-syn((Y,M),ℚ_p(r))→H^i_et(U_K,ℚ_p(r)) and its commutation with the rigid period under the realization comparison of AM Lemma 3.10, naturally under pullback and with products. Consume CohomologyComparisons §4.8, classical rational syntomic period extension. (BesserI Corollary 9.10, manuscript p. 32; AM Lemma 3.10, pp. 29–30).
 
-**`relative-hodge`.** On the two geometric domains of 6.4, establish the independent algebraic hypotheses of 6.2 on actual algebraic de Rham cohomology, using the proper or logarithmic compactification complex; AM Assumption 2.20 alone gives none of these algebraic finiteness conclusions. For the smooth projective curve X/S with finite étale D of 6.6, require the logarithmic de Rham residue/Gysin sequence to be strict for the Hodge filtration, horizontal, compatible with scalar extension and traces. AM Definition 2.1, Propositions 2.15,2.17,2.18, AM line 131, AM line 510–607. The full-domain datum of 6.1 needs no finiteness theorem. The interface consumed from CohomologyComparisons is: For smooth affine S over an AM base and either projective smooth u or the full goodCompactification of 6.3, supply finite algebraic H^i_dR, a finite exhaustive separated Hodge filtration with finite locally free graded pieces, integrable Gauss–Manin connection, Griffiths transversality, horizontal comparison and filtered base change for every i≥0; for projective smooth relative curves X/S with finite étale boundary D, supply the strict horizontal filtered logarithmic residue/Gysin sequence with traces and scalar extension. For smooth separated finite-type T over any characteristic-zero field L, supply F^rRΓ_dR(T/L), r∈ℤ, from smooth proper normal-crossings compactifications, with filtered independence, products, finite Čech descent and scalar extension; over L=K this is the absolute specialization S=Spec(V) of the relative realization (BesserI Definition 5.1, BesserI line 648–662). Consume CohomologyComparisons §§2.14,6.3, algebraic relative Hodge and strict residue extension. (AM Definitions 2.1,2.12 and Propositions 2.15,2.17–2.18; AM line 131, AM line 451, AM line 512, AM line 567, AM line 587).
+**`relative-hodge`.** On the two geometric domains of 6.4, establish the independent algebraic hypotheses of 6.2 on actual algebraic de Rham cohomology, using the proper or logarithmic compactification complex; AM Assumption 2.20 alone gives none of these algebraic finiteness conclusions. For the smooth projective curve X/S with finite étale D of 6.6, require the logarithmic de Rham residue/Gysin sequence to be strict for the Hodge filtration, horizontal, compatible with scalar extension and traces. AM Definition 2.1, Propositions 2.15,2.17,2.18, AM line 131, AM line 510–607. The full-domain datum of 6.1 needs no finiteness theorem. The interface consumed from CohomologyComparisons is: For smooth affine S over an AM base and either projective smooth u or the full good compactification of 6.3, supply finite algebraic H^i_dR, a finite exhaustive separated Hodge filtration with finite locally free graded pieces, integrable Gauss–Manin connection, Griffiths transversality, horizontal comparison and filtered base change for every i≥0; for projective smooth relative curves X/S with finite étale boundary D, supply the strict horizontal filtered logarithmic residue/Gysin sequence with traces and scalar extension. For smooth separated finite-type T over any characteristic-zero field L, supply F^rRΓ_dR(T/L), r∈ℤ, from smooth proper normal-crossings compactifications, with filtered independence, products, finite Čech descent and scalar extension; over L=K this is the absolute specialization S=Spec(V) of the relative realization (BesserI Definition 5.1, BesserI line 648–662). Consume CohomologyComparisons §§2.14,6.3, algebraic relative Hodge and strict residue extension. (AM Definitions 2.1,2.12 and Propositions 2.15,2.17–2.18; AM line 131, AM line 451, AM line 512, AM line 567, AM line 587).
 
 **`rational-descent`.** The h-topology on reduced separated finite-type K-varieties, arithmetic pairs as dense open interiors of reduced proper flat V-models with induced boundary log structure, semistable h-bases, enhanced rational syntomic h-realization and uniqueness, arithmetic and geometric period maps, product compatibility and equivalence after τ≤r for r≥0. The classical-pair comparison for fine log-smooth Cartier-type arithmetic pairs and r≥0 is NN Proposition 3.18, p. 33, NN line 1688–1691. NN Theorem A(1),(4), Proposition 4.6 and Corollary 4.11 are reserved to the base owner. This extension compares its classical producers to that realization; it does not rebuild h-descent or prove a second semistable comparison theorem. The interface consumed from CohomologyComparisons is: For fine log-smooth Cartier-type arithmetic pairs and r≥0, supply the canonical classical-to-h quasi-isomorphism of NN Proposition 3.18; for reduced separated finite-type K-varieties, supply rational syntomic h-descent and the product-compatible arithmetic/geometric τ≤r period comparisons of NN Theorem A(1),(4), Proposition 4.6 and Corollary 4.11. On the shared semistable carrier, supply the identification with the negative normalized convention N_base,norm=−N_c/e and its change law exp(−e log(u)N_base,norm)=exp(log(u)N_c), compatible with φ and the de Rham projection; N_c is the positive-Taylor operator of HK Theorem 5.1 (HK line 1340). Consume CohomologyComparisons §4.8, rational syntomic h-realization extension. (NN Theorem A(1),(4) ownership contract; NN Proposition 3.18, p. 33).
 
@@ -119,7 +119,7 @@ QWittVectors §1.7 `CommutingEndomorphisms.koszulComplex`: Cochain Koszul comple
 
 **`relative-rigid-projective-finiteness`.** This is the geometric rigid finiteness input invoked in AM line 510–527; algebraic filtered finiteness is a separate contract. The interface consumed from PadicDifferentialEquationsAndRigidCohomology is: For V a complete mixed-characteristic DVR with perfect residue field and F_V(x)≡x^p modulo pV, S=Spec(B) smooth affine over V and a compatible p-Frobenius σ on B† and u:U→S projective smooth, supply coherent R^iu_rig j†O on strict neighbourhoods in every degree i≥0, with base change to closed fibres and finite coefficient extensions, and its connection and Frobenius. Consume PadicDifferentialEquationsAndRigidCohomology §RD.5.115, for the projective smooth liftable families here. (AM Setting 2.14 and Proposition 2.15, pp. 12–13).
 
-**`relative-rigid-log-finiteness`.** AM line 530–585 retains both boundary conditions and log integrality; no finiteness for arbitrary open smooth families is requested. The interface consumed from PadicDifferentialEquationsAndRigidCohomology is: For V a complete mixed-characteristic DVR with perfect residue field and F_V(x)≡x^p modulo pV, S=Spec(B) smooth affine over V and a compatible p-Frobenius σ on B† and the full goodCompactification of 6.3 (smooth projective ambient V-schemes, both total V-normal-crossings and relative S-normal-crossings boundary, projective log-smooth integral map and Zariski-type base), supply coherent R^iu_rig j†O on strict neighbourhoods for every i≥0 with base change to closed fibres and finite coefficient extensions, connection and Frobenius. Consume PadicDifferentialEquationsAndRigidCohomology §§RD.5.107–RD.5.109, relative overconvergent direct-image extension on the full AM compactification domain. (AM Setting 2.16 and Proposition 2.17, pp. 13–14).
+**`relative-rigid-log-finiteness`.** AM line 530–585 retains both boundary conditions and log integrality; no finiteness for arbitrary open smooth families is requested. The interface consumed from PadicDifferentialEquationsAndRigidCohomology is: For V a complete mixed-characteristic DVR with perfect residue field and F_V(x)≡x^p modulo pV, S=Spec(B) smooth affine over V and a compatible p-Frobenius σ on B† and the full good compactification of 6.3 (smooth projective ambient V-schemes, both total V-normal-crossings and relative S-normal-crossings boundary, projective log-smooth integral map and Zariski-type base), supply coherent R^iu_rig j†O on strict neighbourhoods for every i≥0 with base change to closed fibres and finite coefficient extensions, connection and Frobenius. Consume PadicDifferentialEquationsAndRigidCohomology §§RD.5.107–RD.5.109, relative overconvergent direct-image extension on the full AM compactification domain. (AM Setting 2.16 and Proposition 2.17, pp. 13–14).
 
 **`rigid-gysin`.** The (−1) twist multiplies Frobenius by p. After geometric splitting, Gysin followed by curve trace sums the boundary coefficients on each geometric component; over k use finite-étale coefficient-field traces. The sequence is compatible with the de Rham residue sequence under comparison and with finite extensions of perfect residue/coefficient fields. Empty D retains H²(U)=H²(X), so the last zero of the affine relative sequence cannot be asserted without its affineness hypothesis. The interface consumed from PadicDifferentialEquationsAndRigidCohomology is: For a smooth projective curve X over a perfect characteristic-p field k, finite étale reduced boundary D and U=X−D, supply the Frobenius-compatible rigid localization sequence 0→H¹_rig(X)→H¹_rig(U)→H⁰_rig(D)(−1)→H²_rig(X)→H²_rig(U)→0 over K0, with residue, Gysin, trace and scalar-extension compatibility; when D meets every geometric component, supply H²_rig(U)=0. Consume PadicDifferentialEquationsAndRigidCohomology §§RD.4.19–RD.4.21,RD.5.88–RD.5.89,RD.6.88, including trace descent and arbitrary perfect residue fields. (AM Proposition 2.18 proof, p. 14, AM line 595–607).
 
@@ -173,15 +173,20 @@ AdicSpacesPartIV §F1.7 `dagger-coherent-affinoid-kiehl` and `dagger-coherent-th
 
 ## How to read the build
 
-Layer 1 constructs the exact coefficient category, its connection fibre and extension evaluation. Layer 2 assembles rigid syntomic cohomology on its natural fields. Layer 3 separates divided and undivided log-syntomic coefficients before gluing and completion. Layer 4 constructs their period maps and proves distinct exact and bounded conclusions. Layer 5 supplies adapters to the imported HK and rational h-realizations. Layer 6 promotes relative geometric data on explicit admissible domains and gives residue and extension projections. Layer 7 specializes those extensions at Frobenius-compatible points and identifies their absolute log/rigid syntomic values. Within a layer, subsections are in build order. Each paragraph fixes its hypotheses and locator, its named API, a proof dependency chain and discriminating Checks. The base’s general comparison theory is a supplier contract, not another implementation of these layers.
+Layer 1 constructs the exact coefficient category, its connection fibre and extension evaluation. Layer 2 assembles rigid syntomic cohomology on its natural fields. Layer 3 separates divided and undivided log-syntomic coefficients before gluing and completion. Layer 4 constructs their period maps and proves distinct exact and bounded conclusions. Layer 5 supplies adapters to the imported HK and rational h-realizations. Layer 6 promotes relative geometric data on explicit admissible domains and gives residue and extension projections. Layer 7 specializes those extensions at Frobenius-compatible points and identifies their absolute log/rigid syntomic values. Within a layer, subsections are in build order. Each paragraph fixes its hypotheses and locator, its API, a proof dependency chain and discriminating Checks. The base’s general comparison theory is a supplier contract, not another implementation of these layers.
+
+The headline theorems are injective extension evaluation (§1.6), the unramified rigid fibre (§2.3), local log-PD realization and gluing (§3.4), exact small-weight and bounded all-weight period comparisons with étale gluing (§§4.3–4.5), the semistable and h-realization adapters (§§5.2–5.3), the geometric filtered realizations, continuous-form comparison and residue sequence (§§6.4–6.6), and specialization, log/rigid comparison and absolute extension evaluation (§§7.3–7.5). `Suggested.lean` states the headline theorems expressible against the pinned APIs. Each of these headlines needs geometric realization or coefficient carriers absent at those pins, as its module docstring specifies; the API and coordinate Checks below remain the mathematical specification.
 
 ## Layer 1: Filtered Frobenius connections and extension evaluation
 
 ### 1.1 Coefficient objects and morphisms
 
-Define `FilFMIC`, written FilFMIC(S,σ), as the category with objects (H_dR,H_rig,c,∇,F,Φ): coherent B_K- and B†_K-modules, c:H_dR⊗B_K B†_K≃H_rig, an integrable algebraic connection on H_dR, a finite exhaustive separated descending integer filtration with finite locally free graded pieces satisfying ∇F^j⊆Ω¹⊗F^(j−1), and a horizontal B†_K-linear isomorphism Φ:σ*H_rig≃H_rig. The induced connection on H_rig uses continuous differentials. Morphisms are pairs of linear maps preserving c, connection, filtration and Φ. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†. (AM, Definition 2.1 and Remark 2.2, pp. 3–4; AM line 117, AM line 131, AM line 155).
+Define FilFMIC(S,σ) as the category with objects (H_dR,H_rig,c,∇,F,Φ): coherent B_K- and B†_K-modules, c:H_dR⊗B_K B†_K≃H_rig, an integrable algebraic connection on H_dR, a finite exhaustive separated descending integer filtration with finite locally free graded pieces satisfying ∇F^j⊆Ω¹⊗F^(j−1), and a horizontal B†_K-linear isomorphism Φ:σ*H_rig≃H_rig. The induced connection on H_rig uses continuous differentials. Morphisms are pairs of linear maps preserving c, connection, filtration and Φ. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†. (AM, Definition 2.1 and Remark 2.2, pp. 3–4; AM line 117, AM line 131, AM line 155).
 
-Define `FilFMIC.ofData`: The displayed geometric data and verified axioms construct an object. Prove `FilFMIC.hom_ext`: Two morphisms with equal de Rham and rigid component maps are equal. Prove `FilFMIC.fiberProductEquivalence`: Identify this category with filtered connections fibred over connections against overconvergent Frobenius connections. Define `FilFMIC.forget`: Give additive realization functors and their coefficient-extension comparison; the de Rham realization is faithful, since c determines the rigid component. The rigid realization need not be faithful on generic-only components.
+- The displayed geometric data and verified axioms construct an object.
+- Two morphisms with equal de Rham and rigid component maps are equal.
+- Identify this category with filtered connections fibred over connections against overconvergent Frobenius connections.
+- Give additive realization functors and their coefficient-extension comparison; the de Rham realization is faithful, since c determines the rigid component. The rigid realization need not be faithful on generic-only components.
 
 Use the supplied coefficient/connection realization and form the fibre product category. Composition is componentwise; compatibility and horizontality are preserved by it. Local freeness of the finite filtration makes the underlying algebraic module finite projective on S_K.
 
@@ -189,17 +194,20 @@ Use the supplied coefficient/connection realization and form the fibre product c
 
 **Checks.**
 
-- `FilFMIC.ofData_zero`: Both modules zero, the unique connection and finite zero filtration give the zero object; Φ:0≃0 is invertible.
-- `FilFMIC.ofData_unit`: Rank one with c natural, ∇=d, F⁰=B_K, F¹=0, Φ=σ is an object; its constant horizontal section 1 is fixed.
-- `FilFMIC.ofData_nonhorizontal`: Over V[t,t⁻¹] with σ(t)=t^p, trivial ∇ and Φ(e)=t e fail horizontality since ∇Φ(e)=dt⊗e≠0. Invertibility alone must not admit this datum.
-- `FilFMIC.ofData_ramifiedBaseObstruction`: For V=ℤ_p[π] with π²=p, a ring endomorphism fixing p sends π to valuation 1, while π^p has valuation at least 2. Their difference cannot lie in pV=(π²). Thus the required p-Frobenius modulo p does not exist, including at p=2. This base is admitted in the classical layers, not as an AM base.
-- `FilFMIC.ofData_genericOnlyRealization`: For S=Spec(K) as a smooth affine V-scheme, B†=0. The datum H_dR=K,H_rig=0 with the unit filtration is admitted, and its identity is nonzero on de Rham realization but zero on rigid realization. Only the de Rham realization is asserted faithful.
+- Both modules zero, the unique connection and finite zero filtration give the zero object; Φ:0≃0 is invertible.
+- Rank one with c natural, ∇=d, F⁰=B_K, F¹=0, Φ=σ is an object; its constant horizontal section 1 is fixed.
+- Over V[t,t⁻¹] with σ(t)=t^p, trivial ∇ and Φ(e)=t e fail horizontality since ∇Φ(e)=dt⊗e≠0. Invertibility alone must not admit this datum.
+- For V=ℤ_p[π] with π²=p, a ring endomorphism fixing p sends π to valuation 1, while π^p has valuation at least 2. Their difference cannot lie in pV=(π²). Thus the required p-Frobenius modulo p does not exist, including at p=2. This base is admitted in the classical layers, not as an AM base.
+- For S=Spec(K) as a smooth affine V-scheme, B†=0. The datum H_dR=K,H_rig=0 with the unit filtration is admitted, and its identity is nonzero on de Rham realization but zero on rigid realization. Only the de Rham realization is asserted faithful.
 
 ### 1.2 Tensor operations, Tate twists and transport
 
-Construct `FilFMIC.tensorTatePullback`. On FilFMIC define direct sums, tensor with the convolution filtration and tensor connection, the tensor unit, and duals with their dual filtration and inverse-transpose Frobenius. For every integer m define O_S(m) by Φ=p^(−m)σ and F^(−m)=B_K, F^(−m+1)=0. A morphism g:S′→S of smooth affine V-schemes induces a tensor pullback. Change of compatible Frobenius lift σ→σ′ gives tensor equivalences satisfying identity and cocycle laws; no equation gσ′=σg is required when pullback is defined through isocrystals. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; S′ is smooth affine and carries a compatible Frobenius lift. (AM, Remark 2.2, Definition 2.3 and (2.1), pp. 4–5; AM line 164, AM line 171, AM line 181, AM line 206).
+On FilFMIC define direct sums, tensor with the convolution filtration and tensor connection, the tensor unit, and duals with their dual filtration and inverse-transpose Frobenius. For every integer m define O_S(m) by Φ=p^(−m)σ and F^(−m)=B_K, F^(−m+1)=0. A morphism g:S′→S of smooth affine V-schemes induces a tensor pullback. Change of compatible Frobenius lift σ→σ′ gives tensor equivalences satisfying identity and cocycle laws; no equation gσ′=σg is required when pullback is defined through isocrystals. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; S′ is smooth affine and carries a compatible Frobenius lift. (AM, Remark 2.2, Definition 2.3 and (2.1), pp. 4–5; AM line 164, AM line 171, AM line 181, AM line 206).
 
-Prove `FilFMIC.tateTensor`: O(a)⊗O(b)≃O(a+b), with Φ=p^(−a−b)σ and the stated filtration. Prove `FilFMIC.pullback_comp`: Pullbacks compose up to the canonical tensor natural isomorphism; identity pullback is identity. Prove `FilFMIC.changeFrobenius_cocycle`: The equivalences for σ,σ′,σ″ compose canonically and preserve the de Rham component. Prove `FilFMIC.dualEvaluation`: The evaluation and coevaluation are horizontal, filtered and Frobenius compatible and satisfy the triangle identities.
+- O(a)⊗O(b)≃O(a+b), with Φ=p^(−a−b)σ and the stated filtration.
+- Pullbacks compose up to the canonical tensor natural isomorphism; identity pullback is identity.
+- The equivalences for σ,σ′,σ″ compose canonically and preserve the de Rham component.
+- The evaluation and coevaluation are horizontal, filtered and Frobenius compatible and satisfy the triangle identities.
 
 Tensor and dualize finite projective realizations; use the isocrystal realization equivalence for Frobenius transport. The scalar p is nonzero in K, hence invertible; negative twists use integer powers only in characteristic zero.
 
@@ -207,15 +215,20 @@ Tensor and dualize finite projective realizations; use the isocrystal realizatio
 
 **Checks.**
 
-- `FilFMIC.tensorTatePullback_twistOne`: O(1) has F⁰=0, F⁻¹=B_K and Φ=p⁻¹σ; the opposite exponent is rejected.
-- `FilFMIC.tensorTatePullback_tensorCancel`: O(1)⊗O(−1)≃O(0), and a zero factor gives zero.
-- `FilFMIC.tensorTatePullback_identityPullback`: Identity base map and unchanged σ give the identity on every component, not an extra scalar automorphism.
+- O(1) has F⁰=0, F⁻¹=B_K and Φ=p⁻¹σ; the opposite exponent is rejected.
+- O(1)⊗O(−1)≃O(0), and a zero factor gives zero.
+- Identity base map and unchanged σ give the identity on every component, not an extra scalar automorphism.
 
 ### 1.3 Strict exactness and Yoneda functoriality
 
-Construct `FilFMIC.exactStructure`. Equip FilFMIC with a `TauCeti.ExactStructure` whose conflations 0→H′→H→H″→0 are exact on F^j of the de Rham realization for every j∈ℤ. Compare with strict exactness and the induced rigid exact sequence. Prove `TauCeti.ExactStructure.IsMonoidal` for this exact structure and the symmetric ℚ_p-bilinear tensor of 1.2. Duality from `TauCeti.ExactStructure.op` and the pullbacks and equivalences of 1.2 satisfy `TauCeti.ExactStructure.IsConflationExact`. On the supplied general Yoneda construction export Ext^i(H,H′) for i≥0, Baer addition, ℚ_p-linearity, splicing, pushout, pullback and coefficient-category naturality. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; use an essentially small model, with Ext transported back independently of the model. (AM, Exact structure and Yoneda groups, p. 5; AM line 186–217; Buhler Definition 2.1, p. 5, Buhler line 195).
+Equip FilFMIC with a `TauCeti.ExactStructure` whose conflations 0→H′→H→H″→0 are exact on F^j of the de Rham realization for every j∈ℤ. Compare with strict exactness and the induced rigid exact sequence. Prove `TauCeti.ExactStructure.IsMonoidal` for this exact structure and the symmetric ℚ_p-bilinear tensor of 1.2. Duality from `TauCeti.ExactStructure.op` and the pullbacks and equivalences of 1.2 satisfy `TauCeti.ExactStructure.IsConflationExact`. On the supplied general Yoneda construction export Ext^i(H,H′) for i≥0, Baer addition, ℚ_p-linearity, splicing, pushout, pullback and coefficient-category naturality. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; use an essentially small model, with Ext transported back independently of the model. (AM, Exact structure and Yoneda groups, p. 5; AM line 186–217; Buhler Definition 2.1, p. 5, Buhler line 195).
 
-Prove `FilFMIC.conflation_iff`: A short sequence is a conflation exactly when each F^j sequence is exact. Prove `FilFMIC.exactStructure_isMonoidal`: The tensor of 1.2 preserves conflations on both sides, giving TauCeti.ExactStructure.IsMonoidal for FilFMIC.exactStructure. Prove `FilFMIC.ext_map`: Conflation-exact functors induce maps on all Yoneda groups, commuting with splicing and Baer addition. Prove `FilFMIC.ext_zero`: Ext⁰ is Hom and split 1-extensions represent zero. Prove `FilFMIC.ext_universe`: Changing the small model induces canonical group isomorphisms preserving representatives. Prove `FilFMIC.ext_cup`: The biexact tensor product gives Ext^i(O,H)×Ext^j(O,H′)→Ext^(i+j)(O,H⊗H′) for i,j≥0, compatible with associativity, the unit and the Koszul symmetry.
+- A short sequence is a conflation exactly when each F^j sequence is exact.
+- The tensor of 1.2 preserves conflations on both sides, giving TauCeti.ExactStructure.IsMonoidal for this exact structure.
+- Conflation-exact functors induce maps on all Yoneda groups, commuting with splicing and Baer addition.
+- Ext⁰ is Hom and split 1-extensions represent zero.
+- Changing the small model induces canonical group isomorphisms preserving representatives.
+- The biexact tensor product gives Ext^i(O,H)×Ext^j(O,H′)→Ext^(i+j)(O,H⊗H′) for i,j≥0, compatible with associativity, the unit and the Koszul symmetry.
 
 Check the Quillen axioms by filtered module pushouts/pullbacks and locally split graded pieces, transporting the rigid component along c; use the coefficient exactness contract. Apply general exact-category Yoneda theory, rather than Mathlib HasExt on a category without an abelian structure. Biexact tensor gives the external extension product; pull back along O≃O⊗O for the unit-source cup.
 
@@ -223,17 +236,26 @@ Check the Quillen axioms by filtered module pushouts/pullbacks and locally split
 
 **Checks.**
 
-- `FilFMIC.exactStructure_splitExtension`: 0→H→H⊕O→O→0 is exact on each filtration step and has Yoneda class zero.
-- `FilFMIC.exactStructure_zeroCoefficient`: Ext¹(O,0)=0 and Ext⁰(O,O) is the actual filtered horizontal Frobenius-compatible endomorphism group.
-- `FilFMIC.exactStructure_nonStrictIdentity`: At Spec(ℤ_p), take A with F⁰A=K and B with F⁰B=0, F⁻¹B=K, both Φ=σ. The identity B→A is a morphism but not an isomorphism or a strict admissible map; its inverse does not preserve F⁰. Underlying-module exactness must not define conflations.
+- 0→H→H⊕O→O→0 is exact on each filtration step and has Yoneda class zero.
+- Ext¹(O,0)=0 and Ext⁰(O,O) is the actual filtered horizontal Frobenius-compatible endomorphism group.
+- At Spec(ℤ_p), take A with F⁰A=K and B with F⁰B=0, F⁻¹B=K, both Φ=σ. The identity B→A is a morphism but not an isomorphism or a strict admissible map; its inverse does not preserve F⁰. Underlying-module exactness must not define conflations.
 
 ### 1.4 The coefficient mapping fibre
 
-Define `FilFMIC.syntomicConnectionComplex`. For H∈FilFMIC set A_H^j=Ω^j_(B_K/K)⊗F^(−j)H_dR and B_H^j=Ω^j_(B†_K/K)⊗H_rig for j≥0, zero otherwise. Their differential sends ω⊗h to dω⊗h+(−1)^jω∧∇h. Define S_σ(H)=Fib(1−Φ:A_H→B_H), where Φ includes σ on forms and c identifies the coefficients. This is a functor to complexes of ℚ_p-vector spaces, exact on conflations. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; Ω on B† uses the supplied continuous differential module. (AM, Definition 2.4 and (2.2), pp. 6–7; AM line 224, AM line 249, AM line 258).
+For H∈FilFMIC set A_H^j=Ω^j_(B_K/K)⊗F^(−j)H_dR and B_H^j=Ω^j_(B†_K/K)⊗H_rig for j≥0, zero otherwise. Their differential sends ω⊗h to dω⊗h+(−1)^jω∧∇h. Define S_σ(H)=Fib(1−Φ:A_H→B_H), where Φ includes σ on forms and c identifies the coefficients. This is a functor to complexes of ℚ_p-vector spaces, exact on conflations. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; Ω on B† uses the supplied continuous differential module. (AM, Definition 2.4 and (2.2), pp. 6–7; AM line 224, AM line 249, AM line 258).
 
-Prove `FilFMIC.syntomicConnectionComplex_d`: Fib(f)^j=A^j⊕B^(j−1) and d(a,b)=(da,f(a)−db), with an explicit isomorphism to the supplied cone[-1]. Prove `FilFMIC.syntomicConnectionComplex_d_sq`: The differential squares to zero by integrability, horizontality and transversality. Prove `FilFMIC.syntomicConnectionComplex_map`: Morphisms act componentwise and yield a fibre triangle natural in H. Prove `FilFMIC.syntomicConnectionComplex_exact`: A conflation gives a degreewise short exact sequence of coefficient fibre complexes. Prove `FilFMIC.syntomicConnectionComplex_cup`: Construct the natural homotopy-coherent pairing S(H)⊗S(H′)→S(H⊗H′) from the two multiplicative maps 1 and Φ, giving the unit and graded symmetry on cohomology.
+- Fib(f)^j=A^j⊕B^(j−1) and d(a,b)=(da,f(a)−db), with an explicit isomorphism to the supplied cone[-1].
+- The differential squares to zero by integrability, horizontality and transversality.
+- Morphisms act componentwise and yield a fibre triangle natural in H.
+- A conflation gives a degreewise short exact sequence of coefficient fibre complexes.
+- Construct the natural homotopy-coherent pairing S(H)⊗S(H′)→S(H⊗H′) from the two multiplicative maps 1 and Φ, giving the unit and graded symmetry on cohomology.
 
-Define `FilFMIC.fiberCoordinatesDifferential` as the degreewise coordinate map (a,b)↦(d_Aa,f(a)−d_Bb) for ℚ-linear d_A:A^q→A^(q+1), d_B:B^(q−1)→B^q and f:A^q→B^q. This coordinate map acts on the underlying vector spaces of the supplied cone. Its named API is `FilFMIC.fiberCoordinatesDifferential_apply`, `FilFMIC.fiberCoordinatesDifferential_add`, `FilFMIC.fiberCoordinatesDifferential_smul` and `FilFMIC.fiberCoordinatesDifferential_zero`, giving the formula, additivity, scalar compatibility and zero value (AM line 255–258; MathlibCone line 61–92).
+Use the degreewise fibre coordinate map (a,b)↦(d_Aa,f(a)−d_Bb) for ℚ-linear d_A:A^q→A^(q+1), d_B:B^(q−1)→B^q and f:A^q→B^q, on the underlying vector spaces of the supplied cone (AM line 255–258; MathlibCone line 61–92). Its coordinate API is:
+
+- The first component is d_Aa and the second is f(a)−d_Bb.
+- The map preserves addition of coordinate pairs.
+- The map commutes with multiplication by every ℚ-scalar.
+- The zero pair maps to the zero pair.
 
 Griffiths transversality makes A a subcomplex, integrability gives d²=0, and Frobenius horizontality gives a chain map. Apply the enhanced fibre construction and strict exactness termwise. Compare the chosen coordinates to Mathlib mappingCone rather than redefine cones. The identity 1−Φ on a tensor product decomposes into the two tensor maps, giving the standard fibre pairing; its homotopies give the unit and symmetry on cohomology.
 
@@ -241,21 +263,24 @@ Griffiths transversality makes A a subcomplex, integrability gives d²=0, and Fr
 
 **Checks.**
 
-- `FilFMIC.syntomicConnectionComplex_pointUnit`: At k=𝔽_p, S(O(0)) is [ℚ_p —0→ ℚ_p] in degrees 0,1; both cohomology groups are ℚ_p. The degree-zero class 1 is the cup unit.
-- `FilFMIC.syntomicConnectionComplex_pointTate`: At the same point S(O(1)) is ℚ_p in degree 1, since F⁰O(1)=0. It is not the fibre of 1−p⁻¹ on all of K.
-- `FilFMIC.syntomicConnectionComplex_zero`: S(0)=0. The two-term fibre of multiplication 2 on ℚ is [ℚ —2→ ℚ], with d(a)=(0,2a), the second component carrying +f(a); it is acyclic since 2 is invertible in ℚ.
+- At k=𝔽_p, S(O(0)) is [ℚ_p —0→ ℚ_p] in degrees 0,1; both cohomology groups are ℚ_p. The degree-zero class 1 is the cup unit.
+- At the same point S(O(1)) is ℚ_p in degree 1, since F⁰O(1)=0. It is not the fibre of 1−p⁻¹ on all of K.
+- S(0)=0. The two-term fibre of multiplication 2 on ℚ is [ℚ —2→ ℚ], with d(a)=(0,2a), the second component carrying +f(a); it is acyclic since 2 is invertible in ℚ.
 
 **Checks for the fibre coordinates.**
 
-- `FilFMIC.fiberCoordinatesDifferential_positive`: With d_A=0, d_B=id and f=2 on ℚ, the input (1,0) maps to (0,2). Negating f would give (0,−2).
-- `FilFMIC.fiberCoordinatesDifferential_shift`: For the same coordinate maps, (0,1) maps to (0,−1). Forgetting the shift sign would give (0,1).
-- `FilFMIC.fiberCoordinatesDifferential_first`: With d_A=id, d_B=2·id and f=3·id on ℚ, the input (2,5) maps to (2,−4). Deleting d_A would give (0,−4).
+- With d_A=0, d_B=id and f=2 on ℚ, the input (1,0) maps to (0,2). Negating f would give (0,−2).
+- For the same coordinate maps, (0,1) maps to (0,−1). Forgetting the shift sign would give (0,1).
+- With d_A=id, d_B=2·id and f=3·id on ℚ, the input (2,5) maps to (2,−4). Deleting d_A would give (0,−4).
 
 ### 1.5 Evaluation of extensions
 
-Construct `FilFMIC.extEvaluation`. For every i≥0 and H∈FilFMIC construct the ℚ_p-linear map u_i:Ext^i(O_S,H)→H^i(S_σ(H)). For an admissible i-extension, apply S_σ and send 1∈H⁰(S_σ(O_S)) to its iterated connecting image. At i=0 it sends f:O_S→H to the class f(1). Prove independence of the extension representative, additivity, pushout/pullback naturality and compatibility with the de Rham projection to H^i(A_H). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†. (AM, Equations (2.3)–(2.7), pp. 6–7; AM line 229, AM line 258, AM line 266).
+For every i≥0 and H∈FilFMIC construct the ℚ_p-linear map u_i:Ext^i(O_S,H)→H^i(S_σ(H)). For an admissible i-extension, apply S_σ and send 1∈H⁰(S_σ(O_S)) to its iterated connecting image. At i=0 it sends f:O_S→H to the class f(1). Prove independence of the extension representative, additivity, pushout/pullback naturality and compatibility with the de Rham projection to H^i(A_H). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†. (AM, Equations (2.3)–(2.7), pp. 6–7; AM line 229, AM line 258, AM line 266).
 
-Prove `FilFMIC.extEvaluation_representative`: u_i sends a representative to δ(1), with connecting maps in extension order. Prove `FilFMIC.extEvaluation_natural`: Base pullback, coefficient morphisms and change-of-σ realization commute with u_i. Prove `FilFMIC.extEvaluation_deRham`: Projection to A_H agrees with evaluation after forgetting Φ. Prove `FilFMIC.extEvaluation_cup`: For i,j≥0, u_(i+j)(E cup E′)=u_i(E) cup u_j(E′), using ext_cup and syntomicConnectionComplex_cup with their actual coefficient tensor.
+- u_i sends a representative to δ(1), with connecting maps in extension order.
+- Base pullback, coefficient morphisms and change-of-σ realization commute with u_i.
+- Projection to A_H agrees with evaluation after forgetting Φ.
+- For i,j≥0, u_(i+j)(E cup E′)=u_i(E) cup u_j(E′), using the extension cup of §1.3 and the fibre pairing of §1.4 with their actual coefficient tensor.
 
 Degreewise exactness gives connecting maps. Naturality under extension diagrams gives descent through zigzags, and the diagonal/codiagonal definition of Baer sum proves additivity. The class of 1 is used even on disconnected S; no assertion H⁰(S(O))=ℚ_p is needed. Tensor the representative extensions and compare their connecting maps in the resulting bicomplex to prove the cup identity, including the cochain sign.
 
@@ -263,15 +288,18 @@ Degreewise exactness gives connecting maps. Naturality under extension diagrams 
 
 **Checks.**
 
-- `FilFMIC.extEvaluation_degreeZeroTate`: At Spec(ℤ_p), Hom(O,O(1))=0 because F⁰O(1)=0, whereas Hom(O,O(0))=ℚ_p is identified by u_0 with the horizontal Φ-fixed part of F⁰O(0). Frobenius compatibility alone also forces Hom(O,O(1))=0: a=p⁻¹a implies a=0. To test filtration separately, take the rank-one object T with c=id, ∇=0, Φ=1, F⁰T=0 and F⁻¹T=ℚ_p. Then Hom_FilFMIC(O,T)=0, while forgetting filtration gives Hom(O,T)=ℚ_p; the scalar identity fails precisely filtration preservation (AM line 152–154, AM line 181–184).
-- `FilFMIC.extEvaluation_split`: Every split 1-extension evaluates to zero.
-- `FilFMIC.extEvaluation_pointNonSplit`: Over Spec(ℤ_p), extension with basis h,e, F⁰M=M, ∇=0, Φh=h, Φe=e−h gives u_1=(0,h) in coker(1−Φ on H)=ℚ_p. This is nonzero; it detects reversal of 1−Φ.
+- At Spec(ℤ_p), Hom(O,O(1))=0 because F⁰O(1)=0, whereas Hom(O,O(0))=ℚ_p is identified by u_0 with the horizontal Φ-fixed part of F⁰O(0). Frobenius compatibility alone also forces Hom(O,O(1))=0: a=p⁻¹a implies a=0. To test filtration separately, take the rank-one object T with c=id, ∇=0, Φ=1, F⁰T=0 and F⁻¹T=ℚ_p. Then Hom_FilFMIC(O,T)=0, while forgetting filtration gives Hom(O,T)=ℚ_p; the scalar identity fails precisely filtration preservation (AM line 152–154, AM line 181–184).
+- Every split 1-extension evaluates to zero.
+- Over Spec(ℤ_p), extension with basis h,e, F⁰M=M, ∇=0, Φh=h, Φe=e−h gives u_1=(0,h) in coker(1−Φ on H)=ℚ_p. This is nonzero; it detects reversal of 1−Φ.
 
 ### 1.6 Canonical representatives and the two projections
 
-Prove `FilFMIC.extEvaluation_injective`. If F⁰H_dR=0, u_1 is injective. For every conflation 0→H→M→O_S→0 there is a unique e∈F⁰M_dR mapping to 1. Under c its class is (∇e,(1−Φ)e); it satisfies d∇e=0 and (1−Φ)∇e=d((1−Φ)e). Thus define δ(E)=∇e and R_σ(E)=(1−Φ)e without a quotient ambiguity. δ is unchanged by Frobenius-lift transport. Under the identified underlying extension and filtered lift e, R_σ′−R_σ=(Φ_σ−Φ_σ′)e, where Φ_σ′ is the transported Frobenius from the supplied isocrystal equivalence. No σ-independence of R is asserted. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; F⁰H_dR=0. (AM, Lemma 2.5, (2.10) and (2.22), pp. 7–8,19; AM line 283, AM line 289, AM line 795, AM line 808).
+If F⁰H_dR=0, u_1 is injective. For every conflation 0→H→M→O_S→0 there is a unique e∈F⁰M_dR mapping to 1. Under c its class is (∇e,(1−Φ)e); it satisfies d∇e=0 and (1−Φ)∇e=d((1−Φ)e). Thus define δ(E)=∇e and R_σ(E)=(1−Φ)e without a quotient ambiguity. δ is unchanged by Frobenius-lift transport. Under the identified underlying extension and filtered lift e, R_σ′−R_σ=(Φ_σ−Φ_σ′)e, where Φ_σ′ is the transported Frobenius from the supplied isocrystal equivalence. No σ-independence of R is asserted. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; F⁰H_dR=0. (AM, Lemma 2.5, (2.10) and (2.22), pp. 7–8,19; AM line 283, AM line 289, AM line 795, AM line 808).
 
-Prove `FilFMIC.extension_filteredLift`: Strict exactness identifies F⁰M_dR with B_K, so the lift is unique. Prove `FilFMIC.extEvaluation_injective`: A zero representative yields a horizontal Φ-fixed filtered splitting; a splitting yields zero. Prove `FilFMIC.delta`: The first component lies in Ω¹⊗F⁻¹H_dR and equals the de Rham evaluation. Prove `FilFMIC.frobeniusRemainder`: The second component lies in H_rig and satisfies dR_σ=(1−Φ)δ.
+- Strict exactness identifies F⁰M_dR with B_K, so the lift is unique.
+- A zero representative yields a horizontal Φ-fixed filtered splitting; a splitting yields zero.
+- The first component lies in Ω¹⊗F⁻¹H_dR and equals the de Rham evaluation.
+- The second component lies in H_rig and satisfies dR_σ=(1−Φ)δ.
 
 Since F⁰H=0, the degree-zero source A_H is zero. A zero degree-one class is then the zero pair, not merely an arbitrary coboundary. Its lift is a filtered horizontal Frobenius-fixed splitting. This target uses no Milnor-symbol construction.
 
@@ -279,9 +307,9 @@ Since F⁰H=0, the degree-zero source A_H is zero. A zero degree-one class is th
 
 **Checks.**
 
-- `FilFMIC.extEvaluation_injective_splitLift`: In H⊕O the lift e=(0,1) gives δ=0 and R_σ=0.
-- `FilFMIC.extEvaluation_injective_pointTateRemainder`: For H=O(1) at Spec(ℤ_p), Φe=e+a h gives (∇e,(1−Φ)e)=(0,−a h). The sign must be negative.
-- `FilFMIC.extEvaluation_injective_noFzero`: For H=O(0) at the same point, lifts of 1 in a split extension differ by c h. Therefore unique-lift coordinate projections are not exported without F⁰H=0.
+- In H⊕O the lift e=(0,1) gives δ=0 and R_σ=0.
+- For H=O(1) at Spec(ℤ_p), Φe=e+a h gives (∇e,(1−Φ)e)=(0,−a h). The sign must be negative.
+- For H=O(0) at the same point, lifts of 1 in a split extension differ by c h. Therefore unique-lift coordinate projections are not exported without F⁰H=0.
 
 ### Examples
 
@@ -295,9 +323,11 @@ Tau Ceti exact structures and conflation-exact functors; AdicSpacesPartIV §§F1
 
 ### 2.1 The de Rham-to-rigid diagram
 
-Construct `RigidSyntomic.specializationDiagram`. For smooth separated finite-type X/V construct, on the imported realization carriers, the natural map sp_X:RΓ_dR(X_K/K)→RΓ_rig(X_k/K), its composites sp_r from F^rRΓ_dR, and its compatibility with pullback, finite field extension and products. Retain the scalar-extension map bc:A=RΓ_rig(X_k/K0)→C=RΓ_rig(X_k/K) and σ-semilinear φ on A. Choices of algebraic compactification, rigid frame and resolution yield coherently equivalent diagrams, not additional intrinsic structure on X. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0. (BesserI, §5 and §4.22, manuscript pp. 16–18; BesserI line 625, BesserI line 648, BesserI line 663).
+For smooth separated finite-type X/V construct, on the imported realization carriers, the natural map sp_X:RΓ_dR(X_K/K)→RΓ_rig(X_k/K), its composites sp_r from F^rRΓ_dR, and its compatibility with pullback, finite field extension and products. Retain the scalar-extension map bc:A=RΓ_rig(X_k/K0)→C=RΓ_rig(X_k/K) and σ-semilinear φ on A. Choices of algebraic compactification, rigid frame and resolution yield coherently equivalent diagrams, not additional intrinsic structure on X. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0. (BesserI, §5 and §4.22, manuscript pp. 16–18; BesserI line 625, BesserI line 648, BesserI line 663).
 
-Prove `RigidSyntomic.specialization_natural`: For f:Y→X, f*_rig sp_X=sp_Y f*_dR, with the coherent comparison on resolutions. Prove `RigidSyntomic.specialization_filtered`: sp_(r+1) factors through the filtration map F^(r+1)→F^r. Prove `RigidSyntomic.specialization_product`: sp_(r+s)(a∪b)=sp_r(a)∪sp_s(b).
+- For f:Y→X, f*_rig sp_X=sp_Y f*_dR, with the coherent comparison on resolutions.
+- sp_(r+1) factors through the filtration map F^(r+1)→F^r.
+- sp_(r+s)(a∪b)=sp_r(a)∪sp_s(b).
 
 Pass from logarithmic algebraic forms on a smooth proper generic-fibre compactification to analytic forms, then to the tube of the special fibre and overconvergent forms. Use the supplied independence and common-refinement comparisons. No new rigid cohomology realization or compactification-existence theorem is built here.
 
@@ -305,15 +335,18 @@ Pass from logarithmic algebraic forms on a smooth proper generic-fibre compactif
 
 **Checks.**
 
-- `RigidSyntomic.specializationDiagram_point`: For Spec(V), sp in degree zero is id_K and bc is K0→K.
-- `RigidSyntomic.specializationDiagram_empty`: For the empty scheme every realization and map is zero.
-- `RigidSyntomic.specializationDiagram_notEquivalence`: For Spec(K) regarded as a smooth finite-type V-scheme, sp:K→0 in degree zero is not an equivalence. No equivalence is attached to general smooth open X.
+- For Spec(V), sp in degree zero is id_K and bc is K0→K.
+- For the empty scheme every realization and map is zero.
+- For Spec(K) regarded as a smooth finite-type V-scheme, sp:K→0 in degree zero is not an equivalence. No equivalence is attached to general smooth open X.
 
 ### 2.2 The rigid syntomic fibre
 
-Define `RigidSyntomic.complex` by RΓ_rsyn(X,r)=Fib(f_r:A⊕F^rRΓ_dR(X_K/K)→A⊕C) in enhanced ℚ_p-complexes, where f_r(a,b)=((1−p^(−r)φ)a,bc(a)−sp_r(b)). Define H^q_rsyn(X,r)=H^q of this fibre for q∈ℤ. This is contravariant in smooth separated finite-type X/V and independent of all presentations. The Frobenius part is ℚ_p-linear; it is not generally K0-linear. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0. (BesserI, Definition 6.1, Proposition 6.3 and its cone description, manuscript pp. 19–20; BesserI line 704, BesserI line 712, BesserI line 741).
+Define the rigid syntomic complex by RΓ_rsyn(X,r)=Fib(f_r:A⊕F^rRΓ_dR(X_K/K)→A⊕C) in enhanced ℚ_p-complexes, where f_r(a,b)=((1−p^(−r)φ)a,bc(a)−sp_r(b)). Define H^q_rsyn(X,r)=H^q of this fibre for q∈ℤ. This is contravariant in smooth separated finite-type X/V and independent of all presentations. The Frobenius part is ℚ_p-linear; it is not generally K0-linear. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0. (BesserI, Definition 6.1, Proposition 6.3 and its cone description, manuscript pp. 19–20; BesserI line 704, BesserI line 712, BesserI line 741).
 
-Prove `RigidSyntomic.complex_fiberTriangle`: The fibre has its two projections and null-homotopies for f_r, and satisfies the enhanced fibre universal property. Prove `RigidSyntomic.complex_map`: Pullback preserves both component projections and composes coherently. Prove `RigidSyntomic.complex_independent`: A refinement of presentation induces an equivalence commuting with all component maps. Prove `RigidSyntomic.cohomology`: Take cohomology as ℚ_p-vector spaces, with no artificial K0-linearity requirement.
+- The fibre has its two projections and null-homotopies for f_r, and satisfies the enhanced fibre universal property.
+- Pullback preserves both component projections and composes coherently.
+- A refinement of presentation induces an equivalence commuting with all component maps.
+- Take cohomology as ℚ_p-vector spaces, with no artificial K0-linearity requirement.
 
 Apply the enhanced fibre construction to the actual diagram in 2.1. Forgetting enhancements recovers Besser’s iterated cone via the two cone projections. All maps are formed in ℚ_p-complexes so σ-semilinearity causes no invalid scalar-linear morphism.
 
@@ -321,15 +354,18 @@ Apply the enhanced fibre construction to the actual diagram in 2.1. Forgetting e
 
 **Checks.**
 
-- `RigidSyntomic.complex_pointWeightZero`: For V=ℤ_p and r=0, f(a,b)=(0,a−b). Thus H⁰=ℚ_p on the diagonal, H¹=ℚ_p on the first target component, and all other groups vanish.
-- `RigidSyntomic.complex_pointPositiveWeight`: For V=ℤ_p and r>0, F^rRΓ_dR=0 and f(a)=((1−p^(−r))a,a); H⁰=0 and H¹=ℚ_p. This retains the two different target components.
-- `RigidSyntomic.complex_genericOnly`: If X_k is empty, the fibre is F^rRΓ_dR(X_K), rather than zero.
+- For V=ℤ_p and r=0, f(a,b)=(0,a−b). Thus H⁰=ℚ_p on the diagonal, H¹=ℚ_p on the first target component, and all other groups vanish.
+- For V=ℤ_p and r>0, F^rRΓ_dR=0 and f(a)=((1−p^(−r))a,a); H⁰=0 and H¹=ℚ_p. This retains the two different target components.
+- If X_k is empty, the fibre is F^rRΓ_dR(X_K), rather than zero.
 
 ### 2.3 Exact sequence, descent, products and the unramified presentation
 
-Prove `RigidSyntomic.basicTheory`. The fibre triangle of 2.2 gives, for every q∈ℤ, the long exact sequence with middle map H^q(A⊕F^rRΓ_dR)→H^q(A⊕C) induced by f_r. Finite Zariski Čech covers give descent. Construct associative unital graded-commutative products H^i_rsyn(X,r)×H^j_rsyn(X,s)→H^(i+j)_rsyn(X,r+s), compatible with both realization maps and pullback. If K=K0, identify RΓ_rsyn(X,r) with Fib((1−p^(−r)φ)sp_r:F^rRΓ_dR→RΓ_rig(X_k/K)), without assuming sp is invertible. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r,s≥0; the last equivalence assumes K=K0. (BesserI, Propositions 6.2–6.3, Definition 6.5 and Remark 8.7(3), manuscript pp. 19–20,28; BesserI line 719, BesserI line 727, BesserI line 752, BesserI line 1073).
+The fibre triangle of 2.2 gives, for every q∈ℤ, the long exact sequence with middle map H^q(A⊕F^rRΓ_dR)→H^q(A⊕C) induced by f_r. Finite Zariski Čech covers give descent. Construct associative unital graded-commutative products H^i_rsyn(X,r)×H^j_rsyn(X,s)→H^(i+j)_rsyn(X,r+s), compatible with both realization maps and pullback. If K=K0, identify RΓ_rsyn(X,r) with Fib((1−p^(−r)φ)sp_r:F^rRΓ_dR→RΓ_rig(X_k/K)), without assuming sp is invertible. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r,s≥0; the last equivalence assumes K=K0. (BesserI, Propositions 6.2–6.3, Definition 6.5 and Remark 8.7(3), manuscript pp. 19–20,28; BesserI line 719, BesserI line 727, BesserI line 752, BesserI line 1073).
 
-Prove `RigidSyntomic.longExact`: Every kernel equals the image of the preceding arrow, with the connecting map induced by the fixed fibre coordinates. Provide `RigidSyntomic.cup`: products carry the Koszul sign (−1)^(ij). Prove `RigidSyntomic.cech`: The pullback to a finite Čech nerve is an equivalence. Prove `RigidSyntomic.unramifiedFiber`: Eliminate the equation a=sp_r(b) in the second component of f_r to obtain the single fibre.
+- Every kernel equals the image of the preceding arrow, with the connecting map induced by the fixed fibre coordinates.
+- products carry the Koszul sign (−1)^(ij).
+- The pullback to a finite Čech nerve is an equivalence.
+- Eliminate the equation a=sp_r(b) in the second component of f_r to obtain the single fibre.
 
 Use exactness of the cohomology functor on the fibre triangle. Descent is checked on A,F^rDR,C. Products come from the multiplicative comparison diagram and the standard homotopy product on a fibre of 1−φ_r; pass to cohomology for graded commutativity. The unramified equivalence splits off the contractible identity component while retaining sp as a map.
 
@@ -337,9 +373,9 @@ Use exactness of the cohomology functor on the fibre triangle. Descent is checke
 
 **Checks.**
 
-- `RigidSyntomic.basicTheory_elimination`: At Spec(ℤ_p), r=0, the single fibre [ℚ_p —0→ ℚ_p] gives the groups of 2.2.
-- `RigidSyntomic.basicTheory_gMfrobenius`: For t on G_m and σ(t)=t^p, φ(dlog t)=p dlog t; in weight 1, (1−φ/p)dlog t=0. A twist p instead of p⁻¹ fails.
-- `RigidSyntomic.basicTheory_emptyProduct`: Cohomology of the empty scheme is zero and every product involving it vanishes.
+- At Spec(ℤ_p), r=0, the single fibre [ℚ_p —0→ ℚ_p] gives the groups of 2.2.
+- For t on G_m and σ(t)=t^p, φ(dlog t)=p dlog t; in weight 1, (1−φ/p)dlog t=0. A twist p instead of p⁻¹ fails.
+- Cohomology of the empty scheme is zero and every product involving it vanishes.
 
 ### Examples
 
@@ -353,9 +389,12 @@ AdicSpacesPartIV §§F1.5–F1.9; RigidAnalyticGeometry §§8.1,8.4; EnhancedDer
 
 ### 3.1 Divisibility before finite-level reduction
 
-Define `LogSyntomic.divisiblePD`. For a log-syntomic X/W(k), n≥1 and r≥0 define J_n^⟨r⟩ using a level n+s, s≥r, by the Frobenius-divisibility submodule of J_(n+s)^[r] on which φ lands in p^r O_cr,n+s, followed by the standard reduction modulo p^n. Construct φ_r:J_n^⟨r⟩→O_cr,n by division at that higher level. Prove auxiliary-level independence, Z/p^n-flatness, reduction J_(n+1)^⟨r⟩⊗Z/p^n≃J_n^⟨r⟩, and equality with J_n^[r] for 0≤r≤p−1. For j≤0 use J^[j]=O_cr and the source’s compatible degree conventions in PD de Rham presentations. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X is log-syntomic over W(k); n≥1; r≥0; s≥r. (EN, §2.1 and §2.1.1, pp. 4–5; EN line 158, EN line 165, EN line 198).
+For a log-syntomic X/W(k), n≥1 and r≥0 define J_n^⟨r⟩ using a level n+s, s≥r, by the Frobenius-divisibility submodule of J_(n+s)^[r] on which φ lands in p^r O_cr,n+s, followed by the standard reduction modulo p^n. Construct φ_r:J_n^⟨r⟩→O_cr,n by division at that higher level. Prove auxiliary-level independence, Z/p^n-flatness, reduction J_(n+1)^⟨r⟩⊗Z/p^n≃J_n^⟨r⟩, and equality with J_n^[r] for 0≤r≤p−1. For j≤0 use J^[j]=O_cr and the source’s compatible degree conventions in PD de Rham presentations. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X is log-syntomic over W(k); n≥1; r≥0; s≥r. (EN, §2.1 and §2.1.1, pp. 4–5; EN line 158, EN line 165, EN line 198).
 
-Prove `LogSyntomic.divisiblePD_independent`: The maps from larger s identify the reduced divisibility modules and φ_r. Prove `LogSyntomic.divisiblePD_reduce`: Reduction in n commutes with divided Frobenius. Prove `LogSyntomic.divisiblePD_smallWeight`: For r≤p−1 the inclusion into J_n^[r] is an equality. Prove `LogSyntomic.dividedFrobenius_spec`: On a divisible lift x, p^r times its divided image is φ(x), with independence proved using the higher level, not inferred from this equation modulo p^n alone.
+- The maps from larger s identify the reduced divisibility modules and φ_r.
+- Reduction in n commutes with divided Frobenius.
+- For r≤p−1 the inclusion into J_n^[r] is an equality.
+- On a divisible lift x, p^r times its divided image is φ(x), with independence proved using the higher level, not inferred from this equation modulo p^n alone.
 
 Use the supplied flat crystalline coefficient sheaves and their higher-level Frobenius divisibility. Compare all choices after passing to a common higher level and reducing. The PD valuation estimate gives the small-weight equality. These are filtered coefficient constructions, not inversion of p in Z/p^n.
 
@@ -363,15 +402,18 @@ Use the supplied flat crystalline coefficient sheaves and their higher-level Fro
 
 **Checks.**
 
-- `LogSyntomic.divisiblePD_weightZero`: At r=0, J_n^⟨0⟩=O_cr,n and φ_0=φ.
-- `LogSyntomic.divisiblePD_smallPrime`: At p=2,r=1, the small-weight equality J^⟨1⟩=J^[1] applies even though the exact period theorem of 4.3 has range r≤0.
-- `LogSyntomic.divisiblePD_noDivisionModp`: In Z/p, multiplication by p kills both 0 and 1. Thus the equation p y=0 does not define a unique divided image; a definition using arbitrary division modulo p is rejected.
+- At r=0, J_n^⟨0⟩=O_cr,n and φ_0=φ.
+- At p=2,r=1, the small-weight equality J^⟨1⟩=J^[1] applies even though the exact period theorem of 4.3 has range r≤0.
+- In Z/p, multiplication by p kills both 0 and 1. Thus the equation p y=0 does not define a unique divided image; a definition using arbitrary division modulo p is rejected.
 
 ### 3.2 Two integral fibres on their sites
 
-Define `LogSyntomic.complexes` as follows. S_n(r)=Fib(1−φ_r:J_n^⟨r⟩→O_cr,n) and S′_n(r)=Fib(p^r−φ:J_n^[r]→O_cr,n) on the log-syntomic site. On the étale site use their derived pushforward Rε_* and name the comparison explicitly. For every q∈ℤ give the corresponding crystalline long exact sequences, with J^⟨r⟩ for the divided version and J^[r] for the undivided version. On the syntomic site identify the divided fibre with the kernel sheaf using surjectivity; that identification is not silently transported to the étale site. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X is log-syntomic over W(k); n≥1; r≥0. (EN, §2.1, equation (2.1), pp. 4–5; EN line 158, EN line 169, EN line 178, EN line 196).
+Define the divided and undivided log-syntomic complexes as follows. S_n(r)=Fib(1−φ_r:J_n^⟨r⟩→O_cr,n) and S′_n(r)=Fib(p^r−φ:J_n^[r]→O_cr,n) on the log-syntomic site. On the étale site use their derived pushforward Rε_* and name the comparison explicitly. For every q∈ℤ give the corresponding crystalline long exact sequences, with J^⟨r⟩ for the divided version and J^[r] for the undivided version. On the syntomic site identify the divided fibre with the kernel sheaf using surjectivity; that identification is not silently transported to the étale site. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X is log-syntomic over W(k); n≥1; r≥0. (EN, §2.1, equation (2.1), pp. 4–5; EN line 158, EN line 169, EN line 178, EN line 196).
 
-Prove `LogSyntomic.dividedTriangle`: S_n(r) is the enhanced fibre with its natural projection and null-homotopy. Prove `LogSyntomic.undividedTriangle`: S′_n(r) is the fibre of the stated undivided map. Prove `LogSyntomic.realization`: Derived global sections agree with the crystalline coefficient fibre through the supplied realization. Prove `LogSyntomic.reduce`: Construct the transition maps in n and their compatible fibre triangles.
+- S_n(r) is the enhanced fibre with its natural projection and null-homotopy.
+- S′_n(r) is the fibre of the stated undivided map.
+- Derived global sections agree with the crystalline coefficient fibre through the supplied realization.
+- Construct the transition maps in n and their compatible fibre triangles.
 
 Apply the enhanced fibre and derived pushforward. The crystalline realization contract identifies RΓ of coefficient sheaves with crystalline complexes; the cohomology triangle gives exactness. Only on the syntomic site use surjectivity of 1−φ_r to replace the fibre by its kernel.
 
@@ -379,15 +421,18 @@ Apply the enhanced fibre and derived pushforward. The crystalline realization co
 
 **Checks.**
 
-- `LogSyntomic.complexes_weightZero`: S_n(0)=S′_n(0)=Fib(1−φ:O_cr,n→O_cr,n).
-- `LogSyntomic.complexes_zeroMapModel`: For zero endomorphism f:A[0]→B[0], the fibre has H⁰=A and H¹=B. Ordinary kernels would lose B.
-- `LogSyntomic.complexes_empty`: On the empty log scheme both derived global section complexes are zero.
+- S_n(0)=S′_n(0)=Fib(1−φ:O_cr,n→O_cr,n).
+- For zero endomorphism f:A[0]→B[0], the fibre has H⁰=A and H¹=B. Ordinary kernels would lose B.
+- On the empty log scheme both derived global section complexes are zero.
 
 ### 3.3 Error maps and multiplicative structure
 
-Construct `LogSyntomic.omegaTauProducts`. Construct ω_r:S′_n(r)→S_n(r) from (p^r,id) on source and target coefficients and τ_r:S_n(r)→S′_n(r) from (inclusion,p^r). Their composites are multiplication by p^r; on cohomology kernels and cokernels are annihilated by p^r. Construct the PD cup products in weights r,s≥0 for both families, compatible with crystalline products, transition maps and ω. Retain the source’s warning that τ has no general multiplicativity contract; no algebra-map instance for τ is exported. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X log-syntomic over W(k); n≥1; r,s≥0. (EN, §§2.1–2.1.2, pp. 5–6; EN line 193, EN line 219, EN line 243).
+Construct ω_r:S′_n(r)→S_n(r) from (p^r,id) on source and target coefficients and τ_r:S_n(r)→S′_n(r) from (inclusion,p^r). Their composites are multiplication by p^r; on cohomology kernels and cokernels are annihilated by p^r. Construct the PD cup products in weights r,s≥0 for both families, compatible with crystalline products, transition maps and ω. Retain the source’s warning that τ has no general multiplicativity contract; no algebra-map instance for τ is exported. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X log-syntomic over W(k); n≥1; r,s≥0. (EN, §§2.1–2.1.2, pp. 5–6; EN line 193, EN line 219, EN line 243).
 
-Prove `LogSyntomic.tau_omega`: τ_rω_r=p^r id and ω_rτ_r=p^r id. Prove `LogSyntomic.omega_error`: Every kernel and cokernel of H^q(ω_r), and of H^q(τ_r), is killed by p^r. Prove `LogSyntomic.omega_cup`: ω_(r+s)(a∪b)=ω_r(a)∪ω_s(b). Prove `LogSyntomic.cup_reduce`: Cup products commute with reduction n+1→n and with PD realization.
+- τ_rω_r=p^r id and ω_rτ_r=p^r id.
+- Every kernel and cokernel of H^q(ω_r), and of H^q(τ_r), is killed by p^r.
+- ω_(r+s)(a∪b)=ω_r(a)∪ω_s(b).
+- Cup products commute with reduction n+1→n and with PD realization.
 
 Verify each chain square before passing to the fibres. The two composite identities imply the kernel/cokernel bounds by elementary module algebra. Use the explicit PD fibre products of EN §2.1.2 and descend them to the étale site; assert only the supplied multiplicative comparison for ω.
 
@@ -395,15 +440,18 @@ Verify each chain square before passing to the fibres. The two composite identit
 
 **Checks.**
 
-- `LogSyntomic.omegaTauProducts_weightZero`: ω_0 and τ_0 are identity maps, and the error exponent is zero.
-- `LogSyntomic.omegaTauProducts_errorNotIso`: On the model module Z/p², the map multiplication p has kernel and cokernel killed by p but is not invertible. A killed-error assertion must not generate an integral equivalence.
-- `LogSyntomic.omegaTauProducts_productUnit`: The weight-zero unit acts as identity; odd degree classes use the cochain Koszul sign, including at p=2 without division by 2.
+- ω_0 and τ_0 are identity maps, and the error exponent is zero.
+- On the model module Z/p², the map multiplication p has kernel and cokernel killed by p but is not invertible. A killed-error assertion must not generate an integral equivalence.
+- The weight-zero unit acts as identity; odd degree classes use the cochain Koszul sign, including at p=2 without division by 2.
 
 ### 3.4 Local PD presentations, gluing and rational fibres
 
-Construct `LogSyntomic.presentationsAndCompletion`. For an étale-local exact log immersion into a log-smooth W(k)-scheme with compatible Frobenius lifts, identify S_n(r),S′_n(r) with the corresponding log-PD-envelope de Rham fibres, using J^⟨r−j⟩ or J^[r−j] in degree j and the total Frobenius on forms. Prove independence of immersion and lifts and coherent gluing. For every log-syntomic X/W(k) of 3.2 define RΓ_syn(X,r)=Rlim_n RΓ(X_et,S′_n(r)), its divided analogue RΓ_syn,div(X,r)=Rlim_n RΓ(X_et,S_n(r)), and their rationalizations by tensoring with ℚ_p; S_n and S′_n on X_et mean their derived pushforwards from 3.2. Write RΓ_log-syn(X,ℚ_p(r)) for the rational undivided complex. For an arithmetic pair (U,Ubar) log-smooth over canonical-log V, apply this construction to its boundary-log model. On this arithmetic-pair domain construct the rational equivalence to Fib((1−φ/p^r,can):RΓ_cr,Q→RΓ_cr,Q⊕RΓ_dR/F^r), using the filtered crystalline/de Rham quotient comparison. Both integral families become equivalent after rationalization via ω and τ, with the required p^r rescaling visible. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); n≥1; r≥0; Completed and rational complexes are defined for every log-syntomic X/W(k) as in 3.2; the NN reduction and quotient-fibre assertions retain their arithmetic-pair hypotheses; An arithmetic pair is a dense open K-variety inside a reduced proper flat V-scheme, with fine integral quasi-coherent boundary log structure; Log-smoothness and the existence of local exact log-PD presentations are retained. (EN, §2.1.1, p. 5, EN line 198–218; NN §3.2, equation (32), pp. 25–26, NN line 1299, NN line 1323).
+For an étale-local exact log immersion into a log-smooth W(k)-scheme with compatible Frobenius lifts, identify S_n(r),S′_n(r) with the corresponding log-PD-envelope de Rham fibres, using J^⟨r−j⟩ or J^[r−j] in degree j and the total Frobenius on forms. Prove independence of immersion and lifts and coherent gluing. For every log-syntomic X/W(k) of 3.2 define RΓ_syn(X,r)=Rlim_n RΓ(X_et,S′_n(r)), its divided analogue RΓ_syn,div(X,r)=Rlim_n RΓ(X_et,S_n(r)), and their rationalizations by tensoring with ℚ_p; S_n and S′_n on X_et mean their derived pushforwards from 3.2. Write RΓ_log-syn(X,ℚ_p(r)) for the rational undivided complex. For an arithmetic pair (U,Ubar) log-smooth over canonical-log V, apply this construction to its boundary-log model. On this arithmetic-pair domain construct the rational equivalence to Fib((1−φ/p^r,can):RΓ_cr,Q→RΓ_cr,Q⊕RΓ_dR/F^r), using the filtered crystalline/de Rham quotient comparison. Both integral families become equivalent after rationalization via ω and τ, with the required p^r rescaling visible. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); n≥1; r≥0; Completed and rational complexes are defined for every log-syntomic X/W(k) as in 3.2; the NN reduction and quotient-fibre assertions retain their arithmetic-pair hypotheses; An arithmetic pair is a dense open K-variety inside a reduced proper flat V-scheme, with fine integral quasi-coherent boundary log structure; Log-smoothness and the existence of local exact log-PD presentations are retained. (EN, §2.1.1, p. 5, EN line 198–218; NN §3.2, equation (32), pp. 25–26, NN line 1299, NN line 1323).
 
-Prove `LogSyntomic.localPDComparison`: The local de Rham fibre computes the derived sheaf fibre on its stated site. Prove `LogSyntomic.presentationRefinement`: Common log-PD refinements commute with Frobenius and give equivalences satisfying cocycle laws. Prove `LogSyntomic.completedReduction`: On the NN arithmetic-pair domain, the completed complex reduces derivedly to the n-th complex. Prove `LogSyntomic.rationalFiber`: On the NN arithmetic-pair domain, the second target component is the derived quotient RΓ_dR/F^r, with its canonical quotient map.
+- The local de Rham fibre computes the derived sheaf fibre on its stated site.
+- Common log-PD refinements commute with Frobenius and give equivalences satisfying cocycle laws.
+- On the NN arithmetic-pair domain, the completed complex reduces derivedly to the n-th complex.
+- On the NN arithmetic-pair domain, the second target component is the derived quotient RΓ_dR/F^r, with its canonical quotient map.
 
 Use the filtered log-crystalline Poincaré lemma on each presentation, compare via products of ambient embeddings and descend using enhanced coherences. Rlim commutes with finite fibres on the full log-syntomic domain. On the NN arithmetic-pair domain derived reduction is the crystalline reduction theorem in the contract; rationally identify the filtered ideal fibre with the fibre of (1−φ_r,can) and apply the supplied filtered de Rham quotient equivalence.
 
@@ -411,10 +459,10 @@ Use the filtered log-crystalline Poincaré lemma on each presentation, compare v
 
 **Checks.**
 
-- `LogSyntomic.presentationsAndCompletion_rzero`: F⁰RΓ_dR=RΓ_dR on these de Rham complexes, so the rational presentation at r=0 has zero quotient component.
-- `LogSyntomic.presentationsAndCompletion_rationalError`: After tensoring ℚ_p, p^r is invertible, so ω is an equivalence with inverse p^(−r)τ; τ alone is not claimed to be its inverse.
-- `LogSyntomic.presentationsAndCompletion_tower`: For A_n=⊕_(j≥n) 𝔽_p (n≥0) with inclusion transitions, lim A_n=0 but H¹(Rlim A_n)=lim¹ A_n≃(∏_(j≥0) 𝔽_p)/(⊕_(j≥0) 𝔽_p)≠0; the class of (1,1,…) is nonzero. Indeed, 0→A_n→B→C_n→0 with constant B=⊕_(j≥0) 𝔽_p and C_n=⊕_(j<n) 𝔽_p gives lim C_n=∏ 𝔽_p and lim¹ B=lim¹ C_n=0, since both latter towers are Mittag–Leffler. Replacing Rlim by lim would erase this H¹ (StacksRlim, Tag 07KV, Lemmas 15.88.1–15.88.2, StacksRlim line 10638–10675).
-- `LogSyntomic.presentationsAndCompletion_horizontalPoint`: For X=Spec(ℤ_p) with trivial log structure, r=0 and k=𝔽_p, the divided and undivided towers are [Z/p^n —0→ Z/p^n], with surjective reduction maps. Their completed complexes are [ℤ_p —0→ ℤ_p] and their rationalizations have H⁰=H¹=ℚ_p. This horizontal-log carrier is defined without imposing a vertical boundary.
+- F⁰RΓ_dR=RΓ_dR on these de Rham complexes, so the rational presentation at r=0 has zero quotient component.
+- After tensoring ℚ_p, p^r is invertible, so ω is an equivalence with inverse p^(−r)τ; τ alone is not claimed to be its inverse.
+- For A_n=⊕_(j≥n) 𝔽_p (n≥0) with inclusion transitions, lim A_n=0 but H¹(Rlim A_n)=lim¹ A_n≃(∏_(j≥0) 𝔽_p)/(⊕_(j≥0) 𝔽_p)≠0; the class of (1,1,…) is nonzero. Indeed, 0→A_n→B→C_n→0 with constant B=⊕_(j≥0) 𝔽_p and C_n=⊕_(j<n) 𝔽_p gives lim C_n=∏ 𝔽_p and lim¹ B=lim¹ C_n=0, since both latter towers are Mittag–Leffler. Replacing Rlim by lim would erase this H¹ (StacksRlim, Tag 07KV, Lemmas 15.88.1–15.88.2, StacksRlim line 10638–10675).
+- For X=Spec(ℤ_p) with trivial log structure, r=0 and k=𝔽_p, the divided and undivided towers are [Z/p^n —0→ Z/p^n], with surjective reduction maps. Their completed complexes are [ℤ_p —0→ ℤ_p] and their rationalizations have H⁰=H¹=ℚ_p. This horizontal-log carrier is defined without imposing a vertical boundary.
 
 ### Examples
 
@@ -428,11 +476,22 @@ CrystallineCohomology through contracts crystalline-inputs and crystalline-filte
 
 ### 4.1 Ordinary and modified Tate lattices
 
-Define `Syntomic.modifiedTateLattices`. For r≥0 let L(r)=ℤ_p(r), a=floor(r/(p−1)), b=r−(p−1)a, so 0≤b<p−1. Define L_EN(r)=(p^a a!)⁻¹L(r), the fundamental-sequence kernel lattice for every r≥0, and L_CN(r)=p^(−a)L(r), CN’s printed coordinate lattice. No period map into L_CN is asserted. These are lattices inside ℚ_p(r), and their mod-p^n versions are L/p^nL, not subgroups obtained by dividing elements in Z/p^n. Construct inclusions and scalar-coordinate isomorphisms. Then L_EN=(a!)⁻¹L_CN and the inclusion L_CN→L_EN has cokernel killed by p^v_p(a!). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0; n≥1; the denominator p^a a! is nonzero because p is prime and the ambient field has characteristic zero. (EN, §2.2, p. 7, EN line 299–308; NN §4.1, p. 44, NN line 2324; CN §§1.1.1,2.4.3, pp. 2,23, CN line 67, CN line 968).
+For r≥0 let L(r)=ℤ_p(r), a=floor(r/(p−1)), b=r−(p−1)a, so 0≤b<p−1. Define L_EN(r)=(p^a a!)⁻¹L(r), the fundamental-sequence kernel lattice for every r≥0, and L_CN(r)=p^(−a)L(r), CN’s printed coordinate lattice. No period map into L_CN is asserted. These are lattices inside ℚ_p(r), and their mod-p^n versions are L/p^nL, not subgroups obtained by dividing elements in Z/p^n. Construct inclusions and scalar-coordinate isomorphisms. Then L_EN=(a!)⁻¹L_CN and the inclusion L_CN→L_EN has cokernel killed by p^v_p(a!). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0; n≥1; the denominator p^a a! is nonzero because p is prime and the ambient field has characteristic zero. (EN, §2.2, p. 7, EN line 299–308; NN §4.1, p. 44, NN line 2324; CN §§1.1.1,2.4.3, pp. 2,23, CN line 67, CN line 968).
 
-Prove `Syntomic.modifiedLattice_inclusion`: Give the actual lattice inclusions and their induced maps after reduction, recording that reduction of an inclusion need not be injective. Prove `Syntomic.modifiedLattice_coordinate`: Relative to t_EN=t/(p^a a!), the ordinary generator t has coordinate p^a a!, not 1. Prove `Syntomic.modifiedLattice_EN_CN`: The coordinate inclusion sends the printed CN generator to a! times the EN kernel generator; it is only a lattice map. Prove `Syntomic.modifiedLattice_product`: For prime p and weights r,s≥0, ordinary Tate-line multiplication restricts to the EN and floor-normalized CN lattice products; the CN coordinate variant for other exponents requires a_(r+s)≥a_r+a_s. Prove `Syntomic.modifiedLattice_errorTransport`: For maps of modules, composing a map whose kernel/cokernel is killed by p^A with a lattice inclusion of cokernel exponent p^B gives a bound p^(A+B) on kernel/cokernel; the reduced inclusion has kernel and cokernel killed by p^B as well. This is pure module algebra, not a period-bound transport.
+- Give the actual lattice inclusions and their induced maps after reduction, recording that reduction of an inclusion need not be injective.
+- Relative to t_EN=t/(p^a a!), the ordinary generator t has coordinate p^a a!, not 1.
+- The coordinate inclusion sends the printed CN generator to a! times the EN kernel generator; it is only a lattice map.
+- For prime p and weights r,s≥0, ordinary Tate-line multiplication restricts to the EN and floor-normalized CN lattice products; the CN coordinate variant for other exponents requires a_(r+s)≥a_r+a_s.
+- For maps of modules, composing a map whose kernel/cokernel is killed by p^A with a lattice inclusion of cokernel exponent p^B gives a bound p^(A+B) on kernel/cokernel; the reduced inclusion has kernel and cokernel killed by p^B as well. This is pure module algebra, not a period-bound transport.
 
-After choosing a generator of the ordinary Tate line, define `Syntomic.enLattice p r` as the ℤ_p-submodule of ℚ_p spanned by (p^a a!)⁻¹, with a=floor(r/(p−1)), and `Syntomic.cnLattice p a` as the submodule spanned by (p^a)⁻¹. The coordinate definition accepts any exponent; the printed CN coordinate at weight r uses a=floor(r/(p−1)). It is not in general the kernel lattice. These are precisely the two displayed coordinate spans in that trivialization. Provide `Syntomic.cnLattice_le_enLattice` for the floor decomposition and `Syntomic.modifiedLattice_generator`: the CN generator is a! times the EN generator, for every prime p and r≥0. Their API is `Syntomic.enLattice_weightZero` and `Syntomic.cnLattice_weightZero` for the weight-zero spans, `Syntomic.cnLattice_le_enLattice` for the floor inclusion, and `Syntomic.modifiedLattice_generator` for its factorial coordinate; `Syntomic.modifiedLattice_inclusion` gives the coefficient-reduction maps (EN line 306; CN line 968–979). The Checks below compute weight zero, factorial and unit effects, coefficient reduction and a failed product on these real-bodied coordinate lattices.
+After choosing a generator of the ordinary Tate line, realize L_EN(r) as the ℤ_p-submodule of ℚ_p spanned by (p^a a!)⁻¹, with a=floor(r/(p−1)), and the CN coordinate lattice at exponent a as the span of (p^a)⁻¹. The latter span is defined for every a≥0; CN's printed weight-r lattice uses the floor exponent. These coordinate spans inherit the lattice API above (EN line 306; CN line 968–979):
+
+- At weight zero both spans are generated by 1.
+- At the floor exponent the CN span is contained in the EN span.
+- The CN generator equals a! times the EN generator for every prime p and r≥0.
+- The inclusion induces the coefficient-reduction maps, which need not be injective.
+
+The Checks below compute weight zero, factorial and unit effects, coefficient reduction and a failed product in these coordinate spans.
 
 All lattices are actual scalar multiples of the same rank-one ℚ_p-local system. Compute inclusions in generator coordinates and use the p-adic valuation of factorials for error transport. Use the unique Euclidean decomposition 0≤b<p−1. The kernel is the EN/NN factorial lattice (NN line 2324–2326; EN line 306). With the floor exponent, CN’s recalled global kernel sequence is correct only when a! is a p-adic unit, equivalently a≤p−1; its printed inclusive endpoint also needs the floor choice (CN line 968–971). For products, a_(r+s)≥a_r+a_s makes ordinary multiplication L_CN(r)⊗L_CN(s)→L_CN(r+s) integral; floor exponents satisfy this inequality. For EN, writing a_(r+s)=a_r+a_s+c with c∈{0,1}, the generator product has integral coordinate p^c a_(r+s)!/(a_r!a_s!). Thus both coefficient products are actual lattice maps (CN line 968–971; EN line 306).
 
@@ -440,17 +499,20 @@ All lattices are actual scalar multiples of the same rank-one ℚ_p-local system
 
 **Checks.**
 
-- `Syntomic.modifiedTateLattices_weightZero`: At r=0, a=b=0. Both modified lattices equal ℤ_p and the inclusion is identity.
-- `Syntomic.modifiedTateLattices_factorial`: For p=2,r=2, t²/8=γ₂(t/2) lies in F²A_cr and satisfies φ(t²/8)=4·t²/8. The kernel is L_EN=(1/8)ℤ_2(2); CN’s printed L_CN=(1/4)ℤ_2(2) is strictly smaller and misses this element (NN line 2324–2326; EN line 306; CN line 968–971). Its inclusion has coordinate 2. In generator coordinates both quotients modulo 2 are ℤ_2/2ℤ_2=𝔽_2; the induced map is x↦2x=0 while the generator class in each quotient is nonzero. The same coordinate calculation applies to cnLattice 2 0→cnLattice 2 1, without assigning both exponents to one weight.
-- `Syntomic.modifiedTateLattices_boundary`: At r=p−1, t^(p−1)/p lies in F^(p−1)A_cr and satisfies φ(x)=p^(p−1)x. The floor lattice is p⁻¹ℤ_p(p−1); the smaller lattice ℤ_p(p−1) allowed by the printed inclusive endpoint misses this kernel element. This concerns the recalled global kernel sequence; CN Lemma 2.23(ii) on chart coefficients asserts only p^r-exactness (CN line 968–977; EN line 306).
-- `Syntomic.modifiedTateLattices_unitFactorial`: At p=3,r=4, a=2 and enLattice 3 4 is spanned by 1/18, but equals cnLattice 3 2, spanned by 1/9: 2 is a 3-adic unit. A nontrivial factorial need not make the inclusion strict (MathlibPadicLattice line 317–319, MathlibPadicLattice line 389; MathlibSpanReview line 241–254).
-- `Syntomic.modifiedTateLattices_product`: At p=2, two weight-one floor generators multiply to 1/4, the weight-two floor generator. Replacing the weight-two exponent by 1 would put the target at (1/2)ℤ_2, which does not contain 1/4; arbitrary exponent choices do not support the product.
+- At r=0, a=b=0. Both modified lattices equal ℤ_p and the inclusion is identity.
+- For p=2,r=2, t²/8=γ₂(t/2) lies in F²A_cr and satisfies φ(t²/8)=4·t²/8. The kernel is L_EN=(1/8)ℤ_2(2); CN’s printed L_CN=(1/4)ℤ_2(2) is strictly smaller and misses this element (NN line 2324–2326; EN line 306; CN line 968–971). Its inclusion has coordinate 2. In generator coordinates both quotients modulo 2 are ℤ_2/2ℤ_2=𝔽_2; the induced map is x↦2x=0 while the generator class in each quotient is nonzero. The same coordinate calculation applies to the inclusion ℤ_2→(1/2)ℤ_2, without assigning both exponents to one weight.
+- At r=p−1, t^(p−1)/p lies in F^(p−1)A_cr and satisfies φ(x)=p^(p−1)x. The floor lattice is p⁻¹ℤ_p(p−1); the smaller lattice ℤ_p(p−1) allowed by the printed inclusive endpoint misses this kernel element. This concerns the recalled global kernel sequence; CN Lemma 2.23(ii) on chart coefficients asserts only p^r-exactness (CN line 968–977; EN line 306).
+- At p=3,r=4, a=2 and L_EN(4) is spanned by 1/18, but equals L_CN(4), spanned by 1/9: 2 is a 3-adic unit. A nontrivial factorial need not make the inclusion strict (MathlibPadicLattice line 317–319, MathlibPadicLattice line 389; MathlibSpanReview line 241–254).
+- At p=2, two weight-one floor generators multiply to 1/4, the weight-two floor generator. Replacing the weight-two exponent by 1 would put the target at (1/2)ℤ_2, which does not contain 1/4; arbitrary exponent choices do not support the product.
 
 ### 4.2 Period morphisms and their targets
 
-Construct `Syntomic.fontaineMessingPeriod`. Let k be a perfect field of characteristic p, X a log-scheme log-syntomic over W(k), i:X0→X, X_η=X[1/p], U=X_tr∩X_η, j_η:X_η→X, j′:U→X_η and j=j_ηj′. For n≥1 and 0≤r≤p−2 construct the divided map α_n,r:S_n(r)→i*Rj_*(Z/p^n(r)). For every r≥0 construct the modified-lattice divided map α̃_n,r:S_n(r)→i*Rj_*(L_EN(r)/p^n) and its composite with ω, α′_n,r:S′_n(r)→i*Rj_*(L_EN(r)/p^n). These constructions include trivial-log and horizontal-log inputs over W(k); no structural V-morphism or canonical vertical log structure is required. All maps are natural in X and n and compatible with cup products through the EN kernel-lattice products of 4.1. The exact and bounded conclusions of 4.3–4.5 retain their stronger geometric hypotheses. (EN, §2.2 and §2.2.1, pp. 7–8; EN line 278–308, EN line 311–317, EN line 326–329; CN §5.1.2, p. 54, CN line 2587).
+Let k be a perfect field of characteristic p, X a log-scheme log-syntomic over W(k), i:X0→X, X_η=X[1/p], U=X_tr∩X_η, j_η:X_η→X, j′:U→X_η and j=j_ηj′. For n≥1 and 0≤r≤p−2 construct the divided map α_n,r:S_n(r)→i*Rj_*(Z/p^n(r)). For every r≥0 construct the modified-lattice divided map α̃_n,r:S_n(r)→i*Rj_*(L_EN(r)/p^n) and its composite with ω, α′_n,r:S′_n(r)→i*Rj_*(L_EN(r)/p^n). These constructions include trivial-log and horizontal-log inputs over W(k); no structural V-morphism or canonical vertical log structure is required. All maps are natural in X and n and compatible with cup products through the EN kernel-lattice products of 4.1. The exact and bounded conclusions of 4.3–4.5 retain their stronger geometric hypotheses. (EN, §2.2 and §2.2.1, pp. 7–8; EN line 278–308, EN line 311–317, EN line 326–329; CN §5.1.2, p. 54, CN line 2587).
 
-Prove `Syntomic.period_reduce`: Coefficient reduction and the transition maps of S,S′ commute with α,α′. Prove `Syntomic.period_omega`: The undivided EN map is the modified divided map composed with ω. Prove `Syntomic.period_product`: The cup square commutes with the actual EN kernel-lattice products of 4.1. Prove `Syntomic.period_site`: The target is on X0_et; global sections use RΓ(X0,i*Rj_*−).
+- Coefficient reduction and the transition maps of S,S′ commute with α,α′.
+- The undivided EN map is the modified divided map composed with ω.
+- The cup square commutes with the actual EN kernel-lattice products of 4.1.
+- The target is on X0_et; global sections use RΓ(X0,i*Rj_*−).
 
 Apply the filtered crystalline Poincaré lemma and the Fontaine–Messing coefficient fundamental sequences on the syntomic-étale site of the log-syntomic X/W(k), then push to X0_et using the supplied projection comparisons. Construct the modified map before using ω. Period-ring multiplication proves the cup square.
 
@@ -458,16 +520,17 @@ Apply the filtered crystalline Poincaré lemma and the Fontaine–Messing coeffi
 
 **Checks.**
 
-- `Syntomic.fontaineMessingPeriod_zeroWeight`: At r=0, ω=id and the modified and ordinary lattices agree, so both period constructions coincide.
-- `Syntomic.fontaineMessingPeriod_unit`: The weight-zero syntomic unit maps to 1 in nearby cycles.
-- `Syntomic.fontaineMessingPeriod_nearbyPoint`: For canonical-log X=Spec(ℤ_p), r=0, the nearby-cycle target has an H¹ contribution from ramified characters of G_Qp: the ramified summand of the cyclotomic ℤ_p-extension gives a nonzero class in H¹(I_Qp,Z/p^n) fixed by the residue action. A constant closed-point sheaf has no such geometric H¹ stalk. Thus nearby cycles cannot be replaced by that constant sheaf (EN line 292–317).
-- `Syntomic.fontaineMessingPeriod_trivialLogPoint`: For trivial-log X=Spec(ℤ_p), admitted by this construction, X_tr=Spec(ℤ_p) but X_η=U=Spec(ℚ_p) and j′ is identity. The identity of X cannot factor through X_η, since p would become invertible in ℤ_p. After equipping the point with canonical vertical log structure, X_tr=U=Spec(ℚ_p), as in the canonical-vertical-log comparison domain of 4.3–4.5. Thus j must be defined from U, not from X_tr alone (EN line 292–300).
+- At r=0, ω=id and the modified and ordinary lattices agree, so both period constructions coincide.
+- The weight-zero syntomic unit maps to 1 in nearby cycles.
+- For canonical-log X=Spec(ℤ_p), r=0, the nearby-cycle target has an H¹ contribution from ramified characters of G_Qp: the ramified summand of the cyclotomic ℤ_p-extension gives a nonzero class in H¹(I_Qp,Z/p^n) fixed by the residue action. A constant closed-point sheaf has no such geometric H¹ stalk. Thus nearby cycles cannot be replaced by that constant sheaf (EN line 292–317).
+- For trivial-log X=Spec(ℤ_p), admitted by this construction, X_tr=Spec(ℤ_p) but X_η=U=Spec(ℚ_p) and j′ is identity. The identity of X cannot factor through X_η, since p would become invertible in ℤ_p. After equipping the point with canonical vertical log structure, X_tr=U=Spec(ℚ_p), as in the canonical-vertical-log comparison domain of 4.3–4.5. Thus j must be defined from U, not from X_tr alone (EN line 292–300).
 
 ### 4.3 Exact divided comparison
 
-Prove `Syntomic.smallWeightComparison`. For X fine saturated log-smooth over V with canonical log structure, n≥1 and 0≤r≤p−2, the divided α induces an equivalence S_n(r)≃τ≤r i*Rj_*Z/p^n(r) on X0_et, and S_n(r) has no cohomology sheaves above r. Exactness is asserted for the divided complex and ordinary Tate lattice in this range only. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X fine saturated and log-smooth over V with canonical log structure; n≥1; 0≤r≤p−2. (EN, Proposition 2.1 and Theorem 2.2, pp. 5,7; EN line 186, EN line 318).
+For X fine saturated log-smooth over V with canonical log structure, n≥1 and 0≤r≤p−2, the divided α induces an equivalence S_n(r)≃τ≤r i*Rj_*Z/p^n(r) on X0_et, and S_n(r) has no cohomology sheaves above r. Exactness is asserted for the divided complex and ordinary Tate lattice in this range only. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X fine saturated and log-smooth over V with canonical log structure; n≥1; 0≤r≤p−2. (EN, Proposition 2.1 and Theorem 2.2, pp. 5,7; EN line 186, EN line 318).
 
-Prove `Syntomic.smallWeight_truncation`: The source equals its τ≤r truncation. Prove `Syntomic.smallWeightComparison_natural`: The equivalence is the map of 4.2 and respects reduction and products whenever all involved weights are in range.
+- The source equals its τ≤r truncation.
+- The equivalence is the map of 4.2 and respects reduction and products whenever all involved weights are in range.
 
 Use the local inverse Cartier and boundary-stratum symbol calculations with the filtered PD presentation to prove the level-one, equal-degree/weight comparison on smooth normal-crossings charts. Products with the degree-zero twist classes give q≤r; the tame degree-(p−1) descent removes the μ_p assumption, and coefficient exact triangles give all n≥1. For general fs log-smooth X, prove invariance under the toric log blow-ups and use proper base change and the one-dimensional-fibre stalk induction of TsujiNearby Lemmas 3.2 and 5.2 to reduce to those charts, then glue. The local PD degree calculation gives vanishing above r (EN Proposition 2.1). These reductions are proof obligations of this target; no full small-weight period equivalence is a supplier premise (TsujiNearby §4 proof of Theorem 4.2, pp. 554–555, and §5 proof of Theorem 5.1, pp. 558–561; TsujiNearby line 892–940, TsujiNearby line 1074–1140).
 
@@ -475,16 +538,17 @@ Use the local inverse Cartier and boundary-stratum symbol calculations with the 
 
 **Checks.**
 
-- `Syntomic.smallWeightComparison_p2`: At p=2 the range contains r=0 and excludes r=1; no positive-weight exact theorem follows from this statement.
-- `Syntomic.smallWeightComparison_p3`: At p=3, r=0,1 are admitted and r=2 is excluded.
-- `Syntomic.smallWeightComparison_undivided`: For r>0 the identities τω=ωτ=p^r do not let this equivalence transfer to S′ integrally.
-- `Syntomic.smallWeightComparison_cartierWitness`: On the residue chart Y=G_m over 𝔽_p, inverse Cartier sends t dlog t to [t^p dlog t]≠0 in Z¹/B¹, whereas [t dlog t]=[dt]=0; replacing its Frobenius-semilinear coefficient rule by the identity would fail. This is a residue-fibre calculation, even when X_1 is a thicker mod-p fibre over ramified V.
+- At p=2 the range contains r=0 and excludes r=1; no positive-weight exact theorem follows from this statement.
+- At p=3, r=0,1 are admitted and r=2 is excluded.
+- For r>0 the identities τω=ωτ=p^r do not let this equivalence transfer to S′ integrally.
+- On the residue chart Y=G_m over 𝔽_p, inverse Cartier sends t dlog t to [t^p dlog t]≠0 in Z¹/B¹, whereas [t dlog t]=[dt]=0; replacing its Frobenius-semilinear coefficient rule by the identity would fail. This is a residue-fibre calculation, even when X_1 is a thicker mod-p fibre over ramified V.
 
 ### 4.4 All weights and bounded error
 
-Prove `Syntomic.boundedPeriodComparison`. Assume X is étale locally a CN semistable chart, including base changes of semistable models: étale over V[x₁^±1,…,x_a^±1,x_(a+1),…,x_d,x_(d+1)]/(x_(d+1)x_(a+1)…x_(a+b)−π^h), 1≤h≤e, with log structure from special fibre and x_(a+b+1)…x_d=0. For all n≥1,r≥0 and 0≤q≤r, H^q(α′_n,r):H^q(S′_n(r))→i*R^qj_*(L_EN(r)/p^n) has kernel and cokernel killed by p^A for an integer A=A(e,p,r) independent of n and X. Separately, if K has enough roots in the CN sense, there is a universal N and c_p (also depending on chart dimension d at p=2) giving p^(Nr+c_p). Here enough roots means δ_K+[K:F_i]<e/(2p), F_i=K0(ζ_(p^i)), i maximal with ζ_(p^i)∈K, and δ_K=e v_p(Different(K/F_i)), with v_p(p)=1. The target is the factorial kernel lattice of EN Theorem 2.3, which restates CN’s bound with this lattice (EN line 306, EN line 326–335). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); e=[K:K0] and π is a uniformizer; X has the stated semistable/base-change charts and log boundary; n≥1; r≥0; 0≤q≤r; the refined bound additionally assumes the stated different inequality. (CN, §2.2.1, Theorem 1.1 and §5.1.2, pp. 2,10,54; CN line 70, CN line 78, CN line 413, CN line 422, CN line 2600; EN Theorem 2.3, EN line 330–335 for the kernel-lattice target).
+Assume X is étale locally a CN semistable chart, including base changes of semistable models: étale over V[x₁^±1,…,x_a^±1,x_(a+1),…,x_d,x_(d+1)]/(x_(d+1)x_(a+1)…x_(a+b)−π^h), 1≤h≤e, with log structure from special fibre and x_(a+b+1)…x_d=0. For all n≥1,r≥0 and 0≤q≤r, H^q(α′_n,r):H^q(S′_n(r))→i*R^qj_*(L_EN(r)/p^n) has kernel and cokernel killed by p^A for an integer A=A(e,p,r) independent of n and X. Separately, if K has enough roots in the CN sense, there is a universal N and c_p (also depending on chart dimension d at p=2) giving p^(Nr+c_p). Here enough roots means δ_K+[K:F_i]<e/(2p), F_i=K0(ζ_(p^i)), i maximal with ζ_(p^i)∈K, and δ_K=e v_p(Different(K/F_i)), with v_p(p)=1. The target is the factorial kernel lattice of EN Theorem 2.3, which restates CN’s bound with this lattice (EN line 306, EN line 326–335). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); e=[K:K0] and π is a uniformizer; X has the stated semistable/base-change charts and log boundary; n≥1; r≥0; 0≤q≤r; the refined bound additionally assumes the stated different inequality. (CN, §2.2.1, Theorem 1.1 and §5.1.2, pp. 2,10,54; CN line 70, CN line 78, CN line 413, CN line 422, CN line 2600; EN Theorem 2.3, EN line 330–335 for the kernel-lattice target).
 
-Prove `Syntomic.boundedPeriod_uniform`: Quantifiers are ∃A(e,p,r), ∀X,n,q≤r; the constant is not chosen separately for each n or X. Prove `Syntomic.boundedPeriod_roots`: Keep the universal linear-in-r exponent separately from the ramified descent bound. The uniformity in e is the statement of CN Theorem 1.1(ii) and EN Theorem 2.3 (CN line 83–84; EN line 334–335); CN Theorem 5.4(ii) states the weaker K-dependent version (CN line 2605–2606). No factorial error is added to either bound.
+- Quantifiers are ∃A(e,p,r), ∀X,n,q≤r; the constant is not chosen separately for each n or X.
+- Keep the universal linear-in-r exponent separately from the ramified descent bound. The uniformity in e is the statement of CN Theorem 1.1(ii) and EN Theorem 2.3 (CN line 83–84; EN line 334–335); CN Theorem 5.4(ii) states the weaker K-dependent version (CN line 2605–2606). No factorial error is added to either bound.
 
 Use CN’s chart syntomic/PD realization, the separately specified local-period convergence, Frobenius-change, Lie, Lazard and twisted Koszul-to-continuous-cohomology contracts, and the continuous Galois realization to obtain the local Lazard comparison. The period-ring Poincaré lemma compares that map to the Fontaine–Messing map (CN Theorems 4.14 and 4.16). Approximation, K(π,1) and rigid étale comparison transfer it to nearby cycles. Cyclotomic extension and ramified descent give A(e,p,r); with enough roots retain Nr+c_p instead. The intermediate estimates and comparison sections are separate supplier requirements; the desired period bound is not one of their premises.
 
@@ -492,15 +556,18 @@ Use CN’s chart syntomic/PD realization, the separately specified local-period 
 
 **Checks.**
 
-- `Syntomic.boundedPeriodComparison_ramified`: A chart xy=π^h with h>1 in a ramified base change is admitted; replacing h by 1 globally would lose a source case.
-- `Syntomic.boundedPeriodComparison_p2positive`: At p=2,r=1 this gives a bounded comparison in q=0,1 and keeps dimension dependence in c_2.
-- `Syntomic.boundedPeriodComparison_notUntruncated`: No claim is made about q>r; a p-power bound at each finite level is not an integral equivalence, even if rationalization kills its errors.
+- A chart xy=π^h with h>1 in a ramified base change is admitted; replacing h by 1 globally would lose a source case.
+- At p=2,r=1 this gives a bounded comparison in q=0,1 and keeps dimension dependence in c_2.
+- No claim is made about q>r; a p-power bound at each finite level is not an integral equivalence, even if rationalization kills its errors.
 
 ### 4.5 Syntomic-étale objects on X
 
-Define `Syntomic.etaleGluing`. Let j_K:X_K→X and j′:X_tr→X_K, so j=j_Kj′. For every r≥0 glue S_n(r) and S′_n(r), respectively, to Rj′_*(L_EN(r)/p^n) using the modified divided and undivided maps of 4.2, obtaining E_n(r),E′_n(r) on X_et. For 0≤r≤p−2 identify the first construction with ordinary-lattice gluing because a=0. Their triangles have first term j_K!Rj′_* of the corresponding lattice, middle term E or E′, and third term i_*S or i_*S′. Construct maps to Rj_* of the generic lattice. Prove τ≤rE_n(r)≃τ≤rRj_*Z/p^n(r) in the divided exact range; on the semistable chart domain, H^q(E′_n(r))→R^qj_*(L_EN/p^n) has kernel and cokernel killed by p^A for 0≤q≤r, with A=A(e,p,r) from 4.4; with enough roots use Nr+c_p. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X fine saturated log-smooth over canonical log V; n≥1; r≥0; the ordinary-lattice divided identification and exact conclusion use r≤p−2; the bounded conclusion assumes the semistable chart domain of 4.4. (EN, §2.2.2, equations (2.6)–(2.7), Theorem 2.5, pp. 8–9; EN line 336, EN line 351, EN line 360).
+Let j_K:X_K→X and j′:X_tr→X_K, so j=j_Kj′. For every r≥0 glue S_n(r) and S′_n(r), respectively, to Rj′_*(L_EN(r)/p^n) using the modified divided and undivided maps of 4.2, obtaining E_n(r),E′_n(r) on X_et. For 0≤r≤p−2 identify the first construction with ordinary-lattice gluing because a=0. Their triangles have first term j_K!Rj′_* of the corresponding lattice, middle term E or E′, and third term i_*S or i_*S′. Construct maps to Rj_* of the generic lattice. Prove τ≤rE_n(r)≃τ≤rRj_*Z/p^n(r) in the divided exact range; on the semistable chart domain, H^q(E′_n(r))→R^qj_*(L_EN/p^n) has kernel and cokernel killed by p^A for 0≤q≤r, with A=A(e,p,r) from 4.4; with enough roots use Nr+c_p. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X fine saturated log-smooth over canonical log V; n≥1; r≥0; the ordinary-lattice divided identification and exact conclusion use r≤p−2; the bounded conclusion assumes the semistable chart domain of 4.4. (EN, §2.2.2, equations (2.6)–(2.7), Theorem 2.5, pp. 8–9; EN line 336, EN line 351, EN line 360).
 
-Prove `Syntomic.etaleGluing_restrict`: i*E=S, j_K*E=Rj′_* of the generic lattice, with the specified attachment map. Prove `Syntomic.etaleGluing_triangle`: The recollement fibre construction yields the displayed distinguished triangle and is unique with its gluing data. Prove `Syntomic.etaleGluing_period`: Restriction of the period map to the closed part is α; on the open part it is identity. Prove `Syntomic.etaleGluing_truncation`: The truncated triangles give the exact divided comparison. For the undivided map, exact closed and open restriction detect its cohomology kernel and cokernel: both vanish on X_K and restrict to those of α′ on X0. Hence the exponent is A (or Nr+c_p) without doubling (EN line 380–386).
+- i*E=S, j_K*E=Rj′_* of the generic lattice, with the specified attachment map.
+- The recollement fibre construction yields the displayed distinguished triangle and is unique with its gluing data.
+- Restriction of the period map to the closed part is α; on the open part it is identity.
+- The truncated triangles give the exact divided comparison. For the undivided map, exact closed and open restriction detect its cohomology kernel and cokernel: both vanish on X_K and restrict to those of α′ on X0. Hence the exponent is A (or Nr+c_p) without doubling (EN line 380–386).
 
 Form the enhanced recollement pullback of the closed fibre and open direct image over nearby cycles. Its localization triangle has exact open extension. Compare it to the localization triangle for Rj_*; the open map is identity and the closed map is 4.3 or 4.4. Apply cohomological exactness for the exact comparison, retaining truncation. For the error bound, use exact restriction: a sheaf supported on X0 is i_* of its closed restriction, so the same annihilator works globally.
 
@@ -508,9 +575,9 @@ Form the enhanced recollement pullback of the closed fibre and open direct image
 
 **Checks.**
 
-- `Syntomic.etaleGluing_genericRestriction`: Restricting E′ to X_K returns Rj′_*L_EN/p^n; it is the lattice itself when j′ is identity.
-- `Syntomic.etaleGluing_emptyClosedPart`: With no closed part the gluing gives only the open direct image, rather than a zero syntomic sheaf on X.
-- `Syntomic.etaleGluing_unit`: At weight zero the closed and open units glue to the unit and its period image is 1.
+- Restricting E′ to X_K returns Rj′_*L_EN/p^n; it is the lattice itself when j′ is identity.
+- With no closed part the gluing gives only the open direct image, rather than a zero syntomic sheaf on X.
+- At weight zero the closed and open units glue to the unit and its period image is 1.
 
 ### Examples
 
@@ -524,10 +591,10 @@ Layers 2–3; EtaleCohomologyFoundations §§F.0.3,F.1,F.4.1–F.4.5; contracts 
 
 ### 5.1 Hyodo–Kato data on the shared carriers
 
-Construct `ClassicalSyntomic.hyodoKatoAdapter` for proper fine log-smooth X over canonical log V with Cartier-type special fibre, q≥0. On the supplied D^q=H^q_HK(X0), transport its actual bijective σ-semilinear φ into `WittVector.Isocrystal p k`. Retain its K0-linear nilpotent N and its supplied ι_π:D^q⊗K0 K≃H^q_log-dR(X_K/K), with the positive-Taylor convention of §5.2. The adapter is the same cohomology module with its existing Frobenius, rather than an independently selected isocrystal (HK §§3.2–3.6, pp.243–246, Theorem 5.1, pp.262–263; HK line 698, HK line 715, HK line 740, HK line 770, HK line 1321, HK line 1335; MathlibPin line 117).
+Construct the Hyodo–Kato isocrystal adapter for proper fine log-smooth X over canonical log V with Cartier-type special fibre, q≥0. On the supplied D^q=H^q_HK(X0), transport its actual bijective σ-semilinear φ into `WittVector.Isocrystal p k`. Retain its K0-linear nilpotent N and its supplied ι_π:D^q⊗K0 K≃H^q_log-dR(X_K/K), with the positive-Taylor convention of §5.2. The adapter is the same cohomology module with its existing Frobenius, rather than an independently selected isocrystal (HK §§3.2–3.6, pp.243–246, Theorem 5.1, pp.262–263; HK line 698, HK line 715, HK line 740, HK line 770, HK line 1321, HK line 1335; MathlibPin line 117).
 
 
-Provide `ClassicalSyntomic.hyodoKato_isocrystal`: its semilinear equivalence is the transported φ on that same D^q, and its equivariant morphisms are the supplied cohomological pullbacks.
+- Its semilinear equivalence is the transported φ on that same D^q, and its equivariant morphisms are the supplied cohomological pullbacks.
 
 Use the proper HK supplier theorem for the cohomology and uniformizer comparison; transport its Frobenius equivalence into the existing Mathlib class. The counterexample is HK’s own obstruction to omitting Cartier type.
 
@@ -535,19 +602,28 @@ Use the proper HK supplier theorem for the cohomology and uniformizer comparison
 
 **Checks.**
 
-- `ClassicalSyntomic.hyodoKatoAdapter_rankOne`: For the good-reduction point D=K0, φ=σ and N=0; every ι_π is the same.
-- `ClassicalSyntomic.hyodoKatoAdapter_twoTerm`: On D=ℚ_p e0⊕ℚ_p e1, φe0=e0, φe1=p e1, Ne1=e0, Ne0=0, Nφe1=p e0. Uniformizer change sends e1 to e1+log(u)e0 before ι_π.
-- `ClassicalSyntomic.hyodoKatoAdapter_cartierNecessary`: For p∤m and m>1, the log chart 1↦m on Spec(k[t]/t^m) is log-smooth but not Cartier type; φ(t)=t^p on its rational crystalline H⁰ is not bijective for every such m>1 (HK (3.3), HK line 738–739). It cannot supply an Isocrystal instance.
+- For the good-reduction point D=K0, φ=σ and N=0; every ι_π is the same.
+- On D=ℚ_p e0⊕ℚ_p e1, φe0=e0, φe1=p e1, Ne1=e0, Ne0=0, Nφe1=p e0. Uniformizer change sends e1 to e1+log(u)e0 before ι_π.
+- For p∤m and m>1, the log chart 1↦m on Spec(k[t]/t^m) is log-smooth but not Cartier type; φ(t)=t^p on its rational crystalline H⁰ is not bijective for every such m>1 (HK (3.3), HK line 738–739). It cannot supply an Isocrystal instance.
 
 ### 5.2 The semistable total fibre and its adapter
 
-Define `ClassicalSyntomic.semistableFiber`. For an arithmetic pair (U,Ubar) log-smooth over canonical log V and of Cartier type, set D=RΓ_HK,Q and E=RΓ_dR/F^r. Define C_st(D,r,ι_π) as the total homotopy fibre of the square with top (1−φ/p^r,ι_π):D→D⊕E, left N:D→D, right (N,0):D⊕E→D and bottom 1−φ/p^(r−1):D→D. Construct the canonical equivalence RΓ_syn,Q(U,Ubar,r)≃C_st(D,r,ι_π), natural in the pair and compatible with products and the supplied uniformizer-change comparison. For degree-zero realizations its three terms are D, D⊕E⊕D, D with differentials x↦((1−φ/p^r)x,ι_πx,Nx) and (a,b,c)↦Na−(1−φ/p^(r−1))c. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); (U,Ubar) is an arithmetic pair with fine integral quasi-coherent log structure, log-smooth over canonical log V and of Cartier type; r≥0; π is a uniformizer; ι_π is supplied enhanced comparison data. (NN, §3.2 and Proposition 3.8, pp. 26–27; NN line 1341, NN line 1366, NN line 1384, NN line 1387).
+For an arithmetic pair (U,Ubar) log-smooth over canonical log V and of Cartier type, set D=RΓ_HK,Q and E=RΓ_dR/F^r. Define C_st(D,r,ι_π) as the total homotopy fibre of the square with top (1−φ/p^r,ι_π):D→D⊕E, left N:D→D, right (N,0):D⊕E→D and bottom 1−φ/p^(r−1):D→D. Construct the canonical equivalence RΓ_syn,Q(U,Ubar,r)≃C_st(D,r,ι_π), natural in the pair and compatible with products and the supplied uniformizer-change comparison. For degree-zero realizations its three terms are D, D⊕E⊕D, D with differentials x↦((1−φ/p^r)x,ι_πx,Nx) and (a,b,c)↦Na−(1−φ/p^(r−1))c. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); (U,Ubar) is an arithmetic pair with fine integral quasi-coherent log structure, log-smooth over canonical log V and of Cartier type; r≥0; π is a uniformizer; ι_π is supplied enhanced comparison data. (NN, §3.2 and Proposition 3.8, pp. 26–27; NN line 1341, NN line 1366, NN line 1384, NN line 1387).
 
-Prove `ClassicalSyntomic.semistableFiber_square`: N(1−φ/p^r)=(1−φ/p^(r−1))N; give the coherence used by the enhanced square. Prove `ClassicalSyntomic.semistableFiber_universal`: The total fibre is the iterated enhanced fibre with its square projections and homotopies. Prove `ClassicalSyntomic.semistableFiberComparison`: The comparison is induced by the log deformation N-triangle and ι_π, rather than selected as an arbitrary isomorphism. Prove `ClassicalSyntomic.semistableFiber_changeUniformizer`: Changing π gives the comparison through the imported HK change law, preserving its de Rham projection.
+- N(1−φ/p^r)=(1−φ/p^(r−1))N; give the coherence used by the enhanced square.
+- The total fibre is the iterated enhanced fibre with its square projections and homotopies.
+- The comparison is induced by the log deformation N-triangle and ι_π, rather than selected as an arbitrary isomorphism.
+- Changing π gives the comparison through the imported HK change law, preserving its de Rham projection.
 
-For degree-zero realizations, define the actual differentials `ClassicalSyntomic.semistableD0` and `ClassicalSyntomic.semistableD1` by the displayed three-term formula. They are linear coordinate functions on any ℚ-vector spaces D,E with ℚ-linear φ,N and ι; restricting the arithmetic maps to ℚ supplies these carriers. Their exponents are the integers −r and 1−r, even for r=0. Provide `ClassicalSyntomic.semistable_d_squared` under Nφ=pφN, with p prime: D1(D0(x))=0 for every x. No finiteness, invertibility or nilpotence is needed for this differential identity; those geometric hypotheses belong to the supplied realization and comparison. The named component API is `ClassicalSyntomic.semistableD0_apply` and `ClassicalSyntomic.semistableD1_apply`; prove `ClassicalSyntomic.semistableD0_add`, `ClassicalSyntomic.semistableD1_add`, `ClassicalSyntomic.semistableD0_smul`, `ClassicalSyntomic.semistableD1_smul`, `ClassicalSyntomic.semistableD0_zero`, and `ClassicalSyntomic.semistableD1_zero` for additivity, ℚ-scalar compatibility and zero inputs, together with the stated square-zero identity (NN line 1366–1384).
+For degree-zero realizations, use the displayed differentials D0:D→D⊕E⊕D and D1:D⊕E⊕D→D on ℚ-vector spaces D,E with ℚ-linear φ,N and ι; restricting the arithmetic maps to ℚ supplies these carriers. The exponents are the integers −r and 1−r, even for r=0 (NN line 1366–1384). Their coordinate API is:
 
-Construct `ClassicalSyntomic.semistableFiber_baseConvention` with N_b=−N_c/e on the same D and with the same φ and ι, where e≥1 is the ramification index. Its chain map in degrees 0,1,2 is respectively identity, (a,b,c)↦(a,b,−c/e), and multiplication by −1/e. Prove it is an equivalence, natural in the realization, and preserves the de Rham component. The shared-carrier convention requested in contract `rational-descent` is N_base,norm=−N_c/e, with change law exp(−e log(u)N_base,norm). In this convention, exp(−e log(u)N_b)=exp(log(u)N_c). Provide `ClassicalSyntomic.semistable_baseConvention_differentials`, the two chain-map squares for (identity, diag(1,1,−1/e), −1/e) on ℚ-vector spaces for all p,r,e∈ℕ, including p=0 and e=0 with the field convention 0⁻¹=0; the chain equivalence requires e≠0, explicitly as e≥1 above. This scalar-coordinate theorem fixes the sign and scaling of the adapter (HK Theorem 5.1, HK line 1340; NN §3.2, NN line 1366–1384; contract `rational-descent`).
+- D0(x)=((1−φ/p^r)x,ιx,Nx) and D1(a,b,c)=Na−(1−φ/p^(r−1))c.
+- Both maps preserve addition.
+- Both maps commute with every ℚ-scalar.
+- Both maps send zero to zero.
+- For prime p and Nφ=pφN, D1(D0(x))=0 for every x. This identity needs no finiteness, invertibility or nilpotence; those geometric hypotheses belong to the supplied realization and comparison.
+
+Construct the base-convention chain adapter with N_b=−N_c/e on the same D and with the same φ and ι, where e≥1 is the ramification index. Its chain map in degrees 0,1,2 is respectively identity, (a,b,c)↦(a,b,−c/e), and multiplication by −1/e. Prove it is an equivalence, natural in the realization, and preserves the de Rham component. The shared-carrier convention requested in contract `rational-descent` is N_base,norm=−N_c/e, with change law exp(−e log(u)N_base,norm). In this convention, exp(−e log(u)N_b)=exp(log(u)N_c). Prove the two chain-map squares for (identity, diag(1,1,−1/e), −1/e) on ℚ-vector spaces for all p,r,e∈ℕ, including p=0 and e=0 with the field convention 0⁻¹=0; the chain equivalence requires e≠0, explicitly as e≥1 above. This scalar-coordinate theorem fixes the sign and scaling of the adapter (HK Theorem 5.1, HK line 1340; NN §3.2, NN line 1366–1384; contract `rational-descent`).
 
 The relation Nφ=pφN makes the square commute. Apply the supplied log deformation N-triangle to the rational fibre of 3.4 and compare the deformation complex with HK by its Frobenius-equivariant section. NN Proposition 3.8’s kernel/cokernel argument identifies the resulting iterated fibres. Proper 5.1 is only the cohomology witness; the enhanced arithmetic-pair input is a separate required contract.
 
@@ -555,21 +631,23 @@ The relation Nφ=pφN makes the square commute. Apply the supplied log deformati
 
 **Checks.**
 
-- `ClassicalSyntomic.semistableFiber_twistWitness`: On the two-dimensional datum of 5.1, N(1−φ/p^r)e1=(1−p^(1−r))e0, agreeing with the lower map on Ne1. Reusing 1−φ/p^r below fails. At p=2, D1(2,0)(e1,0,0)=e0 and D1(2,0)(0,0,e0)=e0, while D1(2,1)(0,0,e1)=e1. These separately detect the N term, subtraction sign and lower exponent.
-- `ClassicalSyntomic.semistableFiber_rzero`: At r=0 the lower exponent is −1, so the lower map is 1−pφ; on φ=diag(1,2), Ne1=e0, the upper image of e1 at r=0 is (−e1,e1,e0), and D1 of this image is −e0+e0=0; no natural-number subtraction may replace it by 1−φ.
-- `ClassicalSyntomic.semistableFiber_zero`: If D=E=0 the total fibre is zero; its three-term differential squares to zero for every valid (φ,N,ι) datum.
+- On the two-dimensional datum of 5.1, N(1−φ/p^r)e1=(1−p^(1−r))e0, agreeing with the lower map on Ne1. Reusing 1−φ/p^r below fails. At p=2, D1(2,0)(e1,0,0)=e0 and D1(2,0)(0,0,e0)=e0, while D1(2,1)(0,0,e1)=e1. These separately detect the N term, subtraction sign and lower exponent.
+- At r=0 the lower exponent is −1, so the lower map is 1−pφ; on φ=diag(1,2), Ne1=e0, the upper image of e1 at r=0 is (−e1,e1,e0), and D1 of this image is −e0+e0=0; no natural-number subtraction may replace it by 1−φ.
+- If D=E=0 the total fibre is zero; its three-term differential squares to zero for every valid (φ,N,ι) datum.
 
 **Checks for the coordinate adapter.**
 
-- `ClassicalSyntomic.semistableFiber_baseConvention_twoTerm`: At p=2,r=0,e=2, take φ=diag(1,2), N_c e1=e0 and ι=id. The classical D0(e1) is (−e1,e1,e0), whereas the transported D0(e1) is (−e1,e1,−e0/2). Their D1 values are both zero, but on the independent input (e1,0,0), classical D1=e0 and transported D1=−e0/2. A sign-only adapter would give −e0 instead of −e0/2.
-- `ClassicalSyntomic.semistableFiber_baseConvention_identity`: If N_c=0, transport leaves the actual Frobenius and de Rham maps fixed. On the third and last terms it still scales by −1/e; it is a chain equivalence, rather than equality of presentations.
-- `ClassicalSyntomic.semistableFiber_baseConvention_zeroIndex`: At e=0 the two differential-commutation identities still hold: on the rank-two datum above D0(e1)=(−e1,e1,0) after scaling N to zero, and D1(−e1,e1,0)=0. The equivalence excludes e=0: its third degree-one summand and degree-two term would be sent to zero, which is not invertible on a nonzero D.
+- At p=2,r=0,e=2, take φ=diag(1,2), N_c e1=e0 and ι=id. The classical D0(e1) is (−e1,e1,e0), whereas the transported D0(e1) is (−e1,e1,−e0/2). Their D1 values are both zero, but on the independent input (e1,0,0), classical D1=e0 and transported D1=−e0/2. A sign-only adapter would give −e0 instead of −e0/2.
+- If N_c=0, transport leaves the actual Frobenius and de Rham maps fixed. On the third and last terms it still scales by −1/e; it is a chain equivalence, rather than equality of presentations.
+- At e=0 the two differential-commutation identities still hold: on the rank-two datum above D0(e1)=(−e1,e1,0) after scaling N to zero, and D1(−e1,e1,0)=0. The equivalence excludes e=0: its third degree-one summand and degree-two term would be sent to zero, which is not invertible on a nonzero D.
 
 ### 5.3 Compatibility with rational h-descent
 
-Prove `ClassicalSyntomic.hRealizationCompatibility`. For an arithmetic pair as in 5.2 with interior U, identify the classical rational syntomic complex of 3.4 with the base-owned h-realization RΓ_syn(U_h,r). For every reduced separated finite-type K-variety X and r≥0, transport the base’s functorial arithmetic and geometric product-compatible period maps and its equivalences τ≤rRΓ_syn(X_h,r)≃τ≤rRΓ_et(X,ℚ_p(r)) and τ≤rRΓ_syn(X_Kbar,h,r)≃τ≤rRΓ_et(X_Kbar,ℚ_p(r)). These are exports of the base theorem through named classical adapters, with all comparison squares specified. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0; Classical-pair statements retain fine integral quasi-coherent log structure, log smoothness and Cartier type; the classical map is the one induced by the base h-realization on its log-smooth Cartier-type arithmetic pairs. (NN, Proposition 3.18, p. 33, NN line 1688–1691 for the classical-pair map; Theorem A(1),(4), Proposition 4.6 and Corollary 4.11, pp. 2,46,53, NN line 78, NN line 85, NN line 93, NN line 2400, NN line 2778 for the period comparisons).
+For an arithmetic pair as in 5.2 with interior U, identify the classical rational syntomic complex of 3.4 with the base-owned h-realization RΓ_syn(U_h,r). For every reduced separated finite-type K-variety X and r≥0, transport the base’s functorial arithmetic and geometric product-compatible period maps and its equivalences τ≤rRΓ_syn(X_h,r)≃τ≤rRΓ_et(X,ℚ_p(r)) and τ≤rRΓ_syn(X_Kbar,h,r)≃τ≤rRΓ_et(X_Kbar,ℚ_p(r)). These are exports of the base theorem through named classical adapters, with all comparison squares specified. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); r≥0; Classical-pair statements retain fine integral quasi-coherent log structure, log smoothness and Cartier type; the classical map is the one induced by the base h-realization on its log-smooth Cartier-type arithmetic pairs. (NN, Proposition 3.18, p. 33, NN line 1688–1691 for the classical-pair map; Theorem A(1),(4), Proposition 4.6 and Corollary 4.11, pp. 2,46,53, NN line 78, NN line 85, NN line 93, NN line 2400, NN line 2778 for the period comparisons).
 
-Prove `ClassicalSyntomic.hRealizationCompatibility`: The classical-to-h map commutes with product, pullback and the semistable fibre projections. Prove `ClassicalSyntomic.arithmeticPeriodAdapter`: The transported arithmetic period is the base period on the common realization. Prove `ClassicalSyntomic.geometricPeriodAdapter`: Geometric base extension and G_K-action commute with the transported period.
+- The classical-to-h map commutes with product, pullback and the semistable fibre projections.
+- The transported arithmetic period is the base period on the common realization.
+- Geometric base extension and G_K-action commute with the transported period.
 
 Use uniqueness of the base’s h-descent extension to identify the classical-pair map, checking the semistable presentation and product on the h-basis. Transport the base’s period squares through that equivalence. The h-descent theorem, semistable comparison theorem and its geometric counterpart are imports, not new proof targets.
 
@@ -577,9 +655,9 @@ Use uniqueness of the base’s h-descent extension to identify the classical-pai
 
 **Checks.**
 
-- `ClassicalSyntomic.hRealizationCompatibility_identity`: Changing a presentation by its identity induces identity on the h-realization and on both period maps.
-- `ClassicalSyntomic.hRealizationCompatibility_p2`: At p=2 any r≥0 is permitted rationally; the integral exact range is not reused.
-- `ClassicalSyntomic.hRealizationCompatibility_truncation`: At r=0 only τ≤0 is exported. Tensoring with ℚ_p does not itself provide a comparison in all degrees.
+- Changing a presentation by its identity induces identity on the h-realization and on both period maps.
+- At p=2 any r≥0 is permitted rationally; the integral exact range is not reused.
+- At r=0 only τ≤0 is exported. Tensoring with ℚ_p does not itself provide a comparison in all degrees.
 
 ### Examples
 
@@ -593,9 +671,11 @@ Layer 3; contracts hyodo-kato-proper, arithmetic-pair-deformation, crystalline-i
 
 ### 6.1 Relative cohomology before promotion
 
-Construct `RelativeCohomology.datum`. For smooth quasi-projective u:U→S on an AM base and i≥0, assemble H^i(U/S)=(H^i_dR(U_K/S_K),H^i_rig(U_k/S_k),c,∇,Φ,F). The first module is Γ(S_K,R^iu_K*Ω•_(U_K/S_K)); the second is Γ(S_K^an,R^iu_rig j†O), with relative continuous differential realization on frames. Construct c by algebraic-to-analytic adjunction and restriction to overconvergent forms. Give the Gauss–Manin and Hodge maps and the Frobenius structure from the rigid realization. This datum is defined without asserting coherence or invertibility of c in an arbitrary open family. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; u is smooth quasi-projective; i≥0. (AM, Definition 2.12 and Remark 2.13, pp. 11–12; AM line 451, AM line 463, AM line 478).
+For smooth quasi-projective u:U→S on an AM base and i≥0, assemble H^i(U/S)=(H^i_dR(U_K/S_K),H^i_rig(U_k/S_k),c,∇,Φ,F). The first module is Γ(S_K,R^iu_K*Ω•_(U_K/S_K)); the second is Γ(S_K^an,R^iu_rig j†O), with relative continuous differential realization on frames. Construct c by algebraic-to-analytic adjunction and restriction to overconvergent forms. Give the Gauss–Manin and Hodge maps and the Frobenius structure from the rigid realization. This datum is defined without asserting coherence or invertibility of c in an arbitrary open family. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; u is smooth quasi-projective; i≥0. (AM, Definition 2.12 and Remark 2.13, pp. 11–12; AM line 451, AM line 463, AM line 478).
 
-Prove `RelativeCohomology.datum_comparison`: c is the displayed adjunction/restriction map, B†_K-linear after scalar extension. Prove `RelativeCohomology.datum_frame`: The frame description and the lifted U^an relative-overconvergent description agree. Prove `RelativeCohomology.datum_natural`: Morphisms of families induce the realization maps and commute with c,∇,F,Φ wherever their base-change comparison is defined.
+- c is the displayed adjunction/restriction map, B†_K-linear after scalar extension.
+- The frame description and the lifted U^an relative-overconvergent description agree.
+- Morphisms of families induce the realization maps and commute with c,∇,F,Φ wherever their base-change comparison is defined.
 
 Use the supplied algebraic and rigid relative derived pushforwards and take H^i. The map c is constructed before any bijectivity theorem. Adjoint pullback to analytification followed by j† produces it; the frame-independence theorem identifies the two rigid descriptions.
 
@@ -603,15 +683,17 @@ Use the supplied algebraic and rigid relative derived pushforwards and take H^i.
 
 **Checks.**
 
-- `RelativeCohomology.datum_identity`: For u=id_S, H⁰=(B_K,B†_K,c,d,σ,F⁰=all,F¹=0) and H^i=0 for i>0.
-- `RelativeCohomology.datum_empty`: For U empty every cohomology datum is zero.
-- `RelativeCohomology.datum_projectiveLine`: For P¹_S, H⁰=O_S, H¹=0, H²=O_S(−1); the H² Frobenius is p times the base Frobenius, not p⁻¹.
+- For u=id_S, H⁰=(B_K,B†_K,c,d,σ,F⁰=all,F¹=0) and H^i=0 for i>0.
+- For U empty every cohomology datum is zero.
+- For P¹_S, H⁰=O_S, H¹=0, H²=O_S(−1); the H² Frobenius is p times the base Frobenius, not p⁻¹.
 
 ### 6.2 The admissibility interface
 
-Prove `RelativeCohomology.filteredFrobeniusRealization`. Assume u:U→S is smooth quasi-projective on an AM base, every R^iu_rig j†O is coherent over j†O_(S_K^an), and every c_i:H^i_dR⊗B†_K→H^i_rig is bijective. Independently assume the algebraic finiteness, Hodge-filtration and connection hypotheses below on the actual modules of 6.1. Then promote these data to FilFMIC(S,σ), with horizontal invertible Φ supplied by the rigid realization. Prove naturality in family morphisms and in base changes for which the actual relative cohomology maps are isomorphisms respecting the Hodge filtration. AM Assumption 2.20 supplies only the rigid coherence and comparison conditions; it does not imply the independent algebraic hypotheses. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; u smooth quasi-projective; For every i≥0 the stated relative rigid sheaf is coherent and c_i is bijective; For every i≥0, the actual module H^i_dR(U_K/S_K) of 6.1 is finite over B_K, its actual Hodge filtration is finite exhaustive separated with finite locally free graded pieces, its Gauss–Manin connection is integrable and satisfies Griffiths transversality, and c_i identifies its induced continuous connection with the rigid connection. (AM, Definition 2.1, Remark 2.13, Assumption 2.20 and Remark 2.21, pp. 3–4,12,15; AM line 131, AM line 497, AM line 502, AM line 627).
+Assume u:U→S is smooth quasi-projective on an AM base, every R^iu_rig j†O is coherent over j†O_(S_K^an), and every c_i:H^i_dR⊗B†_K→H^i_rig is bijective. Independently assume the algebraic finiteness, Hodge-filtration and connection hypotheses below on the actual modules of 6.1. Then promote these data to FilFMIC(S,σ), with horizontal invertible Φ supplied by the rigid realization. Prove naturality in family morphisms and in base changes for which the actual relative cohomology maps are isomorphisms respecting the Hodge filtration. AM Assumption 2.20 supplies only the rigid coherence and comparison conditions; it does not imply the independent algebraic hypotheses. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; u smooth quasi-projective; For every i≥0 the stated relative rigid sheaf is coherent and c_i is bijective; For every i≥0, the actual module H^i_dR(U_K/S_K) of 6.1 is finite over B_K, its actual Hodge filtration is finite exhaustive separated with finite locally free graded pieces, its Gauss–Manin connection is integrable and satisfies Griffiths transversality, and c_i identifies its induced continuous connection with the rigid connection. (AM, Definition 2.1, Remark 2.13, Assumption 2.20 and Remark 2.21, pp. 3–4,12,15; AM line 131, AM line 497, AM line 502, AM line 627).
 
-Prove `RelativeCohomology.filteredFrobeniusRealization_forget`: Forgetting the promoted object returns the constructed datum of 6.1. Prove `RelativeCohomology.filteredFrobeniusRealization_pullback`: When the actual base-change maps on both realizations are isomorphisms, identify the Hodge filtrations and respect the connections and Frobenius, they give an isomorphism in FilFMIC. Prove `RelativeCohomology.filteredFrobeniusRealization_unique`: The coefficient object is uniquely determined by the datum and its verified properties; no Frobenius is chosen independently of rigid cohomology.
+- Forgetting the promoted object returns the constructed datum of 6.1.
+- When the actual base-change maps on both realizations are isomorphisms that identify the Hodge filtrations and respect the connections and Frobenius, they give an isomorphism in FilFMIC.
+- The coefficient object is uniquely determined by the datum and its verified properties; no Frobenius is chosen independently of rigid cohomology.
 
 Affine overconvergent coherence gives finite B†_K-modules. Use the independent finiteness and filtered-connection hypotheses on the actual algebraic modules; bijectivity of c identifies their scalar extensions and connections with the rigid modules. The rigid coefficient realization supplies horizontal invertible Frobenius. Verify 1.1 directly. No descent of algebraic finiteness through B_K→B†_K is used.
 
@@ -619,17 +701,20 @@ Affine overconvergent coherence gives finite B†_K-modules. Use the independent
 
 **Checks.**
 
-- `RelativeCohomology.filteredFrobeniusRealization_identity`: Promotion of H⁰(S/S) agrees with O_S and its exact filtration.
-- `RelativeCohomology.filteredFrobeniusRealization_zeroDegree`: A vanishing cohomology datum promotes to the zero object, including in degrees above a known cohomological bound.
-- `RelativeCohomology.filteredFrobeniusRealization_guard`: A formal tuple with c=0 between nonzero rank-one modules cannot be promoted; a non-locally-free Hodge graded piece also fails the explicit filtered-realization contract.
-- `RelativeCohomology.filteredFrobeniusRealization_genericDivisor`: For every prime p, V=ℤ_p, S=Spec(V[t]), σ(t)=t^p and U=D(pt−1), one has U_k=S_k and all-degree coherent rigid cohomology with bijective c_i. In degree zero H_dR=ℚ_p[t,(pt−1)⁻¹], while H_rig=B†_K since (1−pt)⁻¹=Σ_(j≥0)p^j t^j converges on some radius 1<ρ<p. The algebraic module is not finite: finitely many fractions have a bounded pole order at t=1/p, but its inverse powers have unbounded pole order. Thus 6.1 applies and 6.2 does not; nonempty special fibre and rigid coherence do not repair algebraic finiteness.
+- Promotion of H⁰(S/S) agrees with O_S and its exact filtration.
+- A vanishing cohomology datum promotes to the zero object, including in degrees above a known cohomological bound.
+- A formal tuple with c=0 between nonzero rank-one modules cannot be promoted; a non-locally-free Hodge graded piece also fails the explicit filtered-realization contract.
+- For every prime p, V=ℤ_p, S=Spec(V[t]), σ(t)=t^p and U=D(pt−1), one has U_k=S_k and all-degree coherent rigid cohomology with bijective c_i. In degree zero H_dR=ℚ_p[t,(pt−1)⁻¹], while H_rig=B†_K since (1−pt)⁻¹=Σ_(j≥0)p^j t^j converges on some radius 1<ρ<p. The algebraic module is not finite: finitely many fractions have a bounded pole order at t=1/p, but its inverse powers have unbounded pole order. Thus 6.1 applies and 6.2 does not; nonempty special fibre and rigid coherence do not repair algebraic finiteness.
 
 
 ### 6.3 The full compactification setting
 
-Define `RelativeCohomology.goodCompactification` to mean the existence of smooth projective V-schemes Sbar,Xbar, S=Spec(B) open in Sbar with relative simple normal-crossings complement T, a projective extension fbar:Xbar→Sbar, a horizontal relative normal-crossings divisor D_h on Xbar/V and vertical divisor D_v=fbar⁻¹(T), such that D_h∪D_v is relative normal-crossings over V, X=fbar⁻¹(S), D=D_h∩X is relative normal-crossings over S, U=X−D, and (Xbar,D_h∪D_v)→(Sbar,T) is log-smooth and integral with the base of Zariski type. The witnesses are presentation data; no boundary splitting or restriction on p is imposed. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; u:U→S smooth quasi-projective; all identifications commute with u. (AM, Setting 2.16, pp. 13–14; AM line 530–558).
+Define a good compactification of u to mean the existence of smooth projective V-schemes Sbar,Xbar, S=Spec(B) open in Sbar with relative simple normal-crossings complement T, a projective extension fbar:Xbar→Sbar, a horizontal relative normal-crossings divisor D_h on Xbar/V and vertical divisor D_v=fbar⁻¹(T), such that D_h∪D_v is relative normal-crossings over V, X=fbar⁻¹(S), D=D_h∩X is relative normal-crossings over S, U=X−D, and (Xbar,D_h∪D_v)→(Sbar,T) is log-smooth and integral with the base of Zariski type. The witnesses are presentation data; no boundary splitting or restriction on p is imposed. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; u:U→S smooth quasi-projective; all identifications commute with u. (AM, Setting 2.16, pp. 13–14; AM line 530–558).
 
-Prove `RelativeCohomology.goodCompactification_ofData`: The stated diagrams, boundary identities and geometric hypotheses construct a witness. Prove `RelativeCohomology.goodCompactification_ext`: Isomorphic compactification diagrams transport witnesses and induce the same interior u. Prove `RelativeCohomology.goodCompactification_independence`: Whenever the intrinsic datum satisfies 6.2, its coefficient object uses the realizations of 6.1, so two compactification witnesses induce the same promoted object. Prove `RelativeCohomology.goodCompactification_relativeBoundary`: Over S the vertical divisor disappears and the horizontal boundary is D with its relative S-normal-crossings property.
+- The stated diagrams, boundary identities and geometric hypotheses construct a witness.
+- Isomorphic compactification diagrams transport witnesses and induce the same interior u.
+- Whenever the intrinsic datum satisfies 6.2, its coefficient object uses the realizations of 6.1, so two compactification witnesses induce the same promoted object.
+- Over S the vertical divisor disappears and the horizontal boundary is D with its relative S-normal-crossings property.
 
 Use the imported scheme/log-divisor vocabulary and store precisely the geometric presentation required in AM Setting 2.16. Invariance under isomorphisms follows from its geometric predicates. The independence API refers to the intrinsic cohomology datum; it asserts no existence of a good compactification for every u.
 
@@ -637,15 +722,17 @@ Use the imported scheme/log-divisor vocabulary and store precisely the geometric
 
 **Checks.**
 
-- `RelativeCohomology.goodCompactification_constantGm`: Take S=A¹_V, Sbar=P¹_V, Xbar=P¹_V×P¹_V over the first factor, T=∞, D_h the second-factor sections 0,∞. Then D_v is the fibre over ∞ and U=A¹_V×G_m,V satisfies every clause.
-- `RelativeCohomology.goodCompactification_properConstant`: With no horizontal boundary in the same example and a fixed smooth projective fibre, the interior family is projective smooth; empty divisors are allowed.
-- `RelativeCohomology.goodCompactification_collision`: The horizontal sections x=0 and x=t over A¹_V collide at t=0. Their union is not a relative normal-crossings divisor over S there, even if the total-space crossing is normal. This does not give a goodCompactification witness for that S.
+- Take S=A¹_V, Sbar=P¹_V, Xbar=P¹_V×P¹_V over the first factor, T=∞, D_h the second-factor sections 0,∞. Then D_v is the fibre over ∞ and U=A¹_V×G_m,V satisfies every clause.
+- With no horizontal boundary in the same example and a fixed smooth projective fibre, the interior family is projective smooth; empty divisors are allowed.
+- The horizontal sections x=0 and x=t over A¹_V collide at t=0. Their union is not a relative normal-crossings divisor over S there, even if the total-space crossing is normal. This does not give a good compactification witness for that S.
 
 ### 6.4 Projective smooth and good-compactification families
 
-Prove `RelativeCohomology.sufficientGeometricSettings`. For every i≥0, prove coherence of R^iu_rig j†O and bijectivity of c_i in each of two domains: (a) u is projective smooth; (b) u admits goodCompactification as in 6.3. In each domain also establish finiteness of the actual algebraic de Rham modules, a finite exhaustive separated Hodge filtration with finite locally free graded pieces, integrable Gauss–Manin connection with Griffiths transversality, horizontal comparison and filtered base change. These independent algebraic conclusions, together with the rigid conclusions, give the FilFMIC object of 6.2. Keep log integrality, Zariski type and both the total and relative boundary hypotheses in (b). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; Either u is projective smooth or goodCompactification(u) holds; i≥0. (AM, Setting 2.14 and Propositions 2.15,2.17, pp. 12–14; AM line 510, AM line 512, AM line 567).
+For every i≥0, prove coherence of R^iu_rig j†O and bijectivity of c_i in each of two domains: (a) u is projective smooth; (b) u admits a good compactification as in 6.3. In each domain also establish finiteness of the actual algebraic de Rham modules, a finite exhaustive separated Hodge filtration with finite locally free graded pieces, integrable Gauss–Manin connection with Griffiths transversality, horizontal comparison and filtered base change. These independent algebraic conclusions, together with the rigid conclusions, give the FilFMIC object of 6.2. Keep log integrality, Zariski type and both the total and relative boundary hypotheses in (b). Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; Either u is projective smooth or u has a good compactification as in 6.3; i≥0. (AM, Setting 2.14 and Propositions 2.15,2.17, pp. 12–14; AM line 510, AM line 512, AM line 567).
 
-Prove `RelativeCohomology.projectiveSmooth`: The projective-smooth domain satisfies AM Assumption 2.20 and all independent algebraic hypotheses of 6.2 in every degree. Prove `RelativeCohomology.goodCompactification_admissible`: The full good-compactification domain satisfies AM Assumption 2.20 and all independent algebraic hypotheses of 6.2 in every degree. Prove `RelativeCohomology.comparison_horizontal`: The invertible c_i commutes with connection, filtration maps and Frobenius on the rigid side.
+- The projective-smooth domain satisfies AM Assumption 2.20 and all independent algebraic hypotheses of 6.2 in every degree.
+- The full good-compactification domain satisfies AM Assumption 2.20 and all independent algebraic hypotheses of 6.2 in every degree.
+- The invertible c_i commutes with connection, filtration maps and Frobenius on the rigid side.
 
 Apply relative-rigid-projective-finiteness in (a) and relative-rigid-log-finiteness in (b). Independently apply relative-hodge to the proper de Rham or compactification log-de Rham complex to obtain algebraic finiteness and all filtered-connection hypotheses of 6.2. With coherence established in all degrees, use geometric base change and the absolute/logarithmic comparison to prove c_i invertible and horizontal. Then apply 6.2; rigid coherence supplies no substitute for algebraic finiteness.
 
@@ -653,32 +740,35 @@ Apply relative-rigid-projective-finiteness in (a) and relative-rigid-log-finiten
 
 **Checks.**
 
-- `RelativeCohomology.sufficientGeometricSettings_properCurve`: For a constant smooth projective geometrically connected genus-g curve, ranks are 1,2g,1 in degrees 0,1,2, including g=0.
-- `RelativeCohomology.sufficientGeometricSettings_constantGm`: The compactification in 6.3 gives H⁰=O and H¹=O(−1); its H¹ Frobenius multiplies dlog x by p.
-- `RelativeCohomology.sufficientGeometricSettings_allPrimes`: The geometric statements admit p=2. A ramified V without a p-Frobenius modulo p is excluded from the AM relative setting, while the classical log/rigid producers still admit it. The Frobenius hypothesis is not vacuous notation.
+- For a constant smooth projective geometrically connected genus-g curve, ranks are 1,2g,1 in degrees 0,1,2, including g=0.
+- The compactification in 6.3 gives H⁰=O and H¹=O(−1); its H¹ Frobenius multiplies dlog x by p.
+- The geometric statements admit p=2. A ramified V without a p-Frobenius modulo p is excluded from the AM relative setting, while the classical log/rigid producers still admit it. The Frobenius hypothesis is not vacuous notation.
 
 ### 6.5 Relative continuous-differential cohomology
 
-Prove `RelativeCohomology.continuousDifferentialComparison`. For a smooth morphism U=Spec(A)→S=Spec(B) of smooth affine V-schemes such that H^j(S_K^an,R^iu_rig j†O)=0 for every i≥0 and j>0, identify H^i_rig(U_k/S_k) with H^i(Ω•_(A†_K/B†_K)) naturally and compatibly with the supplied connection; Frobenius compatibility is asserted only with the AM lifts. No affine acyclicity statement is applied to a proper positive-genus curve. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); U and S are smooth affine and H^j(S_K^an,R^iu_rig j†O)=0 for all i≥0,j>0; Frobenius compatibility additionally uses the AM lifts. (AM, Lemma 2.19 and Remark 2.21(3), pp. 14–15; AM line 609, AM line 612, AM line 639).
+For a smooth morphism U=Spec(A)→S=Spec(B) of smooth affine V-schemes such that H^j(S_K^an,R^iu_rig j†O)=0 for every i≥0 and j>0, identify H^i_rig(U_k/S_k) with H^i(Ω•_(A†_K/B†_K)) naturally and compatibly with the supplied connection; Frobenius compatibility is asserted only with the AM lifts. No affine acyclicity statement is applied to a proper positive-genus curve. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); U and S are smooth affine and H^j(S_K^an,R^iu_rig j†O)=0 for all i≥0,j>0; Frobenius compatibility additionally uses the AM lifts. (AM, Lemma 2.19 and Remark 2.21(3), pp. 14–15; AM line 609, AM line 612, AM line 639).
 
-The comparison is the edge map from global relative continuous forms to the relative rigid realization. Prove `RelativeCohomology.continuousDifferentialComparison_ofCoherent`: Under the same smooth affine hypotheses, if all R^iu_rig j†O are coherent, the affine coefficient-vanishing contract verifies the preceding hypothesis, so the same comparison is an isomorphism in every degree. Its connection and conditional Frobenius compatibility are those of the general map (AM Remark 2.21(3), AM line 639–645).
+The comparison is the edge map from global relative continuous forms to the relative rigid realization. Prove that under the same smooth affine hypotheses, if all R^iu_rig j†O are coherent, the affine coefficient-vanishing contract verifies the preceding hypothesis, so the same comparison is an isomorphism in every degree. Its connection and conditional Frobenius compatibility are those of the general map (AM Remark 2.21(3), AM line 639–645).
 
 For the general theorem apply affine coefficient vanishing on U to each coherent relative differential sheaf, and the assumed higher-cohomology vanishing on S to the relative rigid cohomology sheaves. The two hypercohomology spectral sequences identify the edge with the continuous-differential comparison. For the coherent corollary, affine coefficient vanishing on S supplies that extra vanishing; no coherence of relative cohomology sheaves is needed in the general statement.
 
-*Needs:* AdicSpacesPartIV §F1.7 `dagger-coherent-theorem-b` and `overconvergent-sections-formula`; contract `relative-rigid-realization`; contract `relative-rigid-coefficients` for conditional Frobenius compatibility; AdicSpacesPartIV §F1.7; AdicSpacesPartIV §F1.9; RigidAnalyticGeometry §7.3; EnhancedDerivedSheaves §§0.1–0.4; the general theorem uses the displayed all-degree acyclicity hypothesis, and `_ofCoherent` additionally uses affine coefficient vanishing on S.
+*Needs:* AdicSpacesPartIV §F1.7 `dagger-coherent-theorem-b` and `overconvergent-sections-formula`; contract `relative-rigid-realization`; contract `relative-rigid-coefficients` for conditional Frobenius compatibility; AdicSpacesPartIV §F1.7; AdicSpacesPartIV §F1.9; RigidAnalyticGeometry §7.3; EnhancedDerivedSheaves §§0.1–0.4; the general theorem uses the displayed all-degree acyclicity hypothesis, and the coherent corollary additionally uses affine coefficient vanishing on S.
 
 **Checks.**
 
-- `RelativeCohomology.continuousDifferentialComparison_affineLine`: For A=V[t], S=Spec(V), the dagger complex has H⁰=K and H¹=0, since overconvergent integration remains overconvergent.
-- `RelativeCohomology.continuousDifferentialComparison_gM`: For A=V[t,t⁻¹], H¹=K dlog t. Replacing dagger forms by only exact forms would erase this class.
-- `RelativeCohomology.continuousDifferentialComparison_ramifiedBase`: For V=ℤ_2[π]/(π²−2), S=Spec(V[t]) and U=S×A¹, relative dagger forms give H⁰=B†_K and H^i=0 for i>0, with the usual connection. The realization and comparison apply although §1.1 excludes an AM Frobenius lift on V; no Frobenius compatibility is asserted for this base.
-- `RelativeCohomology.continuousDifferentialComparison_properCounterexample`: For an elliptic curve E/V, H¹(E_K^an,O)=K. The unrestricted smooth-scheme wording of AM Lemma 2.19 would be false; its affine-embedding proof supplies the affine theorem used here.
+- For A=V[t], S=Spec(V), the dagger complex has H⁰=K and H¹=0, since overconvergent integration remains overconvergent.
+- For A=V[t,t⁻¹], H¹=K dlog t. Replacing dagger forms by only exact forms would erase this class.
+- For V=ℤ_2[π]/(π²−2), S=Spec(V[t]) and U=S×A¹, relative dagger forms give H⁰=B†_K and H^i=0 for i>0, with the usual connection. The realization and comparison apply although §1.1 excludes an AM Frobenius lift on V; no Frobenius compatibility is asserted for this base.
+- For an elliptic curve E/V, H¹(E_K^an,O)=K. The unrestricted smooth-scheme wording of AM Lemma 2.19 would be false; its affine-embedding proof supplies the affine theorem used here.
 
 ### 6.6 Residues without a split-boundary hypothesis
 
-Prove `RelativeCohomology.openCurveResidueSequence`. Let U and S be smooth affine over an AM base, u:U→S smooth of relative dimension one with connected fibres, X→S a projective smooth compactification and D=X−U finite étale over S. Assume all hypotheses of 6.2 for U/S, including algebraic finiteness and the actual filtered-realization hypotheses independently of rigid coherence and bijectivity of c. Construct the exact sequence 0→H¹(X/S)→H¹(U/S)→Res H⁰(D/S)(−1)→Gys H²(X/S)→0 in FilFMIC, with Res filtered, horizontal and Frobenius compatible. Construct induced maps Ext^i(O_S,H¹(U/S)(m))→Ext^i(O_S,H⁰(D/S)(m−1)) for every i≥0,m∈ℤ, commuting with u_i and coefficient pullback. D is a finite étale scheme, not a list of S-rational sections. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; U and S smooth affine; u smooth of relative dimension one with connected fibres; X/S projective smooth; U⊂X; D finite étale; U/S satisfies all hypotheses of 6.2, including the independent algebraic finiteness, Hodge-filtration and connection conditions. (AM, Proposition 2.18 and the residue interface in Lemma 4.2, pp. 14,33; AM line 587, AM line 595, AM line 1483).
+Let U and S be smooth affine over an AM base, u:U→S smooth of relative dimension one with connected fibres, X→S a projective smooth compactification and D=X−U finite étale over S. Assume all hypotheses of 6.2 for U/S, including algebraic finiteness and the actual filtered-realization hypotheses independently of rigid coherence and bijectivity of c. Construct the exact sequence 0→H¹(X/S)→H¹(U/S)→Res H⁰(D/S)(−1)→Gys H²(X/S)→0 in FilFMIC, with Res filtered, horizontal and Frobenius compatible. Construct induced maps Ext^i(O_S,H¹(U/S)(m))→Ext^i(O_S,H⁰(D/S)(m−1)) for every i≥0,m∈ℤ, commuting with u_i and coefficient pullback. D is a finite étale scheme, not a list of S-rational sections. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; U and S smooth affine; u smooth of relative dimension one with connected fibres; X/S projective smooth; U⊂X; D finite étale; U/S satisfies all hypotheses of 6.2, including the independent algebraic finiteness, Hodge-filtration and connection conditions. (AM, Proposition 2.18 and the residue interface in Lemma 4.2, pp. 14,33; AM line 587, AM line 595, AM line 1483).
 
-Prove `RelativeCohomology.residue`: The residue of (dt/t)⊗h along a local boundary parameter is h, with the corresponding Tate shift. Prove `RelativeCohomology.residueSequence_exact`: Exactness holds on every filtration step and the rigid comparison, not only after forgetting the filtration. Prove `RelativeCohomology.residue_frobenius`: Res φ=φ_(H⁰D(−1)) Res, so the target Frobenius has the extra factor p. Prove `RelativeCohomology.residueExt`: Pushout of an admissible extension along Res defines the Ext map and commutes with evaluation.
+- The residue of (dt/t)⊗h along a local boundary parameter is h, with the corresponding Tate shift.
+- Exactness holds on every filtration step and the rigid comparison, not only after forgetting the filtration.
+- Res φ=φ_(H⁰D(−1)) Res, so the target Frobenius has the extra factor p.
+- Pushout of an admissible extension along Res defines the Ext map and commutes with evaluation.
 
 Use the logarithmic de Rham residue/Gysin sequence and its strictness from relative-hodge; proper-smooth X and finite-étale D use 6.4. Identify the rigid sequence via c and flat scalar extension; check Frobenius on the absolute fibres using `rigid-gysin`, with H²(U)=0 supplied by the affine curve hypothesis. Descend finite étale boundary data, retaining its entire cohomology module and trace. Apply coefficient pushout in Yoneda Ext and naturality of 1.5; symbol residue identities remain consumers’ theorems.
 
@@ -686,16 +776,19 @@ Use the logarithmic de Rham residue/Gysin sequence and its strictness from relat
 
 **Checks.**
 
-- `RelativeCohomology.openCurveResidueSequence_splitGm`: For P¹−{0,∞}, Res(dlog t)=(1,−1) in O²(−1); Gys is the sum, hence the composite is zero.
-- `RelativeCohomology.openCurveResidueSequence_nonsplit`: Over ℤ_2 take D⊂P¹ given by t²+t+1, an unramified quadratic étale divisor. H⁰(D) has rank 2, Gys is its field trace, and H¹(P¹−D) is rank-one trace-zero part with twist (−1); Frobenius acts by −2. A boundary indexed by rational sections would miss it.
-- `RelativeCohomology.openCurveResidueSequence_emptyBoundaryExcluded`: A nonempty smooth projective curve X/S with D empty has nonzero H². It does not satisfy the affine U curve hypotheses, so 0→H¹X→H¹X→0→H²X→0 is not exported as exact.
-- `RelativeCohomology.residueSequence_emptyBoundaryControl`: For X=P¹_k and D empty, U=X has H²_rig(U)=K0(−1); the general rigid localization sequence retains H²_rig(X)→H²_rig(U) as identity. This proper curve is excluded by the affine U/S hypothesis of the short relative sequence.
+- For P¹−{0,∞}, Res(dlog t)=(1,−1) in O²(−1); Gys is the sum, hence the composite is zero.
+- Over ℤ_2 take D⊂P¹ given by t²+t+1, an unramified quadratic étale divisor. H⁰(D) has rank 2, Gys is its field trace, and H¹(P¹−D) is rank-one trace-zero part with twist (−1); Frobenius acts by −2. A boundary indexed by rational sections would miss it.
+- A nonempty smooth projective curve X/S with D empty has nonzero H². It does not satisfy the affine U curve hypotheses, so 0→H¹X→H¹X→0→H²X→0 is not exported as exact.
+- For X=P¹_k and D empty, U=X has H²_rig(U)=K0(−1); the general rigid localization sequence retains H²_rig(X)→H²_rig(U) as identity. This proper curve is excluded by the affine U/S hypothesis of the short relative sequence.
 
 ### 6.7 Geometric extension projections
 
-Construct `RelativeCohomology.extensionProjections`. For a smooth affine u:U→S satisfying all hypotheses of 6.2, including its independent algebraic conditions, and n≥0 with F^(n+1)H^n_dR=0, set H=H^n(U/S)(n+1). Export δ:Ext¹(O,H)→Ω¹_BK⊗F^nH^n_dR and R_σ:Ext¹(O,H)→B†_K⊗H^n_dR as the canonical components of 1.6. They satisfy dδ=0 and (1−Φ_(n+1))δ=dR_σ. For the setting of AM §2.7 additionally retain F^(n+1)H^(n+1)_dR=0; it is an application hypothesis, not a condition on the general coefficient construction. The maps commute with residue and filtered base change when the cohomology comparisons are defined. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; U and S affine; u smooth; all hypotheses of 6.2 hold, including its independent algebraic finiteness, Hodge-filtration and connection conditions; n≥0; F^(n+1)H^n_dR=0; the AM §2.7 application also assumes F^(n+1)H^(n+1)_dR=0. (AM, §2.7, equation (2.22), p. 19; AM line 795, AM line 799, AM line 808).
+For a smooth affine u:U→S satisfying all hypotheses of 6.2, including its independent algebraic conditions, and n≥0 with F^(n+1)H^n_dR=0, set H=H^n(U/S)(n+1). Export δ:Ext¹(O,H)→Ω¹_BK⊗F^nH^n_dR and R_σ:Ext¹(O,H)→B†_K⊗H^n_dR as the canonical components of 1.6. They satisfy dδ=0 and (1−Φ_(n+1))δ=dR_σ. For the setting of AM §2.7 additionally retain F^(n+1)H^(n+1)_dR=0; it is an application hypothesis, not a condition on the general coefficient construction. The maps commute with residue and filtered base change when the cohomology comparisons are defined. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); in addition V has an endomorphism F_V inducing x↦x^p modulo pV; S=Spec(B) is smooth affine over V; σ:B†→B† extends F_V and induces x↦x^p modulo pB†; U and S affine; u smooth; all hypotheses of 6.2 hold, including its independent algebraic finiteness, Hodge-filtration and connection conditions; n≥0; F^(n+1)H^n_dR=0; the AM §2.7 application also assumes F^(n+1)H^(n+1)_dR=0. (AM, §2.7, equation (2.22), p. 19; AM line 795, AM line 799, AM line 808).
 
-Prove `RelativeCohomology.delta`: δ is the algebraic connection component of the unique filtered lift. Prove `RelativeCohomology.frobeniusRemainder`: R_σ is the overconvergent (1−Φ) component, with the Frobenius acting also on base forms. Prove `RelativeCohomology.projectionsResidue`: After the Tate shift of 6.6, the two components commute with the coefficient residue map. Prove `RelativeCohomology.projections_changeFrobenius`: δ transports identically on the de Rham side; R changes through the supplied lift-change equivalence.
+- δ is the algebraic connection component of the unique filtered lift.
+- R_σ is the overconvergent (1−Φ) component, with the Frobenius acting also on base forms.
+- After the Tate shift of 6.6, the two components commute with the coefficient residue map.
+- δ transports identically on the de Rham side; R changes through the supplied lift-change equivalence.
 
 Substitute the Tate filtration in 1.6 and use the cohomology object of 6.2. F⁰H=F^(n+1)H^n=0 removes the coboundary ambiguity. Horizontality, strictness and the Tate shift in 6.6 prove residue compatibility. The extra vanishing in AM §2.7 is retained only for that geometric application, and symbols are not defined here.
 
@@ -703,9 +796,9 @@ Substitute the Tate filtration in 1.6 and use the cohomology object of 6.2. F⁰
 
 **Checks.**
 
-- `RelativeCohomology.extensionProjections_split`: A split geometric extension has δ=0 and R_σ=0.
-- `RelativeCohomology.extensionProjections_curveTwist`: For U=G_m/S, n=1, H¹(U/S)(2)=O(1), so F⁰=0 and the residue extension lands in H⁰(D/S)(1), not twist (2).
-- `RelativeCohomology.extensionProjections_nzero`: For n=0, H=H⁰(U/S)(1); the construction uses weight 1 with no sign reversal. No artificial n≥1 restriction is introduced.
+- A split geometric extension has δ=0 and R_σ=0.
+- For U=G_m/S, n=1, H¹(U/S)(2)=O(1), so F⁰=0 and the residue extension lands in H⁰(D/S)(1), not twist (2).
+- For n=0, H=H⁰(U/S)(1); the construction uses weight 1 with no sign reversal. No artificial n≥1 restriction is introduced.
 
 ### Examples
 
@@ -719,9 +812,12 @@ Layer 1; Layer 2 comparison diagram; AdicSpacesPartIV §§F1.5,F1.7–F1.9; Rigi
 
 ### 7.1 Frobenius-compatible lifts of residue points
 
-Construct `FrobeniusPoint.lift`. Let V=W(k), k perfect, Z=Spec(C) smooth affine over W(k), and (σ_m) a compatible system of p-Frobenius lifts on C/p^m extending Witt Frobenius F_W. For every a∈Z(k) construct the unique W(k)-point P_a lifting a such that P_a∘σ=F_W∘P_a on the p-adic completion, equivalently at every finite level. Give reduction, naturality for Frobenius-compatible morphisms and uniqueness APIs. This is not a choice of an arbitrary analytic lift. Here p prime; k perfect of characteristic p; V=W(k); Z smooth affine over W(k); Compatible σ_m exist for all m≥1. (AM, Lemma 3.8, pp. 28–29; AM line 1229–1287).
+Let V=W(k), k perfect, Z=Spec(C) smooth affine over W(k), and (σ_m) a compatible system of p-Frobenius lifts on C/p^m extending Witt Frobenius F_W. For every a∈Z(k) construct the unique W(k)-point P_a lifting a such that P_a∘σ=F_W∘P_a on the p-adic completion, equivalently at every finite level. Give reduction, naturality for Frobenius-compatible morphisms and uniqueness APIs. This is not a choice of an arbitrary analytic lift. Here p prime; k perfect of characteristic p; V=W(k); Z smooth affine over W(k); Compatible σ_m exist for all m≥1. (AM, Lemma 3.8, pp. 28–29; AM line 1229–1287).
 
-Prove `FrobeniusPoint.lift_reduce`: P_a modulo p equals a. Prove `FrobeniusPoint.lift_commutes`: At every m, P_aσ_m=F_WP_a. Prove `FrobeniusPoint.lift_unique`: Any W(k)-point with the same reduction and these equations equals P_a. Prove `FrobeniusPoint.lift_natural`: A morphism commuting with the σ_m carries P_a to the lift of its residue point.
+- P_a modulo p equals a.
+- At every m, P_aσ_m=F_WP_a.
+- Any W(k)-point with the same reduction and these equations equals P_a.
+- A morphism commuting with the σ_m carries P_a to the lift of its residue point.
 
 Use formal smoothness for successive lifting and the contraction of F_W⁻¹σ on lifts modulo p^m: the next value depends only on the previous reduction. Uniqueness follows at every finite level, and p-adic completeness produces a W(k)-point. This is a mathematical existence proof, not an algorithm target.
 
@@ -729,15 +825,17 @@ Use formal smoothness for successive lifting and the contraction of F_W⁻¹σ o
 
 **Checks.**
 
-- `FrobeniusPoint.lift_zero`: For Z=A¹_W and σ(t)=t^p, P_0(t)=0.
-- `FrobeniusPoint.lift_teichmuller`: For the same σ, P_a(t)=[a], since F_W[a]=[a]^p; P_1(t)=1.
-- `FrobeniusPoint.lift_arbitraryLift`: Over ℤ_p, t↦p lifts the residue point 0 but is not compatible with σ(t)=t^p because p^p≠p. With σ(t)=t^p+p the compatible lift of 0 is instead congruent to p modulo p².
+- For Z=A¹_W and σ(t)=t^p, P_0(t)=0.
+- For the same σ, P_a(t)=[a], since F_W[a]=[a]^p; P_1(t)=1.
+- Over ℤ_p, t↦p lifts the residue point 0 but is not compatible with σ(t)=t^p because p^p≠p. With σ(t)=t^p+p the compatible lift of 0 is instead congruent to p modulo p².
 
 ### 7.2 Detection by lifts over an algebraically closed residue field
 
-Prove `FrobeniusPoint.detectSection`. Let k be algebraically closed of characteristic p, C smooth affine over W(k), and M finite locally free over C_hat[1/p]. Choose for every a∈Spec(C/p)(k) any W(k)-point P_a lifting a. If x∈M has zero image in M⊗_(C_hat[1/p]),P_a Frac(W(k)) for every a, then x=0. Frobenius compatibility is unnecessary for this detection theorem; the canonical lifts of 7.1 are one allowed choice. Here p prime; k algebraically closed of characteristic p; C smooth affine over W(k); C_hat its p-adic completion; M finite locally free over C_hat[1/p]; One lifting P_a is specified for every k-point. (AM, Lemma 3.9, p. 29; AM line 1289–1301).
+Let k be algebraically closed of characteristic p, C smooth affine over W(k), and M finite locally free over C_hat[1/p]. Choose for every a∈Spec(C/p)(k) any W(k)-point P_a lifting a. If x∈M has zero image in M⊗_(C_hat[1/p]),P_a Frac(W(k)) for every a, then x=0. Frobenius compatibility is unnecessary for this detection theorem; the canonical lifts of 7.1 are one allowed choice. Here p prime; k algebraically closed of characteristic p; C smooth affine over W(k); C_hat its p-adic completion; M finite locally free over C_hat[1/p]; One lifting P_a is specified for every k-point. (AM, Lemma 3.9, p. 29; AM line 1289–1301).
 
-Prove `FrobeniusPoint.detectSection_equal`: Two sections agreeing at all P_a are equal, by applying detection to their difference. Prove `FrobeniusPoint.detectSection_zeroRank`: The zero-rank case is included. Prove `FrobeniusPoint.detectSection_choice`: The conclusion holds for any such system of lifts, not only a chosen Frobenius system.
+- Two sections agreeing at all P_a are equal, by applying detection to their difference.
+- The zero-rank case is included.
+- The conclusion holds for any such system of lifts, not only a chosen Frobenius system.
 
 Embed the finite projective module as a direct summand of a finite free module. For a nonzero coordinate clear p-denominators and divide by its largest common p-power; its reduction modulo p is nonzero. Vanishing at all residue points contradicts the Nullstellensatz for the reduced smooth special fibre. If the special fibre is empty, C_hat=0 and the conclusion is the zero-module case.
 
@@ -745,15 +843,17 @@ Embed the finite projective module as a direct summand of a finite free module. 
 
 **Checks.**
 
-- `FrobeniusPoint.detectSection_zeroModule`: For M=0 the only section is zero, so no nonzero-rank hypothesis is introduced.
-- `FrobeniusPoint.detectSection_constant`: For M=C_hat[1/p], x=1 evaluates to 1 at every existing residue lift and is not detected as zero on nonempty Spec(C/p).
-- `FrobeniusPoint.detectSection_finiteResidue`: For k=𝔽_p, C=W(k)[t], the nonzero section t^p−t vanishes at every Teichmüller lift of the finitely many 𝔽_p-points. Algebraic closedness cannot be omitted.
+- For M=0 the only section is zero, so no nonzero-rank hypothesis is introduced.
+- For M=C_hat[1/p], x=1 evaluates to 1 at every existing residue lift and is not detected as zero on nonempty Spec(C/p).
+- For k=𝔽_p, C=W(k)[t], the nonzero section t^p−t vanishes at every Teichmüller lift of the finitely many 𝔽_p-points. Algebraic closedness cannot be omitted.
 
 ### 7.3 Specializing extensions and their representatives
 
-Prove `FilFMIC.specializationEvaluation`. On the W(k) base of 7.1, suppose σ comes from the fixed overconvergent lift defining FilFMIC. Pullback along P_a, extending continuously to C_hat and its generic fibre, carries any admissible extension E of O by H to its absolute coefficient extension and carries u_i(E) to u_i(P_a*E). For F⁰H=0 the unique filtered lift specializes, so dP_a(δ(E))=δ(P_a*E)=0 (pullback as a differential form, not merely tensor evaluation in the cotangent fibre) and R_σ(E)|P_a=R_(F_W)(P_a*E). Use the pullback on connection complexes and its completion map. The formula compares actual extensions; it is not an assertion about arbitrary unrelated tuples. Assume the hypotheses of 7.1 and the overconvergent σ of 1.1; H∈FilFMIC(Z,σ); E is an admissible extension; For representative formulas F⁰H_dR=0. (AM, Pullback (2.1), Lemma 2.5 and proof of Theorem 3.7, pp. 5,7,30–31; AM line 206, AM line 283, AM line 1352–1364).
+On the W(k) base of 7.1, suppose σ comes from the fixed overconvergent lift defining FilFMIC. Pullback along P_a, extending continuously to C_hat and its generic fibre, carries any admissible extension E of O by H to its absolute coefficient extension and carries u_i(E) to u_i(P_a*E). For F⁰H=0 the unique filtered lift specializes, so dP_a(δ(E))=δ(P_a*E)=0 (pullback as a differential form, not merely tensor evaluation in the cotangent fibre) and R_σ(E)|P_a=R_(F_W)(P_a*E). Use the pullback on connection complexes and its completion map. The formula compares actual extensions; it is not an assertion about arbitrary unrelated tuples. Assume the hypotheses of 7.1 and the overconvergent σ of 1.1; H∈FilFMIC(Z,σ); E is an admissible extension; For representative formulas F⁰H_dR=0. (AM, Pullback (2.1), Lemma 2.5 and proof of Theorem 3.7, pp. 5,7,30–31; AM line 206, AM line 283, AM line 1352–1364).
 
-Prove `FilFMIC.specializationEvaluation_ext`: The specialization square for u_i commutes for every i≥0. Prove `FilFMIC.specializationEvaluation_lift`: The unique F⁰ lift of 1 pulls back to the unique F⁰ lift of 1. Prove `FilFMIC.specializationEvaluation_remainder`: The Frobenius equation P_aσ=F_WP_a identifies (1−Φ)e after pullback with its absolute representative.
+- The specialization square for u_i commutes for every i≥0.
+- The unique F⁰ lift of 1 pulls back to the unique F⁰ lift of 1.
+- The Frobenius equation P_aσ=F_WP_a identifies (1−Φ)e after pullback with its absolute representative.
 
 Apply conflation-exact pullback and the naturality of the connecting maps defining u_i. Uniqueness of the filtered lift identifies its pullback. The Frobenius-compatibility equation of P_a is essential in the second component; extension to the completed generic base is the supplied continuous pullback map.
 
@@ -761,15 +861,17 @@ Apply conflation-exact pullback and the naturality of the connecting maps defini
 
 **Checks.**
 
-- `FilFMIC.specializationEvaluation_split`: The split extension remains split, and its R-value is zero at every compatible point.
-- `FilFMIC.specializationEvaluation_pointIdentity`: For Z=Spec(W(k)), specialization is identity on the extension and on R.
-- `FilFMIC.specializationEvaluation_wrongPoint`: For σ(t)=t^p on ℤ_p[t], evaluation at t=p does not commute with Frobenius. The formula obtained by simply substituting t=p into (1−Φ)e is not an absolute F_W-Frobenius extension representative.
+- The split extension remains split, and its R-value is zero at every compatible point.
+- For Z=Spec(W(k)), specialization is identity on the extension and on R.
+- For σ(t)=t^p on ℤ_p[t], evaluation at t=p does not commute with Frobenius. The formula obtained by simply substituting t=p into (1−Φ)e is not an absolute F_W-Frobenius extension representative.
 
 ### 7.4 Absolute log-syntomic and rigid syntomic comparison
 
-Prove `ClassicalSyntomic.logRigidComparison`. Let Y be smooth projective over W(k), D a relative normal-crossings divisor, M the horizontal log structure induced by D alone, over W(k) with trivial log structure, and U=Y−D. For every r≥0 construct RΓ_log-syn((Y,M),ℚ_p(r))≃RΓ_rsyn(U,r), inducing the AM cohomology comparison in every degree. Identify both with the fibre of F^rRΓ_log-dR(Y_K,M_K)→RΓ_log-cr(Y_k,M_k) with arrow (1−φ/p^r) composed with the de Rham/crystalline map. Prove compatibility with products, pullback of such pairs and the étale period maps: the horizontal-log and rigid periods supplied by `rigid-syntomic-etale-period`. No regulator or symbol map is a premise. Here p prime; k perfect of characteristic p; V=W(k); Y/W(k) projective smooth; D relative normal-crossings; U=Y−D; the log structure is from D alone, not D∪Y0; r≥0. (AM, Lemma 3.10, equations (3.10)–(3.12), pp. 29–30; AM line 1302, AM line 1314, AM line 1327; BesserI Remark 8.7(3), BesserI line 1073).
+Let Y be smooth projective over W(k), D a relative normal-crossings divisor, M the horizontal log structure induced by D alone, over W(k) with trivial log structure, and U=Y−D. For every r≥0 construct RΓ_log-syn((Y,M),ℚ_p(r))≃RΓ_rsyn(U,r), inducing the AM cohomology comparison in every degree. Identify both with the fibre of F^rRΓ_log-dR(Y_K,M_K)→RΓ_log-cr(Y_k,M_k) with arrow (1−φ/p^r) composed with the de Rham/crystalline map. Prove compatibility with products, pullback of such pairs and the étale period maps: the horizontal-log and rigid periods supplied by `rigid-syntomic-etale-period`. No regulator or symbol map is a premise. Here p prime; k perfect of characteristic p; V=W(k); Y/W(k) projective smooth; D relative normal-crossings; U=Y−D; the log structure is from D alone, not D∪Y0; r≥0. (AM, Lemma 3.10, equations (3.10)–(3.12), pp. 29–30; AM line 1302, AM line 1314, AM line 1327; BesserI Remark 8.7(3), BesserI line 1073).
 
-Prove `ClassicalSyntomic.logRigidComparison_fiber`: The equivalence is induced by filtered log/algebraic de Rham and log-crystalline/rigid realization comparisons. Prove `ClassicalSyntomic.logRigidComparison_cup`: The cup square commutes with weight addition. Prove `ClassicalSyntomic.logRigidComparison_period`: The two period maps to generic-fibre étale cohomology commute through this equivalence.
+- The equivalence is induced by filtered log/algebraic de Rham and log-crystalline/rigid realization comparisons.
+- The cup square commutes with weight addition.
+- The two period maps to generic-fibre étale cohomology commute through this equivalence.
 
 Use RΓ_log-syn((Y,M),ℚ_p(r)) on the full log-syntomic domain of 3.4 and its local PD presentations, then apply the supplied filtered log de Rham/algebraic de Rham and relative log-crystalline/rigid comparisons to the two single-fibre presentations. This does not use the canonical-vertical-log arithmetic-pair C_st presentation. Since V=W(k), 2.3 applies without changing base fields. The multiplicative realization diagram induces the fibre equivalence, and the period square supplied by `rigid-syntomic-etale-period` identifies its composite with the horizontal-log period on this pair. The regulator square in AM Lemma 3.10 is a downstream application, not needed for this construction.
 
@@ -777,16 +879,18 @@ Use RΓ_log-syn((Y,M),ℚ_p(r)) on the full log-syntomic domain of 3.4 and its l
 
 **Checks.**
 
-- `ClassicalSyntomic.logRigidComparison_point`: For Y=Spec(W(k)), D empty, r=0 the comparison identifies the same fibre of 1−φ on K0.
-- `ClassicalSyntomic.logRigidComparison_gM`: For Y=P¹_W,D={0,∞}, it identifies dlog t and its Frobenius p dlog t in the two realizations.
-- `ClassicalSyntomic.logRigidComparison_noGoodCompactificationClaim`: For a general smooth open V-scheme without such a W(k) projective normal-crossings pair, this theorem supplies no integral or unramified single-fibre replacement of 2.2.
-- `ClassicalSyntomic.logRigidComparison_verticalLog`: For Y=Spec(ℤ_p), D empty and r=1, the horizontal-log/rigid fibre has H¹=ℚ_p. Adding the canonical vertical log gives the C_st point complex ℚ_p→ℚ_p³→ℚ_p, with first differential ((1−p⁻¹)x,x,0) and second differential zero, so H¹=ℚ_p². These two log structures cannot share an equivalence.
+- For Y=Spec(W(k)), D empty, r=0 the comparison identifies the same fibre of 1−φ on K0.
+- For Y=P¹_W,D={0,∞}, it identifies dlog t and its Frobenius p dlog t in the two realizations.
+- For a general smooth open V-scheme without such a W(k) projective normal-crossings pair, this theorem supplies no integral or unramified single-fibre replacement of 2.2.
+- For Y=Spec(ℤ_p), D empty and r=1, the horizontal-log/rigid fibre has H¹=ℚ_p. Adding the canonical vertical log gives the C_st point complex ℚ_p→ℚ_p³→ℚ_p, with first differential ((1−p⁻¹)x,x,0) and second differential zero, so H¹=ℚ_p². These two log structures cannot share an equivalence.
 
 ### 7.5 The absolute target of relative evaluation
 
-Construct `ClassicalSyntomic.absoluteExtensionValue`. In 7.4 fix n≥0 and r=n+1. Assume H^n(F^rRΓ_dR(U_K))=H^(n+1)(F^rRΓ_dR(U_K))=0, and assume the geometric coefficient H=H^n(U/W(k))(r) of 6.2 has F⁰=0. The connecting map identifies H^n_rig(U_k/K0) with H^(n+1)_rsyn(U,r). Compose R_(F_W):Ext¹(O,H)→H^n_rig with this connecting isomorphism, and with 7.4, to define absoluteExtensionValue in H^(n+1)_log-syn((Y,M),ℚ_p(r)). For a family and compatible point whose fibre satisfies these hypotheses, this value equals the image of R_σ(E)|P_a under the same connecting map. Products and period compatibility are those of the comparison maps; no equality of symbol-defined regulators is asserted. Assume the hypotheses of 7.4; n≥0; r=n+1; H^n(F^rRΓ_dR)=H^(n+1)(F^rRΓ_dR)=0 as filtered-complex hypercohomology; H^n(U/W(k))(r) is a coefficient object with F⁰=0; the family specialization statement retains all hypotheses of 6.2, including its independent algebraic conditions, filtered base-change isomorphisms and the compatible point of 7.3. (AM, Lemma 3.10 and proof of Theorem 3.7, pp. 30–31; AM line 1352, AM line 1379–1400; BesserI Proposition 6.3, BesserI line 727).
+In 7.4 fix n≥0 and r=n+1. Assume H^n(F^rRΓ_dR(U_K))=H^(n+1)(F^rRΓ_dR(U_K))=0, and assume the geometric coefficient H=H^n(U/W(k))(r) of 6.2 has F⁰=0. The connecting map identifies H^n_rig(U_k/K0) with H^(n+1)_rsyn(U,r). Compose R_(F_W):Ext¹(O,H)→H^n_rig with this connecting isomorphism, and with 7.4, to define the absolute extension value in H^(n+1)_log-syn((Y,M),ℚ_p(r)). For a family and compatible point whose fibre satisfies these hypotheses, this value equals the image of R_σ(E)|P_a under the same connecting map. Products and period compatibility are those of the comparison maps; no equality of symbol-defined regulators is asserted. Assume the hypotheses of 7.4; n≥0; r=n+1; H^n(F^rRΓ_dR)=H^(n+1)(F^rRΓ_dR)=0 as filtered-complex hypercohomology; H^n(U/W(k))(r) is a coefficient object with F⁰=0; the family specialization statement retains all hypotheses of 6.2, including its independent algebraic conditions, filtered base-change isomorphisms and the compatible point of 7.3. (AM, Lemma 3.10 and proof of Theorem 3.7, pp. 30–31; AM line 1352, AM line 1379–1400; BesserI Proposition 6.3, BesserI line 727).
 
-Prove `ClassicalSyntomic.absoluteExtensionValue_connecting`: The connecting class of b is represented by (0,b) in the chosen fibre, fixing its positive sign. Prove `ClassicalSyntomic.absoluteExtensionValue_natural`: Coefficient base change and Frobenius-compatible specialization commute with the value. Prove `ClassicalSyntomic.absoluteExtensionValue_period`: Applying the log or rigid period map gives the same étale class.
+- The connecting class of b is represented by (0,b) in the chosen fibre, fixing its positive sign.
+- Coefficient base change and Frobenius-compatible specialization commute with the value.
+- Applying the log or rigid period map gives the same étale class.
 
 Use the long exact sequence for the unramified single fibre of 2.3. The two explicit hypercohomology vanishings make the connecting map an isomorphism. Apply 1.6 for the remainder, 7.3 for specialization and 7.4 for the absolute log target. This fixes only the fibre sign; the (−1)^n in the AM symbol comparison belongs to the regulator consumer.
 
@@ -794,9 +898,9 @@ Use the long exact sequence for the unramified single fibre of 2.3. The two expl
 
 **Checks.**
 
-- `ClassicalSyntomic.absoluteExtensionValue_curve`: For a smooth curve with a good W(k) normal-crossings compactification, n=1,r=2 gives F²Ω•=0. Thus H²_rsyn(U,2)≃H¹_rig(U); the value is the connecting image of R, with no extra negative sign introduced here.
-- `ClassicalSyntomic.absoluteExtensionValue_split`: A split extension has absoluteExtensionValue zero.
-- `ClassicalSyntomic.absoluteExtensionValue_missingVanishing`: If H^(n+1)(F^rRΓ_dR) is nonzero, the fibre exact sequence has a further filtered contribution; the connecting map need not be surjective and no inverse is exported.
+- For a smooth curve with a good W(k) normal-crossings compactification, n=1,r=2 gives F²Ω•=0. Thus H²_rsyn(U,2)≃H¹_rig(U); the value is the connecting image of R, with no extra negative sign introduced here.
+- A split extension has absolute extension value zero.
+- If H^(n+1)(F^rRΓ_dR) is nonzero, the fibre exact sequence has a further filtered contribution; the connecting map need not be surjective and no inverse is exported.
 
 ### Examples
 
