@@ -39,7 +39,9 @@ constant-rank theorem and its level-fibre API; B2.10 owns the finite C^k and
 real-analytic extension, its comparison with that smooth structure, and the Betti
 application. **SmoothBundlesConnections**, B6.0, owns metric convexity and generic
 good-cover refinements; B2.11 adds holomorphic-chart subordination and the disc
-consequence using **ConformalMapping**, L3.
+consequence using **ConformalMapping**, L3. B2.9 constructs the arbitrary-dimensional
+invariance-of-domain extension in the shared topology API; its planar specialization
+agrees with **PlanarTopology**, Layer 2, under the usual real identification ℂ≃ℝ².
 
 **SchemeAndStackFoundations**, SF.2 and SF.4, supplies coherent direct images,
 formal functions, thickenings and formal completion. **ComplexComparisonPartII**,
@@ -231,6 +233,22 @@ number-field discriminant, retaining the square of the order index.
 its finite-value subtype and native quotients require no realization functor. These field carriers do not
 supply the relative universal extensions, completed coefficient sheaves or
 Dieudonné functors required by P1–P4 and F1.
+
+### From Tau Ceti: complements of embedded spheres and balls
+
+Consume `TauCeti.natCard_zerothHomotopy_sphere_compl_range_eq_two` and
+`TauCeti.reducedSingularHomologySphereComplRangeSphereIso` in
+`TauCeti/AlgebraicTopology/Singular/JordanBrouwer.lean`: a continuous injection
+S^(m−1)→S^m has a complement with two path components, with reduced degree-zero
+homology one copy of the coefficients. Consume
+`TauCeti.isZero_reducedSingularHomologyFunctor_compl_range_closedBall` in
+`TauCeti/AlgebraicTopology/Singular/CubeComplement.lean`, specialized to a sphere,
+whose point complements are acyclic. Retain the Hausdorff and finite-dimensional
+hypotheses. For connectivity use rational coefficients and
+`TauCeti.reducedSingularHomology₀Iso` in
+`TauCeti/AlgebraicTopology/Singular/Reduced.lean`, which identifies reduced
+homology with the direct sum indexed by path components other than a chosen
+basepoint. B2.9 constructs the open-map conclusion from these complement theorems.
 
 ### From TauCetiRoadmap.AbelianSchemesAndArithmeticModuli
 
@@ -1357,12 +1375,50 @@ and Theorem 3, printed p.251, for dense semisimple groups;
 
 ### B2.9 Invariance of domain in equal real dimension
 
-A continuous injective map f:U→ℝ^m from an open subset U⊆ℝ^m is open and is a homeomorphism onto
-its image. Consequently the same local assertion holds between real m-manifolds.
+For every finite m≥0, a continuous injective map f:U→ℝ^m from an open
+subset U⊆ℝ^m is an open embedding. Consequently continuous injections between
+boundaryless real m-manifolds are open embeddings, by restriction to charts.
+The local assertion requires no global separation or countability assumption.
+State the general theorem on Mathlib's native Euclidean spaces and
+`Topology.IsOpenEmbedding` in the shared topology API.
 
-([GH][GH], Theorem 5.1 proof, PDF p.29).
+For m≥1, restrict f around each point to a closed ball contained in U and
+include the target ℝ^m into S^m by stereographic compactification. Compactness
+makes the restrictions to the ball and its boundary embeddings. The embedded
+boundary has a complement with two path components. The complement of the
+embedded ball is nonempty, since it contains infinity, and is path connected:
+its reduced degree-zero homology with ℚ coefficients vanishes.
+The image of the ball's interior is path connected, so these two sets are
+exactly the two path components of the boundary complement. They are open
+because that complement is locally path connected. Thus every f(x) has a
+neighbourhood contained in f(U). Apply the same argument to each open subset
+of U and obtain the open embedding with
+`Topology.IsOpenEmbedding.of_continuous_injective_isOpenMap`. For m=0 the
+source is empty or a point (Hatcher, Theorem 2B.3, printed p.172;
+[GH][GH], Theorem 5.1 proof, PDF p.29, for the application).
 
-*Needs:* `Topology.IsOpenEmbedding`.
+**Checks.**
+
+- For m=0 the possible images are ∅ and the one-point space ℝ⁰, both open;
+  the empty open domain also has open image in every dimension.
+- For m=1, x↦x³ maps (−1,1) homeomorphically onto (−1,1), although its
+  derivative at 0 is 0. A nonzero-derivative hypothesis would lose this case.
+- On (−1,1), x↦x² has image [0,1), which is not open in ℝ; its equal values
+  at 1/2 and −1/2 show why injectivity is required.
+- The inclusion [0,1)→ℝ has nonopen image, and x↦(x,0) maps ℝ into a line
+  with empty interior in ℝ². These exclude domains with boundary and unequal
+  real dimensions from the assertion.
+
+*Needs:* the sphere- and closed-ball-complement theorems in the Tau Ceti
+supplier contract, including its reduced degree-zero homology comparison;
+Mathlib `stereographic'`, `stereographic'_source` and `stereographic'_target` in
+`Mathlib/Geometry/Manifold/Instances/Sphere.lean`,
+`Continuous.isClosedEmbedding` in `Mathlib/Topology/Separation/Hausdorff.lean`,
+and `IsOpen.pathComponentIn` in
+`Mathlib/Topology/Connected/LocallyPathConnected.lean` for open path components;
+`Topology.IsOpenEmbedding.of_continuous_injective_isOpenMap` in
+`Mathlib/Topology/Maps/Basic.lean`. The chartwise manifold consequence uses
+only the Euclidean theorem and chart homeomorphisms.
 
 ### B2.10 Real constant-rank theorem for Betti fibres
 
@@ -2740,9 +2796,28 @@ occurs as End_Fp(A′) for some A′ in that class.
 
 ([Waterhouse][Waterhouse], Theorem 6.1 and proof, printed pp.550–551 (PDF pp.31–32)).
 
+**Checks.**
+
+- For a unital local order R_ℓ, multiplication by x preserves R_ℓ exactly
+  when x∈R_ℓ: necessity follows by applying it to 1, and sufficiency from
+  closure under multiplication. Thus the multiplier order of the chosen
+  lattice is R_ℓ itself, including when R_ℓ is nonmaximal.
+- Take p=5, K=ℚ(ζ₅), π=√5 ζ₅ and R=ℤ[π,5/π]. Both generators are
+  integral, every conjugate of π has modulus √5, and π²/5=ζ₅² gives
+  ℚ(π)=K. At the unique prime above 5, normalized by v(5)=4, both
+  generators have valuation 2. Every element of R⊗ℤ₅ is congruent to a
+  scalar in ℤ₅ modulo the valuation-2 ideal, so none has valuation 1;
+  the maximal order contains 1−ζ₅ of valuation 1. Prime-to-5 isogenies
+  preserve the 5-divisible group and its endomorphism order, so a maximal
+  order model cannot reach R by prime-to-5 changes alone.
+- For p=2, K=ℚ(i), π=1+i and 2/π=1−i give R=ℤ[i]. With v(2)=2,
+  both π and 2/π have valuation 1; this time R is maximal at 2. The
+  all-prime construction includes this case without an odd-prime hypothesis.
+
 *Needs:* [F3](#layer-f3-hondatate-and-lattice-classifications), Commutative endomorphisms in the
 nonreal prime-field case; [F3](#layer-f3-hondatate-and-lattice-classifications), Finite-support
-lattice tuples are realized over the prime field.
+lattice tuples are realized over the prime field; F3.5's prime-field
+linear realization; F0.7 and F1.9 for the integral Hom dictionary at all primes.
 
 ### F3.9 Isomorphism classes as rational orbits
 
@@ -2781,8 +2856,15 @@ realize the resulting finite flat subgroup using the quotient theorem A3 and the
 realizations R07.1–R07.2. Prove the resulting integral Hom dictionary in both directions before
 passing to rational orbits. Over F_p define D_lin = Hom_Zp(C, Z_p) and transpose F and V; this
 is linear duality. Preserve V-integrality as well as F-stability. For a nonreal simple
-prime-field class prove maximal-order existence and prime-to-p conductor modifications to
-realize precisely the orders containing π and p/π.
+prime-field class put K=ℚ(π). Identify each rational realization with the rank-one
+K⊗ℚ_ℓ module, using D^lin at p with F=π and V=p/π. For any order R containing
+π and p/π, choose the lattice R_ℓ=R⊗ℤ_ℓ at every exceptional prime, including
+p when necessary, and keep the reference lattices elsewhere. The reference
+multiplier orders agree with R_ℓ outside finitely many primes. Apply F3.7 to
+this finite-support tuple; stability follows from π,p/π∈R. The identity
+(R_ℓ:R_ℓ)=R_ℓ and integral Tate at every prime identify the resulting
+endomorphism order with R. Taking R=O_K also gives maximal-order existence
+(Waterhouse, Theorem 6.1 proof, printed pp.550–551).
 
 ### Examples
 
@@ -3349,6 +3431,9 @@ with the separate polynomial, repeated-root, small-characteristic and mass hypot
 stated in F4–F6. LT v1 (51) and (56) have a leading-coefficient
 misprint; F5 derives 1/2 from (39) rather than using the printed 1.
 
+- **Hatcher**: Allen Hatcher, *Algebraic Topology* (2002), §2.B, Theorem 2B.3,
+  printed p.172 (chapter PDF p.76). [Author-hosted chapter][Hatcher].
+
 - **MilneJV**: James S. Milne, *Jacobian Varieties*, author version dated June 12, 2021,
   Theorem 12.1, p.38, and §13, pp.40–44. [MilneJV][MilneJV].
 
@@ -3393,6 +3478,7 @@ misprint; F5 derives 1/2 from (39) rather than using the printed 1.
 - **Milne**: James S. Milne, *Extensions of abelian varieties defined over a finite field*. Inventiones Mathematicae 5(1968), 63–84; author-hosted published scan. [Milne][Milne].
 
 - **Gao–Survey**: Ziyang Gao, *Recent developments of the Uniform Mordell–Lang Conjecture*. arXiv:2104.03431v5. [Gao–Survey][Gao–Survey].
+[Hatcher]: https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf
 [ConradTrace]: https://math.stanford.edu/~conrad/papers/Kktrace.pdf
 [Tits]: https://doi.org/10.1016/0021-8693(72)90058-0
 [Roby]: https://www.numdam.org/item/10.24033/asens.1124.pdf
