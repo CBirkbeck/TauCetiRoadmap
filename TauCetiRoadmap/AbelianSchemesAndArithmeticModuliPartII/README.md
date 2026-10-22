@@ -34,9 +34,12 @@ exterior powers, vector groups and relative Spec. Its locally free sheaf and
 vector-group conventions also fix the meaning of the vector kernel in P1.
 Use **DifferentialGeometry**, layers 0–1, for differential forms, wedge products
 and exterior derivatives; the new calculation in B1 is the particular Betti
-form and its kernel. B2's equal-dimensional openness, constant-rank application
-and Riemann-surface cover are the auxiliary results required by the curve
-argument, rather than a second general theory of forms or distributions.
+form and its kernel. **LieGroupoidsPoisson**, G0.1, owns the smooth boundaryless
+constant-rank theorem and its level-fibre API; B2.10 owns the finite C^k and
+real-analytic extension, its comparison with that smooth structure, and the Betti
+application. **SmoothBundlesConnections**, B6.0, owns metric convexity and generic
+good-cover refinements; B2.11 adds holomorphic-chart subordination and the disc
+consequence using **ConformalMapping**, L3.
 
 **SchemeAndStackFoundations**, SF.2 and SF.4, supplies coherent direct images,
 formal functions, thickenings and formal completion. **ComplexComparisonPartII**,
@@ -51,7 +54,13 @@ ordinary CM and abelian-variety realization adapters are constructed here.
 Siegel family and M6 the arithmetic coarse-moduli and level interfaces, including M6.11 `finiteFieldFiniteness`.
 **Completed/HodgeStructures**, L0–L3, supplies the linear Hodge carriers.
 **ShimuraVarieties**, §§3.5a–3.5d, supplies the real o-minimal and definable-Chow
-foundations; B2 owns the additional fixed-part, equivariant Hodge-Hom and abelian Ax–Lindemann theorems; B3 owns mixed Kuga uniformization and counting and the abelian-family adapters. **JacobianChallengePartII**, §2.6
+foundations; §5.2 supplies the algebraic weight −1 Hodge–Hom comparison and
+§§5.5–5.8 supply CM models, potential good reduction and the Shimura–Taniyama
+Frobenius formula. B2 owns fixed parts, their trace adapter, algebraic monodromy
+and abelian Ax–Lindemann; B3 owns mixed Kuga uniformization and its counting
+application and abelian-family adapters. F3 owns prescribed-slope CM existence
+and finite-field effectivity, using the parent's A5.1–A5.3 algebraization and
+A6.32–A6.33 Weil restriction. **JacobianChallengePartII**, §2.6
 `RelativeJacobian.CurveDifference`, §§5.3–5.4 and §7.2
 `RelativeJacobian.levelFaltingsZhang`, supplies differences for a given curve
 family. B4 constructs the fine full-level curve moduli and universal family. **JacobianChallenge** supplies the
@@ -83,8 +92,8 @@ Mordell–Lang bounds. The finite-field part does not claim a sharp unconditiona
 numerical exponent for the number of unpolarized varieties.
 
 The invariant tensor comparison with the free divided power algebra is supplied by
-**DerivedModuleAlgebra**, §0.DP.2, “Free divided powers and symmetric tensors”; P0 owns its
-shuffle-product compatibility and degree completion. Mathlib
+**DerivedModuleAlgebra**, §0.DP.2, “Free divided powers and symmetric tensors”; P0 owns the
+arbitrary-module comparison, shuffle-product compatibility and degree completion. Mathlib
 `Polynomial.lifts_and_natDegree_eq_and_monic` and `Polynomial.resultant_map_map` supply monic
 coefficient lifting and fixed-size resultant congruence, with arbitrary coefficient ideals.
 Their specializations are inputs to F2. AbelianSchemesAndArithmeticModuli A6.10–A6.11 owns
@@ -167,8 +176,9 @@ presentation of the divided power algebra.
 
 Consume §0.DP.2, “Free divided powers and symmetric tensors”: for a commutative ring R and
 free R-module M, the natural map Γⁿ_R(M) → (M^(⊗n))^(S_n), γ_n(v) ↦ v^(⊗n), is a linear
-equivalence, natural in M. Its general natural comparison precedes the free equivalence.
-P0's multiplication compatibility uses this map with the shuffle product.
+equivalence, natural in M. Consume §0.DP.2's Roby representability for all modules
+to construct the arbitrary-module natural comparison in P0.5; the free-module
+invertibility theorem remains the export of §0.DP.2.
 
 ### From Mathlib: polynomial lifting and congruence
 
@@ -199,6 +209,10 @@ lifts modulo p^N. Mathlib's natural-valued `PadicInt.valuation` sends zero to
 zero, so recognition statements explicitly exclude zero resultants. For F6
 evaluate `MvPolynomial.mul_esymm_eq_sum` on the root occurrences; the new work
 is the coefficient and reciprocity adapter, not another Newton-identity proof.
+For CM power effectivity use `NumberField.Embeddings.pow_eq_one_of_norm_eq_one`
+in `Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean`: an integral
+number-field element whose complex conjugates all have norm one has a positive
+power equal to one. F3 proves integrality of the quotient before applying it.
 
 ### From Tau Ceti: tensor, discriminant and abelian-variety carriers
 
@@ -230,7 +244,12 @@ kernel is constructed here. Consume A5's complex Hodge dictionary and A6.2
 `endQ_isSemisimple`, A6.10 `End.charpoly`, A6.11 `charpolyTate`, A6.14
 `rosatiPositivity`, A6.18 `polarizedAutomorphisms` and A6.21
 `frobeniusSemisimple`. F1 only transports the last theorem to its faithful
-contravariant realization and identifies the polynomial.
+contravariant realization and identifies the polynomial. Consume A5.1–A5.3 for
+lattice tori, positive Riemann forms and algebraization, and A6.32
+`weilRestrictionAbelian` and A6.33 `weilRestrictionTate` for finite separable
+extensions, with dimension multiplied by the extension degree and the induced
+prime-to-characteristic Tate module. F3 derives the finite-field Frobenius
+polynomial of that restriction.
 
 ### From TauCetiRoadmap.FiniteFlatGroupsAndIntegralPadicHodgeTheory
 
@@ -252,7 +271,38 @@ and pullback comparisons.
 Consume Completed/HodgeStructures L0–L3 for pure, mixed and polarized linear
 Hodge objects and their morphisms. Consume ShimuraVarieties §§3.5a–3.5d for
 `R_an,exp`, finite definable charts, polarized variation carriers and definable
-Chow. The fixed-part and mixed Kuga extensions are constructed in B2–B3.
+Chow. Consume ShimuraVarieties §5.2 `TauCeti.Shimura.weight_one_algebraization`:
+over a smooth finite-type complex scheme, integral flat morphisms of homological
+weight −1 Hodge variations correspond to algebraic abelian-scheme homomorphisms.
+Consume §§5.5–5.8 `TauCeti.Shimura.cm_number_field_model`,
+`TauCeti.Shimura.cm_potential_good_reduction`, `TauCeti.Shimura.cm_frobenius` and
+`TauCeti.Shimura.shimura_taniyama`. Retain a full maximal-order CM action, its
+number-field definition and a Galois field containing all CM conjugates when
+using the last two; at a good prime of residue cardinality q₀ they give arithmetic
+q₀-Frobenius π₀ and ord_w(π₀)/ord_w(q₀)=#(Φ∩H_w)/#H_w, also at ramified primes.
+B2 constructs fixed parts and their trace adapter, and B3 the mixed Kuga extension.
+
+### From TauCetiRoadmap.LieGroupoidsPoisson and SmoothBundlesConnections
+
+Consume LieGroupoidsPoisson G0.1's local smooth constant-rank normal form,
+tangent kernel, chart/restriction comparisons and level-fibre universal property
+on finite-dimensional boundaryless manifolds, with no Hausdorff assumption.
+B2.10 extends the regularity to finite C^k and real analytic maps and compares
+the induced smooth level-fibre structure when both apply. Consume only the early
+SmoothBundlesConnections B6.0 good-cover construction, before its bundle and
+connection applications: on a Hausdorff second-countable boundaryless manifold,
+a chosen smooth positive-definite metric, supplied by DifferentialGeometry
+12.1 when needed, gives locally finite subordinate strongly convex covers and contractions of every nonempty finite intersection.
+B2.11 applies it to the underlying real surface. ConformalMapping L3 supplies
+Riemann mapping for the bounded simply connected chart images of intersections.
+
+### From TauCetiRoadmap.GlobalNumberFields
+
+Consume Layer 0's place/completion and local-degree interfaces and Layer 1
+`GlobalNumberFields.weakApproximation_denseRange` for simultaneous
+finite-completion conditions and real-place signs. F3 uses it coefficientwise
+for a polynomial with prescribed local irreducibility and all roots real, and
+for a CM polarizing element with prescribed imaginary signs.
 
 ### From TauCetiRoadmap.PELModuli and JacobianChallengePartII
 
@@ -290,7 +340,8 @@ through Layer 2's projective Hom and bounded-family constructions.
 Consume SchemeAndStackFoundations SF.2 and SF.4 for coherent direct images,
 formal functions and unit thickenings; AlgebraicVectorBundles L0B and L2B for
 finite locally free sheaves, their tensor operations and vector groups;
-DifferentialGeometry Layers 0–1 for forms and exterior differentiation;
+DifferentialGeometry Layers 0–1 for forms and exterior differentiation and
+12.1 for existence of smooth Riemannian metrics;
 AdelicAlgebraicGroups AA.1, AA.3 and AA.4 for restricted products, compact
 open levels, class-set finiteness and level double quotients with the group
 hypotheses retained; ClassFieldTheory Layers 5,10,13 for local Brauer invariants
@@ -432,19 +483,39 @@ SymmetricPower quotient integrally.
 
 ### P0.5 Shuffle compatibility of the divided-power comparison
 
-Using DerivedModuleAlgebra §0.DP.2's natural comparison, prove that for a free R-module M the degreewise equivalences give a
-graded algebra equivalence from Mathlib's `DividedPowerAlgebra R M` to ⊕n TSymⁿ_R(M) equipped
-with the shuffle product. For an arbitrary module the natural comparison preserves the graded
-multiplication without asserting invertibility (Roby, Chapter III §6 Proposition III.1 and
-Chapter IV §5 Proposition IV.5, printed pp.254–255,272–273).
+For every commutative ring R and R-module M, construct the natural degree-n
+linear map Γⁿ_R(M) → TSymⁿ_R(M) from the homogeneous polynomial law v↦v^(⊗n).
+First define the tensor-valued law after every commutative R-algebra base
+change, using that tensor powers commute with base change. Use
+DerivedModuleAlgebra §0.DP.2's Roby representability to obtain Γⁿ_R(M) → M^(⊗n),
+then use invariance of the law under each permutation to factor this map
+through TSymⁿ_R(M). No commutation of invariants with arbitrary base change
+is assumed. Prove that the sum of these maps is a unital graded
+algebra homomorphism from Mathlib's `DividedPowerAlgebra R M` to ⊕n TSymⁿ_R(M)
+with shuffle multiplication. For free M, identify its degreewise maps with
+DerivedModuleAlgebra §0.DP.2's equivalences and hence obtain a graded algebra
+equivalence (Roby, Chapter III §6 Proposition III.1 and Chapter IV §5
+Proposition IV.5, printed pp.254–255,272–273).
+
+Its API comprises the following laws.
+
+- The degree-n map takes γ_n(v) to v^(⊗n), including γ₀(v)↦1.
+- For every R-linear f:M→N, applying the comparison then the invariant tensor
+  power of f equals applying Γⁿ(f) then the comparison for N.
+- A degree-m times degree-n product maps to the (m,n)-shuffle product, with no
+  factorial denominator. Invertibility is asserted for free modules.
 
 **Checks.**
 
-- In degree zero the map takes 1 to the empty unit tensor.
+- In degree zero the map takes 1 to the empty unit tensor, also for M=0.
 - For rank one in characteristic two, γ₁(v)² maps to 0 while γ₂(v) maps to v⊗v≠0.
 - For free rank two, γ₁(x)γ₁(y) maps to x⊗y+y⊗x, fixing the shuffle coefficient one.
+- For R=ℤ and M=ℤ/2, multiplication by 2 on M sends both γ₁(1) and its tensor
+  image to 0; the map is required without imposing freeness on this module.
 
-*Needs:* DerivedModuleAlgebra §0.DP.2; P0, Shuffle multiplication and divided powers.
+*Needs:* DerivedModuleAlgebra §0.DP.2's universal homogeneous polynomial law,
+Roby representability, direct-sum grading and free comparison; P0.1 invariant tensor powers and
+P0.3 shuffle multiplication and divided powers.
 
 ### P0.6 Multigrading of invariant tensors
 
@@ -1167,22 +1238,45 @@ A6.5 and A6.7; SchemeAndStackFoundations §§2.11,2.16 and algebraic Hom/Hilbert
 
 ### B2.4 Polarized fixed parts and equivariant Hodge Hom
 
-Prove the fixed-part theorem for polarized integral variations arising from smooth proper complex algebraic families over a smooth connected quasi-projective base S, semisimplicity of their rational monodromy, and the weight −1 abelian-scheme Hom comparison: for polarized abelian schemes A,B/S, integral flat Hodge morphisms R₁π_A,*ℤ→R₁π_B,*ℤ are exactly homomorphisms A→B; after any connected finite étale cover, the invariant subvariation is constant and its abelian realization is the constant part up to isogeny. Use Deligne Corollary 4.1.2, Theorem 4.2.6 and Rappel 4.4.3, printed pp.42,45,51 (Deligne line 1377, Deligne line 1698), with Hodge type required at every fibre.
+For polarized torsion-free integral variations arising from smooth proper
+complex algebraic families over a smooth connected quasi-projective base S,
+prove that the invariant rational local system is a constant Hodge subvariation,
+with its induced integral lattice. Prove separately that the rational monodromy
+representation is semisimple and that the identity component G⁰ of its algebraic
+Zariski-closure group is semisimple. The group assertion uses the smooth proper
+geometric origin (Deligne, Corollary 4.1.2, Theorem 4.2.6 and Corollary 4.2.9(a),
+printed pp.42,45,48; Deligne line 1377, Deligne line 1498, Deligne line 1610).
 
-The fixed-part construction must exhibit the invariant local system as a Hodge subvariation;
-semisimplicity of a representation alone does not supply that assertion. Algebraize the
-homological weight −1 morphisms using their fibrewise integral Hodge type and flatness,
-then extend over the base by the abelian-scheme rigidity and normal-base Hom theorem.
+For an abelian scheme, after any connected finite étale cover of S, construct
+the abelian realization of this constant weight −1 subvariation and identify
+its inclusion, up to isogeny, with the constant part supplied by the C(S)/C
+trace. The adapter takes the invariant homology Hodge substructure to a constant
+abelian variety T and its inclusion into the family; it agrees on homology with
+the invariant inclusion and on the generic fibre with the trace map up to
+isogeny. Use ShimuraVarieties §5.2's algebraic Hodge–Hom correspondence to obtain
+this map and its uniqueness, and the trace universal property for the generic
+identification (Deligne, Rappel 4.4.3, printed p.51, Deligne line 1698).
 
 **Checks.**
 
-- A constant polarized family has its entire homology as the fixed part.
-- A variation with zero invariant rational homology has zero fixed part.
-- In a family acquiring a constant factor only after a finite cover, invariants are computed
-  for that cover's monodromy subgroup, and need not descend to the original base.
+- A constant dimension-g family has fixed homology ℤ^(2g), constant part of
+  dimension g, and G⁰=1, a semisimple group of dimension zero.
+- Zero invariant rational homology gives a dimension-zero constant part.
+- For monodromy −I on rank-two homology, invariants are 0; on the double cover
+  killing it they are ℤ². The constant part is computed on that cover.
+- The cyclic subgroup generated by [[2,1],[1,1]] has eigenvalues (3±√5)/2 and
+  semisimple rational representation, but its connected closure is a
+  one-dimensional torus. Representation semisimplicity alone cannot replace
+  the geometric group assertion.
+- Multiplication by 2 on a constant elliptic family acts as 2I on H₁; the
+  rational map (1/2)I is only a quasi-homomorphism, fixing integral versus
+  rational Hom in the imported comparison.
 
-*Needs:* Completed/HodgeStructures L0–L3; ShimuraVarieties §3.5b.1's variation carrier;
-AbelianSchemesAndArithmeticModuli A5.5–A5.6 and A6.25.
+*Needs:* Completed/HodgeStructures L0–L3; ShimuraVarieties §3.5b.1's variation
+carrier and §5.2 `TauCeti.Shimura.weight_one_algebraization`;
+AbelianSchemesAndArithmeticModuli A5.5–A5.6 and A6.25; B2.2–B2.3's trace universal
+property for regular finitely generated function fields, for the abelian
+constant-part adapter.
 
 ### B2.5 Integer characters and countably many closed torus subgroups
 
@@ -1255,7 +1349,8 @@ A subgroup of GL_n over a field of characteristic 0 that is not virtually solvab
 free subgroup on two generators; in particular a Zariski-dense subgroup of a non-trivial
 connected semisimple group does.
 
-([Tits][Tits], Theorem 3;
+([Tits][Tits], Theorem 1, printed p.250, for the characteristic-zero alternative,
+and Theorem 3, printed p.251, for dense semisimple groups;
 [GH][GH], Lemma 5.5, PDF p.25, for the monodromy application).
 
 *Needs:* `Matrix.GeneralLinearGroup`; `Subgroup.FiniteIndex`; `Group.IsSolvable`; `FreeGroup`.
@@ -1271,31 +1366,74 @@ its image. Consequently the same local assertion holds between real m-manifolds.
 
 ### B2.10 Real constant-rank theorem for Betti fibres
 
-For an open set U⊆ℝ^m and a map f:ℝ^m→ℝ^n that is C^k on U, 1≤k≤ω
-(with ω the real-analytic case), suppose its differential has constant rank r
-on U, with r≤m and r≤n. Local C^k coordinates at every x∈U put f in projection
-form, so each nonempty local fibre is a C^k submanifold of dimension m−r.
-The version for finite-dimensional real manifolds follows in charts. Apply
-to the real-analytic Betti map on its smooth maximal-rank locus, where m=2 dim X.
+Consume the smooth local normal form and level-fibre API from LieGroupoidsPoisson
+G0.1. Extend that result here to each finite k≥1 and to real-analytic regularity:
+for an open U⊆ℝ^m, a C^k map f:U→ℝ^n of constant differential rank r has local
+C^k coordinate isomorphisms putting f in the form (u,v)↦(u,0). Its nonempty local
+fibres have dimension m−r and tangent space ker df. The extension includes
+restriction, chart changes and the local map-into-the-fibre universal property.
+On finite-dimensional boundaryless manifolds it is transported through C^k
+charts; no Hausdorff hypothesis is needed for this local assertion.
 
-([GH][GH], Lemma 6.2 proof, PDF p.31).
+Choose an invertible r×r minor, apply the inverse function theorem to the first
+r component functions together with the remaining domain coordinates, and use
+constant rank to make the remaining target functions independent of v. The
+coordinate construction and its inverse retain the given regularity. For a
+smooth f, the finite-k structures agree with the C^k structure obtained by
+forgetting smooth regularity from G0.1's fibre, via the fibre universal property;
+the real-analytic fibre has the same underlying smooth structure. Apply the analytic form to the Betti map
+on the smooth maximal-rank locus, with m=2 dim X. The real/complex chart adapter
+identifies T_xX as a real vector space of dimension 2 dim_ℂ X, without claiming
+that the Betti map is holomorphic (GH, Lemma 6.2 proof, PDF p.31).
 
-*Needs:* `ContDiffOn`; `fderiv`; `LinearMap.range`; `Module.finrank`; `OpenPartialHomeomorph`.
+**Checks.**
+
+- f(x,y)=(x,0) has rank 1, fibre dimension 1 and tangent kernel ℝ(0,1).
+- A constant map ℝ²→ℝ has rank 0 and fibre dimension 2; identity on ℝ² has
+  rank 2 and fibre dimension 0. Empty fibres assert no local chart.
+- For f(x)=x² the rank is 0 at 0 and 1 nearby. No rank-zero neighbourhood
+  exists there, so the constant-rank conclusion is inapplicable.
+- The complex coordinate z=x+iy has real dimension 2; f(z)=Re z has rank 1
+  and real fibre dimension 1, so complex-linear rank cannot be substituted.
+
+*Needs:* LieGroupoidsPoisson G0.1; Mathlib `ContDiffAt.toOpenPartialHomeomorph`
+and `ContDiffAt.to_localInverse` in
+`Mathlib/Analysis/Calculus/InverseFunctionTheorem/ContDiff.lean` for the same
+nonzero differentiability order, including analytic order; `fderiv`,
+`LinearMap.range`, `Module.finrank`; B0's real-analytic Betti charts for the
+application.
 
 ### B2.11 Good-cover refinement on a Riemann surface
 
-The carrier is a complex-analytic
-manifold of dimension one (`IsManifold 𝓘(ℂ) ω S`). Use a Riemannian metric and
-geodesically convex neighbourhoods for the refinement.
+Let S be a Hausdorff second-countable complex-analytic manifold of dimension one
+(`IsManifold 𝓘(ℂ) ω S`). Refine a given open cover first by relatively compact
+holomorphic coordinate neighbourhoods with bounded chart image. Choose a smooth
+Riemannian metric using DifferentialGeometry 12.1 and apply
+SmoothBundlesConnections B6.0 to the underlying real surface. Transport the
+resulting locally finite subordinate good cover back through the complex/real
+chart comparison. Metric existence, convexity and contractions of nonempty
+finite intersections are the imported construction.
 
-Every open cover of a second-countable Hausdorff Riemann surface has a locally finite refinement
-by relatively compact coordinate neighbourhoods such that every nonempty finite intersection is
-contractible. In the connected noncompact intersections used here these are topological open
-discs.
+For every nonempty finite intersection W, choose a containing cover member's
+holomorphic chart. Its image is a nonempty bounded simply connected open subset
+of ℂ, so ConformalMapping L3 makes W biholomorphic to the unit disc; in
+particular it is a topological open disc. The API gives the refinement map to
+the original cover, relative compactness of each member, local finiteness,
+intersection contractions and these disc charts (GH, §5.2, PDF p.22).
 
-([GH][GH], §5.2, PDF p.22, for the good-cover refinement used in the proof).
+**Checks.**
 
-*Needs:* `ChartedSpace`; `IsManifold`; `LocallyFinite`; `ContractibleSpace`.
+- Two overlapping convex discs in a planar chart have a contractible lens;
+  in the Euclidean metric H(t,z)=(1−t)q+tz stays in the lens and gives H(0,z)=q,
+  H(1,z)=z. An empty intersection requires no base point or disc chart.
+- The annulus 1<|z|<2 has fundamental group ℤ and is not itself a good-cover
+  member; a coordinate neighbourhood alone does not imply contractibility.
+- A compact surface has a finite refined cover, but each nonempty intersection
+  still has bounded open chart image and hence is noncompact, rather than a sphere.
+
+*Needs:* SmoothBundlesConnections B6.0's early metric good covers;
+DifferentialGeometry 12.1's metric existence; ComplexManifolds Milestone 1's realification/chart comparison; ConformalMapping
+L3's Riemann mapping theorem; `LocallyFinite` and `ContractibleSpace`.
 
 ### B2.12 Fixed homology and equivariant Hom
 
@@ -1409,7 +1547,8 @@ subgroup of Γ_s contains a free subgroup on two generators.
 ([GH][GH], Lemma 5.5, PDF p.25).
 
 *Needs:* [B2](#layer-b2-curve-monodromy-and-constant-traces), Tits: free subgroups of linear groups;
-B2, Polarized fixed parts and equivariant Hodge Hom.
+B2.4's connected algebraic-monodromy-group semisimplicity from Deligne
+Corollary 4.2.9(a); finite-index subgroups have the same connected Zariski closure.
 
 ### B2.18 Monodromy-invariant subvarieties of a fibre
 
@@ -1538,11 +1677,11 @@ is not a substitute for either assertion.
 
 For the definable argument, prove integer-character separation for closed torus subgroups
 including disconnected ones. Bound free words as matrices; exclude the proper collision kernels
-before counting distinct orbit points. Apply the semirational/block theorem B3’s mixed Kuga input theorem and then
-Baire with the countable subgroup family. For monodromy transport construct the Riemann-surface
-good-cover refinement, glue Betti transitions along loops and prove analytic continuation of a
-nonisolated leaf inside the closed Y. Tits's free-subgroup theorem and connected-monodromy
-semisimplicity give free subgroups at every finite index; the fixed-part and equivariant Hom
+before counting distinct orbit points. Apply B2.6’s semirational block-counting theorem and then
+Baire with the countable subgroup family. For monodromy transport apply B2.11’s Riemann-surface adapter to
+SmoothBundlesConnections B6.0’s good-cover refinement, glue Betti transitions along loops and prove analytic continuation of a
+nonisolated leaf inside the closed Y. Tits's dense-group theorem and B2.4's connected algebraic-monodromy
+semisimplicity (Deligne Corollary 4.2.9(a)) give free subgroups at every finite index; the fixed-part and equivariant Hom
 theorem B2’s polarized fixed-part theorem gives the constant trace. The equal-dimensional invariance-of-domain and
 constant-rank assertions above are prerequisites of the dimension argument, with constant
 maximal rank chosen on a neighbourhood before computing a fibre dimension.
@@ -1553,7 +1692,8 @@ A constant genus-two curve inside its constant Jacobian is GH generically specia
 
 ### Dependencies
 
-The prerequisite interfaces for each target are the *Needs* clauses above. External layers used here are AbelianSchemesAndArithmeticModuli, with the exact contracts specified above. The order is trace construction, uniform torsion and fixed parts, character separation and block counting, then the monodromy and specialness arguments. The abelian Ax target uses only the definition of Ax-type, and precedes its algebraic-subvariety application.
+The prerequisite interfaces for each target are the *Needs* clauses above. External inputs include AbelianSchemesAndArithmeticModuli, ShimuraVarieties §5.2,
+LieGroupoidsPoisson G0.1 and SmoothBundlesConnections B6.0, with the exact contracts above. The order is trace construction, uniform torsion and fixed parts, character separation and block counting, then the monodromy and specialness arguments. The abelian Ax target uses only the definition of Ax-type, and precedes its algebraic-subvariety application.
 
 ## Layer B3: Degeneracy loci and quotient criteria
 
@@ -2365,15 +2505,145 @@ is excluded from the finite-support space.
 *Needs:* **FiniteFlatGroupsAndIntegralPadicHodgeTheory**, R07.2.10 `dieudonnePDivisible`;
 **FiniteFlatGroupsAndIntegralPadicHodgeTheory**, R07.1.2 `etaleGroupEquivContAction`.
 
+### F3.1a CM fields and types with prescribed slopes
+
+For a q-Weil number π, put F=ℚ(π) and λ_v=ord_v(π)/ord_v(q) for v|p.
+Construct a CM field L containing F such that n_w=[L_w:ℚ_p]λ_v is an integer
+for every w|v|p, and a CM type Φ of L with #(Φ∩H_w)=n_w, where H_w is the set
+of embeddings into a fixed algebraic closure of ℚ_p inducing w. Thus
+#(Φ∩H_w)/#H_w=λ_v. Fix an identification with the complex embedding set before
+regarding Φ as a complex CM type. The valuations of q are positive, and
+0≤λ_v≤1 follows from integrality of π and q/π.
+
+If F is CM, use weak approximation to choose a totally real extension of its
+maximal real subfield with sufficiently divisible degree and the prescribed
+full local degrees at p, and form its compositum with F. Prove the polynomial
+approximation step using open Eisenstein coefficient conditions at the finite
+places and simple real roots at the real places. If π has
+a real conjugate, π²=q and F is totally real; L=F(√(−p)) supplies the required
+CM extension, including p=2. Complex conjugation pairs w and w̄ with
+n_w+n_w̄=#H_w; if w=w̄, pair the embeddings inside H_w and choose half.
+These counting laws construct Φ, without requiring a primitive type
+([TateHonda][TateHonda], §3 Lemma 2, printed pp.100–101, and §4 after Lemma 5, printed pp.104–105;
+TateHonda line 172, TateHonda line 253).
+
+**Checks.**
+
+- For π=2+i and q=5, L=ℚ(i) has local degrees 1 at both primes over 5,
+  slopes 1 and 0 and type counts 1 and 0; reversing Φ reverses these slopes.
+- For π=√2, q=2, take L=ℚ(√2,i). At 2 its local degree is 4 and λ=1/2,
+  so n_w=2; the real Weil number is not discarded.
+- For π=±2, q=4, L=ℚ(√(−2)) has degree 2 at 2 and n_w=1.
+  A degree-one local factor at slope 1/2 would give the impossible count 1/2.
+
+*Needs:* F0's Weil-number integrality and conjugation; GlobalNumberFields
+Layers 0–1 for completions, local degrees and mixed-place weak approximation;
+Mathlib `NumberField.IsCMField`.
+
+### F3.1b Realization of a prescribed CM type
+
+For every CM field L and CM type Φ, construct a full lattice I in L stable under
+O_L and a positive integral Riemann form on ℂ^Φ/Φ(I), hence an abelian variety of
+dimension [L:ℚ]/2 with O_L-action and Lie type Φ. Choose ξ∈L with ξ̄=−ξ and
+Im φ(ξ)>0 for φ∈Φ, scale it by a positive integer for integrality, and use
+E(x,y)=Tr_(L/ℚ)(ξx̄y) on L, extended real bilinearly to ℂ^Φ. In the parent's
+sign convention, for x≠0 one has E(Jx,x)>0 and E(x,Jx)<0. Apply AbelianSchemesAndArithmeticModuli A5.1–A5.3; the polarization
+need not be principal and the variety need not be simple. Its API retains the
+O_L-action, the actual type and a polarization whose Rosati restriction is CM
+conjugation ([TateHonda][TateHonda], §4 Lemma 4, printed pp.102–103, TateHonda line 221).
+
+**Checks.**
+
+- For L=ℚ(i), Φ={i↦i}, I=ℤ[i], ξ=i, the form has E(i,1)=2 and E(1,i)=−2;
+  it is positive and integral, with determinant 4, so it is not principal.
+- Replacing ξ=i by −i gives E(i,1)=−2 and fails positivity for this Φ;
+  the sign is tied to the chosen type.
+- Multiplying ξ=i by 2 gives E(i,1)=4 and determinant 16; it changes the
+  polarization degree while retaining the CM type. Scaling need not preserve
+  principal polarization.
+
+*Needs:* F3.1a's CM type for the prescribed-slope application;
+GlobalNumberFields Layer 1 for the imaginary signs;
+AbelianSchemesAndArithmeticModuli A5.1–A5.3 and A3.9.
+
+### F3.1c Effectivity of a power by CM reduction
+
+For every q-Weil number π, construct N≥1 and an abelian variety over F_(q^N)
+whose Frobenius has π^N as a root. Realize F3.1a's CM type by F3.1b, use
+ShimuraVarieties §§5.5–5.6 for a number-field model with defined O_L-action and
+potential good reduction at a place over p, and enlarge to a Galois number
+field containing all conjugates of L. At the chosen good place let q₀=p^b, b≥1,
+be the residue cardinality. Its reduction Frobenius π₀∈O_L, from §§5.7–5.8,
+has ord_w(π₀)/ord_w(q₀)=ord_w(π)/ord_w(q) at every w|p, with the arithmetic
+Frobenius convention even when p ramifies.
+
+Write q=p^a; the Weil absolute values give π≠0. The quotient ζ=π₀^a/π^b
+is a unit at every finite place and has
+absolute value 1 at every infinite place, so it is a root of unity. If ζ has
+order t≥1, extension of the reduction field by degree at makes its Frobenius
+π₀^(at)=π^(bt) and its cardinality q^(bt). Take N=bt. This constructs the
+power before invoking Honda–Tate surjectivity ([TateHonda][TateHonda], §3 Lemma 3 and §4
+Lemmas 5–6, printed pp.101–105, TateHonda line 194, TateHonda line 241,
+TateHonda line 291).
+
+**Checks.**
+
+- With q=q₀=4, π=2 and π₀=−2, the slopes agree but ζ=−1. The choice t=2
+  gives π₀²=π²=4 over the cardinality-16 field; t=1 would retain the wrong sign.
+- With π=√2, q=2 and π₀=2, q₀=4, one has a=1, b=2 and ζ=1; N=2 and
+  π₀=π²=2. Equal slopes do not require equal residue cardinalities.
+- For π=2+i, q=5, a local inverse would have slope −1 rather than 1 at the
+  π-prime. The normalized valuation equality excludes inverse Frobenius.
+
+*Needs:* F3.1a–F3.1b; ShimuraVarieties §§5.5–5.8 with their full-action,
+maximal-order and Galois-model hypotheses;
+`NumberField.Embeddings.pow_eq_one_of_norm_eq_one` after proving the quotient
+is an algebraic integer unit.
+
+### F3.1d Descent of effectivity to the stated finite field
+
+Call a q-Weil number effective if it is a root of P_A for an abelian variety
+A/F_q. This is equivalent to occurring as the Frobenius of an F_q-simple factor,
+using complete reducibility, not Honda–Tate existence. For N≥1 and B/F_(q^N),
+prove P_(Res B)(T)=P_B(T^N) for Res=Res_(F_(q^N)/F_q). The parent A6.32–A6.33
+supplies the abelian restriction and its induced prime-to-p Tate module;
+compute arithmetic q-Frobenius as the cyclic block shift whose Nth power on
+a block is the q^N-Frobenius of B. Thus if π^N is effective, π is a root of
+P_(Res B), and selecting an F_q-simple factor proves π effective. This includes
+inseparable isogeny factors ([TateHonda][TateHonda], §3 Lemma 1, printed p.100,
+TateHonda line 152).
+
+Its API gives invariance of effectivity under conjugacy, forward power
+transport by scalar extension and descent from every positive power; the
+power transports need not preserve simplicity.
+
+**Checks.**
+
+- For N=1 restriction is B and P_B(T^1)=P_B(T).
+- For an elliptic B/F_(q²) with P_B(T)=T²−tT+q², the restriction has
+  P(T)=T⁴−tT²+q² and dimension 2; P_B(T)² generally has a nonzero cubic term
+  −2t and is the wrong induced polynomial.
+- For π=√2 and B/F₄ with P_B(T)=(T−2)², the restriction over F₂ has
+  P(T)=(T²−2)² and π as a root; its constant term is 4, as required in dimension 2.
+- For B=0 the polynomial is 1 and restriction still has polynomial 1;
+  no Weil number becomes effective through an empty root set.
+
+*Needs:* F3.1c for existence of the effective power;
+AbelianSchemesAndArithmeticModuli A6.32 `weilRestrictionAbelian`, A6.33
+`weilRestrictionTate` and A6.5 `poincareReducibility`; F0's characteristic
+polynomial comparison. The implication from a power uses only the supplied B,
+not F3.2's classification.
+
 ### F3.2 Honda–Tate simple isogeny classification
 
 Simple F_q-isogeny classes correspond to conjugacy classes of q-Weil algebraic integers π. The
 dimension is determined by 2 dim A=[Q(π):Q] sqrt([End⁰(A):Q(π)]), with the division-algebra
 local invariants prescribed by π.
 
-([Waterhouse][Waterhouse], Chapter 2, printed pp.526–528 (PDF pp.7–9)).
+([Waterhouse][Waterhouse], Chapter 2, printed pp.526–528 (PDF pp.7–9);
+[TateHonda][TateHonda], §3 Lemmas 1–3 and §4 Lemmas 4–6, printed pp.100–105).
 
-*Needs:* [F0](#layer-f0-finite-field-frobenius-and-tate), Weil q-numbers;
+*Needs:* F3.1a–F3.1d for existence; [F0](#layer-f0-finite-field-frobenius-and-tate), Weil q-numbers;
 [F1](#layer-f1-characteristic-prime-realization), Rational and integral p-Tate comparison;
 [F1](#layer-f1-characteristic-prime-realization), Characteristic-prime invariant of a simple
 endomorphism algebra; [ClassFieldTheory, layer
@@ -2503,7 +2773,9 @@ rational orbits.
 
 The existence assertion must construct an abelian variety over the stated finite field for each
 Weil q-number and prove its multiplicity; a reciprocal polynomial alone does not provide
-existence. Use the characteristic-prime invariant and the real-place invariants to determine the
+existence. Construct the prescribed CM type, its polarized realization and an
+effective power by F3.1a–F3.1c, then use F3.1d's Weil restriction to descend
+effectivity to F_q and select a simple factor. Only then use the characteristic-prime invariant and the real-place invariants to determine the
 division-algebra index e and hence dimension. For marked lattices, clear denominators and
 realize the resulting finite flat subgroup using the quotient theorem A3 and the integral
 realizations R07.1–R07.2. Prove the resulting integral Hom dictionary in both directions before
@@ -2518,6 +2790,8 @@ The zero-dimensional variety gives one marked lattice tuple; the identity markin
 
 ### Dependencies
 
+F3.1a–F3.1d construct Honda existence from GlobalNumberFields Layer 1, the parent
+A5.1–A5.3 and A6.32–A6.33, and ShimuraVarieties §§5.5–5.8, before classification.
 F0 and F1 supply full faithfulness at every prime; FiniteFlatGroupsAndIntegralPadicHodgeTheory R07.1–R07.2 supplies torsion realization and Dieudonné lattices; AbelianSchemesAndArithmeticModuli A3 supplies finite-flat quotients. ClassFieldTheory Layer 10 supplies the invariant sum used in Honda–Tate. Marked realization precedes rational orbits and the prime-field order theorem.
 
 ## Layer F4: Adelic class sets and local bounds
@@ -3078,11 +3352,11 @@ misprint; F5 derives 1/2 from (39) rather than using the printed 1.
 - **MilneJV**: James S. Milne, *Jacobian Varieties*, author version dated June 12, 2021,
   Theorem 12.1, p.38, and §13, pp.40–44. [MilneJV][MilneJV].
 
-- **Tits**: Jacques Tits, *Free subgroups in linear groups*. Journal of Algebra 20 (1972), 250–270, Theorem 3. [Tits][Tits].
+- **Tits**: Jacques Tits, *Free subgroups in linear groups*. Journal of Algebra 20 (1972), 250–270, Theorem 1, p.250, and Theorem 3, p.251 (uncertified). [Tits][Tits].
 
 - **Roby**: Norbert Roby, *Lois polynomes et lois formelles en théorie des modules*. Annales ENS (3) 80 (1963), 213–348. Chapter III §§5–6, Proposition III.1 and Proposition IV.5, printed pp.251–255,272–273. [Roby][Roby].
 - **Kings**: Guido Kings, *Eisenstein classes, elliptic Soulé elements and the ℓ-adic elliptic polylogarithm*. arXiv:1304.7161v2 (2013), §2.2, pp.9–11. [Kings][Kings].
-- **Deligne**: Pierre Deligne, *Théorie de Hodge : II*. Publications Mathématiques de l'IHÉS 40 (1971), 5–57; Corollary 4.1.2, Theorem 4.2.6 and Rappel 4.4.3, printed pp.42,45,51. [Deligne][Deligne].
+- **Deligne**: Pierre Deligne, *Théorie de Hodge : II*. Publications Mathématiques de l'IHÉS 40 (1971), 5–57; Corollary 4.1.2, Theorem 4.2.6, Corollary 4.2.9(a) and Rappel 4.4.3, printed pp.42,45,48,51. [Deligne][Deligne].
 
 - **KS**: Guido Kings and Johannes Sprang, *Eisenstein–Kronecker classes, integrality of critical values of Hecke L-functions and p-adic interpolation*. Annals of Mathematics (2) 202 (2025), no. 1, 1–109. [KS][KS].
 
@@ -3107,6 +3381,8 @@ misprint; F5 derives 1/2 from (39) rather than using the printed 1.
 - **ConradTrace**: Brian Conrad, *Chow’s K/k-image and K/k-trace, and the Lang–Néron theorem*. Enseignement Mathématique 52 (2006), 37–108; author version, Definition 6.1, Theorems 6.2, 6.4 and 7.1, pp.20–23. [ConradTrace][ConradTrace].
 
 - **Conrad**: Brian Conrad, *Polarizations*. 2004 publicly available notes. [Conrad][Conrad].
+
+- **TateHonda**: John Tate, *Classes d’isogénie des variétés abéliennes sur un corps fini (d’après T. Honda)*. Séminaire Bourbaki 1968/69, exposé 352, published 1971, pp.95–110; §3 Lemmas 1–3 and §4 Lemmas 4–6, printed pp.100–105. [TateHonda][TateHonda].
 
 - **Tate**: John Tate, *Endomorphisms of abelian varieties over finite fields*. Inventiones Mathematicae 2 (1966), 134–144. [Tate][Tate].
 
@@ -3133,6 +3409,7 @@ misprint; F5 derives 1/2 from (39) rather than using the printed 1.
 [DPH]: https://arxiv.org/pdf/math/9803097v3
 [Lemmermeyer]: https://arxiv.org/pdf/1309.1071v1
 [Conrad]: https://virtualmath1.stanford.edu/~conrad/vigregroup/vigre04/polarization.pdf
+[TateHonda]: https://numdam.org/item/SB_1968-1969__11__95_0.pdf
 [Tate]: https://pazuki.perso.math.cnrs.fr/index_fichiers/Tate66.pdf
 [Waterhouse]: https://www.numdam.org/item/ASENS_1969_4_2_4_521_0.pdf
 [WM]: https://jmilne.org/math/articles/1971a.pdf
