@@ -123,7 +123,7 @@ Bundle a subset of positive integers and a proof of divisor closure; Div(m) is t
 
 ### 1.2 The ghost image criterion
 
-Prove `BigWitt.ghost_image`. If B has endomorphisms φ_p lifting pth powers modulo p, a sequence b ∈ B^S lies in the ghost image iff b_n ≡ `phi_p(b_{n/p})` modulo p^v_p(n)B for every n ∈ S and prime p dividing n. Ghosts are injective on S-coordinates if multiplication by every n ∈ S is injective on B. The injectivity assertion holds for every commutative B without specifying Frobenius lifts. B is a commutative unital ring; a lift φ_p is specified for every prime appearing in S. Pairwise commutation is unnecessary for the ghost image criterion. (hesselholt line 223, Lemma 1.1, lines 223–267; Lemma 1.9; printed hesselholt v3 pp. 6–7, 11).
+Prove `BigWitt.ghost_image`. If B has endomorphisms φ_p lifting pth powers modulo p, a sequence b ∈ B^S lies in the ghost image iff b_n ≡ `phi_p(b_{n/p})` modulo p^v_p(n)B for every n ∈ S and prime p dividing n. Ghosts are injective on S-coordinates if multiplication by every n ∈ S is injective on B. The injectivity assertion holds for every commutative B without specifying Frobenius lifts. B is a commutative unital ring; a lift φ_p is specified for every prime appearing in S. Pairwise commutation is unnecessary for the ghost image criterion. (hesselholt line 223, Lemma 1.1, lines 223–267; Proposition 1.2 proof, hesselholt line 277; printed hesselholt v3 pp. 6–7).
 
 - Integer torsion-freeness at all primes occurring in S implies ghost injectivity.
 
