@@ -1,23 +1,60 @@
 import Mathlib
 
 /-!
-# QWittVectors: representative target signatures
+# Arithmetic Λ-rings and q-Witt vectors: target signatures
 
-The roadmap is README.md. This file records statements suggested against the pinned APIs
-and is not exhaustive. Ghost polynomials can be stated on coordinate functions before the
-big Witt ring structure is constructed. Their indices are positive members of a truncation
-set; values of a coordinate function outside that set are irrelevant.
+The roadmap is README.md; this file is not the roadmap. It states the roadmap's
+headline theorems against the pinned Mathlib and Tau Ceti APIs.
+
+The headline results, in README order, are:
+* the big Witt ghost-image criterion (§1.2), stated below using its integral
+  coordinate polynomials;
+* big Witt construction and étale Frobenius base change (§§1.3, 1.6), and
+  finite-prime arithmetic fracture (§1.8);
+* arithmetic Λ-perfection and perfect coverage (§§2.3–2.4);
+* absolute q-Witt initiality, the Verschiebung resolution and Witt injectivity
+  (§§3.2, 3.4, 3.7);
+* relative q-Witt initiality and perfect-cover comparisons (§§4.3, 4.6);
+* q-Witt étale base change and completion (§§5.1–5.3);
+* the q-fixed cyclotomic completed coefficient Frobenius (§§6.1–6.3);
+* initial differential q-Witt systems, positive-degree Frobenius and differential
+  base change (§§7.2, 7.5, 7.7);
+* the unique framed coordinate automorphisms (§8.1), stated below on power series,
+  and their complete difference calculus (§§8.2–8.4);
+* framed Frobenius decomposition, framed cohomology, the simultaneous prime-power
+  induction and functorial smooth E∞ de Rham comparison (§§9.1, 9.5–9.7);
+* smooth integer torsion-freeness and degreewise completion (§§10.1–10.2).
+
+Apart from the two theorems stated below, these headlines are not statable at the
+pins. The big Witt results need its functorial ring carrier; the arithmetic
+results need the big Witt comonad and its Λ-coalgebra carrier. Finite-prime
+arithmetic fracture needs enhanced derived localization and completion diagrams.
+The absolute and relative q-Witt results need the q-FV system categories and their
+initial rings; the differential results, including the smooth torsion and completion
+exports, need the differential q-Witt system and de Rham algebra carriers.
+The completed coefficient Frobenius results need arithmetic Λ-bases and their Adams
+twists as well as derived completed scalar extension. The complete difference
+calculus and framed cohomology results need the framed difference DGA and its
+Frobenius; the induction and smooth comparison additionally need the differential
+q-Witt algebra and enhanced E∞ algebra carriers. These constructions are README
+targets, with no substitute statements here.
+
+The two definitions below only make the ghost-image criterion statable. Ghost
+polynomials are evaluated on coordinate functions; only their restrictions to the
+positive indices of a truncation set enter the theorem.
 -/
 
-namespace TauCetiRoadmap.QWittVectors.BigWitt
+namespace TauCetiRoadmap.QWittVectors
+
+namespace BigWitt
 
 open scoped BigOperators
 
 /-! ## Layer 1: Big Witt rings and shared homological algebra -/
 
 /-- A truncation set is a set of positive natural numbers closed under positive divisors.
-The empty truncation set is allowed (Hesselholt, §1). Positive-divisor closure
-also underlies the roadmap's `TruncationSet.div_mem` API for the truncation set S/n. -/
+The empty truncation set is allowed (Hesselholt, §1). Its positive-divisor
+closure also makes S/n a truncation set for every positive n. -/
 structure TruncationSet where
   carrier : Set ℕ
   positive : ∀ n ∈ carrier, 0 < n
@@ -41,113 +78,9 @@ theorem ghost_image {R : Type*} [CommRing R] (S : TruncationSet)
           Ideal.span ({(p : R) ^ padicValNat p n} : Set R) := by
   sorry
 
-/-- Ghosts determine all coordinates in a truncation set when multiplication by each
-index is injective. No Frobenius lifts are needed for this assertion. -/
-theorem ghost_injective {R : Type*} [CommRing R] (S : TruncationSet)
-    (hS : ∀ n ∈ S.carrier, Function.Injective (fun a : R => (n : R) * a))
-    (x y : ℕ → R)
-    (hxy : ∀ n ∈ S.carrier, ghostPolynomial n x = ghostPolynomial n y) :
-    ∀ n ∈ S.carrier, x n = y n := by
-  sorry
+end BigWitt
 
-/-- If all truncation indices are units, every ghost sequence has a unique coordinate
-sequence on that truncation set, including the empty set. -/
-theorem ghost_equiv_of_units {R : Type*} [CommRing R] (S : TruncationSet)
-    (hS : ∀ n ∈ S.carrier, IsUnit (n : R)) (b : ℕ → R) :
-    ∃ x : ℕ → R, (∀ n ∈ S.carrier, ghostPolynomial n x = b n) ∧
-      ∀ y : ℕ → R, (∀ n ∈ S.carrier, ghostPolynomial n y = b n) →
-        ∀ n ∈ S.carrier, y n = x n := by
-  sorry
-
-/-- The empty set and the positive divisors of six both give truncation sets;
-the empty coordinate product has exactly one element. -/
-example :
-    ((∃ S : TruncationSet, S.carrier = ∅) ∧
-      Nonempty (Unique ((n : (∅ : Set ℕ)) → ℤ))) ∧
-    (∃ S : TruncationSet, S.carrier = {n : ℕ | 0 < n ∧ n ∣ 6}) := by
-  constructor
-  · constructor
-    · exact ⟨⟨∅, by simp, by simp⟩, rfl⟩
-    · refine ⟨{ default := fun _ => 0, uniq := ?_ }⟩
-      intro f
-      funext n
-      exact False.elim n.property
-  · refine ⟨⟨{n : ℕ | 0 < n ∧ n ∣ 6}, ?_, ?_⟩, rfl⟩
-    · intro n hn
-      exact hn.1
-    · intro n d hn hd hdn
-      exact ⟨hd, dvd_trans hdn hn.2⟩
-
-/-- Omitting the divisor one prevents the singleton containing two from being a
-truncation set. -/
-example : ¬ ∃ S : TruncationSet, S.carrier = ({2} : Set ℕ) := by
-  rintro ⟨S, hS⟩
-  have h2 : 2 ∈ S.carrier := by simp [hS]
-  have h1 : 1 ∈ S.carrier := S.divisor_closed h2 (by decide) (one_dvd 2)
-  simp [hS] at h1
-
-/-- The symbolic divisor ghosts retain both prime divisors of six. Over the integers,
-coordinates one and one give the compatible first two ghosts one and three. -/
-example {R : Type*} [CommRing R] (x : ℕ → R) :
-    (ghostPolynomial 1 x = x 1 ∧
-      ghostPolynomial 2 x = x 1 ^ 2 + 2 * x 2 ∧
-      ghostPolynomial 6 x = x 1 ^ 6 + 2 * x 2 ^ 3 + 3 * x 3 ^ 2 + 6 * x 6) ∧
-    (ghostPolynomial 1 (fun _ : ℕ => (1 : ℤ)) = 1 ∧
-      ghostPolynomial 2 (fun _ : ℕ => (1 : ℤ)) = 3) := by
-  have h1 : Nat.divisors 1 = {1} := by decide
-  have h2 : Nat.divisors 2 = {1, 2} := by decide
-  have h6 : Nat.divisors 6 = {1, 2, 3, 6} := by decide
-  constructor
-  · refine ⟨?_, ?_, ?_⟩
-    · norm_num [ghostPolynomial, h1]
-    · norm_num [ghostPolynomial, h2]
-    · norm_num [ghostPolynomial, h6]
-      ring
-  · norm_num [ghostPolynomial, h1, h2]
-
-/-- Characteristic two permits a nonzero coordinate with zero ghosts. Over the integers,
-the incompatible pair of ghosts zero and one has no coordinate preimage. -/
-example :
-    (ghostPolynomial 1 (fun n : ℕ => if n = 2 then (1 : ZMod 2) else 0) = 0 ∧
-      ghostPolynomial 2 (fun n : ℕ => if n = 2 then (1 : ZMod 2) else 0) = 0 ∧
-      (if (2 : ℕ) = 2 then (1 : ZMod 2) else 0) ≠ 0) ∧
-    (¬ ∃ x : ℕ → ℤ, ghostPolynomial 1 x = 0 ∧ ghostPolynomial 2 x = 1) := by
-  have h1 : Nat.divisors 1 = {1} := by decide
-  have h2 : Nat.divisors 2 = {1, 2} := by decide
-  constructor
-  · norm_num [ghostPolynomial, h1, h2]
-    decide
-  · rintro ⟨x, hx1, hx2⟩
-    have hx : x 1 = 0 := by simpa [ghostPolynomial, h1] using hx1
-    have hx2' : 2 * x 2 = 1 := by simpa [ghostPolynomial, h2, hx] using hx2
-    omega
-
-end TauCetiRoadmap.QWittVectors.BigWitt
-
-namespace TauCetiRoadmap.QWittVectors.QWitt
-
-open scoped BigOperators
-
-/-! ## Layer 6: Completed coefficient Frobenius and cyclotomic overlaps -/
-
-/-- Consecutive p-cyclotomic completion ideals have the same radical over any base ring.
-The characteristic-p cyclotomic power identities cover both p dividing d and p not dividing d;
-at d = 0 both ideals are the unit ideal. -/
-theorem cyclotomicCompletedFrobenius_ideals
-    (A : Type*) [CommRing A] (p d : ℕ) [Fact p.Prime] :
-    (Ideal.span ({Polynomial.C (p : A), Polynomial.cyclotomic d A} :
-      Set (Polynomial A))).radical =
-    (Ideal.span ({Polynomial.C (p : A), Polynomial.cyclotomic (p * d) A} :
-      Set (Polynomial A))).radical := by
-  sorry
-
-/-- Equal radicals do not imply equal cyclotomic completion ideals, already over the integers. -/
-theorem cyclotomicCompletedFrobenius_ideals_ne :
-    Ideal.span ({Polynomial.C (3 : ℤ), Polynomial.cyclotomic 3 ℤ} :
-      Set (Polynomial ℤ)) ≠
-    Ideal.span ({Polynomial.C (3 : ℤ), Polynomial.X - 1} :
-      Set (Polynomial ℤ)) := by
-  sorry
+namespace QWitt
 
 /-! ## Layer 8: Complete framed difference calculus -/
 
@@ -168,39 +101,6 @@ theorem framedGamma_existsUnique
         (if j = i then 1 + PowerSeries.X else 1) * PowerSeries.C (t j) := by
   sorry
 
-/-! ## Layer 9: Algebraic support for the smooth torsion induction -/
+end QWitt
 
-/-- The prime-to-p part of an exponent gives a unit geometric sum in the power-series ring.
-Its constant coefficient is u, a p-adic unit (Wagner §4.12). -/
-theorem framedTwoTermCohomology_unit
-    (p : ℕ) [Fact p.Prime] (e u : ℕ) (hu : ¬ p ∣ u) :
-    IsUnit (∑ j ∈ Finset.range u,
-      (1 + PowerSeries.X : PowerSeries ℤ_[p]) ^ (p ^ e * j)) := by
-  sorry
-
-/-- The kernel of the two-term framed differential is generated by its complementary
-geometric factor, including e = α when the differential vanishes (Wagner Corollary 4.15). -/
-theorem framedTwoTermCohomology_kernel
-    (p : ℕ) [Fact p.Prime] (α e : ℕ) (he : e ≤ α) :
-    let B := PowerSeries ℤ_[p]
-    let q : B := 1 + PowerSeries.X
-    let I : Ideal B := Ideal.span ({q ^ (p ^ α) - 1} : Set B)
-    let g : B := ∑ j ∈ Finset.range (p ^ (α - e)), q ^ (p ^ e * j)
-    ∀ x : B ⧸ I,
-      Ideal.Quotient.mk I (q ^ (p ^ e) - 1) * x = 0 ↔
-      x ∈ Ideal.span ({Ideal.Quotient.mk I g} : Set (B ⧸ I)) := by
-  sorry
-
-/-- For p = 2, α = 1 and e = 0, the degree-zero cohomology is the ideal generated by h + 2
-in the quotient by h(h + 2). Multiplication by h + 2 identifies it with the quotient by h. -/
-theorem framedTwoTermCohomology_two :
-    let B := PowerSeries ℤ_[2]
-    let h : B := PowerSeries.X
-    let I : Ideal B := Ideal.span ({h * (h + 2)} : Set B)
-    (∀ x : B ⧸ I,
-      Ideal.Quotient.mk I h * x = 0 ↔
-      x ∈ Ideal.span ({Ideal.Quotient.mk I (h + 2)} : Set (B ⧸ I))) ∧
-    Nonempty ((B ⧸ Ideal.span ({h * (h + 2), h} : Set B)) ≃+* ℤ_[2]) := by
-  sorry
-
-end TauCetiRoadmap.QWittVectors.QWitt
+end TauCetiRoadmap.QWittVectors

@@ -2,7 +2,7 @@
 
 **Summary.** Build the general arithmetic Λ-ring and q-Witt library from integral Witt polynomials, commutative algebra and derived completion. The endpoints are relative degree-zero q-Witt rings for every Λ-base and algebra, the q-fixed completed relative Frobenius for étale coefficients, positive-degree q-Witt operations, complete framed difference calculus, and integer torsion-freeness and degreewise completion for smooth algebras over perfectly covered bases, together with their functorial p-complete E∞ de Rham comparison. All primes, including 2, and all positive truncation indices are included.
 
-[Suggested.lean](Suggested.lean) records representative signatures on available carriers. This README specifies the full library.
+[Suggested.lean](Suggested.lean) is the acceptance test: it states the ghost-image criterion and unique framed coordinate automorphisms against the pinned APIs. Its module docstring lists the other headline theorems and the carriers they require. This README specifies the full library, including every API target and Check.
 
 ## Scope and ownership
 
@@ -103,13 +103,13 @@ Read Layers 1–2 for the integral and arithmetic input, the finite Koszul bridg
 
 Define `BigWitt.TruncationSet`. A truncation set S is a subset of positive integers closed under positive divisors, including the empty set. Put S/n = {e > 0 | ne ∈ S}, Div(m) = {d > 0 | d divides m}, and `BigWitt.ghostPolynomial` by `w_n(x) = sum_{d|n} d*x_d^(n/d)` for x ∈ R^S and n ∈ S. R is a commutative ring, possibly without identity; n > 0. (hesselholt line 205, §1 before Proposition 1.2, lines 205–268; Wagner §2.6, wagner line 435; printed hesselholt v3 pp. 5–7; wagner v5 p. 10).
 
-Prove `TruncationSet.ext`: Equality is membership equivalence.
+- Equality is membership equivalence.
 
-Prove `TruncationSet.div_mem`: S/n is divisor closed; (S/n)/k = S/(nk).
+- S/n is divisor closed; (S/n)/k = S/(nk).
 
-Prove `BigWitt.ghostPolynomial_map`: w_n commutes with every coefficient ring map.
+- w_n commutes with every coefficient ring map.
 
-Use the constructor `TruncationSet.mk` to bundle a subset of positive integers and a proof of divisor closure; Div(m) is the canonical finite example. In `Suggested.lean`, `BigWitt.TruncationSet` has `carrier : Set ℕ`, `positive : ∀ n ∈ carrier, 0 < n`, and `divisor_closed : n ∈ carrier → 0 < d → d ∣ n → d ∈ carrier`. This realizes the same positive-index notion without requiring a new coordinate carrier. For unital coefficient rings, `BigWitt.ghostPolynomial` is the divisor sum on functions ℕ→R; only the restriction to S enters any theorem. Its nonunital extension uses the same positive-exponent polynomials.
+Bundle a subset of positive integers and a proof of divisor closure; Div(m) is the canonical finite example. In `Suggested.lean`, `BigWitt.TruncationSet` has `carrier : Set ℕ`, `positive : ∀ n ∈ carrier, 0 < n`, and `divisor_closed : n ∈ carrier → 0 < d → d ∣ n → d ∈ carrier`. This realizes the same positive-index notion without requiring a new coordinate carrier. For unital coefficient rings, `BigWitt.ghostPolynomial` is the divisor sum on functions ℕ→R; only the restriction to S enters any theorem. Its nonunital extension uses the same positive-exponent polynomials.
 
 *Construction and proof.* Finite divisor sums define integral polynomials; divisor transitivity gives the closure and evaluation laws.
 
@@ -123,11 +123,11 @@ Use the constructor `TruncationSet.mk` to bundle a subset of positive integers a
 
 ### 1.2 The ghost image criterion
 
-Prove `BigWitt.ghost_image`. If B has endomorphisms φ_p lifting pth powers modulo p, a sequence b ∈ B^S lies in the ghost image iff b_n ≡ `phi_p(b_{n/p})` modulo p^v_p(n)B for every n ∈ S and prime p dividing n. Ghosts are injective on S-coordinates if multiplication by every n ∈ S is injective on B. The injectivity assertion holds for every commutative B without specifying Frobenius lifts. B is a commutative unital ring; a lift φ_p is specified for every prime appearing in S. Pairwise commutation is unnecessary for the ghost image criterion. (hesselholt line 217, Lemma 1.1, lines 217–267; Lemma 1.9; printed hesselholt v3 pp. 6–7, 11).
+Prove `BigWitt.ghost_image`. If B has endomorphisms φ_p lifting pth powers modulo p, a sequence b ∈ B^S lies in the ghost image iff b_n ≡ `phi_p(b_{n/p})` modulo p^v_p(n)B for every n ∈ S and prime p dividing n. Ghosts are injective on S-coordinates if multiplication by every n ∈ S is injective on B. The injectivity assertion holds for every commutative B without specifying Frobenius lifts. B is a commutative unital ring; a lift φ_p is specified for every prime appearing in S. Pairwise commutation is unnecessary for the ghost image criterion. (hesselholt line 223, Lemma 1.1, lines 223–267; Lemma 1.9; printed hesselholt v3 pp. 6–7, 11).
 
-Prove `BigWitt.ghost_injective`: Integer torsion-freeness at all primes occurring in S implies ghost injectivity.
+- Integer torsion-freeness at all primes occurring in S implies ghost injectivity.
 
-Prove `BigWitt.ghost_equiv_of_units`: If all n ∈ S are units, every ghost sequence has a unique coordinate sequence on S. In the function presentation used by `Suggested.lean`, existence is over ℕ→B and uniqueness is equality on S; coordinates outside S carry no uniqueness claim.
+- If all n ∈ S are units, every ghost sequence has a unique coordinate sequence on S. The criterion `BigWitt.ghost_image` uses coordinate functions ℕ→B restricted to S; coordinates outside S carry no uniqueness claim.
 
 *Construction and proof.* Choose Witt coordinates in divisor order; the congruences make the next numerator divisible by n. Uniqueness needs n-torsion-freeness, existence does not require dividing by a unit.
 
@@ -138,20 +138,21 @@ Prove `BigWitt.ghost_equiv_of_units`: If all n ∈ S are units, every ghost sequ
 - Over ℤ with φ_2 = id and S = Div(2), b_2 ≡ b_1 modulo 2 is the image condition. Coordinates (1,1) give ghosts (1,3), while the pair (0,1) has no integral coordinate preimage; replacing the congruence by unrestricted surjectivity fails.
 - Over 𝔽₂, (0,1) has both ghost coordinates zero for S = Div(2); injectivity without torsion-freeness fails.
 - For S = ∅, the empty sequence is in the image and the map is injective.
+- With all coordinates equal to 1 on Div(6), (w₁,w₂,w₃,w₆)=(1,3,4,12). For φ₂=φ₃=id on ℤ, the n=6 differences are 12−4=8∈2ℤ and 12−3=9∈3ℤ; keeping only prime-power indices would miss this coordinate.
 
 ### 1.3 Big Witt rings
 
-Construct `BigWitt` as the natural commutative ring W_S(R) on R^S whose ghost polynomials are ring maps. For nonunital R use the same integral operation polynomials. For T ⊆ S, restriction is a ring map; W_S is the inverse limit of its finite subtruncations. S is any truncation set; R is commutative, with or without identity. (hesselholt line 268, Proposition 1.2, lines 268–298; Proposition 1.6 proof, lines 383–397; wagner §2.6; printed hesselholt v3 pp. 7, 10; wagner v5 pp. 10–11).
+Construct the big Witt ring W_S(R) as the natural commutative ring on R^S whose ghost polynomials are ring maps. For nonunital R use the same integral operation polynomials. For T ⊆ S, restriction is a ring map; W_S is the inverse limit of its finite subtruncations. S is any truncation set; R is commutative, with or without identity. (hesselholt line 268, Proposition 1.2, lines 268–298; Proposition 1.6 proof, lines 383–397; wagner §2.6; printed hesselholt v3 pp. 7, 10; wagner v5 pp. 10–11).
 
-Prove `BigWitt.mk_coeff`: Coordinates construct every element; coeff (mk x) d = x_d.
+- Coordinates construct every element; coeff (mk x) d = x_d.
 
-Prove `BigWitt.ext`: Elements agree iff all their Witt coordinates agree.
+- Elements agree iff all their Witt coordinates agree.
 
-Prove `BigWitt.map`: Ring maps act on coordinates; map_id and map_comp hold.
+- Ring maps act on coordinates; map_id and map_comp hold.
 
-Prove `BigWitt.restrict_comp`: Restrictions compose and commute with ghosts and coefficient maps.
+- Restrictions compose and commute with ghosts and coefficient maps.
 
-Prove `BigWitt.nonunital_unitization`: W_S(R) identifies with the kernel for W_S(ℤ ⋉ R) → W_S(ℤ).
+- W_S(R) identifies with the kernel for W_S(ℤ ⋉ R) → W_S(ℤ).
 
 *Construction and proof.* Apply 1.2 over the torsion-free polynomial ring in universal coordinates to obtain integral addition, multiplication and negatives. Verify identities there by ghosts and specialize. The kernel model handles nonunital inputs without a fictitious unit.
 
@@ -165,23 +166,23 @@ Prove `BigWitt.nonunital_unitization`: W_S(R) identifies with the kernel for W_S
 
 ### 1.4 Frobenius, Verschiebung and Teichmüller maps
 
-Construct `BigWitt.frobenius`. For every n > 0 construct F_n : W_S(R) → `W_{S/n}(R)`, additive V_n in the reverse direction, and the multiplicative Teichmüller map τ : R → W_S(R). Ghosts satisfy w_e F_n = `w_{ne}`; `(V_n x)_{ne}` = x_e and other coordinates vanish. S is divisor closed; R is a commutative ring; units are preserved in the unital case. (hesselholt line 301, Lemmas 1.3–1.5, lines 301–371; printed hesselholt v3 pp. 8–9).
+For every n > 0 construct F_n : W_S(R) → `W_{S/n}(R)`, additive V_n in the reverse direction, and the multiplicative Teichmüller map τ : R → W_S(R). Ghosts satisfy w_e F_n = `w_{ne}`; `(V_n x)_{ne}` = x_e and other coordinates vanish. S is divisor closed; R is a commutative ring; units are preserved in the unital case. (hesselholt line 301, Lemmas 1.3–1.5, lines 301–371; printed hesselholt v3 pp. 8–9).
 
-Prove `BigWitt.frobenius_comp`: `F_a F_b = F_{ab}`; `V_a V_b = V_{ab}` with the indicated shifted truncations.
+- `F_a F_b = F_{ab}`; `V_a V_b = V_{ab}` with the indicated shifted truncations.
 
-Prove `BigWitt.frobenius_verschiebung`: On `W_{S/n}(R)`, F_n V_n = n.
+- On `W_{S/n}(R)`, F_n V_n = n.
 
-Prove `BigWitt.frobenius_verschiebung_gcd`: For c = gcd(a,b), `F_a V_b = c V_{b/c} F_{a/c}` on `W_{S/b}(R)`, with target `W_{S/a}(R)`.
+- For c = gcd(a,b), `F_a V_b = c V_{b/c} F_{a/c}` on `W_{S/b}(R)`, with target `W_{S/a}(R)`.
 
-Prove `BigWitt.projection_formula`: x V_n(y) = V_n(F_n(x)y).
+- x V_n(y) = V_n(F_n(x)y).
 
-Prove `BigWitt.teichmuller_ghost`: w_e(τ(r)) = r^e and F_n τ(r) = τ(r)^n.
+- w_e(τ(r)) = r^e and F_n τ(r) = τ(r)^n.
 
-Prove `BigWitt.verschiebung_teichmuller_expansion`: `x = sum_{d in S} V_d tau(x_d)`, converging in the finite-restriction topology.
+- `x = sum_{d in S} V_d tau(x_d)`, converging in the finite-restriction topology.
 
 *Construction and proof.* Construct F by the universal polynomial argument in 1.2; define V and τ on coordinates. Prove all identities on universal torsion-free rings using ghosts, then specialize.
 
-*Needs:* Layer 1.3 `BigWitt`.
+*Needs:* Layer 1.3.
 
 **Checks.**
 
@@ -191,15 +192,15 @@ Prove `BigWitt.verschiebung_teichmuller_expansion`: `x = sum_{d in S} V_d tau(x_
 
 ### 1.5 Comparison with p-typical Witt vectors
 
-Prove `BigWitt.pTypicalEquiv`. For prime p and a ≥ 0, coordinate reindexing d=p^i gives W_Div(p^a)(R) ≃+* TruncatedWittVector p (a+1) R; the infinite p-power truncation gives WittVector p R. These equivalences preserve ghosts, τ, V and F with their shifted lengths. R is a commutative unital ring; p is prime. (wagner line 471, Remark 2.7, lines 471–473; printed wagner v5 p. 11).
+For prime p and a ≥ 0, coordinate reindexing d=p^i gives W_Div(p^a)(R) ≃+* TruncatedWittVector p (a+1) R; the infinite p-power truncation gives WittVector p R. These equivalences preserve ghosts, τ, V and F with their shifted lengths. R is a commutative unital ring; p is prime. (wagner line 471, Remark 2.7, lines 471–473; printed wagner v5 p. 11).
 
-Prove `BigWitt.pTypicalEquiv_coeff`: Coefficient p^i corresponds to coefficient i.
+- Coefficient p^i corresponds to coefficient i.
 
-Prove `BigWitt.pTypicalEquiv_truncate`: Big restrictions correspond to TruncatedWittVector.truncate.
+- Big restrictions correspond to TruncatedWittVector.truncate.
 
 *Construction and proof.* The ghost polynomials agree after reindexing; compare operation polynomials over ℤ and transport. Infinite sequences follow by compatible finite restrictions.
 
-*Needs:* Layer 1.4 `BigWitt.frobenius`; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`.
+*Needs:* Layer 1.4; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`.
 
 **Checks.**
 
@@ -209,13 +210,13 @@ Prove `BigWitt.pTypicalEquiv_truncate`: Big restrictions correspond to Truncated
 
 ### 1.6 Étale base change
 
-Prove `BigWitt.etale_baseChange`. For an étale map R → R′, a finite truncation set S and n > 0, W_S(R) → W_S(R′) is étale and `W_S(R') tensor_{W_S(R),F_n} W_{S/n}(R) ~= W_{S/n}(R')`. For coprime positive a,b there is a natural W_Div(ab)(R) ≅ W_Div(a)(W_Div(b)(R)). R and R′ are commutative unital rings; S is finite in the étale assertion. (hesselholt line 811, Theorem 1.25, lines 811–827; borger Corollary 5.4, borger line 1323; Theorem 9.2 and Corollary 9.4, borger lines 1995 and 2095; wagner Remark 2.49, wagner lines 1657–1675; printed hesselholt v3 p. 19; borger v6 p. 26).
+For an étale map R → R′, a finite truncation set S and n > 0, W_S(R) → W_S(R′) is étale and `W_S(R') tensor_{W_S(R),F_n} W_{S/n}(R) ~= W_{S/n}(R')`. For coprime positive a,b there is a natural W_Div(ab)(R) ≅ W_Div(a)(W_Div(b)(R)). R and R′ are commutative unital rings; S is finite in the étale assertion. (hesselholt line 811, Theorem 1.25, lines 811–827; borger Corollary 5.4, borger line 1323; Theorem 9.2 and Corollary 9.4, borger lines 1995 and 2095; wagner Remark 2.49, wagner lines 1657–1675; printed hesselholt v3 p. 19; borger v6 p. 26).
 
-Prove `BigWitt.etale_baseChange_natural`: The tensor comparison is induced by F_n and the coefficient map, natural in étale squares.
+- The tensor comparison is induced by F_n and the coefficient map, natural in étale squares.
 
 *Construction and proof.* Use prime-set decomposition and the finite p-typical étale lifting argument, reducing the Frobenius square modulo p by relative Frobenius for étale algebras. Iterate and use finite divisor induction as in Hesselholt 1.25.
 
-*Needs:* Layer 1.5 `BigWitt.pTypicalEquiv`; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29.
+*Needs:* Layer 1.5; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29.
 
 **Checks.**
 
@@ -225,15 +226,15 @@ Prove `BigWitt.etale_baseChange_natural`: The tensor comparison is induced by F_
 
 ### 1.7 Koszul complexes of commuting endomorphisms
 
-Construct `CommutingEndomorphisms.koszulComplex`. For a commutative ring B, a B-module M and r commuting B-linear endomorphisms D_i, define the cochain complex K(M;D)^k = M⊗_B ∧^k B^r, with differential d(m⊗e_I)=∑_i D_i(m)⊗e_i∧e_I. Give endomorphism-compatible maps, signed coordinate permutations, direct sums, arbitrary scalar extension and cohomology base change for flat scalar extensions, concatenation by iterated two-term totalization, and the comparison with the supplied scalar Koszul complex. r≥0; M any B-module; D_iD_j=D_jD_i; B any commutative ring. (wagner line 603, Remark 2.16, lines 603–619; §4.7, lines 2847–2857; printed wagner v5 pp. 13–14, 57).
+For a commutative ring B, a B-module M and r commuting B-linear endomorphisms D_i, define the cochain complex K(M;D)^k = M⊗_B ∧^k B^r, with differential d(m⊗e_I)=∑_i D_i(m)⊗e_i∧e_I. Give endomorphism-compatible maps, signed coordinate permutations, direct sums, arbitrary scalar extension and cohomology base change for flat scalar extensions, concatenation by iterated two-term totalization, and the comparison with the supplied scalar Koszul complex. r≥0; M any B-module; D_iD_j=D_jD_i; B any commutative ring. (wagner line 603, Remark 2.16, lines 603–619; §4.7, lines 2847–2857; printed wagner v5 pp. 13–14, 57).
 
-Prove `commutingEndomorphismKoszul_d_sq`: Commutativity of the D_i implies d²=0, with no regularity assumption.
+- Commutativity of the D_i implies d²=0, with no regularity assumption.
 
-Prove `commutingEndomorphismKoszul_map`: A map intertwining every D_i induces a chain map; identities and composition hold.
+- A map intertwining every D_i induces a chain map; identities and composition hold.
 
-Prove `commutingEndomorphismKoszul_ext`: Maps induced by intertwining maps are determined in degree zero.
+- Maps induced by intertwining maps are determined in degree zero.
 
-Prove `commutingEndomorphismKoszul_scalar`: For M=B and D_i multiplication by f_i, identify this complex with the cochain dual of the supplied chain scalar Koszul model, using the coordinate dual bases.
+- For M=B and D_i multiplication by f_i, identify this complex with the cochain dual of the supplied chain scalar Koszul model, using the coordinate dual bases.
 
 *Construction and proof.* Give M its B[X_i]-module structure with X_i acting by D_i. Tensor with the supplied finite scalar Koszul resolution, using the cochain wedge convention, and compare termwise. This is the module-action bridge to the supplier complex, not a second scalar Koszul construction.
 
@@ -247,9 +248,9 @@ Prove `commutingEndomorphismKoszul_scalar`: For M=B and D_i multiplication by f_
 
 ### 1.8 Arithmetic fracture
 
-Prove `QWitt.arithmeticFracture`. For M in the enhanced derived category of ℤ-modules and any positive integer N, the square `M -> prod_{p|N}M^hat_p`, `M[1/N] -> prod_{p|N}M^hat_p[1/p]` is a pullback. Localization at N and p-completion for p|N jointly detect zero objects. N>0; M arbitrary, possibly unbounded; each product indexed by p|N is finite. (wagner line 366, Lemma 2.4, Remark 2.5, lines 366–430; §4.18, lines 3081–3095; printed wagner v5 pp. 9–10, 62).
+For M in the enhanced derived category of ℤ-modules and any positive integer N, the square `M -> prod_{p|N}M^hat_p`, `M[1/N] -> prod_{p|N}M^hat_p[1/p]` is a pullback. Localization at N and p-completion for p|N jointly detect zero objects. N>0; M arbitrary, possibly unbounded; each product indexed by p|N is finite. (wagner line 366, Lemma 2.4, Remark 2.5, lines 366–430; §4.18, lines 3081–3095; printed wagner v5 pp. 9–10, 62).
 
-Prove `arithmeticFracture_natural`: The pullback is natural in M and compatible with coefficient algebra objects.
+- The pullback is natural in M and compatible with coefficient algebra objects.
 
 *Construction and proof.* Apply localization and each indicated completion to the fibre of the proposed square; the resulting squares split. Prove conservativity first from derived completeness as RHom of the localization cone. Use the all-prime detection supplier for rational detection.
 
@@ -267,29 +268,29 @@ Divisors of 1, 2, 6 and prime powers distinguish the big indexing from p-typical
 
 ### Dependencies
 
-Layer 1.1 `BigWitt.TruncationSet`; Layer 1.2 `BigWitt.ghost_image`; Layer 1.3 `BigWitt`; Layer 1.4 `BigWitt.frobenius`; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`; Layer 1.5 `BigWitt.pTypicalEquiv`; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §0.K.1; DGAInfinity Layer 0; EnhancedDerivedSheaves §0.3 and Layer E5:spectra-comparison; DerivedModuleAlgebra §1.3; BordismFormalGroups §F6.5.
+Layer 1.1 `BigWitt.TruncationSet`; Layer 1.2 `BigWitt.ghost_image`; Layer 1.3; Layer 1.4; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`; Layer 1.5; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §0.K.1; DGAInfinity Layer 0; EnhancedDerivedSheaves §0.3 and Layer E5:spectra-comparison; DerivedModuleAlgebra §1.3; BordismFormalGroups §F6.5.
 
 ## Layer 2: Arithmetic Λ-rings, prime sets and perfection
 
 ### 2.1 Arithmetic Λ-rings
 
-Define `ArithmeticLambdaRing`. Give the full big Witt functor W = `W_{positive integers}` its comonad structure Δ : W(R) → W(W(R)), counit w_1, characterized by w_n Δ = F_n. An arithmetic Λ-ring is a commutative unital ring A with a ring coaction s : A → W(A) satisfying w_1 s = id and Δs = W(s)s. Define Λ-maps by coaction compatibility and ψ_n = w_n s. A is a commutative unital ring, with torsion allowed. (hesselholt line 711, Proposition 1.19 and Definitions 1.21, 1.23, lines 711–801; printed hesselholt v3 pp. 17–19).
+Give the full big Witt functor W = `W_{positive integers}` its comonad structure Δ : W(R) → W(W(R)), counit w_1, characterized by w_n Δ = F_n. An arithmetic Λ-ring is a commutative unital ring A with a ring coaction s : A → W(A) satisfying w_1 s = id and Δs = W(s)s. Define Λ-maps by coaction compatibility and ψ_n = w_n s. A is a commutative unital ring, with torsion allowed. (hesselholt line 711, Proposition 1.19 and Definitions 1.21, 1.23, lines 711–801; printed hesselholt v3 pp. 17–19).
 
-Prove `ArithmeticLambdaRing.mk`: A coaction and its two coalgebra equations construct the structure.
+- A coaction and its two coalgebra equations construct the structure.
 
-Prove `ArithmeticLambdaRing.hom_ext`: Λ-maps are equal when their underlying ring maps are equal.
+- Λ-maps are equal when their underlying ring maps are equal.
 
-Prove `ArithmeticLambdaRing.adams_one_mul`: ψ_1=id and ψ_a `psi_b=psi_{ab}`.
+- ψ_1=id and ψ_a `psi_b=psi_{ab}`.
 
-Prove `ArithmeticLambdaRing.adams_prime_mod`: ψ_p(a)−a^p belongs to pA for every prime p.
+- ψ_p(a)−a^p belongs to pA for every prime p.
 
-Prove `ArithmeticLambdaRing.ofFrobeniusLifts`: On ℤ-torsion-free A, commuting prime Frobenius lifts determine a unique Λ-structure.
+- On ℤ-torsion-free A, commuting prime Frobenius lifts determine a unique Λ-structure.
 
-Prove `ArithmeticLambdaRing.adams_isLambdaHom`: Each ψ_n commutes with the coaction and defines a Λ-endomorphism.
+- Each ψ_n commutes with the coaction and defines a Λ-endomorphism.
 
 *Construction and proof.* Construct Δ by 1.2 on universal coordinates and prove coalgebra laws by ghosts. The coaction equations imply Adams laws. The torsion-free converse is the same ghost congruence criterion, not a definition on torsion rings.
 
-*Needs:* Layer 1.4 `BigWitt.frobenius`.
+*Needs:* Layer 1.4.
 
 **Checks.**
 
@@ -299,23 +300,23 @@ Prove `ArithmeticLambdaRing.adams_isLambdaHom`: Each ψ_n commutes with the coac
 
 ### 2.2 Prime sets
 
-Construct `ArithmeticLambdaRing.primeSet`. For any set P of primes construct the P-typical Witt comonad and its Λ_P-coalgebras; on P-torsion-free rings these are commuting ψ_p with ψ_p(x) ≡ x^p modulo p. Give change-of-prime-set functors, free Λ_P-rings on sets, and reflexive presentations by free Λ_P-rings. Finite Div(m) q-Witt data require only P={p | p divides m}. P is arbitrary; coalgebras, rather than Adams-only structures, are used on rings with torsion. (borger line 603, §§1.16–1.18, lines 603–638; pridham Definition 2.1, pridham line 506; wagner Remark 2.32, wagner line 1332; Remark 2.43, wagner line 1556; printed borger v6 pp. 12–13; pridham v4 p. 12; wagner v5 pp. 26, 31).
+For any set P of primes construct the P-typical Witt comonad and its Λ_P-coalgebras; on P-torsion-free rings these are commuting ψ_p with ψ_p(x) ≡ x^p modulo p. Give change-of-prime-set functors, free Λ_P-rings on sets, and reflexive presentations by free Λ_P-rings. Finite Div(m) q-Witt data require only P={p | p divides m}. P is arbitrary; coalgebras, rather than Adams-only structures, are used on rings with torsion. (borger line 603, §§1.16–1.18, lines 603–638; pridham Definition 2.1, pridham line 506; wagner Remark 2.32, wagner line 1332; Remark 2.43, wagner line 1556; printed borger v6 pp. 12–13; pridham v4 p. 12; wagner v5 pp. 26, 31).
 
-Prove `LambdaP.restrict`: For P′⊆P restrict the operations and coaction.
+- For P′⊆P restrict the operations and coaction.
 
-Prove `LambdaP.free_homEquiv`: Λ_P-maps from the free ring on I to A correspond naturally to I → A.
+- Λ_P-maps from the free ring on I to A correspond naturally to I → A.
 
-Prove `LambdaP.hom_ext`: Maps from the free ring agree when they agree on its generators.
+- Maps from the free ring agree when they agree on its generators.
 
-Prove `LambdaP.singlePrime_wittCoalgebra`: For P={p}, identify the coaction with the usual p-typical Witt-coalgebra notion of δ-ring.
+- For P={p}, identify the coaction with the usual p-typical Witt-coalgebra notion of δ-ring.
 
-Prove `LambdaP.free_polynomial`: The free Λ-ring on I has underlying polynomial ring on the universal exterior operations of its generators; Adams operations have faithfully flat underlying maps (Bhatt–Scholze Lemma 2.11, p. 15, bhatt-scholze line 594, for a single prime over ℤ_(p); Wagner–Habiro §1.22(e), p. 12, wagner-habiro line 493, for all primes).
+- The free Λ-ring on I has underlying polynomial ring on the universal exterior operations of its generators; Adams operations have faithfully flat underlying maps (Bhatt–Scholze Lemma 2.11, p. 15, bhatt-scholze line 594, for a single prime over ℤ_(p); Wagner–Habiro §1.22(e), p. 12, wagner-habiro line 493, for all primes).
 
-Prove `LambdaP.filteredColimit`: Filtered colimits are created on underlying rings: every coordinate operation and every defining relation uses finitely many arguments.
+- Filtered colimits are created on underlying rings: every coordinate operation and every defining relation uses finitely many arguments.
 
 *Construction and proof.* Restrict Witt indices to the monoid generated by P; repeat the comonad construction. The free object is represented by symmetric-operation generators and the coalgebra equations. Its polynomial presentation supplies the reflexive coequalizer and faithful-flat Adams property needed in 2.4. The faithful-flat statement uses the free polynomial presentation and prime-set decomposition; it does not identify an Adams operation with a literal permutation of the exterior-operation generators.
 
-*Needs:* Layer 2.1 `ArithmeticLambdaRing`; Layer 1.5 `BigWitt.pTypicalEquiv`.
+*Needs:* Layer 2.1; Layer 1.5.
 
 **Checks.**
 
@@ -325,21 +326,21 @@ Prove `LambdaP.filteredColimit`: Filtered colimits are created on underlying rin
 
 ### 2.3 Arithmetic perfection
 
-Define `ArithmeticLambdaRing.perfection`. Call A perfect if every ψ_n, n>0, is an isomorphism. Construct A^perf as the filtered colimit of A indexed by positive integers under divisibility, with transition A_m → A_n equal to `psi_{n/m}`. The resulting Λ-map A → A^perf is initial among Λ-maps to perfect Λ-rings. A is an arithmetic Λ-ring; colimits are in commutative Λ-rings. (wagner line 1621, Remark 2.47 and footnote 2.3, lines 1621–1643; bhatt-scholze Remark 2.27, bhatt-scholze line 775; printed wagner v5 p. 32; bhatt-scholze v4 p. 20).
+Call A perfect if every ψ_n, n>0, is an isomorphism. Construct A^perf as the filtered colimit of A indexed by positive integers under divisibility, with transition A_m → A_n equal to `psi_{n/m}`. The resulting Λ-map A → A^perf is initial among Λ-maps to perfect Λ-rings. A is an arithmetic Λ-ring; colimits are in commutative Λ-rings. (wagner line 1621, Remark 2.47 and footnote 2.3, lines 1621–1643; bhatt-scholze Remark 2.27, bhatt-scholze line 775; printed wagner v5 p. 32; bhatt-scholze v4 p. 20).
 
-Prove `LambdaPerfection.lift`: Maps to a perfect B extend uniquely and naturally across A → A^perf.
+- Maps to a perfect B extend uniquely and naturally across A → A^perf.
 
-Prove `LambdaPerfection.adamsEquiv`: Every Adams operation on A^perf has its shift inverse.
+- Every Adams operation on A^perf has its shift inverse.
 
-Prove `LambdaPerfection.idempotent`: If A is perfect then A → A^perf is an isomorphism.
+- If A is perfect then A → A^perf is an isomorphism.
 
-Prove `LambdaPerfection.map`: Λ-maps induce maps of perfections with identity and composition laws.
+- Λ-maps induce maps of perfections with identity and composition laws.
 
-Prove `LambdaPerfection.of`: The stage-one map sends a to its colimit class; at stages m|n the class of a equals the class of `psi_{n/m}(a)`.
+- The stage-one map sends a to its colimit class; at stages m|n the class of a equals the class of `psi_{n/m}(a)`.
 
 *Construction and proof.* Adams operations commute with the coaction, so form the directed colimit. Index shifts invert each ψ_n. The universal map sends a at stage m to `psi_m^{-1}(f(a))`.
 
-*Needs:* Layer 2.2 `ArithmeticLambdaRing.primeSet`.
+*Needs:* Layer 2.2.
 
 **Checks.**
 
@@ -349,21 +350,21 @@ Prove `LambdaPerfection.of`: The stage-one map sends a to its colimit class; at 
 
 ### 2.4 Perfectly covered Λ-rings
 
-Define `ArithmeticLambdaRing.IsPerfectlyCovered`. A is perfectly covered if there exists a faithfully flat Λ-map A → B with B perfect. This is equivalent to every ψ_n being faithfully flat, and to A → A^perf being faithfully flat. Such A is ℤ-torsion-free; so are its flat algebras. A is an arithmetic Λ-ring; the zero ring is allowed under the usual faithful-flat convention. (wagner line 1621, Remark 2.47 and footnote 2.3, lines 1621–1643; wagner-habiro §1.22(e), wagner-habiro line 493; bhatt-scholze Lemma 2.28, bhatt-scholze line 778; printed wagner v5 p. 32; wagner-habiro v2 p. 12; bhatt-scholze v4 p. 20).
+A is perfectly covered if there exists a faithfully flat Λ-map A → B with B perfect. This is equivalent to every ψ_n being faithfully flat, and to A → A^perf being faithfully flat. Such A is ℤ-torsion-free; so are its flat algebras. A is an arithmetic Λ-ring; the zero ring is allowed under the usual faithful-flat convention. (wagner line 1621, Remark 2.47 and footnote 2.3, lines 1621–1643; wagner-habiro §1.22(e), wagner-habiro line 493; bhatt-scholze Lemma 2.28, bhatt-scholze line 778; printed wagner v5 p. 32; wagner-habiro v2 p. 12; bhatt-scholze v4 p. 20).
 
-Prove `IsPerfectlyCovered.iff_adams`: The three conditions in the statement are equivalent.
+- The three conditions in the statement are equivalent.
 
-Prove `IsPerfectlyCovered.torsionFree`: Multiplication by every positive integer is injective on A.
+- Multiplication by every positive integer is injective on A.
 
-Prove `IsPerfectlyCovered.polynomial`: Toric polynomial algebras over a perfectly covered Λ-base are perfectly covered, for any variable set.
+- Toric polynomial algebras over a perfectly covered Λ-base are perfectly covered, for any variable set.
 
-Prove `IsPerfectlyCovered.free`: Every free arithmetic Λ-ring on a set is perfectly covered.
+- Every free arithmetic Λ-ring on a set is perfectly covered.
 
-Prove `IsPerfectlyCovered.mk`: A perfect Λ-ring B and a faithfully flat Λ-map A→B give a witness of perfect coverage.
+- A perfect Λ-ring B and a faithfully flat Λ-map A→B give a witness of perfect coverage.
 
 *Construction and proof.* Use faithful-flat descent on the ψ_n-twisted tensor functors and filtered colimits of faithful-flat maps. The p-coordinate of a coaction gives px=0 ⇒ ψ_p(x)=0 as in the δ torsion lemma; injective Adams on the cover kill p-torsion, and faithful flatness descends this conclusion. Polynomial monomial bases and 2.2 prove the examples.
 
-*Needs:* Layer 2.3 `ArithmeticLambdaRing.perfection`.
+*Needs:* Layer 2.3.
 
 **Checks.**
 
@@ -373,21 +374,21 @@ Prove `IsPerfectlyCovered.mk`: A perfect Λ-ring B and a faithfully flat Λ-map 
 
 ### 2.5 Relative perfection
 
-Define `ArithmeticLambdaAlgebra.IsRelativelyPerfect`. For any A-algebra R define the twist `R^(n)=R tensor_{A,psi_n}A` with its right-hand A-algebra structure. If R is a Λ-A-algebra, define relative perfection by invertibility of `psi_{p/A}:R^(p) -> R`, r⊗a↦ψ_p(r)a, for every prime p; equivalently these maps are invertible for every positive n. A is an arithmetic Λ-ring and R any commutative unital A-algebra; linearized Adams maps and relative perfection additionally require a compatible Λ-structure on R. (wagner line 1573, §2.45 and Remark 2.47, lines 1573–1628; printed wagner v5 pp. 31–32).
+For any A-algebra R define the twist `R^(n)=R tensor_{A,psi_n}A` with its right-hand A-algebra structure. If R is a Λ-A-algebra, define relative perfection by invertibility of `psi_{p/A}:R^(p) -> R`, r⊗a↦ψ_p(r)a, for every prime p; equivalently these maps are invertible for every positive n. A is an arithmetic Λ-ring and R any commutative unital A-algebra; linearized Adams maps and relative perfection additionally require a compatible Λ-structure on R. (wagner line 1573, §2.45 and Remark 2.47, lines 1573–1628; printed wagner v5 pp. 31–32).
 
-Prove `LambdaAlgebra.linearizedAdams_tmul`: `psi_{n/A}(r tensor a)=psi_n(r)a`; tensor balancing uses ψ_n on A.
+- `psi_{n/A}(r tensor a)=psi_n(r)a`; tensor balancing uses ψ_n on A.
 
-Prove `LambdaAlgebra.twist_comp`: (R^(a))^(b) ≅ R^(ab), naturally and compatibly with linearized Adams.
+- (R^(a))^(b) ≅ R^(ab), naturally and compatibly with linearized Adams.
 
-Prove `IsRelativelyPerfect.ofPerfect`: If A and R are perfect Λ-rings and A → R is a Λ-map, then R is relatively perfect.
+- If A and R are perfect Λ-rings and A → R is a Λ-map, then R is relatively perfect.
 
-Prove `LambdaAlgebra.twist_hom_ext`: A-algebra maps out of the twist are determined on pure tensors.
+- A-algebra maps out of the twist are determined on pure tensors.
 
-Prove `IsRelativelyPerfect.ofPrimeEquivalences`: A compatible Λ-A-algebra and equivalences for every `psi_{p/A}` give relative perfection; these equivalences respect the fixed linearized maps.
+- A compatible Λ-A-algebra and equivalences for every `psi_{p/A}` give relative perfection; these equivalences respect the fixed linearized maps.
 
 *Construction and proof.* The tensor balancing relation is ψ_n-compatible because A → R is a Λ-map. Associativity of scalar extension proves the composite law, and prime factorization reduces all n to primes.
 
-*Needs:* Layer 2.1 `ArithmeticLambdaRing`; Mathlib `Algebra.TensorProduct.includeRight`.
+*Needs:* Layer 2.1; Mathlib `Algebra.TensorProduct.includeRight`.
 
 **Checks.**
 
@@ -401,23 +402,23 @@ The toric ring ℤ[T] is perfectly covered but not perfect; ℤ is perfect. Char
 
 ### Dependencies
 
-Layer 1.4 `BigWitt.frobenius`; Layer 2.1 `ArithmeticLambdaRing`; Layer 1.5 `BigWitt.pTypicalEquiv`; Layer 2.2 `ArithmeticLambdaRing.primeSet`; Layer 2.3 `ArithmeticLambdaRing.perfection`; Mathlib `Algebra.TensorProduct.includeRight`.
+Layer 1.4; Layer 2.1; Layer 1.5; Layer 2.2; Layer 2.3; Mathlib `Algebra.TensorProduct.includeRight`.
 
 ## Layer 3: Absolute q-Witt rings and exactness
 
 ### 3.1 Absolute q-FV systems
 
-Define `QWitt.AbsoluteFVSystem`. For a commutative ring R define a q-FV system to consist of ℤ[q]-rings E_m, m>0, structural maps W_Div(m)(R)[q]/(q^m−1) → E_m, ℤ[q]-linear additive `V_{m/d}:E_d` → E_m and multiplicative ℤ[q]-algebra maps `F_{m/d}:E_m` → E_d compatible with the ordinary Witt maps, and satisfying FV=m/d and `VF=[m/d]_{q^d}`. The unital variant preserves units; the nonunital variant uses nonunital rings with ℤ[q]-action. Morphisms preserve every structure map. R may be nonunital; d divides m and d,m>0. (wagner line 475, Definition 2.8 and Remark 2.12, lines 475–549; printed wagner v5 pp. 11–12).
+For a commutative ring R define a q-FV system to consist of ℤ[q]-rings E_m, m>0, structural maps W_Div(m)(R)[q]/(q^m−1) → E_m, ℤ[q]-linear additive `V_{m/d}:E_d` → E_m and multiplicative ℤ[q]-algebra maps `F_{m/d}:E_m` → E_d compatible with the ordinary Witt maps, and satisfying FV=m/d and `VF=[m/d]_{q^d}`. The unital variant preserves units; the nonunital variant uses nonunital rings with ℤ[q]-action. Morphisms preserve every structure map. R may be nonunital; d divides m and d,m>0. (wagner line 475, Definition 2.8 and Remark 2.12, lines 475–549; printed wagner v5 pp. 11–12).
 
-Prove `AbsoluteFVSystem.mk`: Compatible structural, F and V maps with the two composite laws give a system.
+- Compatible structural, F and V maps with the two composite laws give a system.
 
-Prove `AbsoluteFVSystem.hom_ext`: A morphism is determined by its maps on E_m.
+- A morphism is determined by its maps on E_m.
 
-Prove `AbsoluteFVSystem.truncate`: Restrict the system to any divisor-closed set of positive indices.
+- Restrict the system to any divisor-closed set of positive indices.
 
 *Construction and proof.* Specify the category with all structural commutative squares. The polynomial model for ℤ verifies that the two composite laws impose distinct requirements.
 
-*Needs:* Layer 1.4 `BigWitt.frobenius`.
+*Needs:* Layer 1.4.
 
 **Checks.**
 
@@ -427,21 +428,21 @@ Prove `AbsoluteFVSystem.truncate`: Restrict the system to any divisor-closed set
 
 ### 3.2 Absolute q-Witt rings
 
-Construct `QWitt.absolute`. Construct the initial q-FV system Q_m(R). It is W_Div(m)(R)[q]/I_m, where I_m is generated by `(q^d-1)V_{m/d}(x)` and `[d/e]_{q^e}V_{m/d}(x)-V_{m/e}(F_{d/e}x)` for e|d|m and x∈W_Div(d)(R)[q]. For m=1, Q_1(R) ≅ R, with q acting as 1. R is any commutative ring, possibly nonunital; m>0. (wagner line 483, Lemmas 2.9–2.10 and Remark 2.12, lines 483–549; printed wagner v5 pp. 11–12).
+Construct the initial q-FV system Q_m(R). It is W_Div(m)(R)[q]/I_m, where I_m is generated by `(q^d-1)V_{m/d}(x)` and `[d/e]_{q^e}V_{m/d}(x)-V_{m/e}(F_{d/e}x)` for e|d|m and x∈W_Div(d)(R)[q]. For m=1, Q_1(R) ≅ R, with q acting as 1. R is any commutative ring, possibly nonunital; m>0. (wagner line 483, Lemmas 2.9–2.10 and Remark 2.12, lines 483–549; printed wagner v5 pp. 11–12).
 
-Prove `QWitt.absolute_desc`: Maps to a q-FV system extend uniquely from the structural Witt maps.
+- Maps to a q-FV system extend uniquely from the structural Witt maps.
 
-Prove `QWitt.absolute_map`: Ring maps induce maps of initial systems; identity and composition hold.
+- Ring maps induce maps of initial systems; identity and composition hold.
 
-Prove `QWitt.absolute_hom_ext`: System maps out of Q agree on the structural polynomial generators.
+- System maps out of Q agree on the structural polynomial generators.
 
-Prove `QWitt.F_comp_V_comp`: F and V compose, commute for coprime indices and satisfy the projection formula.
+- F and V compose, commute for coprime indices and satisfy the projection formula.
 
-Prove `QWitt.teichmuller`: τ_m is the multiplicative composite R → W_Div(m)(R) → Q_m(R); `F_{m/d}tau_m(r)=tau_d(r)^(m/d)`.
+- τ_m is the multiplicative composite R → W_Div(m)(R) → Q_m(R); `F_{m/d}tau_m(r)=tau_d(r)^(m/d)`.
 
 *Construction and proof.* Verify that F and V preserve I_m using divisibility and coprime interchange in 1.4. The presentation gives the initial property and the remaining identities by descent from ordinary Witt operations.
 
-*Needs:* Layer 3.1 `QWitt.AbsoluteFVSystem`.
+*Needs:* Layer 3.1.
 
 **Checks.**
 
@@ -451,19 +452,19 @@ Prove `QWitt.teichmuller`: τ_m is the multiplicative composite R → W_Div(m)(R
 
 ### 3.3 Absolute ghosts
 
-Construct `QWitt.absoluteGhost`. For d|m define `gh_{m/d}:Q_m(R)` → R[q]/Φ_d(q) as `F_{m/d}` followed by the quotient by all proper-divisor V-images in Q_d. At d=m this is the first ghost; its target is R[q]/Φ_m(q). The Teichmüller image is r^(m/d) in the dth target. R is commutative, possibly nonunital; m>0. (wagner line 552, §2.13, lines 552–580; printed wagner v5 pp. 12–13).
+For d|m define `gh_{m/d}:Q_m(R)` → R[q]/Φ_d(q) as `F_{m/d}` followed by the quotient by all proper-divisor V-images in Q_d. At d=m this is the first ghost; its target is R[q]/Φ_m(q). The Teichmüller image is r^(m/d) in the dth target. R is commutative, possibly nonunital; m>0. (wagner line 552, §2.13, lines 552–580; printed wagner v5 pp. 12–13).
 
-Prove `QWitt.ghost_quotient`: ker gh_1 is the ideal generated by V_p-images for prime p|m.
+- ker gh_1 is the ideal generated by V_p-images for prime p|m.
 
-Prove `QWitt.ghost_F`: `gh_{m/d}=gh_1 F_{m/d}`.
+- `gh_{m/d}=gh_1 F_{m/d}`.
 
-Prove `QWitt.ghost_V`: `gh_{m/d}` V_n is zero unless n divides m/d; when it does it is n times the appropriate source ghost.
+- `gh_{m/d}` V_n is zero unless n divides m/d; when it does it is n times the appropriate source ghost.
 
-Prove `QWitt.ghost_map`: Ghosts commute with coefficient maps.
+- Ghosts commute with coefficient maps.
 
 *Construction and proof.* First quotient the defining ideal and all prime V-images; the cyclotomic ideal contract identifies the result, treating m=1 directly. Compose with F for the other ghosts.
 
-*Needs:* Layer 3.2 `QWitt.absolute`; `gap:cyclotomic-contract`.
+*Needs:* Layer 3.2; `gap:cyclotomic-contract`.
 
 **Checks.**
 
@@ -473,15 +474,15 @@ Prove `QWitt.ghost_map`: Ghosts commute with coefficient maps.
 
 ### 3.4 The Verschiebung resolution
 
-Prove `QWitt.absolute_verschiebungResolution`. If p_1,…,p_r are the distinct prime factors of m, put `p_J=prod_{j in J}p_j`. The augmented complex with `directSum_{|J|=k}Q_{m/p_J}(R)` in chain degree k, Q_m(R) in degree 0 and quotient R[q]/Φ_m(q) is exact. Deletion of j∈J has coefficient `(-1)^{#{i in J:i<j}}V_{p_j}`. In particular every `V_n:Q_{m/n}(R)` → Q_m(R) is injective. R may be nonunital; m>0; an ordering of distinct prime divisors is fixed only to write signs. (wagner line 591, Proposition 2.15, Remark 2.16, Lemmas 2.17–2.18 and Corollary 2.19, lines 591–1004; printed wagner v5 pp. 13–19).
+If p_1,…,p_r are the distinct prime factors of m, put `p_J=prod_{j in J}p_j`. The augmented complex with `directSum_{|J|=k}Q_{m/p_J}(R)` in chain degree k, Q_m(R) in degree 0 and quotient R[q]/Φ_m(q) is exact. Deletion of j∈J has coefficient `(-1)^{#{i in J:i<j}}V_{p_j}`. In particular every `V_n:Q_{m/n}(R)` → Q_m(R) is injective. R may be nonunital; m>0; an ordering of distinct prime divisors is fixed only to write signs. (wagner line 591, Proposition 2.15, Remark 2.16, Lemmas 2.17–2.18 and Corollary 2.19, lines 591–1004; printed wagner v5 pp. 13–19).
 
-Prove `QWitt.verschiebungResolution_perm`: Reordering primes gives the signed permutation chain isomorphism.
+- Reordering primes gives the signed permutation chain isomorphism.
 
-Prove `QWitt.verschiebung_injective`: All absolute Verschiebungen are injective without a torsion assumption.
+- All absolute Verschiebungen are injective without a torsion assumption.
 
 *Construction and proof.* Prove the prime-power short exact sequence from the explicit ideal. For the general complex, use iterated mapping cones of its finite cube; split the prime-to-p V-directions after p-localization and compare the remaining direction with the prime-power case. Rational and prime-completed detection prove exactness; apply the same cube argument to kernels of V. The terminal object removed from the reverse-inclusion cube is ∅.
 
-*Needs:* Layer 3.3 `QWitt.absoluteGhost`; DerivedModuleAlgebra §0.K.1; EnhancedDerivedSheaves §0.3; `gap:cyclotomic-contract`; Layer 1.7 `CommutingEndomorphisms.koszulComplex`; Layer 1.8 `QWitt.arithmeticFracture`.
+*Needs:* Layer 3.3; DerivedModuleAlgebra §0.K.1; EnhancedDerivedSheaves §0.3; `gap:cyclotomic-contract`; Layer 1.7; Layer 1.8.
 
 **Checks.**
 
@@ -491,15 +492,15 @@ Prove `QWitt.verschiebung_injective`: All absolute Verschiebungen are injective 
 
 ### 3.5 Localization and integer torsion
 
-Prove `QWitt.absolute_localization_torsion`. Q_m commutes with integer localization and with localization R[U⁻¹] at τ_m(U). If R is p-torsion-free, so is Q_m(R); if R has bounded p-primary torsion, so does Q_m(R). If R is p-torsion-free for every p|m, its q-Witt ghosts are jointly injective. R is commutative, possibly nonunital; multiplicative localization at elements uses the corresponding unital algebra or unitization; p is any prime. (wagner line 1006, Corollaries 2.20, 2.22 and Lemmas 2.21, 2.23, lines 1006–1080; printed wagner v5 pp. 19–21).
+Q_m commutes with integer localization and with localization R[U⁻¹] at τ_m(U). If R is p-torsion-free, so is Q_m(R); if R has bounded p-primary torsion, so does Q_m(R). If R is p-torsion-free for every p|m, its q-Witt ghosts are jointly injective. R is commutative, possibly nonunital; multiplicative localization at elements uses the corresponding unital algebra or unitization; p is any prime. (wagner line 1006, Corollaries 2.20, 2.22 and Lemmas 2.21, 2.23, lines 1006–1080; printed wagner v5 pp. 19–21).
 
-Prove `QWitt.absolute_localize`: Q_m(R)[τ_m(U)⁻¹] ≅ Q_m(R[U⁻¹]).
+- Q_m(R)[τ_m(U)⁻¹] ≅ Q_m(R[U⁻¹]).
 
-Prove `QWitt.absolute_boundedTorsion`: A finite bound on p-primary torsion of R gives a bound for each fixed m; no uniform bound in m is asserted.
+- A finite bound on p-primary torsion of R gives a bound for each fixed m; no uniform bound in m is asserted.
 
 *Construction and proof.* Induct along 3.4; localize first to ℤ_(p), where prime-to-p V maps split by ℓ⁻¹F_ℓ. Kernels killed by the other F maps and first ghost lie in im V_p. Apply this to torsion elements, bounding the exponents inductively.
 
-*Needs:* Layer 3.4 `QWitt.absolute_verschiebungResolution`.
+*Needs:* Layer 3.4.
 
 **Checks.**
 
@@ -509,13 +510,13 @@ Prove `QWitt.absolute_boundedTorsion`: A finite bound on p-primary torsion of R 
 
 ### 3.6 Absolute completion
 
-Prove `QWitt.absolute_completion`. If the derived p-completion R̂_p is discrete, Q_m(R)^∧_p ≅ Q_m(R̂_p). If this holds for each p|m, then `Q_m(R)^hat_{(q^n-1)}` is discrete for every n>0. If R has bounded p-primary torsion for every p|m, Q_m(R) has bounded (q^n−1)-power torsion. R is commutative, possibly nonunital; m,n>0; p is prime. (wagner line 1083, Corollaries 2.24, 2.26 and Lemma 2.27, lines 1083–1190; printed wagner v5 pp. 21–23).
+If the derived p-completion R̂_p is discrete, Q_m(R)^∧_p ≅ Q_m(R̂_p). If this holds for each p|m, then `Q_m(R)^hat_{(q^n-1)}` is discrete for every n>0. If R has bounded p-primary torsion for every p|m, Q_m(R) has bounded (q^n−1)-power torsion. R is commutative, possibly nonunital; m,n>0; p is prime. (wagner line 1083, Corollaries 2.24, 2.26 and Lemma 2.27, lines 1083–1190; printed wagner v5 pp. 21–23).
 
-Prove `QWitt.absolute_completion_natural`: Comparisons commute with F, V, ghosts and maps of R.
+- Comparisons commute with F, V, ghosts and maps of R.
 
 *Construction and proof.* Complete the finite resolution 3.4 and induct. On R[ζ_d], compare radicals of (q^n−1) with (p) when d/gcd(d,n) is a nontrivial p-power, use the unit ideal for at least two prime factors, and the zero ideal for d|n. The same argument with annihilator bounds gives bounded torsion.
 
-*Needs:* Layer 3.5 `QWitt.absolute_localization_torsion`; DerivedModuleAlgebra §1.1; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.5; `gap:cyclotomic-contract`.
+*Needs:* Layer 3.5; DerivedModuleAlgebra §1.1; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.5; `gap:cyclotomic-contract`.
 
 **Checks.**
 
@@ -525,13 +526,13 @@ Prove `QWitt.absolute_completion_natural`: Comparisons commute with F, V, ghosts
 
 ### 3.7 Witt injectivity and exactness
 
-Prove `QWitt.absolute_witt_injective`. The natural map W_Div(m)(R) → Q_m(R) is injective for every commutative ring R, including nonunital R. For an exact sequence 0→J→R→R′→0 of such rings, 0→Q_m(J)→Q_m(R)→Q_m(R′)→0 is exact as additive groups. m>0; J is the kernel ring, with no unit required. (wagner line 1194, Proposition 2.28, Corollary 2.29 and Lemma 2.30, lines 1194–1303; printed wagner v5 pp. 23–26).
+The natural map W_Div(m)(R) → Q_m(R) is injective for every commutative ring R, including nonunital R. For an exact sequence 0→J→R→R′→0 of such rings, 0→Q_m(J)→Q_m(R)→Q_m(R′)→0 is exact as additive groups. m>0; J is the kernel ring, with no unit required. (wagner line 1194, Proposition 2.28, Corollary 2.29 and Lemma 2.30, lines 1194–1303; printed wagner v5 pp. 23–26).
 
-Prove `QWitt.absolute_pLocalDecomposition`: For R a ℤ_(p)-algebra and m=p^a n with gcd(n,p)=1, Q_m(R) ≅ `prod_{d|n} Q_{p^a}(R) tensor_{Z_(p)[q],q |-> q^d}Z_(p)[q]/Phi_d(q^(p^a))`.
+- For R a ℤ_(p)-algebra and m=p^a n with gcd(n,p)=1, Q_m(R) ≅ `prod_{d|n} Q_{p^a}(R) tensor_{Z_(p)[q],q |-> q^d}Z_(p)[q]/Phi_d(q^(p^a))`.
 
 *Construction and proof.* The resolution proves exactness on kernel rings. Prove the displayed p-local decomposition by truncated universal properties and 1.6; reduce injectivity to prime powers, where the explicit ideal in 3.2 and coefficient comparison give injectivity. Localize at every prime to conclude.
 
-*Needs:* Layer 3.6 `QWitt.absolute_completion`; Layer 1.6 `BigWitt.etale_baseChange`.
+*Needs:* Layer 3.6; Layer 1.6.
 
 **Checks.**
 
@@ -545,23 +546,23 @@ Q_1(R)=R with q=1; Q_2(ℤ)=ℤ[q]/(q²−1); nonunital zero and square-zero rin
 
 ### Dependencies
 
-Layer 1.4 `BigWitt.frobenius`; Layer 3.1 `QWitt.AbsoluteFVSystem`; Layer 3.2 `QWitt.absolute`; `gap:cyclotomic-contract`; Layer 3.3 `QWitt.absoluteGhost`; DerivedModuleAlgebra §0.K.1; EnhancedDerivedSheaves §0.3; Layer 1.7 `CommutingEndomorphisms.koszulComplex`; Layer 1.8 `QWitt.arithmeticFracture`; Layer 3.4 `QWitt.absolute_verschiebungResolution`; Layer 3.5 `QWitt.absolute_localization_torsion`; DerivedModuleAlgebra §1.1; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.5; Layer 3.6 `QWitt.absolute_completion`; Layer 1.6 `BigWitt.etale_baseChange`.
+Layer 1.4; Layer 3.1; Layer 3.2; `gap:cyclotomic-contract`; Layer 3.3; DerivedModuleAlgebra §0.K.1; EnhancedDerivedSheaves §0.3; Layer 1.7; Layer 1.8; Layer 3.4; Layer 3.5; DerivedModuleAlgebra §1.1; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.5; Layer 3.6; Layer 1.6.
 
 ## Layer 4: Relative q-Witt rings and Λ comparison
 
 ### 4.1 Λ-ring comparisons
 
-Construct `QWitt.lambdaComparison`. For any arithmetic Λ-ring A let s_m:A[q]/(q^m−1)→Q_m(A) be the polynomial extension of the coaction A→W_Div(m)(A). Construct c_m:Q_m(A)→A[q]/(q^m−1) with c_m s_m=ψ_m, c_d `F_{m/d}=reduction` c_m and c_m `V_{m/d}=[m/d]_{q^d}c_d`. If all ψ_n are injective, c_m identifies Q_m(A) with `sum_{d|m}[d]_{q^(m/d)}psi_{m/d}(A)[q]/(q^m-1)`. For perfect A, s_m and c_m are isomorphisms. A is a commutative unital arithmetic Λ-ring; m>0. (wagner line 1348, Lemmas 2.33–2.34, Corollary 2.35, Proposition 2.36 and Corollary 2.37, lines 1348–1468; printed wagner v5 pp. 27–29).
+For any arithmetic Λ-ring A let s_m:A[q]/(q^m−1)→Q_m(A) be the polynomial extension of the coaction A→W_Div(m)(A). Construct c_m:Q_m(A)→A[q]/(q^m−1) with c_m s_m=ψ_m, c_d `F_{m/d}=reduction` c_m and c_m `V_{m/d}=[m/d]_{q^d}c_d`. If all ψ_n are injective, c_m identifies Q_m(A) with `sum_{d|m}[d]_{q^(m/d)}psi_{m/d}(A)[q]/(q^m-1)`. For perfect A, s_m and c_m are isomorphisms. A is a commutative unital arithmetic Λ-ring; m>0. (wagner line 1348, Lemmas 2.33–2.34, Corollary 2.35, Proposition 2.36 and Corollary 2.37, lines 1348–1468; printed wagner v5 pp. 27–29).
 
-Prove `QWitt.lambdaCoordinates`: Every x∈W_Div(m)(A) has a unique expansion `sum_{d|m} V_d s_{m/d}(a_d)`; define ε_d by its final coefficient.
+- Every x∈W_Div(m)(A) has a unique expansion `sum_{d|m} V_d s_{m/d}(a_d)`; define ε_d by its final coefficient.
 
-Prove `QWitt.lambdaComparison_expansion`: `c_m(sum V_d s_{m/d}(a_d)) = sum [d]_{q^(m/d)}psi_{m/d}(a_d)`.
+- `c_m(sum V_d s_{m/d}(a_d)) = sum [d]_{q^(m/d)}psi_{m/d}(a_d)`.
 
-Prove `QWitt.lambdaComparison_natural`: Both comparison maps commute with Λ-maps.
+- Both comparison maps commute with Λ-maps.
 
 *Construction and proof.* Use triangular Witt coordinates to define ε, first on free torsion-free Λ-rings and then by their reflexive presentations. The displayed formula is multiplicative after cyclotomic projection on a torsion-free universal ring. Descend to Q using 3.2; ghost injectivity and 2.4 give the image assertion.
 
-*Needs:* Layer 2.2 `ArithmeticLambdaRing.primeSet`; Layer 3.7 `QWitt.absolute_witt_injective`.
+*Needs:* Layer 2.2; Layer 3.7.
 
 **Checks.**
 
@@ -571,17 +572,17 @@ Prove `QWitt.lambdaComparison_natural`: Both comparison maps commute with Λ-map
 
 ### 4.2 Relative q-FV systems
 
-Define `QWitt.RelativeFVSystem`. For a Λ-ring A and unital A-algebra R, a relative q-FV system has A[q]-algebras E_m receiving `Q_m(R) tensor_{Q_m(A),c_m}A[q]/(q^m-1)`, with compatible A[q]-algebra F and A[q]-linear V satisfying FV=m/d and `VF=[m/d]_{q^d}`. Define its morphisms by commutation with these maps. A is any arithmetic Λ-ring; R is any commutative unital A-algebra; d|m. (wagner line 1504, Definition 2.40, lines 1504–1512; printed wagner v5 p. 30).
+For a Λ-ring A and unital A-algebra R, a relative q-FV system has A[q]-algebras E_m receiving `Q_m(R) tensor_{Q_m(A),c_m}A[q]/(q^m-1)`, with compatible A[q]-algebra F and A[q]-linear V satisfying FV=m/d and `VF=[m/d]_{q^d}`. Define its morphisms by commutation with these maps. A is any arithmetic Λ-ring; R is any commutative unital A-algebra; d|m. (wagner line 1504, Definition 2.40, lines 1504–1512; printed wagner v5 p. 30).
 
-Prove `RelativeFVSystem.mk`: Structural maps and compatible F,V satisfying the two relations construct a system.
+- Structural maps and compatible F,V satisfying the two relations construct a system.
 
-Prove `RelativeFVSystem.hom_ext`: Morphisms are determined by their component maps.
+- Morphisms are determined by their component maps.
 
-Prove `RelativeFVSystem.truncate`: Restriction to any divisor-closed set preserves the notion.
+- Restriction to any divisor-closed set preserves the notion.
 
 *Construction and proof.* Use c_m to specify the scalar action; requiring compatibility with every V is additional data beyond the tensor product at a single level.
 
-*Needs:* Layer 4.1 `QWitt.lambdaComparison`.
+*Needs:* Layer 4.1.
 
 **Checks.**
 
@@ -591,21 +592,21 @@ Prove `RelativeFVSystem.truncate`: Restriction to any divisor-closed set preserv
 
 ### 4.3 Relative q-Witt rings
 
-Construct `QWitt.relative`. The category in 4.2 has initial object Q_m(R/A). It is the tensor product there modulo the ideal generated by `V_{m/d}(xy) tensor 1-V_{m/d}(x) tensor c_d(y)`, for x∈Q_d(R), y∈Q_d(A). Lifts of c_d(y) modulo q^m−1 give the same generator because `V_{m/d}(x)` is killed by q^d−1. It has functorial F,V, multiplicative τ_m and composition, coprime interchange and projection laws. A is any arithmetic Λ-ring; R any commutative unital A-algebra; m>0. (wagner line 1513, Lemmas 2.41–2.42 and Remark 2.43, lines 1513–1559; printed wagner v5 pp. 30–31).
+The category in 4.2 has initial object Q_m(R/A). It is the tensor product there modulo the ideal generated by `V_{m/d}(xy) tensor 1-V_{m/d}(x) tensor c_d(y)`, for x∈Q_d(R), y∈Q_d(A). Lifts of c_d(y) modulo q^m−1 give the same generator because `V_{m/d}(x)` is killed by q^d−1. It has functorial F,V, multiplicative τ_m and composition, coprime interchange and projection laws. A is any arithmetic Λ-ring; R any commutative unital A-algebra; m>0. (wagner line 1513, Lemmas 2.41–2.42 and Remark 2.43, lines 1513–1559; printed wagner v5 pp. 30–31).
 
-Prove `QWitt.relative_desc`: There is a unique compatible map to any relative q-FV system.
+- There is a unique compatible map to any relative q-FV system.
 
-Prove `QWitt.relative_map`: A-algebra maps give maps of systems, preserving identity and composition.
+- A-algebra maps give maps of systems, preserving identity and composition.
 
-Prove `QWitt.relative_hom_ext`: Maps of systems agree when their structural maps agree.
+- Maps of systems agree when their structural maps agree.
 
-Prove `QWitt.relative_teichmuller_F`: `F_{m/d}tau_m(r)=tau_d(r)^(m/d)`.
+- `F_{m/d}tau_m(r)=tau_d(r)^(m/d)`.
 
-Prove `QWitt.relative_truncation`: The same initial property holds on every divisor-closed set; Div(m) depends only on `Lambda_{p|m}`.
+- The same initial property holds on every divisor-closed set; Div(m) depends only on `Lambda_{p|m}`.
 
 *Construction and proof.* Check that all F and V preserve the ideal, using the comparison compatibilities in 4.1 and separate cases p|m/d and p∤m/d. The universal property gives maps and laws without requiring flatness of A.
 
-*Needs:* Layer 4.2 `QWitt.RelativeFVSystem`.
+*Needs:* Layer 4.2.
 
 **Checks.**
 
@@ -615,17 +616,17 @@ Prove `QWitt.relative_truncation`: The same initial property holds on every divi
 
 ### 4.4 Relative ghosts
 
-Construct `QWitt.relativeGhost`. For d|m construct `gh_{m/d}:Q_m(R/A) -> R^(d) tensor_A` A[q]/Φ_d(q). It factors as `F_{m/d}` then the first ghost of Q_d. The first ghost gh_1 at level m is the quotient by the ideal generated by all proper-divisor V-images. A is any Λ-ring; R is an A-algebra; d|m and d,m>0. (wagner line 1565, §2.44, lines 1565–1572; printed wagner v5 p. 31).
+For d|m construct `gh_{m/d}:Q_m(R/A) -> R^(d) tensor_A` A[q]/Φ_d(q). It factors as `F_{m/d}` then the first ghost of Q_d. The first ghost gh_1 at level m is the quotient by the ideal generated by all proper-divisor V-images. A is any Λ-ring; R is an A-algebra; d|m and d,m>0. (wagner line 1565, §2.44, lines 1565–1572; printed wagner v5 p. 31).
 
-Prove `QWitt.relativeGhost_tmul`: On structural x⊗a, `gh_{m/d}` sends x to its ordinary (m/d)th Witt ghost in the R factor, and a to the A[q]/Φ_d factor.
+- On structural x⊗a, `gh_{m/d}` sends x to its ordinary (m/d)th Witt ghost in the R factor, and a to the A[q]/Φ_d factor.
 
-Prove `QWitt.relativeGhost_natural`: Ghosts commute with maps of A-algebras and Λ-base change.
+- Ghosts commute with maps of A-algebras and Λ-base change.
 
-Prove `QWitt.relativeGhost_teichmuller`: `gh_{m/d}(tau_m(r))=r^(m/d) tensor 1`.
+- `gh_{m/d}(tau_m(r))=r^(m/d) tensor 1`.
 
 *Construction and proof.* Tensor the absolute ghosts with the scalar cyclotomic quotient and verify that every relative generator in 4.3 vanishes. The tensor balancing equation forces ψ_d, with no choice of inverse Adams operation.
 
-*Needs:* Layer 4.3 `QWitt.relative`; Layer 2.5 `ArithmeticLambdaAlgebra.IsRelativelyPerfect`; Layer 3.3 `QWitt.absoluteGhost`.
+*Needs:* Layer 4.3; Layer 2.5; Layer 3.3.
 
 **Checks.**
 
@@ -635,15 +636,15 @@ Prove `QWitt.relativeGhost_teichmuller`: `gh_{m/d}(tau_m(r))=r^(m/d) tensor 1`.
 
 ### 4.5 Relative base change
 
-Prove `QWitt.relative_baseChange`. For any Λ-map A→A′ and A-algebra R there is a canonical A′[q]-algebra isomorphism Q_m(R/A)⊗_A A′ ≅ Q_m(R⊗_A A′/A′), compatible with F,V,τ and twisted ghosts. No flatness is required. A,A′ are arithmetic Λ-rings; R is any A-algebra; m>0. (wagner line 1583, Lemma 2.46, lines 1583–1620; printed wagner v5 pp. 31–32).
+For any Λ-map A→A′ and A-algebra R there is a canonical A′[q]-algebra isomorphism Q_m(R/A)⊗_A A′ ≅ Q_m(R⊗_A A′/A′), compatible with F,V,τ and twisted ghosts. No flatness is required. A,A′ are arithmetic Λ-rings; R is any A-algebra; m>0. (wagner line 1583, Lemma 2.46, lines 1583–1620; printed wagner v5 pp. 31–32).
 
-Prove `QWitt.polynomial_image`: For toric A[T_i], Q_m(A[T_i]/A) identifies with `sum_{d|m}[d]_{q^(m/d)}A[T_i^(m/d),q]/(q^m-1)`.
+- For toric A[T_i], Q_m(A[T_i]/A) identifies with `sum_{d|m}[d]_{q^(m/d)}A[T_i^(m/d),q]/(q^m-1)`.
 
-Prove `QWitt.reflexive_coequalizer`: Q_m(−/A) preserves reflexive coequalizers and filtered colimits.
+- Q_m(−/A) preserves reflexive coequalizers and filtered colimits.
 
 *Construction and proof.* First identify the polynomial image using the maps in 4.1 and the relative relations. Prove base change there directly; then use the initial property to preserve reflexive coequalizers of polynomial presentations. A bare appeal to the tensor universal property would omit the Witt structure on the new coefficients.
 
-*Needs:* Layer 4.4 `QWitt.relativeGhost`.
+*Needs:* Layer 4.4.
 
 **Checks.**
 
@@ -653,15 +654,15 @@ Prove `QWitt.reflexive_coequalizer`: Q_m(−/A) preserves reflexive coequalizers
 
 ### 4.6 Perfect-cover comparisons
 
-Prove `QWitt.perfectCover_comparison`. If A is perfectly covered, all relative V are injective, the relative version of the exact resolution 3.4 has quotient R^(m)[ζ_m], and for a relatively perfect Λ-A-algebra R the maps `s_{m/A}:R^(m)[q]/(q^m-1) -> Q_m(R/A)` and `c_{m/A}:Q_m(R/A) -> R[q]/(q^m-1)` are isomorphisms with composite `psi_{m/A}`. For any Λ-A-algebra R both maps exist with that composite without the perfection hypotheses. A is a Λ-ring; existence of comparisons assumes R is a Λ-A-algebra; injectivity and exactness assume A perfectly covered; isomorphisms also assume R relatively perfect. (wagner line 1573, §2.45 and Remark 2.47, lines 1573–1643; printed wagner v5 pp. 31–32).
+If A is perfectly covered, all relative V are injective, the relative version of the exact resolution 3.4 has quotient R^(m)[ζ_m], and for a relatively perfect Λ-A-algebra R the maps `s_{m/A}:R^(m)[q]/(q^m-1) -> Q_m(R/A)` and `c_{m/A}:Q_m(R/A) -> R[q]/(q^m-1)` are isomorphisms with composite `psi_{m/A}`. For any Λ-A-algebra R both maps exist with that composite without the perfection hypotheses. A is a Λ-ring; existence of comparisons assumes R is a Λ-A-algebra; injectivity and exactness assume A perfectly covered; isomorphisms also assume R relatively perfect. (wagner line 1573, §2.45 and Remark 2.47, lines 1573–1643; printed wagner v5 pp. 31–32).
 
-Prove `QWitt.perfectBase_absolute`: If A is perfect, the natural Q_m(R)→Q_m(R/A) is an isomorphism for every R/A.
+- If A is perfect, the natural Q_m(R)→Q_m(R/A) is an isomorphism for every R/A.
 
-Prove `QWitt.relativeComparison_natural`: The comparisons commute with Λ-A-algebra maps and Λ-base change.
+- The comparisons commute with Λ-A-algebra maps and Λ-base change.
 
 *Construction and proof.* Use 4.5 and A→A^perf, reduce to the absolute perfect-base case via 4.1, then descend exactness and isomorphisms by faithful flatness. Keep existence separate from the statements requiring descent.
 
-*Needs:* Layer 4.5 `QWitt.relative_baseChange`; Layer 2.4 `ArithmeticLambdaRing.IsPerfectlyCovered`; Layer 2.5 `ArithmeticLambdaAlgebra.IsRelativelyPerfect`.
+*Needs:* Layer 4.5; Layer 2.4; Layer 2.5.
 
 **Checks.**
 
@@ -675,21 +676,21 @@ Relative constructions exist before perfect coverage is assumed. Twisted ghosts 
 
 ### Dependencies
 
-Layer 2.2 `ArithmeticLambdaRing.primeSet`; Layer 3.7 `QWitt.absolute_witt_injective`; Layer 4.1 `QWitt.lambdaComparison`; Layer 4.2 `QWitt.RelativeFVSystem`; Layer 4.3 `QWitt.relative`; Layer 2.5 `ArithmeticLambdaAlgebra.IsRelativelyPerfect`; Layer 3.3 `QWitt.absoluteGhost`; Layer 4.4 `QWitt.relativeGhost`; Layer 4.5 `QWitt.relative_baseChange`; Layer 2.4 `ArithmeticLambdaRing.IsPerfectlyCovered`.
+Layer 2.2; Layer 3.7; Layer 4.1; Layer 4.2; Layer 4.3; Layer 2.5; Layer 3.3; Layer 4.4; Layer 4.5; Layer 2.4.
 
 ## Layer 5: Étale base change, finiteness and relative completions
 
 ### 5.1 Étale preservation
 
-Prove `QWitt.etale`. For every étale A-algebra map R→R′, Q_m(R/A)→Q_m(R′/A) is étale. For d|m its F-square is a pushout: `Q_m(R'/A) tensor_{Q_m(R/A),F_{m/d}}Q_d(R/A)` ≅ Q_d(R′/A). The ordinary tensor is also the derived tensor since the changed factor is étale and flat. A is any arithmetic Λ-ring; R,R′ any A-algebras; m>0. (wagner line 1651, Proposition 2.48 and Lemma 2.50, lines 1651–1712; printed wagner v5 pp. 33–34).
+For every étale A-algebra map R→R′, Q_m(R/A)→Q_m(R′/A) is étale. For d|m its F-square is a pushout: `Q_m(R'/A) tensor_{Q_m(R/A),F_{m/d}}Q_d(R/A)` ≅ Q_d(R′/A). The ordinary tensor is also the derived tensor since the changed factor is étale and flat. A is any arithmetic Λ-ring; R,R′ any A-algebras; m>0. (wagner line 1651, Proposition 2.48 and Lemma 2.50, lines 1651–1712; printed wagner v5 pp. 33–34).
 
-Prove `QWitt.etale_wittBaseChange`: `W_Div(m)(R') tensor_{W_Div(m)(R)}Q_m(R/A)` ≅ Q_m(R′/A).
+- `W_Div(m)(R') tensor_{W_Div(m)(R)}Q_m(R/A)` ≅ Q_m(R′/A).
 
-Prove `QWitt.etale_natural`: The pushout comparison is natural and compatible with chains of divisors.
+- The pushout comparison is natural and compatible with chains of divisors.
 
 *Construction and proof.* Apply ordinary Witt étale base change to the generators and relations in 3.2 and 4.3, giving the displayed Witt-base-change comparison. Étaleness and the F-pushout then follow from 1.6.
 
-*Needs:* Layer 4.5 `QWitt.relative_baseChange`; Layer 1.6 `BigWitt.etale_baseChange`.
+*Needs:* Layer 4.5; Layer 1.6.
 
 **Checks.**
 
@@ -699,13 +700,13 @@ Prove `QWitt.etale_natural`: The pushout comparison is natural and compatible wi
 
 ### 5.2 Étale ghost pushouts
 
-Prove `QWitt.ghost_etalePushout`. For d|m and an étale A-algebra map R→R′, the square from Q_m(R/A)→Q_m(R′/A) to R^(d)[ζ_d]→R′^(d)[ζ_d], with vertical maps `gh_{m/d}`, is a pushout of rings and of derived commutative algebras. A any arithmetic Λ-ring; R→R′ étale over A; d|m. (wagner line 1715, Corollary 2.51, lines 1715–1730; printed wagner v5 p. 34).
+For d|m and an étale A-algebra map R→R′, the square from Q_m(R/A)→Q_m(R′/A) to R^(d)[ζ_d]→R′^(d)[ζ_d], with vertical maps `gh_{m/d}`, is a pushout of rings and of derived commutative algebras. A any arithmetic Λ-ring; R→R′ étale over A; d|m. (wagner line 1715, Corollary 2.51, lines 1715–1730; printed wagner v5 p. 34).
 
-Prove `QWitt.ghost_etalePushout_map`: The comparison on pure tensors is induced by the coefficient map and the relative ghost.
+- The comparison on pure tensors is induced by the coefficient map and the relative ghost.
 
 *Construction and proof.* Reduce to d=m by 5.1 and present the first ghost as the cokernel of all proper V-images. Flatness of the étale Q-map makes the ordinary quotient pushout the derived one.
 
-*Needs:* Layer 5.1 `QWitt.etale`; Layer 4.4 `QWitt.relativeGhost`; EnhancedDerivedSheaves §E5:abstract.
+*Needs:* Layer 5.1; Layer 4.4; EnhancedDerivedSheaves §E5:abstract.
 
 **Checks.**
 
@@ -715,13 +716,13 @@ Prove `QWitt.ghost_etalePushout_map`: The comparison on pure tensors is induced 
 
 ### 5.3 Relative torsion and completion
 
-Prove `QWitt.relative_torsion_completion`. For a perfectly covered A and any R/A, all conclusions of 3.5 and 3.6 about integer torsion, joint ghost injectivity and discrete completions hold relatively, with ghosts in R^(d)[ζ_d]. In particular Q_m(R/A)^∧_p ≅ Q_m(R̂_p/A) when R̂_p is discrete, and `Q_m(R/A)^hat_{(q^n-1)}` is discrete if R̂_p is discrete for all p|m. Bounded p-primary torsion of R for all p|m gives bounded (q^n−1)-power torsion. A perfectly covered; m,n>0; p prime. Ghost injectivity assumes R p-torsion-free for all p|m; integer torsion statements keep the same prime-specific hypotheses as 3.5. (wagner line 1621, Remark 2.47, lines 1621–1643, with Corollaries 2.22, 2.24, 2.26; §4.19 proof, lines 3123–3127; printed wagner v5 pp. 20–22, 32, 63).
+For a perfectly covered A and any R/A, all conclusions of 3.5 and 3.6 about integer torsion, joint ghost injectivity and discrete completions hold relatively, with ghosts in R^(d)[ζ_d]. In particular Q_m(R/A)^∧_p ≅ Q_m(R̂_p/A) when R̂_p is discrete, and `Q_m(R/A)^hat_{(q^n-1)}` is discrete if R̂_p is discrete for all p|m. Bounded p-primary torsion of R for all p|m gives bounded (q^n−1)-power torsion. A perfectly covered; m,n>0; p prime. Ghost injectivity assumes R p-torsion-free for all p|m; integer torsion statements keep the same prime-specific hypotheses as 3.5. (wagner line 1621, Remark 2.47, lines 1621–1643, with Corollaries 2.22, 2.24, 2.26; §4.19 proof, lines 3123–3127; printed wagner v5 pp. 20–22, 32, 63).
 
-Prove `QWitt.relative_completeBaseChange`: Completed scalar extension to A^perf computes the corresponding completion after perfect-base comparison; complete faithful-flat descent detects discreteness.
+- Completed scalar extension to A^perf computes the corresponding completion after perfect-base comparison; complete faithful-flat descent detects discreteness.
 
 *Construction and proof.* Use the faithful-flat perfect cover and 4.5 for torsion and exactness. For completions, use completed derived scalar extension, not uncompleted tensor interchange with infinite limits; apply complete faithful-flat descent and bounded-torsion comparison from the supplier contracts.
 
-*Needs:* Layer 4.6 `QWitt.perfectCover_comparison`; Layer 3.6 `QWitt.absolute_completion`; DerivedModuleAlgebra §1.7; DerivedModuleAlgebra §1.8; DerivedModuleAlgebra §1.9.
+*Needs:* Layer 4.6; Layer 3.6; DerivedModuleAlgebra §1.7; DerivedModuleAlgebra §1.8; DerivedModuleAlgebra §1.9.
 
 **Checks.**
 
@@ -731,13 +732,13 @@ Prove `QWitt.relative_completeBaseChange`: Completed scalar extension to A^perf 
 
 ### 5.4 Finite type
 
-Prove `QWitt.finiteType`. If R is a finite type ℤ-algebra, Q_m(R) is a finite type ℤ[q]/(q^m−1)-algebra and hence Noetherian. For the toric polynomial ring R₀=ℤ[T_1,…,T_r], R₀[q]/(q^m−1) is finite over the image of c_m. m>0; finite type and finitely many variables are required only for the finiteness statements. (wagner line 1485, Corollary 2.39 and proof, lines 1485–1495; Lemma 2.46 proof, lines 1588–1620; printed wagner v5 pp. 29, 31–32).
+If R is a finite type ℤ-algebra, Q_m(R) is a finite type ℤ[q]/(q^m−1)-algebra and hence Noetherian. For the toric polynomial ring R₀=ℤ[T_1,…,T_r], R₀[q]/(q^m−1) is finite over the image of c_m. m>0; finite type and finitely many variables are required only for the finiteness statements. (wagner line 1485, Corollary 2.39 and proof, lines 1485–1495; Lemma 2.46 proof, lines 1588–1620; printed wagner v5 pp. 29, 31–32).
 
-Prove `QWitt.polynomial_finite`: The image contains ℤ[T_1^m,…,T_r^m,q]/(q^m−1), over which R₀[q]/(q^m−1) is finite.
+- The image contains ℤ[T_1^m,…,T_r^m,q]/(q^m−1), over which R₀[q]/(q^m−1) is finite.
 
 *Construction and proof.* Use the image formula 4.1 and integral monomials for the polynomial case, then descend through a finite presentation.
 
-*Needs:* Layer 4.5 `QWitt.relative_baseChange`; Layer 4.1 `QWitt.lambdaComparison`.
+*Needs:* Layer 4.5; Layer 4.1.
 
 **Checks.**
 
@@ -751,25 +752,25 @@ Identity maps, prime-power indices and a characteristic-two ghost kernel test th
 
 ### Dependencies
 
-Layer 4.5 `QWitt.relative_baseChange`; Layer 1.6 `BigWitt.etale_baseChange`; Layer 5.1 `QWitt.etale`; Layer 4.4 `QWitt.relativeGhost`; EnhancedDerivedSheaves §E5:abstract; Layer 4.6 `QWitt.perfectCover_comparison`; Layer 3.6 `QWitt.absolute_completion`; DerivedModuleAlgebra §1.7; DerivedModuleAlgebra §1.8; DerivedModuleAlgebra §1.9; Layer 4.1 `QWitt.lambdaComparison`.
+Layer 4.5; Layer 1.6; Layer 5.1; Layer 4.4; EnhancedDerivedSheaves §E5:abstract; Layer 4.6; Layer 3.6; DerivedModuleAlgebra §1.7; DerivedModuleAlgebra §1.8; DerivedModuleAlgebra §1.9; Layer 4.1.
 
 ## Layer 6: Completed coefficient Frobenius and cyclotomic overlaps
 
 ### 6.1 Completed étale Frobenius
 
-Construct `QWitt.completedEtaleFrobenius`. For every prime p, a perfectly covered Λ-ring A and étale R/A, the ordinary p-completion R̂_p has a unique continuous ring endomorphism φ_p extending ψ_p:A→A→R̂_p and reducing to x↦x^p on R/p. Its linearization `(Rhat_p tensorL_{A,psi_p}A)^hat_p -> Rhat_p`, r⊗a↦φ_p(r)a, is an equivalence. All rings and completed tensor products in this statement are discrete and agree with ordinary completed tensor products. A perfectly covered; R étale over A; p prime. No Λ-structure or Frobenius lift on uncompleted R is assumed. (wagner-habiro line 647, §2.7, lines 647–658; printed wagner-habiro v2 pp. 15–16).
+For every prime p, a perfectly covered Λ-ring A and étale R/A, the ordinary p-completion R̂_p has a unique continuous ring endomorphism φ_p extending ψ_p:A→A→R̂_p and reducing to x↦x^p on R/p. Its linearization `(Rhat_p tensorL_{A,psi_p}A)^hat_p -> Rhat_p`, r⊗a↦φ_p(r)a, is an equivalence. All rings and completed tensor products in this statement are discrete and agree with ordinary completed tensor products. A perfectly covered; R étale over A; p prime. No Λ-structure or Frobenius lift on uncompleted R is assumed. (wagner-habiro line 647, §2.7, lines 647–658; printed wagner-habiro v2 pp. 15–16).
 
-Prove `completedEtaleFrobenius_mod`: φ_p(r) mod p = r^p for r∈R; the map is ψ_p-semilinear over A.
+- φ_p(r) mod p = r^p for r∈R; the map is ψ_p-semilinear over A.
 
-Prove `completedEtaleFrobenius_natural`: Étale A-algebra maps commute with φ_p on p-completions.
+- Étale A-algebra maps commute with φ_p on p-completions.
 
-Prove `completedEtaleFrobenius_iterate`: Iterated linearizations for `psi_{p^a}` are equivalences, compatible with composition.
+- Iterated linearizations for `psi_{p^a}` are equivalences, compatible with composition.
 
-Prove `completedEtaleFrobenius_ordinary`: The derived completed tensor equals completion of the ordinary twisted tensor.
+- The derived completed tensor equals completion of the ordinary twisted tensor.
 
 *Construction and proof.* Lift the relative Frobenius modulo p uniquely through the nilpotent p-power thickenings using formal étaleness. The inverse limit gives φ_p. Perfect coverage makes A and R torsion-free and ψ_p flat; completed tensor products are discrete by complete flatness. Modulo p the linearization is étale relative Frobenius, an isomorphism; derived Nakayama gives the equivalence.
 
-*Needs:* Layer 2.4 `ArithmeticLambdaRing.IsPerfectlyCovered`; Layer 5.3 `QWitt.relative_torsion_completion`; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7.
+*Needs:* Layer 2.4; Layer 5.3; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7.
 
 **Checks.**
 
@@ -779,19 +780,19 @@ Prove `completedEtaleFrobenius_ordinary`: The derived completed tensor equals co
 
 ### 6.2 Cyclotomic completed Frobenius
 
-Prove `QWitt.cyclotomicCompletedFrobenius`. For A,R,p as in 6.1 and every d>0 there is a natural A[q]-linear equivalence `((Rhat_p tensorL_{A,psi_{pd}}A)[q])^hat_{(p,Phi_{pd})}` ≃ `((Rhat_p tensorL_{A,psi_d}A)[q])^hat_{(p,Phi_d)}`, induced by r⊗a↦φ_p(r)⊗a and q↦q. It agrees with ordinary completed tensor products. Iteration composes these maps for d,pd,…,p^a d. A perfectly covered; R étale over A; p prime; d>0. (wagner-habiro line 647, §2.7 and Theorem 2.9 proof, lines 647–661 and 709–716; printed wagner-habiro v2 pp. 15–17).
+For A,R,p as in 6.1 and every d>0 there is a natural A[q]-linear equivalence `((Rhat_p tensorL_{A,psi_{pd}}A)[q])^hat_{(p,Phi_{pd})}` ≃ `((Rhat_p tensorL_{A,psi_d}A)[q])^hat_{(p,Phi_d)}`, induced by r⊗a↦φ_p(r)⊗a and q↦q. It agrees with ordinary completed tensor products. Iteration composes these maps for d,pd,…,p^a d. A perfectly covered; R étale over A; p prime; d>0. (wagner-habiro line 647, §2.7 and Theorem 2.9 proof, lines 647–661 and 709–716; printed wagner-habiro v2 pp. 15–17).
 
-Prove `cyclotomicCompletedFrobenius_q`: The equivalence fixes q and the right A-factor.
+- The equivalence fixes q and the right A-factor.
 
-Prove `QWitt.cyclotomicCompletedFrobenius_ideals`: For every commutative A, prime p and natural number d, including zero, the ideals (p,Φ_d) and `(p,Phi_{pd})` have equal radicals in A[q], giving the same derived completion functor, by Mathlib `Polynomial.cyclotomic_zero`, `Polynomial.cyclotomic_mul_prime_eq_pow_of_not_dvd`, `Polynomial.cyclotomic_mul_prime_dvd_eq_pow` and DerivedModuleAlgebra §1.2 `isDerivedCompleteRadical`, §1.3. At d=0 both ideals are the unit ideal; the coefficient Frobenius equivalence above retains d>0.
+- For every commutative A, prime p and natural number d, including zero, the ideals (p,Φ_d) and `(p,Phi_{pd})` have equal radicals in A[q], giving the same derived completion functor, by Mathlib `Polynomial.cyclotomic_zero`, `Polynomial.cyclotomic_mul_prime_eq_pow_of_not_dvd`, `Polynomial.cyclotomic_mul_prime_dvd_eq_pow` and DerivedModuleAlgebra §1.2 `isDerivedCompleteRadical`, §1.3. At d=0 both ideals are the unit ideal; the coefficient Frobenius equivalence above retains d>0.
 
-Prove `QWitt.cyclotomicCompletedFrobenius_ideals_ne`: The ideals (3,Φ_3) and (3,q−1) in ℤ[q] are unequal despite their equal radicals. This is the ideal boundary target in the second Check below, on existing polynomial and ideal carriers (Mathlib characteristic-p cyclotomic identities; Wagner–Habiro §2.7, pp. 15–16, wagner-habiro line 647).
+- The ideals (3,Φ_3) and (3,q−1) in ℤ[q] are unequal despite their equal radicals. This distinguishes equality of ideals from equality of their radicals (Mathlib characteristic-p cyclotomic identities; Wagner–Habiro §2.7, pp. 15–16, wagner-habiro line 647).
 
-Prove `cyclotomicCompletedFrobenius_baseChange`: The equivalence is the ψ_d-base change of 6.1 followed by the common completion; it commutes with morphisms of étale A-algebras.
+- The equivalence is the ψ_d-base change of 6.1 followed by the common completion; it commutes with morphisms of étale A-algebras.
 
 *Construction and proof.* Apply ψ_d scalar extension to 6.1: tensor balancing uses `psi_d psi_p=psi_{pd}`. Extend by q fixed. Equal radicals permit use of one completion topology; flatness of ψ_d and completed base change give the equivalence, without imposing p∤d.
 
-*Needs:* Layer 6.1 `QWitt.completedEtaleFrobenius`; Layer 2.5 `ArithmeticLambdaAlgebra.IsRelativelyPerfect`; Mathlib characteristic-p cyclotomic identities; DerivedModuleAlgebra §§1.2–1.3.
+*Needs:* Layer 6.1; Layer 2.5; Mathlib characteristic-p cyclotomic identities; DerivedModuleAlgebra §§1.2–1.3.
 
 **Checks.**
 
@@ -802,15 +803,15 @@ Prove `cyclotomicCompletedFrobenius_baseChange`: The equivalence is the ψ_d-bas
 
 ### 6.3 Completed ghost Frobenius
 
-Prove `QWitt.completedGhostFrobenius`. For pd|m, the reductions modulo p of `gh_{m/(pd)}` and `gh_{m/d}` commute with the bottom map `R/p tensor_{A/p,psi_{pd}}(A/p)[q]/Phi_{pd} -> R/p tensor_{A/p,psi_d}(A/p)[q]/Phi_d`, r⊗a↦r^p⊗a, q↦q. The deformation of this bottom map on the common (p,Φ_d)-completion is exactly 6.2. A perfectly covered; R étale over A; p prime; pd|m. (wagner-habiro line 679, Theorem 2.9 proof, lines 679–721; printed wagner-habiro v2 pp. 16–17).
+For pd|m, the reductions modulo p of `gh_{m/(pd)}` and `gh_{m/d}` commute with the bottom map `R/p tensor_{A/p,psi_{pd}}(A/p)[q]/Phi_{pd} -> R/p tensor_{A/p,psi_d}(A/p)[q]/Phi_d`, r⊗a↦r^p⊗a, q↦q. The deformation of this bottom map on the common (p,Φ_d)-completion is exactly 6.2. A perfectly covered; R étale over A; p prime; pd|m. (wagner-habiro line 679, Theorem 2.9 proof, lines 679–721; printed wagner-habiro v2 pp. 16–17).
 
-Prove `completedGhostFrobenius_teichmuller`: The two paths on τ_m(r) give r^(m/d)⊗1.
+- The two paths on τ_m(r) give r^(m/d)⊗1.
 
-Prove `completedGhostFrobenius_deformation`: The comparison is characterized by the indicated reduction and unique étale lifting, compatibly with iterations.
+- The comparison is characterized by the indicated reduction and unique étale lifting, compatibly with iterations.
 
 *Construction and proof.* The ordinary Witt ghosts in characteristic p satisfy `w_{pn}=w_n^p`. Descend this identity through the relative presentation and the cyclotomic quotient. Use 5.2 for the étale ghost algebras and unique formal lifting to identify the completed map.
 
-*Needs:* Layer 6.2 `QWitt.cyclotomicCompletedFrobenius`; Layer 5.2 `QWitt.ghost_etalePushout`.
+*Needs:* Layer 6.2; Layer 5.2.
 
 **Checks.**
 
@@ -824,25 +825,25 @@ The coefficient map fixes q. For p=3,d=1 its two completion ideals have equal ra
 
 ### Dependencies
 
-Layer 2.4 `ArithmeticLambdaRing.IsPerfectlyCovered`; Layer 5.3 `QWitt.relative_torsion_completion`; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7; Layer 6.1 `QWitt.completedEtaleFrobenius`; Layer 2.5 `ArithmeticLambdaAlgebra.IsRelativelyPerfect`; Layer 6.2 `QWitt.cyclotomicCompletedFrobenius`; Layer 5.2 `QWitt.ghost_etalePushout`.
+Layer 2.4; Layer 5.3; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7; Layer 6.1; Layer 2.5; Layer 6.2; Layer 5.2.
 
 ## Layer 7: Positive-degree q-Witt systems
 
 ### 7.1 Differential q-V systems
 
-Define `QWitt.DifferentialVSystem`. For A a Λ-ring and R/A define a q-V system of nonnegative differential graded A[q]-algebras P_m: each has xy=(−1)^(ij)yx for homogeneous x∈P_m^i,y∈P_m^j, and x²=0 whenever i is odd, receives Q_m(R/A)→P_m⁰, and has graded A[q]-linear `V_{m/d}` extending degree-zero V, with identity and composition laws, V(ω dη)=V(ω)dV(η), and V(ω)dτ_m(r)=V(ωτ_d(r)^(m/d−1))dV(τ_d(r)). Morphisms preserve all data. A any arithmetic Λ-ring; R any A-algebra; homogeneous ω,η in the indicated source; r∈R; d|m. (wagner line 1822, Definition 3.1, lines 1822–1838; printed wagner v5 p. 37).
+For A a Λ-ring and R/A define a q-V system of nonnegative differential graded A[q]-algebras P_m: each has xy=(−1)^(ij)yx for homogeneous x∈P_m^i,y∈P_m^j, and x²=0 whenever i is odd, receives Q_m(R/A)→P_m⁰, and has graded A[q]-linear `V_{m/d}` extending degree-zero V, with identity and composition laws, V(ω dη)=V(ω)dV(η), and V(ω)dτ_m(r)=V(ωτ_d(r)^(m/d−1))dV(τ_d(r)). Morphisms preserve all data. A any arithmetic Λ-ring; R any A-algebra; homogeneous ω,η in the indicated source; r∈R; d|m. (wagner line 1822, Definition 3.1, lines 1822–1838; printed wagner v5 p. 37).
 
-Prove `DifferentialVSystem.mk`: The specified degree-zero map, V and identities construct an object.
+- The specified degree-zero map, V and identities construct an object.
 
-Prove `DifferentialVSystem.hom_ext`: Component DGA maps determine system maps.
+- Component DGA maps determine system maps.
 
-Prove `DifferentialVSystem.V_d`: V_n d = n d V_n.
+- V_n d = n d V_n.
 
-Prove `DifferentialVSystem.truncate`: Restrict to arbitrary divisor-closed positive indices.
+- Restrict to arbitrary divisor-closed positive indices.
 
 *Construction and proof.* Use the associative DG carriers, imposing the displayed graded commutativity and strict odd alternation as conditions on their multiplication. The projection identity with ω=1 and the relation (q^d−1)P_d=0 prove V_n d=n dV_n; no integer is inverted.
 
-*Needs:* Layer 4.3 `QWitt.relative`; DGAInfinity Layer 0; DGAInfinity Layer 1; `gap:ordinary-derham`.
+*Needs:* Layer 4.3; DGAInfinity Layer 0; DGAInfinity Layer 1; `gap:ordinary-derham`.
 
 **Checks.**
 
@@ -852,19 +853,19 @@ Prove `DifferentialVSystem.truncate`: Restrict to arbitrary divisor-closed posit
 
 ### 7.2 The initial q-Witt differential system
 
-Construct `QWitt.differential`. For every A,R as in 7.1 construct the initial q-V system `Q_m Omega*_{R/A}`. Degree zero is canonically Q_m(R/A), and `Q_1 Omega*_{R/A} ~= Omega*_{R/A}`. The natural de Rham DGA map `Omega*_{Q_m(R/A)/A[q]} -> Q_m Omega*` is surjective. At level m the defining differential ideal is generated by all lifted positive-degree relations (k≥1) `sumV(w_j)dV(x_{j1})...dV(x_{jk})` whenever ∑w_j `dx_{j1}...dx_{jk}=0` at a proper divisor, and the V-Teichmüller relations of 7.1. A any Λ-ring; R any A-algebra; m>0; strict odd alternation including at 2. (wagner line 1956, Proposition 3.12, Definition 3.13 and Remark 3.14, lines 1956–2010; printed wagner v5 pp. 40–41).
+For every A,R as in 7.1 construct the initial q-V system `Q_m Omega*_{R/A}`. Degree zero is canonically Q_m(R/A), and `Q_1 Omega*_{R/A} ~= Omega*_{R/A}`. The natural de Rham DGA map `Omega*_{Q_m(R/A)/A[q]} -> Q_m Omega*` is surjective. At level m the defining differential ideal is generated by all lifted positive-degree relations (k≥1) `sumV(w_j)dV(x_{j1})...dV(x_{jk})` whenever ∑w_j `dx_{j1}...dx_{jk}=0` at a proper divisor, and the V-Teichmüller relations of 7.1. A any Λ-ring; R any A-algebra; m>0; strict odd alternation including at 2. (wagner line 1956, Proposition 3.12, Definition 3.13 and Remark 3.14, lines 1956–2010; printed wagner v5 pp. 40–41).
 
-Prove `QWitt.differential_desc`: Every q-V system receives a unique system map from QΩ.
+- Every q-V system receives a unique system map from QΩ.
 
-Prove `QWitt.differential_hom_ext`: Maps agree on elements x₀dx₁⋯dx_k and the structural data.
+- Maps agree on elements x₀dx₁⋯dx_k and the structural data.
 
-Prove `QWitt.differential_map`: A-algebra maps induce DGA maps; filtered colimits and reflexive polynomial presentations are preserved.
+- A-algebra maps induce DGA maps; filtered colimits and reflexive polynomial presentations are preserved.
 
-Prove `QWitt.differential_V_monomial`: V(w dx₁⋯dx_k)=V(w)dV(x₁)⋯dV(x_k).
+- V(w dx₁⋯dx_k)=V(w)dV(x₁)⋯dV(x_k).
 
 *Construction and proof.* Induct on m through its proper divisors and quotient the supplied de Rham algebra by the stated differential ideal. All generators have positive degree, preserving degree zero. Lifting polynomial differential expressions proves existence of V and initiality.
 
-*Needs:* Layer 7.1 `QWitt.DifferentialVSystem`; `gap:dga-quotient`.
+*Needs:* Layer 7.1; `gap:dga-quotient`.
 
 **Checks.**
 
@@ -874,19 +875,19 @@ Prove `QWitt.differential_V_monomial`: V(w dx₁⋯dx_k)=V(w)dV(x₁)⋯dV(x_k).
 
 ### 7.3 Differential q-FV systems
 
-Define `QWitt.DifferentialFVSystem`. A differential q-FV system is a q-V system with graded A[q]-algebra `F_{m/d}` extending F in degree zero, F_1=id, composition, coprime F/V interchange, FV=m/d, `VF=[m/d]_{q^d}`, F d V=d, V(ωFη)=V(ω)η and F(dτ_m(r))=τ_d(r)^(m/d−1)dτ_d(r). A any Λ-ring; R any A-algebra; d|m. F is not required to commute with d. (wagner line 1893, Definition 3.6 and Lemma 3.7 proof, lines 1893–1929; printed wagner v5 p. 39).
+A differential q-FV system is a q-V system with graded A[q]-algebra `F_{m/d}` extending F in degree zero, F_1=id, composition, coprime F/V interchange, FV=m/d, `VF=[m/d]_{q^d}`, F d V=d, V(ωFη)=V(ω)η and F(dτ_m(r))=τ_d(r)^(m/d−1)dτ_d(r). A any Λ-ring; R any A-algebra; d|m. F is not required to commute with d. (wagner line 1893, Definition 3.6 and Lemma 3.7 proof, lines 1893–1929; printed wagner v5 p. 39).
 
-Prove `DifferentialFVSystem.mk`: A q-V system and the displayed graded maps and relations construct an object.
+- A q-V system and the displayed graded maps and relations construct an object.
 
-Prove `DifferentialFVSystem.hom_ext`: A morphism is determined by its component graded algebra maps.
+- A morphism is determined by its component graded algebra maps.
 
-Prove `DifferentialFVSystem.d_F`: d F_n = n F_n d, derived from F d V=d and `VF=[n]_{q^d}`.
+- d F_n = n F_n d, derived from F d V=d and `VF=[n]_{q^d}`.
 
-Prove `DifferentialFVSystem.forget`: Forget F to obtain a q-V system; no equivalence of these two categories is asserted.
+- Forget F to obtain a q-V system; no equivalence of these two categories is asserted.
 
 *Construction and proof.* Store exactly the graded identities and prove the differential formula by FdV and VF; (q^d−1)=0 on the target converts the q-integer to n. The generator calculation fixes the order dF_n=nF_nd.
 
-*Needs:* Layer 7.2 `QWitt.differential`.
+*Needs:* Layer 7.2.
 
 **Checks.**
 
@@ -896,15 +897,15 @@ Prove `DifferentialFVSystem.forget`: Forget F to obtain a q-V system; no equival
 
 ### 7.4 Prime Verschiebung differential identities
 
-Prove `QWitt.verschiebungPrimeDifferential`. In every q-V system over R/A, for p|m and `x in Q_{m/p}(R/A)`, dV_p(x^p)=V_p(x^(p−1))dV_p(x). On absolute q-Witt vectors the map γ_p on im V_p defined by γ_p(V_p x)=p^(p−2)V_p(x^p) is well-defined and satisfies pγ_p(v)=v^p; the differential of every q-V system is a derivation compatible with this operation after passing from absolute to relative degree zero. A any Λ-ring; R any A-algebra; p prime dividing m; a q-V system as in 7.1 is given. No Frobenius on positive degrees is used. (wagner line 1849, §3.3 and Lemma 3.4, lines 1849–1874; langer-zink Lemma 1.5, langer-zink line 601; printed wagner v5 p. 38; langer-zink July 2003 pp. 19–20).
+In every q-V system over R/A, for p|m and `x in Q_{m/p}(R/A)`, dV_p(x^p)=V_p(x^(p−1))dV_p(x). On absolute q-Witt vectors the map γ_p on im V_p defined by γ_p(V_p x)=p^(p−2)V_p(x^p) is well-defined and satisfies pγ_p(v)=v^p; the differential of every q-V system is a derivation compatible with this operation after passing from absolute to relative degree zero. A any Λ-ring; R any A-algebra; p prime dividing m; a q-V system as in 7.1 is given. No Frobenius on positive degrees is used. (wagner line 1849, §3.3 and Lemma 3.4, lines 1849–1874; langer-zink Lemma 1.5, langer-zink line 601; printed wagner v5 p. 38; langer-zink July 2003 pp. 19–20).
 
-Prove `QWitt.VPD_teichmuller`: The V-Teichmüller identity supplies the relation for scalar multiples of Teichmüller lifts.
+- The V-Teichmüller identity supplies the relation for scalar multiples of Teichmüller lifts.
 
-Prove `QWitt.VPD_add`: The relation is preserved under addition, using the integral binomial identity.
+- The relation is preserved under addition, using the integral binomial identity.
 
 *Construction and proof.* The identity holds in every q-V system and uses only Verschiebung and the differential. Prove the formula first on Teichmüller generators, then on sums by the integral binomial expansion, and finally on V_ℓ-generators by induction on m, including ℓ=p. This is the V-only adaptation of the three-step argument in langer-zink line 605; it does not use an unconstructed F. Absolute V-injectivity makes γ_p a function on its image; the relative assertion is the displayed identity, not a claim of relative V-injectivity.
 
-*Needs:* Layer 7.2 `QWitt.differential`; Layer 3.4 `QWitt.absolute_verschiebungResolution`.
+*Needs:* Layer 7.2; Layer 3.4.
 
 **Checks.**
 
@@ -914,17 +915,17 @@ Prove `QWitt.VPD_add`: The relation is preserved under addition, using the integ
 
 ### 7.5 Positive-degree Frobenius
 
-Construct `QWitt.frobeniusDifferential`. For each p|m define an F_p-semilinear derivation `theta_p:Q_m(R) -> Q_{m/p} Omega^1_{R/Z}` by `theta_ptau_m(r)=tau_{m/p}(r)^(p-1)dtau_{m/p}(r)`, θ_p V_p=d, and, for ℓ≠p prime dividing m, p θ_pV_ℓ=dF_pV_ℓ and ℓ θ_pV_ℓ=V_ℓθ_p. It extends uniquely to graded F_p on the relative Q_mΩ*. These F make QΩ initial among differential q-FV systems. A any arithmetic Λ-ring; R any A-algebra; m>0; p prime dividing m. (wagner line 2053, Proposition 3.17, §§3.20–3.30, lines 2053–2549; langer-zink Proposition 1.3, langer-zink line 453 (July 2003 preprint); printed wagner v5 pp. 42–50; langer-zink July 2003 pp. 14–16).
+For each p|m define an F_p-semilinear derivation `theta_p:Q_m(R) -> Q_{m/p} Omega^1_{R/Z}` by `theta_ptau_m(r)=tau_{m/p}(r)^(p-1)dtau_{m/p}(r)`, θ_p V_p=d, and, for ℓ≠p prime dividing m, p θ_pV_ℓ=dF_pV_ℓ and ℓ θ_pV_ℓ=V_ℓθ_p. It extends uniquely to graded F_p on the relative Q_mΩ*. These F make QΩ initial among differential q-FV systems. A any arithmetic Λ-ring; R any A-algebra; m>0; p prime dividing m. (wagner line 2053, Proposition 3.17, §§3.20–3.30, lines 2053–2549; langer-zink Proposition 1.3, langer-zink line 453 (July 2003 preprint); printed wagner v5 pp. 42–50; langer-zink July 2003 pp. 14–16).
 
-Prove `QWitt.theta_add_mul`: θ_p(x+y)=θ_p(x)+θ_p(y), θ_p(xy)=F_p(x)θ_p(y)+F_p(y)θ_p(x).
+- θ_p(x+y)=θ_p(x)+θ_p(y), θ_p(xy)=F_p(x)θ_p(y)+F_p(y)θ_p(x).
 
-Prove `QWitt.frobeniusDifferential_monomial`: F_p(x₀dx₁⋯dx_k)=F_p(x₀)θ_p(x₁)⋯θ_p(x_k).
+- F_p(x₀dx₁⋯dx_k)=F_p(x₀)θ_p(x₁)⋯θ_p(x_k).
 
-Prove `QWitt.frobeniusDifferential_unique`: The Teichmüller and V formulas determine all F; this is uniqueness on the initial object, not on every q-V system.
+- The Teichmüller and V formulas determine all F; this is uniqueness on the initial object, not on every q-V system.
 
 *Construction and proof.* Use the exact V-resolution to define θ on the sum of V-images. The cyclotomic quotient gives unique Teichmüller remainder representatives. Prove additivity and the derivation law by finite-type reduction, detection after localization and completion, and the already constructed proper-divisor operations. Check that θ kills the relative scalar and differential ideals, then use the de Rham universal property. Verify the system laws on the generators; no torsion-free assumption on R is used.
 
-*Needs:* Layer 7.3 `QWitt.DifferentialFVSystem`; Layer 5.4 `QWitt.finiteType`; Layer 3.4 `QWitt.absolute_verschiebungResolution`; DerivedModuleAlgebra §1.3; `gap:cyclotomic-contract`; Layer 7.4 `QWitt.verschiebungPrimeDifferential`; Layer 1.8 `QWitt.arithmeticFracture`.
+*Needs:* Layer 7.3; Layer 5.4; Layer 3.4; DerivedModuleAlgebra §1.3; `gap:cyclotomic-contract`; Layer 7.4; Layer 1.8.
 
 **Checks.**
 
@@ -934,17 +935,17 @@ Prove `QWitt.frobeniusDifferential_unique`: The Teichmüller and V formulas dete
 
 ### 7.6 Differential ghosts
 
-Construct `QWitt.differentialGhost`. Construct DGA maps `gh_{m/d}:Q_m Omega*_{R/A} -> Omega*_{R/A} tensor_{A,psi_d}A[zeta_d]`. On a form x₀dx₁⋯dx_k use the corresponding degree-zero ghost and its de Rham differential. In degree i the ghost of V_n has coefficient n^(i+1) on the components whose index divides the smaller level and is zero elsewhere. A any Λ-ring; R any A-algebra; d|m; i≥0. (wagner line 2011, §3.15, lines 2011–2041; printed wagner v5 pp. 41–42).
+Construct DGA maps `gh_{m/d}:Q_m Omega*_{R/A} -> Omega*_{R/A} tensor_{A,psi_d}A[zeta_d]`. On a form x₀dx₁⋯dx_k use the corresponding degree-zero ghost and its de Rham differential. In degree i the ghost of V_n has coefficient n^(i+1) on the components whose index divides the smaller level and is zero elsewhere. A any Λ-ring; R any A-algebra; d|m; i≥0. (wagner line 2011, §3.15, lines 2011–2041; printed wagner v5 pp. 41–42).
 
-Prove `QWitt.differentialGhost_d`: Ghosts commute with differential and multiplication.
+- Ghosts commute with differential and multiplication.
 
-Prove `QWitt.differentialGhost_F`: For n=m/d and e|d, n^i `gh_{d/e}(F_nomega)=gh_{m/e}(omega)` for a degree-i form ω.
+- For n=m/d and e|d, n^i `gh_{d/e}(F_nomega)=gh_{m/e}(omega)` for a degree-i form ω.
 
-Prove `QWitt.differentialGhost_natural`: Ghosts commute with A-algebra maps and Λ-base change.
+- Ghosts commute with A-algebra maps and Λ-base change.
 
 *Construction and proof.* Give the product of twisted de Rham algebras the q-V system whose degree-i V acts as n^(i+1) on surviving components; apply initiality 7.2. Compatibility with F follows from 7.5 and its Teichmüller and V generators.
 
-*Needs:* Layer 7.5 `QWitt.frobeniusDifferential`; Layer 4.4 `QWitt.relativeGhost`.
+*Needs:* Layer 7.5; Layer 4.4.
 
 **Checks.**
 
@@ -954,15 +955,15 @@ Prove `QWitt.differentialGhost_natural`: Ghosts commute with A-algebra maps and 
 
 ### 7.7 Differential base change
 
-Prove `QWitt.differential_baseChange`. For a Λ-map A→A′, `Q_m Omega*_{R/A} tensor_A` A′ ≅ `Q_m Omega*_{R tensor_A A'/A'}`. If R→R′ is étale over A, `Q_m(R'/A) tensor_{Q_m(R/A)}Q_m Omega*_{R/A}` ≅ `Q_m Omega*_{R'/A}`, with the unique DGA differential extending that on Q_mΩ*. Both comparisons preserve F,V,τ and ghosts. A,A′ any Λ-rings; R any A-algebra; m>0. Étaleness is required in the second assertion only. (wagner line 2044, Lemma 3.16 and Proposition 3.31, Lemma 3.32, lines 2044–2050 and 2552–2595; printed wagner v5 pp. 42, 50–51).
+For a Λ-map A→A′, `Q_m Omega*_{R/A} tensor_A` A′ ≅ `Q_m Omega*_{R tensor_A A'/A'}`. If R→R′ is étale over A, `Q_m(R'/A) tensor_{Q_m(R/A)}Q_m Omega*_{R/A}` ≅ `Q_m Omega*_{R'/A}`, with the unique DGA differential extending that on Q_mΩ*. Both comparisons preserve F,V,τ and ghosts. A,A′ any Λ-rings; R any A-algebra; m>0. Étaleness is required in the second assertion only. (wagner line 2044, Lemma 3.16 and Proposition 3.31, Lemma 3.32, lines 2044–2050 and 2552–2595; printed wagner v5 pp. 42, 50–51).
 
-Prove `QWitt.differential_etaleDescent`: The degreewise functors on affine étale algebras satisfy faithfully flat étale descent.
+- The degreewise functors on affine étale algebras satisfy faithfully flat étale descent.
 
-Prove `QWitt.differential_etaleDifferential`: For `P=Q_m Omega*_{R/A}`, B=A[q] and S=Q_m(R′/A) with R→R′ étale, `S tensor_{P^0}P` has the unique B-linear differential extending d, by the nonnegative graded-commutative, strictly odd-alternating étale-extension contract in gap:ordinary-derham.
+- For `P=Q_m Omega*_{R/A}`, B=A[q] and S=Q_m(R′/A) with R→R′ étale, `S tensor_{P^0}P` has the unique B-linear differential extending d, by the nonnegative graded-commutative, strictly odd-alternating étale-extension contract in gap:ordinary-derham.
 
 *Construction and proof.* Λ-base change follows from initiality and 4.5. Apply the generic étale-extension contract of gap:ordinary-derham with B=A[q], `P=Q_m Omega*_{R/A}` and S=Q_m(R′/A); P is nonnegative, graded commutative and strictly odd alternating, and 5.1 makes P⁰→S étale. Transfer F and V using 5.1 and verify the Teichmüller and FdV identities by uniqueness of étale derivations. Module descent gives the degreewise sheaf property.
 
-*Needs:* Layer 7.6 `QWitt.differentialGhost`; Layer 5.1 `QWitt.etale`; `gap:ordinary-derham`.
+*Needs:* Layer 7.6; Layer 5.1; `gap:ordinary-derham`.
 
 **Checks.**
 
@@ -977,49 +978,52 @@ Frobenius is a graded algebra map. Its differential relation has a factor n, vis
 
 ### Dependencies
 
-Layer 4.3 `QWitt.relative`; DGAInfinity Layer 0; DGAInfinity Layer 1; `gap:ordinary-derham`; Layer 7.1 `QWitt.DifferentialVSystem`; `gap:dga-quotient`; Layer 7.2 `QWitt.differential`; Layer 3.4 `QWitt.absolute_verschiebungResolution`; Layer 7.3 `QWitt.DifferentialFVSystem`; Layer 5.4 `QWitt.finiteType`; DerivedModuleAlgebra §1.3; `gap:cyclotomic-contract`; Layer 7.4 `QWitt.verschiebungPrimeDifferential`; Layer 1.8 `QWitt.arithmeticFracture`; Layer 7.5 `QWitt.frobeniusDifferential`; Layer 4.4 `QWitt.relativeGhost`; Layer 7.6 `QWitt.differentialGhost`; Layer 5.1 `QWitt.etale`.
+Layer 4.3; DGAInfinity Layer 0; DGAInfinity Layer 1; `gap:ordinary-derham`; Layer 7.1; `gap:dga-quotient`; Layer 7.2; Layer 3.4; Layer 7.3; Layer 5.4; DerivedModuleAlgebra §1.3; `gap:cyclotomic-contract`; Layer 7.4; Layer 1.8; Layer 7.5; Layer 4.4; Layer 7.6; Layer 5.1.
 
 ## Layer 8: Complete framed difference calculus
 
 ### 8.1 Framed coordinate automorphisms
 
-Construct `QWitt.framedGamma`. For an étale framing □:A[T₁,…,T_r]→R over any commutative A, on R[[h]] with q=1+h construct unique continuous A[[h]]-algebra automorphisms γ_i congruent to id modulo h and extending T_j↦q^(δ_ij)T_j. They commute and γ_i−id has image in hT_i R[[h]]. Multiplication by hT_i is injective, so the quotient below is uniquely defined. r≥0; A any commutative unital ring, without a Λ-structure requirement; R étale over the displayed polynomial algebra. (wagner line 2830, §4.7, lines 2830–2848; pridham Definition 1.22, pridham line 371; scholze §3, scholze line 319; printed wagner v5 p. 57; pridham v4 p. 9; scholze v1 p. 6).
+For an étale framing □:A[T₁,…,T_r]→R over any commutative A, on R[[h]] with q=1+h construct unique continuous A[[h]]-algebra automorphisms γ_i congruent to id modulo h and extending T_j↦q^(δ_ij)T_j. They commute and γ_i−id has image in hT_i R[[h]]. Multiplication by hT_i is injective, so the quotient below is uniquely defined. r≥0; A any commutative unital ring, without a Λ-structure requirement; R étale over the displayed polynomial algebra. (wagner line 2830, §4.7, lines 2830–2848; pridham Definition 1.22, pridham line 371; scholze §3, scholze line 319; printed wagner v5 p. 57; pridham v4 p. 9; scholze v1 p. 6).
 
 Prove `QWitt.framedGamma_existsUnique`: For every A, R and étale finite-coordinate frame as above and each coordinate i, there is a unique `PowerSeries A`-algebra equivalence of `PowerSeries R` preserving constant coefficients and sending each constant coordinate T_j to `(if j=i then 1+h else 1)*T_j`. Algebra linearity fixes h and preserves every h-power ideal, so continuity for the h-adic filtration is automatic. This is the existence-and-uniqueness signature in `Suggested.lean` on the full series carrier.
 
-Prove `framedGamma_coordinate`: γ_i(T_j)=q^(δ_ij)T_j and γ_i(a)=a.
+- γ_i(T_j)=q^(δ_ij)T_j and γ_i(a)=a.
 
-Prove `framedGamma_inverse`: The inverse extends T_i↦q⁻¹T_i; q=1+h is a unit in A[[h]].
+- The inverse extends T_i↦q⁻¹T_i; q=1+h is a unit in A[[h]].
 
-Prove `framedGamma_natural`: Framing-compatible étale maps commute with γ_i.
+- Framing-compatible étale maps commute with γ_i.
 
-Prove `framedGamma_unique`: Reduction id and the coordinate formula determine γ_i.
+- Reduction id and the coordinate formula determine γ_i.
 
 *Construction and proof.* Lift the coordinate automorphism successively through R[h]/h^n by formal étaleness; lift the inverse too. Uniqueness proves commuting and naturality. Lift against the quotient by hT_i to prove divisibility. T_i is regular on A[T] and remains so by flatness of the framing; h is regular on power series, even when A has zero divisors.
 
-*Needs:* Layer 1.7 `CommutingEndomorphisms.koszulComplex`; SchemeAndStackFoundations §4.1; Mathlib `PowerSeries`.
+*Needs:* Layer 1.7; SchemeAndStackFoundations §4.1; Mathlib `PowerSeries`.
 
 **Checks.**
 
 - For A[T], γ(T²)=q²T²=(1+2h+h²)T².
 - With no variables, R/A is étale and there are no γ_i; constants are fixed.
-- The polynomial ring A[T,q] does not make q invertible; the same coordinate map there need not be an automorphism. Completion is essential.
+- Over ℤ[T,q], T↦qT has no inverse because T is outside its image. In ℤ[T][[h]], q=1+h has inverse 1−h+h²−⋯, and γ⁻¹(T)=(1−h+h²−⋯)T; substituting q⁻¹ for q gives the inverse convention, not γ.
+- For the localization frame ℤ[T]→ℤ[T,T⁻¹], γ(T⁻¹)=q⁻¹T⁻¹ while γ(T)=qT. The identity automorphism reduces correctly modulo h but fails γ(T)=T+hT.
+- Over (ℤ/4)[T], γ(T²)=(1+2h+h²)T²; over 𝔽₂[T] it is (1+h²)T². The construction therefore retains zero divisors and characteristic two.
+- The map 𝔽₂[T]→𝔽₂[Z], T↦Z², is not étale and admits no such γ: the coefficient of h in γ(Z)² is zero, whereas that in (1+h)Z² is Z²≠0. Thus the étale hypothesis is essential for existence.
 
 ### 8.2 Framed Jackson derivatives
 
-Construct `QWitt.framedJacksonDerivative`. Under 8.1 define the continuous A[[h]]-linear operator D_i by hT_i D_i(f)=γ_i(f)−f. These operators commute, satisfy D_i(fg)=fD_i(g)+γ_i(g)D_i(f), and D_i(T_i^n)=[n]_q T_i^(n−1) for n≥1, D_i(T_j)=0 for j≠i. Reduction modulo h is the coordinate derivation ∂/∂T_i on R. The framing and regularity assumptions of 8.1; n≥1. (wagner line 2842, §§4.7–4.8, lines 2842–2872; scholze §3, scholze lines 291–304; printed wagner v5 p. 57; scholze v1 p. 6).
+Under 8.1 define the continuous A[[h]]-linear operator D_i by hT_i D_i(f)=γ_i(f)−f. These operators commute, satisfy D_i(fg)=fD_i(g)+γ_i(g)D_i(f), and D_i(T_i^n)=[n]_q T_i^(n−1) for n≥1, D_i(T_j)=0 for j≠i. Reduction modulo h is the coordinate derivation ∂/∂T_i on R. The framing and regularity assumptions of 8.1; n≥1. (wagner line 2842, §§4.7–4.8, lines 2842–2872; scholze §3, scholze lines 291–304; printed wagner v5 p. 57; scholze v1 p. 6).
 
-Prove `framedJacksonDerivative_unique`: The equation hT_iD_i=γ_i−id uniquely determines D_i.
+- The equation hT_iD_i=γ_i−id uniquely determines D_i.
 
-Prove `framedJacksonDerivative_zero_one`: D_i(0)=D_i(1)=0; D_i(T_i)=1.
+- D_i(0)=D_i(1)=0; D_i(T_i)=1.
 
-Prove `framedJacksonDerivative_commute`: D_iD_j=D_jD_i and D_iγ_j=γ_jD_i for i≠j.
+- D_iD_j=D_jD_i and D_iγ_j=γ_jD_i for i≠j.
 
-Prove `framedJacksonDerivative_map`: Framing-compatible maps intertwine D_i.
+- Framing-compatible maps intertwine D_i.
 
 *Construction and proof.* The divisibility and regularity in 8.1 permit unique cancellation. Expand γ_i(fg)−fg for the twisted product rule, use coordinate evaluation and finite geometric sums for monomials, and formal étaleness for the specialization and commutation identities.
 
-*Needs:* Layer 8.1 `QWitt.framedGamma`.
+*Needs:* Layer 8.1.
 
 **Checks.**
 
@@ -1030,19 +1034,19 @@ Prove `framedJacksonDerivative_map`: Framing-compatible maps intertwine D_i.
 
 ### 8.3 Framed difference complexes
 
-Construct `QWitt.framedDifferenceComplex`. For the framing in 8.1 form C□=K(R[[h]];D_i) and H□=K(R[[h]];hD_i), with terms `Omega^k_{R/A}[[h]]` via the coordinate basis. Equip both with the ordered-wedge product (f dT_I)(g dT_J)=f γ_I(g) dT_I∧dT_J. This is associative, strictly alternating on coordinate one-forms and obeys the DG Leibniz rule. Modulo h, C□ is the de Rham complex; H□ is `Omega*_{R/A}` with zero differential. A any commutative ring; étale framing with finitely many coordinates as in 8.1; all complexes are nonnegative cochain complexes. (wagner line 2849, §§4.7–4.8, lines 2849–2872; pridham Definition 1.22, pridham line 371; printed wagner v5 p. 57; pridham v4 p. 9).
+For the framing in 8.1 form C□=K(R[[h]];D_i) and H□=K(R[[h]];hD_i), with terms `Omega^k_{R/A}[[h]]` via the coordinate basis. Equip both with the ordered-wedge product (f dT_I)(g dT_J)=f γ_I(g) dT_I∧dT_J. This is associative, strictly alternating on coordinate one-forms and obeys the DG Leibniz rule. Modulo h, C□ is the de Rham complex; H□ is `Omega*_{R/A}` with zero differential. A any commutative ring; étale framing with finitely many coordinates as in 8.1; all complexes are nonnegative cochain complexes. (wagner line 2849, §§4.7–4.8, lines 2849–2872; pridham Definition 1.22, pridham line 371; printed wagner v5 p. 57; pridham v4 p. 9).
 
-Prove `framedDifferenceComplex_d`: d_C(f)=∑D_i(f)dT_i and d_H(f)=h∑D_i(f)dT_i.
+- d_C(f)=∑D_i(f)dT_i and d_H(f)=h∑D_i(f)dT_i.
 
-Prove `framedDifferenceComplex_wedge`: dT_i f=γ_i(f)dT_i, and dT_i dT_j=−dT_j dT_i.
+- dT_i f=γ_i(f)dT_i, and dT_i dT_j=−dT_j dT_i.
 
-Prove `framedDifferenceComplex_map`: Framing-compatible étale maps induce continuous DGA maps.
+- Framing-compatible étale maps induce continuous DGA maps.
 
-Prove `framedDifferenceComplex_scalar`: On constants and coordinate basis, the terms agree with completed Kähler exterior powers.
+- On constants and coordinate basis, the terms agree with completed Kähler exterior powers.
 
 *Construction and proof.* Use 1.7 and the commuting derivatives. The skew coefficient rule and commuting γ_i prove associativity; 8.2 proves Leibniz. Finite free coordinate differential modules identify the terms and their h-specializations. The framed DGA is associative, not a commutative DGA.
 
-*Needs:* Layer 8.2 `QWitt.framedJacksonDerivative`; Layer 1.7 `CommutingEndomorphisms.koszulComplex`; `gap:ordinary-derham`.
+*Needs:* Layer 8.2; Layer 1.7; `gap:ordinary-derham`.
 
 **Checks.**
 
@@ -1052,19 +1056,19 @@ Prove `framedDifferenceComplex_scalar`: On constants and coordinate basis, the t
 
 ### 8.4 Framed Frobenius
 
-Construct `QWitt.framedFrobenius`. If A is perfectly covered and R has the étale framing with finitely many coordinates □, for every prime p construct the unique continuous ψ_p-semilinear Frobenius lift φ□ on R̂_p with T_i↦T_i^p. Extend it to R̂_p[[h]] by q↦q^p. On H□ completed degreewise at p it gives a semilinear DGA map with φ□(dT_i)=T_i^(p−1)dT_i, commuting with each γ_i. On C□ the corresponding chain map instead sends dT_i↦[p]_q T_i^(p−1)dT_i. A perfectly covered; R étale over A[T₁,…,T_r]; p prime. Completion is (p,h); all relevant coefficient rings are discrete. (wagner line 2882, §4.9, lines 2882–2891; §4.28, lines 3292–3332; §4.31, lines 3452–3458; pridham Lemma 2.9, pridham line 635; printed wagner v5 pp. 58, 67, 70; pridham v4 p. 15).
+If A is perfectly covered and R has the étale framing with finitely many coordinates □, for every prime p construct the unique continuous ψ_p-semilinear Frobenius lift φ□ on R̂_p with T_i↦T_i^p. Extend it to R̂_p[[h]] by q↦q^p. On H□ completed degreewise at p it gives a semilinear DGA map with φ□(dT_i)=T_i^(p−1)dT_i, commuting with each γ_i. On C□ the corresponding chain map instead sends dT_i↦[p]_q T_i^(p−1)dT_i. A perfectly covered; R étale over A[T₁,…,T_r]; p prime. Completion is (p,h); all relevant coefficient rings are discrete. (wagner line 2882, §4.9, lines 2882–2891; §4.28, lines 3292–3332; §4.31, lines 3452–3458; pridham Lemma 2.9, pridham line 635; printed wagner v5 pp. 58, 67, 70; pridham v4 p. 15).
 
-Prove `framedFrobenius_unique`: Reduction modulo p is absolute Frobenius, and the base and coordinate formulas determine the lift.
+- Reduction modulo p is absolute Frobenius, and the base and coordinate formulas determine the lift.
 
-Prove `framedFrobenius_chain`: φ□(hD_i f)T_i^(p−1)=hD_i(φ□f); φ□(h)=q^p−1.
+- φ□(hD_i f)T_i^(p−1)=hD_i(φ□f); φ□(h)=q^p−1.
 
-Prove `framedFrobenius_natural`: Framing-compatible étale maps commute with φ□.
+- Framing-compatible étale maps commute with φ□.
 
-Prove `framedFrobenius_injective`: The coefficient lift on R̂_p is injective: R/p is reduced, and R̂_p is p-torsion-free and separated.
+- The coefficient lift on R̂_p is injective: R/p is reduced, and R̂_p is p-torsion-free and separated.
 
 *Construction and proof.* Apply formal étaleness over the p-completed polynomial base to lift its coordinate Frobenius. Reducedness of A/p descends from A^perf/p and gives injectivity. Extend continuously by q↦q^p; check γ-commutation on coordinates and by unique étale lifting. The displayed equation proves the chain relation without making the smooth relative Frobenius an equivalence.
 
-*Needs:* Layer 8.3 `QWitt.framedDifferenceComplex`; SchemeAndStackFoundations §4.1; Layer 2.4 `ArithmeticLambdaRing.IsPerfectlyCovered`.
+*Needs:* Layer 8.3; SchemeAndStackFoundations §4.1; Layer 2.4.
 
 **Checks.**
 
@@ -1078,23 +1082,23 @@ For T² the Jackson derivative is (1+q)T; the scaled differential is (q²−1)T 
 
 ### Dependencies
 
-Layer 1.7 `CommutingEndomorphisms.koszulComplex`; SchemeAndStackFoundations §4.1; Mathlib `PowerSeries`; Layer 8.1 `QWitt.framedGamma`; Layer 8.2 `QWitt.framedJacksonDerivative`; `gap:ordinary-derham`; Layer 8.3 `QWitt.framedDifferenceComplex`; Layer 2.4 `ArithmeticLambdaRing.IsPerfectlyCovered`.
+Layer 1.7; SchemeAndStackFoundations §4.1; Mathlib `PowerSeries`; Layer 8.1; Layer 8.2; `gap:ordinary-derham`; Layer 8.3; Layer 2.4.
 
 ## Layer 9: Algebraic support for the smooth torsion induction
 
 ### 9.1 Framed Frobenius decomposition
 
-Construct `QWitt.framedFrobeniusDecomposition`. Under 8.4 and for α≥0 put `B_alpha=(phi_frame^alpha(Rhat_p) tensor_{psi_p^alpha(Ahat_p)}Ahat_p)^hat_p`. Its map to R̂_p is injective and R̂_p is free over B_α with basis T^v, 0≤v_i<p^α. After adjoining h, the p-completed H□ decomposes as a finite direct sum by v, with degree-k basis T^v times the wedges of T_j^(−1)dT_j, interpreted as T_j^(p^α−1)dT_j when v_j=0. After reduction q^(p^α)−1, the v-summand is a tensor product of two-term factors with differential q^(v_i)−1 (zero for v_i=0). A perfectly covered; étale framing with finitely many coordinates; p prime; α≥0; inverse powers in the notation are replaced by the explicit nonnegative monomials. (wagner line 2892, §§4.10–4.12, lines 2892–2972; printed wagner v5 pp. 58–60).
+Under 8.4 and for α≥0 put `B_alpha=(phi_frame^alpha(Rhat_p) tensor_{psi_p^alpha(Ahat_p)}Ahat_p)^hat_p`. Its map to R̂_p is injective and R̂_p is free over B_α with basis T^v, 0≤v_i<p^α. After adjoining h, the p-completed H□ decomposes as a finite direct sum by v, with degree-k basis T^v times the wedges of T_j^(−1)dT_j, interpreted as T_j^(p^α−1)dT_j when v_j=0. After reduction q^(p^α)−1, the v-summand is a tensor product of two-term factors with differential q^(v_i)−1 (zero for v_i=0). A perfectly covered; étale framing with finitely many coordinates; p prime; α≥0; inverse powers in the notation are replaced by the explicit nonnegative monomials. (wagner line 2892, §§4.10–4.12, lines 2892–2972; printed wagner v5 pp. 58–60).
 
-Prove `framedFrobeniusDecomposition_basis`: There are p^(αr) basis vectors and the expansion in them is unique.
+- There are p^(αr) basis vectors and the expansion in them is unique.
 
-Prove `framedFrobeniusDecomposition_d`: On the v_i factor, hD_i sends T_i^(v_i) to (q^(v_i)−1)T_i^(v_i−1)dT_i.
+- On the v_i factor, hD_i sends T_i^(v_i) to (q^(v_i)−1)T_i^(v_i−1)dT_i.
 
-Prove `framedFrobeniusDecomposition_zero`: The zero exponent in the one-form basis means T_i^(p^α−1)dT_i, not T_i⁻¹dT_i.
+- The zero exponent in the one-form basis means T_i^(p^α−1)dT_i, not T_i⁻¹dT_i.
 
 *Construction and proof.* Reduce the framed Frobenius square modulo p and use étale relative Frobenius to transport the polynomial monomial basis; complete flatness lifts it to R̂_p. Expand the exterior basis and calculate hD_i on monomials. Before the cyclotomic quotient the v=0 summand has coefficient differential on B_α; the two-term scalar description is asserted only after reduction.
 
-*Needs:* Layer 8.4 `QWitt.framedFrobenius`; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §1.7.
+*Needs:* Layer 8.4; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §1.7.
 
 **Checks.**
 
@@ -1104,17 +1108,17 @@ Prove `framedFrobeniusDecomposition_zero`: The zero exponent in the one-form bas
 
 ### 9.2 Two-term framed cohomology
 
-Prove `QWitt.framedTwoTermCohomology`. Let S_α=ℤ_p[[h]]/(q^(p^α)−1), q=1+h. For 0≤e≤α, let `K_{alpha,e}` be S_α→S_α in degrees 0,1 with differential q^(p^e)−1. Its H⁰ is `[p^(alpha-e)]_{q^(p^e)}S_alpha ~= Z_p[[h]]/(q^(p^e)-1)`, and H¹ is that same quotient. If e₁≥e₂, the ordinary tensor complex `K_{alpha,e1} tensor_{S_alpha}K_{alpha,e2}` is `K_{alpha,e2} directSum K_{alpha,e2}[-1]`. Thus every summand of 9.1 has p-torsion-free cohomology, and so does H*(H□^∧_p/(q^(p^α)−1)). p prime; α≥0; 0≤e_i≤α; H□ has the hypotheses of 9.1; rank zero handled separately. (wagner line 2950, Lemmas 4.13–4.14 and Corollary 4.15, lines 2950–3012; printed wagner v5 pp. 59–60).
+Let S_α=ℤ_p[[h]]/(q^(p^α)−1), q=1+h. For 0≤e≤α, let `K_{alpha,e}` be S_α→S_α in degrees 0,1 with differential q^(p^e)−1. Its H⁰ is `[p^(alpha-e)]_{q^(p^e)}S_alpha ~= Z_p[[h]]/(q^(p^e)-1)`, and H¹ is that same quotient. If e₁≥e₂, the ordinary tensor complex `K_{alpha,e1} tensor_{S_alpha}K_{alpha,e2}` is `K_{alpha,e2} directSum K_{alpha,e2}[-1]`. Thus every summand of 9.1 has p-torsion-free cohomology, and so does H*(H□^∧_p/(q^(p^α)−1)). p prime; α≥0; 0≤e_i≤α; H□ has the hypotheses of 9.1; rank zero handled separately. (wagner line 2950, Lemmas 4.13–4.14 and Corollary 4.15, lines 2950–3012; printed wagner v5 pp. 59–60).
 
-Prove `QWitt.framedTwoTermCohomology_kernel`: For every prime p and 0≤e≤α, the annihilator of q^(p^e)−1 in S_α is the ideal generated by `[p^(alpha-e)]_{q^(p^e)}`. This is the kernel assertion of `QWitt.framedTwoTermCohomology` on the existing power-series quotient carrier. Its boundary target `QWitt.framedTwoTermCohomology_two` states that the annihilator of h in ℤ₂[[h]]/(h(h+2)) is (h+2) and that the further quotient by h is ℤ₂. These are the kernel and cokernel assertions of the first Check (Wagner Lemmas 4.13–4.14 and Corollary 4.15, pp. 59–60, wagner lines 2973–3012).
+- For every prime p and 0≤e≤α, the annihilator of q^(p^e)−1 in S_α is the ideal generated by `[p^(alpha-e)]_{q^(p^e)}`. In particular, the annihilator of h in ℤ₂[[h]]/(h(h+2)) is (h+2), and its cokernel under multiplication by h is ℤ₂, as in the first Check (Wagner Lemmas 4.13–4.14 and Corollary 4.15, pp. 59–60, wagner lines 2973–3012).
 
-Prove `QWitt.framedTwoTermCohomology_unit`: For v=p^e u, p∤u, `[u]_{q^(p^e)}` is a unit already in ℤ_p[[h]], hence also in S_α; the differential q^v−1 is unit-equivalent to q^(p^e)−1.
+- For v=p^e u, p∤u, `[u]_{q^(p^e)}` is a unit already in ℤ_p[[h]], hence also in S_α; the differential q^v−1 is unit-equivalent to q^(p^e)−1.
 
-Prove `framedTwoTermCohomology_tensor`: The two-factor isomorphism uses the polynomial quotient (q^(p^e₁)−1)/(q^(p^e₂)−1); no division by zero in S_α is used.
+- The two-factor isomorphism uses the polynomial quotient (q^(p^e₁)−1)/(q^(p^e₂)−1); no division by zero in S_α is used.
 
 *Construction and proof.* Compute kernel and cokernel by polynomial divisibility in the torsion-free power-series coefficient ring. Triangularly change the two degree-one basis vectors using the integral polynomial quotient to split the tensor. Repeated splitting and p-completely flat extension to B_α give the cohomology formula without imposing a perfect field base.
 
-*Needs:* Layer 9.1 `QWitt.framedFrobeniusDecomposition`; `gap:cyclotomic-contract`.
+*Needs:* Layer 9.1; `gap:cyclotomic-contract`.
 
 **Checks.**
 
@@ -1124,17 +1128,17 @@ Prove `framedTwoTermCohomology_tensor`: The two-factor isomorphism uses the poly
 
 ### 9.3 Framed Bocksteins
 
-Construct `QWitt.framedBockstein`. For a perfectly covered Λ-ring A and étale framing with finitely many coordinates □ of R/A, put f_m=q^m−1 and E_m=H*(H□/f_m). Since f_m is injective in every term of H□, specialize the generic DGA Bockstein to β_m:E_m^i→E_m^(i+1), with β_m([x])=[d_H(x)/f_m]. It is independent of the cycle lift, squares to zero and is a degree-one derivation. For d|m the reduction F and multiplication `V=[m/d]_{q^d}` satisfy Fβ_mV=β_d. A perfectly covered; R has a specified étale framing with finitely many coordinates; m,d>0 and d divides m. (wagner line 3026, §4.16 and §4.23, lines 3026–3032 and 3178–3194; printed wagner v5 pp. 61, 64).
+For a perfectly covered Λ-ring A and étale framing with finitely many coordinates □ of R/A, put f_m=q^m−1 and E_m=H*(H□/f_m). Since f_m is injective in every term of H□, specialize the generic DGA Bockstein to β_m:E_m^i→E_m^(i+1), with β_m([x])=[d_H(x)/f_m]. It is independent of the cycle lift, squares to zero and is a degree-one derivation. For d|m the reduction F and multiplication `V=[m/d]_{q^d}` satisfy Fβ_mV=β_d. A perfectly covered; R has a specified étale framing with finitely many coordinates; m,d>0 and d divides m. (wagner line 3026, §4.16 and §4.23, lines 3026–3032 and 3178–3194; printed wagner v5 pp. 61, 64).
 
-Prove `framedBockstein_lift`: If d_H(x)=f_m y, then β_m([x])=[y].
+- If d_H(x)=f_m y, then β_m([x])=[y].
 
-Prove `framedBockstein_natural`: Framing-compatible étale maps commute with β_m.
+- Framing-compatible étale maps commute with β_m.
 
-Prove `framedBockstein_sign`: At m=1, β_1(T_i)=dT_i, fixing the plus connecting-map sign.
+- At m=1, β_1(T_i)=dT_i, fixing the plus connecting-map sign.
 
 *Construction and proof.* Perfect coverage makes R integer torsion-free; the first h-coefficient of f_m is m, so f_m acts injectively on R[[h]] and all finite free differential terms. Apply the generic Bockstein supplier to H□ and f_m. Its cycle-lift equation fixes the sign, and its change-of-parameter identity for f_d dividing f_m gives Fβ_mV=β_d. This specializes the generic theorem rather than constructing a second DGA Bockstein theory.
 
-*Needs:* Layer 8.3 `QWitt.framedDifferenceComplex`; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; `gap:dga-bockstein`.
+*Needs:* Layer 8.3; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; `gap:dga-bockstein`.
 
 **Checks.**
 
@@ -1144,17 +1148,17 @@ Prove `framedBockstein_sign`: At m=1, β_1(T_i)=dT_i, fixing the plus connecting
 
 ### 9.4 Product homotopy for framed cochains
 
-Prove `QWitt.framedProductHomotopy`. For a commutative ring A and an ordered finite-coordinate étale frame □ of R/A, put H□=K(R[[h]];hD_i), with its skew product from §8.3 and e_i=dT_i. Construct a continuous A[[h]]-bilinear map H of total degree −1 such that for homogeneous α of degree k and β of degree ℓ, αβ−(−1)^(kℓ)βα=d_H H(α,β)+H(d_Hα,β)+(−1)^k H(α,d_Hβ). The same identity holds after quotienting by q^m−1 for every m>0; consequently every signed commutator of closed forms is a boundary. A any commutative ring; R has a specified ordered finite-coordinate étale frame; h=q−1; k,ℓ≥0; m>0 for the quotient identity; no perfect-coverage or torsion hypothesis. (wagner line 2858, §4.8, pp. 57, lines 2858–2872; Lemma 4.17, p. 61, lines 3033–3052 (cohomology conclusion); the product homotopy follows from the skew rules by the displayed telescoping proof).
+For a commutative ring A and an ordered finite-coordinate étale frame □ of R/A, put H□=K(R[[h]];hD_i), with its skew product from §8.3 and e_i=dT_i. Construct a continuous A[[h]]-bilinear map H of total degree −1 such that for homogeneous α of degree k and β of degree ℓ, αβ−(−1)^(kℓ)βα=d_H H(α,β)+H(d_Hα,β)+(−1)^k H(α,d_Hβ). The same identity holds after quotienting by q^m−1 for every m>0; consequently every signed commutator of closed forms is a boundary. A any commutative ring; R has a specified ordered finite-coordinate étale frame; h=q−1; k,ℓ≥0; m>0 for the quotient identity; no perfect-coverage or torsion hypothesis. (wagner line 2858, §4.8, pp. 57, lines 2858–2872; Lemma 4.17, p. 61, lines 3033–3052 (cohomology conclusion); the product homotopy follows from the skew rules by the displayed telescoping proof).
 
-Prove `QWitt.framedProductHomotopy_formula`: On ordered basis forms a e_I,b e_J, set H=∑_i H_i, where H_i=0 unless i∈I∩J, and H_i(a e_I,b e_J)=(−1)^|I| T_i `gamma_{J<i}(a)gamma_{I>i}(b)` e_I∧ι_i(e_J); here `gamma_U=prod_{j in U}gamma_j`, J<i={j∈J:j<i}, I>i={j∈I:j>i}, and ∧ and ι_i are the ordinary exterior-basis wedge and signed contraction, with all coefficients on the left.
+- On ordered basis forms a e_I,b e_J, set H=∑_i H_i, where H_i=0 unless i∈I∩J, and H_i(a e_I,b e_J)=(−1)^|I| T_i `gamma_{J<i}(a)gamma_{I>i}(b)` e_I∧ι_i(e_J); here `gamma_U=prod_{j in U}gamma_j`, J<i={j∈J:j<i}, I>i={j∈I:j>i}, and ∧ and ι_i are the ordinary exterior-basis wedge and signed contraction, with all coefficients on the left.
 
-Prove `QWitt.framedProductHomotopy_coordinate`: For every form ω, H(e_i,ω)=K_iω with K_i=−T_i(e_i∧ι_i), so e_iω−(−1)^|ω|ωe_i=d_HK_iω−K_i d_Hω.
+- For every form ω, H(e_i,ω)=K_iω with K_i=−T_i(e_i∧ι_i), so e_iω−(−1)^|ω|ωe_i=d_HK_iω−K_i d_Hω.
 
-Prove `QWitt.framedProductHomotopy_quotient`: The A[[h]]-bilinearity makes H descend to H□/(q^m−1) for every positive m, and the product-homotopy identity descends without a torsion assumption or a choice of prime.
+- The A[[h]]-bilinearity makes H descend to H□/(q^m−1) for every positive m, and the product-homotopy identity descends without a torsion assumption or a choice of prime.
 
 *Construction and proof.* For 0≤s≤r define `mu_s(a e_I,b e_J)=gamma_{J <= s}(a)gamma_{I>s}(b)e_I wedge e_J`, with ordinary exterior-basis wedge. The two equivalent twisted Leibniz formulas for hD_j show that every μ_s is a chain map. The displayed H_i satisfies μ_(i−1)−μ_i=d_H H_i+H_i(d_H⊗1+1⊗d_H), with the tensor differential carrying its cochain sign: in coordinate i use γ_i−id=T_i hD_i, and in each other coordinate use the twisted Leibniz rule and γ_jT_i=T_i for j≠i. Sum over i; μ_0 is the skew product and μ_r is its signed opposite. This proves the identity for all forms before any quotient, not just for degree-zero cocycles.
 
-*Needs:* Layer 8.3 `QWitt.framedDifferenceComplex`.
+*Needs:* Layer 8.3.
 
 **Checks.**
 
@@ -1164,17 +1168,17 @@ Prove `QWitt.framedProductHomotopy_quotient`: The A[[h]]-bilinearity makes H des
 
 ### 9.5 The framed cohomology system
 
-Prove `QWitt.framedCohomologySystem`. For A perfectly covered and an étale framing with finitely many coordinates □, put E_m=H*(H□/(q^m−1)) with β_m from §9.3. Then E_m is ℤ-torsion-free, strictly alternating and graded commutative. Give it its canonical Q_m(R/A)→E_m⁰ map, `F_{m/d}` induced by quotient reduction and `V_{m/d}` induced by multiplication `[m/d]_{q^d}`. This is a differential q-FV system. Its canonical Q_mΩ*→E_m map is induced by initiality. A perfectly covered; R has a specified étale framing with finitely many coordinates; m>0; all quotients are degreewise ordinary since q^m−1 is regular on the terms. (wagner line 3022, §§4.16–4.26, lines 3022–3277; printed wagner v5 pp. 61–66).
+For A perfectly covered and an étale framing with finitely many coordinates □, put E_m=H*(H□/(q^m−1)) with β_m from §9.3. Then E_m is ℤ-torsion-free, strictly alternating and graded commutative. Give it its canonical Q_m(R/A)→E_m⁰ map, `F_{m/d}` induced by quotient reduction and `V_{m/d}` induced by multiplication `[m/d]_{q^d}`. This is a differential q-FV system. Its canonical Q_mΩ*→E_m map is induced by initiality. A perfectly covered; R has a specified étale framing with finitely many coordinates; m>0; all quotients are degreewise ordinary since q^m−1 is regular on the terms. (wagner line 3022, §§4.16–4.26, lines 3022–3277; printed wagner v5 pp. 61–66).
 
-Prove `framedCohomologySystem_degreeZero`: For polynomial R the degree-zero map is `c_{m/A}`; for framed R it is its arithmetic fracture extension using coordinate lifts on p-completions.
+- For polynomial R the degree-zero map is `c_{m/A}`; for framed R it is its arithmetic fracture extension using coordinate lifts on p-completions.
 
-Prove `framedCohomologySystem_modOne`: At m=1 the Bockstein DGA is `Omega*_{R/A}`.
+- At m=1 the Bockstein DGA is `Omega*_{R/A}`.
 
-Prove `framedCohomologySystem_FV`: FβV=β, FV=m/d and `VF=[m/d]_{q^d}`; the Teichmüller relation holds by torsion-freeness.
+- FβV=β, FV=m/d and `VF=[m/d]_{q^d}`; the Teichmüller relation holds by torsion-freeness.
 
 *Construction and proof.* Construct the degree-zero map by the finite arithmetic fracture square, using the polynomial comparison and the framed p-adic lifts on each completed factor. Lemma 4.25 is the cohomology/completion supplier gap. Reduce ℤ-torsion-freeness to 9.2 by finite-type and flat étale base change; graded commutativity follows from §9.4: the signed commutator of any two closed forms is d_H H(α,β), hence a boundary modulo q^m−1. Torsion-freeness forces odd squares to zero, including at 2, and proves the Teichmüller relation. All constructions remain dependent on the specified frame.
 
-*Needs:* Layer 1.8 `QWitt.arithmeticFracture`; Layer 9.2 `QWitt.framedTwoTermCohomology`; Layer 9.3 `QWitt.framedBockstein`; Layer 9.4 `QWitt.framedProductHomotopy`; Layer 5.4 `QWitt.finiteType`; Layer 7.7 `QWitt.differential_baseChange`; `gap:cohomology-completion`.
+*Needs:* Layer 1.8; Layer 9.2; Layer 9.3; Layer 9.4; Layer 5.4; Layer 7.7; `gap:cohomology-completion`.
 
 **Checks.**
 
@@ -1184,17 +1188,17 @@ Prove `framedCohomologySystem_FV`: FβV=β, FV=m/d and `VF=[m/d]_{q^d}`; the Tei
 
 ### 9.6 The simultaneous prime-power induction
 
-Prove `QWitt.primePowerSmoothInduction`. For a perfectly covered A and every prime p, establish simultaneously for all α≥0: (a) `Q_{p^alpha} Omega*_{R/A}` is degreewise p-torsion-free for smooth R/A; (b) for framed R the canonical map `(Q_{p^alpha} Omega*)^hat_p -> H*(Hframe^hat_p/(q^(p^alpha)-1))`, with Bockstein differential, is an isomorphism; (c) for framed R there is an explicit quasi-isomorphism `(Omega*_{R/A} tensor_{A,psi_{p^alpha}}A[q]/(q^(p^alpha)-1))^hat_p -> (Q_{p^alpha} Omega*)^hat_p` induced in degree zero by `s_{p^alpha/A}` of the coordinate Frobenius lift; (d) for polynomial R and dξ≡0 mod p at level p^α, ξ=F_p(ω)+pη for some ω at level p^(α+1) and η at level p^α, in the same form degree. A perfectly covered; p any prime including 2; α≥0; R smooth, framed or polynomial as specified separately in (a)–(d). Statement (c) is an equivalence of complexes, not a degreewise isomorphism. (wagner line 2703, §4.3, lines 2703–2720; Lemma 4.5, lines 2756–2808; §§4.29–4.33 and §4.4 proof, lines 3341–3608; printed wagner v5 pp. 54–56, 67–73).
+For a perfectly covered A and every prime p, establish simultaneously for all α≥0: (a) `Q_{p^alpha} Omega*_{R/A}` is degreewise p-torsion-free for smooth R/A; (b) for framed R the canonical map `(Q_{p^alpha} Omega*)^hat_p -> H*(Hframe^hat_p/(q^(p^alpha)-1))`, with Bockstein differential, is an isomorphism; (c) for framed R there is an explicit quasi-isomorphism `(Omega*_{R/A} tensor_{A,psi_{p^alpha}}A[q]/(q^(p^alpha)-1))^hat_p -> (Q_{p^alpha} Omega*)^hat_p` induced in degree zero by `s_{p^alpha/A}` of the coordinate Frobenius lift; (d) for polynomial R and dξ≡0 mod p at level p^α, ξ=F_p(ω)+pη for some ω at level p^(α+1) and η at level p^α, in the same form degree. A perfectly covered; p any prime including 2; α≥0; R smooth, framed or polynomial as specified separately in (a)–(d). Statement (c) is an equivalence of complexes, not a degreewise isomorphism. (wagner line 2703, §4.3, lines 2703–2720; Lemma 4.5, lines 2756–2808; §§4.29–4.33 and §4.4 proof, lines 3341–3608; printed wagner v5 pp. 54–56, 67–73).
 
-Prove `QWitt.primePowerGhostQuotient`: `Q_{p^alpha} Omega*/(im V_p+im dV_p) ~= Omega*_{R/A} tensor_{A,psi_{p^alpha}}A[zeta_{p^alpha}]` for α≥1.
+- `Q_{p^alpha} Omega*/(im V_p+im dV_p) ~= Omega*_{R/A} tensor_{A,psi_{p^alpha}}A[zeta_{p^alpha}]` for α≥1.
 
-Prove `QWitt.primePowerSmoothInduction_step`: The induction proceeds (d at α−1)⇒(a at α)⇒(b at α)⇒(c at α)⇒(d at α).
+- The induction proceeds (d at α−1)⇒(a at α)⇒(b at α)⇒(c at α)⇒(d at α).
 
-Prove `QWitt.primePowerSmoothInduction_base`: At α=0 use `Omega*_{R/A}`, the h-Bockstein identity and the polynomial Cartier cycle decomposition; the α=−1 premise is empty.
+- At α=0 use `Omega*_{R/A}`, the h-Bockstein identity and the polynomial Cartier cycle decomposition; the α=−1 premise is empty.
 
 *Construction and proof.* Treat (a)–(d) as one simultaneous induction, not four circular prerequisites. For (a), use the first-ghost quotient and (d at α−1) to kill a putative p-torsion form; extend from polynomial to smooth by 7.7. For (b), compare the short exact sequences with kernel im V_p+im dV_p using 9.2 and the zero-index Frobenius summand. For (c), use the prismatic Frobenius/décalage comparison gap with the explicit C□ map in 8.4, then identify it through (b). For (d), decompose polynomial de Rham cycles modulo p into Cartier monomials and exact forms; Teichmüller identities and FdV=d lift both. The functorial comparison of §9.7 extends this framed milestone by PD presentations and étale descent.
 
-*Needs:* Layer 9.5 `QWitt.framedCohomologySystem`; Layer 7.7 `QWitt.differential_baseChange`; `gap:prismatic-frobenius`; `gap:ordinary-derham`.
+*Needs:* Layer 9.5; Layer 7.7; `gap:prismatic-frobenius`; `gap:ordinary-derham`.
 
 **Checks.**
 
@@ -1204,17 +1208,17 @@ Prove `QWitt.primePowerSmoothInduction_base`: At α=0 use `Omega*_{R/A}`, the h-
 
 ### 9.7 Functorial smooth de Rham comparison
 
-Prove `QWitt.smoothDeRhamComparison`. For a perfectly covered arithmetic Λ-ring A, every smooth A-algebra R, every prime p and every positive integer m=p^αn with α≥0 and gcd(n,p)=1, construct a natural equivalence of p-complete E∞-A[q]-algebras `prod_{d|n}(Omega*_{R/A} tensorL_{A,psi_{(p^alpha)*d}}A[q]/Phi_d(q^(p^alpha)))^hat_p` ≃ `(Q_m Omega*_{R/A})^hat_p`. The tensor is derived and uses `psi_{(p^alpha)*d}` on the right A-factor; Ω* denotes the ordinary de Rham algebra viewed in the enhanced derived category. The equivalence is functorial for every A-algebra map between smooth A-algebras, without a framing choice. A perfectly covered; R smooth over A; p any prime, including 2; m>0; α=v_p(m); n=m/p^α; gcd(n,p)=1. No Noetherian, perfectness or global framing hypothesis is imposed on R. (wagner line 2692, Proposition 4.2, p. 54, lines 2692–2702; §§4.34–4.35 and proof of (bα)⇒(cα), pp. 71–73, lines 3491–3583; Lemma 4.36 and proof of Proposition 4.2, pp. 74–75, lines 3644–3697 (arXiv v5)).
+For a perfectly covered arithmetic Λ-ring A, every smooth A-algebra R, every prime p and every positive integer m=p^αn with α≥0 and gcd(n,p)=1, construct a natural equivalence of p-complete E∞-A[q]-algebras `prod_{d|n}(Omega*_{R/A} tensorL_{A,psi_{(p^alpha)*d}}A[q]/Phi_d(q^(p^alpha)))^hat_p` ≃ `(Q_m Omega*_{R/A})^hat_p`. The tensor is derived and uses `psi_{(p^alpha)*d}` on the right A-factor; Ω* denotes the ordinary de Rham algebra viewed in the enhanced derived category. The equivalence is functorial for every A-algebra map between smooth A-algebras, without a framing choice. A perfectly covered; R smooth over A; p any prime, including 2; m>0; α=v_p(m); n=m/p^α; gcd(n,p)=1. No Noetherian, perfectness or global framing hypothesis is imposed on R. (wagner line 2692, Proposition 4.2, p. 54, lines 2692–2702; §§4.34–4.35 and proof of (bα)⇒(cα), pp. 71–73, lines 3491–3583; Lemma 4.36 and proof of Proposition 4.2, pp. 74–75, lines 3644–3697 (arXiv v5)).
 
-Prove `QWitt.smoothDeRhamComparison_primePower`: For n=1, the sole d=1 factor is `(Omega*_{R/A} tensorL_{A,psi_{p^alpha}}A[q]/(q^(p^alpha)-1))^hat_p`, and on an étale frame with finitely many coordinates its equivalence agrees with §9.6(c).
+- For n=1, the sole d=1 factor is `(Omega*_{R/A} tensorL_{A,psi_{p^alpha}}A[q]/(q^(p^alpha)-1))^hat_p`, and on an étale frame with finitely many coordinates its equivalence agrees with §9.6(c).
 
-Prove `QWitt.smoothDeRhamComparison_natural`: Every A-algebra map R→S between smooth A-algebras gives a commuting square of equivalences in the ∞-category of p-complete E∞-A[q]-algebras, coherently with identities and composition.
+- Every A-algebra map R→S between smooth A-algebras gives a commuting square of equivalences in the ∞-category of p-complete E∞-A[q]-algebras, coherently with identities and composition.
 
-Prove `QWitt.differential_pLocalDecomposition`: For every A-algebra R and m=p^αn with gcd(n,p)=1, put C_α=A[q]/(q^(p^α)−1). Then (Q_mΩ*)_(p) ≅ `prod_{d|n}(Q_{p^alpha} Omega* tensor_{C_alpha,sigma_d}A_(p)[q]/Phi_d(q^(p^alpha)))` as DG A_(p)[q]-algebras, where σ_d(a)=ψ_d(a) and σ_d(q)=q^d. For perfectly covered A these maps out of C_α are flat, so the ordinary tensors agree with derived tensors over C_α.
+- For every A-algebra R and m=p^αn with gcd(n,p)=1, put C_α=A[q]/(q^(p^α)−1). Then (Q_mΩ*)_(p) ≅ `prod_{d|n}(Q_{p^alpha} Omega* tensor_{C_alpha,sigma_d}A_(p)[q]/Phi_d(q^(p^alpha)))` as DG A_(p)[q]-algebras, where σ_d(a)=ψ_d(a) and σ_d(q)=q^d. For perfectly covered A these maps out of C_α are flat, so the ordinary tensors agree with derived tensors over C_α.
 
 *Construction and proof.* For a prime power choose a surjection P→R̂_p with P p-completely ind-smooth over Â_p and carrying a compatible δ-structure. Use its δ-compatible PD envelope D(P→R̂_p), the PD de Rham complex and its multiplicative crystalline Poincaré equivalence to `(Omega*_{R/A})^hat_p`. The relative comparison of §4.6 induces a map from the PD de Rham complex after killing p-primary torsion on the q-Witt side. Section 9.6(a) allows descent to `Q_{p^alpha} Omega*`. Compare different presentations via their completed tensor coproducts: the presentation category is weakly contractible, and a functorial free δ-presentation gives coherent naturality. On an étale frame this map is §9.6(c), so §7.7 and ordinary de Rham étale descent prove equivalence for arbitrary smooth R. For general m, construct the displayed p-local product by the differential q-FV universal property, as in §3.7; flat Adams twists and cyclotomic scalar maps identify ordinary and derived tensors over C_α=A[q]/(q^(p^α)−1). Apply the prime-power comparison to its factors and p-complete.
 
-*Needs:* Layer 9.6 `QWitt.primePowerSmoothInduction`; Layer 7.7 `QWitt.differential_baseChange`; Layer 3.7 `QWitt.absolute_witt_injective`; Layer 4.6 `QWitt.perfectCover_comparison`; `gap:ordinary-derham`; `gap:pd-presentation`; `gap:cyclotomic-contract`; EnhancedDerivedSheaves §E5:abstract; DerivedModuleAlgebra §0.2.
+*Needs:* Layer 9.6; Layer 7.7; Layer 3.7; Layer 4.6; `gap:ordinary-derham`; `gap:pd-presentation`; `gap:cyclotomic-contract`; EnhancedDerivedSheaves §E5:abstract; DerivedModuleAlgebra §0.2.
 
 **Checks.**
 
@@ -1228,21 +1232,21 @@ Local framed cohomology is used only as an algebraic tool. Filtered q-Hodge desc
 
 ### Dependencies
 
-Layer 8.4 `QWitt.framedFrobenius`; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §1.7; Layer 9.1 `QWitt.framedFrobeniusDecomposition`; `gap:cyclotomic-contract`; Layer 8.3 `QWitt.framedDifferenceComplex`; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; `gap:dga-bockstein`; Layer 1.8 `QWitt.arithmeticFracture`; Layer 9.2 `QWitt.framedTwoTermCohomology`; Layer 9.3 `QWitt.framedBockstein`; Layer 9.4 `QWitt.framedProductHomotopy`; Layer 5.4 `QWitt.finiteType`; Layer 7.7 `QWitt.differential_baseChange`; `gap:cohomology-completion`; Layer 9.5 `QWitt.framedCohomologySystem`; `gap:prismatic-frobenius`; `gap:ordinary-derham`; Layer 9.6 `QWitt.primePowerSmoothInduction`; Layer 3.7 `QWitt.absolute_witt_injective`; Layer 4.6 `QWitt.perfectCover_comparison`; `gap:pd-presentation`; EnhancedDerivedSheaves §E5:abstract; DerivedModuleAlgebra §0.2.
+Layer 8.4; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §1.7; Layer 9.1; `gap:cyclotomic-contract`; Layer 8.3; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; `gap:dga-bockstein`; Layer 1.8; Layer 9.2; Layer 9.3; Layer 9.4; Layer 5.4; Layer 7.7; `gap:cohomology-completion`; Layer 9.5; `gap:prismatic-frobenius`; `gap:ordinary-derham`; Layer 9.6; Layer 3.7; Layer 4.6; `gap:pd-presentation`; EnhancedDerivedSheaves §E5:abstract; DerivedModuleAlgebra §0.2.
 
 ## Layer 10: Smooth q-Witt torsion and completion exports
 
 ### 10.1 Smooth integer torsion-freeness
 
-Prove `QWitt.smooth_integerTorsionFree`. If A is perfectly covered and R is smooth over A, `Q_m Omega*_{R/A}` is degreewise ℤ-torsion-free for every m>0. Consequently every positive-degree V_n is injective and the initial q-V system is also initial among degreewise ℤ-torsion-free q-V systems. A perfectly covered; R smooth over A; m>0; no Noetherian assumption on A. (wagner line 2690, Proposition 4.1, line 2690 and proof, lines 3613–3643; printed wagner v5 pp. 54, 73–74).
+If A is perfectly covered and R is smooth over A, `Q_m Omega*_{R/A}` is degreewise ℤ-torsion-free for every m>0. Consequently every positive-degree V_n is injective and the initial q-V system is also initial among degreewise ℤ-torsion-free q-V systems. A perfectly covered; R smooth over A; m>0; no Noetherian assumption on A. (wagner line 2690, Proposition 4.1, line 2690 and proof, lines 3613–3643; printed wagner v5 pp. 54, 73–74).
 
-Prove `QWitt.smooth_verschiebung_injective`: F_nV_n=n and integer torsion-freeness imply V_n injective.
+- F_nV_n=n and integer torsion-freeness imply V_n injective.
 
-Prove `QWitt.smooth_torsionFreeInitial`: The initial map into every torsion-free q-V system is still unique.
+- The initial map into every torsion-free q-V system is still unique.
 
 *Construction and proof.* Work étale locally on a smooth algebra, reduce polynomial bases to ℤ by flat Λ-base change, and use finite generation over the Noetherian Q-ring from 5.4. Detect p-torsion after localization at p, the (p,q^(m/ℓ)−1)-completions for ℓ≠p and their complementary localization. F_ℓ and V_ℓ remove prime-to-p factors on the completed pieces; the remaining localization is a flat base change of the p-power case 9.6. This covers every p and m.
 
-*Needs:* Layer 9.6 `QWitt.primePowerSmoothInduction`; Layer 7.7 `QWitt.differential_baseChange`; Layer 5.4 `QWitt.finiteType`; `gap:cyclotomic-contract`.
+*Needs:* Layer 9.6; Layer 7.7; Layer 5.4; `gap:cyclotomic-contract`.
 
 **Checks.**
 
@@ -1252,15 +1256,15 @@ Prove `QWitt.smooth_torsionFreeInitial`: The initial map into every torsion-free
 
 ### 10.2 Bounded difference torsion and completion
 
-Prove `QWitt.smooth_boundedDifferenceTorsion`. For perfectly covered A, smooth R/A, m>0 and every degree i≥0, `Q_m Omega^i_{R/A}` has bounded (q−1)-power torsion. Its degreewise ordinary (q−1)-completion is canonically its derived completion. Both comparisons are natural and compatible with F,V,ghosts and Λ-base change in the appropriate completed sense. A perfectly covered; R smooth over A; m>0; the torsion bound is for a fixed degree and index, not a global uniform bound. (wagner line 2810, Lemma 4.6, lines 2810–2822; printed wagner v5 p. 56).
+For perfectly covered A, smooth R/A, m>0 and every degree i≥0, `Q_m Omega^i_{R/A}` has bounded (q−1)-power torsion. Its degreewise ordinary (q−1)-completion is canonically its derived completion. Both comparisons are natural and compatible with F,V,ghosts and Λ-base change in the appropriate completed sense. A perfectly covered; R smooth over A; m>0; the torsion bound is for a fixed degree and index, not a global uniform bound. (wagner line 2810, Lemma 4.6, lines 2810–2822; printed wagner v5 p. 56).
 
-Prove `QWitt.smooth_degreewiseCompletion`: The completed degree-i module is discrete and computes LΛ_(q−1) of that module.
+- The completed degree-i module is discrete and computes LΛ_(q−1) of that module.
 
-Prove `QWitt.smooth_completion_complex`: For the bounded smooth de Rham degrees of a fixed smooth R, degreewise completion represents derived completion of the complex.
+- For the bounded smooth de Rham degrees of a fixed smooth R, degreewise completion represents derived completion of the complex.
 
 *Construction and proof.* For ℤ-polynomial R use the surjection from the de Rham algebra and 5.4 to get finite generation in each degree, hence bounded torsion. Flat Λ-base change transfers the same bound to a polynomial ring over A. Étale base change and a finite affine cover of a smooth affine algebra transfer a common finite bound. The principal bounded-torsion completion contract identifies ordinary and derived completions.
 
-*Needs:* Layer 10.1 `QWitt.smooth_integerTorsionFree`; Layer 5.4 `QWitt.finiteType`; Layer 7.7 `QWitt.differential_baseChange`; DerivedModuleAlgebra §1.5.
+*Needs:* Layer 10.1; Layer 5.4; Layer 7.7; DerivedModuleAlgebra §1.5.
 
 **Checks.**
 
@@ -1274,7 +1278,7 @@ Every positive index and prime is covered. The auxiliary comparisons retain thei
 
 ### Dependencies
 
-Layer 9.6 `QWitt.primePowerSmoothInduction`; Layer 7.7 `QWitt.differential_baseChange`; Layer 5.4 `QWitt.finiteType`; `gap:cyclotomic-contract`; Layer 10.1 `QWitt.smooth_integerTorsionFree`; DerivedModuleAlgebra §1.5.
+Layer 9.6; Layer 7.7; Layer 5.4; `gap:cyclotomic-contract`; Layer 10.1; DerivedModuleAlgebra §1.5.
 
 ## Downstream consumers
 
