@@ -10,6 +10,7 @@ measures, dynatomic equations, iterated preimage actions, and the stated family
 and orbit-intersection results. General algebraic geometry, curve theory, heights,
 potential theory and Galois theory are consumed through the contracts in the indicated layers.
 
+- ModularCurves §4C owns the universal Legendre family, and MordellLawrenceVenkatesh §6.4 its native Weierstrass coefficient model, discriminant and j-invariant. The variants in §§6.35 and 6.111 are their specializations for Lattès dynamics and projected torsion sets.
 - Mathlib supplies iteration, positive periods, minimal periods and semiconjugacy;
   polynomials, projective points and resultants; native Weil heights and field
   Northcott; field extensions, finite polynomial Galois actions and Krull topology.
@@ -83,7 +84,7 @@ Arithmetic heights are absolute unless explicitly called **native relative**. Ov
 At a finite place v above p, distinguish the native Mathlib absolute value
 `v(x) = N(v)^(-ord_v(x))` from the standard local absolute value extending
 `|p| = 1/p`, used with weights `r_v = [K_v : ℚ_p]/[K : ℚ]` in Layer 4.
-Prove `nativeFinitePlace_eq_standard_pow`: the native value is the standard
+Prove the native-to-standard finite-place comparison: the native value is the standard
 value raised to `[K_v : ℚ_p]`. Consequently escape rates and local energies
 scale by this local degree when passing from native sums to weighted absolute
 sums (Mathlib `FinitePlace.norm_embedding'`; baker-rumely-2006, §2, pp. 4–5).
@@ -111,6 +112,14 @@ Each contract specifies the mathematical output consumed by its linked targets.
 An extension named here requires the full stated output; a theorem with a weaker
 conclusion does not discharge that contract. Arithmetic point lists retain every
 rank, saturation, local-data and finite-certificate hypothesis.
+
+### From TauCetiRoadmap.ModularCurves — §4C
+
+Consume the universal Legendre family and its field fibres, with its chosen x-coordinate.
+
+### From TauCetiRoadmap.MordellLawrenceVenkatesh — §6.4
+
+Consume the universal Legendre family and its field fibres from ModularCurves §4C, and the native Weierstrass coefficient model `legendreCurve` and its formulas `legendreCurve.Δ_eq` and `legendreCurve.j_eq` from MordellLawrenceVenkatesh §6.4. Section 6.35 specializes this model for its Lattès map; §6.111 specializes the coefficient tuple inside `legendreTorsionImages` to state the projected-torsion theorem on native points.
 
 ### From TauCetiRoadmap.DiophantineApproximationAndTranscendence — §§0.2, 0.3, 2.4
 
@@ -284,7 +293,9 @@ Consume Lane C, targets 13–15, for the classical Euclidean harmonic and potent
 
 ### From Mathlib and Tau Ceti
 
-`Equiv.conj` (`Mathlib/Logic/Equiv/Defs.lean`) supplies conjugation of self-maps as h∘f∘h⁻¹. Use `Equiv.divRight₀` and `Equiv.addRight` for the rational scaling and translation convention Checks in §§0.36, 2.16 and 3.3; their backward-orbit transport is the specialization of `backwardOrbit_conjugate`.
+`WeierstrassCurve.Affine.Point.xRep` in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean` supplies the normalized x-coordinate representatives (1,0) at zero and (x,1) at a nonsingular affine point (x,y). The point type includes only nonsingular affine points and the point at infinity; ellipticity is a separate condition, not a field of that type. The Legendre bound explicitly excludes t = 0,1.
+
+`Equiv.conj` (`Mathlib/Logic/Equiv/Defs.lean`) supplies conjugation of self-maps as h∘f∘h⁻¹. Use `Equiv.divRight₀` and `Equiv.addRight` for the rational scaling and translation convention Checks in §§0.36, 2.16 and 3.3; their backward-orbit transport follows from conjugacy transport in §2.17.
 
 Consume `Polynomial.dickson 1 a n` over a commutative ring, together with `Polynomial.map_dickson`, `Polynomial.dickson_add_two`, `Polynomial.dickson_one_one_eval_add_inv` and `Polynomial.dickson_one_one_mul`, from `Mathlib/RingTheory/Polynomial/Dickson.lean`. These supply the carrier, coefficient transport, recurrence, parameter-one evaluation and composition identities used in §6.25. Consume also `Polynomial.dickson_sq_mul_eval_mul` from `TauCeti/RingTheory/Polynomial/Dickson.lean`: over a commutative ring, `(dickson k (b^2*a) n).eval (b*t) = b^n*(dickson k a n).eval t`, for every k,n and a,b,t. Applying it over R[X] at X gives D_n(bX,b²a)=bⁿD_n(X,a), the parameter scaling used in §6.25.
 
@@ -762,6 +773,8 @@ passes from local energies to adelic heights, pairings and equidistribution.
 Layer 5 builds the preimage tower and its Galois action. Layer 6 develops power
 and Lattès examples, families, specialization and orbit intersections.
 
+`Suggested.lean` states the headline theorems whose objects can be expressed at the pinned libraries: rational three-cycle uniqueness and the four- and five-cycle exclusions (§§3.57, 3.58, 3.88), Stoll's integer-family finite-level Galois theorem (§5.64), Ritt's classification (§6.23), the full affine-line orbit-intersection theorem (§6.84), the whole-field Lech–Cassels embedding (§6.86), polynomial-line return times (§6.90), infinitely many algebraic torsion specializations of a constant mark (§6.87), the uniform common Legendre torsion bound (§6.111), and its extension to two standard projections with three common branch values (§6.112). Its real-bodied definitions are `forwardOrbit`, `IsFiniteUnionAP`, `ellipticStandardProjection` and `legendreTorsionImages`. The module docstring identifies the other headline theorems and the carriers they lack at the pins; the layers below specify their full statements, APIs and Checks.
+
 Within a layer the targets follow their prerequisites. Layer 0 constructs the
 power map and the rational-function-field height used by Layers 1–2. The
 period-three parametrization precedes the two-cycle reduction and the final
@@ -785,19 +798,19 @@ Define O_f(x) as Set.range (n ↦ f^[n] x). Membership: y ∈ O_f(x) iff y = f^[
 Prove the following basic API.
 
 - `forwardOrbit`: O_f(x) = {f^[n] x : n ∈ ℕ} ⊆ α.
-- `mem_forwardOrbit_iff`: y ∈ O_f(x) ↔ ∃ n, f^[n] x = y.
-- `self_mem_forwardOrbit`: x ∈ O_f(x).
-- `mapsTo_forwardOrbit`: f maps O_f(x) into itself.
-- `forwardOrbit_eq_insert`: O_f(x) = insert x (O_f(f x)).
-- `image_forwardOrbit`: If Function.Semiconj g fa fb then g '' O_fa(x) = O_fb(g x).
-- `forwardOrbit_subset_of_mem`: If y ∈ O_f(x) then O_f(y) ⊆ O_f(x).
+- y ∈ O_f(x) ↔ ∃ n, f^[n] x = y.
+- x ∈ O_f(x).
+- f maps O_f(x) into itself.
+- O_f(x) = insert x (O_f(f x)).
+- If Function.Semiconj g fa fb then g '' O_fa(x) = O_fb(g x).
+- If y ∈ O_f(x) then O_f(y) ⊆ O_f(x).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.forwardOrbit_succ_zero`** (computation): The forward orbit of 0 under n ↦ n + 1 on ℕ is all of ℕ.
-- **`TauCeti.ArithmeticDynamics.forwardOrbit_id`** (degenerate): For the identity map, forwardOrbit id x = {x}.
-- **`TauCeti.ArithmeticDynamics.forwardOrbit_sq_sub_one`** (computation): Under z ↦ z² − 1 on ℤ, the forward orbit of 1 is {1, 0, −1}.
-- **`TauCeti.ArithmeticDynamics.one_not_mem_forwardOrbit_succ_two`** (non-example): Under n ↦ n + 1 on ℤ, 1 ∉ O(2): the forward orbit is not the orbit of the ℤ-action generated by f.
+- The forward orbit of 0 under n ↦ n + 1 on ℕ is all of ℕ.
+- For the identity map, forwardOrbit id x = {x}.
+- Under z ↦ z² − 1 on ℤ, the forward orbit of 1 is {1, 0, −1}.
+- Under n ↦ n + 1 on ℤ, 1 ∉ O(2): the forward orbit is not the orbit of the ℤ-action generated by f.
 
 **Endpoint checks.** Under n ↦ n + 1 on ℕ the orbit of 0 is ℕ; under the identity every orbit is a singleton. Under z ↦ z² − 1 on ℤ the orbit of 1 is {1, 0, −1} (Silverman, AWS notes, Example 2).
 
@@ -817,22 +830,22 @@ Define IsPreperiodicPt f x := ∃ m, f^[m] x ∈ Function.periodicPts f and prep
 
 Prove the following basic API.
 
-- `IsPreperiodicPt`: IsPreperiodicPt f x :↔ ∃ m, f^[m] x ∈ periodicPts f.
-- `preperiodicPts`: The set {x | IsPreperiodicPt f x}.
-- `isPreperiodicPt_iff_exists_iterate_eq`: IsPreperiodicPt f x ↔ ∃ m n, 0 < n ∧ f^[m + n] x = f^[m] x.
-- `isPreperiodicPt_of_isPeriodicPt`: A periodic point of positive period (Mathlib's IsPeriodicPt f n x, n > 0) is preperiodic.
-- `periodicPts_subset_preperiodicPts`: periodicPts f ⊆ preperiodicPts f.
-- `isPreperiodicPt_apply_iff`: IsPreperiodicPt f (f x) ↔ IsPreperiodicPt f x.
-- `IsPreperiodicPt.iterate`: Preperiodicity is preserved along the orbit: f^[m] x is preperiodic.
-- `isPreperiodicPt_of_finite`: On a finite type every point is preperiodic.
-- `isPreperiodicPt_iterate_iff`: For k ≥ 1, x is preperiodic for f^[k] iff it is for f.
+- IsPreperiodicPt f x :↔ ∃ m, f^[m] x ∈ periodicPts f.
+- The set {x | IsPreperiodicPt f x}.
+- IsPreperiodicPt f x ↔ ∃ m n, 0 < n ∧ f^[m + n] x = f^[m] x.
+- A periodic point of positive period (Mathlib's IsPeriodicPt f n x, n > 0) is preperiodic.
+- periodicPts f ⊆ preperiodicPts f.
+- IsPreperiodicPt f (f x) ↔ IsPreperiodicPt f x.
+- Preperiodicity is preserved along the orbit: f^[m] x is preperiodic.
+- On a finite type every point is preperiodic.
+- For k ≥ 1, x is preperiodic for f^[k] iff it is for f.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.isPreperiodicPt_one_sq_sub_one`** (computation): 1 is preperiodic but not periodic for z ↦ z² − 1 on ℤ; the boundary theorem is `quadraticTail_not_periodic`.
-- **`TauCeti.ArithmeticDynamics.not_isPreperiodicPt_two_sq_sub_one`** (non-example): 2 is not preperiodic for z ↦ z² − 1 on ℤ (its orbit tends to ∞).
-- `TauCeti.ArithmeticDynamics.isPreperiodicPt_pow_iff_isOfFinOrder`: For g ↦ g^d with d ≥ 2 on a group, IsPreperiodicPt ↔ Mathlib's IsOfFinOrder g.
-- **`TauCeti.ArithmeticDynamics.isPreperiodicPt_id`** (degenerate): Every point is preperiodic for the identity.
+- 1 is preperiodic but not periodic for z ↦ z² − 1 on ℤ; the starting point is not periodic.
+- 2 is not preperiodic for z ↦ z² − 1 on ℤ (its orbit tends to ∞).
+- For g ↦ g^d with d ≥ 2 on a group, IsPreperiodicPt ↔ Mathlib's IsOfFinOrder g.
+- Every point is preperiodic for the identity.
 
 **Endpoint checks.** 1 is preperiodic but not periodic for z ↦ z² − 1 on ℤ; 2 is wandering (Silverman, AWS notes, Example 2). For g ↦ g^d (d ≥ 2) on a group the preperiodic points are the torsion elements (AWS notes, Exercise A).
 
@@ -866,25 +879,25 @@ Define binaryResultant m n F G := Polynomial.resultant (aeval ![X, 1] F) (aeval 
 
 Prove the following basic API.
 
-- `binaryResultant`: `Res_{m,n}(F,` G) ∈ R.
-- `binaryResultant_homogenize`: `Res_{m,n}(homogenize` f m, homogenize g n) = Mathlib's resultant f g m n when deg f ≤ m, deg g ≤ n.
-- `binaryResultant_smul_left`: `Res_{m,n}(c` • F, G) = c^n · `Res_{m,n}(F,` G).
-- `binaryResultant_smul_right`: `Res_{m,n}(F,` c • G) = c^m · `Res_{m,n}(F,` G).
-- `binaryResultant_smul_smul`: `Res_{d,d}(c` • F, c • G) = `c^{2d}` · `Res_{d,d}(F,` G) (Rumely).
-- `binaryResultant_comm`: `Res_{m,n}(F,` G) = `(−1)^{mn}` `Res_{n,m}(G,` F).
-- `binaryResultant_map`: `Res_{m,n}(φF,` φG) = `φ(Res_{m,n}(F,` G)) for a ring homomorphism φ.
-- `binaryResultant_zero_left`: `Res_{m,n}(0,` G) = 0 when n ≠ 0.
-- **`binaryResultant_X_pow_X_pow`** (example): `Res_{d,d}(X₀^d,` X₁^d) = 1.
-- `binaryResultant_toTupleMvPolynomial`: For Mathlib's pair (homogenize p n, X₁^n) of a polynomial p of degree n, the resultant is lead(p)^n.
+- `Res_{m,n}(F,` G) ∈ R.
+- `Res_{m,n}(homogenize` f m, homogenize g n) = Mathlib's resultant f g m n when deg f ≤ m, deg g ≤ n.
+- `Res_{m,n}(c` • F, G) = c^n · `Res_{m,n}(F,` G).
+- `Res_{m,n}(F,` c • G) = c^m · `Res_{m,n}(F,` G).
+- `Res_{d,d}(c` • F, c • G) = `c^{2d}` · `Res_{d,d}(F,` G) (Rumely).
+- `Res_{m,n}(F,` G) = `(−1)^{mn}` `Res_{n,m}(G,` F).
+- `Res_{m,n}(φF,` φG) = `φ(Res_{m,n}(F,` G)) for a ring homomorphism φ.
+- `Res_{m,n}(0,` G) = 0 when n ≠ 0.
+- `Res_{d,d}(X₀^d,` X₁^d) = 1.
+- For Mathlib's pair (homogenize p n, X₁^n) of a polynomial p of degree n, the resultant is lead(p)^n.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.binaryResultant_linear`** (computation): `Res_{1,1}(aX₀` + bX₁, cX₀ + eX₁) = ae − bc.
-- **`TauCeti.ArithmeticDynamics.binaryResultant_X_sq_add_two_Y_sq`** (computation): `Res_{2,2}(X₀²` + 2X₁², X₀X₁) = 2 over ℤ.
-- `TauCeti.ArithmeticDynamics.binaryResultant_Y_pow_X_pow`: `Res_{d,d}(X₁^d,` X₀^d) = (−1)^d, pinning the orientation.
-- **`TauCeti.ArithmeticDynamics.binaryResultant_X_X`** (non-example): `Res_{1,1}(X₀,` X₀) = 0: proportional forms share the zero [0 : 1].
-- **`TauCeti.ArithmeticDynamics.binaryResultant_zero_degree`** (degenerate): `Res_{0,0}(0,` 0) = 1 (empty determinant); nonvanishing alone does not exclude the zero pair in degree 0.
-- `TauCeti.ArithmeticDynamics.binaryResultant_quadratic_silverman`: For quadratic forms the value equals Silverman's displayed polynomial (AWS notes, Example 23).
+- `Res_{1,1}(aX₀` + bX₁, cX₀ + eX₁) = ae − bc.
+- `Res_{2,2}(X₀²` + 2X₁², X₀X₁) = 2 over ℤ.
+- `Res_{d,d}(X₁^d,` X₀^d) = (−1)^d, pinning the orientation.
+- `Res_{1,1}(X₀,` X₀) = 0: proportional forms share the zero [0 : 1].
+- `Res_{0,0}(0,` 0) = 1 (empty determinant); nonvanishing alone does not exclude the zero pair in degree 0.
+- For quadratic forms the value equals Silverman's displayed polynomial (AWS notes, Example 23).
 
 **Endpoint checks.** `Res_{1,1}(aX₀` + bX₁, cX₀ + eX₁) = ae − bc (Milnor, Appendix A). `Res_{2,2}(X₀²` + 2X₁², X₀X₁) = 2: the displayed resultant of (z² + 2)/z, which vanishes modulo 2 (example, see Good reduction of a rational map). For quadratic forms the value is Silverman's polynomial a₂²b₀² − a₂a₁b₁b₀ + a₁²b₂b₀ − 2a₂a₀b₂b₀ + a₂a₀b₁² − a₁a₀b₂b₁ + a₀²b₂² (AWS notes, Example 23).
 
@@ -918,23 +931,21 @@ Every x ≠ 0 in K² can be scaled into R² with a unit coordinate (valuation ri
 
 Prove the following basic API.
 
-- `projReduction`: ℙ¹(K) → ℙ¹(k).
-- `projReduction_mk`: For x ∈ R² with a unit coordinate, projReduction [x] = [x̃].
-- `projReduction_surjective`: projReduction is surjective.
+- ℙ¹(K) → ℙ¹(k).
+- For x ∈ R² with a unit coordinate, projReduction [x] = [x̃].
+- projReduction is surjective.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.projReduction_half`** (computation): Over ℤ_[2], [1/2 : 1] reduces to ∞.
-- **`TauCeti.ArithmeticDynamics.projReduction_three`** (computation): Over ℤ_[2], [3 : 1] reduces to [1 : 1].
-- **`TauCeti.ArithmeticDynamics.projReduction_infty`** (degenerate): ∞ reduces to ∞.
+- Over ℤ_[2], [1/2 : 1] reduces to ∞.
+- Over ℤ_[2], [3 : 1] reduces to [1 : 1].
+- ∞ reduces to ∞.
 
 **Endpoint checks.** Over ℤ_[2]: [1/2 : 1] ↦ ∞, [3 : 1] ↦ [1 : 1], ∞ ↦ ∞.
 
 Applications include Silverman, AWS notes, Proposition 24(b)–(c) and Theorem 25 — reduction of points and of periodic orbits; Reduction commutes with evaluation — compatibility with the reduced map; Layer 2 — reduction of cycles and the Gauss point; Layer 5 — reduction of preimage trees modulo primes of good reduction.
 
 ### 0.7 Preperiodic iff the forward orbit is finite
-
-The named signature is `isPreperiodicPt_iff_finite_forwardOrbit`.
 
 For f : α → α and x : α: IsPreperiodicPt f x ↔ (forwardOrbit f x).Finite.
 
@@ -949,8 +960,6 @@ For f : α → α and x : α: IsPreperiodicPt f x ↔ (forwardOrbit f x).Finite.
 **Endpoint checks.** For z ↦ z² − 1 on ℤ, O(1) = {1, 0, −1} is finite and O(2) is infinite.
 
 ### 0.8 Semiconjugacies preserve preperiodic points
-
-The named signature is `isPreperiodicPt_map_iff_of_bijective`.
 
 (a) If g : α → β satisfies g ∘ fa = fb ∘ g (Function.Semiconj g fa fb) and x is preperiodic for fa, then g x is preperiodic for fb. (b) If moreover g is bijective, x is preperiodic for fa iff g x is preperiodic for fb.
 
@@ -1006,17 +1015,17 @@ Define binaryRoots n G := ((G(X, 1)).roots.map (r ↦ [r : 1])) + (n − deg G(X
 
 Prove the following basic API.
 
-- `binaryRoots`: The multiset of zeros of a binary form of formal degree n.
-- `mem_binaryRoots_iff`: For G ≠ 0 homogeneous of degree n: [x] ∈ binaryRoots n G ↔ G(x) = 0.
-- `card_binaryRoots`: For G ≠ 0 homogeneous of degree n over an algebraically closed field, binaryRoots n G has n elements.
-- `binaryRoots_mul`: For G, H homogeneous of degrees m, n with G·H ≠ 0: binaryRoots (m + n) (G H) = binaryRoots m G + binaryRoots n H.
-- `binaryRoots_smul`: Scaling by c ≠ 0 does not change the roots.
+- The multiset of zeros of a binary form of formal degree n.
+- For G ≠ 0 homogeneous of degree n: [x] ∈ binaryRoots n G ↔ G(x) = 0.
+- For G ≠ 0 homogeneous of degree n over an algebraically closed field, binaryRoots n G has n elements.
+- For G, H homogeneous of degrees m, n with G·H ≠ 0: binaryRoots (m + n) (G H) = binaryRoots m G + binaryRoots n H.
+- Scaling by c ≠ 0 does not change the roots.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.binaryRoots_X_mul_Y_sq`** (computation): binaryRoots 3 (X₀X₁²) = {[0 : 1], ∞, ∞}.
-- **`TauCeti.ArithmeticDynamics.binaryRoots_Y_pow`** (degenerate): binaryRoots n (X₁^n) = n · {∞}.
-- **`TauCeti.ArithmeticDynamics.binaryRoots_irreducible`** (non-example): X₀² + X₁² has no roots in ℙ¹(ℚ), so the cardinality statement needs K algebraically closed.
+- binaryRoots 3 (X₀X₁²) = {[0 : 1], ∞, ∞}.
+- binaryRoots n (X₁^n) = n · {∞}.
+- X₀² + X₁² has no roots in ℙ¹(ℚ), so the cardinality statement needs K algebraically closed.
 
 **Endpoint checks.** X₀X₁² (n = 3): {[0 : 1], ∞, ∞}. X₁^n: n copies of ∞, although its dehomogenisation 1 has no roots. X₀² + X₁² has no roots in ℙ¹(ℚ).
 
@@ -1092,25 +1101,25 @@ Define the structure with fields forms, isHomogeneous, forms_ne_zero, binaryResu
 
 Prove the following basic API.
 
-- `HomogeneousLift`: The structure of degree-d pairs with nonzero resultant.
-- `HomogeneousLift.eval`: F(x) = (F₀(x), F₁(x)) for x ∈ K².
-- `HomogeneousLift.eval_ne_zero`: x ≠ 0 → F(x) ≠ 0.
-- `HomogeneousLift.eval_smul`: F(c • x) = c^d • F(x).
-- `HomogeneousLift.smul`: c • F for c ∈ K^× (same map).
-- `HomogeneousLift.smul_forms`: (c • F).forms = c • F.forms.
-- `HomogeneousLift.id`: The identity lift (X₀, X₁) of degree 1.
-- `HomogeneousLift.ofPolynomial`: The lift toTupleMvPolynomial p of a polynomial p, of degree natDegree p (for p = 0 the constant pair (0, 1)).
-- `HomogeneousLift.ofPolynomial_forms`: Its forms are Mathlib's toTupleMvPolynomial p.
-- `HomogeneousLift.ofGL`: The linear lift of γ ∈ GL₂(K), degree 1.
-- `HomogeneousLift.map`: Base change along σ : K →+* L.
-- `HomogeneousLift.map_forms`: (F.map σ).forms i = MvPolynomial.map σ (F.forms i).
+- The structure of degree-d pairs with nonzero resultant.
+- F(x) = (F₀(x), F₁(x)) for x ∈ K².
+- x ≠ 0 → F(x) ≠ 0.
+- F(c • x) = c^d • F(x).
+- c • F for c ∈ K^× (same map).
+- (c • F).forms = c • F.forms.
+- The identity lift (X₀, X₁) of degree 1.
+- The lift toTupleMvPolynomial p of a polynomial p, of degree natDegree p (for p = 0 the constant pair (0, 1)).
+- Its forms are Mathlib's toTupleMvPolynomial p.
+- The linear lift of γ ∈ GL₂(K), degree 1.
+- Base change along σ : K →+* L.
+- (F.map σ).forms i = MvPolynomial.map σ (F.forms i).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.HomogeneousLift.X_sq_Y_sq`** (computation): (X₀², X₁²) is a lift of degree 2.
-- **`TauCeti.ArithmeticDynamics.HomogeneousLift.not_X_sq_XY`** (non-example): (X₀², X₀X₁) is not a lift: the forms share [0 : 1] and Res = 0.
-- **`TauCeti.ArithmeticDynamics.HomogeneousLift.zero_degree`** (degenerate): A lift of degree 0 is a nonzero pair of constants.
-- **`TauCeti.ArithmeticDynamics.HomogeneousLift.eval_X_sq_add_two`** (computation): The lift (X₀² + 2X₁², X₀X₁) sends (1, 1) to (3, 1).
+- (X₀², X₁²) is a lift of degree 2.
+- (X₀², X₀X₁) is not a lift: the forms share [0 : 1] and Res = 0.
+- A lift of degree 0 is a nonzero pair of constants.
+- The lift (X₀² + 2X₁², X₀X₁) sends (1, 1) to (3, 1).
 
 **Endpoint checks.** (X₀², X₁²) is a lift of z ↦ z² (resultant 1); (X₀², X₀X₁) is not (common zero [0 : 1]). (X₀² + 2X₁², X₀X₁) is a lift over ℚ of (z² + 2)/z.
 
@@ -1130,19 +1139,19 @@ Homogeneity: F_i(G₀, G₁) is homogeneous of degree e·d (MvPolynomial.IsHomog
 
 Prove the following basic API.
 
-- `HomogeneousLift.comp`: F ∘ G of degree d·e.
-- `HomogeneousLift.comp_forms`: (F ∘ G).forms i = aeval G.forms (F.forms i).
-- `HomogeneousLift.eval_comp`: (F ∘ G)(x) = F(G(x)).
-- `HomogeneousLift.comp_assoc`: ((F ∘ G) ∘ H).forms = (F ∘ (G ∘ H)).forms.
-- `HomogeneousLift.id_comp`: (id ∘ F).forms = F.forms.
-- `HomogeneousLift.comp_id`: (F ∘ id).forms = F.forms.
-- `HomogeneousLift.smul_comp`: ((c • F) ∘ G).forms = c • (F ∘ G).forms.
+- F ∘ G of degree d·e.
+- (F ∘ G).forms i = aeval G.forms (F.forms i).
+- (F ∘ G)(x) = F(G(x)).
+- ((F ∘ G) ∘ H).forms = (F ∘ (G ∘ H)).forms.
+- (id ∘ F).forms = F.forms.
+- (F ∘ id).forms = F.forms.
+- ((c • F) ∘ G).forms = c • (F ∘ G).forms.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.HomogeneousLift.comp_X_sq`** (computation): (X₀², X₁²) ∘ (X₀², X₁²) = (X₀⁴, X₁⁴).
-- `TauCeti.ArithmeticDynamics.HomogeneousLift.comp_degree`: The composite of lifts of degrees 2 and 3 has forms homogeneous of degree 6.
-- **`TauCeti.ArithmeticDynamics.HomogeneousLift.comp_not_comm`** (non-example): (X₀², X₁²) ∘ (X₀ + X₁, X₁) ≠ (X₀ + X₁, X₁) ∘ (X₀², X₁²).
+- (X₀², X₁²) ∘ (X₀², X₁²) = (X₀⁴, X₁⁴).
+- The composite of lifts of degrees 2 and 3 has forms homogeneous of degree 6.
+- (X₀², X₁²) ∘ (X₀ + X₁, X₁) ≠ (X₀ + X₁, X₁) ∘ (X₀², X₁²).
 
 **Endpoint checks.** (X₀², X₁²) ∘ (X₀², X₁²) = (X₀⁴, X₁⁴). (X₀², X₁²) ∘ (X₀ + X₁, X₁) = ((X₀ + X₁)², X₁²) ≠ (X₀² + X₁², X₁²) = (X₀ + X₁, X₁) ∘ (X₀², X₁²).
 
@@ -1162,31 +1171,31 @@ Define the setoid on Σ_d HomogeneousLift K d and RationalMap K as its quotient;
 
 Prove the following basic API.
 
-- `RationalMap`: The type of rational self-maps of ℙ¹ over K.
-- `RationalMap.mk`: The class of a lift.
-- `RationalMap.degree`: deg f ∈ ℕ.
-- `RationalMap.degree_mk`: deg (mk F) = d for F of degree d.
-- `RationalMap.mk_eq_mk_iff`: mk F = mk G ↔ G = c • F for some c ≠ 0 (same degree).
-- `RationalMap.exists_mk_eq`: Every f has a lift of degree deg f.
-- **`RationalMap.instMonoid`** (instance): Monoid under composition.
-- `RationalMap.mk_comp`: mk (F ∘ G) = mk F * mk G.
-- `RationalMap.one_eq_mk_id`: 1 = mk (X₀, X₁).
-- `RationalMap.degree_mul`: deg (f * g) = deg f · deg g.
-- `RationalMap.degree_one`: deg 1 = 1.
-- `RationalMap.degree_pow`: deg (f^n) = (deg f)^n.
-- `RationalMap.ofPolynomial`: The polynomial map z ↦ p(z).
-- `RationalMap.degree_ofPolynomial`: deg (ofPolynomial p) = natDegree p.
-- `RationalMap.ofPolynomial_comp`: ofPolynomial (p.comp q) = ofPolynomial p * ofPolynomial q.
-- **`RationalMap.toRatFunc`** (coercion): f ↦ F₀(X, 1)/F₁(X, 1) ∈ RatFunc K.
-- `RationalMap.toRatFunc_injOn`: toRatFunc is injective on maps of degree ≥ 1 (the degree is recovered from the reduced fraction).
-- `RationalMap.toRatFunc_ofPolynomial`: toRatFunc (ofPolynomial p) = p as a rational function.
+- The type of rational self-maps of ℙ¹ over K.
+- The class of a lift.
+- deg f ∈ ℕ.
+- deg (mk F) = d for F of degree d.
+- mk F = mk G ↔ G = c • F for some c ≠ 0 (same degree).
+- Every f has a lift of degree deg f.
+- Monoid under composition.
+- mk (F ∘ G) = mk F * mk G.
+- 1 = mk (X₀, X₁).
+- deg (f * g) = deg f · deg g.
+- deg 1 = 1.
+- deg (f^n) = (deg f)^n.
+- The polynomial map z ↦ p(z).
+- deg (ofPolynomial p) = natDegree p.
+- ofPolynomial (p.comp q) = ofPolynomial p * ofPolynomial q.
+- f ↦ F₀(X, 1)/F₁(X, 1) ∈ RatFunc K.
+- toRatFunc is injective on maps of degree ≥ 1 (the degree is recovered from the reduced fraction).
+- toRatFunc (ofPolynomial p) = p as a rational function.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.degree_ofPolynomial_sq`** (computation): z ↦ z² has degree 2.
-- `TauCeti.ArithmeticDynamics.RationalMap.pow_ofPolynomial_sq`: (z²)^n = `z^{2^n}` in the monoid: iterate equality is equality of maps.
-- **`TauCeti.ArithmeticDynamics.RationalMap.degree_zero_constants`** (degenerate): Maps of degree 0 correspond bijectively to ℙ¹(K).
-- `TauCeti.ArithmeticDynamics.RationalMap.toRatFunc_X_sq_add_two`: The map with lift (X₀² + 2X₁², X₀X₁) is Mathlib's rational function (X² + 2)/X.
+- z ↦ z² has degree 2.
+- (z²)^n = `z^{2^n}` in the monoid: iterate equality is equality of maps.
+- Maps of degree 0 correspond bijectively to ℙ¹(K).
+- The map with lift (X₀² + 2X₁², X₀X₁) is Mathlib's rational function (X² + 2)/X.
 
 **Endpoint checks.** deg(z²) = 2 and (z²)^n = `z^{2^n}` as rational maps. Over 𝔽_p, z^p ≠ z as rational maps although they agree on ℙ¹(𝔽_p) (see The action of a rational map on ℙ¹(K)).
 
@@ -1206,18 +1215,18 @@ Well defined on points: F(x) ≠ 0 for x ≠ 0 (Homogeneous lifts of a degree-d 
 
 Prove the following basic API.
 
-- `RationalMap.toEnd`: The monoid homomorphism to Function.End (ℙ¹(K)).
-- `RationalMap.toEnd_mk_apply`: toEnd (mk F) [x] = [F(x)].
-- `RationalMap.toEnd_mul`: toEnd (f * g) P = toEnd f (toEnd g P).
-- `RationalMap.toEnd_pow`: toEnd (f^n) = (toEnd f)^[n].
-- `RationalMap.toEnd_injective`: For infinite K, f is determined by its action on ℙ¹(K).
-- `RationalMap.toEnd_ofPolynomial_mk_one`: ofPolynomial p sends [x : 1] to [p(x) : 1].
+- The monoid homomorphism to Function.End (ℙ¹(K)).
+- toEnd (mk F) [x] = [F(x)].
+- toEnd (f * g) P = toEnd f (toEnd g P).
+- toEnd (f^n) = (toEnd f)^[n].
+- For infinite K, f is determined by its action on ℙ¹(K).
+- ofPolynomial p sends [x : 1] to [p(x) : 1].
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.toEnd_sq_two`** (computation): z² sends [2 : 1] to [4 : 1] in ℙ¹(ℚ).
-- **`TauCeti.ArithmeticDynamics.RationalMap.toEnd_sq_infty`** (degenerate): A polynomial of degree ≥ 1 fixes ∞.
-- **`TauCeti.ArithmeticDynamics.RationalMap.toEnd_frobenius`** (non-example): Over 𝔽_p, toEnd (z^p) = toEnd 1 although z^p ≠ 1.
+- z² sends [2 : 1] to [4 : 1] in ℙ¹(ℚ).
+- A polynomial of degree ≥ 1 fixes ∞.
+- Over 𝔽_p, toEnd (z^p) = toEnd 1 although z^p ≠ 1.
 
 **Endpoint checks.** z² sends [2 : 1] to [4 : 1] and fixes ∞. Over 𝔽_p, z^p and the identity have the same action but differ as rational maps.
 
@@ -1237,21 +1246,21 @@ Define HasGoodReduction R f by the existence of an integral homogeneous lift wit
 
 Prove the following basic API.
 
-- `RationalMap.HasGoodReduction`: Existence of a normalized integral lift (a unit coefficient) with unit resultant.
-- `RationalMap.reduction`: The reduced map over the residue field.
-- `RationalMap.degree_reduction`: deg (reduction f) = deg f.
-- **`RationalMap.hasGoodReduction_one`** (example): The identity has good reduction.
-- `RationalMap.hasGoodReduction_ofPolynomial_iff`: For p ∈ R[X] with 1 ≤ natDegree p, z ↦ p(z) has good reduction iff lead(p) ∈ R^×.
-- **`RationalMap.hasGoodReduction_map_units`** (example): Maps given by γ ∈ GL₂(R) have good reduction.
+- Existence of a normalized integral lift (a unit coefficient) with unit resultant.
+- The reduced map over the residue field.
+- deg (reduction f) = deg f.
+- The identity has good reduction.
+- For p ∈ R[X] with 1 ≤ natDegree p, z ↦ p(z) has good reduction iff lead(p) ∈ R^×.
+- Maps given by γ ∈ GL₂(R) have good reduction.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.not_hasGoodReduction_two`** (non-example): (z² + 2)/z has bad reduction over ℤ_[2] (resultant 2).
-- **`TauCeti.ArithmeticDynamics.RationalMap.hasGoodReduction_three`** (computation): (z² + 2)/z has good reduction over ℤ_[3].
-- **`TauCeti.ArithmeticDynamics.RationalMap.hasGoodReduction_sq_add`** (computation): z² + c with c ∈ ℤ has good reduction over every ℤ_[p].
-- `TauCeti.ArithmeticDynamics.RationalMap.conj_changes_reduction`: z²/2 is conjugate over ℚ_[2] to z², which has good reduction, while z²/2 does not.
-- **`TauCeti.ArithmeticDynamics.RationalMap.hasGoodReduction_constant_two`** (degenerate): The constant polynomial 2 has good reduction over ℤ_[2], although its leading coefficient is not a unit. This tests the positive-degree hypothesis in the polynomial criterion.
-- **`TauCeti.ArithmeticDynamics.RationalMap.not_hasGoodReduction_nonintegral_monic`** (non-example): Over ℚ₂, z² + 1/2 has unit leading coefficient but bad reduction. Its normalized integral lift is (2X₀² + X₁², 2X₁²), with resultant 16; the reduced forms (X₁², 0) have the common zero ∞. This tests the integral-coefficient hypothesis.
+- (z² + 2)/z has bad reduction over ℤ_[2] (resultant 2).
+- (z² + 2)/z has good reduction over ℤ_[3].
+- z² + c with c ∈ ℤ has good reduction over every ℤ_[p].
+- z²/2 is conjugate over ℚ_[2] to z², which has good reduction, while z²/2 does not.
+- The constant polynomial 2 has good reduction over ℤ_[2], although its leading coefficient is not a unit. This tests the positive-degree hypothesis in the polynomial criterion.
+- Over ℚ₂, z² + 1/2 has unit leading coefficient but bad reduction. Its normalized integral lift is (2X₀² + X₁², 2X₁²), with resultant 16; the reduced forms (X₁², 0) have the common zero ∞. This tests the integral-coefficient hypothesis.
 
 **Endpoint checks.** (z² + 2)/z over ℚ has resultant 2 on its normalised lift (X₀² + 2X₁², X₀X₁): bad reduction at 2 (the reduction (X₀², X₀X₁) has the common zero [0 : 1] and degree drops), good at every odd p. z² + c, c ∈ ℤ: good reduction everywhere. z²/2 is conjugate over ℚ to z² (good reduction) but has bad reduction at 2.
 
@@ -1271,16 +1280,16 @@ deg is multiplicative with deg 1 = 1, so a unit has degree 1; a degree-1 lift (a
 
 Prove the following basic API.
 
-- **`RationalMap.unitsEquivPGL`** (equivalence): (RationalMap K)ˣ ≃* PGL(2, K).
-- `RationalMap.isUnit_iff_degree_eq_one`: IsUnit f ↔ deg f = 1.
-- `RationalMap.toEnd_units_apply`: The action of a unit on ℙ¹(K) is Mathlib's PGL(2, K)-action.
-- `RationalMap.unitsEquivPGL_symm_mk`: The unit attached to the class of γ ∈ GL₂(K) is mk (ofGL γ).
+- (RationalMap K)ˣ ≃* PGL(2, K).
+- IsUnit f ↔ deg f = 1.
+- The action of a unit on ℙ¹(K) is Mathlib's PGL(2, K)-action.
+- The unit attached to the class of γ ∈ GL₂(K) is mk (ofGL γ).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.unitsEquivPGL_inv_z`** (computation): z ↦ 1/z is a unit of order 2 sending [2 : 1] to [1 : 2] and swapping 0 with ∞; the affine reciprocal formula requires x ≠ 0.
-- **`TauCeti.ArithmeticDynamics.RationalMap.not_isUnit_sq`** (non-example): z ↦ z² is not a unit.
-- `TauCeti.ArithmeticDynamics.RationalMap.translation_infinite_order`: z ↦ z + 1 is a unit of infinite order over ℚ.
+- z ↦ 1/z is a unit of order 2 sending [2 : 1] to [1 : 2] and swapping 0 with ∞; the affine reciprocal formula requires x ≠ 0.
+- z ↦ z² is not a unit.
+- z ↦ z + 1 is a unit of infinite order over ℚ.
 
 **Endpoint checks.** z ↦ 1/z (lift (X₁, X₀)) is a unit of order 2; z ↦ z + 1 is a unit of infinite order over ℚ; z² is not a unit.
 
@@ -1300,21 +1309,21 @@ map on lifts is HomogeneousLift.map (Homogeneous lifts of a degree-d self-map of
 
 Prove the following basic API.
 
-- `RationalMap.map`: The monoid homomorphism RationalMap K →* RationalMap L.
-- `RationalMap.map_mk`: map σ (mk F) = mk (F.map σ).
-- `RationalMap.degree_map`: deg (map σ f) = deg f.
-- `RationalMap.toEnd_map_projMap`: toEnd (map σ f) (projMap σ P) = projMap σ (toEnd f P).
-- `RationalMap.map_injective`: map σ is injective.
-- `RationalMap.projMap`: ℙ¹(K) → ℙ¹(L), [x] ↦ [σ x].
-- `RationalMap.projMap_mk`: projMap σ [x] = [σ x].
-- `RationalMap.projMap_injective`: projMap σ is injective.
-- `RationalMap.exists_map_eq_of_isAlgebraic`: Over F algebraic over ℚ, every f is map (L ↪ F) g for a finite-dimensional L ⊆ F.
+- The monoid homomorphism RationalMap K →* RationalMap L.
+- map σ (mk F) = mk (F.map σ).
+- deg (map σ f) = deg f.
+- toEnd (map σ f) (projMap σ P) = projMap σ (toEnd f P).
+- map σ is injective.
+- ℙ¹(K) → ℙ¹(L), [x] ↦ [σ x].
+- projMap σ [x] = [σ x].
+- projMap σ is injective.
+- Over F algebraic over ℚ, every f is map (L ↪ F) g for a finite-dimensional L ⊆ F.
 
 **Checks.**
 
-- `TauCeti.ArithmeticDynamics.RationalMap.map_ofPolynomial`: map σ (ofPolynomial p) = ofPolynomial (p.map σ).
-- **`TauCeti.ArithmeticDynamics.RationalMap.toEnd_map_sq_I`** (computation): Over ℚ̄, z² sends i to −1.
-- **`TauCeti.ArithmeticDynamics.RationalMap.map_id_eq`** (degenerate): map (RingHom.id K) f = f.
+- map σ (ofPolynomial p) = ofPolynomial (p.map σ).
+- Over ℚ̄, z² sends i to −1.
+- map (RingHom.id K) f = f.
 
 **Endpoint checks.** map along ℚ → ℚ̄ of z² sends i to −1; map along the identity is the identity.
 
@@ -1362,19 +1371,19 @@ Define the action as the pullback along unitsEquivPGL.symm of Mathlib's MulDistr
 
 Prove the following basic API.
 
-- **`RationalMap.instMulActionPGL`** (instance): MulAction PGL(2, K) (RationalMap K).
-- `RationalMap.smul_def`: γ • f = γ' * f * γ'⁻¹ with γ' = unitsEquivPGL.symm γ.
-- **`RationalMap.isConj_iff_exists_smul`** (equivalence): Mathlib's IsConj f g ↔ ∃ γ, γ • f = g.
-- `RationalMap.degree_smul`: deg (γ • f) = deg f.
-- `RationalMap.toEnd_smul_apply`: toEnd (γ • f) (γ • P) = γ • toEnd f P.
-- `RationalMap.smul_mk`: A lift of γ • mk F is γ ∘ F ∘ adj(γ).
-- `RationalMap.isPreperiodicPt_smul_iff`: γ • P is preperiodic for γ • f iff P is preperiodic for f.
+- MulAction PGL(2, K) (RationalMap K).
+- γ • f = γ' * f * γ'⁻¹ with γ' = unitsEquivPGL.symm γ.
+- Mathlib's IsConj f g ↔ ∃ γ, γ • f = g.
+- deg (γ • f) = deg f.
+- toEnd (γ • f) (γ • P) = γ • toEnd f P.
+- A lift of γ • mk F is γ ∘ F ∘ adj(γ).
+- γ • P is preperiodic for γ • f iff P is preperiodic for f.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.smul_sq_translation`** (computation): Conjugating z² by z ↦ z + 1 gives z² − 2z + 2.
-- **`TauCeti.ArithmeticDynamics.RationalMap.smul_sq_inv`** (computation): A nontrivial γ (z ↦ 1/z) fixes z² under conjugation.
-- **`TauCeti.ArithmeticDynamics.RationalMap.not_isConj_sq_sq_add_one`** (non-example): z² and z² + 1 are not conjugate over ℚ.
+- Conjugating z² by z ↦ z + 1 gives z² − 2z + 2.
+- A nontrivial γ (z ↦ 1/z) fixes z² under conjugation.
+- z² and z² + 1 are not conjugate over ℚ.
 
 **Endpoint checks.** Conjugating z² by z ↦ z + 1 gives z² − 2z + 2; by z ↦ 1/z it gives z² again. z² and z² + 1 are not conjugate over ℚ (three versus one ℚ-rational fixed points).
 
@@ -1386,7 +1395,7 @@ For a field K there is an injective monoid homomorphism RationalMap K → End(�
 
 K a field; SchemeAndStackFoundations §0.3 supplies ℙ¹_K, its charts and O(n). This target constructs the morphism from a base-point-free homogeneous pair and classifies all K-endomorphisms, including degree-zero constants.
 
-First prove `projectiveLine_picard_degree`: every line bundle on ℙ¹_K is O(d) for a unique integer d, and `projectiveLine_sections_O`: global sections of O(d), for d≥0, identify with degree-d binary forms, compatibly with evaluation on both standard charts. Prove `projectiveLine_morphism_sections`: morphisms to ℙ¹ correspond to an invertible sheaf with two generating sections up to isomorphism; its pullback of O(1) is that sheaf. A globally generated O(d) has d≥0. Construct `RationalMap.toSchemeEnd` by gluing the chart ratios F₀/F₁ and F₁/F₀ on their nonvanishing loci. Prove `RationalMap.toSchemeEnd_points`, `RationalMap.toSchemeEnd_comp`, `RationalMap.toSchemeEnd_scale`, and `RationalMap.toSchemeEnd_bijective`. For surjectivity apply the three preceding projective-line targets; for injectivity compare over K̄, an infinite field, then descend morphism equality. These prerequisites are owned here (Silverman AWS §6.1, p.19; Stacks §27.13, Lemma 27.13.1 (Tag 01NE), Picard calculation Lemma 31.29.5 (Tag 0BXJ), and section calculation Lemma 30.8.1 (Tag 01XT)).
+First prove the Picard classification of the projective line: every line bundle on ℙ¹_K is O(d) for a unique integer d, and the global-section formula for O(d): global sections of O(d), for d≥0, identify with degree-d binary forms, compatibly with evaluation on both standard charts. Prove the description of projective-line morphisms by generating sections: morphisms to ℙ¹ correspond to an invertible sheaf with two generating sections up to isomorphism; its pullback of O(1) is that sheaf. A globally generated O(d) has d≥0. Construct the map to scheme endomorphisms by gluing the chart ratios F₀/F₁ and F₁/F₀ on their nonvanishing loci. Prove agreement on points, compatibility with composition, invariance under scaling the lift, and bijectivity. For surjectivity apply the three preceding projective-line targets; for injectivity compare over K̄, an infinite field, then descend morphism equality. These prerequisites are owned here (Silverman AWS §6.1, p.19; Stacks §27.13, Lemma 27.13.1 (Tag 01NE), Picard calculation Lemma 31.29.5 (Tag 0BXJ), and section calculation Lemma 30.8.1 (Tag 01XT)).
 
 **Checks.**
 
@@ -1429,20 +1438,20 @@ X^d and Y^d are homogeneous of degree d; over an algebraic closure their only co
 
 Prove the following basic API.
 
-- `powerMap_apply`: P_d(z) = z^d for z in K and P_d(∞) = ∞.
-- `powerMap_comp`: P_d ∘ P_e = `P_{de}` as rational maps.
-- `powerMap_iterate`: P_dⁿ = `P_{dⁿ}` as rational maps.
-- `powerMap_degree`: The degree of P_d is d.
-- `powerMap_resultant`: Res(X^d, Y^d) = 1; hence P_d has good reduction at every nonarchimedean place (Good reduction of a rational map).
-- `powerMap_conj_inv`: P_d commutes with ι(z) = 1/z and with z ↦ ζz for every (d−1)-th root of unity ζ.
-- `powerMap_isFixedPt_iff`: For d ≥ 2, the fixed points of P_d are 0, ∞ and the (d−1)-th roots of unity.
-- `powerMap_map`: For a field homomorphism σ : K → L, the base change of P_d over K is P_d over L.
+- P_d(z) = z^d for z in K and P_d(∞) = ∞.
+- P_d ∘ P_e = `P_{de}` as rational maps.
+- P_dⁿ = `P_{dⁿ}` as rational maps.
+- The degree of P_d is d.
+- Res(X^d, Y^d) = 1; hence P_d has good reduction at every nonarchimedean place (Good reduction of a rational map).
+- P_d commutes with ι(z) = 1/z and with z ↦ ζz for every (d−1)-th root of unity ζ.
+- For d ≥ 2, the fixed points of P_d are 0, ∞ and the (d−1)-th roots of unity.
+- For a field homomorphism σ : K → L, the base change of P_d over K is P_d over L.
 
 **Checks.**
 
-- **`powerMap_two_iterate_three`** (computation): Over ℚ, P_2³(2) = 256 and P_2³(∞) = ∞.
-- **`powerMap_one`** (degenerate): P_1 is the identity rational map of ℙ¹.
-- **`powerMap_two_not_preperiodic`** (non-example): The point 2 ∈ ℚ is not preperiodic for P_2 (its orbit 2, 4, 16, 256, … is injective), whereas every root of unity is.
+- Over ℚ, P_2³(2) = 256 and P_2³(∞) = ∞.
+- P_1 is the identity rational map of ℙ¹.
+- The point 2 ∈ ℚ is not preperiodic for P_2 (its orbit 2, 4, 16, 256, … is injective), whereas every root of unity is.
 
 **Endpoint checks.** P_2 over ℚ: P_2(2) = 4, P_2³(2) = 256, P_2(∞) = ∞, P_2(−1) = 1. P_d ∘ P_e = `P_{de}` holds as an equality of rational maps (of forms up to scaling), not only on points. Res(X^d, Y^d) = 1, so P_d has good reduction at every finite place of every number field.
 
@@ -1462,19 +1471,19 @@ Each |·|_π and |·|_∞ comes from a discrete valuation (IsDedekindDomain.Heig
 
 Prove the following basic API.
 
-- **`ratFuncAdmissibleAbsValues`** (instance): The Height.AdmissibleAbsValues instance on RatFunc k: archAbsVal = 0, nonarchAbsVal = {|·|_π} ∪ {|·|_∞}.
-- `ratFunc_logHeight₁_eq`: Height.logHeight₁ g = max(natDegree (num g), natDegree (denom g)).
-- `ratFunc_logHeight_eq`: For p, q ∈ k[t] coprime and not both zero, Height.logHeight ![p, q] = max(natDegree p, natDegree q).
-- `ratFunc_totalWeight`: Height.totalWeight (RatFunc k) = 0 (no archimedean absolute values), so the constants of Mathlib's lower height bound carry no archimedean factor.
-- `ratFunc_logHeight₁_comp`: For nonconstant g, u ∈ k(t), h(g ∘ u) = h(g) · h(u), where g ∘ u = RatFunc.eval (algebraMap k (RatFunc k)) u g.
-- `ratFunc_logHeight_map_constants`: For a field extension k ⊆ k′, the height of [p : q] ∈ ℙ¹(k(t)) equals its height in ℙ¹(k′(t)).
+- The Height.AdmissibleAbsValues instance on RatFunc k: archAbsVal = 0, nonarchAbsVal = {|·|_π} ∪ {|·|_∞}.
+- Height.logHeight₁ g = max(natDegree (num g), natDegree (denom g)).
+- For p, q ∈ k[t] coprime and not both zero, Height.logHeight ![p, q] = max(natDegree p, natDegree q).
+- Height.totalWeight (RatFunc k) = 0 (no archimedean absolute values), so the constants of Mathlib's lower height bound carry no archimedean factor.
+- For nonconstant g, u ∈ k(t), h(g ∘ u) = h(g) · h(u), where g ∘ u = RatFunc.eval (algebraMap k (RatFunc k)) u g.
+- For a field extension k ⊆ k′, the height of [p : q] ∈ ℙ¹(k(t)) equals its height in ℙ¹(k′(t)).
 
 **Checks.**
 
-- **`ratFunc_logHeight₁_example`** (computation): In ℚ(t), Height.logHeight₁ ((t² + 1)/(t − 1)) = 2.
-- **`ratFunc_logHeight₁_C`** (degenerate): Height.logHeight₁ (C c) = 0 for every c ∈ k, and Height.logHeight₁ t = 1.
-- `ratFunc_logHeight₁_eq_finrank`: For g ∈ k(t) ∖ k, Height.logHeight₁ g = [k(t) : k(g)] = max(deg num g, deg denom g) (Mathlib RatFunc.finrank_eq_max_natDegree).
-- **`ratFunc_logHeight₁_ne_intDegree`** (non-example): The height is not Mathlib's RatFunc.intDegree: for g = 1/t, Height.logHeight₁ g = 1 while intDegree g = −1.
+- In ℚ(t), Height.logHeight₁ ((t² + 1)/(t − 1)) = 2.
+- Height.logHeight₁ (C c) = 0 for every c ∈ k, and Height.logHeight₁ t = 1.
+- For g ∈ k(t) ∖ k, Height.logHeight₁ g = [k(t) : k(g)] = max(deg num g, deg denom g) (Mathlib RatFunc.finrank_eq_max_natDegree).
+- The height is not Mathlib's RatFunc.intDegree: for g = 1/t, Height.logHeight₁ g = 1 while intDegree g = −1.
 
 **Endpoint checks.** h((t² + 1)/(t − 1)) = 2 and h(![t², t + 1]) = 2. Constants have height 0, so Northcott fails when k is infinite: the set {g : h(g) ≤ 0} contains k. For g ∉ k, h(g) = [k(t) : k(g)] (Mathlib RatFunc.finrank_eq_max_natDegree).
 
@@ -1488,7 +1497,7 @@ Applications include [The moduli space M_d(K) of degree-d maps](#029-the-moduli-
 
 Construct the orbit predicates first, then the homogeneous-form map and its degree/resultant contracts. Scheme comparisons and geometric moduli require their listed suppliers; a set quotient over K does not identify all twists with geometric K-points.
 
-Define `dynamicalModuliScheme` by the preceding construction. Prove `dynamicalModuli_affine`, `dynamicalModuli_baseChange`, `dynamicalModuli_dimension`, `quadraticModuliScheme_iso_affinePlane`.
+Construct the dynamical moduli scheme by the preceding quotient; prove affineness, compatibility with base change, the relative dimension formula and the affine-plane identification in degree two.
 
 **Checks.**
 
@@ -1510,19 +1519,19 @@ Degree is a conjugacy invariant (Conjugation of rational maps by PGL₂), so it 
 
 Prove the following basic API.
 
-- `ModuliSpace`: M_d(K) = {c : ConjClasses (RationalMap K) | conjDegree c = d}.
-- `RationalMap.conjDegree`: The degree of a conjugacy class.
-- `ModuliSpace.mk`: The class of a degree-d map.
-- `ModuliSpace.mk_eq_mk_iff`: mk f = mk g ↔ IsConj f g.
-- `ModuliSpace.mk_surjective`: Every point has a representative.
-- `ModuliSpace.map`: M_d(K) → M_d(L) along σ : K →+* L.
-- `ModuliSpace.map_mk`: map σ (mk f) = mk (RationalMap.map σ f).
+- M_d(K) = {c : ConjClasses (RationalMap K) | conjDegree c = d}.
+- The degree of a conjugacy class.
+- The class of a degree-d map.
+- mk f = mk g ↔ IsConj f g.
+- Every point has a representative.
+- M_d(K) → M_d(L) along σ : K →+* L.
+- map σ (mk f) = mk (RationalMap.map σ f).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.ModuliSpace.subsingleton_zero`** (degenerate): M₀(K) has at most one point.
-- **`TauCeti.ArithmeticDynamics.ModuliSpace.twist`** (non-example): 1/z² and 2/z² differ in M₂(ℚ) but agree in M₂(ℚ̄).
-- **`TauCeti.ArithmeticDynamics.ModuliSpace.sq_ne_sq_add_one`** (computation): z² and z² + 1 are distinct points of M₂(ℚ).
+- M₀(K) has at most one point.
+- 1/z² and 2/z² differ in M₂(ℚ) but agree in M₂(ℚ̄).
+- z² and z² + 1 are distinct points of M₂(ℚ).
 
 **Endpoint checks.** M₀(K) is a point. 1/z² and 2/z² are different points of M₂(ℚ) with the same image in M₂(ℚ̄) (a conjugacy γ must preserve the critical points {0, ∞}, forcing γ(z) = cz or c/z with c³ = 2).
 
@@ -1544,16 +1553,16 @@ Well defined on the class: scaling F scales the form (The zeros of a binary form
 
 Prove the following basic API.
 
-- `RationalMap.fixedPoints`: The multiset of fixed points of f.
-- `RationalMap.mem_fixedPoints_iff`: For deg f ≥ 2: P ∈ fixedPoints f ↔ toEnd f P = P.
-- `RationalMap.card_fixedPoints`: Over an algebraically closed field, deg f ≥ 2: d + 1 fixed points with multiplicity.
-- `RationalMap.fixedPoints_smul`: fixedPoints (γ • f) = (fixedPoints f).map (γ • ·).
+- The multiset of fixed points of f.
+- For deg f ≥ 2: P ∈ fixedPoints f ↔ toEnd f P = P.
+- Over an algebraically closed field, deg f ≥ 2: d + 1 fixed points with multiplicity.
+- fixedPoints (γ • f) = (fixedPoints f).map (γ • ·).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.fixedPoints_sq`** (computation): fixedPoints (z²) = {0, 1, ∞}.
-- **`TauCeti.ArithmeticDynamics.RationalMap.fixedPoints_translation`** (degenerate): z ↦ z + 1 has the single fixed point ∞ with multiplicity 2.
-- **`TauCeti.ArithmeticDynamics.RationalMap.fixedPoints_sq_add_one`** (non-example): Over ℚ, fixedPoints (z² + 1) = {∞}: the K-points of the multiset miss the irrational fixed points.
+- fixedPoints (z²) = {0, 1, ∞}.
+- z ↦ z + 1 has the single fixed point ∞ with multiplicity 2.
+- Over ℚ, fixedPoints (z² + 1) = {∞}: the K-points of the multiset miss the irrational fixed points.
 
 **Endpoint checks.** z² has fixed points 0, 1, ∞; z + 1 has ∞ twice; over ℚ, z² + 1 has only ∞ (its finite fixed points solve z² − z + 1 = 0).
 
@@ -1573,20 +1582,20 @@ Jac(cF) = c² Jac(F), so the roots depend only on f (The zeros of a binary form 
 
 Prove the following basic API.
 
-- `RationalMap.criticalPoints`: The multiset of critical points.
-- `RationalMap.card_criticalPoints`: Characteristic 0, algebraically closed, d ≥ 1: 2d − 2 critical points.
-- `RationalMap.criticalPoints_smul`: criticalPoints (γ • f) = (criticalPoints f).map (γ • ·).
-- `RationalMap.count_criticalPoints_le`: Characteristic 0: each critical point has multiplicity ≤ d − 1.
-- `RationalMap.mk_one_mem_criticalPoints_iff`: Characteristic 0, d ≥ 1: at [x : 1] with F₁(x, 1) ≠ 0, critical iff (f₀'f₁ − f₀f₁')(x) = 0 for f_i = F_i(X, 1).
-- `RationalMap.mem_criticalPoints_mul_iff`: Chain rule: P is critical for f ∘ g iff P is critical for g or g(P) is critical for f.
-- `RationalMap.criticalPoints_comp`: Chain rule: for rational maps f, g of degree ≥ 1 in characteristic 0, local degrees multiply, `e_{f∘g}(c)` = e_g(c)·e_f(g(c)), where the critical multiplicity at c is e(c) − 1; so c is critical for f ∘ g iff c is critical for g or g(c) is critical for f.
-- `RationalMap.criticalPoints_iterate`: The local degree of the n-th iterate at c is the product of the local degrees of f at c, f(c), …, `f^{n−1}(c);` hence the critical points of fⁿ are the points whose orbit meets a critical point of f within n − 1 steps, with critical multiplicity that product minus one.
+- The multiset of critical points.
+- Characteristic 0, algebraically closed, d ≥ 1: 2d − 2 critical points.
+- criticalPoints (γ • f) = (criticalPoints f).map (γ • ·).
+- Characteristic 0: each critical point has multiplicity ≤ d − 1.
+- Characteristic 0, d ≥ 1: at [x : 1] with F₁(x, 1) ≠ 0, critical iff (f₀'f₁ − f₀f₁')(x) = 0 for f_i = F_i(X, 1).
+- Chain rule: P is critical for f ∘ g iff P is critical for g or g(P) is critical for f.
+- Chain rule: for rational maps f, g of degree ≥ 1 in characteristic 0, local degrees multiply, `e_{f∘g}(c)` = e_g(c)·e_f(g(c)), where the critical multiplicity at c is e(c) − 1; so c is critical for f ∘ g iff c is critical for g or g(c) is critical for f.
+- The local degree of the n-th iterate at c is the product of the local degrees of f at c, f(c), …, `f^{n−1}(c);` hence the critical points of fⁿ are the points whose orbit meets a critical point of f within n − 1 steps, with critical multiplicity that product minus one.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.criticalPoints_pow`** (computation): z³ over ℚ has critical points 0, 0, ∞, ∞.
-- **`TauCeti.ArithmeticDynamics.RationalMap.criticalPoints_frobenius`** (degenerate): In characteristic p, z^p has no critical points in the sense of the Jacobian form (it vanishes identically).
-- `TauCeti.ArithmeticDynamics.RationalMap.criticalPoints_milnor`: For Milnor's normal form, [ω : 1] is critical iff μ₂ω² + 2ω + μ₁ = 0.
+- z³ over ℚ has critical points 0, 0, ∞, ∞.
+- In characteristic p, z^p has no critical points in the sense of the Jacobian form (it vanishes identically).
+- For Milnor's normal form, [ω : 1] is critical iff μ₂ω² + 2ω + μ₁ = 0.
 
 **Endpoint checks.** z³ over ℚ: 0 and ∞, each twice. z^p over 𝔽_p: Jac = 0 and the definition returns no critical points. Milnor's normal form z(z + μ₁)/(μ₂z + 1): Jac = 2(μ₂X₀² + 2X₀X₁ + μ₁X₁²).
 
@@ -1620,18 +1629,18 @@ Finite fixed point: with f(z) = F₀(z,1)/F₁(z,1) and F₁(z, 1) ≠ 0 (since 
 
 Prove the following basic API.
 
-- `RationalMap.multiplier`: μ_P(f) ∈ K.
-- `RationalMap.multiplier_ofPolynomial`: At a finite fixed point z of p, μ = p'(z).
-- `RationalMap.multiplier_ofPolynomial_infty`: For deg p ≥ 2, μ_∞ = 0.
-- `RationalMap.multiplier_eq_trace`: If F(x) = c x, c ≠ 0, then `μ_{[x]}` = (∂₀F₀(x) + ∂₁F₁(x))/c − d.
-- `RationalMap.multiplier_eq_one_iff`: For deg f ≥ 2 and a fixed point P over an algebraically closed field, μ_P = 1 iff P has multiplicity at least 2 in fixedPoints f.
+- μ_P(f) ∈ K.
+- At a finite fixed point z of p, μ = p'(z).
+- For deg p ≥ 2, μ_∞ = 0.
+- If F(x) = c x, c ≠ 0, then `μ_{[x]}` = (∂₀F₀(x) + ∂₁F₁(x))/c − d.
+- For deg f ≥ 2 and a fixed point P over an algebraically closed field, μ_P = 1 iff P has multiplicity at least 2 in fixedPoints f.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.multiplier_sq_one`** (computation): The multiplier of z² at 1 is 2.
-- **`TauCeti.ArithmeticDynamics.RationalMap.multiplier_sq_infty`** (non-example): The multiplier of z² at ∞ is 0, not the value 2z of the naive derivative.
-- **`TauCeti.ArithmeticDynamics.RationalMap.multiplier_translation_infty`** (degenerate): The parabolic fixed point ∞ of z + 1 has multiplier 1.
-- **`TauCeti.ArithmeticDynamics.RationalMap.multiplier_frobenius`** (computation): In characteristic p, z^p has multiplier 0 at 1.
+- The multiplier of z² at 1 is 2.
+- The multiplier of z² at ∞ is 0, not the value 2z of the naive derivative.
+- The parabolic fixed point ∞ of z + 1 has multiplier 1.
+- In characteristic p, z^p has multiplier 0 at 1.
 
 **Endpoint checks.** z²: μ₀ = 0, μ₁ = 2, μ_∞ = 0; z + 1: μ_∞ = 1 (parabolic); z^p over 𝔽_p: μ₁ = 0.
 
@@ -1639,7 +1648,7 @@ Applications include Milnor, §3 and Appendix C — multipliers µ₁, µ₂, µ
 
 For the power maps of §0.27a, prove the following multiplier application.
 
-- `powerMap_multiplier`: For d ≥ 2 the multiplier (The multiplier of a periodic cycle) of the fixed points 0 and ∞ is 0; if char K ∤ d, the multiplier of a fixed (d−1)-th root of unity is d, and the n-cycle of a root of unity of exact period n has multiplier dⁿ.
+- For d ≥ 2 the multiplier (The multiplier of a periodic cycle) of the fixed points 0 and ∞ is 0; if char K ∤ d, the multiplier of a fixed (d−1)-th root of unity is d, and the n-cycle of a root of unity of exact period n has multiplier dⁿ.
 
 **Check.** For z², the fixed multipliers at 0, 1, ∞ are 0, 2, 0. In characteristic 2 all three derivative values vanish.
 
@@ -1657,20 +1666,20 @@ Define CriticallyMarkedMap K d as the subtype and the action through Conjugation
 
 Prove the following basic API.
 
-- `CriticallyMarkedMap`: The type of critically marked maps of degree d.
-- **`CriticallyMarkedMap.instMulActionPGL`** (instance): PGL(2, K) acts on critically marked maps.
-- `CriticallyMarkedModuliSpace`: The orbit quotient M_d^cm(K).
-- `CriticallyMarkedModuliSpace.forget`: M_d^cm(K) → M_d(K).
-- `CriticallyMarkedModuliSpace.forget_surjective`: Surjective over an algebraically closed field of characteristic 0.
-- **`CriticallyMarkedModuliSpace.instMulActionPerm`** (instance): Relabelling action of Sym(2d − 2).
-- `CriticallyMarkedModuliSpace.forget_smul`: forget (σ • c) = forget c.
-- `CriticallyMarkedModuliSpace.forget_eq_forget_iff`: Fibres of forget are Sym(2d − 2)-orbits (closed field, characteristic 0).
+- The type of critically marked maps of degree d.
+- PGL(2, K) acts on critically marked maps.
+- The orbit quotient M_d^cm(K).
+- M_d^cm(K) → M_d(K).
+- Surjective over an algebraically closed field of characteristic 0.
+- Relabelling action of Sym(2d − 2).
+- forget (σ • c) = forget c.
+- Fibres of forget are Sym(2d − 2)-orbits (closed field, characteristic 0).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.CriticallyMarkedModuliSpace.forget_fiber_two`** (computation): The class of z² has exactly one preimage in M₂^cm.
-- **`TauCeti.ArithmeticDynamics.CriticallyMarkedModuliSpace.degree_one`** (degenerate): For d = 1, forget : M₁^cm → M₁ is a bijection.
-- **`TauCeti.ArithmeticDynamics.CriticallyMarkedModuliSpace.fiber_generic`** (non-example): forget : M₂^cm → M₂ is not injective.
+- The class of z² has exactly one preimage in M₂^cm.
+- For d = 1, forget : M₁^cm → M₁ is a bijection.
+- forget : M₂^cm → M₂ is not injective.
 
 **Endpoint checks.** d = 1: no critical points and M₁^cm = M₁. d = 2: z² has one preimage (z ↦ 1/z swaps its critical points 0, ∞ and commutes with z²); a map with trivial automorphism group has two. For d = 3, z³ has the nonidentity automorphism z ↦ −z fixing each critical point 0 and ∞, so ordering critical points alone does not remove stabilizers.
 
@@ -1736,17 +1745,17 @@ Define sigma f i := (f.fixedPoints.map f.multiplier).esymm i. Invariance: fixedP
 
 Prove the following basic API.
 
-- `RationalMap.sigma`: σᵢ(f) ∈ K.
-- `RationalMap.sigma_smul`: σᵢ(γ • f) = σᵢ(f).
-- `RationalMap.sigma_eq_zero_of_lt`: σᵢ = 0 when i exceeds the number of fixed points.
-- `ModuliSpace.sigma`: σᵢ as a function on M_d(K).
-- `ModuliSpace.sigma_mk`: (mk f).sigma i = f.sigma i.
+- σᵢ(f) ∈ K.
+- σᵢ(γ • f) = σᵢ(f).
+- σᵢ = 0 when i exceeds the number of fixed points.
+- σᵢ as a function on M_d(K).
+- (mk f).sigma i = f.sigma i.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.sigma_sq`** (computation): σ₁(z²) = 2 and σ₂(z²) = 0.
-- **`TauCeti.ArithmeticDynamics.RationalMap.sigma_sq_add_const`** (computation): Over an algebraically closed field of characteristic 0, σ(z² + c) = (2, 4c, 0).
-- **`TauCeti.ArithmeticDynamics.RationalMap.sigma_not_closed`** (non-example): Over ℚ, σ₂(z² + 1) = 0 (only ∞ is a ℚ-point), whereas over ℚ̄ it is 4.
+- σ₁(z²) = 2 and σ₂(z²) = 0.
+- Over an algebraically closed field of characteristic 0, σ(z² + c) = (2, 4c, 0).
+- Over ℚ, σ₂(z² + 1) = 0 (only ∞ is a ℚ-point), whereas over ℚ̄ it is 4.
 
 **Endpoint checks.** z²: σ₁ = 2, σ₂ = 0, σ₃ = 0. z² + c over an algebraically closed field of characteristic 0: σ₁ = 2, σ₂ = 4c, σ₃ = 0.
 
@@ -1808,18 +1817,18 @@ Define tateLimit as Filter.limUnder atTop (n ↦ h(φ^[n] P)/α^n). tateLimit_co
 
 Prove the following basic API.
 
-- `tateLimit`: tateLimit φ h α : S → ℝ.
-- `tateLimit_def`: tateLimit φ h α P = limUnder atTop (n ↦ h(φⁿ P)/αⁿ).
-- `tateLimit_congr_of_bounded`: α > 1, h ∘ φ − αh bounded and h' − h bounded ⇒ tateLimit φ h' α = tateLimit φ h α.
-- `tateLimit_const_mul`: Under α > 1 and bounded h ∘ φ − αh, tateLimit φ (c · h) α = c · tateLimit φ h α.
-- `tateLimit_iterate`: Under α > 1 and bounded h ∘ φ − αh, tateLimit φ^[k] h (α^k) = tateLimit φ h α for k ≥ 1.
-- `tateLimit_nonneg`: Under α > 1 and bounded h ∘ φ − αh, h ≥ 0 ⇒ tateLimit φ h α ≥ 0.
+- tateLimit φ h α : S → ℝ.
+- tateLimit φ h α P = limUnder atTop (n ↦ h(φⁿ P)/αⁿ).
+- α > 1, h ∘ φ − αh bounded and h' − h bounded ⇒ tateLimit φ h' α = tateLimit φ h α.
+- Under α > 1 and bounded h ∘ φ − αh, tateLimit φ (c · h) α = c · tateLimit φ h α.
+- Under α > 1 and bounded h ∘ φ − αh, tateLimit φ^[k] h (α^k) = tateLimit φ h α for k ≥ 1.
+- Under α > 1 and bounded h ∘ φ − αh, h ≥ 0 ⇒ tateLimit φ h α ≥ 0.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.tateLimit_id`** (degenerate): tateLimit id h 2 P = 0 for every h and P.
-- **`TauCeti.ArithmeticDynamics.tateLimit_double`** (computation): tateLimit (x ↦ 2x) id 2 x = x on ℝ: the first two normalized terms at x = 1 are 1/1 = 1 and 2/2 = 1. Dividing the limit by two would give the wrong normalization.
-- **`TauCeti.ArithmeticDynamics.not_tendsto_tateSeq_one`** (non-example): With α = 1, φ = (· + 1), h = id the Tate sequence diverges.
+- tateLimit id h 2 P = 0 for every h and P.
+- tateLimit (x ↦ 2x) id 2 x = x on ℝ: the first two normalized terms at x = 1 are 1/1 = 1 and 2/2 = 1. Dividing the limit by two would give the wrong normalization.
+- With α = 1, φ = (· + 1), h = id the Tate sequence diverges.
 
 **Endpoint checks.** φ = id, α = 2: the limit is 0 for every h. φ(x) = 2x, h = id on ℝ, α = 2: the sequence is constant and the limit is x. α = 1, φ(x) = x + 1, h = id: the sequence x + n diverges, so α > 1 is essential.
 
@@ -1883,8 +1892,6 @@ The forward orbit of P is finite (Preperiodic iff the forward orbit is finite), 
 
 ### 1.6 Existence of Tate's limit
 
-The named signature is `tendsto_tateLimit`.
-
 Let α > 1 and suppose h ∘ φ − αh is bounded. Then for every P the sequence h(φⁿP)/αⁿ converges, and its limit is tateLimit φ h α P.
 
 α > 1. ∃ C, |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
@@ -1927,8 +1934,6 @@ d = 0: f(P) is a fixed point and logHeight f(P) is a constant. d ≥ 1: choose a
 
 ### 1.9 Tate's limit differs from h by at most C/(α − 1)
 
-The named signature is `abs_tateLimit_sub_le`.
-
 Let α > 1 and |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)). Then |tateLimit φ h α P − h(P)| ≤ C/(α − 1) for every P.
 
 α > 1. |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
@@ -1942,8 +1947,6 @@ Take m = 0 in Tate's telescoping estimate: |h(φⁿP)/αⁿ − h(P)| ≤ C/(α 
 **Endpoint checks.** For the power map on ℙ¹, h ∘ φ = d·h exactly, C = 0, and the canonical height equals h.
 
 ### 1.10 The functional equation ĥ ∘ φ = αĥ
-
-The named signature is `tateLimit_apply`.
 
 Let α > 1 and suppose h ∘ φ − αh is bounded. Then tateLimit φ h α (φP) = α · tateLimit φ h α P for every P.
 
@@ -1987,8 +1990,6 @@ tateLimit φ h α P = 0 (Preperiodic points have Tate limit zero) and |tateLimit
 
 ### 1.13 Uniqueness of Tate's limit
 
-The named signature is `eq_tateLimit_of_bounded`.
-
 Let α > 1 and suppose h ∘ φ − αh is bounded. If g : S → ℝ satisfies (i) g − h is bounded and (ii) g ∘ φ = αg, then g = tateLimit φ h α. Hence tateLimit φ h α is the unique function with (i) and (ii).
 
 α > 1. ∃ C, |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
@@ -2002,8 +2003,6 @@ tateLimit φ h α satisfies (i) (Tate's limit differs from h by at most C/(α �
 **Endpoint checks.** For the power map z ↦ z^d on ℙ¹ the Weil height h itself satisfies (i) and (ii), so ĥ = h (Silverman ADS, p. 99).
 
 ### 1.14 Zero Tate limit and Northcott give preperiodicity
-
-The named signature is `tateLimit_eq_zero_iff`.
 
 Let α > 1 with h ∘ φ − αh bounded, and let A ⊆ S be forward invariant (φ(A) ⊆ A) such that {Q ∈ A : h(Q) ≤ B} is finite for every B (Northcott on A). If P ∈ A and tateLimit φ h α P = 0, then P is preperiodic for φ.
 
@@ -2061,8 +2060,6 @@ Height machine (RP.0): h_L ∘ φ = `h_{φ*L}` + O(1) = `h_{L^{⊗d}}` + O(1) = 
 
 ### 1.18 The Tate limit of doubling on an elliptic curve and Tau Ceti's canonical height
 
-The named signature is `tateLimit_elliptic_doubling`.
-
 Let F be a field with Height.AdmissibleAbsValues, W an elliptic curve over F and h the naive height of the x-coordinate (Tau Ceti's WeierstrassCurve.Affine.Point.naiveHeight). Then tateLimit (Q ↦ 2•Q) h 4 = canonicalHeight (Tau Ceti's Point.canonicalHeight), and for every integer m ≥ 2, tateLimit (Q ↦ m•Q) h m² = canonicalHeight. Normalisation: Call–Silverman's `ĥ_{E,[m],η}` for η the class of 2(O), with `h_{2(O)}` = h, equals Tau Ceti's canonical height for 2(O), twice the height for (O); points of Tate limit 0 are exactly the torsion points under Northcott for the field height.
 
 F with admissible absolute values and decidable equality (Tau Ceti's group law); W elliptic.
@@ -2089,23 +2086,23 @@ Definition from Tate's limit of a height along a self-map. Hypothesis of Tate's 
 
 Prove the following basic API.
 
-- `RationalMap.relCanonicalHeight`: `ĥ_{f,K}` : ℙ¹(K) → ℝ.
-- `RationalMap.tendsto_relCanonicalHeight`: deg f ≥ 2: logHeight(fⁿP)/dⁿ → `ĥ_{f,K}(P).`
-- `RationalMap.exists_abs_relCanonicalHeight_sub_le`: deg f ≥ 2: `ĥ_{f,K}` − logHeight is bounded.
-- `RationalMap.relCanonicalHeight_toEnd`: `ĥ_{f,K}(f(P))` = `d·ĥ_{f,K}(P).`
-- `RationalMap.eq_relCanonicalHeight_of_bounded`: Uniqueness among functions with bounded difference from logHeight and the functional equation.
-- `RationalMap.relCanonicalHeight_nonneg`: `ĥ_{f,K}` ≥ 0.
-- `RationalMap.relCanonicalHeight_pow`: `ĥ_{fⁿ,K}` = `ĥ_{f,K}` for n ≥ 1.
-- `RationalMap.relCanonicalHeight_smul`: `ĥ_{γ•f,K}(γP)` = `ĥ_{f,K}(P).`
-- `RationalMap.relCanonicalHeight_eq_zero_of_isPreperiodicPt`: Preperiodic points have ĥ = 0.
-- `RationalMap.relCanonicalHeight_map_algebraMap`: Number fields K ⊆ L: `ĥ_{f_L,L}(P)` = [L : K]`·ĥ_{f,K}(P).`
+- `ĥ_{f,K}` : ℙ¹(K) → ℝ.
+- deg f ≥ 2: logHeight(fⁿP)/dⁿ → `ĥ_{f,K}(P).`
+- deg f ≥ 2: `ĥ_{f,K}` − logHeight is bounded.
+- `ĥ_{f,K}(f(P))` = `d·ĥ_{f,K}(P).`
+- Uniqueness among functions with bounded difference from logHeight and the functional equation.
+- `ĥ_{f,K}` ≥ 0.
+- `ĥ_{fⁿ,K}` = `ĥ_{f,K}` for n ≥ 1.
+- `ĥ_{γ•f,K}(γP)` = `ĥ_{f,K}(P).`
+- Preperiodic points have ĥ = 0.
+- Number fields K ⊆ L: `ĥ_{f_L,L}(P)` = [L : K]`·ĥ_{f,K}(P).`
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.RationalMap.relCanonicalHeight_sq`** (computation): Over ℚ, relCanonicalHeight (z²) [x : 1] = logHeight₁ x.
-- **`TauCeti.ArithmeticDynamics.RationalMap.relCanonicalHeight_translation`** (non-example): For z ↦ z + 1 (degree 1) the Tate sequence at 0 is log n, unbounded: the construction needs degree ≥ 2.
-- **`TauCeti.ArithmeticDynamics.RationalMap.relCanonicalHeight_infty`** (degenerate): A polynomial of degree ≥ 2 has relative canonical height 0 at ∞.
-- **`TauCeti.ArithmeticDynamics.RationalMap.relCanonicalHeight_sq_add_t_zero`** (computation): Over k(t) with its admissible absolute values, the canonical height of z² + t at 0 is 1/2: the orbit 0, t, t² + t, … has heights 0, 1, 2, 4, …, so `d^{−n}` h(fⁿ(0)) = `2^{n−1}/2^n.`
+- Over ℚ, relCanonicalHeight (z²) [x : 1] = logHeight₁ x.
+- For z ↦ z + 1 (degree 1) the Tate sequence at 0 is log n, unbounded: the construction needs degree ≥ 2.
+- A polynomial of degree ≥ 2 has relative canonical height 0 at ∞.
+- Over k(t) with its admissible absolute values, the canonical height of z² + t at 0 is 1/2: the orbit 0, t, t² + t, … has heights 0, 1, 2, 4, …, so `d^{−n}` h(fⁿ(0)) = `2^{n−1}/2^n.`
 
 **Endpoint checks.** Over ℚ, relCanonicalHeight (z²) [x : 1] = logHeight₁ x. Polynomials of degree ≥ 2 have canonical height 0 at the fixed point ∞.
 
@@ -2125,24 +2122,24 @@ Definition from Tate's limit of a height along a self-map; hypothesis of Tate's 
 
 Prove the following basic API.
 
-- `RationalMap.canonicalHeight`: ĥ_f : ℙ¹(F) → ℝ.
-- `RationalMap.tendsto_canonicalHeight`: h(fⁿP)/dⁿ → ĥ_f(P).
-- `RationalMap.exists_abs_canonicalHeight_sub_le`: ĥ_f − h is bounded.
-- `RationalMap.canonicalHeight_toEnd`: ĥ_f(f(P)) = d·ĥ_f(P).
-- `RationalMap.eq_canonicalHeight_of_bounded`: The unique function with ĥ − h bounded and ĥ ∘ f = d·ĥ.
-- `RationalMap.canonicalHeight_nonneg`: ĥ_f ≥ 0.
-- `RationalMap.canonicalHeight_pow`: `ĥ_{fⁿ}` = ĥ_f for n ≥ 1.
-- `RationalMap.canonicalHeight_smul`: `ĥ_{γ•f}(γP)` = ĥ_f(P).
-- `RationalMap.canonicalHeight_map`: `ĥ_{map σ f}(σP)` = ĥ_f(P) for embeddings σ.
-- `RationalMap.canonicalHeight_eq_zero_of_isPreperiodicPt`: Preperiodic points have ĥ_f = 0.
+- ĥ_f : ℙ¹(F) → ℝ.
+- h(fⁿP)/dⁿ → ĥ_f(P).
+- ĥ_f − h is bounded.
+- ĥ_f(f(P)) = d·ĥ_f(P).
+- The unique function with ĥ − h bounded and ĥ ∘ f = d·ĥ.
+- ĥ_f ≥ 0.
+- `ĥ_{fⁿ}` = ĥ_f for n ≥ 1.
+- `ĥ_{γ•f}(γP)` = ĥ_f(P).
+- `ĥ_{map σ f}(σP)` = ĥ_f(P) for embeddings σ.
+- Preperiodic points have ĥ_f = 0.
 
 **Checks.**
 
-- `TauCeti.ArithmeticDynamics.RationalMap.canonicalHeight_powMap`: For d ≥ 2, the canonical height of z ↦ z^d is ClassicalArithmeticCompletion.projectiveWeilHeight (acceptance: the power map).
-- **`TauCeti.ArithmeticDynamics.RationalMap.canonicalHeight_sq_two`** (computation): `ĥ_{z²}(`[2 : 1]) = log 2.
-- **`TauCeti.ArithmeticDynamics.RationalMap.canonicalHeight_chebyshev`** (non-example): `ĥ_{z²−2}(`[−2 : 1]) = 0 although h([−2 : 1]) = log 2: ĥ is not h in general.
-- `TauCeti.ArithmeticDynamics.RationalMap.canonicalHeight_rat_compat`: Over ℚ, canonicalHeight f = relCanonicalHeight f (Mathlib's relative height, degree 1).
-- **`TauCeti.ArithmeticDynamics.RationalMap.canonicalHeight_sq_I`** (computation): Over ℚ̄, `ĥ_{z²}(i)` = 0 since i is preperiodic.
+- For d ≥ 2, the canonical height of z ↦ z^d is ClassicalArithmeticCompletion.projectiveWeilHeight (acceptance: the power map).
+- `ĥ_{z²}(`[2 : 1]) = log 2.
+- `ĥ_{z²−2}(`[−2 : 1]) = 0 although h([−2 : 1]) = log 2: ĥ is not h in general.
+- Over ℚ, canonicalHeight f = relCanonicalHeight f (Mathlib's relative height, degree 1).
+- Over ℚ̄, `ĥ_{z²}(i)` = 0 since i is preperiodic.
 
 **Endpoint checks.** `ĥ_{z²}(`[2 : 1]) = log 2; `ĥ_{z²−2}(`[−2 : 1]) = 0 while h([−2 : 1]) = log 2; `ĥ_{z²}(i)` = 0 (i ↦ −1 ↦ 1).
 
@@ -2259,7 +2256,7 @@ Layer 0; Mathlib field and projective heights, admissible absolute values and sc
 ### 2.1 Meromorphic maps to the sphere
 
 For a nonempty connected open domain Ω ⊆ ℂ and f meromorphic on Ω, prove
-`sphereMeromorphic_iff_holomorphic`: the meromorphic germs of f determine a
+the meromorphic-to-sphere holomorphy comparison: the meromorphic germs of f determine a
 unique holomorphic map Ω → `OnePoint ℂ`, taking the value ∞ at each pole and
 the analytic extension value at every removable singularity. Conversely, a
 holomorphic sphere-valued map other than the constant-infinity map determines
@@ -2286,7 +2283,7 @@ Native projective analytic line of multiplicative seminorms with compact Hausdor
 
 Hybrid projective-line carrier and topology, finite-level model functions and their central values, density in continuous functions (Favre Theorems 2.10 and 2.12), and continuity of fibre Laplacian/Monge–Ampère measures under uniform admissible-potential limits (Theorem 4.2). The topological hybrid space alone does not supply these measure/potential comparison theorems.
 
-Define `analyticLine` and `gaussPoint` on the carriers and domains specified above. Prove `analyticLine_isCompact`, `typeI_dense`, `gaussPoint_fixed_integral`, `analytify_comp`.
+Construct the analytic line and Gauss point on the stated carriers; prove compactness, density of type-I points, that integral linear changes fix the Gauss point, and compatibility of analytification with composition.
 
 **Checks.**
 
@@ -2302,7 +2299,7 @@ The Berkovich projective line over a complete algebraically closed nontrivially 
 
 Discs/affinoids map with their type-I traces; separating type-II points, residue components and weak-open Gauss neighborhoods; chordal rational Lipschitz and analytic disc coefficient estimates. Full-degree annulus maps multiply log modulus by full degree; classify singleton inverse-fibre type II/III/IV points and show finite omitted residue directions’ thin annuli fill except at most one point. For the measure argument supply local-degree pullback on Radon measures, supp(f*ρ)=f⁻¹suppρ, integration duality, BDV potentials with Δlog⁺|T|=δ_G−δ∞, harmonic uniqueness, singular-potential Hartogs and weak Laplacian convergence. This API includes rational-map disc geometry as well as the geometry of the underlying tree. The pole-free convergent local expansion and its small invariant/expanding-disc bounds are required for arbitrary rational maps, without global good reduction.
 
-Define `berkovichLaplacian` on the carriers and domains specified above. Prove `berkovichLaplacian_add`, `berkovichLaplacian_const`, `berkovichLaplacian_pullback`, `berkovichLaplacian_harmonic`.
+Construct the Berkovich Laplacian on the stated domain; prove additivity, vanishing on constants, compatibility with pullback and the stated characterization of harmonic functions.
 
 **Checks.**
 
@@ -2316,7 +2313,7 @@ On OnePoint ℂ with its complex charts construct the normalized distributional 
 
 Applications include [Complex canonical measure comparison and support](#280-complex-canonical-measure-comparison-and-support); [Power-map acceptance across places](#286-power-map-acceptance-across-places); [The canonical measure at an archimedean place](#266-the-canonical-measure-at-an-archimedean-place); [The archimedean canonical measure: mass, invariance, no atoms](#274-the-archimedean-canonical-measure-mass-invariance-no-atoms).
 
-Define `sphereLaplacian` by the preceding construction. Prove `sphereLaplacian_add`, `sphereLaplacian_const`, `sphereLaplacian_log`, `sphereLaplacian_pullback`.
+Construct the sphere Laplacian on the stated domain; prove additivity, vanishing on constants, the displayed logarithmic identities and compatibility with pullback.
 
 **Checks.**
 
@@ -2337,7 +2334,7 @@ logarithmic potential is continuous on the affine line and has that logarithmic
 singularity at infinity. Define the measure-valued Laplacian only on the stated
 potential class, and define the more general curvature distribution separately.
 
-Define `localMutualEnergy` and the specified test-function class on the carriers and domains specified above. Prove `localMutualEnergy_symm`, `localMutualEnergy_add`, `localMutualEnergy_nonneg`, `localEnergy_cauchySchwarz`, and `localMutualEnergy_coordinateChange`: for mass-zero ν,η each a continuous-potential part plus finitely many type-I atoms, simultaneous Möbius transport changes their mutual energy by Σ_x ν({x})η({x})log|γ′(x)| in affine charts avoiding poles, with the reciprocal-chart version at infinity. This is zero for two continuous-potential measures, but need not vanish for empirical measures.
+Define the local mutual energy and the specified test-function class on the carriers and domains specified above. Prove symmetry, additivity, nonnegativity of self-energy, the Cauchy–Schwarz inequality, and the following coordinate-change formula: for mass-zero ν,η each a continuous-potential part plus finitely many type-I atoms, simultaneous Möbius transport changes their mutual energy by Σ_x ν({x})η({x})log|γ′(x)| in affine charts avoiding poles, with the reciprocal-chart version at infinity. This is zero for two continuous-potential measures, but need not vanish for empirical measures.
 
 **Checks.**
 
@@ -2412,29 +2409,29 @@ Define `G_{F,v}(x)` as the limit (limUnder along atTop) of the real sequence `d^
 
 Prove the following basic API.
 
-- `escapeRate`: For v an absolute value on K, a lift F of degree d and x ∈ K², escapeRate v F x = `lim_{n→∞}` `d^{−n}·log` ‖Fⁿ(x)‖_v (defined through limUnder; Existence of the escape rate, with a uniform rate shows the limit exists for x ≠ 0 and d ≥ 2).
-- `escapeRate_tendsto`: d ≥ 2, Res F ≠ 0, x ≠ 0 ⟹ `d^{−n}` log ‖Fⁿ(x)‖_v → escapeRate v F x (target Existence of the escape rate, with a uniform rate).
-- `escapeRate_apply_lift`: escapeRate v F (F x) = d · escapeRate v F x (target Functional equation `G_{F,v}(F(x))` = `d·G_{F,v}(x)).`
-- `escapeRate_smul`: escapeRate v F (a • x) = escapeRate v F x + log (v a) for a ≠ 0 (target Logarithmic homogeneity `G_{F,v}(αx)` = `G_{F,v}(x)` + log v(α)).
-- `escapeRate_const_smul_lift`: escapeRate v (c • F) x = escapeRate v F x + log (v c)/(d − 1) for c ≠ 0 (target Changing the lift: `G_{cF,v}` = `G_{F,v}` + log v(c)/(d − 1)).
-- `escapeRate_iterate_lift`: If G is a lift of degree dᵐ (m ≥ 1) with G.eval = (F.eval)^[m], then escapeRate v G x = escapeRate v F x (target The escape rate of an iterate: `G_{Fᵐ,v}` = `G_{F,v}).`
-- `escapeRate_conj`: For A ∈ GL₂(K) and a lift G with G.eval y = A⁻¹·F.eval(A·y) (a lift of the conjugate map): escapeRate v G x = escapeRate v F (A·x) (target Transformation of the escape rate under conjugation).
-- `escapeRate_abs_sub_log_norm_le`: There is C with |escapeRate v F x − log ‖x‖_v| ≤ C for all x ≠ 0; explicitly log c_v(F)/(d − 1) ≤ escapeRate v F x − log ‖x‖_v ≤ log C_v(F)/(d − 1) (target Two-sided bound for `G_{F,v}` − log ‖·‖_v).
-- `escapeRate_algebraMap`: For a field extension L/K and an absolute value w on L restricting to v, escapeRate w (F.map (algebraMap K L)) (algebraMap x) = escapeRate v F x (target The escape rate is unchanged by field extension).
-- `escapeRate_comp_ringEquiv`: For σ : L ≃ₐ[K] L and absolute values w, w′ on L with w′ = w ∘ σ: escapeRate w′ F y = escapeRate w F (σ ∘ y) for F defined over K: the escape rate is Galois-equivariant (used for the Galois-averaged decomposition of DeMarco–Krieger–Ye (2.3)).
-- `escapeRate_rpow_abv`: For 0 < s ≤ 1 (so that v^s is again an absolute value), escapeRate (v^s) F x = s · escapeRate v F x; this converts between the normalised absolute values of Mathlib's places and the standard ones |·|_p used by DeMarco–Krieger–Ye.
-- **`continuous_escapeRate`** (instance): For E a normed field and v its norm (NormedField.toAbsoluteValue), escapeRate is continuous on E² ∖ {0} (target Continuity of the escape rate).
-- `escapeRate_nonpos_iff`: escapeRate v F x ≤ 0 ⟺ the orbit (Fⁿ(x))ₙ is bounded (target `G_{F,v}(x)` ≤ 0 exactly on the filled Julia set of F).
-- **`escapeRate_monomial`** (example): For F = (X₀^d, X₁^d), escapeRate v F x = log ‖x‖_v at every absolute value v.
+- For v an absolute value on K, a lift F of degree d and x ∈ K², escapeRate v F x = `lim_{n→∞}` `d^{−n}·log` ‖Fⁿ(x)‖_v (defined through limUnder; Existence of the escape rate, with a uniform rate shows the limit exists for x ≠ 0 and d ≥ 2).
+- d ≥ 2, Res F ≠ 0, x ≠ 0 ⟹ `d^{−n}` log ‖Fⁿ(x)‖_v → escapeRate v F x (target Existence of the escape rate, with a uniform rate).
+- escapeRate v F (F x) = d · escapeRate v F x (target Functional equation `G_{F,v}(F(x))` = `d·G_{F,v}(x)).`
+- escapeRate v F (a • x) = escapeRate v F x + log (v a) for a ≠ 0 (target Logarithmic homogeneity `G_{F,v}(αx)` = `G_{F,v}(x)` + log v(α)).
+- escapeRate v (c • F) x = escapeRate v F x + log (v c)/(d − 1) for c ≠ 0 (target Changing the lift: `G_{cF,v}` = `G_{F,v}` + log v(c)/(d − 1)).
+- If G is a lift of degree dᵐ (m ≥ 1) with G.eval = (F.eval)^[m], then escapeRate v G x = escapeRate v F x (target The escape rate of an iterate: `G_{Fᵐ,v}` = `G_{F,v}).`
+- For A ∈ GL₂(K) and a lift G with G.eval y = A⁻¹·F.eval(A·y) (a lift of the conjugate map): escapeRate v G x = escapeRate v F (A·x) (target Transformation of the escape rate under conjugation).
+- There is C with |escapeRate v F x − log ‖x‖_v| ≤ C for all x ≠ 0; explicitly log c_v(F)/(d − 1) ≤ escapeRate v F x − log ‖x‖_v ≤ log C_v(F)/(d − 1) (target Two-sided bound for `G_{F,v}` − log ‖·‖_v).
+- For a field extension L/K and an absolute value w on L restricting to v, escapeRate w (F.map (algebraMap K L)) (algebraMap x) = escapeRate v F x (target The escape rate is unchanged by field extension).
+- For σ : L ≃ₐ[K] L and absolute values w, w′ on L with w′ = w ∘ σ: escapeRate w′ F y = escapeRate w F (σ ∘ y) for F defined over K: the escape rate is Galois-equivariant (used for the Galois-averaged decomposition of DeMarco–Krieger–Ye (2.3)).
+- For 0 < s ≤ 1 (so that v^s is again an absolute value), escapeRate (v^s) F x = s · escapeRate v F x; this converts between the normalised absolute values of Mathlib's places and the standard ones |·|_p used by DeMarco–Krieger–Ye.
+- For E a normed field and v its norm (NormedField.toAbsoluteValue), escapeRate is continuous on E² ∖ {0} (target Continuity of the escape rate).
+- escapeRate v F x ≤ 0 ⟺ the orbit (Fⁿ(x))ₙ is bounded (target `G_{F,v}(x)` ≤ 0 exactly on the filled Julia set of F).
+- For F = (X₀^d, X₁^d), escapeRate v F x = log ‖x‖_v at every absolute value v.
 
 **Checks.**
 
-- **`escapeRate_powerMap`** (computation): For F = (X₀², X₁²) over ℚ and v = |·|_∞: escapeRate v F (3, 1) = log 3 and escapeRate v F (1, 1) = 0.
-- **`escapeRate_padicCantor_zero`** (computation): For p prime, F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) over ℚ and v = |·|_p: escapeRate v F (0, 1) = −(log p)/(p − 1); the one-step value (1/p)·log ‖F(0, 1)‖_p = −(log p)/p is different, so the limit is not the first term.
-- **`escapeRate_goodReduction_degenerate`** (degenerate): For F = (X₀² − X₀X₁ − X₁², X₁²) and any prime p, escapeRate |·|_p F x = log ‖x‖_p for every x ∈ ℚ² ∖ {0}.
-- `escapeRate_monicPolynomial_compat`: For a polynomial map f(z) = z² + c over ℂ with lift F = (X₀² + cX₁², X₁²): escapeRate |·| F (z, 1) = lim `2^{−n}` log max(|fⁿ(z)|, 1), the Green function of the filled Julia set; for c = 0 this is Real.posLog |z|.
-- **`escapeRate_depends_on_lift`** (non-example): The escape rate depends on the lift, not only on f: with F = (X₀², X₁²) and 2F, escapeRate |·|_∞ (2F) x = escapeRate |·|_∞ F x + log 2 ≠ escapeRate |·|_∞ F x.
-- **`escapeRate_nonmonic_polynomial_orbit`** (non-example): For p = 2, F = (X₀² − X₀X₁, 2X₁²) and z ∈ ℂ₂ with z² = 2: the polynomial orbit under (z² − z)/2 is unbounded, but G_F(z,1) = −log 2/4 < 0. The sublevel criterion concerns F-orbits in two dimensions.
+- For F = (X₀², X₁²) over ℚ and v = |·|_∞: escapeRate v F (3, 1) = log 3 and escapeRate v F (1, 1) = 0.
+- For p prime, F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) over ℚ and v = |·|_p: escapeRate v F (0, 1) = −(log p)/(p − 1); the one-step value (1/p)·log ‖F(0, 1)‖_p = −(log p)/p is different, so the limit is not the first term.
+- For F = (X₀² − X₀X₁ − X₁², X₁²) and any prime p, escapeRate |·|_p F x = log ‖x‖_p for every x ∈ ℚ² ∖ {0}.
+- For a polynomial map f(z) = z² + c over ℂ with lift F = (X₀² + cX₁², X₁²): escapeRate |·| F (z, 1) = lim `2^{−n}` log max(|fⁿ(z)|, 1), the Green function of the filled Julia set; for c = 0 this is Real.posLog |z|.
+- The escape rate depends on the lift, not only on f: with F = (X₀², X₁²) and 2F, escapeRate |·|_∞ (2F) x = escapeRate |·|_∞ F x + log 2 ≠ escapeRate |·|_∞ F x.
+- For p = 2, F = (X₀² − X₀X₁, 2X₁²) and z ∈ ℂ₂ with z² = 2: the polynomial orbit under (z² − z)/2 is unbounded, but G_F(z,1) = −log 2/4 < 0. The sublevel criterion concerns F-orbits in two dimensions.
 
 **Endpoint checks.** `G_{F,v}` = log ‖·‖_v for F = (X₀^d, X₁^d) at every v. For the (z^p − z)/p lift at p, G(0, 1) = −(log p)/(p − 1).
 
@@ -2468,22 +2465,22 @@ Define λ(P) := `λ_{fⁿ}(P)` with n = minimalPeriod (toEnd f) P (Mathlib's Fun
 
 Prove the following basic API.
 
-- `cycleMultiplier`: cycleMultiplier f P = (f ^ n).multiplier P with n = minimalPeriod (toEnd f) P: the multiplier of the cycle of P (Layer 0's fixed-point multiplier of fⁿ).
-- `cycleMultiplier_def`: For P of exact period n: cycleMultiplier f P = RationalMap.multiplier (f ^ n) P, and by Layer 0's trace formula it equals tr(D(Fⁿ)(x))/μ − dⁿ for Fⁿ(x) = μx.
-- `multiplier_pow_mul`: If P is fixed by fⁿ then (f ^ (k·n)).multiplier P = ((f ^ n).multiplier P)^k.
-- `cycleMultiplier_eq_prod_deriv`: For a polynomial map p and z of exact period n: cycleMultiplier (ofPolynomial p) [z : 1] = `∏_{i<n}` p′(pⁱ(z)); target Chain rule: the multiplier of a cycle is a product of derivatives states the same for rational maps in a chart.
-- `cycleMultiplier_toEnd`: cycleMultiplier f (toEnd f P) = cycleMultiplier f P (target All points of a cycle have the same multiplier).
-- `cycleMultiplier_smul`: cycleMultiplier (γ • f) (γ • P) = cycleMultiplier f P for γ ∈ PGL₂(K) (Multipliers are conjugation invariant applied to fⁿ, with (γ • f)ⁿ = γ • fⁿ).
-- `cycleMultiplier_reduction`: For a valuation ring R with fraction field K and f with good reduction over R: if fⁿ(P) = P then (fⁿ).multiplier P is the image of some a ∈ R whose residue is (f̃ⁿ).multiplier (projReduction P) (target Multipliers of cycles reduce to multipliers).
-- `cycleMultiplier_eq_one_iff`: Over an algebraically closed field, for deg f ≥ 2 and P of exact period n: the cycle multiplier is 1 ⟺ P is a multiple fixed point of fⁿ (Layer 0's multiplier_eq_one_iff for fⁿ); the input of Layer 3's dynatomic multiplicities.
+- cycleMultiplier f P = (f ^ n).multiplier P with n = minimalPeriod (toEnd f) P: the multiplier of the cycle of P (Layer 0's fixed-point multiplier of fⁿ).
+- For P of exact period n: cycleMultiplier f P = RationalMap.multiplier (f ^ n) P, and by Layer 0's trace formula it equals tr(D(Fⁿ)(x))/μ − dⁿ for Fⁿ(x) = μx.
+- If P is fixed by fⁿ then (f ^ (k·n)).multiplier P = ((f ^ n).multiplier P)^k.
+- For a polynomial map p and z of exact period n: cycleMultiplier (ofPolynomial p) [z : 1] = `∏_{i<n}` p′(pⁱ(z)); target Chain rule: the multiplier of a cycle is a product of derivatives states the same for rational maps in a chart.
+- cycleMultiplier f (toEnd f P) = cycleMultiplier f P (target All points of a cycle have the same multiplier).
+- cycleMultiplier (γ • f) (γ • P) = cycleMultiplier f P for γ ∈ PGL₂(K) (Multipliers are conjugation invariant applied to fⁿ, with (γ • f)ⁿ = γ • fⁿ).
+- For a valuation ring R with fraction field K and f with good reduction over R: if fⁿ(P) = P then (fⁿ).multiplier P is the image of some a ∈ R whose residue is (f̃ⁿ).multiplier (projReduction P) (target Multipliers of cycles reduce to multipliers).
+- Over an algebraically closed field, for deg f ≥ 2 and P of exact period n: the cycle multiplier is 1 ⟺ P is a multiple fixed point of fⁿ (Layer 0's multiplier_eq_one_iff for fⁿ); the input of Layer 3's dynatomic multiplicities.
 
 **Checks.**
 
-- **`cycleMultiplier_twoCycle`** (computation): For f(z) = z² − z − 1 over ℚ the 2-cycle {1, −1} has cycleMultiplier f [1 : 1] = f′(1)·f′(−1) = 1·(−3) = −3.
-- **`cycleMultiplier_fixed`** (degenerate): For d ≥ 2 and a fixed point (exact period 1) the cycle multiplier is Layer 0's multiplier: cycleMultiplier (z^d) [1 : 1] = d (read in K; 0 in characteristic p | d), and cycleMultiplier (z^d) ∞ = 0.
-- **`cycleMultiplier_infinity`** (computation): For f(z) = (z² + 1)/(3z) over ℚ the fixed point ∞ has cycle multiplier 3 = tr DF(1, 0) − 2 with F = (X₀² + X₁², 3X₀X₁).
-- `cycleMultiplier_eq_multiplier_pow`: cycleMultiplier f P = (f ^ 2).multiplier P for P = [1 : 1] and f(z) = z² − z − 1 (exact period 2), both equal to −3.
-- **`multiplier_ne_cycleMultiplier`** (non-example): For P of exact period n ≥ 2 the fixed-point multiplier f.multiplier P of Layer 0 is not the cycle multiplier (P is not fixed by f; for [1 : 1] and z² − z − 1 it is Layer 0's junk value, while the cycle multiplier is −3).
+- For f(z) = z² − z − 1 over ℚ the 2-cycle {1, −1} has cycleMultiplier f [1 : 1] = f′(1)·f′(−1) = 1·(−3) = −3.
+- For d ≥ 2 and a fixed point (exact period 1) the cycle multiplier is Layer 0's multiplier: cycleMultiplier (z^d) [1 : 1] = d (read in K; 0 in characteristic p | d), and cycleMultiplier (z^d) ∞ = 0.
+- For f(z) = (z² + 1)/(3z) over ℚ the fixed point ∞ has cycle multiplier 3 = tr DF(1, 0) − 2 with F = (X₀² + X₁², 3X₀X₁).
+- cycleMultiplier f P = (f ^ 2).multiplier P for P = [1 : 1] and f(z) = z² − z − 1 (exact period 2), both equal to −3.
+- For P of exact period n ≥ 2 the fixed-point multiplier f.multiplier P of Layer 0 is not the cycle multiplier (P is not fixed by f; for [1 : 1] and z² − z − 1 it is Layer 0's junk value, while the cycle multiplier is −3).
 
 **Endpoint checks.** The tests; Chain rule: the multiplier of a cycle is a product of derivatives identifies the value with the product of derivatives along the cycle.
 
@@ -2529,20 +2526,20 @@ Use native Nat.iterate and Set.Finite; expose the union of iterated preimages. F
 
 Prove the following basic API.
 
-- `mem_backwardOrbit`: x∈backwardOrbit f a iff some n≥0 has f^n(x)=a.
-- `self_mem_backwardOrbit`: a∈backwardOrbit f a.
-- `mem_exceptionalSet`: a∈exceptionalSet f iff backwardOrbit f a is finite.
-- `backwardOrbit_conjugate`: For an equivalence h and g=h∘f∘h⁻¹, backwardOrbit g (h a)=h(backwardOrbit f a); exceptional sets transform by h.
-- `exceptional_iff_finite_grandOrbit`: For a surjective self-map, finite backward orbit iff finite grand orbit {x:∃m,n≥0, f^m(x)=f^n(a)}. Surjectivity forces the finite backward set to be permuted.
-- `exceptional_iterate`: For any finite-fibre self-map and m≥1, exceptionalSet(f^m)=exceptionalSet(f). Rational maps have finite fibres; arbitrary self-maps need not satisfy this law.
+- x∈backwardOrbit f a iff some n≥0 has f^n(x)=a.
+- a∈backwardOrbit f a.
+- a∈exceptionalSet f iff backwardOrbit f a is finite.
+- For an equivalence h and g=h∘f∘h⁻¹, backwardOrbit g (h a)=h(backwardOrbit f a); exceptional sets transform by h.
+- For a surjective self-map, finite backward orbit iff finite grand orbit {x:∃m,n≥0, f^m(x)=f^n(a)}. Surjectivity forces the finite backward set to be permuted.
+- For any finite-fibre self-map and m≥1, exceptionalSet(f^m)=exceptionalSet(f). Rational maps have finite fibres; arbitrary self-maps need not satisfy this law.
 
 **Checks.**
 
-- **`Exceptional.identity`** (degenerate): For id on any X, E=id’s entire carrier; each backward orbit is a singleton.
-- **`Exceptional.integerTranslation`** (non-example): For f(n)=n+1 on Z, E=∅ because each backward orbit contains a−k for every k≥0.
-- **`Exceptional.powerSphere`** (value): For z↦z^d on P¹(C), d≥2, E={0,∞}; on affine C the same self-map has E={0}.
-- `rationalSquare_two_boundary` (non-example): On ℚ, z↦z² has backward orbit {2} at 2 but infinite forward orbit {2,4,16,…}, contained in its grand orbit. The same holds on ℙ¹(ℚ); this point action is not surjective, so the grand-orbit equivalence requires its stated hypothesis.
-- **`Exceptional.frobenius`** (comparison): On P¹(K), K algebraically closed of characteristic p>0 and r≥1, z↦z^(p^r) has E=P¹(overline(F_p)), an infinite set.
+- For id on any X, E=id’s entire carrier; each backward orbit is a singleton.
+- For f(n)=n+1 on Z, E=∅ because each backward orbit contains a−k for every k≥0.
+- For z↦z^d on P¹(C), d≥2, E={0,∞}; on affine C the same self-map has E={0}.
+- On ℚ, z↦z² has backward orbit {2} at 2 but infinite forward orbit {2,4,16,…}, contained in its grand orbit. The same holds on ℙ¹(ℚ); this point action is not surjective, so the grand-orbit equivalence requires its stated hypothesis.
+- On P¹(K), K algebraically closed of characteristic p>0 and r≥1, z↦z^(p^r) has E=P¹(overline(F_p)), an infinite set.
 
 **Endpoint checks.** Do not remove n=0 or confuse degree with the cardinality of a fibre.
 
@@ -2562,19 +2559,19 @@ Use the native UniformEquicontinuousOn predicate on the whole neighborhood, rath
 
 Prove the following basic API.
 
-- `mem_classicalFatou`: Membership is the displayed open-neighborhood UniformEquicontinuousOn condition.
-- `classicalJulia_eq_compl`: classicalJulia f=(classicalFatou f)ᶜ.
-- `isOpen_classicalFatou`: classicalFatou f is open for every self-map.
-- `isClosed_classicalJulia`: classicalJulia f is closed for every self-map.
-- `classicalFatou_uniformConjugate`: For a uniform equivalence h, Fatou(h∘f∘h⁻¹)=h(Fatou f), and likewise Julia.
-- `classicalFatou_complex_normal`: On P¹(C), membership iff iterates are normal on some neighborhood in the compact-open spherical topology. This needs the complex analytic supplier, not only a set equivalence.
+- Membership is the displayed open-neighborhood UniformEquicontinuousOn condition.
+- classicalJulia f=(classicalFatou f)ᶜ.
+- classicalFatou f is open for every self-map.
+- classicalJulia f is closed for every self-map.
+- For a uniform equivalence h, Fatou(h∘f∘h⁻¹)=h(Fatou f), and likewise Julia.
+- On P¹(C), membership iff iterates are normal on some neighborhood in the compact-open spherical topology. This needs the complex analytic supplier, not only a set equivalence.
 
 **Checks.**
 
-- **`ClassicalFatou.identity`** (degenerate): On any uniform space the identity has Fatou=X and Julia=∅.
-- **`ClassicalFatou.constant`** (value): The boundary theorem `classicalFatou_const` states that any constant self-map has Fatou=X: the n=0 identity and constant positive iterates form an equicontinuous family.
-- **`ClassicalJulia.realDoubling`** (non-example): The boundary theorem `classicalJulia_realDoubling` states that for f(x)=2x on Euclidean R, Julia=R, including 0; fixing the center does not make the family locally uniformly equicontinuous.
-- **`ClassicalJulia.complexPower`** (comparison): For z↦z^d on the complex sphere, Julia={z∈C:|z|=1}, and infinity lies in Fatou.
+- On any uniform space the identity has Fatou=X and Julia=∅.
+- Any constant self-map has Fatou=X: the n=0 identity and constant positive iterates form an equicontinuous family.
+- For f(x)=2x on Euclidean R, Julia=R, including 0; fixing the center does not make the family locally uniformly equicontinuous.
+- For z↦z^d on the complex sphere, Julia={z∈C:|z|=1}, and infinity lies in Fatou.
 
 **Endpoint checks.** Euclidean equicontinuity on affine C alone is not the sphere predicate. A pointwise condition without a neighborhood is rejected.
 
@@ -2596,21 +2593,21 @@ The generic predicates are real-bodied Set predicates over an existing topologic
 
 Prove the following basic API.
 
-- `mem_forwardSaturation`: y∈forwardSaturation f U iff ∃n≥0, ∃x∈U, f^n(x)=y.
-- `subset_forwardSaturation`: U⊆forwardSaturation f U, including the n=0 term.
-- `forwardSaturation_mono`: U⊆V implies forwardSaturation f U⊆forwardSaturation f V.
-- `mem_omissionFatou`: x∈F iff an open U containing x has infinite omitted complement.
-- `omissionJulia_eq_compl`: J=Fᶜ.
-- `isOpen_omissionFatou`: F is open, hence J is closed, for every topological self-map.
-- `omissionFatou_homeomorph`: For a homeomorphism h and g=h∘f∘h⁻¹, F(g)=h(F(f)), and likewise J.
-- `berkovichJulia_carrier`: The Berkovich predicate is the omission predicate on Layer 2 The native analytic projective line’s weak-topology carrier, not on OnePoint K or the strong-metric line.
+- y∈forwardSaturation f U iff ∃n≥0, ∃x∈U, f^n(x)=y.
+- U⊆forwardSaturation f U, including the n=0 term.
+- U⊆V implies forwardSaturation f U⊆forwardSaturation f V.
+- x∈F iff an open U containing x has infinite omitted complement.
+- J=Fᶜ.
+- F is open, hence J is closed, for every topological self-map.
+- For a homeomorphism h and g=h∘f∘h⁻¹, F(g)=h(F(f)), and likewise J.
+- The Berkovich predicate is the omission predicate on Layer 2 The native analytic projective line’s weak-topology carrier, not on OnePoint K or the strong-metric line.
 
 **Checks.**
 
-- **`OmissionFatou.finiteCarrier`** (degenerate): On any finite topological X, omission Fatou=∅ for every f, including id.
-- **`OmissionFatou.realIdentity`** (value): For id on R, omission Fatou=R: each point has an open bounded interval with infinite complement.
-- **`OmissionFatou.integerTranslation`** (non-example): For n↦n+1 on discrete Z, omission Fatou=Z: the forward orbit of a singleton omits the infinite lower ray.
-- **`BerkovichJulia.goodReduction`** (comparison): For z↦z² over K, classical Julia=∅ but Berkovich Julia={ζ_G}; ζ_G is a nonclassical type-II point.
+- On any finite topological X, omission Fatou=∅ for every f, including id.
+- For id on R, omission Fatou=R: each point has an open bounded interval with infinite complement.
+- For n↦n+1 on discrete Z, omission Fatou=Z: the forward orbit of a singleton omits the infinite lower ray.
+- For z↦z² over K, classical Julia=∅ but Berkovich Julia={ζ_G}; ζ_G is a nonclassical type-II point.
 
 **Endpoint checks.** Identity on a finite discrete carrier has empty omission Fatou set although its classical equicontinuity Fatou set is the whole carrier. Use arbitrary open neighborhoods, not only classical discs.
 
@@ -3116,22 +3113,22 @@ Define `λ̂_{F,v}(z)` := `G_{F,v}(z,` 1). The homogeneous formula: `G_{F,v}(x�
 
 Prove the following basic API.
 
-- `localCanonicalHeight`: localCanonicalHeight v F z = escapeRate v F (z, 1) for z ∈ K: the local canonical height `λ̂_{F,v}` relative to the divisor (∞), in the affine coordinate.
-- `localCanonicalHeight_eq_escapeRate_sub_log`: For x = (x₀, x₁) with x₁ ≠ 0: localCanonicalHeight v F (x₀/x₁) = escapeRate v F x − log v(x₁); so λ̂([x₀ : x₁]) = `G_{F,v}(x₀,` x₁) − log v(x₁) is the homogeneous description, independent of the representative.
-- `localCanonicalHeight_eq_green_add_posLog`: localCanonicalHeight v F z = dynamicalGreenFunction v F [z : 1] + log⁺ v(z) (Mathlib's Real.posLog).
-- `abs_localCanonicalHeight_sub_posLog_le`: `|λ̂_{F,v}(z)` − log⁺ v(z)| ≤ B_v/(d − 1) for all z ∈ K (target `λ̂_{F,v}` − log⁺ v is bounded): λ̂ is a Weil local height for (∞).
-- `localCanonicalHeight_apply_map`: `λ̂_{F,v}(f(z))` = `d·λ̂_{F,v}(z)` − log v(F₁(z, 1)) whenever F₁(z, 1) ≠ 0 (target Functional equation of the local canonical height).
-- `localCanonicalHeight_const_smul_lift`: `λ̂_{cF,v}` = `λ̂_{F,v}` + log v(c)/(d − 1): the normalisation of λ̂ is fixed by the choice of lift.
-- `tendsto_localCanonicalHeight_sub_log`: For K a normed field: `λ̂_{F,v}(z)` − log v(z) → `G_{F,v}(1,` 0) as v(z) → ∞ (target Behaviour of `λ̂_{F,v}` at ∞).
-- `sum_localCanonicalHeight`: For K a number field and z ∈ K: `Σ_{v | ∞}` `mult(v)·λ̂_{F,v}(z)` + `Σ_{v ∤ ∞}` `λ̂_{F,v}(z)` = [K : ℚ]·ĥ_f(z) (target The canonical height is the sum of the local canonical heights).
+- localCanonicalHeight v F z = escapeRate v F (z, 1) for z ∈ K: the local canonical height `λ̂_{F,v}` relative to the divisor (∞), in the affine coordinate.
+- For x = (x₀, x₁) with x₁ ≠ 0: localCanonicalHeight v F (x₀/x₁) = escapeRate v F x − log v(x₁); so λ̂([x₀ : x₁]) = `G_{F,v}(x₀,` x₁) − log v(x₁) is the homogeneous description, independent of the representative.
+- localCanonicalHeight v F z = dynamicalGreenFunction v F [z : 1] + log⁺ v(z) (Mathlib's Real.posLog).
+- `|λ̂_{F,v}(z)` − log⁺ v(z)| ≤ B_v/(d − 1) for all z ∈ K (target `λ̂_{F,v}` − log⁺ v is bounded): λ̂ is a Weil local height for (∞).
+- `λ̂_{F,v}(f(z))` = `d·λ̂_{F,v}(z)` − log v(F₁(z, 1)) whenever F₁(z, 1) ≠ 0 (target Functional equation of the local canonical height).
+- `λ̂_{cF,v}` = `λ̂_{F,v}` + log v(c)/(d − 1): the normalisation of λ̂ is fixed by the choice of lift.
+- For K a normed field: `λ̂_{F,v}(z)` − log v(z) → `G_{F,v}(1,` 0) as v(z) → ∞ (target Behaviour of `λ̂_{F,v}` at ∞).
+- For K a number field and z ∈ K: `Σ_{v | ∞}` `mult(v)·λ̂_{F,v}(z)` + `Σ_{v ∤ ∞}` `λ̂_{F,v}(z)` = [K : ℚ]·ĥ_f(z) (target The canonical height is the sum of the local canonical heights).
 
 **Checks.**
 
-- **`localCanonicalHeight_powerMap`** (computation): For F = (X₀², X₁²) and every absolute value v: localCanonicalHeight v F z = log⁺ v(z); e.g. at v = |·|₃, λ̂(1/9) = log 9 and λ̂(3) = 0.
-- **`localCanonicalHeight_padicCantor`** (computation): For F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) and v = |·|_p: λ̂(z) = −(log p)/(p − 1) for z ∈ ℤ_p and λ̂(z) = log |z|_p for |z|_p > 1.
-- **`localCanonicalHeight_goodReduction`** (degenerate): If F is v-integral with v(Res F) = 1 then localCanonicalHeight v F = log⁺ ∘ v; for F = (X₀² − X₀X₁ − X₁², X₁²) this holds at every prime.
-- `localCanonicalHeight_callSilverman`: `λ̂_{F,v}` satisfies Call–Silverman's two axioms for the divisor E = (∞) with the rational function φ = F₁(z, 1) of divisor f*(∞) − d(∞): λ̂ − log⁺ v is bounded and λ̂(f(z)) = d·λ̂(z) + v(φ(z)) with v(·) = −log v(·); by uniqueness it is their canonical local height with constant a = 1.
-- **`localCanonicalHeight_not_posLog`** (non-example): For the Lattès-free example f(z) = (z² + 1)/(3z) over ℂ₃ with F = (X₀² + X₁², 3X₀X₁): λ̂(i) = −(1/2)·log 3 ≠ 0 = log⁺ |i|₃, so λ̂ is not the naive local height although it agrees with it on ℚ₃.
+- For F = (X₀², X₁²) and every absolute value v: localCanonicalHeight v F z = log⁺ v(z); e.g. at v = |·|₃, λ̂(1/9) = log 9 and λ̂(3) = 0.
+- For F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) and v = |·|_p: λ̂(z) = −(log p)/(p − 1) for z ∈ ℤ_p and λ̂(z) = log |z|_p for |z|_p > 1.
+- If F is v-integral with v(Res F) = 1 then localCanonicalHeight v F = log⁺ ∘ v; for F = (X₀² − X₀X₁ − X₁², X₁²) this holds at every prime.
+- `λ̂_{F,v}` satisfies Call–Silverman's two axioms for the divisor E = (∞) with the rational function φ = F₁(z, 1) of divisor f*(∞) − d(∞): λ̂ − log⁺ v is bounded and λ̂(f(z)) = d·λ̂(z) + v(φ(z)) with v(·) = −log v(·); by uniqueness it is their canonical local height with constant a = 1.
+- For the Lattès-free example f(z) = (z² + 1)/(3z) over ℂ₃ with F = (X₀² + X₁², 3X₀X₁): λ̂(i) = −(1/2)·log 3 ≠ 0 = log⁺ |i|₃, so λ̂ is not the naive local height although it agrees with it on ℚ₃.
 
 **Endpoint checks.** For F = (X₀², X₁²): λ̂ = log⁺ v. For good reduction at v: λ̂ = log⁺ v.
 
@@ -3151,20 +3148,20 @@ Define g on nonzero vectors by `G_{F,v}(x)` − log ‖x‖_v; it is invariant u
 
 Prove the following basic API.
 
-- `dynamicalGreenFunction`: dynamicalGreenFunction v F : ℙ¹(K) → ℝ, P ↦ escapeRate v F (P.rep) − log ‖P.rep‖_v, independent of the representative by Logarithmic homogeneity `G_{F,v}(αx)` = `G_{F,v}(x)` + log v(α).
-- `dynamicalGreenFunction_mk`: dynamicalGreenFunction v F (Projectivization.mk K x hx) = escapeRate v F x − log ‖x‖_v.
-- `abs_dynamicalGreenFunction_le`: `|g_{F,v}|` ≤ B_v/(d − 1) on ℙ¹(K) (target Two-sided bound for `G_{F,v}` − log ‖·‖_v).
-- `dynamicalGreenFunction_apply_map`: `g_{F,v}(f(P))` = `d·g_{F,v}(P)` − log(‖F(x)‖_v/‖x‖_v^d) for P = [x] (target Functional equation of the Green function).
-- `dynamicalGreenFunction_unique`: `g_{F,v}` is the unique bounded function with that functional equation (target Uniqueness of the Green function among bounded functions).
-- `dynamicalGreenFunction_eq_zero_of_goodReduction`: If F is v-integral with v(Res F) = 1 then `g_{F,v}` = 0 (target Good reduction implies `G_{F,v}` = log ‖·‖_v).
-- **`continuous_dynamicalGreenFunction`** (instance): For E a normed field and v its norm, x ↦ escapeRate v F x − log ‖x‖ is continuous on E² ∖ {0}; hence `g_{F,v}` is continuous for the quotient topology of ℙ¹(E) (target Continuity of the escape rate).
+- dynamicalGreenFunction v F : ℙ¹(K) → ℝ, P ↦ escapeRate v F (P.rep) − log ‖P.rep‖_v, independent of the representative by Logarithmic homogeneity `G_{F,v}(αx)` = `G_{F,v}(x)` + log v(α).
+- dynamicalGreenFunction v F (Projectivization.mk K x hx) = escapeRate v F x − log ‖x‖_v.
+- `|g_{F,v}|` ≤ B_v/(d − 1) on ℙ¹(K) (target Two-sided bound for `G_{F,v}` − log ‖·‖_v).
+- `g_{F,v}(f(P))` = `d·g_{F,v}(P)` − log(‖F(x)‖_v/‖x‖_v^d) for P = [x] (target Functional equation of the Green function).
+- `g_{F,v}` is the unique bounded function with that functional equation (target Uniqueness of the Green function among bounded functions).
+- If F is v-integral with v(Res F) = 1 then `g_{F,v}` = 0 (target Good reduction implies `G_{F,v}` = log ‖·‖_v).
+- For E a normed field and v its norm, x ↦ escapeRate v F x − log ‖x‖ is continuous on E² ∖ {0}; hence `g_{F,v}` is continuous for the quotient topology of ℙ¹(E) (target Continuity of the escape rate).
 
 **Checks.**
 
-- **`dynamicalGreenFunction_powerMap`** (computation): For F = (X₀^d, X₁^d), dynamicalGreenFunction v F = 0 at every absolute value v.
-- **`dynamicalGreenFunction_padicCantor`** (computation): For F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) and v = |·|_p: g([0 : 1]) = −(log p)/(p − 1) and g([1 : 0]) = 0.
-- **`dynamicalGreenFunction_scale`** (degenerate): `g_{cF,v}` = `g_{F,v}` + log v(c)/(d − 1): for c a v-unit the Green function is unchanged.
-- **`dynamicalGreenFunction_not_zero_nonclosed`** (non-example): For F = (X₀² + X₁², 3X₀X₁): `g_{F,|·|₃}` vanishes on ℙ¹(ℚ₃) but `g_{F,|·|₃}(`[i : 1]) = −(1/2)·log 3 on ℙ¹(ℂ₃), so vanishing on K-points does not force good reduction.
+- For F = (X₀^d, X₁^d), dynamicalGreenFunction v F = 0 at every absolute value v.
+- For F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) and v = |·|_p: g([0 : 1]) = −(log p)/(p − 1) and g([1 : 0]) = 0.
+- `g_{cF,v}` = `g_{F,v}` + log v(c)/(d − 1): for c a v-unit the Green function is unchanged.
+- For F = (X₀² + X₁², 3X₀X₁): `g_{F,|·|₃}` vanishes on ℙ¹(ℚ₃) but `g_{F,|·|₃}(`[i : 1]) = −(1/2)·log 3 on ℙ¹(ℂ₃), so vanishing on K-points does not force good reduction.
 
 **Endpoint checks.** `g_{F,v}` = 0 for good reduction at v. g for (z^p − z)/p at p takes the value −(log p)/(p − 1) on ℤ_p.
 
@@ -3316,22 +3313,22 @@ On `A^{1,an}_K` the defining sequence converges uniformly (The lift bounds at po
 
 Prove the following basic API.
 
-- `berkovichEscapePotential`: berkovichEscapePotential F : `P^{1,an}_K` → ℝ, the continuous extension ĝ_F of the Green function `g_{F,v}.`
-- `berkovichEscapePotential_classical`: On type I points, ĝ_F(a) = dynamicalGreenFunction v F a for a ∈ ℙ¹(K).
-- **`continuous_berkovichEscapePotential`** (instance): ĝ_F is continuous on `P^{1,an}_K.`
-- `berkovichEscapePotential_eq_limit`: For x ∈ `A^{1,an}_K:` ĝ_F(x) = lim `d^{−n}` log max([Fⁿ₀(T, 1)]_x, [Fⁿ₁(T, 1)]_x) − log max([T]_x, 1).
-- `berkovichEscapePotential_const_smul_lift`: `ĝ_{cF}` = ĝ_F + log|c|/(d − 1).
-- `berkovichLocalCanonicalHeight`: The extension `λ̂^{an}_F` = ĝ_F + log max([T], 1) of the local canonical height to `A^{1,an}_K,` continuous with a logarithmic pole at ∞.
-- `berkovichEscapePotential_eq_zero_of_goodReduction`: If F is a normalised lift with good reduction then ĝ_F = 0.
-- `iterateFormsAffine`: iterateFormsAffine F n i ∈ K[T]: the i-th form of the n-fold composite of F, dehomogenised at X₁ = 1; ĝ_F(x) is the limit of `d^{−n}` log max([iterateFormsAffine F n 0]_x, [iterateFormsAffine F n 1]_x) − log max([T]_x, 1).
-- `berkovichLocalCanonicalHeight_apply`: berkovichLocalCanonicalHeight F x = berkovichEscapePotential F x + log max([T]_x, 1) for x ∈ `A^{1,an}_K.`
+- berkovichEscapePotential F : `P^{1,an}_K` → ℝ, the continuous extension ĝ_F of the Green function `g_{F,v}.`
+- On type I points, ĝ_F(a) = dynamicalGreenFunction v F a for a ∈ ℙ¹(K).
+- ĝ_F is continuous on `P^{1,an}_K.`
+- For x ∈ `A^{1,an}_K:` ĝ_F(x) = lim `d^{−n}` log max([Fⁿ₀(T, 1)]_x, [Fⁿ₁(T, 1)]_x) − log max([T]_x, 1).
+- `ĝ_{cF}` = ĝ_F + log|c|/(d − 1).
+- The extension `λ̂^{an}_F` = ĝ_F + log max([T], 1) of the local canonical height to `A^{1,an}_K,` continuous with a logarithmic pole at ∞.
+- If F is a normalised lift with good reduction then ĝ_F = 0.
+- iterateFormsAffine F n i ∈ K[T]: the i-th form of the n-fold composite of F, dehomogenised at X₁ = 1; ĝ_F(x) is the limit of `d^{−n}` log max([iterateFormsAffine F n 0]_x, [iterateFormsAffine F n 1]_x) − log max([T]_x, 1).
+- berkovichLocalCanonicalHeight F x = berkovichEscapePotential F x + log max([T]_x, 1) for x ∈ `A^{1,an}_K.`
 
 **Checks.**
 
-- **`berkovichEscapePotential_gauss_padicCantor`** (computation): For F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) over ℂ_p: `ĝ_F(ζ_{0,1})` = 0 (every Fⁿ₀(T, 1) has Gauss norm 1), while ĝ_F(a) = −(log p)/(p − 1) at every a ∈ ℤ_p.
-- **`berkovichEscapePotential_powerMap`** (degenerate): For F = (X₀^d, X₁^d), ĝ_F = 0 on all of `P^{1,an}_K.`
-- `berkovichEscapePotential_classical_compat`: ĝ_F restricted to ℙ¹(K) is The normalised dynamical Green function `g_{F,v}` on ℙ¹(K), and to ℙ¹(ℚ₃) ⊂ `P^{1,an}_{ℂ₃}` it is the function computed over ℚ₃ (The escape rate is unchanged by field extension).
-- **`berkovichEscapePotential_not_onestep`** (non-example): The one-step function `d^{−1}` log max([F₀(T, 1)], [F₁(T, 1)]) − log max([T], 1) is not ĝ_F: for the (z^p − z)/p lift at a = 0 it equals −(log p)/p ≠ −(log p)/(p − 1).
+- For F = (X₀^p − `X₀X₁^{p−1},` pX₁^p) over ℂ_p: `ĝ_F(ζ_{0,1})` = 0 (every Fⁿ₀(T, 1) has Gauss norm 1), while ĝ_F(a) = −(log p)/(p − 1) at every a ∈ ℤ_p.
+- For F = (X₀^d, X₁^d), ĝ_F = 0 on all of `P^{1,an}_K.`
+- ĝ_F restricted to ℙ¹(K) is The normalised dynamical Green function `g_{F,v}` on ℙ¹(K), and to ℙ¹(ℚ₃) ⊂ `P^{1,an}_{ℂ₃}` it is the function computed over ℚ₃ (The escape rate is unchanged by field extension).
+- The one-step function `d^{−1}` log max([F₀(T, 1)], [F₁(T, 1)]) − log max([T], 1) is not ĝ_F: for the (z^p − z)/p lift at a = 0 it equals −(log p)/p ≠ −(log p)/(p − 1).
 
 **Endpoint checks.** Test berkovichEscapePotential_gauss_padicCantor.
 
@@ -3351,20 +3348,20 @@ On each affine chart the escape potential is a locally uniform limit of subharmo
 
 Prove the following basic API.
 
-- `archimedeanCanonicalMeasure`: archimedeanCanonicalMeasure f : Measure (OnePoint ℂ), `µ_{f,∞}` = Δg_F + ω with ω the normalised arc length on the unit circle.
-- `laplacian_localCanonicalHeight_archimedean`: `Δλ̂_{F,∞}` = `µ_{f,∞}` − δ_∞ on the Riemann sphere; on ℂ, `µ_{f,∞}` = (1/2π)·Δ_eucl G_F(z, 1) as distributions.
-- **`isProbabilityMeasure_archimedeanCanonicalMeasure`** (instance): `µ_{f,∞}` is a probability measure (target The archimedean canonical measure: mass, invariance, no atoms).
-- `archimedeanCanonicalMeasure_pullback`: `f^*µ_{f,∞}` = `d·µ_{f,∞}` for the pull-back of measures along f counted with multiplicity (and hence `f_*µ_{f,∞}` = `µ_{f,∞}).`
-- `archimedeanCanonicalMeasure_noAtoms`: `µ_{f,∞}` has no atoms (its potential g_F is continuous).
-- `archimedeanCanonicalMeasure_eq_lyubich`: Every atom-free probability measure µ with f^*µ = d·µ equals `µ_{f,∞}` (Lyubich; Freire–Lopes–Mañé; target `µ_{f,∞}` is Lyubich's measure of maximal entropy).
-- `unitCircleMeasure`: The normalised arc-length measure ω on the unit circle of the Riemann sphere OnePoint ℂ (the Laplacian of log⁺|z| plus δ_∞).
+- archimedeanCanonicalMeasure f : Measure (OnePoint ℂ), `µ_{f,∞}` = Δg_F + ω with ω the normalised arc length on the unit circle.
+- `Δλ̂_{F,∞}` = `µ_{f,∞}` − δ_∞ on the Riemann sphere; on ℂ, `µ_{f,∞}` = (1/2π)·Δ_eucl G_F(z, 1) as distributions.
+- `µ_{f,∞}` is a probability measure (target The archimedean canonical measure: mass, invariance, no atoms).
+- `f^*µ_{f,∞}` = `d·µ_{f,∞}` for the pull-back of measures along f counted with multiplicity (and hence `f_*µ_{f,∞}` = `µ_{f,∞}).`
+- `µ_{f,∞}` has no atoms (its potential g_F is continuous).
+- Every atom-free probability measure µ with f^*µ = d·µ equals `µ_{f,∞}` (Lyubich; Freire–Lopes–Mañé; target `µ_{f,∞}` is Lyubich's measure of maximal entropy).
+- The normalised arc-length measure ω on the unit circle of the Riemann sphere OnePoint ℂ (the Laplacian of log⁺|z| plus δ_∞).
 
 **Checks.**
 
-- **`archimedeanCanonicalMeasure_powerMap`** (computation): For f(z) = z^d (d ≥ 2): g_F = 0 and `µ_{f,∞}` = ω, the normalised arc-length measure on {|z| = 1}.
-- **`archimedeanCanonicalMeasure_chebyshev`** (computation): For the Chebyshev map f(z) = z² − 2: `µ_{f,∞}` is the arcsine law on [−2, 2], with density 1/(π·√(4 − x²)) (push-forward of ω under z ↦ z + 1/z).
-- **`archimedeanCanonicalMeasure_iterate`** (degenerate): `µ_{fⁿ,∞}` = `µ_{f,∞}` for every n ≥ 1.
-- **`archimedeanCanonicalMeasure_not_circle`** (non-example): For f(z) = z² − z − 1, `µ_{f,∞}` ≠ ω: if they were equal, Δg_F = 0 would make g_F constant; but g_F([1 : 1]) = G_F(1, 1) = 0 (bounded orbit, and G_F ≥ 0 because F₁ = X₁²), while at the fixed point α = 1 + √2 (|α| > 1) the functional equation λ̂(α) = 2λ̂(α) − log|F₁(α, 1)| = 2λ̂(α) gives λ̂(α) = 0, so g_F([α : 1]) = −log α ≠ 0.
+- For f(z) = z^d (d ≥ 2): g_F = 0 and `µ_{f,∞}` = ω, the normalised arc-length measure on {|z| = 1}.
+- For the Chebyshev map f(z) = z² − 2: `µ_{f,∞}` is the arcsine law on [−2, 2], with density 1/(π·√(4 − x²)) (push-forward of ω under z ↦ z + 1/z).
+- `µ_{fⁿ,∞}` = `µ_{f,∞}` for every n ≥ 1.
+- For f(z) = z² − z − 1, `µ_{f,∞}` ≠ ω: if they were equal, Δg_F = 0 would make g_F constant; but g_F([1 : 1]) = G_F(1, 1) = 0 (bounded orbit, and G_F ≥ 0 because F₁ = X₁²), while at the fixed point α = 1 + √2 (|α| > 1) the functional equation λ̂(α) = 2λ̂(α) − log|F₁(α, 1)| = 2λ̂(α) gives λ̂(α) = 0, so g_F([α : 1]) = −log α ≠ 0.
 
 **Endpoint checks.** Test archimedeanCanonicalMeasure_powerMap.
 
@@ -3472,23 +3469,23 @@ For the n-step potential g_n, Poincaré–Lelong and pullback compatibility (Lay
 
 Prove the following basic API.
 
-- `canonicalMeasure`: canonicalMeasure f : Measure `(P^{1,an}_K),` `µ_{f,v}` = Δĝ_F + `δ_{ζ_{0,1}},` independent of the lift F.
-- `laplacian_berkovichLocalCanonicalHeight`: `Δλ̂^{an}_F` = `µ_{f,v}` − δ_∞ (target `Δλ̂_{f,v}` = `µ_{f,v}` − δ_∞).
-- **`isProbabilityMeasure_canonicalMeasure`** (instance): `µ_{f,v}` is a Borel probability measure (target `µ_{f,v}` is a probability measure).
-- `canonicalMeasure_pullback`: `f^*µ_{f,v}` = `d·µ_{f,v}` and `f_*µ_{f,v}` = `µ_{f,v}` (target Invariance f^*µ = d·µ and f_*µ = µ).
-- `canonicalMeasure_iterate`: For n ≥ 1, `µ_{fⁿ,v}` = `µ_{f,v}` (from The escape rate of an iterate: `G_{Fᵐ,v}` = `G_{F,v}:` the escape potentials of F and Fⁿ agree).
-- `canonicalMeasure_conj`: For a unit γ of the monoid of rational maps (a Möbius map): canonicalMeasure (γ⁻¹ * f * γ) = pullback γ (canonicalMeasure f), i.e. `µ_{φ⁻¹∘f∘φ}` = `(φ^{an})^*` µ_f (target Canonical measures of conjugate maps).
-- `canonicalMeasure_eq_dirac_gauss_iff`: For K complete and algebraically closed and R its valuation ring: canonicalMeasure f = `δ_{ζ_{0,1}}` ⟺ f.HasGoodReduction R (targets Good reduction gives `µ_{f,v}` = `δ_{ζ_{0,1}}` and `µ_{f,v}` = `δ_{ζ_{0,1}}` implies good reduction).
-- `canonicalMeasure_isPointMass_iff`: `µ_{f,v}` is a point mass at a type II point ⟺ f has potentially good reduction (target Potential good reduction ⟺ `µ_{f,v}` is a point mass at a type II point).
-- `canonicalMeasure_classical_null`: `µ_{f,v}({a})` = 0 for every type I point a ∈ ℙ¹(K): a measure with a continuous potential does not charge classical points (Layer 2 Nonarchimedean potential theory and local degrees).
+- canonicalMeasure f : Measure `(P^{1,an}_K),` `µ_{f,v}` = Δĝ_F + `δ_{ζ_{0,1}},` independent of the lift F.
+- `Δλ̂^{an}_F` = `µ_{f,v}` − δ_∞ (target `Δλ̂_{f,v}` = `µ_{f,v}` − δ_∞).
+- `µ_{f,v}` is a Borel probability measure (target `µ_{f,v}` is a probability measure).
+- `f^*µ_{f,v}` = `d·µ_{f,v}` and `f_*µ_{f,v}` = `µ_{f,v}` (target Invariance f^*µ = d·µ and f_*µ = µ).
+- For n ≥ 1, `µ_{fⁿ,v}` = `µ_{f,v}` (from The escape rate of an iterate: `G_{Fᵐ,v}` = `G_{F,v}:` the escape potentials of F and Fⁿ agree).
+- For a unit γ of the monoid of rational maps (a Möbius map): canonicalMeasure (γ⁻¹ * f * γ) = pullback γ (canonicalMeasure f), i.e. `µ_{φ⁻¹∘f∘φ}` = `(φ^{an})^*` µ_f (target Canonical measures of conjugate maps).
+- For K complete and algebraically closed and R its valuation ring: canonicalMeasure f = `δ_{ζ_{0,1}}` ⟺ f.HasGoodReduction R (targets Good reduction gives `µ_{f,v}` = `δ_{ζ_{0,1}}` and `µ_{f,v}` = `δ_{ζ_{0,1}}` implies good reduction).
+- `µ_{f,v}` is a point mass at a type II point ⟺ f has potentially good reduction (target Potential good reduction ⟺ `µ_{f,v}` is a point mass at a type II point).
+- `µ_{f,v}({a})` = 0 for every type I point a ∈ ℙ¹(K): a measure with a continuous potential does not charge classical points (Layer 2 Nonarchimedean potential theory and local degrees).
 
 **Checks.**
 
-- **`canonicalMeasure_goodReduction_quadratic`** (computation): For f(z) = z² − z − 1 over ℂ_p (any prime p): `µ_{f,p}` = `δ_{ζ_{0,1}}.`
-- **`canonicalMeasure_padicCantor`** (computation): For f(z) = (z^p − z)/p over ℂ_p: `µ_{f,p}` is the Haar probability measure of ℤ_p, pushed into `P^{1,an}_{ℂ_p}` along ℤ_p ⊂ ℙ¹(ℂ_p) (target Worked example: (z^p − z)/p, bad reduction with Haar canonical measure).
-- **`canonicalMeasure_powerMap`** (degenerate): For f(z) = z^d (d ≥ 2): `µ_{f,v}` = `δ_{ζ_{0,1}}` at every nonarchimedean v, in every residue characteristic (also p | d).
-- **`canonicalMeasure_ne_gauss_nonclosed`** (non-example): For f(z) = (z² + 1)/(3z) at v = 3: ĝ_F vanishes on ℙ¹(ℚ₃) but `µ_{f,3}` ≠ `δ_{ζ_{0,1}}` on `P^{1,an}_{ℂ₃},` because f has bad reduction over ℂ₃ (it has repelling fixed points); so µ cannot be read off from K-points of a non-closed field.
-- **`canonicalMeasure_notDirac_classical`** (non-example): `µ_{f,v}` is never a point mass at a classical point: `µ_{f,v}({a})` = 0 for a ∈ ℙ¹(ℂ_v).
+- For f(z) = z² − z − 1 over ℂ_p (any prime p): `µ_{f,p}` = `δ_{ζ_{0,1}}.`
+- For f(z) = (z^p − z)/p over ℂ_p: `µ_{f,p}` is the Haar probability measure of ℤ_p, pushed into `P^{1,an}_{ℂ_p}` along ℤ_p ⊂ ℙ¹(ℂ_p) (target Worked example: (z^p − z)/p, bad reduction with Haar canonical measure).
+- For f(z) = z^d (d ≥ 2): `µ_{f,v}` = `δ_{ζ_{0,1}}` at every nonarchimedean v, in every residue characteristic (also p | d).
+- For f(z) = (z² + 1)/(3z) at v = 3: ĝ_F vanishes on ℙ¹(ℚ₃) but `µ_{f,3}` ≠ `δ_{ζ_{0,1}}` on `P^{1,an}_{ℂ₃},` because f has bad reduction over ℂ₃ (it has repelling fixed points); so µ cannot be read off from K-points of a non-closed field.
+- `µ_{f,v}` is never a point mass at a classical point: `µ_{f,v}({a})` = 0 for a ∈ ℙ¹(ℂ_v).
 
 **Endpoint checks.** The tests; positivity and total mass 1 are `µ_{f,v}` is a probability measure.
 
@@ -3669,8 +3666,6 @@ Pushforward invariance follows by duality from balance. Critical points have zer
 **Construction.** [Generic measure entropy and maximizing-measure machinery](#27-measure-entropy-and-maximizing-measures).
 
 ### 2.86 Power-map acceptance across places
-
-The named signatures are `exceptionalSet_complexPower`, `classicalJulia_complexPower`.
 
 For f(z)=z^d, d≥2, on P¹(C), J is the unit circle and μ is normalized angular probability there; F consists of |z|<1 and |z|>1 including infinity, and E={0,∞}. On P¹(K) the same map has good reduction, J_I=∅, J_Ber={ζ_G}, and `μ=δ_{ζ_G}.` In characteristic p and d=p^r, the nonarchimedean classical exceptional set is P¹(overline(F_p)), even though the Berkovich Julia set remains the Gauss singleton.
 
@@ -3856,20 +3851,20 @@ Define ord_P F := multiplicity(ℓ_P, F) with ℓ_P = P₁·X − P₀·Y (mathl
 
 Prove the following basic API.
 
-- `binaryFormOrder`: ord_P F ∈ ℕ for F ∈ K[X, Y] and P : Fin 2 → K.
-- `binaryFormOrder_eq_zero_iff`: For a nonzero homogeneous F and P ≠ 0: ord_P F = 0 iff F(P) ≠ 0.
-- `binaryFormOrder_mul`: For F, G ≠ 0 and P ≠ 0: ord_P(FG) = ord_P F + ord_P G.
-- `binaryFormOrder_smul_point`: `ord_{cP}` F = ord_P F for c ≠ 0: the order depends only on the point of ℙ¹.
-- `binaryFormOrder_affine`: For F ≠ 0 homogeneous: ord_[a:1] F = rootMultiplicity a (F(X, 1)) (Mathlib's Polynomial.rootMultiplicity).
-- `pow_dvd_iff_le_binaryFormOrder`: For F ≠ 0, P ≠ 0: ℓ_P^k ∣ F iff k ≤ ord_P F.
+- ord_P F ∈ ℕ for F ∈ K[X, Y] and P : Fin 2 → K.
+- For a nonzero homogeneous F and P ≠ 0: ord_P F = 0 iff F(P) ≠ 0.
+- For F, G ≠ 0 and P ≠ 0: ord_P(FG) = ord_P F + ord_P G.
+- `ord_{cP}` F = ord_P F for c ≠ 0: the order depends only on the point of ℙ¹.
+- For F ≠ 0 homogeneous: ord_[a:1] F = rootMultiplicity a (F(X, 1)) (Mathlib's Polynomial.rootMultiplicity).
+- For F ≠ 0, P ≠ 0: ℓ_P^k ∣ F iff k ≤ ord_P F.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.binaryFormOrder_test_zero`** (computation): ord_[0:1](X²Y) = 2 over ℚ.
-- **`TauCeti.ArithmeticDynamics.binaryFormOrder_test_infinity`** (computation): ord_[1:0](X²Y) = 1 over ℚ (the order at ∞ counts the power of Y).
-- **`TauCeti.ArithmeticDynamics.binaryFormOrder_test_const`** (degenerate): A nonzero constant has order 0 at every point.
-- **`TauCeti.ArithmeticDynamics.binaryFormOrder_test_simple`** (non-example): ord_[1:1](X² − Y²) = 1, not 2: X² − Y² has two distinct simple zeros, so a definition by total degree or by vanishing to the maximal possible order fails.
-- **`TauCeti.ArithmeticDynamics.binaryFormOrder_test_nonhomogeneous`** (non-example): For F = X − 1 over ℚ and P = [1:1], F(1,1) = 0 but ord_P F = 0. The evaluation characterisation requires homogeneity.
+- ord_[0:1](X²Y) = 2 over ℚ.
+- ord_[1:0](X²Y) = 1 over ℚ (the order at ∞ counts the power of Y).
+- A nonzero constant has order 0 at every point.
+- ord_[1:1](X² − Y²) = 1, not 2: X² − Y² has two distinct simple zeros, so a definition by total degree or by vanishing to the maximal possible order fails.
+- For F = X − 1 over ℚ and P = [1:1], F(1,1) = 0 but ord_P F = 0. The evaluation characterisation requires homogeneity.
 
 **Endpoint checks.** ord_[0:1](X²Y) = 2, ord_[1:0](X²Y) = 1, ord_P(1) = 0 and ord_[1:1](X² − Y²) = 1.
 
@@ -3889,22 +3884,22 @@ The composite lift is Layer 0's iterate of the rational map (Rational self-maps 
 
 Prove the following basic API.
 
-- `periodForm`: Φₙ(φ) = Y·Fₙ − X·Gₙ ∈ R[X, Y] for a lift φ and n ∈ ℕ.
-- `periodForm_zero`: Φ₀(φ) = 0.
-- `periodForm_isHomogeneous`: If F, G are homogeneous of degree d, Φₙ is homogeneous of degree dⁿ + 1.
-- `periodForm_ne_zero`: For a lift of a morphism of degree d ≥ 2 and n ≥ 1, Φₙ ≠ 0 (φⁿ is not the identity).
-- `aeval_periodForm_polynomialLift`: For monic f: Φₙ(Y^d f(X/Y), Y^d)(X, 1) = fⁿ(X) − X (Mathlib's Polynomial.comp iterate).
-- `eval_periodForm_eq_zero_iff`: Φₙ(P) = 0 iff φⁿ(P) = P (promoted: The zeros of Φₙ are the points of period n).
-- `periodForm_liftIterate`: Φₖ(φᵐ) = `Φ_{mk}(φ)` (promoted: Φₖ(φᵐ) = `Φ_{mk}(φ)).`
-- `periodForm_conj`: Conjugation by A ∈ GL₂(K) (promoted: The period form under conjugation by GL₂).
-- `periodForm_map`: Φₙ commutes with ring homomorphisms on coefficients (promoted: The period form commutes with change of coefficients).
+- Φₙ(φ) = Y·Fₙ − X·Gₙ ∈ R[X, Y] for a lift φ and n ∈ ℕ.
+- Φ₀(φ) = 0.
+- If F, G are homogeneous of degree d, Φₙ is homogeneous of degree dⁿ + 1.
+- For a lift of a morphism of degree d ≥ 2 and n ≥ 1, Φₙ ≠ 0 (φⁿ is not the identity).
+- For monic f: Φₙ(Y^d f(X/Y), Y^d)(X, 1) = fⁿ(X) − X (Mathlib's Polynomial.comp iterate).
+- Φₙ(P) = 0 iff φⁿ(P) = P (promoted: The zeros of Φₙ are the points of period n).
+- Φₖ(φᵐ) = `Φ_{mk}(φ)` (promoted: Φₖ(φᵐ) = `Φ_{mk}(φ)).`
+- Conjugation by A ∈ GL₂(K) (promoted: The period form under conjugation by GL₂).
+- Φₙ commutes with ring homomorphisms on coefficients (promoted: The period form commutes with change of coefficients).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.periodForm_test_square`** (computation): For the lift (X², Y²) of z ↦ z² over ℚ: Φ₁ = Y·X² − X·Y².
-- **`TauCeti.ArithmeticDynamics.periodForm_test_zero`** (degenerate): Φ₀(φ) = 0 for every lift (the identity is degenerate).
-- `TauCeti.ArithmeticDynamics.periodForm_test_quadratic`: For z² + c: Φ₁(X, 1) = X² − X + c, the affine period polynomial f(z) − z.
-- **`TauCeti.ArithmeticDynamics.periodForm_test_identity`** (non-example): For the identity lift (X, Y): Φ₁ = 0, so the period form of a degenerate map carries no information (a definition not tied to the lift of a morphism would be wrong here).
+- For the lift (X², Y²) of z ↦ z² over ℚ: Φ₁ = Y·X² − X·Y².
+- Φ₀(φ) = 0 for every lift (the identity is degenerate).
+- For z² + c: Φ₁(X, 1) = X² − X + c, the affine period polynomial f(z) − z.
+- For the identity lift (X, Y): Φ₁ = 0, so the period form of a degenerate map carries no information (a definition not tied to the lift of a morphism would be wrong here).
 
 **Endpoint checks.** For z ↦ z² with lift (X², Y²): Φ₁ = X²Y − XY² = XY(X − Y), whose zeros are 0, 1 and ∞, the three fixed points.
 
@@ -3924,20 +3919,20 @@ Dehomogenise: F(z, 1), G(z, 1) ∈ K[z] (mathlib:MvPolynomial.aeval), viewed in 
 
 Prove the following basic API.
 
-- `fixedPointGerm`: g_φ = F(z, 1)·G(z, 1)⁻¹ ∈ K[[z]].
-- `germIterate`: gⁿ, the n-fold substitution iterate of a germ, germIterate g 0 = z.
-- `germIterate_succ`: `g^{n+1}` = subst gⁿ g.
-- `coeff_one_germIterate`: For constantCoeff g = 0: the linear coefficient of gⁿ is λⁿ (chain rule).
-- `constantCoeff_fixedPointGerm`: If F(0, 1) = 0 then g_φ has constant coefficient 0.
-- `fixedPointGerm_polynomialLift`: For a monic polynomial f the germ of its lift at 0 is f itself, as a power series.
-- `fixedPointGerm_conj_invariant_coeff_one`: Conjugating by z ↦ uz, u ≠ 0, leaves the linear coefficient (the multiplier of Layer 2) unchanged.
-- `fixedPointGerm_liftIterate`: The germ of φⁿ is gⁿ (promoted: The germ of φⁿ is the n-th iterate of the germ).
+- g_φ = F(z, 1)·G(z, 1)⁻¹ ∈ K[[z]].
+- gⁿ, the n-fold substitution iterate of a germ, germIterate g 0 = z.
+- `g^{n+1}` = subst gⁿ g.
+- For constantCoeff g = 0: the linear coefficient of gⁿ is λⁿ (chain rule).
+- If F(0, 1) = 0 then g_φ has constant coefficient 0.
+- For a monic polynomial f the germ of its lift at 0 is f itself, as a power series.
+- Conjugating by z ↦ uz, u ≠ 0, leaves the linear coefficient (the multiplier of Layer 2) unchanged.
+- The germ of φⁿ is gⁿ (promoted: The germ of φⁿ is the n-th iterate of the germ).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.fixedPointGerm_test_tangent`** (computation): For z² − z over ℚ: g = −z + z².
-- **`TauCeti.ArithmeticDynamics.fixedPointGerm_test_identity`** (degenerate): The identity lift (X, Y) has germ z.
-- **`TauCeti.ArithmeticDynamics.fixedPointGerm_test_superattracting`** (non-example): For z² the linear coefficient is 0: the germ of the lift (X², Y²) is z², not z (a definition using G(z,1)·F(z,1)⁻¹ or forgetting to dehomogenise fails).
+- For z² − z over ℚ: g = −z + z².
+- The identity lift (X, Y) has germ z.
+- For z² the linear coefficient is 0: the germ of the lift (X², Y²) is z², not z (a definition using G(z,1)·F(z,1)⁻¹ or forgetting to dehomogenise fails).
 
 **Endpoint checks.** For z² − z: g = −z + z², multiplier −1. For g=z² and γ(z)=2z, the conjugate germ is z²/2; using the inverse conjugator would give 2z².
 
@@ -3971,21 +3966,21 @@ Define by strong recursion on n using mathlib:Polynomial.divByMonic over the pro
 
 Prove the following basic API.
 
-- `dynatomicPolynomial`: Φ*ₙ(f) ∈ R[z] by exact monic division.
-- `dynatomicPolynomial_zero`: Φ*₀(f) = 1.
-- `dynatomicPolynomial_one`: Φ*₁(f) = f − z for monic f of degree ≥ 2.
-- `dynatomicPolynomial_monic`: Φ*ₙ(f) is monic.
-- `natDegree_dynatomicPolynomial`: deg Φ*ₙ(f) = `Σ_{m∣n}` μ(n/m)dᵐ for n ≥ 1.
-- `map_dynatomicPolynomial`: Φ*ₙ(g(f)) = g(Φ*ₙ(f)) for every ring homomorphism g.
-- `prod_dynatomicPolynomial_divisors`: For n ≥ 1, `∏_{m∣n}` Φ*ₘ(f) = fⁿ(z) − z (promoted: `∏_{m∣n}` Φ*ₘ(f) = fⁿ(z) − z for monic f over any ring).
-- `aeval_dynatomicForm_polynomialLift`: For n ≥ 1, agreement with the homogeneous Φ*ₙ of the lift (promoted: The affine and homogeneous dynatomic polynomials agree).
+- Φ*ₙ(f) ∈ R[z] by exact monic division.
+- Φ*₀(f) = 1.
+- Φ*₁(f) = f − z for monic f of degree ≥ 2.
+- Φ*ₙ(f) is monic.
+- deg Φ*ₙ(f) = `Σ_{m∣n}` μ(n/m)dᵐ for n ≥ 1.
+- Φ*ₙ(g(f)) = g(Φ*ₙ(f)) for every ring homomorphism g.
+- For n ≥ 1, `∏_{m∣n}` Φ*ₘ(f) = fⁿ(z) − z (promoted: `∏_{m∣n}` Φ*ₘ(f) = fⁿ(z) − z for monic f over any ring).
+- For n ≥ 1, agreement with the homogeneous Φ*ₙ of the lift (promoted: The affine and homogeneous dynatomic polynomials agree).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.dynatomicPolynomial_test_quadratic`** (computation): Φ*₂(z² + c) = z² + z + c + 1 over ℚ.
-- **`TauCeti.ArithmeticDynamics.dynatomicPolynomial_test_zero`** (degenerate): Φ*₀(f) = 1. At n = 0 the empty divisor product is 1 while f⁰(z) − z = 0, so the positive-index product identity does not extend to zero.
-- `TauCeti.ArithmeticDynamics.dynatomicPolynomial_test_cyclotomic`: For z² over ℤ and n ≥ 2: Φ*ₙ = ∏ cyclotomic k over the k ∣ 2ⁿ − 1 with ord_k(2) = n (Mathlib's Polynomial.cyclotomic).
-- **`TauCeti.ArithmeticDynamics.dynatomicPolynomial_test_tangent`** (non-example): Φ*₂(z² − z) = z², of degree 2 (not the degree 4 of f² − z), whose only root 0 is a fixed point.
+- Φ*₂(z² + c) = z² + z + c + 1 over ℚ.
+- Φ*₀(f) = 1. At n = 0 the empty divisor product is 1 while f⁰(z) − z = 0, so the positive-index product identity does not extend to zero.
+- For z² over ℤ and n ≥ 2: Φ*ₙ = ∏ cyclotomic k over the k ∣ 2ⁿ − 1 with ord_k(2) = n (Mathlib's Polynomial.cyclotomic).
+- Φ*₂(z² − z) = z², of degree 2 (not the degree 4 of f² − z), whose only root 0 is a fixed point.
 
 **Endpoint checks.** Φ*₁(z² + c) = z² − z + c, Φ*₂(z² + c) = z² + z + c + 1 (degree 2 = ν₂(2)), Φ*₄(z² + c) is Morton's degree-12 polynomial.
 
@@ -4063,7 +4058,7 @@ f is strictly increasing on ℚ (odd d), hence injective; if `f^{m+n}(x)` = fᵐ
 
 ### 3.11 The orbit-repetition check
 
-For a self-map f : α → α, a finite set S ⊆ α, N ∈ ℕ and x ∈ α, define `orbitRepeatsWithin f S N x` to mean that there are i < j < N with f^[i] x = f^[j] x and f^[k] x ∈ S for every k ≤ j. This is a predicate on a finite initial orbit segment. Prove `orbitRepeatsWithin_sound`: the predicate implies preperiodicity. Prove `orbitRepeatsWithin_complete`: if S contains every preperiodic point and N ≥ |S| + 1, every preperiodic x satisfies it. Prove `orbitRepeatsWithin_false_of_not_mem`: if x ∉ S the predicate fails, and prove monotonicity in S and N. No equality or computability hypothesis is needed (hutz15, §2, pp. 6–7; pigeonhole on a finite forward orbit).
+For a self-map f : α → α, a finite set S ⊆ α, N ∈ ℕ and x ∈ α, define the orbit-repetition predicate for f, S, N and x to mean that there are i < j < N with f^[i] x = f^[j] x and f^[k] x ∈ S for every k ≤ j. This is a predicate on a finite initial orbit segment. Prove soundness: the predicate implies preperiodicity. Prove completeness: if S contains every preperiodic point and N ≥ |S| + 1, every preperiodic x satisfies it. Prove failure of repetition outside the candidate set: if x ∉ S the predicate fails, and prove monotonicity in S and N. No equality or computability hypothesis is needed (hutz15, §2, pp. 6–7; pigeonhole on a finite forward orbit).
 
 **Checks.**
 
@@ -4072,7 +4067,7 @@ For a self-map f : α → α, a finite set S ⊆ α, N ∈ ℕ and x ∈ α, def
 - A three-cycle in S = {0, 1, 2} satisfies the predicate at N = 4, with i = 0, j = 3; N = 3 does not suffice for this start.
 - At N = 0 there are no i < j < N, including for a fixed point.
 
-*Needs:* Layer 0 `forwardOrbit`, `IsPreperiodicPt`; Mathlib finite-set pigeonhole.
+*Needs:* Layer 0 `forwardOrbit`, preperiodicity; Mathlib finite-set pigeonhole.
 
 ### 3.12 The candidate box for rational preperiodic points of z^d + c
 
@@ -4088,15 +4083,15 @@ The positive integer b with b^d = den(c), when it exists, is unique. The interva
 
 Prove the following basic API.
 
-- `unicriticalCandidates`: The finite candidate set for (d, c).
-- `mem_unicriticalCandidates_of_preperiodic`: Every rational preperiodic point of z^d + c (d ≥ 2) lies in the box (promoted: The candidate box contains every rational preperiodic point).
-- `card_unicriticalCandidates_le`: |box| ≤ 2⌈den(c)(1 + |c|)⌉ + 1.
+- The finite candidate set for (d, c).
+- Every rational preperiodic point of z^d + c (d ≥ 2) lies in the box (promoted: The candidate box contains every rational preperiodic point).
+- |box| ≤ 2⌈den(c)(1 + |c|)⌉ + 1.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.unicriticalCandidates_test_integral`** (computation): For c = 0, d = 2 the box is {−1, 0, 1}.
-- **`TauCeti.ArithmeticDynamics.unicriticalCandidates_test_nonsquare`** (degenerate): For c = 1/2, d = 2 the box is empty (2 is not a square).
-- **`TauCeti.ArithmeticDynamics.unicriticalCandidates_test_quarter`** (non-example): For c = −29/16 every candidate has denominator dividing 4, so 1/2 + 1/16 (denominator 16) is not a candidate although |·| ≤ 1 + |c|.
+- For c = 0, d = 2 the box is {−1, 0, 1}.
+- For c = 1/2, d = 2 the box is empty (2 is not a square).
+- For c = −29/16 every candidate has denominator dividing 4, so 1/2 + 1/16 (denominator 16) is not a candidate although |·| ≤ 1 + |c|.
 
 **Endpoint checks.** For c = 0, d = 2: {−1, 0, 1}; for c = −29/16, d = 2: b = 4 and |a| ≤ 12, 25 candidates.
 
@@ -4116,15 +4111,15 @@ Take the image of the pairs in [−H, H]² ∖ {0} under Projectivization.mk (ma
 
 Prove the following basic API.
 
-- `ratPointsOfHeightLE`: The Finset of points of ℙ¹(ℚ) of height ≤ H.
-- `mem_ratPointsOfHeightLE_iff`: [v] ∈ ratPointsOfHeightLE H iff Mathlib's Height.mulHeight v ≤ H.
-- `ratPointsOfHeightLE_mono`: Monotone in H.
+- The Finset of points of ℙ¹(ℚ) of height ≤ H.
+- [v] ∈ ratPointsOfHeightLE H iff Mathlib's Height.mulHeight v ≤ H.
+- Monotone in H.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.ratPointsOfHeightLE_test_one`** (computation): There are four points of height ≤ 1.
-- **`TauCeti.ArithmeticDynamics.ratPointsOfHeightLE_test_zero`** (degenerate): No point has height ≤ 0.
-- **`TauCeti.ArithmeticDynamics.ratPointsOfHeightLE_test_half`** (non-example): [1 : 2] has height 2: it lies in the height-2 set and not in the height-1 set (a definition bounding |a/b| instead of max(|a|, |b|) would include it at H = 1).
+- There are four points of height ≤ 1.
+- No point has height ≤ 0.
+- [1 : 2] has height 2: it lies in the height-2 set and not in the height-1 set (a definition bounding |a/b| instead of max(|a|, |b|) would include it at H = 1).
 
 **Endpoint checks.** H = 1: {[0 : 1], [1 : 0], [1 : 1], [−1 : 1]}, four points.
 
@@ -4144,15 +4139,15 @@ Define PoonenConjecture : Prop := ∀ c x : ℚ, ∀ N ≥ 4, minimalPeriod (z �
 
 Prove the following basic API.
 
-- `PoonenConjecture`: The proposition ∀ c x : ℚ, ∀ N ≥ 4, minimalPeriod (z ↦ z² + c) x ≠ N.
-- `PoonenConjecture.minimalPeriod_le_three`: Under the conjecture every rational exact period is ≤ 3.
-- `card_quadratic_preperiodic_le_eight`: Assuming PoonenConjecture and rank J(C₁(3₂))(ℚ)≤1 for C₁(3₂): y²=x⁶−2x⁴+2x³+5x²+2x+1, z²+c has at most eight finite rational preperiodic points (supplied by §3.89) (promoted: Under Poonen's conjecture, #PrePer(z² + c, ℙ¹(ℚ)) ≤ 9).
+- The proposition ∀ c x : ℚ, ∀ N ≥ 4, minimalPeriod (z ↦ z² + c) x ≠ N.
+- Under the conjecture every rational exact period is ≤ 3.
+- Assuming PoonenConjecture and rank J(C₁(3₂))(ℚ)≤1 for C₁(3₂): y²=x⁶−2x⁴+2x³+5x²+2x+1, z²+c has at most eight finite rational preperiodic points (supplied by §3.89) (promoted: Under Poonen's conjecture, #PrePer(z² + c, ℙ¹(ℚ)) ≤ 9).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.PoonenConjecture_test_three`** (computation): −1/4 has exact period 3 for z² − 29/16, so the bound 4 cannot be lowered.
-- `TauCeti.ArithmeticDynamics.PoonenConjecture_test_four`: The conjecture implies minimalPeriod ≠ 4, the statement of Morton's theorem.
-- **`TauCeti.ArithmeticDynamics.PoonenConjecture_test_nonexample`** (non-example): Over ℚ̄, a primitive 15th root of unity has exact period 4 for z², since the multiplicative order of 2 modulo 15 is 4. The rational-field restriction cannot be dropped.
+- −1/4 has exact period 3 for z² − 29/16, so the bound 4 cannot be lowered.
+- The conjecture implies minimalPeriod ≠ 4, the statement of Morton's theorem.
+- Over ℚ̄, a primitive 15th root of unity has exact period 4 for z², since the multiplicative order of 2 modulo 15 is 4. The rational-field restriction cannot be dropped.
 
 **Endpoint checks.** Sharpness of the bound 4: z² − 29/16 has the rational 3-cycle −1/4 ↦ −7/4 ↦ 5/4.
 
@@ -4172,19 +4167,19 @@ Use finite cyclic group rotation on Fin n and its action on functions; define pr
 
 Prove the following basic API.
 
-- `primitiveBinaryWord`: A word has trivial cyclic-rotation stabilizer.
-- `primitiveNecklace`: Orbit of a primitive word under position rotation.
-- `necklace_eq_iff`: Two words define the same necklace iff one is a cyclic shift of the other.
-- `necklaceComplement`: Complement involution on necklaces, commuting with rotation and squaring to identity.
-- `infinityNecklace`: Orbit under complement of a primitive necklace.
-- `infinityNecklace_eq_iff`: Equality iff words differ by a rotation, or by a rotation followed by complement.
-- `infinityNecklace_card`: The finite cardinality is the displayed Burnside count; its geometric interpretation belongs to [3.82 Ramification of the quadratic parameter maps](#382-ramification-of-the-quadratic-parameter-maps).
+- A word has trivial cyclic-rotation stabilizer.
+- Orbit of a primitive word under position rotation.
+- Two words define the same necklace iff one is a cyclic shift of the other.
+- Complement involution on necklaces, commuting with rotation and squaring to identity.
+- Orbit under complement of a primitive necklace.
+- Equality iff words differ by a rotation, or by a rotation followed by complement.
+- The finite cardinality is the displayed Burnside count; its geometric interpretation belongs to [3.82 Ramification of the quadratic parameter maps](#382-ramification-of-the-quadratic-parameter-maps).
 
 **Checks.**
 
-- **`quadratic_infinity_necklaces_1`** (degenerate): n=1: two primitive words, two necklaces, one complement-orbit.
-- **`quadratic_infinity_necklaces_2`** (computation): n=2: 01 and 10 are primitive, one necklace fixed by complement, one infinity-place.
-- **`quadratic_infinity_necklaces_3`** (non-example): At n=4 word 0101 is excluded; word 0011 is primitive and its complement is a rotation, whereas 0001 and 1110 give two necklaces in one complement-orbit.
+- n=1: two primitive words, two necklaces, one complement-orbit.
+- n=2: 01 and 10 are primitive, one necklace fixed by complement, one infinity-place.
+- At n=4 word 0101 is excluded; word 0011 is primitive and its complement is a rotation, whereas 0001 and 1110 give two necklaces in one complement-orbit.
 
 **Endpoint checks.** e₁,e₂,e₃,e₄,e₅,e₆ are 1,1,1,2,3,5. The unquotiented primitive word count is ν₂(n), while the quotient curve degree is ν₂(n)/n.
 
@@ -4204,20 +4199,20 @@ Use RatFunc ℂ; polynomial numerator/denominator and multiplicity give pole ord
 
 Prove the following basic API.
 
-- `rationalQuadraticDifferential`: Reuse RatFunc ℂ for the coefficient; record dz² and pole-coordinate convention.
-- `quadraticDifferential_ext`: Equality is equality of rational coefficients, equivalently agreement on any nonempty open set avoiding poles.
-- `quadraticDifferentialPoleOrder`: At a finite point use denominator minus numerator order; at ∞ use q(1/w)/w⁴.
-- `quadraticDifferentialMass`: Local Lebesgue integral of |q| over a bounded measurable set.
-- `quadraticDifferentialMass_zero`: The zero differential has mass 0 on every set.
-- `quadraticDifferentialMass_smul`: Mass(aq,U)=|a|Mass(q,U); mass is subadditive.
-- `quadraticDifferentialMass_mono`: U⊂V implies mass(U)≤mass(V); strictly so for q≠0 if V∖U contains a nonempty open set away from poles.
-- `quadraticDifferential_pole_change`: Under z=h(w), coefficient becomes q(h(w))h′(w)²; at inversion this is q(1/w)/w⁴.
+- Reuse RatFunc ℂ for the coefficient; record dz² and pole-coordinate convention.
+- Equality is equality of rational coefficients, equivalently agreement on any nonempty open set avoiding poles.
+- At a finite point use denominator minus numerator order; at ∞ use q(1/w)/w⁴.
+- Local Lebesgue integral of |q| over a bounded measurable set.
+- The zero differential has mass 0 on every set.
+- Mass(aq,U)=|a|Mass(q,U); mass is subadditive.
+- U⊂V implies mass(U)≤mass(V); strictly so for q≠0 if V∖U contains a nonempty open set away from poles.
+- Under z=h(w), coefficient becomes q(h(w))h′(w)²; at inversion this is q(1/w)/w⁴.
 
 **Checks.**
 
-- **`rational_quadratic_differentials_1`** (computation): q=1/z has simple pole at 0 and mass 2πR on disc radius R.
-- **`rational_quadratic_differentials_2`** (non-example): q=1/z² has double pole at 0 and infinite mass on every disc about 0.
-- `rational_quadratic_differentials_3`: q=1 has no affine poles but a fourth-order pole at ∞; treating it as a holomorphic differential on the sphere fails.
+- q=1/z has simple pole at 0 and mass 2πR on disc radius R.
+- q=1/z² has double pole at 0 and infinite mass on every disc about 0.
+- q=1 has no affine poles but a fourth-order pole at ∞; treating it as a holomorphic differential on the sphere fails.
 
 **Endpoint checks.** `∫_{|z|<R}|1/z|dA=2πR` for R>0. `∫_{|z|<R}|1/z²|dA` diverges; it is not admitted to the simple-pole mass theorem.
 
@@ -4237,19 +4232,19 @@ Use AddCircle 1 for ℝ/ℤ and its normalized representative; make endpoint tes
 
 Prove the following basic API.
 
-- `unicriticalKneading`: Sequence of Option(Fin d) obtained from the specified moving partition.
-- `kneading_boundary_iff`: ν_θ(k)=⋆ iff `τ^{k−1}θ∈τ⁻¹{θ}.`
-- `kneading_digit_iff`: Digit j iff in the explicitly labelled open arc; the arc for 0 wraps around 1.
-- `kneading_period`: Exact period n of θ gives first ⋆ at n and n-periodic sequence.
-- `cyclicKneadingExpression`: Primitive w,t,s with n=ts and displayed starred repetition.
-- `cyclicExpression_unique`: Two primitive cyclic expressions have equal word, length and repetition count.
-- `maximalAngle_kneading`: If θ has maximal representative in its orbit and base-d expansion .ε₁…εₙ, then εₙ≤d−2 and its block is ε₁…εₙ₋₁⋆.
+- Sequence of Option(Fin d) obtained from the specified moving partition.
+- ν_θ(k)=⋆ iff `τ^{k−1}θ∈τ⁻¹{θ}.`
+- Digit j iff in the explicitly labelled open arc; the arc for 0 wraps around 1.
+- Exact period n of θ gives first ⋆ at n and n-periodic sequence.
+- Primitive w,t,s with n=ts and displayed starred repetition.
+- Two primitive cyclic expressions have equal word, length and repetition count.
+- If θ has maximal representative in its orbit and base-d expansion .ε₁…εₙ, then εₙ≤d−2 and its block is ε₁…εₙ₋₁⋆.
 
 **Checks.**
 
-- **`unicritical_kneading_sequence_1`** (computation): d=3,θ=1/7:12102⋆ repeats, with first ⋆ at 6.
-- **`unicritical_kneading_sequence_2`** (computation): d=4,θ=28/31: maximal angle with expansion .32130 and kneading block 3213⋆.
-- **`unicritical_kneading_sequence_3`** (degenerate): θ=0 for every d: every symbol is ⋆; no digit is assigned to the boundary.
+- d=3,θ=1/7:12102⋆ repeats, with first ⋆ at 6.
+- d=4,θ=28/31: maximal angle with expansion .32130 and kneading block 3213⋆.
+- θ=0 for every d: every symbol is ⋆; no digit is assigned to the boundary.
 
 **Endpoint checks.** For d=3,θ=1/7 the length 6 block is 12102⋆. The endpoint symbol must not be collapsed to digit 0.
 
@@ -4271,20 +4266,20 @@ Construct the near ∞ Böttcher coordinate from iterated d-th roots and uniform
 
 Prove the following basic API.
 
-- `unicriticalBottcher`: Normalized conformal conjugacy near ∞ with φ_c(z)/z→1.
-- `bottcher_unique`: Two normalized germs satisfying the conjugacy coincide.
-- `bottcher_dynamics`: φ_c∘f_c=(φ_c)^d on its specified domain.
-- `unicriticalDynamicRay`: Inverse radial curve on its maximal continuation domain, with specified endpoint or critical obstruction.
-- `unicriticalParameterRay`: Inverse radial curve for Φ_d(c)=φ_c(c).
-- `externalRay_landing`: Landing is the limit of the actual ray as its radial parameter tends down to 1, when it exists.
-- `externalRay_dynamics`: f_c sends an unobstructed ray of angle θ to angle dθ and sends their landing points accordingly.
-- `parameterCoordinate_unique`: Normalized parameter biholomorphism is fixed by Φ_d(c)=φ_c(c), not an arbitrary Riemann map.
+- Normalized conformal conjugacy near ∞ with φ_c(z)/z→1.
+- Two normalized germs satisfying the conjugacy coincide.
+- φ_c∘f_c=(φ_c)^d on its specified domain.
+- Inverse radial curve on its maximal continuation domain, with specified endpoint or critical obstruction.
+- Inverse radial curve for Φ_d(c)=φ_c(c).
+- Landing is the limit of the actual ray as its radial parameter tends down to 1, when it exists.
+- f_c sends an unobstructed ray of angle θ to angle dθ and sends their landing points accordingly.
+- Normalized parameter biholomorphism is fixed by Φ_d(c)=φ_c(c), not an arbitrary Riemann map.
 
 **Checks.**
 
-- **`unicritical_external_ray_system_1`** (computation): c=0: dynamic ray θ lands at exp(2πiθ), and f_c carries that endpoint to exp(2πidθ).
-- **`unicritical_external_ray_system_2`** (degenerate): θ=0,c=0: the ray is the positive real half-line (1,∞), with endpoint 1.
-- **`unicritical_external_ray_system_3`** (non-example): For d=2,c=2, the critical point escapes; a global conformal equivalence of its whole complement with the exterior unit disc is not the claimed coordinate.
+- c=0: dynamic ray θ lands at exp(2πiθ), and f_c carries that endpoint to exp(2πidθ).
+- θ=0,c=0: the ray is the positive real half-line (1,∞), with endpoint 1.
+- For d=2,c=2, the critical point escapes; a global conformal equivalence of its whole complement with the exterior unit disc is not the claimed coordinate.
 
 **Endpoint checks.** For c=0, φ_c(z)=z outside the unit disc and the ray landing point is exp(2πiθ). Ray landing below is a separate theorem; general Carathéodory for Jordan boundaries does not imply it for Multibrot sets.
 
@@ -4374,22 +4369,22 @@ Form the element `∏_{(i, j) ∈ divisorsAntidiagonal n}` `ι(Φⱼ(φ))^{μ(i)
 
 Prove the following basic API.
 
-- `dynatomicForm`: Φ*ₙ(φ) ∈ K[X, Y].
-- `algebraMap_dynatomicForm`: ι(Φ*ₙ) = `∏_{m∣n}` `ι(Φₘ)^{μ(n/m)}` in the fraction field (promoted: The Möbius product ∏ `Φₘ^{μ(n/m)}` is a polynomial).
-- `prod_dynatomicForm_divisors`: `∏_{m ∣ n}` Φ*ₘ = Φₙ for n ≥ 1.
-- `binaryFormOrder_dynatomicForm`: ord_P Φ*ₙ = a*_P(n) for P ≠ 0.
-- `eval_dynatomicForm_eq_zero_iff`: Φ*ₙ(P) = 0 iff P has formal period n.
-- `dynatomicForm_one`: Φ*₁ = Φ₁.
-- `dynatomicForm_map`: For a field homomorphism g: Φ*ₙ(g(φ)) = g(Φ*ₙ(φ)).
-- `dynatomicForm_isHomogeneous`: Φ*ₙ is homogeneous of degree `Σ_{m∣n}` μ(n/m)(dᵐ + 1) (promoted: The degree of Φ*ₙ).
-- `aeval_dynatomicForm_polynomialLift`: For monic f the dehomogenisation of Φ*ₙ of its lift is the affine dynatomic polynomial (promoted: The affine and homogeneous dynatomic polynomials agree).
+- Φ*ₙ(φ) ∈ K[X, Y].
+- ι(Φ*ₙ) = `∏_{m∣n}` `ι(Φₘ)^{μ(n/m)}` in the fraction field (promoted: The Möbius product ∏ `Φₘ^{μ(n/m)}` is a polynomial).
+- `∏_{m ∣ n}` Φ*ₘ = Φₙ for n ≥ 1.
+- ord_P Φ*ₙ = a*_P(n) for P ≠ 0.
+- Φ*ₙ(P) = 0 iff P has formal period n.
+- Φ*₁ = Φ₁.
+- For a field homomorphism g: Φ*ₙ(g(φ)) = g(Φ*ₙ(φ)).
+- Φ*ₙ is homogeneous of degree `Σ_{m∣n}` μ(n/m)(dᵐ + 1) (promoted: The degree of Φ*ₙ).
+- For monic f the dehomogenisation of Φ*ₙ of its lift is the affine dynatomic polynomial (promoted: The affine and homogeneous dynatomic polynomials agree).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.dynatomicForm_test_quadratic`** (computation): For z² + c over ℚ: Φ*₂ = X² + XY + (c + 1)Y².
-- **`TauCeti.ArithmeticDynamics.dynatomicForm_test_one`** (degenerate): Φ*₁ = Φ₁ for z² + c.
-- `TauCeti.ArithmeticDynamics.dynatomicForm_test_cyclotomic`: For z² and n ≥ 2 the dehomogenised Φ*ₙ is ∏ Φ_k over the k ∣ 2ⁿ − 1 with ord_k(2) = n (Mathlib's Polynomial.cyclotomic); e.g. n = 2 gives Φ₃ = z² + z + 1.
-- **`TauCeti.ArithmeticDynamics.dynatomicForm_test_square`** (non-example): For z² − 3/4: Φ*₂ = (X + Y/2)², a square: its zeros are not all of exact period 2, so a definition as 'the product of (X − αY) over points of exact period n' is wrong.
+- For z² + c over ℚ: Φ*₂ = X² + XY + (c + 1)Y².
+- Φ*₁ = Φ₁ for z² + c.
+- For z² and n ≥ 2 the dehomogenised Φ*ₙ is ∏ Φ_k over the k ∣ 2ⁿ − 1 with ord_k(2) = n (Mathlib's Polynomial.cyclotomic); e.g. n = 2 gives Φ₃ = z² + z + 1.
+- For z² − 3/4: Φ*₂ = (X + Y/2)², a square: its zeros are not all of exact period 2, so a definition as 'the product of (X − αY) over points of exact period n' is wrong.
 
 **Endpoint checks.** For z² + c with lift (X² + cY², Y²): Φ*₁ = Y(X² − XY + cY²), Φ*₂ = X² + XY + (c + 1)Y², and the dehomogenised Φ*₃ is z⁶ + z⁵ + (3c + 1)z⁴ + (2c + 1)z³ + (3c² + 3c + 1)z² + (c + 1)²z + c³ + 2c² + c + 1.
 
@@ -4451,17 +4446,17 @@ Apply The dynatomic polynomial of a monic polynomial map to f = X^d + C c over �
 
 Prove the following basic API.
 
-- `unicriticalDynatomic`: Φ*ₙ(x, c) ∈ ℤ[c][x].
-- `unicriticalDynatomic_monic`: Φ*ₙ(x, c) is monic in x for d ≥ 2.
-- `map_unicriticalDynatomic`: Specialising c ↦ c₀ ∈ L gives Φ*ₙ(x^d + c₀) ∈ L[x].
-- `natDegree_unicriticalDynatomic`: deg_x Φ*ₙ(x, c) = νd(n) for n ≥ 1.
+- Φ*ₙ(x, c) ∈ ℤ[c][x].
+- Φ*ₙ(x, c) is monic in x for d ≥ 2.
+- Specialising c ↦ c₀ ∈ L gives Φ*ₙ(x^d + c₀) ∈ L[x].
+- deg_x Φ*ₙ(x, c) = νd(n) for n ≥ 1.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.unicriticalDynatomic_test_one`** (computation): For d = 2: Φ*₁(x, c) = x² − x + c.
-- **`TauCeti.ArithmeticDynamics.unicriticalDynatomic_test_two`** (computation): For d = 2: Φ*₂(x, c) = x² + x + c + 1.
-- **`TauCeti.ArithmeticDynamics.unicriticalDynatomic_test_zero`** (degenerate): Φ*₀(x, c) = 1.
-- **`TauCeti.ArithmeticDynamics.unicriticalDynatomic_test_degree`** (non-example): For d = 2, deg_x Φ*₄ = 12, not 2⁴ = 16: the dynatomic polynomial is not f⁴(x) − x.
+- For d = 2: Φ*₁(x, c) = x² − x + c.
+- For d = 2: Φ*₂(x, c) = x² + x + c + 1.
+- Φ*₀(x, c) = 1.
+- For d = 2, deg_x Φ*₄ = 12, not 2⁴ = 16: the dynatomic polynomial is not f⁴(x) − x.
 
 **Endpoint checks.** Φ*₁(x, c) = x² − x + c, Φ*₂(x, c) = x² + x + c + 1, deg Φ*₄ = 12 (Morton 1998, §2).
 
@@ -4495,16 +4490,16 @@ Using classical decidability for Finset.filter, define preperiodicFilter f S := 
 
 Prove the following basic API.
 
-- `preperiodicFilter`: The preperiodic candidates: S.filter of the check.
-- `preperiodicFilter_subset`: preperiodicFilter f S ⊆ S.
-- `preperiodicFilter_mono_sound`: Every element of preperiodicFilter f S is preperiodic.
-- `mem_preperiodicFilter_iff`: If S contains every preperiodic point, x ∈ preperiodicFilter f S iff x is preperiodic (promoted: Correctness of the preperiodic filter).
+- The preperiodic candidates: S.filter of the check.
+- preperiodicFilter f S ⊆ S.
+- Every element of preperiodicFilter f S is preperiodic.
+- If S contains every preperiodic point, x ∈ preperiodicFilter f S iff x is preperiodic (promoted: Correctness of the preperiodic filter).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.preperiodicFilter_test_square`** (computation): For z ↦ z² on ℚ: preperiodicFilter over {−2, −1, 0, 1, 2} is {−1, 0, 1}.
-- **`TauCeti.ArithmeticDynamics.preperiodicFilter_test_empty`** (degenerate): The empty candidate set gives ∅.
-- **`TauCeti.ArithmeticDynamics.preperiodicFilter_test_translation`** (non-example): A translation n ↦ n + 1 on ℤ has no preperiodic point: the filter of {−3, …, 3} is ∅.
+- For z ↦ z² on ℚ: preperiodicFilter over {−2, −1, 0, 1, 2} is {−1, 0, 1}.
+- The empty candidate set gives ∅.
+- A translation n ↦ n + 1 on ℤ has no preperiodic point: the filter of {−3, …, 3} is ∅.
 
 **Endpoint checks.** preperiodicFilter (z ↦ z²) {−2, −1, 0, 1, 2} = {−1, 0, 1}.
 
@@ -4512,7 +4507,7 @@ Applications include The computed rational preperiodic points of z^d + c — app
 
 ### 3.31 Projective charts and transport of evaluation
 
-For a field isomorphism e : K ≃+* L and a rational map f over K, identify ℙ¹(K) with K ⊔ {∞}. Prove `projectiveChart_evaluation`: at [x : 1], the value is ∞ exactly when F₁(x,1) = 0, and otherwise is F₀(x,1)/F₁(x,1). Prove `projectiveChart_transport`: the chart equivalence commutes with e, equality and every compositional iterate. Base-point freeness ensures that the numerator and denominator cannot vanish together. This specializes to any exact field realization, with no extra computational structure (hutz15, §1, pp. 1–2; doylekrumm, §4.3, pp. 11–13).
+For a field isomorphism e : K ≃+* L and a rational map f over K, identify ℙ¹(K) with K ⊔ {∞}. Prove the projective-chart evaluation formula: at [x : 1], the value is ∞ exactly when F₁(x,1) = 0, and otherwise is F₀(x,1)/F₁(x,1). Prove transport through the projective charts: the chart equivalence commutes with e, equality and every compositional iterate. Base-point freeness ensures that the numerator and denominator cannot vanish together. This specializes to any exact field realization, with no extra computational structure (hutz15, §1, pp. 1–2; doylekrumm, §4.3, pp. 11–13).
 
 **Checks.**
 
@@ -4550,20 +4545,20 @@ Form the finite separable extension ℂ(f(z))⊂ℂ(z), of degree deg f by RatFu
 
 Prove the following basic API.
 
-- `polynomialQuadraticPushforward`: Linear trace operator with regular-fibre evaluation formula.
-- `quadraticPushforward_regular`: At a regular value avoiding pole images it equals the finite fibre sum.
-- `quadraticPushforward_zero`: Pushforward 0=0.
-- `quadraticPushforward_id`: Pushforward by identity is identity.
-- `quadraticPushforward_comp`: (f∘g)_*=f_*∘g_* for nonconstant polynomials.
-- `quadraticPushforward_poles`: Affine poles lie among critical values and images of coefficient poles; simple poles remain simple.
-- `unicriticalPushforward_simple`: The two explicit formulas in the statement, including a≠0 for the second.
-- `unicriticalPushforward_double`: For a≠0, f_*(1/(z−a)²)=1/(z−f(a))²−((d−1)/(a·f′(a)))(1/(z−f(a))−1/(z−c)); summed along a cycle it gives the multiplier-variation identity of Gao–Ou Lemma 2.8.
+- Linear trace operator with regular-fibre evaluation formula.
+- At a regular value avoiding pole images it equals the finite fibre sum.
+- Pushforward 0=0.
+- Pushforward by identity is identity.
+- (f∘g)_*=f_*∘g_* for nonconstant polynomials.
+- Affine poles lie among critical values and images of coefficient poles; simple poles remain simple.
+- The two explicit formulas in the statement, including a≠0 for the second.
+- For a≠0, f_*(1/(z−a)²)=1/(z−f(a))²−((d−1)/(a·f′(a)))(1/(z−f(a))−1/(z−c)); summed along a cycle it gives the multiplier-variation identity of Gao–Ou Lemma 2.8.
 
 **Checks.**
 
-- **`polynomial_quadratic_pushforward_1`** (computation): For f=z², the coefficient 1/z pushes to 0 by cancellation of the two preimages.
-- **`polynomial_quadratic_pushforward_2`** (computation): For f=z² and a=1, 1/(z−1) pushes to½(1/(z−1)−1/z).
-- **`polynomial_quadratic_pushforward_3`** (non-example): For f=id, every coefficient is fixed by pushforward; nonconstant alone cannot imply absence of fixed differentials.
+- For f=z², the coefficient 1/z pushes to 0 by cancellation of the two preimages.
+- For f=z² and a=1, 1/(z−1) pushes to½(1/(z−1)−1/z).
+- For f=id, every coefficient is fixed by pushforward; nonconstant alone cannot imply absence of fixed differentials.
 
 **Endpoint checks.** The construction extends rationally at critical values instead of evaluating a term with zero derivative. It applies to nonzero simple-pole coefficients used by smoothness and to the explicitly punctured double-pole calculation.
 
@@ -4613,17 +4608,17 @@ Define a_P(n) := ord_P Φₙ(φ) (The order of a binary form at a point of ℙ¹
 
 Prove the following basic API.
 
-- `periodicMultiplicity`: a_P(n) := ord_P Φₙ(φ) ∈ ℕ.
-- `periodicMultiplicity_pos_iff`: For n ≥ 1 and deg φ ≥ 2: a_P(n) > 0 iff fⁿ(P) = P.
-- `periodicMultiplicity_liftIterate`: For m, k ≥ 1 and deg φ ≥ 2, a_P(φᵐ, k) = a_P(φ, mk).
-- `sum_periodicMultiplicity`: Over an algebraically closed field, summing a_P(n) over a set of representatives of the points of ℙ¹ where Φₙ vanishes gives dⁿ + 1.
+- a_P(n) := ord_P Φₙ(φ) ∈ ℕ.
+- For n ≥ 1 and deg φ ≥ 2: a_P(n) > 0 iff fⁿ(P) = P.
+- For m, k ≥ 1 and deg φ ≥ 2, a_P(φᵐ, k) = a_P(φ, mk).
+- Over an algebraically closed field, summing a_P(n) over a set of representatives of the points of ℙ¹ where Φₙ vanishes gives dⁿ + 1.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.periodicMultiplicity_test_tangent`** (computation): For z² − z (lift (X² − XY, Y²)) over ℚ: `a_{[0:1]}(2)` = 3.
-- **`TauCeti.ArithmeticDynamics.periodicMultiplicity_test_fixed`** (computation): For z² − z: `a_{[0:1]}(1)` = 1.
-- **`TauCeti.ArithmeticDynamics.periodicMultiplicity_test_nonperiodic`** (degenerate): For z²: `a_{[2:1]}(1)` = 0, since 2 is not fixed.
-- `TauCeti.ArithmeticDynamics.periodicMultiplicity_test_infinity`: For a polynomial map of degree ≥ 2, ∞ is a simple root of every Φₙ: `a_{[1:0]}(n)` = 1 for n ≥ 1.
+- For z² − z (lift (X² − XY, Y²)) over ℚ: `a_{[0:1]}(2)` = 3.
+- For z² − z: `a_{[0:1]}(1)` = 1.
+- For z²: `a_{[2:1]}(1)` = 0, since 2 is not fixed.
+- For a polynomial map of degree ≥ 2, ∞ is a simple root of every Φₙ: `a_{[1:0]}(n)` = 1 for n ≥ 1.
 - For the degree-one identity Φₙ = 0, and the total finite multiplicity has its junk value; it cannot characterize the identity’s fixed points. The degree hypothesis excludes this case.
 
 **Endpoint checks.** For z² − z: Z₂ = 3(0) + (2) + (∞), so a₀(2) = 3, a₂(2) = 1, a_∞(2) = 1 (Morton–Silverman 1995, §1).
@@ -4673,21 +4668,21 @@ Define `UniformBoundednessConjecture N d D` : Prop := ∃ C, ∀ number fields L
 Prove the following basic API.
 
 - `UniformBoundednessConjecture N d D`: The proposition for ℙᴺ: ∃ C, ∀ L, [L : ℚ] ≤ D → ∀ φ of degree d, #PrePer ≤ C.
-- `UniformBoundednessConjecture.mono`: UBC(N, d, D′) implies UBC(N, d, D) for D ≤ D′.
-- `finite_preperiodicPts`: For each fixed morphism the set is finite (promoted: Finitely many L-rational preperiodic points (Northcott)); the conjecture asks for uniformity.
+- UBC(N, d, D′) implies UBC(N, d, D) for D ≤ D′.
+- For each fixed morphism the set is finite (promoted: Finitely many L-rational preperiodic points (Northcott)); the conjecture asks for uniformity.
 - `UniformBoundednessProperty N d D C`: UBC(N, d, D; C). The elliptic application uses N=1.
-- `UniformBoundednessProperty.mono`: UBC(N, d, D; C) and C ≤ C′ imply UBC(N, d, D; C′).
-- `prePer_finite`: For fixed f over a number field K, PrePer(f, ℙ¹(K)) is finite (Preperiodic points of a polarized morphism form a set of bounded height), so each UBC(1, d, D; C) is a uniformity statement.
+- UBC(N, d, D; C) and C ≤ C′ imply UBC(N, d, D; C′).
+- For fixed f over a number field K, PrePer(f, ℙ¹(K)) is finite (Preperiodic points of a polarized morphism form a set of bounded height), so each UBC(1, d, D; C) is a uniformity statement.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.UniformBoundednessConjecture_test_degenerate`** (degenerate): The predicate extended to D=0 is vacuously true: no number field has degree at most 0.
-- **`TauCeti.ArithmeticDynamics.UniformBoundednessConjecture_test_linear`** (non-example): Extending the predicate to d=1 makes UBC(1, 1, 1) false: the identity of ℙ¹ over ℚ has infinitely many preperiodic points.
-- **`TauCeti.ArithmeticDynamics.UniformBoundednessConjecture_test_poonen`** (computation): Any constant valid for d = 2 over ℚ is ≥ 9, because z² − 29/16 has nine rational preperiodic points.
-- **`prePer_sq_rat`** (computation): PrePer(z², ℙ¹(ℚ)) = {0, 1, −1, ∞} has 4 elements.
-- **`uniformBoundedness_fixed_map`** (degenerate): For one fixed f over one fixed K the finiteness of PrePer(f, ℙ¹(K)) is a theorem (Preperiodic points of a polarized morphism form a set of bounded height).
-- `uniformBoundedness_implies_torsion_bound`: UBC(1, 4, D) implies #E(K)_tors ≤ 2C for all elliptic E/K with [K : ℚ] = D (Uniform boundedness for maps of ℙ¹ bounds torsion on elliptic curves (conditional)).
-- **`uniformBoundedness_needs_degree_bound`** (non-example): No bound independent of D exists: PrePer(z², ℙ¹(ℚ(ζ_N))) contains the N-th roots of unity, so it has at least N elements.
+- The predicate extended to D=0 is vacuously true: no number field has degree at most 0.
+- Extending the predicate to d=1 makes UBC(1, 1, 1) false: the identity of ℙ¹ over ℚ has infinitely many preperiodic points.
+- Any constant valid for d = 2 over ℚ is ≥ 9, because z² − 29/16 has nine rational preperiodic points.
+- PrePer(z², ℙ¹(ℚ)) = {0, 1, −1, ∞} has 4 elements.
+- For one fixed f over one fixed K the finiteness of PrePer(f, ℙ¹(K)) is a theorem (Preperiodic points of a polarized morphism form a set of bounded height).
+- UBC(1, 4, D) implies #E(K)_tors ≤ 2C for all elliptic E/K with [K : ℚ] = D (Uniform boundedness for maps of ℙ¹ bounds torsion on elliptic curves (conditional)).
+- No bound independent of D exists: PrePer(z², ℙ¹(ℚ(ζ_N))) contains the N-th roots of unity, so it has at least N elements.
 
 **Endpoint checks.** Any constant for (N, d, D) = (1, 2, 1) is ≥ 9, by z² − 29/16.
 
@@ -4721,16 +4716,16 @@ Compose The candidate box for rational preperiodic points of z^d + c with Filter
 
 Prove the following basic API.
 
-- `unicriticalRationalPreperiodic`: The filter applied to the candidate box.
-- `unicriticalRationalPreperiodic_subset`: The result is a subset of the candidate box.
-- `mem_unicriticalRationalPreperiodic_iff`: For d ≥ 2: x ∈ result iff x is preperiodic for z^d + c (promoted: Certified enumeration of the rational preperiodic points of z^d + c).
+- The filter applied to the candidate box.
+- The result is a subset of the candidate box.
+- For d ≥ 2: x ∈ result iff x is preperiodic for z^d + c (promoted: Certified enumeration of the rational preperiodic points of z^d + c).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.unicriticalRationalPreperiodic_test_poonen`** (computation): For d = 2, c = −29/16 the result has 8 elements (9 with ∞).
-- **`TauCeti.ArithmeticDynamics.unicriticalRationalPreperiodic_test_chebyshev`** (computation): For d = 2, c = −2 the result is {−2, −1, 0, 1, 2}.
-- **`TauCeti.ArithmeticDynamics.unicriticalRationalPreperiodic_test_empty`** (degenerate): For d = 2, c = 1 the result is ∅.
-- `TauCeti.ArithmeticDynamics.unicriticalRationalPreperiodic_test_cube`: For d = 3, c = 0 the result is {−1, 0, 1}, the three fixed points, as Odd-degree z^d + c over ℚ: only fixed points predicts.
+- For d = 2, c = −29/16 the result has 8 elements (9 with ∞).
+- For d = 2, c = −2 the result is {−2, −1, 0, 1, 2}.
+- For d = 2, c = 1 the result is ∅.
+- For d = 3, c = 0 the result is {−1, 0, 1}, the three fixed points, as Odd-degree z^d + c over ℚ: only fixed points predicts.
 
 **Endpoint checks.** c = −29/16: {±1/4, ±3/4, ±5/4, ±7/4}; c = −2: {−2, −1, 0, 1, 2}; c = 1: ∅; d = 3, c = 0: {−1, 0, 1}.
 
@@ -4778,19 +4773,19 @@ Define a*_P(n) := `Σ_{(i, j) ∈ divisorsAntidiagonal n}` μ(i)·a_P(j) (mathli
 
 Prove the following basic API.
 
-- `essentialMultiplicity`: a*_P(n) = `Σ_{d∣n}` μ(n/d) a_P(d) ∈ ℤ.
-- `essentialMultiplicity_one`: a*_P(1) = a_P(1).
-- `sum_essentialMultiplicity_divisors`: a_P(n) = `Σ_{d∣n}` a*_P(d) for n ≥ 1 (Möbius inversion).
-- `essentialMultiplicity_eq_of_minimalPeriod_eq`: If P has exact period n, a*_P(n) = a_P(n).
-- `essentialMultiplicity_of_minimalPeriod`: Reduction to a fixed point (promoted: Reduction of a*_P to a fixed point).
-- `essentialMultiplicity_nonneg`: Effectivity a*_P(n) ≥ 0 (promoted: Effectivity of the dynatomic cycle).
+- a*_P(n) = `Σ_{d∣n}` μ(n/d) a_P(d) ∈ ℤ.
+- a*_P(1) = a_P(1).
+- a_P(n) = `Σ_{d∣n}` a*_P(d) for n ≥ 1 (Möbius inversion).
+- If P has exact period n, a*_P(n) = a_P(n).
+- Reduction to a fixed point (promoted: Reduction of a*_P to a fixed point).
+- Effectivity a*_P(n) ≥ 0 (promoted: Effectivity of the dynatomic cycle).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.essentialMultiplicity_test_tangent`** (computation): For z² − z over ℚ: `a*_{[0:1]}(2)` = 2 although 0 is fixed (Morton–Silverman's example).
-- **`TauCeti.ArithmeticDynamics.essentialMultiplicity_test_acceptance`** (computation): For z² − 3/4: `a*_{[−1/2:1]}(2)` = 2 (the fixed point −1/2 has multiplier −1).
-- **`TauCeti.ArithmeticDynamics.essentialMultiplicity_test_one`** (degenerate): a*_P(1) = a_P(1) for z² and every P.
-- **`TauCeti.ArithmeticDynamics.essentialMultiplicity_test_repelling`** (non-example): For z²: the fixed point 1 has multiplier 2, so `a*_{[1:1]}(2)` = 0; a definition counting all points of period dividing n would give 1.
+- For z² − z over ℚ: `a*_{[0:1]}(2)` = 2 although 0 is fixed (Morton–Silverman's example).
+- For z² − 3/4: `a*_{[−1/2:1]}(2)` = 2 (the fixed point −1/2 has multiplier −1).
+- a*_P(1) = a_P(1) for z² and every P.
+- For z²: the fixed point 1 has multiplier 2, so `a*_{[1:1]}(2)` = 0; a definition counting all points of period dividing n would give 1.
 
 **Endpoint checks.** For z² − z: a*₀(2) = a₀(2) − a₀(1) = 3 − 1 = 2 (Morton–Silverman 1995, §1).
 
@@ -4896,20 +4891,20 @@ Define IsOfFormalPeriod φ n P :⟺ 0 < a*_P(n) (The essential (dynatomic) multi
 
 Prove the following basic API.
 
-- `IsOfFormalPeriod`: P has formal period n: 0 < a*_P(n).
-- `IsOfFormalPeriod.iterate_eq`: Formal period n implies fⁿ(P) = P.
-- `IsOfFormalPeriod.minimalPeriod_dvd`: Formal period n implies Mathlib's minimalPeriod f P ∣ n.
-- `isOfFormalPeriod_one_iff`: Formal period 1 iff f(P) = P.
-- `isOfFormalPeriod_of_minimalPeriod_eq`: Exact period n implies formal period n (promoted: Exact period n implies formal period n).
-- `isOfFormalPeriod_zero_iff`: The classification n ∈ {m, mr, mrpᵉ} at [0 : 1] (promoted: Which formal periods occur: n ∈ {m, m·r, m·r·pᵉ}).
-- `eval_dynatomicForm_eq_zero_iff`: Formal period n iff Φ*ₙ(P) = 0 (on The dynatomic polynomial Φ*ₙ(φ)).
+- P has formal period n: 0 < a*_P(n).
+- Formal period n implies fⁿ(P) = P.
+- Formal period n implies Mathlib's minimalPeriod f P ∣ n.
+- Formal period 1 iff f(P) = P.
+- Exact period n implies formal period n (promoted: Exact period n implies formal period n).
+- The classification n ∈ {m, mr, mrpᵉ} at [0 : 1] (promoted: Which formal periods occur: n ∈ {m, m·r, m·r·pᵉ}).
+- Formal period n iff Φ*ₙ(P) = 0 (on The dynatomic polynomial Φ*ₙ(φ)).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.IsOfFormalPeriod_test_acceptance`** (computation): For z² − 3/4 over ℚ: −1/2 has formal period 2 and exact period 1 (Flynn–Poonen–Schaefer §2).
-- **`TauCeti.ArithmeticDynamics.IsOfFormalPeriod_test_tangent`** (computation): For z² − z: 0 has formal period 2 (Morton–Silverman §1).
-- **`TauCeti.ArithmeticDynamics.IsOfFormalPeriod_test_fixed`** (degenerate): Formal period 1 means fixed: 1 has formal period 1 for z².
-- **`TauCeti.ArithmeticDynamics.IsOfFormalPeriod_test_nonexample`** (non-example): In characteristic 0, −1/2 does not have formal period 3 for z² − 3/4 (a definition 'fⁿ(P) = P' would say it does).
+- For z² − 3/4 over ℚ: −1/2 has formal period 2 and exact period 1 (Flynn–Poonen–Schaefer §2).
+- For z² − z: 0 has formal period 2 (Morton–Silverman §1).
+- Formal period 1 means fixed: 1 has formal period 1 for z².
+- In characteristic 0, −1/2 does not have formal period 3 for z² − 3/4 (a definition 'fⁿ(P) = P' would say it does).
 
 **Endpoint checks.** z² − 3/4, P = −1/2: formal periods {1, 2}, exact period 1.
 
@@ -4930,8 +4925,6 @@ By At a fixed point a_P(n) is the order of gⁿ(z) − z, a_P(k) = ord(gᵏ − 
 **Endpoint checks.** z² − 3/4 at −1/2 over ℚ: λ = −1, r = 2, B ≡ 3, so a(k) = 1 for odd k and 3 for even k. For z² at 0, λ = 0 and r = 0, so a(k) = 1 for every k ≥ 1; this case has no root-of-unity B-profile.
 
 ### 3.53 Relative height bounds for dynamical candidate sets
-
-The named signatures are `relativeHeightCandidateBound`, `nativeHeightCandidateBound`.
 
 Let K be a number field of degree s=[K:ℚ]>0 and f a rational map of degree at least 2 over K. Mathlib's Height.logHeight of a representative of a point of ℙ¹(K) is relative to K (no division by s); the absolute height is h_abs(P)=Height.logHeight(P.rep)/s. The explicit preperiodic-height bound is native: every preperiodic P satisfies Height.logHeight(P.rep)≤B_nat=C/(d−1). Take rationals D≥1 and 0<τ≤1 with D≥exp(B_nat); when the available bound is instead an absolute one, h_abs(P)≤B, take D≥exp(sB). Then the projective union T of both ED.0 output lists plus ∞ contains every preperiodic point, and filtering T by the orbit-repetition check with segment length |T|+1 yields exactly PrePer(f,ℙ¹(K)); equality tests at the height boundary are unnecessary. This adapter supplies a sufficient finite superset, and does not advertise T as an exact height-cutoff list.
 
@@ -5131,7 +5124,7 @@ Strong induction on n. Put Dₘ := Φ*ₘ(φ_f)(X, 1). Dehomogenising `∏_{m∣
 
 ### 3.66a Local analytic equations and algebraic smoothness
 
-For d≥2,n≥1 over ℂ, prove `dynatomicLocalEquationComparison`: the reduced analytic closure of the exact-period, multiplier≠1 locus has the same local defining ideal as Φ*ₙ,d=0, and a nonzero local partial derivative. Use the monic factorization of f_cⁿ−x, formal-period classification and local parabolic splitting to identify ideals, not only zero sets. This proves algebraic reducedness and smoothness, independently of global connectedness (Gao–Ou §2.2, pp.4–9; §3, Theorem 3.1).
+For d≥2,n≥1 over ℂ, prove the dynatomic local-equation comparison: the reduced analytic closure of the exact-period, multiplier≠1 locus has the same local defining ideal as Φ*ₙ,d=0, and a nonzero local partial derivative. Use the monic factorization of f_cⁿ−x, formal-period classification and local parabolic splitting to identify ideals, not only zero sets. This proves algebraic reducedness and smoothness, independently of global connectedness (Gao–Ou §2.2, pp.4–9; §3, Theorem 3.1).
 
 *Needs:* §§3.28, 3.49, 3.60, 3.61, 3.66; the algebraic Jacobian criterion. No global monodromy input.
 
@@ -5155,7 +5148,7 @@ For n>1 rotate a primitive periodic word to its maximal lexicographic marking. I
 
 **Endpoint checks.** Connectedness of unmarked cycles alone is insufficient; the terminal satellite loop connects all n markings. At n=1 the explicit graph is irreducible for every d≥2.
 
-**Construction.** The local comparison `dynatomicLocalEquationComparison` in §3.66a is independent of this monodromy theorem; §3.70 combines the two outputs.
+**Construction.** The local comparison the dynatomic local-equation comparison in §3.66a is independent of this monodromy theorem; §3.70 combines the two outputs.
 
 ### 3.68 `∏_{m∣n}` Φ*ₘ(f) = fⁿ(z) − z for monic f over any ring
 
@@ -5185,15 +5178,15 @@ Define the coordinate ring as AdjoinRoot (Φ*ₙ(x, c)) (mathlib:AdjoinRoot) ove
 
 Prove the following basic API.
 
-- `DynatomicCurveRing`: The coordinate ring ℤ[c][x]/(Φ*ₙ(x, c)) of Y₁(n).
-- `nonempty_dynatomicCurveRing_hom_iff`: A ring homomorphism to L with x ↦ x₀, c ↦ c₀ exists iff Φ*ₙ(x₀, c₀) = 0.
-- `dynatomicCurveRing_sigma`: σ: x ↦ x^d + c, c ↦ c is a ring automorphism of the coordinate ring.
+- The coordinate ring ℤ[c][x]/(Φ*ₙ(x, c)) of Y₁(n).
+- A ring homomorphism to L with x ↦ x₀, c ↦ c₀ exists iff Φ*ₙ(x₀, c₀) = 0.
+- σ: x ↦ x^d + c, c ↦ c is a ring automorphism of the coordinate ring.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.DynatomicCurveRing_test_acceptance`** (computation): (x, c) = (−1/2, −3/4) is a ℚ-point of Y₁(2) for d = 2.
-- **`TauCeti.ArithmeticDynamics.DynatomicCurveRing_test_fixed`** (degenerate): (0, 0) is a ℚ-point of Y₁(1).
-- **`TauCeti.ArithmeticDynamics.DynatomicCurveRing_test_nonexample`** (non-example): (0, 0) is not a ℚ-point of Y₁(2), since Φ*₂(0, 0) = 1: a definition by fⁿ(x) = x would wrongly include it.
+- (x, c) = (−1/2, −3/4) is a ℚ-point of Y₁(2) for d = 2.
+- (0, 0) is a ℚ-point of Y₁(1).
+- (0, 0) is not a ℚ-point of Y₁(2), since Φ*₂(0, 0) = 1: a definition by fⁿ(x) = x would wrongly include it.
 
 **Endpoint checks.** (−1/2, −3/4) ∈ Y₁(2)(ℚ) although −1/2 is fixed; (0, 0) ∈ Y₁(1) but (0, 0) ∉ Y₁(2) since Φ*₂(0, 0) = 1.
 
@@ -5201,15 +5194,15 @@ Applications include Flynn–Poonen–Schaefer 1995, §§2–4 — rational poin
 
 ### 3.70 From analytic branches to the algebraic dynatomic curve
 
-Use §3.66a `dynatomicLocalEquationComparison` for the local ideal comparison, reducedness and algebraic smoothness. Transfer smooth analytic connectedness, proved by marked monodromy, to geometric integrality, and descend faithfully to characteristic-zero fields. State the local equation comparison rather than only equality of zero sets; use the monic factorization of f_cⁿ−x and the formal-period classification. Algebraic Jacobian criteria and AlgebraicCurves regular models are inputs to this Layer 3 bridge (Gao–Ou §3).
+Use §3.66a the dynatomic local-equation comparison for the local ideal comparison, reducedness and algebraic smoothness. Transfer smooth analytic connectedness, proved by marked monodromy, to geometric integrality, and descend faithfully to characteristic-zero fields. State the local equation comparison rather than only equality of zero sets; use the monic factorization of f_cⁿ−x and the formal-period classification. Algebraic Jacobian criteria and AlgebraicCurves regular models are inputs to this Layer 3 bridge (Gao–Ou §3).
 
-For d≥2,n≥1, the complex zero scheme of the Φ*ₙ,d is reduced, smooth and geometrically integral; its complex points are the closure in ℂ² of exact n-period pairs with multiplier≠1. At a pair of exact period m dividing n with multiplier of order r>1, it belongs to that closure exactly when n=mr; multiplier 1 points of exact n-period also belong. The complex smoothness/irreducibility descends to any characteristic-zero field by the integral-coefficient model and faithful field extension. Prove `dynatomicGeometricallyIntegral` by this local comparison followed by §3.67 marked monodromy and faithful descent.
+For d≥2,n≥1, the complex zero scheme of the Φ*ₙ,d is reduced, smooth and geometrically integral; its complex points are the closure in ℂ² of exact n-period pairs with multiplier≠1. At a pair of exact period m dividing n with multiplier of order r>1, it belongs to that closure exactly when n=mr; multiplier 1 points of exact n-period also belong. The complex smoothness/irreducibility descends to any characteristic-zero field by the integral-coefficient model and faithful field extension. Prove geometric integrality of the dynatomic curve by this local comparison followed by §3.67 marked monodromy and faithful descent.
 
 d≥2,n≥1; do not identify every root of f_c^n(z)−z with a dynatomic point. Formal/exact-period classification is the one; boundary means closure minus the open exact-period, multiplier≠1 locus, not the topological boundary of a curve in ℂ².
 
 Use the formal-period classification to list possible lower-period roots. Local transversality and parabolic splitting identify exactly which branches occur in the closure. Local defining equations have a nonzero partial derivative; compare the monic product factorization `f_c^n−z=∏_{e|n}Φ*ₑ` to identify the reduced local equations, not only their zero sets. Transitive marked monodromy gives irreducibility of the reduced curve. Transfer the analytic Jacobian and component assertions to smooth/geometrically integral affine schemes and descend by faithful field extension; §3.66a’s local equation comparison supplies the analytic-to-algebraic input.
 
-*Needs:* §3.66a `dynatomicLocalEquationComparison`; [The dynatomic polynomial Φ*ₙ(x, c) of the family x^d + c](#328-the-dynatomic-polynomial-φₙx-c-of-the-family-xd--c); [`∏_{m∣n}` Φ*ₘ(f) = fⁿ(z) − z for monic f over any ring](#368-_mn-φₘf--fⁿz--z-for-monic-f-over-any-ring); [Characteristic zero: formal period n and exact period m < n force n = m·r](#361-characteristic-zero-formal-period-n-and-exact-period-m--n-force-n--mr); [Transversality at unicritical parabolic parameters](#349-transversality-at-unicritical-parabolic-parameters); [Transitivity of unicritical marked-point monodromy](#367-transitivity-of-unicritical-marked-point-monodromy).
+*Needs:* §3.66a the dynatomic local-equation comparison; [The dynatomic polynomial Φ*ₙ(x, c) of the family x^d + c](#328-the-dynatomic-polynomial-φₙx-c-of-the-family-xd--c); [`∏_{m∣n}` Φ*ₘ(f) = fⁿ(z) − z for monic f over any ring](#368-_mn-φₘf--fⁿz--z-for-monic-f-over-any-ring); [Characteristic zero: formal period n and exact period m < n force n = m·r](#361-characteristic-zero-formal-period-n-and-exact-period-m--n-force-n--mr); [Transversality at unicritical parabolic parameters](#349-transversality-at-unicritical-parabolic-parameters); [Transitivity of unicritical marked-point monodromy](#367-transitivity-of-unicritical-marked-point-monodromy).
 
 ([gao-ou](#gao-ou), Theorems 1.1–1.2 p.1, Theorem 2.1 p.2; §2.2 pp.4–9 and §3.5 pp.28–29 — Analytic closure and local branch description; [fps](#fps), §2, pp.3–4 — Algebraic dynatomic curve and geometric irreducibility over ℚ.)
 
@@ -5271,18 +5264,18 @@ Use the coordinate ring and its geometric-integrality endpoint, refined by [3.70
 
 Prove the following basic API.
 
-- `dynatomicProjectiveModel`: The regular projective k-curve with function field F=Frac(k[c,x]/Φ*).
-- `dynatomicAffineOpen`: Open immersion of the smooth Y₁ inducing identity on F.
-- `dynatomicParameterMap`: Finite map to ℙ¹ extending c, of degree ν_d(n).
-- `dynatomicModel_ext`: A k-isomorphism of the named function fields extends uniquely to an isomorphism of their regular projective models.
-- `dynatomicModel_baseChange`: For k⊂K characteristic zero, base-changing X₁ agrees with the regular projective model of Frac(K[c,x]/Φ*); identity and composite base changes commute.
-- `dynatomicBoundary`: The complement of Y₁ is precisely the places of F at which c has a pole, since A is its integral closure over k[c].
+- The regular projective k-curve with function field F=Frac(k[c,x]/Φ*).
+- Open immersion of the smooth Y₁ inducing identity on F.
+- Finite map to ℙ¹ extending c, of degree ν_d(n).
+- A k-isomorphism of the named function fields extends uniquely to an isomorphism of their regular projective models.
+- For k⊂K characteristic zero, base-changing X₁ agrees with the regular projective model of Frac(K[c,x]/Φ*); identity and composite base changes commute.
+- The complement of Y₁ is precisely the places of F at which c has a pole, since A is its integral closure over k[c].
 
 **Checks.**
 
-- **`projective_dynatomic_model_1`** (computation): n=1,d=2: Y₁ has coordinate ring k[x] and projective model ℙ¹.
-- `projective_dynatomic_model_2`: n=2,d=2: Φ₂*=x²+x+c+1 gives X₁≅ℙ¹ and two geometric points over generic c.
-- **`projective_dynatomic_model_3`** (non-example): n=4,d=2: the regular model has genus 2; a claim that every monic plane model normalizes to ℙ¹ fails.
+- n=1,d=2: Y₁ has coordinate ring k[x] and projective model ℙ¹.
+- n=2,d=2: Φ₂*=x²+x+c+1 gives X₁≅ℙ¹ and two geometric points over generic c.
+- n=4,d=2: the regular model has genus 2; a claim that every monic plane model normalizes to ℙ¹ fails.
 
 **Endpoint checks.** For d=2,n=1, X₁ is ℙ¹ with c=x−x² and π₁ degree 2. At n=5, genus is 14, not the arithmetic genus of its degree 30 plane closure.
 
@@ -5316,19 +5309,19 @@ The ring automorphism extends to the fraction field; its n-th power is identity.
 
 Prove the following basic API.
 
-- `dynatomicCycleModel`: Regular projective model of `F^{⟨σ⟩}.`
-- `dynatomicRotation`: Automorphism σ of X₁, order exactly n, with σ(x)=x^d+c and σ(c)=c on function fields.
-- `dynatomicCycleProjection`: q:X₁→X₀, q∘σ=q, finite of degree n.
-- `cycleProjection_factor`: Any invariant morphism from X₁ to a regular projective curve factors uniquely through q.
-- `cycleProjection_fibre`: On the unramified exact-period locus, q(P)=q(Q) iff Q=σ^j(P) for some 0≤j<n.
-- `cycleModel_baseChange`: Characteristic-zero field extensions commute with the fixed-field quotient and its maps.
-- `rationalCyclePoint_iff`: A rational quotient point on the free locus is a Galois-stable geometric cycle; rational marked lift iff every point in that cycle is rational.
+- Regular projective model of `F^{⟨σ⟩}.`
+- Automorphism σ of X₁, order exactly n, with σ(x)=x^d+c and σ(c)=c on function fields.
+- q:X₁→X₀, q∘σ=q, finite of degree n.
+- Any invariant morphism from X₁ to a regular projective curve factors uniquely through q.
+- On the unramified exact-period locus, q(P)=q(Q) iff Q=σ^j(P) for some 0≤j<n.
+- Characteristic-zero field extensions commute with the fixed-field quotient and its maps.
+- A rational quotient point on the free locus is a Galois-stable geometric cycle; rational marked lift iff every point in that cycle is rational.
 
 **Checks.**
 
-- **`dynatomic_cycle_quotient_1`** (degenerate): n=1: σ=id, q is identity, X₀=X₁.
-- **`dynatomic_cycle_quotient_2`** (computation): d=2,n=2: q has degree 2; the lower-period point (x,c)=(−1/2,−3/4) is fixed by σ and is ramified.
-- **`dynatomic_cycle_quotient_3`** (non-example): For f(z)=z² over ℚ the two primitive cube roots form a Galois-stable 2-cycle and a rational X₀(2) point, with no rational marking.
+- n=1: σ=id, q is identity, X₀=X₁.
+- d=2,n=2: q has degree 2; the lower-period point (x,c)=(−1/2,−3/4) is fixed by σ and is ramified.
+- For f(z)=z² over ℚ the two primitive cube roots form a Galois-stable 2-cycle and a rational X₀(2) point, with no rational marking.
 
 **Endpoint checks.** The degree of q is n even though special fibres can contain fewer than n distinct points. X₀(3) has rational points for cycles over cubic fields; this is not a rational 3-cycle theorem.
 
@@ -5392,11 +5385,9 @@ r² + c is the negative of a point of period 3, so (τ, 2τ(τ + 1)r) lies on C 
 
 ### 3.81 The symmetric curve for two marked 3-cycles
 
-The named signatures are `mortonThreeCycleInversePoint`, `mortonThreeCycleInverseCoefficient`, `mortonThreeCycleParameter_inverse`.
+For a field K, define H(t,u)=(t²−1)u³+(t³−2t²−9t+2)u²−9(t²−1)u−(t³−2t²−9t+2) over K, and let the affine Morton curve be H=0. It is symmetric in t,u. With ζ=t+u,υ=tu, its equation is υ²(ζ−2)−υ(6ζ+4)−(ζ³−2ζ²−9ζ+2)=0. Define t(c,x)=1+2c+2x+2x² on a marked period 3 point. For t²≠1, its inverse is x=(t³+t²−t+7)/(4(t²−1)), c=−(t⁶−2t⁵+11t⁴+20t³+23t²−18t+29)/(16(t²−1)²). Define the cycle rotation by t↦(t+3)/(1−t), and the cycle trace by η(t)=(t³−9t)/(t²−1) is constant on the cycle, with c=−(η²−2η+29)/16.
 
-For a field K, define H(t,u)=(t²−1)u³+(t³−2t²−9t+2)u²−9(t²−1)u−(t³−2t²−9t+2) over K, and let the affine Morton curve be H=0. It is symmetric in t,u. With ζ=t+u,υ=tu, its equation is υ²(ζ−2)−υ(6ζ+4)−(ζ³−2ζ²−9ζ+2)=0. Define t(c,x)=1+2c+2x+2x² on a marked period 3 point. For t²≠1, its inverse is x=(t³+t²−t+7)/(4(t²−1)), c=−(t⁶−2t⁵+11t⁴+20t³+23t²−18t+29)/(16(t²−1)²). Define `mortonThreeCycleRotation` by t↦(t+3)/(1−t), and `mortonCycleTrace` by η(t)=(t³−9t)/(t²−1) is constant on the cycle, with c=−(η²−2η+29)/16.
-
-The polynomial functions are defined over every field K. The inverse-parameter theorem `mortonThreeCycleParameter_inverse` assumes (2:K)≠0 and t²≠1; the cycle parametrization and its rotation/trace comparisons assume char(K)≠2 and their displayed nonzero denominators. The inverse parametrizes the formal period-three equation; exact period remains a separate predicate and can fail at multiplier collisions, including characteristic 3. The ℚ computations and rational-cycle exclusions are specializations. Two different cycles at the same c have η values adding to 2; repeating the same cycle does not supply the required symmetric-curve point.
+The polynomial functions are defined over every field K. The inverse-parameter theorem morton Three Cycle Parameter inverse assumes (2:K)≠0 and t²≠1; the cycle parametrization and its rotation/trace comparisons assume char(K)≠2 and their displayed nonzero denominators. The inverse parametrizes the formal period-three equation; exact period remains a separate predicate and can fail at multiplier collisions, including characteristic 3. The ℚ computations and rational-cycle exclusions are specializations. Two different cycles at the same c have η values adding to 2; repeating the same cycle does not supply the required symmetric-curve point.
 
 Use the explicit Φ₃ polynomial of Morton §1 and eliminate c after introducing t; polynomial division gives the inverse formulas. Substitute f_c(x) into t to find the fractional-linear rotation; sum its three orbit values to obtain η and its quadratic parameter relation. For two distinct cycles the two roots η and 2−η of that quadratic give H(t,u)=0. Expand in symmetric functions to obtain the displayed equation.
 
@@ -5406,24 +5397,24 @@ Use the explicit Φ₃ polynomial of Morton §1 and eliminate c after introducin
 
 Prove the following basic API.
 
-- `mortonThreeCycleEquation`: The explicit polynomial function H(t,u).
-- `mortonThreeCycleEquation_swap`: H(t,u)=H(u,t).
-- `mortonThreeCycleEquation_symmetric`: H(t,u)=υ²(ζ−2)−υ(6ζ+4)−(ζ³−2ζ²−9ζ+2) for ζ=t+u,υ=tu.
-- `mortonThreeCycleParameter`: t(c,x)=1+2c+2x+2x² with inverse x(t),c(t) when t²≠1.
-- `mortonThreeCycleInversePoint_map`, `mortonThreeCycleInverseCoefficient_map`: The inverse coordinates commute with field homomorphisms; `mortonThreeCycleInversePoint_pole`, `mortonThreeCycleInverseCoefficient_pole` give the totalized value 0 at t=±1, which is outside the inverse theorem.
-- `mortonThreeCycleRotation_compatibility`: t(c,f_c(x))=(t+3)/(1−t) on exact period 3 points; three applications give identity.
-- `mortonCycleTrace_relation`: η(t) is rotation invariant and c=−(η²−2η+29)/16.
-- `distinctCycles_mortonEquation`: Over a field K of characteristic different from 2, distinct K-rational exact 3 cycles supply t,u∈K with H=0 and t,u≠±1.
+- The explicit polynomial function H(t,u).
+- H(t,u)=H(u,t).
+- H(t,u)=υ²(ζ−2)−υ(6ζ+4)−(ζ³−2ζ²−9ζ+2) for ζ=t+u,υ=tu.
+- t(c,x)=1+2c+2x+2x² with inverse x(t),c(t) when t²≠1.
+- The inverse coordinates commute with field homomorphisms; both inverse coordinate functions have the totalized value 0 at t=±1, which is outside the inverse theorem.
+- t(c,f_c(x))=(t+3)/(1−t) on exact period 3 points; three applications give identity.
+- η(t) is rotation invariant and c=−(η²−2η+29)/16.
+- Over a field K of characteristic different from 2, distinct K-rational exact 3 cycles supply t,u∈K with H=0 and t,u≠±1.
 
 **Checks.**
 
-- **`morton_symmetric_three_cycle_curve_1`** (computation): All four sign pairs (t,u)=(±1,±1) satisfy H=0.
-- **`morton_symmetric_three_cycle_curve_2`** (non-example): H(0,0)=−2; the equation is not identically 0.
-- `morton_symmetric_three_cycle_curve_3`: For c=−29/16 the cycle (5/4,−1/4,−7/4) has t-coordinates 3,−3,0 respectively, all sharing η=0.
+- All four sign pairs (t,u)=(±1,±1) satisfy H=0.
+- H(0,0)=−2; the equation is not identically 0.
+- For c=−29/16 the cycle (5/4,−1/4,−7/4) has t-coordinates 3,−3,0 respectively, all sharing η=0.
 
 **Checks.**
 
-- `mortonThreeCycleInversePoint` takes values 5/4,−1/4,−7/4 at t=3,−3,0, while `mortonThreeCycleInverseCoefficient` is −29/16 at each. Distinct markings have the same coefficient, rather than three different maps.
+- The inverse point coordinate takes values 5/4,−1/4,−7/4 at t=3,−3,0, while the inverse coefficient is −29/16 at each. Distinct markings have the same coefficient, rather than three different maps.
 - In characteristic 3, t=0 gives inverse coordinates c=1,x=2, and x²+c=x. A formal period-three point need not have exact period 3.
 - Both inverse functions take totalized value 0 at t=1 and t=−1; these values cannot be used as inverse coordinates. This distinguishes the functions from the guarded parametrization theorem.
 - Rotation sends 3→−3→0→3 and the trace is 0 at all three. At t=1, totalized rotation and trace are 0; the rotation/trace identities require their denominator guards.
@@ -5494,7 +5485,7 @@ Match the explicit polynomial models, known points, base point and Jacobian rank
 
 Over any field K, for H(t,u)=0 and ζ=t+u≠0, set υ=tu, X=(ζ+2)/ζ, Y=(υ(ζ−2)−(3ζ+2))/ζ². Then Y²=4X³−11X²+8X. On ζ≠0,2 this defines the quotient by t↔u; the inverse symmetric coordinates are ζ=2/(X−1), υ=(ζ²Y+3ζ+2)/(ζ−2), with t,u the roots of T²−ζT+υ. When char(K)≠2,7, on the regular projective models this is the degree 2 fixed-field quotient, but the affine point-exclusion proof uses only the guarded formulas. In characteristic different from 2, at ζ=0 the H-equation forces υ=−1, and at ζ=2 it forces υ=1; hence these cases have (t,u)=(1,−1),(−1,1), or (1,1).
 
-The coordinate functions and `mortonEllipticEquation` are over any field K; the affine identity requires ζ≠0. The inverse and exceptional-coordinate descriptions require char(K)≠2 and ζ≠2, equivalently X≠2, with X≠1. The smooth elliptic/projective-quotient interpretation requires char(K)≠2,7; in characteristic 7 the cubic is singular. The rational-point application remains over ℚ. Arithmetic rank-zero completeness belongs to ED.3, not this map.
+The coordinate functions and morton Elliptic Equation are over any field K; the affine identity requires ζ≠0. The inverse and exceptional-coordinate descriptions require char(K)≠2 and ζ≠2, equivalently X≠2, with X≠1. The smooth elliptic/projective-quotient interpretation requires char(K)≠2,7; in characteristic 7 the cubic is singular. The rational-point application remains over ℚ. Arithmetic rank-zero completeness belongs to ED.3, not this map.
 
 Insert the symmetric H equation and complete the square to derive the elliptic equation after multiplying by ζ⁴. Solve the rational equations for ζ,υ with the guarded denominators; the quadratic T²−ζT+υ recovers the unordered pair. Treat ζ=0,2 by polynomial substitution before division. Field invariants and AlgebraicCurves give the projective quotient if used, without adding its rational point computation.
 
@@ -5504,19 +5495,19 @@ Insert the symmetric H equation and complete the square to derive the elliptic e
 
 Prove the following basic API.
 
-- `mortonEllipticCoordinates`: The displayed X,Y on ζ≠0, with equation certificate from H=0.
-- `mortonEllipticEquation`: Y²=4X³−11X²+8X on the guarded domain.
-- `mortonEllipticCoordinates_swap`: Swapping t and u preserves X andY.
-- `mortonElliptic_inverse`: Recover ζ and υ by the displayed inverses when ζ≠0,2.
-- `mortonElliptic_fibre`: Away from the branch/exceptional locus equal X,Y gives equal unordered pairs {t,u}.
-- `mortonExceptionalCoordinates`: ζ=0 or 2 implies the listed sign pairs, proved without rational division.
-- `mortonElliptic_baseChange`: The formulas commute with field homomorphisms on their nonzero-denominator domains.
+- The displayed X,Y on ζ≠0, with equation certificate from H=0.
+- Y²=4X³−11X²+8X on the guarded domain.
+- Swapping t and u preserves X andY.
+- Recover ζ and υ by the displayed inverses when ζ≠0,2.
+- Away from the branch/exceptional locus equal X,Y gives equal unordered pairs {t,u}.
+- ζ=0 or 2 implies the listed sign pairs, proved without rational division.
+- The formulas commute with field homomorphisms on their nonzero-denominator domains.
 
 **Checks.**
 
-- **`morton_elliptic_quotient_map_1`** (computation): (t,u)=(−1,−1) has ζ=−2 and maps to (X,Y)=(0,0).
-- **`morton_elliptic_quotient_map_2`** (degenerate): (1,−1) has ζ=0 and is outside the affine map domain; its symmetric relation still holds.
-- **`morton_elliptic_quotient_map_3`** (non-example): (0,0) gives (X,Y) undefined by ζ=0 and is not on H=0; denominator guards cannot replace the curve hypothesis.
+- (t,u)=(−1,−1) has ζ=−2 and maps to (X,Y)=(0,0).
+- (1,−1) has ζ=0 and is outside the affine map domain; its symmetric relation still holds.
+- (0,0) gives (X,Y) undefined by ζ=0 and is not on H=0; denominator guards cannot replace the curve hypothesis.
 
 **Endpoint checks.** In characteristic 7 the cubic is 4X(X−4)²; the polynomial identity gives no smoothness assertion. The exceptional ζ=0 case cannot be assigned the totalized value of rational division and treated as a valid map value. The unordered pair is encoded by the symmetric coordinates; the double cover needs its quadratic discriminant, not just a rational X,Y.
 
@@ -5580,7 +5571,7 @@ Layers 0–2; AlgebraicCurves Layers 0–3, 6–8, 11–12; ConformalMapping L4;
 
 For a projective variety X over a complete algebraically closed valued field C_v: the analytification X^an (the Berkovich space at a finite place, the complex analytic space at an infinite place) as a compact Hausdorff space with a dense inclusion X(C_v) → X^an, functorial in X, and equal to the analytic line of The analytic projective line at a place of a number field, with its kernel, circle measures and weight for X = P¹.
 
-Prove `projectiveAnalytification_comp`, `projectiveAnalytification_isCompact` and `projectiveAnalytification_dense` on these carriers (chambert-loir-2006, §2; yuan2008, §3).
+Prove compatibility of projective analytification with composition, compactness and density of classical points on these carriers (chambert-loir-2006, §2; yuan2008, §3).
 
 **Checks.**
 
@@ -5594,7 +5585,7 @@ For a projective n-dimensional variety X over a number field, construct the adel
 
 Applications include [Equidistribution of small points for semipositive adelic line bundles (Yuan)](#411-equidistribution-of-small-points-for-semipositive-adelic-line-bundles-yuan).
 
-Define adelic intersection and normalized subvariety height on the stated integrable metric domain by the preceding construction. Prove `adelicIntersection_symmetric`, `adelicIntersection_add`, `adelicIntersection_uniformLimit`, `adelicHeight_successiveMinima`.
+Define adelic intersection and normalized subvariety height on the stated integrable metric domain by the preceding construction. Prove symmetry and additivity of the adelic intersection, continuity under uniform limits on the stated domain, and the successive-minima inequality for the adelic height.
 
 **Checks.**
 
@@ -5610,9 +5601,9 @@ Applications include [Equidistribution of small points for semipositive adelic l
 
 ### 4.3a Quasi-projective adelic completion and heights
 
-For a quasi-projective variety X over a number field K, or over a one-variable function field K/k with arbitrary constant field k, construct `quasiProjectiveAdelicPicard` from projective models over ℤ or k and the boundary topology. On a common dominating model, a boundary divisor D supported on the complement controls differences by −εD≤E≤εD. Prove `adelicBoundaryTopology_independent` for changes of boundary divisor and compactification; construct the separated completion and the nef and integrable classes. Define pullback for morphisms and its functoriality, and the analytic-metric realization `quasiProjectiveAdelicMetric`, compatibly with pullback. These are Yuan–Zhang v9 §2.4, pp.36–49, Lemma 2.4.1, §2.5 (relative theory), §§3.3–3.5 (analytic realization).
+For a quasi-projective variety X over a number field K, or over a one-variable function field K/k with arbitrary constant field k, construct the quasi-projective adelic Picard group from projective models over ℤ or k and the boundary topology. On a common dominating model, a boundary divisor D supported on the complement controls differences by −εD≤E≤εD. Prove independence of the boundary topology for changes of boundary divisor and compactification; construct the separated completion and the nef and integrable classes. Define pullback for morphisms and its functoriality, and the analytic-metric realization a quasi-projective adelic metric, compatibly with pullback. These are Yuan–Zhang v9 §2.4, pp.36–49, Lemma 2.4.1, §2.5 (relative theory), §§3.3–3.5 (analytic realization).
 
-Construct `quasiProjectiveAdelicIntersection` and normalized point and subvariety heights for integrable adelic bundles, with symmetry, multilinearity, projection formula, boundary-topology continuity and finite-extension compatibility. For a dimension-n subvariety require positive geometric degree when dividing by (n+1)deg_L; do not assign a normalized height through a zero denominator. Prove `quasiProjectiveAdelic_projectiveComparison` with §4.2 over projective number-field varieties (Yuan–Zhang v9 §3.5.2, §4.1, §§5.3–5.4).
+Construct the quasi-projective adelic intersection and normalized point and subvariety heights for integrable adelic bundles, with symmetry, multilinearity, projection formula, boundary-topology continuity and finite-extension compatibility. For a dimension-n subvariety require positive geometric degree when dividing by (n+1)deg_L; do not assign a normalized height through a zero denominator. Prove agreement with the projective adelic intersection with §4.2 over projective number-field varieties (Yuan–Zhang v9 §3.5.2, §4.1, §§5.3–5.4).
 
 **Checks.**
 
@@ -5624,7 +5615,7 @@ Construct `quasiProjectiveAdelicIntersection` and normalized point and subvariet
 
 ### 4.4 Quasi-projective adelic equidistribution
 
-Use §4.3a `quasiProjectiveAdelicPicard`, `quasiProjectiveAdelicMetric`, `quasiProjectiveAdelicIntersection` and their normalized heights for both number fields and one-variable function fields. Prove the general equidistribution theorem of Yuan–Zhang, Theorem 5.4.3, p. 168: over a number field or a one-variable function field, a nef adelic line bundle L̄ on a quasi-projective variety X with positive geometric top self-intersection deg_L(X) gives weak convergence of the Galois-orbit measures of any generic sequence with h_L̄(x_n) → h_L̄(X) to c₁(L̄_v)^(dim X)/deg_L(X) at each place v. Positivity supplies the nonzero normalization denominator. That general theorem must precede dynamical applications: its inputs are the completion, analytic metrics, intersections and heights just constructed, not dynamical equidistribution. Here construct the invariant extension of O(1) on the chosen parameter family S_d × P¹ by Yuan–Zhang §6.3’s Tate-limit argument, and restrict to the critical sections. Boundary behavior is essential; the projective theorem alone does not supply this contract.
+Use §4.3a quasi Projective Adelic Picard, a quasi-projective adelic metric, quasi Projective Adelic Intersection and their normalized heights for both number fields and one-variable function fields. Prove the general equidistribution theorem of Yuan–Zhang, Theorem 5.4.3, p. 168: over a number field or a one-variable function field, a nef adelic line bundle L̄ on a quasi-projective variety X with positive geometric top self-intersection deg_L(X) gives weak convergence of the Galois-orbit measures of any generic sequence with h_L̄(x_n) → h_L̄(X) to c₁(L̄_v)^(dim X)/deg_L(X) at each place v. Positivity supplies the nonzero normalization denominator. That general theorem must precede dynamical applications: its inputs are the completion, analytic metrics, intersections and heights just constructed, not dynamical equidistribution. Here construct the invariant extension of O(1) on the chosen parameter family S_d × P¹ by Yuan–Zhang §6.3’s Tate-limit argument, and restrict to the critical sections. Boundary behavior is essential; the projective theorem alone does not supply this contract.
 
 Applications include [Critical height as an adelic height and equidistribution of PCF maps in moduli (Yuan–Zhang)](#449-critical-height-as-an-adelic-height-and-equidistribution-of-pcf-maps-in-moduli-yuanzhang).
 
@@ -5650,30 +5641,30 @@ Choose C_v: ℂ at an infinite place; at a finite place over p the completion of
 
 Prove the following basic API.
 
-- `AnalyticLine.ofInfinitePlace`: For an infinite place w of K: the Riemann sphere OnePoint ℂ with ι_w lifting the embedding of w, δ(x, y) = |x − y|, circle measures on circles, weight mult(w)/[K : ℚ].
-- `AnalyticLine.ofFinitePlace`: For a finite place v of K: the Berkovich projective line over C_v (Layer 2 Nonarchimedean potential theory and local degrees), ι_v, the Hsia kernel, `m_{a,r,v}` = `δ_{ζ_{a,r}},` weight [K_v : ℚ_p]/[K : ℚ].
-- `NumberFieldPlace.analyticLine`: The family v ↦ P¹_v^an over all places of K.
-- `AnalyticLine.infty`: The point ∞ of P¹_v^an, the image of ∞ ∈ P¹(K̄).
-- `AnalyticLine.kernel_embed`: δ_v(ι_v x, ι_v y) = |x − y|_v for x, y ∈ K̄.
-- `AnalyticLine.kernel_symm`: δ_v(x, y) = δ_v(y, x) for x, y ∈ A¹_v^an.
-- `AnalyticLine.potential_circle`: For a, z ∈ K̄ and r > 0: ∫ log δ_v(ι_v z, w) `dm_{a,r,v}(w)` = log max(|z − a|_v, r).
-- `AnalyticLine.weight_mul_log_eq`: For a ∈ K^×: r_v log|a|_v = [K : ℚ]`^{-1}` log ‖a‖_v, with ‖·‖_v Mathlib's normalised value of the place `(w(a)^{mult w}` for infinite w, the FinitePlace absolute value for finite v).
-- `NumberFieldPlace.sum_weight_infinite`: `Σ_{v infinite}` r_v = 1.
-- `NumberFieldPlace.sum_weight_mul_log_eq_zero`: Product formula: for a ∈ K^×, Σ_v r_v log|a|_v = 0 (finitely many nonzero terms).
-- **`AnalyticLine.compactSpace`** (instance): P¹_v^an is compact Hausdorff, and the type I points P¹(K̄) have dense image.
+- For an infinite place w of K: the Riemann sphere OnePoint ℂ with ι_w lifting the embedding of w, δ(x, y) = |x − y|, circle measures on circles, weight mult(w)/[K : ℚ].
+- For a finite place v of K: the Berkovich projective line over C_v (Layer 2 Nonarchimedean potential theory and local degrees), ι_v, the Hsia kernel, `m_{a,r,v}` = `δ_{ζ_{a,r}},` weight [K_v : ℚ_p]/[K : ℚ].
+- The family v ↦ P¹_v^an over all places of K.
+- The point ∞ of P¹_v^an, the image of ∞ ∈ P¹(K̄).
+- δ_v(ι_v x, ι_v y) = |x − y|_v for x, y ∈ K̄.
+- δ_v(x, y) = δ_v(y, x) for x, y ∈ A¹_v^an.
+- For a, z ∈ K̄ and r > 0: ∫ log δ_v(ι_v z, w) `dm_{a,r,v}(w)` = log max(|z − a|_v, r).
+- For a ∈ K^×: r_v log|a|_v = [K : ℚ]`^{-1}` log ‖a‖_v, with ‖·‖_v Mathlib's normalised value of the place `(w(a)^{mult w}` for infinite w, the FinitePlace absolute value for finite v).
+- `Σ_{v infinite}` r_v = 1.
+- Product formula: for a ∈ K^×, Σ_v r_v log|a|_v = 0 (finitely many nonzero terms).
+- P¹_v^an is compact Hausdorff, and the type I points P¹(K̄) have dense image.
 
 **Checks.**
 
-- **`AnalyticLine.test_kernel_two_adic`** (computation): For K = ℚ and the finite place 2: δ(ι 1, ι 3) = 1/2.
-- **`AnalyticLine.test_potential_circle_origin`** (computation): At every place and for every z ∈ K̄: ∫ log δ_v(ι_v z, w) `dm_{0,1,v}(w)` = log⁺|z|_v; in particular it is 0 for z = 0.
-- **`AnalyticLine.test_weight_rat`** (degenerate): For K = ℚ every place has weight r_v = 1.
-- **`AnalyticLine.test_circle_not_classical`** (non-example): At a finite place, `m_{0,1,v}` is not the Dirac mass at any point ι_v x, x ∈ K̄: the Gauss point is not a type I point.
+- For K = ℚ and the finite place 2: δ(ι 1, ι 3) = 1/2.
+- At every place and for every z ∈ K̄: ∫ log δ_v(ι_v z, w) `dm_{0,1,v}(w)` = log⁺|z|_v; in particular it is 0 for z = 0.
+- For K = ℚ every place has weight r_v = 1.
+- At a finite place, `m_{0,1,v}` is not the Dirac mass at any point ι_v x, x ∈ K̄: the Gauss point is not a type I point.
 
 **Endpoint checks.** At the finite place 2 of ℚ: δ(ι 1, ι 3) = |2|_2 = 1/2 and `δ(ζ_{0,1},` `ζ_{0,1})` = 1. ∫ log δ_v(ι z, w) `dm_{0,1,v}(w)` = log⁺|z|_v at every place (Jensen's formula at infinite places, the value of the Gauss norm at finite places). For K = ℚ all weights equal 1, and for any K the infinite weights sum to 1.
 
 Applications include Favre–Rivera-Letelier §§2, 4, 5 — the space P¹(C_v) at each place on which adelic measures, energies and regularisations live; DeMarco–Krieger–Ye §§2.3, 2.7, 7.1 — the carrier of canonical measures, mutual energies and the measures `m_{F,η,v};` ArithmeticDynamics Layer 4 (every other target of the layer) — every local object at a place v is a measure or function on this space.
 
-Construct `AnalyticLine.localGaloisAction` at a finite v by extending Gal(K_v^alg/K_v) isometrically to C_v and transporting seminorms by (σ·S)(P)=S(σ⁻¹P). At a real place use complex conjugation, and at a complex place the local group is trivial. Prove `AnalyticLine.localGaloisAction_mul`, `AnalyticLine.localGaloisAction_typeI`, and `AnalyticLine.localGaloisAction_continuous` for each acting element (FRL §5.1, via coefficient transport on the analytic carrier).
+Construct the local Galois action on the analytic line at a finite v by extending Gal(K_v^alg/K_v) isometrically to C_v and transporting seminorms by (σ·S)(P)=S(σ⁻¹P). At a real place use complex conjugation, and at a complex place the local group is trivial. Prove the action law, compatibility with type-I points, and continuity for each acting element (FRL §5.1, via coefficient transport on the analytic carrier).
 
 **Checks.**
 
@@ -5695,18 +5686,18 @@ The proper closed subsets of an integral curve are the finite sets of closed poi
 
 Prove the following basic API.
 
-- `IsGenericSequence`: The predicate: for every proper closed Z ⊊ X, {n : x_n ∈ Z} is finite.
-- `isGenericSequence_iff_finite_fibres`: For X of dimension 1: (x_n) is generic iff {n : x_n = x} is finite for every x.
-- `IsGenericSequence.comp_strictMono`: A subsequence of a generic sequence is generic.
-- `IsGenericSequence.map_dominant`: The image of a generic sequence under a dominant morphism is generic.
-- `not_isGenericSequence_of_forall_mem`: If all x_n lie in a proper closed Z, the sequence is not generic.
+- The predicate: for every proper closed Z ⊊ X, {n : x_n ∈ Z} is finite.
+- For X of dimension 1: (x_n) is generic iff {n : x_n = x} is finite for every x.
+- A subsequence of a generic sequence is generic.
+- The image of a generic sequence under a dominant morphism is generic.
+- If all x_n lie in a proper closed Z, the sequence is not generic.
 
 **Checks.**
 
-- **`test_not_isGenericSequence_const`** (non-example): A constant sequence in a positive-dimensional integral X is not generic.
-- `test_isGenericSequence_injective_curve`: An injective sequence of closed points of an integral curve is generic.
-- **`test_not_isGenericSequence_line`** (non-example): A sequence of distinct points on a line in the affine plane is not generic in the plane.
-- **`test_isGenericSequence_point`** (degenerate): If X = Spec K is a point, its only proper closed subset is ∅, so every sequence in X is generic.
+- A constant sequence in a positive-dimensional integral X is not generic.
+- An injective sequence of closed points of an integral curve is generic.
+- A sequence of distinct points on a line in the affine plane is not generic in the plane.
+- If X = Spec K is a point, its only proper closed subset is ∅, so every sequence in X is generic.
 
 **Endpoint checks.** On P¹ the sequence of primitive n-th roots of unity is generic; the constant sequence 0 is not. For f(z) = z^d the exceptional set {0, ∞} is a proper subvariety; the sequence x_n = 0 is small (ĥ_f(0) = 0) but not generic, and [x_n]_v = δ_0 does not converge to λ_v.
 
@@ -5726,19 +5717,19 @@ Define λ_v as the circle measure `m_{0,1,v}` of The analytic projective line at
 
 Prove the following basic API.
 
-- `AnalyticLine.standard`: λ_v := `m_{0,1,v},` a probability measure on P¹_v^an.
-- `AnalyticLine.potential_standard`: ∫ log δ_v(ι_v z, w) dλ_v(w) = log⁺|z|_v for z ∈ K̄.
-- `AnalyticLine.energy_standard_self`: (λ_v, λ_v)_v = 0.
-- `AnalyticLine.energy_dirac_standard`: ([x]_v, λ_v)_v = −log⁺|x|_v for x ∈ K̄.
-- `AnalyticLine.standard_hasContinuousPotential`: λ_v has continuous potential (its potential relative to itself is 0).
-- `AnalyticLine.standard_invariant_unit`: λ_v is invariant under z ↦ uz for |u|_v = 1 and, at a finite place, under `PGL₂(O_{C_v}).`
+- λ_v := `m_{0,1,v},` a probability measure on P¹_v^an.
+- ∫ log δ_v(ι_v z, w) dλ_v(w) = log⁺|z|_v for z ∈ K̄.
+- (λ_v, λ_v)_v = 0.
+- ([x]_v, λ_v)_v = −log⁺|x|_v for x ∈ K̄.
+- λ_v has continuous potential (its potential relative to itself is 0).
+- λ_v is invariant under z ↦ uz for |u|_v = 1 and, at a finite place, under `PGL₂(O_{C_v}).`
 
 **Checks.**
 
-- **`AnalyticLine.test_standard_self_energy`** (computation): (λ_v, λ_v)_v = 0 at every place v.
-- **`AnalyticLine.test_standard_pairing_two`** (computation): At an infinite place, ([2]_v, λ_v)_v = −log 2.
-- **`AnalyticLine.test_standard_ne_dirac_zero`** (non-example): λ_v ≠ `δ_{ι_v 0}:` the standard measure is not the point mass at 0 (whose potential log|z|_v differs from log⁺|z|_v at z = 1/2).
-- `AnalyticLine.test_standard_finite_gauss`: At a finite place λ_v is the Dirac mass at `ζ_{0,1},` not a measure on type I points: λ_v(ι_v(K̄)) = 0.
+- (λ_v, λ_v)_v = 0 at every place v.
+- At an infinite place, ([2]_v, λ_v)_v = −log 2.
+- λ_v ≠ `δ_{ι_v 0}:` the standard measure is not the point mass at 0 (whose potential log|z|_v differs from log⁺|z|_v at z = 1/2).
+- At a finite place λ_v is the Dirac mass at `ζ_{0,1},` not a measure on type I points: λ_v(ι_v(K̄)) = 0.
 
 **Endpoint checks.** (λ_v, λ_v)_v = 0 at every place. ([2], λ_v)_v = −log 2 at an infinite place and ([`p^{-1}`], λ_v)_v = −log p at the place p of ℚ.
 
@@ -5758,21 +5749,21 @@ The orbit of x ∈ K̄ is the set of roots of its minimal polynomial over K, fin
 
 Prove the following basic API.
 
-- `IsGaloisStableFinset`: The predicate σ(F) ⊆ F for all σ ∈ Gal(K̄/K), for a finite F ⊂ P¹(K̄).
-- `galoisOrbitFinset`: The Galois orbit of x ∈ P¹(K̄), as a finite set.
-- `isGaloisStableFinset_galoisOrbitFinset`: The orbit of x is Galois-stable, contains x, and is contained in every Galois-stable set containing x.
-- `card_galoisOrbitFinset`: |Gal·x| = [K(x) : K] for x ∈ K̄, and |Gal·∞| = 1.
-- `AnalyticLine.orbitMeasure`: [F]_v = `|F|^{-1}` `Σ_{x∈F}` `δ_{ι_v x}.`
-- `AnalyticLine.orbitMeasure_univ`: [F]_v(P¹_v^an) = 1 for F nonempty.
-- `AnalyticLine.integral_orbitMeasure`: ∫ f d[F]_v = `|F|^{-1}` `Σ_{x∈F}` f(ι_v x).
-- `IsGaloisStableFinset.union`: A finite union of Galois-stable sets is Galois-stable, and [F ⊔ G]_v = (|F|[F]_v + |G|[G]_v)/(|F| + |G|) for disjoint F, G.
+- The predicate σ(F) ⊆ F for all σ ∈ Gal(K̄/K), for a finite F ⊂ P¹(K̄).
+- The Galois orbit of x ∈ P¹(K̄), as a finite set.
+- The orbit of x is Galois-stable, contains x, and is contained in every Galois-stable set containing x.
+- |Gal·x| = [K(x) : K] for x ∈ K̄, and |Gal·∞| = 1.
+- [F]_v = `|F|^{-1}` `Σ_{x∈F}` `δ_{ι_v x}.`
+- [F]_v(P¹_v^an) = 1 for F nonempty.
+- ∫ f d[F]_v = `|F|^{-1}` `Σ_{x∈F}` f(ι_v x).
+- A finite union of Galois-stable sets is Galois-stable, and [F ⊔ G]_v = (|F|[F]_v + |G|[G]_v)/(|F| + |G|) for disjoint F, G.
 
 **Checks.**
 
-- **`AnalyticLine.test_orbitMeasure_singleton`** (degenerate): [{x}]_v = `δ_{ι_v x}.`
-- **`test_galoisOrbitFinset_sqrt_two`** (computation): Over K = ℚ the orbit of √2 is {√2, −√2}, of cardinality 2.
-- **`test_not_isGaloisStableFinset_sqrt_two`** (non-example): {√2} is not Galois-stable over ℚ.
-- `test_galoisOrbitFinset_rat`: For x ∈ K, Gal·x = {x} and [Gal·x]_v = `δ_{ι_v x}.`
+- [{x}]_v = `δ_{ι_v x}.`
+- Over K = ℚ the orbit of √2 is {√2, −√2}, of cardinality 2.
+- {√2} is not Galois-stable over ℚ.
+- For x ∈ K, Gal·x = {x} and [Gal·x]_v = `δ_{ι_v x}.`
 
 **Endpoint checks.** [{0}]_v = `δ_{ι 0};` for F the primitive cube roots of unity over ℚ, [F]_∞ is the average of the Dirac masses at `e^{±2πi/3}.` {√2} is not Galois-stable over ℚ, and {√2, −√2} is.
 
@@ -5822,26 +5813,26 @@ The data are the measures ρ_v; condition (ii) is stated through the logarithmic
 
 Prove the following basic API.
 
-- `AdelicMeasure.standard`: The standard adelic measure λ = (λ_v).
-- `AdelicMeasure.exceptionalPlaces`: The finite set N(ρ) = {v : ρ_v ≠ λ_v}.
-- `AdelicMeasure.potential`: The continuous potential `g_{ρ,v}` : P¹_v^an → ℝ with `g_{ρ,v}(z)` = ∫ log δ_v(z, w) dρ_v(w) − log⁺|z|_v and `g_{ρ,v}(∞)` = 0.
-- `AdelicMeasure.potential_eq_zero`: `g_{ρ,v}` = 0 for v ∉ N(ρ), and `g_{λ,v}` = 0 for all v.
-- `AdelicMeasure.ext`: ρ = σ iff ρ_v = σ_v for every place v.
-- `AdelicMeasure.baseChange`: For L/K finite and compatible identifications of local analytic lines, repeat ρ_v at w|v. Pairings and the height of a fixed K-Galois-stable finite set are unchanged. Point heights need not be unchanged when that orbit splits.
-- `AdelicMeasure.not_atom`: ρ_v gives measure 0 to every type I point, in particular to ∞.
+- The standard adelic measure λ = (λ_v).
+- The finite set N(ρ) = {v : ρ_v ≠ λ_v}.
+- The continuous potential `g_{ρ,v}` : P¹_v^an → ℝ with `g_{ρ,v}(z)` = ∫ log δ_v(z, w) dρ_v(w) − log⁺|z|_v and `g_{ρ,v}(∞)` = 0.
+- `g_{ρ,v}` = 0 for v ∉ N(ρ), and `g_{λ,v}` = 0 for all v.
+- ρ = σ iff ρ_v = σ_v for every place v.
+- For L/K finite and compatible identifications of local analytic lines, repeat ρ_v at w|v. Pairings and the height of a fixed K-Galois-stable finite set are unchanged. Point heights need not be unchanged when that orbit splits.
+- ρ_v gives measure 0 to every type I point, in particular to ∞.
 
 **Checks.**
 
-- **`AdelicMeasure.test_standard_exceptionalPlaces`** (degenerate): N(λ) = ∅.
-- **`AdelicMeasure.test_gauss_radius`** (computation): Over ℚ, the family with ρ_p = `δ_{ζ_{0,p}}` and ρ_v = λ_v for v ≠ p is an adelic measure with N(ρ) = {p} and `g_{ρ,p}(z)` = log max(|z|_p, p) − log⁺|z|_p.
-- **`AdelicMeasure.test_not_dirac_type_one`** (non-example): A family with ρ_v = `δ_{ι_v 0}` at some place is not an adelic measure.
-- **`AdelicMeasure.test_not_infinitely_many`** (non-example): The family with ρ_p = `δ_{ζ_{0,p}}` at every prime p is not an adelic measure (ρ_p ≠ λ_p for infinitely many p).
+- N(λ) = ∅.
+- Over ℚ, the family with ρ_p = `δ_{ζ_{0,p}}` and ρ_v = λ_v for v ≠ p is an adelic measure with N(ρ) = {p} and `g_{ρ,p}(z)` = log max(|z|_p, p) − log⁺|z|_p.
+- A family with ρ_v = `δ_{ι_v 0}` at some place is not an adelic measure.
+- The family with ρ_p = `δ_{ζ_{0,p}}` at every prime p is not an adelic measure (ρ_p ≠ λ_p for infinitely many p).
 
 **Endpoint checks.** The standard family λ = (λ_v) is an adelic measure with N(λ) = ∅. Over ℚ, ρ_p := `δ_{ζ_{0,p}}` at one prime p and ρ_v := λ_v elsewhere is an adelic measure: `g_{ρ,p}(z)` = log max(|z|_p, p) − log⁺|z|_p is continuous. ρ_v := `δ_{ι_v 0}` at one place is not an adelic measure: its potential log|z|_v − log⁺|z|_v tends to −∞ at 0.
 
 Applications include Favre–Rivera-Letelier Definition 1.2 and Theorems 1–7 — the height h_ρ and the equidistribution theorem are attached to an adelic measure; Favre–Rivera-Letelier Theorem 4 (Theorem 8) — the canonical measures of a rational map form an adelic measure whose height is the canonical height; Fili Theorems 1–2 — the Arakelov–Zhang pairing is a distance on adelic measures; DeMarco–Krieger–Ye §§2.8, 7.1 — the curvature measures of normalised adelic heights, and the measures `m_{F,η};` ArithmeticDynamics Layer 6 — canonical measures of families (Lattès maps) are compared through their adelic measures.
 
-Define `AdelicMeasure.IsLocallyGaloisInvariant`: at every finite v the measure is invariant under the continuous action of `Gal(K_v^alg/K_v)`, extended continuously to C_v; at a real v it is invariant under complex conjugation (at a complex v the condition is empty). Prove `AdelicMeasure.IsLocallyGaloisInvariant.baseChange` with compatible local identifications and `AdelicMeasure.heightAt_baseChange_of_invariant`: for this subclass only, point heights are invariant under finite extension and under compatible choices of local embeddings. The proof averages local potentials over each orbit above v and uses the local Galois action and `Σ_{w|v} r_w = r_v`; fixed-set height invariance needs no invariance hypothesis (FRL Définition 1.2 and §5.2, by orbit averaging).
+Define local Galois invariance of an adelic measure: at every finite v the measure is invariant under the continuous action of `Gal(K_v^alg/K_v)`, extended continuously to C_v; at a real v it is invariant under complex conjugation (at a complex v the condition is empty). Prove preservation of local Galois invariance under base change with compatible local identifications and invariance of point heights under base change for locally Galois-invariant measures: for this subclass only, point heights are invariant under finite extension and under compatible choices of local embeddings. The proof averages local potentials over each orbit above v and uses the local Galois action and `Σ_{w|v} r_w = r_v`; fixed-set height invariance needs no invariance hypothesis (FRL Définition 1.2 and §5.2, by orbit averaging).
 
 **Checks.**
 
@@ -5851,7 +5842,7 @@ Define `AdelicMeasure.IsLocallyGaloisInvariant`: at every finite v the measure i
 
 ### 4.13 Adelic metrics on `O_{P¹}(1)`
 
-In the local P¹ energy theory, an adelic metric means a finite-support model-admissible metric: a family φ = `(φ_v)_{v∈M_K}` of continuous functions φ_v : P¹_v^an → ℝ with φ_v = 0 for all but finitely many v. It defines at each place the continuous metric ‖·‖_v := `‖·‖_{st,v}` `e^{−φ_v}` on O(1) over P¹_v^an, where the standard metric is `‖s(x)‖_{st,v}` = |s(x₀, x₁)|_v / max(|x₀|_v, |x₁|_v) for a linear form s, extended continuously to P¹_v^an. With affine coordinate z = x₀/x₁ and ∞ = (1 : 0): −log‖x₁‖_v(z) = log⁺|z|_v + φ_v(z) (the section x₁ has divisor ∞) and −log‖x₀‖_v(z) = `log⁺|z^{-1}|_v` + φ_v(z) (divisor 0). Retain these local metric families without a descent condition. Define `AdelicMetric.IsLocallyGaloisInvariant` by invariance of every φ_v under §4.6’s local Galois action. For that subclass, the pair Ō=(O(1),(‖·‖_v)_v) is a descended adelically metrized line bundle in Zhang’s sense. On arbitrary families the height in §4.34 is the K-orbit average, with the same ground-field dependence as §4.18. The quasi-projective adelic completion used in the general-variety endpoint is broader and has its own approximation conditions.
+In the local P¹ energy theory, an adelic metric means a finite-support model-admissible metric: a family φ = `(φ_v)_{v∈M_K}` of continuous functions φ_v : P¹_v^an → ℝ with φ_v = 0 for all but finitely many v. It defines at each place the continuous metric ‖·‖_v := `‖·‖_{st,v}` `e^{−φ_v}` on O(1) over P¹_v^an, where the standard metric is `‖s(x)‖_{st,v}` = |s(x₀, x₁)|_v / max(|x₀|_v, |x₁|_v) for a linear form s, extended continuously to P¹_v^an. With affine coordinate z = x₀/x₁ and ∞ = (1 : 0): −log‖x₁‖_v(z) = log⁺|z|_v + φ_v(z) (the section x₁ has divisor ∞) and −log‖x₀‖_v(z) = `log⁺|z^{-1}|_v` + φ_v(z) (divisor 0). Retain these local metric families without a descent condition. Define local Galois invariance of an adelic metric by invariance of every φ_v under §4.6’s local Galois action. For that subclass, the pair Ō=(O(1),(‖·‖_v)_v) is a descended adelically metrized line bundle in Zhang’s sense. On arbitrary families the height in §4.34 is the K-orbit average, with the same ground-field dependence as §4.18. The quasi-projective adelic completion used in the general-variety endpoint is broader and has its own approximation conditions.
 
 K a number field; the metrics on O(1)^an over P¹_v^an are those of Layer 2 Local mutual energy and test functions, described on P¹ by the function φ_v.
 
@@ -5863,25 +5854,25 @@ The standard metric is continuous on P¹_v^an: at a finite place −log‖x₁�
 
 Prove the following basic API.
 
-- `AdelicMetric.IsLocallyGaloisInvariant.baseChange`: Compatible finite extension preserves local invariance.
-- `AdelicMetric.height_baseChange_of_invariant`: For a locally invariant metric family the point height commutes with finite extension; the proof is local orbit averaging as in §4.12. For arbitrary families only the height of a fixed K-Galois-stable finite set is unchanged.
-- `AdelicMetric.standard`: The standard metric φ = 0.
-- `AdelicMetric.twist`: For constants c = (c_v), finitely many nonzero: φ + c, i.e. ‖·‖_v `e^{−c_v}.`
-- `AdelicMetric.average`: The metric `(‖·‖₁‖·‖₂)^{1/2},` i.e. (φ₁ + φ₂)/2.
-- `AdelicMetric.ext`: φ = ψ iff φ_v = ψ_v for all v.
-- `AdelicMetric.negLogNormX1`: The function −log‖x₁‖_v = log⁺|z|_v + φ_v on P¹_v^an ∖ {∞}.
-- `AdelicMetric.support_finite`: {v : φ_v ≠ 0} is finite.
-- `AdelicMetric.toContinuousMetric`: The continuous metric `‖·‖_{st,v}e^{−φ_v}` on O(1)^an of Layer 2 Local mutual energy and test functions, bijectively.
+- Compatible finite extension preserves local invariance.
+- For a locally invariant metric family the point height commutes with finite extension; the proof is local orbit averaging as in §4.12. For arbitrary families only the height of a fixed K-Galois-stable finite set is unchanged.
+- The standard metric φ = 0.
+- For constants c = (c_v), finitely many nonzero: φ + c, i.e. ‖·‖_v `e^{−c_v}.`
+- The metric `(‖·‖₁‖·‖₂)^{1/2},` i.e. (φ₁ + φ₂)/2.
+- φ = ψ iff φ_v = ψ_v for all v.
+- The function −log‖x₁‖_v = log⁺|z|_v + φ_v on P¹_v^an ∖ {∞}.
+- {v : φ_v ≠ 0} is finite.
+- The continuous metric `‖·‖_{st,v}e^{−φ_v}` on O(1)^an of Layer 2 Local mutual energy and test functions, bijectively.
 
 **Checks.**
 
-- **`AdelicMetric.test_standard_negLogNorm`** (degenerate): For the standard metric, −log‖x₁‖_v(z) = log⁺|z|_v for z ∈ K̄.
-- **`AdelicMetric.test_gauss_radius_metric`** (computation): For R ≥ 1, φ_v(z) = log max(|z|_v, R) − log⁺|z|_v at one place (0 elsewhere) is an adelic metric with φ_v(∞) = 0 and φ_v(0) = log R.
-- **`AdelicMetric.test_average_radius`** (computation): Average the standard metric with the one-place radius metric above for R > 1. The resulting potential is φ_v/2, with value (log R)/2 at 0 and 0 at ∞. This distinguishes the geometric mean from an unnormalized product of norms.
+- For the standard metric, −log‖x₁‖_v(z) = log⁺|z|_v for z ∈ K̄.
+- For R ≥ 1, φ_v(z) = log max(|z|_v, R) − log⁺|z|_v at one place (0 elsewhere) is an adelic metric with φ_v(∞) = 0 and φ_v(0) = log R.
+- Average the standard metric with the one-place radius metric above for R > 1. The resulting potential is φ_v/2, with value (log R)/2 at 0 and 0 at ∞. This distinguishes the geometric mean from an unnormalized product of norms.
 - The standard metric is locally invariant: its potential is zero, and its circle/Gauss curvature is fixed by the local action.
 - The Gauss-radius potential is locally invariant, with values log R at 0 and 0 at infinity; its nonconstant potential does not violate invariance.
 - The normalized potential of the circle centered at i at the real place is not invariant under conjugation, so it belongs only to the broader metric-family class.
-- **`AdelicMetric.test_not_adelic_all_primes`** (non-example): φ_p = 1 for every prime p (over ℚ) is not an adelic metric.
+- φ_p = 1 for every prime p (over ℚ) is not an adelic metric.
 
 **Endpoint checks.** The standard metric φ = 0 gives −log‖x₁‖_v(z) = log⁺|z|_v. At a place v and R ≥ 1, φ_v(z) = log max(|z|_v, R) − log⁺|z|_v extends continuously to P¹_v^an with φ_v(∞) = 0; with φ_w = 0 elsewhere it is an adelic metric.
 
@@ -5901,20 +5892,20 @@ The potential formula for one circle measure is AnalyticLine.potential_circle; a
 
 Prove the following basic API.
 
-- `AnalyticLine.regularised`: [F]`_{v,r}` = `|F|^{-1}` `Σ_{x∈F}` `m_{x,r,v}.`
-- `AnalyticLine.potential_regularised`: ∫ log δ_v(ι z, w) d[F]`_{v,r}(w)` = `|F|^{-1}` `Σ_{x∈F}` log max(|z − x|_v, r).
-- `AnalyticLine.energy_circle_circle`: `(m_{x,r,v},m_{y,r,v})_v` ≤ −log max(|x−y|_v,r), with equality at finite places, and at infinite places if x=y or |x−y|≥2r.
-- `AnalyticLine.regularised_hasContinuousPotential`: [F]`_{v,r}` has continuous potential.
-- `AnalyticLine.tendsto_regularised`: [F]`_{v,r}` → [F]_v weakly as r → 0⁺.
-- **`AnalyticLine.regularised_singleton_zero_one`** (example): [{0}]`_{v,1}` = λ_v.
+- [F]`_{v,r}` = `|F|^{-1}` `Σ_{x∈F}` `m_{x,r,v}.`
+- ∫ log δ_v(ι z, w) d[F]`_{v,r}(w)` = `|F|^{-1}` `Σ_{x∈F}` log max(|z − x|_v, r).
+- `(m_{x,r,v},m_{y,r,v})_v` ≤ −log max(|x−y|_v,r), with equality at finite places, and at infinite places if x=y or |x−y|≥2r.
+- [F]`_{v,r}` has continuous potential.
+- [F]`_{v,r}` → [F]_v weakly as r → 0⁺.
+- [{0}]`_{v,1}` = λ_v.
 
 **Checks.**
 
-- **`AnalyticLine.test_regularised_zero_one`** (degenerate): [{0}]`_{v,1}` = λ_v at every place.
-- **`AnalyticLine.test_energy_circle_self`** (computation): `(m_{x,r,v},` `m_{x,r,v})_v` = −log r; at an infinite place with r = 1/2 this equals log 2.
-- **`AnalyticLine.test_regularised_no_atom`** (non-example): For r > 0, [F]`_{v,r}` gives measure 0 to every type I point ι_v x, so [F]`_{v,r}` ≠ [F]_v.
-- **`AnalyticLine.test_potential_regularised_far`** (computation): If |z − x|_v ≥ r for all x ∈ F then the potential of [F]`_{v,r}` at z equals `|F|^{-1}` Σ log|z − x|_v, the potential of [F]_v.
-- **`AnalyticLine.test_energy_overlapping_circles`** (non-example): At an infinite place with x=0, y=1, r=1, the energy is strictly negative, whereas −log max(|x−y|,r)=0; centre evaluation cannot replace the second circle average.
+- [{0}]`_{v,1}` = λ_v at every place.
+- `(m_{x,r,v},` `m_{x,r,v})_v` = −log r; at an infinite place with r = 1/2 this equals log 2.
+- For r > 0, [F]`_{v,r}` gives measure 0 to every type I point ι_v x, so [F]`_{v,r}` ≠ [F]_v.
+- If |z − x|_v ≥ r for all x ∈ F then the potential of [F]`_{v,r}` at z equals `|F|^{-1}` Σ log|z − x|_v, the potential of [F]_v.
+- At an infinite place with x=0, y=1, r=1, the energy is strictly negative, whereas −log max(|x−y|,r)=0; centre evaluation cannot replace the second circle average.
 
 **Endpoint checks.** F = {0}, r = 1: [F]`_{v,1}` = λ_v. `(m_{x,r},` `m_{x,r})_v` = −log r; for r = 1/2 at an infinite place this is log 2.
 
@@ -5964,7 +5955,7 @@ g₁ := the potential of `d^{−1}` f^*λ_v − λ_v, i.e. g₁(x) = `d^{−1}` 
 
 ### 4.18 The height h_ρ attached to an adelic measure
 
-For an adelic measure ρ over K and a nonempty finite Galois-stable set F ⊂ P¹(K̄), h_ρ(F) := ½ `Σ_{v∈M_K}` r_v ([F]_v − ρ_v, [F]_v − ρ_v)_v, where (·,·)_v is the mutual energy of Layer 2 Local mutual energy and test functions (the diagonal of type I points omitted, so ([F]_v, [F]_v)_v = `−|F|^{-2}` `Σ_{x≠y∈F∖{∞}}` log|x − y|_v); for x ∈ P¹(K̄), `h_{ρ,K}(x)` := h_ρ(Gal(K̄/K)·x). Only finitely many terms are nonzero. The height of a fixed K-Galois-stable finite set is independent of embeddings and is preserved by finite extension with compatible local identifications. Point heights for arbitrary ρ retain the ground field: when an orbit splits over an extension their values can change. Throughout this layer h_ρ(x) abbreviates `h_{ρ,K}(x)` for the stated ground field K; field independence is used only under `AdelicMeasure.IsLocallyGaloisInvariant`.
+For an adelic measure ρ over K and a nonempty finite Galois-stable set F ⊂ P¹(K̄), h_ρ(F) := ½ `Σ_{v∈M_K}` r_v ([F]_v − ρ_v, [F]_v − ρ_v)_v, where (·,·)_v is the mutual energy of Layer 2 Local mutual energy and test functions (the diagonal of type I points omitted, so ([F]_v, [F]_v)_v = `−|F|^{-2}` `Σ_{x≠y∈F∖{∞}}` log|x − y|_v); for x ∈ P¹(K̄), `h_{ρ,K}(x)` := h_ρ(Gal(K̄/K)·x). Only finitely many terms are nonzero. The height of a fixed K-Galois-stable finite set is independent of embeddings and is preserved by finite extension with compatible local identifications. Point heights for arbitrary ρ retain the ground field: when an orbit splits over an extension their values can change. Throughout this layer h_ρ(x) abbreviates `h_{ρ,K}(x)` for the stated ground field K; field independence is used only under local Galois invariance of an adelic measure.
 
 ρ adelic over K; F Galois-stable finite. All finite sets to which the height-average identities are applied are nonempty.
 
@@ -5976,22 +5967,22 @@ Finiteness: for v ∉ N(ρ) finite such that every x ∈ F ∖ {∞} is a v-adic
 
 Prove the following basic API.
 
-- `AdelicMeasure.height`: h_ρ(F) = ½ Σ_v r_v ([F]_v − ρ_v, [F]_v − ρ_v)_v for Galois-stable finite F.
-- `AdelicMeasure.heightAt`: `h_{ρ,K}(x)` := h_ρ(Gal(K̄/K)·x) for x ∈ P¹(K̄).
-- `AdelicMeasure.height_finite`: Only finitely many places contribute to h_ρ(F).
-- `AdelicMeasure.heightAt_galois`: h_ρ(σx) = h_ρ(x) for σ ∈ Gal(K̄/K).
-- `AdelicMeasure.height_baseChange`: For a fixed nonempty K-Galois-stable F, its height over L/K finite equals its height over K, with compatible local identifications. Point-height invariance is `AdelicMeasure.heightAt_baseChange_of_invariant` from §4.12.
-- `AdelicMeasure.height_eq_average`: For nonempty Galois-stable finite F: h_ρ(F) = `|F|^{-1}` `Σ_{x∈F}` h_ρ(x) (from Decomposition of the adelic height into local potentials).
-- `AdelicMeasure.heightAt_infty`: h_ρ(∞) = ½ Σ_v r_v (ρ_v, ρ_v)_v.
-- `AdelicMeasure.heightAt_standard`: h_λ(x) = NumberField.absLogHeight₁ x for x ∈ K̄ and h_λ(∞) = 0 (The standard adelic measure gives Mathlib's absolute logarithmic Weil height).
+- h_ρ(F) = ½ Σ_v r_v ([F]_v − ρ_v, [F]_v − ρ_v)_v for Galois-stable finite F.
+- `h_{ρ,K}(x)` := h_ρ(Gal(K̄/K)·x) for x ∈ P¹(K̄).
+- Only finitely many places contribute to h_ρ(F).
+- h_ρ(σx) = h_ρ(x) for σ ∈ Gal(K̄/K).
+- For a fixed nonempty K-Galois-stable F, its height over L/K finite equals its height over K, with compatible local identifications. Point-height invariance is invariance of point heights under base change for locally Galois-invariant measures from §4.12.
+- For nonempty Galois-stable finite F: h_ρ(F) = `|F|^{-1}` `Σ_{x∈F}` h_ρ(x) (from Decomposition of the adelic height into local potentials).
+- h_ρ(∞) = ½ Σ_v r_v (ρ_v, ρ_v)_v.
+- h_λ(x) = NumberField.absLogHeight₁ x for x ∈ K̄ and h_λ(∞) = 0 (The standard adelic measure gives Mathlib's absolute logarithmic Weil height).
 
 **Checks.**
 
 - For ρ over ℚ with unit-circle measure centered at i at infinity and standard finite-place measures, `h_{ρ,ℚ}(i)`=½log 2; over ℚ(i), with the complex embedding i↦i and repeated measures, `h_{ρ,ℚ(i)}(i)`=0. The original orbit {i,−i} retains height ½log 2 over either field.
-- `AdelicMeasure.test_height_standard_two`: h_λ(2) = log 2 = NumberField.absLogHeight₁ 2.
-- **`AdelicMeasure.test_height_standard_infty`** (degenerate): h_λ(∞) = 0.
-- **`AdelicMeasure.test_height_gauss_radius`** (computation): For ρ over ℚ with ρ_p = `δ_{ζ_{0,p}}` and ρ_v = λ_v otherwise: h_ρ(∞) = −½ log p and h_ρ(0) = ½ log p.
-- **`AdelicMeasure.test_height_not_additive`** (non-example): h_λ({2} ∪ {3}) = (log 2 + log 3)/2, which is not h_λ({2}) + h_λ({3}): the height of a Galois-stable set is an average, not a sum.
+- h_λ(2) = log 2 = NumberField.absLogHeight₁ 2.
+- h_λ(∞) = 0.
+- For ρ over ℚ with ρ_p = `δ_{ζ_{0,p}}` and ρ_v = λ_v otherwise: h_ρ(∞) = −½ log p and h_ρ(0) = ½ log p.
+- h_λ({2} ∪ {3}) = (log 2 + log 3)/2, which is not h_λ({2}) + h_λ({3}): the height of a Galois-stable set is an average, not a sum.
 
 **Endpoint checks.** h_λ(2) = log 2, h_λ(ζ) = 0 for a root of unity ζ, and h_λ(∞) = 0 (The standard adelic measure gives Mathlib's absolute logarithmic Weil height). For the adelic measure over ℚ with ρ_p = `δ_{ζ_{0,p}}:` h_ρ(∞) = −½ log p and h_ρ(0) = ½ log p.
 
@@ -6011,20 +6002,20 @@ Continuous potential: `µ_{f,v}` = λ_v + `Δ(λ_{f,v}` − log⁺|z|_v) with `�
 
 Prove the following basic API.
 
-- `RationalMap.canonicalAdelicMeasure`: ρ_f = `(µ_{f,v})_v` as an adelic measure.
-- `RationalMap.canonicalAdelicMeasure_locallyGaloisInvariant`: For f over K of degree at least two, ρ_f satisfies `AdelicMeasure.IsLocallyGaloisInvariant`. The local Galois action commutes with f and fixes λ_v; hence it fixes each normalized pullback of λ_v and its weak limit. This supplies `AdelicMeasure.heightAt_baseChange_of_invariant` for dynamical heights.
-- `RationalMap.canonicalAdelicMeasure_apply`: `ρ_{f,v}` = `µ_{f,v}.`
-- `RationalMap.canonicalAdelicMeasure_eq_standard_of_goodReduction`: `ρ_{f,v}` = λ_v at every finite place of good reduction.
-- `RationalMap.canonicalAdelicMeasure_iterate`: `ρ_{f^n}` = ρ_f for n ≥ 1.
-- `RationalMap.canonicalAdelicMeasure_conj`: `ρ_{γ^{-1}∘f∘γ,v}` = `(γ^{-1})_*` `ρ_{f,v}` for γ ∈ PGL₂(K).
-- `RationalMap.canonicalAdelicMeasure_invariant`: `f_*µ_{f,v}` = `µ_{f,v}` and `f^*µ_{f,v}` = `d·µ_{f,v}` (Layer 2).
+- ρ_f = `(µ_{f,v})_v` as an adelic measure.
+- For f over K of degree at least two, ρ_f satisfies local Galois invariance of an adelic measure. The local Galois action commutes with f and fixes λ_v; hence it fixes each normalized pullback of λ_v and its weak limit. This supplies invariance of point heights under base change for locally Galois-invariant measures for dynamical heights.
+- `ρ_{f,v}` = `µ_{f,v}.`
+- `ρ_{f,v}` = λ_v at every finite place of good reduction.
+- `ρ_{f^n}` = ρ_f for n ≥ 1.
+- `ρ_{γ^{-1}∘f∘γ,v}` = `(γ^{-1})_*` `ρ_{f,v}` for γ ∈ PGL₂(K).
+- `f_*µ_{f,v}` = `µ_{f,v}` and `f^*µ_{f,v}` = `d·µ_{f,v}` (Layer 2).
 
 **Checks.**
 
-- **`RationalMap.test_canonicalAdelicMeasure_pow`** (computation): `ρ_{z^d}` = λ for every d ≥ 2.
-- `RationalMap.test_canonicalAdelicMeasure_iterate`: `ρ_{f∘f}` = ρ_f.
-- **`RationalMap.test_canonicalAdelicMeasure_translate`** (computation): For σ_α(z) = α − (α − z)² and a finite place v with |α|_v > 1, `ρ_{σ_α,v}` = `δ_{ζ_{α,1}}.`
-- **`RationalMap.test_canonicalAdelicMeasure_bad_reduction`** (non-example): For f(z) = (z² − z)/p over ℚ, `ρ_{f,p}` ≠ λ_p.
+- `ρ_{z^d}` = λ for every d ≥ 2.
+- `ρ_{f∘f}` = ρ_f.
+- For σ_α(z) = α − (α − z)² and a finite place v with |α|_v > 1, `ρ_{σ_α,v}` = `δ_{ζ_{α,1}}.`
+- For f(z) = (z² − z)/p over ℚ, `ρ_{f,p}` ≠ λ_p.
 
 **Endpoint checks.** `ρ_{z^d}` = λ for every d ≥ 2. For f(z) = (z² − z)/p over ℚ, `µ_{f,p}` is supported on a Cantor set of type I points in ℤ_p, so `ρ_{f,p}` ≠ λ_p.
 
@@ -6044,20 +6035,20 @@ Finite place: if |c|_v ≤ 1 all P_cⁿ(0) are v-integral; if |c|_v > 1, |P_cⁿ
 
 Prove the following basic API.
 
-- `multibrotGreen`: `G_{M,v}(c)` = lim `D^{−(n−1)}` log⁺|P_cⁿ(0)|_v.
-- `multibrotGreen_finite`: `G_{M,v}(c)` = log⁺|c|_v at a finite place.
-- `multibrotGreen_eq_escapeRate`: `G_{M,v}(c)` = `G_{P_c,v}(c)` = `D·G_{P_c,v}(0).`
-- `multibrotAdelicMeasure`: `µ_{M_D}` as an adelic measure over ℚ.
-- `multibrotAdelicMeasure_potential`: ∫ log δ_v(c, w) `dµ_{M_D,v}(w)` = `G_{M,v}(c)` at every place (capacity 1).
-- `multibrotAdelicMeasure_holder`: The potentials of `µ_{M_D}` are Hölder.
-- `multibrotAdelicMeasure_heightAt_infty`: `h_{µ_{M_D}}(∞)` = 0.
+- `G_{M,v}(c)` = lim `D^{−(n−1)}` log⁺|P_cⁿ(0)|_v.
+- `G_{M,v}(c)` = log⁺|c|_v at a finite place.
+- `G_{M,v}(c)` = `G_{P_c,v}(c)` = `D·G_{P_c,v}(0).`
+- `µ_{M_D}` as an adelic measure over ℚ.
+- ∫ log δ_v(c, w) `dµ_{M_D,v}(w)` = `G_{M,v}(c)` at every place (capacity 1).
+- The potentials of `µ_{M_D}` are Hölder.
+- `h_{µ_{M_D}}(∞)` = 0.
 
 **Checks.**
 
-- **`test_multibrotGreen_finite`** (computation): For a prime p and c ∈ ℚ, `G_{M,p}(c)` = log⁺|c|_p.
-- **`test_multibrotGreen_zero`** (degenerate): `G_{M,v}(0)` = 0 at every place.
-- **`test_multibrotGreen_misnormalised`** (non-example): lim `D^{−n}` log⁺|P_cⁿ(0)|_p = `D^{−1}` log⁺|c|_p, so FRL's normalisation `D^{−n}` gives a measure of mass 1/D, not a probability measure.
-- `test_multibrotAdelicMeasure_finite`: `µ_{M_D,p}` = λ_p at every prime p.
+- For a prime p and c ∈ ℚ, `G_{M,p}(c)` = log⁺|c|_p.
+- `G_{M,v}(0)` = 0 at every place.
+- lim `D^{−n}` log⁺|P_cⁿ(0)|_p = `D^{−1}` log⁺|c|_p, so FRL's normalisation `D^{−n}` gives a measure of mass 1/D, not a probability measure.
+- `µ_{M_D,p}` = λ_p at every prime p.
 
 **Endpoint checks.** `G_{M,p}(c)` = log⁺|c|_p at every prime p. G_M(0) = 0 (0 ∈ M_D), and G_M(c) = log|c| + o(1).
 
@@ -6077,20 +6068,20 @@ For an adelic metric φ on O(1) over K, the curvature at v is initially the dist
 
 Prove the following basic API.
 
-- `AdelicMetric.IsSemipositive`: Every curvature measure `µ_{φ,v}` is positive.
-- `AdelicMetric.curvature`: For semipositive φ, the adelic measure µ_φ = (λ_v + Δφ_v)_v.
-- `AdelicMetric.potential_curvature`: `g_{µ_φ,v}` = φ_v − φ_v(∞).
-- `AdelicMetric.curvature_standard`: µ of the standard metric is λ.
-- `AdelicMetric.curvature_twist`: `µ_{φ+c}` = µ_φ for constants c.
-- `AdelicMetric.curvature_mass`: `µ_{φ,v}(P¹_v^an)` = 1 = deg O(1).
-- `AdelicMetric.curvature_eq_chambertLoir`: `µ_{φ,v}` is the Chambert-Loir measure c₁(Ō_v) of Layer 2 Local mutual energy and test functions.
+- Every curvature measure `µ_{φ,v}` is positive.
+- For semipositive φ, the adelic measure µ_φ = (λ_v + Δφ_v)_v.
+- `g_{µ_φ,v}` = φ_v − φ_v(∞).
+- µ of the standard metric is λ.
+- `µ_{φ+c}` = µ_φ for constants c.
+- `µ_{φ,v}(P¹_v^an)` = 1 = deg O(1).
+- `µ_{φ,v}` is the Chambert-Loir measure c₁(Ō_v) of Layer 2 Local mutual energy and test functions.
 
 **Checks.**
 
-- **`AdelicMetric.test_curvature_standard`** (degenerate): The curvature of the standard metric is the standard adelic measure.
-- **`AdelicMetric.test_curvature_gauss_radius`** (computation): For φ_v = log max(|z|_v, R) − log⁺|z|_v (R ≥ 1) the curvature at v is `m_{0,R,v}.`
-- `AdelicMetric.test_curvature_twist`: Adding a constant c_v to φ_v does not change the curvature.
-- **`AdelicMetric.test_not_semipositive`** (non-example): For R > 1 the metric −(log max(|z|_v, R) − log⁺|z|_v) is not semipositive.
+- The curvature of the standard metric is the standard adelic measure.
+- For φ_v = log max(|z|_v, R) − log⁺|z|_v (R ≥ 1) the curvature at v is `m_{0,R,v}.`
+- Adding a constant c_v to φ_v does not change the curvature.
+- For R > 1 the metric −(log max(|z|_v, R) − log⁺|z|_v) is not semipositive.
 
 **Endpoint checks.** Standard metric: µ_v = λ_v at every place. The metric φ_v(z) = log max(|z|_v, R) − log⁺|z|_v (R ≥ 1) has curvature `m_{0,R,v}` (the circle of radius R at an infinite place, `δ_{ζ_{0,R}}` at a finite place): semipositive. The metric −φ_v with R > 1 has curvature 2λ_v − `m_{0,R,v},` which is not positive: not semipositive.
 
@@ -6152,19 +6143,19 @@ f, g of degree ≥ 2 over K; v a place.
 
 Prove the following basic API.
 
-- `RationalMap.localEnergy`: E_v(f, g) = `½(µ_{f,v}` − `µ_{g,v},` `µ_{f,v}` − `µ_{g,v})_v.`
-- `RationalMap.localEnergy_eq_localHeights`: E_v(f, g) = ½(∫(λ_f − λ_g)dµ_g + ∫(λ_g − λ_f)dµ_f).
-- `RationalMap.localEnergy_nonneg`: E_v(f, g) ≥ 0, with equality iff `µ_{f,v}` = `µ_{g,v}.`
-- `RationalMap.localEnergy_comm`: E_v(f, g) = E_v(g, f).
-- `RationalMap.localEnergy_conj`: `E_v(γ^{-1}fγ,` `γ^{-1}gγ)` = E_v(f, g) for γ ∈ PGL₂(C_v) (the canonical measures have continuous potentials, so Layer 2’s mass-zero energy invariance applies).
-- `RationalMap.azPairing_eq_sum_localEnergy`: ⟨f, g⟩ = Σ_v r_v E_v(f, g).
+- E_v(f, g) = `½(µ_{f,v}` − `µ_{g,v},` `µ_{f,v}` − `µ_{g,v})_v.`
+- E_v(f, g) = ½(∫(λ_f − λ_g)dµ_g + ∫(λ_g − λ_f)dµ_f).
+- E_v(f, g) ≥ 0, with equality iff `µ_{f,v}` = `µ_{g,v}.`
+- E_v(f, g) = E_v(g, f).
+- `E_v(γ^{-1}fγ,` `γ^{-1}gγ)` = E_v(f, g) for γ ∈ PGL₂(C_v) (the canonical measures have continuous potentials, so Layer 2’s mass-zero energy invariance applies).
+- ⟨f, g⟩ = Σ_v r_v E_v(f, g).
 
 **Checks.**
 
-- **`RationalMap.test_localEnergy_pow`** (degenerate): E_v(z², z³) = 0.
-- **`RationalMap.test_localEnergy_translate_finite`** (computation): At a finite place with |α|_v > 1, E_v(z², α − (α − z)²) = log|α|_v.
-- **`RationalMap.test_localEnergy_translate_infinite`** (computation): At an infinite place with |α| ≥ 2, E_v(z², α − (α − z)²) = log|α|.
-- `RationalMap.test_localEnergy_self`: E_v(f, f) = 0 for every f.
+- E_v(z², z³) = 0.
+- At a finite place with |α|_v > 1, E_v(z², α − (α − z)²) = log|α|_v.
+- At an infinite place with |α| ≥ 2, E_v(z², α − (α − z)²) = log|α|.
+- E_v(f, f) = 0 for every f.
 
 **Endpoint checks.** E_v(z², z³) = 0 at every place. For σ_α(z) = α − (α − z)²: E_v(z², σ_α) = log⁺|α|_v at a finite place (the hyperbolic distance from `ζ_{0,1}` to `ζ_{α,1}` is 2 log⁺|α|_v) and log⁺|α|_v + I(|α|_v) at an infinite place, I as in PST Lemma 17.
 
@@ -6184,19 +6175,19 @@ For an adelic measure ρ over K, the normalised adelic metric Ō^ρ is φ^ρ_v :
 
 Prove the following basic API.
 
-- `AdelicMeasure.metric`: The normalised metric φ^ρ.
-- `AdelicMeasure.metric_isSemipositive`: φ^ρ is semipositive.
-- `AdelicMeasure.curvature_metric`: The curvature of φ^ρ is ρ.
-- `AdelicMeasure.metric_infty`: φ^ρ_v(∞) = ½(ρ_v, ρ_v)_v.
-- `AdelicMeasure.metric_standard`: φ^λ is the standard metric.
-- `AdelicMetric.eq_metric_curvature_add_const`: A semipositive φ equals `φ^{µ_φ}` + c with c_v = φ_v(∞) − `½(µ_{φ,v},` `µ_{φ,v})_v.`
+- The normalised metric φ^ρ.
+- φ^ρ is semipositive.
+- The curvature of φ^ρ is ρ.
+- φ^ρ_v(∞) = ½(ρ_v, ρ_v)_v.
+- φ^λ is the standard metric.
+- A semipositive φ equals `φ^{µ_φ}` + c with c_v = φ_v(∞) − `½(µ_{φ,v},` `µ_{φ,v})_v.`
 
 **Checks.**
 
-- **`AdelicMeasure.test_metric_standard`** (degenerate): φ^λ = 0.
-- **`AdelicMeasure.test_metric_gauss_radius`** (computation): For the Gauss-radius measure at p, φ^ρ_p(∞) = −½ log p.
-- `AdelicMeasure.test_curvature_metric`: The curvature of φ^ρ is ρ, for every adelic measure ρ.
-- **`AdelicMeasure.test_metric_not_potential`** (non-example): For the Gauss-radius measure, the metric `g_{ρ,·}` without the constant ½(ρ, ρ) is not φ^ρ: their heights differ by ½ log p.
+- φ^λ = 0.
+- For the Gauss-radius measure at p, φ^ρ_p(∞) = −½ log p.
+- The curvature of φ^ρ is ρ, for every adelic measure ρ.
+- For the Gauss-radius measure, the metric `g_{ρ,·}` without the constant ½(ρ, ρ) is not φ^ρ: their heights differ by ½ log p.
 
 **Endpoint checks.** φ^λ = 0, the standard metric. For the Gauss-radius measure at p over ℚ: φ^ρ_p(z) = log max(|z|_p, p) − log⁺|z|_p − ½ log p.
 
@@ -6258,20 +6249,20 @@ For adelic measures ρ, σ over K: ⟨ρ, σ⟩ := ½ Σ_v r_v (ρ_v − σ_v, �
 
 Prove the following basic API.
 
-- `AdelicMeasure.pairing`: ⟨ρ, σ⟩ = ½ Σ_v r_v (ρ_v − σ_v, ρ_v − σ_v)_v.
-- `AdelicMeasure.localPairing`: ⟨ρ, σ⟩_v = ½(ρ_v − σ_v, ρ_v − σ_v)_v.
-- `AdelicMeasure.pairing_comm`: ⟨ρ, σ⟩ = ⟨σ, ρ⟩.
-- `AdelicMeasure.pairing_self`: ⟨ρ, ρ⟩ = 0.
-- `AdelicMeasure.pairing_eq_heights`: ⟨ρ, σ⟩ = h_ρ(∞) + h_σ(∞) − Σ_v r_v (ρ_v, σ_v)_v (Fili Proposition 7).
-- `AdelicMeasure.pairing_standard`: ⟨ρ, λ⟩ = h_ρ(∞) + Σ_v r_v ∫ log⁺|z|_v dρ_v (The pairing with the standard measure).
-- `AdelicMeasure.pairing_eq_metric_pairing`: ⟨ρ, σ⟩ = Ō^ρ·Ō^σ.
+- ⟨ρ, σ⟩ = ½ Σ_v r_v (ρ_v − σ_v, ρ_v − σ_v)_v.
+- ⟨ρ, σ⟩_v = ½(ρ_v − σ_v, ρ_v − σ_v)_v.
+- ⟨ρ, σ⟩ = ⟨σ, ρ⟩.
+- ⟨ρ, ρ⟩ = 0.
+- ⟨ρ, σ⟩ = h_ρ(∞) + h_σ(∞) − Σ_v r_v (ρ_v, σ_v)_v (Fili Proposition 7).
+- ⟨ρ, λ⟩ = h_ρ(∞) + Σ_v r_v ∫ log⁺|z|_v dρ_v (The pairing with the standard measure).
+- ⟨ρ, σ⟩ = Ō^ρ·Ō^σ.
 
 **Checks.**
 
-- **`AdelicMeasure.test_pairing_standard_self`** (degenerate): ⟨λ, λ⟩ = 0.
-- **`AdelicMeasure.test_pairing_gauss_radius`** (computation): For the Gauss-radius measure ρ at p over ℚ: ⟨ρ, λ⟩ = ½ log p.
-- `AdelicMeasure.test_pairing_symm`: ⟨ρ, σ⟩ = ⟨σ, ρ⟩ for all adelic ρ, σ.
-- **`AdelicMeasure.test_pairing_not_bilinear`** (non-example): ⟨·,·⟩ is not bilinear: ⟨ρ, ρ⟩ = 0 for every ρ although ⟨ρ, λ⟩ > 0 for the Gauss-radius measure.
+- ⟨λ, λ⟩ = 0.
+- For the Gauss-radius measure ρ at p over ℚ: ⟨ρ, λ⟩ = ½ log p.
+- ⟨ρ, σ⟩ = ⟨σ, ρ⟩ for all adelic ρ, σ.
+- ⟨·,·⟩ is not bilinear: ⟨ρ, ρ⟩ = 0 for every ρ although ⟨ρ, λ⟩ > 0 for the Gauss-radius measure.
 
 **Endpoint checks.** ⟨λ, λ⟩ = 0. For the Gauss-radius measure ρ at p over ℚ: ⟨ρ, λ⟩ = `½(δ_{ζ_{0,p}}` − `δ_{ζ_{0,1}},` same)_p = ½ log p (the energy of δ_S − `δ_{S′}` is the hyperbolic distance).
 
@@ -6325,7 +6316,7 @@ For an adelic metric φ on O(1) over K and x ∈ P¹(K̄) with Galois orbit O, h
 
 φ an adelic metric; s a linear form over K not vanishing on O.
 
-Independence of s: two sections differ by a rational function in K(z) whose values on O multiply to an element of K^× (a norm), killed by the product formula (PST Proposition 8, proof). With s = x₁ (for x ≠ ∞): −log‖x₁‖_v = log⁺|z|_v + φ_v, and Σ_v r_v `|O|^{-1}` Σ_y log⁺|y|_v = absLogHeight₁(x) (The standard adelic measure gives Mathlib's absolute logarithmic Weil height); with s = x₀ at ∞: −log‖x₀‖_v(∞) = φ_v(∞). For arbitrary metric families retain the ground field in `h_{φ,K}`: the fixed finite-set height is unchanged by compatible extension, while point-height invariance requires `AdelicMetric.IsLocallyGaloisInvariant`. Galois invariance over the fixed field K follows from equality of K-orbits, exactly as for h_ρ.
+Independence of s: two sections differ by a rational function in K(z) whose values on O multiply to an element of K^× (a norm), killed by the product formula (PST Proposition 8, proof). With s = x₁ (for x ≠ ∞): −log‖x₁‖_v = log⁺|z|_v + φ_v, and Σ_v r_v `|O|^{-1}` Σ_y log⁺|y|_v = absLogHeight₁(x) (The standard adelic measure gives Mathlib's absolute logarithmic Weil height); with s = x₀ at ∞: −log‖x₀‖_v(∞) = φ_v(∞). For arbitrary metric families retain the ground field in `h_{φ,K}`: the fixed finite-set height is unchanged by compatible extension, while point-height invariance requires local Galois invariance of an adelic metric. Galois invariance over the fixed field K follows from equality of K-orbits, exactly as for h_ρ.
 
 *Needs:* [Adelic metrics on `O_{P¹}(1)`](#413-adelic-metrics-on-o_p¹1); [The standard adelic measure gives Mathlib's absolute logarithmic Weil height](#428-the-standard-adelic-measure-gives-mathlibs-absolute-logarithmic-weil-height); [Galois-stable finite sets and their probability measures [F]_v](#49-galois-stable-finite-sets-and-their-probability-measures-f_v); `NumberField.absLogHeight₁`.
 
@@ -6333,20 +6324,20 @@ Independence of s: two sections differ by a rational function in K(z) whose valu
 
 Prove the following basic API.
 
-- `AdelicMetric.height`: h_φ : P¹(K̄) → ℝ.
-- `AdelicMetric.height_eq_of_section`: h_φ(x) = Σ_v r_v `|O|^{-1}Σ_{y∈O}(−log‖s(y)‖_v)` for every linear form s over K nonvanishing on O.
-- `AdelicMetric.height_standard`: h of the standard metric is absLogHeight₁ (0 at ∞).
-- `AdelicMetric.height_twist`: `h_{φ+c}` = h_φ + Σ_v r_v c_v.
-- `AdelicMetric.height_average`: `h_{(φ₁+φ₂)/2}` = `(h_{φ₁}` + `h_{φ₂})/2.`
-- `AdelicMetric.height_sub_weil_bounded`: |h_φ − h| ≤ Σ_v r_v sup|φ_v| on P¹(K̄).
-- `AdelicMetric.height_galois`: h_φ(σx) = h_φ(x) for σ ∈ Gal(K̄/K).
+- h_φ : P¹(K̄) → ℝ.
+- h_φ(x) = Σ_v r_v `|O|^{-1}Σ_{y∈O}(−log‖s(y)‖_v)` for every linear form s over K nonvanishing on O.
+- h of the standard metric is absLogHeight₁ (0 at ∞).
+- `h_{φ+c}` = h_φ + Σ_v r_v c_v.
+- `h_{(φ₁+φ₂)/2}` = `(h_{φ₁}` + `h_{φ₂})/2.`
+- |h_φ − h| ≤ Σ_v r_v sup|φ_v| on P¹(K̄).
+- h_φ(σx) = h_φ(x) for σ ∈ Gal(K̄/K).
 
 **Checks.**
 
-- `AdelicMetric.test_height_standard_two`: For the standard metric, h(2) = log 2 = absLogHeight₁ 2.
-- **`AdelicMetric.test_height_infty`** (computation): h_φ(∞) = Σ_v r_v φ_v(∞).
-- `AdelicMetric.test_height_twist`: Adding the constant c at one place v changes the height by r_v c everywhere.
-- **`AdelicMetric.test_height_gauss_radius_zero`** (non-example): Over ℚ with φ_p = log max(|z|_p, p) − log⁺|z|_p, h_φ(0) = log p, so h_φ is not the Weil height although the metric is standard at all other places.
+- For the standard metric, h(2) = log 2 = absLogHeight₁ 2.
+- h_φ(∞) = Σ_v r_v φ_v(∞).
+- Adding the constant c at one place v changes the height by r_v c everywhere.
+- Over ℚ with φ_p = log max(|z|_p, p) − log⁺|z|_p, h_φ(0) = log p, so h_φ is not the Weil height although the metric is standard at all other places.
 
 **Endpoint checks.** Standard metric: h_φ = absLogHeight₁ with h(∞) = 0. Over ℚ with φ_p = log max(|z|_p, p) − log⁺|z|_p: h_φ(0) = log p ≠ h(0) = 0 and h_φ(∞) = 0.
 
@@ -6396,7 +6387,7 @@ Suppose |F_n| ≤ M along a subsequence. By Decomposition of the adelic height i
 
 ### 4.38 The normalised metric of ρ has height h_ρ
 
-For every adelic measure ρ over K, `h_{φ^ρ}` = h_ρ on P¹(K̄), with both point heights formed using the same K-orbit. Prove `AdelicMetric.normalised_isLocallyGaloisInvariant_iff`: the normalized metric of ρ is locally invariant exactly when ρ is; its normalized potential is recovered from the kernel and fixed value at infinity.
+For every adelic measure ρ over K, `h_{φ^ρ}` = h_ρ on P¹(K̄), with both point heights formed using the same K-orbit. Prove the local Galois invariance comparison for the normalized metric: the normalized metric of ρ is locally invariant exactly when ρ is; its normalized potential is recovered from the kernel and fixed value at infinity.
 
 ρ adelic over K.
 
@@ -6424,20 +6415,20 @@ The integral is finite: log⁺|z|_v + `φ_{1,v}` is `µ_{2,v}-integrable` becaus
 
 Prove the following basic API.
 
-- `AdelicMetric.pairing`: Ō₁·Ō₂ for semipositive φ₁, φ₂.
-- `AdelicMetric.pairing_comm`: Ō₁·Ō₂ = Ō₂·Ō₁ (The Arakelov–Zhang pairing through mutual energies; symmetry).
-- `AdelicMetric.pairing_eq_energy`: Ō₁·Ō₂ = Σ_v r_v [`φ_{1,v}(∞)` + `φ_{2,v}(∞)` − `(µ_{1,v},` `µ_{2,v})_v`].
-- `AdelicMetric.pairing_twist`: (φ₁ + c)·φ₂ = φ₁·φ₂ + Σ_v r_v c_v.
-- `AdelicMetric.pairing_average`: Bilinearity for averages: ((φ₁+φ₂)/2)·((φ₁+φ₂)/2) = ¼ φ₁·φ₁ + ½ φ₁·φ₂ + ¼ φ₂·φ₂.
-- `AdelicMetric.pairing_standard`: standard·standard = 0.
-- `AdelicMetric.pairing_eq_sections`: Ō₁·Ō₂ equals Zhang's expression h₁((u)) + h₂((s)) + Σ_v r_v ∫ `−log‖s‖_{1,v}` `d(µ_{2,v}` − `δ_{div u})` for any linear forms s, u over K with div s ≠ div u (Independence of the Arakelov–Zhang pairing from the auxiliary sections).
+- Ō₁·Ō₂ for semipositive φ₁, φ₂.
+- Ō₁·Ō₂ = Ō₂·Ō₁ (The Arakelov–Zhang pairing through mutual energies; symmetry).
+- Ō₁·Ō₂ = Σ_v r_v [`φ_{1,v}(∞)` + `φ_{2,v}(∞)` − `(µ_{1,v},` `µ_{2,v})_v`].
+- (φ₁ + c)·φ₂ = φ₁·φ₂ + Σ_v r_v c_v.
+- Bilinearity for averages: ((φ₁+φ₂)/2)·((φ₁+φ₂)/2) = ¼ φ₁·φ₁ + ½ φ₁·φ₂ + ¼ φ₂·φ₂.
+- standard·standard = 0.
+- Ō₁·Ō₂ equals Zhang's expression h₁((u)) + h₂((s)) + Σ_v r_v ∫ `−log‖s‖_{1,v}` `d(µ_{2,v}` − `δ_{div u})` for any linear forms s, u over K with div s ≠ div u (Independence of the Arakelov–Zhang pairing from the auxiliary sections).
 
 **Checks.**
 
-- **`AdelicMetric.test_pairing_standard`** (degenerate): standard·standard = 0.
-- **`AdelicMetric.test_pairing_gauss_radius`** (computation): For the Gauss-radius metric Ō_p over ℚ, Ō_p·Ō_p = log p.
-- `AdelicMetric.test_pairing_twist_self`: (φ + c)·(φ + c) = φ·φ + 2 Σ_v r_v c_v.
-- **`AdelicMetric.test_pairing_not_curvature_only`** (non-example): The pairing is not a function of the curvature measures alone: twisting the standard metric by c = 1 at one place gives self-pairing 2r_v ≠ 0 with the same curvature λ.
+- standard·standard = 0.
+- For the Gauss-radius metric Ō_p over ℚ, Ō_p·Ō_p = log p.
+- (φ + c)·(φ + c) = φ·φ + 2 Σ_v r_v c_v.
+- The pairing is not a function of the curvature measures alone: twisting the standard metric by c = 1 at one place gives self-pairing 2r_v ≠ 0 with the same curvature λ.
 
 **Endpoint checks.** standard·standard = 0. For the Gauss-radius metric Ō_p over ℚ (φ_p = log max(|z|_p, p) − log⁺|z|_p): Ō_p·Ō_p = log p.
 
@@ -6457,20 +6448,20 @@ f of degree d ≥ 2 over K; F a homogeneous lift over K.
 
 Prove the following basic API.
 
-- `RationalMap.canonicalMetric`: `φ^{f,F}` as an adelic metric.
-- `RationalMap.canonicalMetric_isSemipositive`: `φ^{f,F}` is semipositive.
-- `RationalMap.curvature_canonicalMetric`: The curvature of `φ^{f,F}` is ρ_f.
-- `RationalMap.height_canonicalMetric`: `h_{φ^{f,F}}` = ĥ_f.
-- `RationalMap.canonicalMetric_smul`: `φ^{f,aF}` = `φ^{f,F}` + log|a|_v/(d − 1).
-- `RationalMap.canonicalMetric_eq_zero_of_goodReduction`: `φ^{f,F}_v` = 0 where F has good reduction.
-- `RationalMap.canonicalMetric_functional_equation`: `−log‖x₁‖_{f,v}(f(z))` = `d·(−log‖x₁‖_{f,v}(z))` − log|F₁(z, 1)|_v (the invariance ‖s∘f‖ = Π‖s_j‖ of PST (5)).
+- `φ^{f,F}` as an adelic metric.
+- `φ^{f,F}` is semipositive.
+- The curvature of `φ^{f,F}` is ρ_f.
+- `h_{φ^{f,F}}` = ĥ_f.
+- `φ^{f,aF}` = `φ^{f,F}` + log|a|_v/(d − 1).
+- `φ^{f,F}_v` = 0 where F has good reduction.
+- `−log‖x₁‖_{f,v}(f(z))` = `d·(−log‖x₁‖_{f,v}(z))` − log|F₁(z, 1)|_v (the invariance ‖s∘f‖ = Π‖s_j‖ of PST (5)).
 
 **Checks.**
 
-- `RationalMap.test_canonicalMetric_pow`: For f = z^d with F = (x₀^d, x₁^d) the canonical metric is the standard metric, and its height is NumberField.absLogHeight₁.
-- `RationalMap.test_canonicalMetric_smul`: Scaling the lift by a ∈ K^× twists φ_v by log|a|_v/(d − 1) and leaves the height unchanged.
-- **`RationalMap.test_canonicalMetric_quadratic`** (computation): For f = z² + c and a finite place with |c|_v > 1, φ_v(0) = ½ log|c|_v.
-- **`RationalMap.test_canonicalMetric_not_standard`** (non-example): For f = z² + c with c ∉ `O_{K,v}` at some finite place, the canonical metric is not the standard metric.
+- For f = z^d with F = (x₀^d, x₁^d) the canonical metric is the standard metric, and its height is NumberField.absLogHeight₁.
+- Scaling the lift by a ∈ K^× twists φ_v by log|a|_v/(d − 1) and leaves the height unchanged.
+- For f = z² + c and a finite place with |c|_v > 1, φ_v(0) = ½ log|c|_v.
+- For f = z² + c with c ∉ `O_{K,v}` at some finite place, the canonical metric is not the standard metric.
 
 **Endpoint checks.** f = z^d with F = (x₀^d, x₁^d): φ = 0 and h = absLogHeight₁ = ĥ_f (ClassicalArithmeticCompletion §6.37). f = z² + c, F = (x₀² + c x₁², x₁²), finite place with |c|_v > 1: φ_v(0) = `G_{F,v}(0,` 1) = ½ log|c|_v ≠ 0.
 
@@ -6674,18 +6665,18 @@ At a finite place with η_v = 1 where every x ∈ F is v-integral, `ζ_{x,1}` = 
 
 Prove the following basic API.
 
-- `AdelicMeasure.ofFiniteSet`: `m_{F,η}` as an adelic measure.
-- `AdelicMeasure.ofFiniteSet_apply_eq_standard`: `m_{F,η,v}` = λ_v at every finite place with η_v = 1 at which all elements of F are integral.
-- `AdelicMeasure.ofFiniteSet_localHeight`: −log‖x₁‖_v = α_v + `|F|^{-1}Σ_{x∈F}` log max(|z − x|_v, η_v) with α_v = ½(m_v, m_v)_v.
-- `AdelicMeasure.ofFiniteSet_energy_le`: `(m_{F,η,v},` `m_{F,η,v})_v` ≤ ([F]_v, [F]_v)_v + (−log η_v)/|F|.
-- `AdelicMeasure.ofFiniteSet_selfPairing`: `h_{F,η}·h_{F,η}` = 0.
+- `m_{F,η}` as an adelic measure.
+- `m_{F,η,v}` = λ_v at every finite place with η_v = 1 at which all elements of F are integral.
+- −log‖x₁‖_v = α_v + `|F|^{-1}Σ_{x∈F}` log max(|z − x|_v, η_v) with α_v = ½(m_v, m_v)_v.
+- `(m_{F,η,v},` `m_{F,η,v})_v` ≤ ([F]_v, [F]_v)_v + (−log η_v)/|F|.
+- `h_{F,η}·h_{F,η}` = 0.
 
 **Checks.**
 
-- **`AdelicMeasure.test_ofFiniteSet_zero`** (degenerate): For F = {0} and η ≡ 1, `m_{F,η}` = λ.
-- **`AdelicMeasure.test_ofFiniteSet_energy_two_points`** (computation): For K = ℚ, F = {0, 1}, η_∞ = 1/4 and η_p = 1: `(m_{F,η,∞},` `m_{F,η,∞})_∞` = (log 4)/2.
-- **`AdelicMeasure.test_ofFiniteSet_not_adelic`** (non-example): If η_p = 1/2 for every prime p, the family ([F]`_{p,1/2})_p` is not an adelic measure.
-- `AdelicMeasure.test_ofFiniteSet_potential`: The potential of `m_{F,η,v}` at z ∈ K̄ is `|F|^{-1}Σ_{x∈F}` log max(|z − x|_v, η_v) − log⁺|z|_v.
+- For F = {0} and η ≡ 1, `m_{F,η}` = λ.
+- For K = ℚ, F = {0, 1}, η_∞ = 1/4 and η_p = 1: `(m_{F,η,∞},` `m_{F,η,∞})_∞` = (log 4)/2.
+- If η_p = 1/2 for every prime p, the family ([F]`_{p,1/2})_p` is not an adelic measure.
+- The potential of `m_{F,η,v}` at z ∈ K̄ is `|F|^{-1}Σ_{x∈F}` log max(|z − x|_v, η_v) − log⁺|z|_v.
 
 **Endpoint checks.** F = {0}, η ≡ 1: `m_{F,η}` = λ and `h_{F,η}` = h. Remark 7.2 of DKY: when Σ_v r_v α_v ≠ 0, `h_{F,η}` has positive essential minimum.
 
@@ -6747,21 +6738,21 @@ The canonical metrics have self-intersection 0 and curvatures ρ_f, ρ_g (The ca
 
 Prove the following basic API.
 
-- `RationalMap.azPairing`: ⟨f, g⟩ = ⟨ρ_f, ρ_g⟩.
-- `RationalMap.azPairing_comm`: ⟨f, g⟩ = ⟨g, f⟩.
-- `RationalMap.azPairing_self`: ⟨f, f⟩ = 0.
-- `RationalMap.azPairing_nonneg`: ⟨f, g⟩ ≥ 0.
-- `RationalMap.azPairing_eq_metric_pairing`: ⟨f, g⟩ = `Ō_{f,F}·Ō_{g,G}` for any lifts F, G.
-- `RationalMap.azPairing_sq_eq`: ⟨z², g⟩ = ĥ_g(∞) + Σ_v r_v ∫ log⁺|z|_v `dµ_{g,v}` (PST Proposition 16).
-- `RationalMap.azPairing_iterate`: For n ≥ 1, ⟨f^n,g⟩ = ⟨f,g⟩.
-- `RationalMap.azPairing_conj`: `⟨γ^{-1}fγ,` `γ^{-1}gγ⟩` = ⟨f, g⟩ for γ ∈ PGL₂(K).
+- ⟨f, g⟩ = ⟨ρ_f, ρ_g⟩.
+- ⟨f, g⟩ = ⟨g, f⟩.
+- ⟨f, f⟩ = 0.
+- ⟨f, g⟩ ≥ 0.
+- ⟨f, g⟩ = `Ō_{f,F}·Ō_{g,G}` for any lifts F, G.
+- ⟨z², g⟩ = ĥ_g(∞) + Σ_v r_v ∫ log⁺|z|_v `dµ_{g,v}` (PST Proposition 16).
+- For n ≥ 1, ⟨f^n,g⟩ = ⟨f,g⟩.
+- `⟨γ^{-1}fγ,` `γ^{-1}gγ⟩` = ⟨f, g⟩ for γ ∈ PGL₂(K).
 
 **Checks.**
 
-- **`RationalMap.test_azPairing_pow`** (degenerate): ⟨z², z³⟩ = 0.
-- **`RationalMap.test_azPairing_translate_two`** (computation): For σ(z) = z² and σ₂(z) = 2 − (2 − z)² over ℚ, ⟨σ, σ₂⟩ = log 2 (PST Proposition 18(c): |2| ≥ 2 at the infinite place, so the pairing is h(2)).
-- **`RationalMap.test_azPairing_translate_one`** (computation): ⟨z², 1 − (1 − z)²⟩ = (3√3/4π) `Σ_{n≥1}` χ₋₃(n) `n^{-2}.`
-- **`RationalMap.test_azPairing_zero_not_eq`** (non-example): ⟨f, g⟩ = 0 does not imply f = g: ⟨z², z³⟩ = 0.
+- ⟨z², z³⟩ = 0.
+- For σ(z) = z² and σ₂(z) = 2 − (2 − z)² over ℚ, ⟨σ, σ₂⟩ = log 2 (PST Proposition 18(c): |2| ≥ 2 at the infinite place, so the pairing is h(2)).
+- ⟨z², 1 − (1 − z)²⟩ = (3√3/4π) `Σ_{n≥1}` χ₋₃(n) `n^{-2}.`
+- ⟨f, g⟩ = 0 does not imply f = g: ⟨z², z³⟩ = 0.
 
 **Endpoint checks.** ⟨z², z³⟩ = 0 (both canonical adelic measures are λ). ⟨z², 1 − (1 − z)²⟩ = (3√3/4π) L(2, χ₋₃) ≈ 0.323067 (PST Proposition 18(d)).
 
@@ -6977,25 +6968,25 @@ Structure with two fields (V, parent); ancestor by recursion on j; children as a
 
 Prove the following basic API.
 
-- `LevelTower.ancestor`: For k, j ∈ ℕ, the ancestor map `V_{k+j}` → V_k, π_k ∘ ⋯ ∘ `π_{k+j−1}.`
-- `LevelTower.ancestor_zero`: The ancestor map with j = 0 is the identity.
-- `LevelTower.ancestor_succ`: ancestor k (j + 1) x = ancestor k j `(π_{k+j}` x).
-- `LevelTower.children`: The children of v ∈ V_n: the subset `π_n^{-1}(v)` of `V_{n+1}.`
-- `LevelTower.IsRegular`: T is d-regular: Nat.card V_0 = 1, every V_n is finite, and every vertex has exactly d children.
-- `LevelTower.card_level_of_isRegular`: If T is d-regular then Nat.card V_n = dⁿ for every n.
-- `LevelTower.parent_surjective_of_isRegular`: If T is d-regular with d ≥ 1, every parent map π_n is surjective.
-- `LevelTower.Hom`: Morphisms of level towers: levelwise maps commuting with the corresponding maps.
-- `LevelTower.Iso`: Isomorphisms of level towers: levelwise bijections commuting with the corresponding maps.
-- `LevelTower.Iso.refl`: The identity isomorphism of T.
-- `LevelTower.Iso.symm`: The inverse of an isomorphism (levelwise inverse bijections).
-- `LevelTower.Iso.trans`: The composite of two isomorphisms.
+- For k, j ∈ ℕ, the ancestor map `V_{k+j}` → V_k, π_k ∘ ⋯ ∘ `π_{k+j−1}.`
+- The ancestor map with j = 0 is the identity.
+- ancestor k (j + 1) x = ancestor k j `(π_{k+j}` x).
+- The children of v ∈ V_n: the subset `π_n^{-1}(v)` of `V_{n+1}.`
+- T is d-regular: Nat.card V_0 = 1, every V_n is finite, and every vertex has exactly d children.
+- If T is d-regular then Nat.card V_n = dⁿ for every n.
+- If T is d-regular with d ≥ 1, every parent map π_n is surjective.
+- Morphisms of level towers: levelwise maps commuting with the corresponding maps.
+- Isomorphisms of level towers: levelwise bijections commuting with the corresponding maps.
+- The identity isomorphism of T.
+- The inverse of an isomorphism (levelwise inverse bijections).
+- The composite of two isomorphisms.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.LevelTower.test_card_binary`** (computation): If T is 2-regular then Nat.card V_3 = 8.
-- **`TauCeti.ArithmeticDynamics.LevelTower.test_degree_one`** (degenerate): If T is 1-regular then every level has exactly one element.
-- **`TauCeti.ArithmeticDynamics.LevelTower.test_not_regular`** (non-example): The tower with V_n = Fin (n + 1) and every parent map constant equal to the last vertex is not d-regular for any d (vertex 0 of level 1 has no children, the last vertex of level 1 has three).
-- `TauCeti.ArithmeticDynamics.LevelTower.test_ancestor_one`: The ancestor one level down is the corresponding: ancestor k 1 x = π_k x.
+- If T is 2-regular then Nat.card V_3 = 8.
+- If T is 1-regular then every level has exactly one element.
+- The tower with V_n = Fin (n + 1) and every parent map constant equal to the last vertex is not d-regular for any d (vertex 0 of level 1 has no children, the last vertex of level 1 has three).
+- The ancestor one level down is the corresponding: ancestor k 1 x = π_k x.
 
 **Endpoint checks.** A 2-regular tower has 8 vertices at level 3; a 1-regular tower has one vertex at each level. The tower with levels Fin (n + 1) and every vertex sent to the last vertex below is regular of no degree.
 
@@ -7057,18 +7048,18 @@ Definition over Nat.divisors with integer exponents μ(n/d) (ArithmeticFunction.
 
 Prove the following basic API.
 
-- `mobiusQuotient`: b_n = `∏_{d ∣ n}` `c_d^{μ(n/d)}.`
-- `mobiusQuotient_one`: b_1 = c_1.
-- `prod_mobiusQuotient`: If c_n ≠ 0 for n ≥ 1 then `∏_{d ∣ n}` b_d = c_n for n ≥ 1 (Möbius inversion).
-- `mobiusQuotient_prime`: For p prime, b_p = c_p / c_1.
-- `mobiusQuotient_map`: Möbius quotients commute with field homomorphisms applied termwise.
+- b_n = `∏_{d ∣ n}` `c_d^{μ(n/d)}.`
+- b_1 = c_1.
+- If c_n ≠ 0 for n ≥ 1 then `∏_{d ∣ n}` b_d = c_n for n ≥ 1 (Möbius inversion).
+- For p prime, b_p = c_p / c_1.
+- Möbius quotients commute with field homomorphisms applied termwise.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.mobiusQuotient.test_x_sq_add_one`** (computation): For c = Stoll's sequence of x² + 1 (cast to ℚ): b_2 = −2 and b_4 = 13.
-- **`TauCeti.ArithmeticDynamics.mobiusQuotient.test_constant`** (degenerate): For the constant sequence 1, every b_n = 1.
-- **`TauCeti.ArithmeticDynamics.mobiusQuotient.test_not_consecutive`** (non-example): For a nowhere-vanishing c, b_6 = c_6 c_1 / (c_2 c_3) (not c_6 / c_5).
-- `TauCeti.ArithmeticDynamics.mobiusQuotient.test_inversion`: For a nowhere-vanishing c, b_1 b_2 b_4 = c_4.
+- For c = Stoll's sequence of x² + 1 (cast to ℚ): b_2 = −2 and b_4 = 13.
+- For the constant sequence 1, every b_n = 1.
+- For a nowhere-vanishing c, b_6 = c_6 c_1 / (c_2 c_3) (not c_6 / c_5).
+- For a nowhere-vanishing c, b_1 b_2 b_4 = c_4.
 
 **Endpoint checks.** For Stoll's sequence of x² + 1 (c = −1, 2, 5, 26, …): b_2 = −2, b_4 = 13. For the constant sequence 1 all Möbius quotients are 1.
 
@@ -7090,9 +7081,9 @@ Choose a prime 𝔓 of 𝓞_L above p; the 𝔓-adic valuation restricts to e(�
 
 ### 5.6a Critical divisors for separable rational maps in every characteristic
 
-For a separable rational map f=A/B on ℙ¹_K of degree d≥1 over any field K, define `RationalMap.separableCriticalDivisor` as the effective divisor over K, equivalently its full geometric multiset over K̄, from the degree-(2d−2) homogenization of A′B−AB′, using coprime numerator and denominator of maximum degree d. Separability makes this polynomial nonzero. Equivalently it is the zero divisor of f*Ω¹→Ω¹; its local multiplicity is the different exponent, which is e_P(f)−1 at tame points but can be larger at wild points. This extends §0.31's characteristic-zero critical multiset: its Jacobian is d times this form, so prove `separableCriticalDivisor_eq_criticalPoints` in characteristic zero (Juul §2, Lemmas 2.6–2.10; §3, Theorem 3.1).
+For a separable rational map f=A/B on ℙ¹_K of degree d≥1 over any field K, define rational Map separable Critical Divisor as the effective divisor over K, equivalently its full geometric multiset over K̄, from the degree-(2d−2) homogenization of A′B−AB′, using coprime numerator and denominator of maximum degree d. Separability makes this polynomial nonzero. Equivalently it is the zero divisor of f*Ω¹→Ω¹; its local multiplicity is the different exponent, which is e_P(f)−1 at tame points but can be larger at wild points. This extends §0.31's characteristic-zero critical multiset: its Jacobian is d times this form, so prove the comparison with the critical-point divisor in characteristic zero (Juul §2, Lemmas 2.6–2.10; §3, Theorem 3.1).
 
-Prove `separableCriticalDivisor_lift_independent`, `separableCriticalDivisor_baseChange`, `separableCriticalDivisor_degree` (degree 2d−2), `separableCriticalDivisor_conjugate`, and `separableCriticalDivisor_comp`: R_(f∘g)=R_g+g*R_f for separable f,g. Prove the affine derivative criterion and the corresponding reciprocal-chart criterion, including poles and infinity. These give `rationalMap_branchSupport_iterate`: the branch points of f^[n] lie among the first n forward images of the critical support. Use this divisor throughout the arbitrary-characteristic Juul targets; the raw homogeneous Jacobian in §0.31 cannot detect it when the characteristic divides d.
+Prove lift independence, compatibility with base change, degree 2d−2, conjugacy invariance and the composition formula for the separable critical divisor: R_(f∘g)=R_g+g*R_f for separable f,g. Prove the affine derivative criterion and the corresponding reciprocal-chart criterion, including poles and infinity. These give the iterated branch-support bound: the branch points of f^[n] lie among the first n forward images of the critical support. Use this divisor throughout the arbitrary-characteristic Juul targets; the raw homogeneous Jacobian in §0.31 cannot detect it when the characteristic divides d.
 
 **Checks.**
 
@@ -7108,9 +7099,9 @@ Let k be an algebraically closed field of any characteristic, A = k[u] a polynom
 
 Any characteristic; A[θ] integrally closed; 𝔭 exactly divides Disc(P).
 
-Prove `discriminantInertia_transposition` by the discriminant-ideal identity, the different bound and the inertia-orbit decomposition, in the hypotheses of Juul Lemmas 2.4, 2.6, 2.7 and Corollary 2.8, pp.5–6. Consume AlgebraicCurves Layer 6 integral bases and monogenic Kummer theorem, Layer 7 the different/discriminant comparison and bound, and Layer 8 inertia orbits and composita in their arbitrary-characteristic forms. Only the resulting discriminant-to-permutation assertions are targets here. Prove also `discriminantInertia_charTwo`: in characteristic 2, discriminant valuation exactly 2 permits only one transposition or one 3-cycle on the roots (Juul Corollary 2.9, p.6). If the reduction of P is cube-free, exclude the 3-cycle by the prime-factor/inertia-orbit correspondence, obtaining a transposition. This supplies wild inertia as well as tame cases, rather than applying a tame different equality in characteristic 2.
+Prove the discriminant transposition criterion by the discriminant-ideal identity, the different bound and the inertia-orbit decomposition, in the hypotheses of Juul Lemmas 2.4, 2.6, 2.7 and Corollary 2.8, pp.5–6. Consume AlgebraicCurves Layer 6 integral bases and monogenic Kummer theorem, Layer 7 the different/discriminant comparison and bound, and Layer 8 inertia orbits and composita in their arbitrary-characteristic forms. Only the resulting discriminant-to-permutation assertions are targets here. Prove also the characteristic-two discriminant criterion: in characteristic 2, discriminant valuation exactly 2 permits only one transposition or one 3-cycle on the roots (Juul Corollary 2.9, p.6). If the reduction of P is cube-free, exclude the 3-cycle by the prime-factor/inertia-orbit correspondence, obtaining a transposition. This supplies wild inertia as well as tame cases, rather than applying a tame different equality in characteristic 2.
 
-Prove `inertiaRootOrbits`: over algebraically closed k, in a finite Galois splitting field M/F with intermediate root field L=M^H, inertia orbits on G/H correspond to places of L above the chosen place, of lengths e(P|p). Derive this root-permutation comparison from AlgebraicCurves Layers 6 and 8’s place action, stabilizers and inertia indices (Juul Lemma 2.4).
+Prove the comparison between inertia orbits and places: over algebraically closed k, in a finite Galois splitting field M/F with intermediate root field L=M^H, inertia orbits on G/H correspond to places of L above the chosen place, of lengths e(P|p). Derive this root-permutation comparison from AlgebraicCurves Layers 6 and 8’s place action, stabilizers and inertia indices (Juul Lemma 2.4).
 
 *Needs:* AlgebraicCurves Layers 6–8; `Algebra.IsUnramifiedIn`; `Ideal.Quotient.stabilizerHom`.
 
@@ -7152,17 +7143,17 @@ Definition by V n := Fin n → Fin d and parent := Fin.tail. regularTree_isRegul
 
 Prove the following basic API.
 
-- `regularTree_parent`: The corresponding of x : Fin (n+1) → Fin d in T^d is Fin.tail x.
-- `regularTree_isRegular`: T^d is d-regular.
-- `mem_children_regularTree_iff`: y is a child of x in T^d if and only if y = Fin.cons a x for some a ∈ Fin d.
-- `card_regularTree_V`: Nat.card of level n of T^d is dⁿ.
+- The corresponding of x : Fin (n+1) → Fin d in T^d is Fin.tail x.
+- T^d is d-regular.
+- y is a child of x in T^d if and only if y = Fin.cons a x for some a ∈ Fin d.
+- Nat.card of level n of T^d is dⁿ.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.regularTree.test_card_three`** (computation): Level 3 of T² has 8 vertices.
-- **`TauCeti.ArithmeticDynamics.regularTree.test_unary`** (degenerate): Every level of T¹ has one vertex.
-- **`TauCeti.ArithmeticDynamics.regularTree.test_parent_convention`** (non-example): The corresponding of the word ![0, 1] in T² is ![1] (the corresponding drops the letter at index 0; a definition by Fin.init would give ![0]).
-- `TauCeti.ArithmeticDynamics.regularTree.test_children`: Every vertex x of T^d has exactly d children.
+- Level 3 of T² has 8 vertices.
+- Every level of T¹ has one vertex.
+- The corresponding of the word ![0, 1] in T² is ![1] (the corresponding drops the letter at index 0; a definition by Fin.init would give ![0]).
+- Every vertex x of T^d has exactly d children.
 
 **Endpoint checks.** Nat.card of level 3 of T² is 8; every level of T¹ is a point. The corresponding of the word (0, 1) of T² is (1), not (0).
 
@@ -7182,25 +7173,25 @@ autSubgroup: the compatibility condition is closed under composition, identity a
 
 Prove the following basic API.
 
-- `LevelTower.autSubgroup`: The subgroup of ∏_n Perm(V_n) of families commuting with the corresponding maps.
-- `LevelTower.Aut`: Aut(T), the group underlying autSubgroup.
-- `LevelTower.levelHom`: The action of Aut(T) on level n, a homomorphism to Perm(V_n).
+- The subgroup of ∏_n Perm(V_n) of families commuting with the corresponding maps.
+- Aut(T), the group underlying autSubgroup.
+- The action of Aut(T) on level n, a homomorphism to Perm(V_n).
 - `LevelTower.Aut.ext_iff'`: σ = τ in Aut(T) if and only if levelHom n σ = levelHom n τ for every n.
-- `LevelTower.levelHom_parent`: π_n (levelHom (n+1) σ x) = levelHom n σ (π_n x).
-- **`LevelTower.Aut.isTopologicalGroup`** (instance): Aut(T) is a topological group.
-- `LevelTower.continuous_levelHom`: levelHom n is continuous for the discrete topology on Perm(V_n).
-- `LevelTower.isOpen_ker_levelHom`: If V_n is finite, the kernel of levelHom n is an open subgroup.
-- **`LevelTower.Aut.compactSpace`** (instance): If every level is finite, Aut(T) is compact.
-- **`LevelTower.Aut.totallyDisconnectedSpace`** (instance): Aut(T) is totally disconnected.
-- **`LevelTower.Aut.t2Space`** (instance): Aut(T) is Hausdorff.
-- `LevelTower.Iso.autCongr`: An isomorphism T ≅ T' induces Aut(T) ≃* Aut(T') by conjugation; it is compatible with refl, symm and trans.
+- π_n (levelHom (n+1) σ x) = levelHom n σ (π_n x).
+- Aut(T) is a topological group.
+- levelHom n is continuous for the discrete topology on Perm(V_n).
+- If V_n is finite, the kernel of levelHom n is an open subgroup.
+- If every level is finite, Aut(T) is compact.
+- Aut(T) is totally disconnected.
+- Aut(T) is Hausdorff.
+- An isomorphism T ≅ T' induces Aut(T) ≃* Aut(T') by conjugation; it is compatible with refl, symm and trans.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.LevelTower.Aut.test_unary_trivial`** (degenerate): Aut(T¹) is a subsingleton.
-- **`TauCeti.ArithmeticDynamics.LevelTower.Aut.test_level_one_surjective`** (computation): levelHom 1 : Aut(T²) → Perm(V_1) is surjective.
-- **`TauCeti.ArithmeticDynamics.LevelTower.Aut.test_non_automorphism`** (non-example): Equiv.swap ![0,0] ![0,1] is not in the range of levelHom 2 for T².
-- `TauCeti.ArithmeticDynamics.LevelTower.Aut.test_compact`: Aut(T²) is a compact space (so, with the two instances above, a profinite group in the sense of Mathlib's ProfiniteGrp).
+- Aut(T¹) is a subsingleton.
+- levelHom 1 : Aut(T²) → Perm(V_1) is surjective.
+- Equiv.swap ![0,0] ![0,1] is not in the range of levelHom 2 for T².
+- Aut(T²) is a compact space (so, with the two instances above, a profinite group in the sense of Mathlib's ProfiniteGrp).
 
 **Endpoint checks.** Aut(T¹) is trivial; Aut(T²) → Perm(V_1) is onto Perm(V_1) ≅ S_2; the transposition of the leaves (0,0), (0,1) of T², which have different parents, is not in the image of levelHom 2. Aut(T²) is compact.
 
@@ -7220,22 +7211,22 @@ Level n is the subtype {x // g^[n] x = α}; parent x := g x, with g^[n] (g x) = 
 
 Prove the following basic API.
 
-- `preimageTree`: T(g, α) for g : X → X and α ∈ X.
-- `polyPreimageTree`: T(f, α; L) for f ∈ K[x], α ∈ K, L a K-algebra field: the preimage tree of y ↦ f(y) on L at the image of α.
-- `preimageTree_parent_coe`: The corresponding of x ∈ `V_{n+1}` is g(x).
-- `preimageTree_ancestor_coe`: The ancestor at level k of x ∈ `V_{k+j}` is g^j(x).
-- **`preimageTree.uniqueLevelZero`** (instance): V_0 = {α}: level zero has a unique element.
-- `preimageTree.hom`: A map h : X → Y with h ∘ g = g' ∘ h and h(α) = α' induces a morphism T(g, α) → T(g', α').
-- `preimageTree.iso`: A bijection h with h ∘ g = g' ∘ h and h(α) = α' induces an isomorphism T(g, α) ≅ T(g', α').
-- `polyPreimageTree_mem_rootSet`: For deg f ≥ 1: x is at level n of T(f, α; L) iff x ∈ (fⁿ − α).rootSet L (Mathlib's Polynomial.rootSet).
+- T(g, α) for g : X → X and α ∈ X.
+- T(f, α; L) for f ∈ K[x], α ∈ K, L a K-algebra field: the preimage tree of y ↦ f(y) on L at the image of α.
+- The corresponding of x ∈ `V_{n+1}` is g(x).
+- The ancestor at level k of x ∈ `V_{k+j}` is g^j(x).
+- V_0 = {α}: level zero has a unique element.
+- A map h : X → Y with h ∘ g = g' ∘ h and h(α) = α' induces a morphism T(g, α) → T(g', α').
+- A bijection h with h ∘ g = g' ∘ h and h(α) = α' induces an isomorphism T(g, α) ≅ T(g', α').
+- For deg f ≥ 1: x is at level n of T(f, α; L) iff x ∈ (fⁿ − α).rootSet L (Mathlib's Polynomial.rootSet).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.preimageTree.test_roots_of_unity`** (computation): For g(z) = z² on ℂ and α = 1, Nat.card V_n = 2ⁿ.
-- **`TauCeti.ArithmeticDynamics.preimageTree.test_identity`** (degenerate): For g = id every level of T(id, α) has exactly one element.
-- **`TauCeti.ArithmeticDynamics.preimageTree.test_critical_collision`** (non-example): T(z ↦ z², 0) on ℂ is not 2-regular (0 is a critical value; each level is {0}).
-- `TauCeti.ArithmeticDynamics.preimageTree.test_rootSet`: For deg f ≥ 1, membership in level n of T(f, α; L) is membership in (fⁿ − α).rootSet L.
-- **`TauCeti.ArithmeticDynamics.preimageTree.test_constant_rootSet`** (non-example): For f = 0 and α = 0 over ℚ, the set-theoretic level 1 is all of ℚ, whereas Polynomial.rootSet (0 : ℚ[X]) ℚ is empty. Thus the rootSet comparison requires positive degree even though the self-map tree does not.
+- For g(z) = z² on ℂ and α = 1, Nat.card V_n = 2ⁿ.
+- For g = id every level of T(id, α) has exactly one element.
+- T(z ↦ z², 0) on ℂ is not 2-regular (0 is a critical value; each level is {0}).
+- For deg f ≥ 1, membership in level n of T(f, α; L) is membership in (fⁿ − α).rootSet L.
+- For f = 0 and α = 0 over ℚ, the set-theoretic level 1 is all of ℚ, whereas Polynomial.rootSet (0 : ℚ[X]) ℚ is empty. Thus the rootSet comparison requires positive degree even though the self-map tree does not.
 
 **Endpoint checks.** For z ↦ z² on ℂ and α = 1, level n is the set of 2ⁿ-th roots of unity and has 2ⁿ elements. For z ↦ z² on ℂ and α = 0 every level is {0}: the tree is not 2-regular (critical collision).
 
@@ -7256,8 +7247,6 @@ fⁿ − α splits over K̄ with roots z (f^n(z) = α); it is separable iff its 
 **Endpoint checks.** f = x² + 1 over ℚ, α = 0: the critical point 0 has orbit 1, 2, 5, 26, …, never 0, so every fⁿ is separable. f = x² − 2 over ℚ, α = 2: f(0) = −2, f²(0) = 2 = α, so f² − 2 is inseparable (it equals x²(x² − 4)).
 
 ### 5.13 The discriminant recursion for iterates
-
-The named signature is `discr_iterate_sub_succ`.
 
 Let K be a field, f ∈ K[x] of degree d with leading coefficient a and (d : K) ≠ 0, α ∈ K, and let R be the multiset of roots of f' in an algebraically closed L ⊇ K (the critical points with multiplicity). With Mathlib's discriminant Polynomial.discr and A = `(−1)^{d(d−1)/2}` d^d `a^{d−1}:` `Disc(f^{n+1}` − α) = `A^{dⁿ}` · `a^{(dⁿ − 1)(dⁿ⁺¹ + 1)}` · Disc(fⁿ − α)^d · `∏_{r ∈ R}` `(f^{n+1}(r)` − α). For monic f (a = 1) this is Aitken–Hajir–Maire's Proposition 3.2 (specialized at t = α); for a ≠ 1 the factor `a^{(dⁿ−1)(dⁿ⁺¹+1)}` corrects it ([Correction 32](#correction-32)).
 
@@ -7299,22 +7288,22 @@ truncAut: subgroup, as for autSubgroup, with the finitely many conditions k < n.
 
 Prove the following basic API.
 
-- `LevelTower.truncAut`: Aut(T_n) as a subgroup of `∏_{k ≤ n}` Perm(V_k).
-- `LevelTower.truncAut.restrict`: Restriction `Aut(T_{n+1})` → Aut(T_n).
-- `LevelTower.truncAut.toLevelPerm`: The action of Aut(T_n) on V_n.
-- `LevelTower.truncAut.toLevelPerm_injective`: If all parent maps are surjective, toLevelPerm is injective, so Aut(T_n) is a subgroup of Perm(V_n).
-- `LevelTower.Aut.truncate`: Truncation Aut(T) → Aut(T_n).
-- `LevelTower.Aut.truncate_surjective`: For a d-regular tower, truncation Aut(T) → Aut(T_n) is surjective.
-- `LevelTower.truncAut.restrict_surjective`: For a d-regular tower, restriction `Aut(T_{n+1})` → Aut(T_n) is surjective.
-- `LevelTower.levelSign`: For finite levels, χ_k : Aut(T_n) → ℤˣ, the sign of the permutation of V_k.
-- `LevelTower.Iso.truncAutCongr`: An isomorphism T ≅ T' induces Aut(T_n) ≃* Aut(T'_n), compatible with restrict and truncate.
+- Aut(T_n) as a subgroup of `∏_{k ≤ n}` Perm(V_k).
+- Restriction `Aut(T_{n+1})` → Aut(T_n).
+- The action of Aut(T_n) on V_n.
+- If all parent maps are surjective, toLevelPerm is injective, so Aut(T_n) is a subgroup of Perm(V_n).
+- Truncation Aut(T) → Aut(T_n).
+- For a d-regular tower, truncation Aut(T) → Aut(T_n) is surjective.
+- For a d-regular tower, restriction `Aut(T_{n+1})` → Aut(T_n) is surjective.
+- For finite levels, χ_k : Aut(T_n) → ℤˣ, the sign of the permutation of V_k.
+- An isomorphism T ≅ T' induces Aut(T_n) ≃* Aut(T'_n), compatible with restrict and truncate.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.LevelTower.truncAut.test_level_zero`** (degenerate): If Nat.card V_0 = 1 then Nat.card Aut(T_0) = 1.
-- **`TauCeti.ArithmeticDynamics.LevelTower.truncAut.test_card_binary_two`** (computation): Nat.card Aut(T²_2) = 8.
-- **`TauCeti.ArithmeticDynamics.LevelTower.truncAut.test_non_automorphism`** (non-example): Equiv.swap ![0,0] ![0,1] is not in the range of toLevelPerm for T² at n = 2.
-- `TauCeti.ArithmeticDynamics.LevelTower.truncAut.test_iteratedWreathProduct`: Aut(T²_n) ≃* IteratedWreathProduct (Multiplicative (ZMod 2)) n.
+- If Nat.card V_0 = 1 then Nat.card Aut(T_0) = 1.
+- Nat.card Aut(T²_2) = 8.
+- Equiv.swap ![0,0] ![0,1] is not in the range of toLevelPerm for T² at n = 2.
+- Aut(T²_n) ≃* IteratedWreathProduct (Multiplicative (ZMod 2)) n.
 
 **Endpoint checks.** Aut(T_0) of a rooted tree is trivial; |Aut(T²_2)| = 8 (the dihedral group of order 8); the transposition of two leaves of T² with different parents is not in the image of toLevelPerm. For the binary tree, Aut(T_n) ≅ IteratedWreathProduct (Multiplicative (ZMod 2)) n (Mathlib), of order `2^{2ⁿ−1}.`
 
@@ -7334,16 +7323,16 @@ None for the construction. The comparison with galActionHom needs fⁿ − α to
 
 Prove the following basic API.
 
-- `galoisTreeAction`: The homomorphism Gal(L/K) → Aut(T(f, α; L)).
-- `levelHom_galoisTreeAction_coe`: The action of σ on a level-n vertex x is σ(x) ∈ L.
-- `galActionHom_restrict_eq_galoisTreeAction`: If fⁿ − α splits over L then Polynomial.Gal.galActionHom (fⁿ − α) L (Polynomial.Gal.restrict _ L σ) x = σ x, the level-n action of σ.
+- The homomorphism Gal(L/K) → Aut(T(f, α; L)).
+- The action of σ on a level-n vertex x is σ(x) ∈ L.
+- If fⁿ − α splits over L then Polynomial.Gal.galActionHom (fⁿ − α) L (Polynomial.Gal.restrict _ L σ) x = σ x, the level-n action of σ.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.galoisTreeAction.test_conj`** (computation): For K = ℝ, L = ℂ, f = X², α = 1 and complex conjugation: the level-2 vertex i is sent to −i.
-- **`TauCeti.ArithmeticDynamics.galoisTreeAction.test_trivial`** (degenerate): For L = K, galoisTreeAction K K f α σ = 1.
-- **`TauCeti.ArithmeticDynamics.galoisTreeAction.test_nontrivial`** (non-example): For K = ℝ, L = ℂ, f = X² + 1, α = 0, complex conjugation acts nontrivially (it swaps ±i at level 1).
-- `TauCeti.ArithmeticDynamics.galoisTreeAction.test_galActionHom`: On level n the action equals Mathlib's galActionHom of fⁿ − α after Polynomial.Gal.restrict.
+- For K = ℝ, L = ℂ, f = X², α = 1 and complex conjugation: the level-2 vertex i is sent to −i.
+- For L = K, galoisTreeAction K K f α σ = 1.
+- For K = ℝ, L = ℂ, f = X² + 1, α = 0, complex conjugation acts nontrivially (it swaps ±i at level 1).
+- On level n the action equals Mathlib's galActionHom of fⁿ − α after Polynomial.Gal.restrict.
 
 **Endpoint checks.** K = ℝ, L = ℂ, f = x², α = 1: complex conjugation sends the level-2 vertex i to −i. L = K: the action is trivial.
 
@@ -7363,19 +7352,19 @@ Definition by cases on n = 1. adjustedCriticalOrbit_ne_zero_iff: for char K ≠ 
 
 Prove the following basic API.
 
-- `adjustedCriticalOrbit`: c_n for f, γ, α.
-- `adjustedCriticalOrbit_one`: c_1 = α − f(γ).
-- `adjustedCriticalOrbit_of_two_le`: c_n = fⁿ(γ) − α for n ≥ 2.
-- `adjustedCriticalOrbit_map`: c_n commutes with ring homomorphisms applied to f, γ, α.
-- `adjustedCriticalOrbit_ne_zero_iff`: For f = (x − γ)² + δ over a field of characteristic ≠ 2 and n ≥ 1: c_1, …, c_n ≠ 0 iff fⁿ − α is separable.
-- `adjustedCriticalOrbit_X_sq_add_succ`: For f = x² + a, γ = α = 0 and n ≥ 1: `c_{n+1}` = c_n² + a.
+- c_n for f, γ, α.
+- c_1 = α − f(γ).
+- c_n = fⁿ(γ) − α for n ≥ 2.
+- c_n commutes with ring homomorphisms applied to f, γ, α.
+- For f = (x − γ)² + δ over a field of characteristic ≠ 2 and n ≥ 1: c_1, …, c_n ≠ 0 iff fⁿ − α is separable.
+- For f = x² + a, γ = α = 0 and n ≥ 1: `c_{n+1}` = c_n² + a.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.adjustedCriticalOrbit.test_x_sq_add_one`** (computation): For x² + 1 over ℤ at 0: c_1, …, c_5 = −1, 2, 5, 26, 677.
-- **`TauCeti.ArithmeticDynamics.adjustedCriticalOrbit.test_power_map`** (degenerate): For x² at 0: c_n = 0 for all n ≥ 1.
-- **`TauCeti.ArithmeticDynamics.adjustedCriticalOrbit.test_sign`** (non-example): For x² + 1 at 0: c_1 = −1 ≠ 1 = f(0) (the sign of c_1 is not that of the critical value).
-- `TauCeti.ArithmeticDynamics.adjustedCriticalOrbit.test_stoll_recursion`: For x² + a at 0: c_1 = −a and `c_{n+1}` = c_n² + a for n ≥ 1 (Stoll's sequence).
+- For x² + 1 over ℤ at 0: c_1, …, c_5 = −1, 2, 5, 26, 677.
+- For x² at 0: c_n = 0 for all n ≥ 1.
+- For x² + 1 at 0: c_1 = −1 ≠ 1 = f(0) (the sign of c_1 is not that of the critical value).
+- For x² + a at 0: c_1 = −a and `c_{n+1}` = c_n² + a for n ≥ 1 (Stoll's sequence).
 
 **Endpoint checks.** x² + 1 at 0: c_1, …, c_5 = −1, 2, 5, 26, 677. x² + 5 at 0: c_1 = −5, c_2 = 30, c_3 = 905 = 5 · 181, c_4 = 819030 = 2 · 3 · 5 · 23 · 1187.
 
@@ -7383,7 +7372,7 @@ Applications include Jones, arboreal survey, Theorem 5.1, p. 26 — stability if
 
 ### 5.17a Polynomials without critical orbit relations in arbitrary characteristic
 
-For algebraically closed k, d≥2, N≥1 and (d,char k)≠(2,2), define `juulGoodPolynomial d N` on degree-d polynomials: in odd or zero characteristic f′ has distinct roots; in characteristic 2 it is a nonzero scalar times the square of a separable polynomial. All positive critical-orbit values through time N are pairwise distinct except for identical marked times and points. In characteristic 2 no fibre polynomial f−c is divisible by (X−b)³. If the positive characteristic divides d, also require f indecomposable as a rational function and deg f′=d−2. Prove `juulGoodPolynomial_open` and `juulGoodPolynomial_nonempty`; its critical-orbit separation and first-level inertia API are `juulGoodPolynomial_orbit_separation`, `juulGoodPolynomial_inertia_transposition` (Juul Definition 3.4, Lemma 3.6, pp.10–12; Theorem 3.7, pp.12–13).
+For algebraically closed k, d≥2, N≥1 and (d,char k)≠(2,2), define the following critical-orbit separation condition through level N on degree-d polynomials: in odd or zero characteristic f′ has distinct roots; in characteristic 2 it is a nonzero scalar times the square of a separable polynomial. All positive critical-orbit values through time N are pairwise distinct except for identical marked times and points. In characteristic 2 no fibre polynomial f−c is divisible by (X−b)³. If the positive characteristic divides d, also require f indecomposable as a rational function and deg f′=d−2. Prove juul Good Polynomial open and juul Good Polynomial nonempty; its critical-orbit separation and first-level inertia API are juul Good Polynomial orbit separation, juul Good Polynomial inertia transposition (Juul Definition 3.4, Lemma 3.6, pp.10–12; Theorem 3.7, pp.12–13).
 
 Construct the nonempty open locus by coefficient and critical-root parameter spaces. Treat the derivative-square locus in characteristic 2 and the derivative-degree and decomposition loci when the characteristic divides d separately, as in the proof of Lemma 3.6. In characteristic zero, the affine scaling/Taylor comparison avoids each of the finitely many critical-orbit equalities; that argument is a specialization of this target, not a proof in all characteristics.
 
@@ -7397,7 +7386,7 @@ Construct the nonempty open locus by coefficient and critical-root parameter spa
 
 ### 5.18 The first level over k(t) is the full symmetric group
 
-For algebraically closed k, d≥2 and f in the class `juulGoodPolynomial d N` of §5.17a, with N≥1, prove `juulFirstLevel_symmetric`: Gal(f(X)−t/k(t))=S_d. When char k≠2 and char k does not divide d, simple critical points and distinct critical values already suffice. At the remaining characteristics retain the square-derivative, cube-free-fibre and indecomposability hypotheses of that class (Juul Theorem 3.7, proof, pp.12–13; Proposition 3.2, pp.8–9).
+For algebraically closed k, d≥2 and f in the class the following critical-orbit separation condition through level N of §5.17a, with N≥1, prove the first-level symmetric-group theorem: Gal(f(X)−t/k(t))=S_d. When char k≠2 and char k does not divide d, simple critical points and distinct critical values already suffice. At the remaining characteristics retain the square-derivative, cube-free-fibre and indecomposability hypotheses of that class (Juul Theorem 3.7, proof, pp.12–13; Proposition 3.2, pp.8–9).
 
 Prove the inertia assertions using §5.7. If char k does not divide d, finite inertia generates a transitive group by §5.8 and tame infinity, hence S_d. If the characteristic divides d, indecomposability gives primitivity, and a transposition in a primitive group gives S_d (Juul Lemmas 2.12–2.14).
 
@@ -7633,18 +7622,18 @@ Definition: arborealRep := galoisTreeAction K (SeparableClosure K) f α; arborea
 
 Prove the following basic API.
 
-- `arborealRep`: ρ : Gal(K^sep/K) → Aut(T(f, α; K^sep)).
-- `arborealImage`: G_∞(f, α) = im ρ.
-- `levelImage`: G_n(f, α) = im(truncate_n ∘ ρ) ≤ Aut(T_n).
-- `card_levelImage`: If fⁿ − α is separable then |G_n(f, α)| = |Polynomial.Gal (fⁿ − α)|.
-- `levelImage_map_le`: For a field extension E/K and fⁿ − α separable for all n, there is a tree isomorphism T(f, α; E^sep) ≅ T(f, α; K^sep) carrying G_N over E into G_N over K.
+- ρ : Gal(K^sep/K) → Aut(T(f, α; K^sep)).
+- G_∞(f, α) = im ρ.
+- G_n(f, α) = im(truncate_n ∘ ρ) ≤ Aut(T_n).
+- If fⁿ − α is separable then |G_n(f, α)| = |Polynomial.Gal (fⁿ − α)|.
+- For a field extension E/K and fⁿ − α separable for all n, there is a tree isomorphism T(f, α; E^sep) ≅ T(f, α; K^sep) carrying G_N over E into G_N over K.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.arborealRep.test_x_sq_add_one_level_one`** (computation): levelImage ℚ (x² + 1) 0 1 = ⊤.
-- **`TauCeti.ArithmeticDynamics.arborealRep.test_sepClosed`** (degenerate): If K is separably closed then G_∞(f, α) = ⊥.
-- **`TauCeti.ArithmeticDynamics.arborealRep.test_chebyshev_not_maximal`** (non-example): levelImage ℚ (x² − 2) 0 2 ≠ ⊤ (the post-critically finite Chebyshev map; G_n is cyclic of order 2ⁿ).
-- `TauCeti.ArithmeticDynamics.arborealRep.test_card_gal`: Under separability, Nat.card G_n(f, α) = Nat.card (Polynomial.Gal (fⁿ − α)).
+- levelImage ℚ (x² + 1) 0 1 = ⊤.
+- If K is separably closed then G_∞(f, α) = ⊥.
+- levelImage ℚ (x² − 2) 0 2 ≠ ⊤ (the post-critically finite Chebyshev map; G_n is cyclic of order 2ⁿ).
+- Under separability, Nat.card G_n(f, α) = Nat.card (Polynomial.Gal (fⁿ − α)).
 
 **Endpoint checks.** For x² + 1 over ℚ at 0, G_1 = Aut(T_1) ≅ C_2 (x² + 1 is irreducible). For x² − 2 over ℚ at 0, G_2 ≠ Aut(T_2): the adjusted critical orbit c_1 = 2, c_2 = 2 has the square product c_1 c_2 = 4 (Stoll's criterion).
 
@@ -7678,21 +7667,21 @@ preimageField := IntermediateField.adjoin K (rootSet (fⁿ − α) K^sep). IsSpl
 
 Prove the following basic API.
 
-- `preimageField`: K_n as an intermediate field of K^sep/K.
-- `preimageFieldInfty`: K_∞ = ⨆_n K_n.
-- `preimageField_mono`: Under separability and deg f ≥ 1, K_n ≤ `K_{n+1}.`
-- `preimageField_isSplittingField`: If fⁿ − α is separable, K_n is a splitting field of fⁿ − α over K.
-- **`preimageField_isGalois`** (instance): If fⁿ − α is separable, K_n/K is Galois.
-- **`finiteDimensional_preimageField`** (instance): K_n/K is finite.
-- `relfinrank_preimageField_succ_le`: Under separability, [`K_{n+1}` : K_n] ≤ `(d!)^{dⁿ}` (relfinrank).
-- `fixingSubgroup_preimageField`: For deg f ≥ 1, the fixing subgroup of K_n is `ρ^{-1}(ker` levelHom n).
+- K_n as an intermediate field of K^sep/K.
+- K_∞ = ⨆_n K_n.
+- Under separability and deg f ≥ 1, K_n ≤ `K_{n+1}.`
+- If fⁿ − α is separable, K_n is a splitting field of fⁿ − α over K.
+- If fⁿ − α is separable, K_n/K is Galois.
+- K_n/K is finite.
+- Under separability, [`K_{n+1}` : K_n] ≤ `(d!)^{dⁿ}` (relfinrank).
+- For deg f ≥ 1, the fixing subgroup of K_n is `ρ^{-1}(ker` levelHom n).
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.preimageField.test_level_zero`** (degenerate): K_0 = ⊥ (= K).
-- **`TauCeti.ArithmeticDynamics.preimageField.test_squaring`** (computation): For f = x², α = 1 over ℚ: finrank ℚ K_2 = 2.
-- **`TauCeti.ArithmeticDynamics.preimageField.test_not_one_root`** (non-example): For f = x³, α = 2 over ℚ: finrank ℚ K_1 = 6 (the Galois closure, not ℚ(∛2) of degree 3).
-- `TauCeti.ArithmeticDynamics.preimageField.test_splittingField`: K_n is a splitting field of (x² + 1)ⁿ − 0 over ℚ in Mathlib's sense (IsSplittingField).
+- K_0 = ⊥ (= K).
+- For f = x², α = 1 over ℚ: finrank ℚ K_2 = 2.
+- For f = x³, α = 2 over ℚ: finrank ℚ K_1 = 6 (the Galois closure, not ℚ(∛2) of degree 3).
+- K_n is a splitting field of (x² + 1)ⁿ − 0 over ℚ in Mathlib's sense (IsSplittingField).
 
 **Endpoint checks.** K_0 = K; for z ↦ z² over ℚ at 1, K_2 = ℚ(i) of degree 2. For z ↦ z³ over ℚ at 2, K_1 is the splitting field of x³ − 2, of degree 6, not ℚ(∛2).
 
@@ -7802,9 +7791,9 @@ Let k be algebraically closed of any characteristic, f a separable rational map 
 
 Use a coordinate chart in which the marked critical images through N are finite. No tameness assumption is needed for this nonramification statement. Use AlgebraicCurves Layer 8, Composita, Stichtenoth Corollary 3.9.3, for finite separable extensions in every characteristic.
 
-The prime (f(a)−α_i) lies above f^[n+1](a)−t. By `rationalMap_branchSupport_iterate` (§5.6a), the latter point is not a branch point of the earlier splitting tower: the orbit-separation hypothesis excludes every earlier critical image. If a prime above it ramified in another next-level factor M_j, it would force α_j=f(b) for a critical point b. Projecting to the t-line gives f^[n+1](a)=f^[n+1](b), hence b=a. Two distinct roots α_i,α_j would then specialize to f(a), contradicting the already proved absence of earlier ramification. Apply `unramified_compositum` to all other factors (Juul Lemma 3.3, p.9). This uses branch-support containment, not an e−1 discriminant formula at wild points.
+The prime (f(a)−α_i) lies above f^[n+1](a)−t. By the iterated branch-support bound (§5.6a), the latter point is not a branch point of the earlier splitting tower: the orbit-separation hypothesis excludes every earlier critical image. If a prime above it ramified in another next-level factor M_j, it would force α_j=f(b) for a critical point b. Projecting to the t-line gives f^[n+1](a)=f^[n+1](b), hence b=a. Two distinct roots α_i,α_j would then specialize to f(a), contradicting the already proved absence of earlier ramification. Apply the unramified-compositum theorem to all other factors (Juul Lemma 3.3, p.9). This uses branch-support containment, not an e−1 discriminant formula at wild points.
 
-*Needs:* §5.6a `rationalMap_branchSupport_iterate`; §5.7 discriminant-to-inertia comparison; AlgebraicCurves Layer 8, Composita; [The fields K_n = `K(f^{-n}(α))` and K_∞](#537-the-fields-k_n--kf-nα-and-k_).
+*Needs:* §5.6a the iterated branch-support bound; §5.7 discriminant-to-inertia comparison; AlgebraicCurves Layer 8, Composita; [The fields K_n = `K(f^{-n}(α))` and K_∞](#537-the-fields-k_n--kf-nα-and-k_).
 
 ([juul-generic-iterates](#juul-generic-iterates), Lemma 3.3, p. 9 — The statement.)
 
@@ -7894,18 +7883,18 @@ Definition: ∀ n ≥ 1, Irreducible (fⁿ − C α). irreducible_iterate_of_le:
 
 Prove the following basic API.
 
-- `IsStableAt`: (f, α) is stable over K: fⁿ − α irreducible for all n ≥ 1.
-- `IsStableAt.irreducible_sub`: A stable pair has f − α irreducible.
-- `irreducible_iterate_of_le`: If deg f ≥ 1, 1 ≤ m ≤ n and fⁿ − α is irreducible then f^m − α is irreducible.
-- `isStableAt_iff_forall_transitive`: Under separability of all iterates, (f, α) is stable iff Gal(K^sep/K) acts transitively on every level n ≥ 1 of the preimage tree.
-- `isStableAt_conj_iff`: For u ∈ Kˣ, v ∈ K: (f, α) is stable iff (u⁻¹(f(ux + v) − v), u⁻¹(α − v)) is.
+- (f, α) is stable over K: fⁿ − α irreducible for all n ≥ 1.
+- A stable pair has f − α irreducible.
+- If deg f ≥ 1, 1 ≤ m ≤ n and fⁿ − α is irreducible then f^m − α is irreducible.
+- Under separability of all iterates, (f, α) is stable iff Gal(K^sep/K) acts transitively on every level n ≥ 1 of the preimage tree.
+- For u ∈ Kˣ, v ∈ K: (f, α) is stable iff (u⁻¹(f(ux + v) − v), u⁻¹(α − v)) is.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.IsStableAt.test_x_sq_add_one`** (computation): IsStableAt (x² + 1 : ℚ[x]) 0.
-- **`TauCeti.ArithmeticDynamics.IsStableAt.test_linear`** (degenerate): A polynomial ax + b with a ≠ 0 is stable at every α.
-- **`TauCeti.ArithmeticDynamics.IsStableAt.test_golden`** (non-example): For f = x² − x − 1 over ℚ: f² is irreducible but (f, 0) is not stable.
-- `TauCeti.ArithmeticDynamics.IsStableAt.test_jones_f_stable`: IsStableAt f α ↔ ∀ n ≥ 1, (X − C α) ∘ fⁿ is irreducible (Jones's 'X − α is f-stable', whose n = 0 condition is automatic).
+- IsStableAt (x² + 1 : ℚ[x]) 0.
+- A polynomial ax + b with a ≠ 0 is stable at every α.
+- For f = x² − x − 1 over ℚ: f² is irreducible but (f, 0) is not stable.
+- IsStableAt f α ↔ ∀ n ≥ 1, (X − C α) ∘ fⁿ is irreducible (Jones's 'X − α is f-stable', whose n = 0 condition is automatic).
 
 **Endpoint checks.** x² + 1 over ℚ at 0 is stable (Stoll, or Jones's criterion: −1, 2, 5, 26, … are non-squares). x² − x − 1 over ℚ at 0 is not stable, although f and f² are irreducible: f³ is a product of two irreducible quartics.
 
@@ -7941,7 +7930,7 @@ G_∞ is closed and is the inverse limit of the G_n (arboreal-image-inverse-limi
 
 ### 5.54 Juul's Theorem 3.1: full wreath image over k(t) from one clean critical orbit
 
-Let k be algebraically closed of any characteristic, φ a separable degree-d rational map with first-level Galois group S_d, N≥1, and a critical point a whose positive orbit values through N do not coincide with another critical orbit value at an earlier or equal time, except at the same point and time. If char k≠2 require multiplicity one at a; if char k=2 require the inertia above φ(a)−t to act by exactly one transposition. Prove `juulCleanOrbit_fullWreath`: the first N levels have full symmetric wreath image (Juul Theorem 3.1, pp.8–10).
+Let k be algebraically closed of any characteristic, φ a separable degree-d rational map with first-level Galois group S_d, N≥1, and a critical point a whose positive orbit values through N do not coincide with another critical orbit value at an earlier or equal time, except at the same point and time. If char k≠2 require multiplicity one at a; if char k=2 require the inertia above φ(a)−t to act by exactly one transposition. Prove the full-wreath-product conclusion for a clean critical orbit: the first N levels have full symmetric wreath image (Juul Theorem 3.1, pp.8–10).
 
 Use §5.45 to isolate the ramification in one next-level splitting field. Its inertia transposition survives over the compositum of the other splitting fields. A normal subgroup of S_d containing a transposition is S_d; this gives every next-level factor and hence the full kernel. The argument uses the actual inertia hypothesis in characteristic 2, rather than a discriminant-valuation-one substitute.
 
@@ -7966,16 +7955,16 @@ Definition: (∀ n, fⁿ − C α ≠ 0) ∧ ∃ B, ∀ n, card (factors (fⁿ �
 
 Prove the following basic API.
 
-- `IsEventuallyStableAt`: The number of irreducible factors (with multiplicity) of fⁿ − α is bounded in n. All these polynomials must be nonzero.
-- `IsStableAt.isEventuallyStableAt`: Stable pairs are eventually stable.
-- `isEventuallyStableAt_iff_of_le`: For deg f ≥ 1, eventual stability depends only on the factor counts of fⁿ − α for n ≥ N, for any N.
+- The number of irreducible factors (with multiplicity) of fⁿ − α is bounded in n. All these polynomials must be nonzero.
+- Stable pairs are eventually stable.
+- For deg f ≥ 1, eventual stability depends only on the factor counts of fⁿ − α for n ≥ N, for any N.
 
 **Checks.**
 
-- **`TauCeti.ArithmeticDynamics.IsEventuallyStableAt.test_stable`** (computation): (x² + 1, 0) over ℚ is eventually stable.
-- **`TauCeti.ArithmeticDynamics.IsEventuallyStableAt.test_power_map`** (non-example): (x², 0) over ℚ is not eventually stable.
-- **`TauCeti.ArithmeticDynamics.IsEventuallyStableAt.test_sixteen_ninths`** (computation): The third iterate of x² − 16/9 over ℚ has exactly four irreducible factors.
-- **`TauCeti.ArithmeticDynamics.IsEventuallyStableAt.test_zero_polynomial`** (non-example): The constant zero polynomial at α = 0 is not eventually stable, although Mathlib assigns its zero polynomial an empty factor multiset.
+- (x² + 1, 0) over ℚ is eventually stable.
+- (x², 0) over ℚ is not eventually stable.
+- The third iterate of x² − 16/9 over ℚ has exactly four irreducible factors.
+- The constant zero polynomial at α = 0 is not eventually stable, although Mathlib assigns its zero polynomial an empty factor multiset.
 
 **Endpoint checks.** x² − 16/9 over ℚ at 0: fⁿ has exactly four irreducible factors for n ≥ 3 (survey p. 27), so it is eventually stable but not stable. x² at 0: fⁿ = `x^{2ⁿ}` has 2ⁿ factors; not eventually stable.
 
@@ -8027,15 +8016,15 @@ The roots of f(x) = β are the d-th roots of β − b; for n ≥ 1, K_n contains
 
 Let d≥2 and k be any field with (d,char k)≠(2,2), and let s_0, …, `s_{d−1}` independent indeterminates, F = k(s_0, …, `s_{d−1})` and G(x) = x^d + `s_{d−1}x^{d−1}` + ⋯ + s_0 ∈ F[x]. Then for every n, G_n(G, 0) = Aut(T^d_n): the Galois group of Gⁿ(x) over F is the full iterated wreath product [S_d]^n; hence G_∞(G, 0) = Aut(T^d_∞).
 
-For the polynomial conclusion assume (d,char k)≠(2,2). For the generic rational function `Φ(X)=(X^d+s_{d−1}X^{d−1}+⋯+s₀)/(u_dX^d+⋯+u₀)`, with all coefficients independent, prove `genericRational_fullArboreal` over k(s,u) for every field k and d≥2: Gal(Φ^[n](X)/k(s,u))=[S_d]^n at each n. The polynomial theorem is `genericPolynomial_fullArboreal` with the stated exception.
+For the polynomial conclusion assume (d,char k)≠(2,2). For the generic rational function `Φ(X)=(X^d+s_{d−1}X^{d−1}+⋯+s₀)/(u_dX^d+⋯+u₀)`, with all coefficients independent, prove the generic rational-map arboreal theorem over k(s,u) for every field k and d≥2: Gal(Φ^[n](X)/k(s,u))=[S_d]^n at each n. The polynomial theorem is the generic polynomial arboreal theorem with the stated exception.
 
-Separability: Gⁿ is separable over F (it specializes to separable polynomials), so the tree is d-regular. Reduce to k algebraically closed: G_n over k̄(s) is contained in G_n over k(s) (level-image-base-change), so it suffices to prove maximality over k̄(s). Pick f₀ of degree d from §5.17a `juulGoodPolynomial_nonempty` (for N=n). Choose u≠0 with u^(d−1)=lc(f₀)⁻¹ and put f(X)=u⁻¹f₀(uX), which is monic; §5.22 transports the critical-orbit and inertia properties. Then first-level-symmetric gives G_1(f, t) = S_d, and juul-maximality-over-function-field gives G_n(f, t) = Aut(T_n) over k̄(t). g(x) = f(x + t) − t has gⁿ(x) = fⁿ(x + t) − t (shift-to-transcendental-root), so G_n(g, 0) = G_n(f, t) = Aut(T_n); g is the specialization of G at s_i ↦ coeff_i(g) ∈ k̄[t], and galois-specialization gives Aut(T_n) = G_n(g, 0) ≤ G_n(G, 0) ≤ Aut(T_n).
+Separability: Gⁿ is separable over F (it specializes to separable polynomials), so the tree is d-regular. Reduce to k algebraically closed: G_n over k̄(s) is contained in G_n over k(s) (level-image-base-change), so it suffices to prove maximality over k̄(s). Pick f₀ of degree d from §5.17a juul Good Polynomial nonempty (for N=n). Choose u≠0 with u^(d−1)=lc(f₀)⁻¹ and put f(X)=u⁻¹f₀(uX), which is monic; §5.22 transports the critical-orbit and inertia properties. Then first-level-symmetric gives G_1(f, t) = S_d, and juul-maximality-over-function-field gives G_n(f, t) = Aut(T_n) over k̄(t). g(x) = f(x + t) − t has gⁿ(x) = fⁿ(x + t) − t (shift-to-transcendental-root), so G_n(g, 0) = G_n(f, t) = Aut(T_n); g is the specialization of G at s_i ↦ coeff_i(g) ∈ k̄[t], and galois-specialization gives Aut(T_n) = G_n(g, 0) ≤ G_n(G, 0) ≤ Aut(T_n).
 
 *Needs:* [Juul's Theorem 3.1: full wreath image over k(t) from one clean critical orbit](#554-juuls-theorem-31-full-wreath-image-over-kt-from-one-clean-critical-orbit); [The first level over k(t) is the full symmetric group](#518-the-first-level-over-kt-is-the-full-symmetric-group); [Polynomials without critical orbit relations in arbitrary characteristic](#517a-polynomials-without-critical-orbit-relations-in-arbitrary-characteristic); [The shift g(x) = f(x + t) − t](#531-the-shift-gx--fx--t--t); [Galois groups of iterates do not grow under specialization](#539-galois-groups-of-iterates-do-not-grow-under-specialization); [Level images shrink under base extension](#538-level-images-shrink-under-base-extension); [Under non-collision the preimage tree is the complete d-ary tree](#528-under-non-collision-the-preimage-tree-is-the-complete-d-ary-tree).
 
 ([jones-arboreal-survey](#jones-arboreal-survey), §2.1, Theorem 2.1, p. 5 — The statement (Odoni 1985, Theorem I; the original is not openly available); [juul-generic-iterates](#juul-generic-iterates), §1, Theorem 1.1 and p. 2 — The proof followed here is Juul's, in arbitrary characteristic, with its quadratic-polynomial exception.)
 
-For the rational degree-two case in characteristic 2, construct the nonempty open locus of maps with a finite critical point and no marked orbit collisions through N (Juul Theorem 5.1 and Corollary 5.2, p.14). Apply the rational-map clean-orbit theorem and coefficient specialization. For generic quadratic polynomials in characteristic 2 prove `genericQuadratic_charTwo_image`: at positive level n the group is R_n⋊R_n× acting affinely on R_n=𝔽₂[Y]/(Y^n), by the additive operator X↦X²+sX (Juul Theorem 5.3, pp.15–16). Its order is 2^(2n−1), so it is not the full binary tree group for n≥3.
+For the rational degree-two case in characteristic 2, construct the nonempty open locus of maps with a finite critical point and no marked orbit collisions through N (Juul Theorem 5.1 and Corollary 5.2, p.14). Apply the rational-map clean-orbit theorem and coefficient specialization. For generic quadratic polynomials in characteristic 2 prove the generic quadratic image theorem in characteristic two: at positive level n the group is R_n⋊R_n× acting affinely on R_n=𝔽₂[Y]/(Y^n), by the additive operator X↦X²+sX (Juul Theorem 5.3, pp.15–16). Its order is 2^(2n−1), so it is not the full binary tree group for n≥3.
 
 **Endpoint checks.** In characteristic zero, d = 2: the generic quadratic x² + s_1x + s_0 has G_n = Aut(T²_n) for all n (equivalently, by conjugation, x² + t over k(t) has maximal image). n = 1: the generic polynomial has Galois group S_d (classical).
 
@@ -8099,6 +8088,8 @@ a ∈ ℤ, −a not a square (this is also the irreducibility of every f_n with 
 
 ### 5.64 Stoll's theorem: surjective arboreal representations for x² + a over ℚ
 
+The headline `stoll_integer_family_card_gal` states the finite-level theorem on the native polynomial splitting-field Galois group: for every integer a in the three families below and every n ≥ 0, the Galois group of the n-fold compositional iterate of X² + a over ℚ has order 2^(2^n − 1). The inequalities, congruences and nonsquare condition are explicit hypotheses; at n = 0 the polynomial is X and the order is 1.
+
 Let a ∈ ℤ with (a) a > 0 and a ≡ 1 (mod 4), or (b) a > 0 and a ≡ 2 (mod 4), or (c) a < 0, a ≡ 0 (mod 4) and −a not a square. Then for f = x² + a over ℚ and α = 0, G_n(f, 0) = Aut(T_n) for every n ≥ 1; equivalently the arboreal representation ρ : Gal(ℚ^sep/ℚ) → Aut(T²_∞) is surjective.
 
 One of (a), (b), (c).
@@ -8115,7 +8106,7 @@ In all cases −a is not a square. Rescale: g := |a| x² + sgn(a), an even integ
 
 For f = x² + 1 over ℚ and α = 0: (i) the critical point 0 has orbit 1, 2, 5, 26, 677, … which never meets 0, so every fⁿ is separable and T(f, 0; ℚ^sep) ≅ T²; (ii) the adjusted critical orbit is c = −1, 2, 5, 26, 677, 458330, …; (iii) G_1 = Aut(T_1) ≅ C_2, G_2 = Aut(T_2) ≅ D_4 of order 8, G_3 = Aut(T_3) of order 128, and in general G_n = Aut(T_n) of order `2^{2ⁿ−1}` for every n ≥ 1; (iv) ρ : Gal(ℚ^sep/ℚ) → Aut(T²_∞) is surjective. Every level is covered by the proven statement (iii) — nothing is inferred from finitely many computations.
 
-The finite-level headline is `stoll_X_sq_add_one_card_gal`: for every n≥0, `Nat.card (Polynomial.Gal ((X^2+1 : ℚ[X]).comp^[n] X)) = 2^(2^n-1)`. At n=0 the polynomial is X and its Galois group is trivial.
+The finite-level specialization of `stoll_integer_family_card_gal` at a = 1 gives for every n≥0, `Nat.card (Polynomial.Gal ((X^2+1 : ℚ[X]).comp^[n] X)) = 2^(2^n-1)`. At n=0 the polynomial is X and its Galois group is trivial.
 
 (i): the orbit is positive from index 1 on (critical-orbit-positivity), so no collision (separable-iterates-criterion); preimage-tree-regular. (ii): adjustedCriticalOrbit_X_sq_add_succ. (iii) for all n: stoll-integer-families, case (a) with a = 1. The three first levels also follow directly from stoll-maximality-criterion: −1; −1, 2; −1, 2, 5 are 2-independent (a negative number and distinct primes); orders from [5.29 The order of Aut(T_n)](#529-the-order-of-autt_n). (iv): arboreal-image-inverse-limit.
 
@@ -8143,7 +8134,7 @@ Applications include [Uniform hybrid escape potentials for meromorphic families]
 
 Power and Lattès maps test the earlier layers. Family heights and specialization feed critical-height and Legendre estimates. The embedding route constructs arbitrary-field integral presentations and transports a primitive root before producing the p-adic model for étale DML. Hybrid, activity, classification and representative-height suppliers keep their open proof leaves.
 
-Define `hybridProjectiveLine` and its model functions by the preceding construction. Prove `hybridProjectiveLine_fibre`, `hybridModelFunctions_dense`, `hybridCurvature_uniformLimit`.
+Construct the hybrid projective line and its model functions; identify its fibres, prove density of model functions, and prove curvature convergence under uniform limits on the stated admissible domain.
 
 **Checks.**
 
@@ -8165,24 +8156,24 @@ Degrees: Φ_n has degree n² and leading coefficient 1 (WeierstrassCurve.natDegr
 
 Prove the following basic API.
 
-- `lattesMap_apply`: For x in F: `f_{E,n}(x)` = Φ_n(x)/ΨSq_n(x) if ΨSq_n(x) ≠ 0 and `f_{E,n}(x)` = ∞ otherwise; `f_{E,n}(∞)` = ∞.
-- `lattesMap_degree`: deg `f_{E,n}` = n² for n ≠ 0.
-- `lattesMap_neg`: `f_{E,−n}` = `f_{E,n}` (WeierstrassCurve.Φ_neg, WeierstrassCurve.ΨSq_neg).
-- `lattesMap_one`: `f_{E,1}` = id.
-- `lattesMap_two`: `f_{E,2}(x)` = (x⁴ − b₄x² − 2b₆x − b₈)/(4x³ + b₂x² + 2b₄x + b₆).
-- `lattesMap_resultant_two`: The resultant of (Φ_2, ΨSq_2) is Δ(E)², so an integral model with unit discriminant has good reduction in these coordinates at every residue characteristic. Abstract good reduction of E gives this conclusion in the coordinates of a good integral model.
-- `lattesMap_map`: For a field homomorphism σ : F → L, `f_{σ(E),n}` = `σ(f_{E,n})` (WeierstrassCurve.map_Φ, WeierstrassCurve.map_ΨSq).
-- `lattesMap_iterate`: `f_{E,n}^k` = `f_{E,n^k}` as rational maps (from Composition of Lattès maps: `f_{E,m}` ∘ `f_{E,n}` = `f_{E,mn}).`
-- `lattesMap_isFixedPt_infty`: ∞ is a fixed point of `f_{E,n}.`
+- For x in F: `f_{E,n}(x)` = Φ_n(x)/ΨSq_n(x) if ΨSq_n(x) ≠ 0 and `f_{E,n}(x)` = ∞ otherwise; `f_{E,n}(∞)` = ∞.
+- deg `f_{E,n}` = n² for n ≠ 0.
+- `f_{E,−n}` = `f_{E,n}` (WeierstrassCurve.Φ_neg, WeierstrassCurve.ΨSq_neg).
+- `f_{E,1}` = id.
+- `f_{E,2}(x)` = (x⁴ − b₄x² − 2b₆x − b₈)/(4x³ + b₂x² + 2b₄x + b₆).
+- The resultant of (Φ_2, ΨSq_2) is Δ(E)², so an integral model with unit discriminant has good reduction in these coordinates at every residue characteristic. Abstract good reduction of E gives this conclusion in the coordinates of a good integral model.
+- For a field homomorphism σ : F → L, `f_{σ(E),n}` = `σ(f_{E,n})` (WeierstrassCurve.map_Φ, WeierstrassCurve.map_ΨSq).
+- `f_{E,n}^k` = `f_{E,n^k}` as rational maps (from Composition of Lattès maps: `f_{E,m}` ∘ `f_{E,n}` = `f_{E,mn}).`
+- ∞ is a fixed point of `f_{E,n}.`
 
 **Checks.**
 
-- **`lattesMap_two_y2_eq_x3_sub_x`** (computation): For E : y² = x³ − x over ℚ, `f_{E,2}(x)` = (x² + 1)²/(4x(x² − 1)); in particular `f_{E,2}(2)` = 25/24.
+- For E : y² = x³ − x over ℚ, `f_{E,2}(x)` = (x² + 1)²/(4x(x² − 1)); in particular `f_{E,2}(2)` = 25/24.
 - For E:y²+y=x³ the discriminant is −27 and the doubling lift (X⁴−2XZ³,4X³Z+Z⁴) has resultant 729, a unit at 2. Excluding residue characteristic 2 is unnecessary.
 - At 5, y²+125y=x³ is isomorphic to that good curve, but its normalized lift (X⁴−31250XZ³,4X³Z+15625Z⁴) has resultant 729·5²⁴. Good reduction of the abstract curve does not imply good reduction in this x-coordinate.
-- **`lattesMap_one_eq_id`** (degenerate): `f_{E,1}` and `f_{E,−1}` are the identity rational map.
-- `lattesMap_apply_xCoord`: For P = (x₀, y₀) ∈ E(F) with nP = (x₁, y₁) affine, `f_{E,n}(x₀)` = x₁ = x₁ · ΨSq_n(x₀)/ΨSq_n(x₀), matching Tau Ceti WeierstrassCurve.mul_eval_ΨSq_eq_eval_Φ_of_zsmul.
-- **`lattesMap_not_of_singular`** (non-example): For the singular cubic y² = x³ over ℚ (Δ = 0), Φ_2 = X⁴ and ΨSq_2 = 4X³ are not coprime, so the pair does not define a degree-4 map (it reduces to x ↦ x/4).
+- `f_{E,1}` and `f_{E,−1}` are the identity rational map.
+- For P = (x₀, y₀) ∈ E(F) with nP = (x₁, y₁) affine, `f_{E,n}(x₀)` = x₁ = x₁ · ΨSq_n(x₀)/ΨSq_n(x₀), matching Tau Ceti WeierstrassCurve.mul_eval_ΨSq_eq_eval_Φ_of_zsmul.
+- For the singular cubic y² = x³ over ℚ (Δ = 0), Φ_2 = X⁴ and ΨSq_2 = 4X³ are not coprime, so the pair does not define a degree-4 map (it reduces to x ↦ x/4).
 
 **Endpoint checks.** E : y² = x³ − x over ℚ: `f_{E,2}(x)` = (x² + 1)²/(4x(x² − 1)), with `f_{E,2}(0)` = `f_{E,2}(±1)` = ∞ (the 2-torsion) and `f_{E,2}(∞)` = ∞. The Legendre curve E_t: `f_{E_t,2}` = (x² − t)²/(4x(x − 1)(x − t)), the map (2.1) of DeMarco–Krieger–Ye (The Legendre curve E_t and its Lattès map f_t). deg `f_{E,3}` = 9: Φ_3 has degree 9 and ΨSq_3 = Ψ₃² has degree 8 in characteristic zero; that denominator degree may drop in positive characteristic.
 
@@ -8216,19 +8207,19 @@ supp Crit(f) is finite (The critical points of a rational map, with multiplicity
 
 Prove the following basic API.
 
-- `postcriticalSet`: PC(f) = `⋃_{n ≥ 1}` fⁿ(supp Crit(f)).
-- `IsPostcriticallyFinite`: Every critical point of f is preperiodic.
-- `isPostcriticallyFinite_iff_finite`: f is PCF iff PC(f) is finite.
-- `IsPostcriticallyFinite.conj`: PCF is invariant under conjugation by PGL₂(K̄).
-- `isPostcriticallyFinite_iterate_iff`: f is PCF iff fⁿ is PCF (n ≥ 1), by The critical points of a rational map, with multiplicity criticalPoints_iterate.
-- `IsPostcriticallyFinite.map`: PCF is preserved by field embeddings.
+- PC(f) = `⋃_{n ≥ 1}` fⁿ(supp Crit(f)).
+- Every critical point of f is preperiodic.
+- f is PCF iff PC(f) is finite.
+- PCF is invariant under conjugation by PGL₂(K̄).
+- f is PCF iff fⁿ is PCF (n ≥ 1), by The critical points of a rational map, with multiplicity criticalPoints_iterate.
+- PCF is preserved by field embeddings.
 
 **Checks.**
 
-- **`isPCF_sq_sub_two`** (computation): z² − 2 over ℚ is postcritically finite, with PC = {−2, 2, ∞}.
-- **`isPCF_powerMap`** (degenerate): P_d (d ≥ 2) is PCF: its critical points 0 and ∞ are fixed, and PC(P_d) = {0, ∞}.
-- `isPCF_legendreLattesMap`: The Legendre maps f_t are PCF with PC(f_t) = {0, 1, t, ∞} (Flexible Lattès maps are postcritically finite).
-- **`not_isPCF_sq_add_one`** (non-example): z² + 1 over ℚ is not PCF: the orbit 0, 1, 2, 5, 26, … of the critical point 0 is infinite.
+- z² − 2 over ℚ is postcritically finite, with PC = {−2, 2, ∞}.
+- P_d (d ≥ 2) is PCF: its critical points 0 and ∞ are fixed, and PC(P_d) = {0, ∞}.
+- The Legendre maps f_t are PCF with PC(f_t) = {0, 1, t, ∞} (Flexible Lattès maps are postcritically finite).
+- z² + 1 over ℚ is not PCF: the orbit 0, 1, 2, 5, 26, … of the critical point 0 is infinite.
 
 **Endpoint checks.** z² − 2 is PCF: 0 ↦ −2 ↦ 2 ↦ 2. z² + i is PCF: 0 ↦ i ↦ i − 1 ↦ −i ↦ i − 1. z² + 1 is not PCF: 0 ↦ 1 ↦ 2 ↦ 5 ↦ 26 ↦ ….
 
@@ -8248,21 +8239,21 @@ Primitive representatives exist and are unique up to k^×: clear denominators an
 
 Prove the following basic API.
 
-- `specialize`: `f_{t₀}` := [`F_{t₀}` : `G_{t₀}`] for t₀ ∈ T⁰(f).
-- `goodSet`: T⁰(f) = {t₀ ∈ k̄ : Res(F, G)(t₀) ≠ 0}.
-- `goodSet_compl_finite`: k̄ ∖ T⁰(f) is finite.
-- `specializePoint`: `P_{t₀}` := [p(t₀) : q(t₀)] for P = [p : q], p, q ∈ k[t] coprime.
-- `specialize_degree`: deg `f_{t₀}` = d for t₀ ∈ T⁰(f).
-- `specialize_iterate`: `(fⁿ)_{t₀}` = `(f_{t₀})ⁿ` for t₀ ∈ T⁰(f) (from Specialisation commutes with evaluation and iteration).
-- `specialize_wellDefined`: At t₀ ∈ T⁰(f), any representative in k[t] whose specialized forms form a nonzero pair yields the same rational map; use a primitive representative to guarantee this. Both forms are allowed to evaluate to zero only outside this conclusion.
-- `specializePoint_const`: A constant point c ∈ ℙ¹(k) specialises to c.
+- `f_{t₀}` := [`F_{t₀}` : `G_{t₀}`] for t₀ ∈ T⁰(f).
+- T⁰(f) = {t₀ ∈ k̄ : Res(F, G)(t₀) ≠ 0}.
+- k̄ ∖ T⁰(f) is finite.
+- `P_{t₀}` := [p(t₀) : q(t₀)] for P = [p : q], p, q ∈ k[t] coprime.
+- deg `f_{t₀}` = d for t₀ ∈ T⁰(f).
+- `(fⁿ)_{t₀}` = `(f_{t₀})ⁿ` for t₀ ∈ T⁰(f) (from Specialisation commutes with evaluation and iteration).
+- At t₀ ∈ T⁰(f), any representative in k[t] whose specialized forms form a nonzero pair yields the same rational map; use a primitive representative to guarantee this. Both forms are allowed to evaluate to zero only outside this conclusion.
+- A constant point c ∈ ℙ¹(k) specialises to c.
 
 **Checks.**
 
-- **`specialize_sq_add_t`** (computation): For f = z² + t over ℚ(t) and t₀ = −2: T⁰(f) = ℚ̄, and `f_{−2}` = z² − 2.
-- **`specialize_const`** (degenerate): If f has coefficients in k, then T⁰(f) = k̄ ∖ {roots of the constant Res} = k̄ and `f_{t₀}` = f for every t₀.
-- `specialize_legendre`: For the Legendre family over ℚ(t): T⁰ = ℚ̄ ∖ {0, 1} and the specialisation at t₀ is The Legendre curve E_t and its Lattès map f_t `f_{t₀}.`
-- **`specialize_bad_fibre`** (non-example): For f = tz² + z over ℚ(t) (F = tX² + XY, G = Y²), Res(F, G) = t², so 0 ∉ T⁰(f); indeed [F₀ : G₀] = [XY : Y²] is the identity, of degree 1.
+- For f = z² + t over ℚ(t) and t₀ = −2: T⁰(f) = ℚ̄, and `f_{−2}` = z² − 2.
+- If f has coefficients in k, then T⁰(f) = k̄ ∖ {roots of the constant Res} = k̄ and `f_{t₀}` = f for every t₀.
+- For the Legendre family over ℚ(t): T⁰ = ℚ̄ ∖ {0, 1} and the specialisation at t₀ is The Legendre curve E_t and its Lattès map f_t `f_{t₀}.`
+- For f = tz² + z over ℚ(t) (F = tX² + XY, G = Y²), Res(F, G) = t², so 0 ∉ T⁰(f); indeed [F₀ : G₀] = [XY : Y²] is the identity, of degree 1.
 
 **Endpoint checks.** f = z² + t: F = X² + tY², G = Y², Res = 1, T⁰ = k̄ and `f_{t₀}` = z² + t₀. The Legendre family f_T over ℚ(T): Res = 256T⁴(T − 1)⁴, T⁰ = ℚ̄ ∖ {0, 1}, and `(f_T)_{t₀}` = `f_{t₀}` (The Legendre curve E_t and its Lattès map f_t).
 
@@ -8282,20 +8273,20 @@ The critical points lie in ℙ¹(ℚ̄) (roots of J(F, G), a nonzero form with a
 
 Prove the following basic API.
 
-- `criticalHeight`: ĥ_crit(f) = Σ_c m_c ĥ_f(c).
-- `criticalHeight_nonneg`: ĥ_crit(f) ≥ 0.
-- `criticalHeight_conj`: ĥ_crit(φ⁻¹ ∘ f ∘ φ) = ĥ_crit(f) (The critical height is invariant under conjugation).
-- `criticalHeightModuli`: The induced function on M_d(ℚ̄).
-- `criticalHeight_iterate`: ĥ_crit(fⁿ) = n ĥ_crit(f) (The critical height of an iterate).
-- `criticalHeight_eq_zero_iff`: ĥ_crit(f) = 0 iff f is PCF (Zero critical height characterises postcritically finite maps).
-- `criticalHeight_galois`: ĥ_crit(σ(f)) = ĥ_crit(f) for σ ∈ Gal(ℚ̄/ℚ).
+- ĥ_crit(f) = Σ_c m_c ĥ_f(c).
+- ĥ_crit(f) ≥ 0.
+- ĥ_crit(φ⁻¹ ∘ f ∘ φ) = ĥ_crit(f) (The critical height is invariant under conjugation).
+- The induced function on M_d(ℚ̄).
+- ĥ_crit(fⁿ) = n ĥ_crit(f) (The critical height of an iterate).
+- ĥ_crit(f) = 0 iff f is PCF (Zero critical height characterises postcritically finite maps).
+- ĥ_crit(σ(f)) = ĥ_crit(f) for σ ∈ Gal(ℚ̄/ℚ).
 
 **Checks.**
 
-- **`criticalHeight_sq_add_c`** (computation): For c ∈ ℚ̄, ĥ_crit(z² + c) = `ĥ_{z²+c}(0);` for c = 1 it is positive since 0 is wandering.
-- **`criticalHeight_powerMap`** (degenerate): ĥ_crit(P_d) = 0 for d ≥ 2.
-- `criticalHeight_iterate_two`: ĥ_crit(f ∘ f) = 2 ĥ_crit(f) (Ingram's property A′, The critical height of an iterate).
-- **`criticalHeight_lattes_not_moduli_height`** (non-example): ĥ_crit is not bounded below by a positive multiple of an ample height on all of M_4: ĥ_crit(f_t) = 0 for every t ∈ ℚ̄ ∖ {0, 1}, while the classes [f_t] have unbounded moduli height (j(t) is unbounded).
+- For c ∈ ℚ̄, ĥ_crit(z² + c) = `ĥ_{z²+c}(0);` for c = 1 it is positive since 0 is wandering.
+- ĥ_crit(P_d) = 0 for d ≥ 2.
+- ĥ_crit(f ∘ f) = 2 ĥ_crit(f) (Ingram's property A′, The critical height of an iterate).
+- ĥ_crit is not bounded below by a positive multiple of an ample height on all of M_4: ĥ_crit(f_t) = 0 for every t ∈ ℚ̄ ∖ {0, 1}, while the classes [f_t] have unbounded moduli height (j(t) is unbounded).
 
 **Endpoint checks.** ĥ_crit(P_d) = 0; ĥ_crit(z² + c) = `ĥ_{z²+c}(0)` since ∞ is fixed. ĥ_crit(f_t) = 0 for the Legendre Lattès maps.
 
@@ -8392,20 +8383,20 @@ Equivalence: a union of progressions {a_i k + b_i} is periodic with period lcm o
 Prove the following basic API.
 
 - `IsFiniteUnionAP`: The predicate on sets S ⊆ ℕ.
-- `isFiniteUnionAP_iff_eventually_periodic`: Equivalence with eventual periodicity.
-- `IsFiniteUnionAP.union`: Closed under binary union.
-- `IsFiniteUnionAP.inter`: Closed under binary intersection.
-- `IsFiniteUnionAP.compl`: Closed under complement.
-- `Set.Finite.isFiniteUnionAP`: Finite sets are finite unions of arithmetic progressions.
-- `IsFiniteUnionAP.exists_infinite_ap`: An infinite finite union of arithmetic progressions contains {ak + b : k ∈ ℕ} with a ≥ 1.
-- `isFiniteUnionAP_preimage_affine`: If S is one then so is {k : ak + b ∈ S} for a ≥ 1; and, for N ≥ 1, S is one iff each {k : Nk + j ∈ S}, 0 ≤ j < N, is one.
+- Equivalence with eventual periodicity.
+- Closed under binary union.
+- Closed under binary intersection.
+- Closed under complement.
+- Finite sets are finite unions of arithmetic progressions.
+- An infinite finite union of arithmetic progressions contains {ak + b : k ∈ ℕ} with a ≥ 1.
+- If S is one then so is {k : ak + b ∈ S} for a ≥ 1; and, for N ≥ 1, S is one iff each {k : Nk + j ∈ S}, 0 ≤ j < N, is one.
 
 **Checks.**
 
-- **`isFiniteUnionAP_evens_union`** (computation): The set {1} ∪ {2k : k ∈ ℕ} is a finite union of arithmetic progressions (pairs (0, 1) and (2, 0)).
-- **`isFiniteUnionAP_empty_univ`** (degenerate): The empty set, every finite set and ℕ are finite unions of arithmetic progressions.
-- `isFiniteUnionAP_iff_eventually_periodic`: S is a finite union of arithmetic progressions iff ∃ N, ∃ p ≥ 1, ∀ n ≥ N, (n ∈ S ↔ n + p ∈ S).
-- **`not_isFiniteUnionAP_powers`** (non-example): For p ≥ 2, {p^k : k ∈ ℕ} is not a finite union of arithmetic progressions (it is infinite and its gaps are unbounded).
+- The set {1} ∪ {2k : k ∈ ℕ} is a finite union of arithmetic progressions (pairs (0, 1) and (2, 0)).
+- The empty set, every finite set and ℕ are finite unions of arithmetic progressions.
+- S is a finite union of arithmetic progressions iff ∃ N, ∃ p ≥ 1, ∀ n ≥ N, (n ∈ S ↔ n + p ∈ S).
+- For p ≥ 2, {p^k : k ∈ ℕ} is not a finite union of arithmetic progressions (it is infinite and its gaps are unbounded).
 
 **Endpoint checks.** {0, 1} ∪ 2ℕ is a finite union of arithmetic progressions. {2^k : k ∈ ℕ} is not. For N=0 the residue-class condition has no instances and is true even for this non-example; the positivity guard in reconstruction is essential. A singleton at max b_i ceases to recur only beyond that index.
 
@@ -8557,15 +8548,15 @@ The relative canonical/Weil-height difference is ≤C₁h_T(t)+C₂ by the gener
 
 ### 6.25 Bilu–Tichy polynomial-pair classification
 
-For a number field K and a finite set S of places containing the archimedean places, write O_S for the S-integers. Define `HasInfiniteBoundedDenominatorSolutions F G` to mean that some fixed Δ∈O_S, Δ≠0, makes the set of (x,y)∈K² with F(x)=G(y) and Δx,Δy∈O_S infinite. The denominator is shared by the entire infinite set. Prove `boundedDenominatorSolutions_swap`, `boundedDenominatorSolutions_affine_iff` for separate invertible affine substitutions, and `boundedDenominatorSolutions_commonComposition`: bounded-denominator solutions of F(x)=G(y) give such solutions of E(F(x))=E(G(y)), for every nonconstant E∈K[X] (Bilu–Tichy §10, pp.284–286).
+For a number field K and a finite set S of places containing the archimedean places, write O_S for the S-integers. Define the bounded-denominator solution condition for F and G to mean that some fixed Δ∈O_S, Δ≠0, makes the set of (x,y)∈K² with F(x)=G(y) and Δx,Δy∈O_S infinite. The denominator is shared by the entire infinite set. Prove invariance under interchange and separate invertible affine substitutions, and preservation by a common outer composition: bounded-denominator solutions of F(x)=G(y) give such solutions of E(F(x))=E(G(y)), for every nonconstant E∈K[X] (Bilu–Tichy §10, pp.284–286).
 
-Use D_n(X,a)=`Polynomial.dickson 1 a n`. On this carrier prove `dickson_eval_add_mul`: for any commutative ring R, u,v∈R and n≥0, D_n(u+v,uv)=uⁿ+vⁿ; and `dickson_parameter_comp`: D_m(D_n(X,a),aⁿ)=`D_{mn}`(X,a). No inverses or characteristic restrictions are needed. These extend the imported evaluation and composition identities to general parameters (Bilu–Tichy §3, equations (3)–(6), p.266; induction on the imported recurrence also proves the formulas over commutative rings).
+Use D_n(X,a)=`Polynomial.dickson 1 a n`. On this carrier prove the general-parameter Dickson evaluation identity: for any commutative ring R, u,v∈R and n≥0, D_n(u+v,uv)=uⁿ+vⁿ; and the general-parameter Dickson composition identity: D_m(D_n(X,a),aⁿ)=`D_{mn}`(X,a). No inverses or characteristic restrictions are needed. These extend the imported evaluation and composition identities to general parameters (Bilu–Tichy §3, equations (3)–(6), p.266; induction on the imported recurrence also proves the formulas over commutative rings).
 
-Define `IsBiluTichyStandardPair` over a characteristic-zero field K by the following five families, allowing interchange of the entries. Throughout a,b∈K×, m,n≥1 and p∈K[X] is nonzero, possibly constant: first, (X^m,aX^r p(X)^m), with 0≤r<m, gcd(r,m)=1 and r+deg(p)>0; second, (X²,(aX²+b)p(X)²); third, (D_m(X,a^n),D_n(X,a^m)), with gcd(m,n)=1; fourth, (a^(−m/2)D_m(X,a),−b^(−n/2)D_n(X,b)), with gcd(m,n)=2 (both half-exponents are integers); fifth, ((aX²−1)³,3X⁴−4X³). Define `IsBiluTichySpecificPair` by (D_m(X,a^(n/e)),−D_n(X cos(π/e),a^(m/e))), or its interchange, where e=gcd(m,n)≥3, a∈K and cos(2π/e)∈K. Interpret cos(π/e) algebraically in a chosen algebraic closure via a primitive 2e-th root of unity; prove that the displayed polynomial descends to K. The parameter powers are matched so that both compositions through D_e have parameter a^(mn/e²), as in the proof of Theorem 10.5, p.286. Prove `biluTichyStandardPair_swap`, `biluTichySpecificPair_swap` and coefficient-embedding compatibility for both predicates (Bilu–Tichy §1.1, p.262 and §9, pp.282–283).
+Define the Bilu–Tichy standard-pair predicate over a characteristic-zero field K by the following five families, allowing interchange of the entries. Throughout a,b∈K×, m,n≥1 and p∈K[X] is nonzero, possibly constant: first, (X^m,aX^r p(X)^m), with 0≤r<m, gcd(r,m)=1 and r+deg(p)>0; second, (X²,(aX²+b)p(X)²); third, (D_m(X,a^n),D_n(X,a^m)), with gcd(m,n)=1; fourth, (a^(−m/2)D_m(X,a),−b^(−n/2)D_n(X,b)), with gcd(m,n)=2 (both half-exponents are integers); fifth, ((aX²−1)³,3X⁴−4X³). Define the Bilu–Tichy specific-pair predicate by (D_m(X,a^(n/e)),−D_n(X cos(π/e),a^(m/e))), or its interchange, where e=gcd(m,n)≥3, a∈K and cos(2π/e)∈K. Interpret cos(π/e) algebraically in a chosen algebraic closure via a primitive 2e-th root of unity; prove that the displayed polynomial descends to K. The parameter powers are matched so that both compositions through D_e have parameter a^(mn/e²), as in the proof of Theorem 10.5, p.286. Prove invariance of both predicates under interchange of the two polynomials and compatibility with coefficient embeddings (Bilu–Tichy §1.1, p.262 and §9, pp.282–283).
 
-Prove `biluTichy_classification`: for nonconstant F,G∈K[X], `HasInfiniteBoundedDenominatorSolutions F G` is equivalent to the existence of a nonconstant E∈K[X], invertible affine a,b∈K[X], and a standard or specific pair (F₁,G₁) over K such that F=E∘F₁∘a, G=E∘G₁∘b and `HasInfiniteBoundedDenominatorSolutions F₁ G₁`. The last arithmetic condition is part of the equivalence: a pair's shape alone does not ensure rational solvability (Bilu–Tichy Theorem 10.5, pp.285–286).
+Prove the Bilu–Tichy classification: for nonconstant F,G∈K[X], the bounded-denominator solution condition for F and G is equivalent to the existence of a nonconstant E∈K[X], invertible affine a,b∈K[X], and a standard or specific pair (F₁,G₁) over K such that F=E∘F₁∘a, G=E∘G₁∘b and the bounded-denominator solution condition for F₁ and G₁. The last arithmetic condition is part of the equivalence: a pair's shape alone does not ensure rational solvability (Bilu–Tichy Theorem 10.5, pp.285–286).
 
-Derive `biluTichy_equalDegree` as the equal-degree >1 S-integral necessity: the displayed decompositions can be chosen with (F₁,G₁), up to interchange, equal to (X,X), (X²,c∘X²) for affine c, (D₂(X,α)/α,D₂(X,β)/β) for nonzero α,β, or (D_n(X,α),−D_n(X cos(π/n),α)) with n≥1, α∈K and cos(2π/n)∈K. Derive the affine-normalized shared-shape corollary of GTZ Corollary 2.2; over K̄ the nonzero Dickson parameter is normalized by a square root. The cyclotomic degree bound makes the possible n finite for fixed K (GTZ Theorem 2.1 and Corollary 2.2, pp.5–6).
+Derive the equal-degree Bilu–Tichy corollary as the equal-degree >1 S-integral necessity: the displayed decompositions can be chosen with (F₁,G₁), up to interchange, equal to (X,X), (X²,c∘X²) for affine c, (D₂(X,α)/α,D₂(X,β)/β) for nonzero α,β, or (D_n(X,α),−D_n(X cos(π/n),α)) with n≥1, α∈K and cos(2π/n)∈K. Derive the affine-normalized shared-shape corollary of GTZ Corollary 2.2; over K̄ the nonzero Dickson parameter is normalized by a square root. The cyclotomic degree bound makes the possible n finite for fixed K (GTZ Theorem 2.1 and Corollary 2.2, pp.5–6).
 
 For the necessity proof, Siegel bounds the genus and number of infinite places of a component carrying infinitely many bounded-denominator points. Develop the polynomial decomposition and exceptional-factor classification of Bilu–Tichy §§4–9, especially Theorem 9.3, using the supplied curve/function-field theory; this is the polynomial-pair theory owned here. For §6.23 prove Ritt's equal-common-iterate classification from §IV, p.356. Neither classification is inferred from Siegel alone.
 
@@ -8587,11 +8578,11 @@ For the necessity proof, Siegel bounds the genus and number of infinite places o
 
 ### 6.26 The dynamical Lehmer conjecture for projective space (statement)
 
-For every integer N≥1, number field K and morphism f:ℙᴺ→ℙᴺ over K with f*O(1)≅O(d) and d≥2, define `DynamicalLehmerProperty f` by the existence of C(f)>0 such that every wandering P∈ℙᴺ(K̄) satisfies ĥ_f(P)≥C(f)/[K(P):K]. Here ĥ_f is the absolute canonical height of O(1), from Layer 1's polarized-morphism construction, and K(P) is the field generated by projective coordinate ratios, independent of a homogeneous representative. Define `DynamicalLehmerConjecture` to quantify over all N,K,f in these hypotheses. This is a conjectural proposition, consumed only as an explicit hypothesis (Benedetto et al., Conjecture 16.2, p.39).
+For every integer N≥1, number field K and morphism f:ℙᴺ→ℙᴺ over K with f*O(1)≅O(d) and d≥2, define the dynamical Lehmer property of f by the existence of C(f)>0 such that every wandering P∈ℙᴺ(K̄) satisfies ĥ_f(P)≥C(f)/[K(P):K]. Here ĥ_f is the absolute canonical height of O(1), from Layer 1's polarized-morphism construction, and K(P) is the field generated by projective coordinate ratios, independent of a homogeneous representative. Define dynamical Lehmer Conjecture to quantify over all N,K,f in these hypotheses. This is a conjectural proposition, consumed only as an explicit hypothesis (Benedetto et al., Conjecture 16.2, p.39).
 
 The ℙ¹ formulation is its specialization to N=1 and rational maps of degree at least two. For f=z² over ℚ it is classical Lehmer: a positive lower bound C/[ℚ(α):ℚ] for h(α) at nonzero algebraic α that are not roots of unity.
 
-Prove `dynamicalLehmerProperty_conj_iff` for γ∈PGL_(N+1)(K): the height and field degree are preserved under P↦γP. Prove `dynamicalLehmerProperty_iterate_iff` for f^n, n≥1: the canonical height and wandering locus are unchanged. Prove `dynamicalLehmer_projectiveLine_specialization`, identifying the N=1 predicate with the displayed rational-map formulation. These do not prove the conjecture.
+Prove conjugacy invariance of the dynamical Lehmer property for γ∈PGL_(N+1)(K): the height and field degree are preserved under P↦γP. Prove invariance of the dynamical Lehmer property under positive iteration for f^n, n≥1: the canonical height and wandering locus are unchanged. Prove the projective-line specialization, identifying the N=1 predicate with the displayed rational-map formulation. These do not prove the conjecture.
 
 *Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [Zero canonical height iff preperiodic (L ample)](#121-zero-canonical-height-iff-preperiodic-l-ample); [Preperiodic points of a polarized morphism form a set of bounded height](#122-preperiodic-points-of-a-polarized-morphism-form-a-set-of-bounded-height); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); ClassicalArithmeticCompletion §6.37; `IntermediateField.adjoin`; `Module.finrank`.
 
@@ -8599,10 +8590,10 @@ Prove `dynamicalLehmerProperty_conj_iff` for γ∈PGL_(N+1)(K): the height and f
 
 **Checks.**
 
-- `dynamicalLehmer_powerMap_two_example`: for f=z² and P=2 over ℚ, ĥ_f(P)=log 2, requiring C(f)≤log 2.
-- `dynamicalLehmer_degree_one_points`: in every dimension N≥1 the K-rational wandering points have a positive lower bound, by Northcott and height zero iff preperiodic. This is weaker than the conjecture over all algebraic points.
-- `dynamicalLehmer_powerMap_iff_lehmer`: the N=1 power-map case is the classical conjecture.
-- `dynamicalLehmer_needs_degree`: for f=z² and P=2^(1/n), n≥1, height is log(2)/n and [ℚ(P):ℚ]=n, so no degree-independent positive bound holds.
+- for f=z² and P=2 over ℚ, ĥ_f(P)=log 2, requiring C(f)≤log 2.
+- in every dimension N≥1 the K-rational wandering points have a positive lower bound, by Northcott and height zero iff preperiodic. This is weaker than the conjecture over all algebraic points.
+- the N=1 power-map case is the classical conjecture.
+- for f=z² and P=2^(1/n), n≥1, height is log(2)/n and [ℚ(P):ℚ]=n, so no degree-independent positive bound holds.
 - In dimension 2, the coordinatewise squaring morphism at [2^(1/n):1:1] has the same height and field degree; the predicate includes this example without identifying ℙ² with ℙ¹.
 
 **Endpoint checks.** Conjugacy uses a K-defined projective transformation; arbitrary transformations over K̄ need not preserve [K(P):K]. Iteration requires n≥1; n=0 is the degree-one identity.
@@ -8621,18 +8612,18 @@ For squarefree Q, the invariance (f × f)(C) ⊆ C is equivalent to Q | Q ∘ (F
 
 Prove the following basic API.
 
-- `DynamicallyRelated`: The relation on ℙ¹(L̄) × ℙ¹(L̄).
-- `DynamicallyRelated.symm`: Symmetric (swap the factors).
-- `DynamicallyRelated.refl`: Reflexive (the diagonal).
-- `dynamicallyRelated_of_isPreperiodic`: A preperiodic point is related to every point.
-- `DynamicallyRelated.conj`: Relatedness is preserved by simultaneous conjugation: a ~_f b ⟹ φ⁻¹a `~_{φ⁻¹fφ}` φ⁻¹b.
+- The relation on ℙ¹(L̄) × ℙ¹(L̄).
+- Symmetric (swap the factors).
+- Reflexive (the diagonal).
+- A preperiodic point is related to every point.
+- Relatedness is preserved by simultaneous conjugation: a ~_f b ⟹ φ⁻¹a `~_{φ⁻¹fφ}` φ⁻¹b.
 
 **Checks.**
 
-- **`dynamicallyRelated_graph_sq`** (computation): Over ℚ(t), for f = z², a = t and b = t² are related through the graph C : Y₀X₁² = X₀²Y₁ of z², which is (f × f)-invariant.
-- **`dynamicallyRelated_refl`** (degenerate): Every a is related to itself (the diagonal is invariant).
-- `dynamicallyRelated_preperiodic_example`: If a is preperiodic for f then a is related to every b.
-- **`dynamicallyRelated_requires_invariance`** (non-example): For f = z² + 1 over ℚ, the vertical line C = {X₀ = 0} contains (0, b) but is not invariant (f(0) = 1), so it does not witness a relation; 0 is wandering and a relation needs another curve.
+- Over ℚ(t), for f = z², a = t and b = t² are related through the graph C : Y₀X₁² = X₀²Y₁ of z², which is (f × f)-invariant.
+- Every a is related to itself (the diagonal is invariant).
+- If a is preperiodic for f then a is related to every b.
+- For f = z² + 1 over ℚ, the vertical line C = {X₀ = 0} contains (0, b) but is not invariant (f(0) = 1), so it does not witness a relation; 0 is wandering and a relation needs another curve.
 
 **Endpoint checks.** a = b: related by the diagonal X₀Y₁ − X₁Y₀. a preperiodic: related to every b by the finite union of vertical lines through the orbit of a. b = φ(a) for φ commuting with f: related by the graph of φ.
 
@@ -8652,22 +8643,22 @@ Choose the finite transcendence basis and identify Q(t) with Frac(Q[T]) by aeval
 
 Prove the following basic API.
 
-- `integralPrimitivePresentation`: Existence of the full presentation above from EssFiniteType Q L and a finite marked family.
-- `parameterEvaluation_injective`: j and its fraction-field extension ĵ are injective, and ĵ(F)=Q(t).
-- `primitiveEquation_map`: H_F=C(c)·minpoly_F(y) with c≠0; its positive degree equals [L:F].
-- `markedExpression_eq`: s_i=U_i(y,t)/V_i(t), V_i≠0, deg_Y U_i<deg_Y H.
-- `markedExpression_commonDenominator`: A single nonzero V serves any finite marked family.
-- `markedExpression_zero`: A zero mark has an admissible representation U=0,V=1.
-- `presentation_transport`: A Q-field isomorphism transports t,y and the marked identities with unchanged integral polynomial data.
-- `presentation_renameParameters`: A permutation of Fin n transports H,U,V by variable renaming and preserves every equation.
+- Existence of the full presentation above from EssFiniteType Q L and a finite marked family.
+- j and its fraction-field extension ĵ are injective, and ĵ(F)=Q(t).
+- H_F=C(c)·minpoly_F(y) with c≠0; its positive degree equals [L:F].
+- s_i=U_i(y,t)/V_i(t), V_i≠0, deg_Y U_i<deg_Y H.
+- A single nonzero V serves any finite marked family.
+- A zero mark has an admissible representation U=0,V=1.
+- A Q-field isomorphism transports t,y and the marked identities with unchanged integral polynomial data.
+- A permutation of Fin n transports H,U,V by variable renaming and preserves every equation.
 
 **Checks.**
 
-- **`presentation_Q_one_sixth`** (degenerate): n=0,y=0,H=Y,U=1,V=6 represents 1/6 in Q; no field generator is marked.
-- **`presentation_quadratic_denominator`** (computation): In Q(t)[y]/(y²−t), the mark 1/(y+t) has U=t−Y,V=t²−t, and V≠0.
-- **`presentation_zero_mark`** (degenerate): Zero is represented with U=0,V=1; the construction never requires nonzero marks.
-- `presentation_degree_one`: For L=Q(t), choose y=0,H=Y; degree one is permitted although the algebraic extension is trivial.
-- **`presentation_denominator_nonexample`** (non-example): The pair U=1,V=0 cannot represent a mark; a zero specialized denominator is never an admissible evaluation.
+- n=0,y=0,H=Y,U=1,V=6 represents 1/6 in Q; no field generator is marked.
+- In Q(t)[y]/(y²−t), the mark 1/(y+t) has U=t−Y,V=t²−t, and V≠0.
+- Zero is represented with U=0,V=1; the construction never requires nonzero marks.
+- For L=Q(t), choose y=0,H=Y; degree one is permitted although the algebraic extension is trivial.
+- The pair U=1,V=0 cannot represent a mark; a zero specialized denominator is never an admissible evaluation.
 
 **Endpoint checks.** L=Q permits n=0 and H=Y, y=0; s=1/6 has U=1,V=6. For L=Q(t)[y]/(y²−t), 1/(y+t)=(t−y)/(t²−t), illustrating why the denominator can be moved into A. No claim that an arbitrary finite set of marks generates L.
 
@@ -8773,22 +8764,19 @@ b₂ = −4(1 + t), b₄ = 2t, b₆ = 0, b₈ = −t², so Φ_2 = x⁴ − 2tx²
 
 Prove the following basic API.
 
-- `legendreCurve`: E_t = WeierstrassCurve with (a₁, a₂, a₃, a₄, a₆) = (0, −(1 + t), 0, t, 0).
-- `legendreCurve_Δ`: Δ(E_t) = 16t²(t − 1)².
-- `legendreCurve_j`: j(E_t) = 256(t² − t + 1)³/(t²(t − 1)²) for t ≠ 0, 1.
-- `legendreLattesMap`: f_t = `f_{E_t,2}.`
-- `legendreLattesMap_eq`: f_t(x) = (x² − t)²/(4x(x − 1)(x − t)).
-- `legendreLift`: F_t(z, w) = ((z² − tw²)², 4zw(z − w)(z − tw)), a homogeneous lift of f_t of degree 4.
-- `legendreLift_resultant`: Res(F_t) = 256t⁴(t − 1)⁴ = Δ(E_t)².
-- `legendreCanonicalHeight`: ĥ_t = `ĥ_{f_t}` on ℙ¹(ℚ̄) for t ∈ ℚ̄ ∖ {0, 1}.
-- `legendreCanonicalHeight_eq_zero_iff`: ĥ_t(x) = 0 iff x ∈ x(E_t(ℚ̄)_tors) (Preperiodic points of a Lattès map are the torsion images with Zero canonical height iff preperiodic (L ample)).
+- f_t = `f_{E_t,2}.`
+- f_t(x) = (x² − t)²/(4x(x − 1)(x − t)).
+- F_t(z, w) = ((z² − tw²)², 4zw(z − w)(z − tw)), a homogeneous lift of f_t of degree 4.
+- Res(F_t) = 256t⁴(t − 1)⁴ = Δ(E_t)².
+- ĥ_t = `ĥ_{f_t}` on ℙ¹(ℚ̄) for t ∈ ℚ̄ ∖ {0, 1}.
+- ĥ_t(x) = 0 iff x ∈ x(E_t(ℚ̄)_tors) (Preperiodic points of a Lattès map are the torsion images with Zero canonical height iff preperiodic (L ample)).
 
 **Checks.**
 
-- **`legendreLattesMap_neg_one`** (computation): `f_{−1}(x)` = (x² + 1)²/(4x(x² − 1)) over ℚ; e.g. `f_{−1}(2)` = 25/24.
-- **`legendreCurve_Δ_zero`** (degenerate): At t = 0 the curve y² = x²(x − 1) has Δ = 0, and (x² − 0)² = x⁴ and 4x²(x − 1) share the root 0: the formula collapses to x²/(4(x − 1)) of degree 2.
-- `legendreLattesMap_eq_lattesMap`: f_t = `f_{E_t,2},` and the Tau Ceti canonical height of P ∈ E_t(K) equals [K : ℚ] ĥ_t(x(P)) (The canonical height of a Lattès map is twice the Néron–Tate height).
-- **`legendreLattesMap_not_polynomial`** (non-example): f_t is not a polynomial map: f_t⁻¹(∞) = {0, 1, t, ∞} ≠ {∞} (∞ is not totally invariant).
+- `f_{−1}(x)` = (x² + 1)²/(4x(x² − 1)) over ℚ; e.g. `f_{−1}(2)` = 25/24.
+- At t = 0 the curve y² = x²(x − 1) has Δ = 0, and (x² − 0)² = x⁴ and 4x²(x − 1) share the root 0: the formula collapses to x²/(4(x − 1)) of degree 2.
+- f_t = `f_{E_t,2},` and the Tau Ceti canonical height of P ∈ E_t(K) equals [K : ℚ] ĥ_t(x(P)) (The canonical height of a Lattès map is twice the Néron–Tate height).
+- f_t is not a polynomial map: f_t⁻¹(∞) = {0, 1, t, ∞} ≠ {∞} (∞ is not totally invariant).
 
 **Endpoint checks.** t = −1: `f_{−1}(x)` = (x² + 1)²/(4x(x² − 1)), the Lattès map of y² = x³ − x. Res(F_t) = 256t⁴(t − 1)⁴ = Δ(E_t)², so f_t has good reduction exactly at the places v ∤ 2 with |t(t − 1)|_v = 1 (Good reduction and canonical measures of f_t at places not above 2 (DeMarco–Krieger–Ye Proposition 3.2)).
 
@@ -8908,19 +8896,19 @@ The two formulations agree: V(ℂ) ∩ O_Φ(α) is a finite union of orbits `O_{
 
 Prove the following basic API.
 
-- `DynamicalMordellLangProperty`: DML(X, Φ): for all V and α, S(X, Φ, V, α) is a finite union of arithmetic progressions.
-- `DynamicalMordellLangConjecture`: The proposition ∀ X Φ, DML(X, Φ).
-- `DynamicalMordellLangAffine`: The proposition DML_affine(N) for polynomial self-maps of 𝔸^N_ℂ.
-- `dynamicalMordellLangProperty_iterate_iff`: DML(X, Φ) iff DML(X, Φ^k) for k ≥ 1.
-- `dynamicalMordellLangProperty_of_etale`: DML(X, Φ) holds for Φ étale (The dynamical Mordell–Lang theorem for étale maps (Bell–Ghioca–Tucker)).
-- `dynamicalMordellLangAffine_of_conjecture`: The conjecture implies DML_affine(N) for every N.
+- DML(X, Φ): for all V and α, S(X, Φ, V, α) is a finite union of arithmetic progressions.
+- The proposition ∀ X Φ, DML(X, Φ).
+- The proposition DML_affine(N) for polynomial self-maps of 𝔸^N_ℂ.
+- DML(X, Φ) iff DML(X, Φ^k) for k ≥ 1.
+- DML(X, Φ) holds for Φ étale (The dynamical Mordell–Lang theorem for étale maps (Bell–Ghioca–Tucker)).
+- The conjecture implies DML_affine(N) for every N.
 
 **Checks.**
 
-- **`dmlSet_translation`** (computation): X = 𝔸¹_ℂ, Φ(z) = z + 1, α = 0, V = {3}: S = {3}, a finite union of arithmetic progressions.
-- **`dmlSet_univ_empty`** (degenerate): For V = X, S = ℕ; for V = ∅, S = ∅.
-- `dml_linear_of_skolemMahlerLech`: For linear Φ on 𝔸^N_ℂ and a hyperplane V, S is the zero set of a linear recurrence sequence, so DML is the Skolem–Mahler–Lech theorem (DiophantineApproximationAndTranscendence §2.4 for the simple-root case).
-- **`dml_fails_char_p`** (non-example): The analogue over 𝔽_p(t) is false (The dynamical Mordell–Lang statement fails in positive characteristic (Ghioca Example 1.4)): the return set `{(p^{2n} − 1)/(p² − 1)}` is not a finite union of arithmetic progressions.
+- X = 𝔸¹_ℂ, Φ(z) = z + 1, α = 0, V = {3}: S = {3}, a finite union of arithmetic progressions.
+- For V = X, S = ℕ; for V = ∅, S = ∅.
+- For linear Φ on 𝔸^N_ℂ and a hyperplane V, S is the zero set of a linear recurrence sequence, so DML is the Skolem–Mahler–Lech theorem (DiophantineApproximationAndTranscendence §2.4 for the simple-root case).
+- The analogue over 𝔽_p(t) is false (The dynamical Mordell–Lang statement fails in positive characteristic (Ghioca Example 1.4)): the return set `{(p^{2n} − 1)/(p² − 1)}` is not a finite union of arithmetic progressions.
 
 **Endpoint checks.** Proven cases: Φ étale (The dynamical Mordell–Lang theorem for étale maps (Bell–Ghioca–Tucker)); lines under split polynomial maps (The dynamical Mordell–Lang theorem for lines under split polynomial maps (Ghioca–Tucker–Zieve Theorem 1.4)).
 
@@ -8941,8 +8929,6 @@ K = 𝔽_p(t); Φ is an automorphism (a translation) of 𝔾_m², hence étale.
 **Endpoint checks.** p = 2: the set is {(4^j − 1)/3} = {0, 1, 5, 21, 85, …}.
 
 ### 6.45 Common iterates from synchronized affine intersections
-
-The named signature is `linearSynchronizedIntersection`.
 
 Let K have characteristic zero, f(X)=aX+b and g(X)=cX+e with a,c nonzero. If the set of common values fⁿ(x₀)=gⁿ(y₀), with the same n≥0, is infinite, then `f^{∘m}=g^{∘m}` for some m≥1. Together with conjugating a nonvertical line to the diagonal, this supplies the linear case of the polynomial-lines DML target.
 
@@ -9018,9 +9004,9 @@ Take θ in ℚ_p from Algebraically independent finite families in a p-adic fiel
 
 Let k be an algebraically closed field of characteristic 0, T a smooth geometrically integral curve over k, and f a rational map of degree d≥2 over k(T) that is not isotrivial in moduli: the specialisations `f_{t₀},` t₀ ∈ T⁰(f), are not all conjugate to one another. Let c₁, …, `c_{2d−2}` ∈ ℙ¹ over an algebraic closure of k(T) be the critical points of f with multiplicity (The critical points of a rational map, with multiplicity). DAO(f) is the equivalence: there are infinitely many t₀ ∈ T⁰(f) such that `f_{t₀}` is postcritically finite (Postcritically finite rational maps) if and only if c_i and c_j are f-dynamically related (Dynamically related points of a map over a function field) for all i, j. The dynamical André–Oort conjecture for one-parameter families (Baker–DeMarco) is the proposition that DAO(f) holds for all such families. It is a statement, not a theorem; the higher-dimensional form of Baker–DeMarco is not precise in the sources and is not stated in Layer 6.
 
-Define `curveFamily_specialization` on a nonempty good open T⁰(f) by evaluating the coefficients of a homogeneous lift in local rings of T; remove coefficient poles and zeros of the resultant. Prove lift independence, degree preservation and compatibility with iteration. Define `criticalMark_finiteCover`: a finite dominant cover T′→T with T′ smooth geometrically integral, on which every critical point is a rational mark of the pulled-back map; shrink the good open where necessary. Both sides of DAO are independent of the marking cover. k algebraically closed of characteristic 0. The non-isotriviality hypothesis is implicit in the source (its families (11.1) are non-constant); without it the statement is false ([Correction 46](#correction-46)).
+Define specialization of a curve family on a nonempty good open T⁰(f) by evaluating the coefficients of a homogeneous lift in local rings of T; remove coefficient poles and zeros of the resultant. Prove lift independence, degree preservation and compatibility with iteration. Define a finite cover marking the critical points: a finite dominant cover T′→T with T′ smooth geometrically integral, on which every critical point is a rational mark of the pulled-back map; shrink the good open where necessary. Both sides of DAO are independent of the marking cover. k algebraically closed of characteristic 0. The non-isotriviality hypothesis is implicit in the source (its families (11.1) are non-constant); without it the statement is false ([Correction 46](#correction-46)).
 
-(b) ⟹ (a) is expected from relations forcing simultaneous preperiodicity; (a) ⟹ (b) is the unlikely-intersection content. Neither direction is proved in general. Prove `dynamicalAndreOortProperty_finiteBaseChange_iff` for every finite dominant map T′→T of smooth geometrically integral curves: finite fibres and surjectivity over an algebraically closed field preserve infinitude of PCF fibres, and extension of function fields identifies geometric relatedness. Prove `dynamicalAndreOortProperty_conj_iff` under conjugacy over a finite extension of k(T). Thus the formulation with critical points over the algebraic closure of k(T) agrees with the marked-critical-point formulation of the source.
+(b) ⟹ (a) is expected from relations forcing simultaneous preperiodicity; (a) ⟹ (b) is the unlikely-intersection content. Neither direction is proved in general. Prove invariance of the dynamical André–Oort property under finite base change for every finite dominant map T′→T of smooth geometrically integral curves: finite fibres and surjectivity over an algebraically closed field preserve infinitude of PCF fibres, and extension of function fields identifies geometric relatedness. Prove conjugacy invariance of the dynamical André–Oort property under conjugacy over a finite extension of k(T). Thus the formulation with critical points over the algebraic closure of k(T) agrees with the marked-critical-point formulation of the source.
 
 *Needs:* AlgebraicCurves Layer 12 (curve/function-field dictionary and finite covers); [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve), for the general curve evaluation and height carriers when heights are used; [Specialisation of a one-parameter family of rational maps and of its points](#67-specialisation-of-a-one-parameter-family-of-rational-maps-and-of-its-points); [The critical points of a rational map, with multiplicity](#031-the-critical-points-of-a-rational-map-with-multiplicity); [Postcritically finite rational maps](#65-postcritically-finite-rational-maps); [Dynamically related points of a map over a function field](#627-dynamically-related-points-of-a-map-over-a-function-field); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂).
 
@@ -9028,16 +9014,16 @@ Define `curveFamily_specialization` on a nonempty good open T⁰(f) by evaluatin
 
 Prove the following basic API.
 
-- `DynamicalAndreOortProperty`: DAO(f) for a non-isotrivial degree-d≥2 family f over k(T), for every such k,T.
-- `DynamicalAndreOortConjecture`: The proposition ∀ k,T,f in these hypotheses, DAO(f).
-- `dynamicalAndreOortProperty_of_all_preperiodic`: If all critical points of f are preperiodic over the algebraic closure of k(T), DAO(f) holds.
+- DAO(f) for a non-isotrivial degree-d≥2 family f over k(T), for every such k,T.
+- The proposition ∀ k,T,f in these hypotheses, DAO(f).
+- If all critical points of f are preperiodic over the algebraic closure of k(T), DAO(f) holds.
 
 **Checks.**
 
-- **`dao_sq_add_t`** (computation): For f = z² + t over k(t) (critical points 0 and ∞, with ∞ fixed): 0 and ∞ are related because ∞ is preperiodic, and z² + t₀ is PCF for infinitely many t₀ (for instance every root of fⁿ_t(0) = 0), so both sides of DAO(f) hold.
-- **`dao_all_preperiodic`** (degenerate): If every critical point of f is preperiodic over the algebraic closure of k(T), then (b) holds and `f_{t₀}` is PCF for every t₀ ∈ T⁰(f) (preperiodicity specialises), so (a) holds.
-- `dao_legendre_family`: For the Legendre Lattès family over k(t), which is non-isotrivial (j(t) is non-constant), every specialisation is PCF (Flexible Lattès maps are postcritically finite) and the critical points are preperiodic (they map to x(E[2])), so both sides hold.
-- **`dao_constant_family`** (non-example): For the constant family f = z² + 1 over k(t), 0 and ∞ are related (∞ is fixed) but no specialisation is PCF: the non-isotriviality hypothesis cannot be dropped.
+- For f = z² + t over k(t) (critical points 0 and ∞, with ∞ fixed): 0 and ∞ are related because ∞ is preperiodic, and z² + t₀ is PCF for infinitely many t₀ (for instance every root of fⁿ_t(0) = 0), so both sides of DAO(f) hold.
+- If every critical point of f is preperiodic over the algebraic closure of k(T), then (b) holds and `f_{t₀}` is PCF for every t₀ ∈ T⁰(f) (preperiodicity specialises), so (a) holds.
+- For the Legendre Lattès family over k(t), which is non-isotrivial (j(t) is non-constant), every specialisation is PCF (Flexible Lattès maps are postcritically finite) and the critical points are preperiodic (they map to x(E[2])), so both sides hold.
+- For the constant family f = z² + 1 over k(t), 0 and ∞ are related (∞ is fixed) but no specialisation is PCF: the non-isotriviality hypothesis cannot be dropped.
 
 **Check.** Pull z²+t back along the degree-two map from the smooth projective model of y²=t⁵−t to ℙ¹. The base has genus 2, while both sides of DAO remain true by finite base change. Rational substitutions alone cannot supply this case.
 
@@ -9046,8 +9032,6 @@ Prove the following basic API.
 Applications include Benedetto et al., Conjectures 11.5–11.6 — the dynamical analogue of André–Oort: PCF maps play the role of special points; DeMarco–Mavraki–Ye, Remark 1.7 and Theorems 1.1–1.2 — uniform bounded-geometry results for PCF-special subvarieties obtained without the classification this conjecture predicts (bifurcation Part II).
 
 ### 6.51 Transport through a primitive root
-
-The named signature is `primitiveRootTransport`.
 
 Let A be a domain with F=Frac(A), let L/F be a finite simple extension generated by y, and let j:A→L be its scalar map. Suppose H∈A[Y] maps to C(c)·minpoly_F(y), c≠0. For any field E, injective e:A→E, and η∈E with H_e(η)=0, there is a unique ring homomorphism σ:L→E extending e on A and sending y to η. It is injective. Every marked identity x=U_j(y)/j(V) with V≠0 transports to σ(x)=U_e(η)/e(V).
 
@@ -9103,20 +9087,20 @@ x(nP + T) = τ_T(x(nP)) = `τ_T(f_{E,n}(x(P)))` (Translation by a 2-torsion poin
 
 Prove the following basic API.
 
-- `lattesMap_isFlexibleLattes`: For E elliptic over K̄, |n| ≥ 2 and T ∈ E[2], τ_T ∘ `f_{E,n}` is a flexible Lattès map.
-- `IsFlexibleLattes.conj`: Flexible Lattès is invariant under conjugation by PGL₂(K̄).
-- `IsFlexibleLattes.degree_eq_sq`: A flexible Lattès map has degree n² with |n| ≥ 2.
-- `IsFlexibleLattes.isPostcriticallyFinite`: Every flexible Lattès map is postcritically finite (Flexible Lattès maps are postcritically finite).
-- `flexibleLattesLocus`: L_d ⊆ M_d(K̄), the set of conjugacy classes of flexible Lattès maps of degree d.
-- `flexibleLattesLocus_nonempty_iff`: L_d ≠ ∅ iff d = n² with n ≥ 2.
-- `IsFlexibleLattes.map`: Flexible Lattès is preserved by field embeddings K̄ → L̄.
+- For E elliptic over K̄, |n| ≥ 2 and T ∈ E[2], τ_T ∘ `f_{E,n}` is a flexible Lattès map.
+- Flexible Lattès is invariant under conjugation by PGL₂(K̄).
+- A flexible Lattès map has degree n² with |n| ≥ 2.
+- Every flexible Lattès map is postcritically finite (Flexible Lattès maps are postcritically finite).
+- L_d ⊆ M_d(K̄), the set of conjugacy classes of flexible Lattès maps of degree d.
+- L_d ≠ ∅ iff d = n² with n ≥ 2.
+- Flexible Lattès is preserved by field embeddings K̄ → L̄.
 
 **Checks.**
 
-- **`legendreLattesMap_isFlexibleLattes`** (computation): For t ∈ ℚ̄ ∖ {0, 1}, the Legendre map f_t = (x² − t)²/(4x(x − 1)(x − t)) is a flexible Lattès map of degree 4.
-- **`not_isFlexibleLattes_of_not_square`** (degenerate): No rational map of degree 2 or 3 is a flexible Lattès map (the degree of a flexible Lattès map is a perfect square ≥ 4).
-- `isFlexibleLattes_conj_iff`: f is flexible Lattès iff φ ∘ f ∘ φ⁻¹ is, for every φ ∈ PGL₂(K̄); hence L_d is a well-defined subset of M_d(K̄).
-- **`powerMap_four_not_isFlexibleLattes`** (non-example): P_4(z) = z⁴ is not flexible Lattès: 0 is totally invariant (P_4⁻¹(0) = {0}), whereas every point of ℙ¹ has at least two preimages under a flexible Lattès map (the n² preimages under P ↦ nP + T map two-to-one by x).
+- For t ∈ ℚ̄ ∖ {0, 1}, the Legendre map f_t = (x² − t)²/(4x(x − 1)(x − t)) is a flexible Lattès map of degree 4.
+- No rational map of degree 2 or 3 is a flexible Lattès map (the degree of a flexible Lattès map is a perfect square ≥ 4).
+- f is flexible Lattès iff φ ∘ f ∘ φ⁻¹ is, for every φ ∈ PGL₂(K̄); hence L_d is a well-defined subset of M_d(K̄).
+- P_4(z) = z⁴ is not flexible Lattès: 0 is totally invariant (P_4⁻¹(0) = {0}), whereas every point of ℙ¹ has at least two preimages under a flexible Lattès map (the n² preimages under P ↦ nP + T map two-to-one by x).
 
 **Endpoint checks.** f_t (t ≠ 0, 1) is flexible Lattès of degree 4 (T = O, n = 2), and so is `τ_{(0,0)}` ∘ f_t(x) = t/f_t(x). L_d = ∅ for d = 2, 3, 5, 6, 7, 8. P_4 is not flexible Lattès although 4 is a square.
 
@@ -9152,6 +9136,17 @@ F Galois-stable; η adelic. F⊂𝔸¹ is nonempty; circles and discs in this fo
 
 ### 6.57 Standard projections of an elliptic curve
 
+On the native Weierstrass point carrier, define `ellipticStandardProjection` for W over ℂ and A ∈ GL₂(ℂ) by applying A to `WeierstrassCurve.Affine.Point.xRep` and taking the ratio of its two coordinates, with infinity when the second coordinate is zero. Its source is W.toAffine.Point and its target is `OnePoint ℂ`; it is a standard projection when W is elliptic. The matrix acts on column vectors from the left, so [[a,b],[c,d]] gives (ax+b)/(cx+d). Invertibility and nonvanishing of the native x-representative exclude the zero transformed vector. All standard projections are obtained this way, since they differ from the x-coordinate quotient by an automorphism of the projective line (demarco-krieger-ye-2020, §1, p. 2, and Corollary 8.2, pp. 44–45).
+
+Its basic API consists of compatibility with projective coordinate changes, invariance under multiplying A by a nonzero scalar, and equality of fibres precisely for pairs P,−P on a smooth curve. The ramification points are exactly the four two-torsion points, with simple ramification.
+
+**Checks.**
+
+- For A = [[0,1],[1,0]], infinity maps to 0, 0 maps to infinity, and the affine x-value 2 maps to 1/2. The inverse-ratio convention would give 2 instead.
+- Replacing the identity matrix by twice the identity leaves an affine x-value 2 equal to 4/2 = 2 and leaves infinity fixed; the projection depends on the projective class of A.
+- For the Legendre curve at t = 2 and A = 1, the zero point maps to infinity and (0,0) maps to 0; these distinct points must not be identified.
+- The zero matrix is excluded by invertibility; otherwise every vector would map to infinity under the total formula. At t = 0 the Legendre model is singular, so the smooth four-branch-value assertion does not apply.
+
 Let E be an elliptic curve over an algebraically closed field k of characteristic ≠2. A standard projection is π=φ∘x for φ∈PGL₂(k), where x(O)=∞. Equivalently it is a degree-two quotient identifying P and −P, followed by a projective coordinate choice. Translating by any e∈E[2] gives another map of this form because x∘τ_e=ι_e∘x for a Möbius map ι_e. The branch set π(E[2]) has four points, and π(E^tors)=φ(x(E^tors)); precomposing by τ_e leaves the torsion-image set unchanged.
 
 k algebraically closed, char k ≠ 2. Over ℂ these are exactly the degree-two quotients π with π(P) = π(−P) composed with 2-torsion translations.
@@ -9164,18 +9159,18 @@ x ∘ τ_e(P) = τ_e-image of x(P) (Translation by a 2-torsion point acts on the
 
 Prove the following basic API.
 
-- `standardProjection`: π=φ∘x for φ∈PGL₂(k); the alternative φ∘x∘τ_e with e∈E[2] is obtained by absorbing ι_e into the Möbius parameter.
-- `standardProjection_neg`: π(−P + 2e) = π(P), i.e. π(−P) = π(P) for e ∈ E[2] (2e = O).
-- `standardProjection_branchSet`: The points of ℙ¹ with exactly one preimage under π are the four points of π(E[2]); π is two-to-one elsewhere.
-- `standardProjection_torsion`: π(E^tors) = φ(x(E^tors)).
-- `standardProjection_normalize`: A Möbius transformation ψ moves the branch set π(E[2]) to {0, 1, t, ∞} for some t ≠ 0, 1; after translating by a 2-torsion point so that π(O) = ∞, E is in Legendre form E_t.
+- π=φ∘x for φ∈PGL₂(k); the alternative φ∘x∘τ_e with e∈E[2] is obtained by absorbing ι_e into the Möbius parameter.
+- π(−P + 2e) = π(P), i.e. π(−P) = π(P) for e ∈ E[2] (2e = O).
+- The points of ℙ¹ with exactly one preimage under π are the four points of π(E[2]); π is two-to-one elsewhere.
+- π(E^tors) = φ(x(E^tors)).
+- A Möbius transformation ψ moves the branch set π(E[2]) to {0, 1, t, ∞} for some t ≠ 0, 1; after translating by a 2-torsion point so that π(O) = ∞, E is in Legendre form E_t.
 
 **Checks.**
 
-- **`standardProjection_legendre`** (computation): For E_t and e = O, φ = id, the standard projection is x, with branch set {0, 1, t, ∞}.
-- **`standardProjection_translate`** (degenerate): Translating by e ∈ E[2] does not change the set of torsion images: π^e(E^tors) = π(E^tors).
-- `standardProjection_branch_card`: The branch set π(E[2]) has exactly four points (the roots of Ψ₂Sq and ∞ for π = x, Mathlib WeierstrassCurve.Ψ₂Sq).
-- **`standardProjection_not_three_to_one`** (non-example): The map E → ℙ¹ given by the y-coordinate of y² = x³ + 1 has degree 3, is not a quotient by P ↦ −P, and is not a standard projection.
+- For E_t and e = O, φ = id, the standard projection is x, with branch set {0, 1, t, ∞}.
+- Translating by e ∈ E[2] does not change the set of torsion images: π^e(E^tors) = π(E^tors).
+- The branch set π(E[2]) has exactly four points (the roots of Ψ₂Sq and ∞ for π = x, Mathlib WeierstrassCurve.Ψ₂Sq).
+- The map E → ℙ¹ given by the y-coordinate of y² = x³ + 1 has degree 3, is not a quotient by P ↦ −P, and is not a standard projection.
 
 **Endpoint checks.** For E_t, x itself is a standard projection with branch set {0, 1, t, ∞}.
 
@@ -9309,19 +9304,19 @@ Use the quotient-of-affine-map notion of Milnor Definition 2.1 restricted to a t
 
 Prove the following basic API.
 
-- `isAffineLattes`: Existence of the rank-two torus affine quotient data above.
-- `affineLattes_conjugation`: Möbius conjugation preserves the predicate.
-- `affineLattes_degree`: The degree is |a|² for any quotient presentation.
-- `multiplication_isAffineLattes`: A multiplication Lattès map over C satisfies this predicate.
-- `affineLattes_normalForm`: Every such map has cyclic quotient normal form n=2,3,4 or6.
-- `affineLattes_flexible_iff`: In the normal form the map is flexible iff n=2 and a∈Z.
+- Existence of the rank-two torus affine quotient data above.
+- Möbius conjugation preserves the predicate.
+- The degree is |a|² for any quotient presentation.
+- A multiplication Lattès map over C satisfies this predicate.
+- Every such map has cyclic quotient normal form n=2,3,4 or6.
+- In the normal form the map is flexible iff n=2 and a∈Z.
 
 **Checks.**
 
-- `affineLattes_degree_four`: Multiplication by 2 on any complex elliptic torus gives a flexible map of degree 4.
-- **`affineLattes_degree_two`** (computation): Multiplication by 1+i on C/Z[i], modulo ±1, gives a rigid affine Lattès map of degree 2.
-- **`affineLattes_power_nonexample`** (non-example): z^d has exceptional points 0 and infinity and is not an affine-torus Lattès map, which has none.
-- `affineLattes_translation`: For odd integer a, the nonzero admissible 2-torsion translation can give a flexible map with no postcritical fixed point; multiplication-only data miss it.
+- Multiplication by 2 on any complex elliptic torus gives a flexible map of degree 4.
+- Multiplication by 1+i on C/Z[i], modulo ±1, gives a rigid affine Lattès map of degree 2.
+- z^d has exceptional points 0 and infinity and is not an affine-torus Lattès map, which has none.
+- For odd integer a, the nonzero admissible 2-torsion translation can give a flexible map with no postcritical fixed point; multiplication-only data miss it.
 
 **Endpoint checks.** All multiplication-by-m examples are included. z↦z^d is a cylinder quotient and is not a torus quotient.
 
@@ -9487,11 +9482,11 @@ The Lattès family f := `f_{E,2}` over K(t) (The Lattès map of multiplication b
 
 ### 6.78 Ingram's theorem: divisor-height variation over a curve
 
-Let K be a number field, X/K a smooth projective geometrically integral curve, f∈K(X)[z] a polynomial of degree d≥2, and P∈ℙ¹(K(X)). Construct `polynomialVariationDivisor f P` in Div(X)⊗ℚ by the local geometric escape rates, with degree ĥ_f(P). Prove `ingram_divisorHeightVariation`: on the good specialization locus U⊆X, `|ĥ_{f_t}(P_t)−h_D(t)|≤C(f,P)` for every t∈U(K̄), using absolute heights; the constant is independent of the extension containing t. The point P=∞ has D=0 and both canonical heights zero. For X=ℙ¹ derive `ingram_projectiveLineVariation`: `|ĥ_{f_t}(P_t)−ĥ_f(P)h(t)|≤C(f,P)` (Theorem 1 and Corollary 2, p.2).
+Let K be a number field, X/K a smooth projective geometrically integral curve, f∈K(X)[z] a polynomial of degree d≥2, and P∈ℙ¹(K(X)). Construct the variation divisor D = D(f,P) in Div(X)⊗ℚ by the local geometric escape rates, with degree ĥ_f(P). Prove the divisor-height variation theorem: on the good specialization locus U⊆X, `|ĥ_{f_t}(P_t)−h_D(t)|≤C(f,P)` for every t∈U(K̄), using absolute heights; the constant is independent of the extension containing t. The point P=∞ has D=0 and both canonical heights zero. For X=ℙ¹ derive the projective-line variation theorem: `|ĥ_{f_t}(P_t)−ĥ_f(P)h(t)|≤C(f,P)` (Theorem 1 and Corollary 2, p.2).
 
-Prove `polynomialVariationDivisor_degree`, `polynomialVariationDivisor_iterate` (replacement of P by f(P) multiplies D by d), and `polynomialVariationDivisor_finiteBaseChange`: for a finite dominant map π:Y→X of smooth projective geometrically integral curves, the pulled-back family and section have divisor π*D and generic height deg(π)ĥ_f(P). The divisor construction uses AlgebraicCurves' places and rational divisors, transported through its function-field/curve dictionary; h_D uses the RP.0 height machine. For a general X this theorem compares with h_D itself, not with deg(D) times an arbitrary degree-one height with O(1) error.
+Prove the degree formula for D and its iteration formula (replacement of P by f(P) multiplies D by d), and compatibility of D with finite base change: for a finite dominant map π:Y→X of smooth projective geometrically integral curves, the pulled-back family and section have divisor π*D and generic height deg(π)ĥ_f(P). The divisor construction uses AlgebraicCurves' places and rational divisors, transported through its function-field/curve dictionary; h_D uses the RP.0 height machine. For a general X this theorem compares with h_D itself, not with deg(D) times an arbitrary degree-one height with O(1) error.
 
-Ingram Lemmas 5–6 and 10–11: at a base point β where an iterate of P enters the polynomial escape region B⁰_β, the local canonical height is a nonnegative rational pole order. Define D = Σ_β `λ̂_{f,β}(P)`[β]. Its support is finite, since it is contained in the poles of the coefficients and P. Choose a common iterate N reaching the escape region at every point of Supp D; after iteration, (d−1)D is integral. Rescale the final height identity by d^N. The section P = ∞ is treated separately, with both canonical heights zero. Increase N so that d^N(d−1)D is integral and, when D≠0, has sufficiently large degree. Riemann–Roch supplies a rational function g with exactly this pole divisor: for each support point β the subspace with smaller pole order is proper, and the infinite constant field permits avoiding their finite union, after a finite extension splitting the support. Handle D=0 separately. Compare `λ̂_{f_t,v}(P_t)` with the local Weil function `d^{−N}(d−1)^{−1}log⁺|g(t)|_v.` Ingram Lemma 9: if P has pole order m at β and enters B⁰_β, construct the formal Böttcher coordinate G_β in the Laurent series field; w^mG_β is a power-series unit for a uniformizer w. Hensel uniqueness, coefficient bounds and the Schwarz estimate give convergence in a v-adic neighbourhood of β, uniformly outside finitely many places. This uses Laurent series, correcting the power-series-ring slip described below. Ingram Lemma 13: the quotient `G_β^{d−1}a_d/g` is an analytic unit near β (after the chosen iteration). Its logarithm gives the local difference between the canonical and divisor heights there, hence a bounded difference; at all but finitely many places this difference vanishes on the prescribed discs. Lemmas 7–8 and 11 give the coefficient and escape bounds with the same finite exceptional set. For poles of the coefficients or P outside Supp D, bounded formal iterates and the maximum-modulus estimate bound the specialized escape rate. Away from all poles, the coefficients and P are bounded and the geometric escape-rate estimate supplies a uniform local bound. Ingram Lemmas 11–13 and the proof of Theorem 1 on pp. 18–19 patch these regions into a bound b_v, zero for almost all v. The generic-height-zero case of Ingram Lemma 12 uses Benedetto zero-height criterion for nonisotrivial polynomials. Use its explicit local disc and global product-formula inputs; no Northcott theorem over K(X) is assumed. Sum the bounds over places, with r_v = [L_v:ℚ_v]/[L:ℚ] and the extension compatibility of the heights. The bound remains independent of the finite field L containing t. The degree of D is ĥ_f(P); on ℙ¹, the height of D differs from deg(D)h(t) by O(1). This proves `ingram_divisorHeightVariation`; the last comparison gives `ingram_projectiveLineVariation`.
+Ingram Lemmas 5–6 and 10–11: at a base point β where an iterate of P enters the polynomial escape region B⁰_β, the local canonical height is a nonnegative rational pole order. Define D = Σ_β `λ̂_{f,β}(P)`[β]. Its support is finite, since it is contained in the poles of the coefficients and P. Choose a common iterate N reaching the escape region at every point of Supp D; after iteration, (d−1)D is integral. Rescale the final height identity by d^N. The section P = ∞ is treated separately, with both canonical heights zero. Increase N so that d^N(d−1)D is integral and, when D≠0, has sufficiently large degree. Riemann–Roch supplies a rational function g with exactly this pole divisor: for each support point β the subspace with smaller pole order is proper, and the infinite constant field permits avoiding their finite union, after a finite extension splitting the support. Handle D=0 separately. Compare `λ̂_{f_t,v}(P_t)` with the local Weil function `d^{−N}(d−1)^{−1}log⁺|g(t)|_v.` Ingram Lemma 9: if P has pole order m at β and enters B⁰_β, construct the formal Böttcher coordinate G_β in the Laurent series field; w^mG_β is a power-series unit for a uniformizer w. Hensel uniqueness, coefficient bounds and the Schwarz estimate give convergence in a v-adic neighbourhood of β, uniformly outside finitely many places. This uses Laurent series, correcting the power-series-ring slip described below. Ingram Lemma 13: the quotient `G_β^{d−1}a_d/g` is an analytic unit near β (after the chosen iteration). Its logarithm gives the local difference between the canonical and divisor heights there, hence a bounded difference; at all but finitely many places this difference vanishes on the prescribed discs. Lemmas 7–8 and 11 give the coefficient and escape bounds with the same finite exceptional set. For poles of the coefficients or P outside Supp D, bounded formal iterates and the maximum-modulus estimate bound the specialized escape rate. Away from all poles, the coefficients and P are bounded and the geometric escape-rate estimate supplies a uniform local bound. Ingram Lemmas 11–13 and the proof of Theorem 1 on pp. 18–19 patch these regions into a bound b_v, zero for almost all v. The generic-height-zero case of Ingram Lemma 12 uses Benedetto zero-height criterion for nonisotrivial polynomials. Use its explicit local disc and global product-formula inputs; no Northcott theorem over K(X) is assumed. Sum the bounds over places, with r_v = [L_v:ℚ_v]/[L:ℚ] and the extension compatibility of the heights. The bound remains independent of the finite field L containing t. The degree of D is ĥ_f(P); on ℙ¹, the height of D differs from deg(D)h(t) by O(1). This proves the divisor-height variation theorem; the last comparison gives the projective-line variation theorem.
 
 *Needs:* AlgebraicCurves Layers 3–5 and 12 (places, divisors, Riemann–Roch and regular projective models); HeightsRationalPointsAndObstructions RP.0 curve heights; [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve); [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv); [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [Admissible absolute values and heights on a rational function field](#027b-admissible-absolute-values-and-heights-on-a-rational-function-field); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials).
 
@@ -9578,7 +9573,7 @@ For |t|_v > 1/|16|_v the interval [`ζ_{0,1/|4|},` `ζ_{0,|4t|}`] is totally inv
 
 ### 6.84 Orbits of polynomials of equal degree meeting a line (Ghioca–Tucker–Zieve Theorems 1.5 and 1.1)
 
-The named signature `polynomialOrbits_commonIterate` states the equal-degree common-iterate conclusion on `Polynomial K`, `forwardOrbit` and function iteration over every characteristic-zero field.
+The headline signature `polynomialOrbits_meetingLine` states Theorem 1.5 on `Polynomial K` and `forwardOrbit` over every characteristic-zero field: infinitely many pairs in O_F(x) × O_G(y) satisfying v = a·u + b, with a ≠ 0 and equal degrees greater than one, imply G^[n](a·z+b) = a·F^[n](z)+b for all z and some n > 0. The diagonal a = 1, b = 0 gives the common-iterate conclusion.
 
 Let K be a field of characteristic 0, α, β, x₀, y₀ ∈ K with α ≠ 0, and f, g ∈ K[X] with deg f = deg g > 1. If infinitely many points of O_f(x₀) × O_g(y₀) lie on the line Y = αX + β, then g^k(αX + β) = α f^k(X) + β for some k ≥ 1. In particular (α = 1, β = 0, Theorem 1.1, K = ℂ): if O_f(x₀) ∩ O_g(y₀) is infinite then f and g have a common iterate.
 
@@ -9626,6 +9621,8 @@ integral-primitive-presentation obtains the integer parameter ring, its fraction
 
 ### 6.87 Infinitely many torsion specializations of a constant Legendre mark
 
+The headline `legendreTorsionSpecializations_infinite` states this on ℂ with explicit predicates that the fixed a and each parameter t are algebraic over ℚ, with a,t ≠ 0,1 and a in `legendreTorsionImages` at t.
+
 For a∈Q̄\{0,1}, there are infinitely many distinct t∈Q̄\{0,1} for which a is preperiodic for f_t, equivalently either point of E_t over x=a is torsion.
 
 Infinity is handled separately as a persistent mark. The choice of sign of the point does not affect torsion.
@@ -9635,6 +9632,12 @@ The marked degree growth implies a nonzero activity/bifurcation measure, by the 
 *Needs:* [Legendre marked-point degree growth](#672-legendre-marked-point-degree-growth); [Continuous marked escape potential across the three Legendre cusps](#680-continuous-marked-escape-potential-across-the-three-legendre-cusps); [Preperiodic points of a Lattès map are the torsion images](#663-preperiodic-points-of-a-lattès-map-are-the-torsion-images).
 
 ([dwy-2014-v3](#dwy-2014-v3), Theorem 1.2 p.2 and §6.5 pp.28–29 — The proof establishes infinitude of Tor(c) by non-normality before using equidistribution for the equivalence theorem.)
+
+**Checks.**
+
+- For a = 2, the parameter t = 2 makes the marked point two-torsion. At t = 4 the doubling x-coordinate is 0, since (4−4)²/(8(2−4)) = 0; the marked point is four-torsion.
+- For a = 2 and t = 4/3, the doubling x-coordinate is 4/3, since (4−4/3)²/(8(2−4/3)) = 4/3; this is another smooth four-torsion fibre.
+- At a = 0 or a = 1 the mark is two-torsion on every smooth fibre, a persistent branch mark rather than the nonbranch case; t = 0 or t = 1 has discriminant zero and is excluded.
 
 **Endpoint checks.** Do not infer infinitude just by writing more division polynomials: distinct roots still need proof. The mark a=0 is torsion for every good parameter and belongs to the separate persistent case.
 
@@ -9966,6 +9969,21 @@ Fix 0 < b < δ/8 (δ of Uniform positivity of the Arakelov–Zhang pairing (DeMa
 
 ### 6.111 Uniform common torsion images for pairs of Legendre curves (DeMarco–Krieger–Ye Theorem 1.4; published Theorem 1.5)
 
+Define `legendreTorsionImages` at t ∈ ℂ as the image of the finite-additive-order points of the Weierstrass coefficient model (0, −(1+t), 0, t, 0) under `ellipticStandardProjection` with the identity matrix. It is a subset of `OnePoint ℂ`, with an affine point (x,y) sent to x and the zero point sent to infinity. The headline `uniformLegendreCommonTorsion` asserts one B ∈ ℕ for all distinct t₁,t₂ ∈ ℂ ∖ {0,1}, with both finiteness of their common projected torsion set and cardinality at most B (demarco-krieger-ye-2020, Theorem 1.4, p. 3).
+
+Its basic API consists of the following facts.
+
+- Membership means that a finite-additive-order point has the given standard projected x-coordinate.
+- The zero point maps to infinity, so infinity belongs to every projected torsion set.
+- Negating a point preserves its projection; the smooth fibres have branch values 0, 1, t and infinity.
+
+**Checks.**
+
+- At t = 2, the coefficient tuple is (0,−3,0,2,0), the discriminant is 64, and (0,0) is a nonzero point of order two whose projection is 0; the zero point instead maps to infinity.
+- At t₁ = 2 and t₂ = 3, the branch values common to the two fibres are exactly 0, 1 and infinity. Thus the full common torsion set has at least three elements, and omitting infinity changes the count.
+- At t₁ = t₂ = 2 the common projected torsion set is infinite: the 2^m-torsion has 4^m points and projection has fibres of size at most two. The distinct-parameter hypothesis excludes this case; a cardinal bound without finiteness would be vacuous for an infinite set because its natural cardinal is zero.
+- At t = 0 and t = 1 the discriminant is zero; the smooth-curve assertion excludes both fibres.
+
 There is a uniform constant B such that `|π(E_{t₁}^tors)` ∩ `π(E_{t₂}^tors)|` ≤ B for all t₁ ≠ t₂ in ℂ ∖ {0, 1}, where E_t : y² = x(x − 1)(x − t) and π(x, y) = x (with π(O) = ∞).
 
 t₁ ≠ t₂ complex, ≠ 0, 1.
@@ -9979,6 +9997,8 @@ Over ℚ̄ this is Uniform bound on joint small points over ℚ̄ (DeMarco–Kri
 **Endpoint checks.** B ≥ 34 would follow from Stoll's genus-2 example through Theorem 1.1 of the paper; the bound B of the proof is not explicit.
 
 ### 6.112 The Bogomolov–Fu–Tschinkel bound with three common branch values (DeMarco–Krieger–Ye Corollary 8.2)
+
+The headline `uniformThreeBranchCommonTorsion` uses arbitrary smooth Weierstrass models W₁,W₂ over ℂ and arbitrary invertible matrices A₁,A₂ defining their standard projections. If the intersection of the projected two-torsion sets has exactly three elements, then their projected torsion intersection is finite and has cardinality at most a single B ∈ ℕ independent of the curves and matrices. The two ellipticity instances are explicit binders in the statement.
 
 There is a uniform B such that |π₁(E₁^tors) ∩ π₂(E₂^tors)| ≤ B for all elliptic curves E₁, E₂ over ℂ and standard projections π₁, π₂ (Standard projections of an elliptic curve) with |π₁(E₁[2]) ∩ π₂(E₂[2])| = 3.
 
