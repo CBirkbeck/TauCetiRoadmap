@@ -1,165 +1,168 @@
 import Mathlib
+import TauCeti.Algebra.Category.ModuleCat.Sheaf.ExteriorPower
+import TauCeti.Algebra.Category.ModuleCat.Sheaf.TensorProduct.Closed
+import TauCeti.AlgebraicGeometry.Modules.Differentials.Basic
+import TauCeti.AlgebraicGeometry.Cohomology.Module.Base
+import TauCeti.AlgebraicGeometry.LineBundle.Class
 
 /-!
-# K3SurfacesAndSymplecticBoundedness: representative target signatures
+# K3SurfacesAndSymplecticBoundedness: target signatures
 
-The roadmap is README.md. This file records statements suggested against the pinned APIs
-and is not exhaustive.
+The roadmap is README.md; this file is not the roadmap. It states the roadmap's
+headline theorems against the pinned APIs: invariance under field extension,
+vanishing of one-forms and vector fields, the Hodge diamond, finite freeness of
+the Picard group, Picard-rank bounds and bounded rank-revealing extensions.
+The definitions specialize native exterior powers, cohomology, schemes and
+line-bundle classes; they do not supply any geometric theorem as data.
+
+The remaining headline theorems are not statable at the pins:
+* §§1.3 and 1.6: projectivity and the quartic construction lack the standard
+  projective-space structure morphism and relative hypersurface carrier.
+  The abstract Proj scheme itself is available.
+* §§1.4–1.5 and §§4.1–4.4: surface Riemann–Roch, the numerical Picard kernel,
+  the geometric Picard lattice, specialization and the saturated cycle map
+  lack geometric divisor intersection numbers and the integral étale cycle map.
+  Picard finite freeness and the rank inequalities themselves are stated below.
+* §§2.1–2.2 and §§2.4–2.7: relative Picard representability, the closedness
+  operator on one-forms, integral crystalline ranks, deformation spaces and
+  polarized lifts lack the relative Picard space, exterior differential,
+  de Rham–Witt/crystalline cohomology and marked formal deformation carriers.
+  The Hodge diamond and the vanishings of §2.3 are stated below.
+* §§3.2–3.4: analytic comparison and integral Betti/étale invariants lack
+  scheme analytification, analytic coherent sheaves and integral étale
+  cohomology with its comparison maps.
+* §§5.3–5.4: finite étale polarized automorphism schemes and the infinite
+  symplectic Wehler action lack the ample-line predicate, polarized
+  automorphism scheme and pullback action on canonical forms.
+* §§6.0–6.4a: supersingular discriminants, height/rank comparisons, genus-one
+  pencils, tame fixed-point counts, wild-prime bounds and rank-22 Picard
+  faithfulness lack the geometric Picard pairing, formal Brauer group and
+  K3 quotient/resolution carriers.
+* §§6.5–6.6: faithful cohomological actions and uniform finite-subgroup bounds
+  lack the integral étale automorphism representation.
+* §6.7d: the tame involution lift and its genus-one pencil lack the marked
+  equivariant deformation carrier and geometric Picard specialization map.
+* §§6.8a–6.11: invariant-dimension bounds, the tame Mathieu character,
+  Mukai's bound and tame M₂₃ containment lack the K3 cohomology action,
+  quotient correspondence and Mathieu permutation model.
+* §§7.2–7.7: primitive openness, ample-power vanishing, cubic embeddings and
+  the finite-type covering family lack the relative Picard space, ampleness
+  and surface Hilbert-scheme carriers.
+* §§8.1–8.5: separated Deligne–Mumford moduli, coarse spaces, dimension-19
+  smoothness and finite-field finiteness lack the polarized K3 family
+  groupoid and algebraic-stack/coarse-space carriers.
+
+The general congruence input of §4.5 is supplied by
+NoncommutativeAndEquivariantIwasawa §0.1.
 -/
 
 namespace TauCetiRoadmap.K3SurfacesAndSymplecticBoundedness
 
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+
+universe u
+
+/-! ## Layer 1: Native surfaces and the K3 predicate -/
+
+/-- The sheaf of relative differential p-forms is the p-th exterior power of
+relative Kähler differentials for the specified structure morphism. -/
+noncomputable def differentialForms (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (p : ℕ) : X.Modules :=
+  letI : X.Over (Spec (.of k)) := ⟨f⟩
+  (SheafOfModules.exteriorPower X.sheaf p).obj (X.relativeDifferentials k)
+
+/-- A K3 surface over k is smooth of relative dimension two, proper and
+geometrically integral, with trivial canonical sheaf and H¹(O) = 0.
+Canonical triviality is existence of an isomorphism, with none chosen.
+Huybrechts, Chapter 1, Definition 1.1, p.7. -/
+def IsK3 (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) : Prop :=
+  SmoothOfRelativeDimension 2 f ∧ IsProper f ∧ GeometricallyIntegral f ∧
+    Nonempty (differentialForms k f 2 ≅ SheafOfModules.unit X.ringCatSheaf) ∧
+    Subsingleton (TauCeti.AlgebraicGeometry.Scheme.Modules.Cohomology
+      (SheafOfModules.unit X.ringCatSheaf) 1)
+
+/-- The unpolarized K3 condition is preserved and reflected by every field
+extension, including inseparable extensions. Huybrechts, Chapter 17, §2.1. -/
+theorem isK3_fieldExtension_iff (k K : Type u) [Field k] [Field K] [Algebra k K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) :
+    IsK3 K (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ↔
+      IsK3 k f := by
+  sorry
+
+/-! ## Layer 2: Picard spaces, vanishing and lifting -/
+
+/-- Every K3 surface over every field has no global regular one-forms or vector
+fields, and H² of its tangent sheaf vanishes as well. The tangent sheaf is the
+internal-Hom dual of the cotangent sheaf. Lang–Nygaard, Theorems 1.1 and 1.3,
+Corollary 1.2, pp.171–173; Deligne, Proposition 1.1(b), p.59. -/
+theorem IsK3.noVectorFields (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (hX : IsK3 k f) :
+    Subsingleton (TauCeti.AlgebraicGeometry.Scheme.Modules.Cohomology
+      (differentialForms k f 1) 0) ∧
+    Subsingleton (TauCeti.AlgebraicGeometry.Scheme.Modules.Cohomology
+      (SheafOfModules.dual (R := X.sheaf) (differentialForms k f 1)) 0) ∧
+    Subsingleton (TauCeti.AlgebraicGeometry.Scheme.Modules.Cohomology
+      (SheafOfModules.dual (R := X.sheaf) (differentialForms k f 1)) 2) := by
+  sorry
+
+/-- The coherent Hodge numbers of a K3 surface in every characteristic are
+1 at (0,0), (2,0), (0,2), (2,2), 20 at (1,1), and zero elsewhere;
+all these cohomology spaces are finite-dimensional. Deligne, Proposition 1.1,
+pp.59–60; Huybrechts, Chapter 1, Remark 2.5. -/
+theorem IsK3.hodgeNumbers (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (hX : IsK3 k f) (p q : ℕ) :
+    letI : X.Over (Spec (.of k)) := ⟨f⟩
+    Module.Finite k (TauCeti.AlgebraicGeometry.Scheme.Modules.Cohomology
+      (differentialForms k f p) q) ∧
+    Module.finrank k (TauCeti.AlgebraicGeometry.Scheme.Modules.Cohomology
+      (differentialForms k f p) q) =
+      (match p, q with
+      | 0, 0 | 2, 0 | 0, 2 | 2, 2 => 1
+      | 1, 1 => 20
+      | _, _ => 0) := by
+  sorry
+
 /-! ## Layer 4: Picard lattices and arithmetic rank boundedness -/
 
-/-- The first congruence kernel consists of invertible matrices reducing to the identity. -/
-noncomputable def firstCongruenceKernel (ell : ℕ) [Fact ell.Prime] (n : ℕ) :
-    Subgroup (Matrix.GeneralLinearGroup (Fin n) (PadicInt ell)) :=
-  (Matrix.GeneralLinearGroup.map
-    (PadicInt.toZMod : PadicInt ell →+* ZMod ell)).ker
+/-- The geometric Picard rank is the integral rank of the native line-bundle
+class group after base change to the algebraic closure of the ground field. -/
+noncomputable def geometricPicardRank (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) : ℕ :=
+  Module.finrank ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass
+    (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))))))
 
-/-- The rank-one odd-prime control `rank1_prime3`: minus one is outside the kernel. -/
-example : (-1 : Matrix.GeneralLinearGroup (Fin 1) (PadicInt 3)) ∉
-    firstCongruenceKernel 3 1 := by
-  intro h
-  change Matrix.GeneralLinearGroup.map (n := Fin 1)
-    (PadicInt.toZMod : PadicInt 3 →+* ZMod 3) (-1) = 1 at h
-  have hentry := congrArg
-    (fun A : Matrix.GeneralLinearGroup (Fin 1) (ZMod 3) => A 0 0) h
-  change (PadicInt.toZMod : PadicInt 3 →+* ZMod 3) (-1) = 1 at hentry
-  rw [RingHom.map_neg, map_one] at hentry
-  norm_num [ZMod.neg_one_eq_one_iff] at hentry
-
-/-- The control `prime2_negative`: at two the kernel contains a nontrivial involution. -/
-example : (-1 : Matrix.GeneralLinearGroup (Fin 1) (PadicInt 2)) ∈
-      firstCongruenceKernel 2 1 ∧
-    (-1 : Matrix.GeneralLinearGroup (Fin 1) (PadicInt 2)) ≠ 1 ∧
-    (-1 : Matrix.GeneralLinearGroup (Fin 1) (PadicInt 2)) ^ 2 = 1 := by
-  refine ⟨?_, ?_, ?_⟩
-  · change Matrix.GeneralLinearGroup.map (n := Fin 1)
-      (PadicInt.toZMod : PadicInt 2 →+* ZMod 2) (-1) = 1
-    apply Matrix.GeneralLinearGroup.ext
-    intro i j
-    fin_cases i
-    fin_cases j
-    change (PadicInt.toZMod : PadicInt 2 →+* ZMod 2) (-1) = 1
-    rw [RingHom.map_neg, map_one]
-    decide
-  · intro h
-    have hentry := congrArg
-      (fun A : Matrix.GeneralLinearGroup (Fin 1) (PadicInt 2) => A 0 0) h
-    change (-1 : PadicInt 2) = 1 at hentry
-    have htwo : (2 : PadicInt 2) = 0 := by linear_combination -hentry
-    exact (by norm_num : (2 : PadicInt 2) ≠ 0) htwo
-  · simp
-
-/-- In matrix size zero the general linear group, and hence its congruence kernel, is trivial. -/
-theorem rank0_kernel (ell : ℕ) [Fact ell.Prime]
-    (A : Matrix.GeneralLinearGroup (Fin 0) (PadicInt ell)) : A = 1 := by
-  apply Matrix.GeneralLinearGroup.ext
-  intro i
-  exact Fin.elim0 i
-
-/-- The two-term unipotent control: the square-zero off-diagonal term has linear powers. -/
-theorem unipotent_two_term (m : ℕ) :
-    (!![1, 3; 0, 1] : Matrix (Fin 2) (Fin 2) (PadicInt 3)) ^ m =
-      !![1, 3 * (m : PadicInt 3); 0, 1] := by
-  induction m with
-  | zero =>
-    ext i j
-    fin_cases i <;> fin_cases j <;> norm_num
-  | succ m ih =>
-    rw [pow_succ, ih, Matrix.mul_fin_two]
-    ext i j
-    fin_cases i <;> fin_cases j <;> simp
-    ring
-
-/-- For every odd prime and every matrix size, the first principal congruence subgroup
-of the p-adic general linear group has no nonidentity element of finite order.
-The integral consequence is used in Huybrechts, Chapter 17, proof of Lemma 2.6. -/
-theorem GeneralLinearGroup.oddCongruenceKernel_torsionFree
-    (ell : ℕ) [Fact ell.Prime] (hodd : ell ≠ 2) (n : ℕ)
-    (A : Matrix.GeneralLinearGroup (Fin n) (PadicInt ell))
-    (hred : Matrix.GeneralLinearGroup.map
-      (PadicInt.toZMod : PadicInt ell →+* ZMod ell) A = 1)
-    (hfinite : IsOfFinOrder A) : A = 1 := by
+/-- The Picard group of every K3 surface is a finite free abelian group.
+Huybrechts, Chapter 1, Proposition 2.4 and Chapter 17, §2. -/
+theorem IsK3.picardGroup_finiteFree (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (hX : IsK3 k f) :
+    Module.Free ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass X)) ∧
+    Module.Finite ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass X)) := by
   sorry
 
-/-- Reduction modulo an odd prime is injective on every finite subgroup of the
-p-adic general linear group, including in matrix size zero. -/
-theorem finiteSubgroup.reduction_injective
-    (ell : ℕ) [Fact ell.Prime] (hodd : ell ≠ 2) (n : ℕ)
-    (H : Subgroup (Matrix.GeneralLinearGroup (Fin n) (PadicInt ell))) [Finite H] :
-    Function.Injective (fun A : H => Matrix.GeneralLinearGroup.map
-      (PadicInt.toZMod : PadicInt ell →+* ZMod ell) A.val) := by
+/-- Arithmetic Picard rank is positive and at most geometric Picard rank;
+the latter is at most 22, and at most 20 in characteristic zero.
+Huybrechts, Chapter 17, §§2.1–2.2, pp.365–366. -/
+theorem IsK3.picardRank_bounds (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (hX : IsK3 k f) :
+    1 ≤ Module.finrank ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass X)) ∧
+    Module.finrank ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass X)) ≤
+      geometricPicardRank k f ∧
+    geometricPicardRank k f ≤ 22 ∧
+    (ringChar k = 0 → geometricPicardRank k f ≤ 20) := by
   sorry
 
-/-- Every finite subgroup of the integral general linear group embeds into the
-general linear group over the field with three elements by entrywise reduction.
-Huybrechts, Chapter 17, proof of Lemma 2.6. -/
-theorem finiteSubgroup.integral_reduction_injective
-    (n : ℕ) (H : Subgroup (Matrix.GeneralLinearGroup (Fin n) ℤ)) [Finite H] :
-    Function.Injective (fun A : H => Matrix.GeneralLinearGroup.map
-      (Int.castRingHom (ZMod 3)) A.val) := by
+/-- A finite separable subextension of the algebraic closure of universally
+bounded degree realizes the geometric Picard rank, over every ground field.
+Huybrechts, Chapter 17, Lemma 2.6, p.367. -/
+theorem IsK3.boundedPicardDescent (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (hX : IsK3 k f) :
+    ∃ K : IntermediateField k (AlgebraicClosure k),
+      FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧
+      Module.finrank k K ≤ Nat.card (Matrix.GeneralLinearGroup (Fin 22) (ZMod 3)) ∧
+      Module.finrank ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass
+        (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) =
+        geometricPicardRank k f := by
   sorry
-
-/-! ## Layer 5: Symplectic and polarized automorphisms -/
-
-/-- The two Wehler deck pullbacks on column vectors in the ordered hyperplane classes. -/
-def wehlerPullbacks (i : Fin 2) : Matrix (Fin 2) (Fin 2) ℤ :=
-  if i = 0 then !![1, 4; 0, -1] else !![-1, 0; 4, 1]
-
-/-- The first deck involution fixes the first hyperplane class. -/
-theorem wehlerPullbacks_zero : wehlerPullbacks 0 = !![1, 4; 0, -1] := by
-  rfl
-
-/-- The second deck involution fixes the second hyperplane class. -/
-theorem wehlerPullbacks_one : wehlerPullbacks 1 = !![-1, 0; 4, 1] := by
-  rfl
-
-/-- The control `wehler_pairing`: both deck pullbacks preserve the intersection pairing. -/
-example : (∀ i : Fin 2, (wehlerPullbacks i).transpose * !![2, 4; 4, 2] *
-      wehlerPullbacks i = !![2, 4; 4, 2]) ∧
-    Matrix.det (!![2, 4; 4, 2] : Matrix (Fin 2) (Fin 2) ℤ) = -12 := by
-  constructor
-  · intro i
-    fin_cases i <;> decide
-  · norm_num [Matrix.det_fin_two]
-
-/-- The control `wehler_product`: composition reverses pullback order, giving trace fourteen. -/
-example : wehlerPullbacks 1 * wehlerPullbacks 0 = !![-1, -4; 4, 15] ∧
-    Matrix.trace (wehlerPullbacks 1 * wehlerPullbacks 0) = 14 ∧
-    Matrix.det (wehlerPullbacks 1 * wehlerPullbacks 0) = 1 := by
-  norm_num [wehlerPullbacks, Matrix.mul_fin_two, Matrix.trace_fin_two, Matrix.det_fin_two]
-
-/-! ## Layer 6: Finite symplectic actions and universal bounds -/
-
-open scoped BigOperators
-
-/-- The rational Mathieu character formula; only positive inputs represent element orders. -/
-def mathieuCharacter (n : ℕ) : ℚ :=
-  24 / ((n : ℚ) * ∏ q ∈ n.primeFactors, (1 + 1 / (q : ℚ)))
-
-/-- The identity has Mathieu character twenty-four. -/
-theorem mathieuCharacter_one : mathieuCharacter 1 = 24 := by
-  norm_num [mathieuCharacter]
-
-/-- At a prime order q the Mathieu character is twenty-four divided by q plus one. -/
-theorem mathieuCharacter_prime (q : ℕ) (hq : q.Prime) :
-    mathieuCharacter q = 24 / ((q : ℚ) + 1) := by
-  have hq0 : (q : ℚ) ≠ 0 := by exact_mod_cast hq.ne_zero
-  unfold mathieuCharacter
-  rw [hq.primeFactors]
-  simp only [Finset.prod_singleton]
-  congr 1
-  field_simp [hq0]
-
-/-- The control `mathieu_identity`: the empty prime product gives character twenty-four. -/
-example : mathieuCharacter 1 = 24 := by
-  norm_num [mathieuCharacter]
-
-/-- The controls `mathieu_order2` and `mathieu_order7`: nonidentity tame character values. -/
-example : mathieuCharacter 2 = 8 ∧ mathieuCharacter 7 = 3 := by
-  norm_num [mathieuCharacter, (by decide : Nat.Prime 2).primeFactors,
-    (by decide : Nat.Prime 7).primeFactors]
 
 end TauCetiRoadmap.K3SurfacesAndSymplecticBoundedness
