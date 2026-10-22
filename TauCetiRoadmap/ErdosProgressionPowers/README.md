@@ -27,8 +27,9 @@ nonexistence for all sufficiently large lengths belongs to the statement Layer 7
 
 Suggested home: `TauCeti/NumberTheory/ProgressionPowers/`. Use individual files
 for the arithmetic, the two Frey specializations, the character family and the two
-analytic endgames. The README specifies the mathematics. `Suggested.lean`
-suggests names and signatures and is not an exhaustive replacement for it.
+analytic endgames. The README specifies the mathematics. `Suggested.lean` states the headline
+theorems against the pinned APIs, with only the simple definitions their
+statements require; the supporting theory and Checks are specified here.
 
 ## Scope and ownership
 
@@ -179,7 +180,7 @@ Use `CongruenceSubgroup.Gamma0_prime_index` and
 `CongruenceSubgroup.Gamma0_prime_power_index` in
 `TauCeti/NumberTheory/ModularForms/CongruenceSubgroups/Basic.lean` for the
 actual subgroup index at prime and positive prime-power levels. The rational
-prime-product expression `gammaZeroIndex` in §1.1 is compared to that index.
+prime-product expression in §1.1 is compared to that index.
 
 Use `TauCeti.Multiquadratic.fundamentalDiscriminantChar`,
 `TauCeti.Multiquadratic.fundamentalDiscriminantChar_isQuadratic`,
@@ -282,7 +283,7 @@ locators are not identified by the available contracts; a gap supplies no theore
 - `gap:isogeny-uniformity`: supplier `EllipticCurveModularity`; section: rational-isogeny residual images (locator unavailable); needs: for non-CM E/ℚ admitting a nontrivial rational cyclic isogeny, the mod-ell image is surjective for every prime ell>37 (Lemos2017v2, Theorem 1.1, p. 2).
 - `gap:character-pnt`: supplier `AnalyticNumberTheoryPartII`; section: effective character PNT (locator unavailable); needs: for a primitive nonprincipal character of conductor N>1 and X≥2, ∑_(m≤X)χ(m)Λ(m)=−X^β/β+O(X exp(−c log X/(√log X+log N))(log N)⁴), with effective absolute c and implied constant and the exceptional term present only if χ has an exceptional real zero β (IwaniecKowalski2004, Theorem 5.27; BS20, Theorem 5).
 - `gap:exceptional-zero-repulsion`: supplier `AnalyticNumberTheoryPartII`; section: exceptional real zeros (locator unavailable); needs: an effective c*>0 such that distinct real primitive quadratic characters of conductors N₁,N₂>1 with real zeros β₁,β₂ satisfy min(β₁,β₂)<1−3c*/log(N₁N₂), and each primitive quadratic character has at most one real zero in (1−c*/log N,1), which is simple (IwaniecKowalski2004, Theorems 5.26, 5.28; BS20, Proposition 7.1).
-- `gap:bounded-height-landau-page`: supplier `AnalyticNumberTheoryPartII`; section: bounded-height Landau–Page theorem (locator unavailable); needs: some effective c>0 satisfies the full real/simple unique character-and-zero `boundedPage c` contract of §5.2 (IwaniecKowalski2004, Theorem 5.28).
+- `gap:bounded-height-landau-page`: supplier `AnalyticNumberTheoryPartII`; section: bounded-height Landau–Page theorem (locator unavailable); needs: some effective c>0 satisfies the bounded-height Landau–Page contract of §5.2, including reality, simplicity and uniqueness of the character/zero pair (IwaniecKowalski2004, Theorem 5.28).
 - `gap:small-conductor-zeros`: supplier `AnalyticNumberTheoryPartII`; section: explicit zero exclusion (locator unavailable); needs: unconditional exclusion of exceptional real zeros for primitive nonprincipal quadratic characters of conductor 1<N<400000, for the same fixed small c* as §3.1 (Platt2013v1, Abstract, p. 1; BS20, p. 376). This is a mathematical input, with no computational procedure specified here.
 - `gap:log-free-density`: supplier `AnalyticNumberTheoryPartII`; section: log-free zero density (locator unavailable); needs: the effective primitive-character zero-density inequality for Q,T≥2 and 1/2≤σ≤1 stated in §5.1 (Bombieri1987, discussion after Théorème 14; BS20, p. 386).
 
@@ -297,9 +298,16 @@ Layer 5 builds the bounded-height zero estimates and a single Granville witness.
 Layer 6 combines either route with the signed geometric adapter for fixed-length
 finiteness. Layer 7 records explicit conjectural predicates; it supplies no
 premise to Layers 0–6. Each simultaneous choice satisfies all its properties
-at once. Local declaration names below belong to
-`TauCetiRoadmap.ErdosProgressionPowers`; README targets include constructions
-whose carriers are not represented in `Suggested.lean`.
+at once. Backticked local declaration names belong to
+`TauCetiRoadmap.ErdosProgressionPowers` and occur in `Suggested.lean`.
+Its headline tests are the half-interval prime-divisibility theorem (§1.9),
+the prime-exponent bound (§6.2), signed hyperbolic and positive fixed-exponent
+finiteness (§6.3), all-exponent fixed-length finiteness (§6.5), and the
+consecutive-product theorem (§7.1). The comparison-curve theorem (§1.12) and
+the full simultaneous character-family theorem (§2.7) need the arithmetic
+conductor, deletion level and residual comparison of the Frey curve, which
+are not available at the pins; the module docstring identifies these missing
+interfaces. Their full statements remain targets here.
 
 ## Layer 0: Primitive solutions and signed factors
 
@@ -307,30 +315,32 @@ Define primitive nontrivial solutions with n,d,y in ℤ, positive length k and p
 
 ### 0.1 Primitive progression solutions
 
-Define `term n d i` as n+i*d and `primitive_solution` as the predicate S below; `H` and `Hplus` are its two explicit large-exponent specializations. The notation `Triple` means ℕ×ℕ×ℕ and `Quadruple` means ℕ×ℕ×ℕ×ℕ, without implicit order constraints. Prove `term_gcd`, `large_prime_valuations` and `residue_class_count` in the respective subsections below.
+Define `term n d i` as n+i*d and `primitive_solution` as the predicate S below; `H` is its large-exponent specialization, and H⁺ adds the stronger length bound. A triple is an element of ℕ×ℕ×ℕ and a quadruple an element of ℕ×ℕ×ℕ×ℕ, without implicit order constraints. Prove the gcd divisibility, large-prime valuation and residue-class counting theorems in the respective subsections below.
 
-For n,d,y in ℤ and k,ell in ℕ, S(n,d,k,y,ell) means k>0, ell prime, gcd(n,d)=1, product over i in range(k) of n+i*d equals y^ell, and y*d is nonzero. H adds k≥10^8 and ell>exp(10^k); Hplus adds k≥2*10^10. All real casts and exponentials are explicit.
+For n,d,y in ℤ and k,ell in ℕ, S(n,d,k,y,ell) means k>0, ell prime, gcd(n,d)=1, product over i in range(k) of n+i*d equals y^ell, and y*d is nonzero. H adds k≥10^8 and ell>exp(10^k); H⁺ adds k≥2*10^10. All real casts and exponentials are explicit.
 
-Prove `primitive_solution_iff` (characterisation): S is equivalent to precisely the five conjuncts in its definition. `primitive_solution_term_ne_zero` (relation): S and i<k imply n+i*d is nonzero. `primitive_solution_prime` (projection): S implies ell is prime and ell≥2.
+- S is equivalent to precisely the five conjuncts in its definition.
+- S and i<k imply n+i*d is nonzero.
+- S implies ell is prime and ell≥2.
 
 **Checks.**
 
-- `primitive_solution_square` (computation): S(1,24,3,35,2) holds: 1*25*49=35^2.
-- `primitive_solution_signed` (computation): S(-3,2,4,3,2) holds; its four factors are -3,-1,1,3.
-- `primitive_solution_zero_length` (degenerate): S(n,d,0,y,ell) never holds.
-- `primitive_solution_nonprimitive` (non-example): S(4,2,1,2,2) does not hold despite its product equation.
+- S(1,24,3,35,2) holds: 1*25*49=35^2.
+- S(-3,2,4,3,2) holds; its four factors are -3,-1,1,3.
+- S(n,d,0,y,ell) never holds.
+- S(4,2,1,2,2) does not hold despite its product equation.
 
-Use the native positive integer gcd and finite product. Nonzero product implies every indexed term is nonzero. H and Hplus are explicit conjunctions, not new opaque assumptions. The `term_zero`, `term_succ`, `Hplus_implies_H`, `H_length` and `Hplus_length` projections pin their API.
+Use the native positive integer gcd and finite product. Nonzero product implies every indexed term is nonzero. H and H⁺ are explicit conjunctions, not new opaque assumptions. The API gives term(0)=n, term(i+1)=term(i)+d, H⁺⇒H, and the two stated length projections.
 
 **Checks.**
 
 - term(2,3,0)=2 pins zero-based indexing.
 - term(2,3,1)=5 increments by d, rather than n.
 - term(−3,2,2)=1 retains signs.
-- Hplus implies H; it includes every conjunct of the base predicate.
+- H⁺ implies H; it includes every conjunct of the base predicate.
 - H implies k≥10⁸; the prime-exponent equation alone does not define H.
-- Hplus implies k≥2·10¹⁰, its stronger length requirement.
-- H at k=0,1,2 is false regardless of the other parameters; Hplus fails at each of these lengths as well.
+- H⁺ implies k≥2·10¹⁰, its stronger length requirement.
+- H at k=0,1,2 is false regardless of the other parameters; H⁺ fails at each of these lengths as well.
 
 *Needs:* Mathlib `Int.gcd_def`.
 
@@ -358,22 +368,26 @@ The gcd bound prevents q dividing two distinct terms because their difference of
 
 ### 0.4 Signed small-prime factorization
 
-Define `SignedFactorization n d k ell A z`, for A : Fin k → ℕ and z : Fin k → ℤ,
+Define the signed-factorization predicate with parameters n,d∈ℤ, k,ell∈ℕ,
+A : Fin k → ℕ and z : Fin k → ℤ,
 by the positivity, nonzero, term equation and two prime-support conditions below.
-Prove `signed_factorization_exists_unique` for positive odd ell, nonzero terms and
+Prove unique signed factorization for positive odd ell, nonzero terms and
 large-prime valuation divisibility, asserting unique existence of the pair (A,z).
 
 
 For positive odd ell and nonzero terms n+i*d, i<k, whose valuations at every prime q≥k are divisible by ell, choose the unique family (A_i,z_i) with A_i>0, z_i a nonzero signed integer, n+i*d=A_i*z_i^ell, every prime of A_i <k and every prime of |z_i| ≥k. S with odd ell supplies these hypotheses. All powers of small primes remain in A_i; it need not be ell-powerfree.
 
-Prove `signed_factors_eq` (projection): For i<k, n+i*d=A_i*z_i^ell. `signed_factors_support` (characterisation): A_i>0 and z_i≠0; p|A_i implies p<k, and p||z_i| implies k≤p, for every prime p. `signed_factors_unique` (extensionality): Any family with these equality, sign and support conditions agrees componentwise with the chosen family. `signed_factors_sign` (relation): The sign of z_i is the sign of n+i*d.
+- For i<k, n+i*d=A_i*z_i^ell.
+- A_i>0 and z_i≠0; p|A_i implies p<k, and p||z_i| implies k≤p, for every prime p.
+- Any family with these equality, sign and support conditions agrees componentwise with the chosen family.
+- The sign of z_i is the sign of n+i*d.
 
 **Checks.**
 
-- `signed_factors_negative` (computation): For S(-8,1,1,-2,3), the single factor is (1,-2).
-- `signed_factors_boundary` (computation): For S(8,19,2,6,3), the factors are (1,2),(1,3); the prime p=k=2 belongs to the large side.
-- `signed_factors_small_power` (non-example): For n=64,d=0,k=3,ell=3 the valuation construction gives (64,1) at each index; 64 retains its full small-prime exponent and is not cube-free. This tests the construction, not S, since d=0. The alternative (1,4) is rejected because its z has the small prime 2.
-- `signed_factors_mixed_sign` (computation): For S(-8,7,2,2,3), the factors are (1,-2),(1,-1).
+- For S(-8,1,1,-2,3), the single factor is (1,-2).
+- For S(8,19,2,6,3), the factors are (1,2),(1,3); the prime p=k=2 belongs to the large side.
+- For n=64,d=0,k=3,ell=3 the valuation construction gives (64,1) at each index; 64 retains its full small-prime exponent and is not cube-free. This tests the construction, not S, since d=0. The alternative (1,4) is rejected because its z has the small prime 2.
+- For S(-8,7,2,2,3), the factors are (1,-2),(1,-1).
 
 Split the factorization of |n+i*d| at the strict bound k. Divide each large-prime exponent by ell using large-prime valuation divisibility. Since ell is odd, restore the sign in z_i. Unique factorization and injectivity of odd powers give uniqueness.
 
@@ -383,18 +397,20 @@ Split the factorization of |n+i*d| at the strict bound k. Divide each large-prim
 
 ### 0.5 Three-term progression triples
 
-Define `ap_triples k` as A(k) below.
+Define the strict progression-triple set A(k) below.
 
 A(k) is the finite set of natural triples (i,j,h) with i,j,h<k, i<j and i+h=2*j. Thus i<j<h and the spacing is positive; there is no truncated subtraction in its definition.
 
-Prove `ap_triples_mem` (characterisation): Membership is equivalent to i,j,h<k, i<j and i+h=2*j. `ap_triples_spacing` (relation): A member has i<j<h and j-i=h-j>0. `ap_triples_mono` (functoriality): k≤K implies A(k) is a subset of A(K).
+- Membership is equivalent to i,j,h<k, i<j and i+h=2*j.
+- A member has i<j<h and j-i=h-j>0.
+- k≤K implies A(k) is a subset of A(K).
 
 **Checks.**
 
-- `ap_triples_empty` (degenerate): A(0)=A(1)=A(2)=empty.
-- `ap_triples_three` (computation): A(3) consists exactly of (0,1,2).
-- `ap_triples_five` (computation): A(5) has exactly four elements.
-- `ap_triples_no_constant` (non-example): No triple (i,i,i) belongs to A(k).
+- A(0)=A(1)=A(2)=empty.
+- A(3) consists exactly of (0,1,2).
+- A(5) has exactly four elements.
+- No triple (i,i,i) belongs to A(k).
 
 Filter the finite product of three copies of range(k) by the two displayed conditions. Membership and strict h>j follow by natural-number arithmetic.
 
@@ -404,17 +420,19 @@ Filter the finite product of three copies of range(k) by the two displayed condi
 
 ### 0.6 Equal-sum progression quadruples
 
-Define `equal_sum_quadruples k` as I(k) below and `kappa` as the signed integer j₁j₂−i₁i₂.
+Define the equal-sum index set I(k) below and its signed product difference κ=j₁j₂−i₁i₂.
 
 I(k) consists of (j1,i1,i2,j2) in range(k)^4 with j1<i1≤i2<j2 and i1+i2=j1+j2. Equality i1=i2 is permitted.
 
-Prove `equal_sum_quadruples_mem` (characterisation): Membership is equivalent to the four bounds, ordering and equal-sum equation. `equal_sum_quadruples_kappa` (relation): For a member, the integer kappa is negative and 0<|kappa|<k^2. `equal_sum_quadruples_mono` (functoriality): The quadruple sets are monotone in k.
+- Membership is equivalent to the four bounds, ordering and equal-sum equation.
+- For a member, the integer kappa is negative and 0<|kappa|<k^2.
+- The quadruple sets are monotone in k.
 
 **Checks.**
 
-- `equal_sum_quadruples_empty` (degenerate): I(2) is empty.
-- `equal_sum_quadruples_three` (computation): I(3) consists exactly of (0,1,1,2), with kappa=-1.
-- `equal_sum_quadruples_unequal` (non-example): (0,1,1,3) is excluded from I(4), although its ordering holds, because its sums differ.
+- I(2) is empty.
+- I(3) consists exactly of (0,1,1,2), with kappa=-1.
+- (0,1,1,3) is excluded from I(4), although its ordering holds, because its sums differ.
 - kappa(0,1,2,3)=−2; the opposite product difference would be positive.
 - kappa(1,2,2,3)=−1, including a nonzero first index.
 
@@ -426,17 +444,19 @@ Filter the fourfold finite product. The positive gap makes kappa=j1*j2-i1*i2 a n
 
 ### 0.7 Divisibility index sets
 
-Define `divisibility_indices n d k r` as I_r below.
+Define Iᵣ(n,d,k) by divisibility of the progression term, as below.
 
 For n,d in ℤ and k,r in ℕ, I_r is the set of i<k such that the integer r divides n+i*d. The definition is total, including r=0; counting statements require r>0.
 
-Prove `divisibility_indices_mem` (characterisation): i belongs to I_r iff i<k and (r:Z)|(n+i*d). `divisibility_indices_one` (simp): I_1 equals range(k). `divisibility_indices_prime_d` (relation): If gcd(n,d)=1, p is prime and p|d, then I_p is empty.
+- i belongs to I_r iff i<k and (r:Z)|(n+i*d).
+- I_1 equals range(k).
+- If gcd(n,d)=1, p is prime and p|d, then I_p is empty.
 
 **Checks.**
 
-- `divisibility_indices_sample` (computation): For n=1,d=2,k=6,r=3, I_r={1,4}.
-- `divisibility_indices_empty` (degenerate): For k=0 the set is empty, for every r.
-- `divisibility_indices_boundary` (non-example): For n=1,d=1,k=3,r=4, the set is empty; index k=3 is not included.
+- For n=1,d=2,k=6,r=3, I_r={1,4}.
+- For k=0 the set is empty, for every r.
+- For n=1,d=1,k=3,r=4, the set is empty; index k=3 is not included.
 
 Filter range(k) by integer divisibility, rather than by a rational or real quotient. The range excludes k.
 
@@ -456,26 +476,26 @@ A common prime of r,d cannot divide n. In the coprime case invert d modulo r and
 
 ### 0.9 Explicit prime arithmetic
 
-Prove `explicitPrimeEstimates` with the numerical domains used below:
+Prove the explicit Chebyshev estimates with the numerical domains used below:
 θ(x)<1.000081x for every real x>0 (Schoenfeld1976, Note Added in Proof, p. 360), the errors
 |θ(x;8,a)−x/4|≤0.002811x/4 for a=3,5 and x≥10¹⁰ (RamareRumely1996, Theorem 1 and Table 1, modulus eight), and effective
 π(x), reciprocal-prime and logarithmically weighted reciprocal-prime bounds with explicit endpoints. In particular, for x≥59 use x/log x·(1+1/(2 log x))<π(x)<x/log x·(1+3/(2 log x)); for x≥286 use |∑_(p≤x)1/p−log log x−B₁|<1/(2(log x)²), with B₁ the prime reciprocal constant.
-Prove `weightedPrimeReciprocalBounds`: writing E=−γ−∑_(p prime) log p/(p(p−1))=−1.33258…,
+Prove the weighted reciprocal-prime bounds: writing E=−γ−∑_(p prime) log p/(p(p−1))=−1.33258…,
 log x+E−1/(2 log x)<∑_(p≤x)(log p)/p for every real x>1, and
 ∑_(p≤x)(log p)/p<log x+E+1/(2 log x) for x≥319
 (RosserSchoenfeld1962, Theorem 6, inequalities (3.21)–(3.22), p. 70).
 Thus the centered expression is ∑_(p≤x)(log p)/p−log x−E; the negative value of E fixes its sign.
-Prove `primePowerTail` strong enough to preserve the strict margin
+Prove the prime-power tail bound strong enough to preserve the strict margin
 0.000045875k between the four-character projection and 0.1239k: for every real
 x>0, 0≤ψ(x)−θ(x)<1.001093√x+3x^(1/3), and for integer k≥2·10¹⁰,
 0≤ψ(k)−θ(k)−ψ(k/2)+θ(k/2)<0.000045875k
 (Schoenfeld1976, Theorem 6*, bounds (5.3*)–(5.4*), p. 356).
-Prove `explicitTotientRatio`: for real x≥10⁸,
+Prove the explicit totient-ratio bound: for real x≥10⁸,
 ∏_(p prime, p≤x)(1+1/p)≤2 log x (Tenenbaum1995, Theorem 9 and following remark).
-Prove `explicitPrimeCount`: π(x)<1.1x/log x for real x≥10⁸
+Prove the explicit prime-count bounds: π(x)<1.1x/log x for real x≥10⁸
 (RosserSchoenfeld1962, Theorem 1); in particular π(k)<10⁻⁵k at
 k≥exp(exp(10⁷)). Use the supplied `Chebyshev.theta` and `Chebyshev.psi`.
-Prove `factorialLargePrimeContribution`: for natural k≥exp(exp(10⁷)),
+Prove the factorial large-prime contribution bound: for natural k≥exp(exp(10⁷)),
 ∑_(p prime, k^(7/16)<p≤k) v_p((k−1)!) log p≥(9/16)k log k−5k
 (BS20, §9, p. 384; Tenenbaum1995, Theorem 5; RosserSchoenfeld1962, Theorem 6).
 For a=k^(7/16), subtract the upper bound at a from the lower bound at k.
@@ -484,14 +504,14 @@ Legendre’s valuation formula and θ(k)<1.000081k then give the explicit lower 
 which is at least (9/16)k log k−5k throughout k≥exp(exp(10⁷)).
 The constant E cancels, and both endpoints exceed 319 in this range.
 
-*Needs:* `primePowerTail` uses the supplied Chebyshev functions and Schoenfeld’s
-explicit estimates; `explicitTotientRatio` uses the indicated prime-product
-estimate; `factorialLargePrimeContribution` uses Legendre’s factorial valuation
-formula, `weightedPrimeReciprocalBounds` and the displayed θ estimate. (BS20, equation (10),
+*Needs:* the prime-power tail bound uses the supplied Chebyshev functions and Schoenfeld’s
+explicit estimates; the explicit totient-ratio bound uses the indicated prime-product
+estimate; the factorial large-prime contribution bound uses Legendre’s factorial valuation
+formula, the weighted reciprocal-prime bounds and the displayed θ estimate. (BS20, equation (10),
 p. 362; §6, equations (19)–(21), pp. 369–370; §9, pp. 382–384;
 §5, proof of Lemma 5.1, p. 365.)
 
-Prove `eventualDivisorSubpower`: for every real ε>0 there is an effective
+Prove the eventual divisor-subpower bound: for every real ε>0 there is an effective
 N such that every integer n≥N has at most n^ε positive divisors. The bound is
 for all sufficiently large n after ε is fixed, including nonsquarefree n.
 (BS20, §8, proof of Proposition 8.2, p. 378; §12, Proposition 12.3,
@@ -523,7 +543,7 @@ Consume `gap:newform-galois`, `gap:newform-coefficient-bound` and
 `gap:elliptic-modularity` with the exact hypotheses in the supplier contracts.
 Use EtaleCohomologyFoundations §F.4.0 for invariant integral lattices of the
 jointly continuous K_λ-representation of the compact absolute Galois group.
-Prove `newformGalois_residual_latticeIndependent`: any two such lattices have
+Prove semisimplified residual lattice-independence: any two such lattices have
 isomorphic semisimplified residual representations, and specialize this to
 weight-two newforms. The arithmetic-Frobenius polynomial is `T^2-c_p*T+p`.
 (BS20, §2, pp. 358–359.)
@@ -534,16 +554,16 @@ weight-two newforms. The arithmetic-Frobenius polynomial is `T^2-c_p*T+p`.
 - At coefficient prime ell the unramified Frobenius clause is not asserted, even when ell does not divide N.
 - Changing an invariant lattice preserves the semisimplified residual representation; equality of chosen matrices is not required.
 
-Construct `artinConductor` for the torsion and Tate-module representations of
+Construct the Artin conductor for the torsion and Tate-module representations of
 elliptic curves over number fields, using inertia invariants and the Swan
 ramification filtration at primes of residue characteristic different from the
 coefficient prime. Construct the prime-to-coefficient residual conductor by the
 same invariant, not by deleting an arbitrary list of primes. Prove
-`artinConductor_isomorphic`. Consume EllipticCurves Layer 8’s semistable
+invariance under isomorphism. Consume EllipticCurves Layer 8’s semistable
 algorithmic–Artin comparison, giving rational-Tate-module exponents 0 and 1
 for good and multiplicative reduction. For E[ell] at a multiplicative prime
 of residue characteristic different from ell, prove
-`residualConductor_multiplicative`: the exponent is 0 if ell divides the
+the multiplicative residual-conductor formula: the exponent is 0 if ell divides the
 minimal discriminant valuation, and 1 otherwise. Over ℚ prove the elliptic
 wild bounds f₂≤8 and f₃≤5; odd semistable exponents are 0 or 1.
 (BS20, §2, equation (3), pp. 358–359;
@@ -558,60 +578,60 @@ wild bounds f₂≤8 and f₃≤5; odd semistable exponents are 0 or 1.
 
 Consume `gap:weight-two-lowering`: for E/ℚ and odd prime ell with
 irreducible E[ell], use the deletion level M₀ of BS20 equation (3).
-Prove the trace adapters `levelLowering_goodTrace` at p∤ell M M₀ and
-`levelLowering_removedTrace` at p∤ell M₀ with p exactly dividing M;
+Prove the good-prime trace congruence at p∤ell M M₀ and
+the removed-prime trace congruence at p∤ell M₀ with p exactly dividing M;
 the latter congruence is p+1≡±cₚ modulo the chosen coefficient prime λ.
 The prime-to-ell conductor comparison retains the supplier’s good or finite-flat
 multiplicative coefficient-prime hypotheses. (BS20, Theorem 3 and Lemma 2.1,
 p. 359; Theorem 4, p. 360.)
 
-Prove `removedPrimeBound`: if p≠ell is deleted from a multiplicative curve's
+Prove the removed-prime bound: if p≠ell is deleted from a multiplicative curve's
 level as above, then ell≤(sqrt(p)+1)^((M₀+1)/6). Establish the intermediate
 norm divisibility ell | Norm(p+1∓cₚ), Deligne's bound at every embedding,
 and Martin’s trivial-character newspace inequality g₀⁺(M₀)≤(M₀+1)/12
 (Martin2003v1, Theorem 2).
 (BS20, Lemma 2.2 and equation (4), p. 359.)
 
-Define `gammaZeroIndex` on all natural N by the rational value N∏_(q∈N.primeFactors)(1+1/q); use it for positive N. Define
-`krausF` by (μ(N)/6+1)^(2g₀⁺(N)), `krausG` by
-(μ(lcm(N,4))/6+1)² and `krausH` as their maximum. Prove
-`gammaZeroIndex_prime`, `krausH_ge_f`, `krausH_ge_g` and compatibility
+Define the Γ₀ index expression on all natural N by the rational value N∏_(q∈N.primeFactors)(1+1/q); use it for positive N. Define
+F_K(N)=(μ(N)/6+1)^(2g₀⁺(N)), G_K(N)=(μ(lcm(N,4))/6+1)²,
+and the Kraus majorant H_K(N)=max(F_K(N),G_K(N)). Prove
+μ(p)=p+1 at primes p, H_K(N)≥F_K(N) and H_K(N)≥G_K(N) and compatibility
 with ModularForms Layer 10's actual index and newspace dimension.
-Prove `krausRealization`: for a prime ell≥5, if E/ℚ has full rational two-torsion,
+Prove the Kraus realization theorem: for a prime ell≥5, if E/ℚ has full rational two-torsion,
 irreducible E[ell], Serre weight 2, prime-to-ell residual conductor N and
-ell>krausH(N), an actual elliptic curve F/ℚ has full rational two-torsion,
+ell>H_K(N), an actual elliptic curve F/ℚ has full rational two-torsion,
 conductor N and the same residual representation. Also prove
-`fullTwoTorsion_irreducible`: every elliptic curve E/ℚ with full rational
+the full-two-torsion irreducibility theorem: every elliptic curve E/ℚ with full rational
 two-torsion has irreducible E[ell] at every prime ell≥7; and
-`rationalTwoTorsion_irreducible`: every E/ℚ with a nonzero rational point
+the rational-two-torsion irreducibility theorem: every E/ℚ with a nonzero rational point
 of order two has irreducible E[ell] at every prime ell≥11, using
 `gap:rational-isogenies`, retaining the torsion hypotheses.
 (Kraus1997, §3.1, Théorème 4, p. 1144, for the weight-two realization input;
-the displayed krausH is the numerical majorant used in BS20.)
+the displayed H_K is the numerical majorant used in BS20.)
 (BS20, §2, equation (5) and Theorem 4, p. 360; Lemma 3.3 proof,
 p. 362; Lemma 3.5 proof, p. 363.)
 
 **Checks.**
 
 - μ(0)=0, μ(1)=1 and μ(4)=6; an empty prime product is 1.
-- N=1 with g₀⁺(1)=0 gives krausF(1)=1, krausG(1)=4 and krausH(1)=4; replacing the maximum by the first term loses the dyadic constraint.
-- N=11 with g₀⁺(11)=1 gives μ(11)=12, μ(44)=72 and krausH(11)=169; replacing the newspace by a Γ₁ space changes this value.
+- N=1 with g₀⁺(1)=0 gives F_K(1)=1, G_K(1)=4 and H_K(1)=4; replacing the maximum by the first term loses the dyadic constraint.
+- N=11 with g₀⁺(11)=1 gives μ(11)=12, μ(44)=72 and H_K(11)=169; replacing the newspace by a Γ₁ space changes this value.
 
 *Needs:* EllipticCurves Layers 2–4 and Layer 8’s semistable conductor comparison; EtaleCohomologyFoundations §F.4.0; `gap:newform-galois`, `gap:newform-coefficient-bound`, `gap:elliptic-modularity`, `gap:weight-two-lowering`, `gap:rational-isogenies`; ModularForms Layers 2–4, 8 and 10; LocalFieldsRamification Layers 3–4; Layer 0's explicit prime estimates only for the later progression level bounds.
 
 ### 1.2 Progression Frey specialization
 
-Define `tripleG` as g, `normalized` as (a,b,c), and `first_curve` as E below.
+Define the triple gcd as g, the normalized coefficient triple as (a,b,c), and the first Frey curve as E below.
 
 For integer n,d and a triple (i,j,h), put t_r=n+r*d, g=gcd(t_i,gcd(2*t_j,t_h)), a=t_i/g, b=-2*t_j/g, c=t_h/g. The specialization E has coefficients a1=a3=a6=0, a2=c-a, a4=-a*c, equivalently Y^2=X(X-a)(X+c). Under S and membership in A(k), g>0 and a,b,c are nonzero pairwise coprime with a+b+c=0. This is an application adapter to the supplier Frey model, not a second generic Frey carrier.
 
-Prove `first_curve_coefficients` (data): The native five coefficients are 0,c-a,0,-a*c,0, with a,c the normalized terms. `first_curve_normalization` (relation): Under S and a member of A(k), g>0; g*a=t_i, g*b=-2*t_j, g*c=t_h; a+b+c=0 and every pair is coprime. `first_curve_frey_compatibility` (compatibility): The specialization equals the supplier Frey model on the normalized coefficients, under the stated normalization hypotheses.
+The native five coefficients are 0,c-a,0,-a*c,0, with a,c the normalized terms. Under S and a member of A(k), g>0; g*a=t_i, g*b=-2*t_j, g*c=t_h; a+b+c=0 and every pair is coprime. The specialization equals the supplier Frey model on the normalized coefficients, under the stated normalization hypotheses.
 
 **Checks.**
 
-- `first_curve_unit_gcd` (computation): n=1,d=1,(i,j,h)=(0,1,2) gives g=1, (a,b,c)=(1,-4,3), a2=2,a4=-3.
-- `first_curve_even_gcd` (computation): n=2,d=1,(0,1,2) gives g=2, (a,b,c)=(1,-3,2), a2=1,a4=-2.
-- `first_curve_signed` (computation): n=-3,d=2,(0,1,2) gives (a,b,c)=(-3,2,1), a2=4,a4=3.
+- n=1,d=1,(i,j,h)=(0,1,2) gives g=1, (a,b,c)=(1,-4,3), a2=2,a4=-3.
+- n=2,d=1,(0,1,2) gives g=2, (a,b,c)=(1,-3,2), a2=1,a4=-2.
+- n=-3,d=2,(0,1,2) gives (a,b,c)=(-3,2,1), a2=4,a4=3.
 
 The helpers use integer division before casting to ℚ; under S, g>0 and the exact divisibility identities justify every displayed division by g. Normalize by the positive gcd. Use i+h=2*j and the gcd-of-terms contract. Specialize the supplier model to these coefficients and compare its native Weierstrass coefficients. Compare the progression model to the EllipticCurves worked Frey–Hellegouarch example coefficient by coefficient.
 
@@ -621,9 +641,9 @@ The helpers use integer division before casting to ℚ; under S, g>0 and the exa
 
 ### 1.3 First-family invariants and odd local properties
 
-Prove `first_local_invariants` for the native invariant equalities and the separate minimality and semistability targets below.
+Prove the first-family invariant identities for the native invariant equalities and the separate minimality and semistability targets below.
 
-For S and a triple in A(k), the native invariant identities are Delta(E)=16(abc)^2=64*t_i^2*t_j^2*t_h^2/g^6 and c4(E)=16(a^2-b*c), without an oddness restriction on ell. If ell is odd, prove `first_oddLocalProperties`: E is minimal and semistable at each odd prime, and ell divides v_p(Delta(E)) for every prime p≥k. The displayed Delta is for this equation, not an arbitrary minimal change at 2.
+For S and a triple in A(k), the native invariant identities are Delta(E)=16(abc)^2=64*t_i^2*t_j^2*t_h^2/g^6 and c4(E)=16(a^2-b*c), without an oddness restriction on ell. If ell is odd, prove the first-family odd local properties: E is minimal and semistable at each odd prime, and ell divides v_p(Delta(E)) for every prime p≥k. The displayed Delta is for this equation, not an arbitrary minimal change at 2.
 
 Compute the native Weierstrass discriminant and c4 by polynomial algebra. Pairwise coprimality forces c4 a unit whenever an odd prime divides Delta; use the supplier minimal/multiplicative criterion. At p≥k the gcd is a unit and the large-prime valuations are multiples of ell.
 
@@ -633,7 +653,7 @@ Compute the native Weierstrass discriminant and c4 by polynomial algebra. Pairwi
 
 ### 1.4 Progression generalized Fermat identities
 
-Prove `linear_fermat_identities` with the hypotheses and conclusions below.
+Prove the generalized Fermat identities with the hypotheses and conclusions below.
 
 For any integers i1<i2<i3, (i3-i2)t_i1+(i1-i3)t_i2+(i2-i1)t_i3=0. Under signed factorization substitute t_i=A_i*z_i^ell. For a triple in A(k) this is A_i*z_i^ell-2*A_j*z_j^ell+A_h*z_h^ell=0.
 
@@ -645,17 +665,17 @@ Expand t_i=n+i*d, cancel n and d terms, then substitute the signed factor equali
 
 ### 1.5 Equal-sum second Frey family
 
-Define `secondA`, `secondB` and `second_curve` by A, B and the displayed native model below.
+Define the endpoint product A, the middle product B and the second Frey curve by A, B and the displayed native model below.
 
 For q=(j1,i1,i2,j2) define A=t_j1*t_j2, B=t_i1*t_i2 and the integer kappa=j1*j2-i1*i2. The native Weierstrass model has coefficients 0,2*kappa*d,0,kappa*A,0. For q in I(k), A-B=kappa*d^2, kappa<0 and |kappa|<k^2. Signed factor substitution gives A_j1*A_j2*(z_j1*z_j2)^ell-A_i1*A_i2*(z_i1*z_i2)^ell=kappa*d^2.
 
-Prove `second_curve_coefficients` (data): The coefficients are 0,2*kappa*d,0,kappa*A,0. `second_curve_difference` (relation): Membership in I(k) implies A-B=kappa*d^2 and kappa<0. `second_curve_equation` (compatibility): Its native affine equation is Y^2=X*(X^2+2*kappa*d*X+kappa*A).
+The coefficients are 0,2*kappa*d,0,kappa*A,0. Membership in I(k) implies A-B=kappa*d^2 and kappa<0. Its native affine equation is Y^2=X*(X^2+2*kappa*d*X+kappa*A).
 
 **Checks.**
 
-- `second_curve_three` (computation): n=d=1,q=(0,1,1,2) gives kappa=-1,A=3,B=4,a2=-2,a4=-3.
-- `second_curve_signed` (computation): n=-3,d=2,q=(0,1,1,2) gives kappa=-1,A=-3,B=1,a2=-4,a4=3.
-- `second_curve_not_first` (non-example): At n=d=1,q=(0,1,1,2) the second a2 is -2, while the first model on (0,1,2) has a2=2.
+- n=d=1,q=(0,1,1,2) gives kappa=-1,A=3,B=4,a2=-2,a4=-3.
+- n=-3,d=2,q=(0,1,1,2) gives kappa=-1,A=-3,B=1,a2=-4,a4=3.
+- At n=d=1,q=(0,1,1,2) the second a2 is -2, while the first model on (0,1,2) has a2=2.
 
 Use the equal-sum cancellation to obtain the quadratic identity. This second curve is source-specific and is not a generic replacement elliptic-curve carrier. Its invariants are obtained by the native coefficient formulas.
 
@@ -665,9 +685,9 @@ Use the equal-sum cancellation to obtain the quadratic identity. This second cur
 
 ### 1.6 Second-family invariants and local tests
 
-Prove `second_local_invariants` for the two invariant identities below and the separate local reduction targets under their stated prime conditions.
+Prove the second-family invariant identities for the two invariant identities below and the separate local reduction targets under their stated prime conditions.
 
-For all integers n,d and q in I(k), the native invariant identities are Delta(E_q)=-64*kappa^3*A^2*B and c4(E_q)=16*kappa*(4*kappa*d^2-3*A). Under S with odd ell prove `second_largePrimeLocalProperties`: at prime p≥k with p not dividing kappa the model is minimal and semistable and ell divides v_p(Delta). Prove `second_halfIntervalLocalProperties` in the separate Lemma 4.1 branch q=(i,i+1,i+p-1,i+p) with k/2<p≤k, p≥5, p not dividing d and both endpoint terms divisible by p, one has p|A, p not dividing B*kappa*d, ell|v_p(A), c4 a p-unit and positive Delta valuation divisible by ell; thus reduction is minimal multiplicative there.
+For all integers n,d and q in I(k), the native invariant identities are Delta(E_q)=-64*kappa^3*A^2*B and c4(E_q)=16*kappa*(4*kappa*d^2-3*A). Under S with odd ell prove the second-family large-prime local properties: at prime p≥k with p not dividing kappa the model is minimal and semistable and ell divides v_p(Delta). Prove the second-family half-interval local properties in the separate Lemma 4.1 branch q=(i,i+1,i+p-1,i+p) with k/2<p≤k, p≥5, p not dividing d and both endpoint terms divisible by p, one has p|A, p not dividing B*kappa*d, ell|v_p(A), c4 a p-unit and positive Delta valuation divisible by ell; thus reduction is minimal multiplicative there.
 
 Compute invariants using A-B=kappa*d^2. For p≥k use gcd and large valuations. For the half-interval two-term branch use unique or paired term valuations from the product equation and p-unit d, gaps p-1,1; prove the c4 unit directly. Do not invoke the p≥k statement at p<k.
 
@@ -677,7 +697,7 @@ Compute invariants using A-B=kappa*d^2. For p≥k use gcd and large valuations. 
 
 ### 1.7 First-family reduced-level bounds
 
-Prove `first_reduced_level` with the hypotheses and conclusions below.
+Prove the first-family reduced-level theorem with the hypotheses and conclusions below.
 
 For S, ell≥7 and a in A(k), the irreducible residual representation of E_a occurs in a weight-two newform at the deletion level M_a. M_a divides 2^8*A_i*A_j*A_h, its odd part is squarefree, M_a divides 2^7*product over primes q≤k of q, and M_a≤2^7*exp(1.000081*k). No identification with the prime-to-ell residual conductor is implicit.
 
@@ -689,7 +709,7 @@ Import the uniform full-two-torsion irreducibility cutoff and modular level lowe
 
 ### 1.8 Second-family reduced-level bounds
 
-Prove `second_reduced_level` with the hypotheses and conclusions below.
+Prove the second-family reduced-level theorem with the hypotheses and conclusions below.
 
 For S, ell≥11 and q in I(k), E_q has irreducible residual representation realized by a weight-two newform at deletion level M_q, with M_q dividing 2^7*3^5*kappa^2*product over primes r≤k of r^2 and M_q≤2^7*3^5*k^4*exp(2.000162*k).
 
@@ -713,7 +733,7 @@ Suppose p does not divide d. One or two terms are divisible by p. Choose a first
 
 ### 1.10 Serre-weight and residual-conductor bridge
 
-Prove `coefficient_prime_bridge` with the hypotheses and conclusions below.
+Prove the coefficient-prime bridge with the hypotheses and conclusions below.
 
 Under H and a in A(k), E_a[ell] is irreducible of Serre weight 2, its prime-to-ell Artin conductor equals the deletion level M_a, and ell does not divide M_a.
 
@@ -725,7 +745,7 @@ The level bound places ell above all level primes. At ell, use the good or finit
 
 ### 1.11 Kraus threshold for progression levels
 
-Prove `kraus_progression_threshold` with the hypotheses and conclusions below.
+Prove the progression Kraus threshold bound with the hypotheses and conclusions below.
 
 Under H and a in A(k), mu(M_a) and mu(lcm(M_a,4)) are at most 2^8*log(k)*exp(1.000081*k), and the exact Kraus threshold H_K(M_a) is less than exp(10^k). Here mu is the Gamma0 index and the dimension in H_K is the trivial-character newspace dimension.
 
@@ -737,7 +757,7 @@ Use the primorial divisibility and the explicit totient ratio bound. Combine the
 
 ### 1.12 Actual comparison elliptic curve
 
-Prove `comparison_curve` with the hypotheses and conclusions below.
+Prove the comparison-curve theorem with the hypotheses and conclusions below.
 
 Under H, for every a in A(k) there exists an actual elliptic curve F_a/Q with full rational two-torsion, conductor exactly M_a and residual representation at the same prime ell isomorphic to that of E_a. All subsequent choices use one such F_a for each triple.
 
@@ -749,7 +769,7 @@ Apply the Kraus realization theorem with the coefficient-prime bridge, irreducib
 
 ### 1.13 Good reduction and forced trace zero
 
-Prove `good_trace_comparison` with the hypotheses and conclusions below.
+Prove the good-reduction and trace comparison with the hypotheses and conclusions below.
 
 Under H, a in A(k), and prime k/2<p≤k, both E_a and its chosen F_a have good reduction at p and their integer Frobenius traces agree. If p is 3 modulo 4, that common trace is zero and F_a has supersingular reduction. Trace zero implies the supersingular criterion here because p≥5; the geometric definition is not replaced by trace zero in all characteristics.
 
@@ -777,22 +797,20 @@ For a field K of characteristic different from 2 and λ∈K with λ≠0,1,
 use ModularCurves §4C’s universal Legendre family and its field fibres, and
 ArithmeticDynamics §6.35 `legendreCurve` and `legendreCurve_Δ` for its native
 field presentation. Construct the scaled twists and the full-two-torsion adapter here.
-The light model `twistedLegendre lambda` has coefficients (0,−2(1+λ),0,4λ,0)
-and equation y²=x(x−2)(x−2λ), including singular parameters. Prove
-`twistedLegendre_equation`, `twistedLegendre_discriminant` and
-`twistedLegendre_isElliptic_iff`: over characteristic different from two it is
+The scaled Legendre model with parameter λ has coefficients (0,−2(1+λ),0,4λ,0)
+and equation y²=x(x−2)(x−2λ), including singular parameters. Prove its equation and discriminant formula and characterize ellipticity: over characteristic different from two it is
 elliptic exactly when λ≠0,1.
-Prove `legendre_rootOrderings`, `legendre_parameter_nonzero` and
-`legendre_parameter_ne_one`: every elliptic curve with full K-rational
+Prove the six labelled Legendre root orderings, nonvanishing of the Legendre parameter and
+nonvanishing of one minus the parameter: every elliptic curve with full K-rational
 two-torsion is a scaled Legendre model and the six labelled root orderings give
 λ, 1−λ, 1/λ, 1/(1−λ), λ/(λ−1), (λ−1)/λ. Labels are retained when values
-coincide. At good odd primes over ℚ prove `legendre_good_units`: both λ
+coincide. At good odd primes over ℚ prove the good-prime unit theorem: both λ
 and 1−λ are local units, and use ClassicalArithmeticCompletion §1.51 for the
 odd support of their squareclass characters. Interpret EllipticCurves' native
 descent/halving criterion in these split cubic coordinates. Prove
-`legendre_square_twoPrimary`: a square parameter over a finite field of odd
+the square-parameter two-primary subgroup theorem: a square parameter over a finite field of odd
 characteristic gives the required subgroup of order 8. Prove
-`minusOne_twoPrimary` at primes p≡5 mod 8 for y²=x(x−1)(x+1), with the
+the minus-one two-primary point-count theorem at primes p≡5 mod 8 for y²=x(x−1)(x+1), with the
 exact assertion that its point count is divisible by 8 but not by 16.
 (BS20, §6, Lemmas 6.2–6.6, pp. 367–372.)
 
@@ -804,10 +822,10 @@ exact assertion that its point count is divisible by 8 but not by 16.
 
 For every field of characteristic different from 2, nonzero t,v with
 2t²+2v²=1 and an element i with i²=−1, prove
-`caseTwo_orderFourWitness`: on y²=x(x−2)(x−2λ), λ=2t², the point
+the Case-II order-four witness: on y²=x(x−2)(x−2λ), λ=2t², the point
 (2λ+4itv,8itv(t+iv)) doubles to (2λ,0). Prove its native descent-coordinate
 identities and the resulting two-primary obstruction when tv is a nonsquare
-at p≡5 mod 8. Prove `symmetricCubic_traceZero` for every odd prime
+at p≡5 mod 8. Prove the symmetric-cubic trace-zero theorem for every odd prime
 p≡3 mod 4 and every nonzero quadratic twist of x(x−1)(x+1), and the
 model-specific twist/trace comparisons at good primes. (BS20, Lemmas 6.4–6.6,
 pp. 368–372, especially the Case-II point calculation on pp. 371–372.)
@@ -815,11 +833,11 @@ pp. 368–372, especially the Case-II point calculation on pp. 371–372.)
 **Checks.**
 
 - t=v=1/2 and λ=1/2 give the point (1+i,−1+i) on y²=x(x−2)(x−1); both sides equal −2i.
-- The parameters 0 and 1 make `twistedLegendre` singular, while λ=1/2 gives nonzero discriminant; using a Legendre model without the scale two changes these values.
+- The parameters 0 and 1 make the scaled Legendre model singular, while λ=1/2 gives nonzero discriminant; using a Legendre model without the scale two changes these values.
 - Its double is (1,0), not the identity; the point has exact order four in characteristic zero.
 - At p=3 the symmetric curve has trace 0; its trace and the geometric supersingular criterion are compared only within their stated characteristic ranges.
 
-Consume `gap:isogeny-uniformity` (Lemos2017v2, Theorem 1.1, p. 2). Prove `cm_halfParameter_image`: for the CM λ=1/2
+Consume `gap:isogeny-uniformity` (Lemos2017v2, Theorem 1.1, p. 2). Prove the CM half-parameter image theorem: for the CM λ=1/2
 model the same residual image lies in the normalizer of its CM Cartan and
 is proper at ell>37; specify the CM field, its torsion action and the
 conjugacy comparison under residual isomorphism. Integrality of CM j is
@@ -831,19 +849,21 @@ the rational-isogeny surjectivity result cited there, p. 373, and its cited Lemo
 
 ### 2.2 Legendre case partition
 
-Define `inCaseSquareclasses u` as (∃t∈ℚ,u=−t²) or (∃t∈ℚ,u=2t²), including zero. Define `case_partition` by the two finite sets below.
+Define membership in −ℚ²∪2ℚ² by (∃t∈ℚ,u=−t²) or (∃t∈ℚ,u=2t²), including zero. Define the Legendre case partition by the two finite sets below.
 
 Given k and finite parameter sets L_a of rational numbers for a in A(k), form CaseI={a: some lambda in L_a is neither minus a rational square nor twice a rational square} and CaseII=A(k) minus CaseI. In the application L_a is the six-parameter set of the same chosen F_a, constructed by the native Legendre interfaces of this layer. Both cases are disjoint and exhaust A(k).
 
-Prove `case_partition_mem` (characterisation): Membership in CaseI is equivalent to membership in A(k) and the stated existential nonsquare condition; membership in CaseII is equivalent to membership in A(k) and every parameter being in -Q^2 union2Q^2. `case_partition_union` (relation): The union of the two components is A(k) and they are disjoint. `case_partition_reindex` (functoriality): Pointwise equal finite parameter sets give equal partitions.
+- Membership in CaseI is equivalent to membership in A(k) and the stated existential nonsquare condition; membership in CaseII is equivalent to membership in A(k) and every parameter being in -Q^2 union2Q^2.
+- The union of the two components is A(k) and they are disjoint.
+- Pointwise equal finite parameter sets give equal partitions.
 
 **Checks.**
 
-- `case_partition_three` (computation): k=3 and L_a={3} put the unique triple in CaseI, not CaseII.
-- `case_partition_minus_one` (computation): k=3 and L_a={-1} put the unique triple in CaseII.
-- `case_partition_twice_square` (computation): 2 lies in the twice-square branch, and constant parameter sets {2} put A(3) wholly in CaseII; omitting that branch fails.
+- k=3 and L_a={3} put the unique triple in CaseI, not CaseII.
+- k=3 and L_a={-1} put the unique triple in CaseII.
+- 2 lies in the twice-square branch, and constant parameter sets {2} put A(3) wholly in CaseII; omitting that branch fails.
 - Zero lies in both branches; 3 lies in neither.
-- `case_partition_empty` (degenerate): k=0 gives two empty sets for every parameter assignment.
+- k=0 gives two empty sets for every parameter assignment.
 
 Filter A(k) by the explicit rational-square predicate and take the relative complement. Use the native Legendre interfaces of this layer, retaining all six labelled root orderings.
 
@@ -853,9 +873,9 @@ Filter A(k) by the explicit rational-square predicate and take the relative comp
 
 ### 2.3 Case-I nonsquare and absolute projection
 
-Prove `case_one_projection` with the hypotheses and conclusions below.
+Prove the Case-I character projection with the hypotheses and conclusions below.
 
-Under H, every associated Legendre parameter lambda is a nonsquare modulo every prime k/2<p≤k with p = 3 mod 8. Under Hplus, a CaseI parameter lies outside all four squareclasses ±Q^2,±2Q^2. The primitive characters of lambda,-lambda,2lambda,-2lambda have mod8 projection mu1-mu2-mu3+mu4=4*(lambda/p) at p = 3 mod 8 and zero otherwise, away from support. One of the four therefore has absolute prime-weighted sum at least (1-3*0.002811)*k/8 and nontrivial odd conductor. The absolute values are printed in equation (21) and Proposition 6.1, equation (16).
+Under H, every associated Legendre parameter lambda is a nonsquare modulo every prime k/2<p≤k with p = 3 mod 8. Under H⁺, a CaseI parameter lies outside all four squareclasses ±Q^2,±2Q^2. The primitive characters of lambda,-lambda,2lambda,-2lambda have mod8 projection mu1-mu2-mu3+mu4=4*(lambda/p) at p = 3 mod 8 and zero otherwise, away from support. One of the four therefore has absolute prime-weighted sum at least (1-3*0.002811)*k/8 and nontrivial odd conductor. The absolute values are printed in equation (21) and Proposition 6.1, equation (16).
 
 Use trace zero, the supplier Legendre order-four test and the congruence #F_p=p+1 to rule out a square lambda. The mod8 classes rule out the other excluded squareclasses. Apply the explicit theta(x;8,3) error bound at k and k/2. The triangle inequality bounds the maximum absolute sum by a quarter of the absolute signed combination.
 
@@ -865,15 +885,15 @@ Use trace zero, the supplier Legendre order-four test and the congruence #F_p=p+
 
 ### 2.4 Case-II positive normalization and square test
 
-Prove `case_two_normalization` with the hypotheses and conclusions below.
+Prove the positive Case-II normalization with the hypotheses and conclusions below.
 
 Under H and CaseII one can choose lambda=2*t^2 and 1-lambda=2*v^2 with positive rational t,v, so 2*t^2+2*v^2=1. For each prime k/2<p≤k with p = 5 mod 8, t and v are p-units and the Legendre symbol of t*v is +1.
 
-Use the six-parameter transformations to place lambda in(0,1) and both lambda,1-lambda in2Q^2. At p = 5 mod 8 compare the first-family reduction to a twist of the CM model with lambda=-1. If tv were nonsquare, the order-four witness and native halving criterion give a subgroup isomorphic to ℤ/2ℤ×ℤ/8ℤ. Its order 16 would divide #F′_λ(𝔽_p)=p+1±a_p(F₋₁). By `minusOne_twoPrimary`, 8 exactly divides p+1−a_p(F₋₁); since p≡5 mod 8, a_p(F₋₁)≡6 mod 8 and 4 exactly divides p+1+a_p(F₋₁). Neither possible count is divisible by 16.
+Use the six-parameter transformations to place lambda in(0,1) and both lambda,1-lambda in2Q^2. At p = 5 mod 8 compare the first-family reduction to a twist of the CM model with lambda=-1. If tv were nonsquare, the order-four witness and native halving criterion give a subgroup isomorphic to ℤ/2ℤ×ℤ/8ℤ. Its order 16 would divide #F′_λ(𝔽_p)=p+1±a_p(F₋₁). By the minus-one two-primary point-count theorem, 8 exactly divides p+1−a_p(F₋₁); since p≡5 mod 8, a_p(F₋₁)≡6 mod 8 and 4 exactly divides p+1+a_p(F₋₁). Neither possible count is divisible by 16.
 
 **Checks.**
 
-- `case_two_counts_five`: over 𝔽₅ the symmetric curve has eight points and its twist by the nonsquare 2 has four; neither count is divisible by 16. This is a named native-point-count boundary target.
+- the point-count comparison over 𝔽₅: over 𝔽₅ the symmetric curve has eight points and its twist by the nonsquare 2 has four; neither count is divisible by 16. This is a named native-point-count boundary target.
 
 *Needs:* Layer 2 — legendre case partition; Layer 1 — good reduction and forced trace zero; Layer 2, native Legendre interfaces.
 
@@ -881,7 +901,7 @@ Use the six-parameter transformations to place lambda in(0,1) and both lambda,1-
 
 ### 2.5 CM exclusion for progression Frey curves
 
-Prove `frey_non_cm` with the hypotheses and conclusions below.
+Prove the non-CM theorem for progression Frey curves with the hypotheses and conclusions below.
 
 Under H, the native elliptic curve E_a is not CM, for every a in A(k). Its j-invariant is 2^8*(a^2-b*c)^3/(a*b*c)^2. Integral j and pairwise coprimality would force each of a,b,c to be a signed power of 2; the relation a+b+c=0 forces two to be equal. The resulting index equations imply d=0 or d divides3, contrary to H and the half-prime-divisibility theorem.
 
@@ -893,9 +913,9 @@ Import algebraic integrality of CM j-values and deduce integer j for rational j.
 
 ### 2.6 Case-II conductor exclusion and projection
 
-Prove `case_two_projection` with the hypotheses and conclusions below.
+Prove the Case-II character projection with the hypotheses and conclusions below.
 
-Under Hplus and CaseII choose a character from the four squareclasses omega*t*v, omega in{±1,±2}. One has absolute prime-weighted sum at least (1-3*0.002811)*k/8; its odd conductor divides M_a and is not 1. If odd conductor were1, tv is a square or twice a square; parity excludes the latter, quartic descent forces lambda=1/2, and the CM residual image versus non-CM surjectivity at ell>37 contradicts the residual comparison.
+Under H⁺ and CaseII choose a character from the four squareclasses omega*t*v, omega in{±1,±2}. One has absolute prime-weighted sum at least (1-3*0.002811)*k/8; its odd conductor divides M_a and is not 1. If odd conductor were1, tv is a square or twice a square; parity excludes the latter, quartic descent forces lambda=1/2, and the CM residual image versus non-CM surjectivity at ell>37 contradicts the residual comparison.
 
 Project to primes 5 mod 8 using the previous square test and the explicit theta(x;8,5) estimate. Use Legendre parameter valuation and conductor support. Clear denominators primitively in2t^2+2v^2=1. Apply the exact T^4+V^4=2U^2 descent theorem, not FLT4. Import the CM normalizer image and the rational-isogeny surjectivity theorem, then use the same residual comparison.
 
@@ -905,20 +925,21 @@ Project to primes 5 mod 8 using the previous square test and the explicit theta(
 
 ### 2.7 Simultaneous quadratic character family
 
-Prove `character_family` with the hypotheses and conclusions below. Its Lean
-signature records the same-witness mass and coefficient-support milestone using
-the explicit finite sum; divisibility by the deletion level M_a remains in the
-README target `character_family_support`.
+Prove the simultaneous character-family theorem with all the conclusions below,
+including divisibility by the deletion level M_a for the same chosen character.
 
-Under Hplus choose for every a in A(k) one pair (N_a,chi_a), with N_a>1 and chi_a a native primitive real quadratic character modulo its conductor N_a. The same choice simultaneously has: |sum over integers k/2<m≤k of chi_a(m)*Lambda(m)|>0.1239*k; N_a^odd squarefree, N_a^odd dividing M_a and A_i*A_j*A_h, N_a^odd≠1; and N_a≤8*N_a^odd. N_a is the actual native character conductor, not a freely assigned modulus.
+Under H⁺ choose for every a in A(k) one pair (N_a,chi_a), with N_a>1 and chi_a a native primitive real quadratic character modulo its conductor N_a. The same choice simultaneously has: |sum over integers k/2<m≤k of chi_a(m)*Lambda(m)|>0.1239*k; N_a^odd squarefree, N_a^odd dividing M_a and A_i*A_j*A_h, N_a^odd≠1; and N_a≤8*N_a^odd. N_a is the actual native character conductor, not a freely assigned modulus.
 
-Prove `character_family_primitive` (compatibility): For every a, chi_a.IsPrimitive and chi_a.conductor=N_a; it is quadratic and real. `character_family_mass` (relation): The absolute half-interval von-Mangoldt sum is strictly greater than 0.1239*k. `character_family_support` (relation): N_a^odd is squarefree, divides both M_a and A_i*A_j*A_h, and N_a≤8*N_a^odd. `character_family_nonprincipal` (characterisation): N_a^odd≠1, hence N_a>1 and chi_a is not the principal character.
+- For every a, chi_a.IsPrimitive and chi_a.conductor=N_a; it is quadratic and real.
+- The absolute half-interval von-Mangoldt sum is strictly greater than 0.1239*k.
+- N_a^odd is squarefree, divides both M_a and A_i*A_j*A_h, and N_a≤8*N_a^odd.
+- N_a^odd≠1, hence N_a>1 and chi_a is not the principal character.
 
 **Checks.**
 
-- `character_family_one` (compatibility): Under Hplus, at every triple chi_a(1)=1.
-- `character_family_zero` (non-example): Under Hplus, chi_a(0)=0 and N_a>1; the principal modulus1 character cannot be selected.
-- `character_family_same_witness` (characterisation): Under Hplus, each selected pair satisfies both the large absolute sum and the odd-support bound; selecting different pairs for the two properties does not meet the contract.
+- Under H⁺, at every triple chi_a(1)=1.
+- Under H⁺, chi_a(0)=0 and N_a>1; the principal modulus1 character cannot be selected.
+- Under H⁺, each selected pair satisfies both the large absolute sum and the odd-support bound; selecting different pairs for the two properties does not meet the contract.
 
 Use the exhaustive partition and the respective four-character constructions. The primitive squareclass character gives the exact conductor and dyadic bound. Convert prime sums to von-Mangoldt sums by the effective prime-power tail; the strict numerical margin is0.000045875*k. Fix one finite family only after all its simultaneous conclusions hold.
 
@@ -940,14 +961,14 @@ Prove the progression-specific harmonic-family criterion of Proposition 7.2 for 
 
 ### 3.1 General effective analytic inputs
 
-Define `weightedHalf k value` as ∑_(floor(k/2)<m≤k) value(m)Λ(m). Prove `weightedHalfAdd`, `weightedHalfZero` and its compatibility with the prime sum plus the prime-power tail.
+Define the weighted half-interval sum W(k,value) by ∑_(floor(k/2)<m≤k) value(m)Λ(m). Prove additivity of the weighted half-interval sum, its value at the zero weight and its compatibility with the prime sum plus the prime-power tail.
 
 **Checks.**
 
 - At k=0 the interval is empty and the sum is 0.
 - At k=2 with value identically 1, the result is log 2; the upper endpoint is included.
 - At k=1 with value identically 1, the result is 0 since Λ(1)=0; treating 1 as a prime gives a wrong weight.
-- `weightedHalf 4 (fun _ => 1)=log 3+log 2`: the contribution of 4 is log 2, not zero.
+- W(4,1)=log 3+log 2: the contribution of 4 is log 2, not zero.
 
 Fix an effective absolute c* with 0<c*<log 2 small enough for the exceptional-zero
 repulsion contract. For a primitive nonprincipal real quadratic character
@@ -966,7 +987,7 @@ hold; it is not changed with the progression. These are unconditional zero
 statements, with no GRH premise. (BS20, §7, equations (23)–(26) and
 proof of Proposition 7.2, pp. 374–376.)
 
-Prove `smoothModulusCharacterSum`: for r≥1, positive integer moduli
+Prove the smooth-modulus character-sum bound: for r≥1, positive integer moduli
 q₁,…,qᵣ, complex Dirichlet characters πᵢ modulo qᵢ, q=q₁>1 squarefree,
 π₁ primitive and gcd(q,q₂⋯qᵣ)=1, every integer M and positive real R with
 R≥max(q₂,…,qᵣ,q^(1/4))*q^(5/4) satisfy
@@ -974,26 +995,26 @@ R≥max(q₂,…,qᵣ,q^(1/4))*q^(5/4) satisfy
 The maximum includes q^(1/4), also when r=1; τ(q) is q.divisors.card,
 and all fractional powers are real. (BS20, Theorem 6, pp. 376–377;
 IwaniecKowalski2004, Theorem 12.13.) Distinctness in
-`smoothCharacterCorrelation` means inequality of the pulled-back functions
+the smooth-character correlation bound means inequality of the pulled-back functions
 ℤ→ℝ, so it is meaningful at different conductors.
 
-Prove `finiteGramBound` over any real or complex inner-product
+Prove the finite Gram inequality over any real or complex inner-product
 space and every finite vector family (Bombieri1971, Proposition 1): for vectors y_a and x, ∑_a |⟨x,y_a⟩|²≤‖x‖²·max_a∑_b|⟨y_a,y_b⟩|,
 with the empty family giving 0 and a nonempty family for the displayed maximum.
 Equivalently, for every nonnegative real C bounding every Gram row sum, the left
 side is at most C‖x‖², including an empty family. Separate its diagonal and
-off-diagonal terms. Prove `smoothCharacterCorrelation`:
+off-diagonal terms. Prove the smooth-character correlation bound:
 for fixed c₂>0 there are effective c₃>0 and K such that for k≥K,
 distinct primitive quadratic characters with positive conductors N₁,N₂≤k^c₂ and
 largest prime factors at most k^(7/16) satisfy
-|∑_(k/2<m≤k)χ₁(m mod N₁)χ₂(m mod N₂)|≤k^(1−c₃). Use `smoothModulusCharacterSum`, the coprime-character product and exclusion
+|∑_(k/2<m≤k)χ₁(m mod N₁)χ₂(m mod N₂)|≤k^(1−c₃). Use the smooth-modulus character-sum bound, the coprime-character product and exclusion
 identities, bounded CRT blocks and finite differencing before this specialization.
 The ambient product modulus and primitive product conductor remain distinct;
 principal components are retained. CRT and differencing alone do not prove the
 cancellation theorem. (BS20, Proposition 8.2 and its proof, pp. 376–379;
 equations (32)–(35), pp. 379–380.)
 
-Prove `quadraticConductor_maxPrime_lower`: for every primitive quadratic
+Prove the largest-prime lower bound for quadratic conductors: for every primitive quadratic
 character over ℝ of positive conductor N>1, 0.94 log N<Nat.maxPrimeFac N.
 Retain dyadic part 1,4,8. The small-conductor range is part of the theorem,
 not an asymptotic hypothesis. (BS20, Lemma 7.3, p. 375.)
@@ -1012,25 +1033,25 @@ the least ratio P/log(8∏p) in this finite list is 3/log 24>0.94.
 - The principal character has a main term of order k and is excluded from a nonprincipal PNT error estimate.
 - Equal characters have diagonal correlation of order k and are excluded from the strict off-diagonal power saving.
 
-*Needs:* `gap:character-pnt`, `gap:exceptional-zero-repulsion`, `gap:small-conductor-zeros`; `smoothModulusCharacterSum` for the correlation specialization; ClassicalArithmeticCompletion §1.51 for quadratic-conductor support; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's explicit prime estimates and divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
+*Needs:* `gap:character-pnt`, `gap:exceptional-zero-repulsion`, `gap:small-conductor-zeros`; the smooth-modulus character-sum bound for the correlation specialization; ClassicalArithmeticCompletion §1.51 for quadratic-conductor support; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's explicit prime estimates and divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
 
 ### 3.2 Harmonic smooth-conductor criterion
 
-Prove `harmonic_criterion` with the hypotheses and conclusions below.
+Prove the harmonic smooth-conductor criterion with the hypotheses and conclusions below.
 
-For each fixed 0<c1<1 there is an effectively computable k1(c1) such that under Hplus, any finite D subset A(k) with pairwise distinct P(N_a), P(N_a)<(log k)^(1-c1) and sum over D of 1/P(N_a)≥0.166 forces k≤k1(c1). Here P is the native largest prime factor and all selected characters are nonprincipal.
+For each fixed 0<c1<1 there is an effectively computable k1(c1) such that under H⁺, any finite D subset A(k) with pairwise distinct P(N_a), P(N_a)<(log k)^(1-c1) and sum over D of 1/P(N_a)≥0.166 forces k≤k1(c1). Here P is the native largest prime factor and all selected characters are nonprincipal.
 
 For a nonexceptional character use log N<1.07*(log k)^(1-c1) and the supplier effective PNT: the error is O(k*exp(-c*(log k)^min(c1,1/2))*(log k)^4), contradicting the fixed lower bound for effective large k. If all characters are exceptional, order their conductors; repulsion gives N_j≥N_1^(2^(j-1)), strictly for j≥2. The conductor–largest-prime theorem and 1/0.94<1.07, 2/0.94<2.13 give reciprocal mass<2.13/log N_1, so N_1≤373743<400000. Use the checked unconditional small-conductor zero-exclusion theorem, not an assumed GRH statement.
 
-*Needs:* Layer 2 — simultaneous quadratic character family; Layer 0, explicit prime estimates; Layer 3 `quadraticConductor_maxPrime_lower`; `gap:character-pnt`, `gap:exceptional-zero-repulsion`, `gap:small-conductor-zeros`; Mathlib `Nat.maxPrimeFac`.
+*Needs:* Layer 2 — simultaneous quadratic character family; Layer 0, explicit prime estimates; Layer 3 the largest-prime lower bound for quadratic conductors; `gap:character-pnt`, `gap:exceptional-zero-repulsion`, `gap:small-conductor-zeros`; Mathlib `Nat.maxPrimeFac`.
 
 ([BS20], Proposition 7.2, pp. 374-375; §7 proof, p.375; decay exponent for general c1; §7 proof, pp.375–376.)
 
 ### 3.3 Many smooth characters criterion
 
-Prove `many_character_criterion` with the hypotheses and conclusions below.
+Prove the many-character criterion with the hypotheses and conclusions below.
 
-For each c2>10 there is an effective k2(c2) such that under Hplus any B subset A(k) with |B|>17*log k, pairwise distinct selected characters, P(N_a)≤k^(7/16) and N_a<k^c2 forces k≤k2(c2). Quantitative proof: the mean squared absolute weighted sum is at most (k*log k/2+O(k))*((k+1)/(34*log k)+k^(1-c3))=(1/68+o(1))*k^2, where c3(c2)>0 is effective.
+For each c2>10 there is an effective k2(c2) such that under H⁺ any B subset A(k) with |B|>17*log k, pairwise distinct selected characters, P(N_a)≤k^(7/16) and N_a<k^c2 forces k≤k2(c2). Quantitative proof: the mean squared absolute weighted sum is at most (k*log k/2+O(k))*((k+1)/(34*log k)+k^(1-c3))=(1/68+o(1))*k^2, where c3(c2)>0 is effective.
 
 Apply the Layer 3 finite Gram inequality to x_m=Lambda(m), y_a,m=chi_a(m) on the integer half interval. The diagonal is at most(k+1)/2, the input norm is k log k/2+O(k), and the generic smooth-modulus cancellation bound controls off-diagonal pairs by k^(1-c3). Its proof must use the product ambient modulus separately from the primitive conductor and eventual divisor subpower bounds. Compare1/68<0.1239^2; no fourth power of0.1239 enters.
 
@@ -1052,8 +1073,8 @@ Define survivors avoiding a prime set S of reciprocal mass below 0.17 and the tw
 
 ### 4.1 Quantitative three-term progressions
 
-Prove `roth_cutoff_substitution`: 10⁶<132 log(2)·10⁵<10⁷, certifying the density substitution below.
-Prove `quantitativeThreeAP`: for 0<δ<1, a subset J of range(k) with
+Prove the numerical Roth substitution: 10⁶<132 log(2)·10⁵<10⁷, certifying the density substitution below.
+Prove the quantitative three-term progression theorem: for 0<δ<1, a subset J of range(k) with
 |J|≥δk and k≥exp(exp(132 log(2)/δ)) contains i<j<h with i+h=2j,
 all in J. The proof supplies this displayed bound rather than an unspecified
 qualitative threshold. (RahmanRoth, as quoted in BS20, §9, equation (36), p. 381; BS20, §9, Theorem 8 and its application in the proof
@@ -1069,23 +1090,27 @@ of Proposition 9.1, pp. 381–384.)
 
 ### 4.2 Thin-prime sieve survivors
 
-Define `Tpr`, `Upr` and `thin_prime_survivors` by the two prime intervals and the set J below.
+Define Tₚᵣ, Uₚᵣ and the thin-prime survivor set by the two prime intervals and the set J below.
 
 For n,d,k and a finite set S of primes≤k define T_pr={p prime:k^(7/16)<p≤k}, U_pr={p prime:(log k)^(1-10^-4)<p≤10^4*log k}, and J=range(k) minus the union of divisibility index sets I_p for p in S union T_pr union U_pr. Both lower endpoints are open; no integer ceiling replaces the prime predicates.
 
-Prove `thin_prime_survivors_mem` (characterisation): i is in J iff i<k and none of the three forbidden prime sets divides n+i*d. `thin_prime_survivors_antitone` (functoriality): Increasing S can only shrink J. `thin_prime_survivors_conductor` (relation): Under Hplus, a triple in J has conductor N_a avoiding every odd prime in S union U_pr and P(N_a)≤k^(7/16). If S has reciprocal mass<0.17, it cannot contain2, so the full avoidance conclusion follows. Under Hplus all primes of U_pr are odd.
+- i is in J iff i<k and none of the three forbidden prime sets divides n+i*d.
+- Increasing S can only shrink J.
+- Under H⁺, a triple in J has conductor N_a avoiding every odd prime in S union U_pr and P(N_a)≤k^(7/16).
+- If S has reciprocal mass<0.17, it cannot contain2, so the full avoidance conclusion follows.
+- Under H⁺ all primes of U_pr are odd.
 
 **Checks.**
 
-- `thin_prime_survivors_zero` (degenerate): For k=0 the survivor set is empty.
+- For k=0 the survivor set is empty.
 - At n=d=k=1 and S empty, the survivor set is {0}; an identically empty survivor definition fails this Check.
-- `thin_prime_survivors_union` (characterisation): Deleting S,T_pr,U_pr in any order gives the same finite set.
+- Deleting S,T_pr,U_pr in any order gives the same finite set.
 - T_pr(2)={2}; T_pr(16)={5,7,11,13}; T_pr(1) is empty. These test the actual prime membership near the lower bound. For natural k and prime p, p=k^(7/16) is impossible: it would imply 7v_p(k)=16. The interval remains open on the left.
 - U_pr(0)=empty, using the total logarithm at zero.
 - U_pr(1)=empty: its upper bound is zero.
 - 2 belongs to U_pr(2); this tests both logarithmic bounds on an actual prime.
 
-Form finite prime sets with explicit real bounds, then take their divisibility-index union and relative complement. The construction is total; density and conductor consequences require Hplus and the certified numerical range. Only odd primes in the forbidden sets are excluded from N_a by the coefficient-support theorem. Its dyadic factor is bounded by8; 2≤k^(7/16) under Hplus. For the later thinSet application, 2 in S would force reciprocal mass≥1/2, contradicting<0.17.
+Form finite prime sets with explicit real bounds, then take their divisibility-index union and relative complement. The construction is total; density and conductor consequences require H⁺ and the certified numerical range. Only odd primes in the forbidden sets are excluded from N_a by the coefficient-support theorem. Its dyadic factor is bounded by8; 2≤k^(7/16) under H⁺. For the later thin-prime-set application, 2 in S would force reciprocal mass≥1/2, contradicting<0.17.
 
 *Needs:* Layer 0 — divisibility index sets; Layer 2 — simultaneous quadratic character family.
 
@@ -1093,21 +1118,23 @@ Form finite prime sets with explicit real bounds, then take their divisibility-i
 
 ### 4.3 Maximal-valuation deletion
 
-Define `removedIndex p coeff J` as the least maximal-valuation index for nonempty J, with value 0 for empty J. Define `valuation_deletion` as J₁ below.
+Define the removed index for a prime p and coefficient family on J to be the least index with maximal p-valuation when J is nonempty, and 0 when J is empty. Define the valuation-deletion set as J₁ below.
 
 For gcd(n,d)=1, nonzero terms i<k, positive coefficients A_i dividing |n+i*d| supported on primes<k, and J subset range(k), delete for every prime p<k dividing some A_i with i in J an index having maximal v_p(A_i). Break ties by the least index. The resulting J1 is a subset of J, loses at most the number of primes below k, and product over J1 of A_i divides(k-1)!. Signed factors satisfy the coefficient hypotheses.
 
-Prove `valuation_deletion_subset` (projection): J1 is a subset of J and its cardinal is at least |J| minus the number of primes below k. `valuation_deletion_factorial` (relation): Under the coefficient and primitive-term hypotheses, the product over J1 of A_i divides(k-1)!. `valuation_deletion_tie` (characterisation): For each supported prime the removed maximizer is the least among equal-valuation indices.
+- J1 is a subset of J and its cardinal is at least |J| minus the number of primes below k.
+- Under the coefficient and primitive-term hypotheses, the product over J1 of A_i divides(k-1)!.
+- For each supported prime the removed maximizer is the least among equal-valuation indices.
 
 **Checks.**
 
-- `valuation_deletion_empty` (degenerate): An empty J remains empty.
-- `valuation_deletion_units` (computation): If every A_i=1, then J1=J and its product is1.
-- `valuation_deletion_sample` (computation): n=d=1,k=5,J=range(5),A=(1,2,3,4,1) gives J1={0,1,4} and product2 dividing24.
-- `removedIndex` is 0 on ∅, independently of the coefficients.
-- On the singleton {3} with coefficient 0, `removedIndex` is 3; zero coefficients do not create an empty maximizer set.
-- On {2,5} with constant coefficient 1, `removedIndex` is 2, testing least-index ties.
-- `valuation_deletion_least_tie` (non-example): n=d=1,k=4,J=range(4),A=(1,2,1,2) removes index1 rather than3 for the prime2.
+- An empty J remains empty.
+- If every A_i=1, then J1=J and its product is1.
+- n=d=1,k=5,J=range(5),A=(1,2,3,4,1) gives J1={0,1,4} and product2 dividing24.
+- the least maximal-valuation index is 0 on ∅, independently of the coefficients.
+- On the singleton {3} with coefficient 0, the least maximal-valuation index is 3; zero coefficients do not create an empty maximizer set.
+- On {2,5} with constant coefficient 1, the least maximal-valuation index is 2, testing least-index ties.
+- n=d=1,k=4,J=range(4),A=(1,2,1,2) removes index1 rather than3 for the prime2.
 
 For each prime in the finite support union take the least maximizer of the native valuation. If j is its deleted index, each remaining valuation is bounded by v_p(|i-j|), by the term-gcd bound and maximality. The product of nonzero index differences divides j!*(k-1-j)!, which divides(k-1)!. Combine prime valuations.
 
@@ -1117,7 +1144,7 @@ For each prime in the finite support union take the least maximizer of the nativ
 
 ### 4.4 Explicit Stirling upper bound
 
-Prove `stirling_upper_adapter` with the displayed real factorial inequality.
+Prove the explicit Stirling upper bound with the displayed real factorial inequality.
 
 For every natural m≥1, (m!:R)≤sqrt(2*pi*m)*(m/exp(1))^m*exp(1/(12*m)). This is the numerical adapter quoted in the source, derived from the pinned Stirling sequence rather than a second asymptotic theory.
 
@@ -1129,11 +1156,11 @@ For integers M>m≥1, sum the pinned inequality log(stirlingSeq j)-log(stirlingS
 
 ### 4.5 Sieve losses and coefficient density
 
-Prove `survivor_density` with the hypotheses and conclusions below.
+Prove the survivor-density bounds with the hypotheses and conclusions below.
 
-Under Hplus, k≥exp(exp(10^7)) and sum over S of 1/p<0.17, the losses from T_pr,U_pr,S are at most k*log(16/7), k*log(1/(1-10^-4))+5*k*log10/loglogk+10^4*logk, and strictly less than 0.17*k+1.1*k/logk. Thus |J|>0.0032*k. Deletion gives |J1|>0.00319*k. Its smooth coefficient product is less than k^(0.44*k), and J2={i in J1:A_i≤k^139} has |J2|>10^-5*k.
+Under H⁺, k≥exp(exp(10^7)) and sum over S of 1/p<0.17, the losses from T_pr,U_pr,S are at most k*log(16/7), k*log(1/(1-10^-4))+5*k*log10/loglogk+10^4*logk, and strictly less than 0.17*k+1.1*k/logk. Thus |J|>0.0032*k. Deletion gives |J1|>0.00319*k. Its smooth coefficient product is less than k^(0.44*k), and J2={i in J1:A_i≤k^139} has |J2|>10^-5*k.
 
-Under Hplus, every prime in (k/2,k] divides d by §1.9, so I_p=∅ there. Sum the one-residue-class bound only over k^(7/16)<p≤k/2, retaining the +1 loss. The main reciprocal difference is log(16/7)+log(1−log 2/log k); the negative second term absorbs π(k/2)<0.6k/log k and the explicit reciprocal-prime errors in the certified range. Apply maximal-valuation deletion. The large-prime part of(k-1)! has log at least(9/16)*k*logk-5*k; combine the local explicit Stirling upper adapter. Markov counting with log A_i>139*logk bounds the complement of J2. The numerical range is strengthened to the certified Roth threshold. For the 0.44 bound one may instead use the weaker native (k-1)!≤k^k: subtracting the large-prime contribution gives log(product A_i)≤(7/16)*k*logk+5*k<0.44*k*logk in the certified range. The sharper Stirling adapter remains a separately covered source item.
+Under H⁺, every prime in (k/2,k] divides d by §1.9, so I_p=∅ there. Sum the one-residue-class bound only over k^(7/16)<p≤k/2, retaining the +1 loss. The main reciprocal difference is log(16/7)+log(1−log 2/log k); the negative second term absorbs π(k/2)<0.6k/log k and the explicit reciprocal-prime errors in the certified range. Apply maximal-valuation deletion. The large-prime part of(k-1)! has log at least(9/16)*k*logk-5*k; combine the local explicit Stirling upper adapter. Markov counting with log A_i>139*logk bounds the complement of J2. The numerical range is strengthened to the certified Roth threshold. For the 0.44 bound one may instead use the weaker native (k-1)!≤k^k: subtracting the large-prime contribution gives log(product A_i)≤(7/16)*k*logk+5*k<0.44*k*logk in the certified range. The sharper Stirling adapter remains a separately covered source item.
 
 *Needs:* Layer 1 — half-interval primes divide the difference; Layer 4 — thin-prime sieve survivors; Layer 4 — maximal-valuation deletion; Layer 0 — one-residue-class count; Layer 0, explicit prime estimates; Layer 4 — explicit stirling upper bound; Mathlib `Nat.factorial_le_pow`.
 
@@ -1141,11 +1168,11 @@ Under Hplus, every prime in (k/2,k] divides d by §1.9, so I_p=∅ there. Sum th
 
 ### 4.6 Simultaneous thin-conductor witness
 
-Define `thinSet k S` by S consisting of primes at most k and reciprocal mass less than 0.17. The witness and its API carry k≥exp(exp(10⁷)) directly. Prove `thinSet_empty`, `thinSet_subset` and `thinSet_two_not_mem`.
+Define the thin-prime-set predicate on k,S by S consisting of primes at most k and reciprocal mass less than 0.17. The witness and its API carry k≥exp(exp(10⁷)) directly. Prove that the empty set is thin, subsets of thin sets are thin, and 2 belongs to no thin set.
 
-Under Hplus and k≥exp(exp(10^7)), for every finite S of primes≤k with reciprocal mass<0.17 choose one a in A(k) such that no p in S divides N_a, P(N_a)≤k^(7/16), no prime in((logk)^(1-10^-4),10^4logk] divides N_a, and N_a<k^418. All four conclusions hold for this same triple. Use the 10^7 cutoff, which follows from the quantitative Roth substitution in the integration requirements below.
+Under H⁺ and k≥exp(exp(10^7)), for every finite S of primes≤k with reciprocal mass<0.17 choose one a in A(k) such that no p in S divides N_a, P(N_a)≤k^(7/16), no prime in((logk)^(1-10^-4),10^4logk] divides N_a, and N_a<k^418. All four conclusions hold for this same triple. Use the 10^7 cutoff, which follows from the quantitative Roth substitution in the integration requirements below.
 
-Prove `thin_conductor_witness_mem` (projection): The selected triple belongs to A(k) and all its indices belong to J2. `thin_conductor_witness_avoid` (relation): Its conductor has no prime in S or in U_pr. `thin_conductor_witness_size` (relation): Its largest prime factor is≤k^(7/16) and its conductor is<k^418.
+The selected triple belongs to A(k) and all its indices belong to J2. Its conductor has no prime in S or in U_pr. Its largest prime factor is≤k^(7/16) and its conductor is<k^418.
 
 **Checks.**
 
@@ -1154,9 +1181,9 @@ Prove `thin_conductor_witness_mem` (projection): The selected triple belongs to 
 - At k=9, thinSet fails for {2} by reciprocal mass.
 - At k=9, thinSet fails for {9} by primality, despite its small reciprocal mass.
 - At k=6, thinSet fails for {7} by the upper bound.
-- `thin_conductor_witness_empty_s` (degenerate): For S empty the two nonvacuous size bounds and U_pr avoidance still hold under the stated large-k hypotheses.
-- `thin_conductor_witness_same` (characterisation): One triple satisfies the conjunction of all four properties; four independently chosen witnesses are insufficient.
-- `thin_conductor_witness_certified_threshold` (non-example): The quantitative Roth exponent needed at density10^-5 exceeds10^6 and is less than10^7; the constructor requires the certified latter threshold.
+- For S empty the two nonvacuous size bounds and U_pr avoidance still hold under the stated large-k hypotheses.
+- One triple satisfies the conjunction of all four properties; four independently chosen witnesses are insufficient.
+- The quantitative Roth exponent needed at density10^-5 exceeds10^6 and is less than10^7; the constructor requires the certified latter threshold.
 
 Apply the Layer 4 quantitative Roth statement to J2 with density10^-5. Its loglog threshold is132*log2*10^5<10^7, not<10^6. Choose one three-term progression in J2. The odd-support and dyadic conductor bound yield N≤2^8*k^417<k^418, and membership in J enforces all avoidance properties. The reciprocal-mass hypothesis excludes2 from S, and the lower endpoint of U_pr exceeds2 in this range; therefore the odd-prime survivor API supplies full conductor avoidance here.
 
@@ -1166,15 +1193,15 @@ Apply the Layer 4 quantitative Roth statement to J2 with density10^-5. Its loglo
 
 ### 4.7 Maximal largest-prime family
 
-Under Hplus at the certified threshold, choose a nonempty inclusion-maximal finite B subset A(k) whose P(N_a) are pairwise distinct, all P(N_a)≤k^(7/16), N_a<k^418, and N_a avoids U_pr. Maximality is by inclusion, not by conductor size or cardinal alone.
+Under H⁺ at the certified threshold, choose a nonempty inclusion-maximal finite B subset A(k) whose P(N_a) are pairwise distinct, all P(N_a)≤k^(7/16), N_a<k^418, and N_a avoids U_pr. Maximality is by inclusion, not by conductor size or cardinal alone.
 
-Prove `maximal_conductor_family_admissible` (projection): B is nonempty, lies in A(k), has distinct P(N_a), and satisfies all three conductor restrictions. `maximal_conductor_family_maximal` (characterisation): Every admissible superset of B equals B. `maximal_conductor_family_mass` (relation): If |B|≤17logk, its reciprocal-largest-prime mass is at least0.17.
+B is nonempty, lies in A(k), has distinct P(N_a), and satisfies all three conductor restrictions. Every admissible superset of B equals B. If |B|≤17logk, its reciprocal-largest-prime mass is at least0.17.
 
 **Checks.**
 
-- `maximal_conductor_family_nonempty` (non-example): Under the constructor hypotheses B cannot be empty.
-- `maximal_conductor_family_no_duplicate` (characterisation): Two distinct members never have the same largest conductor prime, even if their conductors differ.
-- `maximal_conductor_family_extension` (characterisation): An outside triple satisfying all size and gap restrictions must repeat one of B’s largest primes.
+- Under the constructor hypotheses B cannot be empty.
+- Two distinct members never have the same largest conductor prime, even if their conductors differ.
+- An outside triple satisfying all size and gap restrictions must repeat one of B’s largest primes.
 
 The witness for S empty makes the family nonempty. Select an inclusion-maximal member of the finite family of admissible subsets of A(k). For |B|≤17logk a reciprocal mass<0.17 would permit a new witness with S={P(N_a):a in B}, contradicting maximality.
 
@@ -1184,9 +1211,9 @@ The witness for S empty makes the family nonempty. Select an inclusion-maximal m
 
 ### 4.8 Original analytic endgame
 
-Prove `original_route_bound` with the effective threshold specified below.
+Prove the original-route length bound with the effective threshold specified below.
 
-There is an effective absolute K_original such that Hplus implies k≤K_original. For the maximal B, if |B|>17logk apply the many-character criterion with c2=418; otherwise D={a in B:P(N_a)≤(logk)^(1-10^-4)} has reciprocal mass≥0.1683>0.166. Its smoothness is strictly less than(logk)^(1-1/20000), so the harmonic criterion applies.
+There is an effective absolute K_original such that H⁺ implies k≤K_original. For the maximal B, if |B|>17logk apply the many-character criterion with c2=418; otherwise D={a in B:P(N_a)≤(logk)^(1-10^-4)} has reciprocal mass≥0.1683>0.166. Its smoothness is strictly less than(logk)^(1-1/20000), so the harmonic criterion applies.
 
 Distinct largest prime factors imply distinct primitive characters. In the small-cardinality branch, U_pr avoidance places every complementary largest prime above10^4logk, giving complementary mass≤0.0017. Use c1=1/20000 to handle the closed endpoint, instead of substituting the strict criterion at c1=10^-4. Take the maximum of the certified threshold and both effective contradiction thresholds.
 
@@ -1208,18 +1235,18 @@ For a bounded-height Landau-Page constant c>0 define T=exp(c log k/(3log log k))
 
 ### 5.1 Bounded-height analytic inputs
 
-Prove the native L-function adapter `boundedPage_exists` from `gap:bounded-height-landau-page`: some c>0 satisfies `boundedPage` in §5.2,
+Prove the bounded-height Landau–Page adapter for the native L-function from `gap:bounded-height-landau-page`: some c>0 satisfies the bounded-height Landau–Page contract in §5.2,
 with primitive characters, positive moduli q≤T, T≥2, |Im ρ|≤T and
 Re ρ≥1−c/log T, excluding the principal pole. Every qualifying pair has
 real character values and a real simple zero, and the pair is unique across
 all such moduli (IwaniecKowalski2004, Theorem 5.28).
-Prove `realExceptionalZero_upper`: for any quadratic character modulo q≥3
+Prove the explicit real-zero upper bound: for any quadratic character modulo q≥3
 and a positive real zero β at a regular point (β≠1 or χ≠1),
 β≤1−40/(√q*(log q)²)
 (BMOR2018v3, Proposition 1.11). Consume `gap:log-free-density`:
 ∑_(q≤Q)∑_(χ primitive mod q) N(σ,T,χ)≪_ε
 (Q^(5+ε)T^(3+ε))^(1−σ), for 1/2≤σ≤1 and Q,T≥2,
-ε>0 and effective constants. Prove `truncatedHalfIntervalFormula` for
+ε>0 and effective constants. Prove the truncated half-interval formula for
 primitive nonprincipal characters by subtracting the two explicit formulas at
 one common height T (IwaniecKowalski2004, Proposition 5.25). Bound local zero counts, parity and trivial-zero terms,
 endpoint and horizontal errors, and the zero contribution uniformly near ρ=0
@@ -1236,40 +1263,73 @@ and proof, pp. 386–387; Proposition 12.2 and proof, p. 387.)
 
 ### 5.2 Bounded-height exceptional moduli
 
-Define `zeroHeight k c` as T below, `zeroWithin` as the primitive regular-zero witness, `hasZeroWithin` by existential quantification over that character and zero, and `exceptional_moduli` as Q(k,c). Define `pageZero c T χ ρ` as the primitive regular-zero condition with |Im ρ|≤T and Re ρ≥1−c/log T; `pageException c T q` means a positive modulus admitting such χ,ρ. Define `boundedPage c` to assert, for every T≥2 and q≤T, that every such zero is real and simple and χ is real-valued, and that any two qualifying character/zero pairs agree (including their moduli and pulled-back integer values). Modulus uniqueness is a consequence, not a substitute for reality. Their APIs include membership, finite bounds, height projection and invariance under equality of the character and zero, all with the same positive-modulus instance.
+Define T(k,c)=exp(c log k/(3 log log k)) using total real logarithms and
+division. For a positive modulus q, a primitive regular-zero witness consists
+of a native primitive complex Dirichlet character χ modulo q and ρ∈ℂ with
+χ.LFunction(ρ)=0, ρ≠1 or χ≠1, |Im ρ|≤T(k,c), and
+Re ρ>1−3 log log k/log k. Define the witness-existence predicate by
+quantifying χ and ρ, and define Q(k,c) to contain exactly the integers
+1≤q≤k⁴ admitting a witness. The analytic applications require k≥3 and c>0.
 
-The finite-set and zero predicates are total on natural k and real c, using the native total real logarithm and division. Their analytic applications require k≥3 and c>0. For k≥3 and fixed c>0 from the bounded-height Landau-Page theorem put T=exp(c*logk/(3*loglogk)). Q(k,c) consists of integers1≤q≤k^4 for which some native primitive complex Dirichlet character modulo q has a zero rho of its meromorphic LFunction at a regular point (rho≠1 or chi is nonprincipal) with |Im rho|≤T and Re rho>1-3*loglogk/logk. The modulus is positive; LSeries, which is zero outside convergence, is not used.
+Define a Page zero at c,T by the same primitivity, regular-point and zero
+conditions, with |Im ρ|≤T and Re ρ≥1−c/log T. A Page exception is a positive
+modulus admitting a Page zero. Define the bounded-height Landau–Page contract
+at c to assert, for every T≥2, that every such pair at q≤T has a real-valued
+character and a real simple zero, and that any two pairs at moduli at most T
+have equal moduli, pulled-back integer character values and zero.
 
-Prove `exceptional_moduli_five`: there exists an even quadratic character χ modulo 5 such that `zeroWithin 16 0 χ 0`, `hasZeroWithin 16 0 5` and `5 ∈ exceptional_moduli 16 0`. Take the nonprincipal quadratic character, which is primitive and even; the supplied even-function value formula gives L(0,χ)=−χ(0)/2=0. Here `zeroHeight 16 0=1` and 1−3 log(log 16)/log 16<0 (BS20, §12, (40)–(41), p. 386, for the region; the supplied even-function value formula supplies the trivial zero). This named boundary target includes the logarithmic inequality in its proof obligation.
+The APIs retain the same positive-modulus instance throughout:
 
-Prove `exceptional_moduli_mem` (characterisation): Membership is equivalent to the displayed positive-modulus bounds and the bounded-height zero witness. A zero witness satisfies rho≠1 or chi≠1, excluding the principal pole. `exceptional_moduli_finite` (structure): The set is finite, contained in{1,..,k^4}. `exceptional_moduli_height` (projection): Every witness zero obeys the same T used in the zero-density estimates.
+- Membership in Q(k,c) is equivalent to the stated bounds and witness; hence
+  Q(k,c) is finite and contained in {1,…,k⁴}.
+- Every witness projects to its primitive character, regular zero, real-part
+  bound and height bound; these conditions are invariant under equality of
+  the character and zero.
+- T(k,c) is positive, T(0,c)=T(1,c)=1, and T(k,0)=1. For k≥3 it is monotone
+  in c, as is the witness-existence predicate.
+- A Page exception is equivalent to a positive modulus with a Page witness.
+  For T≥2 and c′≤c, a Page zero at c′ is one at c; thus the Landau–Page contract at c
+  implies that at c′.
+- The Landau–Page contract yields reality, nonzero L-function derivative and
+  equality of the whole character/zero pair, rather than modulus uniqueness alone.
+
+Prove the modulus-five trivial-zero example. The nonprincipal quadratic
+character χ₅ modulo 5 is primitive and even; its value at zero is zero and
+the supplied even-function formula gives L(0,χ₅)=−χ₅(0)/2=0. At k=16,c=0,
+T=1 and 1−3 log(log 16)/log 16<0, so q=5 belongs to Q(16,0).
+(BS20, §12, (40)–(41), p. 386, for the region; the supplied even-function
+value formula for the trivial zero.)
 
 **Checks.**
 
-- zeroHeight(0,c)=1 with the total logarithm at zero.
-- zeroHeight(1,c)=1; the total denominator does not invalidate the definition.
-- zeroHeight(k,0)=1 for every k; the exponent is zero.
-- zeroHeight is always positive, as an exponential. Its API includes `zeroHeight_pos`, `zeroHeight_zero` and `zeroHeight_one`.
-- `pageException c T 0` is false; a positive-modulus instance is necessary.
-- At T<0, `pageException c T q` fails for every q, since absolute imaginary parts are nonnegative.
-- `pageZero` excludes the principal pair (1,1), independently of the total L-function value at its pole.
-- `pageZero` excludes every candidate with |Im ρ|>T, even if its real part is in the strip.
-- Strengthening the strip by c′≤c preserves `boundedPage` for every admissible T≥2.
-- Every qualifying pair under `boundedPage c` has a real zero and real character values; modulus uniqueness alone would not imply this.
-- The same pair has nonzero L-function derivative; reality alone would not imply simplicity.
-- Two qualifying pairs under `boundedPage c` have equal moduli, integer values and zero; uniqueness of modulus alone does not identify the pair.
-- `pageZero` holds at T=2, c=4 log 2 for the primitive modulus-one character and ρ=−2, and hence `pageException` holds at modulus 1 for that region. This trivial zero distinguishes a wide region from the small positive constant in the theorem.
-- `hasZeroWithin k c 0` is false: there is no `NeZero 0` instance to witness the existential.
-- `hasZeroWithin 0 c q` is false for every q: the strip is Re ρ>1, where the continued L-function is nonzero, and the pole is excluded.
-- For k≥3 and c≤c′, `hasZeroWithin k c q` implies `hasZeroWithin k c′ q`; log log k>0 makes the permitted height increase.
-- `exceptional_moduli_five` (positive boundary): the even nonprincipal quadratic character χ₅ modulo 5 has L(0,χ₅)=0; it gives `zeroWithin 16 0 χ₅ 0`, `hasZeroWithin 16 0 5` and `5 ∈ exceptional_moduli 16 0`. Constantly false predicates would reject this witness.
-- `exceptional_moduli_zero` (non-example): 0 never belongs to Q(k,c), regardless of zero witnesses.
-- `exceptional_moduli_upper` (characterisation): q>k^4 never belongs.
-- `exceptional_moduli_high_zero` (non-example): A zero with |Im rho|>T alone cannot witness membership.
-- `exceptional_moduli_principal_pole` (non-example): For every positive modulus, the pair chi=1,rho=1 never satisfies the zero-witness predicate, regardless of the totalized LFunction value.
-- `zeroWithin 0 c χ 0` is false: its real-part inequality is 1<0. This tests the strip independently of height and pole exclusion.
+- T(0,c)=1: the total logarithm at zero gives exponent zero.
+- T(1,c)=1: the total denominator gives exponent zero.
+- T(k,0)=1 for every k, and every T(k,c) is positive.
+- Modulus 0 admits neither kind of witness, since it is not positive.
+- T<0 admits no Page exception: |Im ρ|≥0 cannot satisfy |Im ρ|≤T.
+- Both zero predicates exclude the principal pair (χ,ρ)=(1,1), regardless of
+  the total L-function value at its pole.
+- A candidate above the respective height bound fails even if its real part
+  is in the strip.
+- At k=0 the progression-dependent strip is Re ρ>1; no regular L-function
+  zero exists there. In particular ρ=0 fails the inequality 1<0.
+- For k≥3 and c≤c′, log log k>0 makes T(k,c)≤T(k,c′), so every witness
+  for c is also one for c′.
+- At c′≤c the Page strip narrows; the Landau–Page contract at c still gives
+  a real simple zero and real character values throughout the narrower strip.
+- Two qualifying pairs have equal moduli, integer values and zero; equality
+  of moduli alone would not test the contract.
+- At T=2,c=4 log 2, the primitive modulus-one character and ρ=−2 satisfy
+  the Page predicate: its real-part lower bound is −3. This trivial zero
+  distinguishes a wide strip from the theorem's small constant.
+- The even character χ₅ has L(0,χ₅)=0 and witnesses 5∈Q(16,0); an identically
+  false witness predicate would fail this example.
+- Neither 0 nor any q>k⁴ belongs to Q(k,c), independently of zero witnesses.
 
-Take a subset of range(k^4+1) using the exact quantified character and complex-zero predicate. Use the native primitive-character and meromorphic continuation vocabulary. The analytic height restriction is essential. Explicitly exclude the principal-character pole at rho=1. Mathlib totalizes the function there; an assigned value is not a meromorphic zero. The same guard belongs in the bounded-height Landau-Page input predicate.
+Take Q(k,c) as the subset of range(k⁴+1) selected by the exact witness
+condition. Use the meromorphic continuation; the naive totalized LSeries
+outside convergence does not define this zero set. The pole exclusion and
+height bound are required in both analytic predicates.
 
 *Needs:* Mathlib `DirichletCharacter.LFunction`, `DirichletCharacter.IsPrimitive`, `ZMod.LFunction_apply_zero_of_even` and `DirichletCharacter.LFunction_ne_zero_of_one_le_re`; ClassicalArithmeticCompletion §1.51 for the quadratic character modulo 5 and the coefficient-change contracts above.
 
@@ -1277,11 +1337,11 @@ Take a subset of range(k^4+1) using the exact quantified character and complex-z
 
 ### 5.3 Exceptional-modulus bounds
 
-Prove `exceptional_moduli_bounds` with a positive constant c satisfying `boundedPage c`; both hypotheses occur explicitly in its signature.
+Prove the exceptional-modulus bounds with a positive constant c satisfying the bounded-height Landau–Page contract at c; both hypotheses are retained.
 
 For the fixed positive Landau-Page constant c, there are effective K,C such that k≥K gives |Q(k,c)|≤C*(logk)^61, every q in Q(k,c) is≥logk, and at most one q in Q(k,c) is<T. These conclusions are proved simultaneously from zero density and bounded-height zero-free input.
 
-Apply the supplier log-free density estimate at Q=k^4 and the exact T, with all character/modulus multiplicities. For small q first use the full Landau–Page contract to make the exceptional zero and character real; apply `realExceptionalZero_upper`, then use uniqueness for the remaining moduli. Constants depend only on the fixed analytic input, not on n,d.
+Apply the supplier log-free density estimate at Q=k^4 and the exact T, with all character/modulus multiplicities. For small q first use the full Landau–Page contract to make the exceptional zero and character real; apply the explicit real-zero upper bound, then use uniqueness for the remaining moduli. Constants depend only on the fixed analytic input, not on n,d.
 
 *Needs:* Layer 5 — bounded-height exceptional moduli and bounded-height analytic inputs; `gap:bounded-height-landau-page`; `gap:log-free-density`.
 
@@ -1289,29 +1349,29 @@ Apply the supplier log-free density estimate at Q=k^4 and the exact T, with all 
 
 ### 5.4 Nonexceptional half-interval character estimate
 
-Prove `nonexceptional_half_sum` for every c>0 as below; its constants may depend on c.
+Prove the nonexceptional half-interval estimate for every c>0 as below; its constants may depend on c.
 
 For sufficiently large k, every native primitive nonprincipal character of conductor q≤k^4 outside Q(k,c) has absolute von-Mangoldt half-interval sum≤C*k/logk, uniformly with effective C. The principal character is excluded.
 
-Subtract the supplier truncated explicit formulas at k and k/2 with the same height T. Bound(k^rho-(k/2)^rho)/rho as an integral, by C*k^Re(rho)*min(1,1/|rho|); a naked sum1/|rho| is not uniform near zero. Use local zero counts for the weighted zero sum and the nonexceptional real-part bound. Track parity constants, trivial zeros and horizontal truncation errors. T, not Q=k^4, belongs in the truncation denominator.
+Subtract the supplier truncated explicit formulas at k and k/2 with the same height T. Interpret (k^rho−(k/2)^rho)/rho at rho=0 by the integral over [k/2,k], whose value there is log 2. For 0≤Re(rho)≤1, bound this integral by C*k^Re(rho)*min(1,2/(1+|rho|)); the denominator is at least 1, so the bound includes rho=0. A naked sum of 1/|rho| is not uniform near zero. Use local zero counts for the weighted zero sum and the nonexceptional real-part bound. Track parity constants, trivial zeros and horizontal truncation errors. T, not Q=k^4, belongs in the truncation denominator.
 
-*Needs:* Layer 5 — bounded-height exceptional moduli; §5.1 `truncatedHalfIntervalFormula` and local zero counts.
+*Needs:* Layer 5 — bounded-height exceptional moduli; §5.1 the truncated half-interval formula and local zero counts.
 
 ([BS20], Proposition 12.2, p.387; nonprincipal hypothesis and uniform zero-sum estimate.)
 
 ### 5.5 Exceptional divisibility indices
 
-Define `exceptional_indices` as Bad below for an arbitrary finite modulus set.
+Define the exceptional divisibility index set as Bad below for an arbitrary finite modulus set.
 
 For integers n,d, positive k and any finite set Q of positive moduli, Bad is the set of i<k for which some q in Q has a positive divisor r with r≥q^(1/3)/2 and r dividing n+i*d. In the application Q=Q(k,c). The real cube-root threshold and the +1 count for r>k are retained.
 
-Prove `exceptional_indices_mem` (characterisation): Membership is precisely the positive-divisor witness with i<k. `exceptional_indices_empty_moduli` (simp): An empty exceptional-modulus set gives an empty bad-index set. `exceptional_indices_mono` (functoriality): Increasing the exceptional-modulus set can only increase the bad-index set.
+Membership is precisely the positive-divisor witness with i<k. An empty exceptional-modulus set gives an empty bad-index set. Increasing the exceptional-modulus set can only increase the bad-index set.
 
 **Checks.**
 
-- `exceptional_indices_empty` (degenerate): An empty modulus set gives no bad indices.
-- `exceptional_indices_large_divisor` (non-example): With modulus set{1000},n=1000,d=1,k=3, index0 is bad via r=1000>k; truncating r at k loses it.
-- `exceptional_indices_sample` (computation): With modulus set{8},n=d=1,k=4, every index is bad, since r=1 is an admissible divisor at the exact threshold8^(1/3)/2=1.
+- An empty modulus set gives no bad indices.
+- With modulus set{1000},n=1000,d=1,k=3, index0 is bad via r=1000>k; truncating r at k loses it.
+- With modulus set{8},n=d=1,k=4, every index is bad, since r=1 is an admissible divisor at the exact threshold8^(1/3)/2=1.
 
 Filter range(k) by the finite exceptional-modulus/divisor witness. Do not restrict the divisors to r≤k.
 
@@ -1321,7 +1381,7 @@ Filter range(k) by the finite exceptional-modulus/divisor witness. Do not restri
 
 ### 5.6 Exceptional indices are sparse
 
-Prove `exceptional_indices_sparse` for c>0 with `boundedPage c` and the coprime nonzero n,d below.
+Prove sparsity of exceptional indices for c>0 with the bounded-height Landau–Page contract at c and the coprime nonzero n,d below.
 
 For all sufficiently large k and coprime nonzero n,d, |Bad|≤C*k/(logk)^(1/4), with effective C uniform in n,d.
 
@@ -1333,17 +1393,19 @@ For each q sum k/r+1 over its divisors r≥q^(1/3)/2, using the residue count. S
 
 ### 5.7 Single Granville conductor witness
 
-Under Hplus and sufficiently large effective k choose one triple a=(i,j,h) in A(k) whose three indices avoid Bad and with N_a≤8*A_i*A_j*A_h≤k^4. Both properties hold for the same triple.
+Under H⁺ and sufficiently large effective k choose one triple a=(i,j,h) in A(k) whose three indices avoid Bad and with N_a≤8*A_i*A_j*A_h≤k^4. Both properties hold for the same triple.
 
-Prove `granville_scale`: for real x≥64, 8*x^(7/2)≤x⁴, with equality at 64 (BS20, §12 final paragraph, p. 388; elementary real powers).
+Prove the Granville scale inequality: for real x≥64, 8*x^(7/2)≤x⁴, with equality at 64 (BS20, §12 final paragraph, p. 388; elementary real powers).
 
-Prove `addendum_witness_mem` (projection): The chosen triple belongs to A(k), with positive spacing1. `addendum_witness_avoid` (relation): Each of its three indices is outside Bad. `addendum_witness_size` (relation): Its conductor and coefficient product satisfy N_a≤8*A_i*A_j*A_h≤k^4.
+- The chosen triple belongs to A(k), with positive spacing1.
+- Each of its three indices is outside Bad.
+- Its conductor and coefficient product satisfy N_a≤8*A_i*A_j*A_h≤k^4.
 
 **Checks.**
 
-- `addendum_witness_same` (characterisation): One chosen triple satisfies both avoidance and size; two separate existential witnesses are insufficient.
-- `addendum_witness_disjoint` (compatibility): The chosen triple is one of the disjoint consecutive blocks used in the factorial product estimate.
-- `addendum_witness_scale` (computation): At k=64,8*k^(7/2)=k^4; the final size implication holds for every k≥64.
+- One chosen triple satisfies both avoidance and size; two separate existential witnesses are insufficient.
+- The chosen triple is one of the disjoint consecutive blocks used in the factorial product estimate.
+- At k=64,8*k^(7/2)=k^4; the final size implication holds for every k≥64.
 
 Delete one maximal-valuation index per small prime, then delete Bad. Use the original disjoint consecutive blocks(0,1,2),(3,4,5),..; at most one block is lost per deleted index. Effectively more than2k/7 blocks survive. Their combined A-product divides(k-1)!≤k^k. One block has coefficient product≤k^(7/2); k≥64 implies8*k^(7/2)≤k^4. Choose that block, which already avoids Bad. The effective prime-count estimate from Layer 0 explicit prime estimates bounds the number of maximal-valuation deletions by pi(k)=o(k); combine it with the uniform Bad bound before counting disjoint blocks.
 
@@ -1353,7 +1415,7 @@ Delete one maximal-valuation index per small prime, then delete Bad. Use the ori
 
 ### 5.8 Exceptional-conductor detection
 
-Prove `conductor_detection` with the hypotheses and conclusions below.
+Prove exceptional-conductor detection with the hypotheses and conclusions below.
 
 For the single witness above, N_a is not in Q(k,c). Indeed N_a^odd divides A_i*A_j*A_h and N_a≤8*N_a^odd, so the product of the three gcd(N_a,A_r) is≥N_a/8. One gcd is≥N_a^(1/3)/2, and as a positive divisor of N_a and the indexed term it would make that same index bad if N_a were exceptional.
 
@@ -1365,9 +1427,9 @@ Use squarefreeness of Nodd to distribute its prime factors among the three gcds.
 
 ### 5.9 Granville analytic endgame
 
-Prove `granville_route_bound` with an effective absolute threshold.
+Prove the Granville-route length bound with an effective absolute threshold.
 
-There is an effectively computable absolute K_Granville such that Hplus implies k≤K_Granville. This route uses no quantitative Roth theorem or short smooth-modulus cancellation bound.
+There is an effectively computable absolute K_Granville such that H⁺ implies k≤K_Granville. This route uses no quantitative Roth theorem or short smooth-modulus cancellation bound.
 
 Choose the single addendum witness. Detection puts its conductor outside Q, its size is≤k^4 and its odd part is nontrivial, so the selected character is nonprincipal. The uniform O(k/logk) bound contradicts its strict absolute lower bound>0.1239*k for effective large k.
 
@@ -1402,7 +1464,7 @@ Prove `effective_prime_bound` with the quantified threshold, integer domain and 
 
 There exists an effectively computable absolute integer k0≥5 such that for every positive integer k≥k0, integers n,d,y with gcd(n,d)=1, and prime ell satisfying product over i<k of(n+i*d)=y^ell, either y*d=0 or ell≤exp(10^k). The same logical statement has both an original-route and a Granville-route effective threshold; an unqualified classical existential by itself is not an effectivity proof.
 
-Suppose y*d≠0 and ell>exp(10^k). Taking k0 above10^8 and2*10^10 gives Hplus. Either analytic endgame contradicts sufficiently large k. Fix the maximum of the explicit or effectively controlled input thresholds. Keep a ledger of effective dependencies; none uses ineffective Siegel constants or a rational-point height bound.
+Suppose y*d≠0 and ell>exp(10^k). Taking k0 above10^8 and2*10^10 gives H⁺. Either analytic endgame contradicts sufficiently large k. Fix the maximum of the explicit or effectively controlled input thresholds. Keep a ledger of effective dependencies; none uses ineffective Siegel constants or a rational-point height bound.
 
 *Needs:* Layer 4 — original analytic endgame; Layer 5 — granville analytic endgame; Layer 0 — primitive progression solutions.
 
@@ -1410,11 +1472,11 @@ Suppose y*d≠0 and ell>exp(10^k). Taking k0 above10^8 and2*10^10 gives Hplus. E
 
 ### 6.3 Fixed-exponent progression finiteness
 
-Prove `fixed_exponent_finiteness` for natural k≥3, ell≥2 and 2*ell+k<k*ell. Prove `fixed_exponent_finiteness_length_ge_five` as its k≥5 specialization.
+Prove `fixed_exponent_finiteness` for natural k≥3, ell≥2 and 2*ell+k<k*ell, and deduce its k≥5 specialization.
 
 For every fixed k≥3 and natural ell≥2 with 2*ell+k<k*ell, the set of coprime integer(n,d,y) with y*d≠0 and product over i<k of(n+i*d)=y^ell is finite. For positive n,d,y this is the hyperbolic part of Darmon–Granville Corollary 2.1; the signed extension needs the same finite sign patterns rather than an unsupported appeal to positivity. The source also covers positive progressions at (k,ell)=(4,2) and (3,3) by Euler’s arithmetic theorems. Those cases are outside the signed hyperbolic statement: (−3,−1,1,3) is a nontrivial signed four-term progression with square product 9 and diagonal genus one.
 
-Prove `four_term_product_not_square`: for integers n,d>0 with gcd(n,d)=1 and every integer y, ∏_(i<4)(n+i*d)≠y². Prove `three_term_product_not_cube`: under the same hypotheses, ∏_(i<3)(n+i*d)≠y³ (DG95, §2.1, p. 520, Euler boundary cases). These are arithmetic descent targets here. Their elementary inputs are the term-gcd bound, prime valuation factorization and well-founded descent on positive integers; the cubic proof carries out descent for x³+z³=2u³ with nonzero integer variables, retaining mixed signs when the prime 2 divides both endpoints. Track the primes 2 and 3 separately rather than assume pairwise coprimality of all terms. Neither assertion follows from genus one or Faltings.
+Prove the positive four-term square exclusion: for integers n,d>0 with gcd(n,d)=1 and every integer y, ∏_(i<4)(n+i*d)≠y². Prove the positive three-term cube exclusion: under the same hypotheses, ∏_(i<3)(n+i*d)≠y³ (DG95, §2.1, p. 520, Euler boundary cases). These are arithmetic descent targets here. Their elementary inputs are the term-gcd bound, prime valuation factorization and well-founded descent on positive integers; the cubic proof carries out descent for x³+z³=2u³ with nonzero integer variables, retaining mixed signs when the prime 2 divides both endpoints. Track the primes 2 and 3 separately rather than assume pairwise coprimality of all terms. Neither assertion follows from genus one or Faltings.
 
 Prove `positive_fixed_exponent_finiteness`: for k≥3, ell≥2 and k+ell≥6, the set of positive integer triples (n,d,y) with gcd(n,d)=1 and progression product y^ell is finite (DG95, Corollary 2.1, p. 520). Split off (4,2) and (3,3), whose sets are empty by the two arithmetic targets; all remaining pairs satisfy 2*ell+k<k*ell and use `fixed_exponent_finiteness`.
 
@@ -1426,15 +1488,15 @@ Choose finite small-prime ell-powerfree coefficient classes, including signs. El
 
 ### 6.4 Composite exponent reduction
 
-Prove `pow_eq_pow_div_prime`: for y∈ℤ and a natural p dividing ell, y^ell=(y^(ell/p))^p (BS20, §1 after Theorem 2, p. 357; power associativity).
+Prove the exponent-divisor power identity: for y∈ℤ and a natural p dividing ell, y^ell=(y^(ell/p))^p (BS20, §1 after Theorem 2, p. 357; power associativity).
 
 *Needs:* Mathlib power laws and exact natural division.
 
-Prove `primitive_solution_natAbs_y_gt_one`: for k≥3, d*y≠0 and a product equation with ell≥2, |y|>1 (the elementary distinct-term argument below; BS20, §1, p. 357).
+Prove the absolute-value exclusion: for k≥3, d*y≠0 and a product equation with ell≥2, |y|>1 (the elementary distinct-term argument below; BS20, §1, p. 357).
 
 *Needs:* Layer 0 `term` and nonzero finite products.
 
-Prove `finite_root_exponent_pairs`: for any fixed integer Y with |Y|>1, the set of integer y and natural r≥1 satisfying y^r=Y is finite (BS20, §1, p. 357; prime valuation argument).
+Prove finiteness of root/exponent pairs: for any fixed integer Y with |Y|>1, the set of integer y and natural r≥1 satisfying y^r=Y is finite (BS20, §1, p. 357; prime valuation argument).
 
 *Needs:* Mathlib natural factorization and integer power valuations.
 
@@ -1462,8 +1524,8 @@ The effective prime theorem bounds the possible prime divisors p of ell for this
 
 - At (k,ell)=(3,4), 2*ell+k<k*ell and the diagonal genus is 3.
 - At (k,ell)=(4,3), the strict inequality holds and the genus is 10.
-- At (k,ell)=(4,2), equality replaces the strict inequality and the genus is 1. The signed primitive progression (−3,−1,1,3) has product 9; the positive set is empty by `four_term_product_not_square`.
-- At (k,ell)=(3,3), the genus is also one and the positive set is empty by `three_term_product_not_cube`.
+- At (k,ell)=(4,2), equality replaces the strict inequality and the genus is 1. The signed primitive progression (−3,−1,1,3) has product 9; the positive set is empty by the positive four-term square exclusion.
+- At (k,ell)=(3,3), the genus is also one and the positive set is empty by the positive three-term cube exclusion.
 - For n=d=1, the boundary products are 24 and 6. The three terms (2,3,4) have product 24 and share the prime 2 at the endpoints; this branch cannot assume pairwise coprimality. For d=0,n=y=1 the cube identity holds, so the positive-difference hypothesis is essential.
 
 ### Examples
@@ -1494,17 +1556,19 @@ Prove `consecutiveProduct_not_perfectPower`: for positive n, k≥2 and ell≥2,
 
 ### 7.2 Erdős nonexistence assertion
 
-Define `erdos_threshold K` as ErdosThreshold(K) below.
+Define ErdosThreshold(K) by the universal nonexistence statement below.
 
 For integer K≥0 let ErdosThreshold(K) assert that for every k≥K, k≥2, positive integers n,d,y and ell≥2 with gcd(n,d)=1, the progression product is not y^ell. The Erdős conjecture is the assertion that some K satisfies this explicit predicate. It is recorded, not proved or used as an assumption.
 
-Prove `erdos_threshold_iff` (characterisation): The predicate is equivalent to the displayed positive-domain universal nonexistence statement. `erdos_threshold_mono` (functoriality): K≤L and ErdosThreshold(K) imply ErdosThreshold(L). `erdos_threshold_nonexistence` (projection): For every k≥K with k≥2, ErdosThreshold(K) implies the exact primitive positive-domain product inequality for every n,d,y>0 and integer ell≥2.
+- The predicate is equivalent to the displayed positive-domain universal nonexistence statement.
+- K≤L and ErdosThreshold(K) imply ErdosThreshold(L).
+- For every k≥K with k≥2, ErdosThreshold(K) implies the exact primitive positive-domain product inequality for every n,d,y>0 and integer ell≥2.
 
 **Checks.**
 
-- `erdos_threshold_zero` (non-example): ErdosThreshold(0) is false because n=1,d=24,k=3,y=35,ell=2 is a primitive positive solution.
-- `erdos_threshold_three` (non-example): The same solution shows ErdosThreshold(3) is false.
-- `erdos_threshold_positive_domain` (characterisation): The signed solution(-3,2,4,3,2) is excluded by positivity and is not itself a counterexample to ErdosThreshold(4).
+- ErdosThreshold(0) is false because n=1,d=24,k=3,y=35,ell=2 is a primitive positive solution.
+- The same solution shows ErdosThreshold(3) is false.
+- The signed solution(-3,2,4,3,2) is excluded by positivity and is not itself a counterexample to ErdosThreshold(4).
 
 State the positive-domain quantifiers and exact primitive product equation. Keep integer exponent ell≥2, not just prime ell. The definition is an explicit predicate; it has no admitted proposition body.
 
@@ -1514,17 +1578,19 @@ State the positive-domain quantifiers and exact primitive product equation. Keep
 
 ### 7.3 Smooth-multiplier progression equation
 
-Define `smooth_multiplier` as SmoothMultiplierSolution below.
+Define SmoothMultiplierSolution by the equation and support conditions below.
 
-For real tau, n,d,y,b in ℤ and k,ell in ℕ, SmoothMultiplierSolution means 0<k, ell prime, gcd(n,d)=1, y*d≠0, b≠0, product over i<k of(n+i*d)=b*y^ell, and every prime divisor of |b| is≤tau*k. The discussion concerns fixed 0≤tau<1/2. Its extension is an announcement without a separate quantified proof, not an unconditional theorem of this roadmap.
+For real tau, integers n,d,y,b and natural k,ell, SmoothMultiplierSolution means 0<k, ell prime, gcd(n,d)=1, y*d≠0, b≠0, product over i<k of(n+i*d)=b*y^ell, and every prime divisor of |b| is≤tau*k. The discussion concerns fixed 0≤tau<1/2. Its extension is an announcement without a separate quantified proof, not an unconditional theorem of this roadmap.
 
-Prove `smooth_multiplier_iff` (characterisation): The predicate has exactly the displayed domain, equation and support conditions. `smooth_multiplier_one` (compatibility): For tau≥0 and b=1 it is equivalent to S(n,d,k,y,ell). `smooth_multiplier_tau_mono` (functoriality): For tau≤sigma, a solution for tau is a solution for sigma.
+- The predicate has exactly the displayed domain, equation and support conditions.
+- For tau≥0 and b=1 it is equivalent to S(n,d,k,y,ell).
+- For tau≤sigma, a solution for tau is a solution for sigma.
 
 **Checks.**
 
-- `smooth_multiplier_zero` (non-example): b=0 never gives a SmoothMultiplierSolution.
-- `smooth_multiplier_unit` (computation): tau=0,n=1,d=24,k=3,y=35,ell=2,b=1 gives a solution.
-- `smooth_multiplier_support_boundary` (computation): for n=d=y=1,k=2,ell=2,b=2, `smooth_multiplier tau 1 1 2 1 2 2` holds exactly when 1≤tau. It holds at tau=1 and fails below 1; this admits a nonunit multiplier and tests the closed endpoint.
+- b=0 never gives a SmoothMultiplierSolution.
+- tau=0,n=1,d=24,k=3,y=35,ell=2,b=1 gives a solution.
+- for n=d=y=1,k=2,ell=2,b=2, SmoothMultiplierSolution(tau,1,1,2,1,2,2) holds exactly when 1≤tau. It holds at tau=1 and fails below 1; this admits a nonunit multiplier and tests the closed endpoint.
 
 Use the explicit equation and native prime-divisor predicate. The zero multiplier is excluded so its prime support cannot make the support condition vacuous. The fixed tau<1/2 restriction does not cover all multipliers supported below k.
 
