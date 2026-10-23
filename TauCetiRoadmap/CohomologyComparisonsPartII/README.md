@@ -389,11 +389,11 @@ AdicSpacesPartIV §§F1.5–F1.9; RigidAnalyticGeometry §§8.1,8.4; EnhancedDer
 
 ### 3.1 Divisibility before finite-level reduction
 
-For a log-syntomic X/W(k), n≥1 and r≥0 define J_n^⟨r⟩ using a level n+s, s≥r, by the Frobenius-divisibility submodule of J_(n+s)^[r] on which φ lands in p^r O_cr,n+s, followed by the standard reduction modulo p^n. Construct φ_r:J_n^⟨r⟩→O_cr,n by division at that higher level. Prove auxiliary-level independence, Z/p^n-flatness, reduction J_(n+1)^⟨r⟩⊗Z/p^n≃J_n^⟨r⟩, and equality with J_n^[r] for 0≤r≤p−1. For j≤0 use J^[j]=O_cr and the source’s compatible degree conventions in PD de Rham presentations. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X is log-syntomic over W(k); n≥1; r≥0; s≥r. (EN, §2.1 and §2.1.1, pp. 4–5; EN line 158, EN line 165, EN line 198).
+For a log-syntomic X/W(k), n≥1 and r≥0 define J_n^⟨r⟩ using a level n+s, s≥r, by the Frobenius-divisibility submodule M_(n+s,r) of J_(n+s)^[r] on which φ lands in p^r O_cr,n+s, followed by reduction as M_(n+s,r)/p^n M_(n+s,r). Its higher-level inclusion followed by reduction induces the natural coefficient-comparison map c_(n,r):J_n^⟨r⟩→J_n^[r]. Construct φ_r:J_n^⟨r⟩→O_cr,n by division at that higher level. Prove auxiliary-level independence, Z/p^n-flatness, reduction J_(n+1)^⟨r⟩⊗Z/p^n≃J_n^⟨r⟩, and the canonical identification with J_n^[r] via c_(n,r) for 0≤r≤p−1. For j≤0 use J^[j]=O_cr and the source’s compatible degree conventions in PD de Rham presentations. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X is log-syntomic over W(k); n≥1; r≥0; s≥r. (EN, §2.1 and §2.1.1, pp. 4–5; EN line 158, EN line 165, EN line 198).
 
 - The maps from larger s identify the reduced divisibility modules and φ_r.
-- Reduction in n commutes with divided Frobenius.
-- For r≤p−1 the inclusion into J_n^[r] is an equality.
+- Reduction in n commutes with divided Frobenius and c_(n,r).
+- For 0≤r≤p−1, c_(n,r) is an isomorphism identifying J_n^⟨r⟩ with J_n^[r].
 - On a divisible lift x, p^r times its divided image is φ(x), with independence proved using the higher level, not inferred from this equation modulo p^n alone.
 
 Use the supplied flat crystalline coefficient sheaves and their higher-level Frobenius divisibility. Compare all choices after passing to a common higher level and reducing. The PD valuation estimate gives the small-weight equality. These are filtered coefficient constructions, not inversion of p in Z/p^n.
@@ -427,7 +427,7 @@ Apply the enhanced fibre and derived pushforward. The crystalline realization co
 
 ### 3.3 Error maps and multiplicative structure
 
-Construct ω_r:S′_n(r)→S_n(r) from (p^r,id) on source and target coefficients and τ_r:S_n(r)→S′_n(r) from (inclusion,p^r). Their composites are multiplication by p^r; on cohomology kernels and cokernels are annihilated by p^r. Construct the PD cup products in weights r,s≥0 for both families, compatible with crystalline products, transition maps and ω. Retain the source’s warning that τ has no general multiplicativity contract; no algebra-map instance for τ is exported. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X log-syntomic over W(k); n≥1; r,s≥0. (EN, §§2.1–2.1.2, pp. 5–6; EN line 193, EN line 219, EN line 243).
+Construct ω_r:S′_n(r)→S_n(r) from (p^r,id) on source and target coefficients and τ_r:S_n(r)→S′_n(r) from (c_(n,r),p^r). The source-coefficient map p^r:J_n^[r]→J_n^⟨r⟩ is induced by multiplication at the higher level; c_(n,r) need not be monic after reduction. Their composites are multiplication by p^r; on cohomology kernels and cokernels are annihilated by p^r. Construct the PD cup products in weights r,s≥0 for both families, compatible with crystalline products, transition maps and ω. Retain the source’s warning that τ has no general multiplicativity contract; no algebra-map instance for τ is exported. Assume p is prime; V is a complete mixed-characteristic (0,p) DVR with perfect residue field k; K=Frac(V), K0=Frac(W(k)); X log-syntomic over W(k); n≥1; r,s≥0. (EN, §§2.1–2.1.2, pp. 5–6; EN line 193, EN line 219, EN line 243).
 
 - τ_rω_r=p^r id and ω_rτ_r=p^r id.
 - Every kernel and cokernel of H^q(ω_r), and of H^q(τ_r), is killed by p^r.
@@ -441,6 +441,7 @@ Verify each chain square before passing to the fibres. The two composite identit
 **Checks.**
 
 - ω_0 and τ_0 are identity maps, and the error exponent is zero.
+- In the module reduction model J=Z/8 and M=2J, M/2M≃𝔽_2 has nonzero class [2], while J/2J≃𝔽_2 and the induced map sends [2] to [0]. Thus a higher-level inclusion need not remain injective after reducing each module by its own multiple of p. With J=Z/27 and M=3J, the nonzero class [3] likewise maps to [0] modulo 3.
 - On the model module Z/p², the map multiplication p has kernel and cokernel killed by p but is not invertible. A killed-error assertion must not generate an integral equivalence.
 - The weight-zero unit acts as identity; odd degree classes use the cochain Koszul sign, including at p=2 without division by 2.
 
