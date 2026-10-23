@@ -347,7 +347,9 @@ structure IntegralHeckeAction (k : ℕ) where
           (qExpansion 1 (f : CuspForm 𝒮ℒ (k : ℤ))).coeff (n / p) else 0)
 
 /-- Reduction of the integral cusp lattice followed by scalar extension to an
-algebraic closure of the prime field, as a native tensor product (README §3.14). -/
+algebraic closure of the prime field, as a native tensor product (README §§3.13a–3.14).
+The localized Fourier-lattice comparison and, for p > 3, the geometric reduction-image
+comparison are targets in README §3.13a. -/
 abbrev ResidualCuspSpace (p k : ℕ) [Fact p.Prime] :=
   TensorProduct ℤ (AlgebraicClosure (ZMod p)) (integralCuspLattice (k : ℤ))
 

@@ -88,11 +88,12 @@ It consumes the following mathematics by its existing ownership:
   Its §§5.1–5.3, 5.10–5.11, 5.16 and 5.22 own factor-base generation, relation lattices,
   class-group quotients, regulator index comparisons and joint class–unit completeness.
   This roadmap consumes these comparisons; it defines no second relation lattice or stopping bound.
-- **AlgebraicModularFormsAndSerreWeights** (Layers R15.2, R15.3, R15.5): the `q`-expansion
+- **AlgebraicModularFormsAndSerreWeights** (Layers R15.1–R15.3, R15.5): the `q`-expansion
   principle and bounded denominators at level one, the theta operator and the Hasse invariant, and
   the Deligne–Serre lifting of residual eigensystems to characteristic zero.
-- **[ContourIntegration](../../Completed/ContourIntegration/README.md)** Layer 2: the argument
-  principle with multiplicities and pole corrections. Layer 4 specializes it to Dirichlet functions.
+- **[ContourIntegration](../../Completed/ContourIntegration/README.md)** Layer 3: the
+  null-homologous argument principle with multiplicities and pole corrections, including its
+  star-convex specialization. Layer 4 applies this interface on rectangular contours.
 - **ZerosOfLFunctions** §§4.1, 4.3–4.4, 4.9, 7.1–7.2a and Layer 9 own generic divisor and
   zero counts, rectangle boundaries and their argument principle, and abstract localization
   semantics. Section 4.21a adds the native Dirichlet normalization, the symmetric
@@ -105,9 +106,26 @@ It consumes the following mathematics by its existing ownership:
 - **FormalLaurentPuiseux** L5 owns coprime factor lifting over K[[t]]. The complete-DVR
   statement in §1.26a differs by allowing every complete DVR, including mixed characteristic
   and arbitrary residue field; no separate K[[t]] lifting target is specified here.
+- **IntegralLattices** Layer 2, milestone 2A owns positive-definite bounded-norm
+  finiteness. Sections 4.26–4.27 add the rational affine-coordinate comparison and exact
+  boundary membership; they use that finiteness theorem without a second lattice carrier.
 - **GlobalNumberFields** Layer 11 owns intrinsic orders and their fractional ideals. The
   finite rational bases in §2.1 and arbitrary-submodule stabilizers in §2.2 are presentation
   comparisons with those carriers, rather than another order or ideal-class theory.
+
+The common foundations used by EffectiveDiophantineMethods have one owner here:
+
+| Foundation owned here | Consumer refinement in EffectiveDiophantineMethods |
+| --- | --- |
+| Canonical rational-centred p-adic records and normalization (§§0.14, 4.10–4.13) | Enclosures of a specified value (§0.1), and balls in general number-field completions (§0.9) |
+| Rectangular isolated-root presentations, arithmetic, equality and complete isolation (§§0.8–0.13, 4.19) | Squarefree annihilators, labelled embeddings, discs and quantitative refinement (§§0.2–0.3) |
+| Local-image spans, cardinality completeness and good-odd-prime equality (§§3.18–3.21) | Factorwise coordinates, square witnesses and global Selmer data (§§3.2–3.5) |
+| Generic p-saturation, finite-index and joint-reduction criteria (§§3.22–3.25) | Height and index data and Mordell–Weil assembly (§§3.17–3.22) |
+| Rational affine ellipsoid membership and its reduction to IntegralLattices 2A (§§4.26–4.27) | LDL identities and Fincke–Pohst tail witnesses (§§1.7–1.8) |
+
+These consumer refinements retain their extra data and use the shared objects through
+value-, subgroup- and membership-preserving comparisons described under *Downstream consumers*.
+The direction of supply is from this roadmap to EffectiveDiophantineMethods.
 
 Downstream roadmaps build on this one and are listed at the end. In particular the `2`-Selmer
 groups, rank bounds, canonical-height enclosures, index bounds and Mordell–Weil bases of elliptic
@@ -312,8 +330,13 @@ minimal-polynomial and generating-root hypotheses, before the local degree formu
 
 ### From Completed.ContourIntegration
 
-Layer 2 supplies the argument principle on contours avoiding zeros and poles, with their
-meromorphic orders and winding numbers; the two conductor-one poles are retained in §4.21a.
+Layer 3 supplies the null-homologous argument principle, realized by
+`TauCeti.Contour.argumentPrinciple_nullHomologous` and its star-convex specialization
+`TauCeti.Contour.argumentPrinciple_starConvex`. Use an open neighborhood of the contour,
+analyticity and nonvanishing off a finite set containing every zero and pole, meromorphy
+and the correct order at those points, a closed piecewise-C¹ contour avoiding the set,
+and null-homology in that neighborhood. A convex neighborhood of a rectangle supplies
+null-homology. The two conductor-one poles are retained in §4.21a.
 
 ### From TauCetiRoadmap.ZerosOfLFunctions
 
@@ -362,9 +385,21 @@ finite support and the −∞ part are explicit in §§2.18–2.19a.
 
 ### From TauCetiRoadmap.AlgebraicModularFormsAndSerreWeights
 
-- R15.2 (level-one `q`-expansion principle), R15.3 (theta
+- R15.1, “Level-one and level-two descent”, supplies the level-one geometric comparison
+  after inverting 6. R15.2, “The integral cusp lattice and its reduction image”, supplies
+  the localized coefficient lattice and the image of its geometric reduction map.
+  Section 3.13a identifies our integer Fourier lattice after localization and reduction
+  with those inputs before R15.3 is applied; arbitrary Katz cusp forms are not identified
+  with the reduction image. R15.3 (theta
   operator with the shift `a_ℓ ↦ ℓ·a_ℓ`, Hasse invariant), R15.5 (Deligne–Serre lifting of a
   residual eigensystem to a characteristic-zero eigenform).
+
+### From TauCetiRoadmap.IntegralLattices
+
+Layer 2, milestone 2A supplies finiteness of `{x in L | B(x,x) <= C}` for every
+positive-definite integral lattice L and rational C. Section 4.26 applies it after
+clearing denominators in G and in the rational translate t; it constructs no new
+lattice, bounded-norm theorem, reduction theory or successive-minimum interface.
 
 ### From TauCetiRoadmap.HeightsRationalPointsAndObstructions
 
@@ -1523,6 +1558,47 @@ For prime p<200 and even 2≤k<p, the nonordinary pairs (p,k) are exactly (59,16
 
 Identify the determinant reductions for every prime and even weight in the stated finite range, including the nonzero reductions for excluded pairs; the integer gcd condition gives the filtered list. ([BCG](#source-bcg), Remark 3.3, p.518, for the filtered primes; [CG13](#source-cg13), Appendix, Table of results, p.14, N-marked entries and the companion-weight relation.) *Needs:* `NonordinaryLevelOnePair` (3.11); integral Hecke matrix (3.7).
 
+### 3.13a Localized Fourier lattice and geometric reduction image
+
+Let k≥2 be even, fix a number field K with embedding K→ℂ, a finite place λ over a
+prime p, and O=O_(K,λ) with residue field κ. Let L_q be the submodule of
+S_k(SL₂(ℤ),K) whose Fourier coefficients lie in O, as in
+AlgebraicModularFormsAndSerreWeights R15.2, “The integral cusp lattice and its reduction image”.
+Prove the O-linear equivalence `O tensor_Z integralCuspLattice(k) ≃ L_q`
+sending a⊗f to af. It preserves every Fourier coefficient and intertwines all integer
+Hecke operators. Indeed, the Miller pivots a_i(f_j)=δ_ij show that a form has all
+coefficients in O exactly when its coordinates in this basis lie in O; the inverse
+reads off its first d coefficients. This is the coefficient-lattice consequence of
+Stein Lemma 2.20 and Remark 2.21, printed pp.20–21 (Stein lines 1134–1165).
+
+Choose an embedding κ→𝔽̄_p. Reducing this equivalence and extending scalars gives
+`ResidualCuspSpace p k ≃ Fbar_p tensor_O L_q`, with the same coefficient and Hecke
+comparisons. For p>3, identify L_q with the geometric cusp lattice L through
+AlgebraicModularFormsAndSerreWeights R15.1, “Level-one and level-two descent”, and R15.2's
+analytic and q-expansion comparisons. Prove that the induced map identifies this
+residual space with `Fbar_p tensor_kappa S_red`, where
+`S_red = im(L/λL → S_k(X_κ))` is R15.2's reduction image. Injectivity follows from
+the pivot coefficients, which remain the identity matrix after reduction. The target
+is this image; no surjectivity onto all Katz forms is assumed. The companion examples
+in §§3.14–3.16 all have p>3, so theta and Hasse act on the supplied geometric forms
+after this comparison.
+
+*Needs:* Miller basis (3.3); integral Hecke recurrence and matrices (3.6–3.7);
+Mathlib `Module.Basis.baseChange` and `LinearMap.baseChange`;
+AlgebraicModularFormsAndSerreWeights R15.1, “Level-one and level-two descent”, and R15.2,
+“The integral cusp lattice and its reduction image”.
+
+**Checks.**
+
+- At k=2, d=0: both localized lattices and their reduction images are zero.
+- At k=12, the inverse sends aΔ to a=a₁(aΔ); after reduction 1⊗Δ has first
+  coefficient 1 and 1⊗(pΔ) has first coefficient 0. T₂ acts by −24 on both sides.
+- At k=38,p=79 the two pivot coordinates remain independent, and T₇₉ has matrix
+  `[[3,17],[25,10]]` on both sides; its value on (47,1) is (158,1185)=(0,0) modulo 79.
+- At p=3 the Katz cusp form AΔ has weight 14 and first coefficient 1, whereas
+  the characteristic-zero weight-14 cusp lattice and its reduction image are zero.
+  Thus an assertion about all Katz forms would exceed this comparison's hypotheses.
+
 ### 3.14 Complete companion eigensystem at weight 82 (`weight82_companion_system`)
 
 Let a_n be the exact integer coefficients of f=ΔE₄²E₆. The level-one integral Hecke matrices at weight 82 admit a common nonzero eigenvector over an algebraic closure of 𝔽₁₀₇, with eigenvalue ℓ⁸¹a_ℓ for every prime ℓ≠107. Equivalently a_ℓ(f)=ℓ²⁵a_ℓ(g) modulo 107. This coefficient convention matches BCG’s cohomological Galois normalization ρ̄_f≅ε̄⁻²⁵ρ̄_g, whose determinant is ε̄^(1−k). A common root of two separate characteristic polynomials is insufficient.
@@ -1530,7 +1606,8 @@ At ℓ=2, a₂(f)=−48≡59 and 2⁸¹≡45 modulo 107, so the companion eigenv
 87; at ℓ=3, a₃(f)=−195804≡6 and 3⁸¹≡53, giving 104. Using the opposite
 exponent 25 would instead give 56 and 95, fixing the twist convention.
 
-Construct a common residual eigensystem, apply the mod-p theta/Hasse weight comparison, and prove the full congruence with a congruence Sturm bound. The theta operator, its eigenvalue shift a_ℓ ↦ ℓ·a_ℓ and the Hasse invariant are AlgebraicModularFormsAndSerreWeights R15.3's; the lift of a residual eigensystem is R15.5's; the cohomological normalization is the one fixed in this statement. These proof inputs are not inferred from two Hecke eigenvalues. ([BCG](#source-bcg), Theorem 2.4 proof, p.515.) *Needs:* integral Hecke matrix (3.7); `levelOne_congruence_sturm` (3.4); the coefficient identity of §3.8 (3.8); AlgebraicModularFormsAndSerreWeights R15.3; AlgebraicModularFormsAndSerreWeights R15.5 (Deligne–Serre lifting of eigenvalues).
+Use §3.13a to identify the localized and residual Fourier lattices with R15.2’s
+coefficient lattice and geometric reduction image. Construct a common residual eigensystem, apply the mod-p theta/Hasse weight comparison, and prove the full congruence with a congruence Sturm bound. The theta operator, its eigenvalue shift a_ℓ ↦ ℓ·a_ℓ and the Hasse invariant are AlgebraicModularFormsAndSerreWeights R15.3's; the lift of a residual eigensystem is R15.5's; the cohomological normalization is the one fixed in this statement. These proof inputs are not inferred from two Hecke eigenvalues. ([BCG](#source-bcg), Theorem 2.4 proof, p.515.) *Needs:* localized Fourier lattice and geometric reduction image (3.13a); integral Hecke matrix (3.7); `levelOne_congruence_sturm` (3.4); the coefficient identity of §3.8 (3.8); AlgebraicModularFormsAndSerreWeights R15.3; AlgebraicModularFormsAndSerreWeights R15.5 (Deligne–Serre lifting of eigenvalues).
 
 The acceptance carrier `ResidualCuspSpace p k` is
 `AlgebraicClosure (ZMod p) ⊗[ℤ] integralCuspLattice k`, using the prime-field
@@ -1580,7 +1657,7 @@ The acceptance predicate `OrdinaryCompanionPair p k` uses two instances of
 functions a,b satisfying the eigenvector equations for every prime, including p.
 The twist comparison is imposed at every prime other than p.
 
-Use the integer Hecke matrices and coefficientwise reduction into the algebraic closure. Record both operator families, their intrinsic recurrence comparisons, two nonzero simultaneous eigenvectors and their eigenvalue function. Characteristic-zero lifting is the Deligne–Serre lemma of AlgebraicModularFormsAndSerreWeights R15.5. ([BCG](#source-bcg), Theorem 2.1 and §2.3, pp.513–515; Remark 3.3, p.518.) *Needs:* integral Hecke matrix (3.7); level-one prime recurrence (3.6); complete companion eigensystem at weight 82 (3.14); AlgebraicModularFormsAndSerreWeights R15.5 (Deligne–Serre lifting of eigenvalues).
+Use §3.13a for the coefficient-lattice and geometric-reduction comparisons, then the integer Hecke matrices and coefficientwise reduction into the algebraic closure. Record both operator families, their intrinsic recurrence comparisons, two nonzero simultaneous eigenvectors and their eigenvalue function. Characteristic-zero lifting is the Deligne–Serre lemma of AlgebraicModularFormsAndSerreWeights R15.5. ([BCG](#source-bcg), Theorem 2.1 and §2.3, pp.513–515; Remark 3.3, p.518.) *Needs:* localized Fourier lattice and geometric reduction image (3.13a); integral Hecke matrix (3.7); level-one prime recurrence (3.6); complete companion eigensystem at weight 82 (3.14); AlgebraicModularFormsAndSerreWeights R15.5 (Deligne–Serre lifting of eigenvalues).
 
 **Checks.**
 
@@ -1712,6 +1789,21 @@ If pQ = P with Q = (x₀, y₀), Tau Ceti's mul_eval_ΨSq_eq_eval_Φ_of_zsmul gi
 
 ### 3.25 The reduction sieve for p-saturation
 
+First prove the generic joint-reduction criterion. Let A and C_i be additive
+commutative groups, G≤A, p prime, and ψ_i:A→C_i a finite family of homomorphisms
+with pC_i=0. If their induced joint map G/pG→∏_i C_i is injective and A[p]≤G,
+then G is p-saturated. Every ψ_i kills pA, so injectivity gives G∩pA=pG;
+§3.22 then applies. This criterion needs neither finite index nor a free generator list.
+
+**Checks.**
+
+- In A=ℤ, G=3ℤ, p=2, reduction to ℤ/2 sends the generator 3 to 1. The induced
+  map G/2G is injective and G is 2-saturated: 2a divisible by 3 forces 3 to divide a.
+- In A=ℤ, G=2ℤ, p=2, reduction modulo 2 sends the generator 2 to 0. Its joint
+  kernel is nonzero, and 2·1∈G with 1∉G witnesses failure of saturation.
+- In A=ℤ/2, G=0, p=2, the map from G/2G=0 is injective even for an empty
+  reduction family, but 2·1=0 with 1∉G. The ambient-torsion condition excludes it.
+
 Let W be an elliptic Weierstrass curve over ℚ with integral coefficients, p a prime and g₁, …, g_m ∈ W(ℚ). For a prime q of good reduction let ρ_q : W(ℚ) → W̃(𝔽_q)/pW̃(𝔽_q) be reduction followed by the quotient. Each ρ_q vanishes on pW(ℚ), so V_p is contained in the kernel of the 𝔽_p-linear map 𝔽_p^m → W̃(𝔽_q)/pW̃(𝔽_q), b ↦ Σ b_i ρ_q(g_i). If the intersection of these kernels over finitely many good primes is 0, then V_p = 0. A prime q contributes only when p divides #W̃(𝔽_q).
 
 Reduction at a prime of good reduction is a group homomorphism W(ℚ) → W̃(𝔽_q), so it sends pW(ℚ) into pW̃(𝔽_q). Hence an element of V_p maps to zero under every ρ_q. The p-part of W̃(𝔽_q)/pW̃(𝔽_q) is trivial unless p divides the group order. ([Siksek](#source-siksek), §4.1, equation (40), pp.17–18.) *Needs:* p-saturation reduces to finitely many divisibility tests (3.23); TauCetiRoadmap EllipticCurves Layer 4; point counts over a finite field as a character sum (3.17).
@@ -1760,7 +1852,7 @@ the division-polynomial comparison of §3.24 identifies the exact divisibility c
 
 ### Dependencies
 
-Layers 0–2; TauCetiRoadmap LocalFieldsRamification Layer 2; TauCetiRoadmap ModularForms Layers 7–11; AlgebraicModularFormsAndSerreWeights R15.2, R15.3, R15.5; TauCetiRoadmap EllipticCurves Layers 4 and 6; HeightsRationalPointsAndObstructions §1.17; Mathlib (level-one modular forms, `quadraticChar`, division polynomials); Tau Ceti (Sturm bound, Hecke recurrence, point count, `x − T` descent, division-polynomial identity).
+Layers 0–2; TauCetiRoadmap LocalFieldsRamification Layer 2; TauCetiRoadmap ModularForms Layers 7–11; AlgebraicModularFormsAndSerreWeights R15.1–R15.3, R15.5; TauCetiRoadmap EllipticCurves Layers 4 and 6; HeightsRationalPointsAndObstructions §1.17; Mathlib (level-one modular forms, `quadraticChar`, division polynomials); Tau Ceti (Sturm bound, Hecke recurrence, point count, `x − T` descent, division-polynomial identity).
 
 ## Layer 4: quantitative analytic bounds and finite Gram data
 
@@ -2288,7 +2380,7 @@ Substituting the argument identities evaluates this through the Gamma term and t
 integrated S terms, with the absolute count fixed by the contour identity. Do not discard
 pole or endpoint contributions (Platt Theorems 3.1–3.2, pp.4–5; Platt line 271).
 *Needs:* ZerosOfLFunctions §§4.1, 4.3–4.4, 4.9 and 7.1–7.2a;
-ContourIntegration Layer 2 argument principle; Tau Ceti
+ContourIntegration Layer 3 null-homologous argument principle; Tau Ceti
 `TauCeti.Contour.argumentPrinciple_starConvex`; Mathlib
 `DirichletCharacter.IsPrimitive.completedLFunction_one_sub`,
 `DirichletCharacter.LFunction_ne_zero_of_one_le_re` and the completed/Gamma comparisons
@@ -2378,8 +2470,13 @@ Dimension zero is allowed; all finiteness statements require positive definitene
 - Increasing R gives an inclusion.
 - For t=0 and R≥0 it contains zero.
 
-Finiteness follows from positive quadratic completion (deWeger, §3.6, printed pp.51–53).
-*Needs:* Mathlib `Matrix.PosDef` and finiteness of bounded integer sets.
+For positive-definite G choose positive integers a,D so that aG has integral entries
+and Dt∈ℤⁿ. The injective map x↦D(x−t) sends the set into the bounded-norm set of
+the integral lattice with Gram matrix aG, at bound aD²R, because
+`(D(x-t))^T (aG) (D(x-t)) = a*D^2*((x-t)^T G (x-t))`.
+Apply IntegralLattices Layer 2, milestone 2A; positive scaling preserves definiteness.
+The coordinate comparison retains equality at the boundary (deWeger, §3.6, printed pp.51–53).
+*Needs:* Mathlib `Matrix.PosDef`; IntegralLattices Layer 2, milestone 2A.
 
 **Checks.**
 
@@ -2517,7 +2614,7 @@ Sum each constant block contribution and the diagonal terms separately. Each dia
 
 ### Dependencies
 
-Layers 0–3; Mathlib (`NonemptyInterval`, digamma, `DirichletCharacter.LFunction`, `ModularForm.L`, `WeakFEPair`, `Matrix.PosDef`); TauCetiRoadmap RealAlgebraicGeometry Layers 1–4; ContourIntegration Layer 2; ZerosOfLFunctions §§4.1, 4.3–4.4, 4.9, 7.1–7.2a and Layer 9.
+Layers 0–3; IntegralLattices Layer 2, milestone 2A; Mathlib (`NonemptyInterval`, digamma, `DirichletCharacter.LFunction`, `ModularForm.L`, `WeakFEPair`, `Matrix.PosDef`); TauCetiRoadmap RealAlgebraicGeometry Layers 1–4; ContourIntegration Layer 3; ZerosOfLFunctions §§4.1, 4.3–4.4, 4.9, 7.1–7.2a and Layer 9.
 
 ## Layer 5: interpretation of finite arithmetic families
 
@@ -2552,11 +2649,31 @@ Layers 0, 3 and 4.
 
 ## Downstream consumers
 
-- **EffectiveDiophantineMethods**: its `2`-Selmer groups, rank bounds, canonical-height enclosures,
-  index bounds and Mordell–Weil bases use the size check completes a local image (3.19),
-  `localImage_of_good_odd` (3.21), finite p-saturation criterion (3.26), the order presentations of Layer 2 and
-  the enclosures of Layer 4; its worked Diophantine examples instantiate the dataset binding of
-  Layer 5.
+- **EffectiveDiophantineMethods** consumes the common foundations through these comparisons:
+  - For its §0.1 proof-bearing p-adic enclosure of x with rational centre c and precision N,
+    use §4.10's normalized record and transport containment along equality of denotations.
+    For its §0.9 general-completion balls this comparison applies only to K=ℚ, K_v=ℚ_p,
+    ord(p)=1 and rational centres; it does not identify general-completion records.
+  - Its §§0.2–0.3 rectangular selected-root data forget squarefreeness and the embedding
+    label to give `IsolatedAlgebraicRoot`, with exactly the same complex value. A disc
+    datum first chooses a rational rectangle containing the selected root and contained
+    in the disc's interior, so this restriction requires the root to be in that interior;
+    for boundary roots choose a new isolating rectangle by §0.9a instead. Arithmetic and
+    equality use §§0.10–0.13, and complete isolation uses §4.19.
+  - Its §§3.2–3.4 coordinate-rich local-image data transport their coordinate subgroup to
+    `localImageSpan` under the specified square-class isomorphism. Cardinality completeness
+    uses §3.19 and good-odd-prime equality uses `localImage_of_good_odd` (§3.21), with
+    all square witnesses and the integral good-model hypothesis retained.
+  - Its §§3.17–3.18 saturation and joint-reduction data use `IsPSaturated` (§3.22) and
+    §§3.23–3.25, retaining A[p]≤G; §3.26 specializes the finite criterion to rational
+    elliptic points. Heights, global index bounds and Mordell–Weil assembly remain
+    its §§3.5–3.22's applications of these foundations.
+  - Its §§1.7–1.8 LDL and Fincke–Pohst witnesses identify their finite output with
+    §§4.26–4.27's affine integer set by the same inequality, including equality at the
+    boundary. This comparison assumes positive definiteness; an empty totalized output
+    for a non-positive-definite matrix is not identified with the native sublevel set.
+  Its worked Diophantine examples also consume the order presentations of Layer 2,
+  the enclosures of Layer 4 and the finite-family comparisons of Layer 5.
 
 ## References
 
