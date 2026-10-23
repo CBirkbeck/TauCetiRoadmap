@@ -18,7 +18,7 @@ potential theory and Galois theory are consumed through the contracts in the ind
 - Tau Ceti's EllipticCurves supplies elliptic geometry and the elliptic height.
   The new target is its comparison with the dynamical Tate limit and with Lattès
   maps. General abelian Néron–Tate heights come from
-  HeightsRationalPointsAndObstructions, RP.0.
+  HeightsRationalPointsAndObstructions §0.19.
 - The native analytic line, local potential theory, mutual energy and their
   dynamical maps, invariant measures and Julia-support comparisons are built in
   Layer 2. General projective analytification, local curvature measures and all-place
@@ -40,7 +40,7 @@ potential theory and Galois theory are consumed through the contracts in the ind
   the different and Hurwitz. SchemeAndStackFoundations, §§0.3, 0.9 and Layer 5, supplies
   schemes, spreading out and intersection degrees. The dynatomic coordinate
   rings and dynamical ramification calculations belong here.
-- EffectiveDiophantineMethods, ED.0, ED.3 and ED.4, supplies certified height
+- EffectiveDiophantineMethods §0.11 and Layers 3–4 supply certified height
   candidates, Mordell–Weil calculations and rational-point certificates.
   The dynamical equations, projective chart comparisons, finite candidate sets
   and orbit-repetition criteria belong here.
@@ -78,13 +78,13 @@ the exceptional quadratic characteristic-two image theorem.
   target here. The meromorphic-extension comparison retains its additional
   pole and removable-value content.
 
-Supplier gaps are recorded by their exact required output:
+Supplier interfaces distinguish the imported output from its dynamical adapters:
 
-| Gap | Supplier and section | needs |
+| Interface | Supplier and section | Use here |
 |---|---|---|
-| `gap:rp-dominant-height` | HeightsRationalPointsAndObstructions, RP.0 | For a generically finite dominant rational map between projective varieties with chosen ample heights, supply h_Y(F(P))≥c h_X(P)−C off a proper closed subset, with c>0. |
-| `gap:rp-geometric-height-field` | HeightsRationalPointsAndObstructions, RP.0 | Supply the global geometric height-field and curve-height machine for K(T) used in §6.24 over finitely generated characteristic-zero constants. |
-| `gap:ed-bounded-height-candidates` | EffectiveDiophantineMethods, ED.0 | Supply a finite subset of a number field containing every point up to a specified native height bound, and its projective-line counterpart, with the inclusion hypothesis consumed in §3.40. |
+| Dominant-map height comparison | HeightsRationalPointsAndObstructions §0.30, `weilHeight_dominant_lower_bound` | Consume h_Y(F(P))≥c h_X(P)−C, c>0, on a dense open in the domain of a dominant generically finite rational map over ℚ̄ with ample compactification heights. Section 6.10 extends this to the whole finite-fibre locus. |
+| `gap:rp-geometric-height-field` | HeightsRationalPointsAndObstructions §§0.9–0.16 | Supply the global geometric height-field and curve-height machine for K(T) used in §6.24 over finitely generated characteristic-zero constants. |
+| Bounded-height candidate sets | EffectiveDiophantineMethods §0.11, `ED0.boundedHeightPoints` and `ED0.boundedHeightProjectivePoints` | Consume both finite output lists and the projective set including ∞, with an integral power basis, complete archimedean embedding data, rational D≥1 and 0<τ≤1, and D≥exp(B) for the native logarithmic bound B. Sections 3.47 and 3.53 supply height normalization, chart transport and the preperiodic-set inclusion used in §3.40. |
 
 ## Conventions
 
@@ -92,7 +92,7 @@ For a self-map f, f^[n] denotes n-fold composition, including the identity at n=
 
 Maps of degree at least two are required wherever a canonical dynamical limit, Julia-support theorem or entropy log d is asserted. Targets state stronger field or characteristic conditions individually. Pullbacks of measures and divisors count local algebraic degrees, including inseparable multiplicity. This degree is not the separable degree or the number of distinct points in a fibre. Good reduction and potential good reduction are separate conditions; arbitrary PGL₂ conjugation need not preserve good reduction in the chosen coordinates.
 
-Arithmetic heights are absolute unless explicitly called **native relative**. Over a number field K of degree q, the absolute logarithmic height is the native logarithmic height divided by q. Thus an absolute bound B gives native multiplicative radius exp(qB), while a native logarithmic bound B gives exp(B). A finite superset supplied by EffectiveDiophantineMethods ED.0 is used with infinity included; the orbit criterion below is a mathematical statement about that set.
+Arithmetic heights are absolute unless explicitly called **native relative**. Over a number field K of degree q, the absolute logarithmic height is the native logarithmic height divided by q. Thus an absolute bound B gives native multiplicative radius exp(qB), while a native logarithmic bound B gives exp(B). A finite superset supplied by EffectiveDiophantineMethods §0.11 is used with infinity included; the orbit criterion below is a mathematical statement about that set.
 
 At a finite place v above p, distinguish the native Mathlib absolute value
 `v(x) = N(v)^(-ord_v(x))` from the standard local absolute value extending
@@ -159,31 +159,35 @@ Consume `tateLimit φ α h`, `tendsto_tateLimit`, `abs_tateLimit_sub_le`, `tateL
 
 Consume §5.17a `metrizedDivisorAction`, `arithmeticDegree` and `arithmeticIntersection` for projective arithmetic models in every dimension; §5.17b `AdelicMetrizedLineBundle`, `SemipositiveAdelic`, `IntegrableAdelic`, `adelicIntersection_uniformBound`, `adelicCycleHeight` and `cycleProbabilityMeasure`; §5.17c `BergmanDensity` and `bergmanDensity_uniform` with its positive smooth metric and curvature-volume hypotheses; §5.17d `AdelicSectionLattice`, `arithmeticEulerCharacteristic` and the arithmetic Hilbert–Samuel asymptotic; §5.17e section lifting and arithmetic Nakai; and §5.17f `AdelicSuccessiveMinimum` and `successiveMinima_inequality`. Intersections are symmetric, multilinear, compatible with pullback and field extension, and continuous for uniform changes with a fixed model outside finitely many places. The integrable continuity bound uses fixed differences of semipositive factors. For a nonzero effective pure n-cycle Z and ample L, the supplied absolute height is I(L̄^(n+1),Z)/((n+1)deg_L Z), where I is divided by [K:ℚ]; for semipositive L̄ the local probability measure is c₁(L̄_v)^n/deg_L Z. The zero cycle has no such normalization. These inputs do not assert the all-place equidistribution or quasi-projective completion targets of this roadmap.
 
-### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — RP.0
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §0.16
 
 Weil's height machine over a number field K (or a global height field): for a smooth projective variety V/K and η ∈ Pic(V) ⊗ ℝ, a function `h_{V,η}` : V(K̄) → ℝ determined up to bounded functions, with (a) ℝ-linearity in η up to O(1) (so `h_{L^{⊗d}}` = d·h_L + O(1)) and dependence only on the class of η; (b) functoriality: for a morphism φ : W → V, `h_{V,η}` ∘ φ = `h_{W,φ*η}` + O(1); (c) normalisation: for V = ℙᴺ and η = [O(1)], `h_{V,η}` is, up to O(1), the absolute logarithmic Weil height h([x₀ : … : x_N]) = Projectivization.logHeight_K(x)/[K : ℚ] for x ∈ `K^{N+1}` and K any number field containing the coordinates; (d) Northcott for ample η: for all B and D, {P ∈ V(K̄) : [K(P) : K] ≤ D, `h_{V,η}(P)` ≤ B} is finite; (e) ample η: `h_{V,η}` bounded below. These are Silverman's properties (i)–(iv) (AWS notes, §4.1) and the input (2) of Call–Silverman §1.
 
-### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — RP.0
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §0.19
 
 For an abelian variety A over a number field K and a symmetric line bundle L ([−1]*L ≅ L): [m]*L ≅ `L^{⊗m²}` for every integer m, and the Néron–Tate height `ĥ_{A,L}` : A(K̄) → ℝ with `ĥ_{A,L}` − `h_{A,L}` bounded and `ĥ_{A,L}(mP)` = `m²·ĥ_{A,L}(P),` compared with Tau Ceti's elliptic canonicalHeight for dim A = 1 and L = O((O)).
 
-### From TauCetiRoadmap.EffectiveDiophantineMethods — ED.3
+### From TauCetiRoadmap.EffectiveDiophantineMethods — §0.11
+
+Consume `ED0.boundedHeightPoints`, its completeness theorem `ED0.mem_boundedHeightPoints_of_mulHeight₁_le`, and `ED0.boundedHeightProjectivePoints` with `ED0.mem_boundedHeightProjectivePoints`. The inputs are a number field L, a power basis over ℚ with integral generator, a complete collection of [L:ℚ] archimedean embedding data with pairwise disjoint root boxes as in §0.4, and rationals D≥1 and 0<τ≤1. The union S_<∪S_≈ contains every x with native multiplicative height at most D; its projective counterpart includes ∞ and every P with native logarithmic height at most log D. A native bound B uses D≥exp(B); an absolute bound B_abs uses D≥exp([L:ℚ]B_abs). Both lists are retained. Sections 3.47 and 3.53 apply this supplied completeness to the dynamical height bound and projective evaluation; they do not construct another bounded-height enumeration.
+
+### From TauCetiRoadmap.EffectiveDiophantineMethods — Layer 3
 
 Mordell–Weil certificates for two genus-2 Jacobians: (a) for C₀(5): y² = x⁶ + 8x⁵ + 22x⁴ + 22x³ + 5x² + 6x + 1, the FPS Theorem 3 rank-one result and explicit generator data, with the finite descent and local certificates required by ED.3/fps-genus-two-mordell-weil; (b) for C₁(3₂): y² = x⁶ − 2x⁴ + 2x³ + 5x² + 2x + 1, ED.3/poonen-genus-two-mordell-weil supplies the torsion/rank-lower-bound and 3-saturation contracts for [∞₊ − ∞₋]. The dynamical consumers take a corrected descent proving rank ≤ 1 as an explicit hypothesis. Poonen Proposition 1 and the author errata, p. 1, correct the 743-adic point to (−2, √33) and require 2-adic information; the errata do not themselves provide the missing formal descent certificate.
 
-### From TauCetiRoadmap.EffectiveDiophantineMethods — ED.3
+### From TauCetiRoadmap.EffectiveDiophantineMethods — Layer 3
 
 Complete lists of rational points of the rank-zero curves used by Poonen and Morton: E11: y² + y = x³ − x² has E11(ℚ) = {O, (0, 0), (0, −1), (1, 0), (1, −1)}; E15: y² + xy + y = x³ + x² has {O, (0, 0), (−1, 0), (0, −1)}; E17: y² + xy + y = x³ − x² − x has {O, (0, 0), (1, −1), (0, −1)}; E24: y² = x³ − x² + x has {O, (0, 0), (1, 1), (1, −1)}; E40: y² = x³ − 2x + 1 has {O, (0, ±1), (1, 0)}; Morton's Y² = 4X³ − 11X² + 8X has exactly the points ∞, (0, 0), (1, ±1), (2, ±2); each with a certificate that the Mordell–Weil rank is 0 and the torsion subgroup is as listed.
 
-### From TauCetiRoadmap.EffectiveDiophantineMethods — ED.3
+### From TauCetiRoadmap.EffectiveDiophantineMethods — Layer 3
 
 Complete lists of rational points of three genus-2 curves with rank-zero Jacobians (models of X₁(13), X₁(16), X₁(18)): y² = x⁶ + 2x⁵ + x⁴ + 2x³ + 6x² + 4x + 1 and y² = x⁶ + 2x⁵ + 5x⁴ + 10x³ + 10x² + 4x + 1 each have exactly the six rational points (−1, ±1), (0, ±1) and the two points at infinity; v² = u(u² + 1)(1 + 2u − u²) has exactly (0, 0), (±1, ±2) and the point at infinity. Certificates: J(ℚ) finite (descent) and the torsion computed.
 
-### From TauCetiRoadmap.EffectiveDiophantineMethods — ED.3
+### From TauCetiRoadmap.EffectiveDiophantineMethods — Layer 3
 
 For Stoll's genus-4 curve X₀^dyn(6): the Jacobian J, its Mordell–Weil group, and a saturation certificate showing that, if rank J(ℚ) = 3, the subgroup G generated by differences of the ten known rational points has finite index and its saturation at the relevant primes is computed (Stoll 2008, §3).
 
-### From TauCetiRoadmap.EffectiveDiophantineMethods — ED.4
+### From TauCetiRoadmap.EffectiveDiophantineMethods — Layer 4
 
 Chabauty–Coleman certificates with every residue disc treated: (a) C₀(5): y² = x⁶ + 8x⁵ + 22x⁴ + 22x³ + 5x² + 6x + 1 has exactly the six rational points (0, ±1), (−3, ±1), ∞± (FPS 1995, Theorem 6, p = 3, given J(ℚ) ≅ ℤ); (b) C₁(3₂): y² = x⁶ − 2x⁴ + 2x³ + 5x² + 2x + 1 has exactly (−1, ±1), (0, ±1), (1, ±3), ∞± (Poonen 1995, Proposition 2, p = 3, including the variant embedding P ↦ [P + S₊] on the disc of the Weierstrass point (1, 0) mod 3); (c) under rank J(ℚ) = 3, X₀^dyn(6) has exactly its ten known rational points (Stoll 2008, p = 5 with a differential annihilating G).
 
@@ -237,9 +241,9 @@ Hilbert's irreducibility theorem for number fields in the form: for a number fie
 
 (1) Quasi-projective varieties over a field K: schemes admitting an immersion into ℙ^N_K = Proj K[x₀, …, x_N], their closed subvarieties and K-points, with étale and unramified endomorphisms as Mathlib AlgebraicGeometry.Etale / FormallyUnramified morphisms of finite type. (2) Spreading out: for smooth geometrically irreducible X, an étale Φ, V and α over ℂ defined over a finitely generated ℤ-algebra R ⊂ ℂ, a model X_R → Spec R such that, over a dense open U ⊆ Spec R, X_U is smooth and quasi-projective, Φ extends to an unramified endomorphism, fibres are geometrically irreducible, and α extends to a section (EGA IV §§8–9, 12; Bell–Ghioca–Tucker Proposition 4.3). (3) Base change of smoothness, unramifiedness and quasi-projectivity along Spec ℤ_p → Spec R.
 
-### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — RP.0
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §§0.16, 0.30
 
-For a projective variety X over ℚ̄ with an ample line bundle L, the Weil height `h_{X,L}` : X(ℚ̄) → ℝ (well defined up to bounded functions), with pullback functoriality `h_{Y,φ*M}` = `h_{X,M}` ∘ φ + O(1) for morphisms φ : Y → X, restriction to closed subvarieties, commensurability `c₁h_{X,L}` − c₂ ≤ `h_{X,L′}` ≤ `c₃h_{X,L}` + c₄ of two ample heights, and `gap:rp-dominant-height` for a generically finite morphism on a dense open; the extension to its whole finite-fibre locus is a Layer 6 target; applied to a projective compactification of the moduli space M_d of degree-d rational maps, giving the ample moduli height `h_{M_d}.`
+For a projective variety X over ℚ̄ with an ample line bundle L, the Weil height `h_{X,L}` : X(ℚ̄) → ℝ (well defined up to bounded functions), with pullback functoriality `h_{Y,φ*M}` = `h_{X,M}` ∘ φ + O(1) for morphisms φ : Y → X, restriction to closed subvarieties, commensurability `c₁h_{X,L}` − c₂ ≤ `h_{X,L′}` ≤ `c₃h_{X,L}` + c₄ of two ample heights, and HeightsRationalPointsAndObstructions §0.30 `weilHeight_dominant_lower_bound` for a generically finite morphism on a dense open; the extension to its whole finite-fibre locus is a Layer 6 target; applied to a projective compactification of the moduli space M_d of degree-d rational maps, giving the ample moduli height `h_{M_d}.`
 
 ### From TauCetiRoadmap.FuchsianOrbifolds — layer-5-compact-surface-degree-theory-and-fuchsian-applications
 
@@ -301,11 +305,11 @@ Unique regular projective models, finite maps from inclusions of function fields
 
 Normalized conformal coordinates, analytic continuation, and general monodromy/lifting theorems, specialized to the explicitly specified dynamical domains. Periodic ray landing and parabolic basin theory require the dynamical constructions below.
 
-### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — RP.0
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §§0.9–0.16
 
 Extend the supplied height machine by `h_{T,D}(t)/h_{T,A}(t)→deg` D for every real divisor class D on a smooth projective curve and deg A=1, as `h_{T,A}→∞,` with compatible algebraic-extension normalization. Supply the generic intersection-degree identity and the uniform relative height bound used by Call–Silverman Theorems 3.1 and 4.1 for global height fields, not only number fields.
 
-### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — RP.4
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §4.8
 
 Use Siegel on the normalizations of the components of F(X)=G(Y), with the integral model and boundary points tracked. The Bilu–Tichy classification is a separate input and is not attributed to Siegel.
 
@@ -1181,9 +1185,10 @@ Prove the following basic API.
 
 - (X₀², X₁²) ∘ (X₀², X₁²) = (X₀⁴, X₁⁴).
 - The composite of lifts of degrees 2 and 3 has forms homogeneous of degree 6.
-- (X₀², X₁²) ∘ (X₀ + X₁, X₁) ≠ (X₀ + X₁, X₁) ∘ (X₀², X₁²).
+- Over ℚ, (X₀², X₁²) ∘ (X₀ + X₁, X₁) ≠ (X₀ + X₁, X₁) ∘ (X₀², X₁²): their first forms differ by 2X₀X₁, and evaluation at (1,1) gives 4 and 2.
+- In characteristic 2 the same two composites are equal, both (X₀²+X₁²,X₁²); the composition API retains arbitrary characteristic.
 
-**Endpoint checks.** (X₀², X₁²) ∘ (X₀², X₁²) = (X₀⁴, X₁⁴). (X₀², X₁²) ∘ (X₀ + X₁, X₁) = ((X₀ + X₁)², X₁²) ≠ (X₀² + X₁², X₁²) = (X₀ + X₁, X₁) ∘ (X₀², X₁²).
+**Endpoint checks.** (X₀², X₁²) ∘ (X₀², X₁²) = (X₀⁴, X₁⁴). Over ℚ, (X₀², X₁²) ∘ (X₀ + X₁, X₁) = ((X₀ + X₁)², X₁²) ≠ (X₀² + X₁², X₁²) = (X₀ + X₁, X₁) ∘ (X₀², X₁²); in characteristic 2 the middle pairs agree.
 
 Applications include Silverman, AWS notes, Proposition 24(a) — the iterate's lift is the composite of lifts, reduced termwise; Rational self-maps of ℙ¹ over a field — the monoid structure of rational maps; Layer 3 — the lift of f^n defines the period-n points (Y F^n_0 − X F^n_1); Layer 2 — the homogeneous escape rate lim `d^{-n}` log ‖F^n(x)‖ uses the n-fold composite.
 
@@ -1831,7 +1836,7 @@ Mathlib iteration, periodic-point, projective-space, multivariate-polynomial, re
 
 ## Layer 1: Canonical heights
 
-Tate’s elementary limiting argument is the common engine. Separate the projective-line construction on native height carriers from the general-variety and divisorial-eigenclass endpoints, which require RP.0. Zero height implies preperiodicity only with the stated Northcott and field hypotheses.
+Tate’s elementary limiting argument is the common engine. Separate the projective-line construction on native height carriers from the general-variety and divisorial-eigenclass endpoints, which require HeightsRationalPointsAndObstructions §0.16. Zero height implies preperiodicity only with the stated Northcott and field hypotheses.
 
 ### 1.1 Normalized iterates and the Tate series
 
@@ -1996,11 +2001,11 @@ g := tateLimit ψ α k ∘ π satisfies g ∘ φ = (tateLimit ψ α k) ∘ ψ �
 
 Let K be a number field, V/K a smooth projective variety, φ : V → V a morphism and L an ample line bundle on V with φ*L ≅ `L^{⊗d}` for an integer d ≥ 2, and let h_L : V(K̄) → ℝ be a Weil height for L. Then `ĥ_{V,φ,L}(P)` = lim `d^{−n}` h_L(φⁿP) exists for every P ∈ V(K̄), `|ĥ_{V,φ,L}` − h_L| ≤ c/(d − 1) where c bounds |h_L ∘ φ − d h_L|, `ĥ_{V,φ,L}` ∘ φ = `d·ĥ_{V,φ,L},` `ĥ_{V,φ,L}` is the unique function with ĥ − h_L bounded and ĥ ∘ φ = dĥ, and it does not depend on the choice of the Weil height h_L.
 
-K a number field; V smooth projective over K; φ a morphism over K; L ample with φ*L ≅ `L^{⊗d},` d ≥ 2. The Weil height machine for line bundles on V (functoriality, additivity, dependence on the isomorphism class) is supplied by HeightsRationalPointsAndObstructions:RP.0.
+K a number field; V smooth projective over K; φ a morphism over K; L ample with φ*L ≅ `L^{⊗d},` d ≥ 2. The Weil height machine for line bundles on V (functoriality, additivity, dependence on the isomorphism class) is supplied by HeightsRationalPointsAndObstructions §0.16.
 
-Height machine (RP.0): h_L ∘ φ = `h_{φ*L}` + O(1) = `h_{L^{⊗d}}` + O(1) = d·h_L + O(1); this is Call–Silverman (2), the hypothesis of Tate's lemma with α = d. Existence, bound, functional equation: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp` applied to (V(K̄), φ, h_L, d). Uniqueness: HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Independence of h_L: two Weil heights for L differ by a bounded function (RP.0), so the limits agree (HeightsRationalPointsAndObstructions §0.18 `congr_bounded`, a consequence of HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`).
+Height machine (HeightsRationalPointsAndObstructions §0.16): h_L ∘ φ = `h_{φ*L}` + O(1) = `h_{L^{⊗d}}` + O(1) = d·h_L + O(1); this is Call–Silverman (2), the hypothesis of Tate's lemma with α = d. Existence, bound, functional equation: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp` applied to (V(K̄), φ, h_L, d). Uniqueness: HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Independence of h_L: two Weil heights for L differ by a bounded function (HeightsRationalPointsAndObstructions §0.16), so the limits agree (HeightsRationalPointsAndObstructions §0.18 `congr_bounded`, a consequence of HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`).
 
-*Needs:* `HeightsRationalPointsAndObstructions:RP.0`; HeightsRationalPointsAndObstructions §0.18 `tateLimit`; HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`.
+*Needs:* HeightsRationalPointsAndObstructions §0.16; HeightsRationalPointsAndObstructions §0.18 `tateLimit`; HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Theorem 1.1, pp. 166–167 — Exactly the theorem, here for η the class of an ample L and α = d an integer; [call-silverman-1993](#call-silverman-1993), §1, p. 166 — The input from the height machine; [silverman-aws-2010](#silverman-aws-2010), §5.2, p. 15, Supplementary Material — The polarized setting of the roadmap.)
 
@@ -2012,13 +2017,17 @@ Let F be a field with Height.AdmissibleAbsValues, W an elliptic curve over F and
 
 F with admissible absolute values and decidable equality (Tau Ceti's group law); W elliptic.
 
-The identity (2 • ·)^[n] P = 2^n • P identifies the defining sequences. Tau Ceti's `Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow` gives h(2^nP)/4^n → canonicalHeight P, and `Filter.Tendsto.limUnder_eq` identifies the Tate limit with that value. For general m, take g = canonicalHeight: g(mP) = m²g(P) and |g − h| ≤ D imply |h(mP) − m²h(P)| ≤ D(1 + m²). Uniqueness of the Tate limit gives the result. Under field Northcott, `Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder` identifies its zero set.
+The identity (2 • ·)^[n] P = 2^n • P identifies the defining sequences. Tau Ceti's `Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow` gives h(2^nP)/4^n → canonicalHeight P. The normalized-iterate/series comparison of §1.1 then identifies the supplied error-series Tate limit with that value. For general m, take g = canonicalHeight: g(mP) = m²g(P) and |g − h| ≤ D imply |h(mP) − m²h(P)| ≤ D(1 + m²). Uniqueness of the Tate limit gives the result. Under field Northcott, `Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder` identifies its zero set.
 
-*Needs:* HeightsRationalPointsAndObstructions §0.18 `tateLimit`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; `WeierstrassCurve.Affine.Point.canonicalHeight`; `WeierstrassCurve.Affine.Point.naiveHeight`; `WeierstrassCurve.Affine.Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow`; `WeierstrassCurve.Affine.Point.abs_canonicalHeight_sub_naiveHeight_le`; `WeierstrassCurve.Affine.Point.canonicalHeight_nsmul`; `WeierstrassCurve.Affine.Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder`; `smul_iterate`; `Filter.Tendsto.const_mul`; `Filter.Tendsto.limUnder_eq`.
+*Needs:* HeightsRationalPointsAndObstructions §0.18 `tateLimit`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; `WeierstrassCurve.Affine.Point.canonicalHeight`; `WeierstrassCurve.Affine.Point.naiveHeight`; `WeierstrassCurve.Affine.Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow`; `WeierstrassCurve.Affine.Point.abs_canonicalHeight_sub_naiveHeight_le`; `WeierstrassCurve.Affine.Point.canonicalHeight_nsmul`; `WeierstrassCurve.Affine.Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder`; `smul_iterate`; [Normalized iterates and the Tate series](#11-normalized-iterates-and-the-tate-series).
 
 ([call-silverman-1993](#call-silverman-1993), §1, Example 1, p. 167 — The example (multiplication on an abelian variety), made concrete for elliptic curves.)
 
-**Endpoint checks.** The point at infinity has Tate limit 0; a point of order 3 has Tate limit 0 for every m.
+**Checks.**
+
+- At the point at infinity, h=0 and every normalized iterate and every error-series term is 0.
+- On y²+y=x³ over ℚ, P=(0,0) has order 3, with 2P=(0,−1) and 4P=P. Both x-heights are 0, so the normalized iterates and the error-series value are 0 for every m≥2.
+- On y²=x³−2 over ℚ, P=(3,5) has x(2P)=129/100. The first two normalized terms are log 3 and (log 129)/4; the first error-series partial sum is log 3+(log 129−4log 3)/4=(log 129)/4. Omitting the initial h(P) would subtract log 3 from the limit.
 
 ### 1.19 The relative canonical height of a rational map
 
@@ -2097,11 +2106,11 @@ Applications include ClassicalArithmeticCompletion §6.37 — `ĥ_{z^d}` = h, Kr
 
 In the setting of Call–Silverman canonical height of a polarized morphism (K a number field, L ample, φ*L ≅ `L^{⊗d},` d ≥ 2): a point P ∈ V(K̄) is preperiodic for φ iff `ĥ_{V,φ,L}(P)` = 0.
 
-As in Call–Silverman canonical height of a polarized morphism; L ample is used through Northcott for h_L over the number field K(P) (HeightsRationalPointsAndObstructions:RP.0).
+As in Call–Silverman canonical height of a polarized morphism; L ample is used through Northcott for h_L over the number field K(P) (HeightsRationalPointsAndObstructions §0.16).
 
-(⇒) Preperiodic points have Tate limit zero. (⇐) The orbit of P lies in V(K(P)); Northcott for the ample L over K(P) (RP.0) makes {Q ∈ V(K(P)) : h_L(Q) ≤ B} finite, and Zero Tate limit and Northcott give preperiodicity applies with A = V(K(P)).
+(⇒) Preperiodic points have Tate limit zero. (⇐) The orbit of P lies in V(K(P)); Northcott for the ample L over K(P) (HeightsRationalPointsAndObstructions §0.16) makes {Q ∈ V(K(P)) : h_L(Q) ≤ B} finite, and Zero Tate limit and Northcott give preperiodicity applies with A = V(K(P)).
 
-*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [Zero Tate limit and Northcott give preperiodicity](#114-zero-tate-limit-and-northcott-give-preperiodicity); `HeightsRationalPointsAndObstructions:RP.0`.
+*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [Zero Tate limit and Northcott give preperiodicity](#114-zero-tate-limit-and-northcott-give-preperiodicity); HeightsRationalPointsAndObstructions §0.16.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Corollary 1.1.1(a), p. 168 — Exactly the statement; [silverman-aws-2010](#silverman-aws-2010), §5.2, p. 15, Supplementary Material — The same statement.)
 
@@ -2111,11 +2120,11 @@ As in Call–Silverman canonical height of a polarized morphism; L ample is used
 
 In the setting of Call–Silverman canonical height of a polarized morphism: {P ∈ V(K̄) : P preperiodic for φ} is a set of bounded h_L-height; hence V(K) has finitely many preperiodic points, and more generally there are finitely many preperiodic points of degree at most D over K, for every D.
 
-As in Call–Silverman canonical height of a polarized morphism; L ample (Northcott for bounded degree from HeightsRationalPointsAndObstructions:RP.0).
+As in Call–Silverman canonical height of a polarized morphism; L ample (Northcott for bounded degree from HeightsRationalPointsAndObstructions §0.16).
 
-Bounded height: Preperiodic points have bounded height with the constant c of Call–Silverman (3). Finiteness: Northcott for ample L over extensions of bounded degree (RP.0).
+Bounded height: Preperiodic points have bounded height with the constant c of Call–Silverman (3). Finiteness: Northcott for ample L over extensions of bounded degree (HeightsRationalPointsAndObstructions §0.16).
 
-*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [Preperiodic points have bounded height](#112-preperiodic-points-have-bounded-height); `HeightsRationalPointsAndObstructions:RP.0`.
+*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [Preperiodic points have bounded height](#112-preperiodic-points-have-bounded-height); HeightsRationalPointsAndObstructions §0.16.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Corollary 1.1.1(b), p. 168 — Exactly the statement.)
 
@@ -2123,13 +2132,13 @@ Bounded height: Preperiodic points have bounded height with the constant c of Ca
 
 ### 1.23 Multiplication on an abelian variety: the Néron–Tate height
 
-Let A be an abelian variety over a number field K and L a symmetric line bundle on A. For every integer m ≥ 2, [m]*L ≅ `L^{⊗m²}` and the canonical height `ĥ_{A,[m],L}` of Call–Silverman canonical height of a polarized morphism (or Canonical height of a divisor class eigenvector, without ampleness when L is not ample) is independent of m and equals the Néron–Tate height `ĥ_{A,L}` of HeightsRationalPointsAndObstructions:RP.0.
+Let A be an abelian variety over a number field K and L a symmetric line bundle on A. For every integer m ≥ 2, [m]*L ≅ `L^{⊗m²}` and the canonical height `ĥ_{A,[m],L}` of Call–Silverman canonical height of a polarized morphism (or Canonical height of a divisor class eigenvector, without ampleness when L is not ample) is independent of m and equals the Néron–Tate height `ĥ_{A,L}` of HeightsRationalPointsAndObstructions §0.19.
 
-A an abelian variety over a number field; L symmetric; [m]*L ≅ `L^{⊗m²}` and the Néron–Tate height with `ĥ_{A,L}(mP)` = `m²ĥ_{A,L}(P)` and `ĥ_{A,L}` − h_L bounded are supplied by RP.0.
+A an abelian variety over a number field; L symmetric; [m]*L ≅ `L^{⊗m²}` and the Néron–Tate height with `ĥ_{A,L}(mP)` = `m²ĥ_{A,L}(P)` and `ĥ_{A,L}` − h_L bounded are supplied by HeightsRationalPointsAndObstructions §0.19.
 
-`ĥ_{A,L}` has bounded difference from h_L and satisfies `ĥ_{A,L}` ∘ [m] = `m²ĥ_{A,L}` (RP.0); by the uniqueness in Call–Silverman canonical height of a polarized morphism (HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`) it is `ĥ_{A,[m],L}` for every m ≥ 2.
+`ĥ_{A,L}` has bounded difference from h_L and satisfies `ĥ_{A,L}` ∘ [m] = `m²ĥ_{A,L}` (HeightsRationalPointsAndObstructions §0.19); by the uniqueness in Call–Silverman canonical height of a polarized morphism (HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`) it is `ĥ_{A,[m],L}` for every m ≥ 2.
 
-*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; `HeightsRationalPointsAndObstructions:RP.0`.
+*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; `HeightsRationalPointsAndObstructions §0.19`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Example 1, p. 167 — Exactly the comparison.)
 
@@ -2167,11 +2176,11 @@ F algebraic over ℚ; deg f ≥ 2.
 
 Let K be a global height field (e.g. a number field), V/K smooth projective, φ : V → V a morphism and η ∈ Pic(V) ⊗ ℝ with φ*η = αη for a real α > 1 (η not necessarily ample). Then there is a unique `ĥ_{V,η,φ}` : V(K̄) → ℝ with ĥ − `h_{V,η}` bounded and ĥ ∘ φ = αĥ, namely lim `α^{−n}` `h_{V,η}(φⁿP).` The zero-height criterion does not survive: preperiodic points still have ĥ = 0, but ĥ(P) = 0 need not imply P preperiodic.
 
-K a global height field; η ∈ Pic(V) ⊗ ℝ an eigenclass with real eigenvalue α > 1; ℝ-linear Weil heights `h_{V,η}` from HeightsRationalPointsAndObstructions:RP.0.
+K a global height field; η ∈ Pic(V) ⊗ ℝ an eigenclass with real eigenvalue α > 1; ℝ-linear Weil heights `h_{V,η}` from HeightsRationalPointsAndObstructions §0.16.
 
-Height machine for ℝ-divisor classes (RP.0): `h_{V,η}` ∘ φ = `h_{V,φ*η}` + O(1) = α `h_{V,η}` + O(1). Existence and uniqueness: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Preperiodic points: Preperiodic points have Tate limit zero. Counterexample to the converse: V = ℙ¹ × ℙ¹, φ = (z², w + 1), η = pr₁*O(1), α = 2: φ*η = 2η, and by Tate's limit is transported along semiconjugacies along pr₁ `(h_{V,η}` = h ∘ pr₁ + O(1)) ĥ(P, Q) = `ĥ_{z²}(P)` (The canonical height of a rational map of ℙ¹); so ĥ(0, 0) = 0 while (0, 0) has infinite orbit (0, n).
+Height machine for ℝ-divisor classes (HeightsRationalPointsAndObstructions §0.16): `h_{V,η}` ∘ φ = `h_{V,φ*η}` + O(1) = α `h_{V,η}` + O(1). Existence and uniqueness: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Preperiodic points: Preperiodic points have Tate limit zero. Counterexample to the converse: V = ℙ¹ × ℙ¹, φ = (z², w + 1), η = pr₁*O(1), α = 2: φ*η = 2η, and by Tate's limit is transported along semiconjugacies along pr₁ `(h_{V,η}` = h ∘ pr₁ + O(1)) ĥ(P, Q) = `ĥ_{z²}(P)` (The canonical height of a rational map of ℙ¹); so ĥ(0, 0) = 0 while (0, 0) has infinite orbit (0, n).
 
-*Needs:* `HeightsRationalPointsAndObstructions:RP.0`; HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹).
+*Needs:* HeightsRationalPointsAndObstructions §0.16; HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹).
 
 ([call-silverman-1993](#call-silverman-1993), §1, p. 166 — The setting of Theorem 1.1, with no ampleness; [call-silverman-1993](#call-silverman-1993), §1, Example 2, p. 167 — Non-ample eigenclasses occurring in the source.)
 
@@ -2181,11 +2190,11 @@ Height machine for ℝ-divisor classes (RP.0): `h_{V,η}` ∘ φ = `h_{V,φ*η}`
 
 Let K be a number field and f : ℙ¹ → ℙ¹ a morphism of degree d ≥ 2 over K. With L = O(1) (so f*L ≅ `L^{⊗d}),` the canonical height `ĥ_{ℙ¹,f,O(1)}` of Call–Silverman canonical height of a polarized morphism equals canonicalHeight f (The canonical height of a rational map of ℙ¹) on ℙ¹(K̄).
 
-K a number field; the identification of the scheme morphism with the rational map is Rational maps as endomorphisms of the scheme ℙ¹_K; the normalisation `h_{O(1)}` = ClassicalArithmeticCompletion.projectiveWeilHeight + O(1) is supplied by HeightsRationalPointsAndObstructions:RP.0.
+K a number field; the identification of the scheme morphism with the rational map is Rational maps as endomorphisms of the scheme ℙ¹_K; the normalisation `h_{O(1)}` = ClassicalArithmeticCompletion.projectiveWeilHeight + O(1) is supplied by HeightsRationalPointsAndObstructions §0.16.
 
-canonicalHeight f has bounded difference from `h_{O(1)}` (normalisation from RP.0 and HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`) and satisfies the functional equation (HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`); conclude by the uniqueness in Call–Silverman canonical height of a polarized morphism.
+canonicalHeight f has bounded difference from `h_{O(1)}` (normalisation from HeightsRationalPointsAndObstructions §0.16 and HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`) and satisfies the functional equation (HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`); conclude by the uniqueness in Call–Silverman canonical height of a polarized morphism.
 
-*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; [Rational maps as endomorphisms of the scheme ℙ¹_K](#026-rational-maps-as-endomorphisms-of-the-scheme-ℙ¹_k); `HeightsRationalPointsAndObstructions:RP.0`.
+*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; [Rational maps as endomorphisms of the scheme ℙ¹_K](#026-rational-maps-as-endomorphisms-of-the-scheme-ℙ¹_k); HeightsRationalPointsAndObstructions §0.16.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Example 3, p. 167 — Exactly the example, for n = 1.)
 
@@ -2197,7 +2206,7 @@ For z ↦ z^d the absolute canonical height equals the Weil height. The generic 
 
 ### Dependencies
 
-Layer 0; Mathlib field and projective heights, admissible absolute values and scalar Northcott; Tau Ceti elliptic heights; HeightsRationalPointsAndObstructions §0.18 Tate series and RP.0 height-machine and abelian-height contracts for general varieties.
+Layer 0; Mathlib field and projective heights, admissible absolute values and scalar Northcott; Tau Ceti elliptic heights; HeightsRationalPointsAndObstructions §0.18 Tate series, §0.16 height machine and §0.19 abelian-height contracts for general varieties.
 
 ## Layer 2: Local heights, Julia sets and canonical measures
 
@@ -4200,15 +4209,15 @@ Applications include Gao–Ou Lemmas 3.11–3.12 — Distinguishes primitive fro
 
 ### 3.18 Böttcher coordinates and unicritical external rays
 
-For every d≥2 construct the normalized Böttcher and parameter coordinates, periodic parameter-ray landing, roots and co-roots of hyperbolic components, the petal structure and the Hausdorff R,S limit assertions stated in Layer 3. These are the precise analytic inputs in Gao–Ou §3.3 and Propositions 3.13,3.15, using the Douady–Hubbard, Eberlein and Petersen–Ryd results cited there. General conformal continuation supplies the analytic tools; the polynomial-dynamical uniformization, ray landing and parabolic assertions remain separate Layer 3 targets.
+For every d≥2 construct the normalized Böttcher and parameter coordinates, periodic parameter-ray landing, roots and co-roots of hyperbolic components, the petal structure and the Hausdorff limits of the compact outer ray tails specified in §3.35. These are the precise analytic inputs in Gao–Ou §3.3 and Propositions 3.13,3.15, using the Douady–Hubbard, Eberlein and Petersen–Ryd results cited there. General conformal continuation supplies the analytic tools; the polynomial-dynamical uniformization, ray landing and parabolic assertions remain separate Layer 3 targets.
 
-For d≥2 let K_c={z: the forward orbit under f_c=z^d+c is bounded}, using the escape-rate/bounded-orbit comparison and M_d={c:0∈K_c}. Construct the normalized Böttcher coordinate near ∞, φ_c(f_c(z))=φ_c(z)^d and φ_c(z)/z→1. For c∈M_d extend it to ℂ∖K_c≅ℂ∖closedDisc(0,1). Define dynamical rays as inverse radial half-lines, with landing a radial limit as radius decreases to 1; for c∉M_d extend the rays maximally, stopping at a critical preimage if continuation breaks. Construct the parameter coordinate Φ_d(c)=φ_c(c), a biholomorphism ℂ∖M_d→ℂ∖closedDisc(0,1); parameter rays are its inverse radial half-lines. These are actual curves, not names for arbitrary choices of landing functions.
+For d≥2 let K_c={z: the forward orbit under f_c=z^d+c is bounded}, using the escape-rate/bounded-orbit comparison and M_d={c:0∈K_c}. Construct the normalized Böttcher coordinate near ∞, φ_c(f_c(z))=φ_c(z)^d and φ_c(z)/z→1. Put G_c(z)=lim_(k→∞) d^(−k)log max(1,|f_c^k(z)|), so G_c(f_c(z))=dG_c(z) and G_c=log|φ_c| wherever the coordinate is defined. For c∈M_d extend it to ℂ∖K_c≅ℂ∖closedDisc(0,1). Define dynamical rays as inverse radial half-lines, with landing a radial limit as radius decreases to 1; for c∉M_d extend the rays maximally, stopping at a critical preimage if continuation breaks. Construct the parameter coordinate Φ_d(c)=φ_c(c), a biholomorphism ℂ∖M_d→ℂ∖closedDisc(0,1); parameter rays are its inverse radial half-lines. These are actual curves, not names for arbitrary choices of landing functions.
 
 d≥2; normalization at ∞ fixes the d−1 root-of-unity ambiguity. For disconnected K_c do not assert a global Böttcher isomorphism ℂ∖K_c; use maximal rays and their critical obstructions.
 
 Construct the near ∞ Böttcher coordinate from iterated d-th roots and uniform convergence, normalized by its asymptotic expansion. Extend on the escaping basin when K_c is connected; prove parameter uniformization and connectivity of M_d using the critical-value coordinate. Analytic continuation along rays defines each external ray on its maximal radial interval. An obstruction at positive potential is precritical; if the radial parameter reaches potential zero, the ray has a nonempty compact connected accumulation set in K_c, which need not be a singleton. Assert a landing point only when that radial limit exists, as in the separate periodic-ray landing theorems. The Böttcher, parameter-uniformization and ray-limit contracts in the indicated layers are the dynamical inputs. General conformal continuation and monodromy come from ConformalMapping.
 
-*Needs:* `AddCircle`; ConformalMapping Layers, L4 (analytic continuation and the reflection principle); [`G_{F,v}(x)` ≤ 0 exactly on the filled Julia set of F](#252-g_fvx--0-exactly-on-the-filled-julia-set-of-f).
+*Needs:* `AddCircle`; ConformalMapping Layers, L4 (analytic continuation and the reflection principle); [Existence of the escape rate, with a uniform rate](#233-existence-of-the-escape-rate-with-a-uniform-rate); [`G_{F,v}(x)` ≤ 0 exactly on the filled Julia set of F](#252-g_fvx--0-exactly-on-the-filled-julia-set-of-f).
 
 ([gao-ou](#gao-ou), §3.3, pp.14–18 — Böttcher coordinates, dynamical and parameter rays, and critical obstructions; [kiwi-cremer-1995](#kiwi-cremer-1995), §§1–2, pp.2–3 — Nonlanding rays and their accumulation continua.)
 
@@ -4529,17 +4538,21 @@ Prove primitive-root uniqueness using the common-period/commuting-word argument.
 
 ### 3.35 Periodic ray landing and unicritical parabolic structure
 
-For d≥2, every periodic parameter ray of exact angle period n lands at a parabolic parameter c₀. Its dynamic ray lands at an exact m-period point with m|n and multiplier a primitive (n/m)-th root of unity. Each period-n hyperbolic component has one root at which two period-n parameter rays land and d−2 co-roots at which one such ray lands; the root is primitive exactly when the two landing angles have distinct τ-orbits. An exact m-cycle with primitive r-th-root multiplier has the local splitting into one m-cycle and one mr-cycle described in Gao–Ou Lemma 3.9; at primitive multiplier 1 a single parabolic cycle splits into two m-cycles. Unicriticality gives the one critical attracting basin and the exact petal count used in transversality. Let c_m→c₀ along the parameter ray of angle θ, and put R(c)=R_c(θ)∪{c,∞} (the compactified dynamic ray through the critical value) and S(c)=f_c⁻¹(R(c)) (the d precritical dynamic rays together with 0 and ∞). After passing to a subsequence, R(c_m)→R and S(c_m)→S in the Hausdorff topology on compact subsets of the Riemann sphere, with `S=f_{c₀}⁻¹(R);` R meets `ℂ∖K_{c₀}` exactly in the dynamic ray `R_{c₀}(θ),` meets `∂K_{c₀}` only at the parabolic point `γ_{c₀}(θ),` and meets the interior of `K_{c₀}` only inside that point’s immediate basin, so S meets `∂K_{c₀}` only in preimages of that point. These are the primitive and distinguished-satellite configurations used by the two monodromy propositions.
+For d≥2, every periodic parameter ray of exact angle period n lands at a parabolic parameter c₀. Its dynamic ray lands at an exact m-period point with m|n and multiplier a primitive (n/m)-th root of unity. Each period-n hyperbolic component has one root at which two period-n parameter rays land and d−2 co-roots at which one such ray lands; the root is primitive exactly when the two landing angles have distinct τ-orbits. An exact m-cycle with primitive r-th-root multiplier has the local splitting into one m-cycle and one mr-cycle described in Gao–Ou Lemma 3.9; at primitive multiplier 1 a single parabolic cycle splits into two m-cycles. Unicriticality gives the one critical attracting basin and the exact petal count used in transversality. For an escaping c on the parameter ray of angle θ, define the closed outer tail R_out(c)={z∈R_c(θ):G_c(z)≥G_c(c)}∪{∞}, where G_c is the escape potential of §3.18, and S_out(c)=f_c⁻¹(R_out(c)). The set R_out(c) is the inverse radial segment of radii at least |φ_c(c)|, including its endpoint c and ∞; it is compact. Its preimage S_out(c) is the union of d closed ray tails at angles (θ+j)/d, 0≤j<d, each ending at 0 and ∞ and satisfying G_c(z)≥G_c(0)=G_c(c)/d. These cut sets are distinct from the maximal rays of §3.18. Let c_j→c₀ along the parameter ray. After passing to a subsequence, R_out(c_j)→R and S_out(c_j)→S in the Hausdorff topology on compact subsets of the Riemann sphere, with `S=f_{c₀}⁻¹(R);` R meets `ℂ∖K_{c₀}` exactly in the dynamic ray `R_{c₀}(θ),` meets `∂K_{c₀}` only at the parabolic point `γ_{c₀}(θ),` and meets the interior of `K_{c₀}` only inside that point’s immediate basin, so S meets `∂K_{c₀}` only in preimages of that point. These are the primitive and distinguished-satellite configurations used by the two monodromy propositions.
 
 d≥2; periodic angles; hyperbolic-component root/co-root assertion for n>1 as used in §3.3. This target uses the [ray and basin construction contract](#318-böttcher-coordinates-and-unicritical-external-rays): Gao–Ou recall deep ray and basin inputs rather than proving them; no existing ConformalMapping layer supplies polynomial dynamics.
 
-Prove periodic landing and the multiplier/angle-period relation using Böttcher coordinates, orbit portraits and parabolic local dynamics. Use the multiplier map of a unicritical hyperbolic component (degree d−1, one branch point) to distinguish its unique root from d−2 co-roots. Prove the local petal/splitting statement and the stated ray-limit control. Gao–Ou cite Douady–Hubbard, Eberlein and Petersen–Ryd here; the exact required ray-landing and petal outputs are specified in this statement and in the construction targets in this layer.
+Prove periodic landing and the multiplier/angle-period relation using Böttcher coordinates, orbit portraits and parabolic local dynamics. Use the multiplier map of a unicritical hyperbolic component (degree d−1, one branch point) to distinguish its unique root from d−2 co-roots. Prove the local petal/splitting statement and the stated limit control for R_out and S_out. Use G_c(f_c(z))=dG_c(z) to identify the d inverse tails and their common endpoint 0; continue the critical-value tail only from c out to ∞. Gao–Ou cite Douady–Hubbard, Eberlein and Petersen–Ryd here; the exact required ray-landing and petal outputs are specified in this statement and in the construction targets in this layer.
 
 *Needs:* [Böttcher coordinates and unicritical external rays](#318-böttcher-coordinates-and-unicritical-external-rays); ConformalMapping Layers, L4 (analytic continuation and the reflection principle).
 
 ([gao-ou](#gao-ou), §3.3 pp.14–18, Lemma 3.9 p.15; §3.4 proof of Proposition 3.13 pp.24–25 and Proposition 3.15 pp.26–28 — Exact invoked ray/basin and Hausdorff-limit contracts, with their unexpanded suppliers identified.)
 
-**Endpoint checks.** For d=2,n=2 the period 2 root c=−3/4 has fixed point −1/2, multiplier −1, and angle period 2, not exact point period 2. The co-root count is 0 for d=2 and 1 for d=3; copying the quadratic two-ray statement to every root/co-root fails.
+**Checks.**
+
+- For d=2,c=2,θ=0 the maximal ray is (0,∞), while R_out(2)=[2,∞] and S_out(2)=ℝ∪{∞}. The preimage of the untruncated (0,∞] also contains iy with |y|<√2; for instance f_2(i)=1. Thus maximal continuation gives the wrong cut set.
+- For c_j=1/4+1/j on parameter ray zero, R_out(c_j)=[c_j,∞] tends to [1/4,∞] and S_out(c_j)=ℝ∪{∞} tends to ℝ∪{∞}; f_(1/4)⁻¹([1/4,∞])=ℝ∪{∞}. The limiting tail meets the real Julia set at 1/2, not at its initial point 1/4.
+- For d=2,n=2 the period-2 root c=−3/4 has fixed point −1/2 and multiplier −1; the angle period is 2 while the point period is 1. The co-root count is 0 for d=2 and 1 for d=3.
 
 **Construction.** [foundational unicritical ray, basin and ray-limit inputs](#318-böttcher-coordinates-and-unicritical-external-rays).
 
@@ -4696,17 +4709,21 @@ Polynomial growth of degree≥2 gives a sufficiently large disc with relatively 
 
 ### 3.43 Symbolic coding outside the Multibrot set
 
-For c∉M_d lying on a nonzero-angle parameter ray, the d precritical dynamic rays cut the plane into sectors `U₀,…,U_{d−1},` with U₀ containing ray 0 and the others numbered counterclockwise. Itinerary gives a bijection ι_c:K_c→(Fin d)^ℕ conjugating f_c to the left shift. Thus exact point period equals exact sequence period. On `X=ℂ∖(M_d∪R_{M_d}(0)),` the inverse x(ι,c) for a fixed sequence is continuous in c, and for a periodic sequence is holomorphic. This supplies the consistent labels for periodic roots in the monodromy calculation.
+For c∉M_d lying on a nonzero-angle parameter ray, the closed cut S_out(c) of §3.35, consisting of the d ray tails from 0 to ∞, cuts the plane into sectors `U₀,…,U_{d−1},` with U₀ containing ray 0 and the others numbered counterclockwise. Itinerary gives a bijection ι_c:K_c→(Fin d)^ℕ conjugating f_c to the left shift. Thus exact point period equals exact sequence period. On `X=ℂ∖(M_d∪R_{M_d}(0)),` the inverse x(ι,c) for a fixed sequence is continuous in c, and for a periodic sequence is holomorphic. This supplies the consistent labels for periodic roots in the monodromy calculation.
 
 d≥2; c∈X; the cut label convention is part of the statement. Holomorphic periodic-root continuation is asserted on X, not across parabolic landing parameters.
 
-Each sector maps conformally to the slit critical-value complement; inverse branches form nested compact sets with unique intersection. Recover the unique itinerary point; show conjugacy and exact period preservation. For periodic itineraries apply the implicit function theorem since their cycles are repelling outside M_d. Parameter uniformization slit at ray 0 makes X simply connected and fixes the labels.
+Each sector, a component of ℂ∖S_out(c), maps conformally to ℂ∖R_out(c); inverse branches form nested compact sets with unique intersection. Recover the unique itinerary point; show conjugacy and exact period preservation. For periodic itineraries apply the implicit function theorem since their cycles are repelling outside M_d. Parameter uniformization slit at ray 0 makes X simply connected and fixes the labels.
 
 *Needs:* [Böttcher coordinates and unicritical external rays](#318-böttcher-coordinates-and-unicritical-external-rays); [Periodic ray landing and unicritical parabolic structure](#335-periodic-ray-landing-and-unicritical-parabolic-structure); ConformalMapping Layers, L4 (analytic continuation and the reflection principle).
 
 ([gao-ou](#gao-ou), §3.4, p.23 — The itinerary bijection, period equality and parameter dependence.)
 
-**Endpoint checks.** Constant itineraries give fixed points, not exact n-period points for n>1. Changing the sector orientation changes the labels and invalidates the specific adjacent-digit transposition below.
+**Checks.**
+
+- For d=2,c=−3 on parameter ray 1/2, R_out(c)=(−∞,−3]∪{∞} and S_out(c)=iℝ∪{∞}. Thus U₀ is the right half-plane and U₁ the left half-plane. The fixed points (1+√13)/2 and (1−√13)/2 have constant itineraries 0 and 1, respectively.
+- For this same c=−3, f_c(1)=−2 and f_c(−2)=1. Their itineraries are the repeating words 01 and 10, both of exact period 2; a constant itinerary instead has period 1.
+- For d=2,c=2 on parameter ray zero, S_out(c)=ℝ∪{∞} contains dynamic ray zero. It therefore supplies no complementary sector containing that ray, explaining the exclusion of parameter ray zero from the label domain. Changing the sector orientation changes the labels used by adjacent-digit monodromy.
 
 ### 3.44 The essential (dynatomic) multiplicity a*_P(n)
 
@@ -4770,13 +4787,13 @@ Every preperiodic point has log-height ≤ log(2·max(H(q), 1))/(d − 1), hence
 
 ### 3.47 Finite candidate sets over a number field
 
-Let L be a number field, φ binary forms of degree d ≥ 2 over L with a Nullstellensatz certificate, f the induced map of ℙ¹(L), B = C/(d − 1) the native relative logarithmic height bound of An explicit height bound for preperiodic points, and S a finite set of points of ℙ¹(L) certified to contain every point of native relative logarithmic height ≤ B (EffectiveDiophantineMethods:gap:ed-bounded-height-candidates). Then PrePer(f, ℙ¹(L)) = preperiodicFilter f S.
+Let L be a number field, φ binary forms of degree d ≥ 2 over L with a Nullstellensatz certificate, f the induced map of ℙ¹(L), B = C/(d − 1) the native relative logarithmic height bound of An explicit height bound for preperiodic points, and S a finite set of points of ℙ¹(L) certified to contain every point of native relative logarithmic height ≤ B (EffectiveDiophantineMethods §0.11). Then PrePer(f, ℙ¹(L)) = preperiodicFilter f S.
 
-L a number field; S a certified bounded-height enumeration (ED.0). x is preperiodic for f when ∃ m, f^[m] x ∈ Function.periodicPts f. Apply gap:ed-bounded-height-candidates with a rational D ≥ exp(B), since this B is the native relative logarithmic height bound. For a separately supplied absolute bound B_abs use D ≥ exp([L:ℚ]·B_abs). Include both output lists and infinity. Projective chart transport commutes with each iterate.
+L a number field; S a certified bounded-height enumeration (EffectiveDiophantineMethods §0.11). x is preperiodic for f when ∃ m, f^[m] x ∈ Function.periodicPts f. Apply EffectiveDiophantineMethods §0.11 with a rational D ≥ exp(B), since this B is the native relative logarithmic height bound. For a separately supplied absolute bound B_abs use D ≥ exp([L:ℚ]·B_abs). Include both output lists and infinity. Projective chart transport commutes with each iterate.
 
-Use the native relative height bound B with gap:ed-bounded-height-candidates at rational radius D ≥ exp(B), and take the union of its two certified lists together with infinity. The chosen integral basis, embedding data and root-enclosure certificate hypotheses remain required. An absolute logarithmic input is first multiplied by [L:ℚ]. Use projective chart transport, and apply [3.40 Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter). The relative-height-candidate-adapter is a downstream specialization of this endpoint, not a prerequisite.
+Use the native relative height bound B with EffectiveDiophantineMethods §0.11 at rational radius D ≥ exp(B), and take the union of its two certified lists together with infinity. The chosen power basis over ℚ must have integral generator; all [L:ℚ] archimedean embedding data with pairwise disjoint root boxes are supplied, together with rational D≥1 and 0<τ≤1 as required by §0.11. An absolute logarithmic input is first multiplied by [L:ℚ]. Use projective chart transport, and apply [3.40 Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter). The relative-height-candidate-adapter is a downstream specialization of this endpoint, not a prerequisite.
 
-*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); `gap:ed-bounded-height-candidates` (EffectiveDiophantineMethods, ED.0).
+*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); EffectiveDiophantineMethods §0.11 `ED0.boundedHeightProjectivePoints` and its completeness theorem.
 
 ([hutz15](#hutz15), Abstract, p. 1 — Number-field version of the enumeration; [hutz15](#hutz15), §1, footnote 1, p. 2 — The height-bound-then-enumerate strategy (Doyle–Faber–Krumm), which this theorem certifies.)
 
@@ -4875,13 +4892,13 @@ By At a fixed point a_P(n) is the order of gⁿ(z) − z, a_P(k) = ord(gᵏ − 
 
 ### 3.53 Relative height bounds for dynamical candidate sets
 
-Let K be a number field of degree s=[K:ℚ]>0 and f a rational map of degree at least 2 over K. Mathlib's Height.logHeight of a representative of a point of ℙ¹(K) is relative to K (no division by s); the absolute height is h_abs(P)=Height.logHeight(P.rep)/s. The explicit preperiodic-height bound is native: every preperiodic P satisfies Height.logHeight(P.rep)≤B_nat=C/(d−1). Take rationals D≥1 and 0<τ≤1 with D≥exp(B_nat); when the available bound is instead an absolute one, h_abs(P)≤B, take D≥exp(sB). Then the projective union T of both ED.0 output lists plus ∞ contains every preperiodic point, and filtering T by the orbit-repetition check with segment length |T|+1 yields exactly PrePer(f,ℙ¹(K)); equality tests at the height boundary are unnecessary. This adapter supplies a sufficient finite superset, and does not advertise T as an exact height-cutoff list.
+Let K be a number field of degree s=[K:ℚ]>0 and f a rational map of degree at least 2 over K. Mathlib's Height.logHeight of a representative of a point of ℙ¹(K) is relative to K (no division by s); the absolute height is h_abs(P)=Height.logHeight(P.rep)/s. The explicit preperiodic-height bound is native: every preperiodic P satisfies Height.logHeight(P.rep)≤B_nat=C/(d−1). Take rationals D≥1 and 0<τ≤1 with D≥exp(B_nat); when the available bound is instead an absolute one, h_abs(P)≤B, take D≥exp(sB). Then the projective union T of both EffectiveDiophantineMethods §0.11 output lists plus ∞ contains every preperiodic point, and filtering T by the orbit-repetition check with segment length |T|+1 yields exactly PrePer(f,ℙ¹(K)); equality tests at the height boundary are unnecessary. This adapter supplies a sufficient finite superset, and does not advertise T as an exact height-cutoff list.
 
-Degree f≥2; the rational map is defined over K and has no projective base point. An explicit valid bound is supplied together with its normalization: native B_nat with D≥exp(B_nat), or absolute B with D≥exp(sB); an integral power basis and complete embedding certificates are supplied as ED.0 requires. Exact field/projective evaluation and equality are supplied by the runtime adapter.
+Degree f≥2; the rational map is defined over K and has no projective base point. An explicit valid bound is supplied together with its normalization: native B_nat with D≥exp(B_nat), or absolute B with D≥exp(sB); a power basis over ℚ with integral generator and [K:ℚ] archimedean embedding data with pairwise disjoint root boxes are supplied as EffectiveDiophantineMethods §0.11 requires. Exact field/projective evaluation and equality are supplied by the runtime adapter.
 
-For the native bound exponentiate directly: Height.logHeight(P.rep)≤B_nat≤log D. For an absolute bound first multiply by the positive degree s (The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]), then exponentiate. The affine/projective height dictionary identifies Height.logHeight₁(x)=Height.logHeight![x,1], and NumberField.mulHeight₁_eq identifies the native height with the place product used by ED.0 and by Doyle–Krumm. ED.0 completeness applies to both lists together, including every boundary point; add ∞ of height 0 as in its projective contract. Forward iterates of a preperiodic point remain preperiodic and hence stay in T. The filter correctness theorem supplies both soundness and completeness with finite fuel. No uniform-in-map bound is used.
+For the native bound exponentiate directly: Height.logHeight(P.rep)≤B_nat≤log D. For an absolute bound first multiply by the positive degree s (The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]), then exponentiate. The affine/projective height dictionary identifies Height.logHeight₁(x)=Height.logHeight![x,1], and NumberField.mulHeight₁_eq identifies the native height with the place product used by EffectiveDiophantineMethods §0.11 and by Doyle–Krumm. EffectiveDiophantineMethods §0.11 completeness applies to both lists together, including every boundary point; add ∞ of height 0 as in its projective contract. Forward iterates of a preperiodic point remain preperiodic and hence stay in T. The filter correctness theorem supplies both soundness and completeness with finite fuel. No uniform-in-map bound is used.
 
-*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Certified enumeration over a number field from a height enumeration](#347-finite-candidate-sets-over-a-number-field); `gap:ed-bounded-height-candidates` (EffectiveDiophantineMethods, ED.0); [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); `Height.logHeight₁_eq_logHeight`; `NumberField.mulHeight₁_eq`; [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ).
+*Needs:* [An explicit height bound for preperiodic points](#36-an-explicit-height-bound-for-preperiodic-points); [Correctness of the preperiodic filter](#340-correctness-of-the-preperiodic-filter); [Certified enumeration over a number field from a height enumeration](#347-finite-candidate-sets-over-a-number-field); EffectiveDiophantineMethods §0.11 `ED0.boundedHeightProjectivePoints` and its completeness theorem; [Projective charts and transport of evaluation](#331-projective-charts-and-transport-of-evaluation); `Height.logHeight₁_eq_logHeight`; `NumberField.mulHeight₁_eq`; [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ).
 
 ([doylekrumm](#doylekrumm), §2 p.2; Algorithm 4 output, §4.3 p.11 — Relative height H_K and the complete two-list contract; H_K is Mathlib's native mulHeight₁, so the factor s enters only when the bound is absolute.)
 
@@ -4893,9 +4910,9 @@ Let θ have exact angle period n≥2 and kneading block ε₁…εₙ₋₁⋆. 
 
 d≥2,n≥2; analytic continuation based on the consistent labels from X; loops avoid all other branch parameters.
 
-At a primitive point the local projection is c=c₀+δ²; a turn exchanges its two branches. Ray-limit control identifies the two symbolic labels and their rotations. At the distinguished satellite point the local projection is c=c₀+δ^n, so the branches cycle. Identify its fixed parabolic point with the maximal-angle orbit using Lemma 3.14 and the ray-limit exclusion in Proposition 3.15. Lemma 3.11 gives the satellite cyclic-expression constraint; Lemma 3.12 constructs primitive landing angles when its digit constraint fails.
+At a primitive point the local projection is c=c₀+δ²; a turn exchanges its two branches. The Hausdorff limits of R_out(c) and S_out(c) from §3.35 identify the two symbolic labels and their rotations in the complementary sectors of §3.43. At the distinguished satellite point the local projection is c=c₀+δ^n, so the branches cycle. Identify its fixed parabolic point with the maximal-angle orbit using Lemma 3.14 and the ray-limit exclusion in Proposition 3.15. Lemma 3.11 gives the satellite cyclic-expression constraint; Lemma 3.12 constructs primitive landing angles when its digit constraint fails.
 
-*Needs:* [Transversality at unicritical parabolic parameters](#349-transversality-at-unicritical-parabolic-parameters); [Symbolic coding outside the Multibrot set](#343-symbolic-coding-outside-the-multibrot-set); [Primitive-word facts for kneading monodromy](#334-primitive-word-facts-for-kneading-monodromy).
+*Needs:* [Transversality at unicritical parabolic parameters](#349-transversality-at-unicritical-parabolic-parameters); [Symbolic coding outside the Multibrot set](#343-symbolic-coding-outside-the-multibrot-set); [Primitive-word facts for kneading monodromy](#334-primitive-word-facts-for-kneading-monodromy); [Periodic ray landing and unicritical parabolic structure](#335-periodic-ray-landing-and-unicritical-parabolic-structure).
 
 ([gao-ou](#gao-ou), Lemmas 3.11–3.12 pp.20–23; Proposition 3.13 pp.23–25; Lemma 3.14 and Proposition 3.15 pp.25–28 — Labelled primitive transpositions and terminal satellite cycle.)
 
@@ -5516,7 +5533,7 @@ For z²+c, Φ₂*(z,c)=z²+z+c+1 has the fixed root z=−1/2 when c=−3/4: form
 
 ### Dependencies
 
-Layers 0–2; AlgebraicCurves Layers 0–3, 6–8, 11–12; ConformalMapping L4; EffectiveDiophantineMethods ED.0, ED.3 and ED.4 for finite bounded-height supersets and rational-point theorems, with their rank and local-data hypotheses.
+Layers 0–2; AlgebraicCurves Layers 0–3, 6–8, 11–12; ConformalMapping L4; EffectiveDiophantineMethods §0.11, ED.3 and ED.4 for finite bounded-height supersets and rational-point theorems, with their rank and local-data hypotheses.
 
 ## Layer 4: Adelic equidistribution and dynamical pairings
 
@@ -6916,7 +6933,7 @@ For power maps the canonical adelic measure agrees with the standard adelic meas
 
 ### Dependencies
 
-Layers 0–2; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SchemeAndStackFoundations Layer 5 intersection degrees; RP.0 heights; HeightsRationalPointsAndObstructions §§5.17a–f for projective adelic foundations; §§4.1–4.1a for general analytification, local curvature and density; §4.3 arithmetic Siu and §4.5 bifurcation theory for the general-variety and moduli endpoints.
+Layers 0–2; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SchemeAndStackFoundations Layer 5 intersection degrees; HeightsRationalPointsAndObstructions §0.16 heights; HeightsRationalPointsAndObstructions §§5.17a–f for projective adelic foundations; §§4.1–4.1a for general analytification, local curvature and density; §4.3 arithmetic Siu and §4.5 bifurcation theory for the general-variety and moduli endpoints.
 
 ## Layer 5: Arboreal Galois representations
 
@@ -8282,9 +8299,9 @@ Let X,Y be irreducible projective varieties over Q̄ with ample line bundles A,B
 
 The map is defined on U only; the inequality includes every point of U.
 
-Replace Y by the closure of F(U); the map is generically finite. `gap:rp-dominant-height` supplies the bound away from a proper closed subset Z of X. On each irreducible component of Z meeting U, restrict the ample bundles and the finite-fibre map. Induct on dimension, using its image closure as the new target. There are finitely many components. After lower-bounding the ample target height, adjust constants and take maxima to obtain one bound on all of U.
+Replace Y by the closure of F(U); the map is generically finite. HeightsRationalPointsAndObstructions §0.30 `weilHeight_dominant_lower_bound` supplies the bound away from a proper closed subset Z of X. On each irreducible component of Z meeting U, restrict the ample bundles and the finite-fibre map. Induct on dimension, using its image closure as the new target. There are finitely many components. After lower-bounding the ample target height, adjust constants and take maxima to obtain one bound on all of U.
 
-*Needs:* `gap:rp-dominant-height`; HeightsRationalPointsAndObstructions RP.0, Weil height machine.
+*Needs:* HeightsRationalPointsAndObstructions §0.30 `weilHeight_dominant_lower_bound`; HeightsRationalPointsAndObstructions §0.16, Weil height machine.
 
 ([ingram-2018-critical-height](#ingram-2018-critical-height), Lemma 15 and proof pp.14–15 — Induction extends a generically finite height comparison from a dense open to the entire finite-fibre locus.)
 
@@ -8300,7 +8317,7 @@ Absolute coefficient heights and algebraic Möbius conjugacy; constants depend o
 
 The quotient morphism and the height machine give the direction bounding h_M by coefficient height. The reverse direction requires a bounded-height choice of representative in every conjugacy class. [Ingram Lemma 13](#ingram-2018-critical-height), p.14 of arXiv v3, gives this comparison; the required comparison is stated in the bounded-representative construction contract below. Use the infimum form, or choose a representative within 1 of it, in the critical-height argument. This avoids relying on attainment of an absolute-height minimum over all of Q̄.
 
-*Needs:* [The moduli space M_d(K) of degree-d maps](#029-the-moduli-space-m_dk-of-degree-d-maps); HeightsRationalPointsAndObstructions RP.0, Weil height machine.
+*Needs:* [The moduli space M_d(K) of degree-d maps](#029-the-moduli-space-m_dk-of-degree-d-maps); HeightsRationalPointsAndObstructions §0.16, Weil height machine.
 
 ([ingram-2018-critical-height](#ingram-2018-critical-height), Lemma 13 and its use, pp.14–15 — The coefficient-height error is replaced by a bound depending on the moduli class.)
 
@@ -8506,9 +8523,9 @@ Let K be a global height field with its chosen product-formula height structure,
 
 Use compatible height normalizations under finite extensions. The section is evaluated where defined. A projective model lets rational sections extend over the smooth curve. A specified global height field is required; finite generation of K alone does not specify a height. Ampleness of η is not needed for the eigenclass limit.
 
-The relative canonical/Weil-height difference is ≤C₁h_T(t)+C₂ by the general-curve version of Theorem 3.1; its constants are uniform in the point on the fibre. For each fixed section Q=φⁿP, functoriality gives `h_{V,η}(Q_t)=h_{T,Q*η}(t)+O_Q(1).` Generic intersection degree equals the geometric Weil height of Q_η. Use curve-height quasi-equivalence `h_{T,D}(t)/h_T(t)→deg` D, including real divisor classes; the height and intersection contracts are requested from RP.0. Combining with the generic canonical/Weil bound gives a limsup error bounded independently of Q after section-dependent O(1) terms vanish. Replace P by φⁿP. Both canonical heights multiply by αⁿ. Divide the uniform limsup bound by αⁿ and let n tend to infinity. This generalizes the t-line endpoint without requiring Northcott over K.
+The relative canonical/Weil-height difference is ≤C₁h_T(t)+C₂ by the general-curve version of Theorem 3.1; its constants are uniform in the point on the fibre. For each fixed section Q=φⁿP, functoriality gives `h_{V,η}(Q_t)=h_{T,Q*η}(t)+O_Q(1).` Generic intersection degree equals the geometric Weil height of Q_η. Use curve-height quasi-equivalence `h_{T,D}(t)/h_T(t)→deg` D, including real divisor classes; the height and intersection contracts are requested from HeightsRationalPointsAndObstructions §0.16. Combining with the generic canonical/Weil bound gives a limsup error bounded independently of Q after section-dependent O(1) terms vanish. Replace P by φⁿP. Both canonical heights multiply by αⁿ. Divide the uniform limsup bound by αⁿ and let n tend to infinity. This generalizes the t-line endpoint without requiring Northcott over K.
 
-*Needs:* [Canonical height of a divisor class eigenvector, without ampleness](#126-canonical-height-of-a-divisor-class-eigenvector-without-ampleness); HeightsRationalPointsAndObstructions RP.0, Weil height machine; `gap:rp-geometric-height-field`; SchemeAndStackFoundations §0.9 `spreading_out_models`; `HeightsRationalPointsAndObstructions:RP.0`.
+*Needs:* [Canonical height of a divisor class eigenvector, without ampleness](#126-canonical-height-of-a-divisor-class-eigenvector-without-ampleness); HeightsRationalPointsAndObstructions §0.16, Weil height machine; `gap:rp-geometric-height-field`; SchemeAndStackFoundations §0.9 `spreading_out_models`; HeightsRationalPointsAndObstructions §0.16.
 
 ([call-silverman-1993](#call-silverman-1993), §3 Theorem 3.1 pp.177–182; §4 Theorem 4.1 and proof pp.183–186 — The proof compares fibre and generic heights along a section and amplifies by iteration on a smooth projective base curve; [ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), §6.2 Lemma 6.5, p.17 — The polynomial specialization proof needs this limit on a general base curve.)
 
@@ -8528,7 +8545,7 @@ Derive the equal-degree Bilu–Tichy corollary as the equal-degree >1 S-integral
 
 For the necessity proof, Siegel bounds the genus and number of infinite places of a component carrying infinitely many bounded-denominator points. Develop the polynomial decomposition and exceptional-factor classification of Bilu–Tichy §§4–9, especially Theorem 9.3, using the supplied curve/function-field theory; this is the polynomial-pair theory owned here. For §6.23 prove Ritt's equal-common-iterate classification from §IV, p.356. Neither classification is inferred from Siegel alone.
 
-*Needs:* HeightsRationalPointsAndObstructions RP.4 `siegel-theorem`; AlgebraicCurves Layers 3–5, 8 and 12 (divisors, genus, Riemann–Roch and the function-field/curve dictionary); Mathlib polynomial composition, `RatFunc.Luroth.eq_adjoin_generator` (`Mathlib/FieldTheory/RatFunc/Luroth.lean`), and the Dickson declarations in the supplier contract.
+*Needs:* HeightsRationalPointsAndObstructions §4.8 `siegel_finite`; AlgebraicCurves Layers 3–5, 8 and 12 (divisors, genus, Riemann–Roch and the function-field/curve dictionary); Mathlib polynomial composition, `RatFunc.Luroth.eq_adjoin_generator` (`Mathlib/FieldTheory/RatFunc/Luroth.lean`), and the Dickson declarations in the supplier contract.
 
 ([bilu-tichy-2000](#bilu-tichy-2000), §§1.1, 3, 9–10, Theorems 9.3 and 10.5, pp.262, 266, 282–286; [ritt-1920](#ritt-1920), §IV, pp.353–356; [ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), Theorem 2.1 and Corollary 2.2, pp.5–6.)
 
@@ -9192,13 +9209,17 @@ In the setting of Power-series coordinates on a residue disc (Bell–Ghioca–Tu
 
 Φ unramified at the fixed point x.
 
-Unramified: Φ* maps m onto m in `O_{X,x}` of the special fibre, so it induces an isomorphism on m/m²; this map is the reduction of Lᵀ, hence L mod p is invertible. β⃗ ↦ C⃗ + Lβ⃗ mod p is then a bijection of the finite set 𝔽_p^g, so some power is the identity; the higher order terms vanish mod p (Power-series coordinates on a residue disc (Bell–Ghioca–Tucker Propositions 2.1–2.2, Remark 2.3) (c)).
+In the local ring A of the special fibre at x, unramifiedness gives the extended-ideal equality Φ*(m)A=m, with ideal extension understood as `Ideal.map`. Apply `Algebra.FormallyUnramified.map_maximalIdeal` to the local algebra structure defined by Φ*. Since x is 𝔽_p-rational and Φ is over 𝔽_p, its residue-field map is the identity. Reducing coefficients of the extended-ideal equality modulo m therefore makes the induced linear map on m/m² surjective, hence an isomorphism of this finite-dimensional 𝔽_p-vector space; this map is the reduction of Lᵀ, hence L mod p is invertible. β⃗ ↦ C⃗ + Lβ⃗ mod p is then a bijection of the finite set 𝔽_p^g, so some power is the identity; the higher order terms vanish mod p (Power-series coordinates on a residue disc (Bell–Ghioca–Tucker Propositions 2.1–2.2, Remark 2.3) (c)).
 
-*Needs:* [Power-series coordinates on a residue disc (Bell–Ghioca–Tucker Propositions 2.1–2.2, Remark 2.3)](#646-power-series-coordinates-on-a-residue-disc-bellghiocatucker-propositions-2122-remark-23); `AlgebraicGeometry.FormallyUnramified`.
+*Needs:* [Power-series coordinates on a residue disc (Bell–Ghioca–Tucker Propositions 2.1–2.2, Remark 2.3)](#646-power-series-coordinates-on-a-residue-disc-bellghiocatucker-propositions-2122-remark-23); `AlgebraicGeometry.FormallyUnramified`; `Algebra.FormallyUnramified.map_maximalIdeal` (the local algebra is essentially of finite type and its algebra map is local); `Ideal.map`.
 
 ([bell-ghioca-tucker-2010](#bell-ghioca-tucker-2010), Propositions 2.4 and 2.6, pp. 6–7 (arXiv v1) — Returns to the residue class; uses Proposition 2.4 (the linear part is invertible mod p for unramified Φ).)
 
-**Endpoint checks.** F(U) = U + 1 on ℤ_p: Fᵖ(U) = U + p ≡ U (mod p), n = p.
+**Checks.**
+
+- F(U)=U+1 on ℤ_p has Fᵖ(U)=U+p≡U modulo p, including p=2; the translation term contributes to the return period.
+- For Φ(u)=u² on G_m over ℤ₅ at x=1, A=𝔽₅[u,u⁻¹]_(u−1) has Φ*(m)A=(u²−1)A=(u−1)A, since u+1 has residue 2. Yet u−1 is absent from the setwise image, which lies in 𝔽₅(u²). The cotangent multiplier is 2; the residue-disc map is F(U)=2U+5U², and F⁴(U)≡U modulo 5 because 2⁴=1 in 𝔽₅.
+- For the same square map over ℤ₂, u²−1=(u−1)² in the special fibre. Its cotangent map is zero and F(U)=2U+2U² is zero modulo 2, so it is not a permutation; unramifiedness is essential.
 
 ### 6.62 Simple-root primes for a family with prescribed denominator exclusions
 
@@ -9424,15 +9445,19 @@ Good reduction: Res(F_t) = 256t⁴(t − 1)⁴ (The Legendre curve E_t and its L
 
 In the setting of Call–Silverman specialisation theorem for families of maps of ℙ¹, if `ĥ^{K(t)}_f(P)` > 0 then there is H such that `P_{t₀}` is not preperiodic for `f_{t₀}` for every t₀ ∈ T⁰(f) ∩ ℚ̄ with h(t₀) > H. In particular, for every r ≥ 1 there are infinitely many t₀ ∈ ℚ̄ with [ℚ(t₀) : ℚ] ≤ r at which `P_{t₀}` is wandering for `f_{t₀}.`
 
-K a number field; `ĥ^{K(t)}_f(P)` > 0 (this holds when f is not isotrivial and P is not preperiodic, by Benedetto's theorem for polynomials; that criterion is not part of Layer 6, and use positivity as its hypothesis).
+K a number field; `ĥ^{K(t)}_f(P)` > 0. For a nonisotrivial polynomial of degree at least two and a non-preperiodic P, §6.52 supplies this positivity. The general rational-map statement retains positive generic height as its hypothesis.
 
 By Call–Silverman specialisation theorem for families of maps of ℙ¹, `ĥ_{f_{t₀}}(P_{t₀})` ≥ ½ `ĥ^{K(t)}_f(P)` h(t₀) > 0 once h(t₀) is large. Preperiodic points have canonical height 0 (Zero canonical height iff preperiodic (L ample)), so `P_{t₀}` is wandering. There are infinitely many t₀ ∈ ℚ of height > H (e.g. integers), which gives the last clause with r = 1.
 
-*Needs:* [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [Zero canonical height iff preperiodic (L ample)](#121-zero-canonical-height-iff-preperiodic-l-ample).
+*Needs:* [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [Zero canonical height iff preperiodic (L ample)](#121-zero-canonical-height-iff-preperiodic-l-ample); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials) for the polynomial positivity implication.
 
 ([ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), §6, Proposition 6.2, p. 16 (arXiv v2) — The target proves the case ĥ_f(x₀) > 0 over a number field with base ℙ¹, which is the step of Ghioca–Tucker–Zieve's proof that uses Call–Silverman; [ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), §6.2, before Lemma 6.5, p. 17 (arXiv v2) — Ghioca–Tucker–Zieve consume the specialisation theorem to show that non-preperiodic points stay non-preperiodic under specialisation; [ghioca-tucker-zieve-2008](#ghioca-tucker-zieve-2008), §6.2, Definition 6.6, p. 18 (arXiv v2) — The isotrivial non-example: over k(t) a constant map has non-preperiodic constant points of canonical height 0.)
 
-**Endpoint checks.** f = z² + t, P = 0: for all rational t₀ of large height, 0 is wandering for z² + t₀ (for t₀ ∈ ℤ, |t₀| ≥ 3, the orbit of 0 grows).
+**Checks.**
+
+- Over ℚ(t), f=z²+t and P=0 have iterates 0,t,t²+t of degrees 0,1,2; the normalized geometric heights are 0,1/2,1/2 and the generic canonical height is 1/2.
+- At t₀=3 these iterates begin 0,3,12,147 and grow without bound. For every integer |t₀|≥3 the specialized orbit likewise escapes.
+- For the constant map f=z² over ℚ(t), P=2 has geometric canonical height 0 but orbit 2,4,16,256, so being non-preperiodic alone does not supply the positive generic height hypothesis.
 
 ### 6.77 Silverman's specialisation theorem for elliptic surfaces over the t-line
 
@@ -9452,11 +9477,11 @@ The Lattès family f := `f_{E,2}` over K(t) (The Lattès map of multiplication b
 
 Let K be a number field, X/K a smooth projective geometrically integral curve, f∈K(X)[z] a polynomial of degree d≥2, and P∈ℙ¹(K(X)). Construct the variation divisor D = D(f,P) in Div(X)⊗ℚ by the local geometric escape rates, with degree ĥ_f(P). Prove the divisor-height variation theorem: on the good specialization locus U⊆X, `|ĥ_{f_t}(P_t)−h_D(t)|≤C(f,P)` for every t∈U(K̄), using absolute heights; the constant is independent of the extension containing t. The point P=∞ has D=0 and both canonical heights zero. For X=ℙ¹ derive the projective-line variation theorem: `|ĥ_{f_t}(P_t)−ĥ_f(P)h(t)|≤C(f,P)` (Theorem 1 and Corollary 2, p.2).
 
-Prove the degree formula for D and its iteration formula (replacement of P by f(P) multiplies D by d), and compatibility of D with finite base change: for a finite dominant map π:Y→X of smooth projective geometrically integral curves, the pulled-back family and section have divisor π*D and generic height deg(π)ĥ_f(P). The divisor construction uses AlgebraicCurves' places and rational divisors, transported through its function-field/curve dictionary; h_D uses the RP.0 height machine. For a general X this theorem compares with h_D itself, not with deg(D) times an arbitrary degree-one height with O(1) error.
+Prove the degree formula for D and its iteration formula (replacement of P by f(P) multiplies D by d), and compatibility of D with finite base change: for a finite dominant map π:Y→X of smooth projective geometrically integral curves, the pulled-back family and section have divisor π*D and generic height deg(π)ĥ_f(P). The divisor construction uses AlgebraicCurves' places and rational divisors, transported through its function-field/curve dictionary; h_D uses the HeightsRationalPointsAndObstructions §0.16 height machine. For a general X this theorem compares with h_D itself, not with deg(D) times an arbitrary degree-one height with O(1) error.
 
 Ingram Lemmas 5–6 and 10–11: at a base point β where an iterate of P enters the polynomial escape region B⁰_β, the local canonical height is a nonnegative rational pole order. Define D = Σ_β `λ̂_{f,β}(P)`[β]. Its support is finite, since it is contained in the poles of the coefficients and P. Choose a common iterate N reaching the escape region at every point of Supp D; after iteration, (d−1)D is integral. Rescale the final height identity by d^N. The section P = ∞ is treated separately, with both canonical heights zero. Increase N so that d^N(d−1)D is integral and, when D≠0, has sufficiently large degree. Riemann–Roch supplies a rational function g with exactly this pole divisor: for each support point β the subspace with smaller pole order is proper, and the infinite constant field permits avoiding their finite union, after a finite extension splitting the support. Handle D=0 separately. Compare `λ̂_{f_t,v}(P_t)` with the local Weil function `d^{−N}(d−1)^{−1}log⁺|g(t)|_v.` Ingram Lemma 9: if P has pole order m at β and enters B⁰_β, construct the formal Böttcher coordinate G_β in the Laurent series field; w^mG_β is a power-series unit for a uniformizer w. Hensel uniqueness, coefficient bounds and the Schwarz estimate give convergence in a v-adic neighbourhood of β, uniformly outside finitely many places. This uses Laurent series, correcting the power-series-ring slip described below. Ingram Lemma 13: the quotient `G_β^{d−1}a_d/g` is an analytic unit near β (after the chosen iteration). Its logarithm gives the local difference between the canonical and divisor heights there, hence a bounded difference; at all but finitely many places this difference vanishes on the prescribed discs. Lemmas 7–8 and 11 give the coefficient and escape bounds with the same finite exceptional set. For poles of the coefficients or P outside Supp D, bounded formal iterates and the maximum-modulus estimate bound the specialized escape rate. Away from all poles, the coefficients and P are bounded and the geometric escape-rate estimate supplies a uniform local bound. Ingram Lemmas 11–13 and the proof of Theorem 1 on pp. 18–19 patch these regions into a bound b_v, zero for almost all v. The generic-height-zero case of Ingram Lemma 12 uses Benedetto zero-height criterion for nonisotrivial polynomials. Use its explicit local disc and global product-formula inputs; no Northcott theorem over K(X) is assumed. Sum the bounds over places, with r_v = [L_v:ℚ_v]/[L:ℚ] and the extension compatibility of the heights. The bound remains independent of the finite field L containing t. The degree of D is ĥ_f(P); on ℙ¹, the height of D differs from deg(D)h(t) by O(1). This proves the divisor-height variation theorem; the last comparison gives the projective-line variation theorem.
 
-*Needs:* AlgebraicCurves Layers 3–5 and 12 (places, divisors, Riemann–Roch and regular projective models); HeightsRationalPointsAndObstructions RP.0 curve heights; [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve); [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv); [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [Admissible absolute values and heights on a rational function field](#027b-admissible-absolute-values-and-heights-on-a-rational-function-field); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials).
+*Needs:* AlgebraicCurves Layers 3–5 and 12 (places, divisors, Riemann–Roch and regular projective models); HeightsRationalPointsAndObstructions §0.16 curve heights; [Call–Silverman specialization over a global height field and a curve](#624-callsilverman-specialization-over-a-global-height-field-and-a-curve); [Call–Silverman specialisation theorem for families of maps of ℙ¹](#669-callsilverman-specialisation-theorem-for-families-of-maps-of-ℙ¹); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv); [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [Admissible absolute values and heights on a rational function field](#027b-admissible-absolute-values-and-heights-on-a-rational-function-field); [Benedetto zero-height criterion for nonisotrivial polynomials](#652-benedetto-zero-height-criterion-for-nonisotrivial-polynomials).
 
 ([ingram-2011-variation](#ingram-2011-variation), §1, Theorem 1, p. 2 (arXiv v3) — Ingram's theorem for polynomial families; [ingram-2011-variation](#ingram-2011-variation), §1, Corollary 2, p. 2 (arXiv v3) — The X=ℙ¹ corollary has bounded error against the standard height; [ingram-2011-variation](#ingram-2011-variation), §§2–4, Lemmas 5–13 and proof of Theorem 1, pp. 5–19 (arXiv v3) — Local escape bounds, the convergent Laurent Böttcher coordinate and the finite collection of exceptional places give the uniform local comparison used in the target proof.)
 
@@ -9499,13 +9524,13 @@ Away from the cusps, nonvanishing of the resultant gives the usual summable succ
 
 ### 6.81 Ingram's theorem: the critical height is a moduli height
 
-Let d ≥ 2 and let `h_{M_d}` be an ample Weil height on M_d: the Weil height (HeightsRationalPointsAndObstructions:RP.0) attached to an ample line bundle on a projective compactification of the moduli space M_d (The moduli space M_d(K) of degree-d maps), restricted to M_d(ℚ̄). There are constants c₁, c₃ > 0 and c₂, c₄ ≥ 0 such that c₁ `h_{M_d}(`[f]) − c₂ ≤ ĥ_crit([f]) ≤ c₃ `h_{M_d}(`[f]) + c₄ for all [f] ∈ M_d(ℚ̄) outside the flexible Lattès locus L_d (Flexible Lattès maps and the flexible Lattès locus). In particular the non-Lattès PCF classes form a set of bounded height, finite in each bounded degree.
+Let d ≥ 2 and let `h_{M_d}` be an ample Weil height on M_d: the Weil height (HeightsRationalPointsAndObstructions §0.16) attached to an ample line bundle on a projective compactification of the moduli space M_d (The moduli space M_d(K) of degree-d maps), restricted to M_d(ℚ̄). There are constants c₁, c₃ > 0 and c₂, c₄ ≥ 0 such that c₁ `h_{M_d}(`[f]) − c₂ ≤ ĥ_crit([f]) ≤ c₃ `h_{M_d}(`[f]) + c₄ for all [f] ∈ M_d(ℚ̄) outside the flexible Lattès locus L_d (Flexible Lattès maps and the flexible Lattès locus). In particular the non-Lattès PCF classes form a set of bounded height, finite in each bounded degree.
 
 d ≥ 2; `h_{M_d}` any ample Weil height (the constants depend on it). The lower bound fails on L_d: flexible Lattès maps have ĥ_crit = 0 and unbounded moduli height.
 
-Upper bound: the critical-point coefficient/root estimate and |ĥ_f−h| ≪ `h_{Hom_d}(f)+1` bound ĥ_crit(f) by a constant times `h_{Hom_d}(f)+1.` Choose a representative with coefficient height within 1 of its infimum and Silverman’s comparison (Ingram Lemma 13) to obtain the moduli upper bound. Use the bounded-representative comparison contract below. Ingram Lemma 11: move a fixed point γ of multiplier λ ≠ 0,1 to 0 and another fixed point to ∞. For γ = [α:γ₀] and the other point [β:δ], use ψ(z) = (βz+α)/(δz+γ₀), so ψ(0) is the λ-point. Normalize each column separately to bound h(ψ) by the sum of the two point heights. The homogeneous fixed-point polynomial bounds that sum, and coefficient estimates yield `h_{Hom_d}(ψ⁻¹fψ)` ≤ `(d+2)h_{Hom_d}(f)+O_d(1).` This column order sends 0 to the specified multiplier point. Ingram Lemmas 7–9: the resultant-adjugate estimate bounds the homogeneous escape rate below and hence the Green function. At an archimedean place Koebe’s quarter theorem produces a critical point in the attracting domain; at a finite place the quantitative attracting-cycle theorem of Benedetto–Ingram–Jones–Levy does this when |λ|_v is sufficiently small. Root/coefficient estimates relate the size of the attracting disc to `h_{Hom_d}.` The quantitative-attracting-branch target identifies the archimedean and finite-place analytic inputs and keeps their proof leaves explicit. Ingram Lemma 10: use the branch divisor B′ obtained by removing critical images whose forward orbit reaches 0. The removed part has canonical height zero, while f_*^k B′ remains disjoint from 0 so its Green pairing is defined. The attracted critical orbit supplies the k log⁺|λ⁻¹|_v term; the other terms have the uniform Green lower bound. The resulting error is linear in k and in local coefficient size, with resultant term r_v(f). Ingram Lemma 12: sum with the absolute place weights. The resultant contribution cancels by the product formula; Σ_v r_v log⁺|λ⁻¹|_v = h(λ). The Green pairing sums to `d^{k+1}ĥ_crit(f).` Combining with the coordinate estimate gives `d^{k+1}ĥ_crit(f)` ≥ (k−1)h(λ) − `(4d−1)(d+2)h_{Hom_d}(f)` − c₀k. The cases λ = 0,1 follow directly from nonnegativity. Sum over all fixed-point multipliers and apply the estimate to a fixed iterate f^n, using ĥ_crit(f^n) = nĥ_crit(f). McMullen supplies some n with finite multiplier-spectrum fibres outside all Lattès classes. Ingram Lemmas 14–15 use the RP.0 finite-fibre height comparison to bound an ample moduli height by the spectrum height. For a sufficiently large fixed k, its positive k-dependent coefficient absorbs the remaining coefficient-height error. This proves the lower bound outside all Lattès classes, exactly as Ingram Theorem 1 states. To state the endpoint outside the flexible Lattès locus, absorb the finitely many rigid Lattès classes of fixed degree into the additive constant. Milnor Theorem 5.1, Corollary 5.2 and Lemmas 5.4–5.5 classify these by the finite possible imaginary-quadratic multipliers a with |a|²=d, invariant lattice classes and finite translation quotients; the nonrigid n=2 cases have integral a and are precisely the flexible ones. The classification contract is Finiteness of rigid Lattès classes in fixed degree, under its affine-quotient classification contract. No multiplier-finiteness theorem on the flexible locus is claimed.
+Upper bound: the critical-point coefficient/root estimate and |ĥ_f−h| ≪ `h_{Hom_d}(f)+1` bound ĥ_crit(f) by a constant times `h_{Hom_d}(f)+1.` Choose a representative with coefficient height within 1 of its infimum and Silverman’s comparison (Ingram Lemma 13) to obtain the moduli upper bound. Use the bounded-representative comparison contract below. Ingram Lemma 11: move a fixed point γ of multiplier λ ≠ 0,1 to 0 and another fixed point to ∞. For γ = [α:γ₀] and the other point [β:δ], use ψ(z) = (βz+α)/(δz+γ₀), so ψ(0) is the λ-point. Normalize each column separately to bound h(ψ) by the sum of the two point heights. The homogeneous fixed-point polynomial bounds that sum, and coefficient estimates yield `h_{Hom_d}(ψ⁻¹fψ)` ≤ `(d+2)h_{Hom_d}(f)+O_d(1).` This column order sends 0 to the specified multiplier point. Ingram Lemmas 7–9: the resultant-adjugate estimate bounds the homogeneous escape rate below and hence the Green function. At an archimedean place Koebe’s quarter theorem produces a critical point in the attracting domain; at a finite place the quantitative attracting-cycle theorem of Benedetto–Ingram–Jones–Levy does this when |λ|_v is sufficiently small. Root/coefficient estimates relate the size of the attracting disc to `h_{Hom_d}.` The quantitative-attracting-branch target identifies the archimedean and finite-place analytic inputs and keeps their proof leaves explicit. Ingram Lemma 10: use the branch divisor B′ obtained by removing critical images whose forward orbit reaches 0. The removed part has canonical height zero, while f_*^k B′ remains disjoint from 0 so its Green pairing is defined. The attracted critical orbit supplies the k log⁺|λ⁻¹|_v term; the other terms have the uniform Green lower bound. The resulting error is linear in k and in local coefficient size, with resultant term r_v(f). Ingram Lemma 12: sum with the absolute place weights. The resultant contribution cancels by the product formula; Σ_v r_v log⁺|λ⁻¹|_v = h(λ). The Green pairing sums to `d^{k+1}ĥ_crit(f).` Combining with the coordinate estimate gives `d^{k+1}ĥ_crit(f)` ≥ (k−1)h(λ) − `(4d−1)(d+2)h_{Hom_d}(f)` − c₀k. The cases λ = 0,1 follow directly from nonnegativity. Sum over all fixed-point multipliers and apply the estimate to a fixed iterate f^n, using ĥ_crit(f^n) = nĥ_crit(f). McMullen supplies some n with finite multiplier-spectrum fibres outside all Lattès classes. Ingram Lemmas 14–15 use the whole finite-fibre height comparison of §6.10, based on HeightsRationalPointsAndObstructions §0.30, to bound an ample moduli height by the spectrum height. For a sufficiently large fixed k, its positive k-dependent coefficient absorbs the remaining coefficient-height error. This proves the lower bound outside all Lattès classes, exactly as Ingram Theorem 1 states. To state the endpoint outside the flexible Lattès locus, absorb the finitely many rigid Lattès classes of fixed degree into the additive constant. Milnor Theorem 5.1, Corollary 5.2 and Lemmas 5.4–5.5 classify these by the finite possible imaginary-quadratic multipliers a with |a|²=d, invariant lattice classes and finite translation quotients; the nonrigid n=2 cases have integral a and are precisely the flexible ones. The classification contract is Finiteness of rigid Lattès classes in fixed degree, under its affine-quotient classification contract. No multiplier-finiteness theorem on the flexible locus is claimed.
 
-*Needs:* [The critical height of a rational map](#68-the-critical-height-of-a-rational-map); [Flexible Lattès maps and the flexible Lattès locus](#654-flexible-lattès-maps-and-the-flexible-lattès-locus); [The critical height of an iterate](#641-the-critical-height-of-an-iterate); [The critical height is invariant under conjugation](#639-the-critical-height-is-invariant-under-conjugation); [The moduli space M_d(K) of degree-d maps](#029-the-moduli-space-m_dk-of-degree-d-maps); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv); [The multiplier of a periodic cycle](#214-the-multiplier-of-a-periodic-cycle); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); `HeightsRationalPointsAndObstructions:RP.0`; [Finite multiplier spectra off the Lattès locus](#673-finite-multiplier-spectra-off-the-lattès-locus); [Finiteness of rigid Lattès classes in fixed degree](#674-finiteness-of-rigid-lattès-classes-in-fixed-degree); [Minimum conjugate coefficient height versus moduli height](#611-minimum-conjugate-coefficient-height-versus-moduli-height); [Height comparison on the whole finite-fibre locus](#610-height-comparison-on-the-whole-finite-fibre-locus); [Quantitative branch point near a small attracting multiplier](#69-quantitative-branch-point-near-a-small-attracting-multiplier).
+*Needs:* [The critical height of a rational map](#68-the-critical-height-of-a-rational-map); [Flexible Lattès maps and the flexible Lattès locus](#654-flexible-lattès-maps-and-the-flexible-lattès-locus); [The critical height of an iterate](#641-the-critical-height-of-an-iterate); [The critical height is invariant under conjugation](#639-the-critical-height-is-invariant-under-conjugation); [The moduli space M_d(K) of degree-d maps](#029-the-moduli-space-m_dk-of-degree-d-maps); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv); [The multiplier of a periodic cycle](#214-the-multiplier-of-a-periodic-cycle); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); HeightsRationalPointsAndObstructions §0.16; [Finite multiplier spectra off the Lattès locus](#673-finite-multiplier-spectra-off-the-lattès-locus); [Finiteness of rigid Lattès classes in fixed degree](#674-finiteness-of-rigid-lattès-classes-in-fixed-degree); [Minimum conjugate coefficient height versus moduli height](#611-minimum-conjugate-coefficient-height-versus-moduli-height); [Height comparison on the whole finite-fibre locus](#610-height-comparison-on-the-whole-finite-fibre-locus); [Quantitative branch point near a small attracting multiplier](#69-quantitative-branch-point-near-a-small-attracting-multiplier).
 
 ([ingram-2018-critical-height](#ingram-2018-critical-height), Theorem 1, p. 2 (arXiv v3) — Ingram proves the comparison outside all Lattès classes; the target additionally uses finiteness of the rigid classes in fixed degree, explicitly identified in its proof and gap, to exclude only the flexible locus; [demarco-mavraki-ye-2026](#demarco-mavraki-ye-2026), §2.4, p. 9 (arXiv v3) — Ingram's theorem as routed to Layer 6; [ingram-2018-critical-height](#ingram-2018-critical-height), §2, Lemma 12, p. 13 (arXiv v3) — The key lower bound in the proof of Theorem 1; [ingram-2018-critical-height](#ingram-2018-critical-height), Introduction, p. 3 (arXiv v3) — The input specified below as a required construction: finiteness of the multiplier spectrum away from the Lattès locus; [ingram-2018-critical-height](#ingram-2018-critical-height), Introduction, p. 1 (arXiv v3) — The exceptional set is the flexible Lattès locus; the non-example test of the critical height; [ingram-2018-critical-height](#ingram-2018-critical-height), §§1–2, Lemmas 7–15 and proof of Theorem 1, pp. 6–16 (arXiv v3) — The quantitative Green bounds, attracting critical orbit, coordinate control and multiplier-spectrum argument supply the internal proof steps, with the named external inputs kept explicit; [milnor-lattes-2006](#milnor-lattes-2006), §5, Theorem 5.1, Corollary 5.2, Lemmas 5.4–5.5, pp. 15–18 (arXiv v2) — The classification distinguishes flexible integral-multiplier families from the finitely many rigid Lattès classes at fixed degree.)
 
@@ -9892,7 +9917,7 @@ Put p_t(z)=z(z−1)(z−t). The explicit duplication formula of §6.35 gives (f�
 - At s=t=2 the measures coincide and E∞(2,2)=0. The six Legendre parameters with the same j-invariant are not identified in the fixed x-coordinate: t=3 and 1−t=−2 have different fourth branch values.
 - At t=0 or 1 the cubic has a repeated root; near that root the candidate density has order |u|⁻² and is not locally integrable. Smoothness excludes these parameters.
 
-*Needs:* §6.35 Legendre family and explicit Lattès map; §6.57 standard projection and branch values; §2.94 the atomless balanced-measure characterization; §2.5 local mutual energy; §4.39 energy and pairing; complex change of variables on the sphere.
+*Needs:* §6.35 Legendre family and explicit Lattès map; §6.57 standard projection and branch values; §2.80 the complex atomless balanced-measure characterization; §2.5 local mutual energy; §4.39 energy and pairing; complex change of variables on the sphere.
 
 ### 6.107 Uniform positivity of the Arakelov–Zhang pairing (DeMarco–Krieger–Ye Theorem 1.5; published Theorem 1.6)
 
@@ -10001,7 +10026,7 @@ The marked set {0,1/6}⊂ℚ tests zero marks and denominators in the parameter 
 
 ### Dependencies
 
-Layers 0–5 as specified per target; elliptic geometry and heights; SchemeAndStackFoundations §0.9 `spreading_out_models` and the relative Cohen contract; RP.0/RP.4 heights and Siegel; Layer 2 The native analytic projective line hybrid geometry; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
+Layers 0–5 as specified per target; elliptic geometry and heights; SchemeAndStackFoundations §0.9 `spreading_out_models` and the relative Cohen contract; HeightsRationalPointsAndObstructions §§0.16, 4.8 heights and Siegel; Layer 2 The native analytic projective line hybrid geometry; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
 
 ## Source conventions and corrections
 
