@@ -553,7 +553,7 @@ Prove the following interface laws:
 
 Prove `IsK3.picardRank_bounds`: for K3 X/k, 1≤ρ(X)≤ρ_geom(X)≤22; in characteristic zero ρ_geom≤20. For every ℓ invertible in k, c₁ embeds Pic(X_kbar)⊗ℤ_ℓ into H²_et(X_kbar,ℤ_ℓ(1)) and preserves the intersection/cup-trace pairing. The saturated cycle-map theorem asserts that its cokernel is torsion-free; at ρ_geom=22 the map is an isomorphism. (huybrechts, Chapter 17 §§2.1–2.2, pp.365–366; huybrechts lines 13994, 14001–14010; rizov §2.4, lines 296–300).
 
-Use the finite-level Kummer injections Pic/ℓⁿ→H²(µ_ℓⁿ), then the compatible inverse limit on the finite free Picard lattice. Reduction of c₁ modulo ℓⁿ is still injective: if ℓⁿy=c₁(x), finite-level Kummer injectivity gives x=ℓⁿz and torsion-freeness of H² gives y=c₁(z). Thus the cokernel is torsion-free; equal rank makes it zero. The bound 22 uses 3.4; characteristic zero spreads to C and uses the (1, 1) image of c₁, of dimension 20. Positivity gives the lower bound.
+Use the finite-level Kummer injections Pic/ℓⁿ→H²(µ_ℓⁿ), then the compatible inverse limit on the finite free Picard lattice. Reduction of c₁ modulo ℓⁿ is still injective: if ℓⁿy=c₁(x), finite-level Kummer injectivity gives x=ℓⁿz and torsion-freeness of H² gives y=c₁(z). Thus the cokernel is torsion-free; equal rank makes it zero. The bound 22 uses §3.1; characteristic zero spreads to C and uses the (1, 1) image of c₁, of dimension 20. Positivity gives the lower bound.
 
 *Needs:* K3Surfaces K1–K2; §3.1; §4.1; §4.2; §4.3; EtaleCohomologyFoundations §0.9; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §2.11; SchemeAndStackFoundations §0.9.
 
