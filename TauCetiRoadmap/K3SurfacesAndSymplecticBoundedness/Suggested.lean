@@ -12,6 +12,9 @@ The roadmap is README.md; this file is not the roadmap. It states the roadmap's
 headline theorems against the pinned APIs: invariance under field extension,
 vanishing of one-forms and vector fields, the Hodge diamond, finite freeness of
 the Picard group, Picard-rank bounds and bounded rank-revealing extensions.
+This is the arbitrary-field and all-characteristic Part II of K3Surfaces.
+Its geometric algebraic specialization and complex/Betti inputs are consumed from
+K3Surfaces Conventions, K0, K0.A and K1–K2 through the adapter in README §1.3.
 The definitions specialize native exterior powers, cohomology, schemes and
 line-bundle classes; they do not supply any geometric theorem as data.
 
@@ -28,9 +31,12 @@ The remaining headline theorems are not statable at the pins:
   polarized lifts lack the relative Picard space, exterior differential,
   de Rham–Witt/crystalline cohomology and marked formal deformation carriers.
   The Hodge diamond and the vanishings of §2.3 are stated below.
-* §§3.2–3.4: analytic comparison and integral Betti/étale invariants lack
-  scheme analytification, analytic coherent sheaves and integral étale
-  cohomology with its comparison maps.
+* §1.3: the specialization adapter to the geometric algebraic/analytic
+  presentations lacks the standard projective-space structure morphism
+  and scheme analytification carriers.
+* §3.1: integral geometric étale invariants lack integral étale cohomology
+  with its comparison maps; the complex and integral Betti inputs are
+  K3Surfaces K1–K2, rather than further headline targets here.
 * §§5.3–5.4: finite étale polarized automorphism schemes and the infinite
   symplectic Wehler action lack the ample-line predicate, polarized
   automorphism scheme and pullback action on canonical forms.

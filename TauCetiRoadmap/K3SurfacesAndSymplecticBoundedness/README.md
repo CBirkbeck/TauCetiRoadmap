@@ -1,10 +1,12 @@
-# Roadmap: k3 surfaces, picard lattices and symplectic boundedness
+# Roadmap: k3 surfaces, part ii — picard lattices and symplectic boundedness
 
-**Summary.** Build the geometry of K3 surfaces on native schemes over arbitrary fields, from smooth proper surfaces and coherent cohomology to their geometric and arithmetic Picard lattices. Develop characteristic-independent cohomology and faithful automorphism actions, bound every finite automorphism subgroup uniformly, retain the sharper tame symplectic bounds, and construct fixed-degree polarized Deligne–Mumford moduli of finite type over the integers.
+**Summary.** Extend K3Surfaces to native schemes over arbitrary fields and all characteristics, from smooth proper surfaces and coherent cohomology to their geometric and arithmetic Picard lattices. The base roadmap treats projective algebraic K3 surfaces over algebraically closed fields in its characteristic-p>2 lane and complex analytic K3 surfaces, including their periods, cones and Torelli; this Part II supplies arbitrary-field descent, the characteristic-2 differential theorem, arithmetic boundedness and polarized moduli. Develop characteristic-independent cohomology and faithful automorphism actions, bound every finite automorphism subgroup uniformly, retain the sharper tame symplectic bounds, and construct fixed-degree polarized Deligne–Mumford moduli of finite type over the integers.
 
 ## Scope and ownership
 
-This roadmap owns the unpolarized K3 predicate, its field and complex comparisons, the K3 calculations in coherent, crystalline and integral étale cohomology, the geometric realization of the Picard lattice, arithmetic rank descent, symplectic actions, K3 quotient calculations and fixed-degree polarized moduli. Smoothness is relative to the field, including imperfect fields. Projectivity is a theorem of general smooth proper surfaces, not a field of the predicate. The endpoints are the rank and descent bounds, faithful cohomological actions, uniform finite-subgroup bounds, tame symplectic bounds, polarized moduli and finite-field finiteness in Layers 1–8.
+This roadmap owns the arbitrary-field extension of the unpolarized algebraic K3 predicate and its specialization adapter, field descent, the all-characteristic extension of the coherent calculations, crystalline and integral étale cohomology, the geometric realization of the Picard lattice, arithmetic rank descent, symplectic actions, K3 quotient calculations and fixed-degree polarized moduli. Smoothness is relative to the field, including imperfect fields. Projectivity is a theorem of general smooth proper surfaces, not a field of the predicate. The endpoints are the rank and descent bounds, faithful cohomological actions, uniform finite-subgroup bounds, tame symplectic bounds, polarized moduli and finite-field finiteness in Layers 1–8.
+
+K3Surfaces, Conventions and K0, owns the algebraically closed projective presentation and its contraction and coherent numerical calculations; K0.A owns the characteristic-p>2 algebraic one-form/vector-field theorem and its Serre-dual consequence. K3Surfaces, Conventions and K1, owns the analytic K3 predicate, projective algebraic/analytic equivalence, Hodge numbers and exponential/Chern–Picard comparison; K2 owns the integral singular cup lattice, its freeness and marking. These targets are consumed once, with the specialization maps of §1.3. The arbitrary-field predicate below differs by allowing nonclosed and imperfect fields, imposing properness and proving projectivity; it stores no volume-form choice. Its algebraically closed projective specialization is the same unpolarized condition. The analytic predicate is used on K3Surfaces' carrier without a second definition. No stage of K3Surfaces consumes this Part II.
 
 The native scheme morphism predicates, relative differential sheaf, sheaf exterior powers and internal-Hom duals, coherent cohomology with its base-ring action, line-bundle classes, rational-ambient integral lattice carrier, field-Brauer/Galois comparison and algebraic finite-field Brauer triviality are already in the pinned libraries. Their exact declarations appear below; this roadmap does not redefine those objects. SchemeAndStackFoundations §1.17 owns projective finite-group quotients; §§2.10 and 2.15 own topology/field comparisons and finite-cover Hochschild–Serre. Its §§2.20, 4.1–4.6, 4.14 and 5.8–5.10 own generic surface duality, deformations, Hilbert/Isom, RR, geometric numerical equivalence and Hodge index. JacobianChallenge Layers A, C and D own line-bundle classes, proper coherent finiteness/base change and projective Picard representability over fields; Layer D is not limited to a curve representability theorem. AlgebraicVectorBundles L0A–L0C own the exterior-power, determinant and pullback comparison theory. IntegralLattices, Completed Layers 1–5 and active Layers 1, 5–6, own abstract lattices and discriminant theory. The K3 lattice instance differs by being tied to actual line bundles and geometric intersection numbers. NoncommutativeAndEquivariantIwasawa §0.1 owns uniform pro-p groups, including the uniformity and hence torsion-freeness of the first principal congruence subgroup of GL_n(ℤ_ℓ) for every odd prime ℓ and n≥0; §4.5 applies that result to finite subgroups.
 
@@ -57,6 +59,12 @@ The baseline is `a91d3aafa8cd3e6bc33dfde0d7677ed0f1625039`. Read declarations at
 - `TauCeti.subsingleton_brauerGroup_of_finite`, in `TauCeti/Algebra/BrauerGroup/Trivial.lean`, proves `Subsingleton (BrauerGroup k)` for any finite field k, in the full Brauer carrier universes. Together with the following comparisons it gives H²_fppf(Spec k,G_m)=0 for finite k.
 
 - `TauCeti.brauerCohomologyEquiv`, in `TauCeti/Algebra/CrossedProduct/Comparison.lean`, is the additive equivalence from Br(k) to H²_cont(G_k,(kˢ)ˣ) for every field k. Compose its inverse with SchemeAndStackFoundations §2.10 `smoothGroup_fppf_etale_comparison` for G_m and §2.15 `etale_galois_comparison` in degree two to identify H²_fppf(Spec k,G_m) with Br(k).
+
+### From TauCetiRoadmap.K3Surfaces
+
+Consume Conventions and K0 for the algebraically closed projective K3 presentation, canonical-line pullback, contraction by a nonzero two-form, h⁰(ω)=1, χ(O)=2 and c₂=24 on their stated algebraic domain. Consume K0.A for H⁰(Ω¹)=H⁰(T)=H²(T)=0 over algebraically closed fields of characteristic p>2. Consume K1 for the analytic predicate, projective algebraic/analytic equivalence, its coherent/canonical/Picard maps, the Hodge diamond and integral (1,1) description of Pic; consume K2 for the actual integral H² cup lattice of signature (3,19), its torsion-freeness, integral marking and pullback isometries. The remaining integral cohomology groups follow from its simple connectivity and integral manifold duality. Only these stages are prerequisites: periods, cones, Torelli and Enriques applications K3–K7 supply no premise.
+
+The adapter of §1.3 identifies the algebraic presentations on the same structure morphism after projectivity, and §1.2 permits field descent. A chosen volume form is extra input to contraction; rescaling it by a∈kˣ rescales contraction by a and changes neither predicate nor Picard class. The characteristic-2 vanishing and arbitrary-field extension of the coherent calculations are §§2.1a–2.4. The complex comparison is applied through this adapter, with the positive cup-trace convention and exponential normalization exp(2πiz) (huybrechts, Chapter 1 §§3.1–3.3, lines 405–511; arapura-chern, §7.5, Lemma 7.5.1 and Definition 7.5.2, p.150, uncertified locator).
 
 ### From TauCetiRoadmap.SchemeAndStackFoundations
 
@@ -128,7 +136,7 @@ Consume Layer 1, Layer 5, Layer 6, Completed Layers 1–5. The common rational-a
 
 ### From TauCetiRoadmap.NoncommutativeAndEquivariantIwasawa
 
-Consume §0.1, Constant lower-p-series indices, including its first-congruence-subgroup Check: for every odd prime ℓ and n≥0, ker(GL_n(ℤ_ℓ)→GL_n(𝔽_ℓ)) is a uniform pro-ℓ group of dimension n². The uniform predicate includes torsion-freeness. At ℓ=2 only the level-4 subgroup is covered; §4.5 uses odd ℓ.
+Consume §0.1, Constant lower-p-series indices, including its first-congruence-subgroup Check: for every odd prime ℓ and n≥0, ker(GL_n(ℤ_ℓ)→GL_n(𝔽_ℓ)) is a uniform pro-ℓ group of dimension n². The uniform predicate includes torsion-freeness. At ℓ=2 only the level-4 subgroup is covered; §4.5 uses odd ℓ. This §0.1 group-theoretic prefix is a prerequisite of §4.5, hence of §§4.6 and 6.6. Its own input is the native pro-p carrier and the closed lower-p-series/power operations from ProfiniteArithmetic; no Iwasawa algebra, localization or arithmetic theorem of Layers 1–7 is an input here.
 
 ### From TauCetiRoadmap.GlobalQuadraticForms
 
@@ -158,11 +166,13 @@ Consume N6, the mapping-torus example’s topological Lefschetz fixed-point form
 
 Consume K3–K4, K5a–K5b, K6.1. Native analytic germs/sheaves and bundles, coherent/Dolbeault/Serre comparison, compact Kähler Hodge decomposition and cycle classes.
 
-**Part II §integral-Chern-comparison.** What ComplexKahlerGeometry must provide (gap:integral-topology): Supply the analytic exponential sheaf sequence with map z↦exp(2πiz), identify its connecting map with the integral first Chern class, and identify cup-evaluation of Chern classes with analytic intersection, naturally for holomorphic pullback. Arapura, Algebraic Geometry over the Complex Numbers, §7.5, Lemma 7.5.1 and Definition 7.5.2, p.150 (arapura-chern, uncertified published locator), specifies the normalized exponential and its connecting Chern class for every complex manifold. An explicit derivation fixes naturality and signs without a K3 hypothesis: on small charts take holomorphic logarithms u_ij with g_ij=exp(2πi u_ij), where local frames satisfy e_j=e_i g_ij. With the Čech differential (δu)_ijk=u_jk−u_ik+u_ij, the integers δu represent c₁(L). Refining the cover or changing logarithms changes this by an integral coboundary; composing the transition functions and their logarithms with a holomorphic map gives the pullback class. Local logarithms prove sheaf exactness, and the kernel is exactly ℤ. For L=O(D), the positive meridian around a simple holomorphic zero has logarithmic increment +1, so the class is the complex-oriented Thom class of D. AlgebraicTopology Stage 6 cup/cap products and oriented Poincaré–Lefschetz duality then identify c₁(O(D)) with PD[D] and cup-evaluation on a compact complex surface with analytic divisor intersection, including multiplicities by the local zero order. Additivity and differences of effective divisors cover Cartier divisors; transverse representatives and the same Thom classes give the general topological Chern intersection. Thus O(1) has degree +1 on ℙ¹. ComplexKahlerGeometry K6.1 supplies the analytic-cycle/fundamental-class integration comparison. Huybrechts Chapter 1 §3.2, pp.15–16, huybrechts lines 452–472, remains the K3 application, and §3.3 records its winding-number Check. Neither a rescaling of the lattice ℤ nor a reversal of the connecting map is implicit. Required by §3.3.
+**Part II §integral-Chern-comparison.** What ComplexKahlerGeometry must provide (gap:integral-topology): Supply the analytic exponential sheaf sequence with map z↦exp(2πiz), identify its connecting map with the integral first Chern class, and identify cup-evaluation of Chern classes with analytic intersection, naturally for holomorphic pullback. Arapura, Algebraic Geometry over the Complex Numbers, §7.5, Lemma 7.5.1 and Definition 7.5.2, p.150 (arapura-chern, uncertified published locator), specifies the normalized exponential and its connecting Chern class for every complex manifold. An explicit derivation fixes naturality and signs without a K3 hypothesis: on small charts take holomorphic logarithms u_ij with g_ij=exp(2πi u_ij), where local frames satisfy e_j=e_i g_ij. With the Čech differential (δu)_ijk=u_jk−u_ik+u_ij, the integers δu represent c₁(L). Refining the cover or changing logarithms changes this by an integral coboundary; composing the transition functions and their logarithms with a holomorphic map gives the pullback class. Local logarithms prove sheaf exactness, and the kernel is exactly ℤ. For L=O(D), the positive meridian around a simple holomorphic zero has logarithmic increment +1, so the class is the complex-oriented Thom class of D. AlgebraicTopology Stage 6 cup/cap products and oriented Poincaré–Lefschetz duality then identify c₁(O(D)) with PD[D] and cup-evaluation on a compact complex surface with analytic divisor intersection, including multiplicities by the local zero order. Additivity and differences of effective divisors cover Cartier divisors; transverse representatives and the same Thom classes give the general topological Chern intersection. Thus O(1) has degree +1 on ℙ¹. ComplexKahlerGeometry K6.1 supplies the analytic-cycle/fundamental-class integration comparison. Huybrechts Chapter 1 §3.2, pp.15–16, huybrechts lines 452–472, remains the K3 application, and §3.1 records its winding-number Check. Neither a rescaling of the lattice ℤ nor a reversal of the connecting map is implicit. Required by §3.1.
 
 ### From TauCetiRoadmap.ComplexComparisonPartII
 
 Consume C−1.1 for scheme analytification, smooth-manifold and proper/compact comparison; C1.9 `projectiveComplexGaga`, `properSchemeGagaPushforward` and `properSchemeGagaEquivalence` for coherent GAGA; C2.2 `projectiveGeometricDictionaries` for ideals, sections, invertible modules and their algebraization; C5.1 for analytification of differentials and de Rham comparison; C6.3 `artinComparison` and C6.6 `adicArtinComparison` for finite-level and integral singular–étale comparison, with pullback, cup and trace compatibility. Consume C3.2d.2 `relative_picard_algebraicSpace`, C3.2d.3 `relative_picard_separated`, C3.2d.4 `picard_brauer_obstruction` and C3.2d.5 `finite_picard_cartier_torsors` on their universal-functions hypotheses.
+
+The Artin-comparison prerequisites include C6.0–C6.2. In C6.1, the topological support and sheaf/singular bridges require TopologicalSheafCohomology TS3.1–TS3.3 and TS3.7, with CharacteristicClasses C1.2/S0–S5 on the stated support and CW domains. These are transitive prerequisites of C6.3/C6.6, including for the smooth projective application in §3.1. Their stages precede the comparison stages, which precede this roadmap's integral étale invariants; they are not replaced by the K3 numerical calculations.
 
 ### From TauCetiRoadmap.CrystallineCohomology
 
@@ -196,7 +206,7 @@ Consume CR.2.3 (smooth-lift/de Rham comparison and PD filtration), CR.3.2 (prope
 
 [Suggested.lean](Suggested.lean) is the acceptance test for the headline theorems against the pinned APIs. It states field-extension invariance, the vanishing and Hodge theorems, Picard finite freeness, rank bounds and bounded rank descent on native schemes and line-bundle classes. Its module docstring identifies the missing carriers for the remaining geometric headlines. The README specifies every target, interface law and Check on the full K3, cohomology and moduli objects.
 
-Layer 1 fixes the native surface predicate and integer RR conventions. Layer 2 constructs its Picard-space instance and proves the positive-characteristic vanishing and lifting floor. Layer 3 makes the complex and integral geometric cohomology comparisons. Layer 4 builds the geometric lattice instance and proves rank/descent bounds using the supplied general odd-prime congruence theorem. Layer 5 defines actual symplectic and polarized stabilizers and tests full-group infinitude. Layer 6 starts with discriminants, height and genus-one rank comparisons, then supplies quotient, faithfulness and finite-subgroup bounds; the involution pencil follows the fixed-point table. Layers 7–8 construct the all-prime Hilbert atlas and separated polarized stacks, then prove smoothness on its stated open base and finite-field finiteness. Each layer uses its predecessors and the exact supplier contracts. A gap specifies a mathematical theorem supplied by its named owner; it adds no hypothesis to a K3 surface.
+Layer 1 fixes the native surface predicate and integer RR conventions. Layer 2 constructs its Picard-space instance and proves the positive-characteristic vanishing and lifting floor. Layer 3 transports the supplied complex cup lattice to integral geometric étale cohomology. Layer 4 builds the geometric lattice instance and proves rank/descent bounds using the supplied general odd-prime congruence theorem. Layer 5 defines actual symplectic and polarized stabilizers and tests full-group infinitude. Layer 6 starts with discriminants, height and genus-one rank comparisons, then supplies quotient, faithfulness and finite-subgroup bounds; the involution pencil follows the fixed-point table. Layers 7–8 construct the all-prime Hilbert atlas and separated polarized stacks, then prove smoothness on its stated open base and finite-field finiteness. Each layer uses its predecessors and the exact supplier contracts. A gap specifies a mathematical theorem supplied by its named owner; it adds no hypothesis to a K3 surface.
 
 ## Layer 1: Native surfaces and the K3 predicate
 
@@ -249,21 +259,25 @@ Every K3 surface over an arbitrary field k is projective over k. (huybrechts, Ch
 
 Apply the general smooth proper surface projectivity theorem required from the scheme owner, with relative smoothness of dimension 2 and geometric integrality supplied by 1.1. The supplier contract retains its full arbitrary-field surface statement and its modification/ample-support proof. Projectivity is not inferred merely from projectivity after algebraic closure.
 
-*Needs:* §1.1; `gap:surface-projectivity`.
+Over an algebraically closed k of characteristic zero or p>2, construct the specialization equivalence between `IsK3 k f` and its Conventions' projective algebraic condition on the same f. In the forward direction use projectivity and the native identification ∧²Ω¹≅ω; in the reverse direction forget projectivity to properness and use the same identification. Both composites are the identity on the underlying scheme and its isomorphisms. For k=ℂ, compose this adapter with K3Surfaces K1 to obtain its projective analytic object. The algebraization counit is an isomorphism over ℂ to the original X; transport along it identifies the canonical line, coherent cohomology and Picard classes with the originals. The adapter commutes with isomorphisms and field extension wherever both presentations apply. It makes no choice of σ; when a construction asks for σ, its possible choices form a kˣ-torsor. (huybrechts, Chapter 1 Definition 1.1, Remark 1.2 and Proposition 3.2, lines 135–153, 420–429.)
+
+*Needs:* §1.1; §1.2; `gap:surface-projectivity`; AlgebraicVectorBundles L0C; K3Surfaces Conventions, K0 and K1.
 
 **Checks.**
 
 - A smooth quartic has O(1) as an ample witness; it satisfies the native predicate rather than carrying an embedding as data.
 - The argument is a surface theorem and does not assert projectivity of all smooth proper varieties.
 - Relative smoothness is retained over imperfect k; regularity alone is not the stated hypothesis.
+- Over ℂ the algebraic specialization of a smooth quartic fixes f; its analytic algebraization counit pulls the hyperplane class back to H of square 4. The analytic equivalence uses this specified isomorphism over ℂ.
+- For σ(e₁,e₂)=1, replacing σ by 2σ over ℂ gives contraction values 2e₂* and −2e₁*, while the two unpolarized predicates are unchanged. The zero form gives the zero map and is excluded from the chosen-form input.
 
 ### 1.4 Coherent invariants and contraction
 
 For a K3 surface X/k, ω=∧²Ω¹, h⁰(O)=h²(O)=1, χ(O)=2 and 2χ(L)=4+L² in ℤ for every invertible L. For each nonzero σ∈H⁰(ω), v↦(w↦σ(v,w)) identifies T_X with Ω¹_X; scaling σ scales this map. (huybrechts, Chapter 1 §2.3 equation (2.5), pp.11–12; huybrechts lines 142, 305, 316).
 
-Proper geometric integrality identifies global functions with k; Serre duality gives h². Apply surface RR geometrically and transport Euler characteristics and intersections by base change. A local frame computes contraction.
+Extend the K3Surfaces K0 calculation through §1.3 and flat field base change on its algebraic domain. Over arbitrary k, proper geometric integrality identifies global functions with k and Serre duality gives h²; surface RR gives the same integer formula, including characteristic 2. Construct the contraction map on the native differential sheaf over k and identify its base change with K0 on that domain; in characteristic 2 its same alternating-frame formula remains invertible. Euler characteristics and intersections commute with field extension.
 
-*Needs:* §1.3; §1.1; §1.2; SchemeAndStackFoundations §2.20; SchemeAndStackFoundations §5.8; SchemeAndStackFoundations §5.9; SchemeAndStackFoundations §5.10; JacobianChallenge Layer C.
+*Needs:* §1.3; §1.1; §1.2; K3Surfaces K0; SchemeAndStackFoundations §2.20; SchemeAndStackFoundations §5.8; SchemeAndStackFoundations §5.9; SchemeAndStackFoundations §5.10; JacobianChallenge Layer C.
 
 **Checks.**
 
@@ -306,7 +320,7 @@ Smooth quartics, the empty scheme, P², and products of elliptic curves distingu
 
 ### Dependencies
 
-Mathlib `AlgebraicGeometry.SmoothOfRelativeDimension`; Mathlib `AlgebraicGeometry.IsProper`; Mathlib `AlgebraicGeometry.GeometricallyIntegral`; Tau Ceti `AlgebraicGeometry.Scheme.relativeDifferentials`; AlgebraicVectorBundles L0C; SchemeAndStackFoundations §2.20; SchemeAndStackFoundations §0.11; SchemeAndStackFoundations §1.1; JacobianChallenge Layer C; `gap:surface-projectivity`; SchemeAndStackFoundations §5.8; SchemeAndStackFoundations §5.9; SchemeAndStackFoundations §5.10; `gap:hypersurface-cohomology`.
+K3Surfaces Conventions, K0 and K1; Mathlib `AlgebraicGeometry.SmoothOfRelativeDimension`; Mathlib `AlgebraicGeometry.IsProper`; Mathlib `AlgebraicGeometry.GeometricallyIntegral`; Tau Ceti `AlgebraicGeometry.Scheme.relativeDifferentials`; AlgebraicVectorBundles L0C; SchemeAndStackFoundations §2.20; SchemeAndStackFoundations §0.11; SchemeAndStackFoundations §1.1; JacobianChallenge Layer C; `gap:surface-projectivity`; SchemeAndStackFoundations §5.8; SchemeAndStackFoundations §5.9; SchemeAndStackFoundations §5.10; `gap:hypersurface-cohomology`.
 
 ## Layer 2: Picard spaces, vanishing and lifting
 
@@ -336,7 +350,7 @@ Prove the following interface laws:
 
 For a K3 surface X over an algebraically closed field k of characteristic p>0, if its one-dimensional formal Brauer group has infinite height and H⁰(X,T_X)≠0, the map d:H²(X,WO_X)→H²(X,WΩ¹_X) has nonzero kernel. Under the nonzero-vector-field hypothesis X is unirational and its geometric Néron–Severi rank is 22. (lang-nygaard, Theorem 1.3 proof, p.172, lang-nygaard lines 93–104; nygaard-vectorfields Lemma 3.3; rudakov-shafarevich-inseparable §2, Theorem 5 and Corollaries 1–2, pp.1216–1217, lines 438–497; shioda-unirational-primary Lemma p.234 and Corollary 2 p.235).
 
-Prove the Rudakov–Šafarevič vector-field unirationality reduction and apply the general unirational-surface cycle theorem to get rank 22 as in their Corollary 2, then the kernel assertion with the Witt and formal-Brauer comparisons. For this unirational surface, the general surface input gives H¹_et=H³_et=0 and ρ=b₂; Noether from χ(O)=2 and K=0 gives deg c₂=24, and étale Gauss–Bonnet gives b₂=22. This uses only the earlier coherent invariants and general surface theorems, not §2.4, §3.4 or the later K3 lattice. In 2.2, a nonzero d on global one-forms produces a nonzero vector field by contraction. The dual d on H²(O) is then injective; FdV=d and V-separatedness would make the Witt differential injective, contradicting this target.
+Prove the Rudakov–Šafarevič vector-field unirationality reduction and apply the general unirational-surface cycle theorem to get rank 22 as in their Corollary 2, then the kernel assertion with the Witt and formal-Brauer comparisons. For this unirational surface, the general surface input gives H¹_et=H³_et=0 and ρ=b₂; Noether from χ(O)=2 and K=0 gives deg c₂=24, and étale Gauss–Bonnet gives b₂=22. This uses only the earlier coherent invariants and general surface theorems, not §2.4, §3.1 or the later K3 lattice. In 2.2, a nonzero d on global one-forms produces a nonzero vector field by contraction. The dual d on H²(O) is then injective; FdV=d and V-separatedness would make the Witt differential injective, contradicting this target.
 
 Prove the following interface laws:
 
@@ -356,9 +370,9 @@ Prove the following interface laws:
 
 For every K3 surface in characteristic p>0, the differential d:H⁰(X,Ω¹)→H⁰(X,Ω²) is zero. (lang-nygaard, Theorem 1.3, pp.172–173; lang-nygaard lines 76–104).
 
-Extend to an algebraic closure, a perfect field. Finite-height formal Brauer gives Hodge–de Rham degeneration by Nygaard Corollary 2.7. In infinite height, Serre duality turns a nonzero differential into injectivity on H²(O); FdV=d then forces any Witt differential kernel into every image of V, contradicting the separate kernel theorem. The kernel and its vector-field/unirationality reduction are the earlier target §2.1a.
+Extend to an algebraic closure, a perfect field. At odd p use K3Surfaces K0.A, via §1.3, so H⁰(Ω¹)=0 and its differential is zero. At p=2, finite-height formal Brauer gives Hodge–de Rham degeneration by Nygaard Corollary 2.7. In infinite height, Serre duality turns a nonzero differential into injectivity on H²(O); FdV=d then forces any Witt differential kernel into every image of V, contradicting the separate kernel theorem. The kernel and its vector-field/unirationality reduction are the earlier target §2.1a.
 
-*Needs:* §1.2; §1.4; §2.1; `gap:witt-formal-brauer`; §2.1a; CrystallineCohomology CR.4.1, CR.4.6–CR.4.7.
+*Needs:* §1.2; §1.3; §1.4; §2.1; K3Surfaces K0.A; `gap:witt-formal-brauer`; §2.1a; CrystallineCohomology CR.4.1, CR.4.6–CR.4.7.
 
 **Checks.**
 
@@ -370,9 +384,9 @@ Extend to an algebraic closure, a perfect field. Finite-height formal Brauer giv
 
 Prove `IsK3.noVectorFields`: for every K3 surface over every field, H⁰(X,Ω¹)=H⁰(X,T_X)=H²(X,T_X)=0, with T_X the native internal-Hom dual of Ω¹. (lang-nygaard, Theorem 1.1 and Corollary 1.2, pp.171–172; lang-nygaard lines 54–74; characteristic-zero branch huybrechts Chapter 1 §3.3, p.16, lines 488–493).
 
-In positive characteristic, all forms and their Cartier iterates are closed. Oda identifies them as an image of p-torsion Picard Dieudonné data; this is zero by 2.1. Contraction and duality give the tangent vanishings. In characteristic zero spread out to a finitely generated field, embed it into C, use proper GAGA and projective Kähler Hodge symmetry h¹⁰=h⁰¹=0, then descend.
+At p>2 extend to an algebraic closure, apply §1.3 and K3Surfaces K0.A, then descend the three zero cohomology spaces by flat base change. At p=2, §2.2 makes all forms and their Cartier iterates closed. Oda identifies them as an image of p-torsion Picard Dieudonné data, zero by §2.1; contraction and duality give the tangent vanishings. In characteristic zero spread out to a finitely generated field, embed it into ℂ, apply the specialization adapter and K3Surfaces K1 Hodge/Serre comparison, then descend. The conclusion over k is the same native sheaf-cohomology statement in every branch.
 
-*Needs:* §1.2; §1.4; §1.5; §2.1; §2.2; `gap:oda-interface`; ComplexKahlerGeometry K6.1; ComplexComparisonPartII C−1.1, C1.9, C5.1; SchemeAndStackFoundations §0.9.
+*Needs:* §1.2; §1.3; §1.4; §1.5; §2.1; §2.2; K3Surfaces K0.A and K1; `gap:oda-interface`; ComplexKahlerGeometry K6.1; ComplexComparisonPartII C−1.1, C1.9, C5.1; SchemeAndStackFoundations §0.9.
 
 **Checks.**
 
@@ -384,9 +398,9 @@ In positive characteristic, all forms and their Cartier iterates are closed. Oda
 
 For a K3 surface over any field, the Hodge number dim Hᑫ(X, Ωᵖ) is 1 at (p, q)=(0, 0),(2, 0),(0, 2),(2, 2), 20 at (1, 1), and 0 otherwise. The finite-dimensional coherent statement is `IsK3.hodgeNumbers`. In characteristic p>0 over perfect k, Hⁱ_crys(X/W(k)) is free of ranks (1, 0, 22, 0, 1), zero outside 0≤i≤4, and the Hodge–de Rham spectral sequence degenerates at E₁. (deligne-lift, Proposition 1.1, pp.59–60; deligne-lift lines 29–57; huybrechts line 367).
 
-Noether gives c₂=24. RR for Ω¹ gives χ(Ω¹)=-20; §2.3 and coherent duality leave h¹¹=20. The positions in the diamond force all spectral differentials to vanish, giving de Rham dimensions (1, 0, 22, 0, 1). For perfect k of characteristic p>0, put W=W(k) and Mⁱ=Hⁱ_crys(X/W). CrystallineCohomology CR.3.2, Proper smooth crystalline perfectness and reductions (3), gives finite generation, vanishing outside [0, 4] and derived reduction modulo p; CR.2.3 identifies this reduction with de Rham cohomology. Since W is a DVR with residue k, universal coefficients give 0→Mⁱ/pMⁱ→Hⁱ_dR(X/k)→M^(i+1)[p]→0 for every integer i. At i=3, Nakayama gives M³=0 and the right term gives M⁴[p]=0; at i=4, M⁴/pM⁴ has dimension 1. At i=1, M¹=0 and M²[p]=0; at i=2, M²/pM² has dimension 22. At i=−1, M⁰[p]=0; at i=0, M⁰/pM⁰ has dimension 1. A finite W-module without p-torsion is free, so the integral ranks are (1, 0, 22, 0, 1). This is the universal-coefficient argument of Deligne Proposition 1.1, deligne-lift lines 52–57.
+Transport c₂=24 from K3Surfaces K0 on its algebraic domain; in characteristic 2 Noether gives c₂=12χ(O)=24 directly. In characteristic zero the coherent diamond also agrees with K3Surfaces K1 under §1.3. Over every k, RR for Ω¹ gives χ(Ω¹)=-20; §2.3 and coherent duality leave h¹¹=20. The positions in the diamond force all spectral differentials to vanish, giving de Rham dimensions (1, 0, 22, 0, 1). For perfect k of characteristic p>0, put W=W(k) and Mⁱ=Hⁱ_crys(X/W). CrystallineCohomology CR.3.2, Proper smooth crystalline perfectness and reductions (3), gives finite generation, vanishing outside [0, 4] and derived reduction modulo p; CR.2.3 identifies this reduction with de Rham cohomology. Since W is a DVR with residue k, universal coefficients give 0→Mⁱ/pMⁱ→Hⁱ_dR(X/k)→M^(i+1)[p]→0 for every integer i. At i=3, Nakayama gives M³=0 and the right term gives M⁴[p]=0; at i=4, M⁴/pM⁴ has dimension 1. At i=1, M¹=0 and M²[p]=0; at i=2, M²/pM² has dimension 22. At i=−1, M⁰[p]=0; at i=0, M⁰/pM⁰ has dimension 1. A finite W-module without p-torsion is free, so the integral ranks are (1, 0, 22, 0, 1). This is the universal-coefficient argument of Deligne Proposition 1.1, deligne-lift lines 52–57.
 
-*Needs:* §1.4; §2.3; SchemeAndStackFoundations §5.8; SchemeAndStackFoundations §5.10; CrystallineCohomology CR.2.3, CR.3.2 (Proper smooth crystalline perfectness and reductions (3)).
+*Needs:* §1.3; §1.4; §2.3; K3Surfaces K0 and K1; SchemeAndStackFoundations §5.8; SchemeAndStackFoundations §5.10; CrystallineCohomology CR.2.3, CR.3.2 (Proper smooth crystalline perfectness and reductions (3)).
 
 **Checks.**
 
@@ -442,81 +456,33 @@ The positive-power vanishing excludes O; characteristic 2 remains in the closed-
 
 ### Dependencies
 
-§1.2; §1.5; AlgebraicModuliForArithmeticGeometry §7.6.1–§7.6.1a; ComplexComparisonPartII C3.2d.2–C3.2d.5; JacobianChallenge Layer D; SchemeAndStackFoundations §1.11; JacobianChallenge Layer C; §1.4; `gap:witt-formal-brauer`; CrystallineCohomology CR.4.6–CR.4.7; SchemeAndStackFoundations §5.10; CrystallineCohomology CR.4.1, CR.4.6–CR.4.7; `gap:oda-interface`; ComplexKahlerGeometry K6.1; ComplexComparisonPartII C−1.1, C1.9, C5.1; SchemeAndStackFoundations §0.9; SchemeAndStackFoundations §5.8; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7, CR.7.3; SchemeAndStackFoundations §4.1; SchemeAndStackFoundations §4.2; SchemeAndStackFoundations §4.3; SchemeAndStackFoundations §4.6; SchemeAndStackFoundations §4.4; SchemeAndStackFoundations §4.5; `gap:crystalline-chern-derivative`; SchemeAndStackFoundations §4.10; `gap:rational-surface-cohomology`; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §5.4.
+K3Surfaces K0, K0.A and K1; §1.2; §1.3; §1.5; AlgebraicModuliForArithmeticGeometry §7.6.1–§7.6.1a; ComplexComparisonPartII C3.2d.2–C3.2d.5; JacobianChallenge Layer D; SchemeAndStackFoundations §1.11; JacobianChallenge Layer C; §1.4; `gap:witt-formal-brauer`; CrystallineCohomology CR.4.6–CR.4.7; SchemeAndStackFoundations §5.10; CrystallineCohomology CR.4.1, CR.4.6–CR.4.7; `gap:oda-interface`; ComplexKahlerGeometry K6.1; ComplexComparisonPartII C−1.1, C1.9, C5.1; SchemeAndStackFoundations §0.9; SchemeAndStackFoundations §5.8; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7, CR.7.3; SchemeAndStackFoundations §4.1; SchemeAndStackFoundations §4.2; SchemeAndStackFoundations §4.3; SchemeAndStackFoundations §4.6; SchemeAndStackFoundations §4.4; SchemeAndStackFoundations §4.5; `gap:crystalline-chern-derivative`; SchemeAndStackFoundations §4.10; `gap:rational-surface-cohomology`; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §5.4.
 
-## Layer 3: Complex comparison and geometric cohomology
+## Layer 3: Integral geometric étale cohomology
 
-### 3.1 The analytic comparison predicate
-
-On the supplied Hausdorff second-countable native complex-manifold carrier, IsK3Analytic M means M is compact, nonempty and connected, of complex dimension 2, with analytically trivial canonical line and H¹(M,O)=0. (huybrechts, Chapter 1 Definition 3.1, p.14; huybrechts lines 405–407).
-
-Use the supplied analytic sheaf and canonical bundle; this is a predicate on that carrier, with no parallel analytic-space category.
-
-Prove the following interface laws:
-
-- The listed conditions imply the predicate.
-- The predicate is equivalent to exactly those conditions.
-- Biholomorphisms preserve the predicate.
-- The canonical section space has complex dimension 1.
-
-*Needs:* ComplexKahlerGeometry K3; ComplexKahlerGeometry K4; ComplexKahlerGeometry K5b; ComplexComparisonPartII C−1.1.
-
-**Checks.**
-
-- A smooth complex quartic with its native analytic structure satisfies it; the dimension is complex dimension 2, rather than real dimension 2.
-- A compact complex two-torus has h¹(O)=2 and fails.
-- The empty manifold is rejected by nonemptiness.
-
-### 3.2 GAGA and the projective essential image
-
-For algebraic K3 X/C, X_an is an analytic K3, with natural coherent-cohomology, canonical-line and Picard comparisons preserving tensor products, pullbacks and contraction. An analytic K3 is algebraizable as an algebraic K3 exactly when it has a holomorphic closed embedding in some Pⁿ(C). (huybrechts, Chapter 1 Proposition 3.2 and ensuing paragraph, p.14; huybrechts lines 408–429).
-
-Apply proper GAGA and the differential comparison. Conversely algebraize the coherent ideal of the projective analytic embedding and detect smoothness and the defining vanishings through comparisons.
-
-*Needs:* §1.3; §1.2; §1.4; §3.1; ComplexComparisonPartII C−1.1, C1.9, C2.2, C5.1; ComplexKahlerGeometry K4.
-
-**Checks.**
-
-- O_X maps to O_X_an and H¹ is zero on both sides; a comparison changing cohomological degree would fail this vanishing.
-- A rescaled volume form has the same rescaled image.
-- An analytic K3 outside the projective locus is outside the algebraic essential image.
-
-### 3.3 Integral topology of projective complex K3 surfaces
-
-For a projective analytic K3 M, Hⁱ(M,ℤ) is free of ranks (1, 0, 22, 0, 1), zero outside degrees 0–4. Its Hodge decomposition has h²⁰=h⁰²=1 and h¹¹=20; c₁:Pic(M)→H²(M,ℤ) is injective, with image ker(H²(ℤ)→H²(O)), and intersection is cup product evaluated on the complex orientation. (huybrechts, Chapter 1 §§3.2–3.3, pp.15–17; huybrechts lines 452–511).
-
-Hodge symmetry yields H¹(C)=0 and the exponential sequence gives integral H¹=0 and Pic injection. If nx=0 for n>0, torsion-freeness of the complex vector space H²(O) makes the image of x zero. Exactness puts x=c₁(L) for a Picard class L; injectivity of c₁ gives nL=0, and torsion-freeness of Pic gives L=0 and x=0 (huybrechts lines 464–469). Integral Poincaré duality and universal coefficients then eliminate torsion in H³ and force H³=0. Noether/Gauss–Bonnet gives b₂=22 and Hodge decomposition gives 20.
-
-*Needs:* §1.4; §1.5; §3.2; ComplexKahlerGeometry K5a; ComplexKahlerGeometry K5b; ComplexKahlerGeometry K6.1; `gap:integral-topology`; EtaleCohomologyFoundations F.6; AlgebraicTopology Stage 6 items 1–2, 4.
-
-**Checks.**
-
-- 1+22+1=24.
-- For a quartic hyperplane c₁(H), its cup square integrates to 4.
-- Rational Betti ranks alone do not discharge integral freeness.
-- For exp(2πit), the lifted unit circle t∈[0, 1] has increment 1 in the kernel ℤ; the connecting class of O(1) has degree +1 on P¹. Omitting 2πi or reversing the connecting sign would fail this test.
-
-### 3.4 Integral geometric étale invariants
+### 3.1 Integral geometric étale invariants
 
 For every K3 X/k and prime ℓ invertible in k, Hⁱ_et(X_kbar,ℤ_ℓ) is free with ranks (1, 0, 22, 0, 1), vanishes outside 0≤i≤4, and its degree 2 cup-trace pairing with the appropriate Tate twists is perfect. (rizov, §2.4, pp. 7–8; rizov lines 273–300).
 
-Over ℂ use §3.3 and integral singular–étale comparison. For any characteristic-zero field, spread the polarized surface to a finitely generated subfield, embed that subfield into ℂ and apply geometric base change; the original field need not embed into ℂ. In positive characteristic lift by §2.7 and compare the compatible ℤ/ℓⁿ systems on geometric special and generic fibres by smooth proper base change before taking the adic limit. Duality supplies the pairing (rizov §2.4, rizov lines 273–300; the finite-presentation descent is SchemeAndStackFoundations §0.9).
+Over ℂ apply the §1.3 adapter to K3Surfaces K1–K2 and then integral singular–étale comparison. Keep the actual singular cup lattice and its complex orientation throughout the comparison. For any characteristic-zero field, spread the polarized surface to a finitely generated subfield, embed that subfield into ℂ and apply geometric base change; the original field need not embed into ℂ. In positive characteristic lift by §2.7 and compare the compatible ℤ/ℓⁿ systems on geometric special and generic fibres by smooth proper base change before taking the adic limit. Duality supplies the pairing (rizov §2.4, rizov lines 273–300; the finite-presentation descent is SchemeAndStackFoundations §0.9).
 
-*Needs:* §2.7; EtaleCohomologyFoundations F.0.3; EtaleCohomologyFoundations F.2.1; EtaleCohomologyFoundations F.2.2; EtaleCohomologyFoundations F.4.2; EtaleCohomologyFoundations F.4.4; EtaleCohomologyFoundations F.4.6; EtaleCohomologyFoundations F.5; ComplexComparisonPartII C6.3, C6.6; §3.3; SchemeAndStackFoundations §0.9.
+*Needs:* §2.7; EtaleCohomologyFoundations F.0.3; EtaleCohomologyFoundations F.2.1; EtaleCohomologyFoundations F.2.2; EtaleCohomologyFoundations F.4.2; EtaleCohomologyFoundations F.4.4; EtaleCohomologyFoundations F.4.6; EtaleCohomologyFoundations F.5; ComplexComparisonPartII C6.3, C6.6; §1.3; K3Surfaces K1–K2; `gap:integral-topology`; SchemeAndStackFoundations §0.9.
 
 **Checks.**
 
 - The assertion excludes ℓ=char k.
 - ℓ=2 is included when char k≠2; only the congruence bound later chooses odd ℓ.
 - H⁰=ℤ_ℓ and the trace of the class of a geometric point in H⁴(2) is 1.
+- A quartic hyperplane has integral singular cup square 4 and étale cup-trace square 4; negating the cup-trace pairing gives −4 and fails.
+- For exp(2πit), the positive loop t∈[0,1] lifts with increment +1 in ℤ; c₁(O(1)) on ℙ¹ evaluates to +1. This fixes the normalization when transporting the supplied complex Chern class.
 
 ### Examples
 
-The projective quartic agrees on both carriers. A complex two-torus fails H¹(O)=0. Integral cohomology is free, not merely of rational rank 22.
+For a smooth complex quartic the specialization adapter preserves the surface and its hyperplane; integral comparison sends its cup square 4 to cup-trace square 4. The free ranks are (1,0,22,0,1), with Euler sum 24.
 
 ### Dependencies
 
-ComplexKahlerGeometry K3; ComplexKahlerGeometry K4; ComplexKahlerGeometry K5b; ComplexComparisonPartII C−1.1; §1.3; §1.2; §1.4; ComplexComparisonPartII C−1.1, C1.9, C2.2, C5.1; §1.5; ComplexKahlerGeometry K5a; ComplexKahlerGeometry K6.1; `gap:integral-topology`; EtaleCohomologyFoundations F.6; AlgebraicTopology Stage 6 items 1–2, 4; §2.7; EtaleCohomologyFoundations F.0.3; EtaleCohomologyFoundations F.2.1; EtaleCohomologyFoundations F.2.2; EtaleCohomologyFoundations F.4.2; EtaleCohomologyFoundations F.4.4; EtaleCohomologyFoundations F.4.6; EtaleCohomologyFoundations F.5; ComplexComparisonPartII C6.3, C6.6; SchemeAndStackFoundations §0.9.
+§1.3; §2.7; K3Surfaces K1–K2; `gap:integral-topology`; EtaleCohomologyFoundations F.0.3, F.2.1–F.2.2, F.4.2, F.4.4, F.4.6, F.5; ComplexComparisonPartII C6.3, C6.6; SchemeAndStackFoundations §0.9.
 
 ## Layer 4: Picard lattices and arithmetic rank boundedness
 
@@ -589,7 +555,7 @@ Prove `IsK3.picardRank_bounds`: for K3 X/k, 1≤ρ(X)≤ρ_geom(X)≤22; in char
 
 Use the finite-level Kummer injections Pic/ℓⁿ→H²(µ_ℓⁿ), then the compatible inverse limit on the finite free Picard lattice. Reduction of c₁ modulo ℓⁿ is still injective: if ℓⁿy=c₁(x), finite-level Kummer injectivity gives x=ℓⁿz and torsion-freeness of H² gives y=c₁(z). Thus the cokernel is torsion-free; equal rank makes it zero. The bound 22 uses 3.4; characteristic zero spreads to C and uses the (1, 1) image of c₁, of dimension 20. Positivity gives the lower bound.
 
-*Needs:* §3.3; §3.4; §4.1; §4.2; §4.3; EtaleCohomologyFoundations §0.9; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §2.11; SchemeAndStackFoundations §0.9.
+*Needs:* K3Surfaces K1–K2; §3.1; §4.1; §4.2; §4.3; EtaleCohomologyFoundations §0.9; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §2.11; SchemeAndStackFoundations §0.9.
 
 **Checks.**
 
@@ -632,7 +598,7 @@ The quartic hyperplane has bilinear square 4 and half-norm 2. Rank 0 cannot occu
 
 ### Dependencies
 
-§1.2; §1.4; §2.1; SchemeAndStackFoundations §0.9; SchemeAndStackFoundations §2.11; JacobianChallenge Layer C; JacobianChallenge Layer D; SchemeAndStackFoundations §§2.10, 2.15 and `TauCeti.brauerCohomologyEquiv` with `TauCeti.subsingleton_brauerGroup_of_finite`; ComplexComparisonPartII C3.2d.4; §1.5; SchemeAndStackFoundations §5.9; SchemeAndStackFoundations §5.10; `gap:surface-arithmetic-quotient`; Tau Ceti `TauCeti.IntegralLattice.ofSubmodule`; IntegralLattices Layer 1; IntegralLattices Completed Layers 1–5; §3.3; §3.4; EtaleCohomologyFoundations §0.9; EtaleCohomologyFoundations F.6; Mathlib `PadicInt.toZMod`; Mathlib `PadicInt.ker_toZModPow`; Mathlib `PadicInt.ext_of_toZModPow`; Mathlib `PadicInt.mem_span_pow_iff_le_valuation`; NoncommutativeAndEquivariantIwasawa §0.1.
+§1.2; §1.4; §2.1; SchemeAndStackFoundations §0.9; SchemeAndStackFoundations §2.11; JacobianChallenge Layer C; JacobianChallenge Layer D; SchemeAndStackFoundations §§2.10, 2.15 and `TauCeti.brauerCohomologyEquiv` with `TauCeti.subsingleton_brauerGroup_of_finite`; ComplexComparisonPartII C3.2d.4; §1.5; SchemeAndStackFoundations §5.9; SchemeAndStackFoundations §5.10; `gap:surface-arithmetic-quotient`; Tau Ceti `TauCeti.IntegralLattice.ofSubmodule`; IntegralLattices Layer 1; IntegralLattices Completed Layers 1–5; K3Surfaces K1–K2; §3.1; EtaleCohomologyFoundations §0.9; EtaleCohomologyFoundations F.6; Mathlib `PadicInt.toZMod`; Mathlib `PadicInt.ker_toZModPow`; Mathlib `PadicInt.ext_of_toZModPow`; Mathlib `PadicInt.mem_span_pow_iff_le_valuation`; NoncommutativeAndEquivariantIwasawa §0.1.
 
 ## Layer 5: Symplectic and polarized automorphisms
 
@@ -743,7 +709,7 @@ For a K3 surface X over an algebraically closed field of characteristic p>0 with
 
 Use a polarized projective characteristic-zero lift from §2.7, apply Artin’s surface height inequality with b₂=22, and use the one-dimensional finite-height alternative. The rank of the height-h Dieudonné module belongs to the formal-Brauer supplier contract.
 
-*Needs:* §2.7; §3.4; §4.4; `gap:witt-formal-brauer`.
+*Needs:* §2.7; §3.1; §4.4; `gap:witt-formal-brauer`.
 
 **Checks.**
 
@@ -775,7 +741,7 @@ Prove also the rank-21 exclusion: For a geometric K3 in positive characteristic,
 
 Prove also the K3 Jacobian comparison: For a relatively minimal genus-one pencil on a geometric K3, its relatively minimal Jacobian is K3 with the same fibre-component root lattice; for an elliptic pencil their Picard ranks agree (dolgachev-keum lines 493–496; Artin Lemma (1.8), artin-supersingular lines 204–210).
 
-*Needs:* §3.4; §4.4; `gap:witt-formal-brauer`; `gap:elliptic-surface-geometry`; `gap:rational-surface-cohomology`; §6.0a; §6.0b.
+*Needs:* §3.1; §4.4; `gap:witt-formal-brauer`; `gap:elliptic-surface-geometry`; `gap:rational-surface-cohomology`; §6.0a; §6.0b.
 
 **Checks.**
 
@@ -790,7 +756,7 @@ For geometric K3 X/k and finite symplectic G with |G| invertible in k, X/G has r
 
 Tame linearization makes a local symplectic stabilizer a finite subgroup of SL₂. Resolve its ADE singularities; discrepancy 0 and coherent quotient formulas give canonical triviality and H¹=0 on Y. Use the prime-to-p local discriminants. In rank 20, the exceptional classes and an ample class give ρ(Y)≥21, hence ρ(Y)=22 by §6.0c. Use §6.0 to write |disc Pic(Y)|=p^(2σ). If det R is a square, the rank-two orthogonal complement has negative square determinant and a primitive isotropic vector. RR and reflections as in §6.0b give a genus-one pencil whose vertical root lattice contains an isometric copy M of R with finite index a; thus det M=a²det R(φ). Its Jacobian J is K3 with R(J)=R(φ), so ρ(J)≥21 and §6.0c gives ρ(J)=22. The section and fibre span a unimodular plane; since the Mordell–Weil rank is zero, det R(J)=m²|disc Pic(J)| for the finite Mordell–Weil torsion order m. By §6.0 this is divisible by p, contradicting p∤det R. The Jacobian construction and vertical-lattice comparison retain the quasi-elliptic alternative at p=2, 3 (dolgachev-keum lines 465–505). G=1 has Y=X and zero root lattice.
 
-*Needs:* §1.4; §2.3; §3.4; §4.2; §5.1; `gap:surface-quotient-resolutions`; `gap:tame-linear-groups`; `gap:elliptic-surface-geometry`; IntegralLattices Layer 5; `gap:tame-quotient-singularities`; §6.0; §6.0b; §6.0c.
+*Needs:* §1.4; §2.3; §3.1; §4.2; §5.1; `gap:surface-quotient-resolutions`; `gap:tame-linear-groups`; `gap:elliptic-surface-geometry`; IntegralLattices Layer 5; `gap:tame-quotient-singularities`; §6.0; §6.0b; §6.0c.
 
 **Checks.**
 
@@ -810,7 +776,7 @@ Prove the following interface laws:
 - The order-d fixed-point number is the displayed stabilizer sum.
 - The order-11, order-14 and order-15 candidate root lattices 2A₁₀, A₁₃⊕A₆⊕A₁ and A₁₄⊕A₄⊕A₂ have rank 20 and square determinants 121, 196 and 225, respectively, and cannot occur.
 
-*Needs:* §3.3; §3.4; §5.1; §6.1; `gap:tame-quotient-singularities`; IntegralLattices Layer 1; `gap:tame-lefschetz`; MorseNovikov N6; §4.4.
+*Needs:* K3Surfaces K1–K2; §3.1; §5.1; §6.1; `gap:tame-quotient-singularities`; IntegralLattices Layer 1; `gap:tame-lefschetz`; MorseNovikov N6; §4.4.
 
 **Checks.**
 
@@ -825,7 +791,7 @@ For geometric K3 X/k and a nonidentity finite-order symplectic automorphism g, i
 
 No eigenvalue 1 at a tame nonidentity symplectic fixed point makes the fixed scheme reduced of dimension 0. Apply §6.1a to every cyclic subgroup: its quotient Euler and orbit relations give the counts and exclude orders 11, 14 and 15 by the square-discriminant or characteristic-zero root-rank argument.
 
-*Needs:* §3.4; §5.1; §6.1; EtaleCohomologyFoundations F.6; §6.1a; `gap:tame-lefschetz`; MorseNovikov N6.
+*Needs:* §3.1; §5.1; §6.1; EtaleCohomologyFoundations F.6; §6.1a; `gap:tame-lefschetz`; MorseNovikov N6.
 
 **Checks.**
 
@@ -845,7 +811,7 @@ Prove the following interface laws:
 - After contracting F in the κ=0 case, its quotient is rational with trivial canonical divisor and one elliptic Gorenstein singularity, using the refinement in dolgachev-keum Proposition 2.4. Its smooth projective resolution has algebraic H² by gap:rational-surface-cohomology; no cohomology claim is made for the singular contraction itself.
 - For the fibration at κ=1 the induced base action has order p unless p=2 and the fibration is elliptic; the fixed-fibre types are those in wild-cyclic Theorem 3.
 
-*Needs:* §1.4; §3.4; §4.2; §5.1; SchemeAndStackFoundations §2.23; `gap:surface-quotient-resolutions`; `gap:elliptic-surface-geometry`; `gap:rational-surface-cohomology`.
+*Needs:* §1.4; §3.1; §4.2; §5.1; SchemeAndStackFoundations §2.23; `gap:surface-quotient-resolutions`; `gap:elliptic-surface-geometry`; `gap:rational-surface-cohomology`.
 
 **Checks.**
 
@@ -859,7 +825,7 @@ For geometric K3 X/k in characteristic p>0 and g of order p, the minimal resolut
 
 Analyze equivariant O-cohomology and the anticanonical quotient. Track rational versus rational-double-point singularities and the empty-fixed-locus characteristic 2 case. Quotient correspondences with ℚ_ℓ coefficients and resolution contributions identify the algebraic and transcendental pieces. No tame linearization is used. In the rational branch apply the general rational-surface cycle theorem, then the quotient transcendental comparison. In the Enriques branch q:X→Y is a finite étale C₂-torsor, even in characteristic 2. Rational quotient descent gives Hⁱ(Y,ℚ_ℓ)=Hⁱ(X,ℚ_ℓ)^g and H¹(Y)=H³(Y)=0. Since T_X=q* T_Y, the projection formula gives deg c₂(T_X)=2 deg c₂(T_Y). Gauss–Bonnet yields e(Y)=24/2=12 and b₂(Y)=12−2=10.
 
-*Needs:* §3.4; §4.2; §4.4; SchemeAndStackFoundations §2.23; `gap:surface-quotient-resolutions`; §6.2a; `gap:quotient-transcendental-comparison`; `gap:rational-surface-cohomology`; SchemeAndStackFoundations §2.15 and EtaleCohomologyFoundations F.4.2–F.4.6; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §5.4.
+*Needs:* §3.1; §4.2; §4.4; SchemeAndStackFoundations §2.23; `gap:surface-quotient-resolutions`; §6.2a; `gap:quotient-transcendental-comparison`; `gap:rational-surface-cohomology`; SchemeAndStackFoundations §2.15 and EtaleCohomologyFoundations F.4.2–F.4.6; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §5.4.
 
 **Checks.**
 
@@ -928,7 +894,7 @@ For any K3 X/k and every prime ℓ invertible in k, inverse pullback gives a fai
 
 A cohomologically trivial automorphism fixes Pic and an ample class, so has finite order by 5.3. In characteristic 0 Hodge comparison makes it symplectic; the nonidentity tame trace table contradicts identity trace 22 on H². In positive characteristic cross-realization makes it symplectic; remove the prime-to-p part using 6.2 and reduce to order p. The rational quotient has algebraic H² by the surface cycle contract; §6.3 and cohomological triviality force ρ=22, then the supersingular Picard-faithfulness theorem applies. The free Enriques quotient has invariant dimension 10 by the finite étale descent and Gauss–Bonnet calculation of §6.3; the K3-resolution case gives 22>22 by the strict exceptional-rank increase and invariant transcendental comparison. Integral freeness relates the two actions.
 
-*Needs:* §3.2; §3.3; §3.4; §4.4; §5.1; §5.3; §6.2; §6.3; §6.4; `gap:cross-realization`; §6.4a; `gap:rational-surface-cohomology`; SchemeAndStackFoundations §2.15 and EtaleCohomologyFoundations F.4.2–F.4.6.
+*Needs:* K3Surfaces K1–K2; §3.1; §4.4; §5.1; §5.3; §6.2; §6.3; §6.4; `gap:cross-realization`; §6.4a; `gap:rational-surface-cohomology`; SchemeAndStackFoundations §2.15 and EtaleCohomologyFoundations F.4.2–F.4.6.
 
 **Checks.**
 
@@ -942,7 +908,7 @@ For every K3 X/k and finite subgroup G≤Aut_k(X), |G|≤max(|GL₂₂(𝔽₃)|
 
 Choose ℓ=3 unless char k=3, then ℓ=5. A basis identifies rank 22 integral cohomology with ℤ_ℓ²². Faithfulness and odd-prime congruence inject G into the finite GL₂₂. Finite groups of bounded order have finitely many multiplication tables up to isomorphism; this is a finiteness proof, not an enumeration procedure.
 
-*Needs:* §3.4; §4.5; §6.5.
+*Needs:* §3.1; §4.5; §6.5.
 
 **Checks.**
 
@@ -956,7 +922,7 @@ For a geometric K3 X in characteristic p>0 with p≠2 and a symplectic automorph
 
 The fixed marked deformation space is formally smooth over W(k), with tangent H¹(T_X)^g. The eight-point trace in §6.2 gives invariant H² rank 14; crystalline cross-realization and equivariant Hodge degeneration give dim H¹(Ω¹)^g=12 and hence dim H¹(T_X)^g=12 by contraction with the invariant volume form. Choose the norm ample line A⊗g*A, with its canonical involution linearization. Its pair locus inside the fixed formal space is defined by one equation. To prove that equation is not divisible by p, assume extension over the entire characteristic-p fixed deformation and apply the primitive crystalline normalization of §2.6. The normalized class is still g-invariant since the crystalline module is torsion-free. If its reduction lies in F², contraction identifies the graded Gauss–Manin map along the nonzero invariant tangent space with multiplication by the volume form, giving a contradiction to horizontality. Otherwise its nonzero class in (F¹/F²)^g pairs nontrivially with H¹(T_X)^g: Serre duality is equivariant and averaging is exact since 2 is invertible. This again contradicts horizontality. Thus the pair locus is flat. Take a mixed-characteristic trait through its closed point and algebraise the polarized equivariant formal family by the supplier contract. The scalar on the lifted canonical line has square one and reduces to +1; since 2 is invertible it is +1.
 
-*Needs:* §2.3; §2.4; §2.5; §2.6; §3.4; §6.2; `gap:tame-equivariant-deformations`; `gap:crystalline-chern-derivative`; `gap:cross-realization`; SchemeAndStackFoundations §§4.1–4.6 and §4.10; CrystallineCohomology CR.7.3.
+*Needs:* §2.3; §2.4; §2.5; §2.6; §3.1; §6.2; `gap:tame-equivariant-deformations`; `gap:crystalline-chern-derivative`; `gap:cross-realization`; SchemeAndStackFoundations §§4.1–4.6 and §4.10; CrystallineCohomology CR.7.3.
 
 **Checks.**
 
@@ -966,9 +932,9 @@ The fixed marked deformation space is formally smooth over W(k), with tangent H�
 
 For a K3 surface X over an algebraically closed field of characteristic p>0 with p≠2 and a symplectic automorphism g of exact order two, ρ(X)≥9, hence ρ(X)≥5 and X admits a genus-one fibration. It is elliptic if p≠3; at p=3 a quasi-elliptic fibration suffices for the rank-22 deduction of §6.0c. (dolgachev-keum, Lemma 4.3, pp.15–16, dolgachev-keum lines 597–648; the genus-one versus elliptic distinction is huybrechts lines 1127–1132, 1173–1183).
 
-Apply the tame involution lifting theorem of §6.7d, spread its polarized generic fibre and involution to a finitely generated characteristic-zero field and compare over ℂ. Lefschetz gives trace 6 on H² and an anti-invariant subspace of dimension (22−6)/2=8. Symplecticity makes that rational subspace of type (1,1); the exponential-sequence description in §3.3 makes it algebraic. An invariant ample class is independent of it, giving generic Picard rank at least 9 (huybrechts Chapter 15 §1.2, lines 11901–11908). The injective intersection-preserving the Picard specialization map of §4.1 gives ρ(X)≥9. Apply §6.0b. The integral modulo-2 inference in dolgachev-keum lines 643–647 is not a premise of this proof.
+Apply the tame involution lifting theorem of §6.7d, spread its polarized generic fibre and involution to a finitely generated characteristic-zero field and compare over ℂ. Lefschetz gives trace 6 on H² and an anti-invariant subspace of dimension (22−6)/2=8. Symplecticity makes that rational subspace of type (1,1); the exponential-sequence description in K3Surfaces K1 makes it algebraic. An invariant ample class is independent of it, giving generic Picard rank at least 9 (huybrechts Chapter 15 §1.2, lines 11901–11908). The injective intersection-preserving Picard specialization map of §4.1 gives ρ(X)≥9. Apply §6.0b. The integral modulo-2 inference in dolgachev-keum lines 643–647 is not a premise of this proof.
 
-*Needs:* §6.7d; §3.3; §3.4; §4.1; §4.2; §6.2; §6.0b.
+*Needs:* §6.7d; K3Surfaces K1–K2; §3.1; §4.1; §4.2; §6.2; §6.0b.
 
 **Checks.**
 
@@ -1014,7 +980,7 @@ Prove the following interface laws:
 - If ρ(Y)=22 and |G|∉{7, 21}, then ρ(X)=22, by formal-height transfer and §§6.0a–6.7d; elliptic and quasi-elliptic pencils are both included.
 - If X or Y is rank 22 with Artin invariant >1, the crystalline filtration and quotient-discriminant calculation give at least three invariants in H², hence five in total (Proposition 4.5).
 
-*Needs:* §2.4; §3.3; §3.4; §4.4; §6.1; §6.2; §6.8; `gap:elliptic-surface-geometry`; `gap:quotient-transcendental-comparison`; `gap:witt-formal-brauer`; `gap:artin-discriminant`; `gap:cross-realization`; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7; §6.0a; §6.0b; §6.0c; §6.7d; SchemeAndStackFoundations §§2.19–2.21.
+*Needs:* §2.4; K3Surfaces K1–K2; §3.1; §4.4; §6.1; §6.2; §6.8; `gap:elliptic-surface-geometry`; `gap:quotient-transcendental-comparison`; `gap:witt-formal-brauer`; `gap:artin-discriminant`; `gap:cross-realization`; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7; §6.0a; §6.0b; §6.0c; §6.7d; SchemeAndStackFoundations §§2.19–2.21.
 
 **Checks.**
 
@@ -1031,7 +997,7 @@ For a geometric K3 and finite tame symplectic G, total rational cohomology has d
 
 The tame trace formula and 6.2 give the character values. The trivial representation contributes H⁰ and H⁴. In the complex projective case a volume form, its conjugate and an averaged ample class add 3. In positive characteristic §6.8a supplies the invariant-dimension lower bound outside the stated exceptional case.
 
-*Needs:* §3.3; §3.4; §6.1; §6.2; §6.8; EtaleCohomologyFoundations F.6; §6.8a; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7, CR.7.3; `gap:artin-discriminant`; `gap:tame-lefschetz`.
+*Needs:* K3Surfaces K1–K2; §3.1; §6.1; §6.2; §6.8; EtaleCohomologyFoundations F.6; §6.8a; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7, CR.7.3; `gap:artin-discriminant`; `gap:tame-lefschetz`.
 
 **Checks.**
 
@@ -1074,7 +1040,7 @@ A tame symplectic involution fixes eight geometric points. The identity fixes th
 
 ### Dependencies
 
-§6.0; §6.0c; §2.7; §1.4; §2.3; §3.4; §4.2; §5.1; `gap:surface-quotient-resolutions`; `gap:tame-linear-groups`; `gap:elliptic-surface-geometry`; IntegralLattices Layer 5; `gap:tame-quotient-singularities`; §3.3; IntegralLattices Layer 1; `gap:tame-lefschetz`; MorseNovikov N6; §4.4; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §2.23; `gap:quotient-transcendental-comparison`; §5.3; §3.2; `gap:cross-realization`; §4.5; `gap:artin-discriminant`; IntegralLattices Layer 6; §4.4; IntegralLattices Layer 1 (1I); §2.4; `gap:witt-formal-brauer`; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7, CR.7.3; SchemeAndStackFoundations §0.9; `gap:mathieu-permutation-model`; `gap:mukai-eleven-groups-recognition`; `gap:exceptional-mathieu-embeddings`; §6.0a; §6.0b; §6.0c; §6.7d; GlobalQuadraticForms §5.5; QuadraticFormInvariants Layer 6D; `gap:rational-surface-cohomology`; SchemeAndStackFoundations §2.15 and EtaleCohomologyFoundations F.4.2–F.4.6; SchemeAndStackFoundations §5.4; §4.1; §2.5; §2.6; `gap:tame-equivariant-deformations`; `gap:crystalline-chern-derivative`; SchemeAndStackFoundations §§2.19–2.21, §§4.1–4.6 and §4.10.
+§6.0; §6.0c; §2.7; §1.4; §2.3; §3.1; §4.2; §5.1; `gap:surface-quotient-resolutions`; `gap:tame-linear-groups`; `gap:elliptic-surface-geometry`; IntegralLattices Layer 5; `gap:tame-quotient-singularities`; K3Surfaces K1–K2; IntegralLattices Layer 1; `gap:tame-lefschetz`; MorseNovikov N6; §4.4; EtaleCohomologyFoundations F.6; SchemeAndStackFoundations §2.23; `gap:quotient-transcendental-comparison`; §5.3; K3Surfaces K1; `gap:cross-realization`; §4.5; `gap:artin-discriminant`; IntegralLattices Layer 6; §4.4; IntegralLattices Layer 1 (1I); §2.4; `gap:witt-formal-brauer`; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7; CrystallineCohomology CR.2.3, CR.3.2–CR.3.3, CR.3:duality.1, CR.4.7, CR.7.3; SchemeAndStackFoundations §0.9; `gap:mathieu-permutation-model`; `gap:mukai-eleven-groups-recognition`; `gap:exceptional-mathieu-embeddings`; §6.0a; §6.0b; §6.0c; §6.7d; GlobalQuadraticForms §5.5; QuadraticFormInvariants Layer 6D; `gap:rational-surface-cohomology`; SchemeAndStackFoundations §2.15 and EtaleCohomologyFoundations F.4.2–F.4.6; SchemeAndStackFoundations §5.4; §4.1; §2.5; §2.6; `gap:tame-equivariant-deformations`; `gap:crystalline-chern-derivative`; SchemeAndStackFoundations §§2.19–2.21, §§4.1–4.6 and §4.10.
 
 ## Layer 7: Polarizations and a finite-type atlas
 
