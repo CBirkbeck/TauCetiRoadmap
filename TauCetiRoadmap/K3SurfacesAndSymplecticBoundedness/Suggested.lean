@@ -40,6 +40,9 @@ The remaining headline theorems are not statable at the pins:
 * §§5.3–5.4: finite étale polarized automorphism schemes and the infinite
   symplectic Wehler action lack the ample-line predicate, polarized
   automorphism scheme and pullback action on canonical forms.
+* §6.0b: numerical restriction and determinant laws for general regular
+  Jacobians lack the genus-one surface fibration, regular Jacobian and
+  geometric numerical divisor lattice with its intersection pairing.
 * §§6.0–6.4a: supersingular discriminants, height/rank comparisons, genus-one
   pencils, tame fixed-point counts, wild-prime bounds and rank-22 Picard
   faithfulness lack the geometric Picard pairing, formal Brauer group and
