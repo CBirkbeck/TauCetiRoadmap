@@ -43,11 +43,15 @@ with only a few simple definitions:
   needs the Petersson pairing, restricted smooth tensor factorization, normalized
   local period forms, Tamagawa measures and completed adjoint factors.
 
-The split archimedean higher-codimension prediction (README §3.10) and the
-fixed-pair global conjecture in arbitrary odd codimension (README §4.4) are
-conjectural propositions, not theorem targets; their representation and period
-carriers are also missing at the pins. All these constructions remain specified
-in README.md. No auxiliary algebraic identity substitutes for a headline theorem.
+The split archimedean higher-codimension prediction (README §3.10) is a
+conjectural proposition. The historically named fixed-pair global conjecture in
+arbitrary odd codimension (README §4.4) is proved in the literature under the
+discrete Hermitian base-change hypotheses compared there; its formal proof and
+the additional Eisenstein-to-Bessel comparison belong to
+GanGrossPrasadUnitaryGroups, Part II. Its actual cuspidal representation,
+base-change and adelic Bessel-period carriers are also missing at the pins.
+All these constructions remain specified in README.md. No auxiliary algebraic
+identity substitutes for a headline theorem.
 -/
 
 namespace TauCetiRoadmap.GanGrossPrasadUnitaryGroups
