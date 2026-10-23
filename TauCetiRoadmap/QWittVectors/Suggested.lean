@@ -25,7 +25,8 @@ The headline results, in README order, are:
   and their complete difference calculus (§§8.2–8.4);
 * framed Frobenius decomposition, framed cohomology, general-base prismatic
   specialization and iterated Frobenius décalage (§9.5a), the simultaneous prime-power
-  induction and functorial smooth E∞ de Rham comparison (§§9.1, 9.5–9.7);
+  induction, completed δ-compatible PD-presentation comparison and functorial smooth
+  E∞ de Rham comparison (§§9.1, 9.5–9.7);
 * smooth integer torsion-freeness and degreewise completion (§§10.1–10.2).
 
 Apart from the two theorems stated below, these headlines are not statable at the
@@ -44,7 +45,8 @@ The completed coefficient Frobenius results need arithmetic Λ-bases and their A
 twists as well as derived completed scalar extension. The complete difference
 calculus and framed cohomology results need the framed difference DGA and its
 Frobenius; the induction and smooth comparison additionally need the differential
-q-Witt algebra and enhanced E∞ algebra carriers. These constructions are README
+q-Witt algebra and enhanced E∞ algebra carriers. The PD-presentation comparison
+additionally needs the δ-presentation and PD de Rham algebra carriers. These constructions are README
 targets, with no substitute statements here.
 
 The two definitions below only make the ghost-image criterion statable. Ghost
