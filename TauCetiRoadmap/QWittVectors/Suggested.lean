@@ -12,7 +12,8 @@ The headline results, in README order, are:
 * big Witt construction (§1.3), the finite and inverse-limit big Witt power-series
   comparisons (§1.4a), étale Frobenius base change (§1.6), and finite-prime
   arithmetic fracture (§1.8);
-* arithmetic Λ-perfection and perfect coverage (§§2.3–2.4);
+* the integral special λ-ring/Witt-coalgebra equivalence (§2.1a), arithmetic
+  Λ-perfection and perfect coverage (§§2.3–2.4);
 * absolute q-Witt initiality, the Verschiebung resolution and Witt injectivity
   (§§3.2, 3.4, 3.7);
 * relative q-Witt initiality and perfect-cover comparisons (§§4.3, 4.6);
@@ -22,7 +23,8 @@ The headline results, in README order, are:
   base change (§§7.2, 7.5, 7.7);
 * the unique framed coordinate automorphisms (§8.1), stated below on power series,
   and their complete difference calculus (§§8.2–8.4);
-* framed Frobenius decomposition, framed cohomology, the simultaneous prime-power
+* framed Frobenius decomposition, framed cohomology, general-base prismatic
+  specialization and iterated Frobenius décalage (§9.5a), the simultaneous prime-power
   induction and functorial smooth E∞ de Rham comparison (§§9.1, 9.5–9.7);
 * smooth integer torsion-freeness and degreewise completion (§§10.1–10.2).
 
@@ -31,7 +33,9 @@ pins. The big Witt results need its functorial ring carrier. In particular, the
 finite and inverse-limit power-series comparisons need the additive group of
 coordinate big Witt vectors on arbitrary truncation sets; the pinned p-typical
 Witt carriers do not provide it. The arithmetic results need the big Witt comonad
-and its Λ-coalgebra carrier. Finite-prime
+and its Λ-coalgebra carrier; the integral equivalence additionally needs the
+supplied special λ-ring carrier. The prismatic specialization and iteration need
+the bounded-prism, prismatic-cohomology and derived décalage carriers. Finite-prime
 arithmetic fracture needs enhanced derived localization and completion diagrams.
 The absolute and relative q-Witt results need the q-FV system categories and their
 initial rings; the differential results, including the smooth torsion and completion
