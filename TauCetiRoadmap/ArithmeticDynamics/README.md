@@ -5,7 +5,7 @@
 ## Scope and ownership
 
 This roadmap owns the arithmetic of self-maps, the dynamical canonical-height
-construction, local escape functions, Fatou and Julia sets, dynamical equilibrium
+adapters, local escape functions, Fatou and Julia sets, dynamical equilibrium
 measures, dynatomic equations, iterated preimage actions, and the stated family
 and orbit-intersection results. General algebraic geometry, curve theory, heights,
 potential theory and Galois theory are consumed through the contracts in the indicated layers.
@@ -21,8 +21,21 @@ potential theory and Galois theory are consumed through the contracts in the ind
   HeightsRationalPointsAndObstructions, RP.0.
 - The native analytic line, local potential theory, mutual energy and their
   dynamical maps, invariant measures and Julia-support comparisons are built in
-  Layer 2. General projective analytification and adelic intersections are built
-  in Layer 4; hybrid spaces and their measures are built in Layer 6.
+  Layer 2. General projective analytification, local curvature measures and all-place
+  equidistribution are treated in Layer 4; hybrid spaces and their measures are built in Layer 6.
+- HeightsRationalPointsAndObstructions §0.18 owns the arbitrary-set Tate series,
+  convergence, bounded-distance estimate, scaling, bounded-perturbation invariance
+  and uniqueness, with argument order `tateLimit φ α h`. Section 1.1 compares its
+  series with normalized iterates; the dynamical height adapters, semiconjugacy,
+  iteration and applications belong here.
+- HeightsRationalPointsAndObstructions §§5.17a–f owns arbitrary-dimensional
+  arithmetic divisor actions, projective adelic metrized line bundles and
+  intersections, normalized cycle heights, Bouche–Tian estimates, arithmetic
+  Hilbert–Samuel and successive minima. Layer 4 uses those carriers and absolute
+  normalizations; its additional targets are arithmetic Siu, all-place Yuan
+  equidistribution, quasi-projective boundary completion, dynamical metrics,
+  bifurcation theory and the P¹ energy comparisons. The supplier's archimedean
+  abelian equidistribution proof is independent of these additional targets.
 - AlgebraicCurves owns function fields, regular projective models, divisors,
   the different and Hurwitz. SchemeAndStackFoundations, §§0.3, 0.9 and Layer 5, supplies
   schemes, spreading out and intersection degrees. The dynatomic coordinate
@@ -40,7 +53,7 @@ potential theory and Galois theory are consumed through the contracts in the ind
 - PolynomialGaloisGroups and LocalGaloisGroups supply finite Galois and local
   infrastructure; InverseGaloisAndArithmeticFundamentalGroups, IG.2, supplies
   Hilbert irreducibility. The preimage tower and arboreal action belong here.
-- General GIT quotients, global adelic intersection theory, bifurcation currents,
+- General GIT quotients, all-place adelic equidistribution, bifurcation currents,
   Banach-contraction decomposition and generic measure entropy require the
   explicit additional contracts in the indicated layers. They are distinct from set quotients,
   local measures, Hilbert-space spectral theory and Birkhoff's theorem.
@@ -98,6 +111,15 @@ its quotient by 2q is the absolute Néron–Tate height for (O). Thus the raw Ta
 is `Point.canonicalHeight`, and the absolute Lattès height is its quotient by q.
 The dynamical height associated to 2(O) is twice the height associated to (O).
 
+For a projective number-field variety X of dimension n and an ample bundle L,
+write ĉ₁(L̄)^(n+1) for the absolute intersection I of
+HeightsRationalPointsAndObstructions §5.17b, already divided by [K:ℚ], and
+h_L̄(X)=I/((n+1)deg_L X). The same normalization gives point heights.
+**Normalization check.** On ℙ¹, scaling every archimedean metric by e^(−c) adds c
+to point and normalized curve heights and 2c to self-intersection: starting from the standard metric at
+c=1 gives height 1 and self-intersection 2. A second division by [K:ℚ] or omission
+of n+1 would change these values.
+
 Over ℂ, the Riemann sphere has the topology of `OnePoint ℂ`, its compatible compact uniformity and the supplied `OnePoint.instChartedSpace` complex atlas. Over a complete algebraically closed nontrivially valued nonarchimedean field K, the Berkovich line is the multiplicative-seminorm space of §2.2 with the **weak** topology. Type-I points have their classical chordal topology; the strong hyperbolic-tree topology is different. No one-point compactification of K is a replacement for this analytic line. The exceptional set means classical points with finite backward orbit. A finite-grand-orbit predicate on all analytic points is distinct. Pure Frobenius can have infinitely many classical exceptional points.
 
 For singular logarithmic potentials use log 0 = −∞ in the extended-real subharmonic sense, with their locally integrable representatives defining distributions. Poincaré–Lelong is stated for nonzero rational functions. The nonarchimedean sign is μ_f=Δĝ_F+δ_G, with Δlog⁺|T|=δ_G−δ∞. It is opposite to Baker–Rumely's convention. The complex sign is μ_f=Δg_F+ω, with normalized unit-circle angular probability ω and Δlog⁺|z|=ω−δ∞; on C, Δ is 1/(2π) times the Euclidean Laplacian and Δlog|z|=δ₀. The sphere's measure-valued Laplacian is defined on differences of subharmonic potentials with Radon Riesz measures, including the actual escape potential. Arbitrary continuous functions do not have measure-valued Laplacians. Continuous dynamical potentials rule out type-I atoms; they permit the Gauss atom. Measure support and topological entropy use the native library notions; Layer 2 constructs measure entropy on native measurable carriers.
@@ -128,6 +150,14 @@ Consume §0.2 `prod_infinitePlace_comap_pow_mult`, `mulHeight_algebraMap`, `absM
 ### From TauCetiRoadmap.SchemeAndStackFoundations — Layer 0
 
 Consume SchemeAndStackFoundations §0.3, `relativeProj`, `relativeProj_affine_iso`, `relativeProj_baseChange` and `relativeProj_polynomial`, on the polynomial graded algebra over a field K. Use the standard projective charts and Mathlib scheme gluing. The map from homogeneous forms and classification of projective-line endomorphisms are constructed in Layer 0.
+
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §0.18
+
+Consume `tateLimit φ α h`, `tendsto_tateLimit`, `abs_tateLimit_sub_le`, `tateLimit_comp`, `tateLimit_unique` and `congr_bounded` on an arbitrary type S with φ:S→S, α>1 and a global bound |h(φP)−αh(P)|≤C. The supplied definition is h plus the convergent error series, with normalized iterates tending to it. No bounded-error hypothesis is needed for the finite telescoping identity used in §1.1.
+
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §§5.17a–f
+
+Consume §5.17a `metrizedDivisorAction`, `arithmeticDegree` and `arithmeticIntersection` for projective arithmetic models in every dimension; §5.17b `AdelicMetrizedLineBundle`, `SemipositiveAdelic`, `IntegrableAdelic`, `adelicIntersection_uniformBound`, `adelicCycleHeight` and `cycleProbabilityMeasure`; §5.17c `BergmanDensity` and `bergmanDensity_uniform` with its positive smooth metric and curvature-volume hypotheses; §5.17d `AdelicSectionLattice`, `arithmeticEulerCharacteristic` and the arithmetic Hilbert–Samuel asymptotic; §5.17e section lifting and arithmetic Nakai; and §5.17f `AdelicSuccessiveMinimum` and `successiveMinima_inequality`. Intersections are symmetric, multilinear, compatible with pullback and field extension, and continuous for uniform changes with a fixed model outside finitely many places. The integrable continuity bound uses fixed differences of semipositive factors. For a nonzero effective pure n-cycle Z and ample L, the supplied absolute height is I(L̄^(n+1),Z)/((n+1)deg_L Z), where I is divided by [K:ℚ]; for semipositive L̄ the local probability measure is c₁(L̄_v)^n/deg_L Z. The zero cycle has no such normalization. These inputs do not assert the all-place equidistribution or quasi-projective completion targets of this roadmap.
 
 ### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — RP.0
 
@@ -1230,7 +1260,7 @@ Prove the following basic API.
 
 **Endpoint checks.** z² sends [2 : 1] to [4 : 1] and fixes ∞. Over 𝔽_p, z^p and the identity have the same action but differ as rational maps.
 
-Applications include Silverman, AWS notes, §1–§2 — orbits, periodic and preperiodic points of ϕ on P¹(K); Tate's limit of a height along a self-map — the self-map φ = toEnd f of the Tate construction; Layer 3 — periodic points of toEnd f, dynatomic points; Layer 5 — iterated preimages of a point under toEnd f.
+Applications include Silverman, AWS notes, §1–§2 — orbits, periodic and preperiodic points of ϕ on P¹(K); HeightsRationalPointsAndObstructions §0.18 `tateLimit` — the self-map φ = toEnd f of the Tate construction; Layer 3 — periodic points of toEnd f, dynatomic points; Layer 5 — iterated preimages of a point under toEnd f.
 
 ### 0.20 Good reduction of a rational map
 
@@ -1803,50 +1833,24 @@ Mathlib iteration, periodic-point, projective-space, multivariate-polynomial, re
 
 Tate’s elementary limiting argument is the common engine. Separate the projective-line construction on native height carriers from the general-variety and divisorial-eigenclass endpoints, which require RP.0. Zero height implies preperiodicity only with the stated Northcott and field hypotheses.
 
-### 1.1 Tate's limit of a height along a self-map
+### 1.1 Normalized iterates and the Tate series
 
-For a set S, a self-map φ : S → S, a function h : S → ℝ and α ∈ ℝ, tateLimit φ h α P := `lim_{n→∞}` h(φⁿ(P))/αⁿ, defined as Mathlib's limUnder along atTop. When α > 1 and h ∘ φ − αh is bounded the limit exists (Existence of Tate's limit); the value then depends on h only up to bounded functions, is linear in h, and is unchanged when (φ, α) is replaced by (φ^k, α^k) for k ≥ 1.
+Use the argument order tateLimit φ α h throughout. For any φ:S→S, h:S→ℝ, α>1, P∈S and n≥0, prove the finite identity h(P)+Σ_(0≤i<n) α^(−i−1)(h(φ^(i+1)P)−αh(φ^iP))=h(φ^nP)/α^n. Thus whenever the normalized iterates at P converge, the error series at P is summable and the supplied tateLimit φ α h P is that limit. This comparison also applies to a finite orbit without a global bounded-error assumption; it does not prescribe a second definition through a total limit (Call–Silverman §1, Proposition 1.2, (4)–(6), p.169).
 
-S any type; α real; the junk value of limUnder is never used by the theorems, which all assume α > 1 and the bound |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
+Under α>1 and a global bounded-error hypothesis, derive the following refinements from the supplied convergence and uniqueness theorems.
 
-Define tateLimit as Filter.limUnder atTop (n ↦ h(φ^[n] P)/α^n). tateLimit_congr_of_bounded: if h' − h is bounded by B, then h' satisfies the hypothesis with constant C + (α + 1)B and tateLimit φ h' α satisfies (i) and (ii) of Uniqueness of Tate's limit for h, hence equals tateLimit φ h α. tateLimit_const_mul and tateLimit_iterate: the sequences for c·h and for (φ^k, α^k) are c times, respectively a subsequence of, the sequence for (φ, h, α) (Filter.Tendsto.const_mul, Filter.Tendsto.comp). tateLimit_nonneg: a limit of nonnegative terms (le_of_tendsto).
-
-*Needs:* `Filter.limUnder`; `Filter.Tendsto.const_mul`; `Filter.Tendsto.comp`; `le_of_tendsto`.
-
-([call-silverman-1993](#call-silverman-1993), §1, Proposition 1.2, (4), p. 169 — The defining limit, for h = `h_{V,η};` [silverman-ads-sample](#silverman-ads-sample), §3.4, Theorem 3.20, p. 97 — The abstract setting on a set S used here.)
-
-Prove the following basic API.
-
-- tateLimit φ h α : S → ℝ.
-- tateLimit φ h α P = limUnder atTop (n ↦ h(φⁿ P)/αⁿ).
-- α > 1, h ∘ φ − αh bounded and h' − h bounded ⇒ tateLimit φ h' α = tateLimit φ h α.
-- Under α > 1 and bounded h ∘ φ − αh, tateLimit φ (c · h) α = c · tateLimit φ h α.
-- Under α > 1 and bounded h ∘ φ − αh, tateLimit φ^[k] h (α^k) = tateLimit φ h α for k ≥ 1.
-- Under α > 1 and bounded h ∘ φ − αh, h ≥ 0 ⇒ tateLimit φ h α ≥ 0.
+- Multiplying h by any real c multiplies its Tate limit by c; the error bound becomes |c|C.
+- Replacing (φ,α) by (φ^[k],α^k), k≥1, leaves the Tate limit unchanged; the new error bound is C(1+α+⋯+α^(k−1)).
+- If h≥0, the Tate limit is nonnegative, by the normalized-iterate comparison.
 
 **Checks.**
 
-- tateLimit id h 2 P = 0 for every h and P.
-- tateLimit (x ↦ 2x) id 2 x = x on ℝ: the first two normalized terms at x = 1 are 1/1 = 1 and 2/2 = 1. Dividing the limit by two would give the wrong normalization.
-- With α = 1, φ = (· + 1), h = id the Tate sequence diverges.
+- For φ=id,h=1,α=2, the partial sums for n=0,1,2 are 1,1/2,1/4 and tend to 0, not to the initial height 1.
+- For φ(x)=2x,h(x)=x,α=2,P=1, all errors are 0 and the normalized terms at n=0,1,2 are 1,1,1; replacing φ by φ² and α by 4 gives the same value 1.
+- For the same φ and α with h(x)=−x,P=1, the limit is −1; nonnegativity needs h≥0. Taking c=−2 multiplies the original limit 1 by −2.
+- On ℕ with φ(n)=n+1,h(n)=n², the global error |(n+1)²−2n²| is unbounded. On an adjoined fixed point P with h(P)=1 the normalized sequence is still 2^(−n) and the comparison gives Tate value 0 there.
 
-**Endpoint checks.** φ = id, α = 2: the limit is 0 for every h. φ(x) = 2x, h = id on ℝ, α = 2: the sequence is constant and the limit is x. α = 1, φ(x) = x + 1, h = id: the sequence x + n diverges, so α > 1 is essential.
-
-Applications include Call–Silverman, Theorem 1.1 — the canonical height `ĥ_{V,η,φ}` is the Tate limit of a Weil height; Silverman ADS, Theorem 3.20 and the definition of ĥ_φ — canonical heights of morphisms of ℙᴺ; Tau Ceti, WeierstrassCurve.Affine.Point.canonicalHeight — the Tate limit of ([2], naive x-height, 4); The canonical height of a rational map of ℙ¹ — the canonical height of a rational map of ℙ¹; Layer 6 — specialisation of canonical heights in families (Call–Silverman §3–§4).
-
-### 1.2 Tate's telescoping estimate
-
-Let α > 1 and C ≥ 0 with |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)). Then for every P ∈ S and m ≤ n: |h(φⁿP)/αⁿ − h(φᵐP)/αᵐ| ≤ C/((α − 1)αᵐ).
-
-α > 1. |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
-
-Telescoping: h(φⁿP)/αⁿ − h(φᵐP)/αᵐ = `Σ_{i=m+1}^{n}` `α^{−i}(h(φQ_i)` − αh(Q_i)) with Q_i = `φ^{i−1}P` (Function.iterate_succ_apply'). Triangle inequality (Finset.abs_sum_le_sum_abs) and the hypothesis bound each term by `Cα^{−i}.` `Σ_{i=m+1}^{n}` `α^{−i}` ≤ `Σ_{i>m}` `α^{−i}` = `α^{−m}/(α` − 1) (geom_sum_eq).
-
-*Needs:* `Finset.abs_sum_le_sum_abs`; `geom_sum_eq`; `Function.iterate_succ_apply'`.
-
-([call-silverman-1993](#call-silverman-1993), §1, proof of Proposition 1.2, (6), p. 169 — Exactly the estimate; [silverman-ads-sample](#silverman-ads-sample), §3.4, proof of Theorem 3.20, (3.15), p. 97 — The same estimate.)
-
-**Endpoint checks.** φ = id on ℝ, h = 1, α = 2: C = 1 and `|2^{−n}` − `2^{−m}|` ≤ `2^{−m}` = 1/((2 − 1)2^m).
+*Needs:* HeightsRationalPointsAndObstructions §0.18 `tateLimit`, `tendsto_tateLimit`, `tateLimit_unique`; finite geometric sums; real summability; `Filter.Tendsto.comp`; `le_of_tendsto`.
 
 ### 1.3 Mathlib's height-bound constant under finite extension
 
@@ -1878,31 +1882,17 @@ Upper bound: Mathlib's Height.logHeight_eval_le for the forms F₀, F₁ (homoge
 
 ### 1.5 Preperiodic points have Tate limit zero
 
-Let α > 1 and P preperiodic for φ. Then tateLimit φ h α P = 0 for every h : S → ℝ.
+Let α > 1 and P preperiodic for φ. Then tateLimit φ α h P = 0 for every h : S → ℝ.
 
 α > 1; no hypothesis on h.
 
-The forward orbit of P is finite (Preperiodic iff the forward orbit is finite), so h(φⁿP) takes finitely many values and is bounded. A bounded sequence divided by αⁿ tends to 0 (tendsto_pow_atTop_nhds_zero_of_lt_one for `α^{−1}),` so the limit exists and limUnder returns it (Filter.Tendsto.limUnder_eq).
+The forward orbit of P is finite (Preperiodic iff the forward orbit is finite), so h(φⁿP) takes finitely many values and is bounded. A bounded sequence divided by αⁿ tends to 0 (tendsto_pow_atTop_nhds_zero_of_lt_one for `α^{−1}),` so the normalized iterates converge to 0. The series/normalized-iterate comparison of §1.1 then gives the supplied Tate value 0, even without a global bounded-error hypothesis.
 
-*Needs:* [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [Preperiodic iff the forward orbit is finite](#07-preperiodic-iff-the-forward-orbit-is-finite); `tendsto_pow_atTop_nhds_zero_of_lt_one`; `Filter.Tendsto.limUnder_eq`.
+*Needs:* §1.1 series/normalized-iterate comparison; HeightsRationalPointsAndObstructions §0.18 `tateLimit`; [Preperiodic iff the forward orbit is finite](#07-preperiodic-iff-the-forward-orbit-is-finite); `tendsto_pow_atTop_nhds_zero_of_lt_one`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, proof of Corollary 1.1.1(a), p. 168 — Exactly the argument (followed by the limit 0).)
 
 **Endpoint checks.** For z ↦ z² − 2, the point −2 is preperiodic (−2 ↦ 2 ↦ 2), so ĥ(−2) = 0.
-
-### 1.6 Existence of Tate's limit
-
-Let α > 1 and suppose h ∘ φ − αh is bounded. Then for every P the sequence h(φⁿP)/αⁿ converges, and its limit is tateLimit φ h α P.
-
-α > 1. ∃ C, |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
-
-By Tate's telescoping estimate the sequence is Cauchy (Metric.cauchySeq_iff': the tail bound C/((α − 1)αᵐ) tends to 0, tendsto_pow_atTop_nhds_zero_of_lt_one). ℝ is complete, so the sequence converges to its limUnder (CauchySeq.tendsto_limUnder).
-
-*Needs:* [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [Tate's telescoping estimate](#12-tates-telescoping-estimate); `Metric.cauchySeq_iff'`; `tendsto_pow_atTop_nhds_zero_of_lt_one`; `CauchySeq.tendsto_limUnder`.
-
-([call-silverman-1993](#call-silverman-1993), §1, proof of Proposition 1.2, p. 169 — Exactly the argument.)
-
-**Endpoint checks.** For φ(x) = 2x, h = id, α = 2 the sequence is constant.
 
 ### 1.7 The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]
 
@@ -1932,34 +1922,6 @@ d = 0: f(P) is a fixed point and logHeight f(P) is a constant. d ≥ 1: choose a
 
 **Endpoint checks.** For f = z^d the constant is 0.
 
-### 1.9 Tate's limit differs from h by at most C/(α − 1)
-
-Let α > 1 and |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)). Then |tateLimit φ h α P − h(P)| ≤ C/(α − 1) for every P.
-
-α > 1. |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
-
-Take m = 0 in Tate's telescoping estimate: |h(φⁿP)/αⁿ − h(P)| ≤ C/(α − 1) for all n. Pass to the limit (Existence of Tate's limit) in the closed condition |x − h(P)| ≤ C/(α − 1) (le_of_tendsto).
-
-*Needs:* [Tate's telescoping estimate](#12-tates-telescoping-estimate); [Existence of Tate's limit](#16-existence-of-tates-limit); `le_of_tendsto`.
-
-([call-silverman-1993](#call-silverman-1993), §1, Proposition 1.2, (5), p. 169 — Exactly the bound; [silverman-ads-sample](#silverman-ads-sample), §3.4, proof of Theorem 3.20, p. 98 — The same bound.)
-
-**Endpoint checks.** For the power map on ℙ¹, h ∘ φ = d·h exactly, C = 0, and the canonical height equals h.
-
-### 1.10 The functional equation ĥ ∘ φ = αĥ
-
-Let α > 1 and suppose h ∘ φ − αh is bounded. Then tateLimit φ h α (φP) = α · tateLimit φ h α P for every P.
-
-α > 1. ∃ C, |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
-
-h(φⁿ(φP))/αⁿ = α · `h(φ^{n+1}P)/α^{n+1};` the right side tends to α · tateLimit φ h α P (Existence of Tate's limit along the shifted sequence, Filter.tendsto_add_atTop_nat, Filter.Tendsto.const_mul). The left side tends to tateLimit φ h α (φP) (Existence of Tate's limit at φP); conclude by uniqueness of limits (tendsto_nhds_unique).
-
-*Needs:* [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [Existence of Tate's limit](#16-existence-of-tates-limit); `Filter.tendsto_add_atTop_nat`; `Filter.Tendsto.const_mul`; `tendsto_nhds_unique`.
-
-([call-silverman-1993](#call-silverman-1993), §1, proof of Theorem 1.1, p. 170 — Exactly the computation.)
-
-**Endpoint checks.** For φ(x) = 2x on ℝ, h = id, α = 2: tateLimit(2x) = 2x = 2·tateLimit(x).
-
 ### 1.11 h(f(P)) = d·h(P) + O(1) for the absolute height over ℚ̄
 
 Let F be a field algebraic over ℚ and f a rational map of degree d over F. There is C, depending only on f, such that |h(f(P)) − d·h(P)| ≤ C for all P ∈ ℙ¹(F), where h = ClassicalArithmeticCompletion.projectiveWeilHeight.
@@ -1980,37 +1942,23 @@ Let α > 1 and |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
 
 α > 1. |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
 
-tateLimit φ h α P = 0 (Preperiodic points have Tate limit zero) and |tateLimit φ h α P − h(P)| ≤ C/(α − 1) (Tate's limit differs from h by at most C/(α − 1)).
+tateLimit φ α h P = 0 (Preperiodic points have Tate limit zero) and |tateLimit φ α h P − h(P)| ≤ C/(α − 1) (HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`).
 
-*Needs:* [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1).
+*Needs:* [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, proof of Corollary 1.1.1(b), p. 168 — Exactly the argument, with the explicit constant of Proposition 1.2; [silverman-aws-2010](#silverman-aws-2010), §5.1, proof of Theorem 15, p. 13 — The same conclusion by the direct iteration argument.)
 
 **Endpoint checks.** For z² on ℙ¹(ℚ̄) (C = 0) preperiodic points have height 0: they are 0, ∞ and the roots of unity.
 
-### 1.13 Uniqueness of Tate's limit
-
-Let α > 1 and suppose h ∘ φ − αh is bounded. If g : S → ℝ satisfies (i) g − h is bounded and (ii) g ∘ φ = αg, then g = tateLimit φ h α. Hence tateLimit φ h α is the unique function with (i) and (ii).
-
-α > 1. ∃ C, |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)).
-
-tateLimit φ h α satisfies (i) (Tate's limit differs from h by at most C/(α − 1)) and (ii) (The functional equation ĥ ∘ φ = αĥ). The difference δ = g − tateLimit φ h α is bounded, say by B, and δ(φP) = αδ(P); so αⁿ|δ(P)| = |δ(φⁿP)| ≤ B for all n, forcing δ(P) = 0 since αⁿ → ∞.
-
-*Needs:* [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ).
-
-([call-silverman-1993](#call-silverman-1993), §1, proof of Theorem 1.1, p. 170 — Exactly the argument; [silverman-ads-sample](#silverman-ads-sample), §3.4, Theorem 3.20, p. 97 — The abstract uniqueness statement.)
-
-**Endpoint checks.** For the power map z ↦ z^d on ℙ¹ the Weil height h itself satisfies (i) and (ii), so ĥ = h (Silverman ADS, p. 99).
-
 ### 1.14 Zero Tate limit and Northcott give preperiodicity
 
-Let α > 1 with h ∘ φ − αh bounded, and let A ⊆ S be forward invariant (φ(A) ⊆ A) such that {Q ∈ A : h(Q) ≤ B} is finite for every B (Northcott on A). If P ∈ A and tateLimit φ h α P = 0, then P is preperiodic for φ.
+Let α > 1 with h ∘ φ − αh bounded, and let A ⊆ S be forward invariant (φ(A) ⊆ A) such that {Q ∈ A : h(Q) ≤ B} is finite for every B (Northcott on A). If P ∈ A and tateLimit φ α h P = 0, then P is preperiodic for φ.
 
 α > 1; ∃ C, |h(φQ) − αh(Q)| ≤ C for all Q ∈ S (Call–Silverman (3)). Northcott for h on the forward-invariant set A.
 
-By The functional equation ĥ ∘ φ = αĥ, tateLimit φ h α (φⁿP) = αⁿ·0 = 0; by Tate's limit differs from h by at most C/(α − 1), h(φⁿP) ≤ C/(α − 1) for all n. The forward orbit of P lies in A (forward invariance) and in the finite set {Q ∈ A : h(Q) ≤ C/(α − 1)} (Set.Finite.subset), so it is finite, and P is preperiodic (Preperiodic iff the forward orbit is finite).
+By HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`, tateLimit φ α h (φⁿP) = αⁿ·0 = 0; by HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, h(φⁿP) ≤ C/(α − 1) for all n. The forward orbit of P lies in A (forward invariance) and in the finite set {Q ∈ A : h(Q) ≤ C/(α − 1)} (Set.Finite.subset), so it is finite, and P is preperiodic (Preperiodic iff the forward orbit is finite).
 
-*Needs:* [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [Preperiodic iff the forward orbit is finite](#07-preperiodic-iff-the-forward-orbit-is-finite); [The forward orbit of a point under a self-map](#01-the-forward-orbit-of-a-point-under-a-self-map); `Set.Finite.subset`.
+*Needs:* HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; [Preperiodic iff the forward orbit is finite](#07-preperiodic-iff-the-forward-orbit-is-finite); [The forward orbit of a point under a self-map](#01-the-forward-orbit-of-a-point-under-a-self-map); `Set.Finite.subset`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, proof of Corollary 1.1.1(a), p. 168 — Northcott is the only input beyond Tate's lemma; here it is an explicit hypothesis on an invariant set.)
 
@@ -2032,17 +1980,17 @@ F algebraic over ℚ; deg f ≥ 2.
 
 ### 1.16 Tate's limit is transported along semiconjugacies
 
-Let π : S → T with π ∘ φ = ψ ∘ π (Function.Semiconj π φ ψ), α > 1, h : S → ℝ and k : T → ℝ with h ∘ φ − αh and k ∘ ψ − αk bounded, and k ∘ π − h bounded. Then tateLimit ψ k α ∘ π = tateLimit φ h α.
+Let π : S → T with π ∘ φ = ψ ∘ π (Function.Semiconj π φ ψ), α > 1, h : S → ℝ and k : T → ℝ with h ∘ φ − αh and k ∘ ψ − αk bounded, and k ∘ π − h bounded. Then tateLimit ψ α k ∘ π = tateLimit φ α h.
 
 α > 1; the three boundedness hypotheses.
 
-g := tateLimit ψ k α ∘ π satisfies g ∘ φ = (tateLimit ψ k α) ∘ ψ ∘ π = αg (The functional equation ĥ ∘ φ = αĥ for ψ, k). g − h = (tateLimit ψ k α − k) ∘ π + (k ∘ π − h) is bounded (Tate's limit differs from h by at most C/(α − 1)). Conclude by Uniqueness of Tate's limit.
+g := tateLimit ψ α k ∘ π satisfies g ∘ φ = (tateLimit ψ α k) ∘ ψ ∘ π = αg (HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp` for ψ, k). g − h = (tateLimit ψ α k − k) ∘ π + (k ∘ π − h) is bounded (HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`). Conclude by HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`.
 
-*Needs:* [Uniqueness of Tate's limit](#113-uniqueness-of-tates-limit); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ); `Function.Semiconj`.
+*Needs:* §1.1 normalized-iterate, scalar and iteration comparisons; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; `Function.Semiconj`.
 
 ([silverman-ads-sample](#silverman-ads-sample), §3.4, p. 101 — Conjugation invariance, the main application.)
 
-**Endpoint checks.** Conjugation invariance of canonical heights: π = γ ∈ PGL₂, ψ = γ ∘ f ∘ γ⁻¹, with h ∘ γ − h bounded. Iterates: π = id, (φ, α) replaced by (φ^k, α^k) is the API item tateLimit_iterate.
+**Endpoint checks.** Conjugation invariance of canonical heights: π = γ ∈ PGL₂, ψ = γ ∘ f ∘ γ⁻¹, with h ∘ γ − h bounded. Iterates: π = id, (φ, α) replaced by (φ^k, α^k) is the iteration comparison of §1.1.
 
 ### 1.17 Call–Silverman canonical height of a polarized morphism
 
@@ -2050,9 +1998,9 @@ Let K be a number field, V/K a smooth projective variety, φ : V → V a morphis
 
 K a number field; V smooth projective over K; φ a morphism over K; L ample with φ*L ≅ `L^{⊗d},` d ≥ 2. The Weil height machine for line bundles on V (functoriality, additivity, dependence on the isomorphism class) is supplied by HeightsRationalPointsAndObstructions:RP.0.
 
-Height machine (RP.0): h_L ∘ φ = `h_{φ*L}` + O(1) = `h_{L^{⊗d}}` + O(1) = d·h_L + O(1); this is Call–Silverman (2), the hypothesis of Tate's lemma with α = d. Existence, bound, functional equation: Existence of Tate's limit, Tate's limit differs from h by at most C/(α − 1), The functional equation ĥ ∘ φ = αĥ applied to (V(K̄), φ, h_L, d). Uniqueness: Uniqueness of Tate's limit. Independence of h_L: two Weil heights for L differ by a bounded function (RP.0), so the limits agree (tateLimit_congr_of_bounded, a consequence of Uniqueness of Tate's limit).
+Height machine (RP.0): h_L ∘ φ = `h_{φ*L}` + O(1) = `h_{L^{⊗d}}` + O(1) = d·h_L + O(1); this is Call–Silverman (2), the hypothesis of Tate's lemma with α = d. Existence, bound, functional equation: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp` applied to (V(K̄), φ, h_L, d). Uniqueness: HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Independence of h_L: two Weil heights for L differ by a bounded function (RP.0), so the limits agree (HeightsRationalPointsAndObstructions §0.18 `congr_bounded`, a consequence of HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`).
 
-*Needs:* `HeightsRationalPointsAndObstructions:RP.0`; [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [Existence of Tate's limit](#16-existence-of-tates-limit); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ); [Uniqueness of Tate's limit](#113-uniqueness-of-tates-limit).
+*Needs:* `HeightsRationalPointsAndObstructions:RP.0`; HeightsRationalPointsAndObstructions §0.18 `tateLimit`; HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Theorem 1.1, pp. 166–167 — Exactly the theorem, here for η the class of an ample L and α = d an integer; [call-silverman-1993](#call-silverman-1993), §1, p. 166 — The input from the height machine; [silverman-aws-2010](#silverman-aws-2010), §5.2, p. 15, Supplementary Material — The polarized setting of the roadmap.)
 
@@ -2060,13 +2008,13 @@ Height machine (RP.0): h_L ∘ φ = `h_{φ*L}` + O(1) = `h_{L^{⊗d}}` + O(1) = 
 
 ### 1.18 The Tate limit of doubling on an elliptic curve and Tau Ceti's canonical height
 
-Let F be a field with Height.AdmissibleAbsValues, W an elliptic curve over F and h the naive height of the x-coordinate (Tau Ceti's WeierstrassCurve.Affine.Point.naiveHeight). Then tateLimit (Q ↦ 2•Q) h 4 = canonicalHeight (Tau Ceti's Point.canonicalHeight), and for every integer m ≥ 2, tateLimit (Q ↦ m•Q) h m² = canonicalHeight. Normalisation: Call–Silverman's `ĥ_{E,[m],η}` for η the class of 2(O), with `h_{2(O)}` = h, equals Tau Ceti's canonical height for 2(O), twice the height for (O); points of Tate limit 0 are exactly the torsion points under Northcott for the field height.
+Let F be a field with Height.AdmissibleAbsValues, W an elliptic curve over F and h the naive height of the x-coordinate (Tau Ceti's WeierstrassCurve.Affine.Point.naiveHeight). Then tateLimit (Q ↦ 2•Q) 4 h = canonicalHeight (Tau Ceti's Point.canonicalHeight), and for every integer m ≥ 2, tateLimit (Q ↦ m•Q) m² h = canonicalHeight. Normalisation: Call–Silverman's `ĥ_{E,[m],η}` for η the class of 2(O), with `h_{2(O)}` = h, equals Tau Ceti's canonical height for 2(O), twice the height for (O); points of Tate limit 0 are exactly the torsion points under Northcott for the field height.
 
 F with admissible absolute values and decidable equality (Tau Ceti's group law); W elliptic.
 
 The identity (2 • ·)^[n] P = 2^n • P identifies the defining sequences. Tau Ceti's `Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow` gives h(2^nP)/4^n → canonicalHeight P, and `Filter.Tendsto.limUnder_eq` identifies the Tate limit with that value. For general m, take g = canonicalHeight: g(mP) = m²g(P) and |g − h| ≤ D imply |h(mP) − m²h(P)| ≤ D(1 + m²). Uniqueness of the Tate limit gives the result. Under field Northcott, `Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder` identifies its zero set.
 
-*Needs:* [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [Uniqueness of Tate's limit](#113-uniqueness-of-tates-limit); `WeierstrassCurve.Affine.Point.canonicalHeight`; `WeierstrassCurve.Affine.Point.naiveHeight`; `WeierstrassCurve.Affine.Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow`; `WeierstrassCurve.Affine.Point.abs_canonicalHeight_sub_naiveHeight_le`; `WeierstrassCurve.Affine.Point.canonicalHeight_nsmul`; `WeierstrassCurve.Affine.Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder`; `smul_iterate`; `Filter.Tendsto.const_mul`; `Filter.Tendsto.limUnder_eq`.
+*Needs:* HeightsRationalPointsAndObstructions §0.18 `tateLimit`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; `WeierstrassCurve.Affine.Point.canonicalHeight`; `WeierstrassCurve.Affine.Point.naiveHeight`; `WeierstrassCurve.Affine.Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow`; `WeierstrassCurve.Affine.Point.abs_canonicalHeight_sub_naiveHeight_le`; `WeierstrassCurve.Affine.Point.canonicalHeight_nsmul`; `WeierstrassCurve.Affine.Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder`; `smul_iterate`; `Filter.Tendsto.const_mul`; `Filter.Tendsto.limUnder_eq`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Example 1, p. 167 — The example (multiplication on an abelian variety), made concrete for elliptic curves.)
 
@@ -2074,13 +2022,13 @@ The identity (2 • ·)^[n] P = 2^n • P identifies the defining sequences. Tau
 
 ### 1.19 The relative canonical height of a rational map
 
-For a field K with Height.AdmissibleAbsValues (a global height field) and a rational map f over K, relCanonicalHeight f := tateLimit (toEnd f) Projectivization.logHeight (deg f) on ℙ¹(K). For deg f ≥ 2 it is the unique function with ĥ − h bounded and ĥ ∘ f = (deg f)·ĥ; it is nonnegative, vanishes at preperiodic points, is invariant under iteration and conjugation, and scales by [L : K] under an extension of number fields.
+For a field K with Height.AdmissibleAbsValues (a global height field) and a rational map f over K, relCanonicalHeight f := tateLimit (toEnd f) (deg f) Projectivization.logHeight on ℙ¹(K). For deg f ≥ 2 it is the unique function with ĥ − h bounded and ĥ ∘ f = (deg f)·ĥ; it is nonnegative, vanishes at preperiodic points, is invariant under iteration and conjugation, and scales by [L : K] under an extension of number fields.
 
 K with admissible absolute values; the properties need deg f ≥ 2.
 
-Definition from Tate's limit of a height along a self-map. Hypothesis of Tate's lemma: h(f(P)) = d·h(P) + O(1) for the relative height with α = deg f ≥ 2 > 1. Convergence, bound, functional equation and uniqueness: Existence of Tate's limit, Tate's limit differs from h by at most C/(α − 1), The functional equation ĥ ∘ φ = αĥ, Uniqueness of Tate's limit. Iteration: tateLimit_iterate with toEnd (f^n) = (toEnd f)^[n]; conjugation: Tate's limit is transported along semiconjugacies with the bounded function logHeight ∘ γ − logHeight (the degree-one case of the height estimate). Extension of number fields: Projectivization.logHeight over L of a K-point is [L : K] times that over K (DiophantineApproximationAndTranscendence §0.2 `mulHeight_algebraMap`), and tateLimit_const_mul.
+Definition from HeightsRationalPointsAndObstructions §0.18 `tateLimit`. Hypothesis of Tate's lemma: h(f(P)) = d·h(P) + O(1) for the relative height with α = deg f ≥ 2 > 1. Convergence, bound, functional equation and uniqueness: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Iteration: the iteration comparison of §1.1 with toEnd (f^n) = (toEnd f)^[n]; conjugation: Tate's limit is transported along semiconjugacies with the bounded function logHeight ∘ γ − logHeight (the degree-one case of the height estimate). Extension of number fields: Projectivization.logHeight over L of a K-point is [L : K] times that over K (DiophantineApproximationAndTranscendence §0.2 `mulHeight_algebraMap`), and the scalar comparison of §1.1.
 
-*Needs:* [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [h(f(P)) = d·h(P) + O(1) for the relative height](#18-hfp--dhp--o1-for-the-relative-height); [Existence of Tate's limit](#16-existence-of-tates-limit); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ); [Uniqueness of Tate's limit](#113-uniqueness-of-tates-limit); [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [The action of a rational map on ℙ¹(K)](#019-the-action-of-a-rational-map-on-ℙ¹k); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂); DiophantineApproximationAndTranscendence §0.2 `mulHeight_algebraMap`; `Projectivization.logHeight`.
+*Needs:* §1.1 normalized-iterate, scalar and iteration comparisons; HeightsRationalPointsAndObstructions §0.18 `tateLimit`; [h(f(P)) = d·h(P) + O(1) for the relative height](#18-hfp--dhp--o1-for-the-relative-height); HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [The action of a rational map on ℙ¹(K)](#019-the-action-of-a-rational-map-on-ℙ¹k); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂); DiophantineApproximationAndTranscendence §0.2 `mulHeight_algebraMap`; `Projectivization.logHeight`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, p. 166 — The setting of Theorem 1.1; Mathlib's AdmissibleAbsValues is such a structure; [call-silverman-1993](#call-silverman-1993), §1, Example 3, p. 167 — The case n = 1, η = O(1).)
 
@@ -2110,13 +2058,13 @@ Applications include Call–Silverman, §3–§4 — canonical heights over the 
 
 ### 1.20 The canonical height of a rational map of ℙ¹
 
-For a field F of characteristic 0 and a rational map f over F, canonicalHeight f := tateLimit (toEnd f) ClassicalArithmeticCompletion.projectiveWeilHeight (deg f) : ℙ¹(F) → ℝ. For F algebraic over ℚ (e.g. ℚ̄) and deg f ≥ 2: the limit ĥ_f(P) = lim `d^{−n}` h(fⁿ(P)) exists for every P, |ĥ_f − h| is bounded, ĥ_f ∘ f = d·ĥ_f, and ĥ_f is the unique function with these two properties; it is nonnegative, invariant under iteration, conjugation and field embeddings, and for the power map z ↦ z^d it is the Weil height.
+For a field F of characteristic 0 and a rational map f over F, canonicalHeight f := tateLimit (toEnd f) (deg f) ClassicalArithmeticCompletion.projectiveWeilHeight : ℙ¹(F) → ℝ. For F algebraic over ℚ (e.g. ℚ̄) and deg f ≥ 2: the limit ĥ_f(P) = lim `d^{−n}` h(fⁿ(P)) exists for every P, |ĥ_f − h| is bounded, ĥ_f ∘ f = d·ĥ_f, and ĥ_f is the unique function with these two properties; it is nonnegative, invariant under iteration, conjugation and field embeddings, and for the power map z ↦ z^d it is the Weil height.
 
 F of characteristic 0; the properties need F algebraic over ℚ and deg f ≥ 2. h([x : 1]) = NumberField.absLogHeight₁ x, h([1 : 0]) = 0 (The absolute logarithmic Weil height on ℙ¹).
 
-Definition from Tate's limit of a height along a self-map; hypothesis of Tate's lemma from h(f(P)) = d·h(P) + O(1) for the absolute height over ℚ̄ with α = d. Existence, bound, functional equation and uniqueness: Existence of Tate's limit, Tate's limit differs from h by at most C/(α − 1), The functional equation ĥ ∘ φ = αĥ, Uniqueness of Tate's limit. Conjugation (Tate's limit is transported along semiconjugacies; h ∘ γ − h bounded by the degree-one height estimate), iteration (tateLimit_iterate), embeddings σ : F → F' (the sequences agree termwise by ClassicalArithmeticCompletion.projectiveWeilHeight_projMap and toEnd_map_projMap). Power map: h(x^d) = d·h(x) (log of Mathlib's Height.mulHeight₁_pow in a number field containing x, via The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]; h(∞) = 0), so h itself satisfies (i) and (ii) and ĥ = h by Uniqueness of Tate's limit.
+Definition from HeightsRationalPointsAndObstructions §0.18 `tateLimit`; hypothesis of Tate's lemma from h(f(P)) = d·h(P) + O(1) for the absolute height over ℚ̄ with α = d. Existence, bound, functional equation and uniqueness: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Conjugation (Tate's limit is transported along semiconjugacies; h ∘ γ − h bounded by the degree-one height estimate), iteration (the iteration comparison of §1.1), embeddings σ : F → F' (the sequences agree termwise by ClassicalArithmeticCompletion.projectiveWeilHeight_projMap and toEnd_map_projMap). Power map: h(x^d) = d·h(x) (log of Mathlib's Height.mulHeight₁_pow in a number field containing x, via The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]; h(∞) = 0), so h itself satisfies (i) and (ii) and ĥ = h by HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`.
 
-*Needs:* [Tate's limit of a height along a self-map](#11-tates-limit-of-a-height-along-a-self-map); [h(f(P)) = d·h(P) + O(1) for the absolute height over ℚ̄](#111-hfp--dhp--o1-for-the-absolute-height-over-ℚ); [Existence of Tate's limit](#16-existence-of-tates-limit); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ); [Uniqueness of Tate's limit](#113-uniqueness-of-tates-limit); [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [The absolute logarithmic Weil height on ℙ¹](#from-taucetiroadmapclassicalarithmeticcompletion); [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ); [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [The action of a rational map on ℙ¹(K)](#019-the-action-of-a-rational-map-on-ℙ¹k); [Base change of rational maps and points](#022-base-change-of-rational-maps-and-points); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂); `Height.mulHeight₁_pow`.
+*Needs:* §1.1 normalized-iterate, scalar and iteration comparisons; HeightsRationalPointsAndObstructions §0.18 `tateLimit`; [h(f(P)) = d·h(P) + O(1) for the absolute height over ℚ̄](#111-hfp--dhp--o1-for-the-absolute-height-over-ℚ); HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [The absolute logarithmic Weil height on ℙ¹](#from-taucetiroadmapclassicalarithmeticcompletion); [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ); [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [The action of a rational map on ℙ¹(K)](#019-the-action-of-a-rational-map-on-ℙ¹k); [Base change of rational maps and points](#022-base-change-of-rational-maps-and-points); [Conjugation of rational maps by PGL₂](#025-conjugation-of-rational-maps-by-pgl₂); `Height.mulHeight₁_pow`.
 
 ([silverman-ads-sample](#silverman-ads-sample), §3.4, Definition, p. 98 — Exactly the definition for N = 1; [silverman-aws-2010](#silverman-aws-2010), §5.2, p. 14, Theorem 17 — The limit formula; [silverman-ads-sample](#silverman-ads-sample), §3.4, p. 99 — The power-map test canonicalHeight_powMap.)
 
@@ -2179,9 +2127,9 @@ Let A be an abelian variety over a number field K and L a symmetric line bundle 
 
 A an abelian variety over a number field; L symmetric; [m]*L ≅ `L^{⊗m²}` and the Néron–Tate height with `ĥ_{A,L}(mP)` = `m²ĥ_{A,L}(P)` and `ĥ_{A,L}` − h_L bounded are supplied by RP.0.
 
-`ĥ_{A,L}` has bounded difference from h_L and satisfies `ĥ_{A,L}` ∘ [m] = `m²ĥ_{A,L}` (RP.0); by the uniqueness in Call–Silverman canonical height of a polarized morphism (Uniqueness of Tate's limit) it is `ĥ_{A,[m],L}` for every m ≥ 2.
+`ĥ_{A,L}` has bounded difference from h_L and satisfies `ĥ_{A,L}` ∘ [m] = `m²ĥ_{A,L}` (RP.0); by the uniqueness in Call–Silverman canonical height of a polarized morphism (HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`) it is `ĥ_{A,[m],L}` for every m ≥ 2.
 
-*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [Uniqueness of Tate's limit](#113-uniqueness-of-tates-limit); `HeightsRationalPointsAndObstructions:RP.0`.
+*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; `HeightsRationalPointsAndObstructions:RP.0`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Example 1, p. 167 — Exactly the comparison.)
 
@@ -2193,9 +2141,9 @@ For a number field K, a rational map f of degree ≥ 2 over K and P ∈ ℙ¹(K)
 
 K a number field; deg f ≥ 2.
 
-Termwise, ClassicalArithmeticCompletion.projectiveWeilHeight(fⁿP)/dⁿ = (Projectivization.logHeight(fⁿP)/dⁿ)/[K : ℚ] (The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]). Pass to the limit (Existence of Tate's limit for both sequences, Filter.Tendsto.div_const, tendsto_nhds_unique).
+Termwise, ClassicalArithmeticCompletion.projectiveWeilHeight(fⁿP)/dⁿ = (Projectivization.logHeight(fⁿP)/dⁿ)/[K : ℚ] (The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]). Pass to the limit (HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit` for both sequences, Filter.Tendsto.div_const, tendsto_nhds_unique).
 
-*Needs:* [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ); [Existence of Tate's limit](#16-existence-of-tates-limit); `Filter.Tendsto.div_const`; `tendsto_nhds_unique`.
+*Needs:* §1.1 normalized-iterate, scalar and iteration comparisons; [The relative canonical height of a rational map](#119-the-relative-canonical-height-of-a-rational-map); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); [The absolute height on ℙ¹(K) is the relative height divided by [K : ℚ]](#17-the-absolute-height-on-ℙ¹k-is-the-relative-height-divided-by-k--ℚ); HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; `Filter.Tendsto.div_const`; `tendsto_nhds_unique`.
 
 ([silverman-aws-2010](#silverman-aws-2010), §5.2, p. 15, Supplementary Material — The 1/[K : ℚ] normalisation of the relative quantity.)
 
@@ -2221,9 +2169,9 @@ Let K be a global height field (e.g. a number field), V/K smooth projective, φ 
 
 K a global height field; η ∈ Pic(V) ⊗ ℝ an eigenclass with real eigenvalue α > 1; ℝ-linear Weil heights `h_{V,η}` from HeightsRationalPointsAndObstructions:RP.0.
 
-Height machine for ℝ-divisor classes (RP.0): `h_{V,η}` ∘ φ = `h_{V,φ*η}` + O(1) = α `h_{V,η}` + O(1). Existence and uniqueness: Existence of Tate's limit, Tate's limit differs from h by at most C/(α − 1), The functional equation ĥ ∘ φ = αĥ, Uniqueness of Tate's limit. Preperiodic points: Preperiodic points have Tate limit zero. Counterexample to the converse: V = ℙ¹ × ℙ¹, φ = (z², w + 1), η = pr₁*O(1), α = 2: φ*η = 2η, and by Tate's limit is transported along semiconjugacies along pr₁ `(h_{V,η}` = h ∘ pr₁ + O(1)) ĥ(P, Q) = `ĥ_{z²}(P)` (The canonical height of a rational map of ℙ¹); so ĥ(0, 0) = 0 while (0, 0) has infinite orbit (0, n).
+Height machine for ℝ-divisor classes (RP.0): `h_{V,η}` ∘ φ = `h_{V,φ*η}` + O(1) = α `h_{V,η}` + O(1). Existence and uniqueness: HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`, HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`, HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`. Preperiodic points: Preperiodic points have Tate limit zero. Counterexample to the converse: V = ℙ¹ × ℙ¹, φ = (z², w + 1), η = pr₁*O(1), α = 2: φ*η = 2η, and by Tate's limit is transported along semiconjugacies along pr₁ `(h_{V,η}` = h ∘ pr₁ + O(1)) ĥ(P, Q) = `ĥ_{z²}(P)` (The canonical height of a rational map of ℙ¹); so ĥ(0, 0) = 0 while (0, 0) has infinite orbit (0, n).
 
-*Needs:* `HeightsRationalPointsAndObstructions:RP.0`; [Existence of Tate's limit](#16-existence-of-tates-limit); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ); [Uniqueness of Tate's limit](#113-uniqueness-of-tates-limit); [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹).
+*Needs:* `HeightsRationalPointsAndObstructions:RP.0`; HeightsRationalPointsAndObstructions §0.18 `tendsto_tateLimit`; HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; [Preperiodic points have Tate limit zero](#15-preperiodic-points-have-tate-limit-zero); [Tate's limit is transported along semiconjugacies](#116-tates-limit-is-transported-along-semiconjugacies); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹).
 
 ([call-silverman-1993](#call-silverman-1993), §1, p. 166 — The setting of Theorem 1.1, with no ampleness; [call-silverman-1993](#call-silverman-1993), §1, Example 2, p. 167 — Non-ample eigenclasses occurring in the source.)
 
@@ -2235,9 +2183,9 @@ Let K be a number field and f : ℙ¹ → ℙ¹ a morphism of degree d ≥ 2 ove
 
 K a number field; the identification of the scheme morphism with the rational map is Rational maps as endomorphisms of the scheme ℙ¹_K; the normalisation `h_{O(1)}` = ClassicalArithmeticCompletion.projectiveWeilHeight + O(1) is supplied by HeightsRationalPointsAndObstructions:RP.0.
 
-canonicalHeight f has bounded difference from `h_{O(1)}` (normalisation from RP.0 and Tate's limit differs from h by at most C/(α − 1)) and satisfies the functional equation (The functional equation ĥ ∘ φ = αĥ); conclude by the uniqueness in Call–Silverman canonical height of a polarized morphism.
+canonicalHeight f has bounded difference from `h_{O(1)}` (normalisation from RP.0 and HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`) and satisfies the functional equation (HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`); conclude by the uniqueness in Call–Silverman canonical height of a polarized morphism.
 
-*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); [Tate's limit differs from h by at most C/(α − 1)](#19-tates-limit-differs-from-h-by-at-most-cα--1); [The functional equation ĥ ∘ φ = αĥ](#110-the-functional-equation-ĥ--φ--αĥ); [Rational maps as endomorphisms of the scheme ℙ¹_K](#026-rational-maps-as-endomorphisms-of-the-scheme-ℙ¹_k); `HeightsRationalPointsAndObstructions:RP.0`.
+*Needs:* [Call–Silverman canonical height of a polarized morphism](#117-callsilverman-canonical-height-of-a-polarized-morphism); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); HeightsRationalPointsAndObstructions §0.18 `abs_tateLimit_sub_le`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_comp`; [Rational maps as endomorphisms of the scheme ℙ¹_K](#026-rational-maps-as-endomorphisms-of-the-scheme-ℙ¹_k); `HeightsRationalPointsAndObstructions:RP.0`.
 
 ([call-silverman-1993](#call-silverman-1993), §1, Example 3, p. 167 — Exactly the example, for n = 1.)
 
@@ -2249,7 +2197,7 @@ For z ↦ z^d the absolute canonical height equals the Weil height. The generic 
 
 ### Dependencies
 
-Layer 0; Mathlib field and projective heights, admissible absolute values and scalar Northcott; Tau Ceti elliptic heights; the RP.0 height-machine and abelian-height contracts for general varieties.
+Layer 0; Mathlib field and projective heights, admissible absolute values and scalar Northcott; Tau Ceti elliptic heights; HeightsRationalPointsAndObstructions §0.18 Tate series and RP.0 height-machine and abelian-height contracts for general varieties.
 
 ## Layer 2: Local heights, Julia sets and canonical measures
 
@@ -2326,7 +2274,7 @@ Construct the sphere Laplacian on the stated domain; prove additivity, vanishing
 
 Local potential theory at every place v of a number field, on the analytic line P¹_v^an (the Riemann sphere P¹(ℂ) at an infinite place; the Berkovich projective line over C_v at a finite place), as DeMarco–Krieger–Ye's route assigns it: (1) the measure-valued Laplacian Δ on potentials, normalised by Δ log δ_v(·, y) = δ_y − δ_∞ for y ∈ A¹_v^an (δ_v the Hsia kernel relative to ∞, |x − y| on ℂ), hence Δ log⁺|z|_v = λ_v − δ_∞; Δg = 0 iff g is constant; ∫ f dΔg = ∫ g dΔf for continuous potentials; for the continuous-potential class of finite signed Radon measures of mass 0, a continuous solution Δg = ν exists and is unique up to constants; arbitrary Radon measures may require singular distributional potentials; (2) for a signed measure ν whose total variation has continuous potential, g_ν(z) = ∫ log δ_v(z, w) dν(w) is defined, Δg_ν = ν − ν(P¹)δ_∞, and g_ν is continuous; measures with continuous potential charge no type I point; (3) the mutual energy (µ, ν)_v := `−∫∫_{A¹×A¹ ∖ Diag(C_v)}` log δ_v dµ dν for pairs whose total variations have continuous potentials or are finitely supported on type I points, symmetric and bilinear, with (µ, ν)_v = −∫ g_µ dν when the integral exists and the measures share no classical atom; for finite atomic supports use the explicitly diagonal-excluded sum instead; for distinct x,y, ([x], [y])_v = −log|x − y|_v, (λ_v, λ_v)_v = 0, ([x], λ_v)_v = −log⁺|x|_v, (δ_S − `δ_{S′},` δ_S − `δ_{S′})_v` = d_hyp(S, S′) for type II/III points S, S′, and invariance under PGL₂(C_v) for mass-zero measures whose total variations have continuous potentials. For diagonal-excluded atomic energies retain the diagonal correction: if ν=Σ a_i `δ_{x_i}` has mass zero and γ has no pole on its finite support, E(γ_*ν)=E(ν)+Σ a_i² log|γ′(x_i)|; use projective charts when a support point or its image is infinity. The correction also applies when ν has a continuous-potential part and finitely many type-I atoms, using its atomic masses; (4) positivity: for ν of total mass 0 whose total variation has continuous potential, (ν, ν)_v ≥ 0 with equality iff ν = 0 (Favre–Rivera-Letelier Propositions 2.6 and 4.5); (5) a class D_v of test functions dense in C(P¹_v^an) for the sup norm (smooth functions at infinite places; continuous functions locally constant off a finite subtree and C¹ on its edges at finite places, FRL Definition 5.5) with Dirichlet form ⟨φ, φ⟩_v = (Δφ, Δφ)_v and the Cauchy–Schwarz inequality |∫ φ dν|² ≤ ⟨φ, φ⟩_v (ν, ν)_v for mass-zero ν with continuous potential, and ⟨φ, φ⟩_v ≤ C Lip(φ)² for C¹ functions on P¹(ℂ) (chordal metric).
 
-Metrics and Chambert-Loir measures: (6) on P¹ over C_v, continuous metrics on O(1)^an are ‖·‖_st `e^{−φ}` with φ : P¹_v^an → ℝ continuous (‖s(x)‖_st = |s(x₀, x₁)|/max(|x₀|, |x₁|)); the curvature is the distribution λ_v + Δφ; for semipositive metrics, or differences of semipositive metrics, it is a finite Radon measure of total mass deg O(1) = 1; a general continuous metric is not asserted to have measure-valued curvature, and semipositivity (uniform limit of semipositive model metrics) is equivalent on P¹ to positivity of c₁; at a finite place, the model metric of `P¹_{O_{C_v}}` is ‖·‖_st with c₁ = `δ_{ζ_{0,1}};` (7) for a projective variety X of dimension n over C_v and a line bundle L with semipositive continuous metric, the measure c₁(L̄)^n on X^an is positive of total mass deg_L X and continuous in the metric for uniform convergence; model functions are dense in C(X^an) (Yuan §3.3, model-function density theorem) at finite places, and c₁(L̄)^n is the Monge–Ampère measure at infinite places.
+Metrics and Chambert-Loir measures: (6) on P¹ over C_v, continuous metrics on O(1)^an are ‖·‖_st `e^{−φ}` with φ : P¹_v^an → ℝ continuous (‖s(x)‖_st = |s(x₀, x₁)|/max(|x₀|, |x₁|)); the curvature is the distribution λ_v + Δφ; for semipositive metrics, or differences of semipositive metrics, it is a finite Radon measure of total mass deg O(1) = 1; a general continuous metric is not asserted to have measure-valued curvature, and semipositivity (uniform limit of semipositive model metrics) is equivalent on P¹ to positivity of c₁; at a finite place, the model metric of `P¹_{O_{C_v}}` is ‖·‖_st with c₁ = `δ_{ζ_{0,1}}`.
 
 Here continuity of a logarithmic potential on the projective line always means
 continuity after subtracting the total mass times log⁺|z|. The unmodified
@@ -3332,7 +3280,7 @@ Prove the following basic API.
 
 **Endpoint checks.** Test berkovichEscapePotential_gauss_padicCantor.
 
-Applications include The canonical measure `µ_{f,v}` on the Berkovich line — `µ_{f,v}` = Δĝ_F + `δ_{ζ_{0,1}};` DeMarco–Krieger–Ye §2.4 and §3 (Layer 6) — `λ_{t,v}` is continuous and subharmonic on `A^{1,an}_v;` Propositions 3.3–3.6 compute it on intervals of the tree; Layer 4 energies (DeMarco–Krieger–Ye (2.10)–(2.12)) — local energies integrate differences of these potentials against canonical measures; DeMarco–Krieger–Ye §4.1, (4.2), (4.8) (Layer 6) — the escape potential of the degenerating family over ℂ((T)) is computed explicitly.
+Applications include The canonical measure `µ_{f,v}` on the Berkovich line — `µ_{f,v}` = Δĝ_F + `δ_{ζ_{0,1}}`. DeMarco–Krieger–Ye §2.4 and §3 (Layer 6) — `λ_{t,v}` is continuous and subharmonic on `A^{1,an}_v;` Propositions 3.3–3.6 compute it on intervals of the tree; Layer 4 energies (DeMarco–Krieger–Ye (2.10)–(2.12)) — local energies integrate differences of these potentials against canonical measures; DeMarco–Krieger–Ye §4.1, (4.2), (4.8) (Layer 6) — the escape potential of the degenerating family over ℂ((T)) is computed explicitly.
 
 ### 2.66 The canonical measure at an archimedean place
 
@@ -3461,7 +3409,7 @@ Setting: K is a complete nonarchimedean field (algebraically closed where stated
 
 K complete nonarchimedean d ≥ 2
 
-For the n-step potential g_n, Poincaré–Lelong and pullback compatibility (Layer 2 Nonarchimedean potential theory and local degrees) give δ_ζ + Δg_n = `d^{−n}(fⁿ)^*δ_ζ,` a positive probability measure. Hence the total variation of Δg_n is at most 2. Uniform convergence g_n → ĝ_F (The escape potential on the Berkovich line), together with Layer 2 Nonarchimedean potential theory and local degrees weak continuity of the Laplacian under this uniform variation bound, produces a finite signed Δĝ_F and its positive probability measure δ_ζ + Δĝ_F. Uniform convergence alone would not imply bounded differential variation. Define `µ_{f,v}` = Δĝ_F + `δ_{ζ_{0,1}};` independence of the lift follows from berkovichEscapePotential_const_smul_lift.
+For the n-step potential g_n, Poincaré–Lelong and pullback compatibility (Layer 2 Nonarchimedean potential theory and local degrees) give δ_ζ + Δg_n = `d^{−n}(fⁿ)^*δ_ζ,` a positive probability measure. Hence the total variation of Δg_n is at most 2. Uniform convergence g_n → ĝ_F (The escape potential on the Berkovich line), together with Layer 2 Nonarchimedean potential theory and local degrees weak continuity of the Laplacian under this uniform variation bound, produces a finite signed Δĝ_F and its positive probability measure δ_ζ + Δĝ_F. Uniform convergence alone would not imply bounded differential variation. Define `µ_{f,v}` = Δĝ_F + `δ_{ζ_{0,1}}`. independence of the lift follows from berkovichEscapePotential_const_smul_lift.
 
 *Needs:* [The escape potential on the Berkovich line](#265-the-escape-potential-on-the-berkovich-line); Layer 2, The native analytic projective line; Layer 2, Nonarchimedean potential theory and local degrees.
 
@@ -4258,21 +4206,21 @@ For d≥2 let K_c={z: the forward orbit under f_c=z^d+c is bounded}, using the e
 
 d≥2; normalization at ∞ fixes the d−1 root-of-unity ambiguity. For disconnected K_c do not assert a global Böttcher isomorphism ℂ∖K_c; use maximal rays and their critical obstructions.
 
-Construct the near ∞ Böttcher coordinate from iterated d-th roots and uniform convergence, normalized by its asymptotic expansion. Extend on the escaping basin when K_c is connected; prove parameter uniformization and connectivity of M_d using the critical-value coordinate. Analytic continuation along rays defines the maximal external ray; continuation ends at a precritical point or lands on K_c. The Böttcher, parameter-uniformization and ray-limit contracts in the indicated layers are the dynamical inputs. General conformal continuation and monodromy come from ConformalMapping.
+Construct the near ∞ Böttcher coordinate from iterated d-th roots and uniform convergence, normalized by its asymptotic expansion. Extend on the escaping basin when K_c is connected; prove parameter uniformization and connectivity of M_d using the critical-value coordinate. Analytic continuation along rays defines each external ray on its maximal radial interval. An obstruction at positive potential is precritical; if the radial parameter reaches potential zero, the ray has a nonempty compact connected accumulation set in K_c, which need not be a singleton. Assert a landing point only when that radial limit exists, as in the separate periodic-ray landing theorems. The Böttcher, parameter-uniformization and ray-limit contracts in the indicated layers are the dynamical inputs. General conformal continuation and monodromy come from ConformalMapping.
 
 *Needs:* `AddCircle`; ConformalMapping Layers, L4 (analytic continuation and the reflection principle); [`G_{F,v}(x)` ≤ 0 exactly on the filled Julia set of F](#252-g_fvx--0-exactly-on-the-filled-julia-set-of-f).
 
-([gao-ou](#gao-ou), §3.3, pp.14–18 — Böttcher coordinates, dynamical and parameter rays, and critical obstructions.)
+([gao-ou](#gao-ou), §3.3, pp.14–18 — Böttcher coordinates, dynamical and parameter rays, and critical obstructions; [kiwi-cremer-1995](#kiwi-cremer-1995), §§1–2, pp.2–3 — Nonlanding rays and their accumulation continua.)
 
 Prove the following basic API.
 
 - Normalized conformal conjugacy near ∞ with φ_c(z)/z→1.
 - Two normalized germs satisfying the conjugacy coincide.
 - φ_c∘f_c=(φ_c)^d on its specified domain.
-- Inverse radial curve on its maximal continuation domain, with specified endpoint or critical obstruction.
+- Inverse radial curve on its maximal continuation domain, with a precritical obstruction at positive potential or a compact connected accumulation set in K_c at potential zero; a singleton accumulation set supplies its landing point.
 - Inverse radial curve for Φ_d(c)=φ_c(c).
 - Landing is the limit of the actual ray as its radial parameter tends down to 1, when it exists.
-- f_c sends an unobstructed ray of angle θ to angle dθ and sends their landing points accordingly.
+- f_c sends an unobstructed ray of angle θ to angle dθ; when the first ray lands, continuity gives the landing point of its image.
 - Normalized parameter biholomorphism is fixed by Φ_d(c)=φ_c(c), not an arbitrary Riemann map.
 
 **Checks.**
@@ -4280,6 +4228,7 @@ Prove the following basic API.
 - c=0: dynamic ray θ lands at exp(2πiθ), and f_c carries that endpoint to exp(2πidθ).
 - θ=0,c=0: the ray is the positive real half-line (1,∞), with endpoint 1.
 - For d=2,c=2, the critical point escapes; a global conformal equivalence of its whole complement with the exterior unit disc is not the claimed coordinate.
+- For a quadratic Cremer parameter in [kiwi-cremer-1995](#kiwi-cremer-1995), §1, p.2, a ray accumulates at a fixed point p and its distinct preimage −p. Here f_c(p)=f_c(−p)=p and p≠−p, so its accumulation set contains at least two points although the critical point does not escape. A mandatory landing endpoint would exclude this example.
 
 **Endpoint checks.** For c=0, φ_c(z)=z outside the unit disc and the ray landing point is exp(2πiθ). Ray landing below is a separate theorem; general Carathéodory for Jordan boundaries does not imply it for Multibrot sets.
 
@@ -5196,7 +5145,7 @@ Applications include Flynn–Poonen–Schaefer 1995, §§2–4 — rational poin
 
 Use §3.66a the dynatomic local-equation comparison for the local ideal comparison, reducedness and algebraic smoothness. Transfer smooth analytic connectedness, proved by marked monodromy, to geometric integrality, and descend faithfully to characteristic-zero fields. State the local equation comparison rather than only equality of zero sets; use the monic factorization of f_cⁿ−x and the formal-period classification. Algebraic Jacobian criteria and AlgebraicCurves regular models are inputs to this Layer 3 bridge (Gao–Ou §3).
 
-For d≥2,n≥1, the complex zero scheme of the Φ*ₙ,d is reduced, smooth and geometrically integral; its complex points are the closure in ℂ² of exact n-period pairs with multiplier≠1. At a pair of exact period m dividing n with multiplier of order r>1, it belongs to that closure exactly when n=mr; multiplier 1 points of exact n-period also belong. The complex smoothness/irreducibility descends to any characteristic-zero field by the integral-coefficient model and faithful field extension. Prove geometric integrality of the dynatomic curve by this local comparison followed by §3.67 marked monodromy and faithful descent.
+For d≥2,n≥1, the complex zero scheme of the Φ*ₙ,d is reduced, smooth and geometrically integral; its complex points are the closure in ℂ² of exact n-period pairs with multiplier≠1. At a pair of exact period m dividing n with multiplier of order r>1, it belongs to that closure exactly when n=m or n=mr. The n=m case is in the open exact-period, multiplier≠1 locus; the n=mr case is in its complement in the closure. Multiplier 1 points of exact n-period also belong to that complement. The complex smoothness/irreducibility descends to any characteristic-zero field by the integral-coefficient model and faithful field extension. Prove geometric integrality of the dynatomic curve by this local comparison followed by §3.67 marked monodromy and faithful descent.
 
 d≥2,n≥1; do not identify every root of f_c^n(z)−z with a dynatomic point. Formal/exact-period classification is the one; boundary means closure minus the open exact-period, multiplier≠1 locus, not the topological boundary of a curve in ℂ².
 
@@ -5206,7 +5155,11 @@ Use the formal-period classification to list possible lower-period roots. Local 
 
 ([gao-ou](#gao-ou), Theorems 1.1–1.2 p.1, Theorem 2.1 p.2; §2.2 pp.4–9 and §3.5 pp.28–29 — Analytic closure and local branch description; [fps](#fps), §2, pp.3–4 — Algebraic dynatomic curve and geometric irreducibility over ℚ.)
 
-**Endpoint checks.** (c,z)=(−3/4,−1/2) belongs to the period 2 curve but is exact period 1, with multiplicity 2 in the specialized Φ₂. (c,z)=(1/4,1/2) is on the period 1 closure although removed from its multiplier≠1 open subset.
+**Checks.**
+
+- For (c,z)=(−3/4,−1/2), f_c(z)=−1/2 and f′_c(z)=−1. Thus m=1,r=2: Φ*₁(z,c)=0 and Φ*₂(z,c)=0, so n=m and n=mr both occur; the first pair is in the open period-one locus.
+- At the same pair Φ*₃(z,c)=1, so n=3 is excluded; divisibility m∣n alone does not give membership.
+- For (c,z)=(1/4,1/2), f_c(z)=1/2 and f′_c(z)=1: Φ*₁(z,c)=0 but this pair is outside the multiplier≠1 open locus and inside its closure.
 
 ### 3.71 A root of Φ*₂ of exact period one: z² − 3/4 at −1/2
 
@@ -5579,23 +5532,36 @@ Prove compatibility of projective analytification with composition, compactness 
 - The projective line agrees with the local analytic carrier, including its Gauss point.
 - A nonproper affine line is not compact; properness cannot be dropped.
 
-### 4.2 Global adelic intersections and successive minima
+### 4.1a Local curvature measures and model functions in every dimension
 
-For a projective n-dimensional variety X over a number field, construct the adelic intersection ĉ₁(L̄₀)⋯ĉ₁(L̄_n) for integrable adelic metrized line bundles, first for model metrics and then by uniform approximation. Require symmetry, multilinearity, continuity and the induction formula using sections and the local measures of Layer 2 Local mutual energy and test functions. Define normalized subvariety heights and prove Zhang's successive-minima inequality: for semipositive L̄ with L ample, the liminf along a generic sequence is at least h_L̄(X). These are the projective-variety outputs constructed here; arithmetic-curve or arithmetic-surface intersections alone do not suffice. The local P¹ energy theory is independent of this contract (Yuan §3, especially the hypotheses of Theorem 3.1).
+For a projective variety X of dimension n over C_v and a line bundle L with a semipositive continuous local metric, construct c₁(L̄)^n on the analytification of §4.1. It is a positive Radon measure of total mass deg_L X and is continuous under uniform convergence of semipositive metrics. This construction allows local metrics without a chosen global adelic origin. At finite places use model intersection measures and uniform limits; at infinite places use the Monge–Ampère measure. For a metric induced by a global semipositive adelic bundle, prove that division by deg_L X>0 agrees with HeightsRationalPointsAndObstructions §5.17b `cycleProbabilityMeasure` (chambert-loir-2006, §2, pp.4–9; yuan2008, §3.3, pp.39–42).
 
-Applications include [Equidistribution of small points for semipositive adelic line bundles (Yuan)](#411-equidistribution-of-small-points-for-semipositive-adelic-line-bundles-yuan).
+Define a finite-place model function as −log‖1‖ for a rational model metric on the trivial bundle, allowing rational powers of models. Its source is X^an and its target ℝ. Prove that their real span is uniformly dense in C(X^an,ℝ), and that changing a model on a common dominating model does not change the resulting function. At infinite places use restrictions of smooth ambient functions. These functions are the test functions for §4.11, while the P¹ energy and curvature comparison is §2.5 (Yuan §3.3, Definition 3.4 and the following Gubler density theorem, p.40).
 
-Define adelic intersection and normalized subvariety height on the stated integrable metric domain by the preceding construction. Prove symmetry and additivity of the adelic intersection, continuity under uniform limits on the stated domain, and the successive-minima inequality for the adelic height.
+The basic API is mass, additivity of model functions, compatibility with pullback of functions, invariance under refinement of models, uniform continuity of the measure in its metric, and agreement on P¹ with §2.5. Only positive geometric degree permits probability normalization.
 
 **Checks.**
 
-- On ℙ¹ the height of the whole curve is half its metrized self-intersection; the dimension factor is 2.
-- A point has no positive-dimensional genericity condition; its height is the section degree normalized by its field degree.
-- The standard metric on O(1) on ℙ¹ has self-intersection zero, whereas adding a global constant shifts the height and changes self-intersection by twice that constant.
+- On ℙ¹ with the standard finite-place metric on O(1), the measure is δ_G and has mass 1. On O(2) the mass is 2, not 1; division by the degree returns δ_G.
+- At n=0, a C_v-point has degree and measure mass 1; on ℙ¹ the trivial metric on the trivial bundle has curvature and mass 0, and cannot be normalized to a probability.
+- The constant function 1 belongs to the real span of model functions at a finite place and integrates to deg_L X; for the standard O(2) example this is 2.
+- A pointwise metric limit without uniform control is not the convergence hypothesis; O(−1) has degree −1 on ℙ¹ and cannot carry a semipositive metric.
+
+*Needs:* §4.1 projective analytification; SchemeAndStackFoundations Layer 5 model intersection degrees; HeightsRationalPointsAndObstructions §5.17b for the global comparison; §2.5 for the P¹ comparison.
 
 ### 4.3 Arithmetic Siu inequality
 
-For ample hermitian line bundles L̄,M̄ and a hermitian line bundle Ē on an n-dimensional arithmetic variety, prove χ_sup(Ē+N(L̄−M̄)) ≥ `(ĉ₁(L̄)^n−nĉ₁(L̄)^{n−1}ĉ₁(M̄))N^n/n!+o(N^n).` Include the adelic form. Prove also the arithmetic Hilbert–Samuel formula and Bouche–Tian distortion estimates used in the proof (Yuan Theorem 2.2 and Lemma 3.3).
+For ample hermitian line bundles L̄,M̄ and a hermitian line bundle Ē on an n-dimensional arithmetic variety, prove χ_sup(Ē+N(L̄−M̄)) ≥ `(ĉ₁(L̄)^n−nĉ₁(L̄)^{n−1}ĉ₁(M̄))N^n/n!+o(N^n).` Include the adelic form. Use HeightsRationalPointsAndObstructions §§5.17a–d for the intersection, section-lattice, Hilbert–Samuel and positive-bundle analytic inputs. The additional target here is Yuan's arithmetic Siu inequality and its adelic perturbation form: for an ample L with semipositive adelic metric and a smooth archimedean test function f, χ_sup(NL̄(εf))≥(ĉ₁(L̄(εf))^n+O(ε²))N^n/n!+o(N^n), where the O(ε²) constant is independent of N. At finite places use model functions and the corresponding model twists (Yuan Theorem 2.2, p.10; Lemma 3.3, pp.36–37; §3.3, pp.39–42).
+
+Here n is the absolute dimension of the arithmetic model, one more than the generic-fibre dimension. The adelic χ and intersections have the same division by [K:ℚ]; ε tends to zero only after N tends to infinity. Write f as a difference of positive model metrics, apply the arithmetic inequality and pass to the supplied uniform model limits.
+
+**Checks.**
+
+- On Spec ℤ, n=1 and the leading coefficient is deg L̄−deg M̄, with denominator 1!=1.
+- On an arithmetic surface, n=2 and L̄=M̄, the Siu leading coefficient is −ĉ₁(L̄)²/2; a lower bound need not equal the actual leading term 0 for the zero difference.
+- For a constant twist f=1 on ℙ¹ at its archimedean place over ℚ, h increases by ε and self-intersection by 2ε; the first-order coefficient agrees with the height normalization.
+
+*Needs:* HeightsRationalPointsAndObstructions §§5.17a–d; §4.1 projective analytification; §4.1a local measures and model functions.
 
 Applications include [Equidistribution of small points for semipositive adelic line bundles (Yuan)](#411-equidistribution-of-small-points-for-semipositive-adelic-line-bundles-yuan).
 
@@ -5603,7 +5569,7 @@ Applications include [Equidistribution of small points for semipositive adelic l
 
 For a quasi-projective variety X over a number field K, or over a one-variable function field K/k with arbitrary constant field k, construct the quasi-projective adelic Picard group from projective models over ℤ or k and the boundary topology. On a common dominating model, a boundary divisor D supported on the complement controls differences by −εD≤E≤εD. Prove independence of the boundary topology for changes of boundary divisor and compactification; construct the separated completion and the nef and integrable classes. Define pullback for morphisms and its functoriality, and the analytic-metric realization a quasi-projective adelic metric, compatibly with pullback. These are Yuan–Zhang v9 §2.4, pp.36–49, Lemma 2.4.1, §2.5 (relative theory), §§3.3–3.5 (analytic realization).
 
-Construct the quasi-projective adelic intersection and normalized point and subvariety heights for integrable adelic bundles, with symmetry, multilinearity, projection formula, boundary-topology continuity and finite-extension compatibility. For a dimension-n subvariety require positive geometric degree when dividing by (n+1)deg_L; do not assign a normalized height through a zero denominator. Prove agreement with the projective adelic intersection with §4.2 over projective number-field varieties (Yuan–Zhang v9 §3.5.2, §4.1, §§5.3–5.4).
+Construct the quasi-projective adelic intersection and normalized point and subvariety heights for integrable adelic bundles, with symmetry, multilinearity, projection formula, boundary-topology continuity and finite-extension compatibility. For a dimension-n subvariety require positive geometric degree when dividing by (n+1)deg_L; do not assign a normalized height through a zero denominator. Prove agreement with the projective adelic intersection with HeightsRationalPointsAndObstructions §5.17b over projective number-field varieties (Yuan–Zhang v9 §3.5.2, §4.1, §§5.3–5.4).
 
 **Checks.**
 
@@ -5611,7 +5577,7 @@ Construct the quasi-projective adelic intersection and normalized point and subv
 - On A¹ inside ℙ¹, D=∞ and 2D induce equivalent boundary topologies; the completion cannot depend on this scaling or on a dominating compactification.
 - Over k(t), the model O(1) height of the moving point t is 1 and that of a constant is 0, using §0.27b. Uniform metric approximation on a single number-field model does not cover this case.
 
-*Needs:* §4.1 projective analytification, §4.2 projective intersections, SchemeAndStackFoundations §0.3 projective models and Layer 5 intersection degrees; Layer 2 local measures.
+*Needs:* §4.1 projective analytification, HeightsRationalPointsAndObstructions §5.17b projective intersections, SchemeAndStackFoundations §0.3 projective models and Layer 5 intersection degrees; §4.1a general local measures; §2.5 P¹ local measures.
 
 ### 4.4 Quasi-projective adelic equidistribution
 
@@ -5785,19 +5751,21 @@ Infinite place: P¹(ℂ) is a compact metric space for the chordal metric, g is 
 
 ### 4.11 Equidistribution of small points for semipositive adelic line bundles (Yuan)
 
-Let X be a projective variety of dimension n ≥ 1 over a number field K and L̄ = (L, (‖·‖_v)_v) an ample line bundle with a semipositive adelic metric (at every place a uniform limit of semipositive model metrics, and the model metric of one integral model at almost all places; Layer 2 Local mutual energy and test functions). Put h_L̄(X) := `ĉ₁(L̄)^{n+1}/((n` + 1) deg_L X) and h_L̄(x) := ĉ₁(L̄|_x̄)/deg x. If (x_m) is a generic sequence in X(K̄) with h_L̄(x_m) → h_L̄(X), then for every place v the Galois-orbit probability measures `µ_{v,x_m}` converge weakly on X_v^an to c₁(L̄_v)^n / deg_L(X), a probability measure because c₁(L̄_v)^n has total mass deg_L X.
+Let X be a projective variety of dimension n ≥ 1 over a number field K and L̄ = (L, (‖·‖_v)_v) an ample line bundle with a semipositive adelic metric (at every place a uniform limit of semipositive model metrics, and the model metric of one integral model at almost all places; §4.1a local curvature measures and model functions). Put h_L̄(X) := `ĉ₁(L̄)^{n+1}/((n` + 1) deg_L X) and h_L̄(x) := ĉ₁(L̄|_x̄)/deg x. If (x_m) is a generic sequence in X(K̄) with h_L̄(x_m) → h_L̄(X), then for every place v the Galois-orbit probability measures `µ_{v,x_m}` converge weakly on X_v^an to c₁(L̄_v)^n / deg_L(X), a probability measure because c₁(L̄_v)^n has total mass deg_L X.
 
 X projective, dim X = n ≥ 1; L ample with semipositive adelic metric; (x_m) generic and small.
 
-Reduce to the geometric case over `X_{C_v}^an` and to test functions f that are smooth (infinite v) or model functions (finite v; the model-function density theorem stated in Yuan §3.3, Layer 2 Local mutual energy and test functions), by Stone–Weierstrass (Yuan §3.1–3.3). Variational principle: for ε > 0 twist the metric at v by `e^{−εf},` L̄(εf); then `h_{L̄(εf)}(x_m)` = h_L̄(x_m) + r_v ε ∫ f `dµ_{v,x_m}.` Write O(f) as a difference of two ample metrized line bundles and apply Yuan's arithmetic Siu inequality (Theorem 2.2; Lemma 3.3) to obtain small sections of N·L̄(εf), hence liminf_m `h_{L̄(εf)}(x_m)` ≥ `ĉ₁(L̄(εf))^{n+1}/((n+1)deg_L` X) + O(ε²) for the generic sequence (Zhang's successive-minima inequality). Expand `ĉ₁(L̄(εf))^{n+1}` = `ĉ₁(L̄)^{n+1}` + (n+1)r_v ε ∫ f c₁(L̄_v)^n + O(ε²); divide by ε and let ε → 0⁺, then replace f by −f. The global inputs (adelic intersection numbers, heights of subvarieties, arithmetic Siu, successive minima) are the global intersection and equidistribution contracts in the indicated layers; the local measures and model approximation come from Layer 2 Local mutual energy and test functions, the analytification X_v^an from Layer 2 The native analytic projective line and deg_L X from SchemeAndStackFoundations Layer 5.
+Reduce to the geometric case over `X_{C_v}^an` and to test functions f that are smooth (infinite v) or model functions (finite v; the model-function density theorem stated in Yuan §3.3, §4.1a local curvature measures and model functions), by Stone–Weierstrass (Yuan §3.1–3.3). Variational principle: for ε > 0 twist the metric at v by `e^{−εf},` L̄(εf); then `h_{L̄(εf)}(x_m)` = h_L̄(x_m) + r_v ε ∫ f `dµ_{v,x_m}.` Write O(f) as a difference of two ample metrized line bundles and apply Yuan's arithmetic Siu inequality and adelic Minkowski to the perturbed section lattices. For large N obtain a nonzero section whose weighted logarithmic sup norms have sum at most N(−h_L̄(εf)(X)+O(ε²))+o(N); the constant in O(ε²) is independent of N. A generic sequence eventually avoids its divisor, so computing point heights with that section gives liminf_m `h_{L̄(εf)}(x_m)` ≥ `ĉ₁(L̄(εf))^{n+1}/((n+1)deg_L` X) + O(ε²). This step applies to the perturbed integrable metric without assuming it remains semipositive (Yuan Lemma 3.3 and the argument following it, pp.36–38). Expand `ĉ₁(L̄(εf))^{n+1}` = `ĉ₁(L̄)^{n+1}` + (n+1)r_v ε ∫ f c₁(L̄_v)^n + O(ε²); divide by ε and let ε → 0⁺, then replace f by −f. The global inputs (adelic intersection numbers, heights of subvarieties, arithmetic Siu, successive minima) are HeightsRationalPointsAndObstructions §§5.17a–f together with §4.3 arithmetic Siu; the local measures and model approximation come from §4.1a, the analytification X_v^an from §4.1 and deg_L X from SchemeAndStackFoundations Layer 5.
 
-*Needs:* [Generic sequences of algebraic points](#47-generic-sequences-of-algebraic-points); Layer 2, Local mutual energy and test functions; Layer 2, The native analytic projective line; SchemeAndStackFoundations Layer 5.
+*Needs:* §4.1 projective analytification; §4.1a local measures and model-function density; HeightsRationalPointsAndObstructions §§5.17a–f, including §5.17d section lattices and its adelic Minkowski input; §4.3 arithmetic Siu; [Generic sequences of algebraic points](#47-generic-sequences-of-algebraic-points); SchemeAndStackFoundations Layer 5.
 
 ([yuan2008](#yuan2008), Theorem 3.1, pp. 34–35 — The conclusion (Yuan's dim X = n − 1); [yuan2008](#yuan2008), §3.1, p. 33 — The height of X; [yuan2008](#yuan2008), §1.3, p. 7 — The proof strategy.)
 
-**Endpoint checks.** For (X, L̄) = (P¹, Ō(1)) with φ semipositive the theorem is Equidistribution of small points for semipositive adelic metrics on `O_{P¹}(1)` (h_L̄(P¹) = ½ Ō·Ō). For an abelian variety with the Néron–Tate metric of a symmetric ample bundle it is the Szpiro–Ullmo–Zhang theorem consumed by HeightsRationalPointsAndObstructions RP.5. Genericity cannot be dropped: torsion points of an abelian subvariety B ⊊ A equidistribute to the Haar measure of B(ℂ), not of A(ℂ).
+**Endpoint checks.** For (X, L̄) = (P¹, Ō(1)) with φ semipositive the theorem is Equidistribution of small points for semipositive adelic metrics on `O_{P¹}(1)` (h_L̄(P¹) = ½ Ō·Ō). For an abelian variety with the Néron–Tate metric of a symmetric ample bundle it is the archimedean conclusion of HeightsRationalPointsAndObstructions RP.5; that supplier's proof does not use §4.11. Genericity cannot be dropped: torsion points of an abelian subvariety B ⊊ A equidistribute to the Haar measure of B(ℂ), not of A(ℂ).
 
-**Construction.** [adelic line bundles on projective varieties over number fields, their intersection numbers and Zhang's successive minima](#42-global-adelic-intersections-and-successive-minima); [Yuan's arithmetic Siu inequality (arithmetic bigness)](#43-arithmetic-siu-inequality).
+**Perturbation check.** On the complex projective line with the standard O(1) metric, choose a smooth test function f equal to −|z|² on |z|≤1/2 and zero for |z|≥3/4. On a disc of radius r≤1/4, the curvature of the metric twisted by e^(−εf) has mass −2εr². At ε=1/10,r=1/4 this is −1/80, so the perturbed metric is integrable but not semipositive; applying only the semipositive successive-minima theorem would not justify the variational step.
+
+**Construction.** HeightsRationalPointsAndObstructions §§5.17a–f; [Yuan's arithmetic Siu inequality (arithmetic bigness)](#43-arithmetic-siu-inequality).
 
 ### 4.12 Adelic measures on the projective line
 
@@ -6401,7 +6369,7 @@ For x ∈ K̄ with orbit O: `h_{φ^ρ}(x)` = absLogHeight₁(x) + Σ_v r_v `|O|^
 
 ### 4.39 The Arakelov–Zhang pairing of adelic metrics on O(1)
 
-For arbitrary local metric families this section defines the pairing by its local formulas. Its comparison with the global adelic intersection of §4.2 assumes both metrics are locally Galois invariant, so they descend over K.
+For arbitrary local metric families this section defines the pairing by its local formulas. Its comparison with the absolute projective adelic intersection of HeightsRationalPointsAndObstructions §5.17b assumes both metrics are locally Galois invariant, so they descend over K.
 
 For semipositive adelic metrics φ₁, φ₂ on O(1) over K with curvatures µ₁, µ₂, the Arakelov–Zhang pairing is Ō₁·Ō₂ := Σ_v r_v [`φ_{2,v}(∞)` + ∫ (log⁺|z|_v + `φ_{1,v}(z))` `dµ_{2,v}(z)`], the value of Zhang's arithmetic intersection number h₁((u)) + h₂((s)) + Σ_v r_v ∫ `log‖s‖_{1,v}^{-1}` `Δ(log‖u‖_{2,v}^{-1})` at the sections s = x₁ (divisor ∞) and u = x₀ (divisor 0). The sum is finite. For rational maps f, g of degree ≥ 2 over K, the pairing of their canonical adelic metrics is the dynamical Arakelov–Zhang pairing ⟨f, g⟩ (The Arakelov–Zhang pairing of two rational maps).
 
@@ -6409,7 +6377,7 @@ For semipositive adelic metrics φ₁, φ₂ on O(1) over K with curvatures µ�
 
 The integral is finite: log⁺|z|_v + `φ_{1,v}` is `µ_{2,v}-integrable` because `µ_{2,v}` has continuous potential (Layer 2 Local mutual energy and test functions; FRL Lemmas 2.4 and 4.3). At the places where φ₁ = φ₂ = 0 the term is ∫ log⁺ dλ_v = 0. The value at s = x₁, u = x₀: h₁(0) + h₂(∞) + Σ_v r_v [∫(log⁺|z| + φ₁) dµ₂ − `φ_{1,v}(0)`], and h₁(0) = Σ_v r_v `φ_{1,v}(0)` (The height of an adelic metric on O(1)), giving the formula.
 
-*Needs:* [Curvature measures and semipositivity of an adelic metric on O(1)](#421-curvature-measures-and-semipositivity-of-an-adelic-metric-on-o1); [The height of an adelic metric on O(1)](#434-the-height-of-an-adelic-metric-on-o1); Layer 2, Local mutual energy and test functions.
+*Needs:* HeightsRationalPointsAndObstructions §5.17b for the global intersection comparison; [Curvature measures and semipositivity of an adelic metric on O(1)](#421-curvature-measures-and-semipositivity-of-an-adelic-metric-on-o1); [The height of an adelic metric on O(1)](#434-the-height-of-an-adelic-metric-on-o1); Layer 2, Local mutual energy and test functions.
 
 ([demarco-krieger-ye-2020](#demarco-krieger-ye-2020), (2.9), p. 10 — Zhang's pairing written with two sections; [pst2012](#pst2012), §4.3, (18), p. 10 — The dynamical case; [pst2012](#pst2012), §1.4, (2), p. 3 — The identification with Zhang's intersection product.)
 
@@ -6948,7 +6916,7 @@ For power maps the canonical adelic measure agrees with the standard adelic meas
 
 ### Dependencies
 
-Layers 0–2; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SchemeAndStackFoundations Layer 5 intersection degrees; RP.0 heights; the specified global adelic intersection and bifurcation contracts for the general-variety and moduli endpoints.
+Layers 0–2; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SchemeAndStackFoundations Layer 5 intersection degrees; RP.0 heights; HeightsRationalPointsAndObstructions §§5.17a–f for projective adelic foundations; §§4.1–4.1a for general analytification, local curvature and density; §4.3 arithmetic Siu and §4.5 bifurcation theory for the general-variety and moduli endpoints.
 
 ## Layer 5: Arboreal Galois representations
 
@@ -7226,7 +7194,7 @@ Prove the following basic API.
 - For g = id every level of T(id, α) has exactly one element.
 - T(z ↦ z², 0) on ℂ is not 2-regular (0 is a critical value; each level is {0}).
 - For deg f ≥ 1, membership in level n of T(f, α; L) is membership in (fⁿ − α).rootSet L.
-- For f = 0 and α = 0 over ℚ, the set-theoretic level 1 is all of ℚ, whereas Polynomial.rootSet (0 : ℚ[X]) ℚ is empty. Thus the rootSet comparison requires positive degree even though the self-map tree does not.
+- For f = 0 and α = 0 over ℚ, the set-theoretic level 1 is all of ℚ, whereas Polynomial.rootSet (0 : ℚ[X]) ℚ is empty. Thus the rootSet comparison requires a nonzero iterate polynomial (positive degree is sufficient), even though the self-map tree does not.
 
 **Endpoint checks.** For z ↦ z² on ℂ and α = 1, level n is the set of 2ⁿ-th roots of unity and has 2ⁿ elements. For z ↦ z² on ℂ and α = 0 every level is {0}: the tree is not 2-regular (critical collision).
 
@@ -7311,32 +7279,32 @@ Applications include Jones, arboreal survey, §1.1, p. 4 — natural injections 
 
 ### 5.16 The Galois action on the preimage tree
 
-Let K ⊆ L be fields, f ∈ K[x] and α ∈ K. Every σ ∈ Gal(L/K) = (L ≃ₐ[K] L) maps level n of T(f, α; L) to itself by x ↦ σ(x) and commutes with the corresponding maps, because σ(f(x)) = f(σ(x)) and σ(α) = α. This defines a group homomorphism galoisTreeAction : Gal(L/K) → Aut(T(f, α; L)). On level n it agrees with Mathlib's Polynomial.Gal.galActionHom of fⁿ − α composed with the restriction Polynomial.Gal.restrict, when fⁿ − α splits over L.
+Let K ⊆ L be fields, f ∈ K[X] and α ∈ K. Every σ ∈ Gal(L/K) = (L ≃ₐ[K] L) maps level n of T(f,α;L) to itself by x↦σ(x) and commutes with the parent maps, because σ(f(x))=f(σ(x)) and σ(α)=α. This defines the homomorphism galoisTreeAction : Gal(L/K) → Aut(T(f,α;L)) for every f, including constant polynomials.
 
-None for the construction. The comparison with galActionHom needs fⁿ − α to split over L.
+Put q_n=(f.comp^[n] X)−C α. When q_n≠0, construct the equivalence from the level {x∈L : f^[n](x)=α} to Polynomial.rootSet q_n L by the identity on underlying elements. Polynomial.mem_rootSet identifies its membership condition with q_n≠0 and q_n(x)=0; no splitting or separability hypothesis is needed for this equivalence. If q_n also splits over L, transport the level action through this equivalence and prove that it is Polynomial.Gal.galActionHom q_n L composed with Polynomial.Gal.restrict q_n L. The tree action itself needs neither of these hypotheses. The sufficient condition 1≤f.natDegree makes q_n nonzero for every n, but the comparison retains the more general levelwise hypothesis.
 
-σ(aeval x f) = aeval (σ x) f (Polynomial.aeval_algHom_apply), so σ commutes with y ↦ f(y) and fixes algebraMap α; hence σ^[n]-compatibility and σ maps `g^{-n}(α)` to itself. Levelwise permutations with inverse `σ^{-1}.` Homomorphism: levelwise, (στ)(x) = σ(τ(x)). levelHom_galoisTreeAction_coe: by construction the level-n action is σ on the underlying element of L. Comparison: Polynomial.Gal.galActionHom_restrict gives galActionHom (fⁿ − α) L (restrict σ) x = σ x; both sides are σ x.
+Polynomial.aeval_algHom_apply proves the parent-map compatibility; inverse field automorphisms give inverse permutations, and composition holds levelwise. After constructing the carrier equivalence, Polynomial.Gal.galActionHom_restrict identifies the underlying value of the transported action with σ(x).
 
-*Needs:* [The preimage tree T_∞(g, α) of a point under a self-map](#511-the-preimage-tree-t_g-α-of-a-point-under-a-self-map); [The automorphism group Aut(T) of a level tower and its profinite topology](#510-the-automorphism-group-autt-of-a-level-tower-and-its-profinite-topology); `Polynomial.aeval_algHom_apply`; `Polynomial.Gal.galActionHom`; `Polynomial.Gal.galActionHom_restrict`; `Polynomial.Gal.restrict`.
+*Needs:* [The preimage tree T_∞(g, α) of a point under a self-map](#511-the-preimage-tree-t_g-α-of-a-point-under-a-self-map); [The automorphism group Aut(T) of a level tower and its profinite topology](#510-the-automorphism-group-autt-of-a-level-tower-and-its-profinite-topology); `Polynomial.aeval_algHom_apply`; `Polynomial.mem_rootSet`; `Polynomial.rootSet_zero`; `Polynomial.Gal.galActionHom`; `Polynomial.Gal.galActionHom_restrict`; `Polynomial.Gal.restrict`.
 
-([jones-arboreal-survey](#jones-arboreal-survey), §1.1, p. 3 — The construction; [juul-generic-iterates](#juul-generic-iterates), Lemma 2.2, proof, p. 3 — The commutation of σ with the dynamics.)
+([jones-arboreal-survey](#jones-arboreal-survey), §1.1, p.3; [juul-generic-iterates](#juul-generic-iterates), Lemma 2.2, proof, p.3 — Field automorphisms commute with the dynamics. The nonzero guard uses the pinned root-set convention.)
 
 Prove the following basic API.
 
-- The homomorphism Gal(L/K) → Aut(T(f, α; L)).
-- The action of σ on a level-n vertex x is σ(x) ∈ L.
-- If fⁿ − α splits over L then Polynomial.Gal.galActionHom (fⁿ − α) L (Polynomial.Gal.restrict _ L σ) x = σ x, the level-n action of σ.
+- The homomorphism Gal(L/K) → Aut(T(f,α;L)) is defined for every polynomial.
+- The action of σ on a level-n vertex x has underlying value σ(x) in L.
+- For q_n≠0, the level/root-set equivalence preserves underlying elements and intertwines the field-automorphism actions.
+- For q_n≠0 splitting over L, the transported action equals Polynomial.Gal.galActionHom q_n L after Polynomial.Gal.restrict q_n L.
 
 **Checks.**
 
-- For K = ℝ, L = ℂ, f = X², α = 1 and complex conjugation: the level-2 vertex i is sent to −i.
-- For L = K, galoisTreeAction K K f α σ = 1.
-- For K = ℝ, L = ℂ, f = X² + 1, α = 0, complex conjugation acts nontrivially (it swaps ±i at level 1).
-- On level n the action equals Mathlib's galActionHom of fⁿ − α after Polynomial.Gal.restrict.
+- For K=ℝ,L=ℂ,f=X²,α=1,n=2, q_n=X⁴−1≠0 splits and conjugation sends i to −i on both carriers.
+- For f=0,α=0,n=1, the level is all of ℂ and conjugation sends i to −i, while q_n=0 splits and Polynomial.rootSet q_n ℂ=∅. The unrestricted tree action exists, but the carrier comparison does not apply.
+- For f=0,α=1,n=1, q_n=−1≠0 and both the level and the root set are empty; the carrier equivalence still applies.
+- At n=0, q_0=X−C α≠0 and both carriers are the singleton {α}; for L=K every level action is trivial.
+- In characteristic p with f=X^p,α=0,n=1, both carriers are {0}, although q_1=X^p has degree p and is inseparable; the equivalence does not require separability.
 
-**Endpoint checks.** K = ℝ, L = ℂ, f = x², α = 1: complex conjugation sends the level-2 vertex i to −i. L = K: the action is trivial.
-
-Applications include Jones, arboreal survey, §1.1, p. 3 — Gal(K^sep/K) acts on T_∞(α) preserving connectivity since Galois elements commute with φ; Juul, Lemma 2.2, p. 3 — `σ(β_{i,r})` = `β_{π(i), τ_i(r)}:` the action on roots of ϕ(ψ(x)) is by tree automorphisms; Aitken–Hajir–Maire, §2.2, pp. 5–6 — the decomposition group `D_{t0}` acts on the specialized tree; The arboreal Galois representation ρ : Gal(K^sep/K) → Aut(T_∞(f, α)) — the representation is this action for L = K^sep.
+Applications include Jones, §1.1, p.3, the absolute Galois action on the preimage tower; Juul, Lemma 2.2, p.3, the action on roots of a composition; and Aitken–Hajir–Maire, §2.2, pp.5–6, the specialization action.
 
 ### 5.17 The adjusted critical orbit of a quadratic polynomial
 
@@ -9911,15 +9879,30 @@ t₁ ≠ t₂ algebraic, ≠ 0, 1.
 
 **Endpoint checks.** For t₁, t₂ ∈ ℤ ∖ {0, 1} distinct and large, `ĥ_{t₁}` · `ĥ_{t₂}` ≥ h(t₁, t₂)/512 − β.
 
+### 6.106a The archimedean Legendre measure determines the parameter
+
+For every t∈ℂ∖{0,1}, prove that the archimedean equilibrium measure μ_t of the Legendre Lattès map f_t has affine density C_t/|z(z−1)(z−t)| against Euclidean area, with C_t>0 chosen to give total mass one. The density is locally bounded off {0,1,t} and has an integrable inverse-distance singularity at each of these three points; in the reciprocal chart infinity has the same kind of singularity. Thus the measure recovers the four-point branch set {0,1,t,∞}. In the fixed standard coordinate, for s,t∈ℂ∖{0,1}, prove μ_s=μ_t if and only if s=t (demarco-krieger-ye-2020, §2.6 after (2.7), p.10).
+
+Put p_t(z)=z(z−1)(z−t). The explicit duplication formula of §6.35 gives (f′_t(z))²p_t(z)=4p_t(f_t(z)) where the affine denominators are nonzero; use reciprocal charts at poles. The complex change-of-variables formula makes the pullback of the displayed atomless probability four times itself. The Layer 2 uniqueness theorem identifies it with μ_t. This gives the density directly on the sphere; it is the density described through Haar pushforward in the cited source. Equality of measures gives equality almost everywhere of densities; continuity off the branch sets and their unbounded local behavior then recovers those sets. Nondegeneracy of mutual energy supplies E∞(s,t)=0 iff μ_s=μ_t, and this parameter recovery supplies the additional implication s=t.
+
+**Checks.**
+
+- At t=2 and z=2+u, density times |u| tends to C_2/2>0, while at t=3 it tends to 0 because the density is bounded near 2. The two measures differ even though both have full support ℙ¹(ℂ).
+- At t=2,z=3, f_t(z)=49/24, f′_t(z)=−35/144 and p_t(z)=6; both sides of (f′_t(z))²p_t(z)=4p_t(f_t(z)) equal 1225/3456. The pullback factor is 4, not 2.
+- At s=t=2 the measures coincide and E∞(2,2)=0. The six Legendre parameters with the same j-invariant are not identified in the fixed x-coordinate: t=3 and 1−t=−2 have different fourth branch values.
+- At t=0 or 1 the cubic has a repeated root; near that root the candidate density has order |u|⁻² and is not locally integrable. Smoothness excludes these parameters.
+
+*Needs:* §6.35 Legendre family and explicit Lattès map; §6.57 standard projection and branch values; §2.94 the atomless balanced-measure characterization; §2.5 local mutual energy; §4.39 energy and pairing; complex change of variables on the sphere.
+
 ### 6.107 Uniform positivity of the Arakelov–Zhang pairing (DeMarco–Krieger–Ye Theorem 1.5; published Theorem 1.6)
 
 There is δ > 0 such that `ĥ_{t₁}` · `ĥ_{t₂}` ≥ δ for all t₁ ≠ t₂ in ℚ̄ ∖ {0, 1}.
 
 t₁ ≠ t₂ algebraic, ≠ 0, 1.
 
-Suppose (s_n, t_n) with `ĥ_{s_n}` · `ĥ_{t_n}` → 0. Each E_v ≥ 0, so the archimedean energies are small on places of total weight ≥ ½ (The Arakelov–Zhang pairing of adelic metrics on O(1)). At an archimedean place E_v(s, t) is continuous in (s, t) and vanishes only for s = t (nondegeneracy of the mutual energy, The Arakelov–Zhang pairing of adelic metrics on O(1)); with Archimedean energy with one parameter at a cusp (DeMarco–Krieger–Ye Theorem 5.1), Archimedean energy with both parameters at the same cusp (DeMarco–Krieger–Ye Theorems 5.2 and 5.4) and Archimedean energy with parameters at the cusps 0 and ∞ (DeMarco–Krieger–Ye Theorem 5.5), small energy forces the parameters to the diagonal or to the cusps at places of weight ≥ 1/8. The product formula then gives max{h(s_n − t_n), h(s_n, t_n), h(s_n − 1, t_n − 1)} ≥ (1/16) log(1/δ_n) → ∞ (corrected constant: the printed 1/8 is [Correction 39](#correction-39)), so h(s_n, t_n) → ∞, contradicting The Arakelov–Zhang pairing of Legendre heights grows with the parameter height (DeMarco–Krieger–Ye Theorem 1.6; published Theorem 1.7).
+Suppose (s_n, t_n) with `ĥ_{s_n}` · `ĥ_{t_n}` → 0. Each E_v ≥ 0, so the archimedean energies are small on places of total weight ≥ ½ (The Arakelov–Zhang pairing of adelic metrics on O(1)). At an archimedean place E_v(s, t) is continuous in (s, t) and vanishes only for s = t (nondegeneracy of mutual energy in §4.39, followed by parameter recovery from the Legendre measure in §6.106a); with Archimedean energy with one parameter at a cusp (DeMarco–Krieger–Ye Theorem 5.1), Archimedean energy with both parameters at the same cusp (DeMarco–Krieger–Ye Theorems 5.2 and 5.4) and Archimedean energy with parameters at the cusps 0 and ∞ (DeMarco–Krieger–Ye Theorem 5.5), small energy forces the parameters to the diagonal or to the cusps at places of weight ≥ 1/8. The product formula then gives max{h(s_n − t_n), h(s_n, t_n), h(s_n − 1, t_n − 1)} ≥ (1/16) log(1/δ_n) → ∞ (corrected constant: the printed 1/8 is [Correction 39](#correction-39)), so h(s_n, t_n) → ∞, contradicting The Arakelov–Zhang pairing of Legendre heights grows with the parameter height (DeMarco–Krieger–Ye Theorem 1.6; published Theorem 1.7).
 
-*Needs:* [The Arakelov–Zhang pairing of Legendre heights grows with the parameter height (DeMarco–Krieger–Ye Theorem 1.6; published Theorem 1.7)](#6106-the-arakelovzhang-pairing-of-legendre-heights-grows-with-the-parameter-height-demarcokriegerye-theorem-16-published-theorem-17); [Archimedean energy with one parameter at a cusp (DeMarco–Krieger–Ye Theorem 5.1)](#699-archimedean-energy-with-one-parameter-at-a-cusp-demarcokriegerye-theorem-51); [Archimedean energy with both parameters at the same cusp (DeMarco–Krieger–Ye Theorems 5.2 and 5.4)](#6102-archimedean-energy-with-both-parameters-at-the-same-cusp-demarcokriegerye-theorems-52-and-54); [Archimedean energy with parameters at the cusps 0 and ∞ (DeMarco–Krieger–Ye Theorem 5.5)](#6103-archimedean-energy-with-parameters-at-the-cusps-0-and--demarcokriegerye-theorem-55); [The Arakelov–Zhang pairing of adelic metrics on O(1)](#439-the-arakelovzhang-pairing-of-adelic-metrics-on-o1).
+*Needs:* §6.106a archimedean Legendre measure-to-parameter injectivity; [The Arakelov–Zhang pairing of Legendre heights grows with the parameter height (DeMarco–Krieger–Ye Theorem 1.6; published Theorem 1.7)](#6106-the-arakelovzhang-pairing-of-legendre-heights-grows-with-the-parameter-height-demarcokriegerye-theorem-16-published-theorem-17); [Archimedean energy with one parameter at a cusp (DeMarco–Krieger–Ye Theorem 5.1)](#699-archimedean-energy-with-one-parameter-at-a-cusp-demarcokriegerye-theorem-51); [Archimedean energy with both parameters at the same cusp (DeMarco–Krieger–Ye Theorems 5.2 and 5.4)](#6102-archimedean-energy-with-both-parameters-at-the-same-cusp-demarcokriegerye-theorems-52-and-54); [Archimedean energy with parameters at the cusps 0 and ∞ (DeMarco–Krieger–Ye Theorem 5.5)](#6103-archimedean-energy-with-parameters-at-the-cusps-0-and--demarcokriegerye-theorem-55); [The Arakelov–Zhang pairing of adelic metrics on O(1)](#439-the-arakelovzhang-pairing-of-adelic-metrics-on-o1).
 
 ([demarco-krieger-ye-2020](#demarco-krieger-ye-2020), Theorem 1.5, p. 4; proof §6.3, p. 37 (arXiv v2) — The cited result supplies Uniform positivity of the Arakelov–Zhang pairing (DeMarco–Krieger–Ye Theorem 1.5; published Theorem 1.6) under the stated hypotheses; the target fixes its conventions and lists the precise inputs used in the proof.)
 
@@ -9994,7 +9977,7 @@ Over ℚ̄ this is Uniform bound on joint small points over ℚ̄ (DeMarco–Kri
 
 ([demarco-krieger-ye-2020](#demarco-krieger-ye-2020), Theorem 1.4, p. 3; proof §8.2, p. 44 (arXiv v2) — The cited result supplies Uniform common torsion images for pairs of Legendre curves (DeMarco–Krieger–Ye Theorem 1.4; published Theorem 1.5) under the stated hypotheses; the target fixes its conventions and lists the precise inputs used in the proof.)
 
-**Endpoint checks.** B ≥ 34 would follow from Stoll's genus-2 example through Theorem 1.1 of the paper; the bound B of the proof is not explicit.
+**Endpoint checks.** The common images {0,1,∞} give B≥3. The genus-two torsion-intersection constant obtained in §9.3 of the source is 16B, so Stoll's 34-point example gives 34≤16B, not B≥34. For B=3 these numerical constraints read 3≤3 and 34≤48; the proof gives no explicit upper value of B (demarco-krieger-ye-2020, §9.3, p.47).
 
 ### 6.112 The Bogomolov–Fu–Tschinkel bound with three common branch values (DeMarco–Krieger–Ye Corollary 8.2)
 
@@ -10856,6 +10839,12 @@ M. Yu. Lyubich, *Entropy properties of rational endomorphisms of the Riemann sph
 E. V. Flynn, B. Poonen, E. F. Schaefer, *Cycles of quadratic polynomials and rational points on a genus-2 curve*. arXiv:math/9508211v1
 
 [Source](https://arxiv.org/pdf/math/9508211v1).
+
+### kiwi-cremer-1995
+
+Jan Kiwi, *Non-accessible Critical Points of Cremer Polynomials*. arXiv:math/9502235v1 (12 February 1995), §§1–2, pp.2–3.
+
+[Source](https://arxiv.org/pdf/math/9502235v1).
 
 ### gao-ou
 
