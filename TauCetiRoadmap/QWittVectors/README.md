@@ -873,21 +873,25 @@ For every prime p, a perfectly covered Λ-ring A and étale R/A, the ordinary p-
 
 - φ_p(r) mod p = r^p for r∈R; the map is ψ_p-semilinear over A.
 
-- Étale A-algebra maps commute with φ_p on p-completions.
+- Let f:A→A′ be a Λ-map between perfectly covered bases and g:R→R′ a ring map with g∘ι_A=ι_A′∘f, where R/A and R′/A′ are étale. For every prime p, its induced map ĝ_p:R̂_p→R̂′_p satisfies `ghat_p phi_{p,R/A}=phi_{p,R'/A'} ghat_p`. This includes fixed-base naturality and requires neither flatness of f nor an additional étaleness hypothesis on g. It follows from the uniqueness in §2.7 (wagner-habiro lines 647–658).
 
-- Iterated linearizations for `psi_{p^a}` are equivalences, compatible with composition.
+- Write ℓ_p(R/A) for the completed linearization above. The map L_p(f,g) from `(Rhat_p tensorL_{A,psi_p}A)^hat_p` to `(R'hat_p tensorL_{A',psi'_p}A')^hat_p` is induced by r⊗a↦ĝ_p(r)⊗f(a). Prove `ghat_p ell_{p,R/A}=ell_{p,R'/A'} L_p(f,g)`. The vertical maps are f-semilinear on the right scalar factors; tensor balancing uses f∘ψ_p=ψ′_p∘f. Identity pair maps induce identities and composite pair maps induce composites, on completions and on these linearization sources (wagner-habiro §2.7, pp. 15–16, lines 647–658; §2.5).
+
+- For every a≥0, the linearization of φ_p iterated a times, with right scalar twist ψ_(p^a), is an equivalence. The exponent-zero map is the identity; adding exponents composes the linearizations with their indicated scalar twists. The pair maps above intertwine these iterations and their linearizations, with identity and composition laws (wagner-habiro §2.7, pp. 15–16, lines 647–658; §2.5).
 
 - The derived completed tensor equals completion of the ordinary twisted tensor.
 
-*Construction and proof.* Lift the relative Frobenius modulo p uniquely through the nilpotent p-power thickenings using formal étaleness. The inverse limit gives φ_p. Perfect coverage makes A and R torsion-free and ψ_p flat; completed tensor products are discrete by complete flatness. Modulo p the linearization is étale relative Frobenius, an isomorphism; derived Nakayama gives the equivalence.
+*Construction and proof.* Lift the relative Frobenius modulo p uniquely through the nilpotent p-power thickenings using formal étaleness. The inverse limit gives φ_p. For a pair map (f,g), restrict both composites in the naturality equation to R and then to R′/p^n for every n≥1. Their A-actions agree since f∘ψ_p=ψ′_p∘f, and both reduce to r↦g(r)^p modulo p. Formal étaleness of R/A makes their lifts through R′/p^n→R′/p equal. The limit and continuity give the asserted equality on R̂_p. Tensor functoriality gives the linearization square, the pair-map identity and composition laws and their iterated versions. Perfect coverage makes A and R torsion-free and ψ_p flat; completed tensor products are discrete by complete flatness. Modulo p the linearization is étale relative Frobenius, an isomorphism; derived Nakayama gives the equivalence.
 
-*Needs:* Layer 2.4; Layer 5.3; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7.
+*Needs:* Layer 2.4; Layer 2.5 for Adams twists and their composition; Layer 5.3; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §0.2 for tensor functoriality; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7.
 
 **Checks.**
 
 - For R=A, the linearization is the canonical equivalence of the ψ_p-twisted base with A after completion. If p is invertible in A, both completions are zero; no prime is discarded.
 - For A=ℤ,R=ℤ×ℤ,p=2, φ_2 is identity on ℤ₂×ℤ₂ and reduces to the square map.
 - For R=ℤ[T] over A=ℤ, the coordinate lift T↦T² exists but its linearization is not an equivalence modulo 2: T is outside its image. Étaleness cannot be replaced by smoothness.
+- For A=R=ℤ[t] with ψ_n(t)=t^n and A′=R′=ℤ, take f=g with t↦0, a Λ-map which is not flat. At p=2, the two naturality paths send t+2 to 2, and the two linearization paths send (t+2)⊗(t+3) to 6. Modulo 4 the first value is 2, whereas literal squaring of g(t+2)=2 gives 0; lifting the mod-2 power map must retain its specified base action through the square-zero thickening ℤ/4→𝔽₂.
+- Compose this pair map with ℤ→ℤ[1/3]. At p=2, both the composite and the two successive linearization-source maps send (t+2)⊗(t+3) to 2⊗3, and both linearizations give 6. The identity pair map retains (t+2)⊗(t+3); for a=0 it gives the completed identity, and for a=2 the iterated coefficient Frobenius sends t+2 to t⁴+2 and then to 2. At p=3 the localized completions are zero on both paths.
 
 ### 6.2 Cyclotomic completed Frobenius
 
@@ -899,9 +903,9 @@ For A,R,p as in 6.1 and every d>0 there is a natural A[q]-linear equivalence `((
 
 - The ideals (3,Φ_3) and (3,q−1) in ℤ[q] are unequal despite their equal radicals. This distinguishes equality of ideals from equality of their radicals (Mathlib characteristic-p cyclotomic identities; Wagner–Habiro §2.7, pp. 15–16, wagner-habiro line 647).
 
-- The equivalence is the ψ_d-base change of 6.1 followed by the common completion; it commutes with morphisms of étale A-algebras.
+- The equivalence is the ψ_d-base change of 6.1 followed by the common completion. For every pair map (f,g) of §6.1, the maps from the twist of index e over (A,R) to that over (A′,R′), for e=d,pd, are induced by r⊗a↦ĝ_p(r)⊗f(a), q↦q, and extend to the respective (p,Φ_e)-completions. Prove that these f[q]-semilinear maps intertwine the two coefficient-Frobenius equivalences. They preserve identities and composites and intertwine every iteration along d,pd,…,p^a d, including a=0 (wagner-habiro §2.7 and proof of Theorem 2.9, pp. 15–17, lines 647–661 and 709–716; §6.1).
 
-*Construction and proof.* Apply ψ_d scalar extension to 6.1: tensor balancing uses `psi_d psi_p=psi_{pd}`. Extend by q fixed. Equal radicals permit use of one completion topology; flatness of ψ_d and completed base change give the equivalence, without imposing p∤d.
+*Construction and proof.* Apply ψ_d scalar extension to 6.1: tensor balancing uses `psi_d psi_p=psi_{pd}`. Extend by q fixed. Equal radicals permit use of one completion topology; flatness of ψ_d and completed base change give the equivalence, without imposing p∤d. For a pair map, f∘ψ_e=ψ′_e∘f balances both twisted tensors, and f[q] preserves p and Φ_e. Extend the naturality square and coherence laws of §6.1 by these tensor and completion maps; this uses no flatness of f.
 
 *Needs:* Layer 6.1; Layer 2.5; Mathlib characteristic-p cyclotomic identities; DerivedModuleAlgebra §§1.2–1.3.
 
@@ -911,6 +915,7 @@ For A,R,p as in 6.1 and every d>0 there is a natural A[q]-linear equivalence `((
 - For p=3,d=1, Φ_3 mod 3=(q−1)²; (3,Φ_3) and (3,q−1) have the same radical but are not equal in ℤ[q].
 - For d=0, Φ_0=Φ_(p·0)=1, so both ideals are A[q] and both derived completion functors are zero. With A=ℤ, replacing Φ_0 by Φ_1 would give the proper ideal (p,q−1) instead.
 - For R=0 both sides are zero, and for R=A the map is the canonical twisted-base equivalence.
+- For the nonflat map ℤ[t]→ℤ, t↦0, with R=A and R′=A′, take p=2,d=1. The two paths on (t+2)⊗(t+3) give 6 and both fix q=1+h. For two coefficient-Frobenius steps, starting at twist 4 and ending at twist 1, the coefficient becomes (t⁴+2)⊗(t+3), again giving 6 after the pair map. The identity pair map retains each tensor and q; composing with ℤ→ℤ[1/3] still gives 6 and 1+h on either path.
 
 ### 6.3 Completed ghost Frobenius
 
@@ -918,17 +923,18 @@ For pd|m, the reductions modulo p of `gh_{m/(pd)}` and `gh_{m/d}` commute with t
 
 - The two paths on τ_m(r) give r^(m/d)⊗1.
 
-- The comparison is characterized by the indicated reduction and unique étale lifting, compatibly with iterations.
+- The comparison is characterized by the indicated reduction and unique étale lifting, compatibly with iterations. For every pair map (f,g) of §6.1, the relative q-Witt map Q_m(R/A)→Q_m(R′/A′) and the twisted ghost-target maps r⊗a↦g(r)⊗f(a), q↦q intertwine the mod-p ghost diagram. Their completed maps intertwine its deformation of §6.2. These compatibilities preserve identity and composite pair maps and every prime-power iteration, with exponent zero the identity (wagner-habiro proof of Theorem 2.9, pp. 16–17, lines 679–716; §§4.4–4.5, 6.1–6.2).
 
-*Construction and proof.* The ordinary Witt ghosts in characteristic p satisfy `w_{pn}=w_n^p`. Descend this identity through the relative presentation and the cyclotomic quotient. Use 5.2 for the étale ghost algebras and unique formal lifting to identify the completed map.
+*Construction and proof.* The ordinary Witt ghosts in characteristic p satisfy `w_{pn}=w_n^p`. Descend this identity through the relative presentation and the cyclotomic quotient. Use 5.2 for the étale ghost algebras and unique formal lifting to identify the completed map. The ghost naturality of §4.4, the relative base change of §4.5 and the completed pair-map square of §6.2 give naturality of this identification, including identities, composites and iterations.
 
-*Needs:* Layer 6.2; Layer 5.2.
+*Needs:* Layer 6.2; Layer 5.2; Layer 4.4 for relative ghost naturality; Layer 4.5 for Λ-base change.
 
 **Checks.**
 
 - For m=p,d=1, the upper Teichmüller value r maps to r^p, matching the bottom ghost.
 - For A=R=ℤ and p=2 this is the q-fixed overlap between q=−1 and q=1 modulo 2.
 - For A=R=ℤ,p=2,d=1,m=2, the deformed bottom map sends q=1+h to 1+h in ℤ₂[[h]]. Substitution q↦q² instead gives 1+2h+h², a different value; the deformation must fix q.
+- For A=R=ℤ[t]→A′=R′=ℤ with t↦0, take p=2,d=1,m=4. On τ_4(t+2), the top ghost gives (t+2)²⊗1 and the bottom Frobenius gives (t+2)⁴⊗1 modulo 2. After the pair map the unreduced polynomial values are 4 and 16, giving 0 and 0 modulo 2, as for τ_4(2). Its completed deformation sends (t+2)²⊗1 to (t²+2)²⊗1; after the pair map its value is 4, whose reduction is the same 0. Thus the completed lift and the literal square agree modulo 2 without being identical before reduction. Both routes fix q=1+h, also after composition with ℤ→ℤ[1/3].
 
 ### Examples
 
@@ -936,7 +942,7 @@ The coefficient map fixes q. For p=3,d=1 its two completion ideals have equal ra
 
 ### Dependencies
 
-Layer 2.4; Layer 5.3; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7; Layer 6.1; Layer 2.5; Layer 6.2; Layer 5.2.
+Layer 2.4; Layer 2.5; Layer 5.3; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; SchemeAndStackFoundations §4.1; DerivedModuleAlgebra §0.2; DerivedModuleAlgebra §1.2; DerivedModuleAlgebra §1.3; DerivedModuleAlgebra §1.7; Layer 6.1; Layer 6.2; Layer 5.2; Layer 4.4; Layer 4.5.
 
 ## Layer 7: Positive-degree q-Witt systems
 
@@ -1419,7 +1425,7 @@ Layer 9.6; Layer 7.7; Layer 5.4; `gap:cyclotomic-contract`; Layer 10.1; DerivedM
 ## Downstream consumers
 
 - **HabiroCohomologyFoundations**: Layers 2–6 supply relative arithmetic Λ and degree-zero q-Witt theory, especially the completed overlap in Layer 6; Layers 7–10 supply positive-degree operators, complete framed calculus, the functorial smooth de Rham comparison and smooth completion.
-- **HabiroRings**: Layers 1–6: arithmetic Λ-perfection and perfect coverage, relative degree zero, ghosts, base change and q-fixed completed Frobenius overlap. Habiro rings and cyclotomic gluing stay there.
+- **HabiroRings**: Layers 1–6: arithmetic Λ-perfection and perfect coverage, relative degree zero, ghosts, base change and q-fixed completed Frobenius overlap, including naturality and linearization coherence under a Λ-map of perfectly covered bases and a compatible map of their étale algebras (§§6.1–6.3). Habiro rings and cyclotomic gluing stay there.
 - **RefinedTraceMethods**: Layers 7–10 provide the q-Witt operations and framed difference algebra needed for trace/cohomology comparisons; no trace invariant is constructed here.
 - **HabiroCohomologyFoundationsPartII**: Imports the same named algebraic interfaces for its extended cohomology constructions; no reverse dependency.
 

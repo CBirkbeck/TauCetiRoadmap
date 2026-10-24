@@ -18,7 +18,8 @@ The headline results, in README order, are:
   (§§3.2, 3.4, 3.7);
 * relative q-Witt initiality and perfect-cover comparisons (§§4.3, 4.6);
 * q-Witt étale base change and completion (§§5.1–5.3);
-* the q-fixed cyclotomic completed coefficient Frobenius (§§6.1–6.3);
+* the q-fixed cyclotomic completed coefficient Frobenius and its naturality
+  under changes of arithmetic Λ-base and étale algebra (§§6.1–6.3);
 * initial differential q-Witt systems, positive-degree Frobenius and differential
   base change (§§7.2, 7.5, 7.7);
 * the unique framed coordinate automorphisms (§8.1), stated below on power series,
@@ -41,8 +42,9 @@ arithmetic fracture needs enhanced derived localization and completion diagrams.
 The absolute and relative q-Witt results need the q-FV system categories and their
 initial rings; the differential results, including the smooth torsion and completion
 exports, need the differential q-Witt system and de Rham algebra carriers.
-The completed coefficient Frobenius results need arithmetic Λ-bases and their Adams
-twists as well as derived completed scalar extension. The complete difference
+The completed coefficient Frobenius results, including their mixed-base naturality
+and linearization squares, need arithmetic Λ-bases and their Adams twists as well
+as derived completed scalar extension. The complete difference
 calculus and framed cohomology results need the framed difference DGA and its
 Frobenius; the induction and smooth comparison additionally need the differential
 q-Witt algebra and enhanced E∞ algebra carriers. The PD-presentation comparison
