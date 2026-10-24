@@ -19,10 +19,15 @@ potential theory and Galois theory are consumed through the contracts in the ind
   The new target is its comparison with the dynamical Tate limit and with Lattès
   maps. General abelian Néron–Tate heights come from
   HeightsRationalPointsAndObstructions §0.19.
-- The native analytic line, local potential theory, mutual energy and their
-  dynamical maps, invariant measures and Julia-support comparisons are built in
-  Layer 2. General projective analytification, local curvature measures and all-place
-  equidistribution are treated in Layer 4; hybrid spaces and their measures are built in Layer 6.
+- ComplexComparisonPartII §C−1.1 owns general complex scheme analytification,
+  including its underlying topological carrier. AlgebraicModuliForArithmeticGeometry
+  §7.10.2 owns the general Berkovich carrier, affinoid domains and gluing; its §7.4
+  supplies the rigid analytification comparison. Layer 2 owns explicit analytic-line
+  presentations and their natural homeomorphisms to these shared carriers, the P¹
+  tree, local degrees, potential theory, mutual energy and dynamical measures.
+  Layer 4 owns the projective Berkovich realization on the supplied substrate and
+  its carrier comparisons, local curvature measures and all-place equidistribution;
+  Layer 6 owns hybrid spaces and their measures.
 - HeightsRationalPointsAndObstructions §0.18 owns the arbitrary-set Tate series,
   convergence, bounded-distance estimate, scaling, bounded-perturbation invariance
   and uniqueness, with argument order `tateLimit φ α h`. Section 1.1 compares its
@@ -152,6 +157,18 @@ Consume §0.2 `prod_infinitePlace_comap_pow_mult`, `mulHeight_algebraMap`, `absM
 ### From TauCetiRoadmap.SchemeAndStackFoundations — Layer 0
 
 Consume SchemeAndStackFoundations §0.3, `relativeProj`, `relativeProj_affine_iso`, `relativeProj_baseChange` and `relativeProj_polynomial`, on the polynomial graded algebra over a field K. Use the standard projective charts and Mathlib scheme gluing. The map from homogeneous forms and classification of projective-line endomorphisms are constructed in Layer 0.
+
+### From TauCetiRoadmap.ComplexComparisonPartII — §C−1.1
+
+Consume `ComplexAnalyticSpace` and `complexSchemeAnalytification` on locally finite-type complex schemes, with `complexSchemeAnalytification.complexPoints`, `complexSchemeAnalytification.mapId`, `complexSchemeAnalytification.mapComp`, `complexSchemeAnalytification.closedSubspace`, `complexSchemeAnalytification.separatedHausdorff` and `complexSchemeAnalytification.proper`. Take the topological carrier by forgetting the analytic ring sheaf of that same space. For projective X, its classical complex points give the compact Hausdorff carrier used in §4.1; §2.2 compares its P¹ specialization with `OnePoint ℂ`. The category itself imposes no global Hausdorff axiom; the projective hypothesis supplies separatedness and properness.
+
+### From TauCetiRoadmap.AlgebraicModuliForArithmeticGeometry — §§7.10.2, 7.4
+
+Consume §7.10.2 `BerkovichAnalyticSpace`, `BerkovichAnalyticSpace.affinoid`, `BerkovichAnalyticSpace.domain`, `BerkovichAnalyticSpace.refineAtlas`, `BerkovichAnalyticSpace.glueDomains`, `BerkovichAnalyticSpace.fibreProduct` and `BerkovichAnalyticSpace.rigidModel`: bounded multiplicative-seminorm spectra M(A), evaluation topology, completed residue fields and compatible affinoid-domain gluing. Use these for the explicit line realization in §2.2 and the projective realization in §4.1. Over complete nontrivially valued fields, consume §7.4 `SpaceAnalytification` and its scheme, identity and composition comparisons only as rigid analytification; compare its projective value with the rigid model of the constructed Berkovich space. Apply the rigid equivalence only on the supplier's paracompact strictly analytic and quasi-separated rigid spaces with affinoid covers of finite type. The Berkovich topological carrier is the seminorm realization, with its nonclassical points.
+
+### From TauCetiRoadmap.EllipticCurves — Layer 4
+
+For an elliptic curve over the fraction field K of a complete DVR R, consume `HasPotentialGoodReduction`: a finite extension L/K has good reduction on the minimal model over its valuation ring. Consume its equivalence with integrality of j and the minimal-discriminant comparison, including residue characteristic 2. With Mathlib `WeierstrassCurve.variableChange_Δ` in `Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange.lean`, a good integral model E′ obtained from E by x=u²x′+r, u≠0, has Δ(E′)=u⁻¹²Δ(E). Thus |u|¹²=|Δ(E)| for the extended absolute value when |Δ(E′)|=1. Section 6.3 supplies the elliptic-to-Lattès adapter; §6.83 uses this finite-extension and coordinate comparison.
 
 ### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §0.18
 
@@ -340,6 +357,8 @@ Consume §6.37, `projectiveWeilHeight`, `projectivePowerMap`, their affine and i
 Consume Lane C, targets 13–15, for the classical Euclidean harmonic and potential-theory input, with Mathlib’s Laplacian sign. The sphere distributional Laplacian, Riesz measures and logarithmic singularities are constructed in Layer 2 on the stated domain of potentials.
 
 ### From Mathlib and Tau Ceti
+
+Analytic-presentation transport uses `Homeomorph` from `Mathlib/Topology/Homeomorph/Defs.lean` and `ContinuousMap` from `Mathlib/Topology/ContinuousMap/Defs.lean`. Consume `MeasureTheory.Measure.map` and `MeasureTheory.Measure.map_map` in `Mathlib/MeasureTheory/Measure/Map.lean`, `MeasureTheory.Measure.map_dirac'` in `Mathlib/MeasureTheory/Measure/Dirac/Basic.lean`, and `MeasureTheory.integral_map` in `Mathlib/MeasureTheory/Integral/Bochner/Basic.lean`, with their measurability hypotheses. The homeomorphisms in §§2.2, 4.1 are measurable in both directions for the Borel structures; their function and measure comparisons use these native operations and laws.
 
 `WeierstrassCurve.Affine.Point.xRep` in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean` supplies the normalized x-coordinate representatives (1,0) at zero and (x,1) at a nonsingular affine point (x,y). The point type includes only nonsingular affine points and the point at infinity; ellipticity is a separate condition, not a field of that type. The Legendre bound explicitly excludes t = 0,1.
 
@@ -2252,7 +2271,7 @@ extension (Forster, Lectures on Riemann Surfaces, §§1.9, 1.12–1.16).
 
 ### 2.2 The native analytic projective line
 
-The Berkovich projective line `P^{1,an}_K` over a complete nonarchimedean field K (in particular K = ℂ_v, the completion of an algebraic closure of a local field, and K = the completion of an algebraic closure of ℂ((T))), as the compact Hausdorff space `A^{1,an}_K` ∪ {∞}, where `A^{1,an}_K` is the space of multiplicative seminorms [·]_x on K[T] extending the absolute value of K, with the weakest topology making x ↦ [g]_x continuous for every g ∈ K[T]; the embedding ℙ¹(K) ⊂ `P^{1,an}_K` by evaluation seminorms, dense when K is algebraically closed with nontrivial absolute value; the points `ζ_{a,r}` (sup-norm on the closed disc D(a, r)) and the Gauss point `ζ_{0,1}` (the Gauss norm); and, for every nonconstant rational map φ ∈ K(T), its analytification `φ^{an}` : `P^{1,an}_K` → `P^{1,an}_K` given in compatible affine charts by [g]`_{φ^{an}(x)}` = [g ∘ φ]_x where the rational expression is defined, continuous, extending φ on ℙ¹(K), with (φ ∘ `ψ)^{an}` = `φ^{an}` ∘ `ψ^{an}` and `id^{an}` = id; in particular PGL₂(K) acts by homeomorphisms and PGL₂(𝒪_K) fixes `ζ_{0,1}.`
+The Berkovich projective line `P^{1,an}_K` over a complete nonarchimedean field K (in particular K = ℂ_v, the completion of an algebraic closure of a local field, and K = the completion of an algebraic closure of ℂ((T))), as the compact Hausdorff space `A^{1,an}_K` ∪ {∞}, where `A^{1,an}_K` is the space of multiplicative seminorms [·]_x on K[T] extending the absolute value of K, with the weakest topology making x ↦ [g]_x continuous for every g ∈ K[T]; the embedding ℙ¹(K) ⊂ `P^{1,an}_K` by evaluation seminorms, dense when K is algebraically closed with nontrivial absolute value; the points `ζ_{a,r}` given by the weighted Gauss seminorm Σ_i c_i(T−a)^i ↦ max_i |c_i|r^i for r≥0, with r=0 interpreted as evaluation at a, and the Gauss point `ζ_{0,1}` (the Gauss norm); and, for every nonconstant rational map φ ∈ K(T), its analytification `φ^{an}` : `P^{1,an}_K` → `P^{1,an}_K` given in compatible affine charts by [g]`_{φ^{an}(x)}` = [g ∘ φ]_x where the rational expression is defined, continuous, extending φ on ℙ¹(K), with (φ ∘ `ψ)^{an}` = `φ^{an}` ∘ `ψ^{an}` and `id^{an}` = id; in particular PGL₂(K) acts by homeomorphisms and PGL₂(𝒪_K) fixes `ζ_{0,1}.`
 
 (1) The Berkovich projective line `P^{1,an}` over ℂ_v (and over k₀ = ℂ((T)), with |T|₀ = `e^{−1})` with the type II/III points `ζ_{a,r},` the hyperbolic metric on H = `A^{1,an}` ∖ ℂ_v, and the interval (hyperbolic-length) measures on segments [ζ₁, ζ₂] ⊂ H; the action of a rational map on type II points (images of discs). (2) The hybrid space X^hyb of the degenerating family 𝔻* × ℙ¹(ℂ) (Favre §§2–4): the fibres ℙ¹(ℂ) over t ∈ 𝔻* glued to `P^{1,an}_{ℂ((T))}` over t = 0, with the topology in which the sets `{|t|^{a+δ} < |z| < |t|^{a−δ}, 0 < |t| < δ}` ∪ `A(|T|₀^{a+δ},` `|T|₀^{a−δ})` and the disc-like sets are open and which restricts to the Berkovich topology on the central fibre; compactness of the segment [0, ∞] ⊂ `P^{1,an}_{ℂ((T))}.`
 
@@ -2260,13 +2279,23 @@ Native projective analytic line of multiplicative seminorms with compact Hausdor
 
 Hybrid projective-line carrier and topology, finite-level model functions and their central values, density in continuous functions (Favre Theorems 2.10 and 2.12), and continuity of fibre Laplacian/Monge–Ampère measures under uniform admissible-potential limits (Theorem 4.2). The topological hybrid space alone does not supply these measure/potential comparison theorems.
 
-Construct the analytic line and Gauss point on the stated carriers; prove compactness, density of type-I points, that integral linear changes fix the Gauss point, and compatibility of analytification with composition.
+Realize the nonarchimedean line in the supplied Berkovich category by gluing M(K⟨T⟩) and M(K⟨S⟩) along the unit annuli with S=T⁻¹, using AlgebraicModuliForArithmeticGeometry §7.10.2. Construct a canonical homeomorphism h_K from the explicit polynomial-seminorm line above to the underlying space of this realization: on |T|≤1 extend the polynomial seminorm to K⟨T⟩, and use the reciprocal chart elsewhere. It sends evaluation at a to the classical point [a:1], infinity to [1:0], and the Gauss point to the unit-disc Gauss seminorm. Require preservation of every polynomial evaluation in each affine chart and naturality: h_K intertwines the explicit and shared analytifications of every nonconstant rational map, including identities and composition. Prove compactness and Hausdorffness, density of type-I points when K is algebraically closed and nontrivially valued, and that integral linear changes fix the Gauss point (baker-rumely-2006, §2, pp.4–5).
+
+At the complex place construct the canonical homeomorphism h_ℂ from `OnePoint ℂ` to the underlying space of `complexSchemeAnalytification` of ℙ¹_ℂ, with z↦[z:1] and ∞↦[1:0]. Identify the two standard affine charts and their transition z↦1/z; require the same rational-map naturality and composition law. The complex atlas and the supplier's analytic ring sheaf are compared through these charts (Forster, §1.5(c), §§1.9, 1.12–1.16; ComplexComparisonPartII §C−1.1).
+
+The comparison API transports a real continuous function u by u∘h⁻¹ and a finite Radon measure μ by h_*μ, with inverse transports along h⁻¹. Prove ∫(u∘h⁻¹) d(h_*μ)=∫u dμ and compatibility with rational-map pullback of functions and pushforward of measures. These statements use the Borel structures of the weak analytic topologies; a bare bijection does not identify the measure spaces.
 
 **Checks.**
 
 - For the closed unit disc the seminorm of T is 1, while evaluation at 0 gives 0; the Gauss point cannot be a classical point.
 - The disc seminorm at radius r has value r on T − a; replacing its radius by its square changes the value.
 - The identity analytifies to the identity, and z ↦ z² fixes the Gauss point with local degree 2, even in characteristic 2; counting distinct inverse points gives the wrong degree.
+- Both nonarchimedean presentations give |T|=1 at Gauss and |T|=0 at evaluation at 0; their comparison preserves each value. A map collapsing Gauss to a classical point fails this test.
+- Over ℚ₂ at radius 3/4 the weighted Gauss seminorm of T is 3/4, while the supremum on the classical closed disc is 1/2. Defining disc points by a supremum over K-rational points would lose this radius.
+- For an algebraically closed trivially valued K, classical values of |T| are 0 or 1, whereas the radius-2 seminorm has |T|=2. The open set 3/2<|T|<5/2 has no classical point, so density requires the nontrivial valuation hypothesis.
+- For inversion, 0 and ∞ are exchanged in both complex presentations and in both nonarchimedean presentations. The constant function 1 and a transported Dirac mass still have integral 1; the zero measure would give 0.
+
+*Needs:* AlgebraicModuliForArithmeticGeometry §7.10.2 seminorm spectra and affinoid-domain gluing; ComplexComparisonPartII §C−1.1 complex scheme analytification; §2.1 sphere meromorphic comparison; Layer 0 rational maps and projective charts; Mathlib `Homeomorph`, `ContinuousMap`, `MeasureTheory.Measure.map` on Borel spaces.
 
 ### 2.3 Nonarchimedean potential theory and local degrees
 
@@ -3808,7 +3837,7 @@ For z ↦ z^d over ℂ the Julia set is the unit circle and its canonical measur
 
 ### Dependencies
 
-Layers 0–1 and the Layer 0 power map (§0.27a); Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees native analytic geometry and potential theory; ConformalMapping local analysis, sphere charts and finite-degree theory; the explicit Riesz, meromorphic Montel, contraction and entropy extensions.
+Layers 0–1 and the Layer 0 power map (§0.27a); AlgebraicModuliForArithmeticGeometry §7.10.2 Berkovich seminorm spectra and gluing; ComplexComparisonPartII §C−1.1 complex analytification; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees native analytic geometry, carrier comparisons and potential theory; ConformalMapping local analysis, sphere charts and finite-degree theory; the explicit Riesz, meromorphic Montel, contraction and entropy extensions.
 
 ## Layer 3: Periodic equations, dynatomic curves and certified arithmetic
 
@@ -5560,19 +5589,25 @@ Layers 0–2; AlgebraicCurves Layers 0–3, 6–8, 11–12; ConformalMapping L4;
 
 ### 4.1 Analytification of projective varieties
 
-For a projective variety X over a complete algebraically closed valued field C_v: the analytification X^an (the Berkovich space at a finite place, the complex analytic space at an infinite place) as a compact Hausdorff space with a dense inclusion X(C_v) → X^an, functorial in X, and equal to the analytic line of The analytic projective line at a place of a number field, with its kernel, circle measures and weight for X = P¹.
+For a projective variety X over a complete algebraically closed valued field C_v, take the following projective realizations. At an infinite place C_v=ℂ, use the underlying topological space of ComplexComparisonPartII §C−1.1 `complexSchemeAnalytification` of X; specialize its complex-points, separated-Hausdorff, properness and functoriality comparisons.
 
-Prove compatibility of projective analytification with composition, compactness and density of classical points on these carriers (chambert-loir-2006, §2; yuan2008, §3).
+At a finite place, realize X^an in AlgebraicModuliForArithmeticGeometry §7.10.2 `BerkovichAnalyticSpace`. For an embedding X⊂ℙᴺ, the domains |x_j|≤|x_i| for all j have affinoid algebras obtained by imposing X's equations on C_v⟨x_j/x_i : j≠i⟩. Glue their seminorm spectra by the supplied affinoid-domain gluing on overlaps. Prove independence of the projective embedding and charts by common domain refinements, compatibility with morphisms and composition, compactness, Hausdorffness, and density of X(C_v). Compare the rigid model with §7.4 `SpaceAnalytification` of X; this is a comparison of realizations, while measures remain on the Berkovich topological space (chambert-loir-2006, §2, pp.3–4; yuan2008, §3.3, pp.39–40).
+
+For X=ℙ¹, identify this realization with the two-disc realization of §2.2, by the identity on its affinoid evaluation seminorms. Use §2.2's h_K and h_ℂ to compare the explicit local lines with these projective carriers. For a change of presentation h:X^an→X′^an, transport real continuous functions and metric functions by composition with h⁻¹, and finite Radon measures by h_*. Prove that inverse transports compose to the identity, preserve integrals and commute with morphism pullback of functions and pushforward of measures. For a finite surjective morphism f:X^an→Y^an between projective lines and comparisons h_X:X^an→X′^an, h_Y:Y^an→Y′^an, put f′=h_Y∘f∘h_X⁻¹. Prove preservation of the full local algebraic degrees: pushing f*μ forward by h_X equals pulling h_Y*μ back by f′, where h_Y*μ means pushforward and f* is the multiplicity-weighted measure pullback of §§2.3–2.4. This includes inseparable maps.
+
+*Needs:* ComplexComparisonPartII §C−1.1; AlgebraicModuliForArithmeticGeometry §§7.10.2, 7.4; SchemeAndStackFoundations §0.3 projective charts; §§2.2–2.4 for the explicit line comparisons and local-degree measure pullbacks; Mathlib `Homeomorph`, `ContinuousMap`, `MeasureTheory.Measure.map` on Borel spaces.
 
 **Checks.**
 
-- A point has one analytic point; analytification must preserve dimension zero.
-- The projective line agrees with the local analytic carrier, including its Gauss point.
-- A nonproper affine line is not compact; properness cannot be dropped.
+- A C_v-point has one analytic point; its transported Dirac mass has mass 1 and the integral of the constant 1 is 1 in either presentation.
+- On ℙ¹_ℂ, z=2 has reciprocal coordinate 1/2 and inversion exchanges 0 and ∞. A comparison using [1:z] in the first chart fails these values.
+- On ℙ¹ at a finite place, the affinoid chart for |T|≤1 sends Gauss to the seminorm with |T|=1, and evaluation at 0 to |T|=0; the comparison with §2.2 preserves both.
+- For z↦z², pullback of δ₀ is 2δ₀ in both line presentations, including characteristic 2. Under z↦1/z, δ₀ pushes to δ∞, so a comparison in the wrong direction fails.
+- A nonproper affine line is not compact at any place considered here; projectivity cannot be dropped. At a finite place its points have unbounded |T|; at the complex place the values |z| are unbounded.
 
 ### 4.1a Local curvature measures and model functions in every dimension
 
-For a projective variety X of dimension n over C_v and a line bundle L with a semipositive continuous local metric, construct c₁(L̄)^n on the analytification of §4.1. It is a positive Radon measure of total mass deg_L X and is continuous under uniform convergence of semipositive metrics. This construction allows local metrics without a chosen global adelic origin. At finite places use model intersection measures and uniform limits; at infinite places use the Monge–Ampère measure. For a metric induced by a global semipositive adelic bundle, prove that division by deg_L X>0 agrees with HeightsRationalPointsAndObstructions §5.17b `cycleProbabilityMeasure` (chambert-loir-2006, §2, pp.4–9; yuan2008, §3.3, pp.39–42).
+For a projective variety X of dimension n over C_v and a line bundle L with a semipositive continuous local metric, construct c₁(L̄)^n on the analytification of §4.1. It is a positive Radon measure of total mass deg_L X and is continuous under uniform convergence of semipositive metrics. This construction allows local metrics without a chosen global adelic origin. At finite places use model intersection measures and uniform limits; at infinite places use the Monge–Ampère measure. For a metric induced by a global semipositive adelic bundle on an ample L, identify its local analytic carrier with §4.1's carrier by the identity on classical points and the affinoid seminorm comparisons. For that homeomorphism h from the local realization here to the supplier's realization, prove h_*(c₁(L̄)^n/deg_L X)=HeightsRationalPointsAndObstructions §5.17b `cycleProbabilityMeasure`, with deg_L X>0. Require also h_*c₁(L̄)^n=c₁(h_*L̄)^n, where h_*L̄ denotes the same local bundle and metric in the other presentation (chambert-loir-2006, §2, pp.4–9; yuan2008, §3.3, pp.39–42).
 
 Define a finite-place model function as −log‖1‖ for a rational model metric on the trivial bundle, allowing rational powers of models. Its source is X^an and its target ℝ. Prove that their real span is uniformly dense in C(X^an,ℝ), and that changing a model on a common dominating model does not change the resulting function. At infinite places use restrictions of smooth ambient functions. These functions are the test functions for §4.11, while the P¹ energy and curvature comparison is §2.5 (Yuan §3.3, Definition 3.4 and the following Gubler density theorem, p.40).
 
@@ -5584,8 +5619,9 @@ The basic API is mass, additivity of model functions, compatibility with pullbac
 - At n=0, a C_v-point has degree and measure mass 1; on ℙ¹ the trivial metric on the trivial bundle has curvature and mass 0, and cannot be normalized to a probability.
 - The constant function 1 belongs to the real span of model functions at a finite place and integrates to deg_L X; for the standard O(2) example this is 2.
 - A pointwise metric limit without uniform control is not the convergence hypothesis; O(−1) has degree −1 on ℙ¹ and cannot carry a semipositive metric.
+- Transport of the standard O(2) measure gives `h_*(2δ_G)=2δ_{h(G)}` at a finite place, and h_*(2ω)=2h_*ω at the complex place. Division by 2 gives the supplier's probability in each case; transport alone leaves the mass at 2.
 
-*Needs:* §4.1 projective analytification; SchemeAndStackFoundations Layer 5 model intersection degrees; HeightsRationalPointsAndObstructions §5.17b for the global comparison; §2.5 for the P¹ comparison.
+*Needs:* §4.1 projective realizations and function/measure transport on the shared analytic carriers; SchemeAndStackFoundations Layer 5 model intersection degrees; HeightsRationalPointsAndObstructions §5.17b for the ample global comparison; §2.5 for the P¹ comparison.
 
 ### 4.3 Arithmetic Siu inequality
 
@@ -6954,7 +6990,7 @@ For power maps the canonical adelic measure agrees with the standard adelic meas
 
 ### Dependencies
 
-Layers 0–2; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SchemeAndStackFoundations Layer 5 intersection degrees; HeightsRationalPointsAndObstructions §0.16 heights; HeightsRationalPointsAndObstructions §§5.17a–f for projective adelic foundations; §§4.1–4.1a for general analytification, local curvature and density; §4.3 arithmetic Siu and §4.5 bifurcation theory for the general-variety and moduli endpoints.
+Layers 0–2; ComplexComparisonPartII §C−1.1 complex scheme analytification; AlgebraicModuliForArithmeticGeometry §§7.10.2, 7.4 Berkovich substrate and rigid comparison; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees/Layer 2 Local mutual energy and test functions local analytification, energies, metrics and measures; SchemeAndStackFoundations Layer 5 intersection degrees; HeightsRationalPointsAndObstructions §0.16 heights; HeightsRationalPointsAndObstructions §§5.17a–f for projective adelic foundations; §§4.1–4.1a for projective realizations, carrier transport, local curvature and density; §4.3 arithmetic Siu and §4.5 bifurcation theory for the general-variety and moduli endpoints.
 
 ## Layer 5: Arboreal Galois representations
 
@@ -9597,13 +9633,18 @@ Let v | 2 be a place of a number field K and t ∈ K ∖ {0, 1}. The canonical m
 
 v | 2; t ≠ 0, 1.
 
-For |t|_v > 1/|16|_v the interval [`ζ_{0,1/|4|},` `ζ_{0,|4t|}`] is totally invariant and f_t acts by the tent map `f_t(ζ_{0,|4t||16t|^{−r}})` = `ζ_{0,|4t||16t|^{−2r}}` and `f_t(ζ_{0,|4t||16t|^{r−1}})` = `ζ_{0,|4t||16t|^{−2r}}` for r ∈ [0, ½]; conclude as in Good reduction and canonical measures of f_t at places not above 2 (DeMarco–Krieger–Ye Proposition 3.2). The cases |t|_v < |16|_v and |1 − t|_v < |16|_v follow by Symmetries of the Legendre escape rates (DeMarco–Krieger–Ye Proposition 2.1). In the remaining range |j(t)|_v ≤ 1 (from j(t) = 256(t² − t + 1)³/(t²(t − 1)²)), so E_t has potential good reduction, hence so does f_t (a change of coordinates x = u²x′ + r to a good model with |u|¹² = |Δ_t|); `μ_{t,v}` is then the point mass at the image of the Gauss point.
+For |t|_v > 1/|16|_v the interval [`ζ_{0,1/|4|},` `ζ_{0,|4t|}`] is totally invariant and f_t acts by the tent map `f_t(ζ_{0,|4t||16t|^{−r}})` = `ζ_{0,|4t||16t|^{−2r}}` and `f_t(ζ_{0,|4t||16t|^{r−1}})` = `ζ_{0,|4t||16t|^{−2r}}` for r ∈ [0, ½]; conclude as in Good reduction and canonical measures of f_t at places not above 2 (DeMarco–Krieger–Ye Proposition 3.2). The cases |t|_v < |16|_v and |1 − t|_v < |16|_v follow by Symmetries of the Legendre escape rates (DeMarco–Krieger–Ye Proposition 2.1). In the remaining range |j(t)|_v ≤ 1 (from j(t) = 256(t² − t + 1)³/(t²(t − 1)²)). Apply EllipticCurves Layer 4's j-integrality criterion over K_v to choose a finite extension and a good minimal integral model E′. For its coordinate change x=u²x′+r, u≠0, Mathlib `WeierstrassCurve.variableChange_Δ` gives Δ(E′)=u⁻¹²Δ(E_t), so |u|_v¹²=|Δ(E_t)|_v. Section 6.3 gives good reduction of the doubling Lattès map in these good-model coordinates, including residue characteristic 2. The map χ:ℙ¹→ℙ¹, x′↦u²x′+r, conjugates it to f_t. Thus `μ_{t,v}`=χ_*δ_G on the analytic line, with diameter |u|_v²=|Δ(E_t)|_v^(1/6).
 
-*Needs:* [The Legendre curve E_t and its Lattès map f_t](#635-the-legendre-curve-e_t-and-its-lattès-map-f_t); [Symmetries of the Legendre escape rates (DeMarco–Krieger–Ye Proposition 2.1)](#667-symmetries-of-the-legendre-escape-rates-demarcokriegerye-proposition-21); [Good reduction and canonical measures of f_t at places not above 2 (DeMarco–Krieger–Ye Proposition 3.2)](#675-good-reduction-and-canonical-measures-of-f_t-at-places-not-above-2-demarcokriegerye-proposition-32); [The canonical measure `µ_{f,v}` on the Berkovich line](#273-the-canonical-measure-µ_fv-on-the-berkovich-line); [Good reduction of a rational map](#020-good-reduction-of-a-rational-map); `WeierstrassCurve.j`.
+*Needs:* EllipticCurves Layer 4 `HasPotentialGoodReduction`, its j-integrality criterion and finite-extension good minimal model/discriminant comparison; `WeierstrassCurve.variableChange_Δ`; [The Lattès map of multiplication by n on a Weierstrass curve](#63-the-lattès-map-of-multiplication-by-n-on-a-weierstrass-curve), including its unit-discriminant doubling lift in residue characteristic 2; [The Legendre curve E_t and its Lattès map f_t](#635-the-legendre-curve-e_t-and-its-lattès-map-f_t); [Symmetries of the Legendre escape rates (DeMarco–Krieger–Ye Proposition 2.1)](#667-symmetries-of-the-legendre-escape-rates-demarcokriegerye-proposition-21); [Good reduction and canonical measures of f_t at places not above 2 (DeMarco–Krieger–Ye Proposition 3.2)](#675-good-reduction-and-canonical-measures-of-f_t-at-places-not-above-2-demarcokriegerye-proposition-32); [The canonical measure `µ_{f,v}` on the Berkovich line](#273-the-canonical-measure-µ_fv-on-the-berkovich-line); [Good reduction of a rational map](#020-good-reduction-of-a-rational-map); `WeierstrassCurve.j`.
 
 ([demarco-krieger-ye-2020](#demarco-krieger-ye-2020), Proposition 3.5 and proof, p. 16 (arXiv v2) — The potentially good range; the three interval cases precede it in the statement.)
 
-**Endpoint checks.** v = 2 on ℚ, t = 2⁶: |t|_2 = 2⁻⁶ < |16|_2 = 2⁻⁴, so μ is the interval measure on [`ζ_{0,2⁻⁴},` `ζ_{0,2⁻²}`].
+**Checks.**
+
+- At v=2 on ℚ and t=2⁶, |t|_2=2⁻⁶<|16|_2=2⁻⁴, so μ is the interval measure on [`ζ_{0,2⁻⁴}`, `ζ_{0,2⁻²}`]. Its positive length distinguishes it from the potentially good case.
+- At t=−1, j=1728 and Δ=64, so |j|_2=2⁻⁶≤1 and |Δ|_2=2⁻⁶. A good model has |u|_2=2^(−1/2) and the transported Gauss point has diameter 1/2. Using the inverse coordinate change would give diameter 2.
+- At the boundary t=16, j=241³/225 is a 2-adic unit and |Δ|_2=2⁻¹², so the potentially good case gives diameter 1/4. A strict inequality in the potentially good range would omit this case.
+- At t=0 or 1, Δ=0 and E_t is singular; neither has a good elliptic model. Totalized evaluation of the displayed j quotient at its zero denominator cannot replace the hypotheses t≠0,1.
 
 ### 6.83a Specialization preserving polynomial degrees and a wandering point
 
@@ -10088,7 +10129,7 @@ The marked set {0,1/6}⊂ℚ tests zero marks and denominators in the parameter 
 
 ### Dependencies
 
-Layers 0–5 as specified per target; elliptic geometry and heights; SchemeAndStackFoundations §0.9 `spreading_out_models` and the relative Cohen contract; HeightsRationalPointsAndObstructions §§0.16, 4.8 heights and Siegel; Layer 2 The native analytic projective line hybrid geometry; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
+Layers 0–5 as specified per target; elliptic geometry and heights, including EllipticCurves Layer 4 potential-good-reduction and good-model discriminant comparison for §6.83; SchemeAndStackFoundations §0.9 `spreading_out_models` and the relative Cohen contract; HeightsRationalPointsAndObstructions §§0.16, 4.8 heights and Siegel; Layer 2 The native analytic projective line hybrid geometry; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
 
 ## Source conventions and corrections
 
