@@ -58,7 +58,8 @@ This roadmap owns:
   the Fourier transforms of lattice indicators (Layer 2);
 - Artin–Schreier–Witt theory of fields of characteristic `p`, reduced representatives over
   `k((T))` and the conductor formula (Layer 3);
-- Lubin–Tate formal modules in equal characteristic, `p`-primary local existence, local
+- Lubin–Tate formal modules in equal characteristic, their torsion ramification and
+  reciprocity on every unit-filtration step, `p`-primary local existence, local
   Kronecker–Weber and injectivity of the local Artin map in equal characteristic, and the
   Schmid–Witt symbol; the additional scheme and structure assertions for rigidified Picard
   spaces, Rosenlicht's perfect-field universal property at a fixed modulus, and the extension
@@ -276,8 +277,15 @@ ClassFieldTheory Layers 1–4 provide class formations and Tate's theorem; Layer
 provide local invariants, unramified extensions and arithmetic local reciprocity.
 Layer 8 supplies local existence for finite extensions of `ℚ_p` and the prime-to-residue-
 characteristic existence theorem in equal characteristic. These are the domains used here.
+Layer 7's conductors are minima of unit-kernel depths; §§4.1–4.2 prove the ramification
+comparison for the equal-characteristic Lubin–Tate realization used in §4.4.
 
 ### From TauCetiRoadmap.LubinTateFormalModulesAndQuasiCanonicalLifts
+
+The supplier specification is
+[LubinTateFormalModulesAndQuasiCanonicalLifts, LT.0–LT.2](https://github.com/TauCetiProject/TauCetiRoadmapJobs/blob/1842229991e0c68c8cc99af607ac3b6e9861f6a4/packages/LubinTateFormalModulesAndQuasiCanonicalLifts/design/README.md#lt0-formal-modules-coordinates-and-complete-points).
+These layers are prerequisites of Layer 4 and precede FunctionFieldArithmetic in the
+dependency order.
 
 LubinTateFormalModulesAndQuasiCanonicalLifts LT.0, targets *formal-hom* (Formal group
 homomorphisms), *formal-module* (One-dimensional formal modules) and *adic-points*
@@ -289,8 +297,10 @@ The third evaluates on an ideal defining the topology of a complete separated li
 topologized algebra, with continuous coefficient maps and coordinate transport.
 These three targets have no characteristic-zero restriction. Section 4.1 uses `A=R=O`
 and maximal ideals of rings of integers of finite extensions, taking their union for
-algebraic torsion points. LT.1–LT.2 supply the mixed-characteristic construction,
-torsion and Artin comparison; §4.1 adds the equal-characteristic construction.
+algebraic torsion points. LT.1 targets *admissible-series*, *interpolation*, *lt-module*
+and *lt-coordinate-comparison*, and LT.2 targets *primitive-division*, *lt-character*
+and *reciprocity-comparison*, supply the mixed-characteristic construction, torsion
+and arithmetic Artin comparison; §4.1 adds the equal-characteristic construction.
 
 ### From TauCetiRoadmap.LocalFieldsRamification
 
@@ -1010,6 +1020,12 @@ The formal-module and torsion API is:
 - Two series for the same `π` give a unique isomorphism tangent to the identity and
   commuting with their `O`-actions.
 - Torsion identifies with `O/𝔭^m`; the field is Galois of the stated degree and `π` is a norm.
+- For `m≥1`, `M=K_{π,m}`, a primitive torsion point `α` and `a∈Oˣ` with
+  `a≢1 mod 𝔭^m`, put `j=ord_K(a−1)`, so `0≤j<m`; it is independent of the lift
+  of the unit class. The automorphism
+  `σ_a(α)=[a]_f(α)` has displacement `ord_M(σ_a(α)−α)=Q^j`.
+  Under the unit-class isomorphism, `Gal(M/K)^0` is the whole group and
+  `Gal(M/K)^r` is the image of `U_K^(r)` for every integer `r≥1`, trivial for `r≥m`.
 - For `x ∈ Kˣ` with `d=ord_K(x)>0`, take the unramified extension `L/K` of degree `d`
   and a uniformizer `π_L` with `N_{L/K}(π_L)=x`. Relative formal modules give abelian
   fields `K_{x,m}/K` containing `L`, totally ramified over `L`, of degree
@@ -1022,15 +1038,21 @@ associativity, commutativity and the ring-homomorphism laws. Separability of `f^
 characteristic `p` needs a separate argument (its derivative is not a unit in general); it is
 proved by showing that the roots are simple through the `O`-module structure. The degree is
 computed by Newton polygons: the constant term of `f^{∘m}/f^{∘(m−1)}` is a unit times `π`, and all
-its roots have the same valuation. (Yoshida, *Local class field theory via Lubin–Tate theory*,
+its roots have the same valuation. For the ramification assertion, the formal difference
+`[a]_f(α) −_f α = [a−1]_f(α)` is primitive level-`(m−j)` torsion. Its valuation in `M`
+is `Q^j`, and ordinary subtraction has the same valuation because the formal addition
+has linear part `X+Y` and integral higher terms. This determines the lower filtration;
+the Herbrand function sends `Q^s−1` to `s` for `1≤s≤m`, giving the asserted upper groups.
+(Yoshida, *Local class field theory via Lubin–Tate theory*,
 §§3.1–4.2: Lemma 3.4, p. 416; Proposition 3.5, p. 417; Corollary 3.7, p. 418; Proposition 4.4,
 p. 419; §5.1, Definition 5.3 and Proposition 5.4, p. 423; Proposition 5.10, p. 425;
-Appendix II, Proposition 8.1, p. 436.)
+Appendix II, Proposition 8.1, p. 436; Proposition 6.14 and its proof, p. 433.)
 
 *Needs:* LubinTateFormalModulesAndQuasiCanonicalLifts LT.0 targets *formal-hom*,
 *formal-module* and *adic-points*; Mathlib `FormalGroup`,
 `PowerSeries`; ClassFieldTheory Layer 5 (local fields and their
-unramified extensions); AlgebraicCurves Layer 9 (the expansion of a completed place).
+unramified extensions); LocalFieldsRamification Layer 3 (lower groups and Herbrand functions);
+AlgebraicCurves Layer 9 (the expansion of a completed place).
 
 **Checks.**
 
@@ -1044,6 +1066,13 @@ unramified extensions); AlgebraicCurves Layer 9 (the expansion of a completed pl
 - If `ord_K(x) = 2`, the relative field has unramified degree `2`, total degree
   `2(Q − 1)Q^(m−1)`, and its norm group has valuation subgroup `2ℤ`; using an unramified
   extension of degree `1` cannot give that norm group.
+- For `Q=3,m=2`, unit classes with `ord_K(a−1)=0,1` have displacements `1,3`.
+  The lower group orders at indices `0,1,2,3` are `6,3,3,1`, while the upper
+  orders at `0,1,2` are `6,3,1`; identifying lower and upper numbering would give
+  order `3` instead of `1` at depth `2`.
+- For `Q=2,m=2`, the lower orders at `0,1,2` are `2,2,1` and the upper orders
+  at `0,1,2` are also `2,2,1`; the first unit quotient is trivial, so there is
+  no nontrivial tame factor to insert.
 
 ### 4.2 Local existence, local Kronecker–Weber and injectivity in equal characteristic
 
@@ -1059,6 +1088,13 @@ Prove lubinTate_artin: `Art_K(π)` is trivial on `K_π` and acts as `φ` on `K^u
 `u ∈ Oˣ`, `Art_K(u)` is trivial on `K^ur` and acts on `μ_{f,m}` by `[u⁻¹]_f`. Prove
 conductor_existence_all: the norm subgroup of an abelian extension of conductor exponent `n`
 contains `U^(n)` and not `U^(n−1)` (for `n ≥ 1`), in every characteristic.
+
+The ramification assertion of lubinTate_artin is the following comparison in equal
+characteristic: for every finite abelian extension `L/K` and every integer `r≥0`,
+`Art_{L/K}(U_K^(r)) = Gal(L/K)^r`, where `Art_{L/K}` is restriction of `Art_K`,
+`U_K^(0)=Oˣ` and `U_K^(r)=1+𝔭^r` for `r≥1`. For every abelian algebraic extension
+`E/K`, the same equality holds with upper groups defined by their compatible finite
+quotients; the unit image is closed because `U_K^(r)` is compact.
 
 These extend, without restating, ClassFieldTheory Layer 8's `localAbelianExistence`,
 `injective_artinMap` and `localClassFieldCorrespondence` (there stated for finite extensions of
@@ -1077,6 +1113,18 @@ ClassFieldTheory's. (Yoshida, Theorem A, pp. 411–412; Definition 4.10, p. 422;
 p. 425; Theorem 5.15 and Corollary 5.16, p. 427; the existence theorem in §5.3(iv), p. 428;
 Theorems 6.11 and 6.15, pp. 432–433.)
 
+For the ramification comparison, §4.1 computes the upper groups in `K_{π,m}/K`, and
+the inverse-unit action above preserves every unit subgroup. A finite abelian `L/K`
+lies in a compositum of a finite unramified extension and some `K_{π,m}` by
+localKroneckerWeber. The unramified factor contributes no group at depth `r≥0`;
+the lower groups on the totally ramified factor are unchanged by unramified base
+extension, as follows directly from their displacement definition. Herbrand's quotient
+theorem then gives the equality for `L/K`. Passing to all finite quotients gives the
+assertion for `E/K`: compactness of `U_K^(r)` realizes a compatible family of finite
+unit images by a single unit. This derives the comparison from the Lubin–Tate
+realization (Yoshida, Proposition 6.14 and proof and Theorem 6.15, p. 433), before
+using the Schmid–Witt formula.
+
 *Needs:* Layer 4.1; ClassFieldTheory Layers 4, 6, 7 and 8; LocalFieldsRamification Layer 3.
 
 **Checks.**
@@ -1091,6 +1139,16 @@ Theorems 6.11 and 6.15, pp. 432–433.)
   contains `1 + TO`, so the prime-to-`p` theorem of ClassFieldTheory Layer 8 cannot produce `H`.
 - With Yoshida's normalization substituted for ClassFieldTheory's, lubinTate_artin would read
   `[u]_f` instead of `[u⁻¹]_f`; the sign check is the action of `Art_K(π)` on `K^ur`.
+- In an unramified extension of degree `2`, `Art(U_K^(0))=1=G^0` while
+  `Art_K(π)` restricts to the nonidentity Frobenius. Replacing `U_K^(0)` by `Kˣ`
+  would give the whole group of order `2`.
+- In `K_{π,2}/K` for `Q=3`, the images of `U_K^(0),U_K^(1),U_K^(2)` have
+  orders `6,3,1`, equal to the upper group orders in §4.1. Taking their compositum
+  with an unramified quadratic extension gives group order `12` and the same
+  depth-`0,1,2` orders `6,3,1`.
+- For the unramified `ℤ_p`-extension every unit image and every nonnegative upper
+  group is `1`; for the tower `⋃_m K_{π,m}`, the image at depth `r≥1` is
+  `1+𝔭^r`, since its finite images are `U_K^(r)/U_K^(m)` for `m≥r`.
 
 ### 4.3 The Schmid–Witt symbol
 
@@ -1182,7 +1240,11 @@ The conductor API is:
 - A constant-only class has conductor zero, in agreement with
   ArithmeticGaloisRepresentations §3.7.
 
-*Proof sketch.* The image of `U^(r)` under the Schmid–Witt symbol is computed from the explicit
+*Proof sketch.* The ramification comparison in lubinTate_artin (§4.2) identifies
+`Art_{L/K}(U_K^(r))` with `Gal(L/K)^r` at every finite abelian level, and its
+inverse-limit form does so on the tower. This is the input used in Kosters–Wan
+§4.5.1 immediately before Theorem 4.12, p. 21. The image of `U^(r)` under the
+Schmid–Witt symbol is computed from the explicit
 formula of 4.3 on the topological generators `(1 − aT^i)^(p^j)` of the principal units, which lie
 in `U^(r)` exactly when `ip^j ≥ r`, with `j ≥ 0`; thus the least allowed `j` is
 `max(0, ⌈log_p(r/i)⌉)`. This nonnegative bound must be retained when passing to a character
@@ -1197,7 +1259,9 @@ as does the expression for `φ₁(U^r)` in Theorem 4.12.
 The unit generators preceding Theorem 4.12 have nonnegative indices; negative powers of `p`
 cannot supply additional units. The conductor formula itself is unchanged.
 
-*Needs:* Layers 3.2 and 4.3; LocalFieldsRamification Layer 3; ClassFieldTheory Layer 7.
+*Needs:* Layers 3.2, 4.2 (the unit-filtration ramification assertion of lubinTate_artin)
+and 4.3; LocalFieldsRamification Layer 3 (quotient compatibility);
+ClassFieldTheory Layer 7 (the Artin map and unit-defined conductors).
 
 **Checks.**
 
