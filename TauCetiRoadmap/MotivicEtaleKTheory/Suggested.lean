@@ -6,8 +6,9 @@ import Mathlib
 The roadmap is README.md; this file is not the roadmap. It records the roadmap's headline
 theorems against the pinned APIs. None of the following headlines is statable at these pins:
 
-* Layers 1.3–1.4: the integral cubical–simplicial comparison with supports, coefficients and
-  operations lacks the face-admissible higher-cycle complexes and shared higher Chow groups.
+* Layers 1.1, 1.3–1.4: the integral refined-normalization homotopy equivalence and the
+  cubical–simplicial comparison with supports, coefficients and operations lack the
+  face-admissible higher-cycle complexes and shared higher Chow groups.
 * Layer 2.0a: Adams-compatible ordered relativity and multiplicative pairings for supported
   multi-relative cube K-theory lack scheme perfect K-spectra and their supported face
   diagrams, together with integral Adams operations on the associated pointed K-spaces.
