@@ -5,8 +5,8 @@ ideal classes, genera and integral binary quadratic forms in a real quadratic
 field. Its targets are the exact narrow-to-wide kernel, unique descent of real
 class characters, the number of narrow classes in each genus, arithmetic
 criteria for the distinguished principal class to lie in the principal genus,
-the extension of the supplied nonsquare form character to all integral binary
-quadratic forms, and its agreement
+the common extension of the supplied nonsquare and Biró form characters to all
+integral binary quadratic forms, and its agreement
 with the narrow ideal genus character at a positive fundamental discriminant.
 These interfaces connect the existing normalizations of real quadratic
 period and trace formulas to the pinned arithmetic carriers.
@@ -25,9 +25,9 @@ The precise ownership boundaries are as follows.
 
 - **Multiquadratic, Part II** owns the two narrow-defect interfaces, the
   genus-fibre cardinality, the arithmetic interfaces of Layer 2, and Layer 3's
-  extension `binaryFormGenusChar` of the supplied nonsquare form character to
-  the remaining integral forms. It proves restriction agreement with the
-  supplied character and comparison with the pinned narrow ideal character.
+  common total extension `binaryFormGenusChar` of the supplied nonsquare and
+  Biró form characters. It proves restriction agreement with both supplied
+  characters and comparison with the pinned narrow ideal character.
 - **[IntegralLattices, Layer B](https://github.com/TauCetiProject/TauCetiRoadmap/blob/main/TauCetiRoadmap/IntegralLattices/README.md#layer-b-binary-lattices-and-quadratic-orders)**
   (B1–B3) owns integral binary forms and their content, proper equivalence,
   the oriented form–ideal bijection into GlobalNumberFields' `NarrowPic` for
@@ -49,12 +49,18 @@ The precise ownership boundaries are as follows.
 - **AutomorphicSpectralTheory §4.17a**, `quadratic_weyl_domains`, owns the
   real composite identity χ(J)=sign δ=sign δ′. AnalyticNumberTheoryPartI
   §2.25 consumes that value from that supplier.
-- **MetaplecticAutomorphicForms §7.20a**, `quadraticTraceData`, owns the
+- **MetaplecticAutomorphicForms §§7.20a, 7.32-trace** owns both supplied
+  form characters. Section 7.20a, `quadraticTraceData`, owns the
   imprimitive nonsquare form character, its represented-value existence and
   independence, and its proper invariance. Its domain has Δ=δδ′ nonsquare,
   δ fundamental and δ′ a nonzero discriminant; forms are positive definite
-  when Δ<0. Layer 3 extends this same character to negative definite forms
-  and square and zero discriminants, and proves agreement on the overlap.
+  when Δ<0. Section 7.32-trace, `biroArithmeticTraceData`, owns Biró's
+  character ω_δ on positive-discriminant forms, including square
+  discriminants, with δ>0 fundamental and Δ/δ a positive discriminant;
+  its level-N forms satisfy N∣a. Layer 3 owns the total extension and its
+  agreement with each interface on its domain, including Biró's square
+  discriminants. Negative definite forms and zero discriminants also belong to
+  the extension domain.
 - **ClassicalArithmeticCompletion §§5.21, 5.23–5.24** owns the all-radicand
   negative-Pell/norm-unit equivalence, the negative-Pell criterion for J=1
   and the two-primary comparison. Here the kernel and descent statements
@@ -292,22 +298,34 @@ independent of the choice and of the proper representative. Layer 3 uses
 this character and proves that the total extension restricts to it
 (Duke–Imamoḡlu–Tóth, §9, p.978, before Proposition 5).
 
+Section 7.32-trace, `biroArithmeticTraceData`, supplies Biró's character
+ω_δ for δ>0 fundamental and Δ=δδ′>0 with δ′>0 and
+δ′≡0,1 (mod 4), including square Δ. At level one it is defined on
+all integral forms of discriminant Δ; at every positive level N it is
+the same weight restricted to forms with N∣a. It is zero when the content
+is not coprime to δ, and otherwise is (δ/m) at any represented integer m
+coprime to δ. Use this arithmetic interface independently of its geodesics
+and trace identity. Layer 3 proves agreement on raw level-one forms,
+which also gives agreement at every level by restriction
+(Gross–Kohnen–Zagier, Ch. I §2, pp.508–509, the classical character and
+its imprimitive extension).
+
 ## How to read the build
 
 Layer 0 identifies the narrow defect and makes character descent unique.
 Layer 1 counts the elements in an arbitrary genus using the existing quotient.
 Layer 2 uses the supplied value on the distinguished class to obtain signed
 prime-discriminant and two-square criteria. Layer 3 extends the supplied
-nonsquare form character and shows that at a positive fundamental
+nonsquare and Biró form characters and shows that at a positive fundamental
 discriminant it is the narrow ideal genus character of the oriented
 coefficient ideal. Layers 0–2 use the pinned narrow-class theory; the sign
 normalization in 2.1 is imported from AutomorphicSpectralTheory §4.17a.
-Layer 3 also uses MetaplecticAutomorphicForms §7.20a and the pinned form
+Layer 3 also uses MetaplecticAutomorphicForms §§7.20a, 7.32-trace and the pinned form
 carrier. `Suggested.lean` states the headline endpoints and the simple
 definition they need. Its proved example tests the content obstruction.
-The restriction agreement is a README target: the supplied nonsquare
-form-character function is absent from the pinned libraries, so that
-headline cannot be stated against those pinned APIs.
+Both restriction agreements are README targets: the supplied form-character
+functions are absent from the pinned libraries, so those headlines cannot
+be stated against those pinned APIs.
 
 ## Layer 0: the quadratic narrow defect
 
@@ -721,7 +739,7 @@ targets do not need form reduction or analytic inputs.
 For any finite set t of integers put `δ = ∏ P ∈ t, P`. When its members
 are prime discriminants and at most one is even, δ is a fundamental
 discriminant, possibly 1.
-Extend the character of MetaplecticAutomorphicForms §7.20a to every
+Extend the characters of MetaplecticAutomorphicForms §§7.20a, 7.32-trace to every
 `Q : TauCeti.BinaryQuadraticForm ℤ` as `binaryFormGenusChar t Q`, written `χ_δ(Q)` for
 `Q=[a,b,c]`. Its value is `genusCharFun t m` if Q represents an integer m coprime to δ,
 and zero if no such integer exists. In the first case `m` is a chosen such represented integer. The
@@ -739,17 +757,26 @@ paragraph opening the section; Proposition 1 there is the level-`N`
 generalization, which is not needed here). Gross–Kohnen–Zagier use nonzero
 discriminants (Notations, p.503); the local argument below also proves the
 evaluation law at discriminant zero. The extension also includes square
-discriminants and negative definite forms. Prove restriction agreement: if t consists of prime discriminants,
+discriminants and negative definite forms. Prove nonsquare restriction agreement: if t consists of prime discriminants,
 at most one even, Δ=δδ′ is nonsquare, δ′≠0, δ′≡0,1 (mod 4), and Q is
 positive definite when Δ<0, then `binaryFormGenusChar t Q` equals the
-character supplied by MetaplecticAutomorphicForms §7.20a. In the zero
-branch both are zero by the content condition; otherwise compare both at
-one represented integer coprime to δ. The supplied existence, independence
-and invariance are used on this overlap. The evaluation and content laws
-below establish the extension on the remaining forms, rather than
-constructing a second nonsquare character.
+character supplied by MetaplecticAutomorphicForms §7.20a.
 
-*Needs:* MetaplecticAutomorphicForms §7.20a; the pinned form carrier,
+Prove Biró restriction agreement on raw level-one forms: if t consists of
+prime discriminants, at most one even, δ>0, Δ=δδ′>0 with
+δ′>0 and δ′≡0,1 (mod 4), and Q.discrim=Δ, then
+`binaryFormGenusChar t Q = ω_δ(Q)`, with ω_δ supplied by
+MetaplecticAutomorphicForms §7.32-trace. Square Δ is included. For every
+positive integer N, restriction to forms with N∣a gives agreement with
+the level-N weight; no primitivity or coprimality with N is assumed
+(Gross–Kohnen–Zagier, Ch. I §2, pp.508–509, classical character and
+imprimitive extension). For each agreement, both values are zero when the
+content is not coprime to δ; otherwise compare them at one common coprime
+represented integer. The supplied existence, independence and invariance
+are used on the overlaps. The evaluation and content laws below establish
+the total extension, retaining both supplied characters on their domains.
+
+*Needs:* MetaplecticAutomorphicForms §§7.20a, 7.32-trace; the pinned form carrier,
 `genusCharFun`, its multiplicativity, zero and unit-value laws; the local
 argument of Gross–Kohnen–Zagier, Ch. I §2, proof of Proposition 1, p.509.
 
@@ -856,6 +883,17 @@ The proved example tests the total definition's content obstruction directly.
   value is an odd square and is 1 modulo 4. At Δ=16, [1,0,−4]
   represents 1 and −3, both with value 1. These forms lie outside the
   nonsquare supplier domain; the cofactors are 0 and −4, both 0 modulo 4.
+- At Δ=25=5·5 and t={5}, both the extension and Biró's level-one
+  character give 1 on [1,1,−6], evaluated at 1; −1 on [2,1,−3],
+  evaluated at 2 since (5/2)=−1; and 0 on [5,5,0], whose content is 5.
+  These square-discriminant values test both unit signs and the content
+  obstruction. The latter two forms also lie at levels 2 and 5,
+  respectively, with the same values; in particular level 5 requires
+  neither a primitive form nor coprimality of the level with δ.
+- At Δ=δ=δ′=1 and t=∅, [0,1,0] represents 1 at (1,1), so both
+  characters give 1 at every positive level, since every N divides a=0.
+  This checks the empty factor and a zero leading coefficient in the
+  square domain, without introducing a quadratic field or a closed cycle.
 - At Δ=−20, δ=−4, the negative definite form [−1,0,−5] has value −1,
   whereas [1,0,5] has value 1. For δ=5, [2,1,2] and its
   negative both have value −1 since sign 5=1. In the content-zero branch
@@ -985,7 +1023,7 @@ value, the dyadic Kronecker normalization and the sign factor
 
 ### Dependencies
 
-The supplied sign normalization in 2.1, MetaplecticAutomorphicForms §7.20a,
+The supplied sign normalization in 2.1, MetaplecticAutomorphicForms §§7.20a, 7.32-trace,
 and the pinned Tau Ceti narrow class group, coprime-ideal
 genus character and prime-discriminant characters; the binary form carrier,
 evaluation, discriminant and action in `TauCeti.BinaryQuadraticForm`. The oriented form–ideal bijection of IntegralLattices B2 and the
@@ -1000,8 +1038,10 @@ interfaces of AnalyticNumberTheoryPartI Layer 2 and the Nielsen surfaces and
 genus-weighted integrals of AutomorphicSpectralTheory §4.17a retain their own
 normalizations: AnalyticNumberTheoryPartI §2.25 consumes the real genus
 character and its value on J from AutomorphicSpectralTheory §4.17a.
-MetaplecticAutomorphicForms §7.20a supplies the nonsquare form weights used
-in its traces. The supplier contracts specify the direction of these inputs.
+MetaplecticAutomorphicForms §§7.20a, 7.32-trace supply respectively the
+nonsquare and Biró form weights used in their traces, the latter including
+positive square discriminants. The supplier contracts specify the direction
+of these inputs.
 
 Duke–Imamoḡlu–Tóth's genus averages (Theorem 2 and (4.4), pp.959–960)
 use the narrow-genus size h⁺/2^(r−1) of Layer 1, and their twisted traces

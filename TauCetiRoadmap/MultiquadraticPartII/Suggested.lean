@@ -11,10 +11,12 @@ narrow kernel, unique character descent, genus-fibre cardinality, the prime-divi
 and two-square criteria, the norm-unit obstruction, the form-character extension's
 represented-value and content laws, and its comparison with the narrow ideal character.
 
-The restriction agreement with MetaplecticAutomorphicForms §7.20a is not statable
-at the pins: its nonsquare form-character function in `quadraticTraceData` is not
-present in Mathlib or Tau Ceti. No substitute for that comparison is declared.
-`binaryFormGenusChar` is the total extension of that character to integral forms,
+The restriction agreements with MetaplecticAutomorphicForms §§7.20a, 7.32-trace
+are not statable at the pins: neither the nonsquare form-character function in
+`quadraticTraceData` nor Biró's positive-discriminant character in
+`biroArithmeticTraceData` is present in Mathlib or Tau Ceti. The latter agreement
+includes square discriminants. No substitute for either comparison is declared.
+`binaryFormGenusChar` is the common total extension of these characters to integral forms,
 including negative definite forms and square and zero discriminants. The composite
 sign identity is supplied by AutomorphicSpectralTheory §4.17a.
 
@@ -139,8 +141,8 @@ theorem J_ne_one_of_prime_threeModFour {s : Finset ℤ}
 
 /-! ## Layer 3: genus characters of binary forms -/
 
-/-- The total extension of the nonsquare form character supplied by
-MetaplecticAutomorphicForms §7.20a: evaluate `genusCharFun t` at a chosen integer
+/-- The common total extension of the form characters supplied by
+MetaplecticAutomorphicForms §§7.20a, 7.32-trace: evaluate `genusCharFun t` at a chosen integer
 represented by `Q` and coprime to `δ = ∏ P ∈ t, P`, or return zero if none exists.
 For a fundamental divisor of the discriminant, the represented-value law makes
 this independent of choice, including at square and zero discriminants.
