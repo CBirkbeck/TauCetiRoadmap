@@ -38,7 +38,9 @@ statable. None of the following headlines is statable at these pins with only si
   applications need the preceding arithmetic systems, functions and determinant lattices.
 
 Native continuous cohomology, Tate modules, completed group algebras and the generic
-Tate–Shafarevich kernel do not themselves construct these arithmetic objects. No free maps,
+Tate–Shafarevich kernel do not themselves construct these arithmetic objects. In particular, the modified local edges of sections 5.2–5.3 and 8.29
+need the actual Heegner classes and their local diagrams; their generic integral descent is
+a separate supplier contract, and no global correction automorphism is asserted. No free maps,
 abstract support predicates or elementary coefficient calculations replace the headlines.
 -/
 
