@@ -22,10 +22,11 @@ The following headlines are not statable at the pins:
   requires stable SU/SO, its integral homotopy lattice and the suspended
   character; the integral regulator lattice, zeta covolume and S-integer/order
   transport require actual higher K-groups and the specified regulator.
-* Layer 6: real Deligne cohomology on smooth varieties, its universal Chern
-  regulator and infinitesimal classifying comparison require logarithmic Deligne
-  complexes and their classifying-space carriers; the geometric point
-  identification and Borel equals twice Beilinson require those constructions;
+* Layer 6: calibration of the supplied universal Deligne Chern regulator, its
+  conjugation/transfer and Coleman same-map interfaces, and the infinitesimal
+  classifying comparison require the logarithmic Deligne and classifying-space
+  carriers supplied by MotivicEtaleKTheory; the geometric point identification
+  and Borel equals twice Beilinson require those constructions;
   the rational Adams-weight theorem requires higher K-groups and their Adams
   operations.
 
@@ -98,7 +99,8 @@ theorem exists_divisionAlgebra_split_at_infinity
 /-- Over a totally real number field and for even `n ≥ 2`, the positive number
 `√|disc F| · ζ_F(n) / π^(n·[F:ℚ])` is rational. This is the rank-zero
 primitive-period theorem: the comparison sends the empty generator to `1`.
-See Borel 1977, Theorem 6.2 and Remark 6.3, p.632. -/
+See Borel 1977, Theorem 6.2 and Remark 6.3, p.632, with the 1980
+erratum, p.373, for the intermediate rational forms. -/
 theorem exists_pos_rat_dedekindZeta_of_isTotallyReal
     (F : Type u) [Field F] [NumberField F] [NumberField.IsTotallyReal F]
     (n : ℕ) (hn : 2 ≤ n) (hev : Even n) :
