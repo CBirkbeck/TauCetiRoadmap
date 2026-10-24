@@ -22,13 +22,13 @@ statable. None of the following headlines is statable at these pins with only si
   nonvanishing need the CM orbit and reduction maps with their component measures and periods.
 * Sections 8.21–8.22 and 8.24: indefinite and Iwasawa nonvanishing need the geometric
   CM classes, ring-class tower and actual ordinary universal-norm family.
-* Sections 8.27–8.29: the logarithm, control and twisted index-square formulas need the
+* Sections 8.35–8.37: the logarithm, control and twisted index-square formulas need the
   integral family regulator, normalized BDP function and propagated finite Sha groups.
-* Sections 8.31–8.32: the determinant/characteristic equivalence and specialized lattice
+* Sections 8.39–8.40: the determinant/characteristic equivalence and specialized lattice
   formula need the arithmetic Selmer perfect complex and its canonical determinant comparison.
-* Sections 8.36–8.40, including section 8.39a: Howard's divisibility, the weak-torsion bound
+* Sections 8.30–8.34 and 8.41: Howard's divisibility, the weak-torsion bound
   at the augmentation prime, uniform errors and exact paired length need the actual Lambda-adic Heegner system and its local conditions.
-* Sections 8.41–8.44: conditional finite-system nonvanishing, refined divisibility and
+* Sections 8.42–8.45: conditional finite-system nonvanishing, refined divisibility and
   the Castella–Sano equivalence need those systems and their integral main-conjecture assertions.
 * Sections 8b.6–8b.10: rational and integral Heegner/Greenberg equalities, including the
   Eisenstein branch on the source-normalized families of section 8.6a, need the arithmetic
