@@ -26,7 +26,7 @@ The following headlines are not statable at the pins:
   conjugation/transfer and Coleman same-map interfaces, and the infinitesimal
   classifying comparison require the logarithmic Deligne and classifying-space
   carriers supplied by MotivicEtaleKTheory; the geometric point identification
-  and Borel equals twice Beilinson require those constructions;
+  and Borel equals negative twice the shared Beilinson map require those constructions;
   the rational Adams-weight theorem requires higher K-groups and their Adams
   operations.
 
