@@ -1804,10 +1804,11 @@ abelian-group structure theorem.
 
 Consume GeneralizedCohomology G5.4 for ko, ku, KO, KU, their Bott
 classes and canonical connective covers. Construct realKTheoryComparison:
-for real closed k and m≥2, compare connective algebraic K(k;ℤ/m) with
-ko; the map induces isomorphisms on all nonnegative homotopy groups,
+for real closed k and m≥2, construct the finite-coefficient map
+K(k) ∧ S/m → ko ∧ S/m, using the Moore spectrum S/m on both sides.
+The map induces isomorphisms on all nonnegative homotopy groups,
 with coefficient Bockstein and extension to the algebraic closure matching
-complexification ko→ku. Periodic KO has the supplied eight-periodic
+complexification ko ∧ S/m → ku ∧ S/m. Periodic KO has the supplied eight-periodic
 homotopy; its connective cover ko assigns no negative ordinary algebraic
 K-groups. Prove the finite-coefficient comparison by real rigidity and
 Suslin’s real-closed-field calculation. Construct realRestrictionDescent
@@ -1820,13 +1821,16 @@ pp. 517–519; Rognes–Weibel, Theorems 6.7 and 6.9, pp. 32–34.)
 
 **Checks.**
 
+- For k=ℝ and every m≥2, degree zero gives ℤ/m on both sides;
+  integral ko would give ℤ and fail already at m=2.
 - Integrally KO₀=ℤ, KO₁=KO₂=ℤ/2, KO₃=0, KO₄=ℤ and
   KO₅=KO₆=KO₇=0; KU alone fails the degrees one and two.
 - Modulo two the groups in degrees 0,…,7 have orders 2,2,4,2,2,1,1,1;
   the degree-two group is ℤ/4, not (ℤ/2)². Bockstein compatibility
   must retain that extension.
 - Complexification KO₀→KU₀ is the identity, whereas KO₄→KU₄
-  is multiplication by two. Eight-periodicity is applied to KO; ko
+  is multiplication by two. Modulo two, complexification is the identity
+  on π₀≃ℤ/2 and zero on π₄≃ℤ/2. Eight-periodicity is applied to KO; ko
   has no negative-degree periodic table.
 
 *Needs:* §5.2’s coefficients and Suslin normalization,
