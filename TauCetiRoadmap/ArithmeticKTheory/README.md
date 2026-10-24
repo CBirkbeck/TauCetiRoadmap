@@ -24,7 +24,12 @@ comparisons used below.
 This roadmap owns the Tits-building and projective-lattice Steinberg
 finiteness inputs in §3.2 and the rational rank theorem for orders in §3.4.
 The rank-filtered Q-space assembles finite generation and extends ranks to
-finite S. It consumes EtaleCohomologyFoundations §§F.0.3/F.4 for twists and owns
+finite S. Section 3.2 constructs the finite CW model of each neat arithmetic
+bordification from its rounded collar and the MorseTheory M2–M3 cell and
+relative-approximation theorems; it does not require a triangulation. The
+general smooth triangulation comparison belongs to GeometricTopology,
+“The smoothing-and-triangulation comparison”, item 1.
+This roadmap consumes EtaleCohomologyFoundations §§F.0.3/F.4 for twists and owns
 the Suslin and arithmetic-base motivic/étale descent comparisons in §5.2, and the algebraic-to-real
 comparison in §5.4. KTheoryFiniteLocalFields §3.0a owns the shared motivic
 complexes, norm-residue theorem and motivic-to-K tower;
@@ -59,7 +64,9 @@ In particular NumberFieldArithmetic supplies general quadratic-field arithmetic,
 and `TauCeti.NumberField.Sqrt5` already supplies the golden field’s integral
 basis, signature, principal ideals, class number, dyadic prime and fundamental
 unit. Those are inputs to the K₂ presentation, rather than targets of this
-roadmap. Real lattice infrastructure comes from Mathlib’s `IsZLattice` and
+roadmap. Low stable sphere calculations belong to HomotopySpheres Stage 9; §7.5
+uses its fourth-stem vanishing. Real lattice infrastructure comes from
+Mathlib’s `IsZLattice` and
 `ZLattice.covolume`; LocalGaloisGroups and
 ProfiniteArithmetic supply local and profinite arithmetic; ClassFieldTheory
 supplies the class-formation interfaces. No replacement for those roadmaps is
@@ -99,6 +106,10 @@ finite projective algebra. For a finite extension E/F, the upper set T is
 exactly the primes over S whenever a finite-projective S-integer extension is
 used. For a residue field k(v), its absolute norm is q_v=#k(v).
 
+The K₁ localization boundary uses positive order: a uniformizer has value 1.
+The additive exponent of the supplied multiplicative valuation has the opposite
+sign; §2.2 specifies the negation used in every comparison with that API.
+
 The localization boundary β on K₂ is normalized by β{π,u}=ū. Consequently
 β{u,π}=ū⁻¹. The symbol t_v used in Tate's unit-symbol filtration is the inverse
 boundary, with t_v{u,π}=ū, as in K2SymbolsBrauer. Both occur below and their
@@ -127,6 +138,11 @@ Mathlib's B₁=−1/2; Weibel's positive reindexing is treated separately in Lay
 ## Exact supplier contracts
 
 ### From Mathlib
+
+Use `SmoothPartitionOfUnity.exists_isSubordinate` in
+`Mathlib/Geometry/Manifold/PartitionOfUnity.lean` for the smooth collar
+cutoffs in §3.2; its Hausdorff and sigma-compact hypotheses hold for the
+second-countable finite-dimensional quotient manifolds.
 
 Use `Mathlib/RingTheory/DedekindDomain/SInteger.lean`,
 `Mathlib/RingTheory/ClassGroup/ExtendedHom.lean` and
@@ -183,11 +199,14 @@ Tau Ceti's `ClassGroup.relNorm` and
 For S-integers use Tau Ceti's `integerHeightOneSpectrumEquiv`,
 `valuation_integerHeightOneSpectrumEquiv`, `integer_extendedHom_surjective`,
 `ker_integer_extendedHom`, `integerClassGroupEquiv`,
-`finite_integer_classGroup`, `Set.unit_mono`, `Set.unitValuation_ker`, and
+`finite_integer_classGroup`, `Set.unit_mono`, `Set.unitValuation`,
+`Set.unitValuation_ker`, and
 `Set.unit_fg_of_units`. The last result supplies finite generation for finite
 S, not an S-unit rank formula. The existing class-group quotient and unit
 valuation maps are reused; their K-theoretic interpretation is what Layer 2
-adds.
+adds. `Set.unitValuation` takes values in the product of `Multiplicative ℤ`,
+with uniformizer exponent −1; §2.2 negates these exponents and proves finite
+support before comparing them with the positive-order localization boundary.
 The pinned Tau Ceti library also provides `CategoryTheory.ExactStructure`,
 `TauCeti.ExactK0` and `TauCeti.ExactK0.liftEquiv` (the latter two in
 `TauCeti.CategoryTheory.GrothendieckGroup.Exact`), together with exact-functor
@@ -340,7 +359,10 @@ groups, cohomological quotients and completion compatibilities. Section 3.0a
 supplies `motivicCycles` and `motivicToK` on their shared cycle and Milnor
 carriers with coefficient, residue, transfer and Bott normalizations. Section 0.5
 supplies stable finite-cover transfers, including identity, composition and
-pullback laws.
+pullback laws. Section 6.5a supplies `periodicEtaleK`, `etaleKComparison`,
+`etaleDescentFiltration` and `quillenLichtenbaumField`, with coefficient,
+restriction and finite-separable transfer compatibility. Section 5.2 consumes
+that field comparison and extends it to the mixed-characteristic S-integer base.
 
 ### From TauCetiRoadmap.ClassFieldTheory
 
@@ -369,10 +391,47 @@ with complexification in degrees zero and four normalized by 1 and 2.
 
 ### From TauCetiRoadmap.ArithmeticLocallySymmetricSpaces
 
-ALS.2.2–ALS.2.4 supply Borel–Serre bordification, compact arithmetic quotients
-and finite CW models under their neat-level and triangulability hypotheses.
-Section 3.2 identifies the boundary homology, orientation twist and
-projective-lattice duality after passing to a suitable torsion-free neat subgroup.
+ALS.2.2–ALS.2.3 supply Borel–Serre bordification and compact arithmetic
+quotients at neat level; ALS.5a.1 supplies the rounded smooth manifold with
+boundary and its collar. Section 3.2 supplies a finite CW model by a Morse
+exhaustion of its interior, then identifies boundary homology, orientation
+twist and projective-lattice duality after passage to a torsion-free neat
+subgroup. ALS.2.4 requires boundary-compatible triangulability and is not an
+input to this finite-generation argument.
+
+### From TauCetiRoadmap.MorseTheory
+
+M1 supplies nondegenerate critical charts and finiteness of critical points
+on compact sets; M3 supplies proper bounded-below Morse exhaustions and
+relative approximation fixed near a closed set where the function is already
+Morse. M2 supplies finite cell models of compact sublevels and their
+compatibility. Section 3.2 applies these to the rounded arithmetic
+bordification, using the smooth collar and gluing of GeometricTopology Layer 1
+and the pinned `SmoothPartitionOfUnity.exists_isSubordinate` on Hausdorff
+second-countable finite-dimensional smooth manifolds.
+
+### From TauCetiRoadmap.GeometricTopology
+
+Layer 1 supplies smooth collars and boundary gluing used in §3.2 after the
+arithmetic rounding. No smooth triangulation theorem is used there.
+
+### From TauCetiRoadmap.ClassifyingSpaces
+
+Stage 3, items 12–13 supply CW-type classifier uniqueness and the lifting
+of cells under coverings; Stage 4, item 16 identifies lifted cellular
+chains with group (co)homology. Section 3.2 uses these for its finite
+arithmetic classifying model.
+
+### From TauCetiRoadmap.AlgebraicTopology
+
+Stage 8 supplies the simply connected relative Hurewicz theorem.
+Section 7.5 applies it in the stable range of the connective spectrum models.
+
+### From TauCetiRoadmap.HomotopySpheres
+
+Stage 9, item 2 supplies π₄^S=0 from the EHP and Toda calculations; §7.5
+uses its odd-primary consequence. GeneralizedCohomology G2.5 supplies the
+comparison of these stems with the shared spectrum carrier.
 
 ### From TauCetiRoadmap.AdelicAlgebraicGroups
 
@@ -591,29 +650,48 @@ Conventions; comparing it with the supplied tame symbol t_v is an explicit
 inverse. (K-book, V.6.6–6.6.1, p. 409; III.6.3, p. 234. The boundary β agrees with III.6.3, whereas Tate’s t
 is its inverse, as the uniformizer/unit Check below specifies.)
 
-Interpret, without redefining the existing maps, the S-unit and class sequence
+Reuse the supplied S-unit and localized class-group maps to construct the
+signed comparison with the sequence
 
 ```text
 0 → A× → O× → ⨁_(v∈S) ℤ → Cl(A) → Cl(O) → 0.
 ```
 
-The middle map is valuation; one may use the inverse divisor-class map to
-match the K₀ row, with the same image and kernel. Prove exactness at the
-valuation lattice, and identify its K-theoretic origin. Tau Ceti
-supplies the unit kernel and localized class quotient. (K-book, I.3,
+Transport u∈O× to S.unit F by `Set.unitEquivUnitsInteger`. Define its
+positive-order coordinate by
+
+```text
+ord_v(u) = − Multiplicative.toAdd (Set.unitValuation S F u v).
+```
+
+This is an additive homomorphism O×→⊕_(v∈S)ℤ: use §2.1's finite-support
+interface on the nonzero fractional element before passing from the supplied
+product to the direct sum. Prove additivity, compatibility with S-enlargement
+and the equality of this signed map with the K₁ localization boundary. The
+comparison square with the native valuation has negation on its lattice
+vertex. Pair positive order with the inverse divisor-class arrow
+(n_v)↦∏[v]^(−n_v) to match the K₀ row; changing that arrow alone would not
+change the preceding valuation. Negation and class inversion preserve the
+respective kernels and images. Prove exactness at the valuation lattice and
+identify its K-theoretic origin using `Set.unitValuation_ker` and the supplied
+localized class quotient. (K-book, I.3,
 Exercise I.3.8, p. 29; V.6.6.1, p. 409.)
 
 **Checks.**
 
 - At ℤ_(5), β{5,2}=2 in 𝔽₅× whereas β{2,5}=3; t has the opposite values.
 - The two different residues distinguish the inverse convention.
-- For S={p} in ℚ the valuation sends p to 1 and ±1 to 0.
+- For S={p} in ℚ, the native exponents on p and p⁻¹ are −1 and 1;
+  positive order sends them to 1 and −1, while ±1 maps to 0 in both
+  conventions. On p²p⁻¹=p the orders add as 2+(−1)=1.
 - For a nonprincipal prime v, the K₀ image is its inverse class, not its
   rank-one projective class with positive sign.
 - At S=∅ the relative unit and divisor terms vanish.
 
 *Needs:* §2.1; KTheoryLowDegrees §§5.1/8.1/11.3; K2SymbolsBrauer §§9.2–9.6 and 12.1–12.3; Tau Ceti’s
-localized class and unit-valuation maps.
+`Set.unitEquivUnitsInteger`, `Set.unitValuation`, `Set.unitValuation_ker`,
+localized class maps, and Mathlib
+`IsDedekindDomain.HeightOneSpectrum.intValuation_eq_exp_neg_multiplicity`.
 
 
 ### 2.3 Residue transfer and ramification-weighted restriction
@@ -803,6 +881,56 @@ The basic laws are:
 - A linear isomorphism transports every flag forward and acts on its
   apartment orientation; changing basis does not erase that action.
 
+For every number field F, projective O_F-lattice P of positive rank and
+neat torsion-free finite-index subgroup Γ⊆Aut(P), prove
+arithmeticBordificationFiniteCW: the compact arithmetic bordification has
+the homotopy type of a finite CW complex, and its interior is a finite
+K(Γ,1) up to homotopy. Construct the quotient by Γ of the supplied
+equivariant bordification; finite index gives compactness and neatness
+makes the action free. Use the smooth rounding and collar of
+ArithmeticLocallySymmetricSpaces ALS.5a.1. On the interior, with inward collar
+coordinate t>0, construct a smooth bounded-below function equal to 1/t near
+the boundary, extending it over the compact complement by a partition of
+unity. Its sublevel sets are compact and df=−dt/t² has no zero near that end.
+Apply MorseTheory M3's relative approximation, fixed on a smaller collar;
+all critical points then lie in a compact set and M1 makes their number
+finite. Choose a positive regular level a above all critical values and the
+values on the compact complement, with 1/a inside the fixed collar.
+The collar deformation onto this sublevel, followed by
+M2's finite cell model, gives the assertion. With empty boundary use a Morse
+function on the compact manifold itself. Lift the homotopy equivalence to
+universal covers to obtain a finite free Γ-cell resolution; the original
+contractible bordification gives the K(Γ,1) identification. This target
+is the arithmetic application of those geometric suppliers.
+(Quillen, proof of Theorem 1, pp. 184–185; Putman–Studenmund,
+Proposition 2.1 and proof of Theorem C, pp. 8–10.)
+
+Its basic laws are:
+
+- The comparison is a homotopy equivalence from a finite CW complex to the
+  rounded quotient, also identifying its interior homotopy type.
+- Lifting along the universal covering identifies its cellular chains with
+  a resolution having finitely many free ℤ[Γ]-generators in each degree.
+- Pulling the finite model back along a finite covering again gives a
+  finite model, with the prescribed subgroup action on the lifted chains.
+
+**Checks.**
+
+- At rank one over ℚ the torsion-free unit subgroup is trivial and the
+  model is a point: C₀=ℤ and Cᵢ=0 for i>0.
+- For a real quadratic field at rank one, the neat unit quotient is a
+  circle, with one zero-cell and one one-cell, d₁=0 and H₀=H₁=ℤ.
+- On a collar, d(1/t)/dt=−1/t²; at t=1/2 it is −4, so no boundary-end
+  critical point is counted. The deformation to a large sublevel pushes
+  t to max(t,1/a), fixing every point already in that sublevel.
+- A finite stabilizer C_p has H^(2j)(C_p;𝔽_p)=𝔽_p for every j≥0;
+  its compact point quotient cannot be used as a finite K(C_p,1).
+
+*Needs:* ArithmeticLocallySymmetricSpaces ALS.2.2–ALS.2.3 and ALS.5a.1;
+GeometricTopology Layer 1's smooth collar and gluing; Mathlib
+`SmoothPartitionOfUnity.exists_isSubordinate`; MorseTheory M1–M3; ClassifyingSpaces Stage 3,
+items 12–13 and Stage 4, item 16 for lifting and cellular resolutions.
+
 For every number field F, every projective O_F-lattice P of rank m≥1,
 and every q≥0, prove projectiveSteinbergHomology_fg:
 H_q(Aut_(O_F)(P);St(P⊗F)) is finitely generated over ℤ. Establish
@@ -812,7 +940,8 @@ St(P⊗F)⊗ℤ_χ^(m−1), where χ(g)=sign(N_(F/ℚ)(det_F g)). Put d=r₁m(m+
 Γ-module M and every
 integer q, the duality is H^q(Γ;M)≅H_(d−q)(Γ;D⊗ℤM), with
 D=St(P⊗F)⊗ℤ_χ^(m−1) and diagonal action; homology in negative degrees
-is zero. Its API gives the finite classifying model, orientation character, integral duality,
+is zero. At neat levels use arithmeticBordificationFiniteCW for the finite
+classifying model. The duality API gives the orientation character, integral duality,
 transport in P and finite-index descent. A compact arithmetic bordification
 whose boundary has the equivariant homotopy type of the proper building gives duality; cohomology with the inverse
 orientation character gives finiteness of untwisted Steinberg homology.
@@ -839,9 +968,10 @@ pp. 8–10; Kahn, §4.3, pp. 17–18.)
 *Needs:* §3.1, the proper-building construction, existing arithmetic
 lattices and reduction theory, integral group (co)homology, the finite-index
 spectral sequence, and StableHomotopyKTheory §§1.24–1.28. ArithmeticLocallySymmetricSpaces
-ALS.2.2–ALS.2.4 supplies the
-bordification and finite CW model at a neat torsion-free level, with
-AdelicAlgebraicGroups §3.6 reduction theory. The targets here identify its
+ALS.2.2–ALS.2.3 and ALS.5a.1 supply the
+bordification and rounded collar at a neat torsion-free level, with
+AdelicAlgebraicGroups §3.6 reduction theory; arithmeticBordificationFiniteCW
+above supplies its finite CW model without a triangulability hypothesis. The targets here identify its
 boundary homology with St(P⊗F), the orientation character
 sign(N(det))^(m−1), projective-lattice duality and finite-index descent.
 
@@ -1145,7 +1275,10 @@ and 30; Corollaries 2.3.18–2.3.19, p. 48; Corollary 8, p. 5.)
 **Checks.**
 
 - For the signature input, the symmetric lines ⟨1⟩ and ⟨−1⟩ over ℤ
-  have signatures 1 and −1, and their hyperbolic sum has signature zero.
+  have signatures 1 and −1, and their metabolic orthogonal sum has
+  signature zero: ℤ(1,1) is a primitive Lagrangian in diag(1,−1).
+  It is not the integral hyperbolic plane: its vector (1,0) has
+  self-pairing 1, whereas every hyperbolic self-pairing 2ab is even.
   Over ℤ[(1+√5)/2], the unit ε has signs (+,−); ⟨1⟩ and ⟨ε⟩ give
   vectors (1,1) and (1,−1) of determinant −2, detecting rank two.
 - For E=Hℤ with trivial C₂-action, the orbit sequence gives π₀=ℤ,
@@ -1178,7 +1311,10 @@ These cases test both the arithmetic and categorical finiteness inputs.
 ### Dependencies
 
 Layers 1–2; GeneralAlgebraicKTheory §§2.1–2.6, 4.8 and 4.14; StableHomotopyKTheory §§1.24–1.28, 3.36 and 7.1–7.28;
-the building, Steinberg finiteness and rank targets of §§3.2/3.4; finite-field K-theory; the arithmetic Witt and
+the building, arithmetic finite CW model, Steinberg finiteness and rank targets
+of §§3.2/3.4, using ArithmeticLocallySymmetricSpaces ALS.2.2–ALS.2.3 and
+ALS.5a.1, MorseTheory M1–M3, GeometricTopology Layer 1 and ClassifyingSpaces
+Stages 3–4; finite-field K-theory; the arithmetic Witt and
 hermitian comparison/fibre-sequence contracts specified above. The hermitian
 results require those exact supplier theorems, including the low classical
 degrees.
@@ -1468,9 +1604,11 @@ motivic tower; SchemeKTheoryOperations §§3.6–3.7; §2.1's coefficients;
 EtaleCohomologyFoundations §§F.0.3/F.4; the arithmetic localization and
 convergence extension just specified.
 
-Construct arithmeticEtaleDescent, the coefficient-compatible étale
-descent spectral sequences for number fields and all finite-S
-integer rings with ℓ inverted, and their restriction/corestriction maps.
+Use KTheoryFiniteLocalFields §6.5a's `periodicEtaleK`, `etaleKComparison`,
+`etaleDescentFiltration` and `quillenLichtenbaumField` for the field
+comparison. Construct arithmeticEtaleDescent by extending these
+coefficient-compatible descent filtrations and their restriction/corestriction
+maps to all finite-S integer rings with ℓ inverted.
 Prove arithmeticEtaleComparison: for odd ℓ, or for ℓ=2 and totally
 imaginary F, the ordinary finite-coefficient map to étale K-theory is an
 isomorphism in degrees n≥1 and injective at n=0; coefficient limits and
@@ -3440,77 +3578,124 @@ The basic laws are:
 ### 7.5 Vandiver and the conditional integer table
 
 Prove k4_int_eq_zero unconditionally before using the degree-four
-entry. Its homological inputs are the following targets on the genuine
-K-spectrum. For any unital ring R for which a split injection R^a→R^b
-with free cokernel implies a≤b, construct stableRankFiltration on free
-K-theory using the rank-bounded iterated S-construction. Its API includes
-coherent stage inclusions, a filtered-colimit equivalence to free K-theory,
-and GL_m(R)-equivariant stable-building cofiber descriptions. It is distinct from §3.1’s filtration of BQ. Prove
-stableBuilding_connectivity for a PID R: D(R^m) is (m−1)-connected
-for m≥2, with D(R⁴) at least four-connected. The apartment/component
-filtration and its partition-lattice chains give these bounds; hence
-F₃K(ℤ)→K(ℤ) is four-connected.
-(Rognes, author manuscript, Proposition 1.2, pp. 5–6, Propositions
-5.1–5.2, pp. 16–18; K-book, VI.10.1.3, p. 528.)
+entry. Use the spectrum-level rank filtration and the odd-primary homology
+argument below, together with §6.4's dyadic 2-rank formula.
 
-Prove kInt_lowSpectrumHomology: integral spectrum homology in degrees
-0,…,4 is ℤ,0,0,ℤ/2,0. Establish the first three rank-subquotient
-homology groups and their nonzero differentials through total degree four,
-using integerRankSubquotientHomology, which computes the GL₃(ℤ)
-and parabolic homology contribution. For E₁_(s,t)=H_(s+t)(F_(s+1)/F_s),
-its first three columns are as follows; the d₁ maps (1,1)→(0,1),
-(2,2)→(1,2), (1,3)→(0,3) and (2,3)→(1,3) are nonzero.
-(Rognes, §6, p. 19.)
+For any unital ring R such that a split injection R^a→R^b implies a≤b,
+construct stableRankFiltration on free K-theory using the rank-bounded
+iterated S-construction. Its API includes coherent stage inclusions, a
+filtered-colimit equivalence to free K-theory and GL_m(R)-equivariant
+stable-building cofiber descriptions. When all finite projectives are free,
+this is the full K-spectrum. This filtration differs from §3.1's filtration
+of BQ. (Rognes, published version, §1, equation (1.2), pp. 268–269,
+and Proposition 2.2, p. 270.)
+
+For every PID R and m≥1, construct the component filtration of D(R^m)
+and its integral GL_m(R)-chain complex Z_*(R^m). The term Z_(m+c−2),
+1≤c≤m, is the direct sum, over unordered decompositions R^m=⊕_(j=1)^c V_j
+into nonzero summands, of (⊗_j St(V_j))⊗W_c. Here W_c is the degree
+2c−2 integral homology of the c-th stable-apartment component quotient,
+with its induced symmetric-group action, free of rank (c−1)!. Retain the
+induced permutation and orientation actions, rather than replacing W_c by
+an unmarked free group. The component attaching maps define the
+differential, and the homology of this complex is H_*(D(R^m);ℤ). Prove the
+convergent component spectral sequence
+
+```text
+E¹_(s,t) = H_t(GL_m(R); Z_s(R^m)) ⇒ H_(s+t)(F_mK(R)/F_(m−1)K(R);ℤ),
+m−1 ≤ s ≤ 2m−2,  t ≥ 0.
+```
+
+Its API comprises the equivariant component-quotient comparisons, their
+actual attaching-chain maps and the induced spectral-sequence edge maps.
+(Rognes, §5, Notation 5.4, pp. 273–274; Proposition 7.7 and
+Theorems 7.8–7.9, pp. 278–279.)
+
+For R=ℤ prove integerSteinbergLowHomology: H₀(GL_m(ℤ);St_m)=0 for
+every m≥2, and H₁(SL₄(ℤ);St₄) is a finite 2-group. The first assertion,
+Shapiro's lemma and the component sequence make its bottom row vanish for
+m−1≤s<2m−2. Consequently the rank subquotient F_mK(ℤ)/F_(m−1)K(ℤ)
+is (m−1)-connected for m≥2. This is a bound on the homotopy-orbit
+subquotient, not a connectivity assertion about D(R^m). For m=4 the
+remaining total-degree-four term is H₁(GL₄(ℤ);St₄); restriction to SL₄
+and the determinant quotient C₂ show it is zero after inverting 2 by the
+second assertion. These are arithmetic homology targets here.
+(Rognes, Lemma 8.1, Corollary 8.2 and the argument preceding (8.4),
+pp. 279–280, including Soulé's Steinberg-homology input.)
+
+Prove integerRankSubquotientHomology through total degree four after
+inverting 2. For E¹_(s,t)=H_(s+t)(F_(s+1)/F_s;ℤ[1/2]), the first
+three columns have the following entries; the differential
+d₁:(2,2)→(1,2) is an isomorphism ℤ/3→ℤ/3. The target includes the
+chain maps inducing this differential. The m=4 calculation above and
+connectivity of the m≥5 subquotients exclude all other contributions
+in positive total degrees at most four.
+(Rognes, (8.3)–(8.4), pp. 279–280.)
 
 | t | s=0 | s=1 | s=2 |
 | --- | --- | --- | --- |
-| 4 | 0 | (ℤ/2)² | ℤ/2 |
-| 3 | ℤ/2 | (ℤ/2)² | ℤ |
-| 2 | 0 | ℤ/6 | ℤ/3 |
-| 1 | ℤ/2 | ℤ/2 | 0 |
-| 0 | ℤ | 0 | 0 |
+| 3 | 0 | 0 | ℤ[1/2] |
+| 2 | 0 | ℤ/3 | ℤ/3 |
+| 1 | 0 | 0 | 0 |
+| 0 | ℤ[1/2] | 0 | 0 |
 
-The named target includes the integral chain maps inducing these differentials,
-not just a table of abstract groups. The connectivity bound eliminates higher-rank
-terms in this range. Prove kInt_bokstedtComparison with the two-complete
-spectrum JK(ℤ)=fib(ko→[ψ³−1]bspin→[c]bsu): its looped comparison has
-a section, and JK₃(ℤ){2}=ℤ/16, JK₄(ℤ){2}=0. Construct and identify
-the map using Adams operations and real/complex comparison, rather than
-assuming a splitting from the order of K₃.
-(Rognes, §6, pp. 19–21, especially the argument preceding Lemma 6.1.)
-
-Finally apply the stable Atiyah–Hirzebruch spectral sequence
-H_s(K(ℤ);π_t^S)⇒K_(s+t)(ℤ). The comparison kills η times the
-K₃ generator, forcing d₂:H₅(K(ℤ))→H₃(K(ℤ);π₁^S) to be onto.
-The known stable stems through four and kInt_lowSpectrumHomology
-leave no term in total degree four. This proves k4_int_eq_zero,
-including the two-primary calculation, without Vandiver or a zeta order
-formula. (Rognes, Main Theorem and §6, pp. 19–21.)
+Thus kInt_oddSpectrumHomology has H₀(K(ℤ);ℤ[1/2])=ℤ[1/2] and
+H_i(K(ℤ);ℤ[1/2])=0 for 1≤i≤4. The sphere unit is four-connected
+after inverting 2 by the relative stable Hurewicz theorem. Since π₄^S=0,
+K₄(ℤ)⊗ℤ[1/2]=0. Separately §6.4 gives 2-rank s+u−1 in degree four,
+where s is the number of dyadic primes and u the 2-rank of the narrow
+Picard group of ℤ[1/2]. Here s=1 and u=0, so the finite group
+K₄(ℤ){2} has 2-rank zero and is trivial. Finite generation and rational
+rank zero from Layer 3 make K₄(ℤ) finite; the two primary conclusions
+prove k4_int_eq_zero without Vandiver or a zeta order formula.
+(Rognes, Theorems 8.5–8.6, p. 280; Rognes–Weibel, Theorem 7.11,
+pp. 43–44; K-book, VI.10.1.3, p. 528.)
 
 The basic laws are:
 
-- The stable rank stages have coherent inclusions and their filtered colimit is free K-theory under the stated rank condition.
-- The stage cofibers have the GL_m-equivariant stable-building description, retaining their chain maps.
-- The PID connectivity bounds and the special rank-four bound induce the specified connectivity of F₃K(ℤ)→K(ℤ).
+- The rank stages and their equivariant stable-building cofibers retain
+  coherent inclusions and exhaust free K-theory under the rank condition.
+- The component complex computes stable-building homology for every PID,
+  with its full group action and differential.
+- Over ℤ, Steinberg coinvariants give connectivity of the rank
+  subquotients; the SL₄ input eliminates the odd total-degree-four term.
 
 **Checks.**
 
-- The zero stage is contractible, and over ℤ free and projective
-  K-theory agree. The zero ring is excluded: its split map R²→R
-  violates the rank condition, so it cannot carry this rank filtration.
-- D(R⁴) requires four-connectivity; the general (m−1) bound alone gives
-  only three at m=4 and does not suffice for this calculation.
-- H₃(K(ℤ);ℤ)=ℤ/2 is nonzero although H₄ is zero. Ignoring the
-  d₂ from degree five would retain a spurious total-degree-four class.
-- K₃(ℤ){2}=ℤ/16 maps to the same cyclic group in JK; its η-product
-  dies because JK₄{2}=0. An order-only comparison does not force this.
+- At m=1,c=1 the component degree m+c−2 is zero and W₁=ℤ.
+  At m=2 the two degrees are 1 and 2, with W₁ and W₂ both of rank one;
+  the differential between the actual summands remains essential.
+- For R=ℤ[(1+√−19)/2], the rank-two common basis graph is disconnected.
+  Its reduced H₀ is nonzero, and
+  H₁(D(R²);ℤ)=H̃₀(CB₂(R);ℤ)≠0. Thus the general PID component
+  complex does not imply a universal 1-connectivity bound on D(R²).
+  (Hutchinson, arXiv v5, Theorem 3.3, Corollary 3.5 and Example 3.13,
+  pp. 7–10; Miller–Patzt–Wilson, arXiv v2, §1.1, Lemma 4.22 and
+  Proposition 5.3, pp. 1–3 and 29–31.)
+- Over ℤ, St₂ coinvariants vanish: the two ends of a basis apartment
+  are exchanged by a basis swap, and the modular-symbol relations
+  eliminate the resulting possible 2-torsion. The rank-two
+  homotopy-orbit subquotient is 1-connected.
+- The two ℤ/3 entries have differential an isomorphism, giving
+  kernel and cokernel zero; declaring that differential zero would
+  retain a spurious odd class in total degree four.
+- For ℤ[1/2], s=1 and the narrow class group is zero: its ideals are
+  principal with positive rational generators. The degree-four
+  2-rank is 1+0−1=0; a finite ℤ/4 summand would instead have rank one.
 - K₄(ℤ[1/2]) is ℤ/3 by §8.2, so the integral vanishing theorem is
   not a vanishing theorem for every localization of ℤ.
+- The zero ring fails the rank condition, since R²→R is a split
+  injection; over ℤ the free and projective K-spectra agree.
 
-*Needs:* GeneralAlgebraicKTheory §§2.1–2.6 and 5.11–5.12,
-StableHomotopyKTheory §§1.24–1.28 and 7.1–7.28, §§3.1–3.4 and §5.4’s real KO theory;
-the stable filtration, low-rank group homology and Bökstedt comparison
-are proved here with the specified source argument.
+*Needs:* GeneralAlgebraicKTheory §§2.1–2.6 and 5.11–5.12;
+StableHomotopyKTheory §§1.24–1.28 and 7.21–7.24 for categorical homology
+and filtered spectral sequences; AlgebraicTopology Stage 8's relative
+Hurewicz theorem, transported to connective spectra through
+GeneralizedCohomology G2.5 and G2.7; HomotopySpheres Stage 9, item 2's
+π₄^S=0; §3.2's Solomon–Tits theorem and group homology; Layer 3's
+finite generation and ranks; §6.4's dyadic 2-rank formula. The rank and
+component filtrations, integer Steinberg homology and odd subquotient
+calculation are targets here, with the published argument specified above.
 
 First prove specialValueKOrderRatio: for every totally real number
 field F and k≥1,
@@ -3632,7 +3817,10 @@ table without being proved from its hypothesis.
 
 ### Dependencies
 
-Layers 3–6; Mathlib's Bernoulli, class-number and cyclotomic-prime API;
+Layers 3–6; §7.5's rank/component filtrations and integer Steinberg homology;
+HomotopySpheres Stage 9, item 2; AlgebraicTopology Stage 8 and
+GeneralizedCohomology G2.5/G2.7;
+Mathlib's Bernoulli, class-number and cyclotomic-prime API;
 CyclotomicClassGroupsAndStickelberger §§0.1–0.4, 2.1, 3.1–3.3, 4.5, 5.1 and 5.4;
 IntegralIwasawaTheory §§3.1, 6.0, 7.4, 7.7–7.8, 10.4–10.5 and 12.3; arithmeticEtaleDescent and its normalized
 finite-coefficient edges for the constructed Bott shift; the detected
@@ -4565,10 +4753,15 @@ All formulas and finite data use the conventions fixed here.
   The regularity definition is in FltRegular.NumberTheory.RegularPrimes.
   CyclotomicClassGroupsAndStickelberger §§0.2–0.4, 2.1, 3.1–3.2 and
   5.1 own their integration and the stated unrestricted extensions.
-- John Rognes, [*K4(Z) is the trivial group*](https://www.mn.uio.no/math/personer/vit/rognes/papers/k4z.pdf),
-  author manuscript with 1993 header, Main Theorem, Propositions 1.2,
-  5.1–5.2 and §6, pp. 1–22. Published in *Topology* 39 (2000),
-  pp. 267–281; locators here use the author manuscript.
+- John Rognes, [*K4(Z) is the trivial group*](https://www.mn.uio.no/math/personer/vit/rognes/papers/k4odd.pdf),
+  *Topology* 39 (2000), pp. 267–281. Locators use the published version,
+  especially Proposition 2.2, Theorems 7.8–7.9, Lemma 8.1, Corollary 8.2
+  and Theorems 8.5–8.6.
+- Jeremy Miller, Peter Patzt and Jennifer C. H. Wilson,
+  [*On rank filtrations of algebraic K-theory and Steinberg modules*](https://arxiv.org/abs/2303.00245v2),
+  arXiv v2 (2025), §1.1, Lemma 4.22 and Proposition 5.3, pp. 1–3 and 29–31.
+- Kevin Hutchinson, [*GE₂-rings and a graph of unimodular rows*](https://arxiv.org/abs/2108.11241v5),
+  arXiv v5, Theorem 3.3, Corollary 3.5 and Example 3.13, pp. 7–10.
 - Charles A. Weibel, [*The K-book: An Introduction to Algebraic
   K-theory*](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.pdf),
   combined author PDF, 29 August 2013. Its chapter numbering and pages
