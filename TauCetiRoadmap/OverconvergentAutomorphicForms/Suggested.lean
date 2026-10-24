@@ -21,9 +21,12 @@ carriers are available. None of the following headlines is statable at these pin
   operator (Layer 6) lack the overconvergent cuspidal Banach modules, their
   boundary pushforwards and geometric Hecke correspondences.
 * The ordinary Igusa completion and weighted ordinary comparison (Layer 7) lack
-  the level-indexed ordinary Igusa torsors, the anticanonical wild-level
-  limit, and their formal function sheaves and analytic spectral completions
-  with power-bounded models.
+  the level-indexed good-reduction and toroidal ordinary Igusa torsors, the anticanonical
+  wild-level limits, and their formal function sheaves and analytic spectral
+  completions with power-bounded models. Their ordinary boundary completion
+  comparison also lacks toroidal-to-minimal pushforwards and the completed
+  coefficient-valued cusp-unit invariant sheaves; a minimal Igusa torsor is
+  not a carrier for this comparison.
 * The definite unitary Jacquet eigenvariety's dimension, Cohen–Macaulay property
   and reducedness (Layer 0) lack completed automorphic coefficient functions,
   locally analytic Jacquet modules and rigid eigenvarieties.
