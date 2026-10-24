@@ -5,8 +5,8 @@ import Mathlib
 
 README.md is the roadmap; this file is not the roadmap. It states the roadmap's headline
 theorems against the pinned APIs: arbitrary-ideal étale lifting, completed marked maps,
-the Laurent localization resolution, regularity on polynomial coefficient modules, separable
-proper profiles, height one of the prime-chain index, discriminant-support étaleness, and
+the Laurent localization resolution, regularity on polynomial coefficient modules, height one
+of the prime-chain index, discriminant-support étaleness, and
 triviality of an invertible power-series module with trivial first fibre.
 
 The ordinary relative-ring presentation, Taylor equalizer, untwisting, classical and GSWZ-ring
@@ -111,20 +111,6 @@ theorem laurent_regular (R : Type u) (M : Type v) [CommRing R]
 
 
 end OrdinaryDerivedComparison
-
-namespace CountableSolidHabiroTensor
-
-/-- Every radially proper natural-valued profile has separable proper lower profiles.
-This ordinary combinatorial milestone of README §2.11 has no spectral hypotheses;
-Wagner, proof of Lemma B.8, p.80. -/
-theorem separable_weights (h : ℕ × ℕ → ℕ)
-    (hh : ∀ k : ℕ, ∃ B : ℕ, ∀ m n : ℕ, B ≤ m + n → k ≤ h (m, n)) :
-    ∃ f g : ℕ → ℕ, Filter.Tendsto f Filter.atTop Filter.atTop ∧
-      Filter.Tendsto g Filter.atTop Filter.atTop ∧
-      ∀ m n : ℕ, f m + g n ≤ h (m, n) := by
-  sorry
-
-end CountableSolidHabiroTensor
 
 /-! ## Layer 3: the finite prime-chain index -/
 
