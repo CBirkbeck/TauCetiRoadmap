@@ -14,8 +14,9 @@ The remaining headline theorems lack the following carriers at the pins:
 divisor-lattice Fourier duality and volumes (§2) need completed adelic divisor lattices
 and the differential's self-dual measure; reduced Witt–Laurent representatives and the
 Schmid–Witt conductor formula (§§3.2, 4.3–4.4) need the reduced representative and local
-reciprocity constructions; local Kronecker–Weber and Artin injectivity (§4.2) need the
-Lubin–Tate tower and local reciprocity map; the perfect-field fixed-modulus universal
+reciprocity constructions; Lubin–Tate torsion (§4.1), local Kronecker–Weber and Artin
+injectivity (§4.2) need formal-module coefficient actions, evaluated adic points,
+the Lubin–Tate tower and local reciprocity map; the perfect-field fixed-modulus universal
 property and finite-abelian ray-cover classification (§§4.7, 4.10) need generalized
 Picard schemes, Abel maps and Lang covers. The finite-coefficient cohomological
 L-function identity (§5.7) needs constructible étale

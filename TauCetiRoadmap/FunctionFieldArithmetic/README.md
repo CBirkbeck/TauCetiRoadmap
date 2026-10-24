@@ -120,11 +120,11 @@ It leaves the following to the roadmaps that state them, and states none of them
   sections and induction normalization), §§2.15–2.16 (intertwiners), §§4.11–4.17
   (discrete and residual data). These are its everywhere-unramified `GLₙ` branch; they do not
   supply the unitary-group Eisenstein theory of Layer 7.
-- **LubinTateFormalModulesAndQuasiCanonicalLifts**, LT.0 *Formal modules, coordinates and
-  complete points*: formal homomorphisms, tangent-compatible coefficient actions and
-  evaluated adic points. Its LT.1–LT.2 supply the mixed-characteristic Lubin–Tate
-  construction, torsion and arithmetic Artin comparison. Section 4.1 extends that
-  construction to equal characteristic using the same formal-module carriers.
+- **LubinTateFormalModulesAndQuasiCanonicalLifts**, LT.0 targets *formal-hom*,
+  *formal-module* and *adic-points*: formal homomorphisms, tangent-compatible
+  coefficient actions and evaluated adic points. LT.1–LT.2 supply the
+  mixed-characteristic Lubin–Tate construction, torsion and arithmetic Artin comparison.
+  Section 4.1 adds the equal-characteristic construction on these same carriers.
 - **ClassFieldTheory** (Tau Ceti): class formations and Tate's theorem (Layers 1–4), local
   invariants (Layer 5), the local class formation and reciprocity (Layers 6–7) and the
   prime-to-`p` local existence theorem of Layer 8. Its scope section excludes Lubin–Tate theory,
@@ -139,7 +139,8 @@ It leaves the following to the roadmaps that state them, and states none of them
   locally compact groups, so it applies to function fields unchanged).
 - **GeometryOfNumbersAndQuadraticArithmetic**, §3.2: Hermitian local densities, the normalized
   Siegel polynomial and the Cho–Yamauchi overlattice formula over an unramified quadratic field
-  extension of a nonarchimedean local field of characteristic other than two.
+  extension of a nonarchimedean local field of characteristic other than two; §3.1 supplies
+  finite-field Hermitian embedding and isotropic-frame counts, including in characteristic two.
 
 The adelic points of an affine group over a function field (§6.1) are built here because
 AdelicAlgebraicGroups Layer 1 is written for number fields only. The split and inert equal-characteristic-two cases of Hermitian
@@ -278,12 +279,18 @@ characteristic existence theorem in equal characteristic. These are the domains 
 
 ### From TauCetiRoadmap.LubinTateFormalModulesAndQuasiCanonicalLifts
 
-LubinTateFormalModulesAndQuasiCanonicalLifts LT.0, targets *Formal group homomorphisms*,
-*One-dimensional formal modules* and *Adic formal-module points*, supplies formal
-homomorphisms, coefficient actions with the specified tangent map, and evaluated
-maximal-ideal points with coefficient and coordinate functoriality. Their ring and adic
-hypotheses are retained in §4.1. LT.1–LT.2 supply the mixed-characteristic specialization;
-§4.1 supplies the equal-characteristic case.
+LubinTateFormalModulesAndQuasiCanonicalLifts LT.0, targets *formal-hom* (Formal group
+homomorphisms), *formal-module* (One-dimensional formal modules) and *adic-points*
+(Adic formal-module points), supplies the following interfaces. The first is defined
+for commutative rings and commutative Mathlib formal laws; composition and formal-group
+addition give the endomorphism ring. The second equips that law over an `A`-algebra `R`
+with a unital `A`-action whose linear coefficient is the structure map `A → R`.
+The third evaluates on an ideal defining the topology of a complete separated linearly
+topologized algebra, with continuous coefficient maps and coordinate transport.
+These three targets have no characteristic-zero restriction. Section 4.1 uses `A=R=O`
+and maximal ideals of rings of integers of finite extensions, taking their union for
+algebraic torsion points. LT.1–LT.2 supply the mixed-characteristic construction,
+torsion and Artin comparison; §4.1 adds the equal-characteristic construction.
 
 ### From TauCetiRoadmap.LocalFieldsRamification
 
@@ -367,7 +374,10 @@ constant-field function field satisfy these hypotheses.
 GeometryOfNumbersAndQuadraticArithmetic §3.2 supplies Hermitian local densities,
 normalized Siegel polynomials and the Cho–Yamauchi overlattice formula for an unramified
 quadratic field extension when the base field has characteristic different from two,
-including dyadic residue fields.
+including dyadic residue fields. Section 3.1 supplies `hermitianEmbeddingCount`,
+`finite_hermitian_isometry_formula` and `finite_hermitian_norm_fiber` over `𝔽_{q²}/𝔽_q`
+with its nontrivial involution, for every prime power `q≥2`; these residue counts are
+also used in the equal-characteristic-two reciprocity argument of §7.4.
 
 ### From TauCetiRoadmap.AutomorphicSpectralTheory
 
@@ -393,9 +403,10 @@ of finite projective modules, not this derived determinant construction.
 
 ### From TauCetiRoadmap.MetaplecticAutomorphicForms
 
-MetaplecticAutomorphicForms §6.2 and its local Schrödinger, Weil-representation and
-Weil-index interfaces supply the Siegel–Weil sections used in §7.5. This consumption is
-in the odd-characteristic global branch of Layer 7.
+MetaplecticAutomorphicForms §§2.5, 3.2a, 3.3 and 3.3b supply the local Schrödinger
+operators, split étale comparison, unitary dual-pair splittings and Hermitian oscillator
+normalizations. Section 7.5 constructs the local Siegel–Weil section and its density
+comparison from these interfaces, for the odd-characteristic global branch of Layer 7.
 
 ## How to read the build
 
@@ -973,10 +984,11 @@ rational place), so every statement applies at the places of Layers 0–7.
 
 ### 4.1 Lubin–Tate formal modules
 
-Use the formal homomorphism, coefficient-action and evaluated-point carriers of
-LubinTateFormalModulesAndQuasiCanonicalLifts LT.0. The construction below is for
-`char K=p`; its statements agree with that supplier's LT.1–LT.2 over finite extensions
-of `ℚ_p`.
+Use LubinTateFormalModulesAndQuasiCanonicalLifts LT.0, targets *formal-hom*,
+*formal-module* and *adic-points*, for formal homomorphisms, tangent-compatible
+coefficient actions and evaluated points. Their ring and adic hypotheses are those
+in the exact supplier contract. The construction below is for `char K=p`;
+LT.1–LT.2 supply the mixed-characteristic specialization over finite extensions of `ℚ_p`.
 
 A *Lubin–Tate series* for `π` is `f ∈ O[[X]]` with `f ≡ πX` modulo degree `2` and
 `f ≡ X^Q` modulo `π`; `πX + X^Q` is one. Define `F_f`, the unique commutative
@@ -1015,7 +1027,8 @@ its roots have the same valuation. (Yoshida, *Local class field theory via Lubin
 p. 419; §5.1, Definition 5.3 and Proposition 5.4, p. 423; Proposition 5.10, p. 425;
 Appendix II, Proposition 8.1, p. 436.)
 
-*Needs:* LubinTateFormalModulesAndQuasiCanonicalLifts LT.0; Mathlib `FormalGroup`,
+*Needs:* LubinTateFormalModulesAndQuasiCanonicalLifts LT.0 targets *formal-hom*,
+*formal-module* and *adic-points*; Mathlib `FormalGroup`,
 `PowerSeries`; ClassFieldTheory Layer 5 (local fields and their
 unramified extensions); AlgebraicCurves Layer 9 (the expansion of a completed place).
 
@@ -1147,11 +1160,21 @@ u_n = 0                                               if v(c_i) ≥ n for all i,
 u_n = 1 + max { i · p^(n − v(c_i) − 1) : v(c_i) < n }   otherwise.
 ```
 
-Prove aswUpperRamification: under `Gal(K(℘⁻¹x)/K) ≅ Hom(⟨x⟩, ℤ_p)`, the upper ramification
-group `G^r` (`r ≥ 1`) corresponds to the characters `τ` with
-`v(τ(x)) ≥ min_{p ∤ i} (v(c_i) + max(0, ⌈log_p(r/i)⌉))`, with `v(0) = ∞` and the minimum of
-an empty family equal to `∞`. Finite layers use the image of this subgroup in the corresponding
-finite Galois quotient. The conductor API is:
+For a nonzero reduced class `x ∈ Q_∞(K)`, put
+`n₀ = min(v(c), min_{p ∤ i} v(c_i))` and let `x₀ = p^(−n₀)x` in `Q_∞(K)`.
+This is the primitive class obtained by dividing all reduced coefficients by `p^n₀`.
+Prove aswUpperRamification: evaluation on `x₀` identifies
+`Gal(K(℘⁻¹x)/K)` with the full continuous dual `Hom_cont,ℤ_p(ℤ_p x₀, ℤ_p)`;
+its upper ramification group `G^r` (`r ≥ 1`) consists of the maps `τ` with
+`v(τ(x₀)) ≥ min_{p ∤ i} (v(c_i) + max(0, ⌈log_p(r/i)⌉)) − n₀`.
+Here `v(0) = ∞`, the minimum of an empty family is `∞`, and `∞−n₀=∞`.
+For primitive `x`, `n₀=0`. Evaluation on the unnormalized `x` has image
+`p^n₀ℤ_p`, and does not identify the group with its full abstract dual when `n₀>0`.
+At finite length `n≤n₀` the extension is trivial; for `n>n₀` it is the
+length-`(n−n₀)` layer of `x₀`, and its ramification groups are the images of the
+displayed subgroup. The zero class gives the trivial extension and trivial groups;
+a nonzero constant-only class gives an unramified tower with trivial positive groups.
+The conductor API is:
 
 - For finite abelian extensions, `f(L₁L₂/K)=lcm(f(L₁/K),f(L₂/K))` as conductor ideals;
   the exponents therefore take their maximum.
@@ -1163,8 +1186,11 @@ finite Galois quotient. The conductor API is:
 formula of 4.3 on the topological generators `(1 − aT^i)^(p^j)` of the principal units, which lie
 in `U^(r)` exactly when `ip^j ≥ r`, with `j ≥ 0`; thus the least allowed `j` is
 `max(0, ⌈log_p(r/i)⌉)`. This nonnegative bound must be retained when passing to a character
-quotient; Herbrand's theorem passes to quotients. (Kosters–Wan,
-Theorem 4.12, pp. 21–22; Proposition 4.14 and proof, pp. 22–23.)
+quotient; Herbrand's theorem passes to quotients. Normalize the class first so that
+its character is onto `ℤ_p`; division by `p^n₀` shifts the finite layers and subtracts
+`n₀` from the valuation bound. (Kosters–Wan, Theorem 4.12, pp. 21–22;
+Lemma 4.13 and the normalization preceding Proposition 4.14, p. 22;
+Proposition 4.14 and proof, pp. 22–23.)
 
 **Source correction.** The displayed bound in Kosters–Wan Proposition 4.14 omits this clamp,
 as does the expression for `φ₁(U^r)` in Theorem 4.12.
@@ -1179,6 +1205,9 @@ cannot supply additional units. The conductor formula itself is unchanged.
 - At length `1` a single coefficient `c_m ≠ 0`, `p ∤ m`, gives `m + 1`.
 - At length `2` a sole coefficient `c_m` with `v(c_m) = 1` gives `m + 1`, while a unit coefficient
   gives `pm + 1`; a formula ignoring `v(c_i)` would give `pm + 1` in both cases.
+- For `x=p[T⁻¹]`, `n₀=1` and `x₀=[T⁻¹]`. At `r=1` the normalized bound is
+  `1−1=0`, so `G¹=G≅ℤ_p`; evaluation on `x` instead has image `pℤ_p`.
+  The length-one layer is trivial and the length-two layer has conductor exponent `2`.
 - For `x = β + p[T^(−m)]`, `m > p` prime to `p`, the infinite extension has Galois group
   `ℤ_p` and inertia `pℤ_p`. At `r = 1` the corrected bound is `1`; the unclamped bound is
   at most `0` and incorrectly makes the whole Galois group inertia. A constant-only class
@@ -1196,17 +1225,25 @@ for `m = 0` it is trivial. Finiteness follows from this sequence and finiteness 
 Approximation moves a degree-one divisor away from `m`. Fix a class `a ∈ C_m` of
 valuation degree `1`, and `r ≥ 1`. The finite quotient `C_m/⟨a^r⟩` fixes the degree direction;
 `C_m` itself is infinite. Define RayCharacterData to consist of a finite abelian group `A`,
-a specified isomorphism `C_m/⟨a^r⟩ ≅ A`, a character `A → μ_N` for a specified `N ≥ 1`, and
-its local restriction maps. These data use the existing ray class group and finite-group
-notions. Define rayCharacterData_conductor as the least `m′ ≤ m` whose local unit groups
-are killed. Here `U_v^0 = O_vˣ` and `U_v^j = 1 + 𝔭_v^j` for `j ≥ 1`.
+a specified isomorphism `C_m/⟨a^r⟩ ≅ A`, a selected character `χ : A → μ_N` for a
+specified `N ≥ 1`, and its local restriction maps. Write `θ : C_K → A` for the
+quotient map followed by this isomorphism, and `χ∘θ : C_K → μ_N` for the selected
+global character. Define rayCharacterData_conductor as the **quotient conductor**:
+the least `m′≤m` for which `θ` kills every `U_v^{m′_v}`. Define
+rayCharacterData_selectedConductor by the same condition on `χ∘θ`; this is the
+**selected-character conductor**. These data use the existing ray class group and
+finite-group notions. Here `U_v^0 = O_vˣ` and `U_v^j = 1 + 𝔭_v^j` for `j ≥ 1`.
 
 The ray-character data and least conductor have the following API:
 
 - The induced global character has finite image.
-- A positive local conductor exponent `c` kills `U_v^c` and does not kill `U_v^(c−1)`.
-- The exponent is zero exactly when every local unit is killed.
-- After the degree splitting, the recorded value at `a` determines the constant-field part.
+- For either map, a positive local conductor exponent `c` kills `U_v^c` and does
+  not kill `U_v^(c−1)`; exponent zero means that this map kills every local unit.
+- The selected-character conductor divides the quotient conductor, with equality
+  when `χ` is faithful. The quotient conductor is the componentwise maximum over
+  all characters of `A`, whether or not the selected character is faithful.
+- After the degree splitting, `θ(a)` determines the quotient's constant-field part;
+  `χ(θ(a))` determines that of the selected character.
 
 The local wild cyclic parts use §§3.2 and 4.3–4.4; the prime-to-`p` parts use ClassFieldTheory.
 (Milne, Appendix A, A.10–A.11, pp. 134–136, for finite norm quotients;
@@ -1245,6 +1282,10 @@ Mathlib finite abelian groups and characters.
   replacing all positive unit depths by the tame quotient misses this wild part.
 - For `y^p−y = T⁻¹`, the local character kills `U^2` and not `U^1`; its conductor is `2`,
   whereas an unramified character kills `U^0` and has conductor `0`.
+- On `ℙ¹/𝔽_p`, use `m=2[∞]`, `a=[0]` and `r=1`. The quotient is
+  `A=(𝔽_p,+)` and its Lang cover is `y^p−y=t`, with quotient conductor `2[∞]`.
+  Selecting the trivial character gives selected-character conductor zero; a nontrivial
+  character is faithful and has conductor `2[∞]`.
 - Omitting the finite degree quotient gives an infinite group and cannot define finite
   RayCharacterData.
 - For `F = 𝔽_q(t)`, `v = ∞` and `π_v = t⁻¹`, the local coordinate sends `π_v` to `T`
@@ -1517,7 +1558,8 @@ finite-abelian-group extension rayLangCover_conductor: the least modulus for thi
 field cover when `θ` is onto) has local exponent the least `j≥0` killing `U_v^j` under
 `θ`. Equivalently it is the componentwise maximum of the conductors of all characters
 `χ∘θ`, `χ : B → ℚ/ℤ`. Exponent zero means unramified, and an exponent `j>0` kills
-`U_v^j` but not `U_v^(j−1)`. This is the conductor of RayCharacterData in §4.5; its
+`U_v^j` but not `U_v^(j−1)`. This is the quotient conductor rayCharacterData_conductor
+of §4.5 when `B=A`; a chosen `χ` instead has rayCharacterData_selectedConductor. The quotient's
 wild part is computed by §§4.3–4.4 and its tame part by ClassFieldTheory. Prove
 rayLangCover_modulusFactor: factorization through `C_{m′}`, `m′≤m`, is equivalent to
 that conductor dividing `m′`, and to being obtained from the finite-ray construction
@@ -1868,9 +1910,13 @@ bridge above; Layer 5.1.
 **Checks.**
 
 - The constant rank-one sheaf `Λ` on `ℙ¹` gives `L = 1/((1 − T)(1 − qT))` in `Λ[[T]]`.
-- At a place where `ρ` restricted to inertia is a nontrivial tame character of rank one, the local
+- Over a coefficient field, at a place where `ρ` restricted to inertia is a nontrivial tame character of rank one, the local
   factor is `1` (no inertia invariants), and the invariants are computed as a kernel; averaging
   over inertia is invalid when `ℓ` divides the order of the inertia image.
+- Over `Λ=𝔽₃×𝔽₃`, the tame quadratic cover `y²=t` of `𝔽₅(t)` acting on `V=Λ`
+  by `(-1,1)` has `V^{I_0}=0×𝔽₃`. This is a projective summand, and Frobenius
+  acts as the identity on it, so `P_0(T)=(1,1−T)` and the Euler factor is
+  `(1,(1−T)⁻¹)`, rather than `1`. Nontriviality over a ring does not force zero invariants.
 - In characteristic `ℓ`, the identity of an `ℓ`-dimensional space has every power trace equal to
   `0` while `det(1 − T·id) = (1 − T)^ℓ = 1 − T^ℓ ≠ 1`; equality of all power traces does not imply
   equality of determinants.
@@ -2706,6 +2752,32 @@ stabilization and the same interpolation identity, without division by two. The 
 - It satisfies `Den(T,L) = (η(π)T)^(ℓ′(L^∨/L)) Den(1/T,L)` as a Laurent-polynomial
   identity; its degree is `ℓ′(L^∨/L)` and its constant term is `1`.
 
+For the inert equal-characteristic-two branch, prove
+finiteHermitianOverlattice_reciprocity. Let `Q=L^∨/L` with its nondegenerate
+Hermitian linking pairing valued in `F′/O_{F′}`, and put `d=length_{O_{F′}} Q`.
+For an isotropic submodule `N⊆N^⊥` write `a_N=dim_{κ(F′)}((N^⊥/N)/π(N^⊥/N))`.
+Then the finite sum in (3), written on the discriminant module, satisfies
+
+```text
+Σ_{N⊆N^⊥⊆Q} T^(2 length N) m(a_N;T)
+  = (−T)^d Σ_{N⊆N^⊥⊆Q} T^(−2 length N) m(a_N;1/T).
+```
+
+Its constant term is `1`: only `N=0` contributes to degree zero. This reciprocity
+therefore gives exact degree `d` and leading coefficient `(−1)^d`.
+This is an intermediate target here, proved by induction on the length filtration of
+the linking module, counting isotropic subspaces in the residue Hermitian spaces and
+using `length N + length N^⊥ = d`. The induction must compare coefficients of the
+two finite sums, including submodules meeting successive filtration steps; invariance
+under isomorphisms over one coefficient ring alone supplies no transfer between
+characteristics. The residue counts are supplied by GeometryOfNumbersAndQuadraticArithmetic
+§3.1, with its nontrivial quadratic involution and surjective trace, including at `q=2`.
+Stabilization and interpolation above, followed
+by this finite-sum identity, prove the functional equation in characteristic two.
+The characteristic-different-from-two formula and functional equation are those of
+Feng–Yun–Zhang, Theorem 2.3 and Remarks 2.4 and 2.6, pp. 11–13; the additional
+finite-sum reciprocity target has the characteristic-two hypotheses just stated.
+
 *Proof sketch.* As for quadratic forms, `Den(⟨1⟩^m, L)` is a sum over integral overlattices
 `L′ ⊇ L` of `#(L′/L)^(−(m−n))` times the number of isometric embeddings of the reduction `L′ ⊗ k`
 into `⟨1⟩^m ⊗ k`. In the split case the residue algebra is `k × k`, Hermitian spaces over it are
@@ -2715,7 +2787,9 @@ linear maps, `q^(2mn−n²) ∏_{i=0}^{n+a−1} (1 − q^(i−m))` for a reducti
 pp. 12–13; Li–Zhang, *Kudla–Rapoport cycles and derivatives of local densities*, §3.5,
 Theorem 3.5.1, pp. 17–18, for the inert case.)
 
-*Needs:* GeometryOfNumbersAndQuadraticArithmetic §3.2; Mathlib finite-field linear algebra.
+*Needs:* GeometryOfNumbersAndQuadraticArithmetic §§3.1–3.2 (finite-field embedding and
+isotropic-frame counts, and the characteristic-different-from-two density theory);
+Mathlib finite-field linear algebra; the finite-linking-module reciprocity target above.
 
 **Checks.**
 
@@ -2739,6 +2813,14 @@ Theorem 3.5.1, pp. 17–18, for the inert case.)
   `1+T`, while the inert rank-one lattice with Gram element `π` has `1−T`.
   For the inert unit line the residue norm-one fibre has `3` elements and the trace
   takes values `Tr(0)=Tr(1)=0`, `Tr(u)=Tr(u+1)=1` for `u²+u+1=0`.
+- For an inert cyclic linking module of length `1`, the reciprocity sum is `1−T`
+  and `(−T)(1−T⁻¹)=1−T`. At length `2` it is `(1−T)+T²`, with reciprocal
+  `T²(1−T⁻¹+T⁻²)=1−T+T²`; the extra term comes from the unique length-one
+  isotropic submodule. The zero module gives `1` on both sides.
+- For `Q=π⁻¹O_{F′}²/O_{F′}²` with linking form
+  `(π⁻¹x,π⁻¹y)↦π⁻¹ x* y mod O_{F′}` over `𝔽₄/𝔽₂`, there are `3`
+  isotropic lines. The sum is
+  `(1−T)(1+2T)+3T²=1+T+T²`, equal to `T²(1+T⁻¹+T⁻²)`.
 - For the rank-zero lattice the representation scheme has one point, and its density and
   normalized polynomial are both `1`; for `m < n` there is no generic embedding and density `0`.
 
@@ -2752,18 +2834,56 @@ section. Here `q=q_v`, `O_F=O_v` and `O_{F′}=O_{F′_v}` in the local formulas
 W_{Tθ}(1, s, Φ_v) = L_{n,v}(s)⁻¹ · Den(q^(−2s), L),      L_{n,v}(s) = ∏_{i=1}^{n} (1 − η(π)^i q^(−i−2s))⁻¹.
 ```
 
+Define the local Siegel–Weil adapter as follows. For `j≥0`, put `m=n+2j` and
+`V_j=⟨1⟩^m` with self-dual lattice `O_{F′}^m`. Let `ψ_θ` be the conductor-zero
+additive character `b↦ψ₀(Tr_{κ(v)/k} Res_v(bθ))`, so the character in the
+Whittaker integral is `ψ_θ(−tr(Tb))`. Use the unitary oscillator of
+MetaplecticAutomorphicForms §§2.5, 3.2a, 3.3 and 3.3b with splitting character
+`χ_v|_{Fˣ}=η^m=η^n`; the other splitting character can be `1`, since the split
+skew-Hermitian space has dimension `2n`. Define the map from the Schwartz space to local sections by
+`φ↦(g↦(ω_{ψ_θ,χ_v}(g)φ)(0))`. Write localSiegelWeilSection for its value
+`Φ_j(g)=(ω_{ψ_θ,χ_v}(g)1_{O_{F′}^{m×n}})(0)` on the integral lattice indicator.
+Prove localSiegelWeilSection_spherical, with the following adapter API:
+
+- Every image section has Levi covariance
+  `Φ(m(a)g)=χ_v(det a)|det a|_{F′}^{m/2}Φ(g)` and is invariant under the
+  Siegel unipotent on the left.
+- The adapter is linear in `φ`, and evaluation at the identity is `φ(0)`.
+- For the integral lattice indicator, `Φ_j` is hyperspecial-invariant on the right
+  and `Φ_j(1)=1`.
+
+Since `m/2=j+n/2`, these laws identify `Φ_j` with the normalized spherical
+section in §7.2 at `s=j`. The operator for `w_n⁻¹` uses the positive Fourier kernel
+for the trace pairing and fixes the self-dual lattice indicator, so no Weil scalar
+remains in this unramified normalization. For a nonunitary unramified split character,
+apply the unitary oscillator to its unitary part and twist this map by the absolute-value
+character of `H_n≅GL_{2n}` extending the remaining Levi character; the same covariance
+and spherical normalization follow. No nonunitary character is used as a unitary splitting.
+
+Prove localSiegelWeilSection_gramLimit: for nonsingular integral `T`, inserting this
+section into the Whittaker integral and integrating over
+`π^(−N)Herm_n(O_F)` gives, for sufficiently large `N`,
+`q^(N n²) vol{X∈O_{F′}^{m×n}: X*X≡T mod π^N}`. Here `X*` is conjugate transpose
+and the matrix-coordinate lattice has volume `1`. This equals
+`#Rep_{V_j,L}(O_F/π^N)/q^(N n(2m−n))`; its stabilized value is the density of §7.4.
+(Feng–Yun–Zhang, §2.5, Lemma 2.7 and proof, pp. 13–14; Kudla–Rapoport,
+§10, Proposition 10.1 and proof, pp. 37–38, for the characteristic-zero computation;
+the local operator and finite Fourier calculation here retain their stated
+odd-characteristic hypotheses.)
+
 *Proof sketch.* Both sides are rational in `q^(−s)`, so it suffices to compare them at
 `s = j ≥ 0`. There `L_{n,v}(j) = Den(⟨1⟩^(n+2j), ⟨1⟩^n)⁻¹` by 7.4(1), so the claim becomes
-`W_{Tθ}(1, j, Φ_v) = Den(⟨1⟩^(n+2j), L)`. Realize the section at `s = j` through the Weil
-representation on a self-dual lattice of rank `n + 2j` (Rallis' interpolation), so that the
-Whittaker integral becomes a Fourier integral of the characteristic function of `L^n` and computes
-the representation density. The source rank is `n + 2j`, with `X = q^(−2j)`, not `n + j` with an
+`W_{Tθ}(1, j, Φ_v) = Den(⟨1⟩^(n+2j), L)`. Apply the local Siegel–Weil adapter and
+finite Fourier Gram-count limit above to the lattice indicator `1_{O_{F′}^{(n+2j)×n}}`.
+The source rank is `n + 2j`, with `X = q^(−2j)`, not `n + j` with an
 unchanged argument. (Feng–Yun–Zhang, §2.5, Lemma 2.7 and proof, pp. 13–14; Kudla–Rapoport,
 *Special cycles on unitary Shimura varieties II: global theory*, §10, Proposition 10.1 and proof,
 pp. 37–38 of arXiv:0912.3758v2, for the same computation over `ℚ_p`.)
 
-*Needs:* Layers 7.2–7.4; MetaplecticAutomorphicForms (the Weil representation and Weil index over
-every local field); SmoothRepresentationsOfLocalGroups §SR.4.4.
+*Needs:* Layers 7.2–7.4; MetaplecticAutomorphicForms §§2.5, 3.2a, 3.3 and 3.3b
+(local operators, split comparison, unitary splittings and Hermitian normalizations);
+the local Siegel–Weil adapter and Gram-count limit above;
+SmoothRepresentationsOfLocalGroups §SR.4.4.
 
 **Checks.**
 
@@ -2772,6 +2892,15 @@ every local field); SmoothRepresentationsOfLocalGroups §SR.4.4.
   density.
 - In the split case, replacing `q^(−2s)` by `q^(−s)` would match the rank-`(n + j)` density at
   `s = j`, which is the wrong normalization for this section.
+- For `n=1,j=0` in the split case and trivial `χ_v`, evaluation at `m(π,1)` gives
+  `q^(-1/2)`, agreeing with the exponent `j+n/2=1/2`; at `j=1` it gives `q^(-3/2)`.
+  In the inert case at `m(π)` the corresponding values are `χ_v(π)q⁻¹` and
+  `χ_v(π)q⁻³`, since `|π|_{F′}=q⁻²`.
+- The lattice indicator gives `Φ_j(1)=1`, the zero Schwartz function gives `0`,
+  and twice the indicator gives `2`. Thus covariance alone does not normalize the section.
+- For split `n=m=1`, `q=3` and `T=1`, the finite Gram count is
+  `#(x,y∈O_F/π^N:xy=1)=2·3^(N−1)`; division by `3^N` gives `2/3`.
+  For an inert unit line at `q=3`, the norm count is `4·3^(N−1)`, giving `4/3`.
 
 ### 7.6 The global coefficient formula of Feng–Yun–Zhang
 
@@ -2858,7 +2987,7 @@ For `n = 1`, `X = ℙ¹`, `F′ = F × F` and `(𝓔, a)` self-dual, the formula
 Layers 0, 2, 6; ArithmeticGaloisDuality §R02.3.2; AutomorphicLFunctionsAndLocalFactors AL.3;
 ReductiveGroupsPartII Layers RG2.3–RG2.4; SmoothRepresentationsOfLocalGroups
 §§SR.2.1–SR.2.3, SR.4.1 and SR.4.4;
-GeometryOfNumbersAndQuadraticArithmetic §3.2; MetaplecticAutomorphicForms; SchemeAndStackFoundations
+GeometryOfNumbersAndQuadraticArithmetic §§3.1–3.2; MetaplecticAutomorphicForms §§2.5, 3.2a, 3.3 and 3.3b; SchemeAndStackFoundations
 §§2.11, 3.3 and 3.6; EtaleCohomologyFoundations §0.11.
 
 ## Worked examples
