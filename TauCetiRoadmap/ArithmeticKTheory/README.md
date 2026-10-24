@@ -89,9 +89,11 @@ S-integer bases. The real Bott spectra are GeneralizedCohomology G5.4;
 
 Write F for a number field, A for its ring of integers, and S for a set of
 **finite** primes. Except where arbitrary S is expressly allowed, S is finite.
-Put O = O_(F,S). Thus ℤ[1/p] has one prime in S; infinite places are counted by
-r₁ and r₂, not by |S|. The unit rank is r₁+r₂+|S|−1. For a general Dedekind
-domain R, its field of fractions is denoted K and its height-one spectrum by
+Put O = O_(F,S). For a coefficient prime ℓ put
+T_ℓ = S ∪ {v : v divides ℓ}, so O[1/ℓ] = O_(F,T_ℓ); this support
+retains every prime already inverted in O. Thus ℤ[1/p] has one prime in S;
+infinite places are counted by r₁ and r₂, not by |S|. The unit rank is
+r₁+r₂+|S|−1. For a general Dedekind domain R, its field of fractions is denoted K and its height-one spectrum by
 Spec¹(R); a field has empty height-one spectrum.
 
 K_n denotes the actual connective Quillen group, with n≥0 unless a different
@@ -253,8 +255,9 @@ functorial K-groups; §4.3 additivity; §4.8 dévissage; §4.14 Serre localizati
 formulas; §§8.12–8.13 the DVR boundary and its right-module identity.
 Section 2.1 constructs finite-coefficient localization by smashing this triangle
 with StableHomotopyKTheory §7.2's S/m. It retains §7.7's coefficient reductions
-and §7.3's Bocksteins, and proves the boundary/product compatibility at the
-safe prime powers of §7.28. No ring structure at an unsafe modulus is inferred.
+and §7.3's Bocksteins, and proves the signed localization–Bockstein identity
+of §2.1 and the boundary/product compatibility at the safe prime powers of
+§7.28. No ring structure at an unsafe modulus is inferred.
 
 ### From TauCetiRoadmap.EtaleCohomologyFoundations
 
@@ -323,8 +326,35 @@ its real/complex specializations and the norm criterion. KTheoryFiniteLocalField
 
 R02.1/R02.3/R02.4 supplies continuous inverse-limit control, Kummer,
 finite H¹/H², the Brauer invariant-sum computation and Poitou–Tate.
-At odd ℓ, one finite place above ℓ gives Br(O[1/ℓ])[ℓ^r]=0 and
-H²(O[1/ℓ],μ_(ℓ^r))=Pic(O[1/ℓ])/ℓ^r. Real 2-torsion is retained.
+For finite S, odd ℓ and r≥1, retain the full support T_ℓ of Conventions
+and use R02.3's Kummer sequence and R02.4.4's invariant-sum calculation:
+
+```text
+Br(O_(F,T_ℓ))[ℓ^r] ≃ ker((ℤ/ℓ^r)^(T_ℓ) --sum--> ℤ/ℓ^r),
+0 → Pic(O_(F,T_ℓ))/ℓ^r → H²_et(O_(F,T_ℓ),μ_(ℓ^r))
+  → Br(O_(F,T_ℓ))[ℓ^r] → 0.
+```
+
+The coordinates identify the local invariant a/ℓ^r with a modulo ℓ^r.
+Only when |T_ℓ|=1 does this give Brauer vanishing and the Picard/H²
+isomorphism. Real 2-torsion is retained at ℓ=2. (K-book, (VI.8.1.1),
+p. 513, and Example VI.8.3.1, p. 514.)
+
+**Checks.**
+
+- For F=ℚ, S=∅, ℓ=3 and r=1, T₃={3}; the sum map is the
+  identity on ℤ/3 and its kernel is zero. Since Pic(ℤ[1/3])=0,
+  H²_et(ℤ[1/3],μ₃)=0.
+- For F=ℚ, S={2}, ℓ=3 and r=1, T₃={2,3}; the nonzero invariant
+  tuple (1/3,−1/3) has sum zero. Thus Br(ℤ[1/6])[3]≃ℤ/3,
+  and Pic(ℤ[1/6])=0 gives H²_et(ℤ[1/6],μ₃)≃ℤ/3. The tuple
+  (1/3,1/3) has sum 2/3 and is excluded; a difference map would admit it.
+- For the same S and ℓ with r=2, the tuple (1/9,−1/9) has order
+  nine, so the kernel is ℤ/9. Counting places above ℓ alone would
+  incorrectly give zero in both of the last two cases.
+- At F=ℚ and ℓ=2, the finite support {2} is a singleton, but invariants
+  1/2 at 2 and 1/2 at the real place have sum zero in ℚ/ℤ and give
+  Br(ℤ[1/2])[2]≃ℤ/2. The odd-prime hypothesis excludes this case.
 
 ### From TauCetiRoadmap.SelmerIwasawaCohomology
 
@@ -340,8 +370,10 @@ calculations with their signature and Arf normalizations. The localized Picard
 quotient is supplied by Tau Ceti. Section 3.5 constructs the general Dedekind
 injection and L-tables on the supplier's Poincaré carriers.
 
-Section 3.5 constructs the number-ring real-signature map on §6.11’s
-symmetric Witt carrier and proves its finite-kernel and full-rank-image theorem.
+Section 6.4.2 supplies the metabolic-quotient symmetric Witt carrier
+`ExactW0`; §6.10a supplies its integral signature normalization.
+Section 3.5 constructs the number-ring real-signature map on that carrier
+and proves its finite-kernel and full-rank-image theorem.
 
 ### From TauCetiRoadmap.HermitianKTheoryOfPoincareCategories
 
@@ -363,6 +395,10 @@ pullback laws. Section 6.5a supplies `periodicEtaleK`, `etaleKComparison`,
 `etaleDescentFiltration` and `quillenLichtenbaumField`, with coefficient,
 restriction and finite-separable transfer compatibility. Section 5.2 consumes
 that field comparison and extends it to the mixed-characteristic S-integer base.
+The supplier's determinant, semilocal K₁, Matsumoto and finite-field K₂
+inputs come from AlgebraicKTheory A2/A4/A5; these are inherited prerequisites
+of its local comparisons. Its §2.2 uses the uniformizer-last boundary
+∂_n=(−1)^(n−1)B_n, whereas §2.1 below retains the raw right-linear B_n.
 
 ### From TauCetiRoadmap.ClassFieldTheory
 
@@ -618,12 +654,27 @@ sequence K(Z)→K(X)→K(U) used here and m≥2, smashing with S/m gives the
 corresponding fibre sequence with ℤ/m coefficients and its long exact sequence.
 For x∈K_a(U;ℤ/m) and y∈K_b(X;ℤ/m), at a safe prime power m prove the
 right-module boundary identity β(x·res(y))=β(x)·y|Z. Retain the mixed integral/
-coefficient pairing for every m, naturality for localization maps, and the
-commuting squares with coefficient reductions and Bocksteins. Derive these
-from the supplied triangle, pairings and coherent coefficient triangles;
-unsafe-modulus operations are obtained through those maps, without choosing
-an associative Moore product there. (K-book, V.6.8 and proof, pp. 412–413;
-VI.1, pp. 464–468.)
+coefficient pairing for every m. Naturality for localization maps and the
+coefficient-reduction squares commute. Write B_n and B_(m,n) for the
+degree-n raw right-linear localization boundaries β, integrally and with
+ℤ/m coefficients. For n≥2, the ordinary coefficient Bocksteins
+δ_(U,n):K_n(U;ℤ/m)→K_(n−1)(U) and
+δ_(Z,n−1):K_(n−1)(Z;ℤ/m)→K_(n−2)(Z) instead satisfy
+
+```text
+B_(n−1) ∘ δ_(U,n) = −δ_(Z,n−1) ∘ B_(m,n).
+```
+
+Prove this identity from the supplied localization and coherent coefficient
+triangles, retaining the sign from interchanging their suspension coordinates.
+For c∈K_j(U) and z∈K_k(U;ℤ/m), j≥0 and k≥1, also retain
+δ(c·z)=(−1)^j c·δz. The adapter ∂_n=(−1)^(n−1)B_n of
+KTheoryFiniteLocalFields §2.2 commutes with δ; its right-module law is
+∂(x·res(y))=(−1)^b ∂(x)·y|Z when y has degree b. The localization
+product laws of this roadmap use raw B, and the mixed pairing and signed
+identity hold for every m≥2 without an associative
+Moore product. (K-book, IV.2.4–2.5, pp. 280–281; V.6.8 and proof,
+pp. 412–413; V.6.9.2, pp. 414–415; VI.1, pp. 464–468.)
 
 **Checks.**
 
@@ -632,6 +683,15 @@ VI.1, pp. 464–468.)
 - At ℤ_(5) and modulus 16, β([5]·[2])=[2 mod 5] in K₁(𝔽₅;ℤ/16);
   reversing the two degree-one factors negates this value. The mixed
   integral pairing gives β([5]·[2])=[2] also before coefficient reduction.
+- For R=ℤ[ζ₅] localized at (11,ζ₅−3), k=𝔽₁₁ and m=5, choose
+  b∈K₂(R;ℤ/5) with δb=ζ₅ and a uniformizer π. For
+  x=[π]·res(b), right linearity gives B₅x=b̄, so δ(B₅x)=3
+  in k×. The mixed Bockstein gives δx=−[π]·ζ₅ and B(δx)=3⁻¹=4.
+  Thus Bδx=−δB₅x; after the adapter, ∂₂δx=3=δ∂₃x.
+  The values 3 and 4 have order five and are distinct.
+- For m=2, a residue class of order two equals its negative; that case
+  alone cannot detect the missing sign. For identity localization the
+  support groups are zero and both composites in the signed square are zero.
 - Reduction S/p^(r+1)→S/p^r acts by p on the Bockstein torsion term,
   while acting by ordinary reduction on K_n/p^r. At p=2,r=1 these are
   respectively multiplication by 2 and 1 mod 4↦1 mod 2.
@@ -1231,8 +1291,10 @@ group is finitely generated. This includes the coherent duality C₂-action
 on connective K(O). (Calmès et al., proof of Corollary 2.3.18, p. 48.)
 *Needs:* StableHomotopyKTheory §§7.21–7.24, the homotopy-orbit and coherent
 action carriers of GeometryOfNumbersAndQuadraticArithmetic §§6.1a/6.8a,
-and its symmetric Witt carrier and signature comparison in §6.11;
-KTheoryFiniteLocalFields §0.5 for the finite-cover transfer maps.
+and its §6.4.2 symmetric Witt carrier `ExactW0` with integral signature
+normalization in §6.10a. The general number-ring signature theorem is the
+target above in this subsection; KTheoryFiniteLocalFields §0.5 supplies
+the finite-cover transfer maps.
 
 The orbit sequence has the following basic laws:
 
@@ -3623,13 +3685,20 @@ second assertion. These are arithmetic homology targets here.
 (Rognes, Lemma 8.1, Corollary 8.2 and the argument preceding (8.4),
 pp. 279–280, including Soulé's Steinberg-homology input.)
 
+Prove integerSpectrumThirdHomology: H₃(K(ℤ);ℤ)≃ℤ/2 by the independent
+Lee–Szczarba calculation used by Rognes immediately after (8.4), p. 280.
+This is ordinary homology of the K-spectrum. After inverting 2 its value
+is zero; use it before determining the rank differential below.
+
 Prove integerRankSubquotientHomology through total degree four after
 inverting 2. For E¹_(s,t)=H_(s+t)(F_(s+1)/F_s;ℤ[1/2]), the first
 three columns have the following entries; the differential
-d₁:(2,2)→(1,2) is an isomorphism ℤ/3→ℤ/3. The target includes the
-chain maps inducing this differential. The m=4 calculation above and
-connectivity of the m≥5 subquotients exclude all other contributions
-in positive total degrees at most four.
+d₁:(2,2)→(1,2) is an isomorphism ℤ/3→ℤ/3. The independent vanishing
+H₃(K(ℤ);ℤ[1/2])=0 forces its surjectivity, hence bijectivity; the table
+alone does not determine it. The target includes the chain maps inducing
+this differential. The m=4 calculation above and connectivity of the m≥5
+subquotients exclude all other contributions in positive total degrees at
+most four.
 (Rognes, (8.3)–(8.4), pp. 279–280.)
 
 | t | s=0 | s=1 | s=2 |
@@ -3676,9 +3745,10 @@ The basic laws are:
   are exchanged by a basis swap, and the modular-symbol relations
   eliminate the resulting possible 2-torsion. The rank-two
   homotopy-orbit subquotient is 1-connected.
-- The two ℤ/3 entries have differential an isomorphism, giving
-  kernel and cokernel zero; declaring that differential zero would
-  retain a spurious odd class in total degree four.
+- The independent H₃ input becomes (ℤ/2)⊗ℤ[1/2]=0. A zero
+  differential between the two ℤ/3 entries would give cokernel ℤ/3
+  in degree three, contradicting that value, as well as kernel ℤ/3 in
+  degree four. The required isomorphism gives kernel and cokernel zero.
 - For ℤ[1/2], s=1 and the narrow class group is zero: its ideals are
   principal with positive rational generators. The degree-four
   2-rank is 1+0−1=0; a finite ℤ/4 summand would instead have rank one.
@@ -3694,8 +3764,9 @@ Hurewicz theorem, transported to connective spectra through
 GeneralizedCohomology G2.5 and G2.7; HomotopySpheres Stage 9, item 2's
 π₄^S=0; §3.2's Solomon–Tits theorem and group homology; Layer 3's
 finite generation and ranks; §6.4's dyadic 2-rank formula. The rank and
-component filtrations, integer Steinberg homology and odd subquotient
-calculation are targets here, with the published argument specified above.
+component filtrations, integer Steinberg homology, independent ordinary
+spectrum H₃ calculation and odd subquotient calculation are targets here,
+with the published argument specified above.
 
 First prove specialValueKOrderRatio: for every totally real number
 field F and k≥1,
@@ -3817,7 +3888,8 @@ table without being proved from its hypothesis.
 
 ### Dependencies
 
-Layers 3–6; §7.5's rank/component filtrations and integer Steinberg homology;
+Layers 3–6; §7.5's rank/component filtrations, integer Steinberg homology
+and independent ordinary spectrum H₃ calculation;
 HomotopySpheres Stage 9, item 2; AlgebraicTopology Stage 8 and
 GeneralizedCohomology G2.5/G2.7;
 Mathlib's Bernoulli, class-number and cyclotomic-prime API;

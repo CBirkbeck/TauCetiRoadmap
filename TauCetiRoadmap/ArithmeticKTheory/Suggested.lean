@@ -14,9 +14,9 @@ uses those unrestricted inputs, including indices divisible by the prime.
 
 Quillen finite generation and ranks, Soulé localization, the odd and even
 integral tables, Harris–Segal detection, higher wild-kernel divisibility, Bott
-descent, K₄(ℤ) = 0, the totally real special-value order ratio, the integer
-even-order formulas, the Vandiver K-group table and the Gaussian and golden
-tame-kernel equivalences are not statable at the pins: their higher Quillen
+descent, K₄(ℤ) = 0, H₃(K(ℤ); ℤ) ≃ ℤ/2 in ordinary spectrum homology,
+the totally real special-value order ratio, the integer even-order formulas,
+the Vandiver K-group table and the Gaussian and golden tame-kernel equivalences are not statable at the pins: their higher Quillen
 K-group/spectrum carriers and comparison maps are missing. Hermitian finiteness
 also lacks the required GW/L-spectrum carriers. The arithmetic finite CW
 model in README §3.2 lacks the arithmetic bordification and quotient carriers.
