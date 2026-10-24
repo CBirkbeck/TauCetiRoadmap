@@ -7,6 +7,10 @@ The roadmap is README.md; this file is not the roadmap. It states the roadmap's
 headline theorems against the pinned Mathlib and Tau Ceti APIs when their carriers exist.
 
 None of the headline theorems is statable at the pins:
+* relativeFormalEtaleLift (§0.1) needs connective E∞ ring spectra, completed
+  spectral cotangent complexes and marked relative spherical lifts; the
+  ordinary, p-completely étale and p-completely formally étale interfaces
+  require these distinct carriers.
 * sphericalPerfection (§0.1) needs connective E∞ ring spectra, spherical Witt
   vectors and cyclotomic base data.
 * localTraceComparison (§0.3) needs solid even filtrations, spherical lifts,
