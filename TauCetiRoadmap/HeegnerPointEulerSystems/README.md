@@ -16,6 +16,8 @@ Outside the supplied statistics CM realizations, the cyclic-isogeny CM pair at e
 
 EulerSystemsAndKolyvaginSystems §1.6 owns the residual Kummer-field evaluation pairing; §1.16 owns the residual local pairing, simultaneous detection of two classes and classes with prescribed ramification. Sections 5.7, 6.15 and 6.18 consume them for the actual Heegner classes. Section 4.1 identifies the coefficient ideal of this family with that roadmap’s §1.4 inert-prime ideal; §8.15 specializes its §5.12 divisibility profile. These arithmetic identifications retain the actual eigenvalues and point family.
 
+SelmerIwasawaCohomology §4.28 owns parity constancy and quadratic-character decomposition for supplied self-dual ordinary families. Its ordinary modular-form application retains the common arithmetic realization and local diagram and conditions (A1)–(A2) for each twist; it compares Selmer dimensions at two arithmetic points. The anticyclotomic endpoints of Layer 8 here are the divisibility, nonvanishing and determinant statements of §§8.30–8.45.
+
 ArithmeticStatisticsPartVI, “Heegner logarithm and low rank”, owns its marked classical/quaternionic CM divisor and elliptic image, logarithm and height formulas, and the low-analytic-rank implication in its stated scope. “Anticyclotomic character nonvanishing” owns its classical elliptic conductor-tower CM divisors and images as well as higher-point nonvanishing for every odd p with trivial tame character; “Anticyclotomic character Selmer multiplicity one” owns its character-level descent. In these scopes §§1.5–1.6 reuse those supplied divisors and images, proving the conductor relations and normalization comparisons needed for the arithmetic system, rather than reconstructing them. The conditional non-torsion, all-prime classical descent of §7.11 and general-F RM descent of §7.12 have different hypotheses from the statistics applications; neither asserts its character-multiplicity theorem. Section 8.21 here treats general totally real F and prescribed torsion character χ₀, while §8.24 uses the supplied classical theorem to prove non-torsion of this roadmap’s actual normalized Λ-adic class.
 
 ## Conventions
@@ -82,6 +84,8 @@ Use Mathlib `6b7abb3c7686292736be2955bd3eb9ebf63b456a` and Tau Ceti `a91d3aafa8c
 
 The native elliptic Tate module is `TauCeti.TateModule`. In `TauCeti/AlgebraicGeometry/EllipticCurve/TateModule/Basic.lean`, `WeierstrassCurve.nonempty_linearEquiv_tateModule`, `WeierstrassCurve.free_tateModule` and `WeierstrassCurve.finrank_tateModule` give freeness and rank two over ℤ_p for an elliptic curve over a separably closed field with p nonzero. In `TauCeti/AlgebraicGeometry/EllipticCurve/MordellWeil/FinitelyGenerated.lean`, `WeierstrassCurve.Affine.fg_point_of_numberField` gives finite generation of the point group over a number field. Mathlib `ContinuousCohomology.tateShafarevich`, in `Mathlib/RepresentationTheory/Homological/ContCohomology/Sha.lean`, is the intersection of the localization kernels for a supplied topological Galois module and a supplied family of field extensions; it includes no identification with an elliptic Kummer quotient. These inputs do not determine a Heegner point family. The acceptance file consequently needs no Tau Ceti import.
 
+`TauCeti.ContinuousCohomology.map_eq_id_of_inner`, in `TauCeti/RepresentationTheory/Homological/ContCohomology/InnerConjugation.lean`, identifies the action of an inner compatible pair with the identity in every cohomological degree for a locally compact group and smooth discrete coefficients. Section 5.7 applies it to the finite residual image and its discrete E[p]: centrality makes the group map the identity, while the coefficient map is −I, so the induced map is both the identity and negation.
+
 ### From TauCetiRoadmap.GlobalNumberFields
 
 Layer 11, “orders and Picard groups”: full orders, invertible proper Picard groups and conductor-prime-to extension/contraction. The quadratic trace-dual calculation is proved in Layer 0 here.
@@ -122,7 +126,7 @@ Layer R29.5, “Quotient isogenies and modular parametrisations”: the actual f
 
 §§0a.2–0a.4 CM points and level/canonical descent, Layer 0 normalization, Layer 3 Hodge classes and differential constants, Layers 4–5 signs and definite special values, §8.11 quaternionic Gross–Zagier, and §§9.10, 9.14, 9.20, 9.22 isogeny, toric-square and logarithm/function comparisons. Retain CM units, stabilizers, discriminants and integral primitive vectors. General height and CM-moduli constructions remain there; this roadmap applies them to its conductor family.
 
-What GrossZagierAndArithmeticHeights must provide (gap:integral-family-logarithm): For the ordinary split anticyclotomic Heegner family, provide the integral family logarithm and explicit reciprocity identity on the specified distinguished Tate lattice, with coefficient extension, periods and regulator cokernel, used by BCGS Lemmas 1.2.3–1.2.5; the rational finite-point identity alone does not give this contract.
+What GrossZagierAndArithmeticHeights must provide (gap:integral-family-logarithm): For the ordinary split anticyclotomic Heegner family, provide the integral family logarithm and explicit reciprocity identity on the specified distinguished Tate lattice, with coefficient extension, periods and regulator cokernel, used by BCGS Lemmas 1.2.3–1.2.5. Its domain is the positive-filtration Iwasawa cohomology; specialization retains its H² cokernel before the map to the propagated ordinary lattice. Section 8.35 evaluates the quotient-invariant, full-torsion and saturation factors separately for the actual Heegner family; the rational finite-point identity alone does not give this contract.
 
 ### From TauCetiRoadmap.EllipticCurves
 
@@ -917,9 +921,17 @@ For the same actual T, verify H3 cartesian propagation at every quotient of the 
 
 Use EulerSystemsAndKolyvaginSystems §1.6 with L=K(E[p]) and a finite 𝔽_p-Selmer subspace S: its evaluation pairing identifies Gal(L_S/L) with Hom_𝔽p(S,E[p]) under Gross’s full residual-image hypotheses. Set M=L_S and let I be the subgroup fixing the Kummer field generated by a pth division point of the actual y_K. For τ acting on Gal(M/L), the square (τh)² detects the positive component used by Gross. Chebotarev primes whose Frobenius is the prescribed class of τh are inert auxiliary primes, avoid any specified finite set, and their localizations detect the corresponding evaluation annihilator. To detect a second independent class, use the correctly formed composite and the proved disjointness of its Kummer field.
 
-([gross](#references), Propositions9.5–9.6 and Claims10.1/10.3, pp.251–254.)
+For the evaluation pairing and prime selection, verify absolute irreducibility over G_K and Hⁱ(Gal(K(E[p])/K),E[p])=0 for i=1,2. The image over K is normal of index at most two in GL₂(𝔽_p), hence contains SL₂(𝔽_p). Its standard representation is absolutely irreducible, and its central scalar −I acts on E[p] by −1. Sah’s lemma annihilates cohomology by −2, a unit for odd p, giving both vanishings. Use the corrected Gross argument under these conditions, including when p divides D_K; no disjointness of K and ℚ(E[p]) is assumed (Matar–Nekovář Propositions 6.4–6.5, pp.30–31).
 
-*Needs:* EulerSystemsAndKolyvaginSystems §1.6, the residual Kummer-field evaluation pairing; EulerSystemsAndKolyvaginSystems Layer 1 Auxiliary primes and finite–singular comparison; Chebotarev Layer 10, “Dirichlet-density Chebotarev”.
+**Checks.**
+
+- At p=3 the scalar −I−I is I, so Sah’s annihilator is invertible; at p=2 it is zero and gives no vanishing.
+- At p=7 the determinant-square subgroup has index two, contains −I and both elementary unipotents, and −2=5 has inverse 3. This permits the ramified quadratic subfield with D_K=−7 without requiring the image over K to be all of GL₂(𝔽₇).
+- The fixed lines of the upper and lower nonidentity unipotents are respectively the spans of (1,0) and (0,1), with zero intersection, also over the algebraic closure. A diagonal subgroup instead preserves each line and fails absolute irreducibility.
+
+([gross](#references), Propositions9.5–9.6 and Claims10.1/10.3, pp.251–254; [matar-nekovar](#references), §§0.4–0.5, p.1, Propositions 6.4–6.5 and conditions C4–C5, pp.30–31.)
+
+*Needs:* EulerSystemsAndKolyvaginSystems §1.6, the residual Kummer-field evaluation pairing; EulerSystemsAndKolyvaginSystems Layer 1 Auxiliary primes and finite–singular comparison; Chebotarev Layer 10, “Dirichlet-density Chebotarev”; `TauCeti.ContinuousCohomology.map_eq_id_of_inner`, on the finite image with smooth discrete E[p] coefficients.
 
 ### 5.8 Arithmetic local error lengths
 
@@ -962,7 +974,7 @@ Assume E/Q conductor N, imaginary quadratic K discriminant D≠−3,−4 with al
 
 Let E/ℚ be non-CM of conductor N, let K have D_K≠−3,−4 with every N-prime split, and let p be odd with Gal(ℚ(E[p])/ℚ)=GL₂(𝔽_p) and y_K∉pE(K), for the fixed cusp-normalized trace. Then the ε-opposite Selmer eigenspace is zero. Choose a prime using the actual Kummer field M and positive component outside I. Its d(ℓ) is locally nonzero and supported only at λ; global reciprocity forces every Selmer class in that eigenspace to localize to zero. The Kummer-field annihilator calculation then forces the global eigenspace to vanish.
 
-([gross](#references), Proposition8.2 pp.249–250; Claim10.1 pp.252–253.)
+([gross](#references), Proposition8.2 pp.249–250; Claim10.1 pp.252–253; [matar-nekovar](#references), Proposition 6.4, conditions C4–C5 and proof, p.30; Proposition 6.5, pp.30–31.)
 
 *Needs:* [Heegner class detection by auxiliary primes](#57-heegner-class-detection-by-auxiliary-primes); [Parity of the Heegner derivative class](#49-parity-of-the-heegner-derivative-class); EulerSystemsAndKolyvaginSystems Layer 1 Auxiliary primes and finite–singular comparison; SelmerIwasawaCohomology §§2.13–2.20 Dual Selmer structures, local duality and Poitou–Tate; [Component obstruction at bad places](#33-component-obstruction-at-bad-places); [Explicit cocycle and divisibility criterion](#45-explicit-cocycle-and-divisibility-criterion); [Heegner reduction congruence](#26-heegner-reduction-congruence).
 
@@ -970,7 +982,7 @@ Let E/ℚ be non-CM of conductor N, let K have D_K≠−3,−4 with every N-prim
 
 For E,K,p and the nonzero trace Kummer class under the full residual-image hypotheses of §6.2, the remaining Selmer eigenspace equals 𝔽_p·δ(y_K). If a second independent class existed, choose the first auxiliary prime with nonzero local Heegner derivative and form its Kummer extension L′. Prove L′ is disjoint from the Selmer field over L in the relevant character, then choose a second simultaneous Frobenius in the composite. The finite/singular relation and reciprocity force incompatible localizations, so the second class cannot exist.
 
-([gross](#references), Claim10.3 and proof, pp.253–254.)
+([gross](#references), Claim10.3 and proof, pp.253–254; [matar-nekovar](#references), Propositions 6.4–6.5, pp.30–31.)
 
 *Needs:* [Opposite Selmer eigenspace vanishing](#62-opposite-selmer-eigenspace-vanishing); [Heegner class detection by auxiliary primes](#57-heegner-class-detection-by-auxiliary-primes); [Parity of the Heegner derivative class](#49-parity-of-the-heegner-derivative-class); EulerSystemsAndKolyvaginSystems Layer 1 Auxiliary primes and finite–singular comparison; SelmerIwasawaCohomology §§2.13–2.20 Dual Selmer structures, local duality and Poitou–Tate; [Explicit cocycle and divisibility criterion](#45-explicit-cocycle-and-divisibility-criterion); [Bottom class is the trace Kummer class](#46-bottom-class-is-the-trace-kummer-class).
 
@@ -978,7 +990,9 @@ For E,K,p and the nonzero trace Kummer class under the full residual-image hypot
 
 Assume E/ℚ is non-CM of conductor N, K has D_K≠−3,−4 with all N-primes split, the cusp-normalized trace y_K is fixed, p is odd, Q(E[p])/Q has full GL₂(F_p) group, and y_K∉pE(K). Then Sel_p(E/K) is the cyclic F_p-space generated by δ(y_K), rank E(K)=1 and Sha(E/K)[p]=0. This clean theorem requires neither p∤N nor full p-adic surjectivity as an extra hypothesis; do not replace its hypothesis table with Howard’s.
 
-([gross](#references), Propositions2.1/2.3 pp.237–238, Claims10.1/10.3 pp.252–254.)
+The image and cohomology verifications in §5.7 discharge conditions C4–C5 of Matar–Nekovář Proposition 6.4; Proposition 6.5 supplies the remaining torsion and conjugation conditions. This retains p dividing D_K as well as p dividing N.
+
+([gross](#references), Propositions2.1/2.3 pp.237–238, Claims10.1/10.3 pp.252–254; [matar-nekovar](#references), Propositions 6.4–6.5, pp.30–31.)
 
 *Needs:* [Heegner class detection by auxiliary primes](#57-heegner-class-detection-by-auxiliary-primes); [Bottom class is the trace Kummer class](#46-bottom-class-is-the-trace-kummer-class); [Component obstruction at bad places](#33-component-obstruction-at-bad-places); [Opposite Selmer eigenspace vanishing](#62-opposite-selmer-eigenspace-vanishing); [Same Selmer eigenspace generation](#63-same-selmer-eigenspace-generation); EllipticCurves Layer 7, “Selmer groups and Sha”; EllipticCurves Layer 6, “The Mordell–Weil theorem”.
 
@@ -1570,13 +1584,25 @@ The required API is:
 
 ### 8.16 Optimal and distinguished lattice comparison
 
-For E₀ optimal on X₀(N), E₁ optimal on X₁(N), and the distinguished E_• with T_f identified integrally with T_pE_•, the prescribed isogeny E₀→E_• is étale at odd p. For crystalline α as in BCGS Lemma 1.2.3 with L_BDP(α⁻¹)≠0 and α sufficiently near1, I_•(α)C_•(α)=I₀(α)C₀(α), where I is the bottom-class index and C the finite-cokernel local index modulo torsion. Neither factor is individually asserted equal under arbitrary isogeny.
+For E₀ optimal on X₀(N), E₁ optimal on X₁(N), and the distinguished E_• with T_f identified integrally with T_pE_•, the prescribed isogeny E₀→E_• is étale at odd p. Its map on positive Tate lattices is an isomorphism and carries the localized source Heegner classes to one another. For crystalline α as in BCGS Lemma 1.2.3 sufficiently near 1, assume the compact Selmer lattices are free of rank one and their localized bottom classes are nonzero. Let I_E be the bottom-class index, C_E the index of its global localization image in H¹_ord(K_v,T_E,α)/H¹(K_v,T_E,α)_tors, and s_E,α the index of the image of H¹(K_v,T_E,α⁺)/tors in that same saturated lattice. Then I_•C_•/s_•,α=I₀C₀/s₀,α: both sides are the index of the common localized bottom in the positive lattice. Étaleness identifies the positive lattices; the saturated lattices retain their own indices.
+
+The required API is:
+
+- The chosen isogeny identifies the positive lattices and the localized source classes.
+- The index of the bottom class in the saturated local lattice is I_EC_E, and is s_E,α times its positive-lattice index.
+- The displayed ratio is invariant under this étale transport. If s_•,α=s₀,α, it gives equality of the two products; general isogenies retain their finite lattice kernels and cokernels.
+
+**Checks.**
+
+- For the identity isogeny with I₀=I_•=5, C₀=C_•=5 and s₀,α=s_•,α=5, each ratio is 5=25/5.
+- For a common positive lattice ℤ₅, take its inclusions into the source and target saturated lattices to be multiplication by 1 and 5. Let the isogeny on saturated lattices and on global Selmer lines be multiplication by 5, with localization the identity on both lines. A source bottom 5 maps to 25, so (I₀,C₀,s₀,α)=(5,1,1) and (I_•,C_•,s_•,α)=(25,1,5); the ratios are both 5, while the raw products 5 and 25 differ.
+- For a prime-to-p isogeny all the induced Tate-lattice maps are isomorphisms. At p=5 multiplication by 2 preserves each index, whereas multiplication by 5 on a Tate lattice has cokernel (ℤ/5)² of order 25 and cannot be treated as such an isomorphism.
 
 This target also assumes E(K)[p]=0. p splits as v v̄ in K. α is crystalline at both primes above p and comes from a Hecke character of infinity type (n,−n), with n≥0 and n divisible by p−1, as in BCGS Theorem 1.2.1 and Lemma 1.2.3. Assume L_BDP(α⁻¹)≠0; for the displayed near-identity formulas take α≡1 modulo p^m with m sufficiently large.
 
 ([bcgs](#references), §1.2.2 and Lemma 1.2.5; PDF pp.12; [wuthrich](#references), Theorem 4, published p.384 (PDF p.4), proof pp.386–387.)
 
-*Needs:* [Anticyclotomic Heegner class](#86-anticyclotomic-heegner-class); KatoEulerSystems §§6.6, 7.4, 7.7 Elliptic lattice, ordinary divisibility and control; GrossZagierAndArithmeticHeights §9.10 Compatibility with isogenies, differentials and characters; [Crystalline characters near the identity](#814-crystalline-characters-near-the-identity).
+*Needs:* [Anticyclotomic Heegner class](#86-anticyclotomic-heegner-class); KatoEulerSystems §§6.6, 7.4, 7.7 Elliptic lattice, ordinary divisibility and control; GrossZagierAndArithmeticHeights §9.10 Compatibility with isogenies, differentials and characters; [Crystalline characters near the identity](#814-crystalline-characters-near-the-identity); SelmerIwasawaCohomology §§2.6, 4.12 saturation and finite/ordinary lattice comparison. Rank one and nonzero localization are hypotheses of this transport comparison.
 
 ### 8.17 Tamagawa factors near the identity
 
@@ -1800,19 +1826,35 @@ Use §8.33 with characters approaching augmentation and an error constant indepe
 
 ### 8.35 Near-trivial logarithm index formula
 
-With E_• and crystalline α as in BCGS Lemma 1.2.3 sufficiently close to1, L_BDP(α⁻¹)≠0 and κ_1^•(α)≠0, let t_α=length_(ℤ_p^ur)(ℤ_p^ur/L_BDP(α⁻¹)), q_•=#H⁰(ℚ_p,E_•[p∞]), I_•=#(S_α/ℤ_pκ_1^•(α)), and C_•=#coker(loc_v) modulo torsion. Then p^tα q_•=I_•C_•. Use the source’s coefficient extension and square-root BDP normalization.
+For E=E_• or E₀ and crystalline α as in BCGS Lemma 1.2.3 sufficiently close to 1, put A=E[p∞], with the ordinary exact sequence 0→A⁺→A→A⁻→0. Distinguish h_E=#H⁰(ℚ_p,A) from b_E=#H⁰(ℚ_p,A⁻)=#Ẽ(𝔽_p)[p∞]. For these sufficiently small twists the corresponding invariant cardinalities are unchanged. In particular b_E is the p-part of 1−α_p, while h_E need not equal b_E.
+
+Write L_α⁺=H¹(K_v,T_α⁺)/tors and L_α^sat=H¹_ord(K_v,T_α)/H¹(K_v,T_α)_tors, where the ordinary condition is the inverse image of the rational ordinary subspace. The coefficient inclusion induces j_α:L_α⁺→L_α^sat. Prove it is injective with finite cokernel of cardinality s_E,α. The connecting map ∂_α:H⁰(K_v,A_α⁻)→H¹(K_v,A_α⁺), the torsion of H¹(K_v,T_α) and local duality give h_E s_E,α=b_E. Here H⁰(K_v,A_α⁺)=0: its residual inertia character is the nontrivial cyclotomic character at odd p. Before quotienting by full local torsion the ordinary-lattice quotient by the image of H¹(K_v,T_α⁺) has order b_E; after quotienting it has order s_E,α=b_E/h_E. These are integral lattices in the same rational line, rather than an integral identification.
+
+Let t_α=length_(ℤ_p^ur)(ℤ_p^ur/L_BDP(α⁻¹)), I_E=#(S_α/ℤ_pκ₁^E(α)), and C_E,α=#coker(S_α→L_α^sat). The cohomological specialization map sp_α:H¹(K_v,T⁺⊗Λ)⊗_(Λ,α)ℤ_p→L_α⁺ has cokernel H²(K_v,T⁺⊗Λ)[γ−α(γ)], of order b_E by local duality. Use the integral family logarithm ℒ:H¹(K_v,T⁺⊗Λ)→Λ^ur, whose unramified scalar extension is injective with finite length cokernel, and ℒ(loc_vκ∞)=L_BDP up to a unit on the source-normalized lattice. With L_BDP(α⁻¹)≠0, prove [L_α⁺:ℤ_p loc_vκ₁^E(α)]=p^tα b_E, and consequently I_E C_E,α=p^tα b_E s_E,α. All equalities use the prescribed coefficient extension and square-root BDP periods; no logarithm on the saturated lattice is inferred by rational identification. Section 8.33 supplies rank one, and the logarithm supplies nonzero localization before applying the étale transport comparison of §8.16.
+
+The required API for these arithmetic local comparisons is:
+
+- The map j_α has the source and target just specified; its cokernel and the image of ∂_α have order s_E,α, with h_E s_E,α=b_E.
+- The localized bottom lies in j_α(L_α⁺), and its index in L_α^sat is s_E,α times its positive-lattice index.
+- For the fixed étale isogeny E₀→E_•, the positive lattices and localized source classes agree, so I_•C_•,α/s_•,α=I₀C₀,α/s₀,α. The saturated lattice factors themselves need not agree.
+
+**Checks.**
+
+- For E:y²=x³+8x+2 at p=5 the five reduced points are O,(1,±1),(2,±1), so a₅=1 and b_E=5. The point (1,6) modulo 25 has 2P=(7,1), 3P=(17,24), 4P=(11,14)≠−P=(1,19). Since [5]E₁⊂E₂ and E₁ is torsion-free, no nonzero reduction lifts to 5-torsion; thus h_E=1 and s_E,α=5 for sufficiently small α. This excludes identifying full torsion with quotient invariants.
+- For E:y²=x³+x at p=5, the reduced points are O,(0,0),(2,0),(3,0), so a₅=2 and #Ẽ(𝔽₅)=4 gives b_E=h_E=s_E,α=1. All three local corrections have valuation zero.
+- In rank-one lattices take j:ℤ₅→ℤ₅ to be multiplication by 5, locκ=5 in its source and loc(S)=5ℤ₅ in its target. Then I_E=5, C_E,α=5 and [L_α^sat:locκ]=25=5·5. Replacing j by an integral isomorphism loses a factor 5.
 
 This target also assumes E(K)[p]=0. p splits as v v̄ in K. α is crystalline at both primes above p and comes from a Hecke character of infinity type (n,−n), with n≥0 and n divisible by p−1, as in BCGS Theorem 1.2.1 and Lemma 1.2.3. Assume L_BDP(α⁻¹)≠0; for the displayed near-identity formulas take α≡1 modulo p^m with m sufficiently large.
 
-([bcgs](#references), Lemma 1.2.3; PDF pp.11–12.)
+([bcgs](#references), Lemma 1.2.3, its specialization sequence and equations (1.7)–(1.8), Lemma 1.2.5; PDF pp.11–12; [cs](#references), Lemma 3.3.3 and its coefficient exact sequences, PDF p.16. The local-duality and saturation factors are evaluated on their separate lattices above.)
 
-*Needs:* [Uniform arithmetic Kolyvagin error bound](#833-uniform-arithmetic-kolyvagin-error-bound); [Nonzero bottom classes near the identity](#826-nonzero-bottom-classes-near-the-identity); [Optimal and distinguished lattice comparison](#816-optimal-and-distinguished-lattice-comparison); GrossZagierAndArithmeticHeights §9.20 Bloch–Kato logarithm of the Heegner Kummer class; gap:integral-family-logarithm; PadicHodgeRegulators §§1.3, 1.9–1.10 Bloch–Kato logarithms and §§8.17–8.22 Perrin–Riou regulators; SelmerIwasawaCohomology §3.6 Semilocal cohomology and descent of local classes; [Crystalline characters near the identity](#814-crystalline-characters-near-the-identity).
+*Needs:* [Uniform arithmetic Kolyvagin error bound](#833-uniform-arithmetic-kolyvagin-error-bound); [Nonzero bottom classes near the identity](#826-nonzero-bottom-classes-near-the-identity); [Optimal and distinguished lattice comparison](#816-optimal-and-distinguished-lattice-comparison); GrossZagierAndArithmeticHeights §9.20 Bloch–Kato logarithm of the Heegner Kummer class; gap:integral-family-logarithm; PadicHodgeRegulators §§1.3, 1.9–1.10 Bloch–Kato logarithms and §§8.17–8.22 Perrin–Riou regulators; SelmerIwasawaCohomology §3.6 Semilocal cohomology and descent of local classes, §§2.6, 4.12 saturation and finite/ordinary comparison; ArithmeticGaloisDuality R02.4 local Tate duality; [Crystalline characters near the identity](#814-crystalline-characters-near-the-identity).
 
 ### 8.36 Twisted anticyclotomic control formula
 
-For m≫0, crystalline α=α_m and L_BDP(α⁻¹)≠0, prove that the strict-at-v, unrestricted-at-v̄ Greenberg dual is Λ-torsion. Let F_E generate its characteristic ideal, q_E=#H⁰(ℚ_p,E[p∞]), C_α the finite cokernel cardinality of localization from S_α to H¹(K_v,Fil⁺_vT_α)/tors, and c_w^(p)(α⁻¹)=#H¹_ur(K_w,W_α⁻¹). With Sha(W_α⁻¹/K)=H¹_Ford(K,W_α⁻¹)/H¹_Ford(K,W_α⁻¹)_div, prove finiteness of these factors and the identity #(ℤ_p/F_E(α⁻¹))=#Sha(W_α⁻¹/K)·C_α²·∏_(w|N)c_w^(p)(α⁻¹)·q_E². The finite Sha is the source’s propagated Selmer quotient. The formula is integral and uses all K-primes over N and the finite/torsion local cokernel.
+For m≫0, crystalline α=α_m and L_BDP(α⁻¹)≠0, prove that the strict-at-v, unrestricted-at-v̄ Greenberg dual is Λ-torsion. Let F_E generate its characteristic ideal, h_E=#H⁰(ℚ_p,E[p∞]), C_α=C_E,α the finite cokernel cardinality of S_α→L_α^sat as in §8.35, and c_w^(p)(α⁻¹)=#H¹_ur(K_w,W_α⁻¹). With Sha(W_α⁻¹/K)=H¹_Ford(K,W_α⁻¹)/H¹_Ford(K,W_α⁻¹)_div, prove finiteness of these factors and the identity #(ℤ_p/F_E(α⁻¹))=#Sha(W_α⁻¹/K)·C_α²·∏_(w|N)c_w^(p)(α⁻¹)·h_E². The finite Sha is the source’s propagated Selmer quotient. The formula is integral and uses all K-primes over N and localization into the saturated lattice modulo full local torsion.
 
-Prove this arithmetic evaluation from the supplied condition-change and specialization sequences. Nonvanishing of the specialized Heegner bottom and §8.33 give ordinary Selmer corank one; complex conjugation supplies the inverse twist. Local Tate duality gives local ordinary corank one, and the integral family logarithm of §8.35 makes localization nonzero on the compact rank-one lattice. Its discrete divisible map is therefore onto. The condition-change sequence then gives #H¹_FGr(K,W_α⁻¹)=#Sha(W_α⁻¹/K)·C_α². Evaluate the specialization errors: the bad-prime terms give ∏_(w|N)c_w^(p)(α⁻¹), and the two ordinary H⁰ errors give q_E². Twisting the Iwasawa action identifies the resulting Euler characteristic with #(ℤ_p/F_E(α⁻¹)). These are targets here for the actual Heegner local conditions; the generic error sequences alone do not evaluate these factors (BCGS Theorem 1.2.7, proof, pp.13–14).
+Prove this arithmetic evaluation from the supplied condition-change and specialization sequences. Nonvanishing of the specialized Heegner bottom and §8.33 give ordinary Selmer corank one; complex conjugation supplies the inverse twist. Local Tate duality gives local ordinary corank one, and the integral family logarithm of §8.35 makes localization nonzero on the compact rank-one lattice. Its discrete divisible map is therefore onto. The condition-change sequence then gives #H¹_FGr(K,W_α⁻¹)=#Sha(W_α⁻¹/K)·C_α². Evaluate the specialization errors: the bad-prime terms give ∏_(w|N)c_w^(p)(α⁻¹), and the full-representation H⁰ errors at v and v̄ give h_E². Retain these full-torsion terms separately from the positive-lattice specialization factor b_E and saturation index s_E,α of §8.35. Twisting the Iwasawa action identifies the resulting Euler characteristic with #(ℤ_p/F_E(α⁻¹)). These are targets here for the actual Heegner local conditions; the generic error sequences alone do not evaluate these factors (BCGS Theorem 1.2.7, proof and equations (1.12)–(1.13), pp.13–14).
 
 This target also assumes E(K)[p]=0. p splits as v v̄ in K. α is crystalline at both primes above p and comes from a Hecke character of infinity type (n,−n), with n≥0 and n divisible by p−1, as in BCGS Theorem 1.2.1 and Lemma 1.2.3. Assume L_BDP(α⁻¹)≠0; for the displayed near-identity formulas take α≡1 modulo p^m with m sufficiently large.
 
@@ -1822,17 +1864,24 @@ This target also assumes E(K)[p]=0. p splits as v v̄ in K. α is crystalline at
 
 **Checks.**
 
-- With p=5, #Sha=5², C_α=5, two rational bad primes split in K with local p-parts 5 and 25 at each of their two K-primes, and q_E=5, the formula gives valuation 2+2+2(1+2)+2=12, hence cardinality 5¹². Counting each rational bad prime only once gives valuation 9 and loses three powers of 5.
+- With p=5, #Sha=5², C_α=5, two rational bad primes split in K with local p-parts 5 and 25 at each of their two K-primes, and h_E=5, the formula gives valuation 2+2+2(1+2)+2=12, hence cardinality 5¹². Counting each rational bad prime only once gives valuation 9 and loses three powers of 5.
 - If Sha, the cokernel and all local factors are trivial, the cardinality is 1; finite groups of order 1 contribute length zero, not one.
 - Changing C_α from 1 to 5 multiplies the right side by 25. Replacing the square by a single cokernel factor would multiply it by only 5.
+- With h_E=1, b_E=s_E,α=5, t_α=2, C_α=5, #Sha=25 and trivial bad-prime product, control gives p^(2tα)=5⁴=25·25. The logarithm formula gives I_E=5³ because I_E·5=5²·5·5, and the index square is 5⁶=25·5⁴. Replacing the full H⁰ control factor by b_E² would instead give 5⁶ for p^(2tα).
 
 ### 8.37 Integral main conjecture and twisted index square
 
-Assume the integral anticyclotomic Greenberg main conjecture in Λ^ur with the BCGS square-root convention. For crystalline α_m sufficiently close to1 with L_BDP(α_m⁻¹)≠0, the p-optimal curve satisfies I₀(α)²=#Sha(W_α⁻¹/K)·∏_(w|N)c_w^(p)(α⁻¹)·q₀⁴. A rational main conjecture supplies only a bounded p-power error; it does not supply this exact equality.
+Assume the integral anticyclotomic Greenberg main conjecture in Λ^ur with the BCGS square-root convention. For crystalline α_m sufficiently close to 1 with L_BDP(α_m⁻¹)≠0, the p-optimal curve satisfies I₀(α)²=#Sha(W_α⁻¹/K)·∏_(w|N)c_w^(p)(α⁻¹)·b₀⁴, where b₀=#Ẽ₀(𝔽_p)[p∞]. Indeed §8.35 gives I₀C₀,α=p^tα b₀s₀,α, while §8.36 and the integral conjecture give p^(2tα)=#Sha·C₀,α²·∏c_w^(p)·h₀². Cancel C₀,α² and use h₀s₀,α=b₀: the remaining local factor is (h₀b₀s₀,α)²=b₀⁴. A rational main conjecture supplies only a bounded p-power error; it does not supply this exact equality.
+
+**Checks.**
+
+- In the anomalous example of §8.35, h₀=1, b₀=s₀,α=5 gives (h₀b₀s₀,α)²=625=b₀⁴, whereas h₀⁴=1. This is the split local factor L_p² in §§8.19, 8.40 and 8.44.
+- For local lengths v_p(h₀)=v_p(b₀)=1 and v_p(s₀,α)=0, the factor has length 2(1+1+0)=4. Equality of the two invariant cardinalities in this case does not justify it in the preceding example.
+- The split specialization scalar C_p of §8.32 has valuation 2v_p(b₀). If M₀(α)=M₀+2v_p(b₀) and M∞(α)=M∞+2v_p(b₀), its contributions cancel in 2(M₀(α)−M∞(α)). Combining the index square with §8.41 then gives M∞=Σ_(ℓ|N)v_p(c_ℓ), as required by §8.43.
 
 This target also assumes E(K)[p]=0. p splits as v v̄ in K. Integral anticyclotomic Greenberg main conjecture and the p-optimal lattice. α is crystalline at both primes above p and comes from a Hecke character of infinity type (n,−n), with n≥0 and n divisible by p−1, as in BCGS Theorem 1.2.1 and Lemma 1.2.3. Assume L_BDP(α⁻¹)≠0; for the displayed near-identity formulas take α≡1 modulo p^m with m sufficiently large.
 
-([bcgs](#references), Corollary 1.2.12; Remark 1.2.11; PDF pp.14.)
+([bcgs](#references), Corollary 1.2.12 and Remark 1.2.11, PDF p.14, with the separate local-duality and saturation evaluations of §§8.35–8.36; [cs](#references), Proposition 3.3.2, Lemma 3.3.3 and Corollary 3.3.4, PDF pp.14–16.)
 
 *Needs:* [Near-trivial logarithm index formula](#835-near-trivial-logarithm-index-formula); [Twisted anticyclotomic control formula](#836-twisted-anticyclotomic-control-formula); [Tamagawa factors near the identity](#817-tamagawa-factors-near-the-identity); [Optimal and distinguished lattice comparison](#816-optimal-and-distinguished-lattice-comparison); ModularIwasawaMainConjectures §§0.5–0.10 The three cyclotomic formulations; [Crystalline characters near the identity](#814-crystalline-characters-near-the-identity).
 
@@ -2106,6 +2155,8 @@ The finite-system rank and Sha theorems and the anticyclotomic Heegner line supp
 Locators refer to the editions below. A preprint page is its printed PDF page, not the pagination of a later journal edition. BCGS locators use arXiv:2312.09301v2; the author collation has the same cited numbering. Howard locators use arXiv:1202.6340v1 unless published pagination is explicitly given. Castella–Sano is cited as a preprint. For the classical square-index theorem, the theorem statement and its original proof source are distinguished.
 
 - **gross**: Benedict H. Gross, *[Kolyvagin’s work on modular elliptic curves](https://www.wstein.org/papers/bib/gross-kolyvagins_work_on_modular_elliptic_curves.pdf)*. L-functions and Arithmetic, LMS Lecture Note Series 153 (1991), pp.235–256; scanned published article.
+
+- **matar-nekovar**: Ahmed Matar; Jan Nekovář, *[Kolyvagin’s result on the vanishing of Sha(E/K)[p∞] and its consequences for anticyclotomic Iwasawa theory](https://arxiv.org/pdf/1808.09544v2)*. arXiv:1808.09544v2, 31 January 2021; locators use this corrected version, §§0.4–0.5 and Propositions 6.4–6.5.
 
 - **howard**: Benjamin Howard, *[The Heegner point Kolyvagin system](https://arxiv.org/pdf/1202.6340v1)*. arXiv:1202.6340v1, 28 February 2012; Compositio Math.140 (2004),1439–1472.
 

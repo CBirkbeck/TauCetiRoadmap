@@ -23,7 +23,8 @@ statable. None of the following headlines is statable at these pins with only si
 * Sections 8.21–8.22 and 8.24: indefinite and Iwasawa nonvanishing need the geometric
   CM classes, ring-class tower and actual ordinary universal-norm family.
 * Sections 8.35–8.37: the logarithm, control and twisted index-square formulas need the
-  integral family regulator, normalized BDP function and propagated finite Sha groups.
+  integral family regulator, its positive and saturated ordinary local lattices and comparison,
+  normalized BDP function and propagated finite Sha groups.
 * Sections 8.39–8.40: the determinant/characteristic equivalence and specialized lattice
   formula need the arithmetic Selmer perfect complex and its canonical determinant comparison.
 * Sections 8.30–8.34 and 8.41: Howard's divisibility, the weak-torsion bound
