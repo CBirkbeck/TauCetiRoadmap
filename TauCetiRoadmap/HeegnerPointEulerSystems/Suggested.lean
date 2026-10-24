@@ -12,7 +12,8 @@ statable. None of the following headlines is statable at these pins with only si
   and its arithmetic local conditions.
 * Sections 6.7–6.11: Zhang's level-changing congruence and rank lowering, the auxiliary
   rank-zero formula, Jochnowitz criterion and Ribet–Takahashi identity need matched integral
-  quaternionic forms, their eigenfunction pairings and the residual Heegner classes.
+  quaternionic forms, their eigenfunction pairings, the coefficient-DVR Kummer classes and
+  the common residual Heegner classes of section 4.10.
 * Sections 6.18–6.19: the triangular Selmer basis and Zhang's indivisibility theorem need
   the specified residual Heegner system and its Selmer representation.
 * Sections 7.11–7.13: full elliptic and RM Sha finiteness and the uniform classical
@@ -25,12 +26,13 @@ statable. None of the following headlines is statable at these pins with only si
   integral family regulator, normalized BDP function and propagated finite Sha groups.
 * Sections 8.31–8.32: the determinant/characteristic equivalence and specialized lattice
   formula need the arithmetic Selmer perfect complex and its canonical determinant comparison.
-* Sections 8.36–8.40: Howard's divisibility, the weak-torsion bound, uniform errors and
-  exact paired length need the actual Lambda-adic Heegner system and its local conditions.
+* Sections 8.36–8.40, including section 8.39a: Howard's divisibility, the weak-torsion bound
+  at the augmentation prime, uniform errors and exact paired length need the actual Lambda-adic Heegner system and its local conditions.
 * Sections 8.41–8.44: conditional finite-system nonvanishing, refined divisibility and
   the Castella–Sano equivalence need those systems and their integral main-conjecture assertions.
 * Sections 8b.6–8b.10: rational and integral Heegner/Greenberg equalities, including the
-  Eisenstein branch, need the arithmetic Iwasawa modules and integral BDP period comparison.
+  Eisenstein branch on the source-normalized families of section 8.6a, need the arithmetic
+  Iwasawa modules and integral BDP period comparison.
 * Sections 8b.11–8b.13: the split-prime nonvanishing, refined divisibility and equivalence
   applications need the preceding arithmetic systems, functions and determinant lattices.
 
