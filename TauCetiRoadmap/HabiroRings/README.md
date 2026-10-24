@@ -8,7 +8,7 @@ Taylor factors retain the full root-adjoining coefficient algebra: order four ov
 
 This roadmap owns: ordinary marked étale lifts over arbitrary quotient ideals, transport of locally nilpotent rigidity through markings, the finitely generated-ideal completed map interface and regular-principal derived universality (Layer 0); the Laurent-convention and scalar-restriction comparisons for Habiro completion, the two-term resolution of the rational localization with its homotopy-module criterion, the ordinary/derived comparison for polynomial coefficient modules, and completed coefficient base change (Layer 2, §§2.1–2.5); the spherical, spectral and light solid completion theory (§§2.6–2.12); the combinatorics of cyclotomic intersections and of the finite prime-chain index, the general descent principle for monoidal localizations and the prime-edge description of descent mapping spaces (Layer 3); the category of pairs (Layer 1) and the functoriality of the coefficient lifts along morphisms of pairs (Layer 4); the ordinary relative Habiro ring with its Taylor equalizer, untwisting criterion, completed base change, classical and number-field comparisons (Layer 5); completed scalar extension, the q−1 completion map and the transported number-field lines (Layer 6); and the distinguishing examples of Layer 7.
 
-It leaves the following constructions to named roadmaps; the explicitly listed supplier gaps are hypotheses of their consumers:
+It leaves the following constructions to named roadmaps, whose target interfaces are imported with their stated hypotheses:
 
 - **HabiroCohomologyFoundations Layer 0.** §0.1 owns Habiro-complete modules over A[q] for every commutative ring A, the reflection L_H with its two limit formulas, the completed symmetric monoidal tensor, and cyclotomic detection of zero objects, equivalences and individual homotopy degrees. §0.2 owns finite cyclotomic complete descent: the closed-cover diagram, its reduction to singleton and p-primary chain data, reconstruction, mapping spaces, divisor restriction, the arithmetic fracture pieces and naturality, for modules and E∞-algebras. §0.3 owns the marked étale coefficient lifts E_m(R/A), their uniqueness, Frobenius overlap equivalences, transitions lifting q-Witt Frobenius, and the static limit E(R/A) with its h-completion R⟦h⟧. HabiroRings consumes these interfaces in Layers 2–5; it builds no second Habiro-completion functor, cyclotomic descent equivalence or specialized coefficient lift.
 - **HabiroCohomologyFoundations.** The cohomological identification of its étale Habiro–Hodge object belongs to that roadmap; no target or proof here consumes it.
@@ -16,7 +16,7 @@ It leaves the following constructions to named roadmaps; the explicitly listed s
 - **HabiroCyclotomicCompletions Layers 1–5.** Polynomial Habiro topology, q-factorials, Taylor substitution, classical injectivity, root adjunction and ordinary polynomial-module completion. Its §§4.1 and 5.2 supply the integral cyclotomic intersections and comaximal splitting used by HabiroCohomologyFoundations §§0.2–0.3; ordinary Taylor maps are consumed here, in Layer 5. The enhanced reflection belongs to HabiroCohomologyFoundations §0.1, while the Laurent and ordinary/derived comparisons belong here in §§2.1 and 2.4. Its §1.1 supplies `qFactorial_pochhammer`; Gaussian polynomials and their product laws belong to **ArithmeticStatisticsPartIV §3.2**; the integral denominator-cleared product and factorial divisibility are imported from **QSeriesPartitionsAndMockModularForms §3.1**, the integral Gaussian product identity.
 - **EnhancedDerivedSheaves:E0, E1, E2:towers, E3, E5:abstract and E5:spectra-comparison**, **BordismFormalGroups §F6.5**, **GeneralizedCohomology §§G2.1–G2.7**, and **DerivedModuleAlgebra §§1.1–1.5**: enhanced derived categories, coherent diagrams and towers, symmetric monoidal localizations, algebra objects, the spectral module comparison and principal derived completion. Mathlib's ordinary `DerivedCategory` and `LightCondMod` are useful underlying categories; their existing definitions do not supply these enhanced or solid spectral structures.
 - **SolidAnalyticRings §§1.1–2.4, 3.1–3.4, 4.1–4.2, 5.1–5.4 and 6.1–6.3.** Light solid spectral foundations, product and split-tower tensor, balancing, countable-limit interchange, proper profiles, spectral null families and uniformly bounded-below resolutions and realization. In particular §5.2 owns the general two-index profile theorem; §2.11 here applies it with Habiro factorial weights. These sphere-linear inputs differ from the abelian solid-module scope of **VStackSheavesAndLisseCategories §VS2.1**. The ordinary relative ring is independent of this spectral contract.
-- **HabiroNumberFields.** The number-field ring and actual K₃-indexed invertible modules, effective global descent, pairings, integral order-one condition and supported field pullbacks are the explicit supplier gaps below. Their section locators require the supplier contract; local rank one does not determine a global invertible module.
+- **HabiroNumberFields §§2.1–2.4, 3.8–3.11, 3.14 and 3.16.** The compatible primitive-root datum, its existence witness and coherent order transitions; the arithmetic full coefficient algebras, Frobenius-glued ring and Taylor maps; the actual K₃-indexed linear equalizers, effective global descent, invertibility and pairings; integral constant evaluation; and supported field pullback. The relative twists and the two relative Taylor maps remain here in §5.2; the κ-pullback of the arithmetic lines and the first-fibre deduction remain here in Layer 6. Local rank one alone does not supply the global-line interfaces.
 
 DerivedDeRhamCohomology §1.12 owns `DerivedDeRham.completelySmoothAlgebraization`; the direct regular-principal argument of §0.6 uses module completion instead.
 
@@ -77,21 +77,21 @@ The null-sequence and solidification input is described by [MW], §4.1, 4.1, pp.
 - For the diagram F(n,k)=Hℤ when k<n and zero otherwise, with both indices natural, colim_n ∏_k F(n,k) has π₀=⊕_ℕℤ, while ∏_k colim_n F(n,k) has π₀=∏_ℕℤ. The all-one sequence belongs only to the latter; ordinary filteredness cannot replace ω₁-filteredness.
 - A constant simplicial Σᵇ𝕊 has realization Σᵇ𝕊 and the same lower bound b. Terms Σ^(−n)𝕊 admit no uniform lower bound: π_(−n)=ℤ. They do not meet the realization comparison's hypothesis.
 
-### Additional supplier contracts
+### From TauCetiRoadmap.HabiroNumberFields
 
-HabiroCohomologyFoundations §§0.1–0.3 and SolidAnalyticRings §§1.1–6.3 are direct prerequisites, with the consumed interfaces specified in their supplier sections. The additional contracts below are distinct requirements: naming a supplier does not establish them. The number-field comparison of §5.9 requires the ring contract; §§6.2 and 6.4–6.7 require the global-line contract, with the integral-evaluation contract additionally needed in §§6.4–6.7, and §6.7 requires arithmetic naturality. The arithmetic conclusions require all four contracts, independently of the solid spectral inputs. Local p-adic rank one supplies neither effective global descent nor a section whose integral order-one value is 1.
+Import **HabiroNumberFields §§2.1–2.4** for the compatible primitive roots, their explicit complex witness and coherent CRT order transitions, the full arithmetic cyclotomic coefficient algebras, completed coefficient Frobenius, convergent re-expansion and the Frobenius-glued ordinary ring with its Taylor and evaluation maps. For R=𝒪_F[1/Δ], the ring comparison uses Δ>0 divisible by disc(F), without requiring 6∣Δ. The root datum of §2.1 is independent of F and Δ and is also used for the general relative coefficients of §5.2.
 
-What QWittVectors must provide (gap:completed-frobenius-base-naturality): For a Λ-map between perfectly covered A and A′ and a compatible map from étale R/A to étale R′/A′, prove that the completed coefficient Frobenius maps commute with the induced prime-completed map, including the linearization coherences.
+Import **HabiroNumberFields §§3.8–3.11** for the actual K₃(F)-indexed linear equalizers, their scalar action and zero-degree identification, effective global descent to finite projective rank-one modules, and coherent multiplication equivalences, inverse pairings and Picard character. The line targets retain Δ>0 divisible by 6 and disc(F), and their effective-descent and tensor-bijectivity requirements. A local free module at every prime does not establish these global conclusions. This roadmap transports those modules along κ; it does not reconstruct them.
 
-What HabiroCyclotomicCompletions must provide (gap:cyclotomic-prime-ideal): For m>1 prove that the ideal of ℤ[q] generated by the q-integers [p] at q^(m/p), for primes p dividing m, equals (Φ_m); at m=1 retain the separate empty ideal (0).
+Import **HabiroNumberFields §3.14** for integral constant evaluation when gcd(m,Δ)=1, compatible with zero, sums, scalars and tensor multiplication. At m=1 the associated root line is canonically R. Together with §3.11's finite inverse-pairing sum, this supplies the surjective order-one evaluator proved in §6.4; a chosen global generator or a separate integral-jet theorem is not an input. No integrality of higher Taylor coefficients is assumed.
 
-What HabiroNumberFields must provide (gap:number-field-ring): For R=𝒪_F[1/Δ] with Δ>0 divisible by disc(F), supply the ordinary GSWZ ring with its full cyclotomic coefficient algebras, Taylor maps and completed Frobenius gluing.
+Import **HabiroNumberFields §3.16** for field pullback and scalar equivalence over the Habiro ring, for an embedding F→E and one positive Δ divisible by 6 and both discriminants. Retain its effective base-change descent and Chern-torsor and regulator naturality requirements. The actual maps commute with evaluation, tensor multiplication, identities and composition. These arithmetic imports are independent of the solid spectral inputs. They are roadmap targets with the stated hypotheses, not declarations implemented at the pins.
 
-What HabiroNumberFields must provide (gap:number-field-lines): For Δ>0 divisible by 6 and disc(F), supply actual K₃(F)-indexed global invertible modules over the GSWZ ring, effective descent, unit and inverse pairings and coherent multiplication equivalences.
+**Checks.**
 
-What HabiroNumberFields must provide (gap:integral-linear-jet): For the global indexed lines with Δ divisible by 6 and disc(F), supply their integral order-one evaluation over 𝒪_F[1/Δ] and a section evaluating to 1, compatible with the unit and tensor pairings.
-
-What HabiroNumberFields must provide (gap:arithmetic-line-naturality): For F→E and a common positive Δ divisible by 6 and both discriminants, supply scalar equivalences of the actual indexed global lines respecting restriction on K₃, pairings, Taylor maps and integral order-one evaluation, with identity and composition coherences.
+- For F=ℚ and Δ=1, the ring import is admissible but the line import is not; Δ=6 meets both sets of restrictions. At m=1, gcd(1,Δ)=1 and the root torsor is y=1, so constant evaluation lands in R itself.
+- For F=ℚ and Δ=6, a unit-line inverse pairing can be represented by two summands with evaluated products 35 and −34. Their sum is 1 although neither 35 nor −34 is a unit in ℤ[1/6]; a pure-tensor inverse is not required.
+- For ℚ→ℚ(i) and common Δ=12, coefficient completion at 5 is the diagonal ℤ₅→ℤ₅×ℤ₅, and the Habiro scalar equivalence retains both factors. A tensor over the coefficient ring would require an additional scalar action not supplied here.
 
 ### From TauCetiRoadmap.QWittVectors
 
@@ -99,15 +99,16 @@ Import QWittVectors §§1.1–1.6 for big Witt rings, truncation sets, ghosts, F
 
 Use §§3.1–3.7 for absolute q-Witt rings and their F,V and ghost laws; §§4.1–4.6 for relative q-Witt rings, relative ghosts, base change and perfect-cover comparison; §§5.1–5.3 for étale preservation, ghost pushouts and completion. Relative ghosts at d∣m land in R^(d)[ζ_d], with the right-hand A-action, and relative Frobenius is A[q]-linear. Absolute q-Witt rings over a nonperfect Λ-ring are distinct from the relative self-ring. These are exactly the degree-zero interfaces consumed in Layers 4–5 ([W], §§2.1–2.6, pp.8–35).
 
-Use QWittVectors §§6.1–6.3 for completed coefficient Frobenius and q-fixed cyclotomic overlaps. The base A is perfectly covered and R/A is étale. At a prime p, φ_p is defined on the p-completion of R, is ψ_p-semilinear, reduces to pth powers and has invertible completed linearization. The supplied naturality is for étale A-algebra maps; compatibility across different Λ-bases is the additional contract gap:completed-frobenius-base-naturality. No Frobenius existence on arbitrary torsion bases is assumed ([Q], 2.7, pp.15–16).
+Use QWittVectors §§6.1–6.3 for completed coefficient Frobenius and q-fixed cyclotomic overlaps. The base A is perfectly covered and R/A is étale. At a prime p, φ_p is defined on the p-completion of R, is ψ_p-semilinear, reduces to pth powers and has invertible completed linearization. Section 6.1 supplies naturality for every compatible map of pairs, including nonflat Λ-base maps: `ghat_p phi_(p,R/A) = phi_(p,R'/A') ghat_p`, with the corresponding completed linearization square, identity, composition and iteration laws. Sections 6.2–6.3 supply the same compatibilities for cyclotomic overlaps and ghosts. No Frobenius existence on arbitrary torsion bases is assumed ([Q], 2.7, pp.15–16).
 
-The cyclotomic prime-generator identity is required through QWittVectors' cyclotomic-contract supplier requirement, owned by HabiroCyclotomicCompletions §4.1: for m>1, the ideal in ℤ[q] generated by [p] at q^(m/p), for primes p∣m, is (Φ_m). At m=1 the prime-generated ideal is zero and Φ₁=q−1 is used separately ([W], Lemma 2.2, pp.8–9, with this necessary boundary restriction).
+Import the cyclotomic prime-generator identity from QWittVectors §3.2a, derived there from the integral intersections and comaximality of HabiroCyclotomicCompletions §4.1: for m>1, the ideal in ℤ[q] generated by [p] at q^(m/p), for primes p∣m, is (Φ_m). At m=1 the prime-generated ideal is zero and Φ₁=q−1 is used separately ([W], Lemma 2.2, pp.8–9, with this necessary boundary restriction).
 
 **Checks.**
 
 - At m=1 the empty ideal is (0) ≠ (q−1). At m=2 its single generator is 1+q=Φ₂; at m=6 the generators a=1+q³ and b=1+q²+q⁴ satisfy b−qa=Φ₆=q²−q+1, with a=(q+1)Φ₆ and b=(q²+q+1)Φ₆. Thus the positive-index convention alone does not suffice for the prime-generator identity.
 - For toric A=ℤ[T], the absolute comparison at m=2 has image ℤ[T²,q]+(1+q)ℤ[T,q] in ℤ[T,q]/(q²−1), whereas the relative self-ring is the entire A[q]/(q²−1). Evaluation at q=−1 excludes T from the absolute image.
 - For A=ℤ, R=ℤ[i][1/2], φ₃(i)=−i and φ₅(i)=i. These are completed coefficient maps; they do not equip every étale R with a global Λ-structure.
+- For the nonflat Λ-map ℤ[t]→ℤ, t↦0, on self-pairs at p=2, both completed-Frobenius paths send t+2 to 2, and both linearization paths send (t+2)⊗(t+3) to 6. Literal squaring would send 2 to 4, which differs even modulo 4; the supplied lift preserves the specified base action. Identity maps retain the tensor, and composing with ℤ→ℤ[1/3] still gives 6 at p=2 and zero completed targets at p=3.
 
 ### From TauCetiRoadmap.HabiroCohomologyFoundations
 
@@ -351,11 +352,11 @@ The relative constructions take a perfectly covered Λ-ring with an étale algeb
 
 ### 1.1 The category of relative inputs
 
-Objects are perfectly covered Λ-rings A with an étale A-algebra R. An arrow consists of a Λ-map f:A→A′ and a ring map g:R→R′ satisfying `g∘ι_A=ι_{A′}∘f.` Identity and composition are those of ring maps, with the compatibility checked on the base. Twisted base change and prime completion are functorial for these arrows; completed Frobenius compatibility additionally requires gap:completed-frobenius-base-naturality.
+Objects are perfectly covered Λ-rings A with an étale A-algebra R. An arrow consists of a Λ-map f:A→A′ and a ring map g:R→R′ satisfying `g∘ι_A=ι_{A′}∘f.` Identity and composition are those of ring maps, with the compatibility checked on the base. Twisted base change and prime completion are functorial for these arrows; completed Frobenius compatibility, including the linearization squares, is imported from QWittVectors §§6.1–6.3.
 
 This category is the domain of the stage functoriality of Layer 4 and of every construction after it. The arrow R→R′ may be more general than the base-change map R→R⊗_A A′; the stronger base-change formula of §5.6 assumes that precise tensor-product target. No global Λ-structure on R or R′ is part of an object.
 
-*Needs:* [Adams data][r9]; [perfect covers][r19]; `Algebra.Etale`; `Algebra.Etale.baseChange`. Completed-Frobenius compatibility across bases requires gap:completed-frobenius-base-naturality; it is not part of the category definition.
+*Needs:* [Adams data][r9]; [perfect covers][r19]; `Algebra.Etale`; `Algebra.Etale.baseChange`. QWittVectors §§6.1–6.3 supply completed-Frobenius compatibility across bases; it is a theorem about these arrows, not extra arrow data.
 
 See [Q], §2, opening paragraph, p.13; Appendix A, Theorem A.1, p.69.
 
@@ -866,7 +867,7 @@ For a pair (A,R) and m≥1 write `H_{R/A,m}` for E_m(R/A), with its marking by q
 
 For R=A, qW_m(A/A)=A[q]/f_m (QWittVectors §4.3), and `A[q]^∧_{f_m},` with its identity marking, is a marked complete étale lift; uniqueness identifies it with `H_{A/A,m}.` Isomorphic pairs give equivalent stages. The stage map of a pair morphism is not obtained by restricting q-Witt coordinates, and need not be the identity on cyclotomic reductions when g is a nontrivial automorphism.
 
-*Needs:* [§1.1][r23]; gap:completed-frobenius-base-naturality; [Relative q-Witt][r24]; [Étale q-Witt pushouts][r25]; HabiroCohomologyFoundations §0.3 (the marked finite lifts, marked uniqueness, the cyclotomic ghost comparisons, the Frobenius transitions); HabiroCohomologyFoundations §0.2 (coefficient naturality); DerivedModuleAlgebra §§1.1–1.5.
+*Needs:* [§1.1][r23]; QWittVectors §§6.1–6.3 (completed Frobenius naturality for maps of pairs); [Relative q-Witt][r24]; [Étale q-Witt pushouts][r25]; HabiroCohomologyFoundations §0.3 (the marked finite lifts, marked uniqueness, the cyclotomic ghost comparisons, the Frobenius transitions); HabiroCohomologyFoundations §0.2 (coefficient naturality); DerivedModuleAlgebra §§1.1–1.5.
 
 See [Q], §2.2, 2.7 and Remark 2.8, pp.15–16; Theorem 2.9, pp.16–17; [W], §2.5, Lemma 2.46, pp.31–32.
 
@@ -932,26 +933,23 @@ The API comprises:
 
 ### 5.2 Compatible roots and the two Taylor maps
 
-Choose primitive roots ζ_m∈ℂ with `ζ_{mn}=ζ_mζ_n` for coprime m,n and `ζ_{p^a}=ζ_{p^{a+1}}ᵖ.` One such system is `ζ_m=∏_{p∣m}exp(2πi/p^{v_p(m)}).` Put C_m=R^(m)⊗_ℤℤ[ζ_m], retaining this tensor algebra in full, and T_m=C_m[[q−ζ_m]]. Put `T_{p,m}=(R̂_p⊗_{A,ψᵐ}A)̂_p[ζ_{pm}][[q−ζ_m]].`
+Use the compatible primitive roots ζ_m∈ℂ of HabiroNumberFields §2.1, with ζ₁=1, `ζ_{mn}=ζ_mζ_n` for coprime m,n and `ζ_{p^a}=ζ_{p^{a+1}}ᵖ,` together with that section’s existence witness and coherent CRT transition maps. Put C_m=R^(m)⊗_ℤℤ[ζ_m], retaining this tensor algebra in full, and T_m=C_m[[q−ζ_m]]. Put `T_{p,m}=(R̂_p⊗_{A,ψᵐ}A)̂_p[ζ_{pm}][[q−ζ_m]].`
 
 The map `can_{p,m}:T_m→T_{p,m}` extends coefficients and keeps the variable q−ζ_m. The map `φ_{p,m}:T_{pm}→T_{p,m}` first applies completed linearized Frobenius to the coefficients and then substitutes `q−ζ_{pm}=(q−ζ_m)+(ζ_m−ζ_{pm}).` The difference is p-adically topologically nilpotent, making this re-expansion converge. Taylor expansion τ_m sends q to ζ_m+X_m and its constant coefficient is evaluation at ζ_m.
 
 Changing a compatible root system gives canonical isomorphisms between these presentations. In the abstract algebra R^(m)[z]/Φ_m(z), with a separate formal power-series variable, the relabeling can be represented by the identity. On a fixed realized coefficient algebra, the actual Galois action is generally nontrivial: it sends the chosen root to its new conjugate. Independence of presentations must not be confused with triviality of that action. The usual roots exp(2πi/m) fail the compatibility at orders 3 and 6, where the required difference is a unit.
 
-*Needs:* [completed Frobenius][r27]; HabiroCyclotomicCompletions §3.3; HabiroCyclotomicCompletions §3.1; `IsPrimitiveRoot`; `Polynomial.cyclotomic`; `PowerSeries`; `PadicInt`.
+*Needs:* [completed Frobenius][r27]; HabiroNumberFields §2.1 (the compatible-root datum and coherent order transitions); HabiroCyclotomicCompletions §3.3; HabiroCyclotomicCompletions §3.1; `IsPrimitiveRoot`; `Polynomial.cyclotomic`; `PowerSeries`; `PadicInt`.
 
 See [Q], §2.2, 2.11, p.17.
 
 The API comprises:
 
-- A family `(ζ_m)_{m ≥ 1}` of primitive m-th roots of unity in ℂ with `ζ_{mn}` = ζ_mζ_n for coprime m, n and `ζ_{p^α}` = `ζ_{p^{α+1}}^p.`
-- ζ_m := ∏_p `e^{2πi/p^{v_p(m)}}.`
 - (R `⊗_{A,ψ^m}` A)[ζ_m] := (R `⊗_{A,ψ^m}` A) ⊗_Z Z[ζ_m] ≅ (R `⊗_{A,ψ^m}` A)[x]/Φ_m(x).
 - T_m := coeffAlgebra_m[[q − ζ_m]] and `T_{p,m}` := (R̂_p `⊗_{A,ψ^m}` `A)^∧_p[ζ_{pm}][[q` − ζ_m]].
 - `can_{p,m}:` T_m → `T_{p,m},` extension of coefficients with the variable kept.
 - `φ_{p,m}:` `T_{pm}` → `T_{p,m},` `φ_{p/A}` ⊗ id on coefficients followed by `rex_{ζ_m` − `ζ_{pm}}.`
 - τ_m: (R `⊗_{A,ψ^m}` `A)[q]^∧_{Φ_m(q)}` → T_m, q ↦ ζ_m + (q − ζ_m); its constant coefficient is evaluation at ζ_m.
-- ζ_m − `ζ_{pm}` is topologically nilpotent in the p-complete coefficient ring of `T_{p,m}.`
 - For A = R = Z, `φ_{p,m}` is HabiroCyclotomicCompletions §3.3's `rex_{ζ_m` − `ζ_{pm}}` after extension of coefficients.
 - A change of compatible roots induces isomorphisms of the full coefficient and Taylor presentations intertwining can, φ and τ. Abstractly these are relabelings of the formal cyclotomic generator; the Galois action on a fixed realized coefficient algebra is not asserted to be trivial.
 
@@ -1072,9 +1070,9 @@ The API comprises:
 
 For R=𝒪_F[1/Δ] as above and base ℤ, the relative Taylor equalizer identifies `H_{R/ℤ}` with the number-field ring H_R of GSWZ. The isomorphism κ respects each full cyclotomic coefficient algebra, root value, Taylor expansion and completed prime-edge Frobenius. At p∣Δ its p-completed terms vanish.
 
-The comparison imports the ring in the HabiroNumberFields contract with its root and gluing maps. It is a ℤ[q]-algebra comparison, not an assumed R-algebra structure obtained by inserting all constants. Constants must themselves satisfy the Frobenius gluing condition, which usually fails. This distinction is essential for transporting modules and their scalar-extension maps in Layer 6.
+The comparison imports HabiroNumberFields §§2.1–2.4’s ring with its full coefficient algebras, root, Taylor and gluing maps. It is a ℤ[q]-algebra comparison, not an assumed R-algebra structure obtained by inserting all constants. Constants must themselves satisfy the Frobenius gluing condition, which usually fails. This distinction is essential for transporting modules and their scalar-extension maps in Layer 6.
 
-*Needs:* [§5.4][r66]; [§5.2][r63]; [§5.8][r67]; [§5.7](#57-the-classical-habiro-ring); [completed Frobenius][r27]; gap:number-field-ring; HabiroCyclotomicCompletions §3.3.
+*Needs:* [§5.4][r66]; [§5.2][r63]; [§5.8][r67]; [§5.7](#57-the-classical-habiro-ring); [completed Frobenius][r27]; HabiroNumberFields §§2.1–2.4 (the arithmetic ring, full coefficient algebras and Taylor maps); HabiroCyclotomicCompletions §3.3.
 
 See [Q], §2.2, Corollary 2.13, p.19; §1.1, paragraph 1.4, p.4.
 
@@ -1095,11 +1093,11 @@ The examples above compute both Gaussian factors, the flat toric series Σ_n P_n
 
 ### Dependencies
 
-Layers 1–4; HabiroCohomologyFoundations §§0.1–0.3; the full coefficient/Taylor and classical completion interfaces of HabiroCyclotomicCompletions Layers 1, 3, 4 and 5; the actual number-field ring and Frobenius gluing of HabiroNumberFields' ring contract.
+Layers 1–4; HabiroCohomologyFoundations §§0.1–0.3; the full coefficient/Taylor and classical completion interfaces of HabiroCyclotomicCompletions Layers 1, 3, 4 and 5; HabiroNumberFields §§2.1–2.4 (the compatible roots, arithmetic ring and Frobenius gluing).
 
 ## Layer 6: Scalar extension and transported number-field lines
 
-The scalar ring and its monoidal category already exist before this layer. Completed pullback applies to any morphism of pairs. Number-field line applications retain Δ divisible by 6 and the discriminant, together with the effective global, tensor and integral linear-jet certificates of the arithmetic lines.
+The scalar ring and its monoidal category already exist before this layer. Completed pullback applies to any morphism of pairs. Number-field line applications retain Δ divisible by 6 and the discriminant, together with HabiroNumberFields §§3.8–3.11’s effective global descent and tensor equivalences and §3.14’s integral constant evaluation.
 
 ### 6.1 Scalar extension of complete modules
 
@@ -1133,17 +1131,17 @@ The API comprises:
 
 ### 6.2 Transporting the K-theory line bundles
 
-Let F be a number field, choose positive Δ divisible by 6 and disc(F), put R=𝒪_F[1/Δ], and let `κ:H_{R/ℤ}≃H_R` be the Taylor-compatible comparison. Under HabiroNumberFields' line contract's effective global descent and tensor-bijectivity hypotheses, define `M_ξ=κ^*H_{R,ξ}` for ξ∈K₃(F). The imported inverse pairing and multiplication equivalences give M₀≃H and M_ξ⊗_H `M_η≃M_{ξ+η};` hence ρ_F:K₃(F)→Pic(H), ξ↦[M_ξ], is a group homomorphism.
+Let F be a number field, choose positive Δ divisible by 6 and disc(F), put R=𝒪_F[1/Δ], and let `κ:H_{R/ℤ}≃H_R` be the Taylor-compatible comparison. Using HabiroNumberFields §§3.8–3.11’s linear equalizer, effective global descent and tensor equivalences, define `M_ξ=κ^*H_{R,ξ}` for ξ∈K₃(F). The imported inverse pairing and multiplication equivalences give M₀≃H and M_ξ⊗_H `M_η≃M_{ξ+η};` hence ρ_F:K₃(F)→Pic(H), ξ↦[M_ξ], is a group homomorphism.
 
 These are actual invertible modules and actual pairing maps. Local p-adic freeness, a symbol for an unspecified line, or a homomorphism between unnamed groups would not supply this construction. No global freeness or existence of a nonzero Picard class follows from it.
 
-*Needs:* [§5.9][r69]; [§6.1][r70]; gap:number-field-lines.
+*Needs:* [§5.9][r69]; [§6.1][r70]; HabiroNumberFields §§3.8–3.11 (the global linear equalizer, effective descent and tensor equivalences).
 
 See [Q], §1.1, paragraph 1.4, p.4; [G], §1.5, Theorem 2, p.10; §3.3, proof, p.43.
 
 The API comprises:
 
-- For positive Δ divisible by 6 and disc(F) and the actual HabiroNumberFields line contract global line/tensor certificates, `ξ↦[κ^*H_{R,ξ}]` is a group homomorphism `K₃(F)→Pic(H_{R/ℤ}).`
+- For positive Δ divisible by 6 and disc(F) and HabiroNumberFields §§3.10–3.11’s effective descent and tensor equivalences, `ξ↦[κ^*H_{R,ξ}]` is a group homomorphism `K₃(F)→Pic(H_{R/ℤ}).`
 
 **Checks.**
 
@@ -1173,13 +1171,13 @@ The API comprises:
 
 ### 6.4 Trivializing the order-one fiber
 
-The arithmetic evaluator and its preimage of 1 require gap:integral-linear-jet, in addition to gap:number-field-lines.
+Let v=constantCoeff∘c:H→R. HabiroNumberFields §3.14’s integral constant evaluation, transported along κ, defines an R-linear map `e_ξ:R⊗_{H,v}M_ξ→R,` r⊗f↦r f₁(0). Its integral condition applies because gcd(1,Δ)=1. The order-one Kummer torsor is canonically trivial, so its associated root line is R and no root choice is needed. Evaluation preserves scalars and tensor pairings.
 
-Under the HabiroNumberFields line contract descent and tensor hypotheses, let v=constantCoeff∘c:H→R. The evaluation of a transported section at the order-one root defines an R-linear map `e_ξ:R⊗_{H,v}M_ξ→R,` r⊗f↦r f₁(0). The order-one Kummer torsor is canonically trivial, so this value needs no root choice. The actual inverse-tensor certificate supplied by HabiroNumberFields' line contract gives a preimage of 1.
+HabiroNumberFields §3.11’s inverse pairing represents 1 by a finite sum `Σ_i f_i⊗g_i` with f_i∈M_ξ, g_i∈M_(−ξ) and `Σ_i f_i g_i=1` in H. Integral tensor-compatible evaluation gives `Σ_i f_i(1)g_i(1)=1` in R, where f_i(1) denotes the constant at order one. Thus `z=Σ_i g_i(1)⊗f_i` in R⊗_H M_ξ satisfies e_ξ(z)=1. The surjection v, given by H/(q−1)≃R in §5.1, also gives a global section evaluating to 1: lift the finitely many g_i(1) to H and take the corresponding H-linear combination of the f_i. Neither argument requires a pure-tensor inverse or a global basis.
 
 The source is invertible over R, so the surjective map e_ξ is bijective; its resulting linear equivalence is uniquely determined by the evaluation map. This trivializes the fiber at q=1. It does not trivialize M_ξ over H. There is no assumed R→H coefficient map: the scalar structure in this tensor product is v:H→R.
 
-*Needs:* [§6.2][r71]; [§6.3][r72]; [§5.9][r69]; gap:number-field-lines; gap:integral-linear-jet; `Module.Invertible`; `Module.Invertible.bijective_of_surjective`; `PowerSeries.constantCoeff`; `TensorProduct.lid`.
+*Needs:* [§6.2][r71]; [§6.3][r72]; [§5.9][r69]; HabiroNumberFields §§3.8–3.11 (the global linear equalizer, effective descent and tensor equivalences); HabiroNumberFields §3.14 (integral tensor-compatible constant evaluation); `Module.Invertible`; `Module.Invertible.bijective_of_surjective`; `PowerSeries.constantCoeff`; `TensorProduct.lid`.
 
 See [G], Definition 1.4, printed p.10; Proposition 1.5(f), printed p.11; [G], Theorem 2, (25), printed p.10; its proof in §3.3, printed p.43.
 
@@ -1190,7 +1188,7 @@ The API comprises:
 - For every x in the fibre, `e(x)·t^{-1}(1)=x.`
 - Any R-linear equivalence with underlying evaluation e equals t.
 - If evaluation is multiplied by a unit u of R, its normalized fibre equivalence is u times t.
-- For a ring homomorphism f:R→S and an f-semilinear map u between the actual fibres, if e′(u(x))=f(e(x)) for every x, then t′(u(x))=f(t(x)). This preserves the normalization under HabiroNumberFields' line contract supported field pullback; it does not assert existence of u or arithmetic naturality.
+- For a ring homomorphism f:R→S and an f-semilinear map u between the actual fibres, if e′(u(x))=f(e(x)) for every x, then t′(u(x))=f(t(x)). This preserves the normalization under HabiroNumberFields §3.16’s supported field pullback; it does not assert existence of u or arithmetic naturality.
 - For the actual invertible fiber R⊗_H M and an R-linear evaluator e with a preimage of 1, the equivalence t:R⊗_H M≃R has underlying map e. The tensor-unit evaluator and its negative give distinct normalizations; the zero map has no preimage of 1 over ℤ.
 
 **Checks.**
@@ -1198,6 +1196,8 @@ The API comprises:
 - For H=R, M=R and e the Mathlib tensor-unit map, t(1⊗r)=r for every r. In the actual regulator application this is ξ=0.
 - For H=R=Z and e the negative tensor-unit map, t(1⊗3)=−3. A construction ignoring the evaluation normalization fails.
 - For H=R=M=Z, the zero evaluator on Z⊗_Z Z has no preimage of 1 and cannot be used to construct t.
+- Over H=R=ℤ, take f₁=f₂=1, g₁=3 and g₂=−2 in the unit line and its inverse. The pairing sum is 3−2=1 and z=3⊗1−2⊗1 evaluates to 1; neither displayed pure tensor alone does. A zero evaluator gives 0 on this sum and fails compatibility with evaluation of the unit.
+- For H=ℤ[q] and v(q)=1, the coefficients 3 and −2 lift to 3+(q−1) and −2; their combined section is q, which evaluates to 1. The alternative lifts 3 and −2 give the section 1 with the same value, so a lifted global section is not canonical.
 
 ### 6.5 From the first fiber to the completed line
 
@@ -1205,7 +1205,7 @@ The local scalar instance `completedLineCoeffAlgebra` is constant coefficient R[
 
 Apply this to P=B⊗_H M_ξ, using the order-one equivalence and the tensor base-change identifications. The full basis is not canonical: another lift changes it by a unit in 1+XB. R need not be a local ring. The supplier's integral constant evaluation suffices; one must not assume every higher Taylor coefficient of a line section is integral.
 
-*Needs:* [§6.4][r73]; [§6.1][r70]; gap:number-field-lines; `Module.Invertible`; `Module.Invertible.bijective_of_surjective`; `Module.Invertible.free_iff_linearEquiv`; `CommRing.Pic.mk`; `CommRing.Pic.mk_eq_one_iff`; `CommRing.Pic.mapRingHom`; `PowerSeries.constantCoeff_surj`; `PowerSeries.X_dvd_iff`; `PowerSeries.isUnit_iff_constantCoeff`; `Ideal.mem_jacobson_iff`; `Submodule.mkQ_surjective`; `LinearMap.toSpanSingleton`; `LinearMap.surjective_of_surjective_comp_mkQ`; `TensorProduct.AlgebraTensorModule.cancelBaseChange`; `TensorProduct.quotTensorEquivQuotSMul`; `RingHom.quotientKerEquivOfSurjective`.
+*Needs:* [§6.4][r73]; [§6.1][r70]; HabiroNumberFields §§3.8–3.11 (the global linear equalizer, effective descent and tensor equivalences); `Module.Invertible`; `Module.Invertible.bijective_of_surjective`; `Module.Invertible.free_iff_linearEquiv`; `CommRing.Pic.mk`; `CommRing.Pic.mk_eq_one_iff`; `CommRing.Pic.mapRingHom`; `PowerSeries.constantCoeff_surj`; `PowerSeries.X_dvd_iff`; `PowerSeries.isUnit_iff_constantCoeff`; `Ideal.mem_jacobson_iff`; `Submodule.mkQ_surjective`; `LinearMap.toSpanSingleton`; `LinearMap.surjective_of_surjective_comp_mkQ`; `TensorProduct.AlgebraTensorModule.cancelBaseChange`; `TensorProduct.quotTensorEquivQuotSMul`; `RingHom.quotientKerEquivOfSurjective`.
 
 See [Q], §1.1, paragraph 1.4, printed p.4; [G], Proposition 1.5(f), printed p.11; §3.3, printed p.45.
 
@@ -1224,35 +1224,35 @@ The API comprises:
 
 ### 6.6 Vanishing of the completed Picard class
 
-Under the same number-field global descent and integral linear-jet hypotheses, Pic(c)(ρ_F(ξ))=0 in Pic(R[[X]]) for every ξ∈K₃(F). The completed line is B⊗_H M_ξ, and the preceding fiber and Nakayama argument supplies an actual free rank-one B-module. Its inverse pairing and all tensor identifications are transported from HabiroNumberFields' line contract.
+Using HabiroNumberFields §§3.10–3.11’s effective descent and tensor equivalences and §3.14’s integral constant evaluation, Pic(c)(ρ_F(ξ))=0 in Pic(R[[X]]) for every ξ∈K₃(F). The completed line is B⊗_H M_ξ, and the preceding fiber and Nakayama argument supplies an actual free rank-one B-module. Its inverse pairing and all tensor identifications are transported from HabiroNumberFields §§3.10–3.11.
 
 The result is conditional on that supplier's global line construction. It does not follow from local rank one alone or from the printed p-adic section definition without its corrected integral condition. Nor does it assert that ρ_F is nonzero before completion. The geometric completion theorem for invertible modules supplies the final deduction once the actual integral fiber is known.
 
-*Needs:* [§6.2][r71]; [§6.3][r72]; [§6.4][r73]; [§6.5](#65-from-the-first-fiber-to-the-completed-line); gap:number-field-lines; gap:integral-linear-jet.
+*Needs:* [§6.2][r71]; [§6.3][r72]; [§6.4][r73]; [§6.5](#65-from-the-first-fiber-to-the-completed-line); HabiroNumberFields §§3.8–3.11 (the global linear equalizer, effective descent and tensor equivalences); HabiroNumberFields §3.14 (integral tensor-compatible constant evaluation).
 
 See [Q], §1.1, paragraph 1.4, p.4; [G], §1.5, Proposition 1.5(f), p.11; §3.3, p.45; with the stated integral descent hypothesis.
 
 The API comprises:
 
-- Under the stated global descent, tensor-bijectivity and integral linear-jet hypotheses, Pic(c)(ρ_F(ξ)) is the trivial class for every ξ. It does not assert that ρ_F is nonzero.
+- Under the stated effective-descent, tensor-bijectivity and integral constant-evaluation hypotheses, Pic(c)(ρ_F(ξ)) is the trivial class for every ξ. It does not assert that ρ_F is nonzero.
 
 ### 6.7 Supported field scalar comparison
 
-For a number-field embedding F→E, choose one positive Δ divisible by 6, disc(F) and disc(E), and put R=𝒪_F[1/Δ], S=𝒪_E[1/Δ]. Assuming the HabiroNumberFields line contract's effective descent and arithmetic naturality, its actual module equivalence transports to `H_{S/ℤ}⊗_{H_{R/ℤ}}M_ξ≃M_{res ξ}`. Hence Pic(H_Rel→H′_Rel)(ρ_F(ξ))=ρ_E(res ξ).
+For a number-field embedding F→E, choose one positive Δ divisible by 6, disc(F) and disc(E), and put R=𝒪_F[1/Δ], S=𝒪_E[1/Δ]. Using HabiroNumberFields §3.16’s field pullback and scalar equivalence, with its effective-descent and arithmetic-naturality requirements, its actual module equivalence transports to `H_{S/ℤ}⊗_{H_{R/ℤ}}M_ξ≃M_{res ξ}`. Hence Pic(H_Rel→H′_Rel)(ρ_F(ξ))=ρ_E(res ξ).
 
-The κ comparisons commute with Taylor expansion, the coefficient map R→S, and order-one evaluation. They therefore give commuting first-fiber and completed Picard squares. Identity and successive embeddings obey the tensor unit and associator coherences. The input is the HabiroNumberFields' line contract equivalence over the Habiro rings, not a tensor over R, since H need not be an R-algebra. This is the supported field pullback; no trace or arbitrary coefficient-change formula is asserted.
+The κ comparisons commute with Taylor expansion, the coefficient map R→S, and order-one evaluation. They therefore give commuting first-fiber and completed Picard squares. Identity and successive embeddings obey the tensor unit and associator coherences. The input is the HabiroNumberFields §3.16 equivalence over the Habiro rings, not a tensor over R, since H need not be an R-algebra. This is the supported field pullback; no trace or arbitrary coefficient-change formula is asserted.
 
-*Needs:* [§6.2][r71]; [§6.1][r70]; [§5.1][r62]; [§5.9][r69]; gap:number-field-lines; gap:arithmetic-line-naturality; [§6.4][r73]; [§6.5](#65-from-the-first-fiber-to-the-completed-line); `TensorProduct.AlgebraTensorModule.cancelBaseChange`; `TensorProduct.AlgebraTensorModule.distribBaseChange`; `CommRing.Pic.mk_eq_mk_iff`; `CommRing.Pic.mapRingHom_comp_mapRingHom`; `CommRing.Pic.mapRingHom_id`.
+*Needs:* [§6.2][r71]; [§6.1][r70]; [§5.1][r62]; [§5.9][r69]; HabiroNumberFields §§3.8–3.11 (the global linear equalizer, effective descent and tensor equivalences); HabiroNumberFields §3.16 (supported field pullback and scalar equivalence); [§6.4][r73]; [§6.5](#65-from-the-first-fiber-to-the-completed-line); `TensorProduct.AlgebraTensorModule.cancelBaseChange`; `TensorProduct.AlgebraTensorModule.distribBaseChange`; `CommRing.Pic.mk_eq_mk_iff`; `CommRing.Pic.mapRingHom_comp_mapRingHom`; `CommRing.Pic.mapRingHom_id`.
 
 See [G], Definition 1.1, (13), printed pp.6–7; Definition 1.4, printed pp.9–10; [Q], Corollary 2.13, printed p.19, and proof.
 
 The API comprises:
 
-- For a field embedding with a common positive Δ divisible by 6 and both discriminants, and the actual HabiroNumberFields line contract arithmetic naturality certificate, pullback carries M_ξ to `M_{res ξ}` and commutes with first-fiber and completed Picard comparisons.
+- For a field embedding with a common positive Δ divisible by 6 and both discriminants, and HabiroNumberFields §3.16’s field scalar equivalence and its naturality requirements, pullback carries M_ξ to `M_{res ξ}` and commutes with first-fiber and completed Picard comparisons.
 
 **Checks.**
 
-- The identity field embedding gives the tensor-unit isomorphism. Two successive embeddings give the same module map under the tensor associator, using the imported arithmetic naturality certificate.
+- The identity field embedding gives the tensor-unit isomorphism. Two successive embeddings give the same module map under the tensor associator, using HabiroNumberFields §3.16’s identity and composition coherence.
 - A common Δ divisible by 6 and both discriminants makes both coefficient algebras admissible. A tensor over 𝒪_F[1/Δ] would require a coefficient action that is not generally available on H.
 
 ### Examples
@@ -1261,7 +1261,7 @@ The evaluator checks above distinguish its normalization from its negative and f
 
 ### Dependencies
 
-Layers 1–5, the completed tensor of HabiroCohomologyFoundations §0.1, and Mathlib invertible-module/Picard/tensor APIs. The transported K₃ line statements additionally require the actual HabiroNumberFields line contract global module, inverse-tensor, integral linear-jet and supported arithmetic naturality certificates. No Habiro–Hodge or trace object is an input.
+Layers 1–5, the completed tensor of HabiroCohomologyFoundations §0.1, and Mathlib invertible-module/Picard/tensor APIs. The transported K₃ line statements additionally require HabiroNumberFields §§3.8–3.11 (global linear equalizers, effective descent and inverse tensor equivalences), §3.14 (integral constant evaluation) and §3.16 (supported field pullback and scalar equivalence). No Habiro–Hodge or trace object is an input.
 
 ## Layer 7: Examples distinguishing the arithmetic construction
 
@@ -1330,7 +1330,7 @@ Layers 1–6; the stated classical root-connectivity theorem; polynomial factori
 
 **RefinedTraceMethods** imports the scalar interfaces independently of its trace constructions. Its perfectly covered base is QWittVectors §§2.3–2.4's perfect-coverage criterion, with its three equivalent conditions, specified under [perfect covers][r19]. Its completed algebraic tensor is that of HabiroCohomologyFoundations §0.1, with the polynomial/Laurent and coefficient base-change comparisons of [§2.1][r29] and [§2.5][r40], and the spherical completed tensor and its unit in [§2.7][r36]. Its solid comparison is solid unit idempotence and bounded-below monoidality, with both bounded-below factors and the full spectral supplier contract retained. Its coefficient change is the completed ring base-change equivalence in [§5.6](#56-completed-base-change-of-the-ring); arbitrary morphisms of pairs instead use completed scalar extension in [§6.1][r70].
 
-For a number field, the number-field ring equivalence exports the discriminant-localized scalar ring and its full Taylor/Frobenius comparisons. The ring target only needs discriminant inversion. Applications involving the GSWZ lines, and any spectral trace theorem whose own source assumes 6∣Δ, retain that additional hypothesis. The transported Picard character, its completed vanishing theorem and its supported field comparison carry the stated HabiroNumberFields' line contract certificates; the ring equivalence does not supply those certificates automatically.
+For a number field, the number-field ring equivalence exports the discriminant-localized scalar ring and its full Taylor/Frobenius comparisons. The ring target only needs discriminant inversion. Applications involving the GSWZ lines, and any spectral trace theorem whose own source assumes 6∣Δ, retain that additional hypothesis. The transported Picard character, its completed vanishing theorem and its supported field comparison consume HabiroNumberFields §§3.8–3.11, 3.14 and 3.16 with their stated hypotheses; the ring equivalence alone does not supply global lines or arithmetic naturality.
 
 **HabiroCohomologyFoundationsPartII** and **HabiroNahmSeries** use the ring `H_{R/A}` with its projections, quotients and Taylor presentation, the number-field comparison and the transported lines. The identification of the étale Habiro–Hodge object with `H_{R/A}` is the cohomological interface belonging to HabiroCohomologyFoundations as recorded under [Scope and ownership](#scope-and-ownership); this roadmap adds no second comparison.
 
@@ -1344,7 +1344,7 @@ The main locators refer to printed page numbers in the fixed versions linked her
 - **W — Ferdinand Wagner, _q-Witt vectors and q-Hodge complexes_, arXiv:2410.23078v5.** [Full text][W]. Degree-zero q-Witt operations and the Λ/relative comparisons occur in §§2.1–2.6, pp.8–35. The Frobenius target in Proposition 2.48 is W_d, as dictated by its index and pushout proof.
 - **H — Lars Hesselholt, _The big de Rham–Witt complex_, arXiv:1006.3125v3.** [Full text][H]. Dwork's criterion, integral Frobenius polynomials, generating series and the Witt comonad are in §1, pp.6–19; the cofree adjunction is in §2, p.24. Only the foundational Witt and Λ interfaces needed here are used.
 - **B — James Borger, _The basic geometry of Witt vectors, I: The affine case_, arXiv:0801.1691v6.** [Full text][B]. The torsion-free Adams comparison and free arithmetic Λ-ring are in §1, especially 1.17–1.18, pp.12–13.
-- **G — Stavros Garoufalidis, Peter Scholze, Campbell Wheeler and Don Zagier, _The Habiro ring of a number field_, arXiv:2412.04241v2.** [Full text][G]. The ring is Definition 1.1, pp.6–7; the global line is Definition 1.4, p.10; tensor multiplication is Theorem 2, p.10, with proof in §3.3, p.43. Proposition 1.5(f), p.11, and §3.3, p.45, motivate the first-fiber comparison. The actual integral global lines and supported arithmetic maps are imported from HabiroNumberFields' line contract with its stated hypotheses.
+- **G — Stavros Garoufalidis, Peter Scholze, Campbell Wheeler and Don Zagier, _The Habiro ring of a number field_, arXiv:2412.04241v2.** [Full text][G]. The ring is Definition 1.1, pp.6–7; the global line is Definition 1.4, p.10; tensor multiplication is Theorem 2, p.10, with proof in §3.3, p.43. Proposition 1.5(f), p.11, and §3.3, p.45, motivate the first-fiber comparison. The actual integral global lines are imported from HabiroNumberFields §§3.8–3.11 and 3.14, and supported arithmetic maps from §3.16, with their stated hypotheses.
 - **Bosco — Guido Bosco, _Rational p-adic Hodge theory for rigid-analytic varieties_, arXiv:2306.06100v1.** [Full text][Bosco]. Proposition A.3 and Lemma A.4, pp.92–93, supply the written abelian p-adic model for the null-family and boundedness arguments. They do not prove the general light solid spectral contract.
 - **T — Ferdinand Wagner, _q-Hodge filtrations, Habiro cohomology, and ku_, thesis, 15 August 2025.** [Full text][T]. numbered paragraphs 5.1–5.3, printed pp.85–86 (PDF pp.89–90), describe light solid spectra and their countable-product compact generator.
 - **HA — Jacob Lurie, _Higher Algebra_, 18 September 2017.** [Full text][HA]. Proposition 2.2.1.9, p.197, supplies symmetric monoidal localization; Corollaries 3.2.2.4–3.2.2.5, pp.358–359, compute limits of algebra objects; Theorem 7.1.2.13, p.1212, supplies the symmetric monoidal Eilenberg–Mac Lane derived-module comparison; Definition 7.1.3.17 and Proposition 7.1.3.18, p.1219, identify static algebra mapping spaces with ordinary algebra maps.
