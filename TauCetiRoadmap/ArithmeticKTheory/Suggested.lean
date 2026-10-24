@@ -7,8 +7,10 @@ README.md is the roadmap; this file is not the roadmap. It states the roadmap's
 headline theorems against the pinned Mathlib and Tau Ceti APIs: denominator
 localization for arbitrary sets of Dedekind primes and the divided-Bernoulli
 consequence of cyclotomic class-number regularity.
-CyclotomicClassGroupsAndStickelberger supplies the finite criterion and
-prime-power class-number stability.
+CyclotomicClassGroupsAndStickelberger §§3.1 and 5.1 supply unrestricted
+divided-Bernoulli integrality and congruences and the finite criterion;
+§5.4 supplies prime-power class-number stability. The all-index consequence
+uses those unrestricted inputs, including indices divisible by the prime.
 
 Quillen finite generation and ranks, Soulé localization, the odd and even
 integral tables, Harris–Segal detection, higher wild-kernel divisibility, Bott
@@ -56,7 +58,9 @@ end SIntegers
 /-! ## Layer 7: Bernoulli numbers and regular primes -/
 
 /-- If an odd prime does not divide the cyclotomic class number, it divides
-no reduced numerator of B_(2k)/k for k >= 1; README §7.2. -/
+no reduced numerator of B_(2k)/k for k >= 1; README §7.2. The class-number
+hypothesis unfolds CyclotomicClassGroupsAndStickelberger §5.1's
+IsRegularPrime predicate. -/
 theorem regularPrime_dividedBernoulli_num (p : ℕ) (hp : p.Prime) (hodd : Odd p)
     (hreg : ¬ p ∣ NumberField.classNumber (CyclotomicField p ℚ))
     (k : ℕ) (hk : 1 ≤ k) :

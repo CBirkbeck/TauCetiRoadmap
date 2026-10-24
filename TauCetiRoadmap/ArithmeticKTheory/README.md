@@ -41,7 +41,10 @@ Witt injection and symmetric/quadratic L-tables. The number-ring signature theor
 spectral sequence are targets of §3.5 on those supplied carriers.
 CyclotomicClassGroupsAndStickelberger owns the cyclotomic class action,
 projectors, Kummer congruences, reflection, finite criterion and regular-prime
-tower theorem. IntegralIwasawaTheory owns Vandiver propagation and the
+tower theorem. Its §§0.2–0.4, 2.1, 3.1–3.2 and 5.1 use AINTLIB's
+FltRegularBernoulli project as a formalised source; §§7.1–7.3 consume those
+interfaces, including §3.1's unrestricted extensions of the source congruences.
+IntegralIwasawaTheory owns Vandiver propagation and the
 arithmetic-weight Euler characteristics. This roadmap uses those inputs for finite
 cyclotomic K-groups; it does not build another Iwasawa theory. The arithmetic
 K₃ results below precede the downstream decomposable and indecomposable
@@ -257,13 +260,19 @@ Section 7.5 combines those exports with §6.5 to obtain K-group orders.
 ### From TauCetiRoadmap.CyclotomicClassGroupsAndStickelberger
 
 Sections 0.1–0.4 supply the direct Artin class action, tame projectors,
-decomposition and plus part; §3.1 supplies the divided Kummer congruences;
+decomposition and plus part; §2.1 supplies the prime-conductor Stickelberger
+element. For odd prime p, §3.1 supplies p-integrality of pB_n for positive
+even n; when p−1∤n it supplies p-integrality of B_n/n and its residue invariance
+for all positive even indices congruent modulo p−1, including indices divisible
+by p. It also supplies the Teichmüller–Bernoulli comparison in the finite range.
 §3.3 supplies `classComponent_zero` and character reflection; §4.5 supplies
 `herbrand_ribet`. Sections 5.1 and 5.4 supply `IsRegularPrime`,
 `kummer_criterion` and `regular_prime_power_class_number`. Section 7.2 applies
 the criterion to the divided Bernoulli sequence; §7.3 transports the supplied
 class module to the localized Picard module. No class-action or projector
-carrier is reconstructed here.
+carrier is reconstructed here. The AINTLIB source signatures and their index
+restrictions are recorded in §§7.1–7.3; the unrestricted congruence and
+integrality interfaces are the supplier's targets, beyond those source signatures.
 
 ### From TauCetiRoadmap.SchemeKTheoryOperations
 
@@ -3054,13 +3063,46 @@ and primed sequences away from one, the values at small indices and the
 translation of numerator/denominator assertions. The existing
 von Staudt–Clausen API gives the squarefree denominator of B_(2k), with
 prime factors p such that p−1∣2k; it is not reproved here. The stronger
-assertion p∤den(B_(2k)/k) when p−1∤2k is a Kummer-congruence input,
-including the case p∣k. (K-book, VI.2.4.1, p. 472 and VI.2.4,
+assertion p∤den(B_(2k)/k), for odd prime p and k≥1 with p−1∤2k,
+is consumed from CyclotomicClassGroupsAndStickelberger §3.1's unrestricted
+integrality theorem, including the case p∣k. (K-book, VI.2.4.1, p. 472 and VI.2.4,
 p. 472; Mathlib Bernoulli conventions and denominator theorems.)
 Prove bₖ=|B_(2k)| for k≥1 and retain the displayed conversion. The arithmetic
 sequence is Mathlib's `bernoulli`; its
 index-one and denominator results are cited through `bernoulli_one` and
 the existing Bernoulli denominator and squarefreeness theorems.
+
+AINTLIB's formalised inputs use the same `bernoulli`, hence B₁=−1/2.
+In module BernoulliRegular.KummerCongruence.VonStaudtClausen,
+BernoulliRegular.bernoulli_div_mem_padicInt gives B_n/n∈ℤ_p for
+0<n<p−1, while BernoulliRegular.bernoulli_mem_padicInt_of_not_pSubOne_dvd
+gives B_n∈ℤ_p for 0≤n<p−1. Both assume p odd prime; the latter's
+name does not remove its upper bound. The boundary input
+BernoulliRegular.p_mul_bernoulli_mem_padicInt_restricted gives pB_n∈ℤ_p
+for even n≥2 under `∀ j≤n, p³∤j+1`, equivalently n<p³−1.
+These are sources for the supplier's §3.1, whose unrestricted statements
+also cover indices outside those bounds. (AINTLIB, named declarations in
+the indicated module.)
+
+The source congruence BernoulliRegular.bernoulli_div_sModEq_of_modEq
+in module BernoulliRegular.KummerCongruence.Kummer writes
+B_m/m−B_n/n=pz in ℚ_p for some z∈ℤ_p. Its hypotheses are: p odd
+prime; m,n positive and even; m≡n modulo p−1; p−1∤n;
+p∤m,n,m+1,n+1; and `∀ j≤m, p³∤j+1`, together with the corresponding
+condition for n. Thus both indices are less than p³−1. Section 7.2
+distinguishes this signature from the supplier's unrestricted congruence.
+(AINTLIB, BernoulliRegular.KummerCongruence.Kummer, named theorem.)
+
+For the finite-sum source, let D=(a^n−1)B_n−n a^(n−1)
+Σ_(0≤j<p) j^(n−1)⌊ja/p⌋. BernoulliRegular.voronoi_congruence_mod_p
+in module BernoulliRegular.KummerCongruence.Voronoi gives D∈pℤ_p
+for odd prime p, p∤a, even n≥2, p−1∤n, p∤n+1 and n<p³−1.
+In module BernoulliRegular.KummerCongruence.VoronoiHigherOrder,
+BernoulliRegular.voronoi_congruence_mod_p_sq gives
+D+binom(n,2)a^(n−2)p Σ_(0≤j<p) j^(n−2)⌊ja/p⌋²∈p²ℤ_p
+for odd prime p, p∤a, even 4≤n≤p−1 and p∤n+1.
+These finite-sum inputs are consumed through the supplier's §3.1.
+(AINTLIB, the two named theorems.)
 
 The basic laws are:
 
@@ -3076,7 +3118,14 @@ The basic laws are:
 - b₅ is 5/66; b₆ is 691/2730, from
   B₁₂=−691/2730. Arithmetic B₆=1/42 is a different index.
 - At p=5,k=5, B₁₀/5=1/66 has no denominator factor 5, even though
-  p∣k. The divided-denominator refinement must account for cancellation.
+  p∣k. Here B₁₀/10−B₂/2=−5/66; the unrestricted supplier theorem
+  applies, while the source congruence's p∤10 hypothesis fails.
+- At p=5,n=4, pB₄=−1/6 is integral but B₄/4=−1/120 is not.
+  The restricted small-index integrality cannot be applied at n=p−1.
+- At p=5,a=2,n=2, D=1/2−28=−55/2 lies in 5ℤ_5.
+  At p=7,a=3,n=4, D=−250460/3 and the quadratic correction is
+  101682, giving 54586/3=49·1114/3. Omitting that correction
+  leaves valuation one, so fails modulo 49.
 - At k=0 the numerical formula gives b₀=−1. This
   input is outside positivity and the denominator statements, with no
   topological claim.
@@ -3101,7 +3150,8 @@ is fixed.
   applicable.
 
 *Needs:* Mathlib’s Bernoulli convention and denominator API; §§4.2–4.4;
-CyclotomicClassGroupsAndStickelberger §3.1 for the divided-denominator refinement.
+CyclotomicClassGroupsAndStickelberger §3.1 for the unrestricted
+divided-denominator refinement and congruence, with the AINTLIB source shapes above.
 
 
 ### 7.2 Regularity and Kummer's finite criterion
@@ -3109,20 +3159,50 @@ CyclotomicClassGroupsAndStickelberger §3.1 for the divided-denominator refineme
 Use CyclotomicClassGroupsAndStickelberger §§0.1–0.4, 3.1, 3.3, 4.5,
 5.1 and 5.4 for the direct Artin class module, projectors, decomposition,
 divided Kummer congruences, reflection, Herbrand–Ribet, class-number
-regularity, finite criterion and prime-power stability. Here regularity means
-p∤NumberField.classNumber(CyclotomicField p ℚ), with p prime;
+regularity, finite criterion and prime-power stability. Throughout use the
+supplier's `IsRegularPrime p`: for nonzero p it is the predicate
+p∤NumberField.classNumber(CyclotomicField p ℚ), with primality a separate
+hypothesis. For prime p this agrees with FltRegular's IsRegularPrime,
+which expresses coprimality of p with the cardinality of the same native
+class group. The class-number hypothesis in Suggested.lean is the defining
+formula of the supplied predicate; no second predicate is introduced.
 Vandiver's plus-part condition is separate. The decomposition is an input
 before any use of the finite criterion. (K-book, VI.2.4.1, p. 472;
-Sharifi, Corollaries 4.4.4–4.4.5, p. 113.)
+Sharifi, Corollaries 4.4.4–4.4.5, p. 113; AINTLIB,
+FltRegular.NumberTheory.RegularPrimes, IsRegularNumber and IsRegularPrime.)
+
+The formalised finite criterion is BernoulliRegular.kummer_criterion in
+AINTLIB module BernoulliRegular.Main: for prime p≠2, regularity is
+equivalent to nondivisibility of num(B_(2j)) for every j≥1 with 2j≤p−3.
+CyclotomicClassGroupsAndStickelberger §5.1 supplies this criterion on
+its native class module; reindexing by n=2j gives the even window
+2≤n≤p−3. This is a consumed theorem, not an additional target here.
 
 Prove `regularPrime_dividedBernoulli_num`: for every odd prime p satisfying
-p∤NumberField.classNumber(CyclotomicField p ℚ) and every k≥1, p does not
-divide the reduced numerator of B_(2k)/k. When p−1∤2k, apply the supplied
-integral divided congruence to reduce to 2≤n′≤p−3 and use the supplied
-finite criterion. When p−1∣2k, von Staudt–Clausen gives
-v_p(B_(2k)/(2k))=−1−v_p(2k), so its numerator is prime to p.
-Multiplication by two preserves this for odd p. No congruence is divided
-by a possibly nonunit k. (Sharifi, Proposition 5.2.5 and Remarks
+the supplied regularity predicate and every k≥1, p does not divide the
+reduced numerator of B_(2k)/k. Set m=2k. When p−1∤m, its least
+nonnegative residue n′ modulo p−1 is even and satisfies 2≤n′≤p−3.
+The source congruence above then has positive even indices with the
+required congruence and p−1∤n′; the bounds give p∤n′,n′+1 and
+n′<p³−1. Its remaining hypotheses are p∤m, p∤m+1 and m<p³−1.
+None follows from regularity: p∣k, p∣2k+1, and large k are all
+outside this source signature even on the nonexceptional branch.
+
+Use instead CyclotomicClassGroupsAndStickelberger §3.1's unrestricted
+integrality and residue-invariance statements, for all positive even
+indices congruent modulo p−1 outside its zero class. They give
+B_m/m∈ℤ_p and B_m/m≡B_(n′)/n′ modulo p without the three
+remaining restrictions. The finite criterion and 0<n′<p make
+B_(n′)/n′ a p-adic unit, so B_m/m is a unit. Multiplying by the
+p-unit 2 gives B_(2k)/k a unit. The unrestricted integrality and
+congruence are precisely the supplier work beyond the cited AINTLIB
+signatures that this all-k consequence requires; no extension of them
+is planned here. When p−1∣m, the supplied von Staudt–Clausen
+denominator and squarefreeness results give
+v_p(B_m/m)=−1−v_p(m)<0. Multiplication by 2 preserves this valuation
+for odd p, so this branch also has numerator prime to p. No step
+divides a mod-p congruence by the possibly nonunit k.
+(Sharifi, Proposition 5.2.5 and Remarks
 5.2.8–5.2.9, pp. 134–136; K-book, VI.2.4.1, p. 472.)
 
 **Checks.**
@@ -3135,12 +3215,18 @@ by a possibly nonunit k. (Sharifi, Proposition 5.2.5 and Remarks
   by ℚ(ζ₂)=ℚ, rather than by the odd-prime criterion.
 - At p=5, B₂/2=1/12 and B₆/6=1/252 both reduce to 3 modulo 5.
   For k=5, B₁₀/k=1/66 has numerator one despite p∣k.
+- At p=5,k=7, m=14 and n′=2 give B₁₄/14=B₂/2=1/12,
+  but p∣m+1. The unrestricted result applies where the source does not.
+- At p=5,k=63, m=126 and n′=2 give residue 3 for B₁₂₆/126
+  and residue 1 for B₁₂₆/63. The source bound fails already at
+  j=124, since 5³∣j+1; p∤126,127 still holds.
 - At p=3,k=1, B₂/k=1/6 has v₃=−1 and numerator one; p-integrality
   is not asserted on the exceptional branch p−1∣2k.
 - k=0 is excluded: its totalized divided value would be zero, whose
   numerator is divisible by p. Composite p has no regular-prime meaning.
 
-*Needs:* CyclotomicClassGroupsAndStickelberger §§0.2–0.3, 3.1 and 5.1;
+*Needs:* CyclotomicClassGroupsAndStickelberger §§0.2–0.3, 3.1
+(unrestricted divided integrality and congruence) and 5.1;
 Mathlib's Bernoulli denominator and native cyclotomic class-number APIs.
 The supplier's §5.4 tower theorem is used in the K-group applications of §7.4.
 
@@ -3165,6 +3251,46 @@ on the unramified extension whose residual diagonal characters are 1 and
 (Ribet, Theorems 1.1–1.3, pp. 151–153, and Theorem 4.4, pp. 160–162;
 Sharifi, Theorem 4.5.7, p. 117; K-book, VI.10.4, p. 530.)
 
+The supplier's §§3.1–3.2 use AINTLIB module
+BernoulliRegular.KummerCongruence.Bridge as a formalised source:
+BernoulliRegular.bernoulliGen_teichmuller_pow_sModEq_div gives
+B_(1,ω^(n−1))−B_n/n∈pℤ_p for odd prime p and even 2≤n≤p−3.
+In its source signature j=n−1 is positive and odd, j+1<p−1,
+p−1∤j+1 and p∤j+1,j+2; all follow from this window.
+The source uses BernoulliRegular.BernoulliGen; comparison with the
+supplier's native generalized Bernoulli value is at modulus p>1.
+Their conductor-one conventions are not identified.
+
+AINTLIB module BernoulliRegular.Herbrand.Basic supplies
+BernoulliRegular.OrdinaryBernoulliPDivisible (p divides num(B_n)),
+BernoulliRegular.TeichmullerBernoulliPDivisible (B_(1,ω^j)∈pℤ_p)
+and BernoulliRegular.GeneralizedBernoulliPDivisible (the inverse-character
+generalized value lies in pℤ_p). Its theorem
+BernoulliRegular.ordinaryBernoulliPDivisible_of_teichmullerBernoulliPDivisible
+passes from the second condition to the first for positive odd j with
+j+1<p−1. The generalized-character implication requires an explicit
+GeneralizedBernoulliToTeichmullerBridge, and its nontrivial-component
+implication requires OddComponentHerbrandBridge. The supplier's native
+class action and Herbrand–Ribet theorem provide the arithmetic interface
+being transported; these conditional source implications alone do not
+provide it. (AINTLIB, the named definitions and implications in
+BernoulliRegular.Herbrand.Basic.)
+
+The projector sources are BernoulliRegular.charIdempotent,
+BernoulliRegular.plusIdempotent and BernoulliRegular.minusIdempotent in
+module BernoulliRegular.Idempotents. For a finite commutative group G,
+the first is |G|⁻¹Σ_g χ(g)[g⁻¹]; reindexing gives
+|G|⁻¹Σ_g χ(g)⁻¹[g], agreeing with the supplier's direct-action convention.
+Its orthogonality assumes domain coefficients and |G| invertible;
+the sum-to-one law also assumes enough roots of unity. The plus/minus
+formulas are (1±c)/2 with 2 invertible, and give projectors when c²=1.
+BernoulliRegular.stickelbergerElement in module BernoulliRegular.Stickelberger
+is the prime-conductor element Σ_a (a₀/p)[a⁻¹] over ℚ.
+These sources belong to the supplier's §§0.2–0.4 and 2.1;
+the Picard adapter transports the supplied operators and their laws.
+(AINTLIB, the named definitions, charIdempotent_mul_of_ne,
+charIdempotent_sum_eq_one and plusIdempotent_add_minusIdempotent.)
+
 The basic laws are:
 
 - The localized Picard adapter is the quotient by the principal cyclotomic prime and identifies A/ℓ with P.
@@ -3179,11 +3305,21 @@ The basic laws are:
   The adapter is a zero-module equivalence, consistent with e₀+e₁=1.
 - For G=C₄ over 𝔽₅ with χ(g)=2, a χ³ eigenvector has action 3.
   Tensoring by χ gives 2·3=1, whereas tensoring by χ⁻¹ gives 3·3=4.
+- At p=5,n=2, the Teichmüller lifts of 1,2,3,4 modulo 25 are
+  1,7,18,24. Their weighted sum is 165; dividing by 5 gives
+  33≡3 mod 5, agreeing with B₂/2=1/12. The inverse-character
+  weighted sum is 154≡−1 mod 5, so its generalized value is
+  not p-integral. This distinguishes the nonexceptional bridge.
+- For G=C₂ over 𝔽₃, the projectors have coefficients (2,2) and
+  (2,1): their sum is (1,0) and their product is (0,0).
+  In characteristic two the required inverse of 2 does not exist.
+- At conductor five, the Stickelberger coefficients at [3] and [2]
+  are 2/5 and 3/5. Reversing the basis inverse interchanges them.
 - ℓ−1 is invertible in 𝔽_ℓ; the supplied projector sum has no integral
   division-by-ℓ−1 interpretation. These are class-character components,
   distinct from Adams-dualization pieces.
 
-*Needs:* CyclotomicClassGroupsAndStickelberger §§0.1–0.4 and 4.5;
+*Needs:* CyclotomicClassGroupsAndStickelberger §§0.1–0.4, 2.1, 3.1–3.2 and 4.5;
 Tau Ceti's localized class-group quotient, `ClassGroup.equivPic` and the
 principal cyclotomic prime. The adapter does not supply a prerequisite of §7.2.
 
@@ -3497,7 +3633,7 @@ table without being proved from its hypothesis.
 ### Dependencies
 
 Layers 3–6; Mathlib's Bernoulli, class-number and cyclotomic-prime API;
-CyclotomicClassGroupsAndStickelberger §§0.1–0.4, 3.1, 3.3, 4.5, 5.1 and 5.4;
+CyclotomicClassGroupsAndStickelberger §§0.1–0.4, 2.1, 3.1–3.3, 4.5, 5.1 and 5.4;
 IntegralIwasawaTheory §§3.1, 6.0, 7.4, 7.7–7.8, 10.4–10.5 and 12.3; arithmeticEtaleDescent and its normalized
 finite-coefficient edges for the constructed Bott shift; the detected
 Harris–Segal construction; the one-prime Brauer calculation; §7.5’s integerEvenKOrder and its
@@ -4418,6 +4554,17 @@ of a zeta-value order formula.
 Locators above refer to the following versions and their printed pages.
 All formulas and finite data use the conventions fixed here.
 
+- AINTLIB, [*FltRegularBernoulli*](https://github.com/CBirkbeck/AINTLIB/tree/02bd7de5a3e0bf8588c046cc625d99fd3d724560/projects/FltRegularBernoulli),
+  revision 02bd7de5a3e0bf8588c046cc625d99fd3d724560, namespace
+  BernoulliRegular; [*Kummer's Criterion and Regular Primes in Lean*
+  blueprint](https://cbirkbeck.github.io/AINTLIB-blueprints/flt-bernoulli/).
+  Modules Main, KummerCongruence.VonStaudtClausen, KummerCongruence.Voronoi,
+  KummerCongruence.VoronoiHigherOrder, KummerCongruence.Kummer,
+  KummerCongruence.Bridge, Herbrand.Basic, Idempotents and Stickelberger
+  contain the formalised source declarations specified in §§7.1–7.3.
+  The regularity definition is in FltRegular.NumberTheory.RegularPrimes.
+  CyclotomicClassGroupsAndStickelberger §§0.2–0.4, 2.1, 3.1–3.2 and
+  5.1 own their integration and the stated unrestricted extensions.
 - John Rognes, [*K4(Z) is the trivial group*](https://www.mn.uio.no/math/personer/vit/rognes/papers/k4z.pdf),
   author manuscript with 1993 header, Main Theorem, Propositions 1.2,
   5.1–5.2 and §6, pp. 1–22. Published in *Topology* 39 (2000),
