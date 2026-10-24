@@ -15,7 +15,8 @@ and general codimension-three cubic recursions are not statable here on the
 intended projective-section carriers: the supplier projective
 bundle, twisting-section comparison, residual sequence and relative direction
 incidence interfaces specified in README.md are not present at the pins.
-The plane, cubic and higher-dimensional quartic maximal-rank theorems are
+The quadratic rank formula and the plane, cubic and higher-dimensional quartic
+maximal-rank theorems are
 also stated on the native affine first-jet matrix. The relative-scheme
 toolkit, coefficient metric and intermediate API are specified in README.md.
 -/
@@ -102,6 +103,15 @@ def WellPoised {k : Type u} [Field k] {r n : ℕ}
   Function.Surjective (firstJetMap P d)
 
 /-! ## Layer 3: Plane and cubic interpolation bases -/
+
+/-- Generic quadrics have the rank determined by the radical of their symmetric
+    bilinear form, including the defective counts (BO, Section 3, p.6). -/
+theorem quadraticDoublePointRank {k : Type u} [Field k] [CharZero k]
+    (r q : ℕ) (hr : 1 ≤ r) :
+    ∃ P : Fin q → Fin r → k, Function.Injective P ∧
+      (firstJetMatrix P 2).rank =
+        Nat.choose (r+2) 2 - Nat.choose (r+2 - min q (r+1)) 2 := by
+  sorry
 
 /-- Distinct rational configurations attain all twelve required neighboring ranks. -/
 theorem nearExceptionRanks :
