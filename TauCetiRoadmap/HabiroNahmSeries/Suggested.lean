@@ -13,10 +13,15 @@ the rational quadratic Gauss norm evaluation.
 
 The radial asymptotic theorem (including order one for real data) and the
 arithmetic descent theorems are not statable at the pins: their normalized radial
-coefficient family and cyclic Chern comparison carriers are missing. Modularity implying Bloch torsion lacks the integral CGZ
+coefficient family and cyclic Chern comparison carriers are missing. The
+Andrews–Gordon cyclotomic torsion identity lacks the integral projective Bloch
+carrier and its cyclic descent map; generic good-order Chern injectivity is a
+different interface. Modularity implying Bloch torsion lacks the integral CGZ
 Bloch quotient and comparison carriers. Formal admissibility and the Gaussian
 comparison lack the augmentation-complete plethystic and weighted Gaussian
-carriers. Habiro membership, all-root residue gluing and cohomological exports
+carriers. The canonical figure-eight collection and its knot-normalisation
+transport need those same Gaussian carriers. Habiro membership, integral descent
+at every root (including p-divisible orders), and cohomological exports
 lack the number-field K₃-indexed Habiro module and relative Habiro–Hodge carriers.
 The explicit quartic Bloch-order and descendant-rank endpoints need the same
 integral Bloch and descendant-module constructions. Their full targets and
