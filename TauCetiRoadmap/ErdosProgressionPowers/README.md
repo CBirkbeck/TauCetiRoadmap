@@ -41,7 +41,7 @@ specializations stated in Layers 1–6. ArithmeticGaloisRepresentations §1.9 ow
 residual reduction and lattice independence; its §§3.1–3.3 own Swan, Artin and
 prime-to-coefficient residual conductors. General modularity, newform representations,
 rational-isogeny classification and uniformity, character PNT, zero-density and
-Faltings inputs are supplier contracts, including the explicit gaps below.
+Mordell finiteness are supplier contracts, including the explicit gaps below.
 
 EllipticCurves Layers 2–4 and its worked Frey–Hellegouarch example own torsion,
 finite-field Hasse theory, local minimality and reduction, and the generic
@@ -53,14 +53,21 @@ ModularCurves §4C owns the universal Legendre family and its field fibres;
 MordellLawrenceVenkatesh §6.4 owns its native coefficient model over every
 commutative ring, its discriminant and j-invariant. EllipticCurves Layer 5 owns
 general quadratic twists. This roadmap owns their split-cubic specializations
-and progression arithmetic comparisons. EllipticLegendreCharacterInterfaces
-LG.0–LG.5 own the labelled split-cubic, rational-unit, descent, two-primary and
-trace interfaces; the variants retained here extend full-two-torsion
+and progression arithmetic comparisons. The labelled split-cubic, rational-unit,
+descent, two-primary and trace obligations are assigned to
+EllipticLegendreCharacterInterfaces LG.0–LG.5 and recorded in
+`gap:legendre-character-interfaces`; the variants retained here extend full-two-torsion
 normalization to every field of characteristic different from two and the
 square-parameter subgroup theorem to every odd finite field.
-EllipticModularityEffectiveComparisons EC.0–EC.5 own Martin's bound, the
-removed-prime inequality, Kraus realization, uniform irreducibility and
-rational-isogeny surjectivity; the progression applications remain here.
+Martin's bound, the removed-prime inequality, Kraus realization, uniform
+irreducibility and rational-isogeny surjectivity are assigned to
+EllipticModularityEffectiveComparisons EC.0–EC.5 and recorded in
+`gap:effective-modular-comparisons`; the progression applications remain here.
+These two obligations supply no theorem until their full contracts are discharged.
+HeightsRationalPointsAndObstructions §§5.12 and 6.4 own the shared native Mordell
+finiteness theorem; WeightsInEtaleCohomology R34.5–R34.6 own eigenform purity and
+the bound at every complex embedding. Section 7.1 owns the consecutive-product
+arithmetic and counting argument, reusing §4.3 for factorial deletion.
 ClassicalArithmeticCompletion §§1.51 and 4.41 own squareclass characters and the
 quartic descent. ImaginaryQuadraticClassNumber H3.1 owns CM integrality and the
 complex uniformization comparison. AlgebraicCurves Layers 7 and 12E own Hurwitz and the function-field/scheme genus
@@ -182,8 +189,17 @@ Use `roth_3ap_theorem_nat` from
 `Mathlib/Combinatorics/Additive/Corner/Roth.lean` for the qualitative finite-set
 conclusion. Layer 4 proves the stronger numerical cutoff. Use
 `Stirling.stirlingSeq`, `Stirling.log_stirlingSeq_sdiff_le` and
-`Stirling.tendsto_stirlingSeq_sqrt_pi` from
+`Stirling.tendsto_stirlingSeq_sqrt_pi` and `Stirling.le_factorial_stirling` from
 `Mathlib/Analysis/SpecialFunctions/Stirling.lean` for the factorial adapter.
+
+Use `Nat.exists_prime_lt_and_le_two_mul` in
+`Mathlib/NumberTheory/Bertrand.lean`: for natural n≠0 there is a prime p
+with n<p≤2n. Use `SimpleGraph`, `SimpleGraph.completeBipartiteGraph` and
+`SimpleGraph.Free` from `Mathlib/Combinatorics/SimpleGraph/Basic.lean`,
+`Mathlib/Combinatorics/SimpleGraph/Bipartite.lean` and
+`Mathlib/Combinatorics/SimpleGraph/Copy.lean`, respectively, for the bipartite
+graph and forbidden four-cycle; the
+finite neighbour-pair count in §7.1 is stated on these native carriers.
 
 ### From Tau Ceti
 
@@ -248,6 +264,28 @@ Consume Layers 2–4's Hecke operators and normalized weight-two newforms,
 and Layer 8's coefficient number field, Hecke eigenvalues and coefficient-field embeddings. Consume Layer 10's
 trivial-nebentypus dimension formulas. The newspace dimension used in the Kraus
 threshold is not the full Γ₁ dimension.
+
+### From TauCetiRoadmap.WeightsInEtaleCohomology
+
+Consume R34.6's `newform_ramanujan`, using R34.5's realization and purity:
+for every normalized cuspidal weight-two newform f of positive level N and
+trivial nebentypus, every complex embedding σ of its coefficient number field,
+and every prime p∤N, |σ(c_p)|≤2√p. At a coefficient place above ell, the
+Frobenius comparison additionally requires p≠ell; the coefficient bound itself
+does not. No separate eigenform-purity adapter is constructed here.
+(BS20, Lemma 2.2 and proof, p. 359.)
+
+### From TauCetiRoadmap.HeightsRationalPointsAndObstructions
+
+Consume §§5.12 and 6.4's `mordell_finite` on its native signature: K is a
+number field and C is a smooth proper geometrically connected one-dimensional
+scheme over Spec K with genus at least two, using `C.genus K` and its
+finite-dimensional H¹(C, 𝒪_C) instance. Rational points are morphisms over
+Spec K. AlgebraicCurves Layer 12E identifies this genus with the function-field
+genus computed for the diagonal curve. MordellLawrenceVenkatesh §11.6 supplies
+an alternative proof of that same declaration. No effective height bound or
+point enumeration is part of the contract.
+(Faltings1983, §6, Satz 7, p. 365.)
 
 ### From TauCetiRoadmap.ModularCurves
 
@@ -377,14 +415,18 @@ Section 0.7 supplies β≤1−40/(√q(log q)²) for nonprincipal quadratic
 characters modulo q≥3 and positive real zeros, under both BMOR inputs.
 No GRH assumption or omitted numerical hypothesis is substituted for these inputs.
 
-### From TauCetiRoadmap.EllipticLegendreCharacterInterfaces
+### Required Legendre-character interfaces
 
-Consume LG.0's scaled coefficient model, labelled root orderings and split-cubic
+The obligation `gap:legendre-character-interfaces` requires the following full
+contract assigned to EllipticLegendreCharacterInterfaces LG.0–LG.5. Every use of
+these interfaces in Layer 2 requires its discharge; the gap supplies no theorem.
+
+Require LG.0's scaled coefficient model, labelled root orderings and split-cubic
 normalization; use MordellLawrenceVenkatesh §6.4 for the ordinary coefficient
 model. LG.0's full-two-torsion normalization is over ℚ; §2.1 retains its
-extension to all fields of characteristic different from two. Consume LG.1's
+extension to all fields of characteristic different from two. Require LG.1's
 good-odd-prime unit and character-conductor divisibility statements, with
-rational full two-torsion and odd semistability. Consume LG.2's split-cubic
+rational full two-torsion and odd semistability. Require LG.2's split-cubic
 readings of the native descent map and halving criterion; LG.3's embedded
 ℤ/2ℤ×ℤ/4ℤ at square parameters for p≡3 mod 4 and exact valuation
 v₂(#F₋₁(𝔽_p))=3 for p≡5 mod 8; LG.4's corrected scale-two order-four
@@ -392,21 +434,25 @@ point and descent coordinates; and LG.5's symmetric trace-zero and
 scaled-Legendre twist-trace comparison. The all-odd-finite-field subgroup
 extension is stated in §2.1; the generic descent map itself remains supplied.
 
-### From TauCetiRoadmap.EllipticModularityEffectiveComparisons
+### Required effective modular comparisons
 
-Consume EC.0's bound g₀⁺(N)≤(N+1)/12 for the trivial-character weight-two
-newspace, and EC.1's removed-prime inequality
-ell≤(√p+1)^((M₀+1)/6) for p≠ell, p∥M and ell dividing the minimal
+The obligation `gap:effective-modular-comparisons` requires the following full
+contract assigned to EllipticModularityEffectiveComparisons EC.0–EC.5. Every use
+in Layers 1–2 requires its discharge; the gap supplies no theorem.
+
+Require EC.0's bound g₀⁺(N)≤(N+1)/12 for every positive level N in the trivial-character weight-two
+newspace, and EC.1's removed-prime inequality for E/ℚ and odd prime ell:
+ell≤(√p+1)^((M₀+1)/6) for prime p≠ell, p∥M and ell dividing the minimal
 discriminant valuation, with irreducible E[ell] and the weight-two lowering
-hypotheses. Consume EC.2's Γ₀ index μ(N)=N∏_(q|N)(1+1/q) for N>0 and
+hypotheses. Require EC.2's Γ₀ index μ(N)=N∏_(q|N)(1+1/q) for N>0 and
 Kraus thresholds F_K(N)=(μ(N)/6+1)^(2g₀⁺(N)),
 G_K(N)=(μ(lcm(N,4))/6+1)², H_K(N)=max(F_K(N),G_K(N)).
-Consume EC.3's full-two-torsion realization at the exact prime-to-ell residual
-conductor N, assuming prime ell≥5, irreducibility, Serre weight two and
+Require EC.3's realization for E/ℚ with full rational two-torsion at the exact
+prime-to-ell residual conductor N, assuming prime ell≥5, irreducibility, Serre weight two and
 ell>H_K(N). Its output is an actual F/ℚ of conductor N with full rational
-two-torsion and F[ell]≅E[ell]. EC.4 supplies irreducibility at primes ell≥7
+two-torsion and F[ell]≅E[ell]. EC.4 requires irreducibility at primes ell≥7
 for full rational two-torsion, and ell≥11 for a nonzero rational two-torsion
-point. EC.5 supplies surjectivity at every prime ell>37 for a non-CM rational
+point. EC.5 requires surjectivity at every prime ell>37 for a non-CM rational
 elliptic curve with a nontrivial rational cyclic isogeny. These are shared
 mathematical contracts; the deletion-level and coefficient-prime comparison
 in §1.10 is needed before applying EC.3 to the progression curve.
@@ -417,11 +463,11 @@ The following `gaps` entries specify required inputs not supplied unconditionall
 by the cited contracts. A gap supplies no theorem; a locator marked unavailable
 does not identify a supplier section.
 
-- `gap:faltings`: supplier `FaltingsFinitenessAndIsogenyTheorems`; section: rational-point finiteness (locator unavailable); needs: finiteness of C(K) for every smooth projective geometrically connected curve C of genus ≥2 over a number field K (Faltings1983, §6, Satz 7, p. 365).
+- `gap:legendre-character-interfaces`: requires the complete LG.0–LG.5 contract under Required Legendre-character interfaces, including normalization, units, conductor support, descent, two-primary groups, the Case-II point and trace comparisons (BS20, §6, Lemmas 6.2–6.6 and their proofs, pp. 367–372).
+- `gap:effective-modular-comparisons`: requires the complete EC.0–EC.5 contract under Required effective modular comparisons, including the newspace bound, norm inequality, exact Kraus realization, both irreducibility cutoffs and rational-isogeny surjectivity (BS20, §2, Lemma 2.2 and Theorem 4, pp. 359–360; Lemmas 3.3, 3.5, pp. 362–363; Lemos2017v2, Theorem 1.1, p. 2).
 - `gap:elliptic-modularity`: supplier `EllipticCurveModularity`; section: rational elliptic modularity (locator unavailable); needs: every E/ℚ corresponds to a normalized weight-two trivial-nebentypus newform of level its arithmetic conductor with the same traces at all good primes (BS20, §2, Theorem 3, pp. 358–359).
 - `gap:weight-two-lowering`: supplier `SerreWeightAndLevelOptimisation`; section: weight-two level and weight optimization (locator unavailable); needs: irreducible E[ell] for odd prime ell descends to the deletion level in BS20 equation (3), with the coefficient-prime weight-two bridge under the good or finite-flat multiplicative hypotheses (BS20, Theorem 3 and Lemma 2.1, p. 359).
 - `gap:newform-galois`: supplier `AutomorphicGaloisRepresentations`; section: classical newform representations (locator unavailable); needs: the continuous two-dimensional K_λ-representation of a normalized weight-two trivial-nebentypus newform, unramified outside N*ell, with arithmetic-Frobenius polynomial `T^2-c_p*T+p` and cyclotomic determinant (BS20, §2, pp. 358–359).
-- `gap:newform-coefficient-bound`: supplier `DeligneWeightsAndPurity`; section: eigenvalue bounds (locator unavailable); needs: |c_p|≤2√p at every complex embedding for every normalized weight-two newform and prime p∤N (BS20, Lemma 2.2, p. 359).
 - `gap:numerical-prime-inputs`: supplier `AnalyticNumberTheoryPartI` §§0.3, 0.5, 0.16, 0.25 and 3.2; needs: proofs of the five prime/conductor input hypotheses in the table, before any dependent statement is unconditional (Schoenfeld1976, Note Added in Proof, p. 360; RosserSchoenfeld1962, Theorems 1, 5, 8; RamareRumely1996, Theorems 1, 2.1.1 and Table 1; BS20, Lemma 7.3, p. 375). These sections state conditional estimates, not proofs of the inputs.
 - `gap:numerical-zero-inputs`: supplier `AnalyticNumberTheoryPartI` §0.7; needs: proofs of both BMOR input hypotheses in the table before the literal separation constant 40 is available unconditionally (BMOR2018v3, Proposition 1.11 and its proof, §6.1). The global negative-discriminant classification is included.
 - `gap:small-conductor-zeros`: supplier `AnalyticNumberTheoryPartI` §0.7, the zero-exclusion component of its BMOR finite input; needs: a proof excluding exceptional real zeros for primitive nonprincipal quadratic conductors 1<N<400000 at the same sufficiently small c* as §3.1. That component is a hypothesis, not a proved output. Platt2013v1, Abstract, p. 1 records the published mathematical input (BS20, p. 376); no computation is specified here.
@@ -436,7 +482,8 @@ Layer 3 supplies effective analytic inputs and the two original-route criteria;
 Layer 4 supplies quantitative Roth, sieve densities and that route's assembly.
 Layer 5 builds the bounded-height zero estimates and a single Granville witness.
 Layer 6 combines either route with the signed geometric adapter for fixed-length
-finiteness. Layer 7 records explicit conjectural predicates; it supplies no
+finiteness. Layer 7 proves the independent consecutive-product theorem and records
+explicit conjectural predicates; it supplies no
 premise to Layers 0–6. Each simultaneous choice satisfies all its properties
 at once. Backticked local declaration names belong to
 `TauCetiRoadmap.ErdosProgressionPowers` and occur in `Suggested.lean`.
@@ -665,8 +712,8 @@ Normalize the three progression terms to coprime a+b+c=0 and specialize the supp
 
 ### 1.1 General modular comparison interfaces
 
-Consume `gap:newform-galois`, `gap:newform-coefficient-bound` and
-`gap:elliptic-modularity` with the exact hypotheses in the supplier contracts.
+Consume `gap:newform-galois`, WeightsInEtaleCohomology R34.6's
+weight-two trivial-nebentypus coefficient bound and `gap:elliptic-modularity` with the exact hypotheses in the supplier contracts.
 Use EtaleCohomologyFoundations §F.4.0 for invariant integral lattices of the
 jointly continuous K_λ-representation of the compact absolute Galois group.
 Use ArithmeticGaloisRepresentations §1.9 for reduction and semisimplified
@@ -721,7 +768,8 @@ The prime-to-ell conductor comparison retains the supplier’s good or finite-fl
 multiplicative coefficient-prime hypotheses. (BS20, Theorem 3 and Lemma 2.1,
 p. 359; Theorem 4, p. 360.)
 
-Apply EllipticModularityEffectiveComparisons EC.0–EC.4 with their exact
+Require `gap:effective-modular-comparisons` for the full
+EllipticModularityEffectiveComparisons EC.0–EC.4 contract, with its exact
 hypotheses in the supplier contracts: Martin's newspace bound, the
 removed-prime inequality, the exact Kraus thresholds and realization, and
 the two irreducibility cutoffs. For rational progression levels use the
@@ -737,7 +785,7 @@ and Theorem 4, pp. 359–360; Lemmas 3.3, 3.5, pp. 362–363.)
 - N=1 with g₀⁺(1)=0 gives F_K(1)=1, G_K(1)=4 and H_K(1)=4; replacing the maximum by the first term loses the dyadic constraint.
 - N=11 with g₀⁺(11)=1 gives μ(11)=12, μ(44)=72 and H_K(11)=169; replacing the newspace by a Γ₁ space changes this value.
 
-*Needs:* EllipticCurves Layers 2–4 and Layer 8’s semistable conductor comparison; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; `gap:newform-galois`, `gap:newform-coefficient-bound`, `gap:elliptic-modularity`, `gap:weight-two-lowering`; ModularForms Layers 2–4, 8 and 10; EllipticModularityEffectiveComparisons EC.0–EC.4; LocalFieldsRamification Layers 3–4; Layer 0's explicit prime estimates only for the later progression level bounds.
+*Needs:* EllipticCurves Layers 2–4 and Layer 8’s semistable conductor comparison; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; `gap:newform-galois`, `gap:elliptic-modularity`, `gap:weight-two-lowering`; WeightsInEtaleCohomology R34.5–R34.6; ModularForms Layers 2–4, 8 and 10; `gap:effective-modular-comparisons` (EC.0–EC.4); LocalFieldsRamification Layers 3–4; Layer 0's explicit prime estimates only for the later progression level bounds.
 
 ### 1.2 Progression Frey specialization
 
@@ -905,7 +953,7 @@ At n=d=1 the first model has coefficients (0,2,0,−3,0), while the equal-sum mo
 
 ### Dependencies
 
-Layer 0; EllipticModularityEffectiveComparisons EC.0–EC.4; EllipticCurves Layers 2–4, 8 and its worked Frey example; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
+Layer 0; `gap:effective-modular-comparisons` (EC.0–EC.4); WeightsInEtaleCohomology R34.5–R34.6; EllipticCurves Layers 2–4, 8 and its worked Frey example; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
 
 ## Layer 2: Legendre cases and the simultaneous character family
 
@@ -918,7 +966,7 @@ Legendre model F_λ supplied by MordellLawrenceVenkatesh §6.4 and its smooth
 family from ModularCurves §4C. Specialize the native quadratic twist at
 (t,n)=(0,−D/4) to obtain G_(D,λ), with coefficients
 (0,−D(1+λ),0,D²λ,0) and equation y²=x(x−D)(x−Dλ).
-Use EllipticLegendreCharacterInterfaces LG.0 for this specialization,
+Require `gap:legendre-character-interfaces` (LG.0) for this specialization,
 including D=0 and λ=0,1; elliptic applications
 require D≠0 and λ≠0,1. The scale-two model is F′_λ=G_(2,λ).
 (BS20, §6, equation (17), p. 367, and Lemma 6.6, p. 371.)
@@ -933,7 +981,7 @@ require D≠0 and λ≠0,1. The scale-two model is F′_λ=G_(2,λ).
 - D=0 or λ=0,1 gives discriminant 0, and none is admitted in a halving claim.
 - Over ℚ, D=3,λ=−1 gives x(x−3)(x+3)=x³−9x. Its root differences are ±3,±6; none is 2u² for rational u≠0, so full rational two-torsion does not imply a scale-two presentation.
 
-Extend EllipticLegendreCharacterInterfaces LG.0's rational full-two-torsion
+After discharge of `gap:legendre-character-interfaces`, extend LG.0's rational full-two-torsion
 adapter to every field K of characteristic different from two: every elliptic E/K with full K-rational
 two-torsion is K-isomorphic to some G_(D,λ) with D≠0 and λ≠0,1.
 After completing the square, write the cubic roots as e₀,e₁,e₂, translate
@@ -941,7 +989,7 @@ x by e₀ and put D=e₁−e₀, λ=(e₂−e₀)/D. Record all six labelled ord
 λ,1/λ,1−λ,1/(1−λ),λ/(λ−1),(λ−1)/λ, using LG.0's labels and the corresponding D for each
 ordering: D,Dλ,−D,D(λ−1),D(1−λ),−Dλ, respectively.
 Labels remain distinct when parameter values coincide.
-Use EllipticLegendreCharacterInterfaces LG.1: for a rational full-two-torsion
+Require `gap:legendre-character-interfaces` (LG.1): for a rational full-two-torsion
 curve semistable away from 2, λ
 and 1−λ are units at every good odd prime, and each squareclass
 ωλ, ω∈{±1,±2}, has odd character conductor dividing the elliptic conductor.
@@ -949,7 +997,7 @@ Use ClassicalArithmeticCompletion §1.51 for the squareclass character.
 (BS20, §6, Lemma 6.2 and its proof, pp. 367–368.)
 
 At such a prime choose a p-unit representative δ_p of the unramified twist
-class. Apply EllipticLegendreCharacterInterfaces LG.5 to transport the native
+class. Require LG.5 in `gap:legendre-character-interfaces` to transport the native
 projective traces by
  a_p(E)=(δ_p/p)a_p(F_λ), a_p(F′_λ)=(2/p)a_p(F_λ).
 Thus trace zero is preserved by either twist; equality of arbitrary nonzero
@@ -957,8 +1005,8 @@ traces is not asserted. In the progression application E=F_a, use the same
 chosen comparison curve of §1.12 in every ordering and reduction.
 (BS20, Lemmas 6.4 and 6.6, pp. 368, 371.)
 
-Use EllipticLegendreCharacterInterfaces LG.2's split-cubic descent and
-halving criterion and LG.3's prime-field subgroup theorem. Extend the latter
+Require LG.2's split-cubic descent and halving contract in
+`gap:legendre-character-interfaces` and LG.3's prime-field subgroup theorem. Extend the latter
 to every finite field of odd characteristic: for square λ≠0,1, prove that
 the ordinary curve F_λ has a subgroup isomorphic to ℤ/2ℤ×ℤ/4ℤ.
 If −1 is square, (0,0) is 2-divisible; otherwise one of 1−λ and λ−1
@@ -974,7 +1022,7 @@ remaining odd finite fields.)
 - Over 𝔽₅ the ordinary λ=−1 curve has eight points, with 8 dividing the count and 16 not dividing it; over 𝔽₃ it has four points, outside the p≡5 mod 8 assertion.
 - Over 𝔽₇ at λ=2, an ordinary square parameter, the count is eight; over 𝔽₃ at λ=2 the parameter is nonsquare and the count is four.
 
-Consume EllipticLegendreCharacterInterfaces LG.4's Case-II order-four
+Require LG.4's Case-II order-four
 witness: for a field of characteristic different from 2, nonzero t,v with
 2t²+2v²=1 and i²=−1, on y²=x(x−2)(x−2λ), λ=2t², the point
 (2λ+4itv,8itv(t+iv)) doubles to (2λ,0). Consume its native descent-coordinate
@@ -991,7 +1039,8 @@ pp. 368–372, especially the Case-II point calculation on pp. 371–372.)
 - Its double is (1,0), not the identity; the point has exact order four in characteristic zero.
 - At p=3 the symmetric curve has trace 0; its trace and the geometric supersingular criterion are compared only within their stated characteristic ranges.
 
-Consume EllipticModularityEffectiveComparisons EC.5 (Lemos2017v2, Theorem 1.1, p. 2). Prove the CM half-parameter image theorem: for the CM λ=1/2
+Require the EC.5 surjectivity contract in `gap:effective-modular-comparisons`
+(Lemos2017v2, Theorem 1.1, p. 2). Prove the CM half-parameter image theorem: for the CM λ=1/2
 model the same residual image lies in the normalizer of its CM Cartan and
 is proper at ell>37; specify the CM field, its torsion action and the
 conjugacy comparison under residual isomorphism. Integrality of CM j is
@@ -999,7 +1048,7 @@ consumed from ImaginaryQuadraticClassNumber H3.1. These statements concern
 actual torsion representations. (BS20, §6, final Case-II argument and
 the rational-isogeny surjectivity result cited there, p. 373, and its cited Lemos theorem.)
 
-*Needs:* ModularCurves §4C; MordellLawrenceVenkatesh §6.4; EllipticLegendreCharacterInterfaces LG.0–LG.5; Tau Ceti `WeierstrassCurve.quadraticTwistOf` and its point-equivariance comparison; EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); EllipticModularityEffectiveComparisons EC.5; Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
+*Needs:* ModularCurves §4C; MordellLawrenceVenkatesh §6.4; `gap:legendre-character-interfaces` (LG.0–LG.5); Tau Ceti `WeierstrassCurve.quadraticTwistOf` and its point-equivariance comparison; EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); `gap:effective-modular-comparisons` (EC.5); Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
 
 ### 2.2 Legendre case partition
 
@@ -1107,7 +1156,7 @@ The parameter −1 lies in Case II. At λ=1/2 the twist-by-2 witness is (1+i,−
 
 ### Dependencies
 
-Layers 0–1; ModularCurves §4C; MordellLawrenceVenkatesh §6.4; EllipticLegendreCharacterInterfaces LG.0–LG.5; EllipticModularityEffectiveComparisons EC.5; EllipticCurves Layers 3, 5–6; ClassicalArithmeticCompletion §§1.51 and 4.41; ImaginaryQuadraticClassNumber H3.1. The numerical projections use Layer 0 prime estimates independently of the later character criteria.
+Layers 0–1; ModularCurves §4C; MordellLawrenceVenkatesh §6.4; `gap:legendre-character-interfaces` (LG.0–LG.5); `gap:effective-modular-comparisons` (EC.5); EllipticCurves Layers 3, 5–6; ClassicalArithmeticCompletion §§1.51 and 4.41; ImaginaryQuadraticClassNumber H3.1. The numerical projections use Layer 0 prime estimates independently of the later character criteria.
 
 ## Layer 3: The original analytic contradiction criteria
 
@@ -1594,16 +1643,19 @@ using Layer 4 only for maximal-valuation deletion; the original-route Roth and s
 
 ## Layer 6: Effective exponent bound and fixed-length finiteness
 
-Prove the main theorem: an effectively computable absolute k0 exists such that every primitive integer progression product of length k≥k0 with prime exponent ell has y*d=0 or ell≤exp(10^k). Either proof route supplies such a threshold. For each fixed k≥k0, increased to at least5, import Faltings and construct the Darmon-Granville fixed-exponent adapter. Reduce composite exponents to prime divisors and exclude power variables0,1,-1 in nontrivial sufficiently long progressions. Deduce finiteness of positive integer(n,d,y,ell) tuples for each fixed k and all ell≥2, not one finite set over all lengths and not an effective enumeration of points. Correct equation(2.2) of Darmon–Granville to coefficients j-1 and j-2 with its1-based term indexing.
+Prove the main theorem: an effectively computable absolute k0 exists such that every primitive integer progression product of length k≥k0 with prime exponent ell has y*d=0 or ell≤exp(10^k). Either proof route supplies such a threshold. For each fixed k≥k0, increased to at least5, consume the shared Mordell theorem and construct the Darmon-Granville fixed-exponent adapter. Reduce composite exponents to prime divisors and exclude power variables0,1,-1 in nontrivial sufficiently long progressions. Deduce finiteness of positive integer(n,d,y,ell) tuples for each fixed k and all ell≥2, not one finite set over all lengths and not an effective enumeration of points. Correct equation(2.2) of Darmon–Granville to coefficients j-1 and j-2 with its1-based term indexing.
 
 ### 6.1 Rational points on curves of genus at least two
 
-Consume `gap:faltings` for smooth projective geometrically connected curves
-of genus at least two over a number field, using the same scheme-theoretic
-genus and rational-point carrier throughout. No effective height bound is asserted.
+Consume HeightsRationalPointsAndObstructions §§5.12 and 6.4's `mordell_finite`
+for a smooth proper geometrically connected one-dimensional scheme C over a
+number field K, with `2 <= C.genus K` and the finite-dimensional
+H¹(C, 𝒪_C) instance. Use rational points as morphisms over Spec K throughout.
+AlgebraicCurves Layer 12E transfers the diagonal curve's function-field genus
+to this invariant. No effective height bound is asserted.
 (Faltings1983, §6, Satz 7, p. 365; DG95, Corollary 2.1, pp. 520–521.)
 
-*Needs:* `gap:faltings`; AlgebraicCurves Layer 12E’s genus comparison for the adapter.
+*Needs:* HeightsRationalPointsAndObstructions §§5.12 and 6.4; AlgebraicCurves Layer 12E’s genus comparison for the adapter.
 
 ### 6.2 Effective prime-exponent bound
 
@@ -1627,9 +1679,9 @@ Prove the positive four-term square exclusion: for integers n,d>0 with gcd(n,d)=
 
 Prove `positive_fixed_exponent_finiteness`: for k≥3, ell≥2 and k+ell≥6, the set of positive integer triples (n,d,y) with gcd(n,d)=1 and progression product y^ell is finite (DG95, Corollary 2.1, p. 520). Split off (4,2) and (3,3), whose sets are empty by the two arithmetic targets; all remaining pairs satisfy 2*ell+k<k*ell and use `fixed_exponent_finiteness`.
 
-Choose finite small-prime ell-powerfree coefficient classes, including signs. Eliminate n,d to get a diagonal complete intersection in P^(k-1); its projection to the ternary curve has degree ell^(k-3) and the displayed Riemann-Hurwitz computation gives2g-2=k*ell^(k-1)*(1-2/k-1/ell)>0. Prove smoothness, geometric connectedness and ramification of this diagonal intersection; apply the supplied genus comparison and `gap:faltings`. Each rational projective point has only finitely many primitive integral lifts, then only finitely many y. Repeat over finitely many sign patterns. The source version is the author-hosted scan listed in the references. With the source indexing t_i=a+i*d for1≤i≤k, use lambda_j*z_j^ell=(j-1)*lambda_2*z_2^ell-(j-2)*lambda_1*z_1^ell for3≤j≤k. The printed (2.2) coefficients j and j-1 shift the term by d; this local misprint does not change the distinct-branch or genus argument.
+Choose finite small-prime ell-powerfree coefficient classes, including signs. Eliminate n,d to get a diagonal complete intersection in P^(k-1); its projection to the ternary curve has degree ell^(k-3) and the displayed Riemann-Hurwitz computation gives2g-2=k*ell^(k-1)*(1-2/k-1/ell)>0. Prove smoothness, geometric connectedness and ramification of this diagonal intersection; apply the supplied genus comparison and §6.1's shared Mordell theorem. Each rational projective point has only finitely many primitive integral lifts, then only finitely many y. Repeat over finitely many sign patterns. The source version is the author-hosted scan listed in the references. With the source indexing t_i=a+i*d for1≤i≤k, use lambda_j*z_j^ell=(j-1)*lambda_2*z_2^ell-(j-2)*lambda_1*z_1^ell for3≤j≤k. The printed (2.2) coefficients j and j-1 shift the term by d; this local misprint does not change the distinct-branch or genus argument.
 
-*Needs:* Layer 0 — gcd of progression terms; `gap:faltings`; AlgebraicCurves Layers 7 and 12E.
+*Needs:* Layer 0 — gcd of progression terms; §6.1; HeightsRationalPointsAndObstructions §§5.12 and 6.4; AlgebraicCurves Layers 7 and 12E.
 
 ([DG95], §2.1, Corollary 2.1 and its full proof, pp.520–521; [BS20], §1, p.357, discussion of Darmon–Granville Corollary 2.1.)
 
@@ -1681,7 +1733,7 @@ At k=5,ell=2 the diagonal genus equation gives 2g−2=8, hence genus 5. At k=4,e
 
 ### Dependencies
 
-Either Layer 4 or Layer 5 for the exponent bound; Layer 0, AlgebraicCurves Layers 7 and 12E for the signed diagonal curves.
+Either Layer 4 or Layer 5 for the exponent bound; Layer 0, AlgebraicCurves Layers 7 and 12E, and HeightsRationalPointsAndObstructions §§5.12 and 6.4 for signed diagonal-curve finiteness.
 
 ## Layer 7: Conjectural and announced predicates
 
@@ -1699,7 +1751,183 @@ Prove `consecutiveProduct_not_perfectPower`: for positive n, k≥2 and ell≥2,
 - k=2,n=1 gives 2, not a perfect power.
 - The signed progression (−3,−1,1,3) has square product 9 and is excluded by positivity and common difference 1.
 
-*Needs:* Mathlib natural factorization and finite combinatorics; this target is independent of the primitive-progression analytic proof.
+The proof targets below belong to this section. Their deletion input is §4.3,
+which has no H or analytic hypothesis. The consecutive-product argument uses
+neither a Frey comparison nor the progression character-family endgames.
+
+#### Arithmetic reduction and powerfree coefficients
+
+Prove the Sylvester–Schur input: for positive integers k and m>k, some
+prime p>k divides ∏_(1≤j≤k)(m+j). Under the contrary assumption that ell
+is a prime and every prime p≥k has ell-divisible valuation in that product,
+such a p divides only one term and forces m+k≥(k+1)^ell, hence m>k^ell.
+Prove the stronger valuation conclusion of Theorem 2: for k≥3, ell≥2 and
+m≥0 with m+k at least the least prime ≥k, some prime p≥k has valuation
+not divisible by ell in ∏_(1≤j≤k)(m+j). Reduce ell to a prime divisor;
+the case m≤k uses Bertrand's postulate, while m>k uses the targets below.
+For the headline, put m=n−1 using n>0. Handle k=2 separately by coprimality
+of consecutive terms and the impossibility of two consecutive positive
+ell-th powers. (ErdosSelfridge1975, Theorems 1–2 and §1, pp. 292–293.)
+
+For each m≥0, k≥1 and ell≥2, define the positive ell-powerfree coefficients
+and roots by m+j=a_j x_j^ell for 1≤j≤k: the p-exponent of a_j is the
+remainder of v_p(m+j) modulo ell, and that of x_j is the quotient.
+These differ from §0.4's coefficients, which retain all small-prime powers.
+
+- The factorization exists uniquely with a_j positive and ell-powerfree and x_j positive.
+- Every prime of a_j divides m+j; if every prime p≥k has ell-divisible valuation in the full product, each a_j is supported on primes strictly below k.
+- For ell=2 the a_j are squarefree; the coefficient of a perfect ell-th power is 1.
+
+**Checks.**
+
+- For m=7,k=2,ell=3 the terms 8,9 give (a_j,x_j)=(1,2),(9,1); replacing a_j by the whole small-prime part gives the wrong coefficient for 8.
+- For m=3,k=2,ell=2 the terms 4,5 give (1,2),(5,1); support below k requires the additional valuation hypothesis.
+- For m=0,k=1 the term 1 gives (1,1) for every ell≥2; exponent 0 is outside the definition's domain.
+
+*Needs:* Mathlib `Nat.factorization`, natural division and remainders, and
+`Nat.exists_prime_lt_and_le_two_mul` for Bertrand; §0.2 for uniqueness of a
+large-prime term. Prove the Sylvester–Schur input here as the general
+consecutive-integer prime-divisor theorem used in §1 of the source.
+
+#### Distinct products and factorial deletion
+
+For k≥3, ell≥2 and m>k^ell, prove that the preceding coefficients have
+distinct products modulo rational ell-th powers: for 0≤r<ell and two
+multisets I,J of r indices from {1,…,k}, if
+(∏_(i∈I)a_i)/(∏_(j∈J)a_j) is an ell-th power in ℚ, then I=J.
+Repetitions are allowed. Cancel common indices, bound gcds of unequal
+terms by their index differences, and compare the gap between consecutive
+ell-th powers with the difference of the two short term products.
+(ErdosSelfridge1975, Lemma 1 and proof, pp. 293–294.)
+
+Apply §4.3's maximal-valuation deletion with n=m+1,d=1 and these a_j after
+shifting j to j−1. Under the small-prime-support hypothesis it deletes at
+most π(k−1) indices and the retained product divides (k−1)!. Pad the deleted
+set if necessary to obtain exactly k−π(k−1) retained indices; removing more
+positive integer factors preserves divisibility. This is the factorial-deletion
+target already owned in §4.3, applied to powerfree coefficients, with no second
+construction. (ErdosSelfridge1975, Lemma 2, pp. 294–295.)
+
+**Checks.**
+
+- At r=0 both index multisets are empty and both products are 1.
+- For m=28,k=3,ell=3 the coefficients 29,30,31 have the six two-factor products 841,870,899,900,930,961, all distinct modulo rational cubes.
+- Without m>k^ell, m=1,k=7,ell=3 has coefficients 2,3,4,5,6,7,1 and equal products 2·6=3·4 on different index multisets.
+- For m=0,k=5,ell=2 the coefficients are 1,2,3,1,5; §4.3 removes indices 1 and 2 and retains product 5. This family fails support below k, and 5 does not divide 4!=24.
+
+*Needs:* The powerfree factorization above; §0.2's term-gcd bound; §4.3.
+The distinctness theorem uses m>k^ell; deletion uses the support hypothesis
+and does not need that size bound.
+
+#### Rectangle-free counting and the large-length range
+
+Prove that a finite simple bipartite graph with part sizes s,t and no
+four-cycle has at most s+binom(t,2) edges, including empty parts. Count the
+pairs of neighbours at each vertex in the s-part; each pair in the t-part
+occurs at most once. Deduce that if B,U,V are finite sets of positive integers,
+B⊆{uv:u∈U,v∈V}, and all unordered two-factor products from B are distinct
+including repeated factors, then |B|≤|U|+binom(|V|,2).
+(ErdosSelfridge1975, Lemma 3 and (11)–(12), pp. 295–296.)
+
+For k≥30000 and ell≥3 in the contrary valuation case, order the coefficients
+as a₁<⋯<a_k and prove a_i≥i, a_i>3.5694(i−304), and
+a_i>4.3402(i−1492). The multiplicative covers use, respectively, the 25
+integers at most 36 supported on {2,3,5,7}, and the 55 integers at most 100
+supported on {2,3,5,7,11}. Prove their covering and residue-count inequalities,
+then the three coefficient bounds and ∏_(i≤k−π(k))a_i>k!.
+This contradicts deletion: its retained set has at least k−π(k) entries,
+so its product is at least this initial product, but divides (k−1)!.
+Use §4.4's Stirling upper estimate, the prime-count estimates with their numerical
+input obligation, and the supplied `Stirling.le_factorial_stirling` inequality
+sqrt(2πm)(m/exp(1))^m≤m! for every natural m. The comparison at k=30000 and its persistence
+for every larger k are explicit mathematical inequalities.
+(ErdosSelfridge1975, §2.1, (13)–(16), pp. 296–297.)
+
+**Checks.**
+
+- Empty parts have zero edges. A two-edge star with s=1,t=2 has 2=1+binom(2,2) edges.
+- The complete bipartite graph with s=t=2 has four edges, exceeds the bound 3, and contains a four-cycle; the cycle exclusion is essential.
+- B={1,2,3}, U=B,V={1} has six distinct unordered products and saturates the bound 3; B={1,2,4} fails distinctness because 1·4=2·2.
+- The two covering sets have sizes 25 and 55; the first excludes 11 and the second excludes 13, distinguishing smooth support from a mere size cutoff.
+
+*Needs:* Distinctness and deletion above; native finite simple graphs and finite
+sets; §4.4 and `Stirling.le_factorial_stirling` for the factorial comparisons;
+AnalyticNumberTheoryPartI §0.5 with `gap:numerical-prime-inputs` for its
+unconditional numerical prime-count estimate.
+
+#### Odd-prime finite ranges
+
+For ell=3, prove the k=3 contradiction directly. For 4≤k<1000 let f(k,m)
+count coefficients supported on the first m primes. Prove
+f(k,m)(f(k,m)−1)>3^m with m=2,3,4,5,6,7,8 on the respective intervals
+[4,10), [10,28), [28,77), [77,143), [143,340), [340,646), [646,1000).
+The lower bound counts indices after excluding divisibility by primes above
+the m-th prime; each excluded prime p costs at most floor(k/p)+1 indices.
+There are 3^m cubeclasses of ratios on m primes, so the ordered distinct-index
+ratios contradict Lemma 1. (ErdosSelfridge1975, §§2.2–2.3, (17), pp. 297–298.)
+
+For 1000≤k<30000 choose r≥1 and the r largest primes q₁<⋯<qᵣ≤√k.
+Let F(k,r) count coefficients supported on primes ≤√k and containing at most
+one of these q's, counted with multiplicity. Prove there is such an r with
+F(k,r)(F(k,r)−1)>3^(π(q₁)−1)(r²+r+1).
+Bound F below by deleting indices divisible by primes √k<p<k and by each
+q_i q_j, i≤j, using floor(k/a)+1 for every divisor a, including a>k.
+The factor r²+r+1 counts the possible cube-exponent patterns of a ratio with
+at most one selected q in numerator and denominator.
+(ErdosSelfridge1975, §2.4, (18), p. 298.)
+
+For every prime ell≥5 prove the corresponding inequalities
+binom(f+ell−2,ell−1)>ell^m and
+binom(F+ell−2,ell−1)>ell^(π(q₁)−1)binom(r+ell−1,ell−1),
+with the same finite-range choices. Counting multisets of ell−1 coefficients
+then contradicts distinctness modulo rational ell-th powers. These quantified
+inequalities, the residue counts at all interval endpoints, and the k=3 argument
+are the finite arithmetic obligations here; no prime exponent is bounded away
+without this uniform argument. (ErdosSelfridge1975, §2.5, (19)–(20), pp. 298–299.)
+
+**Checks.**
+
+- At k=4,m=2 the elementary lower bound is f≥4, so 4·3=12>9; for ell=5, binom(7,4)=35>25.
+- At k=1000, the primes (19,23,29,31), r=4, give F≥255 and 255·254=64770>45927=3⁷·21.
+- At k=29999, the 31 primes from 29 to 173 give F≥4853 and 4853·4852=23546756>19545219=3⁹·993.
+
+*Needs:* Powerfree factorization and distinctness above; §0.8's residue-class
+count at d=1; finite prime sets, multiset counts and elementary inequalities.
+No large-length estimate is used to cover a missing finite interval.
+
+#### The square-exponent branch and assembly
+
+For ell=2 and k≥71 prove that m>k², m+j=a_j x_j² with positive x_j and
+distinct squarefree a_j supported below k is impossible. Reuse deletion,
+count the 24 residue classes modulo 36 not divisible by 4 or 9, compare the
+2- and 3-valuations in ∏a_j with those in (k−1)!, and prove the resulting
+factorial and prime-product inequalities for all k≥71. Use the supplied theta
+bound to obtain ∏_(p<k)p<3^k in the large range; prove the sharper finite
+prime-product inequalities needed for 71≤k<297 directly.
+(ErdosSelfridge1975, §3.1, (21)–(23), pp. 299–300.)
+
+For 3≤k<71 prove the remaining support/counting assertions: k=3 forces
+repetition; k=4 reduces to four consecutive factors, whose product is
+(m²+5m+5)²−1; for 5≤k<20 five coefficients supported on {2,3} force
+repetition among only four squarefree possibilities, apart from the k=6,8
+residue cases, each containing four consecutive factors with square product.
+For 20≤k<56 use nine coefficients supported on {2,3,5}, and for 56≤k<71
+use 21 supported on {2,3,5,7}, against 8 and 16 squarefree possibilities.
+Prove these counts and the two exceptional residue implications, including
+all endpoints. (ErdosSelfridge1975, §3.2, p. 300.)
+
+**Checks.**
+
+- Modulo 36, exactly 12 classes are divisible by 4 or 9 and 24 are not; subtracting the two counts without their intersection gives 23.
+- The squarefree numbers supported on {2,3} are exactly 1,2,3,6; the threshold is five, not four.
+- For m=0 the four-term product is 24=5²−1, and for m=1 it is 120=11²−1; neither equals the displayed square.
+- At m=0,k=3, the valuation of 3 in 1·2·3 is 1, which is not divisible by either exponent 2 or 3. At m=0,k=4, v₃(24)=1; these also test the least-prime boundary in Theorem 2.
+
+*Needs:* Powerfree factorization, distinctness, deletion and the finite residue
+counts above; AnalyticNumberTheoryPartI §0.3 with
+`gap:numerical-prime-inputs` for the theta bound; native prime factorization.
+Combining the square branch, the odd-prime branches and prime-divisor reduction
+proves Theorem 2, and then `consecutiveProduct_not_perfectPower`.
 
 ### 7.2 Erdős nonexistence assertion
 
@@ -1751,7 +1979,7 @@ The positive solution (n,d,k,y,ell)=(1,24,3,35,2) rules out thresholds 0 and 3. 
 
 ### Dependencies
 
-Layer 0 and native finite products; no target in this layer is a premise to Layers 1–6.
+Layer 0 and native finite products; §§4.3–4.4 and AnalyticNumberTheoryPartI §§0.3 and 0.5, with `gap:numerical-prime-inputs`, for §7.1. No target in this layer is a premise to Layers 1–6.
 
 ## Downstream consumers
 
@@ -1814,6 +2042,9 @@ by `n-d`. Its distinct branch values, the covering degree
 `ell^{k-3}`, and
 `2g-2=kell^{k-1}(1-2/k-1/ell)>0` are the genus requirements.
 
+Layers 1–6 also require the full Legendre-character and effective-modular
+obligations `gap:legendre-character-interfaces` and
+`gap:effective-modular-comparisons`; neither is a theorem supplied by its name.
 All applications of the literal numerical constants retain the seven supplier
 input hypotheses in the contracts table until their discharge. The unconditional
 end theorems require gap:numerical-prime-inputs and gap:numerical-zero-inputs;
@@ -1838,7 +2069,7 @@ The general modular and analytic inputs above retain the hypotheses and numerica
 - **Kraus1997.** Alain Kraus, *Majorations effectives pour l’équation de Fermat généralisée*, Canadian J. Math. 49 (1997), 1139–1161, §3.1, Théorème 4, p. 1144, DOI 10.4153/CJM-1997-056-2.
 - **Lemos2017v2.** Pedro Lemos, *Serre’s uniformity conjecture for elliptic curves with rational cyclic isogenies*, arXiv:1702.01985v2, Theorem 1.1, p. 2. This locator refers to that preprint version.
 - **Faltings1983.** Gerd Faltings, *Endlichkeitssätze für abelsche Varietäten über Zahlkörpern*, Invent. Math. 73 (1983), §6, Satz 7, p. 365.
-- **ErdosSelfridge1975.** Paul Erdős and John L. Selfridge, *The product of consecutive integers is never a power*, Illinois J. Math. 19 (1975), Theorem 1, p. 292.
+- **ErdosSelfridge1975.** Paul Erdős and John L. Selfridge, *The product of consecutive integers is never a power*, Illinois J. Math. 19 (1975), Theorems 1–2, §1 Lemmas 1–2, §2 Lemma 3 and (13)–(20), §3 (21)–(23), pp. 292–300.
 - **Martin2003v1.** Greg Martin, *Dimensions of the spaces of cusp forms and newforms on Γ₀(N) and Γ₁(N)*, arXiv:math/0306128v1, Theorem 2; published in J. Number Theory 112 (2005).
 - **Mazur1978.** Barry Mazur, *Rational isogenies of prime degree*, Invent. Math. 44 (1978), rational-isogeny classification (uncertified primary text).
 - **IwaniecKowalski2004.** Henryk Iwaniec and Emmanuel Kowalski, *Analytic Number Theory* (2004), Theorems 5.26–5.28, 12.13 and Proposition 5.25.
