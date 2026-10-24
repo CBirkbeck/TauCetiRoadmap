@@ -4134,8 +4134,8 @@ measure separately. No exact scalar normalization equality is asserted.
 
 Replace a radius cover by a diameter cover and conversely, tracking the factor two in scale. Apply native
 mkMetric_mono_smul to compare gauges once a bounded doubling ratio is established. Handle the
-zero/finite-ratio cases separately. Extend the NNReal gauge to ENNReal by continuity at infinity when needed,
-and compare covers only at sufficiently small finite scales.
+zero/finite-ratio cases separately. Extend the gauge by the `extendedGauge` formula of §3.10.
+All comparisons use sufficiently small finite diameters, so no continuity at infinity is required.
 
 *Needs:* §3.8 (gauges and disjoint expanded coverings); Mathlib `MeasureTheory.Measure.mkMetric`; Mathlib
 `MeasureTheory.Measure.mkMetric_apply`.
@@ -4301,6 +4301,7 @@ Its basic API has the following statements.
 - For f(r)=r², the extended value at 1/2 is 1/4, whereas at ∞ it is ∞; an extension by zero at ∞ would lose the chosen convention.
 - For f(r)=√r, the extended value at 1/4 is 1/2, retaining the finite radius.
 - For f(r)=r, the extended value at 0 is 0. Finite diameter 2r receives 2r, not r; for f(r)=r² and r=1/4 the diameter gauge gives 1/4 rather than the radius gauge's 1/16.
+- The bounded dimension gauge f(r)=r/(1+r) has f(1)=1/2 and f(2)=2/3, with f(r)→1 as r→∞, whereas its extended value at ∞ is ∞. For k=1 its ratio f(r)/r=1/(1+r) is antitone on positive radii; requiring continuity at infinity would wrongly exclude this admissible gauge.
 
 Define `GaugeRatioMonotone` for k and f to mean that some R>0 makes f(r)/r^k monotone or antitone on 0<r≤R. Only the behavior near zero enters Hausdorff measure; this is the local form of the source's ratio hypothesis. Its API restricts the cutoff R, admits either direction and ignores the totalized quotient at r=0. ([BeresnevichVelani](#references), Theorem 2 and Remark 3, printed p.977.)
 
