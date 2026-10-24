@@ -36,8 +36,16 @@ statements require; the supporting theory and Checks are specified here.
 This roadmap owns the progression arithmetic, the two Frey specializations, their
 local and modular adapters, the Legendre case analysis, simultaneous character
 selection, both analytic endgames and the signed diagonal-curve finiteness application.
-It owns the elliptic residual-discriminant adapters, signed diagonal curves and quantitative
-specializations stated in Layers 1–6. ArithmeticGaloisRepresentations §1.9 owns
+It owns the progression-specific residual-conductor wrapper and local-hypothesis
+verification, signed diagonal curves and quantitative specializations stated in
+Layers 1–6. NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h own elliptic
+conductor values, wild bounds and the multiplicative residual-discriminant formula.
+SerreWeightAndLevelOptimisation §§6.1–6.3 own the deletion level, weight-two
+lowering with a modularity witness, and good-prime and removed-prime trace
+congruences. EllipticCurveModularity R29.3, R29.4 and R29.6 supply that
+modularity witness at the conductor; AutomorphicGaloisRepresentations §1.5
+supplies the continuous arithmetic newform representation.
+ArithmeticGaloisRepresentations §1.9 owns
 residual reduction and lattice independence; its §§3.1–3.3 own Swan, Artin and
 prime-to-coefficient residual conductors. General modularity, newform representations,
 rational-isogeny classification and uniformity, character PNT, zero-density and
@@ -265,6 +273,63 @@ and Layer 8's coefficient number field, Hecke eigenvalues and coefficient-field 
 trivial-nebentypus dimension formulas. The newspace dimension used in the Kraus
 threshold is not the full Γ₁ dimension.
 
+### From TauCetiRoadmap.NeronModelsAndSemistableAbelianVarieties
+
+Consume §5.3g's elliptic conductor values over nonarchimedean local fields:
+good reduction has exponent 0 and split or nonsplit multiplicative reduction
+has exponent 1; over ℚ₂ and ℚ₃ the wild bounds are f₂≤8 and f₃≤5.
+Consume §5.3h's conductor of the actual torsion representation E[ell],
+before semisimplification. At residue characteristic p≠ell, good reduction
+gives exponent 0 and multiplicative reduction gives exponent 0 if
+ell divides v_p(Δ_min), and 1 otherwise. For E/ℚ and prime ell≥5,
+the prime-to-ell residual conductor is the prime-to-ell part of M with
+each prime p≠ell, p∥M and ell dividing v_p(Δ_min) deleted once.
+The formula includes the additive places in this ell≥5 range; no such
+general additive comparison at ell=3 is assumed.
+(BS20, §2, equation (3), p. 358.)
+
+### From TauCetiRoadmap.EllipticCurveModularity
+
+Consume R29.3's “The newform of an elliptic curve,” R29.4's “The level is
+the conductor” and R29.6's modularity theorem. Every elliptic E/ℚ has an
+attached normalized weight-two trivial-character newform at its positive
+arithmetic conductor M, with integer coefficients and the same traces at
+every good prime. This actual modularity witness is supplied to
+SerreWeightAndLevelOptimisation §6.2.
+(BS20, §2, Theorem 3 and its modularity input, pp. 358–359.)
+
+### From TauCetiRoadmap.SerreWeightAndLevelOptimisation
+
+Consume §6.1's deletion level M₀ for E/ℚ, conductor M>0, nonzero minimal
+discriminant Δ_min and prime ell≥3: divide M by the product of primes
+p∥M with ell dividing v_p(Δ_min), including p=ell when it qualifies.
+Consume §6.2 with an actual weight-two trivial-character modularity witness
+at M and irreducible E[ell]. It gives a normalized cuspidal weight-two
+trivial-character newform f at M₀, a coefficient prime λ above ell, and
+the residual isomorphism after scalar extension. The coefficient field is
+totally real. Retain its good or finite-flat multiplicative coefficient-prime
+input when removing ell; M₀ need not be prime to ell in general.
+
+Consume §6.3 for that same f and λ: at p∤ell M M₀ the good traces are
+congruent modulo λ; at p∤ell M₀ with p∥M, c_p is congruent to
+ε_p(p+1), where ε_p=1 for split and −1 for nonsplit multiplicative
+reduction. Neither removed-prime congruence nor unramified Frobenius is
+asserted at p=ell. The comparison of M₀ with the prime-to-ell residual
+conductor uses §5.3h of NeronModelsAndSemistableAbelianVarieties at ell≥5;
+§1.10 verifies the coefficient-prime conditions for the progression family.
+(BS20, equation (3), p. 358; Theorem 3 and Lemma 2.1, p. 359.)
+
+### From TauCetiRoadmap.AutomorphicGaloisRepresentations
+
+Consume §1.5's arithmetic dual of the cohomological newform realization,
+specialized to a normalized cuspidal weight-two newform of positive level N
+and trivial nebentypus. At a coefficient place λ above ell it is a jointly
+continuous two-dimensional representation over K_λ, unramified outside
+N*ell, with cyclotomic determinant and arithmetic-Frobenius polynomial
+`T^2-c_p*T+p` at p∤N*ell. Residual reduction uses
+ArithmeticGaloisRepresentations §1.9 and its continuous residue-map hypotheses.
+(BS20, §2, pp. 358–359.)
+
 ### From TauCetiRoadmap.WeightsInEtaleCohomology
 
 Consume R34.6's `newform_ramanujan`, using R34.5's realization and purity:
@@ -460,14 +525,10 @@ in §1.10 is needed before applying EC.3 to the progression curve.
 ### Supplier gaps
 
 The following `gaps` entries specify required inputs not supplied unconditionally
-by the cited contracts. A gap supplies no theorem; a locator marked unavailable
-does not identify a supplier section.
+by the cited contracts. A gap supplies no theorem.
 
 - `gap:legendre-character-interfaces`: requires the complete LG.0–LG.5 contract under Required Legendre-character interfaces, including normalization, units, conductor support, descent, two-primary groups, the Case-II point and trace comparisons (BS20, §6, Lemmas 6.2–6.6 and their proofs, pp. 367–372).
 - `gap:effective-modular-comparisons`: requires the complete EC.0–EC.5 contract under Required effective modular comparisons, including the newspace bound, norm inequality, exact Kraus realization, both irreducibility cutoffs and rational-isogeny surjectivity (BS20, §2, Lemma 2.2 and Theorem 4, pp. 359–360; Lemmas 3.3, 3.5, pp. 362–363; Lemos2017v2, Theorem 1.1, p. 2).
-- `gap:elliptic-modularity`: supplier `EllipticCurveModularity`; section: rational elliptic modularity (locator unavailable); needs: every E/ℚ corresponds to a normalized weight-two trivial-nebentypus newform of level its arithmetic conductor with the same traces at all good primes (BS20, §2, Theorem 3, pp. 358–359).
-- `gap:weight-two-lowering`: supplier `SerreWeightAndLevelOptimisation`; section: weight-two level and weight optimization (locator unavailable); needs: irreducible E[ell] for odd prime ell descends to the deletion level in BS20 equation (3), with the coefficient-prime weight-two bridge under the good or finite-flat multiplicative hypotheses (BS20, Theorem 3 and Lemma 2.1, p. 359).
-- `gap:newform-galois`: supplier `AutomorphicGaloisRepresentations`; section: classical newform representations (locator unavailable); needs: the continuous two-dimensional K_λ-representation of a normalized weight-two trivial-nebentypus newform, unramified outside N*ell, with arithmetic-Frobenius polynomial `T^2-c_p*T+p` and cyclotomic determinant (BS20, §2, pp. 358–359).
 - `gap:numerical-prime-inputs`: supplier `AnalyticNumberTheoryPartI` §§0.3, 0.5, 0.16, 0.25 and 3.2; needs: proofs of the five prime/conductor input hypotheses in the table, before any dependent statement is unconditional (Schoenfeld1976, Note Added in Proof, p. 360; RosserSchoenfeld1962, Theorems 1, 5, 8; RamareRumely1996, Theorems 1, 2.1.1 and Table 1; BS20, Lemma 7.3, p. 375). These sections state conditional estimates, not proofs of the inputs.
 - `gap:numerical-zero-inputs`: supplier `AnalyticNumberTheoryPartI` §0.7; needs: proofs of both BMOR input hypotheses in the table before the literal separation constant 40 is available unconditionally (BMOR2018v3, Proposition 1.11 and its proof, §6.1). The global negative-discriminant classification is included.
 - `gap:small-conductor-zeros`: supplier `AnalyticNumberTheoryPartI` §0.7, the zero-exclusion component of its BMOR finite input; needs: a proof excluding exceptional real zeros for primitive nonprincipal quadratic conductors 1<N<400000 at the same sufficiently small c* as §3.1. That component is a hypothesis, not a proved output. Platt2013v1, Abstract, p. 1 records the published mathematical input (BS20, p. 376); no computation is specified here.
@@ -712,8 +773,10 @@ Normalize the three progression terms to coprime a+b+c=0 and specialize the supp
 
 ### 1.1 General modular comparison interfaces
 
-Consume `gap:newform-galois`, WeightsInEtaleCohomology R34.6's
-weight-two trivial-nebentypus coefficient bound and `gap:elliptic-modularity` with the exact hypotheses in the supplier contracts.
+Consume AutomorphicGaloisRepresentations §1.5's arithmetic weight-two
+representation, WeightsInEtaleCohomology R34.6's weight-two trivial-nebentypus
+coefficient bound and EllipticCurveModularity R29.3, R29.4 and R29.6's
+modularity witness, with the exact hypotheses in the supplier contracts.
 Use EtaleCohomologyFoundations §F.4.0 for invariant integral lattices of the
 jointly continuous K_λ-representation of the compact absolute Galois group.
 Use ArithmeticGaloisRepresentations §1.9 for reduction and semisimplified
@@ -749,24 +812,28 @@ leaves it unchanged.
 - For odd ell, the residual cyclotomic character is unramified away from ell, so its prime-to-ell conductor is 1 although it ramifies at ell. This tests exclusion of the coefficient prime.
 - A nontrivial tame unipotent inertia action on a residual plane has a one-dimensional fixed space and Sw=0, giving exponent 1; the semisimplification of that inertia action has exponent 0 and cannot replace it.
 
-Consume EllipticCurves Layer 8's semistable algorithmic–Artin comparison.
-The local work here is the multiplicative residual-discriminant formula:
-for odd prime ell and residue characteristic different from ell, the wrapper's
-exponent is 0 when ell divides the minimal discriminant valuation and 1
-otherwise. Specialize to both Frey families and their deletion-level comparison.
-Over ℚ prove the elliptic wild bounds f₂≤8 and f₃≤5; odd semistable
-rational-Tate-module exponents are 0 or 1. Split and nonsplit multiplicative
-reduction both have elliptic exponent 1.
+Consume EllipticCurves Layer 8's semistable algorithmic–Artin comparison
+and NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h's conductor values,
+wild bounds and actual-torsion residual-discriminant formula. Verify their
+local hypotheses on both progression Frey families, then specialize them to
+the wrapper and deletion-level bounds. The wild bounds concern ℚ₂ and ℚ₃;
+the general residual deletion comparison is used only for ell≥5.
 (BS20, §2, equation (3), pp. 358–359; §3.2, Lemmas 3.4–3.5, pp. 362–363.)
 
-Consume `gap:weight-two-lowering`: for E/ℚ and odd prime ell with
-irreducible E[ell], use the deletion level M₀ of BS20 equation (3).
-Prove the good-prime trace congruence at p∤ell M M₀ and
-the removed-prime trace congruence at p∤ell M₀ with p exactly dividing M;
-the latter congruence is p+1≡±cₚ modulo the chosen coefficient prime λ.
-The prime-to-ell conductor comparison retains the supplier’s good or finite-flat
-multiplicative coefficient-prime hypotheses. (BS20, Theorem 3 and Lemma 2.1,
+Consume SerreWeightAndLevelOptimisation §§6.1–6.3 with the supplied
+modularity witness and irreducible E[ell], for prime ell≥3. Use its M₀,
+newform and good-prime and removed-prime trace congruences, retaining the
+same coefficient prime λ, p≠ell and the split/non-split local sign.
+For the progression applications, verify the good or finite-flat multiplicative
+coefficient-prime hypotheses before identifying M₀ with the prime-to-ell
+residual conductor. (BS20, Theorem 3 and Lemma 2.1,
 p. 359; Theorem 4, p. 360.)
+
+**Checks.**
+
+- For 11a1, M=11 and v₁₁(Δ_min)=5: ell=5 gives deletion level and prime-to-ell residual conductor 1, while ell=3 retains the factor 11. No irreducible level-one newform is inferred from this local calculation.
+- The arithmetic data M=33, v₃(Δ_min)=6, v₁₁(Δ_min)=2 and ell=3 give M₀=11; excluding the coefficient prime from the deletion product would give 33. Such data alone supply no elliptic curve or modularity witness.
+- At a removed multiplicative prime p=7 and ell=5, the local split and nonsplit traces are 8≡3 and −8≡2 modulo 5; an unsigned choice would lose the nonsplit branch. At p=ell neither trace-congruence clause applies.
 
 Require `gap:effective-modular-comparisons` for the full
 EllipticModularityEffectiveComparisons EC.0–EC.4 contract, with its exact
@@ -785,7 +852,7 @@ and Theorem 4, pp. 359–360; Lemmas 3.3, 3.5, pp. 362–363.)
 - N=1 with g₀⁺(1)=0 gives F_K(1)=1, G_K(1)=4 and H_K(1)=4; replacing the maximum by the first term loses the dyadic constraint.
 - N=11 with g₀⁺(11)=1 gives μ(11)=12, μ(44)=72 and H_K(11)=169; replacing the newspace by a Γ₁ space changes this value.
 
-*Needs:* EllipticCurves Layers 2–4 and Layer 8’s semistable conductor comparison; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; `gap:newform-galois`, `gap:elliptic-modularity`, `gap:weight-two-lowering`; WeightsInEtaleCohomology R34.5–R34.6; ModularForms Layers 2–4, 8 and 10; `gap:effective-modular-comparisons` (EC.0–EC.4); LocalFieldsRamification Layers 3–4; Layer 0's explicit prime estimates only for the later progression level bounds.
+*Needs:* EllipticCurves Layers 2–4 and Layer 8’s semistable conductor comparison; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; WeightsInEtaleCohomology R34.5–R34.6; ModularForms Layers 2–4, 8 and 10; `gap:effective-modular-comparisons` (EC.0–EC.4); LocalFieldsRamification Layers 3–4; Layer 0's explicit prime estimates only for the later progression level bounds.
 
 ### 1.2 Progression Frey specialization
 
@@ -869,9 +936,14 @@ Prove the first-family reduced-level theorem with the hypotheses and conclusions
 
 For S, ell≥7 and a in A(k), the irreducible residual representation of E_a occurs in a weight-two newform at the deletion level M_a. M_a divides 2^8*A_i*A_j*A_h, its odd part is squarefree, M_a divides 2^7*product over primes q≤k of q, and M_a≤2^7*exp(1.000081*k). No identification with the prime-to-ell residual conductor is implicit.
 
-Import the uniform full-two-torsion irreducibility cutoff and modular level lowering. Delete odd multiplicative primes whose Delta valuation is divisible by ell. Odd local exponents are zero or one; use the exact wild bound at 2. Apply the supplier explicit Chebyshev upper bound at x=k.
+Use the EC.4 full-two-torsion irreducibility cutoff and the supplied modularity
+witness in SerreWeightAndLevelOptimisation §§6.1–6.2. Apply the
+NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h local values to delete
+odd multiplicative primes whose minimal discriminant valuation is divisible
+by ell. Use its wild bound at 2. Apply the supplier explicit Chebyshev
+upper bound at x=k.
 
-*Needs:* Layer 1 — first-family invariants and odd local properties; Layer 0 — signed small-prime factorization; Layer 1, rational-isogeny classification consequences; Layer 1, modular level lowering; Layer 1, Artin-conductor interface; Layer 0, explicit prime estimates.
+*Needs:* §1.3; Layer 0 — signed small-prime factorization; §1.1's modularity witness and residual-conductor wrapper; SerreWeightAndLevelOptimisation §§6.1–6.2; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; `gap:effective-modular-comparisons` (EC.4); Layer 0's explicit prime estimates.
 
 ([BS20], Lemma 3.3, equation (9), and proof, pp. 361-362; Lemma 3.3 and proof, pp. 361-362; Proof of Lemma 3.3, p.362.)
 
@@ -883,7 +955,7 @@ For S, ell≥11 and q in I(k), E_q has irreducible residual representation reali
 
 Use the rational-two-torsion irreducibility cutoff. Apply level lowering with the second local tests. Keep wild factors at 2 and3 and the kappa^2 exceptional factor; use |kappa|<k^2 and Chebyshev bound.
 
-*Needs:* Layer 1 — second-family invariants and local tests; Layer 1, rational-isogeny classification consequences; Layer 1, modular level lowering; Layer 1, Artin-conductor interface; Layer 0, explicit prime estimates.
+*Needs:* §1.6; §1.1's modularity witness and residual-conductor wrapper; SerreWeightAndLevelOptimisation §§6.1–6.2; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; `gap:effective-modular-comparisons` (EC.4); Layer 0's explicit prime estimates.
 
 ([BS20], Lemma 3.5 and proof, p. 363; Proof of Lemma 3.5, p.363.)
 
@@ -907,7 +979,7 @@ Under H and a in A(k), E_a[ell] is irreducible of Serre weight 2, its prime-to-e
 
 The level bound places ell above all level primes. At ell, use the good or finite-flat multiplicative case of coefficient-prime weight-two lowering, justified by the large-prime discriminant divisibility. Match every local conductor exponent with the deletion level. This is a real theorem, not an equality assigned by definition.
 
-*Needs:* Layer 1 — first-family reduced-level bounds; Layer 0 — large-prime valuation divisibility; §1.1 `gap:weight-two-lowering` with its coefficient-prime hypotheses; Layer 1, Artin-conductor interface.
+*Needs:* Layer 1 — first-family reduced-level bounds; Layer 0 — large-prime valuation divisibility; SerreWeightAndLevelOptimisation §§6.1–6.2 with its coefficient-prime hypotheses; NeronModelsAndSemistableAbelianVarieties §5.3h; §1.1's residual-conductor wrapper.
 
 ([BS20], §2, Theorem 4, p. 360; §3.1, Lemmas 3.2–3.3, pp. 361–362; §5, Lemma 5.1, p. 365. The weight and conductor comparison is the adapter between these results.)
 
@@ -943,7 +1015,7 @@ Under H, a in A(k), and prime k/2<p≤k, both E_a and its chosen F_a have good r
 
 p|d and gcd(n,d)=1 imply every term is a p-unit, hence good reduction for the first model. The level bound gives good reduction of F_a. Residual congruence together with the Hasse bounds and ell>4*sqrt(p) makes the integer traces equal. Reducing the first model with d=0 modulo p gives a twist of Y^2=X(X-1)(X+1), whose trace vanishes for p≡3 mod 4.
 
-*Needs:* Layer 1 — actual comparison elliptic curve; Layer 1 — half-interval primes divide the difference; Layer 1 — first-family invariants and odd local properties; EllipticCurves Layer 3; Layer 1, modular level lowering; Tau Ceti `WeierstrassCurve.frobeniusTrace`.
+*Needs:* Layer 1 — actual comparison elliptic curve; Layer 1 — half-interval primes divide the difference; Layer 1 — first-family invariants and odd local properties; EllipticCurves Layer 3; SerreWeightAndLevelOptimisation §6.3; Tau Ceti `WeierstrassCurve.frobeniusTrace`.
 
 ([BS20], Lemma 5.2, first conclusion, pp. 365-366; Lemma 5.2, second conclusion, pp. 365-366.)
 
@@ -953,7 +1025,7 @@ At n=d=1 the first model has coefficients (0,2,0,−3,0), while the equal-sum mo
 
 ### Dependencies
 
-Layer 0; `gap:effective-modular-comparisons` (EC.0–EC.4); WeightsInEtaleCohomology R34.5–R34.6; EllipticCurves Layers 2–4, 8 and its worked Frey example; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
+Layer 0; `gap:effective-modular-comparisons` (EC.0–EC.4); WeightsInEtaleCohomology R34.5–R34.6; EllipticCurves Layers 2–4, 8 and its worked Frey example; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
 
 ## Layer 2: Legendre cases and the simultaneous character family
 
@@ -1857,7 +1929,18 @@ unconditional numerical prime-count estimate.
 
 #### Odd-prime finite ranges
 
-For ell=3, prove the k=3 contradiction directly. For 4≤k<1000 let f(k,m)
+For every prime ell≥3, prove the k=3 contradiction under the contrary
+valuation hypothesis, after the reduction to m>3^ell. All three ell-powerfree
+coefficients are powers of 2. If m is even, both odd terms have coefficient 1,
+contradicting distinctness at length 1. If m is odd, the middle coefficient
+is 1, one endpoint coefficient is 2 and the other is 2^a with 0≤a<ell,
+since one of the even endpoints has 2-valuation exactly 1. For a=0 or 1
+two coefficients repeat. For 2≤a<ell, a copies of coefficient 2 and one
+copy of coefficient 2^a together with a−1 copies of coefficient 1 have the
+same product, contradicting distinctness at length a<ell.
+(ErdosSelfridge1975, §2.2, p. 297.)
+
+For ell=3 and 4≤k<1000 let f(k,m)
 count coefficients supported on the first m primes. Prove
 f(k,m)(f(k,m)−1)>3^m with m=2,3,4,5,6,7,8 on the respective intervals
 [4,10), [10,28), [28,77), [77,143), [143,340), [340,646), [646,1000).
@@ -1887,6 +1970,9 @@ without this uniform argument. (ErdosSelfridge1975, §2.5, (19)–(20), pp. 298�
 
 **Checks.**
 
+- At k=3 with even m the forced coefficients include 1,1, giving equal one-factor products; with odd m, a=0 or 1 gives the repeated coefficient 1 or 2.
+- At ell=3,a=2 the forced coefficients 1,2,4 give 2·2=4·1=4 at length 2<3; at ell=5,a=4, 2⁴=16·1³=16 at length 4<5. Both use different index multisets.
+- The length restriction is essential: coefficients 1,2 at length ell give a ratio 2^ell between the all-2 and all-1 products, a rational ell-th power without equal multisets. Distinctness is used only below ell.
 - At k=4,m=2 the elementary lower bound is f≥4, so 4·3=12>9; for ell=5, binom(7,4)=35>25.
 - At k=1000, the primes (19,23,29,31), r=4, give F≥255 and 255·254=64770>45927=3⁷·21.
 - At k=29999, the 31 primes from 29 to 173 give F≥4853 and 4853·4852=23546756>19545219=3⁹·993.
@@ -1921,7 +2007,7 @@ all endpoints. (ErdosSelfridge1975, §3.2, p. 300.)
 - Modulo 36, exactly 12 classes are divisible by 4 or 9 and 24 are not; subtracting the two counts without their intersection gives 23.
 - The squarefree numbers supported on {2,3} are exactly 1,2,3,6; the threshold is five, not four.
 - For m=0 the four-term product is 24=5²−1, and for m=1 it is 120=11²−1; neither equals the displayed square.
-- At m=0,k=3, the valuation of 3 in 1·2·3 is 1, which is not divisible by either exponent 2 or 3. At m=0,k=4, v₃(24)=1; these also test the least-prime boundary in Theorem 2.
+- At m=0,k=3, the prime 3≥k has valuation 1 in 1·2·3, not divisible by either exponent 2 or 3. At m=0,k=4, v₃(24)=1 but 3<k, and m+k=4 is below the least prime 5≥k; Theorem 2 does not apply there.
 
 *Needs:* Powerfree factorization, distinctness, deletion and the finite residue
 counts above; AnalyticNumberTheoryPartI §0.3 with
