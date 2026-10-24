@@ -16,7 +16,9 @@ carriers. Explicit/universal chain-regulator comparisons lack manifold form-test
 higher-cycle Deligne complexes and their regulator maps; the Green presentation is in H^(2n)
 of the modified fiber, at higher-Chow index zero. Reciprocity constructions, including
 characteristic-zero strong reciprocity, lack curve-function-field Bloch complexes and their
-residue homotopies. The elliptic regulator
+residue homotopies. The next-to-Milnor residue exactness, canonically truncated
+reciprocity systems and motivic comparison also lack the pre-Bloch and higher-Chow carriers;
+the pinned linear and cochain APIs do not provide those objects. The elliptic regulator
 pairing additionally lacks those curve/current regulator maps. These headlines have no
 substitute statements here. The weight-four theorem belongs to Polylogarithms, Part II.
 -/
