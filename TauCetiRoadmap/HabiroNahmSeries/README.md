@@ -8,7 +8,7 @@ This roadmap owns Nahm-specific equations and arithmetic, convergent sums, contr
 
 The arithmetic endpoints require the HabiroNumberFields finite-Chern/cyclic and global-module contracts and the PadicHodgeRegulators local-K₃ lattice contract below. Those contracts are prerequisites, not constructions supplied by this roadmap: analytic convergence and formal admissibility are independent of them, whereas arithmetic descent, membership and cohomological exports retain them as hypotheses.
 
-The following foundations have other owners. HabiroCyclotomicCompletions §1.1 supplies the finite and formal q-Pochhammer toolkit. GeometryOfNumbersAndQuadraticArithmetic §4.3 owns the analytic product, shift and zero divisor. QSeriesPartitionsAndMockModularForms §1.6 supplies finite-prefix limits and the finite/infinite identity, and §§2.4 and 3.3 supplies analytic evaluation and Rogers–Ramanujan identities, and §5.2 supplies the eta multiplier. PolylogarithmFunctions §§1.1–1.7 and 3.1–3.6 supplies analytic Li₂, §§5.1–5.8 supplies Bloch–Wigner values and relations, and §§6.1–6.5 supplies the interval Rogers function. K3BlochGroups §§3.1, 3.3–3.5 owns the shared integral pre-Bloch carrier, antisymmetric tensor cokernel and boundary; ColemanIntegration Layer L2 supplies their local polylogarithmic evaluation and §L2.Fb consumes those carriers; GeneralAlgebraicKTheory §§2.5–2.6 and 3.2 supplies the K-theory carriers and KTheoryFiniteLocalFields §§1.8 and 7.4 supplies finite-coefficient Chern and local reduction inputs. The integral Bloch comparisons, finite-Chern injectivity, number-field Habiro modules and local K₃ regulator lattice use the required arithmetic contracts below. HabiroCohomologyFoundations §4.21 supplies the étale Habiro–Hodge object; its q=1 completion is the q-Hodge complex. Polylogarithms §§2.1 and 2.3 owns algebraic embedding-regulator descent and its Borel normalization; HabiroRings §5.9 and §§6.1–6.6 owns the relative ring comparison, completed scalar extension and transported-line completion. K3BlochGroups §5.8 supplies the real Suslin Rogers detector. This roadmap owns its complementary projective-convention adapter in §1.5 and the Nahm trigonometric application in §2.7.
+The following foundations have other owners. HabiroCyclotomicCompletions §1.1 supplies the finite and formal q-Pochhammer toolkit. GeometryOfNumbersAndQuadraticArithmetic §4.3 owns the analytic product, shift and zero divisor. QSeriesPartitionsAndMockModularForms §1.6 supplies finite-prefix limits and the finite/infinite identity, and §§2.4 and 3.3 supplies analytic evaluation and Rogers–Ramanujan identities, and §5.2 supplies the eta multiplier. PolylogarithmFunctions §§1.1–1.7 and 3.1–3.6 supplies analytic Li₂, §§5.1–5.8 supplies Bloch–Wigner values and relations, and §§6.1–6.5 supplies the interval Rogers function. K3BlochGroups §§3.1, 3.3–3.5 owns the shared integral pre-Bloch carrier, antisymmetric tensor cokernel and boundary; ColemanIntegration Layer L2 supplies their local polylogarithmic evaluation and §L2.Fb consumes those carriers; GeneralAlgebraicKTheory §§2.5–2.6 and 3.2 supplies the K-theory carriers and KTheoryFiniteLocalFields §§1.8 and 7.4 supplies finite-coefficient Chern and local reduction inputs. The integral Bloch comparisons, finite-Chern injectivity, number-field Habiro modules and local K₃ regulator lattice use the required arithmetic contracts below. HabiroCohomologyFoundations §4.21 supplies the étale Habiro–Hodge object; its q=1 completion is the q-Hodge complex. Polylogarithms §§2.1 and 2.3 owns algebraic embedding-regulator descent and its Borel normalization; HabiroRings §5.9 and §§6.1–6.6 owns the relative ring comparison, completed scalar extension and transported-line completion. K3BlochGroups §5.8 supplies the real Suslin Rogers detector. HabiroNumberFields §1.7 owns the integral cyclotomic eta class, its quotient image and boundary, torsion and root-change laws. This roadmap owns the complementary projective-convention adapter in §1.5, the Nahm trigonometric application in §2.7 and the assembly of the conditional exponent-two comparison using that application.
 
 Finite-index arithmetic subgroups, rational cusps and strict widths are already available in Mathlib and Tau Ceti. The `FuchsianOrbifolds` roadmap, Layers 3–5, owns cusp charts, meromorphic descent and extension across a cusp. The `ModularForms` roadmap owns general-level modular-form geometry. Layer 3 below consumes these constructions and proves only the scalar growth comparisons needed here. It does not construct another modular curve. Gaussian measures, densities and polynomial integrability are also existing objects; `StandardDistributions`, Layers 1 and 5, owns their moment and covariance interfaces. The additions here are the algebraic Wick functional and its comparison with those measures, together with the lattice estimates specific to Nahm sums. Poisson summation for a full-rank ℤ-lattice, with the Gaussian Fourier transform it is applied to, belongs to the `ThetaSeries` roadmap (Layer 1); §2.4 consumes it and proves only the polynomial-Gaussian lattice estimate. Gauss sums of finite quadratic modules belong to Tau Ceti; §7.5 consumes them. QuantumEnvelopingAlgebras §QEA6 owns the integer upper-index symmetric Gaussian polynomial; §7.1 uses its q=v² specialisation and owns only the Nahm product identity. The shifted finite Euler–Maclaurin theorem in §2.2 allows arbitrary C^J functions and real shifts, unlike ComputationalNumberTheory §4.19a’s Hurwitz-power remainder. The ring-map reduction condition in §6.1 retains its kernel and product-algebra hypotheses, unlike the additive-subgroup p-saturation criterion in ComputationalNumberTheory §3.22.
 
@@ -37,7 +37,7 @@ For a number field K choose a nonzero positive integer Δ divisible by 6, the fi
 B = R[T]/(δT²−1).
 ```
 
-It may be a product, rather than a field. Its involution sends T to −T. A chosen component, embedding or formal branch is additional data. A theorem over B must hold on every component. The notation `H_{B,ξ}|_Δ` restricts orders to those prime to Δ; it does not silently extend the collection to all orders.
+It may be a product, rather than a field. Its involution sends T to −T. The normalised Gaussian bracket takes 1 to 1, whereas the full Gaussian collection retains its factor T=δ⁻¹/² and changes sign under this involution. The constant-one augmentation branch fixes T(0)=1; at rank zero it sends the full collection T to 1. A chosen component, embedding or formal branch is additional data. A theorem over B must hold on every component. The notation `H_{B,ξ}|_Δ` restricts orders to those prime to Δ; it does not silently extend the collection to all orders.
 
 ## Exact supplier contracts
 
@@ -93,14 +93,18 @@ From Polylogarithms §2.1 consume blochWignerDesc and weightTwoRegulator, and fr
 
 ### From TauCetiRoadmap.HabiroNumberFields
 
-The finite-Chern and cyclic-dilogarithm contract (gap:finite-chern-cyclic) has two distinct arithmetic interfaces. Generic finite-Chern injectivity requires a good-order integer `M_K=6|disc K|·|K₂(𝒪_K)|`, or the precisely equivalent exceptional integer furnished there, and an injective finite Chern map on integral K₃/Bloch classes modulo n when n is prime to M_K. Keep any roots-of-unity restriction in its statement. The same contract requires the cyclic product
+From HabiroNumberFields §§0.2 and 0.9 consume the exceptional integer `M_K=6|disc K|·|K₂(𝒪_K)|` and finite Chern injectivity on integral K₃ classes modulo n for gcd(n,M_K)=1, transported to the Bloch presentation by the specified odd-coefficient comparison. From §§1.1–1.5 consume the cyclic product
 
 ```text
 D_ζ(w) = ∏_{r=1}^{m−1}(1−ζ^r w)^r,
 D_ζ(ζw)/D_ζ(w) = (1−w)^m/(1−w^m),
 ```
 
-its distribution and root-change identities, the cyclic five-term relation and its comparison with finite Chern classes. The fractional-power product sometimes also denoted D is `D_ζ(w)^(1/m)` with specified factor logarithms. These two meanings must not be interchanged. The Kashaev–Mangazeev–Stroganov identity is required from that owner with a proof independent of this roadmap. Cyclic descent and the five-term map R_ζ instead require gcd(n,w_F)=1 and n invertible in F, where w_F is the number of roots of unity in F; they do not require gcd(n,M_F)=1 (CGZ Proposition 2.5, Theorem 2.11, pp. 11–15). The special cyclotomic torsion interface additionally requires the prime-power reduction and injectivity on the relevant n-primary cyclotomic torsion used in CGZ Lemmas 5.1 and 5.3 and Theorem 5.2, pp. 26–28, with the K3BlochGroups §§3.13–3.16 convention maps. Section 2.7 defines the particular trigonometric class and proves its scaling and Nahm-class identities using this interface. Its analytic acceptance calculation is an application here and supplies no reverse dependency.
+Read the ratio as an identity in F(w); evaluation of the displayed quotient requires w^m≠1. The product D_ζ(1) is instead evaluated directly and is nonzero. Consume its distribution and root-change identities, the independently proved KMS identity and the five-term regulator R_ζ. The fractional-power product sometimes also denoted D is `D_ζ(w)^(1/m)` with specified factor logarithms. These meanings must not be interchanged. The uniquely descended cyclic map at odd n requires n invertible in F and μ_n(F)={1}; for number fields gcd(n,w_F)=1 suffices, where w_F is the number of roots of unity. It does not require gcd(n,M_F)=1 (CGZ Proposition 2.5 and Theorem 2.11, pp. 11–15).
+
+From HabiroNumberFields §1.7 consume the integral projective eta sum η_ζ, its image modulo n, boundary vanishing, n-torsion and the quotient root-change law η_(ζ^a)=a²η_ζ. Sections 1.11–1.13 supply the prime-power reduction and cyclotomic-torsion comparison, with the K3BlochGroups §§3.13–3.16 convention maps. Section 2.7 below proves only the root-dependent Nahm identity and the analytic evaluation R_ζ(η_ζ)=ζ² (CGZ Lemmas 5.1 and 5.3, Theorems 5.2 and 7.4, pp. 26–28, 37–39). The quotient root-change law suffices after applying R_ζ; no stronger integral scaling law is needed here.
+
+Consume HabiroNumberFields §1.10's signed Chern evaluation only subject to its independent finiteChern_normalization_comparison, and §1.14's scalar-reading implication subject to that comparison and its exact-order premise. Combining §2.7's value with those implications gives the exponent two when c_fixed=c_plus, and exponent −2 when c_fixed=c_raw, on the good-order domain of §1.13 and its compatible CRT extension. This assembly belongs here; the supplier's regulator and Chern constructions do not depend on it. Section 6.4 retains this hypothesis and order restriction when using the calibration, and uses §1.15's independently defined all-order Chern square for ε_m. This is the precise finite-Chern/cyclic contract (gap:finite-chern-cyclic), not an all-order identification of R_ζ with the Chern square.
 
 ### From TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic
 
@@ -122,7 +126,7 @@ From QuantumEnvelopingAlgebras §QEA6 consume the Laurent-polynomial extension o
 
 ### Number-field module contract
 
-The HabiroNumberFields module contract (gap:habiro-modules-descent) requires Taylor maps at roots of unity, Frobenius-twisted p-adic gluing, restriction to good orders, local principal modules with their regulator exponential, multiplication, inversion of q, and the tensor isomorphism `H_ξ⊗H_η≃H_{ξ+η}`. HabiroRings §§6.1–6.2 transports these supplied lines along R→B and its full p-completion, including all components. Coherent pullback along the involution T↦−T supplies its compatibility, since this involution fixes R; replacing B by a preferred square root is not a substitute. The local generator criterion must impose integrality of its linear coefficient as well as its constant unit. Constant terms can cancel in sums of local generators, so an arbitrary module element need not be a generator.
+Consume HabiroNumberFields §§2.1–2.7 for Taylor maps and Frobenius-twisted p-adic gluing on full cyclotomic algebras, §§1.15 and 3.1–3.7 for coherent Chern root lines and local sections with their regulator exponential, and §§3.8–3.12 for global families, effective descent, tensor equivalences and inversion of q. These supply the module contract (gap:habiro-modules-descent), including restriction to good orders and `H_ξ⊗H_η≃H_{ξ+η}`; effective descent and torsor coherence retain their stated hypotheses. HabiroRings §§6.1–6.2 transports these supplied lines along R→B and its full p-completion, including all components. Coherent pullback along the involution T↦−T supplies its compatibility, since this involution fixes R; replacing B by a preferred square root is not a substitute. The local generator criterion must impose integrality of its linear coefficient as well as its constant unit. Constant terms can cancel in sums of local generators, so an arbitrary module element need not be a generator.
 
 ### From TauCetiRoadmap.QWittVectors
 
@@ -802,28 +806,34 @@ For the radial base and Kummer fields, use the following API (GZ §3, (21), pp. 
 Consume the owner's Andrews–Gordon identity for n=2r+3 odd, `A_ij=2min(i,j)`, B=0. Its product excludes the classes `k≡0,±(r+1) mod n`, equivalently `2k≡0,±1`. Identify the critical tuple with `(X₂,…,X_{r+1})`,
 `X_j=1−[sin(π/n)/sin(πj/n)]²`. Prove the Rogers trigonometric identity for this tuple, `∑_{j=2}^{r+1}L_CGZ(X_j)=(n−3)π²/(6n)`, from the supplied interval pentagon and the sine relations (CGZ Theorem 7.4, (46)–(47), p. 37; CGZ line 1763). Thus Λ=(n−3)π²/(6n). The modular transformation and radial phase are separate inputs (48)–(49), p. 38.
 
-For a primitive odd-order root ζ with n≥3, let F=ℚ(ζ+ζ⁻¹), and define the cyclotomic class in the owner's projective presentation by
+For ζ primitive of order n≥3 odd, put F=ℚ(ζ+ζ⁻¹) and consume the integral class η_ζ and its quotient image from HabiroNumberFields §1.7. With ρ=ζ^((n+1)/2), the unique square root of ζ in μ_n, use the root-dependent coordinates
 
 ```text
-η_ζ=∑_{k mod n}[1−((ζ−ζ⁻¹)/(ζ^k−ζ^(−k)))²] ∈ B_CGZ(F).
+X_j(ζ)=1−((ρ−ρ⁻¹)/(ρ^j−ρ^(−j)))²,
+ξ_ζ=∑_{j=2}^{r+1}[X_j(ζ)] ∈ B_CGZ(F).
 ```
 
-At k=0 the symbol is [∞], and at k=±1 it is [0]; ζ−ζ⁻¹≠0 since n≥3 is odd, and no 0/0 is used. Prove that these free symbols have zero exterior boundary and nη_ζ=0. Prove the root-change law η_(ζ^a)=a²η_ζ for every integer a coprime to n, using the special cyclotomic torsion interface, prime-power reduction and the cyclic root-change maps, without generic good-order finite-Chern injectivity (CGZ (34), pp. 26–27 and proof of Theorem 7.4, p. 39; CGZ lines 1202 and 1912). This Nahm trigonometric class uses the supplied Bloch carrier and cyclic maps rather than constructing them again.
+The denominators are nonzero because ρ is primitive and 0<2j<n. At ζ₀=e(1/n) this is the positive sine tuple above; at ζ=ζ₀^a it is its image under the embedding σ_a sending ζ₀ to ζ. Prove the Nahm identity `2ξ_ζ=η_ρ−[0]` in the integral projective group by pairing j and −j in the supplied eta sum (CGZ (46), (52), pp. 37, 39; CGZ line 1887). This target uses the supplied integral class; its construction and general laws are not targets here.
 
-Let ξ_ζ be the sum of [X_j] for 2≤j≤r+1, and take ρ=ζ^((n+1)/2), the unique square root of ζ in μ_n. Prove 2ξ_ζ=η_ρ−[0] (CGZ (52), p. 39; CGZ line 1887). Compare the product's radial constant with §2.5 at ζ=e(1/n), retaining the phase e(n/24−1/8+1/(12n)−1/(4n²)). The cyclic descent map exists here because F is totally real, w_F=2 and gcd(n,2)=1; n need not be prime to M_F. Prove R_ζ(ξ_ζ)^4=ζ for 3∤n and ζe(−1/3) for 3|n. Retain R_ζ([0])^(−2)=1 in the first case and e(2/3) in the second; the scaling law and 2ξ identity then give R_ζ(η_ζ)=ζ² (CGZ (49)–(52), pp. 38–39; CGZ line 1880). Generic good-order injectivity is reserved for §4.4. *Needs:* the Andrews–Gordon supplier, the interval pentagon and sine relations, K3BlochGroups §§3.13–3.16, §2.6's radial constant comparison, and the distinct cyclic descent and special cyclotomic torsion contracts.
+Compare the product's radial constant with §2.5 at the distinguished root ζ₀, retaining the phase e(n/24−1/8+1/(12n)−1/(4n²)). Cyclic descent applies over F since it is totally real and w_F=2. Prove `R_(ζ₀)(ξ_(ζ₀))^4=ζ₀` for 3∤n and `ζ₀e(−1/3)` for 3|n. Transport both the tuple and the power class by σ_a to every primitive ζ=e(a/n): the fourth-power value is ζ for 3∤n and ζe(−a/3) for 3|n. The corresponding correction `R_ζ([0])^(−2)` is 1 or e(2a/3), respectively. The supplied quotient scaling law with 4((n+1)/2)²≡1 mod n and the Nahm identity then give `R_ζ(η_ζ)=R_ζ(ξ_ζ)^8 R_ζ([0])^(−2)=ζ²` (CGZ (49)–(52), pp. 38–39; CGZ line 1880). No positivity of the conjugate tuple is asserted.
 
-For the cyclotomic class use the following API (CGZ (34), pp. 26–27; (51)–(52), p. 39).
+Assemble the Chern calibration by applying HabiroNumberFields §§1.10, 1.13 and 1.14: assuming finiteChern_normalization_comparison identifies c_fixed with c_plus and [ζ] has exact order n, the eta value reads the comparison exponent as 2. With c_fixed=c_raw it reads −2. The resulting map identity holds on the supplied good-order domain gcd(n,M_F)=1, with compatible prime-power and CRT comparisons; calibration on the real cyclotomic eta field instead uses the separate eta comparison, which does not require gcd(n,M_F)=1. Section 6.4 uses this conditional calibration for its Kummer orientation and retains a separate all-order comparison target. *Needs:* the Andrews–Gordon supplier, the interval pentagon and sine relations, K3BlochGroups §§3.13–3.16, §2.6's radial constant comparison, HabiroNumberFields §§1.5, 1.7 and 1.10–1.14 with their independent normalization hypothesis.
 
-- The projective symbols define a class killed by n and commute with field embeddings and primitive-root changes, with η_(ζ^a)=a²η_ζ.
-- Its half-root version satisfies 2ξ_ζ=η_ρ−[0]; applying the cyclic map retains the displayed 3-primary correction before giving ζ².
+The Nahm-specific trigonometric application has the following API (CGZ (46)–(52), pp. 37–39).
+
+- The root-dependent tuple commutes with the cyclotomic embeddings, satisfies the Nahm equations and gives the displayed integral identity with the supplied eta class.
+- The positive tuple has the stated Rogers sum; the distinguished radial calculation and field transport give the cyclic eta value, with its 3-primary correction.
+- Subject to the independent Chern normalization comparison, that value determines the comparison exponent on the supplier's good-order domain.
 
 **Checks.**
 
 - r=1,n=5 gives the first Rogers–Ramanujan identity and Λ=π²/15.
 - r=2,n=7 gives `A=((2,2),(2,4))` and fixes the ordering X₂,X₃.
 - r=0,n=3 gives the empty sum one and Λ=0. Here ξ=0, η_ρ=[0], and R_ζ([0])^(−2)=ζ², so discarding [0] would replace ζ² by 1.
-- At n=5, F=ℚ(√5) has discriminant 5, so gcd(n,M_F)=5, while gcd(n,w_F)=gcd(5,2)=1; cyclic descent applies although generic good-order injectivity does not.
-- For n=5,a=2 the scaling factor is 4 modulo 5; conjugation a=−1 gives factor 1. At n=3 the factor 6 in M_F excludes generic injectivity despite the valid cyclic descent.
+- At n=5, write x=(√5−1)/2 and φ=(1+√5)/2. Then X₂(e(1/5))=x while X₂(e(2/5))=−φ, and η_(e(1/5))=[0]+2[−φ]. The complementary Rogers values are π²/15 and 4π²/15, so the fixed-tuple error has doubled detector difference −2π²/5, outside (π²/2)ℤ.
+- At n=9,a=2 the transported fourth-power value is e(2/9−2/3)=e(5/9), and the correction is e(4/3); their product after squaring is e(4/9)=ζ². Retaining e(−1/3) would give e(8/9), a different fourth-power value.
+- At n=5, F=ℚ(√5) has discriminant 5, so gcd(n,M_F)=5, while gcd(n,w_F)=1; cyclic descent and eta calibration apply although generic good-order injectivity does not.
+- For n=5 the readings (a,b)=(2,1) and (2,−1) give exponents 2 and −2 modulo five. Since the fifth powers in ℚ(ζ₅) do not contain ζ₅, these are distinct; at n=1 every class is 1 and no exponent can be calibrated.
 
 ### Examples
 
@@ -967,7 +977,14 @@ For the residue majorant, use the following API (GZ §4.3, (24)–(25), pp. 7–
 
 ### 4.2 Cusp valuations and the order-one modular expansion
 
-Assume only that `f=f_{A,B,C}` is invariant under some finite-index Γ≤SL₂(ℤ). Apply §4.1, periodicity and the supplier's puncture criterion to show it is meromorphic at every cusp. Prove nahm_cuspOrder_bound, with `λ=Λ/(4π²)`,
+For analytic data assume that `f=f_{A,B,C}` is invariant under some finite-index Γ≤SL₂(ℤ). First prove the uniform majorant `|f(x+iy)|≤f(iy)` for every real x and y>0: each numerator has modulus exp(−2πyQ(n)), while `|1−q^r|≥1−exp(−2πyr)>0` for r≥1; absolute convergence permits summing these inequalities. For a finite cusp chart σ=((a,b),(c,d)), c≠0, and X in a fixed period interval,
+
+```text
+Im σ(X+iY) = Y/(c²Y²+(cX+d)²),
+1/Im σ(X+iY) = c²Y+(cX+d)²/Y.
+```
+
+The order-one estimate of §2.5 thus gives `|f(σ(X+iY))|=O(exp(Λc²Y/(2π)))` uniformly as Y→∞. At c=0 the positive-coefficient expansion at infinity gives a uniform exponential bound, since Q has a minimum. Apply periodicity and FuchsianOrbifolds Layer 3's punctured-cusp criterion with this uniform bound to obtain meromorphicity. Only then apply §4.1's sharper radial estimates and Layer 3's width-normalised order comparison. Prove nahm_cuspOrder_bound, with `λ=Λ/(4π²)`,
 
 ```text
 v_P(f) ≥ −λ for every rational cusp P,
@@ -986,6 +1003,9 @@ for some c>0. Every positive power of t in the relative radial expansion vanishe
 
 **Checks.**
 
+- For a single Euler factor q=−1/2, |1−q|=3/2≥1−|q|=1/2, so its inverse modulus 2/3 is bounded by 2. The reverse inequality would fail.
+- For σ=((0,−1),(1,0)), Y=10 and X∈[0,1], the endpoint imaginary parts are 1/10 and 10/101; their reciprocals 10 and 101/10 agree with Y+X²/Y and give a bound over the whole interval.
+- In rank zero with C=7 and y=log(2)/(2π), every x gives |f(x+iy)|=f(iy)=1/128; changing C to −1 gives 2 on both sides. The majorant therefore does not require Q to be nonnegative.
 - The first normalised Rogers–Ramanujan function has λ=1/60 and v₀=−1/60.
 - For A=2,B=−3,C=5, the infinity series starts `2q³+…`, since Q(1)=Q(2)=3. This computation tests the minimum formula without asserting that this datum is modular.
 - Rank zero has Λ=λ=0. Invariance under a finite-index group forces exp(2πiCτ) to be constant, hence C=0.
@@ -1378,7 +1398,7 @@ Write T=(T₁,…,T_N) for the augmentation variable before the level substituti
        +(diag(A)/2+Ak)·w) dw/(mh)^N.
 ```
 
-This is a recipe for a formal stationary expansion of GSWZ (112), pp. 28–29, with all its displayed factors retained; it is not an assertion of convergence of this integral. The stationary equations are 1−exp(mw_j)=(−1)^(A_jj)T_j^m∏_i exp(mA_ijw_i). Thus shift to w_j=log(z_j(T^m))/m, use the potential V_A(T^m) with polar factor exp(V_A(T^m)/(m²h)), and covariance Λ_A(T^m)⁻¹ for the centred variables. Fix determinant roots by the constant-one T-branch and use the corrected ψ above with u_j=z_j(T^m)^(1/m). Euler normalisation contributes exp(Nh/24). Define the level collection only after substituting T_j=t_j^(1/m): F̂_(A,m)(t,x)=∑_k I_(A,m,k)(t^(1/m),x). Its stationary tuple, potential and covariance are then z(t), V_A(t) and Λ_A(t)⁻¹ (GSWZ Definition 2.11, (117)–(118), pp. 29–30; GSWZ line 1506). For comparison with §5.5 fix a congruence modulus m, a root order d=ma with gcd(a,m)=1, and 0≤k_j<m. Define the refined congruence expression by
+This is a recipe for a formal stationary expansion of GSWZ (112), pp. 28–29, with all its displayed factors retained; it is not an assertion of convergence of this integral. The stationary equations are 1−exp(mw_j)=(−1)^(A_jj)T_j^m∏_i exp(mA_ijw_i). Thus shift to w_j=log(z_j(T^m))/m, use the potential V_A(T^m) with polar factor exp(V_A(T^m)/(m²h)), and covariance Λ_A(T^m)⁻¹ for the centred variables. Fix the augmentation evaluation of the determinant root by its constant-one branch, and use the corrected ψ above with u_j=z_j(T^m)^(1/m). The continuation to the full coefficient algebra of §5.7 is linear in its determinant generator: it is T times an expression independent of that generator and changes sign under T↦−T. Here this scalar T is distinct from the augmentation tuple T=(T₁,…,T_N). Euler normalisation contributes exp(Nh/24). Define the level collection only after substituting T_j=t_j^(1/m): F̂_(A,m)(t,x)=∑_k I_(A,m,k)(t^(1/m),x). Its stationary tuple, potential and covariance are then z(t), V_A(t) and Λ_A(t)⁻¹ (GSWZ Definition 2.11, (117)–(118), pp. 29–30; GSWZ line 1506). For comparison with §5.5 fix a congruence modulus m, a root order d=ma with gcd(a,m)=1, and 0≤k_j<m. Define the refined congruence expression by
 
 ```text
 S_k(T,q)=(−1)^(diag(A)·k)q^formalExponent(A,k)T^k/∏_j(q;q)_(k_j),
@@ -1390,12 +1410,12 @@ The quotient removes the k-th summand exactly as §5.5; regularity below must pr
 
 Three precise comparisons must be proved:
 
-- Name gaussianGlobalNormalisation for the following target: derive every determinant, cyclic product, root and h/x prefactor from this integrand after the correction to ψ. Establish periodicity of the refined index, its root-action covariance and
+- Name gaussianGlobalNormalisation for the following target: derive every determinant, cyclic product, root and h/x prefactor from this integrand after the correction to ψ, including linear dependence on the determinant generator and sign change under its involution. Establish periodicity of the refined index, its root-action covariance and
   `I_ℓ(T)−I_ℓ(σ_jT)=(−1)^(A_jj)T_jq^(A_jj)I_{ℓ−e_j}(σ^(A_{*,j})T)`, where σ_j multiplies T_j by q. On the level variable t=T^m this sends t_j to q^m t_j, not q t_j.
   The affine Gaussian shift contributes its scalar exponential; omitting it is not translation invariance. These identities imply §5.5's corrected order-m equation (GSWZ Lemma 2.15, (137)–(139), p. 32).
-- Name gaussianMixedRegularity for the following target: after the exact normalisation, each refined congruence expression Ω_(A,m,k)(T,x), with its specified residue-class sum and k-th summand removed, is supported on mℕ^N in T and has constant coefficient one, with coefficients in ℚ(ζ)((x)); restoring T^k gives support k+mℕ^N and initial coefficient one in the §5.5 normalisation. After T=t^(1/m), the normalised congruence series has ordinary nonnegative t-indices. Control negative powers of every T_j, including mixed poles. The identity
+- Name gaussianMixedRegularity for the following target: after the exact normalisation and evaluation on the constant-one determinant branch, each refined congruence expression Ω_(A,m,k)(T,x), with its specified residue-class sum and k-th summand removed, is supported on mℕ^N in T and has constant coefficient one, with coefficients in ℚ(ζ)((x)); restoring T^k gives support k+mℕ^N and initial coefficient one in the §5.5 normalisation. After T=t^(1/m), the normalised congruence series has ordinary nonnegative t-indices. Control negative powers of every T_j, including mixed poles. The identity
   `Λ_A⁻¹=−(I+DA)⁻¹D`, D=diag((1−z)/z), helps, but does not by itself prove cancellation in a normalised integral. Even a separate term `h Li₀(1−t)/12` has a t⁻¹ pole.
-- Once those two targets hold, §5.5's uniqueness over the Laurent field identifies Ω_(A,m,k)(T,x) with F_(A,m,k)(T,q), and in t with F_(A,m,k)(t^(1/m),q), at orders mm′ with gcd(m,m′)=1, and at m=1 identifies the full Gaussian collection with F_A. It identifies V,δ,U and the regulator-exponential normalisation with §5.1's invariants. This identification precedes the level-cancellation target below and does not consume it. The uniqueness step is a proof, not an additional regularity assumption (GSWZ Theorem 8, (163)–(168), pp. 35–36).
+- Once those two targets hold, §5.5's uniqueness over the Laurent field on that augmentation branch identifies Ω_(A,m,k)(T,x) with F_(A,m,k)(T,q), and in t with F_(A,m,k)(t^(1/m),q), at orders mm′ with gcd(m,m′)=1, and at m=1 identifies the augmentation-branch Gaussian collection with F_A; the full-algebra collection retains its determinant factor. It identifies V,δ,U and the regulator-exponential normalisation with §5.1's invariants. This identification precedes the level-cancellation target below and does not consume it. The uniqueness step is a proof, not an additional regularity assumption (GSWZ Theorem 8, (163)–(168), pp. 35–36).
 
 These are explicit mathematical targets of the roadmap. The local repair of (114), the independent all-root residue proof and the uniqueness argument do not establish the two global Gaussian comparisons automatically.
 
@@ -1422,13 +1442,13 @@ For the weighted Gaussian completion, use the following API (GSWZ (110)–(111),
 For the formal local remainder and Gaussian collection, use the following API (GSWZ (112)–(118), pp. 28–30; (137)–(139), p. 32).
 
 - The corrected local remainder removes its displayed polar, linear and quadratic terms and respects root changes and representative changes.
-- The stationary expression retains every phase factor; global normalisation and mixed regularity identify its refined pieces with the congruence series.
+- The stationary expression retains every phase and determinant factor; global normalisation and mixed regularity identify its augmentation-branch refined pieces with the congruence series.
 
 **Checks.**
 
 - m=1,k=0 gives cancelled w²/h coefficient 1/2−1/2=0 and cancelled constant log term −log(1−u)/2+log(1−u)/2=0.
 - m=2 gives linear subtraction Li₁(u²)w/(2h); replacing 2 by 4 leaves Li₁(u²)w/(4h) uncancelled.
-- N=0 gives the empty Gaussian collection 1; for A=0 in two variables it gives the product of reciprocal Pochhammers, with no negative t-indices.
+- N=0 gives the empty bracket and augmentation-branch Gaussian collection 1; its full determinant-algebra continuation is T, with values 1 and −1. For A=0 in two variables the augmentation branch gives the product of reciprocal Pochhammers, with no negative t-indices.
 - A=0,m=2 requires exp(2w)=1−T². At T=1/2 it is 3/4, whereas z(T)=1/2 is wrong; after T=t^(1/2), both the stationary equation and z(t) give 1−t.
 - For m=2,k=1 the restored support is T^(1+2n), while the normalised support is T^(2n)=t^n. The shift T↦qT sends t to q²t.
 - For m=2,a=3,d=6,k=1 the refined sum uses ℓ=1,3,5; after T=t^(1/2), all three use z(T⁶)=z(t³). At a=1 the sum has only ℓ=1 and uses z(t).
@@ -1469,7 +1489,7 @@ Here z₀ is the unique constant-one solution of the **unsigned deformation** `1
 
 For the nondegenerate coefficient algebra, use the following API (GSWZ (36)–(37), pp. 13–14; §2.7, pp. 35–37).
 
-- It represents the signed equations with unit t,z,δ,T, and maps to each coefficient algebra preserving those units.
+- It represents the signed equations with unit t,z,δ,T, and maps to each coefficient algebra preserving those units; the full Gaussian collection retains its factor T, while augmentation evaluation uses the constant-one root.
 - After 2 it is étale over the Laurent t-base; the level extension adjoins t-roots, while roots of z require the separate Kummer extension.
 
 **Checks.**
@@ -1492,7 +1512,7 @@ For the rank-one WKB normalisation, use the following API (GSWZ (140)–(162), p
 **Checks.**
 
 - T is a unit and encodes a chosen square root of δ⁻¹. Adjoining T does not identify its two components.
-- At rank zero S=ℤ[T]/(T²−1); after 2 this is étale with two components. The formal branch T=1 loses the other component.
+- At rank zero S=ℤ[T]/(T²−1); after 2 its full Gaussian collection T has components (1,−1), while the formal branch T=1 gives 1. The diagonal unit (1,1) is fixed by the involution and cannot represent this negative eigensection.
 - At A=3,t=1, `δ=−z²−z−2`; the primes dividing its norm 23 must be inverted for the nondegenerate specialisation.
 - At A=0 or A=1 the displayed b₁ is zero. At A=3 its coefficient is 3X², with z₀=1−t+3t²−12t³+… and X=−t+5t²−28t³+…. The signed branch instead has z=1+t+3t²+12t³+…; using it without the change of variable fails the q-system.
 - Substituting a ramified or δ=0 solution is excluded even if it satisfies the undeleted Nahm equations.
@@ -1642,33 +1662,33 @@ For the intrinsic modified potential, use the following API (GSWZ (130), (132)�
 
 ### 6.4 Kummer orientation, coefficient extension and membership
 
-Let ξ be the integral Bloch/K₃ class of a nondegenerate signed solution over K, retaining the convention-change choices from Layer 1. Let `ε_m(ξ)=c_{ζ_m}(ξ)²` denote the exact finite Chern class exported by the HabiroNumberFields arithmetic contract. Prove nahmConstant_kummerOrientation on the universal Kummer algebra. The full cyclic product and fractional product satisfy `D_fractional(w)^m=D_ζ(w)`; the product `∏D_ζ(w_j)/D_ζ(1)` is P_ζ(ξ) modulo m-th powers. The cyclic factor appearing in the corrected U_m has the inverse P class. Track the additional z-powers, square-root determinant, finite k-sum and normalisation to identify its class with ε_m, including whether the supplier's Chern map agrees with R_ζ or its inverse. The module index cannot be chosen merely to make this identity hold.
+Let ξ be the integral Bloch/K₃ class of a nondegenerate signed solution over K, retaining the convention-change choices from Layer 1. Let `ε_m(ξ)=c_fixed,m(ξ)²` be the all-order Chern square of HabiroNumberFields §1.15, with its chosen K₃/Bloch comparison; it is not defined by a cyclic-regulator value. Prove nahmConstant_kummerOrientation on the universal Kummer algebra. The full cyclic product and fractional product satisfy `D_fractional(w)^m=D_ζ(w)`; the product `∏D_ζ(w_j)/D_ζ(1)` is P_ζ(ξ) modulo m-th powers. The cyclic factor appearing in the corrected U_m has the inverse P class. Track the additional z-powers, square-root determinant, finite k-sum and normalisation to identify its class with ε_m, including the exact power and inversion relating the supplier's Chern square to R_ζ on its domain. The module index cannot be chosen merely to make this identity hold. The calibration assembled in §2.7 uses HabiroNumberFields §§1.10 and 1.14 only under finiteChern_normalization_comparison and on §1.13's good-order domain. At other orders the independently defined ε_m remains available, but nahmConstant_kummerOrientation must prove the comparison directly; neither the calibrated exponent nor its sign extends there by assertion.
 
 The precise constant targets are: each individual refined constant is a unit in its ε_m^(1/m) torsor after the required finite-root scalar extension, and the full constant lies in
-`δ⁻¹/² ε_m(ξ)^(1/m) K[ζ_m]`. The full constant may be zero. Changing representatives of ε_m changes the chosen root by the corresponding unit and preserves the torsor. Source: GSWZ corrected (121)–(124), pp. 30–31 and proof of Theorem 5, p. 43; CGZ (7)–(8), p. 3 and (20)–(21), pp. 10–11. *Needs:* gaussianGlobalNormalisation and the supplier's actual finite-Chern orientation theorem; the regulator calculation alone is insufficient.
+`T ε_m(ξ)^(1/m) K[ζ_m]` inside the full determinant and finite-root algebra, where T=δ⁻¹/² is its universal generator. The full constant may be zero. Changing representatives of ε_m changes the chosen root by the corresponding unit and preserves the torsor. Source: GSWZ corrected (121)–(124), pp. 30–31 and proof of Theorem 5, p. 43; CGZ (7)–(8), p. 3 and (20)–(21), pp. 10–11. *Needs:* gaussianGlobalNormalisation and the supplier's actual finite-Chern orientation theorem; the regulator calculation alone is insufficient.
 
 Define nahmSpecialisationAtOne on the finite presented coefficient algebra S_A by t_j↦1, z_j↦the specified signed solution coordinate and T↦the corresponding generator of B. Its level-m extension sends t_j^(1/m)↦1 and w_j↦a specified m-th root of z_j in the Kummer extension of B. Prove the equations and localised units are preserved, uniqueness on these generators, naturality under field maps and root changes, and commutation with Frobenius when p∤2mΔ. On the base this is 1^p=1 and ζ_m↦ζ_m^p; uniqueness of the étale lift then proves the completed coefficient square. General nondegenerate specialisations require §6.1’s base compatibility condition as well as a map on completions. This is an algebra map on a finite presentation; it is not evaluation of an arbitrary t-adic power series at t=1. Its source and target retain every square-root component. Source: GSWZ §2.7, (169)–(170), pp. 36–37 and Theorem 5, p. 43. *Needs:* §5.7, the chosen solution, Kummer roots and the unit conditions of the conventions.
 
 Use the full finite étale coefficient algebra B=R[T]/(δT²−1), including the split case. Enlarge Δ to include the exceptional integers for its number-field factors. Require through gap:habiro-modules-descent from the HabiroNumberFields arithmetic contract the local generator criterion, Kummer descent, tensor products, inversion and effective global module descent for `H_{R,ξ}`. Consume HabiroRings §§6.1–6.2 for its pullback to B on every factor; the involution compatibility is the composition law for pullback along an R-automorphism of B. The local form of a generator includes
 `δ⁻¹/²ε_m^(1/m)(Oˣ+xO+x²K[[x]])`, so its linear coefficient is integral. A general element is a local span of generators and can have zero constant. This is a supplier extension of the module, not a second definition of one (GSWZ Definitions 1.3–1.4, pp. 9–10).
 
-Define the regular Nahm collection by removing the common polar exponential from the universal Gaussian expression before specialising its regular coefficients:
+Define the regular Nahm collection by removing the common polar exponential from the full Gaussian expression with its determinant factor before specialising its regular coefficients:
 
 ```text
 F̂_(A,m)(t,x) = exp(V_A(t)/(m²h)) · Freg_(A,m)(t,x),
 f_(A,z,m)(x) = ev_z(Freg_(A,m)(t,x)),    h=log(1+x/ζ_m).
 ```
 
-The finite-presentation map of this section applies coefficientwise to Freg, after the localisation and descent targets of §6.1. It does not evaluate V_A as a t-adic series at t=1. The completed p-adic expression is then f̂_(A,z,m)=exp(D_pξ/(m²h))f_(A,z,m), with the positive sign of §6.3. Thus the completed Gaussian expression contains a polar exponential, whereas the Habiro-module section is an ordinary power series with its Kummer leading factor (GSWZ paragraph after (41) and Theorem 5, p. 14; Definition 1.3, (22), p. 9).
+The finite-presentation map of this section applies coefficientwise to Freg, after the localisation and descent targets of §6.1. It does not evaluate V_A as a t-adic series at t=1. The completed p-adic expression is then f̂_(A,z,m)=exp(D_pξ/(m²h))f_(A,z,m), with the positive sign of §6.3. Thus the completed Gaussian expression contains a polar exponential, whereas the Habiro-module section is an ordinary power series with its Kummer leading factor. Prove that the determinant involution sends Freg and f to their negatives: the potential is independent of T, so removing its exponential preserves this law (GSWZ paragraph after (41) and Theorem 5, p. 14; Remark 1.9, p. 15, GSWZ line 645; Definition 1.3, (22), p. 9).
 
 For the regular Nahm collection use the following API (GSWZ (22), (41)–(42), pp. 9, 14).
 
 - Removing and reinstating the specified exponential are inverse operations on the completed Gaussian expression, and the regular coefficients commute with the permitted coefficient maps.
-- The regular leading constants, determinant algebra and Kummer root action are those in this section; the module criterion is applied to the regular collection and its specified completion.
+- The regular leading constants retain the universal factor T, and the regular collection lies in the negative eigenspace of T↦−T; the module criterion is applied to this collection and its specified completion.
 
 **Checks.**
 
-- In rank zero V=0 and the Gaussian expression 1 remains the regular collection 1; adjoining the determinant algebra still retains both square-root components.
+- In rank zero V=0, δ=ε₁=1 and the empty bracket is 1. The full regular collection is T=(1,−1) over B⊗ℚ=K×K, in the line T·K and negated by the involution. Its augmentation value at T=1 is 1; the unit (1,1) is outside T·K in characteristic zero.
 - Formally at A=0,m=1, log F starts −t/h+t/2+…; multiplication by exp(Li₂(t)/h) removes the coefficient −1 of t/h and leaves +1/2 at degree t in the regular logarithm. Removing with the opposite sign would leave −2t/h.
 - In the local regulator convention, if D_pξ=d≠0 then log f̂−log f=d/(m²h), whose pole coefficient in x is ζ_m d/m². For m=1 and d=p² this is p²≠0; the completed expression is not an ordinary power series. For d=0 that pole is 0.
 
