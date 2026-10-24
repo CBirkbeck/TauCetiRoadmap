@@ -13,8 +13,10 @@ relation tests express the weight-three cycle condition on native tensor carrier
 The descent/Borel comparisons and configuration lifting cannot yet be stated on their actual
 objects: the pins lack the Bloch-group, configuration-complex and higher K-theory regulator
 carriers. Explicit/universal chain-regulator comparisons lack manifold form-test currents,
-higher-cycle Deligne complexes and their regulator maps. Reciprocity constructions lack
-curve-function-field Bloch complexes and their residue homotopies. The elliptic regulator
+higher-cycle Deligne complexes and their regulator maps; the Green presentation is in H^(2n)
+of the modified fiber, at higher-Chow index zero. Reciprocity constructions, including
+characteristic-zero strong reciprocity, lack curve-function-field Bloch complexes and their
+residue homotopies. The elliptic regulator
 pairing additionally lacks those curve/current regulator maps. These headlines have no
 substitute statements here. The weight-four theorem belongs to Polylogarithms, Part II.
 -/
