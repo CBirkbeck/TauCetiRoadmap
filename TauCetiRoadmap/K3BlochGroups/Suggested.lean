@@ -71,8 +71,9 @@ noncomputable def preBlochSymbol {F : Type*} [Field F] (x : F) : preBloch F :=
 
 /-! ## Layer 4: Configuration homology and the Suslin sequence -/
 
-/-- The standard inclusion of general linear groups, sending a matrix to `diag(g,1)`.
-The inverse block is `diag(g⁻¹,1)`; the sum of index types is reindexed by `finSumFinEquiv`. -/
+/-- AlgebraicKTheory A1's block inclusion on native field matrices, sending a matrix to
+`diag(g,1)`. The inverse block is `diag(g⁻¹,1)`; the sum of index types is reindexed by
+`finSumFinEquiv`. This adapter supplies the map in the stability headline below. -/
 def generalLinearStabilization (F : Type u) [Field F] (n : ℕ) :
     Matrix.GeneralLinearGroup (Fin n) F →*
       Matrix.GeneralLinearGroup (Fin (n + 1)) F :=

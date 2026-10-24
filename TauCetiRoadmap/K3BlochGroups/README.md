@@ -6,13 +6,13 @@
 
 This roadmap owns the degree-three comparisons, the Bloch presentations and their exact convention maps, the frame and projective-configuration calculations needed for the Suslin map, and the finite-witness interfaces built on them. It does not construct general algebraic K-theory or the analytic dilogarithm. Every occurrence of K₃ refers to Quillen K-theory supplied below, and every abstract isomorphism with a cyclic group is distinguished from a natural comparison map.
 
-The stable general linear and elementary groups GL(A)⊃E(A), with Whitehead's lemma, belong to GeneralAlgebraicKTheory §§3.3–3.4; StableHomotopyKTheory §4.14 gives BGL(A)⁺ its block-sum H-space. The stable Steinberg group St(A), its universal central extension onto E(A) and the identification of the central kernel with K₂(A) belong to AlgebraicKTheory A5, as refined in K2SymbolsBrauer Layers 2 and 4; superperfectness of the source of a universal central extension is StableHomotopyKTheory §3.29 (`uce.source_superperfect`). K2SymbolsBrauer owns Milnor K-theory and its symbol presentation (§§5.4, 5.6, 5.12–5.14), Matsumoto's theorem (§7.2), the graded Milnor-to-Quillen map (§§8.1–8.4), the Bass–Tate sequence of a rational function field (§10.5) and the Bass–Tate signature theorem for number fields (§10.32). The degree-three comparison, its ordered-symbol formula and functorial API are consumed from K2SymbolsBrauer §8.4; this roadmap constructs its cokernel and proves integral injectivity.
+The stable general linear and elementary groups GL(A)⊃E(A), with Whitehead's lemma, belong to AlgebraicKTheory A1 and are consumed through the aliases and transported theorem of GeneralAlgebraicKTheory §§3.3–3.4; StableHomotopyKTheory §4.14 gives BGL(A)⁺ its block-sum H-space. The stable Steinberg group St(A), its universal central extension onto E(A) and the identification of the central kernel with K₂(A) belong to AlgebraicKTheory A5, as refined in K2SymbolsBrauer Layers 2 and 4; superperfectness of the source of a universal central extension is StableHomotopyKTheory §3.29 (`uce.source_superperfect`). K2SymbolsBrauer owns Milnor K-theory and its symbol presentation (§§5.4, 5.6, 5.12–5.14), Matsumoto's theorem (§7.2), the graded Milnor-to-Quillen map (§§8.1–8.4), the Bass–Tate sequence of a rational function field (§10.5) and the Bass–Tate signature theorem for number fields (§10.32). The degree-three comparison, its ordered-symbol formula and functorial API are consumed from K2SymbolsBrauer §8.4; this roadmap constructs its cokernel and proves integral injectivity.
 
 AlgebraicTopology, Stages 2–5 and 8, owns singular homology, CW pairs, relative homotopy, product homology with the coefficient-sensitive Künneth sequence, Hurewicz and Whitehead. StableHomotopyKTheory §1.17, `classifyingSpace_filteredColimit_homology`, supplies filtered-colimit homology for every unital coefficient ring, fixed left coefficient module and degree n≥0; §§1.30 and 1.32 compare classifying-space and group homology. The completed UniversalCovers roadmap, Stages 2–3, owns based lifts and the higher-homotopy comparison for actual coverings. StableHomotopyKTheory supplies classifying spaces, plus constructions, fibre comparisons and spectra. These general constructions remain at their owners. The narrow Hopf and stable-unit results required below are targets of §1.5 here, not unstated consequences of a covering-space theorem.
 
 GeneralAlgebraicKTheory §§13.8a–c owns Quillen's finite-field computation (Brauer lifting, the Adams fixed fibre and its homotopy groups), and its §§3.2 and 3.12 identify πₙ(BGL(A)⁺) with Kₙ(A) for n≥1. KTheoryFiniteLocalFields §1.5 owns the restriction, transfer and Frobenius maps on the K-groups of finite fields. ArithmeticKTheory §§3.2–3.4, 4.1–4.4, 5.1, 5.3–5.4 and 8.10 supplies the number-field arithmetic; the Milnor-image and quotient consequences belong here.
 
-ColemanIntegration §L2.Fb uses the same integral pre-Bloch and Bloch carriers: their general construction is owned by Layer 3 here, while its p-adic evaluation, branch descent and coordinate convention belong to ColemanIntegration.
+Layer 3 owns the shared integral pre-Bloch group, antisymmetric tensor cokernel, boundary, Bloch kernel and their field maps. ColemanIntegration §L2.Fb consumes §§3.1, 3.3–3.5 before its p-adic evaluation and branch descent: its PreBlochGroup and AntisymmetricSquare are aliases of P(F) and Qₛ(F), its preBlochSymbol and boundary are the supplied maps, and its BlochGroup is the same kernel B(F). Its reduced free-symbol presentation is the adapter of §3.4, with evaluation transported to P(F); it does not supply another exported Bloch carrier. The p-adic evaluation, branch descent and projective coordinate transport remain in ColemanIntegration. PolylogarithmFunctions supplies analytic functions and cross-ratios, not these algebraic carriers.
 
 PolylogarithmFunctions owns the interval Rogers function and the Bloch–Wigner function with their analytic identities (the interval function and endpoints are §6.1, reflection is §6.3, the exact interval pentagon is §6.4, and the midpoint value is §6.5). Downstream, Polylogarithms Layer 2 constructs the descended real regulator and compares it with the Borel regulator, and its Layer 4 uses the rational-curve presentation of §4.21. No regulator, dilogarithm or Habiro comparison is used to prove anything in this roadmap.
 
@@ -60,11 +60,11 @@ For real closures use `TauCeti.RealClosure.exists_realClosure` in `TauCeti/Field
 
 ### From TauCetiRoadmap.GeneralAlgebraicKTheory
 
-Sections 3.3–3.4 supply stable GL(A)⊃E(A), Whitehead's lemma, entrywise ring maps and finite-stage colimits for associative unital A. Sections 3.2 and 3.12 identify πₙ(BGL(A)⁺) with Kₙ(A) for n≥1. Sections 7.4 and 1.8 supply the external product K₂(A)×K₁(ℤ)→K₃(A⊗ℤ) and its right-unit comparison; commutativity of A is unnecessary. Sections 13.8a–c supply Brauer lifting, the Adams fixed-fibre model and Quillen's finite-field computation, including K₂(𝔽q)=0 and |K₃(𝔽q)|=q²−1, with continuity to algebraic closures of finite fields.
+Sections 3.3–3.4 expose AlgebraicKTheory A1's stable GL(A)⊃E(A), entrywise ring maps and finite-stage colimits through their finite-stage identity aliases, and transport A1's Whitehead theorem to them, for associative unital A. Sections 3.2 and 3.12 identify πₙ(BGL(A)⁺) with Kₙ(A) for n≥1. Sections 7.4 and 1.8 supply the external product K₂(A)×K₁(ℤ)→K₃(A⊗ℤ) and its right-unit comparison; commutativity of A is unnecessary. Sections 13.8a–c supply Brauer lifting, the Adams fixed-fibre model and Quillen's finite-field computation, including K₂(𝔽q)=0 and |K₃(𝔽q)|=q²−1, with continuity to algebraic closures of finite fields.
 
 ### From TauCetiRoadmap.AlgebraicKTheory
 
-Target A5 supplies St(A)→E(A), its central exact sequence with kernel K₂(A), and its universal property, for every associative unital ring A. K2SymbolsBrauer Layers 2 and 4 fix the corresponding classical and homotopy comparisons.
+Target A1 supplies the finite block inclusions g↦diag(g,1), stable GL(A), E(A), their ring maps and Whitehead's theorem E(A)=[GL(A),GL(A)] with E(A) perfect, for every associative unital ring A, including the zero ring. Its finite-stage field specialization is the native-carrier map `generalLinearStabilization` in §4.8, after reindexing Fin n ⊕ Fin 1 by finSumFinEquiv; this is an adapter for A1's inclusion. Target A5 supplies St(A)→E(A), its central exact sequence with kernel K₂(A), and its universal property, for every associative unital ring A. K2SymbolsBrauer Layers 2 and 4 fix the corresponding classical and homotopy comparisons.
 
 ### From TauCetiRoadmap.K2SymbolsBrauer
 
@@ -674,7 +674,7 @@ Here F is any field. Restrictions to |F|≥4 belong only to the subsequent torsi
 - P(F) is generated by the classes [x].
 - A field homomorphism induces a homomorphism of pre-Bloch groups, with map_id and map_comp.
 
-- P(F) ≃ the free abelian group on F − {0, 1} modulo the five-term elements.
+- The reduced presentation ℤ[F−{0,1}]/R₅ maps isomorphically to P(F) by [x]↦[x]; its inverse kills the unreduced [1] and preserves every other generator. These maps commute with every field embedding. Evaluation defined on the reduced presentation is transported along this isomorphism to P(F).
 
 The source locators for these statements are Weibel, K-book, VI.5.1 (PDF p. 495).
 
@@ -685,6 +685,7 @@ The source locators for these statements are Weibel, K-book, VI.5.1 (PDF p. 495)
 - P(F_4) ≅ ℤ/5, from the relations 3[ω] − 2[ω²] and 3[ω²] − 2[ω].
 - P(F_5) ≅ ℤ/6 on [3], with [2] = 2[3] and [4] = 0.
 - The quotient symbol at 0 and 1 is zero, while over 𝔽₅ its values at 2 and 3 have orders three and six. A symbol map sending every input to zero fails these controls.
+- Over ℚ the reduced-to-unreduced adapter sends the relation at (4,2) to [4]−[2]+[1/2]−[3/2]+[3]=0. At F₂ both presentations are zero, and at F₃ both are infinite cyclic on [−1].
 
 *Needs:* §3.3; the tensor, exterior-power and Matsumoto contracts; the preceding presentations in this layer.
 
@@ -714,6 +715,7 @@ Here F is any field. Restrictions to |F|≥4 belong only to the subsequent torsi
 
 - The inclusion of B(F) into P(F).
 - Two elements of B(F) are equal exactly when their images in P(F) are.
+- The symbol-preserving isomorphism of §3.4 commutes with the boundaries from the reduced and unreduced presentations into the same Qₛ(F), and restricts to an isomorphism of their kernels, natural for every field embedding. These identifications transport reduced-presentation evaluation to the shared P(F) and B(F).
 
 For every field F the sequence 0 -> B(F) -> P(F) -> antisymSquare of the units of F -> K_2(F) -> 0 is exact. In particular the cokernel of the boundary is Matsumoto's presentation of K_2(F).
 
@@ -723,6 +725,7 @@ The source locators for these statements are Weibel, K-book, VI.5.1 (PDF p. 495)
 
 - The boundary of a five-term element is zero.
 - Over ℚ, β(∂[3]) = −1 for the alternating form β(a, b) = v_2(a)v_3(b) − v_3(a)v_2(b), so ∂[3] = 3 ∧ (−2) and not (−2) ∧ 3.
+- Over ℚ the reduced-to-unreduced adapter sends [2] to [2] with boundary 2∧(−1). The pairing s(a)v₂(b)−s(b)v₂(a), with s(u)=1 for negative u and 0 otherwise, gives 1 modulo 2 on both sides; an adapter killing [2] fails this boundary square.
 - The composite with antisymSquare.toExterior is [x] ↦ x ∧ (1 − x) in ⋀[ℤ]^2 (Additive Fˣ).
 - Over F_5, ∂ maps P(F_5) ≅ ℤ/6 onto antisymSquare ℤ (Additive F_5ˣ) ≅ ℤ/2 with kernel ℤ/3: ∂[3] = 3 ∧ 3 ≠ 0 and ∂[2] = 0.
 - Over F_5, ∂([2] + [3]) = 2 ∧ 3 ≠ 0, so the angle-bracket element at 2 is not a Bloch element.
@@ -1285,7 +1288,7 @@ The source locators for these statements are Weibel, K-book, Before Theorem VI.5
 
 ### 4.8 The stability induction
 
-For infinite F and n≥1, the frame hyperhomology spectral sequence has E¹₍ₚ,q₎=H_p(GLₙ₋q(F),Z), 0≤q≤n, and abuts to H₍ₚ₊q−ₙ₎(GLₙ(F),Uₙ) with the finite frame filtration. The d¹ in odd q is stabilization and in even q is zero. Its dʳ vanish for every r≥2. Multiplication by e:Sₙ₋₂→Sₙ is injective for n≥2. The degree-n edge has kernel im Hₙ(GLₙ₋₁) and its Milnor retraction identifies the quotient with Kₙᴹ. Consequently the finite-step stabilization H_i(GLₙ₋₁)→H_i(GLₙ) is an isomorphism for i≤n−1. Equivalently, for n,i≥0 with i≤n, the actual block inclusion GLₙ(F)→GLₙ₊₁(F) induces a bijection on Hᵢ (`generalLinear_homology_stable`). The simple map `generalLinearStabilization` sends g to diag(g,1), with inverse matrix diag(g⁻¹,1), on Mathlib’s native general linear groups. These assertions are proved simultaneously, rather than invoking the stability theorem to prove itself.
+For infinite F and n≥1, the frame hyperhomology spectral sequence has E¹₍ₚ,q₎=H_p(GLₙ₋q(F),Z), 0≤q≤n, and abuts to H₍ₚ₊q−ₙ₎(GLₙ(F),Uₙ) with the finite frame filtration. The d¹ in odd q is stabilization and in even q is zero. Its dʳ vanish for every r≥2. Multiplication by e:Sₙ₋₂→Sₙ is injective for n≥2. The degree-n edge has kernel im Hₙ(GLₙ₋₁) and its Milnor retraction identifies the quotient with Kₙᴹ. Consequently the finite-step stabilization H_i(GLₙ₋₁)→H_i(GLₙ) is an isomorphism for i≤n−1. Equivalently, for n,i≥0 with i≤n, the actual block inclusion GLₙ(F)→GLₙ₊₁(F) induces a bijection on Hᵢ (`generalLinear_homology_stable`). The simple map `generalLinearStabilization` expresses AlgebraicKTheory A1's inclusion on Mathlib’s native field carriers: it sends g to diag(g,1), with inverse matrix diag(g⁻¹,1), and uses finSumFinEquiv for the finite indices. These assertions are proved simultaneously, rather than invoking the stability theorem to prove itself.
 
 **Checks.**
 
@@ -1864,9 +1867,9 @@ Here F is a finite field with cardinality q≥4 and prime characteristic ℓ. σ
 
 - Every finite Bloch class is the image of an actual K₃ class.
 
-For q≥4, 0→T̃(Fq)→K₃(Fq)−bF→Bₛ(Fq)→0 is natural and exact; T̃ is exactly the enhanced Tor term of Layer 4. It is cyclic of order2(q−1) for odd q and q−1 for even q. The left arrow is the monomial enhanced-Tor map, identified below with the homological torsion map of Hutchinson Corollary 7.5. The statement does not identify this arrow with an untwisted roots-of-unity inclusion.
+For q≥4, 0→T̃(Fq)→K₃(Fq)−bF→Bₛ(Fq)→0 is natural and exact; T̃ is exactly the enhanced Tor term of Layer 4. It is cyclic of order 2(q−1) for odd q and q−1 for even q. The chosen left arrow is the monomial enhanced-Tor map; its image equals the image of the enhanced-Tor injection in Hutchinson Corollary 7.5. No equality with that corollary's separately constructed left arrow under a fixed enhanced-Tor identification is asserted.
 
-Here T̃(F) and its monomial arrow are the Layer 4 enhanced Tor construction; the finite identification is proved below using the refined edge calculation and its closure square.
+Here T̃(F) and its monomial arrow are the Layer 4 enhanced Tor construction. Its injectivity follows from its algebraic-closure square; the refined edge calculation and cyclic subgroup uniqueness identify its image with ker bF.
 
 Here is the remaining two-primary and left-arrow proof, in the order needed for these assertions.
 
@@ -1874,7 +1877,7 @@ First, the edge filtration in §5.4 makes B(F) cyclic as a quotient of localized
 
 Next define the left arrow tF:T̃(F)→K₃(F)=K₃ⁱⁿᵈ(F) by the **same monomial plus-space arrow as in §4.19**, defined for every field, before comparing its image with ker bF. This is finiteEnhancedTor_arrow; no choice of a cyclic generator is involved. It is injective: embed F in its infinite algebraic closure Ω. The map T̃(F)→T̃(Ω) is injective by the natural short exact sequences with µ₂ kernels and ordinary Tor quotients; the µ₂ map is injective and the Tor map is injective by the finite cyclic transition formula in §5.2. Section 4.20 gives injectivity T̃(Ω)→K₃ⁱⁿᵈ(Ω). Naturality of the monomial arrow then implies injectivity of tF. This argument does not require σF, and uses no assumed finite Suslin sequence.
 
-Finally K₃(F) is cyclic, tF has image of order 2(q−1) (odd q) or q−1 (even q), and the already constructed bF has a kernel of exactly that order by the preceding refined calculation and §5.3. The two subgroups therefore coincide. This last use of subgroup uniqueness identifies images of **two specified maps whose injection/surjection have already been proved**; it does not manufacture either map from a cyclic order. It proves finiteEnhancedTor_exact and identifies the natural left arrow in Hutchinson Corollary 7.5 with the Layer 4 enhanced Tor arrow. Naturality of tF follows from the monomial construction; that of bF follows from σF and the refined edge. This closes the finite torsion-map compatibility without an unverified Sah comparison or an untwisted root inclusion.
+Finally K₃(F) is cyclic, tF has image of order 2(q−1) (odd q) or q−1 (even q), and the already constructed bF has a kernel of exactly that order by the preceding refined calculation and §5.3. The two subgroups therefore coincide, proving finiteEnhancedTor_exact with the specified monomial arrow. The same subgroup uniqueness identifies its image with that of Hutchinson's enhanced-Tor injection, without choosing an isomorphism of enhanced-Tor carriers that equates the two injections. Naturality of tF follows from the monomial construction; that of bF follows from σF and the refined edge. The sequence is therefore natural and exact with these chosen arrows.
 
 The source locators for these statements are Hutchinson 2013, arXiv v2, §7 Lemma 7.4 and preceding paragraph, pp34–35; Hutchinson 2013, arXiv v2, §7 Corollary 7.5 and proof, pp35–36; Hutchinson 2013, arXiv v2, §7 Corollary 7.5, p35.
 
@@ -1885,6 +1888,7 @@ The source locators for these statements are Hutchinson 2013, arXiv v2, §7 Lemm
 - Its kernel at cardinality4 has order3.
 - At q=5, integral H₃(SL₂(F₅),ℤ) has characteristic-primary information that is excluded by ℤ[1/5]; do not identify the integral group with ℤ/24.
 - q=2 and q=3 remain outside this Bloch convention’s finite-field order formula.
+- In ℤ/24 the injections ℤ/8→ℤ/24 given by x↦3x and x↦15x both have image {0,3,6,9,12,15,18,21}, but send 1 to 3 and 15. The second is the first precomposed with x↦5x on ℤ/8, which fixes its quotient ℤ/4 and its order-two subgroup {0,4}; equality of images and these extension data do not identify the arrows.
 
 *Needs:* §3.4, §3.6, §3.13, §4.19, §5.2, §5.3, §5.4; Layers 1–4; the finite-field, arithmetic and interval Rogers contracts.
 
@@ -2246,6 +2250,8 @@ Over ℚ the single five-term relation at (2,3) has arguments 2,3,3/2,3/4,1/2. A
 Use Layers 1–5 and Mathlib finite supports, kernels, tensor maps and coefficient rings, and KTheoryFiniteLocalFields §1.8 for the finite Chern map in §6.7. The K₂[n] extension of the finite-coefficient group is distinct from the integral Suslin sequence and the ordinary tensor quotient. No regulator or Habiro comparison is used.
 
 ## Downstream consumers
+
+ColemanIntegration §L2.Fb takes the integral carriers and their universal properties from §§3.1, 3.3–3.5. Its preBlochMap, antisymmetricMap and blochMap are the field maps of these sections; its tensorClass is the pure-tensor quotient map and its boundary is ∂[x]=x∧(1−x). The symbol-preserving isomorphism of §3.4 transports its reduced free-symbol calculations and scalar five-term evaluation to this same P(F), with the commuting boundary square restricting the transport to B(F). Its p-adic evaluation and branch descent follow these inputs. PolylogarithmFunctions §§5.8 and 6.1–6.5 supplies the analytic cross-ratio and Rogers inputs to this roadmap before those Coleman constructions.
 
 Polylogarithms Layer 2 consumes the normalized K₃-to-Bloch map for its real regulator comparison, and its Layer 4 consumes the rational-curve presentation of §4.21 and the specialization lemma of §3.12; the analytic scalars belong there. PadicHodgeRegulators and HabiroNumberFields are anticipated consumers of the integral maps, finite-field conventions and finite-coefficient comparison; no section-specific contract is asserted for them. EllipticKTheory is an anticipated consumer of the indecomposable quotient (§2.1), the two-torsion kernel bound (§2.2), the rational rank (§2.5) and the Suslin sequence (§4.20). The all-curve Goncharov kernel does not disappear through one of these consumer comparisons.
 
