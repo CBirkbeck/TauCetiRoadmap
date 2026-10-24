@@ -157,7 +157,8 @@ theorem hardy_ramanujan (ε : ℝ) (hε : 0 < ε) :
         ε * Real.log (Real.log N) < |(ArithmeticFunction.cardFactors n : ℝ) - Real.log (Real.log N)|)).card / (N : ℝ))
       atTop (𝓝 0) := by sorry
 
-/-- All raw moments converging to Gaussian moments imply weak convergence, without a uniform tail hypothesis. -/
+/-- The Gaussian specialization of moment convergence follows from characteristic-function
+Taylor remainders, without a uniform tail hypothesis. -/
 theorem gaussian_weak_convergence_of_moments (μ : ℕ → ProbabilityMeasure ℝ)
     (hfinite : ∀ n k : ℕ, Integrable (fun x : ℝ => |x|^k) (μ n : Measure ℝ))
     (hmom : ∀ k : ℕ, Tendsto (fun n => ∫ x : ℝ, x^k ∂(μ n : Measure ℝ))

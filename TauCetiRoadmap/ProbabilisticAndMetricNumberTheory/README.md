@@ -6,13 +6,13 @@
 
 This roadmap owns additive arithmetic predicates and their prime-power representations, arithmetic specializations of empirical laws, growing-prime probabilistic comparisons, asymptotic equidistribution and its Fourier criteria, reduced-rational approximation and the GCD-graph method, mass transference, pointwise ergodic convergence, the Gauss system, and the specified multiplicative statistics. It also owns the concrete number-theoretic applications of modular homogeneous dynamics described in Layer 4.
 
-Mathlib supplies `ArithmeticFunction`, `cardDistinctFactors` (ω), `cardFactors` (Ω), native continued fractions and positional digits, Haar measure on circles and tori, Gaussian measures and weak convergence. Tau Ceti supplies `Probability.empiricalMeasure`, Gaussian centered moments, conditional-expectation and martingale tools, and mean ergodic convergence. These are prerequisites. The pointwise theorem in §4.1 applies to every integrable observable; the existing L2 mean theorem and its L1 consequence under an L2 hypothesis supply a different statement. Likewise, Gaussian moment determinacy supplies uniqueness of a candidate limit, while convergence from moments needs the tightness and uniform-integrability argument in Layer 1.
+Mathlib supplies `ArithmeticFunction`, `cardDistinctFactors` (ω), `cardFactors` (Ω), native continued fractions and positional digits, Haar measure on circles and tori, Gaussian measures and weak convergence. Tau Ceti supplies `Probability.empiricalMeasure`, Gaussian centered moments, conditional-expectation and martingale tools, and mean ergodic convergence. These are prerequisites. The pointwise theorem in §4.1 applies to every integrable observable; the existing L2 mean theorem and its L1 consequence under an L2 hypothesis supply a different statement. The Gaussian moment-to-weak specialization in §1.5 uses characteristic-function Taylor remainders. General moment convergence to a determinate law, with reusable tightness and uniform-integrability machinery, belongs to RandomMatrices Milestone 3 (the shared-foundations contract of FreeProbability).
 
 Generic arithmetic functions, summation and Dirichlet series remain with Mathlib, Tau Ceti and [ArithmeticDirichletSeries](../../Completed/ArithmeticDirichletSeries/README.md) (Export contract). AnalyticNumberTheoryPartI §§0.19, 0.21 owns reciprocal-prime estimates, §1.5 Dirichlet-polynomial mean squares, and §§3.18, 3.33 pretentious distance and Halász estimates; §§3.12a, 3.32, 3.41 supply analytic counts for the restricted squarefree family. The stronger analytic inputs are mathematical targets in §§0.13, 3.7, 5.1 and 5.2. The finite van der Corput estimate and the entropy-decrement argument belong here. DiophantineApproximationAndTranscendence §0.6 owns BadlyApproximable; this roadmap owns its characterization by bounded native partial denominators. AdelicAlgebraicGroups AA.2–AA.3 owns homogeneous quotients and finite invariant volume; GeometryOfNumbersAndQuadraticArithmetic §§4.2, 4.5 owns Howe–Moore, Moore ergodicity and Mahler compactness. IntegralLattices concerns integral quadratic and bilinear lattices. Möbius orthogonality to nilsequences is outside this roadmap. General Chowla and Sarnak are conjectures, not conclusions of Layer 5.
 
 The finite weighted sums and exact remainder formulas specialize native counting, CRT and empirical-measure declarations; their generic counting and probability theorems are consumed under the pinned names below. The stronger summed rough-number, restricted Dirichlet, long-mean, high-twist Liouville, modulated short-sum, prime fourth-moment and divisor-bounded-mean statements are owned in §§0.13, 3.7, 5.1–5.2. These strengthen the generic mean-square and Halász inputs rather than treating those inputs as the desired conclusions. The sieve targets concern the full smooth/rough decomposition and arbitrary bounded prime phases; no smaller prime family is selected.
 
-The arithmetic Lévy criterion is a specialization of Mathlib’s `MeasureTheory.tendstoInDistribution_iff_tendsto_charFun`; its finite empirical formula is recorded as a comparison, with no additional theorem required. Pointwise Birkhoff and finite Shannon entropy are owned here (§§4.1–4.3, 5.2); ArithmeticDynamics §§2.6–2.7 consumes these interfaces for its measure-entropy development.
+The arithmetic Lévy criterion is a specialization of Mathlib’s `MeasureTheory.tendstoInDistribution_iff_tendsto_charFun`; its finite empirical formula is recorded as a comparison, with no additional theorem required. Pointwise Birkhoff and finite Shannon entropy are owned here (§§4.1–4.3, 5.2). The finite Shannon API is independent of entropy decrement and the multiplicative correlation theorems. ArithmeticDynamics §§2.6–2.7 owns finite measurable partitions, their joins, dynamical entropy, Shannon–McMillan–Breiman and ergodic decomposition; the foundational interface offered to that development is specified under Downstream consumers.
 
 The constant-tail conditional-expectation and reverse-L¹ statements are supplied by the two Tau Ceti declarations below rather than separate targets. The explicit constant-four cylinder bound in §4.6 supplies the Rényi comparison used here. The summability and Gauss logarithmic-integral statements each have one owning target in §4.7; their uses in integrability and growth consume those targets.
 
@@ -43,6 +43,8 @@ The finite-law boundary consists of `ArithmeticFunction` and its zero/extensiona
 The exact finite carriers are in `Mathlib/NumberTheory/ArithmeticFunction/Defs.lean` and `Misc.lean`, `Mathlib/Data/Nat/Factorization/Basic.lean` and `Mathlib/Data/ZMod/QuotientRing.lean`. `ZMod.prodEquivPi` requires pairwise coprime natural moduli; finite probability applications here additionally require every modulus nonzero. `ArithmeticFunction` is a zero-preserving function; it does not assert additivity or multiplicativity. Native `Measure.mkMetric`, in `Mathlib/MeasureTheory/Measure/Hausdorff.lean`, accepts a diameter gauge; continuity, positivity and ratio monotonicity are additional hypotheses of this roadmap’s theorems.
 
 For distribution limits consume `ProbabilityMeasure.tendsto_iff_forall_integral_tendsto`, its bounded-continuous test-function formulation, the native CDF and characteristic function, the Lévy convergence theorem and the existing Gaussian law. The exact finite multinomial expansion is `Finset.sum_pow_eq_sum_piAntidiag`; multiplicity coefficients use `Nat.multinomial_spec`. Tau Ceti's `Probability.Distributions.Gaussian.Moments` supplies even and odd centered Gaussian moments. Moment convergence, arithmetic normalization and cutoff removal remain distinct mathematical targets below.
+
+For §5.2 consume `DirichletCharacter.LSeries_eulerProduct_exp_log` in `Mathlib/NumberTheory/EulerProduct/DirichletLSeries.lean`, and `DirichletCharacter.LFunction_eq_LSeries`, `DirichletCharacter.LFunctionTrivChar_eq_mul_riemannZeta` and `DirichletCharacter.differentiableAt_LFunction` in `Mathlib/NumberTheory/LSeries/DirichletContinuation.lean`. The Euler product and series comparison require Re s>1; the principal-character formula is used off s=1. `DirichletCharacter.LFunction_ne_zero_of_one_le_re` in `Mathlib/NumberTheory/LSeries/Nonvanishing.lean` requires Re s≥1 and either a nonprincipal character or s≠1. Compact-height bounds extend the reciprocal through the principal pole by zero. These inputs supply no quantitative estimate over a growing height interval.
 
 For tori consume native continuous Fourier characters, density of trigonometric polynomials and their integrals against the Haar probability fixed above. The native irrational-circle dense-orbit/ergodicity results (`AddCircle.denseRange_zsmul_iff`, `AddCircle.ergodic_add_left`) and expanding-circle ergodicity are used for their exact hypotheses. General sequence equidistribution and canonical digit-frequency transport are developed below.
 
@@ -2120,7 +2122,7 @@ distribution sandwiches); AnalyticNumberTheoryPartI §§0.19, 0.21.
 
 Prove `gaussian_weak_convergence_of_moments`. Let μₙ be Borel probability measures on ℝ with ∫|x|^k dμₙ finite for every n,k. If ∫x^k dμₙ tends to ∫x^k d(gaussianReal 0 1) for every k, then μₙ converges weakly to that Gaussian. No uniform subgaussian bound on μₙ is assumed. (TAO-CLT-2010, §3, Theorem 25 proof, Taylor-remainder argument; the asymptotic-even-moment version follows by the argument below.)
 
-For each k, convergence bounds the 2k-th moments uniformly in n. The second moment gives tightness by Markov. For any weakly convergent subsequence, the (2k+2)-moment bound gives uniform integrability of |x|^k, so bounded continuous truncations pass every moment to the limit. Gaussian determinacy follows directly from the characteristic-function Taylor remainder: its limsup error at order 2k is at most |t|^(2k)/(2^k k!), tending to zero. Thus every subsequential limit is the Gaussian; tightness then gives convergence of the entire sequence. Alternatively the same remainder proves characteristic-function convergence directly, followed by native Lévy convergence. This roadmap owns these probability bridges; finite moment evaluation alone does not supply them.
+One specialized route fixes t∈ℝ and Taylor order 2k−1, for k≥1. The integrated remainder is at most |t|^(2k)∫x^(2k)dμₙ/(2k)!. Moment convergence passes the finite Taylor polynomial and the limiting even moment; comparing with the Gaussian remainder gives `limsup_n |φ_μₙ(t)−φ_G(t)|≤2|t|^(2k)/(2^k k!)`. Let k tend to infinity and apply native Lévy convergence. This proves the Gaussian specialization directly, without constructing a general moment-determinacy or compactness API.
 
 **Checks.**
 
@@ -2128,7 +2130,7 @@ For each k, convergence bounds the 2k-th moments uniformly in n. The second mome
 - The constant standard Gaussian sequence satisfies all hypotheses and the conclusion.
 - Matching only mean and variance does not suffice: the fixed fair law on {−1,1} has fourth moment 1, whereas the standard Gaussian has fourth moment 3.
 
-*Needs:* native probability weak convergence and Lévy convergence; native Markov and bounded continuous integrals; the Gaussian moments supplied above.
+*Needs:* native characteristic functions and Lévy convergence; Taylor’s integral remainder for the complex exponential on a real segment; the Gaussian moments supplied above.
 
 Prove `erdos_kac`. For every real x, the fractions of positive n≤N with (ω(n)−log log N)/sqrt(log log N)≤x
 tend to cdf(gaussianReal(0,1),x); the same statement holds for Ω. The scale is sqrt(log log N), and Gaussian
@@ -6447,13 +6449,37 @@ AnalyticNumberTheoryPartI §1.5; restricted dirichlet-polynomial mean square; st
 
 *Needs:* native finite Fourier inversion, prime counting and divisibility; §0.5 inclusion–exclusion and finite weighted moment bounds.
 
-**Uniform character twists of Liouville.** For every fixed Dirichlet character χ and A≥1, prove inf over |t|≤Ax of `Σ_{p≤x}(1−Re(λ(p)conj(χ(p))p^(−it)))/p` tends to infinity, uniformly in that full height interval. (TaoLogChowla, Theorem 1.2 and Corollary 1.5, physical pp.2,5–6.)
+**High-height prime phases.** For every fixed B>0 and 0<ε<1/3, prove that there are C>0 and x₀>e such that, for all real x≥x₀ and `2≤|u|≤x^B`, putting `y=exp((log x)^(2/3+ε))` gives `|Σ_{y<p≤x}p^(−1−iu)|≤C`. This is the growing-height analytic target, including the Vinogradov–Korobov high-prime estimate used in MatomakiRadziwill, Lemma 2 proof, physical p.12 (MatomakiRadziwill line 520). It is owned here at every fixed B, rather than inferred by partial summation from an untwisted character estimate. With the supplied reciprocal-prime asymptotic it gives `Σ_{p≤x}(1−cos(u log p))/p≥(1/3−ε)log log x−C′`, uniformly in the same range.
 
 **Checks.**
 
-- At the principal character and t=0 each prime contributes 2/p, since λ(p)=−1; replacing λ by 1 gives 0 and fails the conclusion.
+- At ε=1/12, log y=(log x)^(3/4), so the reciprocal-prime mass of (y,x] is `(1/4)log log x+O(1)`. At log x=64 its main term is (log 64)/4, not (log 64)/3.
+- At u=0 the phase sum is the reciprocal-prime mass of (y,x] and diverges; the lower height bound excludes this case.
+- Each term in the separation sum is nonnegative. For phase u log p=π it is 2/p, whereas phase zero gives 0; the complex-exponential sign does not change its real part.
 
-*Needs:* AnalyticNumberTheoryPartI §0.18 character-prime estimates and §3.18 pretentious distance; native Liouville complete multiplicativity.
+*Needs:* native finite prime sums and complex powers; AnalyticNumberTheoryPartI §§0.19, 0.21 for the reciprocal-prime mass. The displayed high-height estimate is the additional analytic target.
+
+**Compact-height Euler comparison.** For every fixed q≥1 and Dirichlet character χ modulo q, prove, uniformly for x≥e² and real t, with `σ=1+1/log x`, that `Re Σ_{p≤x}conj(χ(p))p^(−1−it)=log |L(σ+it,conj χ)|+O(1)`. The error may be chosen absolute: the prime powers of exponent at least two have bounded absolute sum, and the damping error below x and prime tail above x are bounded using reciprocal-prime estimates. For each fixed T>0, deduce `log |L(σ+it,conj χ)|≥−C_(χ,T)` for |t|≤T. Use native nonvanishing on Re s≥1 and compactness; at the principal pole extend the reciprocal analytically by value zero, so no value of L at its pole is asserted. These are the compact-height inputs to TaoLogChowla, the paragraph after Remark 1.6, physical p.6 (TaoLogChowla line 270).
+
+**Checks.**
+
+- At the principal character modulo 1 and t=0 the prime sum and log ζ(σ) both equal log log x+O(1); the sign of log |L| is positive in the comparison.
+- For the principal character modulo 2 the omitted p=2 Euler factor changes log ζ(σ+it) by log |1−2^(−σ−it)|, bounded because σ>1. No primitive-character hypothesis is required.
+- At σ→1 and t=0 the principal reciprocal tends to 0; boundedness of the reciprocal gives a lower bound for log |L|, not an upper bound near the pole.
+
+*Needs:* native Dirichlet Euler products, `DirichletCharacter.LFunction_ne_zero_of_one_le_re` and the principal-character pole formula; AnalyticNumberTheoryPartI §§0.19, 0.21; native compactness and continuity.
+
+**Uniform character twists of Liouville.** For every fixed q≥1, Dirichlet character χ modulo q and A≥1, prove inf over |t|≤Ax of `Σ_{p≤x}(1−Re(λ(p)conj(χ(p))p^(−it)))/p` tends to infinity, uniformly in that full height interval. The constants and threshold may depend on χ and A. (TaoLogChowla, Theorem 1.2, Corollary 1.5 and the paragraph after Remark 1.6, physical pp.2,5–6; TaoLogChowla line 270.)
+
+Here is a route using high-height prime phases without a growing-height reciprocal-L bound. Fix r≥1 such that χ(p)^r=1 at every p∤q, and put `z_p=λ(p)conj(χ(p))p^(−it)`. For p∤q, `z_p^(2r)=p^(−2rit)` and `1−Re(z_p^(2r))≤4r²(1−Re z_p)`. When 1/r≤|t|≤Ax, apply high-height prime phases with u=2rt, B=2 and ε=1/12; x≥2rA ensures |u|≤x². Removing primes dividing q costs at most `2Σ_{p|q}1/p`, so the required distance sum is at least `(log log x)/(16r²)−C_(χ,A)` for sufficiently large x. For |t|≤1/r, the compact-height Euler comparison instead gives `log log x−C_χ`, since λ(p)=−1. Both ranges have constants independent of t, proving the full infimum statement. The finite order r belongs to the character on units; values at primes dividing q remain zero.
+
+**Checks.**
+
+- At the principal character modulo 1 and t=0 each prime contributes 2/p; replacing λ by 1 gives 0 and fails the conclusion.
+- At the principal character modulo 2 and x=3,t=0 the Liouville sum is 1/2+2/3=7/6; replacing λ by 1 leaves 1/2. In general these replacement sums are the bounded sums `Σ_{p|q,p≤x}1/p`.
+- At r=1 and z=exp(iπ/3), the powering inequality reads 3/2≤2. For ε=1/12 its resulting logarithmic coefficient is 1/16; a fixed positive r is essential for a positive uniform coefficient.
+
+*Needs:* high-height prime phases and compact-height Euler comparison in this section; AnalyticNumberTheoryPartI §3.18 pretentious distance; native Liouville complete multiplicativity and finite order of a character on the finite unit group.
 
 The logarithmic window and harmonic weights are fixed before the cancellation theorems. Uniform nonpretentiousness supplies the corrected Elliott hypothesis; a weaker ordinary Liouville bound is stated separately.
 
@@ -6538,11 +6564,11 @@ After the affine-invariance transport this gives sup_α `E|Σ_{j=1}^H` f(an+j)e(
 
 **Checks.**
 
-- For the multiplicative function equal to 1 at n=1 and 0 elsewhere, all sampled f(n+j) with n,j≥1 vanish, so the modulated average is 0. For f=1 the principal-character separation is 0, excluding that negative control.
+- For the multiplicative function equal to 1 at n=1 and 0 elsewhere, all sampled f(n+j) with n,j≥1 vanish, so the modulated average is 0. For f=1, the principal character modulo 1 at t=0 gives separation 0, excluding that negative control.
 
 *Needs:* AnalyticNumberTheoryPartI §1.5 mean squares and §3.33 Halász; the finite character/height hypothesis and scale hierarchy in this section.
 
-Define finiteEntropy of a finite-valued random variable as −Σ_v P(X=v)log P(X=v), with 0log0=0, and finiteMutualInformation(X,Y)=finiteEntropy(X)+finiteEntropy(Y)−finiteEntropy(X,Y). Prove the finite chain rule, nonnegativity of mutual information and entropy at most log of the alphabet size. These are the finite laws used here; no measure-entropy construction is required. ([TaoLogChowla](#references), §3, (3.1)–(3.8), pp.19–20.)
+Define finiteEntropy of a finite-valued random variable as −Σ_v P(X=v)log P(X=v), with 0log0=0, and finiteMutualInformation(X,Y)=finiteEntropy(X)+finiteEntropy(Y)−finiteEntropy(X,Y). Prove the finite chain rule, nonnegativity of mutual information and entropy at most log of the alphabet size. This finite probability API depends only on finite sums, native probability and real logarithms; it is an independent prerequisite of entropy decrement. The measurable-partition and dynamical-entropy constructions use it through the interface under Downstream consumers. ([TaoLogChowla](#references), §3, (3.1)–(3.8), pp.19–20.)
 
 Its basic API has the following statements.
 
@@ -6581,7 +6607,7 @@ The nonzero initial correlation gives the all-scale lower bound of Proposition 2
 
 - With f(2)=i and g=1 in the completely multiplicative unit-circle reduction, c₂=−i and c₂f(2)g(4)=1=f(1)g(2); the unconjugated coefficient would give −1. For the Liouville pair c₂=(−1)(−1)=1.
 
-- The constant-one f violates finite nonpretentiousness at the principal character and t=0
+- The constant-one f violates finite nonpretentiousness at the principal character modulo 1 and t=0
 
 - The character periods and the whole |t|≤Ax interval are quantified together
 
@@ -6766,7 +6792,7 @@ as the finite-law interface. No general Chowla or Sarnak conjecture is assumed a
 
 ## Downstream consumers
 
-ArithmeticDynamics §2.6 consumes the general integrable pointwise Birkhoff theorem of §4.1, with the invariant conditional-expectation limit and its ergodic specialization.
+The foundational interface for ArithmeticDynamics §§2.6–2.7 consists of `birkhoff_pointwise` from §4.1, with its invariant conditional-expectation limit, `birkhoff_pointwise_ergodic` from §4.3, and the independent finite Shannon API of §5.2. For a finite measurable partition (Pᵢ) of a probability space, the label variable X(x)=i for x∈Pᵢ has masses μ(Pᵢ); hence its Shannon entropy is `−Σ_i μ(Pᵢ)log μ(Pᵢ)`, and the pair of label variables represents the join. This supplies finite partition entropy and its chain rule without a dependence on entropy decrement, logarithmic Chowla or the other number-theoretic applications.
 
 Arithmetic applications may consume Hardy–Ramanujan and Erdős–Kac as probability-law statements, with the exact normalization and the ω/Ω transfer. Koymans–Pagano's restricted squarefree family consumes the separate conditional window estimate. Equidistribution applications use the native torus, character and subtorus interfaces; normal digits consume the pointwise theorem through the expanding-circle bridge. Metric approximation applications consume both the unrestricted and reduced limsup conventions and the precise power or general-gauge Hausdorff conclusion. Continued-fraction applications use the native denominators, the single digit indexing convention, the logarithmic constants and the explicit Gauss–Kuzmin rate. GeometryOfNumbersAndQuadraticArithmetic §§4.2, 4.5 and AdelicAlgebraicGroups AA.2–AA.3 supplies the generic homogeneous structures, and the local bounded_partial_denominators_iff_badlyApproximable supplies the bounded-digits characterization using the predicate from DiophantineApproximationAndTranscendence §0.6; the number-theoretic consumers remain in Layer 4. Multiplicative applications may use the proved short-interval and logarithmic estimates. Nilsequence orthogonality is outside this roadmap; neither ordinary Chowla cancellation nor general Sarnak orthogonality follows from the random-model identities.
 
