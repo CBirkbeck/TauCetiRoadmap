@@ -40,7 +40,7 @@ Hausdorff gauges use `Measure.mkMetric` with diameter argument. A source formula
 
 The finite-law boundary consists of `ArithmeticFunction` and its zero/extensionality API; `ArithmeticFunction.cardDistinctFactors`, `cardFactors` and their factorization/prime-power formulas; `Nat.card_multiples`; `Nat.factorization`; `Nat.primeFactors`; `Nat.primesLE`; finite coprime-product divisibility; and `ZMod.prodEquivPi`. `TauCeti.Probability.empiricalMeasure_apply_toReal` and `integral_empiricalMeasure` evaluate the existing empirical probability without constructing another uniform law.
 
-The exact finite carriers are in `Mathlib/NumberTheory/ArithmeticFunction/Defs.lean` and `Misc.lean`, `Mathlib/Data/Nat/Factorization/Basic.lean` and `Mathlib/Data/ZMod/QuotientRing.lean`. `ZMod.prodEquivPi` requires pairwise coprime natural moduli; finite probability applications here additionally require every modulus nonzero. `ArithmeticFunction` is a zero-preserving function; it does not assert additivity or multiplicativity. Native `Measure.mkMetric`, in `Mathlib/MeasureTheory/Measure/Hausdorff.lean`, accepts a diameter gauge; continuity, positivity and ratio monotonicity are additional hypotheses of this roadmap’s theorems.
+The exact finite carriers are in `Mathlib/NumberTheory/ArithmeticFunction/Defs.lean` and `Misc.lean`, `Mathlib/Data/Nat/Factorization/Basic.lean` and `Mathlib/Data/ZMod/QuotientRing.lean`. `ZMod.prodEquivPi` requires pairwise coprime natural moduli; finite probability applications here additionally require every modulus nonzero. `ArithmeticFunction` is a zero-preserving function; it does not assert additivity or multiplicativity. Native `Measure.mkMetric`, in `Mathlib/MeasureTheory/Measure/Hausdorff.lean`, accepts a diameter gauge; continuity, positivity and ratio monotonicity are additional hypotheses of this roadmap’s theorems. In that file, `MeasureTheory.Measure.le_mkMetric` (lines 490–493) turns a measure bound on every sufficiently small set into domination by the metric measure for an arbitrary extended gauge. `MeasureTheory.Measure.le_hausdorffMeasure` (lines 541–543) is its power-gauge specialization, with a real exponent.
 
 For distribution limits consume `ProbabilityMeasure.tendsto_iff_forall_integral_tendsto`, its bounded-continuous test-function formulation, the native CDF and characteristic function, the Lévy convergence theorem and the existing Gaussian law. The exact finite multinomial expansion is `Finset.sum_pow_eq_sum_piAntidiag`; multiplicity coefficients use `Nat.multinomial_spec`. Tau Ceti's `Probability.Distributions.Gaussian.Moments` supplies even and odd centered Gaussian moments. Moment convergence, arithmetic normalization and cutoff removal remain distinct mathematical targets below.
 
@@ -4230,7 +4230,7 @@ intersection.
 - The constant C_k cannot grow with η; otherwise infinite Hausdorff measure does not follow.
 
 *Needs:* §3.9 (separated cantor levels and their probability measure); Mathlib
-`MeasureTheory.Measure.le_hausdorffMeasure`.
+`MeasureTheory.Measure.le_mkMetric`.
 
 Prove MassTransferenceMeasure.root. The root mass is one. ([BeresnevichVelani](#references)
 §§5.3–5.5, printed pp.986–990.)
@@ -4327,16 +4327,24 @@ pp.977–990.)
 
 If f(r)/r^k has finite zero/positive limit, use the comparison of Hausdorff measures and the
 covering/full-measure argument. For the infinite ratio, apply the Cantor construction and arbitrary-ball
-bound, then native mass distribution to get H^f≥cη for all η.
+bound, then native mass distribution to get H^f≥cη for all η. More precisely, for the Cantor
+probability μ with μ(A)≤Cₖf(r_A)/η, apply `MeasureTheory.Measure.le_mkMetric` to the measure
+(η/Cₖ)μ and `extendedGauge f`. A nonempty set of sufficiently small positive diameter d lies in a
+closed ball of radius d about any of its points, so its scaled mass is at most f(d). Empty sets have
+mass zero; diameter-zero sets have mass zero by the small-ball bound and f(r)→0. Since μ(Kη)=1,
+this yields H^f(Kη)≥η/Cₖ, with Cₖ>0 independent of η.
 
 **Checks.**
 
 - For k=1, f(r)=r^s, 0<s<1 and 0<r<1, the expanded radius r^s is larger than r; reversing the two limsups would be wrong.
 - For k=2 and f(r)=r² the expanded radius is √(r²)=r for r>0, giving the identity implication.
 - Dimension k=0 is excluded before forming the reciprocal exponent 1/k.
+- For the non-power gauge f(r)=r+r², diameter 1/2 has gauge value 3/4; the radius 1/4 has value 5/16. The small-set comparison uses the diameter value.
+- If η=8 and Cₖ=2, the scaled measure is 4μ and the lower bound is H^f(Kη)≥4. Using the inverse scaling would instead give 1/4.
+- A singleton has diameter 0 and mass 0 under the small-ball bound as f(r)→0; a Dirac probability fails that bound because its small centered balls have mass 1.
 
 *Needs:* §3.8 (gauges and disjoint expanded coverings); §3.9 (separated cantor levels and their probability
-measure); Mathlib `MeasureTheory.Measure.le_hausdorffMeasure`.
+measure); Mathlib `MeasureTheory.Measure.le_mkMetric`.
 
 The power-gauge Checks include admissibility of f(r)=r^s for s>0, expansion r<r^s when 0<r<1 and s<1, and the identity r^1=r.
 
@@ -6792,7 +6800,7 @@ as the finite-law interface. No general Chowla or Sarnak conjecture is assumed a
 
 ## Downstream consumers
 
-The foundational interface for ArithmeticDynamics §§2.6–2.7 consists of `birkhoff_pointwise` from §4.1, with its invariant conditional-expectation limit, `birkhoff_pointwise_ergodic` from §4.3, and the independent finite Shannon API of §5.2. For a finite measurable partition (Pᵢ) of a probability space, the label variable X(x)=i for x∈Pᵢ has masses μ(Pᵢ); hence its Shannon entropy is `−Σ_i μ(Pᵢ)log μ(Pᵢ)`, and the pair of label variables represents the join. This supplies finite partition entropy and its chain rule without a dependence on entropy decrement, logarithmic Chowla or the other number-theoretic applications.
+The foundational interface for ArithmeticDynamics §§2.6–2.7 consists of `birkhoff_pointwise` from §4.1, with its invariant conditional-expectation limit, `birkhoff_pointwise_ergodic` from §4.1, and the independent finite Shannon API of §5.2. For a finite measurable partition (Pᵢ) of a probability space, the label variable X(x)=i for x∈Pᵢ has masses μ(Pᵢ); hence its Shannon entropy is `−Σ_i μ(Pᵢ)log μ(Pᵢ)`, and the pair of label variables represents the join. This supplies finite partition entropy and its chain rule without a dependence on entropy decrement, logarithmic Chowla or the other number-theoretic applications.
 
 Arithmetic applications may consume Hardy–Ramanujan and Erdős–Kac as probability-law statements, with the exact normalization and the ω/Ω transfer. Koymans–Pagano's restricted squarefree family consumes the separate conditional window estimate. Equidistribution applications use the native torus, character and subtorus interfaces; normal digits consume the pointwise theorem through the expanding-circle bridge. Metric approximation applications consume both the unrestricted and reduced limsup conventions and the precise power or general-gauge Hausdorff conclusion. Continued-fraction applications use the native denominators, the single digit indexing convention, the logarithmic constants and the explicit Gauss–Kuzmin rate. GeometryOfNumbersAndQuadraticArithmetic §§4.2, 4.5 and AdelicAlgebraicGroups AA.2–AA.3 supplies the generic homogeneous structures, and the local bounded_partial_denominators_iff_badlyApproximable supplies the bounded-digits characterization using the predicate from DiophantineApproximationAndTranscendence §0.6; the number-theoretic consumers remain in Layer 4. Multiplicative applications may use the proved short-interval and logarithmic estimates. Nilsequence orthogonality is outside this roadmap; neither ordinary Chowla cancellation nor general Sarnak orthogonality follows from the random-model identities.
 
