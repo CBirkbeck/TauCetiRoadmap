@@ -11,12 +11,17 @@ conic/Hilbert comparison and the real criterion on all field elements.
 The symbol-algebra central-simplicity and proper-degree matrix-corner theorems
 lack the specified symbol-algebra carrier at the pins. The algebra/Brauer
 dictionary, K₂ norm-residue and invariant comparisons,
-all-place reciprocity on K₂, Tate map dictionaries and finite étale Chern comparison
+all-place reciprocity on K₂, the adic Tate symbol and coefficient diagram,
+conditional and global adic torsion, the global-field Picard sequence,
+the S-integer dictionaries and finite étale Chern comparison
 are not statable at the pins: they lack the classical/Milnor K₂ carrier and its
 comparison with K-spectra and finite K-groups. The all-weight coefficient dictionary
 also lacks the coherent integer-weight finite/adic twist and field étale/Galois
-comparison carriers. The native root pairing and its tensor lift do exist; their
-routine universal-property API stays in README.md.
+comparison carriers. The arbitrary-DVR residue/localization comparison lacks
+the support-purity and finite-twist cohomology carriers. S-integer coefficient
+reduction lacks the finite/adic étale twist cohomology carriers. The native root
+pairing and its tensor lift do exist; their routine universal-property API stays
+in README.md.
 -/
 
 namespace TauCetiRoadmap.K2SymbolsBrauerPartII
