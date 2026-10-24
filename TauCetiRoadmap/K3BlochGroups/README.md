@@ -24,6 +24,8 @@ The normalized positive-characteristic integral K₃-torsion comparison is a con
 
 This roadmap also owns the following results, which the general roadmaps cited above do not state; each is specified where it is used. They are the low-degree Hopf calculation and the sphere-unit comparison (§1.5); the degree-three injectivity consequence of KTheoryFiniteLocalFields §§3.0, 3.0a and 6.10, the weight-two degree-zero comparison and the all-prime divisibility of K₄ of an algebraically closed field (§2.2); the unstable SL₂ symbol presentation (§4.5); the cyclic homology maps and homological stability of symmetric groups (§4.15); the π^s_*-module structure and unit splitting of the stable Atiyah–Hirzebruch spectral sequence of a classifying space (§4.16); rigidity under purely transcendental extension and the rational specialization of five-term relations (§4.21); and the finite-group stable-elements, duality and period theorems (§5.2).
 
+Section 3.12 owns the local specialization adapter for smooth curves without a properness hypothesis, including its agreement with AlgebraicCurves Layer 12A on proper curves. Regularity, stalk dimension and the DVR criterion are the pinned inputs below, not new foundational constructions.
+
 ## Conventions
 
 Rings A are associative and unital; a ring map preserves one, and the zero ring is allowed. Fields F are nontrivial. A field homomorphism is therefore injective. Integral homology has trivial coefficients unless a representation or coefficient ring is displayed. Stable linear and Steinberg groups are directed colimits under block inclusion; no finite-rank stable range is implicit.
@@ -50,6 +52,8 @@ Use `FreeAbelianGroup`, `Finsupp`, `TensorProduct`, `Submodule`, `AddSubgroup`, 
 
 Use `IsCoveringMap.existsUnique_continuousMap_lifts`, `IsCoveringMap.liftHomotopy` and `HSpace` for the covering multiplication of §1.5. The pinned `HSpace` gives a continuous multiplication, a unit, its value at the pair of units and unit homotopies relative to the unit; associativity and commutativity are not fields of that class. Mathlib's first-order language, formulas, structure semantics and elementary-embedding carriers support the real-closed-field theorem in §5.8.
 
+For §3.12 use `AlgebraicGeometry.Scheme.functionField` and its `IsFractionRing (X.presheaf.stalk x) X.functionField` instance in `Mathlib/AlgebraicGeometry/FunctionField.lean`, under `IsIntegral X`. Use `AlgebraicGeometry.Scheme.residueField`, `Scheme.residue` and `Scheme.descResidueField` in `Mathlib/AlgebraicGeometry/ResidueField.lean` for the stalk residue field, its quotient map and the residue-field map induced by a rational point. The function-field instance needs integrality; the residue-field definition alone does not identify the residue field with the base field.
+
 ### From Tau Ceti
 
 `TauCeti.crossRatio_comp_eq_of_sub_eq_div` in `TauCeti/Algebra/Field/LinearFractional.lean` is the affine cross-ratio comparison used through PolylogarithmFunctions §5.8. `TauCeti.antisymmetricTensors` in `TauCeti/LinearAlgebra/TensorProduct/Symmetric.lean` is the negative eigenspace of the tensor flip; its comparison with the cokernel here requires two invertible.
@@ -57,6 +61,8 @@ Use `IsCoveringMap.existsUnique_continuousMap_lifts`, `IsCoveringMap.liftHomotop
 Use `TauCeti.groupHomology.indIso_inv` in `TauCeti/RepresentationTheory/Homological/GroupHomology/Shapiro.lean`; `TauCeti.groupHomology.transfer`, `TauCeti.groupHomology.transfer_comp_map_subtype_id` and `TauCeti.groupHomology.map_comp_transfer` in `TauCeti/RepresentationTheory/Homological/GroupHomology/Transfer/Basic.lean`; `TauCeti.groupHomology.transfer_trans` in `TauCeti/RepresentationTheory/Homological/GroupHomology/Transfer/Trans.lean`; and `TauCeti.groupHomology.δ_naturality` in `TauCeti/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean`. These take actual representations over a commutative coefficient ring; transfer requires a finite-index subgroup. `TauCeti.groupCohomology.eq_zero_of_pow_nsmul_eq_zero_of_map_sylow_eq_zero` in `TauCeti/RepresentationTheory/Homological/GroupCohomology/Sylow.lean` supplies injectivity on the prime-primary subgroup for a finite group. Positive-degree localized cohomology is such torsion; degree zero is handled directly. `TauCeti.ContinuousCohomology.corestriction_mackey` in `TauCeti/RepresentationTheory/Homological/ContCohomology/Corestriction/Mackey/AllDegrees.lean` supplies the all-degree double-coset identity for an open subgroup U, a closed subgroup V and discrete coefficients on a profinite group. Section 5.2 compares its cochains with ordinary cochains for finite discrete groups before using that identity.
 
 For real closures use `TauCeti.RealClosure.exists_realClosure` in `TauCeti/FieldTheory/RealClosure/Basic.lean`, which constructs an ordered algebraic real closure in the base field's universe, and `RingPreordering.exists_linearOrder` in `TauCeti/Algebra/Order/Ring/Ordering/Extension.lean`, which extends a specified field preordering to a compatible linear order. `IsFormallyReal` excludes a nonzero-square sum equal to zero; adjoining the square 1 shows that −1 is not a sum of squares. Thus the sums-of-squares subsemiring is a `RingPreordering`, and the two pinned declarations supply the ordered real-closure embedding needed in §5.8. That section proves the first-order transfer theorem itself.
+
+For §3.12 use `TauCeti.AlgebraicGeometry.isRegularLocalRing_stalk_of_smooth` in `TauCeti/AlgebraicGeometry/Morphisms/Smooth/Regular.lean`, over a locally Noetherian base with regular stalks, and `TauCeti.AlgebraicGeometry.smoothOfRelativeDimension_iff_ringKrullDim_stalk_eq` in `TauCeti/AlgebraicGeometry/Morphisms/Smooth/RelativeDimension.lean`, over a field. The latter identifies relative dimension one with stalk dimension one at closed points of a smooth scheme. Use `TauCeti.IsRegularLocalRing.isDiscreteValuationRing_iff_ringKrullDim_eq_one` in `TauCeti/RingTheory/RegularLocalRing/Basic.lean` to obtain the DVR. None of these inputs assumes properness.
 
 ### From TauCetiRoadmap.GeneralAlgebraicKTheory
 
@@ -112,7 +118,7 @@ Target F7.0b supplies η³=12ν≠0. Identify its stable η with the stabilizati
 
 ### From TauCetiRoadmap.AlgebraicCurves
 
-Layer 12A supplies the DVR at a regular closed point of a curve and its order of vanishing. At an F-rational smooth point the residue field is F. Section 3.12 here proves the local rational weight-two specialization lemma used by Polylogarithms Layer 4.
+Layer 12A supplies the DVR and order of vanishing at a regular closed point of an integral proper dimension-one F-scheme. Section 3.12 compares its local adapter with that order on the smooth proper overlap; for nonproper smooth curves the adapter uses the pinned regular-stalk, dimension and DVR inputs directly. It also proves the local rational weight-two specialization lemma used by Polylogarithms Layer 4.
 
 ### From TauCetiRoadmap.GlobalNumberFields
 
@@ -888,6 +894,15 @@ The source locators for these statements are Goncharov 1995, pp. 202–203 and �
 
 ### 3.12 Rational smooth-curve specialization
 
+For a nonempty smooth connected separated finite-type F-scheme X of relative dimension one and a closed point x, the smooth-curve local specialization adapter uses the native stalk Oₓ of X at x. The pinned smooth-stalk regularity and relative-dimension theorems give regularity and dimension one, and the regular-local DVR criterion equips Oₓ with its DVR structure. Connectedness and smoothness make X integral. The native stalk map exhibits F(X)=X.functionField as the fraction field of Oₓ; its residue field is κ(x)=X.residueField x, with the native residue quotient Oₓ→κ(x). If x is the image of an F-rational point, that point identifies κ(x) with F as an F-algebra. No residue-field identification with F is asserted for a general closed point. This is local algebra, without a compactification input (Weibel, K-book, I.3.8, proof, PDF p.32, for the dimension-one regular-local DVR criterion).
+
+For f∈F(X)ˣ let vₓ(f)∈ℤ be the normalized DVR valuation, so vₓ(π)=1 for a uniformizer. Define the projective specialization P¹(F(X))→P¹(κ(x)) by spₓ(∞)=∞, spₓ(0)=0 and, for f≠0, by the residue of the unit f when vₓ(f)=0, by 0 when vₓ(f)>0, and by ∞ when vₓ(f)<0. On an F-rational point compose with the specified κ(x)≃ₐ[F]F. Extend this map ℚ-linearly to rational projective symbols. This is the local adapter used in the relation set below.
+
+- The fraction-field identification extends the native injection Oₓ→F(X); the residue-field identification at an F-rational point fixes every base-field element.
+- Specialization agrees with residue evaluation on Oₓ, viewed in P¹(κ(x)); it sends each nonzero pole to ∞ and sends zero to 0 separately from the valuation on F(X)ˣ.
+- Restriction to an open neighbourhood of x preserves the stalk, fraction field, residue map, normalized valuation and specialization under their canonical identifications.
+- On the smooth proper overlap with AlgebraicCurves Layer 12A, vₓ(f)=ord_x(f) for every f∈F(X)ˣ, and its fraction-field and residue-field comparisons identify the specialization maps. Both orders assign +1 to a uniformizer of the same stalk, which fixes their sign and scale.
+
 For every field F let V_F=ℚ[P¹(F)] and W_F=ℚ⊗ℤ Q_s(F), and define d_F:V_F→W_F by [x]↦1⊗((1−x)∧x) for x≠0,1,∞, with degenerate values zero. For each smooth connected curve X/F and F-rational points u,v, projective specialization sends rational functions in F(X) to F∪{∞}. Let R_curv^ℚ(F) be the ℚ-span of [0], [∞], and sp_u(α)−sp_v(α), for every such curve and every α∈ker d₍F₍X₎₎. Define G₂^curv(F)=V_F/R_curv^ℚ(F). This is the rational version of §1.9, (1.25a), with the rationalization on both sides. Smooth connected curves over a field are integral; use integral schemes smooth of relative dimension one, not arbitrary fields with unexplained evaluation maps.
 
 Here u,v are F-rational points, not geometric points over an unspecified extension. Specializations take zeros to 0 and poles to ∞. All smooth connected curves occur; F(t) alone is a different relation set. Curve has its usual algebraic meaning: separated and of finite type over F; smoothness has relative dimension one. The integral carrier expresses connectedness in this smooth setting.
@@ -914,12 +929,16 @@ The source locators for these statements are Goncharov 1995, §1.9, pp. 221–22
 
 **Checks.**
 
+- For X=𝔸¹_F at 0, O₀=F[t]_(t), its fraction field is F(t) and its residue field is F. The orders of t, t⁻¹ and 1+t are 1, −1 and 0, and their specializations are 0, ∞ and 1. At 1 the orders of t and t−1 are 0 and 1 and their specializations are 1 and 0. These values also hold over 𝔽₂; a proper-only adapter would exclude X itself.
+- On 𝔸¹_ℝ at the closed point (t²+1), identify the residue field ℝ[t]/(t²+1) with ℂ by t↦i. Then t has order 0 and residue i, and t²+1 has order 1 and residue 0. Identifying every closed-point residue field with ℝ would lose i; only rational points give the base-field identification.
+- On the open inclusion 𝔸¹_F⊂P¹_F at 0, both local orders of t are +1 and both residues of 1+t are 1. At ∞ in P¹, the uniformizer s=1/t has order +1 and t has order −1, so sp_∞(t)=∞. Negating or doubling the order fails the uniformizer test and disagrees with 12A's ord_x.
+- At the cusp Spec F[t²,t³] and its origin, the local maximal ideal has cotangent dimension 2 while the local ring has dimension 1; it is not regular or a DVR. On Spec F[t,ε]/(ε²) at (t,ε), ε≠0 and ε²=0, so the stalk is not a domain. Both are excluded by smoothness; their normalization or reduction cannot replace the specified native stalk.
 - class(1)=0, using [t]+[1−t] and the points 0,∞ on P¹.
 - For x∈Fˣ, class(x)+class(x⁻¹)=0: rationally [t]+[t⁻¹] is a cycle, and specialize at x and 0. The same integral assertion in P(F) is false in general.
 - Over ℚ, the (v₂,v₃) alternating pairing evaluates ∂[3] to −1 and δ_curv(class(3)) to +1. Thus this boundary is nonzero, and using the Suslin sign without reversal fails.
 - Over ℂ, δ_curv(class(i))=1⊗((1−i)∧i)=0, since i is torsion in ℂˣ; class(i) is a cycle. Replacing the wedge of multiplicative units by the field’s additive vector space would not give this value.
 
-*Needs:* §3.1, §3.5, §3.11; AlgebraicCurves Layer 12A for the local DVR at a rational smooth point; Mathlib finite supports, tensor products and quotient modules.
+*Needs:* §3.1, §3.5, §3.11; the pinned smooth-stalk regularity, closed-point dimension, regular-local DVR and native fraction-field and residue-field contracts above for the local adapter; AlgebraicCurves Layer 12A only for agreement on the smooth proper overlap; Mathlib finite supports, tensor products and quotient modules.
 
 ### 3.13 The older projective exterior convention
 
@@ -1054,7 +1073,7 @@ For ℚ, ∂([2]+[−1])=2∧(−1)+(−1)∧2=0, while ∂[2] is nonzero of ord
 
 ### Dependencies
 
-Use Mathlib tensor products, free abelian groups, quotient modules, exterior powers, projectivization and general linear groups, with K2SymbolsBrauer §7.2 for Matsumoto. PolylogarithmFunctions §5.8 supplies the projective cross-ratio foundations used by the normalization adapter of §3.2. Smooth-curve specialization uses AlgebraicCurves Layer 12A for the local DVR dictionary and the local algebraic lemma stated here. No K₃-to-Bloch theorem is used to construct these presentations or their convention maps.
+Use Mathlib tensor products, free abelian groups, quotient modules, exterior powers, projectivization and general linear groups, with K2SymbolsBrauer §7.2 for Matsumoto. PolylogarithmFunctions §5.8 supplies the projective cross-ratio foundations used by the normalization adapter of §3.2. Smooth-curve specialization uses §3.12's local adapter from the pinned regular-stalk, dimension, DVR, fraction-field and residue-field inputs, followed by the local rational boundary lemma. AlgebraicCurves Layer 12A supplies the proper-curve order for the overlap comparison. No K₃-to-Bloch theorem is used to construct these presentations or their convention maps.
 
 ## Layer 4: Configuration homology and the Suslin sequence
 
@@ -2253,11 +2272,13 @@ Use Layers 1–5 and Mathlib finite supports, kernels, tensor maps and coefficie
 
 ColemanIntegration §L2.Fb takes the integral carriers and their universal properties from §§3.1, 3.3–3.5. Its preBlochMap, antisymmetricMap and blochMap are the field maps of these sections; its tensorClass is the pure-tensor quotient map and its boundary is ∂[x]=x∧(1−x). The symbol-preserving isomorphism of §3.4 transports its reduced free-symbol calculations and scalar five-term evaluation to this same P(F), with the commuting boundary square restricting the transport to B(F). Its p-adic evaluation and branch descent follow these inputs. PolylogarithmFunctions §§5.8 and 6.1–6.5 supplies the analytic cross-ratio and Rogers inputs to this roadmap before those Coleman constructions.
 
+The stage dependency is K3BlochGroups Layer 3 → ColemanIntegration L2.Fb. PolylogarithmFunctions §5.8 supplies each roadmap's cross-ratio adapter independently; its Layer 6 supplies the Rogers function used here. None of these analytic inputs depends on Coleman's Bloch evaluation.
+
 Polylogarithms Layer 2 consumes the normalized K₃-to-Bloch map for its real regulator comparison, and its Layer 4 consumes the rational-curve presentation of §4.21 and the specialization lemma of §3.12; the analytic scalars belong there. PadicHodgeRegulators and HabiroNumberFields are anticipated consumers of the integral maps, finite-field conventions and finite-coefficient comparison; no section-specific contract is asserted for them. EllipticKTheory is an anticipated consumer of the indecomposable quotient (§2.1), the two-torsion kernel bound (§2.2), the rational rank (§2.5) and the Suslin sequence (§4.20). The all-curve Goncharov kernel does not disappear through one of these consumer comparisons.
 
 ## References
 
-- Charles A. Weibel, [*The K-book*, combined author draft, 29 August 2013](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.pdf), IV.1 and VI.4–VI.5. “PDF p.” for this volume counts from its first page. Separate author chapters [III](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.III.pdf), [IV](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.IV.pdf), [V](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.V.pdf) and [VI](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.VI.pdf) have their own chapter pagination. The locators distinguish those editions.
+- Charles A. Weibel, [*The K-book*, combined author draft, 29 August 2013](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.pdf), I.3.8, IV.1 and VI.4–VI.5. “PDF p.” for this volume counts from its first page. Separate author chapters [III](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.III.pdf), [IV](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.IV.pdf), [V](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.V.pdf) and [VI](https://sites.math.rutgers.edu/~weibel/Kbook/Kbook.VI.pdf) have their own chapter pagination. The locators distinguish those editions.
 - A. A. Suslin, [*Homology of GLₙ, characteristic classes and Milnor K-theory*](https://www.mathnet.ru/eng/tm2280), Trudy Mat. Inst. Steklov. 165 (1984), 188–204, especially §§1–3 and Theorem 3.4. Page numbers refer to the Russian version of record.
 - A. A. Suslin, [*K₃ of a field, and the Bloch group*](https://www.maths.dur.ac.uk/users/herbert.gangl/Suslin_K3_Bloch_group.pdf), Proc. Steklov Inst. Math. 183 (1991), 217–239, §§1–5, especially Lemmas 4.1–4.4 and Sublemma 4.4.1, pp.227–229.
 - Behrooz Mirzaii, [*Bloch–Wigner theorem over rings with many units*, arXiv:0807.2039v2](https://arxiv.org/abs/0807.2039v2), Lemma 4.1, pp.8–10, for the explicit rank-two bar lift. Only that chain computation is used; stronger torus-kernel claims elsewhere in the paper are not inputs.
