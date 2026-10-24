@@ -155,7 +155,7 @@ Consume SchemeAndStackFoundations §0.3, `relativeProj`, `relativeProj_affine_is
 
 ### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §0.18
 
-Consume `tateLimit φ α h`, `tendsto_tateLimit`, `abs_tateLimit_sub_le`, `tateLimit_comp`, `tateLimit_unique` and `congr_bounded` on an arbitrary type S with φ:S→S, α>1 and a global bound |h(φP)−αh(P)|≤C. The supplied definition is h plus the convergent error series, with normalized iterates tending to it. No bounded-error hypothesis is needed for the finite telescoping identity used in §1.1.
+Consume `tateLimit φ α h`, `tendsto_tateLimit`, `abs_tateLimit_sub_le`, `tateLimit_comp`, `tateLimit_unique` and `congr_bounded` on an arbitrary type S with φ:S→S, α>1 and a global bound |h(φP)−αh(P)|≤C. Read the supplied definition h plus the error series using Mathlib's default unconditional `tsum`; the global bound makes that series absolutely summable, with normalized iterates tending to it. Section 1.1 compares this same defining series under pointwise summability and supplies orbitwise sufficient bounds; the finite telescoping identity needs no bounded-error hypothesis.
 
 ### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §§5.17a–f
 
@@ -176,6 +176,10 @@ For number fields, use the absolute representative instead: on ℙᴺ it is Proj
 ### From TauCetiRoadmap.HeightsRationalPointsAndObstructions — §0.19
 
 For an abelian variety A over a number field K and a symmetric line bundle L ([−1]*L ≅ L): [m]*L ≅ `L^{⊗m²}` for every integer m, and the Néron–Tate height `ĥ_{A,L}` : A(K̄) → ℝ with `ĥ_{A,L}` − `h_{A,L}` bounded and `ĥ_{A,L}(mP)` = `m²·ĥ_{A,L}(P),` compared with Tau Ceti's elliptic canonicalHeight for dim A = 1 and L = O((O)).
+
+### From TauCetiRoadmap.NeronModelsAndSemistableAbelianVarieties — §§1.3, 1.7–1.9
+
+Consume extension of generic morphisms from smooth test schemes in §1.3, finite-type Néron-model existence for abelian varieties over fraction fields of DVRs in §1.7, the abelian-scheme comparison in §1.8, and spreading out and Dedekind gluing in §1.9. For §6.85 apply these to an elliptic curve over the function field of a smooth projective base curve over a number field; its closed-point local rings are DVRs, and taking the base itself as a smooth test scheme extends the generic point P to a section. Section 6.85 constructs D_P and its local-height comparisons with uniformly summable adelic errors.
 
 ### From TauCetiRoadmap.EffectiveDiophantineMethods — §0.11
 
@@ -1853,7 +1857,9 @@ Tate’s elementary limiting argument is the common engine. Separate the project
 
 ### 1.1 Normalized iterates and the Tate series
 
-Use the argument order tateLimit φ α h throughout. For any φ:S→S, h:S→ℝ, α>1, P∈S and n≥0, prove the finite identity h(P)+Σ_(0≤i<n) α^(−i−1)(h(φ^(i+1)P)−αh(φ^iP))=h(φ^nP)/α^n. Thus whenever the normalized iterates at P converge, the error series at P is summable and the supplied tateLimit φ α h P is that limit. This comparison also applies to a finite orbit without a global bounded-error assumption; it does not prescribe a second definition through a total limit (Call–Silverman §1, Proposition 1.2, (4)–(6), p.169).
+Use the argument order tateLimit φ α h throughout. For any φ:S→S, h:S→ℝ, α>1 and P∈S, put e_i=α^(−i−1)(h(φ^(i+1)P)−αh(φ^iP)). For every n≥0, prove the finite identity h(P)+Σ_(0≤i<n)e_i=h(φ^nP)/α^n. If e is `Summable` in Mathlib's default unconditional sense, these normalized iterates tend to h(P)+`∑' i, e i`, the supplied defining expression for tateLimit φ α h P. In particular, any limit of the normalized iterates equals that expression under this summability hypothesis. Convergence of the normalized iterates alone gives only convergence of the naturally ordered partial sums, which need not imply `Summable` (Call–Silverman §1, Proposition 1.2, (4)–(6), p.169, for the bounded-error argument).
+
+Prove the orbitwise sufficient condition: if C≥0 and |h(φ^(i+1)P)−αh(φ^iP)|≤C for every i≥0, then |e_i|≤Cα^(−i−1), so e is absolutely summable and its tail from n is at most Cα^(−n)/(α−1). If M≥0 and |h|≤M on the orbit of P, take C=(1+α)M. Thus every finite orbit admits this comparison without a global bounded-error assumption. All comparisons use the supplier's defining series.
 
 Under α>1 and a global bounded-error hypothesis, derive the following refinements from the supplied convergence and uniqueness theorems.
 
@@ -1867,6 +1873,7 @@ Under α>1 and a global bounded-error hypothesis, derive the following refinemen
 - For φ(x)=2x,h(x)=x,α=2,P=1, all errors are 0 and the normalized terms at n=0,1,2 are 1,1,1; replacing φ by φ² and α by 4 gives the same value 1.
 - For the same φ and α with h(x)=−x,P=1, the limit is −1; nonnegativity needs h≥0. Taking c=−2 multiplies the original limit 1 by −2.
 - On ℕ with φ(n)=n+1,h(n)=n², the global error |(n+1)²−2n²| is unbounded. On an adjoined fixed point P with h(P)=1 the normalized sequence is still 2^(−n) and the comparison gives Tate value 0 there.
+- On ℕ with φ(n)=n+1,α=2,P=0 and h(n)=2^n(1+(−1)^n/(n+1)), the normalized values at n=0,1,2 are 2,1/2,4/3 and tend to 1. The weighted errors start −3/2,5/6,−7/12, their ordered sum is −1, and Σ_(i<n)|e_i|=H_n+H_(n+1)−1 diverges, where H_0=0 and H_n=Σ_(1≤j≤n)1/j. Thus e is not `Summable`; the default `tsum` is 0 and h(0)+`∑' i, e i`=2, excluding an unrestricted identification with the normalized limit 1.
 
 *Needs:* HeightsRationalPointsAndObstructions §0.18 `tateLimit`, `tendsto_tateLimit`, `tateLimit_unique`; finite geometric sums; real summability; `Filter.Tendsto.comp`; `le_of_tendsto`.
 
@@ -1904,7 +1911,7 @@ Let α > 1 and P preperiodic for φ. Then tateLimit φ α h P = 0 for every h : 
 
 α > 1; no hypothesis on h.
 
-The forward orbit of P is finite (Preperiodic iff the forward orbit is finite), so h(φⁿP) takes finitely many values and is bounded. A bounded sequence divided by αⁿ tends to 0 (tendsto_pow_atTop_nhds_zero_of_lt_one for `α^{−1}),` so the normalized iterates converge to 0. The series/normalized-iterate comparison of §1.1 then gives the supplied Tate value 0, even without a global bounded-error hypothesis.
+The forward orbit of P is finite (Preperiodic iff the forward orbit is finite), so choose M≥0 with |h(φⁿP)|≤M for every n. The weighted errors satisfy |e_n|≤(1+α)Mα^(−n−1), so §1.1 proves their summability. A bounded sequence divided by αⁿ tends to 0 (tendsto_pow_atTop_nhds_zero_of_lt_one for `α^{−1}),` so the normalized iterates converge to 0. The summable-series comparison of §1.1 gives the supplied Tate value 0, even without a global bounded-error hypothesis.
 
 *Needs:* §1.1 series/normalized-iterate comparison; HeightsRationalPointsAndObstructions §0.18 `tateLimit`; [Preperiodic iff the forward orbit is finite](#07-preperiodic-iff-the-forward-orbit-is-finite); `tendsto_pow_atTop_nhds_zero_of_lt_one`.
 
@@ -2030,7 +2037,7 @@ Let F be a field with Height.AdmissibleAbsValues, W an elliptic curve over F and
 
 F with admissible absolute values and decidable equality (Tau Ceti's group law); W elliptic.
 
-The identity (2 • ·)^[n] P = 2^n • P identifies the defining sequences. Tau Ceti's `Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow` gives h(2^nP)/4^n → canonicalHeight P. The normalized-iterate/series comparison of §1.1 then identifies the supplied error-series Tate limit with that value. For general m, take g = canonicalHeight: g(mP) = m²g(P) and |g − h| ≤ D imply |h(mP) − m²h(P)| ≤ D(1 + m²). Uniqueness of the Tate limit gives the result. Under field Northcott, `Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder` identifies its zero set.
+The identity (2 • ·)^[n] P = 2^n • P identifies the defining sequences. With g = canonicalHeight, Tau Ceti's bounded-distance estimate |g−h|≤D and g(2Q)=4g(Q) give |h(2Q)−4h(Q)|≤5D, so §1.1 proves summability of the weighted errors. Tau Ceti's `Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow` gives h(2^nP)/4^n → canonicalHeight P; the summable-series comparison identifies the supplied Tate value with it. For general m, g(mP) = m²g(P) and |g − h| ≤ D imply |h(mP) − m²h(P)| ≤ D(1 + m²). Uniqueness of the Tate limit gives the result. Under field Northcott, `Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder` identifies its zero set.
 
 *Needs:* HeightsRationalPointsAndObstructions §0.18 `tateLimit`; HeightsRationalPointsAndObstructions §0.18 `tateLimit_unique`; `WeierstrassCurve.Affine.Point.canonicalHeight`; `WeierstrassCurve.Affine.Point.naiveHeight`; `WeierstrassCurve.Affine.Point.tendsto_naiveHeight_two_pow_nsmul_div_four_pow`; `WeierstrassCurve.Affine.Point.abs_canonicalHeight_sub_naiveHeight_le`; `WeierstrassCurve.Affine.Point.canonicalHeight_nsmul`; `WeierstrassCurve.Affine.Point.canonicalHeight_eq_zero_iff_isOfFinAddOrder`; `smul_iterate`; [Normalized iterates and the Tate series](#11-normalized-iterates-and-the-tate-series).
 
@@ -2939,7 +2946,7 @@ d ≥ 2 Res(F) ≠ 0 A ∈ GL₂(K)
 
 ([demarco-krieger-ye-2020](#demarco-krieger-ye-2020), Proof of Proposition 2.1, p. 8 (arXiv v2) — The conjugation rule for escape rates, in the instance used there; [baker-rumely-2006](#baker-rumely-2006), Lemma 3.21(C), p. 13 (arXiv v2) — The norm-preserving case; the target allows every A ∈ GL₂(K) because the escape rate does not depend on the choice of equivalent norm (BR Remark 3.6).)
 
-**Endpoint checks.** DeMarco–Krieger–Ye Proposition 2.1: with A(z, w) = (w − z, w), A ∘ F_tⁿ = `−F_{1−t}ⁿ` ∘ A, hence `G_{F_{1−t},v}(1` − z, 1) = `G_{F_t,v}(z,` 1) (Layer 6 checks this instance).
+**Endpoint checks.** DeMarco–Krieger–Ye Proposition 2.1: with A(z, w) = (w − z, w), A ∘ F_tⁿ = `−F_{1−t}ⁿ` ∘ A for n≥1, hence `G_{F_{1−t},v}(1` − z, 1) = `G_{F_t,v}(z,` 1). At t=2 and (z,w)=(0,1), n=0 gives A(0,1)=(1,1), whereas −A(0,1)=(−1,−1); at n=1 both sides of the qualified identity are (−4,0), and at n=2 both are (−256,0) (the same witness is used in §6.55).
 
 ### 2.45 `G_{F,v}` = log ‖·‖_v on an algebraically closed field implies good reduction
 
@@ -5461,7 +5468,7 @@ Match the explicit polynomial models, known points, base point and Jacobian rank
 
 *Needs:* `EffectiveDiophantineMethods:ED.3/rank-zero-curves`; `EffectiveDiophantineMethods:ED.3/poonen-genus-two-mordell-weil`; `EffectiveDiophantineMethods:ED.3/stoll-genus-four-subgroup`; `EffectiveDiophantineMethods:ED.4/fps-quintic-cycle-curve`; `EffectiveDiophantineMethods:ED.4/poonen-type-three-two-curve`; `EffectiveDiophantineMethods:ED.4/stoll-six-cycle-curve`; [Points of type (3, 2) occur only for c = −29/16](#380-points-of-type-3-2-occur-only-for-c--2916); [No rational 6-cycles for z² + c, conditionally (Stoll)](#372-no-rational-6-cycles-for-z²--c-conditionally-stoll); [Projective quotient by cycle rotation](#376-projective-quotient-by-cycle-rotation).
 
-([fps](#fps), Theorems 1–3, pp.1–2,6–8 — Genus-two quotient model and distinction between Galois-stable and rational marked cycles.)
+([fps95](#fps95), §2, p.4 — The cycle quotient parametrizes Galois-stable cycles rather than rational marked cycles; §3, display (3), p.7 — The genus-two quotient model; Theorem 3, p.18, and Theorem 6, p.23 — Its Jacobian rank and complete six-point list; all locators to arXiv v1.)
 
 **Endpoint checks.** At x=2 on the Poonen model the sextic equals 73, while at x=−2 it equals 33; the supplier’s rank hypothesis remains necessary for the stated conditional argument. An all-point theorem under rank≤3 is conditional even when its ten known points and subgroup rank 3 are certified. On E11, x=0,1 gives y(y+1)=0, and η=2x−1 gives only −1,1, both excluded in §3.84; a torsion list alone cannot exclude further rational x-coordinates. The group ℤ⊕ℤ/5 has five torsion elements and infinitely many elements, so torsion completeness does not supply rank zero.
 
@@ -9137,7 +9144,7 @@ Second coordinates: the second coordinate of `F_{1−t}(A(z,` w)) is 4(w − z)w
 
 ([demarco-krieger-ye-2020](#demarco-krieger-ye-2020), Proof of Proposition 2.1, p. 8 (arXiv v2) — The two homogeneous conjugacy identities of the target; [demarco-krieger-ye-2020](#demarco-krieger-ye-2020), Proof of Proposition 2.3, p. 11 (arXiv v2) — The two Möbius conjugacies of the target (the second with β(z) = z/t).)
 
-**Endpoint checks.** t = −1: 1 − t = 2 and 1/t = −1: f_2 = α ∘ `f_{−1}` ∘ α⁻¹ and `f_{−1}` is conjugate to itself by β(z) = −z. These are the symmetries used in DeMarco–Krieger–Ye Propositions 2.1 and 2.3.
+**Endpoint checks.** t = −1: 1 − t = 2 and 1/t = −1: f_2 = α ∘ `f_{−1}` ∘ α⁻¹ and `f_{−1}` is conjugate to itself by β(z) = −z. At t=2 and (z,w)=(0,1), the A-identity has both sides (−4,0) at n=1 and (−256,0) at n=2; at n=0 its two sides would be (1,1) and (−1,−1), so the minus sign requires n≥1. These are the symmetries used in DeMarco–Krieger–Ye Propositions 2.1 and 2.3.
 
 ### 6.56 Upper bound for the pairing against a regularised finite set (DeMarco–Krieger–Ye Proposition 7.3)
 
@@ -9351,7 +9358,7 @@ Let K be a number field, v a place of K and t ∈ K ∖ {0, 1}. With F_t the hom
 
 K a number field, v any place (archimedean or not), t ≠ 0, 1.
 
-A ∘ F_tⁿ = `−F_{1−t}ⁿ` ∘ A with A(z, w) = (w − z, w) (The symmetries t ↦ 1 − t and t ↦ 1/t of the Legendre Lattès family); since ‖−u‖_v = ‖u‖_v and A is invertible linear, ‖A(u)‖_v is within a bounded factor of ‖u‖_v, so `d^{−n}` log ‖F_tⁿ(z, 1)‖ and `d^{−n}` log `‖F_{1−t}ⁿ(1` − z, 1)‖ have the same limit. B ∘ F_tⁿ = `F_{1/t}ⁿ` ∘ B with B(z, w) = (z, tw): the same argument gives `G_{F_{1/t},v}(z,` t) = `G_{F_t,v}(z,` 1). Logarithmic homogeneity G(cz, cw) = G(z, w) + log|c|_v (The homogeneous escape rate `G_{F,v})` with c = t gives the last equality.
+A ∘ F_tⁿ = `−F_{1−t}ⁿ` ∘ A for n≥1, with A(z, w) = (w − z, w) (The symmetries t ↦ 1 − t and t ↦ 1/t of the Legendre Lattès family); since ‖−u‖_v = ‖u‖_v and A is invertible linear, ‖A(u)‖_v is within a bounded factor of ‖u‖_v, so `d^{−n}` log ‖F_tⁿ(z, 1)‖ and `d^{−n}` log `‖F_{1−t}ⁿ(1` − z, 1)‖ have the same limit. B ∘ F_tⁿ = `F_{1/t}ⁿ` ∘ B with B(z, w) = (z, tw): the same argument gives `G_{F_{1/t},v}(z,` t) = `G_{F_t,v}(z,` 1). Logarithmic homogeneity G(cz, cw) = G(z, w) + log|c|_v (The homogeneous escape rate `G_{F,v})` with c = t gives the last equality.
 
 *Needs:* [The symmetries t ↦ 1 − t and t ↦ 1/t of the Legendre Lattès family](#655-the-symmetries-t--1--t-and-t--1t-of-the-legendre-lattès-family); [The Legendre curve E_t and its Lattès map f_t](#635-the-legendre-curve-e_t-and-its-lattès-map-f_t); [The homogeneous escape rate `G_{F,v}`](#212-the-homogeneous-escape-rate-g_fv).
 
@@ -9635,7 +9642,7 @@ Number fields (GTZ §3, Theorem 3.4): if fᵐ(X) = gᵐ(Y) has infinitely many S
 
 ### 6.85 Tate's theorem: the canonical height varies like a Weil height on the base
 
-Construct the divisor D_P on the smooth base curve with degree equal to the generic Néron–Tate height. Compare specialized local Néron functions with the local Weil functions of D_P by bounded errors whose adelic sum is O(1), using Néron models over the base's local rings. This proves the O(1) variation elliptic-surface variation target stated in Call–Silverman §4, pp.183–184. The specialization limit alone gives only an o(h(t)) error and is insufficient for this contract.
+Construct the divisor D_P on the smooth base curve with degree equal to the generic Néron–Tate height. Compare specialized local Néron functions with the local Weil functions of D_P by bounded errors whose adelic sum is O(1), using the models and section extensions of NeronModelsAndSemistableAbelianVarieties §§1.3, 1.7–1.9 over the base's local rings and their Dedekind gluing. This section owns D_P, the local-function comparisons and the uniformly summable adelic error estimates. This proves the O(1) elliptic-surface variation target stated in Call–Silverman §4, pp.183–184. The specialization limit alone gives only an o(h(t)) error and is insufficient for this contract.
 
 Let K be a number field, E a Weierstrass curve over K(t) with coefficients in K[t] and Δ(E) ≢ 0, and P ∈ E(K(t)). There is a constant C(E, P) such that `|ĥ_{E_{t₀}}(P_{t₀})` − `ĥ_{E/K(t)}(P)` · h(t₀)| ≤ C(E, P) for all t₀ ∈ ℚ̄ with Δ(E)(t₀) ≠ 0 (absolute Néron–Tate heights normalised to (O), as in Silverman's specialisation theorem for elliptic surfaces over the t-line). (For a general base curve X, `ĥ_{E_t}(P_t)` = `h_{D}(t)` + O(1) for a ℚ-divisor D of degree ĥ_E(P); for X = ℙ¹ this is the displayed statement.)
 
@@ -9643,7 +9650,7 @@ K a number field; base the t-line; Δ(E)(t₀) ≠ 0.
 
 Tate's proof decomposes `ĥ_{E_{t₀}}` into Néron local heights `λ_{E_{t₀},v}` and shows that, as functions of t₀, they differ from local Weil functions of the divisor D_P on the base by bounded amounts; this uses Néron models of E over the local rings of the base (Call–Silverman Remark after Theorem 4.1; Ingram §1). The parameter-divisor and local-height construction contract below strengthens Silverman's specialisation theorem for elliptic surfaces over the t-line from o(h(t₀)) to O(1).
 
-*Needs:* [Silverman's specialisation theorem for elliptic surfaces over the t-line](#677-silvermans-specialisation-theorem-for-elliptic-surfaces-over-the-t-line); [Admissible absolute values and heights on a rational function field](#027b-admissible-absolute-values-and-heights-on-a-rational-function-field); `WeierstrassCurve.Affine.Point.canonicalHeight`.
+*Needs:* [Silverman's specialisation theorem for elliptic surfaces over the t-line](#677-silvermans-specialisation-theorem-for-elliptic-surfaces-over-the-t-line); [Admissible absolute values and heights on a rational function field](#027b-admissible-absolute-values-and-heights-on-a-rational-function-field); NeronModelsAndSemistableAbelianVarieties §§1.3, 1.7–1.9 (extension of sections, local existence, abelian schemes and Dedekind gluing); `WeierstrassCurve.Affine.Point.canonicalHeight`.
 
 ([ingram-2011-variation](#ingram-2011-variation), §1, p. 1 (arXiv v3) — Tate's theorem as stated by the target: for X = ℙ¹ the error term is O(1); [call-silverman-1993](#call-silverman-1993), §4, Remark after Theorem 4.1, pp. 183–184 — Tate's theorem, stated for elliptic surfaces over a curve; for T = ℙ¹, `h_{T,D_P}(t)` = deg(D_P) h(t) + O(1).)
 
