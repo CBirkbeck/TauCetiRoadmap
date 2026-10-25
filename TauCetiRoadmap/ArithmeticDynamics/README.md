@@ -2376,7 +2376,7 @@ For every finite-place C¹ test φ on a fixed finite closed tree, prove approxim
 - For φ(s)=s on a nonclassical segment of length 1, extended by retraction, ⟨φ,φ⟩=1, Δφ=δ₀−δ₁ and E(Δφ)=1. For ν=δ₁−δ₀ the squared integral and both sides of Cauchy–Schwarz equal 1.
 - For φ(s)=s² on the same segment, Δφ=2 ds−2δ₁ has mass 0, and −∫φ dΔφ=−2/3+2=4/3=∫₀¹4s²ds. Omitting the endpoint atom gives mass 2 and energy −2/3.
 - Put g(0)=0, g(s)=s sin(1/s²) for s>0 and φ(s)=∫₀ˢg(t)dt. This is a C¹ test with ⟨φ,φ⟩≤1/3, but at s_n=(π/2+nπ)^(−1/2) its slopes are (−1)^n s_n and their successive variation has divergent sum. Its Laplacian is not a finite signed measure, so its Dirichlet form must use the slope integral.
-- For φ_m=s²+s/m, uniform errors of values and slopes are ≤1/m and the energies are 4/3+2/m+1/m²→4/3. Approximation does not presume uniformly bounded variations for every C¹ target.
+- For φ_m=s²+s(1−s)/m, the endpoint values stay 0 and 1, the uniform value and slope errors are ≤1/(4m) and ≤1/m, and the energies are 4/3−2/(3m)+1/(3m²)→4/3. Approximation does not presume uniformly bounded variations for every C¹ target.
 - At two nested disc points of radii 1 and 2 the mass-zero difference has self-energy log 2; the reverse sign violates positivity.
 - The zero signed measure has energy zero, while a nonzero continuous-potential mass-zero measure has positive energy; constants cannot be treated as measures of mass zero.
 - At distinct type-I points x,y the mutual energy is −log|x − y|; diagonal-excluded atomic self-energy uses the empty sum for a singleton.
