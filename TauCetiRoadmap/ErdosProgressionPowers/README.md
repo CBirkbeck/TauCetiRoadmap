@@ -57,21 +57,22 @@ Frey equation. EllipticCurves Layer 6 owns the `x − θ` Kummer map with kernel
 and Layer 8 owns the semistable algorithmic–Artin conductor comparison. The first family here differs by its progression normalization;
 the second differs by its equal-sum quadratic identity. ModularForms Layers 2–4, 8
 and 10 own Hecke operators, newforms, coefficient fields and dimension formulas.
-ModularCurves §4C owns the universal Legendre family and its field fibres;
-MordellLawrenceVenkatesh §6.4 owns its native coefficient model over every
-commutative ring, its discriminant and j-invariant. EllipticCurves Layer 5 owns
-general quadratic twists. This roadmap owns their split-cubic specializations
-and progression arithmetic comparisons. The labelled split-cubic, rational-unit,
-descent, two-primary and trace obligations are assigned to
-EllipticLegendreCharacterInterfaces LG.0–LG.5 and recorded in
-`gap:legendre-character-interfaces`; the variants retained here extend full-two-torsion
-normalization to every field of characteristic different from two and the
-square-parameter subgroup theorem to every odd finite field.
+ModularCurves §4C owns the universal Legendre family and its field fibres.
+EllipticCurves Layer 5 owns general quadratic twists.
+EllipticLegendreCharacterInterfaces owns the Legendre coefficient models over
+every commutative ring with their invariants (§§0.1–0.5), the labelled
+parameters, ordering scalars and normalization over every field of
+characteristic different from two (§§0.3, 0.8–0.9), good-prime units and
+character conductors (Layer 1), split-cubic descent readings and halving
+(Layer 2), two-primary torsion over odd finite fields (Layer 3), the
+scale-two order-four point (Layer 4) and the symmetric-cubic and
+quadratic-twist trace identities (Layer 5). This roadmap owns their
+progression applications.
 Martin's bound, the removed-prime inequality, Kraus realization, uniform
 irreducibility and rational-isogeny surjectivity are assigned to
 EllipticModularityEffectiveComparisons EC.0–EC.5 and recorded in
 `gap:effective-modular-comparisons`; the progression applications remain here.
-These two obligations supply no theorem until their full contracts are discharged.
+This obligation supplies no theorem until its full contract is discharged.
 HeightsRationalPointsAndObstructions §§5.12 and 6.4 own the shared native Mordell
 finiteness theorem; WeightsInEtaleCohomology R34.5–R34.6 own eigenform purity and
 the bound at every complex embedding. Section 7.1 owns the consecutive-product
@@ -249,7 +250,8 @@ Use `WeierstrassCurve.quadraticTwistOf` and
 Its parameters are trace t and norm n, with discriminant t²−4n, over any
 commutative ring; a unit discriminant is required for ellipticity preservation.
 For characteristic different from two, specializing an ordinary Legendre
-curve at (t,n)=(0,−D/4) gives the coefficients of G_(D,λ).
+curve at (t,n)=(0,−D/4) gives the coefficients of G_(D,λ)
+(EllipticLegendreCharacterInterfaces §0.2).
 Use `WeierstrassCurve.quadraticTwistPointEquiv_map_eq_quadraticCharacter_smul_map`
 from the same file for the Galois-equivariance sign over a separable quadratic
 extension; the split class uses the identity comparison.
@@ -356,13 +358,55 @@ point enumeration is part of the contract.
 
 Consume §4C's universal Legendre family over ℤ[1/2] and its field fibres.
 
-### From TauCetiRoadmap.MordellLawrenceVenkatesh
+### From TauCetiRoadmap.EllipticLegendreCharacterInterfaces
 
-Consume §6.4's native coefficient model of y²=x(x−1)(x−λ) over every
-commutative ring, including characteristic two and singular parameters:
-coefficients (0,−(1+λ),0,λ,0), discriminant 16λ²(λ−1)², and, over a field
-with 2λ(λ−1)≠0, j=256(λ²−λ+1)³/(λ²(λ−1)²). Its smooth specialization
-is the ModularCurves §4C family.
+Its L(λ), L(d,λ) and L(2,λ) are F_λ, G_(D,λ) and F′_λ here, with ordered
+roots (0,D,Dλ). Consume §0.1's coefficient model (0,−(1+λ),0,λ,0) of F_λ
+over every commutative ring, including characteristic two and the singular
+parameters; its smooth specialization is the ModularCurves §4C family.
+Section 0.4 gives the discriminant 16λ²(1−λ)² and, over a field with 2≠0,
+ellipticity iff λ≠0,1, with j=256(λ²−λ+1)³/(λ²(1−λ)²) for those parameters.
+Consume §0.2's scaled model G_(D,λ) with coefficients (0,−D(1+λ),0,D²λ,0)
+over every commutative ring, equal over a field with 2≠0 to the native
+quadratic twist of F_λ at (0,−D/4), and its square-scaling change: for a
+unit u, the admissible change of scaling u⁻¹ carries G_(D,λ) to G_(u²D,λ)
+and sends a point (x,y) to (u²x,u³y). Section 0.5
+gives Δ(G_(D,λ))=16D⁶λ²(1−λ)² and, over a field with 2≠0 and D≠0,
+ellipticity iff λ≠0,1. Consume §0.3's labelled parameters λ, 1/λ, 1−λ,
+1/(1−λ), λ/(λ−1), (λ−1)/λ, with repetitions retained; §0.8's normalization
+of a split normal-form cubic, with scalars D, Dλ, −D, D(λ−1), D(1−λ), −Dλ
+for the root orders (012), (021), (102), (120), (210), (201); §0.9's
+normalization over every field K with 2≠0, by which an elliptic E/K with
+four K-points killed by 2 is K-isomorphic to some G_(D,λ) with D≠0 and
+λ≠0,1; and §0.10's three labelled two-torsion points.
+
+For an elliptic F/ℚ identified with G_(D,λ) by a rational admissible change,
+§1.2 gives v_p(λ)=v_p(1−λ)=0 at every odd prime of good reduction, for every
+associated parameter and without a semistability hypothesis. For
+ω∈{±1,±2}, §1.4 places every odd prime of the primitive conductor of the
+character of ωλ among the bad primes of F, and §1.5 gives, for F semistable
+away from 2, that the odd part of that conductor divides the elliptic
+conductor. Nontriviality of the odd part is not part of this contract; this
+roadmap's §§2.3 and 2.6 prove it in the progression setting. Consume the
+ordered split readings of the native descent map in §§2.1, 2.3 and 2.5–2.7,
+and §2.8's halving criterion: over a field K with 2≠0, D≠0 and λ≠0,1, an
+affine K-point (x,y) of G_(D,λ) is twice a K-point iff x, x−D and x−Dλ are
+squares in K, zero included.
+
+Consume §3.1: over every finite field of odd characteristic, F_λ contains a
+subgroup isomorphic to ℤ/2ℤ×ℤ/4ℤ whenever λ is a square different from 0
+and 1. Consume §3.7, which rests on §§3.2 and 3.6: v₂(#F₋₁(𝔽))=3 over every
+finite field 𝔽 with q≡5 mod 8 elements. Consume §4.1: over a field with
+2≠0, for nonzero t,v with 2t²+2v²=1 and i²=−1, the point
+(2λ+4itv,8itv(t+iv)) of F′_λ, λ=2t², has double (2λ,0) and third descent
+class [4itv]. Consume §5.1: over every finite field with q≡3 mod 4
+elements, y²=x³+ax has trace 0 for every a, the singular a=0 included; and
+§5.2: over every finite field of odd characteristic and every d, the native
+twist at (0,−d/4) of a normal-form equation has trace quadraticChar(d) times
+the original trace, so a_q(G_(D,λ))=quadraticChar(D)·a_q(F_λ). The
+progression hypotheses, the Case partition, the progression obstructions and
+the nontriviality of the odd character conductor are targets of this
+roadmap's Layer 2.
 
 ### From TauCetiRoadmap.LocalFieldsRamification
 
@@ -480,25 +524,6 @@ Section 0.7 supplies β≤1−40/(√q(log q)²) for nonprincipal quadratic
 characters modulo q≥3 and positive real zeros, under both BMOR inputs.
 No GRH assumption or omitted numerical hypothesis is substituted for these inputs.
 
-### Required Legendre-character interfaces
-
-The obligation `gap:legendre-character-interfaces` requires the following full
-contract assigned to EllipticLegendreCharacterInterfaces LG.0–LG.5. Every use of
-these interfaces in Layer 2 requires its discharge; the gap supplies no theorem.
-
-Require LG.0's scaled coefficient model, labelled root orderings and split-cubic
-normalization; use MordellLawrenceVenkatesh §6.4 for the ordinary coefficient
-model. LG.0's full-two-torsion normalization is over ℚ; §2.1 retains its
-extension to all fields of characteristic different from two. Require LG.1's
-good-odd-prime unit and character-conductor divisibility statements, with
-rational full two-torsion and odd semistability. Require LG.2's split-cubic
-readings of the native descent map and halving criterion; LG.3's embedded
-ℤ/2ℤ×ℤ/4ℤ at square parameters for p≡3 mod 4 and exact valuation
-v₂(#F₋₁(𝔽_p))=3 for p≡5 mod 8; LG.4's corrected scale-two order-four
-point and descent coordinates; and LG.5's symmetric trace-zero and
-scaled-Legendre twist-trace comparison. The all-odd-finite-field subgroup
-extension is stated in §2.1; the generic descent map itself remains supplied.
-
 ### Required effective modular comparisons
 
 The obligation `gap:effective-modular-comparisons` requires the following full
@@ -527,7 +552,6 @@ in §1.10 is needed before applying EC.3 to the progression curve.
 The following `gaps` entries specify required inputs not supplied unconditionally
 by the cited contracts. A gap supplies no theorem.
 
-- `gap:legendre-character-interfaces`: requires the complete LG.0–LG.5 contract under Required Legendre-character interfaces, including normalization, units, conductor support, descent, two-primary groups, the Case-II point and trace comparisons (BS20, §6, Lemmas 6.2–6.6 and their proofs, pp. 367–372).
 - `gap:effective-modular-comparisons`: requires the complete EC.0–EC.5 contract under Required effective modular comparisons, including the newspace bound, norm inequality, exact Kraus realization, both irreducibility cutoffs and rational-isogeny surjectivity (BS20, §2, Lemma 2.2 and Theorem 4, pp. 359–360; Lemmas 3.3, 3.5, pp. 362–363; Lemos2017v2, Theorem 1.1, p. 2).
 - `gap:numerical-prime-inputs`: supplier `AnalyticNumberTheoryPartI` §§0.3, 0.5, 0.16, 0.25 and 3.2; needs: proofs of the five prime/conductor input hypotheses in the table, before any dependent statement is unconditional (Schoenfeld1976, Note Added in Proof, p. 360; RosserSchoenfeld1962, Theorems 1, 5, 8; RamareRumely1996, Theorems 1, 2.1.1 and Table 1; BS20, Lemma 7.3, p. 375). These sections state conditional estimates, not proofs of the inputs.
 - `gap:numerical-zero-inputs`: supplier `AnalyticNumberTheoryPartI` §0.7; needs: proofs of both BMOR input hypotheses in the table before the literal separation constant 40 is available unconditionally (BMOR2018v3, Proposition 1.11 and its proof, §6.1). The global negative-discriminant classification is included.
@@ -538,7 +562,7 @@ by the cited contracts. A gap supplies no theorem.
 Layer 0 constructs signed factors, finite index sets and the factorial adapter
 to the supplied prime estimates. Layer 1 specializes the supplied residual and
 conductor invariants before building the modular comparisons for both Frey families.
-Layer 2 builds the Legendre interfaces and the simultaneous character family.
+Layer 2 applies the supplied Legendre interfaces and builds the simultaneous character family.
 Layer 3 supplies effective analytic inputs and the two original-route criteria;
 Layer 4 supplies quantitative Roth, sieve densities and that route's assembly.
 Layer 5 builds the bounded-height zero estimates and a single Granville witness.
@@ -1015,7 +1039,7 @@ Under H, a in A(k), and prime k/2<p≤k, both E_a and its chosen F_a have good r
 
 p|d and gcd(n,d)=1 imply every term is a p-unit, hence good reduction for the first model. The level bound gives good reduction of F_a. Residual congruence together with the Hasse bounds and ell>4*sqrt(p) makes the integer traces equal. Reducing the first model with d=0 modulo p gives a twist of Y^2=X(X-1)(X+1), whose trace vanishes for p≡3 mod 4.
 
-*Needs:* Layer 1 — actual comparison elliptic curve; Layer 1 — half-interval primes divide the difference; Layer 1 — first-family invariants and odd local properties; EllipticCurves Layer 3; SerreWeightAndLevelOptimisation §6.3; Tau Ceti `WeierstrassCurve.frobeniusTrace`.
+*Needs:* Layer 1 — actual comparison elliptic curve; Layer 1 — half-interval primes divide the difference; Layer 1 — first-family invariants and odd local properties; EllipticCurves Layer 3; SerreWeightAndLevelOptimisation §6.3; EllipticLegendreCharacterInterfaces §5.1 for the trace of the symmetric cubic; Tau Ceti `WeierstrassCurve.frobeniusTrace`.
 
 ([BS20], Lemma 5.2, first conclusion, pp. 365-366; Lemma 5.2, second conclusion, pp. 365-366.)
 
@@ -1025,27 +1049,26 @@ At n=d=1 the first model has coefficients (0,2,0,−3,0), while the equal-sum mo
 
 ### Dependencies
 
-Layer 0; `gap:effective-modular-comparisons` (EC.0–EC.4); WeightsInEtaleCohomology R34.5–R34.6; EllipticCurves Layers 2–4, 8 and its worked Frey example; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
+Layer 0; `gap:effective-modular-comparisons` (EC.0–EC.4); EllipticLegendreCharacterInterfaces §5.1; WeightsInEtaleCohomology R34.5–R34.6; EllipticCurves Layers 2–4, 8 and its worked Frey example; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
 
 ## Layer 2: Legendre cases and the simultaneous character family
 
-Partition the six Legendre parameters by -Q^2 union2Q^2. Prove the application-specific nonsquare test at primes 3 mod 8, positive normalization lambda=2t^2 and 1-lambda=2v^2 in CaseII, and the tv square test at primes 5 mod 8 using the order-four witness from this layer. Exclude complex multiplication of the progression Frey curve. Under k≥2*10^10 construct one fixed family of primitive quadratic characters of conductors N_a with squarefree nontrivial odd part dividing M_a and absolute von-Mangoldt half-interval sum greater than 0.1239k. Both cases must give all conclusions for the same character; positivity of the signed sum is not assumed.
+Partition the six Legendre parameters by -Q^2 union2Q^2. Prove the application-specific nonsquare test at primes 3 mod 8, positive normalization lambda=2t^2 and 1-lambda=2v^2 in CaseII, and the tv square test at primes 5 mod 8 using the order-four witness of EllipticLegendreCharacterInterfaces §4.1. Exclude complex multiplication of the progression Frey curve. Under k≥2*10^10 construct one fixed family of primitive quadratic characters of conductors N_a with squarefree nontrivial odd part dividing M_a and absolute von-Mangoldt half-interval sum greater than 0.1239k. Both cases must give all conclusions for the same character; positivity of the signed sum is not assumed.
 
 ### 2.1 Native Legendre and residual-image interfaces
 
 For a field K of characteristic different from 2, use the ordinary native
-Legendre model F_λ supplied by MordellLawrenceVenkatesh §6.4 and its smooth
-family from ModularCurves §4C. Specialize the native quadratic twist at
-(t,n)=(0,−D/4) to obtain G_(D,λ), with coefficients
-(0,−D(1+λ),0,D²λ,0) and equation y²=x(x−D)(x−Dλ).
-Require `gap:legendre-character-interfaces` (LG.0) for this specialization,
-including D=0 and λ=0,1; elliptic applications
-require D≠0 and λ≠0,1. The scale-two model is F′_λ=G_(2,λ).
+Legendre model F_λ of EllipticLegendreCharacterInterfaces §0.1 and its smooth
+family from ModularCurves §4C, and the scaled model G_(D,λ) of
+EllipticLegendreCharacterInterfaces §0.2: the native quadratic twist of F_λ at
+(t,n)=(0,−D/4), with coefficients (0,−D(1+λ),0,D²λ,0) and equation
+y²=x(x−D)(x−Dλ). Both models are defined at D=0 and λ=0,1; elliptic
+applications require D≠0 and λ≠0,1. The scale-two model is F′_λ=G_(2,λ).
 (BS20, §6, equation (17), p. 367, and Lemma 6.6, p. 371.)
 
-- Its discriminant specializes to 16D⁶λ²(λ−1)²; over K ellipticity is equivalent to D≠0 and λ≠0,1.
+- By EllipticLegendreCharacterInterfaces §0.5, the discriminant is 16D⁶λ²(λ−1)²; over K ellipticity is equivalent to D≠0 and λ≠0,1.
 - D=1 gives F_λ and D=2 gives F′_λ with coefficients (0,−2(1+λ),0,4λ,0).
-- Replacing D by D·u² for u≠0 gives an isomorphic curve; the map from G_(D,λ) to G_(D·u²,λ) is (x,y)↦(u²x,u³y).
+- By the square-scaling change of EllipticLegendreCharacterInterfaces §0.2, for u≠0 the map (x,y)↦(u²x,u³y) is an isomorphism from G_(D,λ) to G_(D·u²,λ).
 
 **Checks.**
 
@@ -1053,23 +1076,21 @@ require D≠0 and λ≠0,1. The scale-two model is F′_λ=G_(2,λ).
 - D=0 or λ=0,1 gives discriminant 0, and none is admitted in a halving claim.
 - Over ℚ, D=3,λ=−1 gives x(x−3)(x+3)=x³−9x. Its root differences are ±3,±6; none is 2u² for rational u≠0, so full rational two-torsion does not imply a scale-two presentation.
 
-After discharge of `gap:legendre-character-interfaces`, extend LG.0's rational full-two-torsion
-adapter to every field K of characteristic different from two: every elliptic E/K with full K-rational
-two-torsion is K-isomorphic to some G_(D,λ) with D≠0 and λ≠0,1.
-After completing the square, write the cubic roots as e₀,e₁,e₂, translate
-x by e₀ and put D=e₁−e₀, λ=(e₂−e₀)/D. Record all six labelled orderings:
-λ,1/λ,1−λ,1/(1−λ),λ/(λ−1),(λ−1)/λ, using LG.0's labels and the corresponding D for each
-ordering: D,Dλ,−D,D(λ−1),D(1−λ),−Dλ, respectively.
-Labels remain distinct when parameter values coincide.
-Require `gap:legendre-character-interfaces` (LG.1): for a rational full-two-torsion
-curve semistable away from 2, λ
-and 1−λ are units at every good odd prime, and each squareclass
-ωλ, ω∈{±1,±2}, has odd character conductor dividing the elliptic conductor.
+Every elliptic E/K with full K-rational two-torsion is K-isomorphic to some
+G_(D,λ) with D≠0 and λ≠0,1 by EllipticLegendreCharacterInterfaces §0.9, with
+the six labelled parameters of its §0.3 and the scalar of each root ordering
+from its §0.8; labels remain distinct when parameter values coincide.
+For a rational full-two-torsion curve semistable away from 2,
+EllipticLegendreCharacterInterfaces §1.2 makes λ and 1−λ units at every good
+odd prime, and its §§1.4–1.5 make the odd conductor of the character of each
+squareclass ωλ, ω∈{±1,±2}, divide the elliptic conductor.
 Use ClassicalArithmeticCompletion §1.51 for the squareclass character.
 (BS20, §6, Lemma 6.2 and its proof, pp. 367–368.)
 
 At such a prime choose a p-unit representative δ_p of the unramified twist
-class. Require LG.5 in `gap:legendre-character-interfaces` to transport the native
+class. The square-scaling change of EllipticLegendreCharacterInterfaces §0.2
+replaces D by δ_p, giving a model with unit discriminant at p, and the
+twist-trace identity of its §5.2 on the reduction transports the native
 projective traces by
  a_p(E)=(δ_p/p)a_p(F_λ), a_p(F′_λ)=(2/p)a_p(F_λ).
 Thus trace zero is preserved by either twist; equality of arbitrary nonzero
@@ -1077,15 +1098,12 @@ traces is not asserted. In the progression application E=F_a, use the same
 chosen comparison curve of §1.12 in every ordering and reduction.
 (BS20, Lemmas 6.4 and 6.6, pp. 368, 371.)
 
-Require LG.2's split-cubic descent and halving contract in
-`gap:legendre-character-interfaces` and LG.3's prime-field subgroup theorem. Extend the latter
-to every finite field of odd characteristic: for square λ≠0,1, prove that
-the ordinary curve F_λ has a subgroup isomorphic to ℤ/2ℤ×ℤ/4ℤ.
-If −1 is square, (0,0) is 2-divisible; otherwise one of 1−λ and λ−1
-is square, and (1,0) or (λ,0) is 2-divisible. This assertion is about F_λ.
-Consume LG.3's assertion that 8 exactly divides #F₋₁(𝔽_p) for primes p≡5 mod 8.
-(BS20, Lemmas 6.3 and 6.5, pp. 368, 370; the square −1 branch gives the
-remaining odd finite fields.)
+Consume the split-cubic descent readings and halving criterion of
+EllipticLegendreCharacterInterfaces §§2.1, 2.3 and 2.5–2.8. Its §3.1 gives,
+over every finite field of odd characteristic and for square λ≠0,1, a
+subgroup of the ordinary curve F_λ isomorphic to ℤ/2ℤ×ℤ/4ℤ. Consume its
+§3.7 for the assertion that 8 exactly divides #F₋₁(𝔽_p) for primes p≡5 mod 8.
+(BS20, Lemmas 6.3 and 6.5, pp. 368, 370.)
 
 **Checks.**
 
@@ -1094,14 +1112,14 @@ remaining odd finite fields.)
 - Over 𝔽₅ the ordinary λ=−1 curve has eight points, with 8 dividing the count and 16 not dividing it; over 𝔽₃ it has four points, outside the p≡5 mod 8 assertion.
 - Over 𝔽₇ at λ=2, an ordinary square parameter, the count is eight; over 𝔽₃ at λ=2 the parameter is nonsquare and the count is four.
 
-Require LG.4's Case-II order-four
-witness: for a field of characteristic different from 2, nonzero t,v with
+Consume the Case-II order-four witness of EllipticLegendreCharacterInterfaces
+§4.1: for a field of characteristic different from 2, nonzero t,v with
 2t²+2v²=1 and i²=−1, on y²=x(x−2)(x−2λ), λ=2t², the point
 (2λ+4itv,8itv(t+iv)) doubles to (2λ,0). Consume its native descent-coordinate
 identities and use them for the progression obstruction when tv is nonsquare
-at p≡5 mod 8. Consume LG.5's symmetric-cubic trace-zero theorem for every
-odd prime p≡3 mod 4 and nonzero twist, together with its model-specific
-twist/trace comparisons at good primes. (BS20, Lemmas 6.4–6.6,
+at p≡5 mod 8. Consume the symmetric-cubic trace-zero theorem of its §5.1 for
+every odd prime p≡3 mod 4 and nonzero twist, together with the twist/trace
+comparison of its §5.2 at good primes. (BS20, Lemmas 6.4–6.6,
 pp. 368–372, especially the Case-II point calculation on pp. 371–372.)
 
 **Checks.**
@@ -1120,7 +1138,7 @@ consumed from ImaginaryQuadraticClassNumber H3.1. These statements concern
 actual torsion representations. (BS20, §6, final Case-II argument and
 the rational-isogeny surjectivity result cited there, p. 373, and its cited Lemos theorem.)
 
-*Needs:* ModularCurves §4C; MordellLawrenceVenkatesh §6.4; `gap:legendre-character-interfaces` (LG.0–LG.5); Tau Ceti `WeierstrassCurve.quadraticTwistOf` and its point-equivariance comparison; EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); `gap:effective-modular-comparisons` (EC.5); Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
+*Needs:* ModularCurves §4C; EllipticLegendreCharacterInterfaces §§0.1–0.6, 0.8–0.10, 1.2, 1.4–1.5, 2.1, 2.3, 2.5–2.8, 3.1, 3.7, 4.1, 5.1–5.2; Tau Ceti `WeierstrassCurve.quadraticTwistOf` and its point-equivariance comparison; EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); `gap:effective-modular-comparisons` (EC.5); Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
 
 ### 2.2 Legendre case partition
 
@@ -1228,7 +1246,7 @@ The parameter −1 lies in Case II. At λ=1/2 the twist-by-2 witness is (1+i,−
 
 ### Dependencies
 
-Layers 0–1; ModularCurves §4C; MordellLawrenceVenkatesh §6.4; `gap:legendre-character-interfaces` (LG.0–LG.5); `gap:effective-modular-comparisons` (EC.5); EllipticCurves Layers 3, 5–6; ClassicalArithmeticCompletion §§1.51 and 4.41; ImaginaryQuadraticClassNumber H3.1. The numerical projections use Layer 0 prime estimates independently of the later character criteria.
+Layers 0–1; ModularCurves §4C; EllipticLegendreCharacterInterfaces Layers 0–5; `gap:effective-modular-comparisons` (EC.5); EllipticCurves Layers 3, 5–6; ClassicalArithmeticCompletion §§1.51 and 4.41; ImaginaryQuadraticClassNumber H3.1. The numerical projections use Layer 0 prime estimates independently of the later character criteria.
 
 ## Layer 3: The original analytic contradiction criteria
 
@@ -2069,7 +2087,7 @@ Layer 0 and native finite products; §§4.3–4.4 and AnalyticNumberTheoryPartI 
 
 ## Downstream consumers
 
-The signed factorization, local progression bounds, Legendre trace comparisons and simultaneous character methods supply other perfect-power and generalized Fermat problems. Both effective analytic routes export their absolute thresholds; the genus adapter exports fixed-length finiteness with the primitive-lift contract.
+The signed factorization, local progression bounds, Legendre case analysis and simultaneous character methods supply other perfect-power and generalized Fermat problems. Both effective analytic routes export their absolute thresholds; the genus adapter exports fixed-length finiteness with the primitive-lift contract.
 
 ## Worked examples and integration requirements
 
@@ -2128,9 +2146,8 @@ by `n-d`. Its distinct branch values, the covering degree
 `ell^{k-3}`, and
 `2g-2=kell^{k-1}(1-2/k-1/ell)>0` are the genus requirements.
 
-Layers 1–6 also require the full Legendre-character and effective-modular
-obligations `gap:legendre-character-interfaces` and
-`gap:effective-modular-comparisons`; neither is a theorem supplied by its name.
+Layers 1–6 also require the full effective-modular obligation
+`gap:effective-modular-comparisons`; it is not a theorem supplied by its name.
 All applications of the literal numerical constants retain the seven supplier
 input hypotheses in the contracts table until their discharge. The unconditional
 end theorems require gap:numerical-prime-inputs and gap:numerical-zero-inputs;
