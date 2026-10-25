@@ -44,7 +44,7 @@ This roadmap owns:
 4. **Exact modular and elliptic data** (Layer 3): integral `q`-expansion lattices at level one,
    Miller bases, the congruence Sturm bound, exact equality of coefficient data, integral Hecke
    matrices, the ordinary and nonordinary witnesses and companion eigensystems of
-   Boxer–Calegari–Gee; point counts over finite fields as character sums, exact local images
+   Boxer–Calegari–Gee; the finite-enumeration form of point counts over finite fields, exact local images
    of the `x − T` descent map, and a finite `p`-saturation criterion by exact divisibility and reduction homomorphisms.
 5. **Validated numerics** (Layer 4): signed rational interval and complex box arithmetic,
    outward dyadic rounding, unique-integer recovery, `p`-adic precision propagation, the Odlyzko
@@ -69,6 +69,10 @@ It consumes the following mathematics by its existing ownership:
   bound, reduction of points and the filtration `E₁ ⊆ E₀ ⊆ E` over local fields, Mordell–Weil with
   explicit `2`-descent and Nagell–Lutz, and Selmer groups. Layer 3 adds presentations on top of
   those objects; it does not construct them again.
+- **EllipticLegendreCharacterInterfaces** §§5.1–5.2: the character-sum point count and the trace
+  of quadratic twists for Weierstrass equations with `a₁ = a₃ = 0` over every finite field of odd
+  characteristic, singular equations included. Section 3.17 keeps the finite-enumeration form of
+  the count and its comparison with these identities.
 - **TauCetiRoadmap LocalFieldsRamification** (Layers 0–1): complete discretely valued fields,
   uniformizers, residue fields, ramification indices and residue degrees, Teichmüller
   representatives. Its Layer 2 supplies surjectivity of the norm on units in unramified
@@ -226,7 +230,9 @@ carries its own primality, finite-generation, completeness and scalar-tower hypo
   `ModularForm.discriminant_eq_q_prod` (`Mathlib.NumberTheory.ModularForms.Discriminant`)
   identifies the normalized discriminant with its convergent q-product.
 - Elliptic curves: `WeierstrassCurve.IsCharNeTwoNF`
-  (`Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms`), the division polynomials `WeierstrassCurve.Φ`
+  (`Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms`), `WeierstrassCurve.Affine.equation_iff`
+  (`Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic`, the affine equation as the displayed
+  polynomial identity), the division polynomials `WeierstrassCurve.Φ`
   and `WeierstrassCurve.ΨSq` with `WeierstrassCurve.natDegree_Φ`, `WeierstrassCurve.leadingCoeff_Φ`
   and `WeierstrassCurve.natDegree_ΨSq`
   (`Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree`); the polynomial
@@ -272,10 +278,13 @@ carries its own primality, finite-generation, completeness and scalar-tower hypo
 - `TauCeti.kernelBasis` with `mulVec_eq_zero_of_mem_kernelBasis`, `span_kernelBasis`,
   `linearIndepOn_kernelBasis` and `length_kernelBasis` (the field-kernel basis comparison;
   `TauCeti.LinearAlgebra.Matrix.Echelon.KernelBasis`).
-- `WeierstrassCurve.pointCount`, `WeierstrassCurve.frobeniusTrace` and
-  `WeierstrassCurve.pointCount_eq_card_point` (the projective count, singular point included, and
-  its comparison with Mathlib's point type on an elliptic model;
+- `WeierstrassCurve.pointCount`, `WeierstrassCurve.pointCount_def`, `WeierstrassCurve.frobeniusTrace`,
+  `WeierstrassCurve.frobeniusTrace_def` and `WeierstrassCurve.pointCount_eq_card_point` (the
+  projective count as `Nat.card` of all affine solutions plus one, singular point included, the
+  trace `q + 1` minus that count, and its comparison with Mathlib's point type on an elliptic model;
   `TauCeti.AlgebraicGeometry.EllipticCurve.PointCount`).
+- `WeierstrassCurve.quadraticTwistOf` (`TauCeti.AlgebraicGeometry.EllipticCurve.QuadraticTwist.Basic`):
+  with `a₁ = a₃ = 0`, the twist by `(0, −d/4)` multiplies `a₂, a₄, a₆` by `d, d², d³`.
 - The `x − T` descent: `WeierstrassCurve.Affine.A`, `WeierstrassCurve.Affine.M`,
   `WeierstrassCurve.Affine.μ`, `WeierstrassCurve.Affine.ker_μ_eq`,
   `WeierstrassCurve.Affine.μX_of_eval_f_ne_zero`, `WeierstrassCurve.Affine.localRes`,
@@ -317,6 +326,17 @@ strict cusp width and coefficients including index zero.
 Layer 4 supplies the homomorphism on points at good reduction; Layer 6 supplies the
 Mordell–Weil group and the exact rational torsion subgroup. Apply the rational-point reduction
 map only at a good prime. Descent in this roadmap uses the pinned x − T carriers listed above.
+
+### From TauCetiRoadmap.EllipticLegendreCharacterInterfaces
+
+§5.1, “Character-sum point counts and symmetric cubics”, supplies for every finite field F of odd
+characteristic with q elements and every Weierstrass equation W over F with a₁ = a₃ = 0, singular
+or not, the identity (W.pointCount : ℤ) = q + 1 + Σ_x quadraticChar F (f(x)), with
+f(x) = x³ + a₂x² + a₄x + a₆, and W.frobeniusTrace = −Σ_x quadraticChar F (f(x)). §5.2,
+“Quadratic-twist trace over odd finite fields”, supplies, with decidable equality on F and for
+every d ∈ F, the trace of W.quadraticTwistOf 0 (−d/4) as quadraticChar F (d) times
+W.frobeniusTrace, with no ellipticity or d ≠ 0 hypothesis. Section 3.17 applies both to Tau Ceti's
+projective count through its enumeration; the square-root count is not reproved here.
 
 ### From TauCetiRoadmap.LocalFieldsRamification
 
@@ -1678,21 +1698,24 @@ For (p,k)=(107,26),(139,20),(173,68),(179,30),(191,30),(193,48), an ordinary com
 
 Establish the simultaneous eigensystem for each pair, lift it with the Deligne–Serre lemma of AlgebraicModularFormsAndSerreWeights R15.5, and check the integer gcd. T₂/T₃ checks are discovery evidence; the target requires full congruence presentations. ([BCG](#source-bcg), Remark 3.3, p.518; [CG13](#source-cg13), §§6–7, pp.11–12 and Appendix, Table of results, p.14, C-marked entries.) *Needs:* ordinary companion pair (3.15); `levelOne_congruence_sturm` (3.4); AlgebraicModularFormsAndSerreWeights R15.5 (Deligne–Serre lifting of eigenvalues).
 
-### 3.17 Point counts over a finite field as a character sum
+### 3.17 Point counts over a finite field by enumeration
 
-Let F be a finite field of odd characteristic with q elements and W a Weierstrass curve over F with a₁ = a₃ = 0, singular or not, with cubic f(x) = x³ + a₂x² + a₄x + a₆. Then Tau Ceti's projective count satisfies W.pointCount = q + 1 + Σ_(x∈F) χ(f(x)), where χ = quadraticChar F, and so W.frobeniusTrace = −Σ_(x∈F) χ(f(x)). Over a finite field with decidable equality, W.pointCount is also the cardinality of the finite set of affine solutions plus one, which is how a finite enumeration computes it.
+Let F be a finite field with q elements and decidable equality, of any characteristic, and W a Weierstrass curve over F, singular or not. Write S(W) ⊆ F × F for the finite set obtained by filtering `Finset.univ` by the affine equation y² + a₁xy + a₃y = x³ + a₂x² + a₄x + a₆. Then Tau Ceti's projective count is W.pointCount = #S(W) + 1, so W.frobeniusTrace = q − #S(W); on an elliptic model #S(W) + 1 is also the cardinality of Mathlib's point type.
 
-- W.pointCount equals the cardinality of the filtered finite set of affine solutions plus one.
-- The Frobenius trace is minus the character sum.
+The character-sum form of this count is imported. For odd q and a₁ = a₃ = 0, with f(x) = x³ + a₂x² + a₄x + a₆ and χ = quadraticChar F, EllipticLegendreCharacterInterfaces §5.1 supplies the identity between W.pointCount and q + 1 + Σ_(x∈F) χ(f(x)), singular equations included, and §5.2 supplies the trace of the quadratic twist W.quadraticTwistOf 0 (−d/4) as χ(d) times the trace of W, for every d ∈ F. This section owns the enumeration and its comparison with those identities.
 
-For each x ∈ F the equation y² = f(x) has 1 + χ(f(x)) solutions y, because χ is 1 on nonzero squares, −1 on nonsquares and 0 at 0. Sum over x and add the point at infinity. The comparison with Mathlib's point type on an elliptic model is Tau Ceti's pointCount_eq_card_point. ([Sutherland](#source-sutherland), §7.2, equation (1), p.2.) *Needs:* Tau Ceti `WeierstrassCurve.pointCount`; Tau Ceti `WeierstrassCurve.frobeniusTrace`; Tau Ceti `WeierstrassCurve.pointCount_eq_card_point`; Mathlib `quadraticChar`.
+- W.pointCount = #S(W) + 1 and W.frobeniusTrace = q − #S(W).
+- For odd q and a₁ = a₃ = 0: #S(W) = q + Σ_(x∈F) χ(f(x)), and for every d ∈ F, q − #S(W′) = χ(d)·(q − #S(W)) with W′ = W.quadraticTwistOf 0 (−d/4).
+
+The filtered set is the solution subtype whose `Nat.card` defines W.pointCount (Tau Ceti `WeierstrassCurve.pointCount_def`), and on a finite type the two cardinalities agree; `WeierstrassCurve.frobeniusTrace_def` gives the trace, and Mathlib's `WeierstrassCurve.Affine.equation_iff` unfolds the affine equation to the displayed identity. The comparison rewrites W.pointCount and both traces by the enumeration and then applies EllipticLegendreCharacterInterfaces §§5.1–5.2; the square-root count behind those identities belongs to that roadmap. The comparison with Mathlib's point type on an elliptic model is Tau Ceti's pointCount_eq_card_point. ([Sutherland](#source-sutherland), §7.3, p.2, counting the affine solutions in F_q × F_q and adding the point at infinity.) *Needs:* EllipticLegendreCharacterInterfaces §5.1 (character-sum point count); EllipticLegendreCharacterInterfaces §5.2 (quadratic-twist trace); Tau Ceti `WeierstrassCurve.pointCount_def`; Tau Ceti `WeierstrassCurve.frobeniusTrace_def`; Tau Ceti `WeierstrassCurve.pointCount_eq_card_point`; Tau Ceti `WeierstrassCurve.quadraticTwistOf`; Mathlib `WeierstrassCurve.Affine.equation_iff`; Mathlib `quadraticChar`.
 
 **Checks.**
 
-- *Computed value.* y² = x³+x over ZMod 3 has 4 points: x = 0 gives one point, x = 1 none (f(1) = 2 is a nonsquare), x = 2 two (f(2) = 1).
-- *Computed value.* y² = x³+x+1 over ZMod 5 has 9 points, so its Frobenius trace is −3.
-- *Degenerate case.* The cusp y² = x³ over ZMod 5 has q+1 = 6 points, its singular point included, and trace 0.
-- *Non-example.* Over ZMod 2, y² = x³+1 has 3 points, while q + 1 + Σ χ(f(x)) with Mathlib's quadraticChar of ZMod 2 gives 4: the odd-characteristic hypothesis cannot be dropped.
+- *Computed value.* For y² = x³+x over ZMod 3, S(W) = {(0,0), (2,1), (2,2)}; x = 1 contributes nothing because f(1) = 2 is not a square. So W.pointCount = 4 and the trace is 0.
+- *Computed value.* For y² = x³+x+1 over ZMod 5, #S(W) = 8, so W.pointCount = 9 and the trace is −3. The values χ(f(x)) at x = 0,…,4 are 1, −1, 1, 1, 1, with sum 3 = #S(W) − q, as the comparison with §5.1 requires.
+- *Computed value.* The twist of the same W by the nonsquare d = 2, W.quadraticTwistOf 0 (−2/4), is y² = x³+4x+3 over ZMod 5. Its filtered set is {(2,2), (2,3)}, so its count is 3 and its trace is 3 = χ(2)·(−3), as the comparison with §5.2 requires.
+- *Degenerate case.* The cusp y² = x³ over ZMod 5 has #S(W) = 5, the singular solution (0,0) included, so W.pointCount = 6 and the trace is 0. Mathlib's point type has 5 elements here, so on a singular model the enumeration, not pointCount_eq_card_point, gives the count.
+- *Boundary case.* Over ZMod 2, y² = x³+1 has S(W) = {(0,1), (1,0)} and W.pointCount = 3, so the enumeration holds in characteristic two. There q + 1 + Σ χ(f(x)), with Mathlib's quadraticChar of ZMod 2, is 4: the comparison with §5.1 needs odd q.
 
 ### 3.18 Exact local image of the 2-descent map
 
@@ -1813,7 +1836,7 @@ then G is p-saturated. Every ψ_i kills pA, so injectivity gives G∩pA=pG;
 
 Let W be an elliptic Weierstrass curve over ℚ with integral coefficients, p a prime and g₁, …, g_m ∈ W(ℚ). For a prime q of good reduction let ρ_q : W(ℚ) → W̃(𝔽_q)/pW̃(𝔽_q) be reduction followed by the quotient. Each ρ_q vanishes on pW(ℚ), so V_p is contained in the kernel of the 𝔽_p-linear map 𝔽_p^m → W̃(𝔽_q)/pW̃(𝔽_q), b ↦ Σ b_i ρ_q(g_i). If the intersection of these kernels over finitely many good primes is 0, then V_p = 0. A prime q contributes only when p divides #W̃(𝔽_q).
 
-Reduction at a prime of good reduction is a group homomorphism W(ℚ) → W̃(𝔽_q), so it sends pW(ℚ) into pW̃(𝔽_q). Hence an element of V_p maps to zero under every ρ_q. The p-part of W̃(𝔽_q)/pW̃(𝔽_q) is trivial unless p divides the group order. ([Siksek](#source-siksek), §4.1, equation (40), pp.17–18.) *Needs:* p-saturation reduces to finitely many divisibility tests (3.23); TauCetiRoadmap EllipticCurves Layer 4; point counts over a finite field as a character sum (3.17).
+Reduction at a prime of good reduction is a group homomorphism W(ℚ) → W̃(𝔽_q), so it sends pW(ℚ) into pW̃(𝔽_q). Hence an element of V_p maps to zero under every ρ_q. The p-part of W̃(𝔽_q)/pW̃(𝔽_q) is trivial unless p divides the group order. ([Siksek](#source-siksek), §4.1, equation (40), pp.17–18.) *Needs:* p-saturation reduces to finitely many divisibility tests (3.23); TauCetiRoadmap EllipticCurves Layer 4; point counts over a finite field by enumeration (3.17).
 
 ### 3.26 Finite p-saturation criterion
 
@@ -1853,13 +1876,13 @@ the division-polynomial comparison of §3.24 identifies the exact divisibility c
 - Mathlib's `E₄` is integral and `E₄/2` is not; at weight `12` the Miller basis is `{Δ}` and `T₂` acts by `−24`, so `2` is nonordinary there (`integralModularLattice` (3.1), Miller basis (3.3), integral Hecke matrix (3.7)).
 - The coefficient of `q^107` in `ΔE₄²E₆` is `35830422465487817813321292 ≡ −1 (mod 107)` (the coefficient identity of §3.8 (3.8)).
 - At weight `38` the integral matrix of `T₇₉` in the Miller basis reduces modulo `79` to `[[3, 17], [25, 10]]`, whose determinant `30 − 425 = −395 = −5·79` vanishes modulo `79` (nonordinary determinant at weight 38 and prime 79 (3.10)).
-- `y² = x³ + x + 1` over `ZMod 5` has `9` points and Frobenius trace `−3` (point counts over a finite field as a character sum (3.17)).
+- `y² = x³ + x + 1` over `ZMod 5` has `9` points and Frobenius trace `−3` (point counts over a finite field by enumeration (3.17)).
 - For `y² = x³ − x` at the real place the abscissae `−1/2` and `2` give a complete local image of order `2` (local image presentation (3.18)).
 - In `ℤ`, `6ℤ` is `5`-saturated and neither `2`- nor `3`-saturated (`IsPSaturated` (3.22)).
 
 ### Dependencies
 
-Layers 0–2; TauCetiRoadmap LocalFieldsRamification Layer 2; TauCetiRoadmap ModularForms Layers 7–11; AlgebraicModularFormsAndSerreWeights R15.1–R15.3, R15.5; TauCetiRoadmap EllipticCurves Layers 4 and 6; HeightsRationalPointsAndObstructions §1.17; Mathlib (level-one modular forms, `quadraticChar`, division polynomials); Tau Ceti (Sturm bound, Hecke recurrence, point count, `x − T` descent, division-polynomial identity).
+Layers 0–2; TauCetiRoadmap LocalFieldsRamification Layer 2; TauCetiRoadmap ModularForms Layers 7–11; AlgebraicModularFormsAndSerreWeights R15.1–R15.3, R15.5; TauCetiRoadmap EllipticCurves Layers 4 and 6; EllipticLegendreCharacterInterfaces §§5.1–5.2; HeightsRationalPointsAndObstructions §1.17; Mathlib (level-one modular forms, `quadraticChar`, division polynomials); Tau Ceti (Sturm bound, Hecke recurrence, point count, `x − T` descent, division-polynomial identity).
 
 ## Layer 4: quantitative analytic bounds and finite Gram data
 
