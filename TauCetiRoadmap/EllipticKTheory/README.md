@@ -359,7 +359,9 @@ splitting `K_1(A) ≅ A^× × SK_1(A)` for commutative `A`, and `K_1(F) = F^×`.
 for a ring of `S`-integers of a number field (Bass–Milnor–Serre). §12.2: for a connected nonempty
 regular noetherian scheme `X` of dimension at most one, rank and determinant give an additive
 equivalence `K_0(X) ≃ ℤ × Pic(X)` with inverse `(n, L) ↦ (n − 1)[O] + [L]`, multiplicative for the
-square-zero product `(rs, L^{⊗s} ⊗ M^{⊗r})`, with `[O_y] ↦ (0, O(y))` at a closed point `y`. §12.3: on `ℙ¹_F`, the
+square-zero product `(rs, L^{⊗s} ⊗ M^{⊗r})`, with `[O_y] ↦ (0, O(y))` at a codimension-one
+closed point `y`. For `X = Spec F`, the unique point instead has `[O_y] = [O_X] ↦ (1, O_X)`.
+§12.3: on `ℙ¹_F`, the
 rank–Pic coordinates `(r, d)` and projective-bundle coordinates `(a, b)` are related by
 `(r, d) = (a + b, −b)`. §12.4 supplies the pointed elliptic decomposition
 `K_0(E) ≃ ℤ ⊕ ℤ ⊕ E(F)` through `P ↦ O(P−O)`, with the product of §12.2.
@@ -670,7 +672,9 @@ give an isomorphism `rank ⊕ det : K_0(X) ≅ ℤ ⊕ Pic(X)` (Weibel, *K-book*
 p. 146, which also gives `SK_0(X) = 0`). This is KTheoryLowDegrees §12.2 (`regularCurve_rankDetEquiv`),
 consumed here together with its class formulas:
 `[L] ↦ (1, L)` for a line bundle `L`, in particular `[O_X] ↦ (1, O_X)`, and the skyscraper O_x at a
-closed point `x` maps to `(0, O(x))`, from the exact sequence `0 → O(−x) → O → O_x → 0`. Prove
+codimension-one closed point `x` maps to `(0, O(x))`, from the exact sequence
+`0 → O(−x) → O → O_x → 0`. For `X = Spec F`, its unique point has `O_x = O_X`, hence rank one
+and trivial determinant; the point-divisor formula does not apply. Prove
 K0Curve.rankDet_natural: the isomorphism is natural for pullback along a morphism of such curves,
 in particular along a finite morphism; KTheoryLowDegrees §12.2 supplies the compatibility with
 localisation, that is with open immersions, and with extension of the base field. No separatedness
@@ -681,7 +685,9 @@ constructions below retain their own hypotheses. *Needs:* KTheoryLowDegrees §12
 
 **Checks.**
 
-- a skyscraper at a closed point has rank zero and determinant `O(x)`.
+- a skyscraper at a codimension-one closed point has rank zero and determinant `O(x)`;
+  on `ℙ¹_F` a rational point therefore has rank–degree coordinates `(0, 1)`, fixing the positive sign.
+- on `Spec F` the unique point has `[O_x] = 1` and rank one; it is not a rank-zero divisor class.
 - `[O_X] = (1, O_X)`, the unit.
 - on `ℙ¹_ℚ` the skyscraper at `V(t² + 1)` has determinant of degree two.
 - on the affine line with doubled origin, `div(t)=0′+0″`, so the two origin classes are opposite;
@@ -810,7 +816,9 @@ product ring. *Needs:* §§2.1, 2.4; KTheoryLowDegrees §12.2.
 
 **Checks.**
 
-- `[O_x]·[O_y] = 0` for closed points `x, y`.
+- `[O_x]·[O_y] = 0` for codimension-one closed points `x, y`, including `x = y`;
+  on `ℙ¹_F` this gives `(0, 1)² = (0, 0)` for a rational point.
+- on `Spec F` the unique point instead has `[O_x]² = 1`, since its class is the unit of `K_0(F) = ℤ`.
 - `([L] − 1)² = 0` for every line bundle `L`.
 - `(0, 1, O)² = 0`, whereas with componentwise multiplication on the two integer coordinates
   the degree coordinate would instead square to one. No ring structure on `E(F)` is assumed.
@@ -2197,10 +2205,12 @@ NeronModelsAndSemistableAbelianVarieties §5.3b for the fibre graphs.
 
 **Checks for fibre K-theory.**
 
-- A split nodal I₁ fibre has one vertex and one loop: its incidence map is zero,
-  `dim H₁=1`, and Frobenius fixes that generator, giving rational dimension one.
-- For a non-split nodal I₁ fibre Frobenius exchanges the two branches and sends the
-  loop generator to its negative. The invariant subspace has dimension zero over ℚ;
+- A split nodal I₁ fibre has two vertices, the normalized component `c` and the singular point `s`,
+  and two parallel branch edges `e₁, e₂`. Orient both edges from `c` to `s`: then
+  `∂e₁ = s − c = ∂e₂`, so the incidence map has rank one and
+  `H₁ = ℚ·(e₁ − e₂)`. Frobenius fixes this generator, giving invariant dimension one.
+- For a non-split nodal I₁ fibre Frobenius fixes `c, s` and exchanges `e₁, e₂`, sending
+  `e₁ − e₂` to `−(e₁ − e₂)`. The invariant subspace has dimension zero over ℚ;
   it would have dimension one if branch orientation were forgotten.
 - A type IV fibre with three components through one point has four incidence vertices
   and three edges, hence first Betti number `3−4+1=0`; the pairwise-intersection triangle
