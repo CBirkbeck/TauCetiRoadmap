@@ -1578,7 +1578,7 @@ required prime power, then combine primary moduli. For unsafe small moduli
 use only the resulting compatible operations and maps, rather than assuming
 an unavailable associative coefficient ring. Finite support and finite
 generation then prove the integral assertion. (K-book, Theorem V.6.8,
-Corollaries 6.8.1–6.8.2 and proof, pp. 412–413.)
+Proposition V.6.8.1 and its proof, and the discussion in §V.6.8.2, pp. 412–413.)
 
 **Checks.**
 
