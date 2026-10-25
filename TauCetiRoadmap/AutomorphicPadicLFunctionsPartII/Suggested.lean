@@ -10,8 +10,12 @@ for those statements.
 The following headline theorems are not statable at the pins:
 * The unique equivariant coherent Eisenstein–Kronecker residue class: the completed
   Poincaré coefficient and equivariant support-cohomology carriers are missing.
-* Refined integral critical evaluation and its de Rham polylogarithm comparison:
-  the completed universal-extension, moment and Hodge comparison carriers are missing.
+* Refined integral critical evaluation: the completed universal-extension and moment
+  carriers are missing.
+* The de Rham cohomology of the completed logarithm coefficient, the de Rham
+  polylogarithm class and its comparison with the coherent class: algebraic de Rham
+  cohomology with coefficients in an integrable connection, with supports and
+  equivariant, is missing.
 * The residue-normalized current comparison and explicit critical class formula:
   bundle-valued relative currents and the Eisenstein–Kronecker class are missing.
 * Regularized critical Hecke-value integrality, for nontrivial and unit conductors:

@@ -4,13 +4,13 @@
 
 ## Scope and ownership
 
-This Part II owns the critical coefficient specialization, trace-zero residue classes, critical cap and conductor refinement, the CM Borel current, its unit-orbit evaluation, critical-value applications and the ordinary theta-to-ray-class construction. No roadmap titled automorphic p-adic L-functions precedes this part: its base is formed by the three suppliers of the next sentence, which records where each of them stops, and nothing outside the suppliers named below is consumed. GlobalNumberFields Layers 2, 7 and 9–10 supply the character and ray-class objects, ComplexMultiplicationAndExplicitReciprocity §1.3 supplies the CM geometry, and PadicMeasuresIwasawaAlgebras §§0–3 supplies bounded measure theory without constructing an arithmetic p-adic L-function. The extension here constructs the critical Eisenstein classes and their arithmetic measures, permits L to be a non-CM extension of its maximal CM subfield K, and includes every admissible critical type and every tame integral conductor prime to p.
+This Part II owns the critical coefficient specialization, trace-zero residue classes, critical cap and conductor refinement, the de Rham cohomology of the completed logarithm coefficient over characteristic-zero fields with the residue-characterized de Rham polylogarithm class, the 2πi-normalized Betti duality of complex abelian schemes with their duals, the trace-dual structure and the dual period relation of CM abelian schemes, the CM Borel current, its unit-orbit evaluation, critical-value applications and the ordinary theta-to-ray-class construction. No roadmap titled automorphic p-adic L-functions precedes this part: its base is formed by the three suppliers of the next sentence, which records where each of them stops, and nothing outside the suppliers named below is consumed. GlobalNumberFields Layers 2, 7 and 9–10 supply the character and ray-class objects, ComplexMultiplicationAndExplicitReciprocity §1.3 supplies the CM geometry, and PadicMeasuresIwasawaAlgebras §§0–3 supplies bounded measure theory without constructing an arithmetic p-adic L-function. The extension here constructs the critical Eisenstein classes and their arithmetic measures, permits L to be a non-CM extension of its maximal CM subfield K, and includes every admissible critical type and every tame integral conductor prime to p.
 
 The general objects have the following owners:
 
 - Mathlib owns `NumberField.IsCMField`, `IsZLattice`, the logarithmic unit lattice, `AbstractMeasure`, Dirac measures, pushforward and convolution, Mellin and Gamma integrals, Gaussian Fourier transforms and one-dimensional Schwartz Poisson summation. **ThetaSeries**, Layer 1 and §§2A, 2C, owns lattice Poisson summation, its dual and covolume laws. Tau Ceti owns the split comodule weight decomposition and its scalar point action. The continuation here is a lattice-parameter and polynomial-moment application of these analytic results.
 - **GlobalNumberFields**, Layers 2, 7 and 9–10, owns Hecke characters, ideal-side characters, ray classes, algebraic infinity types, unit compatibility and purity. **ClassFieldTheory**, Layers 7 and 11–13, owns local and global arithmetic reciprocity. The critical admissibility and p-adic-avatar interfaces required in the exact contracts are extensions of these owners.
-- **AbelianSchemesAndArithmeticModuliPartII**, P0.1–P0.6, P1.1, P2.1–P2.8, P3.2–P3.4 and P4.1–P4.3, owns invariant tensors, shuffle products, universal extensions, completed Poincaré sheaves, their moments, splittings, connections and ordinary trivializations. **ComplexMultiplicationAndExplicitReciprocity**, §1.3, owns lifted CM types, Serre tensors, eigenspaces, ideal-kernel degrees and period pairings. This roadmap only chooses the based data and applies those maps to the residue class.
+- **AbelianSchemesAndArithmeticModuliPartII**, P0.1–P0.6, P1.1, P2.1–P2.8, P3.2–P3.4 and P4.1–P4.3, owns invariant tensors, shuffle products, universal extensions, completed Poincaré sheaves, their moments, splittings, connections and ordinary trivializations. Its P3.3 ends with the horizontal rigidified isomorphism Log≃P̂♮, and its P2.8 computes coherent cohomology of the ordinary completed sheaf only; the de Rham cohomology of P̂♮ and the polylogarithm class built on it are §§2.6–2.7 here. **ComplexMultiplicationAndExplicitReciprocity**, §§1.3 and 2.1, owns lifted CM types, Serre tensors, eigenspaces, ideal-kernel degrees, the period pairing, the conjugate de Rham pairing and CM-compatible polarizations; the integral Betti duality with the dual abelian scheme and its 2πi normalization are §5.1 here. **AbelianSchemesAndArithmeticModuli**, A2.2, A4.3, A5.1 and A5.3, owns the dual abelian scheme, de Rham duality, lattice uniformization and the Appell–Humbert description of line bundles. This roadmap only chooses the based data and applies those maps to the residue class.
 - **SchemeAndStackFoundations**, §§2.6–2.7, 2.19–2.20 and 2.23, owns supports, coherent duality and derived equivariance. **AlgebraicTopology**, Stages 5–6 and Stage 8 items 5, 7 and 8, owns finite covers, torus homology, local-coefficient caps, fundamental classes and classifying models. **DifferentialGeometry**, Layers 0–1 and 5, owns generic forms and integration. **Hyperfunctions**, HF2.AnalyticPreparation.CurrentResolution, owns compact bundle-current regularization and its Dolbeault homotopies. **ComplexComparisonPartII**, C1.1 and C5.1/C5.4, owns the analytic/coherent comparisons; its current-resolution and trace compatibility extensions are named in the contracts.
 - **FiniteFlatGroupsAndIntegralPadicHodgeTheory**, R07.1.7, R07.1.9 and R07.1.13, owns Cartier duality and connected–étale/formal group theory. **PadicMeasuresIwasawaAlgebras**, §§0.1, 1.2, 1.7, 2.1–2.2 and 3.1, owns the measure algebra, weighting, bounded Amice theory and pseudomeasures. The integral multivariate and bounded-divisibility extensions remain with that owner.
 - **AutomorphicLFunctionsAndLocalFactors**, AL.1 “Local epsilon factors and Gauss sums” and “Rank-one specialisation and Hecke comparison”, owns the analytic Hecke and local-factor interfaces. **PeriodsAndSpecialValues**, PS.0–PS.1, owns motives and determinant-period interfaces, specified below as supplier requirements.
@@ -33,7 +33,7 @@ The Hermitian form is linear in the first variable: H(z,w)=Σh_i z_i barw_i, h_i
 
 ### From Mathlib
 
-Use `NumberField.IsCMField` in `Mathlib/NumberTheory/NumberField/CMField.lean:69`: it requires total complexity and quadraticity over the maximal real subfield. Use `NumberField.Units.instZLattice_unitLattice` and `NumberField.Units.logEmbeddingEquiv` in `Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean:373` and `:415` for the full logarithmic lattice and units modulo torsion. Use `ZLattice.summable_norm_sub_rpow` in `Mathlib/Algebra/Module/ZLattice/Summable.lean:236` for translated norm-power summability below the negative lattice rank; the complex polynomial numerator estimate is the specialization in §3.3. Use `IsZLattice` in `Mathlib/Algebra/Module/ZLattice/Basic.lean:433` together with its separate `DiscreteTopology` hypothesis; spanning alone is not discreteness.
+Use `NumberField.IsCMField` in `Mathlib/NumberTheory/NumberField/CMField.lean:69`: it requires total complexity and quadraticity over the maximal real subfield. Use `NumberField.Units.instZLattice_unitLattice` and `NumberField.Units.logEmbeddingEquiv` in `Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean:373` and `:415` for the full logarithmic lattice and units modulo torsion. Use `ZLattice.summable_norm_sub_rpow` in `Mathlib/Algebra/Module/ZLattice/Summable.lean:236` for translated norm-power summability below the negative lattice rank; the complex polynomial numerator estimate is the specialization in §3.3. Use `IsZLattice` in `Mathlib/Algebra/Module/ZLattice/Basic.lean:433` together with its separate `DiscreteTopology` hypothesis; spanning alone is not discreteness. Use `FractionalIdeal.dual`, `FractionalIdeal.dual_eq_mul_inv` and `coeIdeal_differentIdeal` in `Mathlib/RingTheory/DedekindDomain/Different.lean:229`, `:356` and `:532` for the trace dual of a nonzero fractional ideal, dual(a)=dual(1)·a⁻¹ with dual(1) the inverse different; §5.1 uses them for the trace-dual Betti structure.
 
 Use `AbstractMeasure`, `AbstractMeasure.dirac` and `AbstractMeasure.map` in `Mathlib/NumberTheory/Padics/Measure/Basic.lean:40`, `:97` and `:105`. The carrier is a continuous linear functional on continuous maps; its definition imposes neither total mass one nor an operator bound of one. Use convolution and `AbstractMeasure.diracHom` from `Mathlib/NumberTheory/Padics/Measure/Monoid.lean`. `AbstractMeasure.amiceTransformEquiv` in `Mathlib/NumberTheory/Padics/Measure/AmiceTransform.lean:157` has domain measures on ℤ_p with ℤ_p coefficients; the coefficient-complete multivariate extension consumed here is the supplier gap below.
 
@@ -61,11 +61,15 @@ What GlobalNumberFields must provide (gap:hecke-padic-avatar): Supply the arithm
 
 ### From TauCetiRoadmap.AbelianSchemesAndArithmeticModuliPartII
 
-Consume P0.1–P0.6 for invariant tensors, multigrading, shuffle multiplication and divided powers; P1.1 for the universal extension of A∨ and the covariant Hodge module; P2.1 for moments; P2.2–P2.3/P2.8 for completed coefficients and their top coherent cohomology; P2.4–P2.7 for isogeny maps, rigidified torsion splitting, Γ-linearization and comultiplication. P3.2/P3.4 supply the smooth connection and Dolbeault realization, and P3.3 supplies the characteristic-zero field-base logarithm-sheaf comparison. P4.1–P4.3 supply ordinary completed base change, the infinitesimal trivialization and torsion translations. These are the precise models used by every EK, moment and theta map below. In elliptic dimension the ordinary and connection completions have conormal ranks 1 and 2; their degree-two coefficient sheaves have ranks 3 and 6, respectively.
+Consume P0.1–P0.6 for invariant tensors, multigrading, shuffle multiplication and divided powers; P1.1 for the universal extension of A∨ and the covariant Hodge module; P2.1 for moments; P2.2–P2.3/P2.8 for completed coefficients and their top coherent cohomology; P2.4–P2.7 for isogeny maps, rigidified torsion splitting, Γ-linearization and comultiplication. P3.2/P3.4 supply the smooth connection and Dolbeault realization, and P3.3 supplies the characteristic-zero field-base logarithm-sheaf comparison: a horizontal isomorphism Log^(1)≃P♮^(1) respecting the unit splittings, hence Log≃P̂♮. Neither the de Rham cohomology of P̂♮ nor any polylogarithm class is part of that contract; P2.8 is the coherent statement for P̂ alone. P4.1–P4.3 supply ordinary completed base change, the infinitesimal trivialization and torsion translations. These are the precise models used by every EK, moment and theta map below. In elliptic dimension the ordinary and connection completions have conormal ranks 1 and 2; their degree-two coefficient sheaves have ranks 3 and 6, respectively.
 
 ### From TauCetiRoadmap.ComplexMultiplicationAndExplicitReciprocity
 
-Consume §1.3, including `cmHodgeEigenspaces`, for the lifted embedding partition, CM Serre tensors, CM Lie/Hodge eigenspaces, ideal-kernel degrees and both period pairings. The generic tensor is O_L⊗_(O_K)A₀, its dimension is [L:K]dim A₀, and the cotangent eigenspaces are trivialized only after the permitted base change. The ideal [c]-kernel has finite-flat rank Nc, including its inseparable part. The period pairing is conjugate on the A-cotangent factor and uses the trace-dual ideal with inverse different. The same §1.3 controls the complex periods, without an ordinary-prime hypothesis.
+Consume §1.3, including `cmHodgeEigenspaces`, for the lifted embedding partition, CM Serre tensors, CM Lie/Hodge eigenspaces, ideal-kernel degrees and both period pairings. The generic tensor is O_L⊗_(O_K)A₀, its dimension is [L:K]dim A₀, and the cotangent eigenspaces are trivialized only after the permitted base change. The ideal [c]-kernel has finite-flat rank Nc, including its inseparable part. The two pairings are the period pairing ω_A×H₁(A(ℂ),ℤ)→ℂ^Σ and the de Rham pairing conj(ω_A)×ω_A∨→ℂ^barΣ, conjugate in its first argument, with their naturality in O_L-linear homomorphisms and the ideal-twist lattice aΛ of A(a). The same §1.3 controls the complex periods, without an ordinary-prime hypothesis. It does not identify H₁(A∨(ℂ),ℤ) with the trace dual a⁻¹d_L⁻¹ or compare the de Rham pairing with integral Betti duality; both are §5.1 targets here. Consume §2.1, the polarized classification of CM abelian varieties, for an O_K-linear polarization whose Rosati involution is complex conjugation, used in §5.8 to compare dual and conjugate periods.
+
+### From TauCetiRoadmap.AbelianSchemesAndArithmeticModuli
+
+Consume A2.2 for the dual abelian scheme A∨ with its doubly rigidified Poincaré bundle and the dual of a homomorphism, A4.3 for the perfect de Rham duality between H¹_dR(A/S) and H¹_dR(A∨/S), A5.1 for the uniformization V/Λ≃A(ℂ) with Λ=H₁(A(ℂ),ℤ), and A5.3 for the classification of holomorphic line bundles on V/Λ, in which the topologically trivial ones are given by unitary characters of Λ. Together with proper GAGA these identify H₁(A∨(ℂ),ℤ) with Hom(Λ,ℤ). The 2πi-normalized comparison of that integral duality with the A4.3 pairing is the §5.1 target.
 
 ### From TauCetiRoadmap.SchemeAndStackFoundations
 
@@ -75,7 +79,7 @@ What SchemeAndStackFoundations must provide (gap:equivariant-poincare-limit): Su
 
 ### From TauCetiRoadmap.ComplexComparisonPartII
 
-C1.1 supplies the local bundle-valued Dolbeault comparison; C5.1 supplies the ordinary algebraic/analytic de Rham comparison, and C5.4 supplies the generic current calculus, its test topology and regularization, real/complex comparison, integration and residue normalizations. Its form-first pairing converts to the test-first pairing here by (−1)^(k(N−k)) in real dimension N and form degree k; at N=2, k=1 this factor is −1. DifferentialGeometry Layers 0–1 and 5 supply the generic forms and integration on which those comparisons operate. The bundle-valued Borel current model uses the following extensions.
+C1.1 supplies the local bundle-valued Dolbeault comparison; C5.1 supplies the ordinary algebraic/analytic de Rham comparison and hypercohomology of bounded-below complexes of sheaves of vector spaces; C5.2 supplies, over a field of characteristic zero, the de Rham complex of a coherent module with integrable connection and its analytification, used for P♮^(n) in §§2.6–2.8 and §3.6; and C5.4 supplies the generic current calculus, its test topology and regularization, real/complex comparison, integration and residue normalizations. Its form-first pairing converts to the test-first pairing here by (−1)^(k(N−k)) in real dimension N and form degree k; at N=2, k=1 this factor is −1. DifferentialGeometry Layers 0–1 and 5 supply the generic forms and integration on which those comparisons operate. The bundle-valued Borel current model uses the following extensions.
 
 What ComplexComparisonPartII must provide (gap:borel-bundle-currents): Extend C5.4’s supplied bundle-test/current calculus to the mixed relative bidegrees on a complex manifold times a real contractible unit cover, with the local form/current resolution natural in finite Poincaré levels and flat connections.
 
@@ -119,7 +123,7 @@ What PeriodsAndSpecialValues must provide (gap:critical-cm-deligne-period): Supp
 
 ## How to read the build
 
-Layers 0–2 select the critical coefficient lines, construct the residue class and evaluate it integrally, with conductor refinement separated from unit-index normalization. Layers 3–4 construct the analytic representative and identify its unit-orbit series. Layer 5 converts this evaluation into period-normalized critical values, proves integral full-unit descent of critical coordinates and deduces algebraicity and the weak period relation. Layers 6–7 use ordinary levels and torsion-free unit groups to turn the same class into theta functions and bounded Eisenstein measures. Layer 8 proves integral unit-index descent on the weighted ray quotient, translates the conductor-one family by its second auxiliary Artin atom, and proves signed interpolation and uniform bounded desmoothing. Each *Needs:* line separates statement inputs from the suggested proof route. `Suggested.lean` is the acceptance test for the headline continuation and functional-equation theorems that are statable on native carriers; the other headline statements require the geometric and arithmetic interfaces specified here.
+Layers 0–2 select the critical coefficient lines, construct the residue class and evaluate it integrally, with conductor refinement separated from unit-index normalization; over a characteristic-zero field they compute the de Rham cohomology of the completed logarithm coefficient and identify the residue class with the de Rham polylogarithm. Layers 3–4 construct the analytic representative and identify its unit-orbit series. Layer 5 converts this evaluation into period-normalized critical values, proves integral full-unit descent of critical coordinates and deduces algebraicity and the weak period relation. Layers 6–7 use ordinary levels and torsion-free unit groups to turn the same class into theta functions and bounded Eisenstein measures. Layer 8 proves integral unit-index descent on the weighted ray quotient, translates the conductor-one family by its second auxiliary Artin atom, and proves signed interpolation and uniform bounded desmoothing. Each *Needs:* line separates statement inputs from the suggested proof route. `Suggested.lean` is the acceptance test for the headline continuation and functional-equation theorems that are statable on native carriers; the other headline statements require the geometric and arithmetic interfaces specified here.
 
 ## Layer 0: Critical types and CM coefficient lines
 
@@ -428,31 +432,87 @@ One proof route is to compare the two torsion splittings after [f] and its dual 
 
 *Needs:* §2.4; §2.1; AbelianSchemesAndArithmeticModuliPartII P2.4.
 
-### 2.6 Comparison with the de Rham polylogarithm
+### 2.6 De Rham cohomology of the completed logarithm coefficient
 
-For S=Spec(k), where k has characteristic zero, the Hodge-to-de Rham edge map sends EK♮_Γ(h) to the de Rham realization of the equivariant polylogarithm with residue h in degree 2d−1 on U. This is a comparison of the supplied Poincaré/logarithm-sheaf models with this residue class; no independent polylogarithm carrier is introduced.
+Let k be a field of characteristic zero, A/k an abelian variety of dimension d≥1, and P♮^(n) the finite Poincaré levels of AbelianSchemesAndArithmeticModuliPartII P2.2 with their integrable connections, identified with the logarithm sheaves Log^(n) by P3.3. Write DR(P♮^(n)) for the de Rham complex P♮^(n)→P♮^(n)⊗Ω¹_A→⋯→P♮^(n)⊗Ω^d_A of ComplexComparisonPartII C5.2, H^i_dR(A,P♮^(n)) for its hypercohomology, and RΓ_dR(A,P̂♮)=R lim_n RΓ(A,DR(P♮^(n))) for the completed coefficient. Normalize the de Rham trace H^(2d)_dR(A/k)→k as the coherent trace H^d(A,Ω^d_A)→k of SchemeAndStackFoundations §2.20 composed with the inverse of the Hodge edge isomorphism H^d(A,Ω^d_A)≃H^(2d)_dR(A/k).
 
-Assume the base is the spectrum of a characteristic-zero field. No comparison over arbitrary characteristic-zero bases is claimed. Finite Poincaré levels, flat connection and equivariant support comparison; compatible residue trace.
+Prove the following four statements.
 
-(KS-v4, Remark 2.37, p.29; Remark 3.21, p.41, KS-v4 line 1266.)
+- For i<2d and n≥1 the transition map H^i_dR(A,P♮^(n))→H^i_dR(A,P♮^(n−1)) is zero. For i=2d the projection P♮^(n)→P♮^(0)=O_A followed by the de Rham trace is an isomorphism H^(2d)_dR(A,P♮^(n))≃k, and the transition maps are the identity under these isomorphisms.
+- Consequently RΓ_dR(A,P̂♮)≃k[−2d]: every limit and every first derived limit of the finite-level groups vanishes except lim_n H^(2d)_dR(A,P♮^(n))=k.
+- Let a group Γ act on A by automorphisms of abelian varieties over k, and give P̂♮ the Γ-linearization of P2.6. Define RΓ_dR(A,Γ;P̂♮) as the derived limit over n of the Γ-equivariant hypercohomology of DR(P♮^(n)), computed in Γ-equivariant sheaves of k-vector spaces on A by SchemeAndStackFoundations §2.23. Then H^i_dR(A,Γ;P̂♮)≃H^(i−2d)(Γ,k) with trivial action on k. In particular it vanishes for i≤2d−1 and equals k for i=2d.
+- Let D⊂A be a finite étale Γ-stable closed subscheme of torsion points with complement U. De Rham support cohomology H^q_(D,dR)(A,P♮^(n)) vanishes for q<2d. In degree 2d it is identified with H⁰(D,ι_D*P♮^(n)) by the local complete-intersection duality of §1.2, applied to P♮^(n)⊗Ω^d_A, followed by the Hodge edge map on supports; prove that this composite is an isomorphism. Under the torsion splitting and moments of P2.5, H⁰(D,ι_D*P̂♮)≃k[D]⊗∏_(j≥0)TSym^j(H) contains k[D] as its TSym⁰-component, onto which the augmentation induced by P̂♮→P♮^(0)=O_A projects. The localization sequence gives an exact sequence
+  0→H^(2d−1)_dR(U,Γ;P̂♮)→H^(2d)_(D,dR)(A,Γ;P̂♮)→k,
+  whose second map is augmentation onto the TSym⁰-component followed by Tr_(D/k).
 
-One proof route is to apply P3 logarithm-comparison, then the Hodge edge morphism. Characterize both classes by their normalized residue and the vanishing computation.
+The relative theorem over a smooth base concerns the relative logarithm sheaf (Sch-2014, Theorem 1.2.1). This target is its field case, the generality in which P3.3 identifies P̂♮ with the logarithm sheaf. The trace normalization is algebraic; the factor (2πi)^d enters only through the analytic convention of §3.2.
+
+Assume k a field of characteristic zero; A an abelian variety over k; Γ acting by automorphisms fixing the identity; D finite étale over k, consisting of torsion points and Γ-stable.
+
+(KS-v4, Remark 2.16, p.18, KS-v4 line 800, for the vanishing for P̂♮ over a characteristic-zero base; Sch-2014, Theorem 1.2.1, pp.52–53, Sch-2014 line 1894, and Lemma 1.2.3, Definition 1.2.4 and Theorem 1.2.9, pp.54–56, Sch-2014 lines 1954–2069, for the logarithm sheaves and the residue sequence at the identity section; HK-2018, Theorem 3.3.1, p.11, HK-2018 line 456, and Proposition 5.3.1, p.19, HK-2018 line 855, for the sheaf-theoretic vanishing and the residue sequence along a torsion subscheme.)
+
+One proof route filters P♮^(n) by its truncation kernels π*Sym^k(H) of P2.2. On each graded piece the de Rham cohomology is H^•_dR(A/k)⊗Sym^k(H). The connecting maps are cup product with the first extension class, which P3.3 identifies with id_H. Hence the first page of the hypercohomology spectral sequence is a sum of Koszul complexes, exact below the top degree; this gives the zero transition maps and the top-degree identification. Pro-zero systems have vanishing lim and lim¹, which gives the completed statement. For the equivariant statement use the spectral sequence H^p(Γ,H^q_dR(A,P̂♮))⇒H^(p+q)_dR(A,Γ;P̂♮) of SchemeAndStackFoundations §2.23. Group cohomology commutes with derived limits. An automorphism of A acts on H^(2d)_dR(A/k) by its degree, which is one. For supports, use local cohomology of the locally free sheaves P♮^(n)⊗Ω^p, concentrated in degree d at the points of D, and SchemeAndStackFoundations §2.7.
+
+**Checks.**
+
+- For d=1 and every n, H⁰_dR(A,P♮^(n)), H¹_dR(A,P♮^(n)) and H²_dR(A,P♮^(n)) have dimensions n+1, n+2 and 1. Their alternating sum is 0, the rank (n+1)(n+2)/2 times the topological Euler characteristic 0 of A(ℂ). Each finite level has nonzero H⁰ and H¹, so the vanishing is a statement about the pro-system: an assertion that H¹_dR(A,P♮^(n)) is eventually zero is false.
+- At n=1 the constant section 1 of P♮^(0)=O_A does not lift to a horizontal section of P♮^(1). The connecting map sends it to the extension class id_H≠0 in H¹_dR(A,π*H)=Hom(H,H) when d≥1. Hence H⁰_dR(A,P♮^(1))→H⁰_dR(A,O_A)=k is zero; for the split connection O_A⊕π*H it would be surjective.
+- For d=1, [−1] acts by −1 on H¹_dR(A/k) and by +1 on H²_dR(A/k). For Γ=μ₂ acting by [−1], the equivariant group in degree 2 is H⁰(μ₂,k)=k and the groups above it vanish in characteristic zero; an action through the sign on the top line would give 0.
+- For L=ℚ(i,√2), d=2 and Γ=⟨1+√2⟩≅ℤ acting on a Serre tensor of type Σ, H⁵_dR(A,Γ;P̂♮)=H¹(ℤ,k)=k. The Γ-invariants of H⁵_dR(A,P̂♮) are 0, since a two-dimensional variety has no de Rham cohomology above degree 4. Equivariant cohomology is not invariants of cohomology.
+- Over ℂ the algebraic residue of dz/z at 0 is 1, whereas its integral over a positively oriented small circle is 2πi. The trace here is the algebraic one; a normalization by integration would rescale every residue by 2πi.
+
+*Needs:* AbelianSchemesAndArithmeticModuliPartII P2.2, P2.5, P2.6 and P3.3; ComplexComparisonPartII C5.1 and C5.2; SchemeAndStackFoundations §2.7, §§2.19–2.20 and §2.23.
+
+### 2.7 The de Rham polylogarithm class with residue h
+
+In the situation of §2.6, for h∈k[D]^(0,Γ) define pol_Γ(h)∈H^(2d−1)_dR(U,Γ;P̂♮) as the unique class whose residue in H^(2d)_(D,dR)(A,Γ;P̂♮) is h placed in the TSym⁰-component of the torsion splitting. Existence and uniqueness are the exact sequence of §2.6, since h has trace zero. Its images pol_Γ^(n)(h) at the finite levels form the compatible system determined by the limit; at a single finite level the residue alone does not determine a class. No identification with a realization of the motivic polylogarithm is asserted: the de Rham class is defined by its residue on the coefficient P̂♮≃Log.
+
+Assume the hypotheses of §2.6 and h trace zero and Γ-invariant.
+
+(KS-v4, Remark 2.37, p.29, KS-v4 line 1266; HK-2018, Definition 5.2.2 and Theorem 5.2.3, pp.18–19, HK-2018 lines 792–823, for the sheaf-theoretic class characterized by its residue along a torsion subscheme; Sch-2014, §1.5.2, p.81, Sch-2014 line 3174, for the de Rham class of an elliptic curve.)
+
+The construction has the following API.
+
+- pol_Γ is k-linear and injective in h.
+- For a subgroup Γ′⊂Γ, restriction sends pol_Γ(h) to pol_(Γ′)(h).
+- For a field extension k⊂k′, base change sends pol_Γ(h) to the class of the transported h.
+
+One proof route defines the class through the exact sequence of §2.6 and obtains the API by uniqueness: each map in the list commutes with residues and preserves the top-degree vanishing.
+
+**Checks.**
+
+- For d=1, Γ=1 and D={e,P,−P}, H¹_dR(A/k)→H¹_dR(U/k) is injective with two-dimensional image, so at level zero the residues determine a class only up to that image: adding the class of the invariant differential leaves the residues unchanged. The uniqueness of pol_Γ(h) uses the vanishing of H¹_dR(A,P̂♮), not the level-zero sequence.
+- On the same D the level-zero image of pol(2,−1,−1) is the class of a differential regular on U with simple poles of residues 2, −1 and −1 at e, P and −P. The vector (1,1,1) has trace 3 and is not a residue vector, by the residue theorem on the proper curve A.
+- pol_Γ(h)=0 forces h=0, since the residue map is injective on H^(2d−1)_dR(U,Γ;P̂♮). On the same D, pol(2,−1,−1) and pol(0,1,−1) have residues 2 and 0 at e, so a construction identifying all nonzero inputs fails.
+
+*Needs:* §2.6; AbelianSchemesAndArithmeticModuliPartII P2.5.
+
+### 2.8 Comparison with the de Rham polylogarithm
+
+For k a field of characteristic zero, the Hodge-to-de Rham edge map sends EK♮_Γ(h) to pol_Γ(h). The edge map is induced by the inclusion of complexes (P♮^(n)⊗Ω^d_A)[−d]→DR(P♮^(n)), which is Γ-equivariant and compatible with the transition maps. It gives H^(d−1)(U,Γ;P̂♮⊗Ω^d_A)→H^(2d−1)_dR(U,Γ;P̂♮), from the coherent degree d−1 to the de Rham degree 2d−1.
+
+Assume the hypotheses of §1.3 over S=Spec k, with k a field of characteristic zero, and the hypotheses of §2.6. No comparison over arbitrary characteristic-zero bases is claimed.
+
+(KS-v4, Remark 2.37, p.29, KS-v4 line 1266; Remark 3.21, p.41.)
+
+One proof route observes that the edge map is a morphism of the localization triangles for D⊂A, so it commutes with the localization boundaries. On supports it carries the coherent support class of h to its de Rham support class, by the normalization of §2.6. Hence the image of EK♮_Γ(h) has residue h, and §2.7 identifies it with pol_Γ(h).
 
 **Checks.**
 
 - The de Rham degree is 2d−1, distinct from the coherent degree d−1.
+- For d=1, Γ=1 and level zero, EK^(0)(h) is a differential on the affine curve U with residues h, and the edge map sends it to its de Rham class, with the same residues.
 - Residue compatibility is checked rather than inferred from an isomorphism of unrigidified bundles.
 - Do not use this field-base comparison as a theorem giving an absolute logarithm-sheaf connection over an arbitrary arithmetic model.
 
-*Needs:* §1.3; §1.4; AbelianSchemesAndArithmeticModuliPartII P3.3.
+*Needs:* §1.3; §1.4; §2.6; §2.7; ComplexComparisonPartII C5.2; SchemeAndStackFoundations §2.7.
 
 ### Examples
 
-For d=1 the free-group cap is R→R, r↦r. Extending it to Γ=μ₂ with the full-index rule would require 1↦1/2; in ℤ₂ this is not an integral map. The refinement at a nonunit conductor uses the identity splitting of B instead.
+For d=1 the free-group cap is R→R, r↦r. Extending it to Γ=μ₂ with the full-index rule would require 1↦1/2; in ℤ₂ this is not an integral map. The refinement at a nonunit conductor uses the identity splitting of B instead. On an elliptic curve over a characteristic-zero field the de Rham groups of P♮^(n) have dimensions n+1, n+2 and 1 in degrees 0, 1 and 2, with zero transition maps below degree 2, so only the completed coefficient has vanishing cohomology in degree 1; the level-zero residue sequence leaves a two-dimensional ambiguity that the completed one removes.
 
 ### Dependencies
 
-Earlier layers 0, 1; SchemeAndStackFoundations §2.6; AbelianSchemesAndArithmeticModuliPartII P2.5; AbelianSchemesAndArithmeticModuliPartII P2.1; SchemeAndStackFoundations §2.23 (gap:equivariant-poincare-limit); Mathlib `NumberField.Units.logEmbeddingEquiv`; Mathlib `NumberField.Units.instZLattice_unitLattice`; AbelianSchemesAndArithmeticModuliPartII P0.4–P0.5; AlgebraicTopology Stage 5 items 3–4 and Stage 8 items 5, 7 and 8; AlgebraicTopology Stage 6 (gap:torus-cap-projection); AbelianSchemesAndArithmeticModuliPartII P2.4; AbelianSchemesAndArithmeticModuliPartII P2.7; ComplexMultiplicationAndExplicitReciprocity §1.3; AbelianSchemesAndArithmeticModuliPartII P3.3. The individual statement and proof-route inputs are specified above.
+Earlier layers 0, 1; SchemeAndStackFoundations §2.6; AbelianSchemesAndArithmeticModuliPartII P2.5; AbelianSchemesAndArithmeticModuliPartII P2.1; SchemeAndStackFoundations §2.23 (gap:equivariant-poincare-limit); Mathlib `NumberField.Units.logEmbeddingEquiv`; Mathlib `NumberField.Units.instZLattice_unitLattice`; AbelianSchemesAndArithmeticModuliPartII P0.4–P0.5; AlgebraicTopology Stage 5 items 3–4 and Stage 8 items 5, 7 and 8; AlgebraicTopology Stage 6 (gap:torus-cap-projection); AbelianSchemesAndArithmeticModuliPartII P2.4; AbelianSchemesAndArithmeticModuliPartII P2.7; ComplexMultiplicationAndExplicitReciprocity §1.3; AbelianSchemesAndArithmeticModuliPartII P2.2, P2.6 and P3.3; ComplexComparisonPartII C5.1 and C5.2; SchemeAndStackFoundations §§2.19–2.20. The individual statement and proof-route inputs are specified above.
 
 ## Layer 3: Analytic representatives and current normalization
 
@@ -594,20 +654,20 @@ One proof route is to use polynomial-growth Fourier coefficients to define distr
 
 ### 3.6 The current realizes the coherent class
 
-The corrected compatible current Φ satisfies ∇″Φ=δ_h·vol and is ∇″-closed on U. Under the trace-normalized current/coherent comparison it represents EK_Γ(h). Its flat universal-extension image, a ∇-closed current with ∇Φ=δ_h·vol, represents under the analytic de Rham comparison the image of the de Rham polylogarithm of §2.6 for the chosen embedding into ℂ. The zero Fourier term disappears because Tr(h)=0; no unregularized pointwise convergence at a torsion pole is asserted.
+The corrected compatible current Φ satisfies ∇″Φ=δ_h·vol and is ∇″-closed on U. Under the trace-normalized current/coherent comparison it represents EK_Γ(h). Its flat universal-extension image, a ∇-closed current with ∇Φ=δ_h·vol, represents under the analytic de Rham comparison the class pol_Γ(h) of §2.7, base changed along the chosen embedding into ℂ. The zero Fourier term disappears because Tr(h)=0; no unregularized pointwise convergence at a torsion pole is asserted.
 
 Assume corrected current, residue convention, torsion-free Borel model and finite-level comparison.
 
 (KS-v4, Definition 3.19, Theorem 3.20 and Corollary 3.22, pp.39–41, with the contraction and binomial signs, KS-v4 line 1795.)
 
-One proof route starts at large Re(s), differentiates termwise in the current topology and telescopes in symmetric degree. Continue the identity and use trace zero to remove the constant mode. Verify the supported residue is precisely h in the algebraic normalization; uniqueness in localization then identifies the class.
+One proof route starts at large Re(s), differentiates termwise in the current topology and telescopes in symmetric degree. Continue the identity and use trace zero to remove the constant mode. Verify the supported residue is precisely h in the algebraic normalization; uniqueness in localization then identifies the class. For the de Rham statement apply §2.8 after base change to ℂ, and compare algebraic and analytic coefficient de Rham cohomology by analytifying the complexes of ComplexComparisonPartII C5.2 on A and on the supports at D, then the five lemma on U.
 
 **Checks.**
 
 - At d=1, b=0 and Λ=2ℤ+iℤ, the local residue h(t) gives (∇″Φ)(η)=2πi·h(t) for η equal to 1 near t and supported away from the other residue points. With h=(1,−1), the two local values are +2πi and −2πi; their sum is 0, as required by trace zero. Haar-normalized δ_h·vol gives these same values, whereas a Lebesgue Dirac gives +πi and −πi.
 - Residue equality includes the orientation sign, not only an unspecified nonzero scalar.
 
-*Needs:* §3.5; §1.3; §2.6; ComplexComparisonPartII C5.1.
+*Needs:* §3.5; §1.3; §2.7; §2.8; ComplexComparisonPartII C5.1 and C5.2.
 
 ### Examples
 
@@ -615,7 +675,7 @@ For the square lattice, ν=z=w=0, the uncompleted series has residue π at 1 and
 
 ### Dependencies
 
-Earlier layers 0, 1, 2; Hyperfunctions HF2.AnalyticPreparation.CurrentResolution; AbelianSchemesAndArithmeticModuliPartII P3.2/P3.4; SchemeAndStackFoundations §2.23 (gap:equivariant-poincare-limit); Mathlib `NumberField.Units.logEmbeddingEquiv`; Mathlib `NumberField.Units.instZLattice_unitLattice`; ComplexComparisonPartII C1.1 (gap:borel-bundle-currents); ComplexComparisonPartII C5.4 (gap:current-residue-trace); ComplexComparisonPartII C5.1; Mathlib `Complex.Gamma_eq_integral`; ThetaSeries Layer 1 (1A, 1E, 1F), 2A and 2C; Mathlib `fourier_gaussian_innerProductSpace`; Mathlib `mellin`; AbelianSchemesAndArithmeticModuliPartII P0.3/P0.5. The individual statement and proof-route inputs are specified above.
+Earlier layers 0, 1, 2; Hyperfunctions HF2.AnalyticPreparation.CurrentResolution; AbelianSchemesAndArithmeticModuliPartII P3.2/P3.4; SchemeAndStackFoundations §2.23 (gap:equivariant-poincare-limit); Mathlib `NumberField.Units.logEmbeddingEquiv`; Mathlib `NumberField.Units.instZLattice_unitLattice`; ComplexComparisonPartII C1.1 (gap:borel-bundle-currents); ComplexComparisonPartII C5.4 (gap:current-residue-trace); ComplexComparisonPartII C5.1 and C5.2; Mathlib `Complex.Gamma_eq_integral`; ThetaSeries Layer 1 (1A, 1E, 1F), 2A and 2C; Mathlib `fourier_gaussian_innerProductSpace`; Mathlib `mellin`; AbelianSchemesAndArithmeticModuliPartII P0.3/P0.5. The individual statement and proof-route inputs are specified above.
 
 ## Layer 4: Orbit sums and explicit critical classes
 
@@ -667,7 +727,7 @@ One proof route is to unfold BΓ and the unit orbit simultaneously; use absolute
 
 ### 4.3 Explicit critical class in analytic and algebraic bases
 
-For torsion-free Γ the corrected conventions give EK^(β,a)_Γ(h,x)=ε(d,a,β)·a!·Σ_(t∈Γ\D) h(−t)E^(β,a+1)(t+x,0;Λ,Γ) dz^[a+1]⊗ubar^[β], where ε(d,a,β)=(-1)^(d(d+1)/2+|a|+|β|+1); in terms of the value index α=a+1 this is (-1)^(d(d−1)/2+|α|+|β|+1). The top-degree BΓ representative is the top contraction of the corrected current, projected to (a,β), differentiated by a, and evaluated at x; it carries ε(d,a,β) in place of the sign (-1)^(d(d−1)/2) of Proposition 3.23, and the fibre integral of §4.2 and the oriented cap add no further sign. In the algebraic bases replace ubar^[β] by q^(−β)ω_A∨^[β], q=⟨barω_A,ω_A∨⟩_dR. The period conversion is Ω∨=2πi q/barΩ, so both the conjugation in q and this factor survive the comparison. For torsion Γ use only the localized normalization of Layer 2. The formula includes the residue-to-current and orientation compatibility. The moment map of §7.1 identifies its moments with these coordinates, and the linear combinations of §7.4 and weighted pushforward of §8.3 retain ε(d,a,β).
+For torsion-free Γ the corrected conventions give EK^(β,a)_Γ(h,x)=ε(d,a,β)·a!·Σ_(t∈Γ\D) h(−t)E^(β,a+1)(t+x,0;Λ,Γ) dz^[a+1]⊗ubar^[β], where ε(d,a,β)=(-1)^(d(d+1)/2+|a|+|β|+1); in terms of the value index α=a+1 this is (-1)^(d(d−1)/2+|α|+|β|+1). The top-degree BΓ representative is the top contraction of the corrected current, projected to (a,β), differentiated by a, and evaluated at x; it carries ε(d,a,β) in place of the sign (-1)^(d(d−1)/2) of Proposition 3.23, and the fibre integral of §4.2 and the oriented cap add no further sign. In the algebraic bases replace ubar^[β] by q^(−β)ω_A∨^[β], q=⟨barω_A,ω_A∨⟩_dR, the conjugate de Rham pairing of ComplexMultiplicationAndExplicitReciprocity §1.3; the conjugation in q survives the comparison, and §5.1 later converts q into the dual period Ω∨. For torsion Γ use only the localized normalization of Layer 2. The formula includes the residue-to-current and orientation compatibility. The moment map of §7.1 identifies its moments with these coordinates, and the linear combinations of §7.4 and weighted pushforward of §8.3 retain ε(d,a,β).
 
 Assume standard datum, x outside D; β−a−1 critical; torsion-free Γ for the integral cap. The analytic trace convention of §3.2 is used.
 
@@ -697,19 +757,23 @@ Earlier layers 0, 1, 2, 3; Mathlib `Complex.Gamma_eq_integral`; Mathlib `mellin`
 
 ### 5.1 Ideal structures and compatible complex periods
 
-An a-structure is an O_L-linear isomorphism ξ_a:a≃H₁(A(ℂ),ℤ), extended L-linearly on rational homology; it is not a generator of the possibly nonprincipal ideal a. The trace pairing identifies the dual lattice with a⁻¹d_L⁻¹, producing ξ_a∨. For an O_L-structure set Ω=⟨ω_A,ξ_L(1)⟩ and Ω∨=⟨ω_A∨,ξ_L∨(1)⟩. The algebraic de Rham pairing q=⟨barω_A,ω_A∨⟩ satisfies Ω∨=2πi q/barΩ. On A(a)=a⊗_(O_L)A the induced periods remain Ω and the lattice becomes aΩ. For a=f b⁻¹ transport bases by [f]*([b]*)⁻¹ when these maps are étale. The point Ω mod fΩ on A(f), after making it R-rational, transports under [b] to Ω mod f b⁻¹Ω. Serre construction from K repeats the K-periods on the embeddings above each embedding of K.
+An a-structure is an O_L-linear isomorphism ξ_a:a≃H₁(A(ℂ),ℤ), extended L-linearly on rational homology; it is not a generator of the possibly nonprincipal ideal a. For an abelian scheme A over R⊂ℂ with dual A∨, prove that the de Rham duality between H_A and H_A∨ induced by AbelianSchemesAndArithmeticModuli A4.3, normalized as cup product with the de Rham first Chern class of the Poincaré bundle of A2.2, extended to ℂ and restricted along the de Rham–Betti comparison, takes H₁(A(ℂ),ℤ)×H₁(A∨(ℂ),ℤ) into 2πiℤ, and that the resulting Betti pairing ⟨·,·⟩_top is perfect onto 2πiℤ. When O_L acts on A, and on A∨ through the dual action, prove ⟨xγ,γ′⟩_top=⟨γ,xγ′⟩_top for x∈O_L. Define the trace-dual structure ξ_a∨:a⁻¹d_L⁻¹→H₁(A∨(ℂ),ℤ) by ⟨ξ_a(x),ξ_a∨(y)⟩_top=2πi·Tr_(L/ℚ)(xy) for x∈a. Prove that it is an O_L-linear isomorphism: perfectness identifies H₁(A∨(ℂ),ℤ) with Hom_ℤ(a,ℤ), and the trace form identifies Hom_ℤ(a,ℤ) with the trace dual of a, which is a⁻¹d_L⁻¹ by Mathlib `FractionalIdeal.dual_eq_mul_inv` and `coeIdeal_differentIdeal`.
 
-Assume standard datum; imported integral Betti/de Rham pairing and CM Serre tensors. The dual ideal includes the inverse different; isogeny base changes retain all chosen bases and rationality of x_Ω.
+For an O_L-structure set Ω=⟨ω_A,ξ_(O_L)(1)⟩ and Ω∨=⟨ω_A∨,ξ_(O_L)∨(1)⟩, where 1∈d_L⁻¹. Prove Ω∨=2πi q/barΩ componentwise, for the conjugate de Rham pairing q=⟨barω_A,ω_A∨⟩ of ComplexMultiplicationAndExplicitReciprocity §1.3. On A(a)=a⊗_(O_L)A the induced periods remain Ω and the lattice becomes aΩ. For a=f b⁻¹ transport bases by [f]*([b]*)⁻¹ when these maps are étale. The point Ω mod fΩ on A(f), after making it R-rational, transports under [b] to Ω mod f b⁻¹Ω. Serre construction from K repeats the K-periods on the embeddings above each embedding of K.
 
-(KS-v4, Definitions 4.3 and 4.5, Proposition 4.6, pp.47–48; Proposition 4.7, pp.48–49; Definition 4.8, p.50; §4.5, pp.53–54, KS-v4 line 2231.)
+Assume standard datum for the periods and their transport. The Betti duality holds for every abelian scheme over R⊂ℂ, and the trace-dual structure for every a-structure. The dual ideal includes the inverse different; isogeny base changes retain all chosen bases and rationality of x_Ω.
+
+(KS-v4, Definitions 4.3 and 4.5, Proposition 4.6, pp.47–48, KS-v4 lines 2231–2278, with the Betti/de Rham compatibility at KS-v4 lines 2239–2248; Proposition 4.7, pp.48–49; Definition 4.8, p.50; §4.5, pp.53–54.)
 
 The construction has the following API.
 
+- ⟨·,·⟩_top is perfect onto 2πiℤ and O_L-balanced.
+- ξ_a∨ is an O_L-linear isomorphism a⁻¹d_L⁻¹≃H₁(A∨(ℂ),ℤ).
 - A(a)(ℂ)≃ℂ^Σ/(aΩ) with the transported differential bases.
 - Ω∨=2πi q/barΩ componentwise, for the trace-dual Betti structure.
 - Transport along [f] and [b] agrees with the Serre tensor identification when their cotangent maps are isomorphisms.
 
-One proof route is to use the imported CM period pairing and its trace-dual description. Tensor the integral Betti lattice and Lie comparison with a, rather than choosing a principal generator. Compute the bilinear pairing between differential bases to obtain the 2πi factor and conjugation.
+One proof route identifies H₁(A∨(ℂ),ℤ) with Hom(H₁(A(ℂ),ℤ),ℤ) through AbelianSchemesAndArithmeticModuli A2.2, A5.1 and A5.3 and proper GAGA: A∨(ℂ) is the torus of topologically trivial line bundles, which are given by the unitary characters of the lattice. Compare 2πi times the resulting evaluation pairing with the A4.3 pairing through the de Rham–Betti comparison of ComplexComparisonPartII C5.1. The trace form then gives the dual lattice. For the period relation expand ξ_(O_L)(1) and the class pairing with every ξ_(O_L)(x) to 2πi·Tr(x) in the bases dual to ω_A and barω_A, using that ω_A and ω_A∨ are orthogonal under A4.3. Tensor the integral Betti lattice and Lie comparison with a, rather than choosing a principal generator.
 
 **Checks.**
 
@@ -719,8 +783,10 @@ One proof route is to use the imported CM period pairing and its trace-dual desc
 - A nonprincipal ideal is permitted and does not require ξ_a(1) to be integral; use its rational extension for that notation.
 - The same Ω is used for all ray-class representatives.
 - For K=ℚ(i), the different is (2i), so the trace-dual lattice of ℤ[i] is (1/(2i))ℤ[i]. Its basis pairings satisfy Tr(1·1/2)=1 and Tr(i·(−i/2))=1.
+- For L=ℚ(i) and an O_L-structure, ⟨ξ(1),ξ∨(1)⟩_top=2πi·Tr(1)=4πi. Restricting the defining formula of ξ∨ to y∈ℤ[i] gives a sublattice of index N(d_L)=4 in H₁(A∨(ℂ),ℤ), so the trace dual and not O_L is the domain of ξ∨.
+- For d=1 the class pairing with each ξ(x) to 2πi·Tr(x) is 2πi(ω_A/Ω+barω_A/barΩ), in the basis dual to the periods Ω and barΩ of ξ(1). Its pairing with ω_A∨ is 2πi q/barΩ, because ⟨ω_A,ω_A∨⟩=0. A version without the conjugation, pairing ω_A in place of barω_A, would give 0.
 
-*Needs:* §0.2; ComplexMultiplicationAndExplicitReciprocity §1.3; AbelianSchemesAndArithmeticModuliPartII P2.4.
+*Needs:* §0.2; ComplexMultiplicationAndExplicitReciprocity §1.3; AbelianSchemesAndArithmeticModuli A2.2, A4.3, A5.1 and A5.3; ComplexComparisonPartII C5.1; AbelianSchemesAndArithmeticModuliPartII P2.4; Mathlib `FractionalIdeal.dual_eq_mul_inv` and `coeIdeal_differentIdeal`.
 
 ### 5.2 Critical-value normalization
 
@@ -845,7 +911,7 @@ Assume critical χ and compatible K/L period structures from CM abelian varietie
 
 (KS-v4, §4.5 and equation (4.5.1), p.53; Corollary 4.14, p.54, KS-v4 line 2534.)
 
-One proof route is to construct the L-datum by the imported Serre tensor construction. Use a K-linear polarization only to identify dual and conjugate periods modulo nonzero algebraic factors. Apply §5.7 for algebraicity and count the repeated periods.
+One proof route is to construct the L-datum by the imported Serre tensor construction. Use an O_K-linear polarization of A₀ whose Rosati involution is complex conjugation, from ComplexMultiplicationAndExplicitReciprocity §2.1, only to identify dual and conjugate periods modulo nonzero algebraic factors. Apply §5.7 for algebraicity and count the repeated periods.
 
 **Checks.**
 
@@ -853,11 +919,11 @@ One proof route is to construct the L-datum by the imported Serre tensor constru
 - At L=ℚ(i,√(1+i)) the K-period exponent doubles without assuming L is CM.
 - The complex algebraicity statement has no p-ordinarity hypothesis; obtain its periods from ComplexMultiplicationAndExplicitReciprocity §1.3 and §5.1, rather than ordinary p-adic period data.
 
-*Needs:* §5.7; §5.1; ComplexMultiplicationAndExplicitReciprocity §1.3.
+*Needs:* §5.7; §5.1; ComplexMultiplicationAndExplicitReciprocity §§1.3 and 2.1.
 
 ### 5.9 Deligne period comparison modulo algebraic units
 
-For the Hecke motive M(χ) over L with coefficient field E, assume Res_(L/ℚ)M(χ) is critical in the realization-theoretic sense and fix τ:E→ℂ. Its nonzero period satisfies c⁺_τ(Res M(χ))∼[(2πi)^(−|β₀|)Ω₀^(α₀+barβ₀)]^[L:K], where ∼ means equality modulo Qbar×. Consequently L_f(χ,0)/c⁺_τ∈Qbar. The ratio is in Qbar× only if L_f(χ,0)≠0. No assertion of the sharper E-rationality is made here; this is the weaker period statement in Corollary 4.15 allowing a zero special value.
+For the Hecke motive M(χ) over L with coefficient field E, assume Res_(L/ℚ)M(χ) is critical in the realization-theoretic sense, and let τ:E→ℂ be the restriction of the fixed embedding of algebraic numbers into ℂ, the embedding through which χ, its infinity type β−α, the CM type Σ and the periods Ω₀ are realized. Its nonzero period satisfies c⁺_τ(Res M(χ))∼[(2πi)^(−|β₀|)Ω₀^(α₀+barβ₀)]^[L:K], where ∼ means equality modulo Qbar×. Consequently L_f(χ,0)/c⁺_τ∈Qbar. The ratio is in Qbar× only if L_f(χ,0)≠0. No assertion of the sharper E-rationality is made here; this is the weaker period statement in Corollary 4.15 allowing a zero special value. τ is not an independent parameter: another embedding E→ℂ replaces χ by a Galois-conjugate character, whose infinity type, CM type and periods are the transported ones.
 
 Assume the Hecke motive, restriction of scalars, realizations and determinant periods of the PeriodsAndSpecialValues requirements PS.0 (gap:hecke-motive-periods) and PS.1 (gap:critical-cm-deligne-period). The CM periods use the number-field differential bases of §§5.7–5.8. The criticality of the restricted motive is an explicit assumption.
 
@@ -869,6 +935,7 @@ One proof route is to import the motivic norm-pullback and finite-order/Tate com
 
 - If L_f(χ,0)=0 the conclusion is the algebraic scalar zero.
 - This does not identify an E×-ambiguity from a Qbar×-ambiguity.
+- For L=K=ℚ(i) and χ((λ))=λ⁻⁴, with E=ℚ(i), the fixed embedding gives infinity type −4σ, critical for Σ={σ} with α=4 and β=0. The conjugate embedding of E gives the character (λ)↦barλ⁻⁴ of type −4barσ, which has α=0 on Σ and is not critical for Σ; a statement letting τ vary with Σ and Ω₀ fixed would be ill-posed there.
 
 *Needs:* §5.8; PeriodsAndSpecialValues PS.0 (gap:hecke-motive-periods); PeriodsAndSpecialValues PS.1 (gap:critical-cm-deligne-period).
 
@@ -878,7 +945,7 @@ At α=(3,2), β=0 the derivative factorial is 2!·1!=2, whereas the factorial of
 
 ### Dependencies
 
-Earlier layers 0, 1, 2, 3, 4; ComplexMultiplicationAndExplicitReciprocity §1.3; AbelianSchemesAndArithmeticModuliPartII P2.4; GlobalNumberFields Layers 9–10 (gap:hecke-padic-avatar); AutomorphicLFunctionsAndLocalFactors AL.1, “Rank-one specialisation and Hecke comparison”; GlobalNumberFields Layers 2, 7 and 9; ClassFieldTheory Layers 11–13 (gap:ray-tower-tame-unit-kernel); PeriodsAndSpecialValues PS.0 (gap:hecke-motive-periods); PeriodsAndSpecialValues PS.1 (gap:critical-cm-deligne-period). The individual statement and proof-route inputs are specified above.
+Earlier layers 0, 1, 2, 3, 4; ComplexMultiplicationAndExplicitReciprocity §§1.3 and 2.1; AbelianSchemesAndArithmeticModuli A2.2, A4.3, A5.1 and A5.3; ComplexComparisonPartII C5.1; Mathlib `FractionalIdeal.dual_eq_mul_inv` and `coeIdeal_differentIdeal`; AbelianSchemesAndArithmeticModuliPartII P2.4; GlobalNumberFields Layers 9–10 (gap:hecke-padic-avatar); AutomorphicLFunctionsAndLocalFactors AL.1, “Rank-one specialisation and Hecke comparison”; GlobalNumberFields Layers 2, 7 and 9; ClassFieldTheory Layers 11–13 (gap:ray-tower-tame-unit-kernel); PeriodsAndSpecialValues PS.0 (gap:hecke-motive-periods); PeriodsAndSpecialValues PS.1 (gap:critical-cm-deligne-period). The individual statement and proof-route inputs are specified above.
 
 ## Layer 6: Ordinary levels and p-adic theta coordinates
 
@@ -1283,3 +1350,5 @@ All Kings–Sprang locators use the 85-page arXiv v4 numbering; supplementary KS
 
 - **KS-v4.** Guido Kings and Johannes Sprang, *Eisenstein–Kronecker classes, integrality of critical values of Hecke L-functions and p-adic interpolation*, arXiv:1912.03657v4 (2024), §§1–5 and Appendices A–B. [Open preprint](https://arxiv.org/abs/1912.03657v4). The construction follows §§2–3, the critical-value applications §4, and ordinary interpolation §5; the additional sign, unit-index and bounded-divisibility targets specify the comparisons required by these normalizations.
 - **BKO-2021.** Ashay A. Burungale, Shinichi Kobayashi and Kazuto Ota, *Rubin’s conjecture on local units in the anticyclotomic tower at inert primes*, Annals of Mathematics 194 (2021), 943–966, Introduction and §§3,6. [Institutional copy](https://authors.library.caltech.edu/records/8svwt-jn031). This records the boundary with the independent nonordinary direction.
+- **HK-2018.** Annette Huber and Guido Kings, *Polylogarithm for families of commutative group schemes*, Journal of Algebraic Geometry 27 (2018), 449–495; all locators use the arXiv:1505.04574v1 numbering, Theorem 3.3.1, Definition 5.2.2, Theorem 5.2.3 and Proposition 5.3.1. [Open preprint](https://arxiv.org/abs/1505.04574v1). Sheaf-theoretic vanishing of the cohomology of the logarithm sheaf and the residue characterization of the polylogarithm, of which §§2.6–2.7 state the de Rham analogues.
+- **Sch-2014.** René Scheider, *The de Rham realization of the elliptic polylogarithm in families*, dissertation, Universität Regensburg, arXiv:1408.3819v1 (2014), Theorem 1.2.1, Lemma 1.2.3, Definition 1.2.4, Theorem 1.2.9 and §1.5.2. [Open preprint](https://arxiv.org/abs/1408.3819v1). De Rham cohomology of the logarithm sheaves of an abelian scheme and the de Rham residue sequence.
