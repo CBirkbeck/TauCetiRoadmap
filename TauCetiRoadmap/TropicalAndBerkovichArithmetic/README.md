@@ -8,13 +8,13 @@ Layer 0 imports the complete Banach-spectrum core from AdicSpacesPartIII §R3.9,
 
 Layer 1 owns line points, paths, annuli, logarithmic lengths and their descent conventions. Layer 2 owns rank-one analytic semistable existence, the metric realization of the imported combinatorial dual graph, retractions, refinement and locally finite noncompact triangulations. StableReduction Layer 1 supplies the dual graph with component genera and its arithmetic-genus formula; Layer 2 supplies flat-family genus invariance in its locally noetherian range; the application to rank-one models requires the descent comparison in this roadmap. Its Layers 7–9 cover discrete valuation rings. Their statement does not establish the required theorem over a possibly nonnoetherian rank-one valuation ring.
 
-Layer 3 owns metric graphs, all-point divisors, potentials, Jacobians, metrized complexes and specialization. Layer 4 owns torus and extended tropicalization on Berkovich analytifications, initial-degeneration and weighted-cycle comparisons. Layer 5 owns faithfulness on metric graphs and marked rays. Algebraic curves and Riemann–Roch are imported. AnalyticToricGeometry Layer 0 supplies lattice, cone and fan geometry. Its complex regular-fan schemes do not supply the general-field toric extension; the precise prerequisite is §4.0 general-field toric schemes below.
+Layer 3 owns metric graphs, all-point divisors, potentials, Jacobians, metrized complexes and specialization. Layer 4 owns torus and extended tropicalization on Berkovich analytifications, initial-degeneration and weighted-cycle comparisons. Layer 5 owns faithfulness on metric graphs and marked rays. Algebraic curves and Riemann–Roch are imported. AnalyticToricGeometry Layer 0 supplies lattice, cone and fan geometry; ShimuraCompactifications §C0.16 supplies finite-fan schemes over arbitrary coefficient rings, including singular cones. Section 4.0 extends that carrier to arbitrary small fans and constructs its valued analytic comparisons.
 
 Layer 6 owns local model metrics, mixed measures, graph and line potential theory, and local heights. ArithmeticDynamics owns dynamical escape-rate estimates and the convergence of its family-specific potentials on the hybrid space. Layer 7 imports the algebraic Tate curve from EllipticCurves Layer 4, local annular primitives and good-reduction integration from ColemanIntegration, and the finite-model abelian logarithm from AnabelianGeometryAndNonabelianChabauty §5.8, its arbitrary-ℂ_p-coefficient extension from ColemanIntegrationPartII §4.0, and rational endpoint integrals from EffectiveDiophantineMethods §4.3. Section 7.0 constructs the arbitrary-rank-one Raynaud interfaces. The new results here compare those objects with skeleta and path integrals.
 
 The complete spectral carrier, its bounded pullback, spectral maximum and Hausdorff topology belong to AdicSpacesPartIII §R3.9. Sections 0.1–0.9 specify only the norm-dominated native presentation and its comparison; §0.2 specializes Mathlib's contraction theorem. The algebraically closed Tate analytic quotient and its circle belong to ClassicalAdicEtaleCohomology §3.7; §7.1 extends them by descent to a general complete field and fixes their metric/differential comparison. Mathlib `Graph` owns unmetric multigraph incidence, including loops and parallel edges; §3.1 adds metric realization and subdivision.
 
-The extensions beyond the cited suppliers' ranges are owned here: isometric absolute-valued-field amalgamation in §0.15a, trivial-base faithful scalar extension in §0.17a, general-field toric schemes in §4.0, rank-one model intersections in §6.1a and rank-one Raynaud uniformization, valuation and polarization in §7.0. ArithmeticDynamics’ line and hybrid specializations consume these general constructions; its dynamical escape-rate and family-potential convergence results retain their own ownership.
+The extensions beyond the cited suppliers' ranges are owned here: isometric absolute-valued-field amalgamation in §0.15a, trivial-base faithful scalar extension in §0.17a, the small-fan extension and valued toric comparisons in §4.0, geometric intersection descent over rank-one fields in §§6.1a–6.2 and rank-one Raynaud uniformization, valuation and polarization in §7.0. ResolutionOfSingularitiesCharacteristicZero §7.7 supplies scheme pair principalization; §0.23 owns its convergent-model transport and the domination and cofinality contracts for the hybrid family. ArithmeticDynamics’ line and hybrid specializations consume these general constructions; its dynamical escape-rate and family-potential convergence results retain their own ownership.
 
 The general analytic carrier, its affinoid domains, atlas refinements, gluing, fibre products and completed residue fields over nonarchimedean K belong to AlgebraicModuliForArithmeticGeometry §7.10.2. Section 0.21 compares its charts and morphisms with the specified weighted normed presentations rather than constructing another category. Section 0.15 extends residue-field realization to general Banach spectra, and §§0.19–0.20 add the weighted rational-presentation and finite-module acyclicity comparisons.
 
@@ -64,7 +64,7 @@ The headline signatures use Mathlib `6b7abb3c7686292736be2955bd3eb9ebf63b456a` a
 - Mathlib `NormedAlgebra.Real.nonempty_algEquiv_or` (Mathlib/Analysis/Normed/Algebra/GelfandMazur.lean): Real normed-algebra field classification. Section 0.26 adds the complete absolute-valued-field version without a chosen real scalar structure and with the norm exponent.
 - Mathlib `T2Space.of_injective_continuous` (Mathlib/Topology/Separation/Hausdorff.lean): Injective continuous maps into a Hausdorff space give Hausdorffness.
 - Mathlib `Pi.t2Space` (Mathlib/Topology/Separation/Hausdorff.lean): Products of Hausdorff spaces are Hausdorff.
-- `AlgebraicGeometry.Scheme.GlueData` and `AlgebraicGeometry.Scheme.GlueData.glued` (Mathlib/AlgebraicGeometry/Gluing.lean) supply scheme gluing along open overlaps; §4.0 supplies the general-field monoid charts and their overlap identifications.
+- `AlgebraicGeometry.Scheme.GlueData` and `AlgebraicGeometry.Scheme.GlueData.glued` (Mathlib/AlgebraicGeometry/Gluing.lean) supply scheme gluing along open overlaps; §4.0 uses them for the small-fan extension of the supplied finite-fan charts.
 - `Rat.AbsoluteValue.equiv_real_of_unbounded` (Mathlib/NumberTheory/Ostrowski.lean) identifies a rational absolute value not bounded by 1 on the naturals with the ordinary real absolute value up to a positive power; §0.26 extends this to the complete field.
 - `Graph`, `Graph.IsLoopAt` and `Graph.banana` (Mathlib/Combinatorics/Graph/Basic.lean) provide multigraph incidence with distinct edge identities, loops and parallel edges. They carry neither positive lengths nor a metric realization, which §3.1 constructs.
 
@@ -148,11 +148,19 @@ The headline signatures use Mathlib `6b7abb3c7686292736be2955bd3eb9ebf63b456a` a
 
 - **SchemeAndStackFoundations §3.3**: Integrate the native smooth connected algebraic curve, smooth proper completion and finite puncture set from AlgebraicCurves. Analytification belongs to Layer 0, not this request. Use §3.3’s `cohomologyDim_zero_structureModule` for H⁰(X̄,O)=K on a smooth proper geometrically connected curve over algebraically closed K, used with proper GAGA for analytic connectedness. Consumed by [2.1 Semistable vertex set](#21-semistable-vertex-set), [1.4 Connected algebraic curves remain connected](#14-connected-algebraic-curves-remain-connected).
 - SchemeAndStackFoundations §4.12 (`chow_lemma`): A projective modification of a proper variety, used in §6.4 to prove the model-function estimate on projective models and descend it by projection.
-- **SchemeAndStackFoundations §§5.2–5.3**: Residue-field cycle degrees, `Chow.c1` and `proper_pushforward`. Section 5.9 treats fields, Dedekind bases and arithmetic surfaces; rank-one model specialization and modification comparison are constructed in §6.1a.
+- **SchemeAndStackFoundations §§5.2–5.3**: Residue-field cycle degrees, `Chow.c1` and `proper_pushforward`. Section 5.9 treats fields, Dedekind bases and arithmetic surfaces; geometric model specialization is constructed in §6.1a and arbitrary-rank-one descent in §6.2.
 
 ### From TauCetiRoadmap.AnalyticToricGeometry
 
-- **AnalyticToricGeometry Layer 0**: Lattices, cones and fans. General-field toric schemes require §4.0 general-field toric schemes; their extended tropicalization is constructed in §4.1 from §0.22 analytification.
+- **AnalyticToricGeometry Layer 0**: Lattices, cones, fans and dual semigroups, used with the coefficient-ring charts below.
+
+### From TauCetiRoadmap.ShimuraCompactifications
+
+- ShimuraCompactifications §C0.16 (`TauCeti.Toric.finiteFanScheme`, `affineChart_baseChange`, `finiteFanScheme_baseChange`, `finiteFanScheme_complex`, `finiteFanScheme_torusAction`, `finiteFanScheme_glue_hom`): Schemes of finite rational fans over every commutative ring, singular cones allowed, with face localizations, coherent coefficient change and compatible chart gluing. Section 4.0 uses the specialization R=K and extends it to small fans; §§4.1–4.2 add valued analytification and tropicalization. Section C0.17 supplies the finite-fan toric morphisms induced by lattice maps.
+
+### From TauCetiRoadmap.ResolutionOfSingularitiesCharacteristicZero
+
+- ResolutionOfSingularitiesCharacteristicZero §7.7 (`qePairPrincipalization`): Projective principalization on a reduced noetherian quasi-excellent ℚ-scheme, for a coherent ideal nonzero on every generic component, with regular source and strict-normal-crossings reduced support including the exceptional support, preserving the stated semi-strict locus. Section 0.23 proves the convergent-model excellence and analytic transport needed for complex meromorphic families, rather than identifying the scheme statement with analytic resolution.
 
 ### From TauCetiRoadmap.NeronModelsAndSemistableAbelianVarieties
 
@@ -682,15 +690,32 @@ Provide the following interface:
 - The parameter monomial t has rescaled absolute value r at every nonzero fiber and at the center.
 - A series converging only on a smaller disc cannot be used at a larger fixed r.
 
-For the construction, build the hybrid Banach base, identify nonzero fibers with powered complex absolute values and the zero fiber with the t-adic completion. Compare affinoid evaluations with SNC-model logarithmic coordinates and pass to the model inverse limit.
+Define the *hybrid model category* using a small skeleton of normal complex spaces proper and flat over the fixed parameter disc with an identified restriction to X over the punctured disc. When a construction is made over a smaller disc, glue its punctured restriction to the given family X outside the center and prove that this extends it to a proper flat model over the fixed disc; all transition maps and inverse limits use that fixed base. Morphisms are proper maps inducing that identity; domination points from a finer model to a coarser one. Its SNC subcategory consists of smooth total spaces whose central Cartier divisor has strict-normal-crossings reduced support; component multiplicities are retained. Prove nonemptiness, common SNC domination of any two models, and cofinality of projective SNC models: every model is dominated by a projective SNC model, and two such dominations have a common projective SNC refinement (Boucksom–Jonsson §4.1 and Lemma 4.1, pp. 20–21; §4.6, equation (4.3), p. 25).
 
-*Needs:* [0.12 Seminormed Banach rings](#012-seminormed-banach-rings); [0.21 Analytic atlases and morphisms](#021-analytic-atlases-and-morphisms); [0.22 Berkovich analytification](#022-berkovich-analytification).
+Provide the following model-category interface:
+
+- Domination maps are the identity over the punctured disc, extend across the fixed disc by that identity when constructed near zero, compose, and induce compatible continuous maps between the dual complexes and hybrid models.
+- Projective meromorphic equations give a proper model germ, and principalization of the central ideal gives an SNC model without changing the punctured family.
+- The SNC model category is nonempty and cofiltered; its projective subcategory is cofinal for inverse limits, including the common-refinement condition.
+- The central retractions identify the Berkovich space over ℂ((t)) with the inverse limit of the projective SNC dual complexes.
+
+Prove *convergent-model resolution transport* in this family setting. Establish noetherianity and quasi-excellence of the convergent complex local algebras and their finite-type model charts, and compare blowups, their punctured restrictions, regular loci and reduced divisor support with the associated analytic modifications. Transport ResolutionOfSingularitiesCharacteristicZero §7.7's pair principalization through these comparisons. Prove the relative analytic domination step: any proper modification of a fixed projective model, trivial over the punctured disc, is dominated after shrinking by a projective modification supported on the central fiber. Apply this to graph closures of model comparisons and principalize the resulting central ideals to obtain the stated cofinality. These are family comparison targets; the scheme theorem alone does not assert them (Boucksom–Jonsson §4.1, proof of Lemma 4.1, pp. 20–21).
+
+**Checks.**
+
+- The constant family P¹ has the smooth projective model P¹×D and a one-point dual complex; further blowups are still needed in the inverse system, whose central limit is Berkovich P¹ rather than that one point.
+- Blowing up the origin of the nodal chart xy=t replaces its two multiplicity-one components by their strict transforms and a multiplicity-two exceptional component. On a new edge the coordinates satisfy w_x+w_y=1, with the exceptional vertex at (1/2,1/2); assigning it multiplicity one would violate the central-divisor equation.
+- A central blowup constructed over |t|<r/2 glues to the unchanged family on t≠0, recovering exactly X_t for r/2≤|t|≤r; it is thereby a model over the fixed disc, not an undefined term of its inverse system. The identity domination induces the identity on each dual complex; two different central blowups require a common dominating model, rather than an assumed morphism between the two blowups.
+
+For the construction, build the hybrid Banach base, identify nonzero fibers with powered complex absolute values and the zero fiber with the t-adic completion. Use the model-category and transport targets to compare affinoid evaluations with SNC-model logarithmic coordinates. Identify the central fiber through the projective cofinal subsystem before proving continuity of the full hybrid comparison.
+
+*Needs:* [0.12 Seminormed Banach rings](#012-seminormed-banach-rings); [0.21 Analytic atlases and morphisms](#021-analytic-atlases-and-morphisms); [0.22 Berkovich analytification](#022-berkovich-analytification); ResolutionOfSingularitiesCharacteristicZero §7.7 pair principalization; this section's convergent-model resolution transport, relative analytic domination, common SNC domination and projective cofinality.
 
 [Sébastien Boucksom and Mattias Jonsson, Tropical and non-Archimedean limits of degenerating families of volume forms](https://arxiv.org/pdf/1605.05277v2), Definition 4.9, pp. 23–24 and Proposition 4.12, pp. 25–26; Appendix A. Supplies the topology and Banach analytic realization; no volume-form or dynamical convergence result is inferred. [Laura DeMarco, Holly Krieger and Hexi Ye, Uniform Manin–Mumford for a family of genus 2 curves](https://arxiv.org/pdf/1901.09945v2), §4, pp. 18–22. Uses the rescaled potential convention in the dynamical family.
 
 **Check.** For f=c·tᵐ with c≠0, its rescaled complex absolute value tends to rᵐ as t→0: the exponent of |c| tends to zero, while the parameter factor equals rᵐ. The central coefficient norm is trivial, so the central evaluation also equals rᵐ, including negative m.
 
-Construct scheme analytification over the mixed Banach ring A_r, including bounded affine charts and their gluing; the purely nonarchimedean affinoid atlas alone does not do this. For an SNC model construct the logarithmic retraction to its dual complex, prove compatibility under dominating models, and identify the central Berkovich space with the inverse limit. Boucksom–Jonsson Appendix A, pp. 43–48 and §§4.3–4.6, pp. 20–29 give these constructions. Retain the Laurent norm |f|=r^ord₀(f) at the central point: in particular |t|=r. Family-specific convergence of dynamical potentials is a downstream ArithmeticDynamics result.
+Construct scheme analytification over the mixed Banach ring A_r, including bounded affine charts and their gluing; the purely nonarchimedean affinoid atlas alone does not do this. For an SNC model construct the logarithmic retraction to its dual complex and prove compatibility under dominating models. Prove the central inverse-limit identification using the projective SNC cofinality above and equation (4.3), before applying Proposition 4.12. Boucksom–Jonsson Appendix A, pp. 43–48 and §§4.1–4.6, pp. 20–29 give these constructions. Retain the Laurent norm |f|=r^ord₀(f) at the central point: in particular |t|=r. Family-specific convergence of dynamical potentials is a downstream ArithmeticDynamics result.
 
 **Check.** The central point evaluates t to r<1, not r⁻¹. The latter would exceed its ambient norm and would not be a point of M(A_r). Thus use r^ord₀(f) in Boucksom–Jonsson Proposition A.4, preprint p. 45 / JEP p. 136, consistently with Appendix A.5–A.6, JEP pp. 136–137.
 
@@ -877,7 +902,7 @@ For ℝ×ℝ the projection absolute values are distinct points, while the ambie
 
 ### Dependencies
 
-Mathlib multiplicative seminorms, normed rings, completions, product topology and compactness; Tau Ceti AdicSpaces Layer 2; DiamondsAndVStacks §D5.13 for the Tate-normalized rank-one quotient; ClassicalAdicEtaleCohomology §3.1 for the Hausdorff strict analytic category and taut-adic equivalence; RigidAnalyticGeometry Layer 5 for strict affinoid Čech acyclicity and AdicSpacesPartII §R1.3 for adic analytification. AlgebraicModuliForArithmeticGeometry §7.10.2 supplies general analytic nets and their gluing; this layer constructs weighted-chart comparison, hybrid scheme analytification and nonstrict finite-module descent.
+Mathlib multiplicative seminorms, normed rings, completions, product topology and compactness; Tau Ceti AdicSpaces Layer 2; DiamondsAndVStacks §D5.13 for the Tate-normalized rank-one quotient; ClassicalAdicEtaleCohomology §3.1 for the Hausdorff strict analytic category and taut-adic equivalence; RigidAnalyticGeometry Layer 5 for strict affinoid Čech acyclicity and AdicSpacesPartII §R1.3 for adic analytification. AlgebraicModuliForArithmeticGeometry §7.10.2 supplies general analytic nets and their gluing; ResolutionOfSingularitiesCharacteristicZero §7.7 supplies scheme pair principalization. This layer constructs weighted-chart comparison, hybrid scheme analytification, convergent-model resolution transport and projective SNC cofinality, and nonstrict finite-module descent.
 
 ## Layer 1: Discs, annuli and metric trees
 
@@ -1319,7 +1344,25 @@ For the construction, characterize virtual-disc neighborhoods and annular interi
 
 [Antoine Ducros, La structure des courbes analytiques](https://webusers.imj-prg.fr/~antoine.ducros/trirss.pdf), §4.5.2, p. 271, §5.1.12, p. 292, Definition 5.1.13 and Theorem 5.1.14, pp. 293–295, and §5.4.12, pp. 318–320. These specify stable genus, nodes, general triangulation existence with prescribed vertices, and the nonempty-node hypothesis for the compact minimal triangulation.
 
-Reconstruct a formal model from the triangulation by gluing the formal vertex neighborhoods and the annular edge charts, checking local finiteness on every compact analytic domain. Retain the constant fields and nonsplit node invariants, and show that reconstruction and passage to component points are inverse in the semistable range. CDN Appendix A.2, pp. 51–52 proves the component-point and automorphism-extension direction for normal flat models; the converse and its locally finite gluing are additional targets, using the Ducros triangulation theory cited there. Semistability is needed for component points to form a triangulation. The nonsplit reconstruction also uses the virtual-annulus descent convention of Layer 1.
+Construct the *analytic formal structure of a vertex set*. For a separated quasi-smooth analytic curve over complete K, let S be closed and discrete, consist of type-II/III points, contain the analytic boundary, meet every irreducible component, and have relatively compact complementary components. At each type-III x∈S outside the analytic boundary, require that no one complementary component contains every branch at x. These are the vertex-set conditions for the unique maximal formal affinoid atlas with vertices S. A formal affinoid atlas is a G-cover by affinoid domains whose pairwise overlaps are finite unions of spectral maximum loci of analytic functions; its equivalence class is the analytic formal structure. Retain the constant fields and nonsplit node invariants. A triangulation satisfying these conditions determines this structure; a type-III self-adjacency can require a refinement before applying the construction (Ducros §§6.3.1–6.3.3, pp. 338–339; Theorem 6.3.15 and §§6.3.16–6.3.17, pp. 343–347).
+
+Provide the following interface:
+
+- Taking the vertices of the maximal formal atlas recovers S, and equivalent atlases have the same maximal atlas.
+- The atlas is strict exactly when all its vertices are type II.
+- Formal domains are precisely the closed analytic domains with analytic boundary contained in S; restricting the atlas restricts its vertex set.
+- Locally finite gluing preserves the formal atlas and its specified vertex set on each compact analytic domain.
+
+Prove *strict formal-scheme reconstruction*. Assume K is nontrivially valued and either algebraically closed or discretely valued, and S above consists only of type-II points. Glue the charts Spf O(V)° of the strict formal atlas to a flat locally topologically finitely presented K°-model relatively normal in its generic fiber. Its generic fiber is X, and its component points are exactly S. Conversely a model in this category recovers its strict formal atlas and its component-point set. If the vertex reductions are smooth and its edge charts are split nodal charts uv=a with 0<|a|<1, this is the split semistable correspondence; a general strict reconstruction is not asserted semistable. Nonsplit data use the virtual-annulus descent convention of Layer 1. The general analytic structure remains available without these field or strictness hypotheses (Ducros §§6.3.9–6.3.13, pp. 340–343, and §§6.3.22–6.3.23, pp. 349–350; CDN Appendix A.2, pp. 51–52, for the model-to-component-point direction).
+
+**Checks.**
+
+- On P¹ over ℚ_p, S={ζ(0,p^(−√2))} cuts the curve into two virtual open discs and has type III because √2∉ℚ. It gives an analytic formal structure with one vertex, but no admissible formal ℤ_p-model with that component point.
+- The Gauss point of P¹ over ℚ_p is type II; its strict structure reconstructs the smooth model P¹ over ℤ_p, with one reduced component and one component point.
+- A single type-III point on a split Tate circle leaves one complementary annulus containing both branches at that point. It fails the formal-atlas vertex condition, even though it is an analytic triangulation; adding a second vertex separates those branches.
+- A type-II point of radius p^(−1/2) on P¹ over ℚ_p has value-group index 2. Strict reconstruction can have a multiplicity-two component; type II alone does not imply a reduced semistable special fiber.
+
+*Needs:* §0.21 analytic domains and G-covers; §1.7 virtual-annulus descent; this section's vertex-set conditions and formal atlas; AdicSpacesPartIII §§R2.2–R2.3 for admissible models and generic fibers. The strict reconstruction uses the stated field hypotheses, while general triangulation existence does not.
 
 **Check.** Gluing two discs along the complement of their origins gives a quasi-smooth nonseparated doubled-origin disc. Any type-II/III vertex set leaves both origins in a nonseparated complementary piece, which is neither a virtual disc nor a virtual annulus. The existence theorem therefore requires separatedness; §0.21 still allows this analytic space.
 
@@ -1674,28 +1717,29 @@ Layers 1–2, finite graph linear algebra and the imported algebraic divisor/Rie
 
 Use tilted models and valued extensions to define initial degenerations at every real tropical point. Scheme-theoretic generic lengths determine weights. Primitive lattice vectors and the target/image index determine balancing and pushforward; set-theoretic initial supports do not supply these integers.
 
-### 4.0 Toric schemes over general fields
+### 4.0 Small-fan extension and valued toric comparisons
 
-Construct *general-field toric schemes*. For a field K and a rational fan Δ of strongly convex cones in a finite-rank lattice N with dual M, glue Spec K[σ∨∩M] along the localizations attached to faces. For finite Δ this gives a separated finite-type toric K-scheme Y_Δ; for an arbitrary small fan it gives the corresponding separated locally finite-type scheme. Its affine orbit charts, dense torus for nonempty Δ, toric morphisms, products and closed graphs are compatible with isometric valued extension after analytification (Gubler, §§2.1–2.2, pp. 3–5; BPR tropicalization, §4.2, p. 14).
+Construct the *small-fan extension*. For a field K and an arbitrary small rational fan Δ of strongly convex cones in a finite-rank lattice N with dual M, glue the affine charts of the finite subfans using their face open immersions. The result Y_Δ is a separated locally finite-type K-scheme, naturally identified on every finite subfan with its finite-fan scheme. Finite subfans cover Δ: the faces of each cone form a finite subfan, and finite unions of these subfans remain finite. The construction is the open gluing of this directed system, not a second construction for finite fans (Gubler §§6.2–6.3, p. 12, for the cone and fan charts; the small gluing is the extension specified here).
 
-Use AnalyticToricGeometry Layer 0's lattices, cones, fans and dual semigroups. The added construction changes the coefficient algebra to K and permits singular cones; its complex specialization is compared chartwise with the supplied complex fan scheme. Locally finite-type analytification uses the gluing extension of §0.22.
+Prove *valued toric comparisons*: analytify these schemes by the locally finite-type gluing extension of §0.22. Toric morphisms, characters, orbit charts, products and face open immersions commute with isometric complete valued extension. For a smooth curve with a closed toric embedding X→Y and finitely many nonzero rational functions, their morphisms X→P¹ give a closed graph in Y×(P¹)ⁿ dominating the specified embedding; quasiprojectivity is preserved when Y is quasiprojective. The analytic comparison uses Gubler §§2.1–2.6, pp. 3–4, and BPR tropicalization §4.2, p. 14. No local finiteness of the affine chart family is assumed: every nonempty toric chart contains the dense torus.
 
 Provide the following interface:
 
-- A face inclusion gives the localization open immersion, and the fan intersection condition identifies chart overlaps.
-- A fan morphism gives a toric K-morphism, preserving identities, composition, characters and orbit strata.
-- Products of fans give equivariant products of schemes.
-- For a smooth curve X, a closed toric embedding X→Y and finitely many nonzero rational functions on X, their morphisms X→P¹ give a closed graph in Y×(P¹)ⁿ, dominating the specified embedding; quasiprojectivity is preserved when Y is quasiprojective.
-- Scalar extension identifies every monoid-algebra chart and every face map with the chart over the larger field.
+- Restriction to a finite subfan is its specified open subscheme, and inclusions of finite subfans compose coherently.
+- Compatible maps on the finite-subfan schemes glue uniquely; the resulting finite specialization is the supplied finite-fan scheme.
+- Fan morphisms and products extend from finite charts and preserve composition, characters and orbit strata.
+- Coefficient change commutes with the small-fan gluing; isometric valued extension commutes with its analytification.
+- The closed graph of the finite tuple of rational functions projects isomorphically to X and dominates its original embedding.
 
 **Checks.**
 
-- For the zero cone in rank zero the scheme is Spec K, including K=𝔽₂; the empty fan gives the empty scheme and has no dense torus inclusion.
-- The two rays in rank one glue K[T] and K[T⁻¹] along K[T,T⁻¹], giving P¹_K. Retaining only their set intersection would lose the localization map.
-- The cone generated by (1,0) and (1,2) is allowed: over a characteristic-zero field its chart is singular, so a regular-cone restriction would discard it.
-- The graph of T² over G_m→G_m is closed in G_m×P¹ and projects isomorphically to G_m; replacing the graph by the product would have positive-dimensional fibers.
+- The zero cone in rank zero gives Spec K, including K=𝔽₂; the empty fan gives the empty scheme and no dense torus inclusion.
+- The two rays in rank one recover P¹_K with overlap K[T,T⁻¹]; the finite specialization retains the supplied localization maps.
+- The cone generated by (1,0) and (1,2) is allowed and is singular in characteristic zero; the comparison cannot assume regular cones.
+- The graph of T² on G_m is closed in G_m×P¹ and has one-point projection fibers; replacing it by the product would give P¹ fibers.
+- Infinitely many distinct rational rays in a rank-two lattice, together with the zero cone, form a small fan. Its scheme is locally of finite type but not quasi-compact; its infinitely many affine charts all meet in the torus, so that cover is not locally finite.
 
-*Needs:* AnalyticToricGeometry Layer 0 for lattice/cone/fan/semigroup geometry; Mathlib `AlgebraicGeometry.Scheme.GlueData` for scheme gluing; native monoid algebras and localizations; §0.22 only for the analytic comparison.
+*Needs:* AnalyticToricGeometry Layer 0 for lattice/cone/fan/semigroup geometry; ShimuraCompactifications §§C0.16–C0.17 for the finite-fan carrier, face localizations, gluing property, coefficient change and toric morphisms; Mathlib `AlgebraicGeometry.Scheme.GlueData` for the small gluing; §0.22 for analytification.
 
 ### 4.1 Torus tropicalization
 
@@ -1716,7 +1760,7 @@ Provide the following interface:
 - The equation χᵘ=a tropicalizes into ⟨w,u⟩=v(a).
 - The map T↦Tⁿ acts by w↦nw, so omitting the exponent fails.
 
-For the construction, characters are invertible analytic functions, so logarithmic evaluation is well-defined and continuous. Pullback of characters proves functoriality; surjective spectral base change proves invariance. General-field toric scheme interfaces require §4.0 general-field toric schemes.
+For the construction, characters are invertible analytic functions, so logarithmic evaluation is well-defined and continuous. Pullback of characters proves functoriality; surjective spectral base change proves invariance. General-field toric scheme interfaces require §4.0 small-fan extension and valued toric comparisons.
 
 Construct the *extended tropicalization*. Let Δ be a rational fan of strongly convex cones in the finite-rank lattice N, and let Y_Δ be its split toric K-scheme. For σ∈Δ put S_σ=σ∨∩M and N_ℝ(σ)=Hom_mon(S_σ,ℝ∪{∞}), where homomorphisms preserve addition and zero, ∞ is absorbing for addition, and ℝ∪{∞} has the order topology of ℝ∪{+∞}. Give N_ℝ(σ) the topology of pointwise convergence. For a face τ≼σ, localization of S_σ gives the open inclusion N_ℝ(τ)→N_ℝ(σ). Glue these charts to N_ℝ(Δ). On Y_σᵃⁿ define trop(x)(u)=−log|χᵘ(x)|, with −log 0=∞ (BPR tropicalization §4.2, p. 14).
 
@@ -1734,11 +1778,11 @@ For the construction, use face localization to compare the formulas on chart ove
 - For A¹, N_ℝ(Δ)=ℝ∪{+∞}; the origin maps to +∞ and ζ(0,1) to 0. The map T↦T² sends a finite coordinate w to 2w and +∞ to +∞, fixing the sign and the boundary convention.
 - For P¹, N_ℝ(Δ)=[−∞,+∞] is compact; 0 maps to +∞ and ∞ to −∞ because the second chart uses T⁻¹. For the single ray ℝ≥0·(1,0) in ℝ², the space is (ℝ∪{+∞})×ℝ, with no infinite second coordinate; adding endpoints in every direction would be wrong.
 
-*Needs:* [0.22 Berkovich analytification](#022-berkovich-analytification); [0.17 Affinoid algebras over valued fields](#017-affinoid-algebras-over-valued-fields); AnalyticToricGeometry Layer 0 and §4.0 general-field toric schemes for Y_Δ, face/orbit charts and toric morphisms.
+*Needs:* [0.22 Berkovich analytification](#022-berkovich-analytification); [0.17 Affinoid algebras over valued fields](#017-affinoid-algebras-over-valued-fields); AnalyticToricGeometry Layer 0 and §4.0 small-fan extension and valued toric comparisons for Y_Δ, face/orbit charts and toric morphisms.
 
 [Matthew Baker, Sam Payne, Joseph Rabinoff, Nonarchimedean geometry, tropicalization, and metrics on curves](https://arxiv.org/abs/1104.0320v3), §4.2, p. 14. The monoid charts, open face gluing, extended map and dense torus stratum specify the analytic construction used in Layer 5.
 
-*Needs:* [0.22 Berkovich analytification](#022-berkovich-analytification); [0.18 Valued base change of spectra](#018-valued-base-change-of-spectra); AnalyticToricGeometry Layer 0 and §4.0 general-field toric schemes.
+*Needs:* [0.22 Berkovich analytification](#022-berkovich-analytification); [0.18 Valued base change of spectra](#018-valued-base-change-of-spectra); AnalyticToricGeometry Layer 0 and §4.0 small-fan extension and valued toric comparisons.
 
 [Walter Gubler, A guide to tropicalizations](https://gubler.app.uni-regensburg.de/Publikationen/1108.6126.pdf), §2.1, p. 3; Definition 3.2 and Propositions 3.6–3.7, p. 7. Seminorm tropicalization, field-extension invariance and classical-point closure after algebraically closed nontrivial extension.
 
@@ -1851,7 +1895,7 @@ Prove *tropical multiplicity formula*. For the standing smooth curve over algebr
 
 For the proof, for a value-group-rational tropical point, pass to its polyhedral analytic fiber and canonical reduction. The Shilov components account for the initial-degeneration generic lengths. For a curve, a finite annular projection identifies each relative component degree with its integral expansion factor. Sum over the noncontracted preimage edges; contracted components contribute zero. Extend to other points by valued base change. Use the canonical-reduction degree and scheme-length comparison constructed in the relative-multiplicity target.
 
-*Needs:* AnalyticToricGeometry Layer 0 and §4.0 general-field toric schemes; [4.5 Relative point and edge multiplicities](#45-relative-point-and-edge-multiplicities); [3.7 Slope formula for rational functions](#37-slope-formula-for-rational-functions).
+*Needs:* AnalyticToricGeometry Layer 0 and §4.0 small-fan extension and valued toric comparisons; [4.5 Relative point and edge multiplicities](#45-relative-point-and-edge-multiplicities); [3.7 Slope formula for rational functions](#37-slope-formula-for-rational-functions).
 
 [Matthew Baker, Sam Payne, Joseph Rabinoff, Nonarchimedean geometry, tropicalization, and metrics on curves](https://arxiv.org/abs/1104.0320v3), Theorem 1.3, pp. 2–3; Proposition 5.4, Theorem 5.8 and Corollary 5.9, pp. 21–23. The curve multiplicity formula is proved by the comparison of analytic edge degrees and initial generic lengths. The finite-map reduction argument is specified in the relative-multiplicity construction.
 
@@ -1891,7 +1935,7 @@ The doubled equation (χᵘ−1)² has the same tropical support as χᵘ−1 an
 
 ### Dependencies
 
-Layers 0–3 for analytic points, annular slopes, skeleta and the slope formula; AnalyticToricGeometry Layer 0 and §4.0 general-field toric schemes with the toric embedding interfaces of §4.0. The valued Gröbner, cycle multiplicity and balancing arguments are constructed here.
+Layers 0–3 for analytic points, annular slopes, skeleta and the slope formula; AnalyticToricGeometry Layer 0 for lattice and fan geometry; ShimuraCompactifications §§C0.16–C0.17 for finite-fan schemes and toric morphisms; §4.0 for the small-fan extension and valued toric comparisons. The valued Gröbner, cycle multiplicity and balancing arguments are constructed here.
 
 ## Layer 5: Faithful tropicalization of curves
 
@@ -1934,7 +1978,7 @@ Provide the following interface:
 
 For the construction, define lattice length by primitive integral direction, use intrinsic shortest paths on both graph realizations, and separate edgewise expansion from global topology.
 
-*Needs:* [3.1 Metric graphs with loops and vertex genus](#31-metric-graphs-with-loops-and-vertex-genus); [4.1 Torus tropicalization](#41-torus-tropicalization); [4.5 Relative point and edge multiplicities](#45-relative-point-and-edge-multiplicities); AnalyticToricGeometry Layer 0 and §4.0 general-field toric schemes.
+*Needs:* [3.1 Metric graphs with loops and vertex genus](#31-metric-graphs-with-loops-and-vertex-genus); [4.1 Torus tropicalization](#41-torus-tropicalization); [4.5 Relative point and edge multiplicities](#45-relative-point-and-edge-multiplicities); AnalyticToricGeometry Layer 0 and §4.0 small-fan extension and valued toric comparisons.
 
 [Matthew Baker, Sam Payne, Joseph Rabinoff, Nonarchimedean geometry, tropicalization, and metrics on curves](https://arxiv.org/abs/1104.0320v3), §5.15, Remark 5.16 and Lemma 5.17, pp. 24–25. Faithfulness and the warning to use the graph’s intrinsic metric, not an ambient skeleton shortcut.
 
@@ -1960,7 +2004,7 @@ Prove *faithful tropicalization and expansion factors*. Every finite embedded Γ
 
 For the proof, cover the finite embedded graph by finitely many closed skeletal segments. Use unit-slope functions to make the expansion gcd one, and add finitely many separating coordinates for pairs in distinct graph neighborhoods. The resulting toric refinement is locally isometric and injective on the compact graph, hence faithful.
 
-*Needs:* [2.2 Skeleton of a semistable decomposition](#22-skeleton-of-a-semistable-decomposition); AnalyticToricGeometry Layer 0 and §4.0 general-field toric schemes; [5.2 Faithful tropicalization on a graph](#52-faithful-tropicalization-on-a-graph); [5.3 Functions separating edges and vertices](#53-functions-separating-edges-and-vertices).
+*Needs:* [2.2 Skeleton of a semistable decomposition](#22-skeleton-of-a-semistable-decomposition); AnalyticToricGeometry Layer 0 and §4.0 small-fan extension and valued toric comparisons; [5.2 Faithful tropicalization on a graph](#52-faithful-tropicalization-on-a-graph); [5.3 Functions separating edges and vertices](#53-functions-separating-edges-and-vertices).
 
 [Matthew Baker, Sam Payne, Joseph Rabinoff, Nonarchimedean geometry, tropicalization, and metrics on curves](https://arxiv.org/abs/1104.0320v3), Theorem 1.1, p. 2; Theorems 5.20–5.21 and proofs, p. 26. The finite-graph existence theorem follows from finitely many separating unit-slope coordinates. Use the residue lifting, annular approximation and rational sublevel constructions specified in the preceding separating-functions target.
 
@@ -1996,7 +2040,7 @@ A coordinate T² alone has expansion two on an annulus. Adjoining T gives slope 
 
 ### Dependencies
 
-Layers 0–4; AlgebraicCurves Layer 4 and Tau Ceti algebraic Riemann–Roch for prescribed-pole functions; AnalyticToricGeometry Layer 0 for lattices and §4.0 for general-K toric embeddings. Formal residue-function lifting and Runge approximation are the additional analytic arguments specified in this layer.
+Layers 0–4; AlgebraicCurves Layer 4 and Tau Ceti algebraic Riemann–Roch for prescribed-pole functions; AnalyticToricGeometry Layer 0 for lattices and §4.0 for valued toric comparisons. Formal residue-function lifting and Runge approximation are the additional analytic arguments specified in this layer.
 
 ## Layer 6: Model metrics, measures and local heights
 
@@ -2030,48 +2074,48 @@ For the construction, use unit absolute value of formal transition functions to 
 
 **Check.** For a local section s of L with s^e=fσ in a formal frame σ of the model of L^e, the defining identity is ||s||^e=|f|. A frame of L^e is not silently treated as a frame of L; tensor and dual operations respect this identity.
 
-### 6.1a Rank-one model intersections
+### 6.1a Geometric model intersections and rank-one descent
 
-Prove *rank-one intersection specialization*. For a proper flat admissible normal formal model over the valuation ring of any complete nontrivially valued rank-one K, and model line bundles 𝔏_i extending L_i raised to positive tensor powers e_i, identify the generic intersection degree with the sum of the component-weighted residue-field intersections divided by ∏e_i. Retain residue degrees and the scheme-theoretic component multiplicities. Prove *rank-one intersection projection*: vertical Cartier intersections respect proper admissible modifications, common refinements and isometric scalar extension, with residue degrees included in pushforward (Chambert–Loir, Definition 2.4 and Proposition 2.7, pp. 5–8).
+Prove *geometric intersection specialization*. Over a complete nontrivially valued algebraically closed field C, put finitely many rational model metrics on a common proper admissible model with reduced special fiber, relatively normal in its reduced generic fiber. Construct such refinements by the power-bounded affinoid charts and their gluing; in this field range they remain locally topologically finitely presented. For model bundles extending L_i^e_i, the sum of special-component intersection degrees divided by ∏e_i equals the generic intersection degree. Prove *geometric intersection projection*: these weighted degrees and their associated component points respect proper model modifications and further algebraically closed isometric extension. The construction includes common refinements of any finite collection of model presentations (Ducros §§6.3.9–6.3.10, pp. 340–341; Chambert–Loir Definition 2.4 and §2.5, pp. 5–6, for the intersection formula).
 
-Construct these comparisons through finitely presented model data and specialization, checking invariance under different descents and then under dominating admissible models. SchemeAndStackFoundations §§5.2–5.3 supplies cycle degrees, first Chern classes and proper pushforward over its stated bases; §5.9's arithmetic intersections supply the discrete calibration. The additional comparisons here apply to the actual rank-one models and their vertical Cartier data. They feed §6.2's measures and §6.7's curvature identity.
+For a complete discretely valued K and a proper normal admissible K°-model, prove agreement with the literal special-fiber formula using scheme-theoretic component multiplicities and residue-field degrees. SchemeAndStackFoundations §§5.2–5.3 supplies the field-valued cycle intersections and proper pushforward; §5.9 supplies the discrete calibration. For arbitrary rank-one K, use geometric extension and pushforward in §6.2. The ordinary special fiber of a K°-normalization is not used to define its weights, and no normal admissible refinement over K is required.
+
+For geometrically nonreduced base changes, retain the generic lengths of their fundamental cycles before passing to the reduced irreducible supports and their normalizations. Prove compatibility of these cycle lengths with intersection degree, proper pushforward and further extension; this retains purely inseparable degree even when the analytic point set is unchanged. Vertical Cartier metric changes are compared on the geometric models and then pushed to Xᵃⁿ. These specialization and projection results provide the rank-one curvature input of §6.7.
 
 **Checks.**
 
-- A single reduced component of degree 6 modeling L² contributes 6/2=3, equal to deg L; forgetting the tensor power gives 6.
-- A component of multiplicity 2 and degree 3 for L contributes 2·3=6; its reduced support alone would give 3.
-- A constant zero-dimensional model with residue extension degree 2 has degree 2, agreeing with pushforward of its degree-one point over that residue field.
-- Subdividing uv=a into uv=b and uv=a/b gives lengths v(b) and v(a)−v(b), summing to v(a); projection cancels the new interior Cartier flux.
+- A reduced component of degree 6 modeling L² contributes 6/2=3; forgetting the tensor power gives 6.
+- On a normal DVR model, multiplicity 2 and residue-field intersection degree 3 contribute 2·3=6. Over C, the reduced-fiber formula instead accounts for degree through the geometric components and cycle lengths.
+- A constant separable degree-two point becomes two geometric points of weight one; their pushforward has mass 2. A purely inseparable degree-p point becomes one geometric support of generic length p and still has mass p.
+- Subdividing uv=a into lengths v(b) and v(a)−v(b) preserves their sum v(a), and the opposite new interior Cartier fluxes cancel.
 
-*Needs:* §6.1; AdicSpacesPartIII §§R2.2–R2.3 for rank-one formal models and admissible modifications; SchemeAndStackFoundations §§5.2–5.3 and §5.9 for their cycle and intersection interfaces.
+*Needs:* §6.1 model metrics; §0.18 valued extension and §0.22 analytification; AdicSpacesPartIII §§R2.2–R2.3 for admissible models and generic fibers; SchemeAndStackFoundations §§5.2–5.3 and §5.9 for cycle intersections, generic lengths, pushforward and the DVR comparison. The arbitrary-base measure descent is constructed in §6.2 after this geometric intersection theorem.
 
 ### 6.2 Chambert–Loir model measures
 
-Construct *model measures*. For a d-dimensional proper variety and model-metrized line bundles L₁,…,L_d, define the mixed measure ΣY `mult(Y)·deg_Y(c₁(𝔏₁)…c₁(𝔏_d))/(e₁…e_d)·δ_{ξ_Y}`, on the generic points of the normal model special fiber. After algebraically closed base change or in the split normalization, its total mass is deg_X(L₁…L_d). On a reduced split semistable curve this is Σ_v deg(𝔏|Cᵥ)/e·δ_v. Common blowups, multilinearity and the projection formula make the measure independent of the presentation.
+Construct *geometric model measures*. Over C as in §6.1a, for a proper d-cycle with rational model-metrized line bundles L₁,…,L_d, define the finite atomic measure on a common reduced-special-fiber model by the component intersection weights `deg_Y(c₁(𝔏₁)…c₁(𝔏_d))/(e₁…e_d)` at the unique component points ξ_Y. Extend linearly over the generic multiplicities of the cycle, using normalizations of its reduced supports. For a normal model over a complete DVR, the same measure is given by the formula with the additional scheme-theoretic special-component multiplicity and the residue-field degree convention. On a reduced split semistable curve it is Σ_v deg(𝔏|Cᵥ)/e·δ_v (Chambert–Loir Definition 2.4 and §2.5, pp. 5–6; Ducros §6.3.9, pp. 340–341, for the geometric model range).
 
-Intersection degrees use the stated residue-field convention; retain component multiplicities in nonreduced special fibers. Section 6.1a supplies the rank-one specialization and projection results for general valuation-ring intersections.
+Construct *rank-one model-measure descent*. For every complete nontrivially valued rank-one K, choose an isometric embedding into a completed algebraic closure C and write p_C:X_Cᵃⁿ→Xᵃⁿ for the scalar projection. Pull back the metrics and the fundamental d-cycle, retaining inseparable generic lengths, and define μ_K=(p_C)_*μ_C. Prove independence of the closure, its embedding and all geometric model presentations; for every complete isometric extension L/K prove `(p_L)_*μ_L=μ_K`. This is scalar-extension pushforward, with no division by a finite or infinite field-extension degree. A finite surjective morphism between K-varieties has the separate degree factor stated below.
 
 Provide the following interface:
 
-- The measure is the finite atomic sum at divisorial model points with the displayed weights.
-- Its total mass is the algebraic intersection degree.
-- It is symmetric and multilinear in metrized line bundles.
-- For finite surjective f of degree δ, f_*c₁(f*L₁)…c₁(f*L_d)=δ c₁(L₁)…c₁(L_d).
-- Common admissible modifications preserve the analytic measure.
+- Over C the measure is the finite atomic sum above; over K it is its finite atomic pushforward, without requiring a normal admissible K°-model.
+- The total mass over every K is deg_X(L₁…L_d), including the degree of a zero-dimensional fundamental cycle.
+- The measure is symmetric and multilinear in metrized line bundles and linear in cycles.
+- For finite surjective f:X→Y between integral proper d-dimensional K-varieties of degree δ, `f_*c₁(f*L₁)…c₁(f*L_d)=δ c₁(L₁)…c₁(L_d)`; δ includes the inseparable degree.
+- Common admissible modifications of a model presentation preserve the measure; scalar-extension pushforward is transitive and agrees with the DVR formula and split semistable formula in their ranges.
+
+For the proof, construct the geometric atomic measure using §6.1a's common reduced models. Prove modification invariance and invariance under algebraically closed extension by intersection projection and the compatibility of the distinguished power-bounded charts with geometric extension. Compare two choices of C inside a common complete algebraically closed valued overfield, using §0.15a's isometric amalgamation, and push to Xᵃⁿ. Apply the same comparison to L/K for extension invariance. Geometric intersection degree and flat cycle base change give total mass; proper cycle pushforward gives the finite-map degree formula. The field-range extension and its independence are theorem targets here; the normal-model assertion in Chambert–Loir §2 is not a general normalization theorem over K°.
 
 **Checks.**
 
-- For good reduction and degree-d L on a curve, the measure is dδ_Gauss.
-- A degree-zero trivial model line has zero curvature measure.
-- A reduced single component with model degree 6 for L² has weight 3, not 6. A component of multiplicity 2 and degree 3 for L has weight 6, not 3. Both the tensor denominator and the component multiplicity are necessary.
+- A degree-d line bundle on a split good-reduction curve gives dδ_v; a degree-zero trivial model line gives zero curvature.
+- A reduced component of degree 6 for L² has weight 3. On a DVR model a multiplicity-two component of degree 3 for L has weight 6; the two formulas are compared after geometric extension.
+- Let v(5)=1, K be the completion of the union of ℚ₅(5^(1/2ⁿ)), and L=K(θ), θ³=5. The K-variety Spec L has degree 3. Its geometric base change has three points of weight 1, all projecting to its one analytic point, so μ_K=3δ_x. The ordinary fiber of L° has degree 1 and cannot supply this weight.
+- In that example v(K×)=ℤ[1/2], and the coefficient ideals of θ and θ² in L° have infima −1/3 and −2/3, neither attained. For instance −1/4>−1/3 can be improved to −5/16>−1/3. No finite generating set reaches the infimum; L° is not an admissible finite-presentation normalization of the finite-free model defined by T³−5.
+- For a purely inseparable extension of degree p in characteristic p, geometric base change has one point of length p. The descended mass is p, including p=2 and p=3; discarding nilpotents would give the wrong mass 1.
 
-For the construction, pass to a common normal model and compute atomic weights by special-fiber intersection. Algebraic specialization of degree gives total mass; projection formula gives blowup invariance and finite-map pushforward, and symmetry of intersections gives symmetry of mixed measures.
-
-*Needs:* [6.1 Formal and model metrics](#61-formal-and-model-metrics); [2.11 Formal models and metric dual graphs](#211-formal-models-and-metric-dual-graphs); SchemeAndStackFoundations §§5.2–5.3 for cycle intersections; §6.1a rank-one intersection specialization and projection.
-
-[Antoine Chambert-Loir, Mesures et équidistribution sur les espaces de Berkovich](https://arxiv.org/pdf/math/0304023v3), Definition 2.4 and §2.5, pp. 5–6. Atomic intersection formula, multiplicities, multilinearity and local heights.
-
-Prove that passing to a dominating admissible model preserves the component-weighted intersection measure, using the specialization contract §6.1a rank-one intersection specialization and vertical Cartier/projection contract §6.1a rank-one intersection projection over the actual rank-one valuation ring. Include residue degrees and nonreduced component multiplicities; no noetherian-model assumption is implicit. Chambert–Loir §2, pp. 4–8 is the model construction in its stated range. The passage from these model measures to continuous semipositive and integrable metrics is the arbitrary-base limit target of §6.4, after the definitions of §6.3; §6.2 uses no limit construction.
+*Needs:* §6.1 model metrics; §6.1a geometric intersection specialization, projection and cycle lengths; §0.15a isometric amalgamation; §0.18 scalar projection; §0.22 proper analytification; SchemeAndStackFoundations §§5.2–5.3 cycle intersections and proper pushforward. Limits enter only in §6.4 after §6.3 defines the metric classes.
 
 ### 6.3 Semipositive and integrable metrics
 
@@ -2118,7 +2162,7 @@ Prove *model-measure limits over arbitrary bases*: on that X, for fixed line bun
 
 For the proof, integrate a model test function by the model intersection recursion, use the uniform-distance/mixed-degree estimate to show the resulting net is Cauchy, and extend its positive functional from the dense model-function lattice to C(Xᵃⁿ). Riesz representation gives the Radon limit with fixed mass. Common approximation gives independence, and polarization/telescoping gives the mixed and integrable extensions. For a nonprojective proper variety, use SchemeAndStackFoundations §4.12’s Chow lemma over the field K to choose a projective modification, prove the estimate after pullback there, and push forward by §6.2’s projection formula. The degree-one modification comparison makes the result independent of the modification. These conclusions do not assume a countable dense subfield.
 
-*Needs:* §6.1 model functions; §6.2 model intersections and §6.1a rank-one intersections; §6.3 semipositivity; compact Hausdorff analytification from §0.22; SchemeAndStackFoundations §4.12 (`chow_lemma`) for the proper-to-projective modification. No general integrable-measure construction is consumed by §6.3.
+*Needs:* §6.1 model functions; §6.2 descended model measures and §6.1a geometric intersections; §6.3 semipositivity; compact Hausdorff analytification from §0.22; SchemeAndStackFoundations §4.12 (`chow_lemma`) for the proper-to-projective modification. No general integrable-measure construction is consumed by §6.3.
 
 **Checks.**
 
@@ -2194,7 +2238,7 @@ For arbitrary positive real edge lengths, solve the finite electrical-network eq
 
 ### 6.7 Model potentials and Laplacian approximation
 
-Prove *model PL approximation*. On a finite rational-length polarized reduction graph of a split semistable proper curve over a complete discretely valued field, each continuous edgewise C² function F admits PL approximants F_n with rational breakpoints, uniformly converging to F, whose Laplacian measures converge weakly to ΔF with uniformly bounded total variation. The potentials may be chosen with rational values, so after multiplying by a positive integer and passing to a finite valued extension their vertex data come from vertical divisors on regular semistable models. Thus their normalized metrics are rational model metrics and the curvature–Laplacian identity passes to F.
+Prove *model PL approximation*. On a finite rational-length polarized reduction graph of a split semistable proper curve over a complete discretely valued field, each continuous edgewise C² function F admits PL approximants F_n with rational breakpoints, uniformly converging to F, whose Laplacian measures converge weakly to ΔF with uniformly bounded total variation. The potentials may be chosen with rational values, so after multiplying by a positive integer and passing to a finite valued extension their vertex data come from vertical divisors on regular semistable models. Thus their normalized metrics are rational model metrics. The signed BV-potential continuity theorem below, rather than semipositive convergence applied directly to these signed metrics, passes the curvature–Laplacian identity to F.
 
 Fix the unit-edge valuation normalization before approximation; use a finite graph and functions C² up to the endpoints of every chosen edge. Refinement allows all rational breakpoints as divisorial points. Constants can be approximated independently and do not affect Δ.
 
@@ -2208,17 +2252,29 @@ For the proof, interpolate at finer rational partitions, approximating values su
 
 Prove *rank-one model-potential approximation*: for a split semistable proper curve over any complete nontrivially valued rank-one K and F continuous and C² up to the ends of each edge piece, there are rational model functions F_n converging uniformly on its compact skeleton, with edge slopes converging to F′ off their breaks, one-sided endpoint slopes converging to those of F, and ΔF_n converging weakly to ΔF with uniformly bounded total variation. Subdivision points and values are chosen in the divisible hull of v(K×); finite valued extensions realize each finite set of them, and rational tensor powers clear slope denominators. Keep the original real lengths; there is no common rational rescaling assumption.
 
-Prove the *rank-one model curvature identity* for these rational model functions by vertical Cartier intersection and projection over the actual rank-one base: curvature of exp(−F_n∘τ) is −i_*ΔF_n. Descend from the finite extensions with normalized tensor powers. Then §6.4’s limit theorem and the derivative/variation bounds pass this identity to F. For finite-variation weak potentials, use bounded-variation smoothing on edges with the same endpoint fluxes before model approximation; this also covers the Green potentials used in §6.8.
+Prove the *rank-one model curvature identity* for these rational model functions: the curvature of the trivial line with metric exp(−F_n∘τ) is −i_*ΔF_n. Compute vertical Cartier intersections on the geometric models of §6.1a and push them to the original analytic curve by §6.2; compare split component degrees with outgoing slopes. Descend from finite extensions using scalar-extension pushforward and the tensor-power normalization. For finite-variation weak potentials, first use smooth potentials converging uniformly, with weakly converging derivative measures, uniformly bounded variation and converging endpoint fluxes, before model approximation. Passing from these signed model curvatures to a continuous metric uses the following integrability and continuity targets.
 
-For the approximation proof, use successively finer partitions in the divisible value group and vertex values there whose errors are o(h²), h the minimum mesh. A secant slope need not be rational. On each small interval replace it by two nearby rational slopes bracketing it, with one breakpoint chosen so that the endpoint values agree. The breakpoint is in the divisible value group because the endpoint difference and interval length are there and both slopes are rational. Choose the rational-slope errors so their sum tends to zero. Approximate any non-value-group breakpoints by subdivision points. Secant slopes converge on smooth pieces, and the extra rational-slope variation tends to zero. Total variation is bounded by the integrals of |F″| on the smooth pieces, the finite sum of derivative jumps at breaks and vertex fluxes, plus vanishing error. Include the converging vertex atoms. Formal subdivisions and vertical Cartier data realize these rational slopes after finite extension. This extends the model-function route of Yuan Proposition A.4, p. 117; the rank-one intersection inputs are §6.1a rank-one intersections, not the DVR calibration.
+For the approximation proof, use successively finer partitions in the divisible value group and vertex values there whose errors are o(h²), h the minimum mesh. A secant slope need not be rational. On each small interval replace it by two nearby rational slopes bracketing it, with one breakpoint chosen so that the endpoint values agree. The breakpoint is in the divisible value group because the endpoint difference and interval length are there and both slopes are rational. Choose the rational-slope errors so their sum tends to zero. Approximate any non-value-group breakpoints by subdivision points. Secant slopes converge on smooth pieces, and the extra rational-slope variation tends to zero. Total variation is bounded by the integrals of |F″| on the smooth pieces, the finite sum of derivative jumps at breaks and vertex fluxes, plus vanishing error. Include the converging vertex atoms. Formal subdivisions and vertical Cartier data realize these rational slopes after finite extension. This extends the model-function route of Yuan Proposition A.4, p. 117; the intersection inputs are §§6.1a–6.2 geometric intersections and rank-one descent, with their DVR comparison.
 
-*Needs:* §3.3 weak Laplacian; §2.13 subdivision and valued extension; §§6.1–6.2; §6.1a rank-one intersection specialization and projection. The limiting conclusion additionally uses §6.4; it does not use §6.8.
+Prove the *positive graph-curvature criterion*. On a split semistable proper curve over complete nontrivially valued rank-one K, let Γ be its compact skeleton with retraction τ and inclusion i. Choose a positive-degree line bundle H with a rational model metric whose curvature is i_*μ₀, with μ₀ positive at every vertex of its semistable model; prove existence using a relatively ample model bundle. For every continuous G in §3.3's weak BV domain, if μ₀−ΔG is positive, the metric on H obtained by multiplying by exp(−G∘τ) is semipositive in §6.3's approximation sense, and its §6.4 curvature is i_*(μ₀−ΔG). Prove this by uniform rational model approximation preserving positivity. On edges outside the support of μ₀ the condition is convexity of G; approximate by convex rational-slope functions and preserve all vertex flux inequalities. Replacing G by (1−ε)G first gives a positive vertex margin εμ₀. Use it to accommodate the rational value and slope approximations; at inserted vertices convexity supplies the inequality. The model curvature identity identifies these inequalities with nonnegative component degrees. Section 6.4 applies to this semipositive approximation. This criterion and its approximation are targets here, using Chambert–Loir §§2.2–2.3 and Proposition 2.7, pp. 4–8, for the semipositivity and limit framework.
+
+Prove *BV-potential integrability and signed continuity*. For every continuous F in that weak BV domain, the trivial line with metric exp(−F∘τ) is integrable in §6.3's sense and has §6.4 curvature −i_*ΔF. For functions F_n in the same domain, if F_n→F uniformly, ΔF_n→ΔF weakly and sup_n‖ΔF_n‖_TV<∞, these integrable curvatures converge weakly to −i_*ΔF. The same statement holds for nets with a uniform variation bound and weak convergence.
+
+To prove integrability, put ν=−ΔF, write its Jordan decomposition ν=ν⁺−ν⁻, and let m=ν⁺(Γ)=ν⁻(Γ). Take a tensor power of the preceding H with degree d>m, fix z∈Γ, and set λ±=ν±+(d−m)δ_z. Both measures have mass d, and λ⁺−λ⁻=ν. The Radon Poisson theorem of §6.6 gives normalized potentials G± with −ΔG±=λ±−μ₀, where μ₀ is now the curvature measure of that tensor power. The positive graph-curvature criterion makes the two resulting metrics on the same fixed H semipositive. Their quotient is exp(−F∘τ), up to a constant metric fixed by evaluation at z. Subtract their §6.4 curvatures to obtain the signed identity, proving agreement with the existing integrable measure rather than defining a competing measure.
+
+For a uniformly variation-bounded family F_n, choose this same H with d larger than all positive Jordan masses. On any subnet where the two padded positive measures converge weakly, the jointly continuous voltage kernel on compact Γ×Γ makes their normalized Poisson potentials converge separately uniformly. Apply §6.4 to the two semipositive metrics on the fixed H and subtract. Every resulting subnet limit is −i_*ΔF, proving signed continuity. This argument requires neither convergence of the Jordan parts along the original net nor semipositivity of the trivial-line metrics themselves.
+
+*Needs:* §3.3 weak Laplacian and variation; §2.13 subdivision and valued extension; §§6.1–6.2 model metrics, geometric intersections and rank-one descent; §6.3 metric classes; §6.4 semipositive limits and decomposition independence; §6.6 Radon Poisson theorem and continuous voltage kernel. Within this section, prove model curvature, then positive graph-curvature approximation, then BV integrability and signed continuity. None uses §6.8.
 
 **Checks.**
 
 - Two loop lengths 1 and √2 remain unchanged: ℓ₂/ℓ₁=√2 rules out making both rational by rescaling.
 - On [0,L], F(s)=s has ΔF=δ_L−δ₀ and every exact affine approximant has the same flux.
 - For F(s)=s²/2, ΔF=−ds+Lδ_L has total variation 2L; controlled interpolation converges to both the density and endpoint atom without a discrete value group.
+- On [0,1] with F(s)=s, ν=δ₀−δ₁. With d=2 and z=0, the padded positive measures are λ⁺=2δ₀ and λ⁻=δ₁+δ₀, each of mass 2; their difference is δ₀−δ₁. The trivial-line curvature is signed, although its two degree-two factors have positive curvature.
+- For μ₀=δ₀+δ₁ on [0,1], G(s)=s gives μ₀−ΔG=2δ₀≥0, while G(s)=2s gives 3δ₀−δ₁ and fails the positive criterion. With G replaced by (1−ε)G in the first case, the curvature becomes (2−ε)δ₀+εδ₁, displaying the positive endpoint margin.
+- For constant F, ν=0 and both padded measures equal dδ_z; their quotient changes only a constant norm and has curvature zero.
+- For the tent of height 1/n supported on [c−1/n,c+1/n] in an edge interior, ΔF_n=−δ_(c−1/n)+2δ_c−δ_(c+1/n), ‖F_n‖∞=1/n and ‖ΔF_n‖_TV=4. The signed measures tend weakly to zero, but both Jordan parts tend to 2δ_c. Padding and separate Poisson potentials retain this cancellation.
 
 ### 6.8 Metric–Laplacian and admissible corrections
 
@@ -2226,9 +2282,9 @@ Prove *the model-metric Laplacian comparison*. On a split semistable curve, mult
 
 Split semistable proper curve of positive genus; the dualizing metric statement uses Yuan’s model/Arakelov metric and normalized Green conventions. Approximation must control Laplacians as well as potentials. The unit-edge formula uses a regular semistable DVR model with local equation uv=π. Thickness n is represented by an edge of length n or by n unit subdivisions.
 
-For the proof, for model PL functions identify vertical-divisor intersections with outgoing slopes. Apply the rank-one model curvature and approximation theorems of §6.7 with weak Laplacian convergence and controlled total variation; the DVR statement is only their discrete calibration. Under s=c·t and F=c·f the slopes are unchanged, including the vertex atoms and the interior Laplacian measure. The model dualizing degree on each component is 2g_v−2+val(v). Subtract the Green Laplacian δ_KΓ−(2g−2)μ_a to obtain the corrected curvature. Local heights rescale with log absolute values, while these curvature measures keep their total mass.
+For the proof, for model PL functions identify vertical-divisor intersections with outgoing slopes. Apply §6.7’s model curvature identity, positive graph-curvature criterion and BV-potential integrability and signed continuity, with weak Laplacian convergence and controlled total variation; the DVR statement is only their discrete calibration. Under s=c·t and F=c·f the slopes are unchanged, including the vertex atoms and the interior Laplacian measure. The model dualizing degree on each component is 2g_v−2+val(v). Subtract the Green Laplacian δ_KΓ−(2g−2)μ_a to obtain the corrected curvature. Local heights rescale with log absolute values, while these curvature measures keep their total mass.
 
-*Needs:* [6.1 Formal and model metrics](#61-formal-and-model-metrics); [6.6 Admissible Green functions and measures](#66-admissible-green-functions-and-measures); [6.4 Limits and local intersection heights](#64-limits-and-local-intersection-heights); [6.7 Model potentials and Laplacian approximation](#67-model-potentials-and-laplacian-approximation), specifically its arbitrary-rank-one curvature and approximation theorems.
+*Needs:* [6.1 Formal and model metrics](#61-formal-and-model-metrics); [6.6 Admissible Green functions and measures](#66-admissible-green-functions-and-measures); [6.4 Limits and local intersection heights](#64-limits-and-local-intersection-heights); [6.7 Model potentials and Laplacian approximation](#67-model-potentials-and-laplacian-approximation), specifically its arbitrary-rank-one model curvature, positivity-preserving approximation, BV integrability and signed continuity theorems.
 
 [Xinyi Yuan, Arithmetic bigness and a uniform Bogomolov-type result](https://faculty.bicmr.pku.edu.cn/~yxy/preprints/bigness_and_bogomolov.pdf), Appendix A.5, displayed admissible metric formula, p. 116; Propositions A.4–A.5 and proofs, pp. 117–118. Metric correction and normalized curvature/Laplacian formula; the original graph edges have length one.
 
@@ -2242,7 +2298,7 @@ A polarized tree with two genus-one vertices has μ_a=(δ_v+δ_w)/2 and no bridg
 
 ### Dependencies
 
-Layers 0–3 for analytic spaces, graph Laplacians and skeleta; AdicSpacesPartIII §§R2.2–R2.3 for formal models; SchemeAndStackFoundations §§5.2–5.3 for cycle intersections; §6.1a rank-one intersection specialization and projection for the residue-field intersections and the stated rank-one model extension. The line, potential, measure and hybrid comparisons supply the downstream dynamical applications; none is a prerequisite of this layer.
+Layers 0–3 for analytic spaces, graph Laplacians and skeleta; AdicSpacesPartIII §§R2.2–R2.3 for formal models; SchemeAndStackFoundations §§5.2–5.3 for cycle intersections; §6.1a geometric intersection specialization and projection, with §6.2 rank-one descent for the residue-field intersections and the stated rank-one model extension. The line, potential, measure and hybrid comparisons supply the downstream dynamical applications; none is a prerequisite of this layer.
 
 ## Layer 7: Uniformization and integration interfaces
 
@@ -2252,9 +2308,9 @@ Import the algebraic Tate curve, local Coleman primitives and the abelian logari
 
 For this section, split semistable reduction means that A admits a smooth separated group model over K° whose connected special fiber is an extension of an abelian variety by a split torus. Good reduction means that A extends to an abelian scheme over K°. Compare the construction for different such models through their formal identity neighborhoods.
 
-Prove *rank-one Raynaud uniformization*. For an abelian variety A with split semistable reduction over any complete nontrivially valued rank-one K, construct the analytic cross 0→M′→Eᵃⁿ→Aᵃⁿ→0 and 0→T→E→B→0, with B of good reduction, the full discrete period lattice M′ and the analytic quotient. Here E is the algebraic semiabelian extension, and its good-reduction formal subgroup defines a distinguished analytic domain E₀. Prove compatibility with isometric extension and descent (Baker–Rabinoff, §§3.2–3.7, pp. 6–7; KRZB uniform, §3.4.1, pp. 21–22).
+Prove *rank-one Raynaud uniformization*. For an abelian variety A with split semistable reduction over any complete nontrivially valued rank-one K, construct the analytic cross 0→M′→Eᵃⁿ→Aᵃⁿ→0 and 0→T→E→B→0, with B of good reduction, the full discrete period lattice M′ and the analytic quotient. Here E is the algebraic semiabelian extension, and its good-reduction formal subgroup defines a distinguished analytic domain E₀. Prove compatibility with isometric extension and descent (Baker–Rabinoff §4.1, pp. 8–9; KRZB uniform §3.4.1, pp. 21–22).
 
-Prove *rank-one Raynaud valuation*: for N the cocharacter lattice of T, construct trop:Eᵃⁿ→N_ℝ extending v on torus coordinates; on valued points its kernel is E₀ and trop(M′) is a full lattice. Prove *rank-one Raynaud polarization*: a principal polarization induces the multiplicative period pairing and its real valuation pairing, compatibly with extension and descent. For Jacobians, its identification with the edge-length pairing is §7.5, rather than an assumption of this construction (Baker–Rabinoff, §§3.7–3.9 and §6, pp. 7–8, 14–16).
+Prove *rank-one Raynaud valuation*: for N the cocharacter lattice of T, construct trop:Eᵃⁿ→N_ℝ extending v on torus coordinates; on valued points its kernel is E₀ and trop(M′) is a full lattice. Prove *rank-one Raynaud polarization*: a principal polarization induces the multiplicative period pairing and its real valuation pairing, compatibly with extension and descent. For Jacobians, its identification with the edge-length pairing is §7.5, rather than an assumption of this construction (Baker–Rabinoff §4.2, p. 9, for tropicalization and the full lattice; §4.3, pp. 9–10, for duality; §6, pp. 14–16, for the Jacobian pairing).
 
 Use NeronModelsAndSemistableAbelianVarieties §§3.13–3.14 and §§4.3–4.4 for the complete-DVR specialization. Establish the rank-one formal extension, algebraization and lattice descent on the same semiabelian objects; no discreteness of v(K×) is assumed.
 
