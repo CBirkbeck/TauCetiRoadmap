@@ -13,8 +13,9 @@ Bloch–Kato logarithm comparisons and curve regulator formulas are not
 statable here: the completed K-groups, continuous period-cohomology
 realizations and syntomic Chern-class carriers are missing at the pins.
 The Perrin–Riou, Wach/Coleman arithmetic image and de Rham interpolation
-headlines lack the corresponding étale (φ,Γ)-module, Wach-module and
-locally analytic distribution realizations. The elementary constraint
+headlines lack (φ,Γ)-modules over the Robba ring (étale or not, with their
+Herr cohomology and Bloch–Kato maps), Wach modules and locally analytic
+distribution realizations. The elementary constraint
 headlines below use the actual native submodule, not surrogate input data.
 -/
 
