@@ -39,9 +39,9 @@ image interfaces. Full Néron torsion specialization lacks the Néron reduction 
 The finite-j exceptional-prime divisibility theorem lacks the good-reduction trace
 and local inertia interfaces. The quantitative elliptic isogeny-degree theorem is
 not statable because the stable Faltings-height carrier is missing. Weight-two
-modular class reciprocity lacks the normalized modular-unit symbols, their Chern
-classes and the attached filtered de Rham eigenform line. These are README targets,
-not assumed suppliers.
+modular class reciprocity lacks the normalized modular-unit symbols, their
+cup-normalized étale classes and the attached filtered de Rham eigenform line.
+These are README targets, not assumed suppliers.
 -/
 
 noncomputable section
