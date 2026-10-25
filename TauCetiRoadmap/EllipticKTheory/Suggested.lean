@@ -21,8 +21,12 @@ finiteness, positive K-theory descent and finite-field K-group classification, m
 integral part and quotient Bloch-class descent cannot be stated: the pins have no higher K-groups
 of schemes or fields, motivic K-theory tower or étale-cohomology carriers. The marked-model
 headlines use native schemes and the S-integer subalgebra; the wider excellent-Dedekind statements
-require an excellence predicate, absent at the pins. General regular-model existence is imported
-from RelativeJacobiansAndIntegralCurveModels §5.1. The projective Weierstrass scheme itself is
+require an excellence predicate, absent at the pins. The native marked-model bundles are acceptance
+adapters for the proper/regular full subcategory of RelativeJacobiansAndIntegralCurveModels §0.1;
+README §6.1 specifies their equivalence, including markings, morphisms, localisation and minimality.
+That equivalence is not statable here: the supplier's DedekindModel carrier is absent at the pins.
+General regular-model existence is transported from its §5.1 through that equivalence.
+The projective Weierstrass scheme itself is
 supplied by Tau Ceti. Boundary cases and API facts are in README.md.
 -/
 
@@ -87,9 +91,11 @@ open _root_.AlgebraicGeometry CategoryTheory Limits
 
 universe u
 
-/-- A marked regular proper model (README §6.1): a proper flat scheme over `O`, regular at every
+/-- The native acceptance adapter for a marked regular proper model (README §6.1): a proper flat scheme over `O`, regular at every
 stalk, whose generic fibre is identified with the fixed `F`-scheme `C` by an isomorphism over `F`.
-The definition makes sense for any `O`-algebra field; arithmetic existence uses S-integers. -/
+The definition makes sense for any `O`-algebra field; arithmetic existence uses S-integers.
+Over a Dedekind domain with fraction field `F`, README's regularProperModelEquivalence identifies
+it with the proper/regular full subcategory of the supplier's DedekindModel. -/
 structure RegularProperModel (O F : Type u) [CommRing O] [Field F] [Algebra O F]
     (C : Scheme.{u}) (toField : C ⟶ Spec (CommRingCat.of F)) where
   /-- The total scheme. -/
@@ -116,8 +122,9 @@ variable {O F : Type u} [CommRing O] [Field F] [Algebra O F]
 noncomputable def genericFibreInclusion (M : RegularProperModel O F C toField) : C ⟶ M.X :=
   M.genericIso.inv ≫ pullback.fst _ _
 
-/-- A morphism of marked models (README §6.3): a map of total schemes over `O` restricting to the
-identity on the fixed generic curve. -/
+/-- A marked morphism in the native acceptance adapter (README §§6.1, 6.3): a map of total schemes
+over `O` restricting to the identity on the fixed generic curve. The adapter equivalence preserves
+this underlying map and identifies it with the supplier's marked morphism. -/
 structure Hom (M N : RegularProperModel O F C toField) where
   /-- The morphism of total schemes. -/
   hom : M.X ⟶ N.X
