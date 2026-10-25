@@ -1994,7 +1994,7 @@ The universal class c has exact order6 in Bₛ(F) for every formally real field 
 
 Here ρ is defined on R; the order statement holds for every formally real field, with the Layer 3 Suslin Bloch group and universal class c=[x]+[1−x]. Its additive order can equivalently be measured in the actual pre-Bloch group P(F), because B(F) is a subgroup. This is the acceptance signature on preBlochSymbol(2)+preBlochSymbol(−1), with the native IsFormallyReal hypothesis; no embedding into ℝ is assumed.
 
-The source locators for these statements are Suslin 1991, §1 Lemma 1.6 and proof, pp219–220; Zagier 2007, II.1.A pp23–24; Suslin 1991, §1 Proposition1.1, p220; Weibel, K-book VI, VI.5.2.1 p24.
+The source locators for these statements are Suslin 1991, §1 Lemma 1.6 and proof, pp219–220; Zagier 2007, Chapter II, §1.A, pp23–24; Suslin 1991, §1 Proposition1.1, p220; Weibel, K-book VI, VI.5.2.1 p24.
 
 **Checks.**
 
@@ -2297,7 +2297,7 @@ Polylogarithms Layer 2 consumes the normalized K₃-to-Bloch map for its real re
 - Frank Calegari, Stavros Garoufalidis and Don Zagier, [*Bloch groups, algebraic K-theory, units, and Nahm’s conjecture*, arXiv:1712.04887v3 (2021)](https://arxiv.org/abs/1712.04887v3), Definitions 1.1 and 2.1 and §6. This is the older exterior presentation, read with the explicit intersection repair in §3.13. It differs from the [published author copy](https://people.mpim-bonn.mpg.de/stavros/publications/printed/calegari_unit.pdf), Ann. Sci. ENS 56 (2023), 383–426, Definition 2.1 and Lemma 2.2, p.391; §4.2–4.3, pp406–407; §6, pp414–416. Published locators use printed journal pages.
 - Alexander B. Goncharov, [*Geometry of configurations, polylogarithms, and motivic cohomology*](https://sasha-goncharov.github.io/Advances1995.pdf), Adv. Math. 114 (1995), 197–318, §§1.8–1.9 and 2.3. The all-curve relation-equality assertion is conditional, as specified at Conjecture 1.20, p.225.
 - Spencer Bloch, *Higher Regulators, Algebraic K-Theory, and Zeta Functions of Elliptic Curves*, CRM Monograph Series 11 (2000), Lecture 6, for the name of the full-tensor convention of §§3.9–3.10. The explicit kernel, obstruction and six-torsion comparisons here are algebraic consequences of the displayed definitions and five-term relations; no theorem of the monograph is used.
-- Don Zagier, [*The Dilogarithm Function*](https://people.mpim-bonn.mpg.de/zagier/files/doi/10.1007/978-3-540-30308-4_1/fulltext.pdf), in *Frontiers in Number Theory, Physics, and Geometry II* (2007), Appendix II.1.A, pp23–24, for the Rogers normalization.
+- Don Zagier, [*The Dilogarithm Function*](https://people.mpim-bonn.mpg.de/zagier/files/doi/10.1007/978-3-540-30308-4_1/fulltext.pdf), in *Frontiers in Number Theory, Physics, and Geometry II* (2007), Chapter II, §1.A, pp23–24, for the Rogers normalization.
 - Moritz C. Kerz, [*The complex of words and Nakaoka stability*, arXiv:math/0410261v1](https://arxiv.org/abs/math/0410261v1), Theorems 1–2, pp.1–3.
 - Allen Hatcher, [*Algebraic Topology*](https://pi.math.cornell.edu/~hatcher/AT/AT.pdf), §4.2, Examples 4.51–4.52, pp380–381, and Exercise 37, p392, for the Hopf and Whitehead input at its topological owner.
 - David Marker, [*Introduction to Model Theory*](https://library.slmath.org/books/Book39/files/marker.pdf), in *Model Theory, Algebra, and Geometry*, MSRI Publications 39 (2000), Theorem 3.5 and Corollary 3.6, pp.24–25, and Proposition 4.1, p.25, for real-closed-field elementary transfer.
