@@ -16,7 +16,8 @@ Serre's rank-two lifting theorem, and the p-adic Mahler–Manin theorem on the n
 The ordinary and multiplicative main conjectures lack the cyclotomic Selmer and normalized
 modular p-adic L-function carriers. The period-defect dictionary between Kato's good pairs and
 canonical periods (README §0.9) lacks the Galois representation of a newform with its
-Betti–étale lattice and Kato's p-adic zeta function of a pair (ω, γ). The Hida approximation of a
+Betti–étale lattice and Kato's p-adic zeta function of a pair (ω, γ). The source Betti/full-symbol
+period comparison of §§0.9 and 1.3 lacks those integral realization and period-lattice carriers. The Hida approximation of a
 p-new weight-two form (README §1.6) lacks the Galois lattices of newforms with their ordinary
 lines, the ordinary Hida family through the form, and the canonical p-adic L-functions and
 integral family periods whose ideals it compares. Kato's main conjecture, its ordinary and signed comparisons,
@@ -25,7 +26,9 @@ Iwasawa complexes and their fundamental lines; the signed results also lack inte
 maps and their image lattices. The elliptic main conjectures lack these same Selmer and
 analytic carriers with their Tate-lattice and Néron-period comparisons. Schneider's elliptic
 and abelian leading-term theorems lack the flat arithmetic complexes and the normalized
-p-adic height pairings. The rank-zero converse lacks the discrete Bloch–Kato Selmer carrier.
+p-adic height pairings. The rank-zero converse and its centralCriticalComparison (README §§2.1, 5.4) lack the modular
+Tate-twisted Iwasawa complex, its twisted Betti factor and zeta morphism, and the discrete
+Bloch–Kato Selmer carrier.
 The Greenberg–Stevens derivative theorem and the p-adic BSD implications lack the modular
 p-adic L-function, global Tate parameter and height-regulator carriers. None of these headline
 statements is replaced by an abstract predicate or an equality on arbitrary scalar data.
