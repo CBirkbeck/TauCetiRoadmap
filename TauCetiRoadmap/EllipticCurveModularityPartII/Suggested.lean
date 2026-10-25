@@ -19,7 +19,9 @@ norm bound; sharp Kraus rational and full-two-torsion realization; uniform
 irreducibility and absolute irreducibility with rational two-torsion; the prime,
 non-CM prime and composite rational cyclic-isogeny degree classifications; finite-prime
 coefficient rationality; integral ideal-congruence Sturm; Cartan integrality,
-the proper-image classification and Lemos's rational-isogeny surjectivity theorem.
+the proper-image classification and Lemos's rational-isogeny surjectivity theorem;
+unconditional modular abelian rank zero and weight-two modular class reciprocity;
+the quantitative elliptic isogeny-degree bound.
 
 The removed-prime bound and Kraus realization are not statable at the pins: the elliptic arithmetic conductor,
 residual Artin conductor and Serre weight interfaces are missing. The Cartan
@@ -35,7 +37,11 @@ Néron cotangent realization. The coefficient-prime reduction alternative and
 exceptional projective-image bound lack the local reduction/weight and projective
 image interfaces. Full Néron torsion specialization lacks the Néron reduction map.
 The finite-j exceptional-prime divisibility theorem lacks the good-reduction trace
-and local inertia interfaces. These are README targets, not assumed suppliers.
+and local inertia interfaces. The quantitative elliptic isogeny-degree theorem is
+not statable because the stable Faltings-height carrier is missing. Weight-two
+modular class reciprocity lacks the normalized modular-unit symbols, their Chern
+classes and the attached filtered de Rham eigenform line. These are README targets,
+not assumed suppliers.
 -/
 
 noncomputable section
