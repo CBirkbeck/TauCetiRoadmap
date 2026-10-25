@@ -1308,6 +1308,8 @@ All displayed positive parameters and their inequality.
 
 *Proof sketch.* Use Rankin’s trick with β=κs/log z, then decouple the multiplicative tilt n^β. A uniform bound needs the actual difference p^(jβ)−p^((j−1)β). The source replaces it by a coarser term whose prime sum grows like log log z; that displayed proof does not close the claimed constant. Prove the uniform Euler-factor estimate retaining these differences.
 
+This estimate concerns the unshifted multiplicative weight. It gives no uniform saving for the shifted weight f(a)ρ̃_Q(k₀a)/(k₀a)²: primes dividing k₀ can force a large smooth factor of a. The fixed-divisor objective below separates that part before using a smooth-factor estimate.
+
 *Needs:* Layer 0 §0.7 multiplicative sieve growth class; Layer 1 §1.4 multiplicative decoupling inequality.
 
 **Extremely smooth-factor saving.** For ρ̃_Q(p^k)≤C `p^{k(2−r)},` C>0,0<r≤1, α∈[0,1],β>0, and z≥3, `Σ_{z^α≤a≤z, P⁺(a)≤log z·log log z}ρ̃_Q(a)/a²≤C′` z^(−rα+β). Here P⁺(1)=1 and zero is excluded. The constant C′ may depend on C,r,α,β; α is fixed before choosing it.
@@ -1349,7 +1351,19 @@ The exact-valuation proportions have the following API.
 - Under the original corrected-density power bound, 0≤d_Q(p,n)≤ρ̃_Q(p^n)/p^(2n)≤C p^(−rn) for every n≥1, with C independent of p,n.
 - For a finite set of distinct primes with prescribed nonnegative valuations, the proportion in the residue space modulo the product of p^(n+1) is the product of their exact-valuation proportions, by CRT.
 
-If p^e exactly divides k₀, quotient valuation j≥0 uses n=e+j, including j=0; it never uses a density bound for a quotient polynomial. Run the main theorem's factor decomposition with local weight f(p^j) at these forced primes, sieving the remaining primes. The required analytic estimate is the displayed fixed-divisor bound, with its constant chosen before k₀: prove the summed lattice errors and all four factor ranges uniformly with these valuation restrictions, including the R₂ replacement required by the main theorem. A local proportion bound alone does not prove that global estimate. Keep X/k₀ and the strengthened rescaled curvature condition throughout.
+If p^e exactly divides k₀, quotient valuation j≥0 uses n=e+j, including j=0; it never uses a density bound for a quotient polynomial. Write each positive quotient Q/k₀=c b, where every prime dividing c divides k₀ and gcd(b,k₀)=1, taking the entire prime-power part at these primes into c. Separate the sum over c, with local weight f(p^j) and exact-valuation proportion d_Q(p,e+j), before decomposing b into smooth and rough parts. The required analytic estimate is the displayed fixed-divisor bound, with its constant chosen before k₀: prove the summed lattice errors and all four factor ranges uniformly with these valuation restrictions, including the R₂ replacement required by the main theorem. A local proportion bound alone does not prove that global estimate. Keep X/k₀ and the strengthened rescaled curvature condition throughout.
+
+**Short-modulus rough-point estimate.** Put B=A/k₀²≥1. Under the fixed-divisor geometry (R/k₀)^θ≤B^(1−3η), with 0<η<1/2, 0<θ≤2, fixed ς>0, and the same L(Cₗ,θ) domain, prove uniformly for 1≤a≤B^η, n=k₀a and 1≤z≤B^ς that
+
+`#{x∈E∩ℤ²:n|Q(x), gcd(n,Q(x)/n)=1, Q(x)/n>0 and z-rough} ≤ C A ρ̃_Q(n)/n² ∏_(deg Q<p<z,p∤n)(1−ρ_Q(p)/p²)`.
+
+Here deg Q≥1 and C depends only on degree,Cₗ,η,ς; a content prime p<z not dividing n makes the population empty. This estimate needs no corrected-density bound for a quotient polynomial. It extends the residue-class proof of the binary sieve with divisibility conditions (KHAYUTIN-19 line 3718, Lemma 9.13, pp.226–227): at modulus n retain at most ρ̃_Q(n) classes, then apply the degree-uniform rough-point sieve to Q(nu+r)/n. Its area is B/a²≥B^(1−2η)≥1, and
+
+`(R/n)^θ ≤ B^(1−3η)a^(−θ) ≤ (B/a²)^(1−η)`,
+
+while z≤(B/a²)^(ς/(1−2η)). At primes not dividing n, the unit coordinate change preserves ordinary densities. The exact-valuation restriction is retained at primes dividing n.
+
+Use this estimate only while the selected quotient prefix a, including c, is at most B^η. The range c>B^η requires a separate uniform estimate in the fixed-divisor construction objective: it is not a rare smooth tail of the shifted weight. This requirement is additional to the ordinary-density R₂ replacement. The unshifted saving (KHAYUTIN-19 line 3968, Lemma 9.21, (41)) supplies neither of these estimates for the shifted weight.
 
 For comparison, if r runs over the zero classes modulo k₀ and Q_r(u)=Q(k₀u+r)/k₀, the exact finite recombination is
 
@@ -1364,8 +1378,12 @@ where e=v_p(k₀) and j=v_p(a). The zero-exponent factors are ordinary densities
 - For the same Q and k₀=p, every Q_r=pu² has ρ̃_(Q_r)(p)=p²−p. At p=2,3,5 these are 2,6,20; their ratio to p^(3/2) is unbounded. The original densities retain C=1,r=1/2.
 - For Q=x₀², d_Q(p,1)=0 and d_Q(p,2)=ρ̃_Q(p²)/p⁴=(p−1)/p². At p=2 these values are 0 and 1/4; the exact quotient valuation zero contributes no mass when k₀=p.
 - For Q=x₀, d_Q(p,n)=(p−1)/p^(n+1) for n≥0. At p=2,n=0,1,2 the values are 1/2,1/4,1/8, testing both the zero-exponent branch and the smooth correction. Requiring v₂(Q)=v₃(Q)=1 gives 72 pairs modulo 36, hence proportion 72/36²=(1/4)(2/9)=1/18.
+- For Q=x₀², ρ̃_Q(p^(2m))=(p−1)p^(3m−1) for m≥1 and ρ̃_Q(p^(2m+1))=0 for m≥0, also at p=2. With f=1 and squarefree k₀=k, the shifted weight is positive exactly at a=kb²; consequently its total mass for a≤k is φ(k)/k², all at a=k. At k=6 this is 1/18, while every a<6 has weight zero.
+- Let k be the product of primes at most P, z=k, α=κ=1, r=1/2, ε=1/4 and s=log k/log P. The smooth tail contains all the preceding mass, so its ratio to the full mass is 1. The admissibility inequality is 1≤log P/8 for P≥exp(8), while exp(−s) tends to zero. This excludes a constant uniform in k in the shifted smooth-saving assertion.
+- In the short-modulus estimate, k₀=1 gives n=a and the ordinary divisibility sieve. For Q=x₀² and n=2, gcd(2,Q/2)=1 is impossible, and ρ̃_Q(2)=0; for n=4 the permitted first coordinates are 2 modulo 4 and ρ̃_Q(4)=4. Thus replacing the corrected density by a smooth-only count would lose nonempty populations.
+- For B=4096,η=1/6,θ=1 and a=4=B^η, the rescaled area is 256 and the radius bound is (R/n)≤16≤256^(5/6). The cutoff exponent changes from ς to 3ς/2, since 4096^ς=256^(3ς/2). Values with c>4 are outside this short-modulus range.
 
-*Needs:* Layer 1 §1.4 binary multiplicative-function sieve and its factor-range estimates with the stated valuation restrictions; Layer 0 §0.7 curve lifting and singular correction; GeometryOfNumbersAndQuadraticArithmetic §4.1; Layer 0 §0.11 translated lattice discrepancies.
+*Needs:* Layer 1 §1.4 binary multiplicative-function sieve and its factor-range estimates with the stated valuation restrictions; Layer 1 §1.4 binary polynomial sieve at power level and binary sieve with divisibility conditions for the short-modulus estimate; Layer 0 §0.7 curve lifting and singular correction; GeometryOfNumbersAndQuadraticArithmetic §4.1; Layer 0 §0.11 translated lattice discrepancies.
 
 **Binary sieve with a unit congruence.** For k₀,k₁,k₂≥1, prime support(k₁)⊆prime support(k₂), gcd(k₀,k₂)=1, k₀k₁k₂≤A^(η/2), ℓ a unit modulo k₂, R^θ≤A^(1−4η), X≤A^(δ/2), the sum of f(Q/k₀) restricted by Q≡k₀k₁ℓ mod k₀k₁k₂ is bounded by C′A f(k₁)ρ_Q(k₀k₁ℓ;k₁k₂)/(k₁k₂)² times the Euler product to X/(k₀k₁) excluding content primes and p|k₀k₂, times `Σ_{a≤X/(k₀k₁),gcd(a,k₂)=1}` f(a)ρ̃_Q(k₀a)/(k₀a)². Here `ρ_Q(t;k)=ρ_{Q−t}(k).`
 
@@ -1443,9 +1461,19 @@ Even N in the Goldbach bound; all constants absolute.
 
 ([HB-SIEVES](#references), §3, third application: Corollary 3.2 (p.14) and Theorems 3.1–3.2, pp.18–21.)
 
-*Proof sketch.* Use the union of the two forbidden residues at each odd prime. At divisors of N the two residues coincide. At two choose the surviving odd class before forming the product. Apply the dimension-two denominator lower bound and bound small prime exceptions.
+*Proof sketch.* Use the union of the two forbidden residues at each odd prime. At divisors of N the two residues coincide. At two choose the surviving odd class before forming the product. Write ρ_N(p)=p g_N(p), equal to 1 when p|N and 2 otherwise, for odd p; set ρ_N(2)=0 after separating parity and extend multiplicatively. The Selberg diagonal dominates the squarefree sum with prime factors ρ_N(p)/p. Apply §1.4's binary sieve Euler denominator with degree bound 2, whose constant is independent of N. For the strict diagonal d<z use its inclusive lower bound at z/2, with z≥4. Extract the factors using
 
-*Needs:* Layer 1 `SieveSelberg.selberg_upper_bound`; Layer 1 §1.1 selberg denominator in dimension κ; AnalyticNumberTheoryPartI §1.2a for divisor sums.
+`1−2/p=(1−1/p)²(1−1/(p−1)²)` and `(1−1/p)/(1−2/p)=(p−1)/(p−2)`.
+
+Mertens gives the uniform reciprocal-denominator bound with the displayed Goldbach correction; extending that correction from p≤z/2 to every odd p|N only increases it. A sufficiently small fixed power of the population size for z controls the elementary divisor-sum remainder. Bound small prime exceptions and bounded population sizes separately. The twin-prime case uses the same degree-two estimate with no varying collision primes.
+
+**Checks.**
+
+- For N=6 at p=3 the forbidden classes coincide, ρ_N(3)=1, and the ratio of local products is (1−1/3)/(1−2/3)=2. For N=10 at p=3 they are distinct and this ratio is 1.
+- At p=5 the collision correction is (1−1/5)/(1−2/5)=4/3; both identities give 3/5=(4/5)²·15/16 when there is no collision. Omitting the varying collision factors loses the uniform N-dependence.
+- With odd-prime support {3,5} and strict z=5, the diagonal is 1+2=3 for two forbidden residues at 3. The inclusive comparison at z/2=5/2 has only d=1, hence value 1≤3; an inclusive diagonal at z=5 would additionally count the excluded d=5 with weight 2/3.
+
+*Needs:* Layer 1 `SieveSelberg.selberg_upper_bound`; Layer 1 §1.4 binary sieve Euler denominator with degree bound 2; AnalyticNumberTheoryPartI §0.26 for Mertens and §1.2a for divisor sums.
 
 **Brun reciprocal convergence.** Prove `SieveApplications.brun_reciprocals`. The sum of 1/p over primes p for which p+2 is prime converges, as does the sum including 1/(p+2).
 
@@ -1489,7 +1517,7 @@ Use the lattice-point discrepancy only at scaled area at least one. The curvatur
 
 Establish degree-uniform squarefree Euler lower bounds, absorption of θ_Q after increasing the growth exponent, and both smooth-factor savings with constants depending only on the stated parameters. Fix α before the extremely-smooth constant and treat α=0 separately.
 
-The ordinary-density R₂ requirement for the binary multiplicative conclusion is stated at that target. For the fixed-divisor conclusion prove the separate uniform valuation-restricted estimate of §1.4 on the original polynomial: the local bound d_Q(p,e+j)≤C p^(−r(e+j)) is available, but quotient-by-quotient constants are not uniform. Its finite recombination formula retains ordinary densities when j=0. Retain (R/k₀)^θ≤(A/k₀²)^(1−3η) and the transformed value bound. For the unit-congruence consequence transport Q≡k₀k₁ℓ modulo k₁k₂; its preliminary quotient Q₁ has unchanged densities off k₁k₂ and zero densities on it, and then consumes the uniform fixed-divisor estimate.
+The ordinary-density R₂ requirement for the binary multiplicative conclusion is stated at that target. For the fixed-divisor conclusion prove the separate uniform valuation-restricted estimate of §1.4 on the original polynomial: the local bound d_Q(p,e+j)≤C p^(−r(e+j)) is available, but quotient-by-quotient constants are not uniform. Separate the entire quotient part supported on primes dividing k₀ before decomposing the remaining part. Use the short-modulus rough-point estimate only up to (A/k₀²)^η; prove a separate bound when the compulsory part exceeds that cutoff. The unshifted smooth-factor saving cannot bound this latter range uniformly. Its finite recombination formula retains ordinary densities when j=0. Retain (R/k₀)^θ≤(A/k₀²)^(1−3η) and the transformed value bound. For the unit-congruence consequence transport Q≡k₀k₁ℓ modulo k₁k₂; its preliminary quotient Q₁ has unchanged densities off k₁k₂ and zero densities on it, and then consumes the uniform fixed-divisor estimate.
 
 Prove positive H_g, the Γ(κ+1) normalization and uniformity under deletion of progression-modulus primes, tracking interval logarithms and totients. The dimension-one diagonal sums additionally require the precise remainder and uniform L estimate behind GGPY Lemmas 3–4; its cited Halberstam–Richert Lemmas 5.3–5.4 need an accessible proof.
 
@@ -2337,7 +2365,13 @@ The definition exposes the following operations and laws:
 
 ([KED-ANT-16](#references), Theorem 16.7 and proof, §16.3.)
 
-*Proof sketch.* For an exceptional odd prime p, q(p)>N^ε implies p>N^ε because q(p)<p. Every positive N^ε-smooth integer is therefore coprime to p, and multiplicativity makes its quadratic symbol 1. The forbidden classes are precisely the nonresidues (symbol−1); the zero class is allowed by the forbidden-residue sieve, so no artificial deletion of multiples of p is needed. A uniform positive proportion of N^ε-smooth integers follows from AnalyticNumberTheoryPartI §3.34 with fixed parameter 1/ε; when ε≥1 every positive integer up to N is N^ε-smooth. Use the distinct-integer smooth count; the source’s ordered-factor construction overcounts.
+*Proof sketch.* If ε≥1 there are no exceptional primes, since q(p)<p≤N≤N^ε. For 0<ε<1, use population length H=N², modulus cutoff Q=N and smoothness cutoff N^ε=H^(ε/2). For an exceptional odd prime p, q(p)>N^ε implies p>N^ε because q(p)<p. Every positive N^ε-smooth integer is therefore coprime to p, and multiplicativity makes its quadratic symbol 1. Forbid precisely the nonresidues, allowing the zero class. AnalyticNumberTheoryPartI §3.34 with fixed parameter 2/ε gives at least c_ε N² distinct smooth integers for sufficiently large N. If E is the exceptional-prime count, the forbidden-residue diagonal has J(N)≥E/3, since its prime summands (p−1)/(p+1) are at least 1/3. The sieve bound is at most (H−1+Q²)/J(N)<2N²/J(N), hence E≤6/c_ε. Absorb bounded N into the constant. This is the square-root-cutoff reformulation in KED-ANT-16 line 565; count distinct integers, rather than ordered prime-factor tuples.
+
+**Checks.**
+
+- At N=16,ε=1/2, H=256,Q=16 and the smoothness cutoff is 4. There are 28 distinct 4-smooth positive integers at most 256; the numerator is H−1+Q²=511, and the Dickman parameter is 4=2/ε.
+- For a forbidden prime p=3 the prime diagonal term is (3−1)/(3+1)=1/2≥1/3. For p=7 it is 3/4; the zero class is permitted in both cases.
+- At ε=1,N=7, q(3)=2<3 and q(7)=3<7≤N^ε, so neither prime is exceptional. For N=2 the odd-prime population is empty for every ε>0.
 
 *Needs:* Layer 2 `SieveApplications.leastNonresidue`; Layer 2 §2.9 large sieve for forbidden residues; AnalyticNumberTheoryPartI §3.34.
 
@@ -2347,7 +2381,7 @@ Establish π/δ in the separated Hilbert inequality and its periodic adapter bef
 
 Use AnalyticNumberTheoryPartII §5.29 for Heath-Brown’s odd-squarefree and real-character estimates, retaining reciprocity signs and (MN)^ε loss in the bilinear consequence. Jutila (1975), Lemmas 2–3 use Layer 2 §2.7 Jutila unweighted mean square and AnalyticNumberTheoryPartI §§3.22 and 1.2a for the separate Jutila, Smith and Koymans–Pagano route, including (log N)⁶ in Lemma 3.
 
-Linnik uses a multiplicity-safe positive-proportion smooth count. For p>N^ε all N^ε-smooth integers are coprime to p; forbid only symbol−1 classes, and separate finitely many small p. Ordered prime tuples overcount the population.
+Linnik uses a multiplicity-safe positive-proportion smooth count up to H=N² with cutoff N^ε, so the fixed Dickman parameter is 2/ε and H+Q²=2N² at Q=N. For p>N^ε all such smooth integers are coprime to p; forbid only symbol−1 classes. Treat ε≥1 directly by q(p)<p, and absorb bounded N into the constant. Ordered prime tuples overcount the population.
 
 Polynomial Farey uses the reversed-denominator power-series coefficients and injectivity of the first 2ℓ coefficients on reduced fractions of denominator degree ℓ. Counting the extensions of an m-coordinate word gives the factor p^(2ℓ−m).
 
@@ -3490,15 +3524,26 @@ The definition exposes the following operations and laws:
 
 *Needs:* Layer 0 §0.2 weighted finite-family sieve; Layer 5 §5.4 primitive affine sieve pair; AdelicAlgebraicGroups §4.2; Layer 5 §5.4 subgroup reduction images.
 
-**Local densities for affine orbits.** For connected simply connected absolutely almost simple G/Q, finitely generated Zariski-dense integral Γ, and f a product of t distinct absolutely irreducible factors on G, outside finitely many primes β(p)=t/p+O(p^(−3/2)). The density is multiplicative on good squarefree moduli, and primitive(O,f) implies β(p)<1 at all relevant local primes. Thus the sieve has dimension t with the excluded finite primes explicitly included in the modulus.
+**Local densities for affine orbits.** For connected simply connected absolutely almost simple G/ℚ, finitely generated Zariski-dense integral Γ, and an integral regular function f nonzero and nonunit on G, let t≥1 be the number of distinct geometric irreducible components of its zero locus. No individual component need be defined over ℚ, and repeated factors of f are allowed. Outside a finite modulus q₀, let t_p count the components of the reduced zero locus individually fixed by Frobenius. Prove β(p)=t_p/p+O(p^(−3/2)), hence β(p)≤t/p+O(p^(−3/2)). If f=c∏_(j=1)^t f_j with distinct f_j∈ℚ[G] absolutely irreducible over the algebraic closure, every t_p=t outside q₀ and the equality with leading coefficient t follows. Multiplicativity on good squarefree moduli comes from the reduction-image theorem; primitivity implies β(p)<1 at every local prime used, including the finite exceptional part.
 
-Geometric factors distinct; nonzero/nonunit f; good reduction; strong-approximation image statement; local primitivity.
+With the finite exceptional primes represented by the primitive-coset modulus, prove that some K≥0 satisfies, for every 2≤w≤v,
 
-([BGS-10](#references), §3.1–3.3, Proposition 3.1 and equations (3.34)–(3.40), pp.574–581.)
+`∏_(w≤p<v,p∤q₀)(1−β(p))⁻¹ ≤ (log v/log w)^t (1+K/log w)`.
 
-*Proof sketch.* Import InverseGaloisAndArithmeticFundamentalGroups §IG.2.5 and Layer 5 §5.4 uniform algebraic point counts for the affine geometric hypersurfaces, with a fixed presentation and degree across good reductions. Use the subgroup reduction-image theorem of this subsection; the supplier for G(Q) alone is insufficient. Distinct hypersurface intersections contribute lower-dimensional errors, whose geometric comparison remains in the uniform algebraic point-count target. Finite bad primes alter the Euler constant and must not be silently discarded.
+Consequently V(z)=∏_(p<z,p∤q₀)(1−β(p))≥c(log z)^(−t) for z≥2 and some c>0. These are an upper dimension-t product condition and a lower bound for V, with constants depending on the fixed group, polynomial, generators and modulus; an asymptotic with leading t is not required. The finite-prime adapter retains simultaneous primitivity at every prime.
 
-*Needs:* Layer 5 §5.4 primitive affine sieve pair; AdelicAlgebraicGroups §4.2; Layer 5 §5.4 subgroup reduction images; Layer 0 §0.10 finite-field polynomial counts; InverseGaloisAndArithmeticFundamentalGroups §IG.2.5 and Layer 5 §5.4 uniform algebraic point counts.
+([BGS-10](#references), §3.2, (3.6), pp.574–575, for the rational absolutely irreducible factor case; (3.34)–(3.40), pp.580–581, for the point-count inputs. The component-wise upper bound follows by the intersection argument below.)
+
+*Proof sketch.* Apply the uniform algebraic point counts of this subsection to each Frobenius-fixed geometric component and to G. Each fixed component contributes p^(dim G−1)+O(p^(dim G−3/2)). A rational point on a non-fixed component lies also on its distinct Frobenius conjugate, whose intersection has dimension at most dim G−2; sum the corresponding O(p^(dim G−2)) counts. The uniform presentation bound applies to the union of these intersections, which descends to the finite field. Divide by #G(𝔽_p)=p^dim G+O(p^(dim G−1/2)), enlarging q₀ to make the denominator positive and at least a fixed multiple of p^dim G. Use the subgroup reduction-image theorem; the rational-point strong-approximation contract alone is insufficient. The upper bound β(p)≤t/p+O(p^(−3/2)) and AnalyticNumberTheoryPartI §§0.21, 0.26 give the displayed product inequality: the reciprocal-prime error is O(1/log w) and the summable local error tail is O(w^(−1/2)). Enlarge K for the bounded prime range. Repeated factors do not change the zero locus, but their multiplicities remain in deg f for the height bound.
+
+**Checks.**
+
+- On SL₂ with f=a²+b² and Γ=SL₂(ℤ), f(I)=1 gives primitivity and t=2. At p=3 there are no zero first rows compatible with determinant one, so β(3)=0 and t₃=0. At p=5 there are 2(5−1)·5=40 zeros among 5(5²−1)=120 matrices, so β(5)=1/3=2/(5+1) and t₅=2. The equality 2/p+O(p^(−3/2)) cannot hold along the inert primes. At the exceptional prime 2 the count is 2/6=1/3, still strictly below one and retained by the finite-prime adapter.
+- For f=a on SL₂, at p=3 the zero first rows number 2 and each has 3 completions, giving β(3)=6/24=1/4=1/(p+1), with t=1. For f=a² the same six matrices vanish and t is still 1, while deg f changes from 1 to 2.
+- For f=a²+b² the product over p=3,5 is V=(1−0)(1−1/3)=2/3; the inverse product is 3/2. A zero local density contributes factor one and is allowed by the upper dimension condition.
+- The constant f=2 has β(2)=1 and fails primitivity; it cannot be repaired by omitting the prime 2. A unit f=1 has empty zero locus and t=0, outside the nonunit endpoint hypotheses.
+
+*Needs:* Layer 5 §5.4 primitive affine sieve pair; AdelicAlgebraicGroups §4.2; Layer 5 §5.4 subgroup reduction images; Layer 0 §0.10 finite-field polynomial counts; InverseGaloisAndArithmeticFundamentalGroups §IG.2.5 and Layer 5 §5.4 uniform algebraic point counts; AnalyticNumberTheoryPartI §§0.21, 0.26 for the dimension product and lower bound for V.
 
 **Affine sieve level from expansion.** Assume a uniform squarefree congruence expansion bound yielding |R_d|≤C X_L^τ d^(dim G−1) with τ<1 for the word ball, uniformly for squarefree good d. Then Σ_(d≤D)|R_d|≤C′X_L^τD^dim G. Hence every δ<(1−τ)/dim G is an admissible power level D=X_L^δ.
 
@@ -3520,23 +3565,29 @@ Proper W; positive spectral gap; strong approximation; fixed variety and generat
 
 *Needs:* Layer 5 §5.4 affine sieve level from expansion; Layer 0 §0.10 finite-field polynomial counts.
 
-**Affine sieve saturation with expansion.** For connected simply connected absolutely almost simple G/Q, finitely generated Zariski-dense Γ⊆G(Q)∩GL_n(Z), integral nonzero nonunit f with t geometric irreducible factors, and primitive(Γ,f), uniform squarefree congruence expansion implies finite saturation number. The same follows for integral orbit images under the source’s pullback/covering hypotheses.
+**Affine sieve saturation with expansion.** For connected simply connected absolutely almost simple G/ℚ, finitely generated Zariski-dense Γ⊆G(ℚ)∩GL_n(ℤ), integral f nonzero and nonunit on G whose zero locus has t≥1 distinct geometric irreducible components, and primitive(Γ,f), uniform squarefree congruence expansion implies finite saturation number. Components need not be individually defined over ℚ; multiplicities in f are unrestricted. The same follows for integral orbit images under the source’s pullback/covering hypotheses.
 
 All algebraic hypotheses; squarefree expansion; signed |f|; dominant orbit map for transfer.
 
 ([BGS-10](#references), Theorem 1.1, p.564; §3.3equations(3.41)–(3.51), pp.581–584.)
 
-*Proof sketch.* Extract a free Zariski-dense subgroup with a primitive coset/modulus adapter; this algebraic reduction needs the exact source §2 proof and is a target of this construction. The positive lower sieve above 9t in §5.2 supplies ≫X/log^tX words rough at z=X^(δ/s). The word-height bound |f|≤C^(L+1)deg(f) converts roughness to a finite Ω bound. Compare with escape from each proper W. Avoid asserting primality or a conjectured optimal saturation number.
+*Proof sketch.* Extract a free Zariski-dense subgroup with a primitive coset/modulus adapter; this algebraic reduction needs the exact source §2 proof and is a target of this construction. Use the one-sided local-density bound, its upper dimension-t product condition and V(z)≥c(log z)^(−t), without assuming each component is rational. The positive lower sieve above 9t in §5.2 supplies ≫X/log^tX words rough at z=X^(δ/s). For a word of length at most L and matrix-entry bound C^(L+1), the polynomial-height bound is |f|≤K_f C^(d(L+1)), where d is the original degree and K_f is the sum of the absolute values of its coefficients. It converts roughness to a finite Ω bound, including repeated factors. Compare with escape from each proper W. Avoid asserting primality or a conjectured optimal saturation number.
 
-*Needs:* Layer 5 §5.4 affine almost-prime locus and saturation; Layer 5 §5.4 affine sieve level from expansion; Layer 5 §5.4 escape from proper algebraic subvarieties; Layer 5 §5.2 positive lower sieve above 9t.
+*Needs:* Layer 5 §5.4 affine almost-prime locus and saturation; Layer 5 §5.4 local densities for affine orbits, including the upper dimension product and lower bound for V; Layer 5 §5.4 affine sieve level from expansion; Layer 5 §5.4 escape from proper algebraic subvarieties; Layer 5 §5.2 positive lower sieve above 9t.
 
-**Explicit affine almost-prime bound.** For a free rank-k subgroup with word growth r=2k−1>1, mixing exponent τ<1, matrix-entry height base C>1, and f of polynomial degree d, every integer R strictly larger than 9t dim(G)d log C/[(1−τ)log r] is an admissible saturation bound after the source’s finite local modifications. Strict inequality permits the distribution and Brun endpoint losses.
+**Explicit affine almost-prime bound.** Under the preceding saturation hypotheses, with t counting distinct geometric components regardless of their fields of definition, a free rank-k subgroup with word growth r=2k−1>1, mixing exponent τ<1, matrix-entry height base C>1, and f of original polynomial degree d gives every integer R strictly larger than 9t dim(G)d log C/[(1−τ)log r] as an admissible saturation bound after the source’s finite local modifications. Repeated factors leave t unchanged but contribute to d. Strict inequality permits the distribution and Brun endpoint losses.
 
 Actual free-word growth and height estimate; non-sharp primitive-coset and expansion hypotheses.
 
 ([BGS-10](#references), Equation (3.51), p.581.)
 
-*Proof sketch.* Apply the positive lower sieve above 9t of §5.2; choose δ<(1−τ)/dim G and s>9t close enough to their endpoints. Verify its strict local margin and uniform dimension product from affine_local_density; logarithmic factors in summing the remainders are absorbed by the strict δ margin. Compare Ω≤log|f|/logz and let L grow. The constant and any finite bad-prime contribution must be tracked under the primitive coset reduction; a claimed endpoint ceiling without this work is not justified.
+*Proof sketch.* Apply the positive lower sieve above 9t of §5.2; choose δ<(1−τ)/dim G and s>9t close enough to their endpoints. Use the local-density theorem's strict local margin, upper dimension product and lower bound for V; logarithmic factors in summing the remainders are absorbed by the strict δ margin. Compare Ω≤log|f|/log z, retaining the original degree d, and let L grow. The constant and any finite bad-prime contribution must be tracked under the primitive coset reduction; a claimed endpoint ceiling without this work is not justified.
+
+**Checks.**
+
+- For t=2,dim G=3,d=2,τ=1/2 and C=r=3 the threshold is 216. Taking δ=333/2000<1/6 and s=1801/100>18 gives d s/δ=72040/333<217, so R=217 has a strict margin.
+- Replacing f=a by a² on SL₂ leaves t=1 and changes d from 1 to 2; with the same other parameters the thresholds are 54 and 108. Counting only distinct factors in the height bound would lose this factor of two.
+- For f=a²+b², K_f=2. An entry bound 3^(L+1) gives |f|≤2·3^(2(L+1)); at L=0 and the identity, the actual value is 1≤18. If k=1 then r=1 and log r=0, so the rank-one case is outside the r>1 hypotheses.
 
 *Needs:* Layer 5 §5.4 affine sieve saturation with expansion; Layer 5 §5.1 from roughness to an almost-prime bound.
 
