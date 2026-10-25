@@ -28,6 +28,11 @@ Scalar matrix identities and README Checks do not replace those geometric headli
 
 Multiple zeta indices are descending and positive, with the empty value equal to one.
 The total sum is used analytically only under the stated summability hypotheses.
+The parameter integral `legendreK` is a signature adapter for EllipticIntegrals' canonical
+modulus integral at `Real.sqrt lam`, on `0 ≤ lam < 1` (PS.7.1). The two-letter `shuffles`
+recursion presents ColemanIntegration L1.12's word product (PS.9.2). Those supplier
+functions and word-algebra carriers are not present at the pins, so their comparison
+maps are README targets; neither local presentation establishes a second generic API.
 -/
 
 noncomputable section
@@ -45,7 +50,8 @@ def legendreRadicand (lam u : ℝ) : ℝ := (1 + u ^ 2) ^ 2 - 4 * lam * u ^ 2
 /-- The nonsingular integrand `2/√D_λ(u)`, on the positive branch. -/
 def legendreIntegrand (lam u : ℝ) : ℝ := 2 / Real.sqrt (legendreRadicand lam u)
 
-/-- `K_λ = ∫₀¹ dt/√((1 - t²)(1 - λt²))`, an improper integral at `t = 1`. -/
+/-- Signature adapter for the canonical modulus integral at `√λ` on `0 ≤ λ < 1`:
+`K_λ = ∫₀¹ dt/√((1 - t²)(1 - λt²))` (PS.7.1). -/
 def legendreK (lam : ℝ) : ℝ :=
   ∫ t in (0 : ℝ)..1, 1 / Real.sqrt ((1 - t ^ 2) * (1 - lam * t ^ 2))
 
@@ -159,8 +165,9 @@ def mzvDecodeAux : ℕ → List Bool → List ℕ
 /-- Decode from zero pending zeros. On valid words this inverts the positive-index encoding. -/
 def mzvDecode (w : List Bool) : List ℕ := mzvDecodeAux 0 w
 
-/-- All interleavings of two words, with multiplicity. -/
-def shuffles {α : Type*} : List α → List α → List (List α)
+/-- Two-letter list presentation of the supplied Coleman shuffle product, retaining
+multiplicity; the word-basis comparison is PS.9.2. -/
+def shuffles : List Bool → List Bool → List (List Bool)
   | [], l => [l]
   | a :: u, [] => [a :: u]
   | a :: u, b :: v =>
