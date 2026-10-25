@@ -1338,9 +1338,34 @@ All main-sieve hypotheses; k₀≥1; strengthened rescaled hypotheses displayed.
 
 ([KHAYUTIN-19](#references), Proposition 9.25 and proof (50), pp.235–236.)
 
-*Proof sketch.* Split the zero residue classes modulo k₀ and apply the main theorem to each quotient polynomial and rescaled domain. The lifting identity recombines corrected densities into ρ̃_Q(k₀a). Keep the corrected X/k₀ ranges throughout. The printed weaker rescaled curvature condition does not ensure the main theorem’s condition; the strengthened condition is part of this statement.
+*Proof sketch.* If X<k₀ there are no positive quotient values. Otherwise the value bound implies k₀²≤A, so the rescaled area is at least one. Keep the original polynomial and split by the exact valuations of Q at primes dividing k₀. For a prime p and n≥0, let d_Q(p,n) be the proportion of pairs modulo p^(n+1) at which Q has exact valuation n. Thus d_Q(p,0)=1−ρ_Q(p)/p², while for n≥1,
 
-*Needs:* Layer 1 §1.4 binary multiplicative-function sieve; Layer 0 §0.7 curve lifting and singular correction; GeometryOfNumbersAndQuadraticArithmetic §4.1; Layer 0 §0.11 translated lattice discrepancies.
+`d_Q(p,n)=ρ_Q(p^n)/p^(2n)−ρ_Q(p^(n+1))/p^(2n+2)=ρ̃_Q(p^n)/p^(2n)−(ρ_Q(p^n)−ρsing_Q(p^n))/p^(2n+1)`.
+
+The exact-valuation proportions have the following API.
+
+- At n=0 the proportion is 1−ρ_Q(p)/p², including constant and zero polynomials.
+- At n≥1 the two displayed expressions agree by the smooth/singular lifting counts.
+- Under the original corrected-density power bound, 0≤d_Q(p,n)≤ρ̃_Q(p^n)/p^(2n)≤C p^(−rn) for every n≥1, with C independent of p,n.
+- For a finite set of distinct primes with prescribed nonnegative valuations, the proportion in the residue space modulo the product of p^(n+1) is the product of their exact-valuation proportions, by CRT.
+
+If p^e exactly divides k₀, quotient valuation j≥0 uses n=e+j, including j=0; it never uses a density bound for a quotient polynomial. Run the main theorem's factor decomposition with local weight f(p^j) at these forced primes, sieving the remaining primes. The required analytic estimate is the displayed fixed-divisor bound, with its constant chosen before k₀: prove the summed lattice errors and all four factor ranges uniformly with these valuation restrictions, including the R₂ replacement required by the main theorem. A local proportion bound alone does not prove that global estimate. Keep X/k₀ and the strengthened rescaled curvature condition throughout.
+
+For comparison, if r runs over the zero classes modulo k₀ and Q_r(u)=Q(k₀u+r)/k₀, the exact finite recombination is
+
+`Σ_r ρ̃_(Q_r)(a)=∏_(p|k₀, p∤a)ρ_Q(p^e) · ∏_(p|k₀, p|a)ρ̃_Q(p^(e+j)) · ∏_(p|a, p∤k₀)ρ̃_Q(p^j)`,
+
+where e=v_p(k₀) and j=v_p(a). The zero-exponent factors are ordinary densities. This identity follows by partitioning residue pairs modulo p^(e+j) and preserving derivatives and one-step lifts when j≥1; at j=0 it counts the original zero classes. It is not an unrestricted identity with ρ̃_Q(k₀a).
+
+**Checks.**
+
+- For Q=x₀²,k₀=p and a=1 there are p zero classes, so Σ_r ρ̃_(Q_r)(1)=p whereas ρ̃_Q(p)=0. The mixed-density formula gives p.
+- For Q=x₀²,k₀=p and a=p, the recombination gives p(p²−p)=(p−1)p²=ρ̃_Q(p²). With k₀=p²,a=1 it instead gives p³=ρ_Q(p²), which differs from (p−1)p². At p=2 these totals are 4 and 8.
+- For the same Q and k₀=p, every Q_r=pu² has ρ̃_(Q_r)(p)=p²−p. At p=2,3,5 these are 2,6,20; their ratio to p^(3/2) is unbounded. The original densities retain C=1,r=1/2.
+- For Q=x₀², d_Q(p,1)=0 and d_Q(p,2)=ρ̃_Q(p²)/p⁴=(p−1)/p². At p=2 these values are 0 and 1/4; the exact quotient valuation zero contributes no mass when k₀=p.
+- For Q=x₀, d_Q(p,n)=(p−1)/p^(n+1) for n≥0. At p=2,n=0,1,2 the values are 1/2,1/4,1/8, testing both the zero-exponent branch and the smooth correction. Requiring v₂(Q)=v₃(Q)=1 gives 72 pairs modulo 36, hence proportion 72/36²=(1/4)(2/9)=1/18.
+
+*Needs:* Layer 1 §1.4 binary multiplicative-function sieve and its factor-range estimates with the stated valuation restrictions; Layer 0 §0.7 curve lifting and singular correction; GeometryOfNumbersAndQuadraticArithmetic §4.1; Layer 0 §0.11 translated lattice discrepancies.
 
 **Binary sieve with a unit congruence.** For k₀,k₁,k₂≥1, prime support(k₁)⊆prime support(k₂), gcd(k₀,k₂)=1, k₀k₁k₂≤A^(η/2), ℓ a unit modulo k₂, R^θ≤A^(1−4η), X≤A^(δ/2), the sum of f(Q/k₀) restricted by Q≡k₀k₁ℓ mod k₀k₁k₂ is bounded by C′A f(k₁)ρ_Q(k₀k₁ℓ;k₁k₂)/(k₁k₂)² times the Euler product to X/(k₀k₁) excluding content primes and p|k₀k₂, times `Σ_{a≤X/(k₀k₁),gcd(a,k₂)=1}` f(a)ρ̃_Q(k₀a)/(k₀a)². Here `ρ_Q(t;k)=ρ_{Q−t}(k).`
 
@@ -1348,7 +1373,13 @@ All main-sieve hypotheses and displayed strengthened restrictions; positive quot
 
 ([KHAYUTIN-19](#references), Definition 9.24 and Proposition 9.26, pp.235–237.)
 
-*Proof sketch.* The correct residue target modulo k₁k₂ is k₀k₁ℓ, obtained by reducing the original congruence; the paper omits k₀ in that factor. Translate and scale these residue classes, divide by k₁, and apply the fixed-divisor theorem. The quotient is coprime to k₂ so multiplicativity removes f(k₁). Prove the full uniform local-bound transport through these quotient polynomials; no unconditional uniform conclusion is supplied by the formal residue manipulation.
+*Proof sketch.* Put m=k₁k₂ and split the classes r with Q(r)≡k₀k₁ℓ modulo m. Define Q₁(u)=Q(mu+r)/k₁. At p∤m the coordinate change and division are units, so every ordinary and corrected prime-power count agrees with Q's; at p|m, Q₁≡k₀ℓ modulo p is a unit, so those counts are zero. Thus Q₁ satisfies the original corrected-density bound with the same C,r. Since gcd(k₀,m)=1, apply the valuation-restricted fixed-divisor theorem to Q₁ with divisor k₀; no further quotient-by-k₀ density transport is used. On the chosen class Q₁/k₀ is coprime to k₁, giving f(Q/k₀)=f(k₁)f(Q₁/k₀). Sum the ρ_Q(k₀k₁ℓ;m) classes, each of area A/m². The displayed size bounds imply the fixed-divisor curvature and value restrictions after this scaling. This consequence requires the uniform valuation-restricted analytic estimate, as well as the main theorem's R₂ replacement.
+
+**Checks.**
+
+- For Q=x₀,k₀=2,k₁=1,k₂=3,ℓ=1 the residue is Q≡2 modulo 3; its Q₁ is a unit at 3 and has ρ̃_(Q₁)(3^j)=0 for j≥1.
+- For Q=x₀,k₀=1,k₁=k₂=2,ℓ=1, a selected class gives Q₁=2u+1. Its densities at 2 vanish, while at 3 it has ρ̃_(Q₁)(3)=3, equal to Q's density.
+- For Q=x₀,k₀=2,k₁=k₂=3,ℓ=1, choose x₀=9u+6. Then Q₁=3u+2 and, when 2|Q₁, Q₁/2 is a unit modulo 3. At u=0 the identity for multiplicative f reads f(3)=f(3)f(1).
 
 *Needs:* Layer 1 §1.4 binary sieve with a fixed divisor; Layer 0 §0.7 binary polynomial local densities; GeometryOfNumbersAndQuadraticArithmetic §4.1; Layer 0 §0.11 translated lattice discrepancies.
 
@@ -1458,7 +1489,7 @@ Use the lattice-point discrepancy only at scaled area at least one. The curvatur
 
 Establish degree-uniform squarefree Euler lower bounds, absorption of θ_Q after increasing the growth exponent, and both smooth-factor savings with constants depending only on the stated parameters. Fix α before the extremely-smooth constant and treat α=0 separately.
 
-The ordinary-density R₂ requirement for the binary multiplicative conclusion is stated at that target. For its congruence consequences also prove corrected-density transport after scaling, retaining (R/k₀)^θ≤(A/k₀²)^(1−3η), the transformed value bound and Q≡k₀k₁ℓ modulo k₁k₂. Explain recombination of corrected densities of Q_r/k₀ at primes of k₀ and transport of the unit residue; substitution in the formula is insufficient.
+The ordinary-density R₂ requirement for the binary multiplicative conclusion is stated at that target. For the fixed-divisor conclusion prove the separate uniform valuation-restricted estimate of §1.4 on the original polynomial: the local bound d_Q(p,e+j)≤C p^(−r(e+j)) is available, but quotient-by-quotient constants are not uniform. Its finite recombination formula retains ordinary densities when j=0. Retain (R/k₀)^θ≤(A/k₀²)^(1−3η) and the transformed value bound. For the unit-congruence consequence transport Q≡k₀k₁ℓ modulo k₁k₂; its preliminary quotient Q₁ has unchanged densities off k₁k₂ and zero densities on it, and then consumes the uniform fixed-divisor estimate.
 
 Prove positive H_g, the Γ(κ+1) normalization and uniformity under deletion of progression-modulus primes, tracking interval logarithms and totients. The dimension-one diagonal sums additionally require the precise remainder and uniform L estimate behind GGPY Lemmas 3–4; its cited Halberstam–Richert Lemmas 5.3–5.4 need an accessible proof.
 
@@ -2255,7 +2286,13 @@ H,Q≥1; primitive characters; integer interval.
 
 ([KED-ANT-16](#references), Theorem 16.2, §16.2.)
 
-*Proof sketch.* Reduced rational phases up to Q are Q⁻²-separated. Use the sharp additive theorem and the native Gauss expansion, then character Parseval.
+*Proof sketch.* For Q=1 the only primitive character is the modulus-one character, of value one, and q/φ(q)=1. Cauchy–Schwarz gives |Σ_j a_j|²≤HΣ_j|a_j|², exactly the constant H−1+Q². For Q≥2 reduced rational phases up to Q are Q⁻²-separated with 0<Q⁻²≤1/4≤1/2. Use the sharp additive theorem, the native Gauss expansion and character Parseval.
+
+**Checks.**
+
+- At Q=H=1,a₁=2+i both sides are 5.
+- At Q=1,H=2,a=(1,1), the bound is 4≤2·2=4; δ=Q⁻²=1 would violate the additive theorem's δ≤1/2 hypothesis.
+- At Q=2 the additive parameter is δ=1/4, and the sharp constant is H+3. Modulus two has no primitive character, but modulus one remains in the sum.
 
 *Needs:* Layer 2 `SieveTaper.sharp_additive_largeSieve`; Layer 2 §2.3 squared norm of a primitive dirichlet gauss sum; Layer 2 §2.3 parseval identity over dirichlet characters.
 
@@ -2265,7 +2302,7 @@ Support actually avoids forbidden residues; squarefree moduli; Q,H≥1.
 
 ([KED-ANT-16](#references), Theorem 16.4 and Lemma 16.5, §16.3.)
 
-*Proof sketch.* For one prime, sum over allowed residue totals and apply Cauchy; finite additive orthogonality gives the missing nontrivial-phase energy. For coprime primes use the additive CRT phases a₁/q₁+a₂/q₂, preserving all other avoidance conditions under twisting. Sum the positive squarefree moduli and apply the sharp additive inequality.
+*Proof sketch.* For Q=1 only d=1 occurs, J(1)=1, and Cauchy–Schwarz gives the stated constant H. For Q≥2 use δ=Q⁻²≤1/2 in the sharp additive theorem. For one prime, sum over allowed residue totals and apply Cauchy; finite additive orthogonality gives the missing nontrivial-phase energy. For coprime primes use the additive CRT phases a₁/q₁+a₂/q₂, preserving all other avoidance conditions under twisting. Sum the positive squarefree moduli and apply the sharp additive inequality.
 
 *Needs:* Layer 2 `SieveTaper.sharp_additive_largeSieve`; Mathlib `ZMod`; Mathlib `Finset`.
 
@@ -2486,15 +2523,21 @@ The input is the Bombieri–Vinogradov theorem in ψ-form at a fixed cutoff (Ked
 
 ### 3.4 transfers, variance and the Barban–Davenport–Halberstam theorem
 
-**Weighted prime-distribution transfer.** The maximal ψ estimate yields the corresponding maximal prime-counting estimate for π(y;q,a)−li(y)/φ(q), and the fixed-x discrepancy π(x;q,a)−π(x)/φ(q), with arbitrary prescribed log saving after increasing B. For a fixed integer j≥0, weighting the modulus sum by τ(q)^j is allowed after increasing the log budget and using second moments; it is not inferred by a pointwise bound τ(q)≤log^j q.
+**Weighted prime-distribution transfer.** The maximal ψ estimate yields the maximal prime-counting estimate with supremum over real 2≤y≤x for π(y;q,a)−li(y)/φ(q), where li(y)=∫₂^y dt/log t, and the fixed-x discrepancy π(x;q,a)−π(x)/φ(q), with arbitrary prescribed log saving after increasing B. For a fixed integer j≥0, weighting the modulus sum by τ(q)^j is allowed after increasing the log budget and using second moments; it is not inferred by a pointwise bound τ(q)≤log^j q.
 
-Every A>0; j fixed; same Q≤sqrt x/(log x)^B; positive reduced residues.
+Every A>0; j fixed; same Q≤sqrt x/(log x)^B; reduced residue classes.
 
 ([KED-ANT-18](#references), Theorem 18.4 and Maynard (1.3), §§18.2 and source application.)
 
-*Proof sketch.* Remove prime powers with their explicit sqrt x log²x cost, split small y, and apply partial summation to each maximal error. Obtain divisor-weighted versions by Cauchy–Schwarz, high divisor moments and a crude global discrepancy bound; increase B to absorb all losses. State dependence on j.
+*Proof sketch.* Remove prime powers with their explicit sqrt x log²x cost, split the range 2≤y≤x at a logarithmic threshold, and apply partial summation on [2,y] to each maximal error. Obtain divisor-weighted versions by Cauchy–Schwarz, high divisor moments and a crude global discrepancy bound; increase B to absorb all losses. State dependence on j.
 
-Preserve maxima over all y≤x and reduced residue classes; the π variant centers at li(y)/φ(q). The additional native names weighted_prime_distribution_pi and weighted_prime_distribution_pi_centered respectively state the maximal π estimate and the separate fixed-x centered estimate.
+The maximal π target weighted_prime_distribution_pi takes the supremum over real 2≤y≤x and reduced residue classes and centers at li(y)/φ(q). The target weighted_prime_distribution_pi_centered is the separate fixed-x π(x)/φ(q) estimate. The maximal ψ target retains 0≤y≤x.
+
+**Checks.**
+
+- At y=2,q=2,a=1, π(2;2,1)=li(2)=0, so the discrepancy is zero.
+- At y=2,q=1,a=0, π(2)=1 and li(2)=0, so the discrepancy is one; the lower integration endpoint does not remove the prime 2.
+- For q=2,a=1 and 1<y<2, π(y;2,1)=0 but li(y) tends to −∞ as y decreases to 1. Including this excluded range would make the maximal error unbounded.
 
 *Needs:* Layer 3 `SieveArithmeticDistribution.bombieri_vinogradov_maximal`; Layer 3 §3.0 divisor moments over reciprocal totients for the fixed divisor powers; AnalyticNumberTheoryPartI §0.32 at q=1.
 
@@ -2532,7 +2575,7 @@ Unconditional theorem; all constants quantified; prime powers included.
 
 Write q=rs with primitive conductor r and cofactor s=q/r; r and s need not be coprime. The induced character is its primitive character times 1_(gcd(n,s)=1). Retain this coprimality mask in every coefficient sequence and use the all-cofactor estimates. Use an exact Vaughan hyperbola covering, retaining dyadic J until a stronger aggregate removes it. Choose U,V and the mesh for every prescribed saving, including maximal cutoff decomposition. AnalyticNumberTheoryPartI §0.32 and Layer 3 §3.0 maximal small-conductor estimates give the required small-conductor, cofactor and exceptional-zero estimates and their conductor/log ranges.
 
-The variance retains log⁵Q and the cofactor τ(s)²/φ(s) sum. Each divisor exponent j and saving A requires a fresh BV budget. Partial summation is uniform in y≤x and centred at li(y)/φ(q); fixed-x π(x)/φ(q) centering is a separate transfer.
+The variance retains log⁵Q and the cofactor τ(s)²/φ(s) sum. Each divisor exponent j and saving A requires a fresh BV budget. Partial summation for π is uniform in real 2≤y≤x and centred at li(y)/φ(q); the ψ maximum still ranges over 0≤y≤x; fixed-x π(x)/φ(q) centering is a separate transfer.
 
 ### Examples
 
@@ -3181,15 +3224,39 @@ The definition exposes the following operations and laws:
 
 *Needs:* Mathlib `ArithmeticFunction.moebius`; Mathlib `Nat.primeFactorsList`.
 
-**Rosser–Iwaniec linear sieve.** Under the dimension-one product condition ∏_(w≤p<z)(1−g(p))⁻¹≤(log z/log w)(1+K/log w),0≤g(p)<1, the Rosser weights give main terms at most V(z)[F(s)+C_K e^(−s)(log D)^(−1/3)] and at least V(z)[f(s)−C_K e^(−s)(log D)^(−1/3)], for D≥z≥2,s=log D/log z. Thus a native weighted sieve has the same brackets, plus/minus Σ_(d<D)|R_d|.
+**Rosser–Iwaniec linear sieve.** Assume the dimension-one product condition ∏_(w≤p<v)(1−g(p))⁻¹≤(log v/log w)(1+K/log w) for 2≤w≤v≤z, with K≥0 and 0≤g(p)<1, and put V(z)=∏_(p<z)(1−g(p)), s=log D/log z. The upper Rosser main term M⁺(z,D) is at most V(z)[F(s)+C_K e^(−s)(log D)^(−1/3)] for D≥z≥2. The lower Rosser main term M⁻(z,D) is at least V(z)[f(s)−C_K e^(−s)(log D)^(−1/3)] for D≥z²≥4.
 
-Nonnegative mass; correct density/remainder data; D≥z≥2; fixed product-condition constant K.
+For a native weighted sieve with nonnegative mass X and correct density/remainder data, these give the corresponding upper and lower sifted-sum brackets with error E(D)=Σ_(d<D)|R_d| on their respective domains. When z≤D<z², f(s)=0 and nonnegativity gives S(z)≥0≥XV(z)[f(s)−C_K e^(−s)(log D)^(−1/3)]−E(D); this is a lower bound for S, not for the signed main term M⁻.
+
+Nonnegative mass; correct density/remainder data; upper main term for D≥z≥2, lower main term for D≥z²; fixed product-condition constant K.
 
 ([IWA-ROSSER](#references), Theorem 1, pp.172–174; HB Theorem 5.1/Corollary 5.1, pp.35–36.)
 
-*Proof sketch.* Combinatorial brackets and coefficient support are finite. The analytic main terms require Iwaniec’s switching integrals and error-control proof §§3–5; that proof is a analytic proof target. Use the lower inequality in the correct direction; the HB printed Theorem 5.1 has a reversed sign in its lower-main-term line.
+*Proof sketch.* Combinatorial brackets and coefficient support are finite. The analytic main terms require Iwaniec’s switching integrals and error-control proof §§3–5, retaining the separate domains. Multiply the main-term inequalities by X≥0 before applying the absolute remainder bound. For 1≤s<2 use nonnegativity of S directly. HB Theorem 5.1 requires both its lower sign correction and the lower-main-term range restriction.
+
+**Checks.**
+
+- For D=z and g(p)=1/p on D^(1/4)≤p<D, zero elsewhere, M⁻=1−Σg(p) tends to 1−log 4<0, while V(z) tends to 1/4 and f(1)=0. Thus a lower main-term estimate cannot be extended to s=1 with a vanishing error depending only on K.
+- At D=z², s=2 and f(2)=0: the lower main-term estimate is available, with its negative error retained.
+- For the empty population X=0,R_d=0, both sifted-sum brackets give 0≤0; no division by X is needed.
 
 *Needs:* Layer 5 §5.2 linear sieve functions; Layer 5 §5.2 rosser sieve weights; Layer 0 §0.5 euler-product sieve dimension.
+
+**Upper sifted-sum bound below s=1.** Under the same product condition and nonnegative mass, for z≥D≥2 and s=log D/log z∈(0,1], prove
+
+`S(z)≤XV(z)[F(s)+C_K s⁻¹((log D)^(−1/3)+(log D)⁻¹)]+E(D)`.
+
+Here E(D) is the same absolute remainder sum on squarefree sieving divisors d<D. In particular the relative main-term error is O_(K,s₀)((log D)^(−1/3)+(log D)⁻¹), uniformly for s₀≤s≤1 with fixed s₀>0. This is an upper bound for the sifted sum; it makes no assertion about raw Rosser main terms below s=1.
+
+*Proof sketch.* Monotonicity gives S(z)≤S(D). Apply the upper s=1 estimate to S(D), with the same level D, and use V(D)/V(z)≤s⁻¹(1+K/log D). Since F(1)/s=F(s)=2e^γ/s, multiplication gives the displayed bound, absorbing the product of the two errors using log D≥log 2. Divisors of the smaller prime product form a subset of the original d<D remainder range, so E(D) is unchanged (HB-SIEVES, Corollary 5.1, p.36; the product comparison is the stated dimension-one hypothesis).
+
+**Checks.**
+
+- At s=1, D=z, the product ratio is one and F(s)=2e^γ, agreeing with the upper endpoint theorem.
+- At s=1/2, z=D², F(s)=4e^γ; replacing it by F(1) loses a factor two.
+- In the Richert choice r=3, α=γ/4, β=27γ/28, the limiting parameter (γ−β)/α=1/7 has F=14e^γ and D_p≥N^(γ/28). Thus log D_p tends to infinity uniformly, although D_p<z near the upper prime endpoint.
+
+*Needs:* Layer 5 §5.2 rosser–iwaniec linear sieve (upper s=1 case); Layer 5 §5.2 linear sieve functions; Layer 0 §0.5 truncated remainder mass.
 
 **Beta sieve in general dimension.** For each κ>0 the Iwaniec constants β_κ,A_κ,B_κ and delay functions F_κ,f_κ satisfy s^κF=A_κ for 0<s≤β_κ+1, s^κf=B_κ for 0<s≤β_κ, with the stated delayed derivatives beyond those endpoints and normalization at infinity. Under the corresponding κ product condition, Theorem 1 bounds the sifted sum by XV(z) times these functions with error e^sqrt(K)Q_κ(s)(log D)^(-1/3), plus/minus the absolute remainder sum. For κ=1,β=2,A=2e^γ,B=0. The error control is Q_κ(s)≪_κ exp(−s log s+s log log(3s)+O_κ(s)). For 0<κ<1/2, β=1 and B>0; atκ=1/2, β=1,A=2sqrt(e^γ/π),B=0; forκ>1/2,β>1,B=0. Prove their normalized existence and precise κ-dependent constants, including β_t<9t for integer t≥1 and f_t(s)>0 for s>β_t, the lower-sifting properties used below (BGS-10, Theorem 3.1 and §3.3).
 
@@ -3225,7 +3292,7 @@ Uniform dimension constant; eventually positive main scale XV(z); relative remai
 
 ([IWA-ROSSER](#references), Theorem 4, pp.176–177; HB Fundamental Lemma, p.38.)
 
-*Proof sketch.* Apply both brackets and divide by positive XV. Control the linear-function error and the relative remainder independently.
+*Proof sketch.* Since s tends to infinity, eventually D≥z² and both main-term estimates apply. Apply both brackets and divide by positive XV. Control the linear-function error and the relative remainder independently.
 
 *Needs:* Layer 5 §5.2 rosser–iwaniec linear sieve; Layer 5 §5.2 linear sieve functions.
 
@@ -3267,9 +3334,9 @@ All these hypotheses hold uniformly in N; the strict integral margin is fixed; w
 
 ([HB-SIEVES](#references), Theorems 6.1–6.2 and equations (6.3)–(6.6), pp.42–45.)
 
-*Proof sketch.* Apply the lower linear sieve to A and upper linear sieve to each A_p at level N^γ/p. Count each remainder only O_α,β,γ(1) times. Partial summation with the two-sided prime-sum estimate gives the displayed integral; use the separate square exception to convert distinct factors to Ω.
+*Proof sketch.* Apply the lower sifted-sum bracket to A. For A_p use level D_p=N^γ/p and cutoff z=N^α: at s_p=log D_p/log z≥1 use the upper linear sieve, and at s_p<1 use the upper sifted-sum bound below s=1. The latter applies uniformly because s_p≥(γ−β)/α>0 and D_p≥N^(γ−β)≥2 for sufficiently large N. Both ranges give the same leading F(s_p) and o(1) relative main-term error. Each resulting error is a sum of |R_(pd)| with pd<N^γ; such an integer has at most γ/α prime divisors p≥N^α. Thus the same absolute remainder budget suffices. Partial summation with the two-sided prime-sum estimate gives the displayed integral; use the separate square exception to convert distinct factors to Ω.
 
-*Needs:* Layer 5 §5.2 richert logarithmic weights; Layer 5 §5.2 rosser–iwaniec linear sieve; the stated uniform dimension-one and prime-sum hypotheses.
+*Needs:* Layer 5 §5.2 richert logarithmic weights; Layer 5 §5.2 rosser–iwaniec linear sieve; Layer 5 §5.2 upper sifted-sum bound below s=1; the stated uniform dimension-one and prime-sum hypotheses.
 
 **Richert explicit level threshold.** For integer r≥1 put Λ_r=r+1−log(4/(1+3^(−r)))/log 3. Under the other Richert assumptions, γ>1/Λ_r yields ≫X/log N P_r values by α=γ/4 and β=γ/(1+3^(−r)). In particular γ<1/2 sufficiently near 1/2 gives Goldbach prime+P₃, whereas this criterion does not yield prime+P₂.
 
@@ -3784,6 +3851,8 @@ The following conventions fix the mathematical statements at the cited versions.
 
 **KHAYUTIN-19, Published Theorem 9.7 proof, equation (47), p.233** Supply an additional ordinary-density input or repair this contribution using the stated corrected-density power bound. Q=x₀² has ρ_Q(p²)=p³, whereas corrected prime-power densities satisfy a power saving with r=1/2. The needed ordinary bound does not follow.
 
+**KHAYUTIN-19, Published Proposition 9.25, p.236, identity after (50)** The sum of corrected quotient densities has ordinary factors ρ_Q(p^e) at primes p^e exactly dividing k₀ with p∤a, and corrected factors ρ̃_Q(p^(e+j)) when j=v_p(a)≥1. At Q=x₀²,k₀=p,a=1 the two sides of the printed unrestricted identity are p and 0. Quotient polynomials pu² also have corrected density p²−p at p, so their power-bound constants are not uniform. The fixed-divisor target uses the separate valuation-restricted analytic estimate of §1.4.
+
 **KHAYUTIN-19, Published Proposition 9.25, pp.235–236, scaled-domain hypothesis** To use the same η in that theorem require (R/k₀)^θ≤(A/k₀²)^(1−3η), with the corresponding value range. After scaling, the theorem requires the power 1−3η of the new area; a bound by the new area does not imply it for large area.
 
 **KHAYUTIN-19, Published Proposition 9.26, pp.236–237, local factor and first proof congruence** Use Q≡k₀k₁ℓ mod k₁k₂ and ρ_Q(k₀k₁ℓ;k₁k₂); transport the unit residue after dividing by k₀. Reduction of the original congruence retains k₀. Coprimality of k₀ and k₂ permits inverse transport for Q/k₀ but does not remove k₀ from Q itself.
@@ -3798,7 +3867,7 @@ The following conventions fix the mathematical statements at the cited versions.
 
 **KHAYUTIN-19, Published Proposition B.8, equations (69)–(72), pp.270–271** The k=1 sum is p²[p−1−ε(u_A/p)−(−ωu/p)]/2, using u_Ay²−u_εw²+4ωu u_A=0. For p=3,u=u_A=ω=1,ε=−1,k=1 the actual residue sum is 18, while the printed formula gives 9.
 
-**HB-SIEVES, arXiv math/0209360v1, Theorem 5.1, p.35** Use M⁻≥W(z)(f(s)−the error bound). The immediately following lower-sieve corollary and the role of M⁻ require a lower estimate.
+**HB-SIEVES, arXiv math/0209360v1, Theorem 5.1, p.35** Use M⁻≥W(z)(f(s)−the error bound) only for D≥z² (s≥2); the upper main term uses D≥z (s≥1). For 1≤s<2 the actual sifted sum has its lower bracket from nonnegativity, with no corresponding lower estimate for M⁻. For g(p)=1/p on D^(1/4)≤p<D and D=z, M⁻ tends to 1−log 4<0 although f(1)=0.
 
 **HB-SIEVES, arXiv math/0209360v1, Example 1 after Corollary 5.1, p.36** Use y=x/(log x)² in that example. The O(1) discrepancy per modulus yields O(y) after summing d<y, and the ensuing displayed bound uses x/(log x)².
 

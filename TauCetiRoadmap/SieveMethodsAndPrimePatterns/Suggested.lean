@@ -170,7 +170,8 @@ theorem primitive_largeSieve (Q H : ℕ) (M : ℤ) (a : Fin H → ℂ) :
 end SieveCharacters
 namespace SieveApplications
 
-/-- The sharp primitive bound, with positive modulus and interval cutoffs. -/
+/-- The sharp primitive bound, with positive modulus and interval cutoffs.
+At Q=1 its constant is H, supplied directly by Cauchy–Schwarz. -/
 
 theorem sharp_primitive_largeSieve (Q H : ℕ) (hQ : 1 ≤ Q) (hH : 1 ≤ H) (M : ℤ) (a : Fin H → ℂ) :
     (∑ q : Fin Q, (((q.val+1 : ℕ) : ℝ)/(q.val+1).totient) *
