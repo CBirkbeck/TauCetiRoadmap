@@ -24,16 +24,16 @@ Its boundaries with neighbouring roadmaps are as follows.
 - **LanglandsParameterStacks** owns excursion algebras, excursion data and the reconstruction of parameters from their pseudocharacters for an arbitrary group; this roadmap verifies the hypotheses on the cohomology of shtukas and proves continuity for the global Galois group. **IntegralHeckeAndGaloisDeterminants** owns determinants and their reconstruction.
 - **SmoothRepresentationsOfLocalGroups** owns Hecke algebras over rings, the Bernstein centre, parabolic induction and the classical Satake isomorphism.
 - **ArithmeticGaloisRepresentations** §§2.5–2.7 owns local Euler factors and local constants in its finite-extension-of-Q_p setting. The equal-characteristic local constants and function-field product formula are supplied by **AutomorphicLFunctionsAndLocalFactors** §AL.3, *Function-field local factors, multiplicity one and converse theorem*. §7.10 uses that prefix to construct gamma factors for reductive groups.
-- **GeometricSatakeAndFusion** owns geometric Satake for the B_dR-Grassmannian over the Fargues–Fontaine curve; the classical equal-characteristic equivalence is Layer 1 here. **HeckeStacksAndLocalShtukas** owns local shtukas and their cohomology; its later geometric realization is not an input here. The comparison between completed and ordinary Bernstein centres is §7.6, and the equal-characteristic GL_r correspondence, including its extension through segments, is §7.11. The generic smooth-category and centre carriers remain those of SmoothRepresentationsOfLocalGroups.
+- **GeometricSatakeAndFusion** GS0, *Equal-characteristic Schubert models and coefficient comparison* (`equalCharacteristicSchubertModels`), owns the ordinary local reduced Schubert models, their positive-loop strata, Bruhat closures and finite-jet action comparisons, before taking their perfections. §1.2 transports these same ordinary models over the curve and constructs the reduced multi-leg collision closures. GeometricSatakeAndFusion also owns geometric Satake for the B_dR-Grassmannian over the Fargues–Fontaine curve; the classical equal-characteristic equivalence is Layer 1 here. **HeckeStacksAndLocalShtukas** owns local shtukas and their cohomology; its later geometric realization is not an input here. The comparison between completed and ordinary Bernstein centres is §7.6, and the equal-characteristic GL_r correspondence, including its extension through segments, is §7.11. The generic smooth-category and centre carriers remain those of SmoothRepresentationsOfLocalGroups.
 - **SheafTheoreticSmithTheory** §§ST.3 and ST.6 extends the finite-extension coefficient setting of §1.14 to coefficients F̄_ℓ and W(F̄_ℓ), for odd ℓ, over arbitrary separably closed geometric fields, and owns its parity–tilting and normalized constant-term comparisons. The integral and torsion Satake functors over O_E and its quotients on the curve Grassmannians are §1.14 here; the larger adic coefficient ring and Smith-theoretic comparisons are not inputs to that construction.
 - The elliptic-sheaf carrier and its comparison with one-leg shtukas belong to §2.7. Generic coherent moduli remain those of AlgebraicModuliForArithmeticGeometry; DrinfeldModulesAndTModules consumes this carrier and owns the Drinfeld-module theory. The unramified local Satake comparison is §5.9 for split groups and §5.10 for nonsplit groups; Layer 7 consumes those statements directly. The function-field SL_r volume and its Tamagawa normalization belong to §0.13; the number-field measure and reduction theory of AdelicAlgebraicGroups is not a function-field volume theorem.
 - Drinfeld's companions on smooth varieties of higher dimension are not part of this roadmap.
 
 ## Conventions
 
-Throughout, k = F_q has characteristic p and X/k is a smooth projective geometrically connected curve of genus g, with function field F, adele ring A, completions F_v with integers O_v and residue fields κ_v of size q_v = `q^{deg v}`. The generic group G/F is connected reductive, with a chosen smooth affine model 𝒢 over X with connected fibres, reductive over a nonempty open U ⊂ X; the constant split case comes first, and every nonsplit statement says how it descends. A **level** N is a finite closed subscheme of X, nilpotents included; a parabolic or Iwahori flag at a point is different data. A central lattice Ξ ⊂ Z(F)\Z(A) is a discrete subgroup that controls the central degree directions (for GL_n, the powers a^Z of an idele a of nonzero degree).
+Throughout, k = F_q has characteristic p and X/k is a smooth projective geometrically connected curve of genus g, with function field F, adele ring A, completions F_v with integers O_v and residue fields κ_v of size q_v = `q^{deg v}`. The generic group G/F is connected reductive, with a chosen smooth affine model 𝒢 over X with connected fibres, reductive over a nonempty open U ⊂ X; the constant split case comes first, and every nonsplit statement says how it descends. A **level** N is a finite closed subscheme of X, nilpotents included; a parabolic or Iwahori flag at a point is different data. A central lattice Ξ ⊂ Z(F)\Z(A) is a discrete subgroup that controls the degree directions detected by F-rational characters (for GL_n, the powers a^Z of an idele a of nonzero degree).
 
-For sheaves, ℓ ≠ p and E is a finite extension of Q_ℓ, large enough for the representations in use, with integers O_E and uniformizer λ; a torsion coefficient ring is O_E/λ^s for a stated integer s ≥ 1. All ranks n used in GL_n, flags and fractional twists satisfy n ≥ 1; the zero group is treated as G=1, not as an elliptic sheaf of rank zero. Schemes and stacks are taken in fixed universes, with the categories of all test schemes and their Ind-categories in a larger universe; no finite-type assertion includes arbitrary-sized disjoint unions. Frob_v denotes a geometric Frobenius element at v, the inverse of arithmetic Frobenius, and traces in the sheaf–function dictionary are traces of geometric Frobenius. Class field theory is normalized so that the arithmetic Artin map sends a uniformizer to arithmetic Frobenius; a rank-one automorphic character χ then corresponds to the Galois character whose geometric-Frobenius value at v is χ(π_v), that is, χ(a) = ρ(Art(a)⁻¹), as in AL.3. One square root of q is fixed for half Tate twists, and q_v is used at a place of degree deg v. For nonsplit G, ᴸG = Ĝ ⋊ Gal(F̃/F) is the finite form of the L-group attached to the fixed field F̃ of the kernel of the pinned Galois action on the full based root datum; Q=Gal(F̃/F) is unramified over U since G extends reductively there. Any larger finite splitting cover used in descent must be étale over U; parameters valued in ᴸG carry the prescribed projection to Gal(F̃/F). Spherical Hecke algebras use the Haar measure with vol(G(O_v)) = 1; the normalized spherical function `h_{V,v}` differs from the trace of the perverse Satake sheaf by the sign `(−1)^{⟨2ρ,ω⟩}` of the orbit dimension. Additive local factors use the additive character of a global differential and the corresponding self-dual measures (AutomorphicLFunctionsAndLocalFactors §AL.3, *Curve additive analysis*; FunctionFieldArithmetic §2.2).
+For sheaves, ℓ ≠ p and E is a finite extension of Q_ℓ, large enough for the representations in use, with integers O_E and uniformizer λ; a torsion coefficient ring is O_E/λ^s for a stated integer s ≥ 1. All ranks n used in GL_n, flags and fractional twists satisfy n ≥ 1; the zero group is treated as G=1, not as an elliptic sheaf of rank zero. Schemes and stacks are taken in fixed universes, with the categories of all test schemes and their Ind-categories in a larger universe; no finite-type assertion includes arbitrary-sized disjoint unions. Frob_v denotes a geometric Frobenius element at v, the inverse of arithmetic Frobenius, and traces in the sheaf–function dictionary are traces of geometric Frobenius. Class field theory is normalized so that the arithmetic Artin map sends a uniformizer to arithmetic Frobenius; a rank-one automorphic character χ then corresponds to the Galois character whose geometric-Frobenius value at v is χ(π_v), that is, χ(a) = ρ(Art(a)⁻¹), as in AL.3. One square root of q is fixed for half Tate twists, and q_v is used at a place of degree deg v. For nonsplit G, ᴸG = Ĝ ⋊ Gal(F̃/F) is the finite form of the L-group attached to the fixed field F̃ of the kernel of the pinned Galois action on the full based root datum; Q=Gal(F̃/F) is unramified over U since G extends reductively there. The finite étale cover attached to Q trivializes the pinned outer action. Trivializations of the reductive model use an étale cover of U, with inner transition maps retained; no finite étale cover trivializing the model is assumed. Parameters valued in ᴸG carry the prescribed projection to Gal(F̃/F). For a good place v, fix a decomposition-group embedding and put Q_v=im(Γ_v→Q) and ᴸG_v=Ĝ⋊Q_v; Q_v is cyclic, generated by the image of geometric Frob_v. Spherical Hecke algebras use the Haar measure with vol(G(O_v)) = 1; the normalized spherical function `h_{V,v}` differs from the trace of the perverse Satake sheaf by the sign `(−1)^{⟨2ρ,ω⟩}` of the orbit dimension. Additive local factors use the additive character of a global differential and the corresponding self-dual measures (AutomorphicLFunctionsAndLocalFactors §AL.3, *Curve additive analysis*; FunctionFieldArithmetic §2.2).
 
 In a shtuka, τ is pullback along id_X × Frob_S. The ordered partition of the legs and the bound on each modification are part of the data. A fixed HN bound is not invariant under Hecke operators or partial Frobenius: these maps may increase the bound, so they act on the directed system of truncations. The groupoid of F_q-points of a stack keeps its automorphisms and, for nonsplit G, its components indexed by the pure inner forms.
 
@@ -149,6 +149,10 @@ Layer LPV.0: nearby and vanishing cycles over a henselian trait.
 
 §1.3: coherent Grassmannians, the Plücker embedding and partial flag bundles.
 
+### From TauCetiRoadmap.GeometricSatakeAndFusion
+
+GS0, *Equal-characteristic Schubert models and coefficient comparison* (`equalCharacteristicSchubertModels`): the ordinary finite-dimensional reduced Schubert schemes for equal-characteristic loop and parahoric quotients, their positive-loop strata and Bruhat closure relations, and their finite-jet action comparisons. Use the ordinary schemes before perfection, including the ordinary GL₂ minuscule model P¹; the multi-leg curve family and its collision closure are §1.2.
+
 ## How to read the build
 
 Layer 0 builds Bun_𝒢 with its level structures, flags and HN data, and identifies its F_q-points with adelic double cosets. Layer 1 builds the Beilinson–Drinfeld Grassmannian and Hecke stacks, extends ℓ-adic sheaf theory to the stacks that occur, and proves the geometric Satake equivalence over finite fields with its global, nonsplit and integral variants. Layer 2 constructs shtukas as Hecke stacks pulled back along Frobenius, with their cohomology sheaves, partial Frobenius, coalescence and Hecke operators. Layer 3 controls this cohomology: creation and annihilation, the Eichler–Shimura relation, Hecke finiteness and cuspidality, and the PGL₂ boundary analysis. Layer 4 proves Drinfeld's lemma and constructs the product Galois actions. Layer 5 builds excursion operators and proves the global decomposition. Layer 6 adds constant twists, companions and the GL_r comparison on top of AL.3. Layer 7 constructs the local parameterization and proves the comparisons at every place.
@@ -157,7 +161,7 @@ Each target states its hypotheses, sources, API and Checks. Suggested.lean lists
 
 ## Layer 0: bundles, levels and adelic geometry
 
-This layer builds the moduli of bundles on the curve and its adelic description. Three distinctions run through it: a full level structure (a trivialization on a finite subscheme that keeps its nilpotents) is different data from an Iwahori flag; a weighted stack volume is different from an unweighted count of isomorphism classes; and Harder–Narasimhan instability, measured in the adjoint group, does not bound the central degree, which is controlled separately by a central lattice Ξ.
+This layer builds the moduli of bundles on the curve and its adelic description. Three distinctions run through it: a full level structure (a trivialization on a finite subscheme that keeps its nilpotents) is different data from an Iwahori flag; a weighted stack volume is different from an unweighted count of isomorphism classes; and Harder–Narasimhan instability, measured in the adjoint group, does not bound geometric central components. Faithful-representation bounds exhaust the bundle stack; central lattices control rational degree directions, while finite type of adjoint-bounded shtuka quotients also uses Frobenius closure.
 
 Standing hypotheses for this layer: X is a smooth projective geometrically connected curve over k = F_q with function field F; the generic group G/F is connected reductive with a chosen smooth affine model 𝒢/X with connected fibres, reductive over a nonempty open U (split statements use the constant split model); bundle statements are over arbitrary k-schemes S. The Iwahori and shifted-HN targets are stated for GL_n or PGL_2, as indicated.
 
@@ -289,7 +293,7 @@ The numerical Euler form and rank-zero slope convention are specified by the pre
 
 For every smooth affine model 𝒢/X with connected fibres and reductive generic fibre, choose a vector bundle V of rank r with trivialized determinant and a faithful representation ρ:𝒢→SL(V) such that SL(V)/𝒢 and GL(V)/𝒢 are quasi-affine; such a ρ exists for every flat affine group scheme of finite type over X. Then ρ_*:Bun_𝒢→`Bun⁰_{GL_r}` is representable, quasi-affine and of finite presentation, so for every dominant coweight μ of SL_r the inverse image `Bun_𝒢^{≤μ,ρ}` of the HN open `Bun^{0,≤μ}_{GL_r}` is an open substack of finite type. These opens exhaust Bun_𝒢, and a second choice of (V,ρ) gives a cofinal system.
 
-On a connected parahoric model, as constructed in VL §12.1, apply the same construction to the adjoint group: `Bun_{G^ad}^{≤μ}` is the inverse image of the degree-zero vector-bundle HN open under a faithful representation of the adjoint model, and `Bun_G^{≤μ}` is its pullback along G→G^ad. These adjoint truncations are stable under central twisting; fixing the relevant central degrees (or quotienting by a central lattice) makes their bounded components of finite type. Intrinsic canonical parabolic reductions of arbitrary models are not assumed; for constant split G the bound HN≤μ through the canonical reductions of §0.5 is an open substack of Bun_G. For a fixed coherent-sheaf class each HN type has finitely many rational isomorphism classes; requiring all slopes ≥0 gives finitely many such types and classes. An adjoint HN bound alone does not bound degrees of the centre.
+On a connected parahoric model, as constructed in VL §12.1, apply the same construction to the adjoint group: `Bun_{G^ad}^{≤μ}` is the inverse image of the degree-zero vector-bundle HN open under a faithful representation of the adjoint model, and `Bun_G^{≤μ}` is its pullback along G→G^ad. These adjoint truncations are stable under central twisting, but their bundle quotients by Ξ need not be of finite type: F-rational characters can miss geometric central components. The general bundle exhaustion is the faithful-representation system. Finite type of adjoint-bounded shtuka quotients is the separate Frobenius-closure theorem of §2.2. Intrinsic canonical parabolic reductions of arbitrary models are not assumed; for constant split G the bound HN≤μ through the canonical reductions of §0.5 is an open substack of Bun_G. For a fixed coherent-sheaf class each HN type has finitely many rational isomorphism classes; requiring all slopes ≥0 gives finitely many such types and classes. An adjoint HN bound alone does not bound degrees of the centre.
 
 *Proof.* The faithful representation with quasi-affine quotients is AH19 Proposition 2.2(b); finite type of the ρ-truncations is AH19 Remark 2.9, which pulls back the finite-type HN opens of vector bundles along ρ_* (VL Lemma 12.1). Cofinality under a change of (V,ρ) holds because each member of one system is quasi-compact and the other system is an increasing open cover. For vector bundles, embed the bounded bundle problem in bounded Quot families after twisting by a sufficiently positive divisor. Use bounded cohomology and finite generation to obtain finite-type atlases; prove openness by specialization of HN polygons. For coherent sheaves with slopes ≥0, ranks and nonnegative quotient degrees admit only finitely many decompositions of the fixed class.
 
@@ -302,6 +306,7 @@ On a connected parahoric model, as constructed in VL §12.1, apply the same cons
 **Checks.**
 
 - For G_m on P¹ the adjoint bound is empty, so every O(d), d∈Z, satisfies it, and each degree has exactly one rational class. Through ρ(t)=diag(t,t⁻¹) into SL₂, O(d) goes to O(d)⊕O(−d), so the ρ-truncation for μ=(b,−b) contains exactly the degrees |d|≤b and is of finite type with no central quotient.
+- For the constant norm-one torus T of F₉/F₃ on P¹/F₃, the F-rational character group is 0 and degree injectivity forces Ξ={1}. Geometrically Bun_T has components d∈Z, all with adjoint bound 0; the norm-one representation in SL₂ sends d to O(d)⊕O(−d), so a faithful bound (b,−b) retains only |d|≤b. Thus finite rational degree data do not make an adjoint-bounded bundle stack quasi-compact.
 - For GL₂ on P¹, O(1)⊕O(−1) has adjoint instability 2: its adjoint bundle O(2)⊕O⊕O(−2) has slopes (2,0,−2), so it lies in the adjoint truncation for μ=(b,0,−b) exactly when b≥2. It fails the bound b=1 and satisfies b=2.
 - For PGL₂ and the bundle induced by O(a)⊕O(−a), a≥0, the adjoint representation into SL₃ and its double into SL₆ give vector bundles with slopes (2a,0,−2a) and (2a,2a,0,0,−2a,−2a). They lie in the bounds μ=(b,0,−b) and μ=(b,b,0,0,−b,−b) respectively exactly when 2a≤b, although their HN polygons differ: the two choices of ρ are cofinal on this family, not equal.
 
@@ -381,9 +386,9 @@ Source: [YZ](#references), §3.4.1–§3.4.2, Lemma 3.19 and Corollary 3.20, pp.
 
 ### 0.10 Central lattices and finite quotients
 
-Choose a central lattice CentralLattice: a discrete free subgroup Ξ of Z(F)\Z(A) whose central-degree map is injective and has finite-index image in the group of central degrees. The degree map pairs an idele with F-rational characters of G. In particular Ξ∩(Z(F)(Z(A)∩K_N)/Z(F))={1}, so the lattice action introduces no extra degree-zero stabilizers. Central tensoring acts on bundles and shtukas. Bounded shtuka loci modulo Ξ have finitely many remaining degree components; rational stabilizer weights are retained. For GL_n, a nonzero-degree idele a gives the quotient by a^Z. For a general smooth model 𝒢, the saturation `⋃_{ξ∈Ξ} ξ·Bun_𝒢^{≤μ,ρ}` of a ρ-truncation of §0.6 is a Ξ-stable open substack whose quotient by Ξ is of finite type; on a connected parahoric model these saturations and the adjoint truncations of §0.6 are cofinal modulo Ξ. As in VL, where Ξ is a lattice, Ξ is also required to make `Z(F)\Z(A)/((Z(A)∩U)Ξ)` finite for every compact open U ⊂ G(A), which is the hypothesis on Ξ in FunctionFieldArithmetic §6.2. For split Z, in particular for GL_n, this follows from the finite-index condition; for semisimple G, where Z is finite and Ξ={1}, from compactness of Z(A).
+Choose a central lattice CentralLattice: a discrete free subgroup Ξ of Z(F)\Z(A) whose central-degree map is injective and has finite-index image in the group of central degrees. The degree map pairs an idele with F-rational characters of G. In particular Ξ∩(Z(F)(Z(A)∩K_N)/Z(F))={1}, so the lattice action introduces no extra degree-zero stabilizers. Central tensoring acts on bundles and shtukas. Rational stabilizer weights are retained; the bounded-shtuka finiteness theorem is §2.2. For GL_n, a nonzero-degree idele a gives the quotient by a^Z. For a general smooth model 𝒢, the saturation `⋃_{ξ∈Ξ} ξ·Bun_𝒢^{≤μ,ρ}` of a ρ-truncation of §0.6 is a Ξ-stable open substack whose quotient by Ξ is of finite type. These quotients exhaust Bun_𝒢/Ξ and are cofinal under a change of faithful representation. There is no such bundle-level cofinality with adjoint truncations for arbitrary nonsplit centres. As in VL, where Ξ is a lattice, Ξ is also required to make `Z(F)\Z(A)/((Z(A)∩U)Ξ)` finite for every compact open U ⊂ G(A), which is the hypothesis on Ξ in FunctionFieldArithmetic §6.2. For split Z, in particular for GL_n, this follows from the finite-index condition; for semisimple G, where Z is finite and Ξ={1}, from compactness of Z(A).
 
-*Proof.* Use the idele-degree exact sequence to isolate the free central directions. Check the tensor action and level compatibility, then choose Ξ so the remaining central degrees form a finite set. Prove finite-type assertions for each HN bound after taking this quotient. The saturation is open as a union of opens, and its quotient by Ξ is the image of the finite-type stack `Bun_𝒢^{≤μ,ρ}`, hence quasi-compact and locally of finite type; cofinality modulo Ξ holds because each member of either system is quasi-compact in the quotient and the other system is an increasing open cover. For split Z ≅ G_m^d the degree-zero part of `Z(F)\Z(A)` is a product of d compact degree-zero idele class groups (ArithmeticGaloisDuality §R02.3.2), so finite index of the degree image of Ξ makes the double quotient finite. For finite Z, Z(A) is the product of the finite groups Z(F_v) over the bad places with the compact groups Z(O_v) elsewhere, since Z(O_v)=Z(F_v) for a finite model.
+*Proof.* Use the idele-degree exact sequence to isolate the free central directions. Check the tensor action and level compatibility, keeping the finite quotient of rational central degrees separate from geometric bundle components. The saturation is open as a union of opens, and its quotient by Ξ is the image of the finite-type stack `Bun_𝒢^{≤μ,ρ}`, hence quasi-compact and locally of finite type; cofinality between faithful-representation systems follows because their quotients are quasi-compact and form increasing open covers. This argument cannot be applied to an adjoint-bounded bundle quotient without a separate quasi-compactness theorem. For split Z ≅ G_m^d the degree-zero part of `Z(F)\Z(A)` is a product of d compact degree-zero idele class groups (ArithmeticGaloisDuality §R02.3.2), so finite index of the degree image of Ξ makes the double quotient finite. For finite Z, Z(A) is the product of the finite groups Z(F_v) over the bad places with the compact groups Z(O_v) elsewhere, since Z(O_v)=Z(F_v) for a finite model.
 
 *Remark.* For GL_n tensoring by a line bundle of degree d changes degree by nd.
 
@@ -400,6 +405,7 @@ The API:
 - For GL_n, a generator represented by a line bundle of degree d≠0 changes bundle degree by nd; the remaining degree classes are Z/(nd)Z.
 - An idele of degree zero cannot generate a central lattice for GL₁: its powers leave infinitely many bundle degrees, and a nontrivial subgroup in degree zero also violates degree injectivity.
 - For a semisimple group the central-degree group has rank zero and Ξ={1} is permitted; no artificial nonzero-degree generator is required.
+- For T the norm-one torus of F₉/F₃ on P¹, the unit norm is surjective and the Picard norm is d↦2d, with kernel 0; hence H¹(P¹,T)=0 and the rational maximal-compact adelic quotient has one class. Nevertheless all geometric d∈Z survive the adjoint bundle bound with Ξ={1}, whereas a faithful bound retains 2b+1 components for integer b≥0.
 
 Source: [VL](#references), §2, before Definition 2.14, p. 59; §8, Remark 8.21, p. 116.
 
@@ -421,17 +427,30 @@ Source: [Yu](#references), §3.3.1, Theorem 3.3.1, (3.3.1) and (3.3.6), pp. 18�
 
 ### 0.12 Nonsplit bundle descent
 
-For nonsplit G, choose a finite splitting extension and compatible integral model away from the bad places. Torsors with effective descent data recover 𝒢-bundles, and the rational groupoid decomposes into the pure-inner-form components indexed by ker¹(F,G). The component decomposition is preserved by spherical Hecke correspondences.
+For the fixed model 𝒢, effective torsor descent on any étale cover of X recovers 𝒢-bundles and their arrows. Over the reductive open U, use étale local isomorphisms from 𝒢 to a split pinned model of its root datum. Their transition automorphisms include both the pinned outer part and the inner part; killing the finite outer action does not assert that the isomorphism torsor has a section. The rational groupoid decomposes into the pure-inner-form components indexed by ker¹(F,G), and spherical Hecke correspondences preserve this decomposition.
 
-*Proof.* Use torsor descent for the model, distinguishing a group form from a torsor under it. Transport Hecke modifications and the no-leg identification on each generic torsor component. Show the operations do not change the generic ker¹ class.
+*Proof.* Apply the torsor and contracted-product descent of SchemeAndStackFoundations §§1.15–1.16 to the fixed group model. On U, retain the isomorphisms on overlaps and their composition on triple overlaps, including inner automorphisms. Transport Hecke modifications and the no-leg identification on each generic torsor component. Show the operations do not change the generic ker¹ class.
 
-*Remark.* A splitting-field choice must disappear from the resulting equivalence.
+*Remark.* The equivalence is independent of the étale trivializations and their refinements.
+
+The descent API includes:
+
+- Pullback of the descent equivalence along any base change.
+- Effective descent of objects and arrows, coherent on triple overlaps.
+- Independence under refinement of the étale cover.
+- Compatibility with bundle isomorphisms and Hecke modifications.
+
+**Checks.**
+
+- For a constant split model the identity trivialization gives identity transition maps.
+- For the constant norm-one torus of F₉/F₃, the outer quotient is C₂ and the nonidentity transition acts by d↦−d on geometric degrees; discarding it would descend every d instead of only d=0 among rational bundles on P¹.
+- For 𝒢=GL(O⊕O(1)) on P¹/F₃, the generic group is split and Q=1, but Lie(𝒢)=O²⊕O(1)⊕O(−1). After any constant-field extension H⁰(Lie(𝒢)(−1)) has dimension 1, while H⁰(O⁴(−1)) has dimension 0. Connected finite étale covers of P¹ are constant-field extensions, so no such cover trivializes this model; its two standard affine charts do trivialize it and, with t=X₁/X₀ and frames e∞=t e₀ for O(1), the transition from ∞-coordinates to 0-coordinates is inner conjugation by diag(1,t).
 
 *Remark.* Do not replace the disjoint union of groupoids by a vector-space direct sum before taking functions.
 
 Source: [VL](#references), §12.1, Remark 12.2 and Theorem 12.3, pp. 148–152; §12.3.2, pp. 159–161.
 
-*Needs:* [§0.7 *Adelic bundle groupoids*](#07-adelic-bundle-groupoids); Mathlib `CategoryTheory.Pseudofunctor.DescentData`.
+*Needs:* [§0.7 *Adelic bundle groupoids*](#07-adelic-bundle-groupoids); Mathlib `CategoryTheory.Pseudofunctor.DescentData`; SchemeAndStackFoundations §§1.15–1.16 (torsors, contracted products and their effective descent).
 
 ### 0.13 Bundle and torsion mass identities
 
@@ -549,28 +568,29 @@ Source: [VL](#references), §1, Definition 1.6, Notation 1.7, Construction 1.8 a
 
 ### 1.2 Schubert bounds
 
-Define SchubertBound. For dominant coweights (ωi), the one-leg Schubert variety is the reduced closure of the positive-loop orbit t^ω. Over the disjoint-leg locus take their product and define `Gr_{I,ω}` as its reduced Zariski closure in the iterated BD Grassmannian. This differs in general from the larger representation-theoretic inequality bound `Gr_{I,≲ω}`; do not identify the two functors on nonreduced test rings without a theorem.
+Define SchubertBound by transport of the ordinary local Schubert schemes of GeometricSatakeAndFusion GS0, *Equal-characteristic Schubert models and coefficient comparison*. For dominant coweights (ωi), identify the one-leg fibre with that same reduced positive-loop orbit closure at t^ω. Over the disjoint-leg locus take their product and define `Gr_{I,ω}` as its reduced Zariski closure in the iterated BD Grassmannian. This differs in general from the larger representation-theoretic inequality bound `Gr_{I,≲ω}`; do not identify the two functors on nonreduced test rings without a theorem.
 
-*Construction.* Construct local loop orbits and their reduced closed Schubert pieces. Use factorization on the disjoint locus and then reduced closure in a finite ambient bound. Show dominance order describes the geometric orbit strata; record what is asserted only for reduced subschemes.
+*Construction.* Transport the local schemes, strata and finite-jet actions through the formal-coordinate trivializations of §1.1; prove independence of the coordinate and compatibility on overlaps. Use factorization on the disjoint locus and then reduced closure in a finite ambient bound. Compare the transported strata with the local Bruhat order, retaining the distinction between reduced schemes and the full modification functor on nonreduced rings.
 
 *Remark.* Retain closure and inequality notation separately.
 
 The API:
 
 - Dominant coweight tuple and reduced global closed support.
-- Open positive-loop orbit in the local Schubert variety.
-- Reduced closure of the disjoint product.
-- On any fixed bound the positive-loop action factors through sufficiently large finite jets.
+- Identify each one-leg fibre and its open stratum with the same ordinary local model and stratum.
+- Reduced closure of the disjoint product, compatible with relabelling of legs.
+- Transport the local finite-jet action to each bounded curve chart and compare it on overlaps.
 
 **Checks.**
 
-- ω=0 gives the unit section.
-- For a torus each one-leg Schubert variety is a point; two colliding exponents add.
-- For GL₂, (1,0) is minuscule and its orbit is already closed; a nonminuscule bound must include smaller strata.
+- ω=0 gives the unit section; under a coordinate change t↦at with a a unit, its position remains 0.
+- For G_m each one-leg Schubert variety is a point; weights 1 and −1 collide to weight 0, whereas weights 1 and 1 collide to weight 2.
+- For GL₂, (1,0) gives the same ordinary P¹ as the local model, whose quotient determinant has degree +1. Its perfection alone would not retain the nonzero tangent vectors P¹(k[ε]/ε²)→P¹(k), so the ordinary model is required.
+- The GL₂ bound (2,0) contains the smaller stratum (1,1); keeping only its open orbit omits that stratum.
 
 Source: [VL](#references), §1, Definition 1.12, p. 46.
 
-*Needs:* [§1.1 *Beilinson–Drinfeld Grassmannians*](#11-beilinsondrinfeld-grassmannians).
+*Needs:* [§1.1 *Beilinson–Drinfeld Grassmannians*](#11-beilinsondrinfeld-grassmannians); GeometricSatakeAndFusion GS0, *Equal-characteristic Schubert models and coefficient comparison* (`equalCharacteristicSchubertModels`).
 
 ### 1.3 Global Hecke chains
 
@@ -725,60 +745,74 @@ Source: [MV](#references), §7, Theorem 7.3, p. 23; §11, Proposition 11.1, p. 3
 
 ### 1.10 Central action on Satake sheaves
 
-The positive-loop action of the centre on the bounded Grassmannian and its Satake sheaves is trivial in the descent needed for the central quotient of shtukas; central tensoring of the bundle factor therefore preserves the coefficient sheaf.
+The positive-loop action of the centre on the bounded Grassmannian and its Satake sheaves is trivial in the descent needed for the central quotient of shtukas; central tensoring of the bundle factor therefore preserves the coefficient sheaf. Over U, prove the corresponding descent of equivariance to the adjoint positive-loop action on bounded supports, as used for inner transitions in §1.11.
 
 *Proof.* A central positive loop changes a trivialization by an automorphism extending across the disc. Check equivariant descent on each finite jet quotient and then transport it to Hecke and shtuka coefficients.
 
 *Remark.* Distinguish this geometric central-loop action from the possibly nontrivial action of Z(Ĝ) on a representation.
 
-Source: [VL](#references), §1, Remark 1.20, p. 51.
+Source: [VL](#references), §1, Theorem 1.17(a), pp. 48–49, and Remark 1.20, p. 51; §12.3.1, Theorem 12.16, p. 157.
 
 *Needs:* [§0.10 *Central lattices and finite quotients*](#010-central-lattices-and-finite-quotients); [§1.9 *Classical geometric Satake*](#19-classical-geometric-satake).
 
 ### 1.11 Nonsplit Satake descent
 
-Over the open where G is reductive, descend split Satake from a finite splitting cover étale over that open with its pinned finite Galois action on Ĝ. The resulting coefficient functor is indexed by algebraic representations of the finite-form L-group Ĝ⋊Q and is compatible with restriction of the prescribed Γ→Q projection. Geometric and algebraic actions differ by the Tate/pinning normalization and must be compared explicitly.
+On the full reductive open U, descend split Satake along étale local trivializations of the fixed model, as in §0.12. On overlaps, the group isomorphisms act on the Grassmannians and their equivariant Satake sheaves. An inner transition is conjugation by a section of the split adjoint group; use the adjoint positive-loop equivariance of the split Satake functor on bounded supports. Its descent from split-group equivariance uses §1.10: lifts of an inner transition are taken fppf locally and differ centrally, so the central action identifies their descent maps, including when the centre is non-smooth. Prove the cocycle on triple overlaps and compatibility with convolution, fusion and the fibre functor. The finite cover associated to Q records only the pinned outer action; it need not trivialize the reductive model. The resulting global coefficient functor is indexed by algebraic representations of Ĝ⋊Q and is compatible with restriction of the prescribed Γ→Q projection. Geometric and algebraic actions differ by the Tate/pinning normalization and must be compared explicitly.
 
 Over a field k₀, the full arithmetic Satake category is equivalent to representations of Ĝ⋊Gal(k₀^sep/k₀) with algebraic Ĝ-action, with continuous arithmetic action on a finite-dimensional vector space over one finite extension of Q_ℓ, as specified in Ric Theorem 5.1. Here k₀=F_q for §1.7 and k₀=F at the generic point for nonsplit descent. The normalized finite-form L-group coefficient functor above is a specified subfunctor of this arithmetic category, not a description of the full category. Before the pinning comparison the semidirect product uses the geometric Galois action; the following comparison transports it to the pinned action.
+
+For fixed legs, extend the coefficient functor as follows (VL §12.3.1, pp. 158–159). Assign each leg either the moving base U∖|N| with group ᴸG or a fixed good place v with group ᴸG_v; each block of the ordered partition has one such assignment. For a representation of the product of these groups, construct the Satake sheaf on the corresponding product of moving and fixed leg bases. Restriction of a global representation to the local groups agrees with specialization of its global Satake sheaf. Every local representation V is a direct summand of the restriction of the finite-dimensional algebraic global representation obtained by inducing V from ᴸG_v to ᴸG: inclusion into and projection from the identity-coset summand give maps i,p with pi=id_V. For several legs take the corresponding exterior products; induction is used to obtain a retract, not as a tensor functor. Split the specialized coefficient idempotent ip, prove independence of the containing global representation, and compare coefficient morphisms, duals, evaluation and coevaluation. In the shtuka cohomology construction these comparisons must intertwine the induced projections, the Frobenius correspondences returning a fixed v-leg after deg v iterates with residue-field descent, and creation and annihilation after specialization; the identities involving these operations are proved in §§3.6 and 5.10.
+
+The descent and coefficient API includes:
+
+- Isomorphism and refinement of étale trivializations induce coherent identifications on all bounded supports and coefficient sheaves.
+- Inner transitions give canonical descent maps independent of their local lifts, compatible with the outer action and tensor structure.
+- Specialization at a fixed leg identifies global coefficients with their restricted local coefficients; splitting a local idempotent commutes with coefficient morphisms and the allowed fusion maps.
+- Evaluation and coevaluation on a local summand agree with those obtained by inserting its inclusion and projection into the global coefficients.
 
 **Checks.**
 
 - For G=1, a rank-one lisse E-sheaf with Frobenius 1+ℓ is arithmetic Satake data of infinite order and cannot factor through any finite Q.
 - For the same trivial group Frobenius −1 factors through a quotient of order two (also when ℓ=2 in characteristic-zero coefficients).
 - For a nonsplit unramified norm-one torus Frobenius acts by −1 on its rank-one character lattice; trivial arithmetic action would give the wrong spherical algebra.
+- For GL(O⊕O(1)) on P¹/F₃ the outer quotient is Q=1, while the two affine charts have transition Ad diag(1,t). Conjugation sends E₁₂ to t⁻¹E₁₂ and E₂₁ to tE₂₁; these transitions recover O(−1) and O(1) rather than constant root lines. Equivariant descent includes the still-good point ∞.
+- With Q=C₂×C₂, Q_v the first factor, and the second factor inverting a split dual-torus character z, a local weight-one V need not extend globally. Induction has dimension 2; on restriction its weights are z and z⁻¹, and the identity-coset projector is diag(1,0), with p i=1 and (ip)²=ip. Taking the trace after this projector gives z, whereas omitting it gives z+z⁻¹.
+- For split SL_p in characteristic p, the central kernel of SL_p→PGL_p is μ_p. The map a↦a^p has derivative 0, so lifts through this kernel are fppf local and cannot be assumed étale local. Adjoint equivariance keeps the inner descent valid in this case.
+- When Q_v=Q, induction and the identity-coset projector are the identity; restricting the trivial coefficient gives the trivial coefficient, with evaluation after coevaluation equal to 1.
 - For G = PGL₂ split, so Ĝ = SL₂ with trivial pinned action, γ with cycl(γ) = 3 and u(x) the upper unipotent matrix, the map displayed in Ric Corollary 5.8 sends the product (1,γ)·(u(1),1) of the pinned L-group to (u(1/3),γ), while the product of the two images in the geometric L-group is (u(3),γ). The corrected map below sends both to (u(1)c(γ)⁻¹,γ).
 
 The comparison between the geometric Galois action on Ĝ obtained by Tannakian descent and the algebraic action through a pinning is Ric, Proposition 5.6, p. 22: act_geo(γ) = act_alg(γ) ∘ Ad χ(γ) with χ = ρ ∘ cycl, where cycl is the ℓ-adic cyclotomic character and ρ, the half-sum of positive coroots of Ĝ, is viewed as a cocharacter of Ĝ_ad. To compare the semidirect products, fix a half Tate character ε of Gal(k₀^sep/k₀) with ε² = cycl and put c(γ) = (2ρ)(ε(γ)) in the maximal torus of Ĝ; c is a homomorphism whose image in Ĝ_ad is χ(γ). Then (g,γ) ↦ (g·c(γ)⁻¹, γ) is an isomorphism from Ĝ ⋊ Gal(k₀^sep/k₀) with the pinned action to the same group with the geometric action: multiplicativity follows from act_geo(γ) = act_alg(γ) ∘ Ad c(γ) and from act_alg(γ)(c(δ)) = c(δ), since pinned automorphisms fix 2ρ. This corrects the map displayed in Ric, Corollary 5.8 (Source corrections, E7). For k₀ = F_q the fixed square root of q gives ε, with ε(arithmetic Frobenius) = √q, and for k₀ = F the cyclotomic character factors through the constant field, so the same ε serves; these are the two cases used here. The half Tate character is a genuine hypothesis: for k₀ = R, cycl(complex conjugation) = −1 has no square root among the characters of Gal(C/R). This twist is the Tate normalization fixed above.
 
-*Proof.* Construct the pinned action and its descent datum on split Satake sheaves. Check cocycle and independence of the splitting cover, then descend fusion and convolution. Compare the geometric and pinned semidirect products by the map (g,γ) ↦ (g·c(γ)⁻¹, γ) above. Keep the action on coefficients distinct from the Weil action on the base.
+*Proof.* Construct descent on the étale trivializations with both inner and outer transition maps, prove the cocycle and independence under refinement, and descend fusion and convolution. For fixed legs use finite-index induction and its local retract, then split the corresponding coefficient idempotents and compare the evaluation and coevaluation diagrams. Compare the geometric and pinned semidirect products by the map (g,γ) ↦ (g·c(γ)⁻¹, γ) above. Keep the action on coefficients distinct from the Weil action on the base.
 
 *Remark.* A split group has trivial Q action.
 
 *Remark.* For a nonsplit torus the dual-character lattice carries the actual Galois action.
 
-Source: [VL](#references), §12.1, pp. 148–149; §12.3.1, Theorem 12.16, pp. 157–158; [Ric](#references), Theorem 5.1, p. 20; Proposition 5.6 and Corollary 5.8, p. 22.
+Source: [VL](#references), §12.1, pp. 148–149; §12.3.1, Theorem 12.16 and the fixed-leg extension (12.9)–(12.10), pp. 157–159; §12.3.5(e′), pp. 164–165; [Ric](#references), Theorem 5.1, p. 20; Proposition 5.6 and Corollary 5.8, p. 22.
 
-*Needs:* [§0.12 *Nonsplit bundle descent*](#012-nonsplit-bundle-descent); [§1.9 *Classical geometric Satake*](#19-classical-geometric-satake); LanglandsParameterStacks §LP0.1 (restriction and functoriality of crossed cocycles); ReductiveGroupsPartII §§RG2.5.1–RG2.5.2 (the dual group with its Galois action, and the L-group).
+*Needs:* [§0.12 *Nonsplit bundle descent*](#012-nonsplit-bundle-descent); [§1.9 *Classical geometric Satake*](#19-classical-geometric-satake); [§1.10 *Central action on Satake sheaves*](#110-central-action-on-satake-sheaves); SchemeAndStackFoundations §§1.15–1.16 (torsors and contracted products); LanglandsParameterStacks §LP0.1 (restriction and functoriality of crossed cocycles); ReductiveGroupsPartII §§RG2.5.1–RG2.5.2 (the dual group with its Galois action, and the L-group).
 
 ### 1.12 Normalized spherical Satake
 
 At a good place v∈U∖|N| with hyperspecial model, normalize vol(G(O_v)) = 1. For split G, the classical Satake isomorphism of SmoothRepresentationsOfLocalGroups §SR.4.1, with a fixed square root of q, identifies the spherical E-Hecke algebra with E ⊗_Z K₀(Rep Ĝ); for a split torus it is the group algebra of the cocharacter lattice. For irreducible V of highest weight ω, let `h_{V,v}` be the image of [V]. It takes values in O_E, the `h_{V,v}` form an O_E-basis of the integral spherical Hecke algebra, and `h_{V,v}` = `(−1)^{⟨2ρ,ω⟩}` Tr(Frob_v, S_V), with the half Tate twist already fixed. For nonminuscule V the trace of the intersection complex is not the characteristic function of a single double coset.
 
-For unramified nonsplit G, the spherical algebra is the algebra of regular functions on the semisimple twisted-conjugacy quotient of Ĝ⋊Frob_v. The coefficient representations and their traces include the Frobenius action of §1.11; `h_{V,v}` denotes the resulting twisted-character function. Such traces span the spherical algebra, without asserting that all representations of Ĝ separately give a basis. For an unramified torus T this is `E[X_*(T)^{Frob_v}]`.
+For unramified nonsplit G, use Q_v and ᴸG_v of the Conventions. The spherical algebra is the algebra of regular functions on the semisimple twisted-conjugacy quotient of the coset Ĝ⋊Frob_v in ᴸG_v. For a finite-dimensional algebraic representation V of ᴸG_v, let `h_{V,v}` be the image of its character restricted to that coset; these local twisted characters span the spherical E-algebra. Their coefficient sheaves are the fixed-leg functor of §1.11. Characters of the global group ᴸG alone need not span this algebra when Q_v is a proper subgroup of Q. For an unramified torus T this is `E[X_*(T)^{Frob_v}]`.
 
 **Checks.**
 
 - For split G_m the lattice is Z and the algebra is E[z,z⁻¹].
 - For the norm-one torus of an unramified quadratic extension, Frobenius acts by −1 on Z. Its invariant lattice is 0, T(K)=T(O_K), and the spherical algebra is E. Using the full dual representation ring would give the incorrect E[z,z⁻¹].
 - For the GL₂ standard representation the split normalization gives q_v^(−1/2) on its minuscule open double coset; the perverse IC trace has the opposite sign.
+- Over F₃(t), take T the product of the norm-one tori of F(√t)/F and F(√(t−1))/F and v=(t−2). The residues 2 and 1 make Frobenius invert the first dual coordinate and fix the second, so Q=C₂×C₂, Q_v=C₂ and the local spherical algebra is E[z,z⁻¹]. A local weight-one character on the second coordinate has trace z; global characters are invariant under z↦z⁻¹. At z=2 and z=1/2 the local character has values 2 and 1/2, whereas each global character has equal values; local coefficients are necessary.
 
-*Proof.* Take the classical Satake isomorphism from SR.4.1, and identify the traces by the sheaf–function dictionary and the compatibility of geometric Satake with convolution. Evaluate the normalized IC traces on local double cosets and compare the triangular bases in dominance order.
+*Proof.* Take the classical Satake isomorphism from SR.4.1, and identify the traces by the sheaf–function dictionary and the compatibility of geometric Satake with convolution. Evaluate the normalized IC traces on local double cosets and compare the triangular bases in dominance order. In the nonsplit case use VL (12.4): restriction of characters of ᴸG_v spans the regular conjugation-invariant functions on its Frobenius coset, since Q_v is cyclic generated by Frob_v and conjugation by ᴸG_v gives the same classes there as conjugation by Ĝ.
 
 *Remark.* h_1 is the unit `1_{G(Ov)}`.
 
 *Remark.* For G_m the basis is `δ_{π^m}` and multiplication adds m.
 
-Source: [VL](#references), §1, after Theorem 1.17 and Remarks 1.20–1.21, pp. 51–52; §12.3.1–§12.3.2, pp. 157–161; §6.1, Proposition 6.2, p. 75.
+Source: [VL](#references), §1, after Theorem 1.17 and Remarks 1.20–1.21, pp. 51–52; §12.1, (12.4) and the following paragraph, p. 151; §12.3.1–§12.3.2, pp. 157–161; §6.1, Proposition 6.2, p. 75.
 
 *Needs:* [§0.14 *Cuspidal functions and bundle functions*](#014-cuspidal-functions-and-bundle-functions); [§1.9 *Classical geometric Satake*](#19-classical-geometric-satake); SmoothRepresentationsOfLocalGroups §SR.4.1 (the Satake transform and isomorphism); [§1.11 *Nonsplit Satake descent*](#111-nonsplit-satake-descent), for the nonsplit trace comparison.
 
@@ -840,7 +874,7 @@ Source: [VL](#references), §13, proof of Proposition 13.1, pp. 166–167; Theor
 
 ### Dependencies
 
-Layer 0; ReductiveGroups and ReductiveGroupsPartII §RG2.5; Tau Ceti `TauCeti.FGPointRepresentationCat`; MotivesAndAlgebraicCycles §§6.1–6.2; SchemeAndStackFoundations Layer 1; RelativeFarguesFontaine §6.5; EndoscopicTransferAndUnitaryTraceComparison §3.2; EtaleCohomologyFoundations §§F.0–F.2, F.2.3 and F.8; EtaleDualityAndPerverseSheaves Layers 0, 2 and 5; DeligneWeightsAndPurity DWP.0 and §8.24; SmoothRepresentationsOfLocalGroups §SR.4.1; LanglandsParameterStacks §LP0.1.
+Layer 0; ReductiveGroups and ReductiveGroupsPartII §RG2.5; Tau Ceti `TauCeti.FGPointRepresentationCat`; MotivesAndAlgebraicCycles §§6.1–6.2; SchemeAndStackFoundations Layer 1; RelativeFarguesFontaine §6.5; EndoscopicTransferAndUnitaryTraceComparison §3.2; GeometricSatakeAndFusion GS0, *Equal-characteristic Schubert models and coefficient comparison*; EtaleCohomologyFoundations §§F.0–F.2, F.2.3 and F.8; EtaleDualityAndPerverseSheaves Layers 0, 2 and 5; DeligneWeightsAndPurity DWP.0 and §8.24; SmoothRepresentationsOfLocalGroups §SR.4.1; LanglandsParameterStacks §LP0.1.
 
 ## Layer 2: global shtukas and their cohomology
 
@@ -875,13 +909,19 @@ Source: [VL](#references), §2, Definition 2.1, pp. 52–53.
 
 For a fixed W, HN bound μ and central lattice Ξ, `Cht^{≤μ}_{N,I,W}/Ξ` is a finite-type Deligne–Mumford stack in the source’s bounded setting. Here ≤μ is a Ξ-stable truncation of §§0.6 and 0.10: the adjoint truncation on a connected parahoric model, and a saturated ρ-truncation for a general smooth model 𝒢; over a ρ-truncation itself the bounded shtukas already form a finite-type Deligne–Mumford stack, since bounded global 𝒢-shtukas are relatively representable of finite type over Bun_𝒢 times the leg base. For sufficiently deep nonempty N, depending on μ and W, its components are quasi-projective schemes. With N empty the quotient-of-quasi-projective assertion holds over U^I for every open U⊊X; do not claim the entire unbounded shtuka stack is a scheme.
 
-*Proof.* Intersect the bounded Hecke locus with the Frobenius graph and use the HN bound for finite type. Frobenius-fixed infinitesimal automorphisms vanish, giving the unramified diagonal. Increase the level enough to kill the remaining finite automorphisms uniformly on the fixed bound.
+*Proof.* For a faithful-representation truncation, intersect the bounded Hecke locus with the Frobenius graph over the finite-type bundle open. For adjoint bounds on a connected parahoric model, prove finite type modulo Ξ by VL Lemma 12.19, not by a bundle boundedness assertion: for a torus the Frobenius closing condition makes the bounded shtuka stack, after a finite cover of the leg base, a finite union of torsors under the rational bundle group; quotienting by Ξ makes it finite type. For general G compare with Gᵃᵈ×Gᵃᵇ through its finite central kernel, and use a tensor power of a faithful representation to bound the inverse image of an adjoint bound and a finite-type abelianized shtuka locus. Thus on bounded shtuka quotients the adjoint truncations and the saturated faithful-representation truncations are cofinal: each is an increasing open exhaustion by quasi-compact members. Frobenius-fixed infinitesimal automorphisms vanish, giving the unramified diagonal. Increase the level enough to kill the remaining finite automorphisms uniformly on the fixed bound.
 
 *Remark.* The depth needed may increase with μ and W.
 
 *Remark.* A single bounded open need not be preserved by all Hecke or partial Frobenius operations.
 
-Source: [VL](#references), §2, Proposition 2.6(a), pp. 53–54, and the paragraph before Definition 2.14, p. 59; [Var](#references), §2, Proposition 2.16(a), pp. 7–8; [AH19](#references), Theorem 3.15, pp. 15–17 (flat affine models of finite type).
+**Checks.**
+
+- For the constant norm-one torus of F₉/F₃ on P¹, the zero-leg Frobenius closing condition is d=−d, hence d=0. The infinitely many geometric bundle components of §0.6 therefore give one allowable degree for these shtukas, with Ξ={1}.
+- For G_m on P¹, zero-leg Frobenius closure permits every degree d∈Z, but a lattice generator of degree a≠0 leaves |a| degree classes; Frobenius alone would not bound these split central directions.
+- For G=1, empty level and no legs, the shtuka stack is a point and every truncation system is constant; there is no positive-rank central lattice to choose.
+
+Source: [VL](#references), §2, Proposition 2.6(a), pp. 53–54, and the paragraph before Definition 2.14, p. 59; §12.3.2, Lemma 12.19 with proof, pp. 159–160; [Var](#references), §2, Proposition 2.16(a), pp. 7–8; [AH19](#references), Theorem 3.15, pp. 15–17 (flat affine models of finite type).
 
 *Needs:* [§0.6 *Bounded bundle loci*](#06-bounded-bundle-loci); [§0.10 *Central lattices and finite quotients*](#010-central-lattices-and-finite-quotients); [§2.1 *Global shtukas*](#21-global-shtukas).
 
@@ -943,7 +983,7 @@ The API:
 
 - For I=∅, W=1, degree-zero compact support gives functions on the rational bundle groupoid modulo Ξ.
 - For G=GL₂ on P¹, I=∅, W=1, empty level, E coefficients and Ξ generated by a degree-one scalar idele, the rational degree-zero bundles of instability at most 2m are O(a)⊕O(−a) with 0≤a≤m. So the degree-zero part of `H^{0,≤μ}` has dimension m+1 (1 for m=0, 2 for m=1), the transition from m to m+1 is extension by zero onto these coordinates, and the colimit is infinite-dimensional: the colimit is not a constructible sheaf on the point, although each truncation is.
-- For GL₂ and two standard minuscule legs, the comparison from the two-block presentation to the one-block presentation is proper pushforward along a map whose fibre over the central coweight (1,1) on the collision diagonal is P¹. Its unshifted compact cohomology has rank 1 in degrees 0 and 2, and the pushforward keeps both, matching Std⊗Std = Sym²⊕det; a comparison that treated this fibre as a point would keep total rank 1 and lose the det summand.
+- For GL₂ on P¹ at empty level, take a standard leg of coweight (1,0) and a dual-standard leg of coweight (0,−1). Their total degree is 1−1=0. On the collision diagonal, the trivial Frobenius-periodic bundle with identity composite modification gives a point in the one-block shtuka presentation; the fibre of the two-block presentation over it is P¹. Its unshifted compact cohomology has ranks 1 in degrees 0 and 2, matching Std⊗Std∨=1⊕Ad in characteristic-zero coefficients. Treating the fibre as a point loses its degree-two class and the corresponding unit constituent in the normalized Satake decomposition. Two standard legs instead have total degree 2 and give an empty untwisted shtuka stack, although their Grassmannian convolution fibre over (1,1) is also P¹.
 
 Source: [VL](#references), §2, Definition 2.14 and Corollaries 2.15–2.18, pp. 59–60; §4.2, Definition 4.1, p. 65; §4.5, Definitions 4.5 and 4.7, p. 68.
 
@@ -1211,7 +1251,7 @@ Source: [Xue-I](#references), §2.3.8, Definitions 2.3.10–2.3.12, pp. 16–17;
 
 For a good place v∈U∖|N| and, initially, split G and V∈Rep Ĝ, define `S_{V,v}` by creating V⊠V∗, applying `Frob_first^{deg v}`, then annihilating, with the source’s descent from a geometric point over v. On the locus where existing legs avoid v, this equals `T(h_{V,v})`; hence it extends that spherical Hecke action across v. The dimension-parity sign in the normalized `h_{V,v}` is essential.
 
-For unramified nonsplit G, use the Frobenius-equivariant coefficients of §1.11 and the twisted-character `h_{V,v}` of §1.12, retaining the local system of diagonal invariants in creation and annihilation. The trace is evaluated on Ĝ⋊Frob_v. This gives the same away-from-v comparison for the nonsplit spherical algebra.
+For unramified nonsplit G and every V∈Rep_E(ᴸG_v), use the fixed-leg coefficients and restriction/projector comparison of §1.11 with the local twisted character `h_{V,v}` of §1.12. After specializing a containing global coefficient representation at v, insert the local summand projector in creation and annihilation and compare it with the maps defined directly on V; retain the local system of diagonal-Ĝ invariants for moving global legs. The trace is evaluated on the local coset Ĝ⋊Frob_v. This proves the same away-from-v comparison for every local spherical operator, including those not spanned by global L-group characters.
 
 The full correspondence computation of VL §§6.2–6.5, including the identities of Lemmas 6.11–6.15 for intersection complexes and convolution, is part of this target; the minuscule case does not suffice.
 
@@ -1229,7 +1269,7 @@ The API:
 - At a degree-two place the construction uses two partial Frobenius iterates and q_v=q²; a single iterate lies over the wrong point before descent.
 - For GL₂ and the minuscule standard representation, the orbit has dimension one. On its open stratum the normalized perverse IC has trace `−q_v^{−1/2}`, while `h_{V,v}` has value `+q_v^{−1/2}`; omitting the parity correction changes the operator's sign.
 
-Source: [VL](#references), §6.1, Proposition 6.2 and Corollary 6.5, p. 75; proof in §§6.2–6.5, pp. 76–100.
+Source: [VL](#references), §6.1, Proposition 6.2 and Corollary 6.5, p. 75; proof in §§6.2–6.5, pp. 76–100; §12.3.3, (12.15)–(12.16), pp. 161–162; §12.3.5(e′), pp. 164–165.
 
 *Needs:* [§1.12 *Normalized spherical Satake*](#112-normalized-spherical-satake); [§2.9 *Partial Frobenius*](#29-partial-frobenius); [§3.1 *Creation and annihilation*](#31-creation-and-annihilation); [§1.11 *Nonsplit Satake descent*](#111-nonsplit-satake-descent).
 
@@ -1749,21 +1789,23 @@ Source: [VL](#references), §11, Theorem 11.11 and proof, p. 148.
 
 ### 5.10 The nonsplit global decomposition
 
-Let G/F be connected reductive with connected parahoric model 𝒢/X, reductive on U, and let F̃ be the fixed field of the kernel of the pinned Galois action on the full based root datum. This extension is unramified over U; a larger finite splitting cover is permitted only if it is étale over U. Put ᴸG = Ĝ ⋊ Gal(F̃/F). The full cusp space on `Bun_{𝒢,N}(F_q)/Ξ`, including ker¹ pure-inner-form components, has the canonical generalized excursion decomposition indexed by continuous semisimple σ : Gal(F̄/F) → ᴸG(E′), unramified outside |N|∪(X∖U), whose projection is the prescribed quotient to Gal(F̃/F). Good-place Satake operators `h_{V,v}` use the twisted characters of §1.12 and act by Tr(σ(Frob_v)|V), and the decomposition respects changes of N.
+Let G/F be connected reductive with connected parahoric model 𝒢/X, reductive on U, and let F̃ be the fixed field of the kernel of the pinned Galois action on the full based root datum. This extension is unramified over the full chosen U; use the étale local model descent of §1.11 there, independently of whether the model has a finite étale splitting cover. Put ᴸG = Ĝ ⋊ Gal(F̃/F). The full cusp space on `Bun_{𝒢,N}(F_q)/Ξ`, including ker¹ pure-inner-form components, has the canonical generalized excursion decomposition indexed by continuous semisimple σ : Gal(F̄/F) → ᴸG(E′), unramified outside |N|∪(X∖U), whose projection is the prescribed quotient to Gal(F̃/F). For every v∈U∖|N| and every V∈Rep_E(ᴸG_v), the good-place operator `h_{V,v}` of §1.12 acts by Tr(σ(Frob_v)|V), with the local embedding and prescribed projection understood; the decomposition respects changes of N.
 
 **Checks.**
 
 - For split G_m the pinned action is trivial, so Q=1 and no auxiliary ramification occurs.
 - For G_m/F₃(t), U=P¹ and N=∅, F(√t)/F is ramified at 0 and ∞ and is rejected as a prescribed finite quotient: it would force ramification at good places.
 - For an unramified nonsplit torus at v, inertia acts trivially on its lattice and hence on Q, whereas Frobenius may act nontrivially.
+- For the product torus of §1.12 with Q=C₂×C₂ and Q_v=C₂, a local weight-one V on the split factor gives eigenvalue z(σ(Frob_v)); its dual gives z(σ(Frob_v))⁻¹. At z=2 these are 2 and 1/2, so a statement only about their global sum 5/2 would miss two distinct spherical operators.
+- For GL(O⊕O(1)) on P¹/F₃, U=P¹ includes ∞. Descent on its two affine charts yields the usual GL₂ spherical comparison at both 0 and ∞, with Q=1; deleting ∞ from the construction would omit a good place.
 
-*Proof.* Use twisted Satake coefficients, and keep the nonconstant local system of diagonal-Ĝ invariants when defining creation and annihilation before passing to generic fibres. Verify the same identities with `O(Ĝ\(ᴸG)^I/Ĝ)`; functions pulled back from the finite component quotient act by their prescribed scalar values. Apply the reconstruction of LanglandsParameterStacks §§LP2c.1–LP2c.2 for groups with reductive identity component and prescribed finite projection. The scalar values force the required projection, and the unramifiedness argument gives the stated good open. Compare restriction of level and all inner-form components through the common Hecke action.
+*Proof.* Use twisted Satake coefficients, and keep the nonconstant local system of diagonal-Ĝ invariants when defining creation and annihilation before passing to generic fibres. Verify the same identities with `O(Ĝ\(ᴸG)^I/Ĝ)`; functions pulled back from the finite component quotient act by their prescribed scalar values. Apply the reconstruction of LanglandsParameterStacks §§LP2c.1–LP2c.2 for groups with reductive identity component and prescribed finite projection. The scalar values force the required projection, and the unramifiedness argument gives the stated good open. For each good v and local V, choose a global representation whose restriction contains V and insert the local projector through the fixed-leg comparison of §§1.11 and 3.6. For any regular function f on ᴸG invariant under ᴸG_v-conjugacy and restricting to χ_V on ᴸG_v, prove `Theta_1(f)(gamma)=T(h_{V,v})` for γ∈Γ_v of geometric Weil degree 1 (VL §12.3.5(e′)); it depends only on that local restriction, not on f or on the containing representation. Such an f exists by extension by zero from the open-and-closed subgroup ᴸG_v. Reconstruction gives the corresponding generalized eigenvalue, and the spherical adjointness argument of §5.9 gives scalar action. Compare restriction of level and all inner-form components through the common Hecke action.
 
 *Remark.* The finite quotient and its projection are part of the parameter; replacing ᴸG by Ĝ loses the nonsplit arithmetic.
 
 Source: [VL](#references), §12.1, Theorem 12.3 and Remark 12.4, pp. 148–152; §12.3.4–§12.3.5, pp. 162–165.
 
-*Needs:* [§0.12 *Nonsplit bundle descent*](#012-nonsplit-bundle-descent); [§1.11 *Nonsplit Satake descent*](#111-nonsplit-satake-descent); [§5.8 *Global reconstruction of parameters*](#58-global-reconstruction-of-parameters); [§5.9 *The global cuspidal decomposition*](#59-the-global-cuspidal-decomposition).
+*Needs:* [§0.12 *Nonsplit bundle descent*](#012-nonsplit-bundle-descent); [§1.11 *Nonsplit Satake descent*](#111-nonsplit-satake-descent); [§1.12 *Normalized spherical Satake*](#112-normalized-spherical-satake); [§3.6 *Hecke operators from Frobenius*](#36-hecke-operators-from-frobenius); [§5.8 *Global reconstruction of parameters*](#58-global-reconstruction-of-parameters); [§5.9 *The global cuspidal decomposition*](#59-the-global-cuspidal-decomposition).
 
 ### 5.11 Integral and modular excursion blocks
 
