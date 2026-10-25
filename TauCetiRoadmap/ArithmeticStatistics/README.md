@@ -1,10 +1,12 @@
 # Roadmap: arithmetic statistics, counting fields and Selmer distributions
 
-**Summary.** Build finite-height arithmetic families and integral orbit dictionaries, prove uniform counting and sieve estimates, then compute field densities, class-group moments and Selmer averages. Compare the arithmetic results with precisely specified finite-group, quadratic-intersection and geometric probability laws. The complete specification is arranged in the eight parts below.
+**Summary.** Build finite-height arithmetic families and integral orbit dictionaries, prove uniform counting and sieve estimates, then compute field densities, class-group moments and Selmer averages. Compare the arithmetic results with precisely specified finite-group, quadratic-intersection and geometric probability laws. This index depends on the eight parts below; their READMEs together give the complete specification.
 
 ## Scope and ownership
 
-This index states no target of its own. Section numbers §k.n follow the common six-layer build: Part I holds Layer 0, Part II Layer 1, Part III Layer 2, Parts IV and V Layer 3, Part VI Layer 4, and Parts VII and VIII Layer 5. Parts VII and VIII number their Layer 5 sections disjointly, but Parts IV and V both use §§3.2–3.9 for different targets, so a citation of a Layer 3 section names its part. The exact links in each part identify its earlier suppliers.
+This index states no target of its own and follows all eight parts in the supply order. Each part is a supplier of this index's specification, rather than a downstream consumer of the index. Section numbers §k.n follow the common six-layer build: Part I holds Layer 0, Part II Layer 1, Part III Layer 2, Parts IV and V Layer 3, Part VI Layer 4, and Parts VII and VIII Layer 5. Parts VII and VIII number their Layer 5 sections disjointly, but Parts IV and V both use §§3.2–3.9 for different targets, so a citation of a Layer 3 section names its part. The exact links in each part identify its earlier suppliers.
+
+[ClassicalArithmeticCompletion §4.39](../ClassicalArithmeticCompletion/README.md#layer-4-topic-39) owns the untruncated set D of positive squarefree radicands whose prime divisors are 2 or 1 modulo 4, its subset D⁻ defined by integral solubility of x² − dy² = −1, and their strict truncations. [ArithmeticStatisticsPartI §0.15](../ArithmeticStatisticsPartI/README.md#negative-pell-radicands) supplies the inclusive-cutoff height adapter, while [ArithmeticStatisticsPartV §3.31](../ArithmeticStatisticsPartV/README.md#restricted-real-quadratic-family) supplies proportions, narrow-class-group rank slices and statistical results on the imported sets. Any local aliases or adapters in either part must agree pointwise with the supplied predicates and preserve the stated cutoff. Both radicand sets retain 1, and every quadratic-field or class-group subfamily excludes it.
 
 The binary-cubic action and discriminant, the cubic-algebra parametrization on projective modules, the weighted cubic coefficients, the uniform small-degree field count, the cubic poles, residues and convexity bound, and the quadratic large sieve are stated by AnalyticNumberTheoryPartII Layer 5; the parts import these objects and do not construct them again. Quantitative prime and number-field estimates are stated by AnalyticNumberTheoryPartI, and Euler products, Abel and Perron summation and the Wiener–Ikehara theorem by ArithmeticDirichletSeries. Generic number-field, elliptic-curve, duality, moduli and finite-quadratic carriers belong to the Mathlib, Tau Ceti and roadmap suppliers named in each part. The source-specific local selectors, sieve estimates and statistical applications are targets of the parts.
 
@@ -15,6 +17,8 @@ A field count uses base-field isomorphism classes unless an embedded or rigid fa
 **Checks.**
 
 - For the positive squarefree negative-Pell radicand family at cutoff 5, [Part I §0.15](../ArithmeticStatisticsPartI/README.md#negative-pell-radicands) uses d ≤ 5 and gives {1, 2, 5}, whereas [Part V §3.31](../ArithmeticStatisticsPartV/README.md#restricted-real-quadratic-family) uses d < 5 and gives {1, 2}. The unit radicand is included in both; 3 fails the prime-factor condition and 4 fails squarefreeness. These finite counts cannot be identified across the two cutoff conventions.
+- On the common untruncated sets, 1, 2 and 5 belong to D⁻, witnessed respectively by (x, y) = (0, 1), (1, 1) and (2, 1); each gives x² − dy² = −1. The radicands 0, 3 and 4 fail positivity, the prime-factor condition and squarefreeness respectively. At cutoffs 0 and 1 the inclusive counts are 0 and 1, while the strict counts are 0 and 0; deleting 1 from D or identifying the two truncations would fail these checks.
+- The supplied strict inclusion D⁻ ⊊ D is witnessed by 34 = 2·17: its prime factors are allowed, but the continued fraction of √34 has period (1, 4, 1, 10), of even length, so the integral negative-Pell equation is insoluble (ClassicalArithmeticCompletion §4.39). The rational pair (3/5, 1/5) gives 9/25 − 34/25 = −1. Using rational solubility or the prime-factor condition alone for D⁻ would incorrectly include 34.
 - In AnalyticNumberTheoryPartII §5.5, the split cubic algebra has automorphism group S₃ of order 6, while a cyclic cubic field has automorphism group of order 3. Their reciprocal automorphism weights are 1/6 and 1/3. Weighting by the group order instead would give 6 and 3. In §5.4, the forms x³ − y³ and xy(x − y) have signed discriminants −27 and 1; taking absolute values would erase the first sign.
 - With the additive Haar normalization of Part I's Conventions, ℤ₂ and ℤ₃ have mass one, while 2ℤ₂ and 3ℤ₃ have masses 1/2 and 1/3. Assigning mass one to these subgroups would contradict their indices 2 and 3.
 - For positive integers X and M, let a(X,M) be 1 when X ≤ M and 0 otherwise. Taking X to infinity first and then M gives 0; the reverse order gives 1. An interchange of these limits requires a separate theorem.
@@ -22,7 +26,17 @@ A field count uses base-field isomorphism classes unless an embedded or rigid fa
 
 ## Exact supplier contracts
 
-Each part states its own external contracts, by roadmap and section, in its own supplier section. The analytic contracts shared by several parts are the following; Parts IV and VIII take no input from them.
+### From the eight arithmetic-statistics parts
+
+The specification suppliers are ArithmeticStatisticsPartI Layer 0, ArithmeticStatisticsPartII Layer 1, ArithmeticStatisticsPartIII Layer 2, ArithmeticStatisticsPartIV Layer 3, ArithmeticStatisticsPartV Layer 3, ArithmeticStatisticsPartVI Layer 4, ArithmeticStatisticsPartVII Layer 5 and ArithmeticStatisticsPartVIII Layer 5. The parts table links all eight specifications. This index consumes their statements, ownership boundaries and conventions without introducing another construction or theorem.
+
+Every supplier in a part's Exact supplier contracts precedes that part; all eight parts precede this index. Within the series, the order I, II, III, IV, V, VI, VII, VIII respects the earlier-part contracts. Part IV needs Part I's family interface, without requiring Parts II–III's orbit counts. Part VI additionally consumes HeightsRationalPointsAndObstructions §§3.18–3.18c, whose arithmetic-statistics inputs are Parts I–III, so that supplier lies after those inputs and before Part VI. External prerequisites of the analytic suppliers likewise precede those suppliers; this series order does not replace their own contracts.
+
+Each part states its own external contracts, by roadmap and section, in its own supplier section. The shared external contracts are recorded below; Parts IV and VIII take no direct input from the analytic contracts.
+
+### From TauCetiRoadmap.ClassicalArithmeticCompletion
+
+[§4.39, The negative-Pell radicands and the family](../ClassicalArithmeticCompletion/README.md#layer-4-topic-39) supplies `pellFamily`, `negPellRadicands`, their strict truncations `pellFamilyBelow` and `negPellRadicandsBelow`, and the inclusion `negPellRadicands_subset_pellFamily`. These use natural radicands, integral solutions and the unit radicand 1. Parts I and V use these objects with the inclusive and strict cutoffs distinguished above; the statistical adapters do not construct a second untruncated family.
 
 ### From TauCetiRoadmap.AnalyticNumberTheoryPartII
 
