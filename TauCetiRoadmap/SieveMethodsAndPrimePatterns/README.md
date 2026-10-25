@@ -14,7 +14,7 @@ AnalyticNumberTheoryPartI §§0.10–0.11, 0.21, 0.26, 0.32, 1.2a, 3.22, 3.26, 3
 
 AnalyticNumberTheoryPartII §5.29 owns the odd-squarefree quadratic large sieve, its primitive-real form and square-pair correction, uniformly in both cutoffs and arbitrary complex coefficients. Layer 2 retains the unrestricted bilinear consequence and prime-denominator applications. ArithmeticStatisticsPartV §3.30, “Conditional joint-spin prime bound”, owns the arithmetic setup, unit-averaged sequence, generator independence, Type I and Type II estimates and prime-ideal cancellation. Layer 5 retains the general short-character progression/subset transfer, the ideal-symbol comparison, the generic coefficient and prime-extraction interfaces, and the spin-sign equidistribution consequence. The generic prime-extraction theorem allows any bounded ideal sequence satisfying its two estimates; it does not reconstruct the supplied joint-spin chain.
 
-The tuple W-trick here is a construction for Maynard weights. Layer 5 states the conjectural short-character input Cₘ and its reduced-conductor progression consequence; every spin conclusion retains Cₘ as a hypothesis. Elliott–Halberstam, the prime-tuple conjecture, Bouniakowsky and Schinzel H remain named conjectures. Ordinary squarefree SL₂ expansion is separate from the absolute mixing bound needed for an affine word population.
+The tuple W-trick here is a construction for Maynard weights. Layer 5 states the conjectural short-character input Cₘ and its reduced-conductor progression consequence; every spin conclusion retains Cₘ as a hypothesis. Elliott–Halberstam, the prime-tuple conjecture, Bouniakowsky and Schinzel H remain named conjectures. The general affine endpoint uses lazy walks on the same group whose squarefree congruence expansion is assumed. The explicit free-tree bound separately requires mixing for its chosen free subgroup.
 
 The general subgroup reduction, squarefree-ring sum-product and noncommutative flattening inputs belong to §5.4; rational-point strong approximation in AdelicAlgebraicGroups §4.2 is consumed only at its stated strength. Curvature discrepancies (§0.11), uniform multiplicative means (§1.1), Jutila's unweighted mean (§2.7), reciprocal-totient moments and maximal small-conductor estimates (§3.0), and conductor-prime norm counts (§0.9) are owned here. The sliced-lattice, exceptional-tail and spin-kernel arguments are consumed within ArithmeticStatisticsPartV §3.30's conditional joint-spin theorem and have no second construction here.
 
@@ -45,6 +45,8 @@ These are the precise inputs required from each owner. Only the stated exports a
 The pinned APIs are Mathlib `6b7abb3c7686292736be2955bd3eb9ebf63b456a` and Tau Ceti `a91d3aafa8cd3e6bc33dfde0d7677ed0f1625039`. The local *Needs* sentences identify the declarations used. Continuous and L² functions, integrals, finite measures, `Asymptotics.IsBigO`, real powers and Gamma functions use existing Mathlib carriers. Unit-interval and simplex integrals retain their measures and integrability hypotheses.
 
 Reuse the native sieve declarations described under Scope and ownership: `BoundingSieve.multSum`, `rem`, `siftedSum`, `mainSum`, `errSum`, `multSum_eq_main_err`, `siftedSum_eq_sum_support_mul_ite`, `IsUpperMoebius`, `siftedSum_le_mainSum_errSum_of_upperMoebius`, `lambdaSquared`, `upperMoebius_lambdaSquared`, `selbergTerms` and `mainSum_lambdaSquared_eq_sum_mul_sum_sq`. The squared-weight upper inequality needs normalization at one; its diagonal identity does not choose an optimizer or bound the absolute remainder.
+
+For simplex mollification, use the supremum norm on `Fin k → ℝ`: `Pi.norm_def` and `norm_le_pi_norm` in `Mathlib/Analysis/Normed/Group/Constructions.lean` (lines 310 and 346). Use `ContDiffBump.normed`, `ContDiffBump.integral_normed` and `ContDiffBump.tsupport_normed_eq` from `Mathlib/Analysis/Calculus/BumpFunction/Normed.lean` (lines 32, 68 and 76) with Lebesgue measure; the normalization denominator is positive by `ContDiffBump.integral_pos` (line 63). For affine escape, `Nat.exists_prime_lt_and_le_two_mul` from `Mathlib/NumberTheory/Bertrand.lean` (line 222) supplies a prime between n and 2n for n≥1.
 
 For finite polynomial counts, use `Polynomial.monicEquivDegreeLT` and `Polynomial.degreeLTEquiv` from `Mathlib/RingTheory/Polynomial/Basic.lean` (lines 141 and 114): their composition identifies monic polynomials of degree j over a finite field with its j coefficient choices. Neither equivalence counts irreducibles.
 
@@ -2800,11 +2802,17 @@ M₁ = 1: `J^{(1)}` = (∫F)² ≤ ∫F², with equality for F = 1 on [0,1]. The
 
 ([MAYNARD-2015](#references), §4, proof of Proposition 4.2, p. 389.)
 
-*Proof sketch.* Shrink: F_η(t) = F((t − η𝟙)/(1 − (k+1)η)) vanishes unless tᵢ ≥ η and Σtᵢ ≤ 1 − η. I scales by (1 − (k+1)η)^k and each `J^{(m)}` by (1 − `(k+1)η)^{k+1},` so the ratio is multiplied by 1 − (k+1)η. Mollify: convolve F_η with a smooth bump (Mathlib ContDiffBump) of radius below η/√k. The result is smooth, supported in ℛ_k, and converges to F_η in L²(cube) as the radius tends to 0. Continuity: F ↦ ∫_0^1 F dt_m is 1-Lipschitz from L²(cube) to L²(cube) by Cauchy–Schwarz, so I and each `J^{(m)}` are continuous. For η and the radius small enough, the ratio moves by less than δ and I and the `J^{(m)}` stay nonzero.
+*Proof sketch.* Shrink: F_η(t) = F((t − η𝟙)/(1 − (k+1)η)) vanishes unless tᵢ ≥ η and Σtᵢ ≤ 1 − η. I scales by (1 − (k+1)η)^k and each `J^{(m)}` by (1 − `(k+1)η)^{k+1},` so the ratio is multiplied by 1 − (k+1)η. Mollify on the native coordinate carrier `Fin k → ℝ`, with its supremum norm: convolve F_η with a nonnegative smooth bump normalized to integral one using `ContDiffBump.normed`, with outer radius 0<r<η/k. If ‖u‖∞≤r then every |uᵢ|≤r, so tᵢ+uᵢ≥η−r>0 and Σ(tᵢ+uᵢ)≤1−η+kr<1 for t in the shrunken support. Thus even the closed support of the convolution stays in ℛ_k. The result is smooth and converges to F_η in L²(cube) as r tends to 0. Continuity: F ↦ ∫_0^1 F dt_m is 1-Lipschitz from L²(cube) to L²(cube) by Cauchy–Schwarz, so I and each `J^{(m)}` are continuous. For η and the radius small enough, the ratio moves by less than δ and I and the `J^{(m)}` stay nonzero.
 
 Maynard's proof of Proposition 4.2 uses this step without proof; it is supplied here.
 
-*Needs:* Layer 4 `SieveMaynard.maynardM`; Mathlib `ContDiffBump`.
+**Checks.**
+
+- At k=4, η=1/10, t=(9/40,9/40,9/40,9/40) lies on the shrunken face with sum 9/10. The displacement u=(1/30,1/30,1/30,1/30) has supremum norm 1/30<η/√4=1/20 but gives sum 31/30>1; it is excluded by r<η/k=1/40.
+- With the same t and r=1/80<1/40, the two displacements ±(r,r,r,r) give sums 19/20 and 17/20, both inside the simplex. At the lower shrunken corner (η,η,η,η), subtracting that displacement leaves each coordinate 7/80>0.
+- At k=1, η=1/4, the shrunken interval is [1/4,3/4]; r=1/8 enlarges it only to [1/8,7/8]. At k=0 the empty vector has sum 0 and ratio 0; the separate direct case avoids division by k.
+
+*Needs:* Layer 4 `SieveMaynard.maynardM`; Mathlib `ContDiffBump.normed`, `ContDiffBump.integral_normed`, `ContDiffBump.tsupport_normed_eq` and `norm_le_pi_norm`.
 
 ### 4.4 the sieve sums S₁ and S₂
 
@@ -3498,31 +3506,30 @@ The definition exposes the following operations and laws:
 
 *Needs:* Mathlib `MvPolynomial`; Mathlib `ArithmeticFunction.cardFactors`; Mathlib `Nat.IsAtMostAlmostPrime`.
 
-**Affine walk sieve data.** For a finite set Ω_L of reduced words of length≤L in a free Zariski-dense subgroup Γ₁, map each word to its integral matrix/orbit point. Push forward counting mass to native BoundingSieve data for the divisibility of f. Repeated values retain their word multiplicity; X_L=#Ω_L. For squarefree d set β(d)=#{g∈Γ₁ mod d:f(g)=0}/#(Γ₁ mod d), and R_d=count_d−β(d)X_L.
+**Affine walk sieve data.** Fix a nonempty finite symmetric generating set S of the original group Γ, let m=|S|≥1, and form an alphabet A with one letter evaluating to each s∈S and m separately labelled letters evaluating to the identity. Let Ω_L=A^L be all labelled words of length exactly L, with no reduction, and evaluate a word by multiplying its letters in their written order, starting at the identity. Push counting mass through Γ to the integral orbit point and then to |f| using the finite-family bridge of §0.2. The full word mass is X_L=(2m)^L; polynomial-value collisions and identity labels keep their multiplicities. For every squarefree d≥1 write H_d=Γ mod d, β(d)=#{h∈H_d:f(h)=0}/|H_d|, and R_d=count_d−β(d)X_L. At d=1 set β(1)=1, so R₁=0.
 
-Integral orbit evaluation; finite word ball; native reduction maps; nonzero divisibility value 0 is treated in the sifted zero-locus exception.
+Integral orbit evaluation; fixed finite generators; nonnegative counting mass; the evaluation of f is reduced modulo d. A zero polynomial value is handled by the sifted zero-locus exception. Empty local bad sets are deleted before constructing native BoundingSieve data, whose prime densities must be strictly between zero and one.
 
-([BGS-10](#references), §3.1pp.573–574; §3.3equations(3.24)–(3.32), pp.577–579.)
+([BGS-10](#references), §3.3, p.583, (3.56)–(3.57) and the following paragraph, for walks on the original group; §3.1, pp.573–574, for the sieve adapter.)
 
-*Construction.* Use the existing finite-family bridge and native finite group quotient. Do not replace a weighted multiset with a set of distinct polynomial values. Multiplicative β on good squarefree moduli requires the supplier’s CRT/strong-approximation theorem.
+*Construction.* Use the existing finite-family bridge and the actual finite reduction image. The uniform probability on letters induces T_d=(I+P_(S,d))/2, where P_(S,d) averages right multiplication by generators on H_d. Relations in Γ do not change the population. Multiplicative β on good squarefree moduli requires the subgroup reduction-image/CRT theorem.
 
 The definition exposes the following operations and laws:
 
-- The native sieve from word-evaluation multiplicities.
-- Total mass equals the number of words.
-- Its divisor sum counts the corresponding word preimages.
-- The remainder is the exact count minus β(d)X_L.
-- On good coprime squarefree moduli the local densities multiply.
-- The sifted sum counts words avoiding all specified small local primes.
+- The evaluation from labelled words to Γ, and then to the integral orbit and natural absolute polynomial value, preserves all fibre multiplicities under pushforward.
+- Total support weight equals X_L=(2m)^L; the native main scale may instead be X_L/|H_b| when conditioning below.
+- Divisor sums count the corresponding word preimages; their signed remainders are count minus the specified main term, including the term at one.
+- Appending a uniformly chosen letter gives the transition T_d, with initial point mass at the identity.
+- On good coprime squarefree moduli β is multiplicative; the sifted sum counts words avoiding the specified local zero sets.
 
 **Checks.**
 
-- Two distinct words with the same f-value contribute mass 2.
-- The length 0 word ball has one word, not an empty family.
-- A word with f=0 is divisible by every prime and contributes no sifted mass once a prime is sieved.
-- With no local primes the sifted mass is the full word mass.
+- For m=2 and L=1 there are four words: two generator labels and two identity labels. The identity therefore has mass 2, even before any further collisions.
+- At L=0 there is one empty word evaluating to the identity, and X₀=1. In the unconditioned population R₁=1−1=0.
+- In the two-element quotient with S={s}, s²=1, the length-one endpoints have masses 1 at each element; P has eigenvalues 1,−1 and T has eigenvalues 1,0. A non-lazy walk alternates point masses instead.
+- For a word with f=0 every positive d divides its value; it contributes no sifted mass once a prime is sieved. With no local primes the full word mass survives.
 
-*Needs:* Layer 0 §0.2 weighted finite-family sieve; Layer 5 §5.4 primitive affine sieve pair; AdelicAlgebraicGroups §4.2; Layer 5 §5.4 subgroup reduction images.
+*Needs:* Layer 0 §0.2 weighted finite-family sieve; native finite reduction maps; Layer 5 §5.4 subgroup reduction images.
 
 **Local densities for affine orbits.** For connected simply connected absolutely almost simple G/ℚ, finitely generated Zariski-dense integral Γ, and an integral regular function f nonzero and nonunit on G, let t≥1 be the number of distinct geometric irreducible components of its zero locus. No individual component need be defined over ℚ, and repeated factors of f are allowed. Outside a finite modulus q₀, let t_p count the components of the reduced zero locus individually fixed by Frobenius. Prove β(p)=t_p/p+O(p^(−3/2)), hence β(p)≤t/p+O(p^(−3/2)). If f=c∏_(j=1)^t f_j with distinct f_j∈ℚ[G] absolutely irreducible over the algebraic closure, every t_p=t outside q₀ and the equality with leading coefficient t follows. Multiplicativity on good squarefree moduli comes from the reduction-image theorem; primitivity implies β(p)<1 at every local prime used, including the finite exceptional part.
 
@@ -3545,25 +3552,70 @@ Consequently V(z)=∏_(p<z,p∤q₀)(1−β(p))≥c(log z)^(−t) for z≥2 and 
 
 *Needs:* Layer 5 §5.4 primitive affine sieve pair; AdelicAlgebraicGroups §4.2; Layer 5 §5.4 subgroup reduction images; Layer 0 §0.10 finite-field polynomial counts; InverseGaloisAndArithmeticFundamentalGroups §IG.2.5 and Layer 5 §5.4 uniform algebraic point counts; AnalyticNumberTheoryPartI §§0.21, 0.26 for the dimension product and lower bound for V.
 
-**Affine sieve level from expansion.** Assume a uniform squarefree congruence expansion bound yielding |R_d|≤C X_L^τ d^(dim G−1) with τ<1 for the word ball, uniformly for squarefree good d. Then Σ_(d≤D)|R_d|≤C′X_L^τD^dim G. Hence every δ<(1−τ)/dim G is an admissible power level D=X_L^δ.
+**Fixed-modulus conditioning and walk remainders.** Under the algebraic hypotheses of local densities above, suppose the normalized symmetric operators P_(S,q) have every nonconstant eigenvalue at most 1−ε, uniformly over all squarefree q≥1 on their actual images H_q, for some 0<ε≤1. This includes squarefree q containing exceptional primes. The lazy operators then have nonconstant spectrum in [0,ρ], with ρ=1−ε/2∈[1/2,1). For any h∈H_q prove
 
-Fixed generators and finite excluded modulus; nonnegative finite-word mass; τ<1; actual spectral mixing estimate.
+`|#{w∈Ω_L:w mod q=h}−X_L/|H_q|| ≤ X_L ρ^L`.
 
-([BGS-10](#references), Equations (3.29)–(3.33), pp.578–580.)
+Set τ=1+log ρ/log(2m)<1, so X_Lρ^L=X_L^τ, including L=0. Choose the exceptional modulus q₀ using the subgroup reduction-image theorem and local-density theorem, and let b be its squarefree radical (b=1 is allowed). Their CRT comparison gives H_(bd)=H_b×∏_(p|d)G(𝔽_p) for good squarefree d coprime to b. Assume (Γ,f) is primitive. Choose γ∈Γ with gcd(|f(γ)|,b)=1 by simultaneous primitivity and set c=γ mod b; if b=1 choose its unique class. Retain exactly the words reducing to c modulo b, with their original unit weights, and use main scale Y_L=X_L/|H_b|, not their actual cardinality. For d coprime to b put
 
-*Proof sketch.* Complete the finite-quotient mixing argument with the word-ball recurrence and an absolute nonconstant spectral bound, or an explicit periodic-coset/lazy-walk treatment giving the stated R_d estimate. Ordinary one-sided expander gap alone does not remove the −2k eigenspace. Then sum the polynomial error in d. Do not assume arbitrary thin groups expand; this theorem explicitly takes the squarefree expansion input.
+`R_(d,c)=#{w∈Ω_L:w mod b=c, d divides f(w)}−β(d)Y_L`.
 
-*Needs:* Layer 5 §5.4 affine walk sieve data; Layer 5 §5.4 local densities for affine orbits.
+Prove, uniformly in L≥0 and good squarefree d≥1, that |R_(d,c)|≤C X_L^τ d^(dim G−1), with C depending only on the fixed data and b. In particular the retained mass is Y_L+R_(1,c), eventually at least Y_L/2; every retained word avoids every prime dividing b. No normalization of the restricted weights or replacement of Y_L by the exact count is made.
 
-**Escape from proper algebraic subvarieties.** For the same word balls with squarefree expansion, each proper algebraic subvariety W⊊G has # {words:w evaluates in W}≤C_WX_L^(1−δ_W) for some δ_W>0. This beats the sieve lower count ≫X_L/log^tX_L.
+([BGS-10](#references), §3.3, p.583, (3.56)–(3.57), for walk equidistribution; §2.4, Proposition 2.1, p.572, for simultaneous primitivity and exceptional moduli.)
 
-Proper W; positive spectral gap; strong approximation; fixed variety and generators.
+*Proof sketch.* On counting L²(H_q), self-adjointness and laziness give ‖T_q^L(δ₁−uniform)‖₂≤ρ^L, hence the pointwise estimate. For a subset B⊆H_(bd), Cauchy–Schwarz also gives error at most X_Lρ^L√|B|. Apply it to B={c}×{f=0 mod d}; CRT makes its uniform main term β(d)Y_L. If g=dim G, fixed-model point counts and CRT give |H_d|≪_a d^(g+a) for every fixed a>0, by absorbing a fixed factor per prime into d^a. As g≥3, choose a=g−2 to obtain √|B|≤√|H_d|≪d^(g−1), including d=1. The term at one records the conditioning error. Reduction from q₀ to b preserves the CRT comparison, and coprimality with b is precisely avoidance of all exceptional primes; no expansion for a subgroup extracted from Γ is invoked.
 
-([BGS-10](#references), Proposition 3.2, pp.582–584.)
+**Checks.**
 
-*Proof sketch.* Choose good primes for which the reduction of W has codimension≥1, use its O(p^(dim G−1)) point count and the congruence mixing error, and optimize p. The source proof’s effective choice of prime and power exponent must be reconstructed; it is a proof target, not a generic density implication.
+- In the two-element quotient above, take b=2, c=s, f(1)=0 and f(s)=1. At L=0 the retained count is 0, Y₀=1/2 and R_(1,c)=−1/2; at L=1 these are 1, 1 and 0. The main scale need not be the actual count for small L.
+- For m=2, ρ=1/2 and L=2, X_L=16, τ=1/2 and X_Lρ^L=4=X_L^τ. If |H_b|=2 the main scale is 8, not 16; the bound at d=1 is still 4.
+- A value 2 fails c modulo b=6, as does 3; a value 5 survives since gcd(5,6)=1. Separate avoidance by values {2,3} cannot supply the required class at b=6.
+- For S₃ and its three transpositions, m=3, P has eigenvalues 1,0,−1 and T has 1,1/2,0. At L=1 the three transpositions have mass 1 each and the identity mass 3, for total X₁=6; the two 3-cycles have mass 0. Multiplicities and a negative eigenvalue are both visible in this nonabelian example.
 
-*Needs:* Layer 5 §5.4 affine sieve level from expansion; Layer 0 §0.10 finite-field polynomial counts.
+*Needs:* Layer 5 §5.4 affine walk sieve data, subgroup reduction images, primitive affine sieve pair and local densities for affine orbits; finite-dimensional self-adjoint spectral theory; AnalyticNumberTheoryPartI §3.26 for divisor-subpower absorption.
+
+**Free-word affine sieve data.** Separately, for a chosen free Zariski-dense subgroup Γ₁ of rank k≥2, let Ω_L be its reduced words of length at most L and push counting mass to |f|. Use the actual growth scale X_L≍(2k−1)^L and its own reduction images, CRT densities and signed remainders, including any fixed primitive coset. The explicit free-tree bound below requires an independent estimate |R_d|≤C X_L^τ d^(dim G−1) with τ<1 for this population. Expansion for Γ is not a hypothesis supplying this estimate for Γ₁.
+
+([BGS-10](#references), §3.1, pp.573–574; §3.3, (3.24)–(3.32), pp.577–579.)
+
+The adapter preserves word multiplicities, counts each divisor preimage, and identifies the sifted sum with the rough-word count; its local densities multiply only on the stated CRT range.
+
+**Checks.**
+
+- The length-zero ball contains its identity word. In rank two the length-one ball has 1+4=5 words, whereas its exact-length-one lazy population has 8 labels.
+- In rank two the length-two ball has 1+4+12=17 words; counting unreduced four-letter words would give 1+4+16=21.
+- Two distinct words with the same absolute f-value contribute mass 2. If f=0 that mass is removed once any prime is sieved.
+
+*Needs:* Layer 0 §0.2 weighted finite-family sieve; Layer 5 §5.4 subgroup reduction images and primitive affine sieve pair; the chosen subgroup's own mixing estimate as an explicit hypothesis.
+
+**Affine sieve level from expansion.** For the original-group lazy population conditioned at (b,c), with Y_L=X_L/|H_b| and τ<1 as above, prove Σ_(d<D,d squarefree,(d,b)=1)|R_(d,c)|≤C′X_L^τ D^dim G for every D≥1. For every 0<δ<(1−τ)/dim G, D=X_L^δ gives remainder o(Y_L/(log X_L)^t) as L→∞, and hence an admissible power level for the positive lower sieve.
+
+([BGS-10](#references), §3.3, (3.29)–(3.33), pp.578–580, for the level calculation, and (3.56)–(3.57), p.583, for the original-group population.)
+
+*Proof sketch.* Sum the conditioned remainder estimate in d. Since b is fixed, the normalized error is O((log X_L)^t X_L^(τ+δ dim G−1)), which tends to zero by the strict δ margin. Empty local zero sets can be deleted without changing this bound. An ordinary squarefree gap supplies the required τ through the lazy population on Γ itself.
+
+**Checks.**
+
+- For dim G=3, τ=1/2 and δ=1/12, the exponent τ+3δ−1 is −1/4. At δ=1/6 it is 0 and gives no logarithmic saving, so that endpoint is excluded.
+- At D=1 the strict sum is empty and equals 0; at D>1 the d=1 conditioning error is included.
+- For X_L=16, |H_b|=2, τ=1/2 and D=2 the error majorant without C′ is 4·8=32, while Y_L=8. The theorem asserts asymptotic usefulness, not a positive small-L sieve count.
+
+*Needs:* Layer 5 §5.4 fixed-modulus conditioning and walk remainders; Layer 5 §5.4 local densities for affine orbits.
+
+**Escape from proper algebraic subvarieties.** Under the same squarefree expansion assumption on Γ and for every fixed proper algebraic subvariety W⊊G defined over ℚ, prove that the original lazy word count in W, and hence its (b,c)-conditioned subcount, is at most C_W X_L^(1−δ_W) for some δ_W>0 and C_W>0, uniformly in L≥0. In particular it is o(Y_L/(log X_L)^t).
+
+([BGS-10](#references), Proposition 3.2 and the original-group walk argument, §3.3, pp.582–584.)
+
+*Proof sketch.* Outside finitely many primes depending on W, its reduction has at most C_W p^(dim G−1) points, whereas |H_p| is at least a fixed positive multiple of p^dim G. The pointwise lazy mixing bound therefore gives count/X_L≤C_W(1/p+ρ^L p^(dim G−1)). Choose a good prime p comparable to ρ^(−L/dim G) by `Nat.exists_prime_lt_and_le_two_mul`, after L is large enough to exceed all exceptional primes; enlarge C_W for the finitely many remaining L. This gives δ_W=(1−τ)/dim G>0. Restricting to c only lowers the count and Y_L differs from X_L by the fixed factor |H_b|. The rational points of a proper subvariety over an extension field lie in a proper ℚ-defined subvariety: take a nonzero ℚ-linear coefficient component of a polynomial vanishing on it.
+
+**Checks.**
+
+- For dim G=3, ρ=1/2 and L=12, the balancing scale is 16 and Bertrand supplies p=17. The two terms are 1/17 and 17²/4096=289/4096; at the ideal balancing value 16 they are both 1/16.
+- For W empty the actual count is 0 for every L. For W={1}, L=0 gives count 1, so C_W must cover small L; for W=G the count is X_L and no positive escape exponent is possible.
+- With X_L=16 and |H_b|=2 a restricted count can be 0 while Y_L=8; restriction never increases the unconditioned count. As L grows, X_L^(−δ_W)(log X_L)^t tends to 0, whereas δ_W=0 would fail to beat the sieve count.
+
+*Needs:* Layer 5 §5.4 fixed-modulus conditioning and walk remainders, subgroup reduction images and uniform algebraic point counts; Mathlib `Nat.exists_prime_lt_and_le_two_mul`.
 
 **Affine sieve saturation with expansion.** For connected simply connected absolutely almost simple G/ℚ, finitely generated Zariski-dense Γ⊆G(ℚ)∩GL_n(ℤ), integral f nonzero and nonunit on G whose zero locus has t≥1 distinct geometric irreducible components, and primitive(Γ,f), uniform squarefree congruence expansion implies finite saturation number. Components need not be individually defined over ℚ; multiplicities in f are unrestricted. The same follows for integral orbit images under the source’s pullback/covering hypotheses.
 
@@ -3571,11 +3623,11 @@ All algebraic hypotheses; squarefree expansion; signed |f|; dominant orbit map f
 
 ([BGS-10](#references), Theorem 1.1, p.564; §3.3equations(3.41)–(3.51), pp.581–584.)
 
-*Proof sketch.* Extract a free Zariski-dense subgroup with a primitive coset/modulus adapter; this algebraic reduction needs the exact source §2 proof and is a target of this construction. Use the one-sided local-density bound, its upper dimension-t product condition and V(z)≥c(log z)^(−t), without assuming each component is rational. The positive lower sieve above 9t in §5.2 supplies ≫X/log^tX words rough at z=X^(δ/s). For a word of length at most L and matrix-entry bound C^(L+1), the polynomial-height bound is |f|≤K_f C^(d(L+1)), where d is the original degree and K_f is the sum of the absolute values of its coefficients. It converts roughness to a finite Ω bound, including repeated factors. Compare with escape from each proper W. Avoid asserting primality or a conjectured optimal saturation number.
+*Proof sketch.* Keep the original Γ and its fixed symmetric generating set. Choose b and c by the fixed-modulus conditioning theorem, retaining simultaneous avoidance at every exceptional prime; use its lazy walk population and main scale Y_L=X_L/|H_b|. Use the one-sided local-density bound, its upper dimension-t product condition and V(z)≥c(log z)^(−t), without assuming each component is rational. The positive lower sieve above 9t in §5.2 supplies ≫Y_L/(log X_L)^t words rough at z=X_L^(δ/s). For a lazy word of length L and matrix-entry bound C^(L+1), the polynomial-height bound is |f|≤K_f C^(d(L+1)), where d is the original degree and K_f is the sum of the absolute values of its coefficients. It converts roughness to a finite Ω bound, including repeated factors. The escape theorem excludes f=0 as well as every proper W, with count o(Y_L/(log X_L)^t); the remaining rough values are nonzero. Compare log|f|≤log K_f+d(L+1)log C with log z=(δ/s)L log(2m) to obtain a fixed finite Ω bound. Avoid asserting primality or a conjectured optimal saturation number.
 
-*Needs:* Layer 5 §5.4 affine almost-prime locus and saturation; Layer 5 §5.4 local densities for affine orbits, including the upper dimension product and lower bound for V; Layer 5 §5.4 affine sieve level from expansion; Layer 5 §5.4 escape from proper algebraic subvarieties; Layer 5 §5.2 positive lower sieve above 9t.
+*Needs:* Layer 5 §5.4 affine almost-prime locus and saturation; Layer 5 §5.4 affine walk sieve data and fixed-modulus conditioning and walk remainders; Layer 5 §5.4 local densities for affine orbits, including the upper dimension product and lower bound for V; Layer 5 §5.4 affine sieve level from expansion; Layer 5 §5.4 escape from proper algebraic subvarieties; Layer 5 §5.2 positive lower sieve above 9t.
 
-**Explicit affine almost-prime bound.** Under the preceding saturation hypotheses, with t counting distinct geometric components regardless of their fields of definition, a free rank-k subgroup with word growth r=2k−1>1, mixing exponent τ<1, matrix-entry height base C>1, and f of original polynomial degree d gives every integer R strictly larger than 9t dim(G)d log C/[(1−τ)log r] as an admissible saturation bound after the source’s finite local modifications. Repeated factors leave t unchanged but contribute to d. Strict inequality permits the distribution and Brun endpoint losses.
+**Explicit affine almost-prime bound.** Under the preceding algebraic and primitivity hypotheses, with t counting distinct geometric components regardless of their fields of definition, choose a free rank-k Zariski-dense subgroup, its primitive-coset adapter, word growth r=2k−1>1, matrix-entry height base C>1, and f of original polynomial degree d. Assume its own reduced-word population has the uniform remainder estimate with mixing exponent τ<1 specified in free-word affine sieve data, and its own power-saving escape bound. These inputs give every integer R strictly larger than 9t dim(G)d log C/[(1−τ)log r] as an admissible saturation bound after the source’s finite local modifications. Repeated factors leave t unchanged but contribute to d. Strict inequality permits the distribution and Brun endpoint losses.
 
 Actual free-word growth and height estimate; non-sharp primitive-coset and expansion hypotheses.
 
@@ -3589,9 +3641,9 @@ Actual free-word growth and height estimate; non-sharp primitive-coset and expan
 - Replacing f=a by a² on SL₂ leaves t=1 and changes d from 1 to 2; with the same other parameters the thresholds are 54 and 108. Counting only distinct factors in the height bound would lose this factor of two.
 - For f=a²+b², K_f=2. An entry bound 3^(L+1) gives |f|≤2·3^(2(L+1)); at L=0 and the identity, the actual value is 1≤18. If k=1 then r=1 and log r=0, so the rank-one case is outside the r>1 hypotheses.
 
-*Needs:* Layer 5 §5.4 affine sieve saturation with expansion; Layer 5 §5.1 from roughness to an almost-prime bound.
+*Needs:* Layer 5 §5.4 free-word affine sieve data with its independent remainder and escape hypotheses; Layer 5 §5.4 local densities for affine orbits; Layer 5 §5.2 positive lower sieve above 9t; Layer 5 §5.1 from roughness to an almost-prime bound.
 
-**Squarefree congruence expansion for SL₂.** For finitely generated Zariski-dense Γ≤SL₂(Z) and a finite symmetric generating set, the Cayley graphs Γ/Γ(q) over squarefree q form a uniform expander family, in the ordinary spectral-gap sense. Turning this ordinary gap into the actual word-population mixing estimate for SL₂ saturation needs the aperiodicity or periodic-coset comparison stated separately.
+**Squarefree congruence expansion for SL₂.** For finitely generated Zariski-dense Γ≤SL₂(Z) and a finite symmetric generating set, the Cayley graphs Γ/Γ(q) over squarefree q form a uniform expander family, in the ordinary spectral-gap sense. The original-group lazy population converts this ordinary gap into the mixing estimate for SL₂ saturation, including conditioning at its fixed exceptional squarefree modulus.
 
 Squarefree q; actual image quotient Γ/Γ(q); no claim for arbitrary prime powers or arbitrary G.
 
@@ -3791,7 +3843,7 @@ For Chen prove the original-family lower bound 2.6408 C_N N/log²N and ordered s
 
 The ideal-symbol comparison and the generic ideal coefficient/prime-extraction interfaces have their stated hypotheses. Spin-sign moments use ArithmeticStatisticsPartV §3.30 with ArithmeticStatisticsPartV §3.30 conditional joint-spin prime bound; each nonempty subset retains C_(|T|n) through §5.3. The imported chain keeps its sliced-lattice and codimension-two exceptional estimates, uniformity in all nonzero ideals, and dyadic/infinite-place reciprocity factors.
 
-For affine sieves supply native subgroup, reduction-image, free-word orbit and CRT density comparisons, identifying relative polynomial density with rational Zariski closure. Establish the free subgroup/coset reduction preserving simultaneous primitivity with fixed bad primes, heights and r=2k−1. Reconstruct SL₂ squarefree expansion from sum-product/flattening. Ordinary one-sided gap leaves a negative extremal eigenvalue: obtain absolute mixing through an aperiodic/lazy population or a periodic-coset comparison compatible with the sieve. Escape requires effective good primes and a power saving. The explicit saturation inequality retains a strict margin.
+For affine sieves supply native subgroup, reduction-image, labelled-walk orbit and CRT density comparisons, identifying relative polynomial density with rational Zariski closure. The general endpoint uses original-group lazy walks, the fixed squarefree modulus b, a simultaneously primitive class c, main scale X_L/|H_b| and its signed remainder at one. Reconstruct SL₂ squarefree expansion from sum-product/flattening and convert its ordinary gap to lazy mixing. Prove conditioned remainders and effective power-saving escape for that same population. The separate free-tree bound retains its chosen subgroup’s independent mixing and escape inputs, primitive-coset reduction, heights, growth r=2k−1 and strict saturation margin.
 
 ### Examples
 
@@ -3810,7 +3862,7 @@ C₆=2C₂,C₁₀=(4/3)C₂ and C₁₈=C₆ test distinct Goldbach corrections
 
 In a cyclic cubic group S={σ} is permitted but S={σ,σ²} is not; identity and involutions are excluded. Odd rational m>1 has individual spin zero, unit squares preserve spin, and ψ=0 makes every joint coefficient zero.
 
-Affine values {2,3} have gcd one but fail simultaneous avoidance at modulus six. The empty orbit is not primitive. The r=2 locus includes −6 and excludes 8, every locus excludes zero, and r=0 includes ±1. The length-zero word ball has its identity word, and collisions retain word multiplicity.
+Affine values {2,3} have gcd one but fail simultaneous avoidance at modulus six. The empty orbit is not primitive. The r=2 locus includes −6 and excludes 8, every locus excludes zero, and r=0 includes ±1. The length-zero lazy population has its identity word; at m=2,L=1 its two identity labels give mass 2, and all collisions retain word multiplicity. The separate rank-two free-word ball has 5 words at length at most one.
 
 ### Dependencies
 
