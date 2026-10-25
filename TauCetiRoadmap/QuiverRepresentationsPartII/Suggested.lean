@@ -30,31 +30,19 @@ namespace TauCetiRoadmap.QuiverRepresentationsPartII
 
 /-! ## Layer 0: integer multisegments and maximal peeling -/
 
-/-- A nonempty closed interval with integer endpoints. -/
-structure Interval where
-  left : ℤ
-  right : ℤ
-  nonempty : left ≤ right
-  deriving DecidableEq
-
-/-- Inclusive membership in an integral interval. -/
-def Interval.contains (s : Interval) (a : ℤ) : Prop :=
-  s.left ≤ a ∧ a ≤ s.right
-
-/-- Inclusion of the first interval in the second. -/
-def Interval.included (s t : Interval) : Prop :=
-  t.left ≤ s.left ∧ s.right ≤ t.right
+/-- The native nonempty closed interval carrier, specialized to integer endpoints. -/
+abbrev Interval := NonemptyInterval ℤ
 
 /-- Right shortening deletes a singleton rather than retaining an empty interval. -/
 def Interval.shorten (s : Interval) : Option Interval :=
-  if h : s.left < s.right then some ⟨s.left, s.right - 1, by omega⟩ else none
+  if h : s.fst < s.snd then some ⟨(s.fst, s.snd - 1), by omega⟩ else none
 
 /-- A finite multiset of intervals; equal intervals remain different occurrences. -/
 abbrev Multisegment := Multiset Interval
 
 /-- Shorten every occurrence and delete exactly the singleton occurrences. -/
 def rightTruncate (m : Multisegment) : Multisegment :=
-  m.bind fun s => match s.shorten with
+  m.bind fun s => match Interval.shorten s with
     | none => 0
     | some t => {t}
 
@@ -64,7 +52,7 @@ def occurrenceInterval (m : Multisegment) (i : Fin m.card) : Interval :=
 
 /-- One copy of each distinct inclusion-maximal interval. -/
 def maximalPart (m : Multisegment) : Multisegment :=
-  (m.toFinset.filter fun s => ∀ t ∈ m.toFinset, s.included t → s = t).val
+  (m.toFinset.filter fun s => ∀ t ∈ m.toFinset, s ≤ t → s = t).val
 
 /-- Subtract the one-copy maximal part, retaining every other occurrence. -/
 def remainder (m : Multisegment) : Multisegment :=
@@ -158,11 +146,11 @@ theorem polynomial_irreducible (n : ℕ) :
 
 /-- Retain all occurrences meeting at least one of the two adjacent grades. -/
 def cutPart (m : Multisegment) (a : ℤ) : Multisegment :=
-  m.filter fun s => s.contains a ∨ s.contains (a + 1)
+  m.filter fun s => a ∈ s ∨ a + 1 ∈ s
 
 /-- A finite set of distinct intervals is pairwise comparable by inclusion. -/
 def IsInclusionChain (A : Finset Interval) : Prop :=
-  IsChain Interval.included (A : Set Interval)
+  IsChain (· ≤ ·) (A : Set Interval)
 
 /-- Maximum inclusion-chain weight, counting all copies at the adjacent cut. -/
 def chainWeight (m : Multisegment) (a : ℤ) : ℕ :=
@@ -171,8 +159,8 @@ def chainWeight (m : Multisegment) (a : ℤ) : ℕ :=
 
 /-- Both endpoints must strictly increase; duplicate occurrences are incomparable. -/
 def endpointBefore (m : Multisegment) (i j : Fin m.card) : Prop :=
-  (occurrenceInterval m i).left < (occurrenceInterval m j).left ∧
-    (occurrenceInterval m i).right < (occurrenceInterval m j).right
+  (occurrenceInterval m i).fst < (occurrenceInterval m j).fst ∧
+    (occurrenceInterval m i).snd < (occurrenceInterval m j).snd
 
 /-- An antichain has no strict endpoint-order edge between any of its labels. -/
 def IsEndpointAntichain (m : Multisegment) (A : Finset (Fin m.card)) : Prop :=
@@ -223,7 +211,7 @@ structure GridPath (r a : ℕ) where
 
 /-- An invalid endpoint pair has weight zero; a valid pair has its full multiplicity. -/
 def intervalWeight (m : Multisegment) (i j : ℤ) : ℕ :=
-  if h : i ≤ j then m.count ⟨i, j, h⟩ else 0
+  if h : i ≤ j then m.count ⟨(i, j), h⟩ else 0
 
 /-- Sum the multiplicity weights over every vertex of the path. -/
 def GridPath.weight {r a : ℕ} (p : GridPath r a) (m : Multisegment) : ℕ :=
@@ -231,7 +219,7 @@ def GridPath.weight {r a : ℕ} (p : GridPath r a) (m : Multisegment) : ℕ :=
 
 /-- Every occurrence lies in the finite interval `[1,r]`. -/
 def InWindow (m : Multisegment) (r : ℕ) : Prop :=
-  ∀ s ∈ m, 1 ≤ s.left ∧ s.right ≤ r
+  ∀ s ∈ m, 1 ≤ s.fst ∧ s.snd ≤ r
 
 /-- Every monotone grid path has weight at most the adjacent inclusion-chain maximum,
 without a support-window or interior-cut hypothesis. -/
