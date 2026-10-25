@@ -10,7 +10,7 @@ measures, dynatomic equations, iterated preimage actions, and the stated family
 and orbit-intersection results. General algebraic geometry, curve theory, heights,
 potential theory and Galois theory are consumed through the contracts in the indicated layers.
 
-- ModularCurves §4C owns the universal Legendre family, and MordellLawrenceVenkatesh §6.4 its native Weierstrass coefficient model, discriminant and j-invariant. The variants in §§6.35 and 6.111 are their specializations for Lattès dynamics and projected torsion sets.
+- ModularCurves §4C owns the universal Legendre family, and EllipticLegendreCharacterInterfaces §§0.1, 0.4 its native Weierstrass coefficient model over every commutative ring, discriminant, ellipticity criterion and j-invariant. The variants in §§6.35 and 6.111 are their specializations for Lattès dynamics and projected torsion sets.
 - Mathlib supplies iteration, positive periods, minimal periods and semiconjugacy;
   polynomials, projective points and resultants; native Weil heights and field
   Northcott; field extensions, finite polynomial Galois actions and Krull topology.
@@ -169,9 +169,9 @@ rank, saturation, local-data and finite-certificate hypothesis.
 
 Consume the universal Legendre family and its field fibres, with its chosen x-coordinate.
 
-### From TauCetiRoadmap.MordellLawrenceVenkatesh — §6.4
+### From TauCetiRoadmap.EllipticLegendreCharacterInterfaces — §§0.1, 0.4
 
-Consume the universal Legendre family and its field fibres from ModularCurves §4C, and the native Weierstrass coefficient model y²=x(x−1)(x−t) over every commutative ring and its discriminant 16t²(t−1)² from MordellLawrenceVenkatesh §6.4. Over a field of characteristic ≠2 with t≠0,1, consume its j-invariant formula 256(t²−t+1)³/(t²(t−1)²). Section 6.35 specializes this model for its Lattès map; §6.111 specializes the coefficient tuple inside `legendreTorsionImages` to state the projected-torsion theorem on native points.
+The supplier's parameter λ is written t here. Consume from §0.1 the native Weierstrass coefficient model y²=x(x−1)(x−t), with coefficients (0,−(1+t),0,t,0), over every commutative ring and at every parameter, including t=0,1. Consume from §0.4 its discriminant 16t²(t−1)² over every commutative ring and its ellipticity criterion: over a field with 2≠0 the model is elliptic exactly when t≠0,1. For those parameters consume its j-invariant 256(t²−t+1)³/(t²(t−1)²). Section 6.35 specializes this model for its Lattès map; §6.111 specializes the coefficient tuple inside `legendreTorsionImages` to state the projected-torsion theorem on native points.
 
 ### From TauCetiRoadmap.DiophantineApproximationAndTranscendence — §§0.2, 0.3, 2.4
 
@@ -9099,9 +9099,9 @@ Let F be a field of characteristic ≠ 2 and t ∈ F with t ≠ 0, 1. The Legend
 
 char F ≠ 2 (for char 2 the curve y² = x(x − 1)(x − t) is singular). t ≠ 0, 1 (exactly the condition Δ(E_t) ≠ 0 when char F ≠ 2).
 
-b₂ = −4(1 + t), b₄ = 2t, b₆ = 0, b₈ = −t², so Φ_2 = x⁴ − 2tx² + t² = (x² − t)² and ΨSq_2 = 4x³ − 4(1 + t)x² + 4tx = 4x(x − 1)(x − t) (WeierstrassCurve.Φ_two, WeierstrassCurve.ΨSq_two). Δ(E_t) = 16t²(t − 1)² and j(t) = 256(t² − t + 1)³/(t²(t − 1)²) from Mathlib's formulas WeierstrassCurve.Δ and WeierstrassCurve.j. Homogenising Φ_2 and ΨSq_2 in degree 4 gives F_t.
+b₂ = −4(1 + t), b₄ = 2t, b₆ = 0, b₈ = −t², so Φ_2 = x⁴ − 2tx² + t² = (x² − t)² and ΨSq_2 = 4x³ − 4(1 + t)x² + 4tx = 4x(x − 1)(x − t) (WeierstrassCurve.Φ_two, WeierstrassCurve.ΨSq_two). Δ(E_t) = 16t²(t − 1)² and j(t) = 256(t² − t + 1)³/(t²(t − 1)²) are EllipticLegendreCharacterInterfaces §0.4 at λ = t. Homogenising Φ_2 and ΨSq_2 in degree 4 gives F_t.
 
-*Needs:* [The Lattès map of multiplication by n on a Weierstrass curve](#63-the-lattès-map-of-multiplication-by-n-on-a-weierstrass-curve); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); `WeierstrassCurve.Δ`; `WeierstrassCurve.j`; `WeierstrassCurve.Φ_two`; `WeierstrassCurve.ΨSq_two`.
+*Needs:* [The Lattès map of multiplication by n on a Weierstrass curve](#63-the-lattès-map-of-multiplication-by-n-on-a-weierstrass-curve); [The canonical height of a rational map of ℙ¹](#120-the-canonical-height-of-a-rational-map-of-ℙ¹); EllipticLegendreCharacterInterfaces §§0.1, 0.4; `WeierstrassCurve.Δ`; `WeierstrassCurve.j`; `WeierstrassCurve.Φ_two`; `WeierstrassCurve.ΨSq_two`.
 
 ([demarco-krieger-ye-2020](#demarco-krieger-ye-2020), §1, (1.2), p. 3 (arXiv v2) — The Legendre curve of the target, E_t with a₂ = −(1 + t), a₄ = t, over any field of characteristic ≠ 2; [demarco-krieger-ye-2020](#demarco-krieger-ye-2020), §2.1, (2.1), p. 6 (arXiv v2) — The Lattès map of the target for n = 2 on the Legendre curve; the target constructs it for every n and every Weierstrass curve with Δ ≠ 0 from Mathlib's division polynomials; [demarco-krieger-ye-2020](#demarco-krieger-ye-2020), §2.4, (2.5), p. 9 (arXiv v2) — The API item legendre_j; [demarco-krieger-ye-2020](#demarco-krieger-ye-2020), §2.2, p. 7 (arXiv v2) — The homogeneous lift used for escape rates.)
 
@@ -10410,7 +10410,7 @@ The marked set {0,1/6}⊂ℚ tests zero marks and denominators in the parameter 
 
 ### Dependencies
 
-Layers 0–5 as specified per target; elliptic geometry and heights, including EllipticCurves Layer 4 potential-good-reduction and good-model discriminant comparison for §6.83; SchemeAndStackFoundations §0.9 `spreading_out_models` and the relative Cohen contract; HeightsRationalPointsAndObstructions §§0.16, 4.8 heights and Siegel; TropicalAndBerkovichArithmetic §0.23 hybrid topology; §6.1 model-function, curvature and dynamical scalar-restriction comparisons; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
+Layers 0–5 as specified per target; elliptic geometry and heights, including EllipticCurves Layer 4 potential-good-reduction and good-model discriminant comparison for §6.83; EllipticLegendreCharacterInterfaces §§0.1, 0.4 Legendre coefficient model, discriminant, ellipticity criterion and j-invariant for §§6.35, 6.111; SchemeAndStackFoundations §0.9 `spreading_out_models` and the relative Cohen contract; HeightsRationalPointsAndObstructions §§0.16, 4.8 heights and Siegel; TropicalAndBerkovichArithmetic §0.23 hybrid topology; §6.1 model-function, curvature and dynamical scalar-restriction comparisons; the stated complex-dynamics, polynomial-decomposition and rigidity inputs.
 
 ## Source conventions and corrections
 
