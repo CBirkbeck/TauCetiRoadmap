@@ -16,7 +16,8 @@ theorems against the pinned Mathlib and Tau Ceti APIs.
 
 Headlines: Martin's dimension formula and sharp equality criterion; the integral
 norm bound; sharp Kraus rational and full-two-torsion realization; uniform
-irreducibility and absolute irreducibility with rational two-torsion; finite-prime
+irreducibility and absolute irreducibility with rational two-torsion; the prime,
+non-CM prime and composite rational cyclic-isogeny degree classifications; finite-prime
 coefficient rationality; integral ideal-congruence Sturm; Cartan integrality,
 the proper-image classification and Lemos's rational-isogeny surjectivity theorem.
 
@@ -25,7 +26,16 @@ residual Artin conductor and Serre weight interfaces are missing. The Cartan
 correspondence, winding quotient and formal immersion headlines
 lack the modular curves with their moduli/j maps, modular Jacobians with integral
 Hecke quotients, and their canonical integral models. They remain README targets;
-no replacement predicates or admitted constructions are used here.
+no replacement predicates or admitted constructions are used here. The Bilu–Parent–Rebolledo rational-point theorem, normalized modular coordinates
+and rational-point tables are not statable:
+the corresponding modular curves with their moduli and j maps are missing. The
+unconditional modular abelian rank-zero theorem lacks the attached modular quotient
+and its L-function; the integral winding comparison lacks its Hecke quotient and
+Néron cotangent realization. The coefficient-prime reduction alternative and
+exceptional projective-image bound lack the local reduction/weight and projective
+image interfaces. Full Néron torsion specialization lacks the Néron reduction map.
+The finite-j exceptional-prime divisibility theorem lacks the good-reduction trace
+and local inertia interfaces. These are README targets, not assumed suppliers.
 -/
 
 noncomputable section
@@ -116,6 +126,39 @@ theorem integral_sturm_congruence (N : ℕ) [NeZero N] (k : ℕ)
 
 /-! ## Layer 5: uniform two-torsion irreducibility -/
 
+/-- Every geometric endomorphism is an integer multiple of the identity;
+this tests complex multiplication over the algebraic closure. -/
+def NonCM (E : WeierstrassCurve ℚ) [E.IsElliptic] : Prop :=
+  ∀ f : TauCeti.Isogeny.Hom (E.baseChange (AlgebraicClosure ℚ)).toAffine
+      (E.baseChange (AlgebraicClosure ℚ)).toAffine,
+    ∃ n : ℤ, f = n • (1 : TauCeti.Isogeny.Hom
+      (E.baseChange (AlgebraicClosure ℚ)).toAffine (E.baseChange (AlgebraicClosure ℚ)).toAffine)
+
+/-- A rational isogeny of degree n with cyclic geometric kernel;
+the kernel is taken after base change to the algebraic closure. -/
+def HasCyclicIsogeny (E : WeierstrassCurve ℚ) [E.IsElliptic] (n : ℕ) : Prop :=
+  ∃ F : WeierstrassCurve ℚ, ∃ (_ : F.IsElliptic),
+    ∃ f : TauCeti.Isogeny E.toAffine F.toAffine,
+      f.degree = n ∧ IsAddCyclic ((f.map (algebraMap ℚ (AlgebraicClosure ℚ))).ker)
+
+/-- Mazur's prime-degree classification for rational cyclic isogenies,
+including the CM degrees (Theorem 1, pp. 129–130). -/
+theorem prime_isogeny_degrees (E : WeierstrassCurve ℚ) [E.IsElliptic]
+    (p : ℕ) (hp : p.Prime) (h : HasCyclicIsogeny E p) :
+    p ∈ ({2, 3, 5, 7, 11, 13, 17, 19, 37, 43, 67, 163} : Finset ℕ) := by sorry
+
+/-- A non-CM rational elliptic curve has no rational prime-degree cyclic
+isogeny outside Mazur's non-CM list. -/
+theorem noncm_prime_isogeny_degrees (E : WeierstrassCurve ℚ) [E.IsElliptic]
+    (hCM : NonCM E) (p : ℕ) (hp : p.Prime) (h : HasCyclicIsogeny E p) :
+    p ∈ ({2, 3, 5, 7, 11, 13, 17, 37} : Finset ℕ) := by sorry
+
+/-- The Mazur–Kenku classification restricts every rational cyclic-isogeny
+degree, including composite degrees and CM curves. -/
+theorem cyclic_isogeny_degrees (E : WeierstrassCurve ℚ) [E.IsElliptic]
+    (n : ℕ) (h : HasCyclicIsogeny E n) :
+    n ∈ Finset.Icc 1 19 ∪ ({21, 25, 27, 37, 43, 67, 163} : Finset ℕ) := by sorry
+
 /-- Geometric n-torsion of an elliptic Weierstrass curve over the fixed
 algebraic closure of the rationals. -/
 abbrev GeometricTorsion (E : WeierstrassCurve ℚ) [E.IsElliptic] (n : ℕ) :=
@@ -166,21 +209,6 @@ theorem rational_two_irreducible (E : WeierstrassCurve ℚ) [E.IsElliptic]
       ((torsionRepresentation E ell).baseChange (AlgebraicClosure (ZMod ell))).IsIrreducible := by sorry
 
 /-! ## Layer 6: rational-isogeny uniformity -/
-
-/-- Every geometric endomorphism is an integer multiple of the identity;
-this tests complex multiplication over the algebraic closure. -/
-def NonCM (E : WeierstrassCurve ℚ) [E.IsElliptic] : Prop :=
-  ∀ f : TauCeti.Isogeny.Hom (E.baseChange (AlgebraicClosure ℚ)).toAffine
-      (E.baseChange (AlgebraicClosure ℚ)).toAffine,
-    ∃ n : ℤ, f = n • (1 : TauCeti.Isogeny.Hom
-      (E.baseChange (AlgebraicClosure ℚ)).toAffine (E.baseChange (AlgebraicClosure ℚ)).toAffine)
-
-/-- A rational isogeny of degree n with cyclic geometric kernel;
-the kernel is taken after base change to the algebraic closure. -/
-def HasCyclicIsogeny (E : WeierstrassCurve ℚ) [E.IsElliptic] (n : ℕ) : Prop :=
-  ∃ F : WeierstrassCurve ℚ, ∃ (_ : F.IsElliptic),
-    ∃ f : TauCeti.Isogeny E.toAffine F.toAffine,
-      f.degree = n ∧ IsAddCyclic ((f.map (algebraMap ℚ (AlgebraicClosure ℚ))).ker)
 
 /-- The torsion image normalizes a quadratic finite subfield of its endomorphism
 ring. The units of that field are a nonsplit Cartan subgroup. -/
