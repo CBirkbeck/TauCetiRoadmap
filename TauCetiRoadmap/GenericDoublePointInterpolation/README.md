@@ -1423,9 +1423,31 @@ The pairwise comaximal ideals (x−P_i)² have product a monic polynomial of deg
 
 **Quartic P⁷ ordinary Horace input.** Assuming the quartic 30-point assertion in P⁶, quartic q=41 and q=42 in P⁷ have maximal rank by specializing u=30 supports to a hyperplane; both ordinary Horace inequalities have the matching direction.
 
-Use u=30 hyperplane supports. The quartic trace has dimension and length 210; the cubic residual has source dimension 120 and lengths 118 or 126 for q=41 or 42. Cubic maximal rank and general simple-point selection supply the residual. The quartic input in P⁶ is a hypothesis of this argument.
+Use u=30 hyperplane supports. The quartic trace has dimension and length
+210; the cubic residual has source dimension 120 and lengths 118 or 126
+for q=41 or 42. There are respectively 11 or 12 general off-H double
+supports Σ. A cubic vanishing doubly at Σ and restricting to zero on H
+is ℓ_H Q, where ℓ_H defines H and Q is a quadric. Since ℓ_H is a unit at
+each off-H support, Q also vanishes doubly at Σ. Section 3.1 shows that
+eight general supports in P⁷ already leave no singular quadric, so Q=0.
+Thus restriction to H is injective on this cubic vanishing system.
 
-*Needs:* [Cubic maximal-rank input](#33-codimension-three-cubic-systems); [Ordinary Horace criterion](#22-hyperplane-residuals-and-ordinary-horace); [Killing a residual system with simple points](#42-filling-the-residual-and-trace-systems).
+Cubic maximal rank gives this system dimension 120−8·11=32 or
+120−8·12=24. In the first case choose 32 independent simple conditions on
+H and retain 30; in the second choose 24 and add six distinct supports.
+The residual ranks are therefore 88+30=118 and 96+24=120. Intersect the
+resulting nonempty simple-point rank open with the quartic trace rank open
+in the irreducible parameter space of 30 distinct supports on H. The
+quartic 30-point assertion in P⁶ supplies the latter open and remains a
+hypothesis of this argument.
+
+**Checks.**
+
+- For q=41 the trace rank is 210 and the residual rank is 118, giving 328=min(330,8·41); the quartic kernel has dimension 2.
+- For q=42 the residual has length 126 but rank 120, giving total rank 210+120=330=min(330,8·42); the six extra simple conditions do not raise its rank above 120.
+- Take H=(X₀+⋯+X₇=0) and seven off-H coordinate supports e₀,…,e₆. The nonzero cubic (X₀+⋯+X₇)X₇² vanishes doubly at them and restricts to zero on H; the restriction kernel has dimension 1. Adding e₇ kills the remaining singular quadric X₇² and makes that kernel zero, so the spanning hypothesis cannot be omitted.
+
+*Needs:* [Quadrics with prescribed singular points](#31-exact-low-degree-rank-witnesses); [Cubic maximal-rank input](#33-codimension-three-cubic-systems); [Ordinary Horace criterion](#22-hyperplane-residuals-and-ordinary-horace); [Killing a residual system with simple points](#42-filling-the-residual-and-trace-systems); [Rank in flat point families](#24-families-and-limits).
 
 ([BO line 970, §6 p. 19](https://arxiv.org/pdf/math/0701409v2)).
 
