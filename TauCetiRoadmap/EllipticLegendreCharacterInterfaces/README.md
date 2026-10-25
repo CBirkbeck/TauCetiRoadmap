@@ -4,17 +4,17 @@
 
 ## Scope and ownership
 
-This roadmap owns coefficient-level Legendre specializations, ordered-root normalization, root evaluations of the native descent map and their arithmetic consequences. It extends EllipticCurves, whose Layer 4 stops at general local reduction and whose Layer 5 owns quadratic twists. It does not replace their curve, isogeny, local-model or twist carriers.
+This roadmap owns coefficient-level Legendre specializations, ordered-root normalization, root evaluations of the native descent map and their arithmetic consequences. It extends EllipticCurves, whose Layer 4 stops at general local reduction and whose Layer 5 owns quadratic twists. It does not replace their curve, isogeny, local-model or twist carriers. The generic Frey equation y²=x(x−A)(x+B) over every commutative ring, with its discriminant, c₄ and ellipticity criterion, is EllipticCurves' worked Frey–Hellegouarch example; L(λ) and L(d,λ) are its specializations at (A,B)=(1,−λ) and (A,B)=(d,−dλ), and the invariant statements of Layer 0 are specializations of those identities, which are not restated here.
 
 The five-coefficient model, nonsingular affine point group, invariants, normal forms, admissible coordinate changes and minimal-equation reduction classes are already in the library: Mathlib's elliptic-curve modules supply them. Tau Ceti supplies the cubic algebra, its unit squareclasses, the descent homomorphism and kernel theorem, root-count formula for two-torsion, point counts and quadratic twists. These general constructions are imports, not targets. Layer 2 adds their three ordered root readings; its coordinate product theorem differs from the generic norm condition by identifying the three individual factors. Layer 0's enumeration differs from the native root-count theorem by giving the actual labelled points and the equality of sets.
 
 ModularCurves §4C owns the universal Legendre curve; §0.1 is its coefficient-level form over every commutative ring. ModularCurves §9E owns the Legendre line, its S₃ action and invariant-ring description. Layer 0 keeps the six labelled rational expressions and their coefficient-model comparisons. Section 0.9 uses cardinality four of the native doubling kernel as full K-rational two-torsion; EllipticCurveModularityPartII §5.1 packages its rational specialization as a predicate. ClassicalArithmeticCompletion §§1.7, 1.8, 1.51 owns primitive squareclass characters and their identification by prime values. NeronModelsAndSemistableAbelianVarieties §§5.3a, 5.3g owns the actual elliptic conductor and its reduction comparison, using ArithmeticGaloisRepresentations Layer 3 for Artin conductors. No discriminant, reduction-symbol formula or Ogg-exponent surrogate is substituted for that conductor.
 
-Layer 5 owns the character-sum point count and the quadratic-twist trace comparison for normal-form equations over every odd finite field, including singular equations. ComputationalNumberTheory §3.17 uses this point-count identity; its arithmetic counting applications remain there. General local factors, rational bad-prime factors, global L-functions and BSD remain in EllipticCurves and the corresponding analytic roadmaps. ErdosProgressionPowers Layer 2 owns all progression-specific uses, character nontriviality and character-sum inequalities. ArithmeticDynamics §§6.35, 6.111–6.112 owns Legendre Lattès maps and their common torsion-image bounds; no such construction is repeated here. Sections 0.1 and 0.4 own the coefficient model, discriminant and j-invariant underlying the families in MordellLawrenceVenkatesh §6.4, ArithmeticDynamics §§6.35, 6.111 and ErdosProgressionPowers Layer 2; the cyclic family, Gauss–Manin theory and dynamical constructions remain there.
+Layer 5 owns the character-sum point count and the quadratic-twist trace comparison for normal-form equations over every odd finite field, including singular equations. ComputationalNumberTheory §3.17 is a consumer of this identity and owns only its finite-enumeration form of the count and its computational applications. General local factors, rational bad-prime factors, global L-functions and BSD remain in EllipticCurves and the corresponding analytic roadmaps. ErdosProgressionPowers Layer 2 owns all progression-specific uses, character nontriviality and character-sum inequalities; the general-field normalization and the odd-finite-field two-by-four subgroup theorem belong to §§0.9 and 3.1. ArithmeticDynamics §§6.35, 6.111–6.112 owns Legendre Lattès maps and their common torsion-image bounds; no such construction is repeated here. Sections 0.1 and 0.4 own the Legendre coefficient model over every commutative ring, its discriminant and its j-invariant; MordellLawrenceVenkatesh §6.4, ArithmeticDynamics §§6.35, 6.111 and ErdosProgressionPowers §2.1 consume them, and the cyclic family, Gauss–Manin theory and dynamical constructions remain there.
 
 ## Conventions
 
-Rings are unital and may be the zero ring in coefficient identities. A field K is nontrivial, with arbitrary universe; geometric statements below assume 2≠0, and under this assumption L(d,λ) is elliptic precisely when d≠0 and λ∉{0,1}. Set L(λ)=(0,−(1+λ),0,λ,0) and L(d,λ)=(0,−d(1+λ),0,d²λ,0); the source’s F′_λ means L(2,λ). Polynomial identities are over every commutative ring; divisions and ellipticity assertions carry the stated field and nonzero hypotheses. The characteristic-three cases are included. Completing the square over a ring requires invertible 2, rather than merely nonzero 2.
+Rings are unital and may be the zero ring in coefficient identities. A field K is nontrivial, with arbitrary universe; geometric statements below assume 2≠0, and under this assumption L(d,λ) is elliptic precisely when d≠0 and λ∉{0,1}. Set L(λ)=(0,−(1+λ),0,λ,0) and L(d,λ)=(0,−d(1+λ),0,d²λ,0); the source’s F′_λ means L(2,λ). In the Frey normalization y²=x(x−A)(x+B), with coefficients (0,B−A,0,−AB,0), these are the pairs (A,B)=(1,−λ) and (A,B)=(d,−dλ), with A+B equal to 1−λ and d(1−λ) respectively. Polynomial identities are over every commutative ring; divisions and ellipticity assertions carry the stated field and nonzero hypotheses. The characteristic-three cases are included. Completing the square over a ring requires invertible 2, rather than merely nonzero 2.
 
 All points mean Mathlib's nonsingular affine points together with the origin O at infinity, with its native addition; `(0,0)` is an affine two-torsion point, never O. Use decidable equality when the native point-group instance requires it. The ordered roots are always (0,d,dλ). A squareclass [a] means the class of a nonzero a in Kˣ/(Kˣ)²; zero is a field square but never a unit squareclass. The split target is K×(K×K) and its corresponding triple of squareclasses, in this order. The six parameter labels retain repetitions.
 
@@ -46,7 +46,7 @@ TauCeti/AlgebraicGeometry/EllipticCurve/PointCount.lean supplies `WeierstrassCur
 
 ### From TauCetiRoadmap.EllipticCurves
 
-Layer 4, “elliptic curves over local fields — reduction, Tate's algorithm, the Tate curve”, supplies general local minimal-model and potential-good-reduction theory. Its integral-j criterion is used only in its good-reduction consequence. Layer 5's quadratic twists are consumed through the native coefficient construction above.
+Layer 4, “elliptic curves over local fields — reduction, Tate's algorithm, the Tate curve”, supplies general local minimal-model and potential-good-reduction theory. Its integral-j criterion is used only in its good-reduction consequence. Layer 5's quadratic twists are consumed through the native coefficient construction above. The worked example “The Frey–Hellegouarch curve” (section “Worked examples”) supplies `freyCurve A B`, the equation y²=x(x−A)(x+B) over every commutative ring with a₂=B−A, a₄=−AB and a₁=a₃=a₆=0, together with Δ=16A²B²(A+B)², c₄=16(A²+AB+B²) and, over a field with 2≠0, ellipticity iff A, B and A+B are all nonzero. Layer 0 specializes these identities at (A,B)=(1,−λ) and (d,−dλ); it assumes nothing of the example's Fermat normalization or conductor statements.
 
 ### From TauCetiRoadmap.ClassicalArithmeticCompletion
 
@@ -74,8 +74,9 @@ The supporting API states:
 - (L(λ)).map f=L(f(λ)) for every ring homomorphism f.
 - L(λ)=L(μ) iff λ=μ, over every commutative ring (compare a₄).
 - L(λ) is in native normal form a₁=a₃=0.
+- L(λ) is the Frey equation y²=x(x−A)(x+B) at (A,B)=(1,−λ): the Frey coefficients B−A and −AB are −(1+λ) and λ.
 
-Specify the five coefficients in WeierstrassCurve; the factored equation follows by ring algebra from Affine.equation_iff.
+Specify the five coefficients in WeierstrassCurve; the factored equation follows by ring algebra from Affine.equation_iff, and the Frey comparison by comparing a₂ and a₄.
 
 **Checks.**
 
@@ -87,7 +88,7 @@ Specify the five coefficients in WeierstrassCurve; the factored equation follows
 - Over the zero ring all coefficients and Δ are 0=1, so Δ is a unit. This prevents using a field's nonzero criterion over an arbitrary ring.
 - In 𝔽₅[ε]/(ε²), λ=2+ε gives Δ=4+2ε, whose inverse is 4+3ε. This tests the coefficient identities on a nonreduced ring.
 
-*Needs:* Mathlib `WeierstrassCurve`; Mathlib `WeierstrassCurve.Affine.Equation`.
+*Needs:* Mathlib `WeierstrassCurve`; Mathlib `WeierstrassCurve.Affine.Equation`; TauCetiRoadmap.EllipticCurves Worked examples (the Frey–Hellegouarch curve) for the Frey comparison.
 
 ### 0.2 The scaled Legendre equation
 
@@ -101,8 +102,9 @@ The supporting API states:
 - L(1,λ)=L(λ).
 - Mapping coefficients along f gives L(f(d),f(λ)).
 - Over a field with 2≠0, L(d,λ) equals the native quadratic twist of L(λ) with parameters (0,−d/4); its twisting discriminant is d, so it is elliptic iff d≠0 and L(λ) is elliptic.
+- L(d,λ) is the Frey equation y²=x(x−A)(x+B) at (A,B)=(d,−dλ), over every commutative ring; here A+B=d(1−λ).
 
-Specify the coefficients and factor the cubic. At 2≠0 compare all five coefficients with native quadratic twist at t=0,n=−d/4.
+Specify the coefficients and factor the cubic. At 2≠0 compare all five coefficients with native quadratic twist at t=0,n=−d/4. For the Frey comparison, B−A=−dλ−d and −AB=d²λ.
 
 **Checks.**
 
@@ -110,8 +112,9 @@ Specify the coefficients and factor the cubic. At 2≠0 compare all five coeffic
 - L(2,1/2) over ℚ has a₂=−3,a₄=2,Δ=64. Both roots 1 and 1/2 are scaled by 2, giving roots 2 and 1.
 - For d=0 all five coefficients vanish, and Δ=0, for every λ. This tests that the scaled model is total at d=0 and is not elliptic over a field there.
 - d=2 gives native twist parameters (0,−1/2), with twisting discriminant 2; parameters (0,−2) instead give twisting discriminant 8. This fixes the scalar normalization.
+- At d=2,λ=3 the Frey pair (A,B)=(2,−6) gives coefficients (0,−8,0,12,0), which are those of L(2,3), and A+B=−4=d(1−λ). The sign-reversed pair (2,6) gives (0,4,0,−12,0), the equation y²=x(x−2)(x+6) with roots 0,2,−6 instead of the ordered roots 0,2,6. This fixes the sign of B in the Frey comparison.
 
-*Needs:* §0.1; Tau Ceti `WeierstrassCurve.quadraticTwistOf`.
+*Needs:* §0.1; Tau Ceti `WeierstrassCurve.quadraticTwistOf`; TauCetiRoadmap.EllipticCurves Worked examples (the Frey–Hellegouarch curve) for the Frey comparison.
 
 ### 0.3 Six labelled Legendre parameters
 
@@ -144,7 +147,7 @@ For every commutative ring, Δ(L(λ))=16λ²(1−λ)² and c₄(L(λ))=16(λ²�
 
 (Silverman, S09 §III.1, Weierstrass invariant formulas; substitute the coefficients of §0.1.)
 
-Substitute the five coefficients into native b₂,b₄,b₆,b₈,c₄,Δ. Factor the discriminant; over a field apply ellipticity iff Δ is a unit. Divide c₄³ by Δ only on an elliptic model. No hypothesis j≠0 or j≠1728 is imposed.
+Specialize the Frey identities Δ=16A²B²(A+B)² and c₄=16(A²+AB+B²) at (A,B)=(1,−λ), where A²B²(A+B)²=λ²(1−λ)² and A²+AB+B²=λ²−λ+1; alternatively substitute the five coefficients into native b₂,b₄,b₆,b₈,c₄,Δ. Over a field apply ellipticity iff Δ is a unit, or the Frey criterion that A=1, B=−λ and A+B=1−λ are nonzero. Divide c₄³ by Δ only on an elliptic model. No hypothesis j≠0 or j≠1728 is imposed.
 
 **Checks.**
 
@@ -152,7 +155,7 @@ Substitute the five coefficients into native b₂,b₄,b₆,b₈,c₄,Δ. Factor
 - At λ=−1 over ℚ, (Δ,c₄,j)=(64,48,1728). This tests the sign and factors in the native invariant formulas.
 - In characteristic 2, Δ=0 for every λ; over 𝔽₃, λ=2 has Δ=1 and j=0. These test that the ellipticity criterion needs 2≠0 and that characteristic three is not excluded.
 
-*Needs:* §0.1; Mathlib `WeierstrassCurve.Δ`; Mathlib `WeierstrassCurve.c₄`; Mathlib `WeierstrassCurve.j`; Mathlib `WeierstrassCurve.IsElliptic`.
+*Needs:* §0.1; Mathlib `WeierstrassCurve.Δ`; Mathlib `WeierstrassCurve.c₄`; Mathlib `WeierstrassCurve.j`; Mathlib `WeierstrassCurve.IsElliptic`; TauCetiRoadmap.EllipticCurves Worked examples (the Frey–Hellegouarch curve) for the Frey route.
 
 ### 0.5 Scaled Legendre discriminant
 
@@ -160,15 +163,16 @@ Substitute the five coefficients into native b₂,b₄,b₆,b₈,c₄,Δ. Factor
 
 (Silverman, S09 §III.1; specialize the native discriminant, c₄ and j twist identities at (0,−d/4).)
 
-Compute the coefficients or specialize the native discriminant and c₄ twist identities with twisting discriminant d. Apply native j-invariance under twisting. The d≠0 assumption is indispensable; over a ring nonzero must be replaced by IsUnit where ellipticity is claimed.
+Compute the coefficients, or specialize the Frey identities at (A,B)=(d,−dλ), where A²B²(A+B)²=d⁶λ²(1−λ)² and A²+AB+B²=d²(λ²−λ+1), or specialize the native discriminant and c₄ twist identities with twisting discriminant d. Over a field with 2≠0 the Frey criterion reads d≠0, dλ≠0 and d(1−λ)≠0. Apply native j-invariance under twisting. The d≠0 assumption is indispensable; over a ring nonzero must be replaced by IsUnit where ellipticity is claimed.
 
 **Checks.**
 
 - At d=2,λ=1/2 over ℚ, (Δ,c₄,j)=(64,48,1728). This tests the powers d² and d⁶ in c₄ and Δ.
 - At d=0 over ℚ, Δ=c₄=0 and the equation is singular for every λ, so no native j is formed.
 - For d=2,λ=3, Δ=36864=2⁶·576 and c₄=448=2²·112, where 576 and 112 are Δ and c₄ of L(3). Scaling a₂ by d² and a₄ by d⁴, which is the change with u=1/d and gives L(d²,λ), would instead give Δ=2¹²·576=2359296 and c₄=2⁴·112=1792.
+- For d=2,λ=3 the Frey formulas at (A,B)=(2,−6) give Δ=16·4·36·16=36864 and c₄=16·(4−12+36)=448, the same values as the twist route. The sign-reversed pair (2,6) has A+B=8 and gives Δ=16·4·36·64=147456 and c₄=16·(4+12+36)=832 instead.
 
-*Needs:* §0.2; §0.4; Tau Ceti `WeierstrassCurve.Δ_quadraticTwistOf`; Tau Ceti `WeierstrassCurve.c₄_quadraticTwistOf`; Tau Ceti `WeierstrassCurve.j_quadraticTwistOf`.
+*Needs:* §0.2; §0.4; Tau Ceti `WeierstrassCurve.Δ_quadraticTwistOf`; Tau Ceti `WeierstrassCurve.c₄_quadraticTwistOf`; Tau Ceti `WeierstrassCurve.j_quadraticTwistOf`; TauCetiRoadmap.EllipticCurves Worked examples (the Frey–Hellegouarch curve) for the Frey route.
 
 ### 0.6 Root-ordering cross-ratios
 
@@ -247,7 +251,7 @@ For L(−1)/ℚ, the rational two-torsion points are (0,0),(1,0),(−1,0), the d
 
 ### Dependencies
 
-Mathlib equation, invariant, normal-form and point-group APIs; Tau Ceti point transport, quadratic twists and two-torsion root count. Within the layer: equations precede invariants, ordered roots precede normalization, and distinct roots precede labelled point enumeration.
+Mathlib equation, invariant, normal-form and point-group APIs; Tau Ceti point transport, quadratic twists and two-torsion root count; EllipticCurves' worked Frey–Hellegouarch identities for the Frey comparison of §§0.1–0.2 and the Frey route of §§0.4–0.5. Within the layer: equations precede invariants, ordered roots precede normalization, and distinct roots precede labelled point enumeration.
 
 ## Layer 1: Good reduction and character conductors
 
@@ -631,14 +635,14 @@ Layer 0 equations and scaled/native-twist identity for the Legendre consequences
 
 ## Downstream consumers
 
-ErdosProgressionPowers Layer 2 treats the progression-specific applications of the six labelled parameters, good-prime units, conductor divisibility, root descent readings, the two-primary count and the conic witness. Its §2.1 requests these interfaces and formulates general-field normalization and odd-finite-field subgroup assertions; §§0.9 and 3.1 provide those general statements here. It supplies the progression hypotheses and the nontriviality of the odd character conductor. EllipticCurveModularityPartII §5.1 packages full rational two-torsion as a predicate; §0.9 supplies normalization under that condition. MordellLawrenceVenkatesh §6.4 treats the coefficient model and its cyclic family; the coefficient model and invariants are owned here in §§0.1, 0.4. ArithmeticDynamics §§6.35, 6.111 specializes the same equation for dynamical carriers; §6.112 extends its torsion-image result. ComputationalNumberTheory §3.17 uses the normal-form character-sum identity of §5.1 in its arithmetic counting interfaces.
+ErdosProgressionPowers §2.1 consumes the coefficient models of §§0.1–0.2, the labelled parameters of §0.3, the general-field normalization of §0.9, the good-prime units and conductor divisibility of §§1.2 and 1.5, the descent readings and halving criterion of Layer 2, the odd-finite-field subgroup theorem of §3.1, the exact two-part of §3.7, the order-four witness of §4.1 and the trace identities of Layer 5. Its Layer 2 keeps the progression-specific arguments, the progression hypotheses and the nontriviality of the odd character conductor. EllipticCurveModularityPartII §5.1 packages full rational two-torsion as a predicate; §0.9 supplies normalization under that condition. MordellLawrenceVenkatesh §6.4 consumes the coefficient model of §0.1 and its discriminant and j-invariant from §0.4, and keeps the cyclic variant, its abelian-by-finite structure and its good-model statements. ArithmeticDynamics §§6.35, 6.111 consume the same model and invariants for Lattès maps and projected torsion sets; §6.112 extends the torsion-image result. ComputationalNumberTheory §3.17 consumes the normal-form character-sum identity of §5.1 and keeps its finite-enumeration form of the count.
 
 The exports include all four characters at ω=±1,±2, all six root labels with possible repetitions, every odd prime of good curve-level reduction, and the square as well as nonsquare twist scalar. Bad-prime local factors and characteristic-two elliptic normalizations have their general owners in EllipticCurves and NeronModelsAndSemistableAbelianVarieties; the polynomial identities here still describe the singular characteristic-two Legendre equations.
 
 ## References
 
 - Michael A. Bennett and Samir Siksek, *A conjecture of Erdős, supersingular primes and short character sums*, Annals of Mathematics 191 (2020), 355–392, DOI 10.4007/annals.2020.191.2.2. Publisher version: https://annals.math.princeton.edu/wp-content/uploads/annals-v191-n2-p02-s.pdf. BS20 lines 462–464 are the symmetric Legendre cubic and its trace, line 513 is equation (17), lines 526–546 are Lemma 6.2, lines 547–557 are Lemma 6.3, lines 655–672 are the descent display and Lemma 6.5, and lines 703–727 are the local part of Lemma 6.6. The order-four witness uses the corrected y-coordinate proved in Layer 4; line 718 is the printed expression tested there.
-- The Mathlib and Tau Ceti modules named in the exact supplier contracts fix the formal conventions. The cross-roadmap contracts refer to EllipticCurves Layer 4 and Layer 5, ModularCurves §§4C, 9E, ClassicalArithmeticCompletion §§1.7, 1.8, 1.51 and NeronModelsAndSemistableAbelianVarieties §§5.3a, 5.3g.
+- The Mathlib and Tau Ceti modules named in the exact supplier contracts fix the formal conventions. The cross-roadmap contracts refer to EllipticCurves Layer 4, Layer 5 and its worked Frey–Hellegouarch example, ModularCurves §§4C, 9E, ClassicalArithmeticCompletion §§1.7, 1.8, 1.51 and NeronModelsAndSemistableAbelianVarieties §§5.3a, 5.3g.
 
 - Joseph H. Silverman, *The Arithmetic of Elliptic Curves*, second edition, 2009, S09 §§III.1–III.2 (invariants and two-torsion), §V.1 (finite-field point counting), §X.1, Proposition 1.4 (split two-descent), DOI 10.1007/978-0-387-09494-6. Uncertified: cited by locator without the text.
 - Neal Koblitz, *Introduction to Elliptic Curves and Modular Forms*, first edition, 1984, K84 p.41, DOI 10.1007/978-1-4684-0255-1. Uncertified: cited by locator without the text; the page is identified by BS20 line 464.

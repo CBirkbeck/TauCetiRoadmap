@@ -19,11 +19,14 @@ namespace TauCetiRoadmap.EllipticLegendreCharacterInterfaces
 
 /-! ## Layer 0: Legendre equations and root orderings -/
 
-/-- The five-coefficient Legendre model over a commutative ring. -/
+/-- The five-coefficient Legendre model `y² = x(x − 1)(x − lam)` over a commutative ring: the
+Frey equation `y² = x(x − A)(x + B)`, with coefficients `(0, B − A, 0, −AB, 0)`, at
+`(A, B) = (1, −lam)`. -/
 def legendre {R : Type*} [CommRing R] (lam : R) : WeierstrassCurve R :=
   ⟨0, -(1 + lam), 0, lam, 0⟩
 
-/-- The split cubic with ordered roots `0`, `d`, and `d * lam`. -/
+/-- The split cubic with ordered roots `0`, `d`, and `d * lam`: the Frey equation
+`y² = x(x − A)(x + B)` at `(A, B) = (d, −d * lam)`. -/
 def scaledLegendre {R : Type*} [CommRing R] (d lam : R) : WeierstrassCurve R :=
   ⟨0, -d * (1 + lam), 0, d ^ 2 * lam, 0⟩
 
