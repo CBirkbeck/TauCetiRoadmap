@@ -20,8 +20,10 @@ comparison (PS.2: no Nori period algebra or realization torsor); the fundamental
 number-field regulator, ETNC, Bloch–Kato measure and elliptic/Rankin–Selberg transport
 theorems (PS.3–PS.6: no higher algebraic K-groups with arithmetic regulators, motivic
 cohomology, virtual determinant category, Selmer complexes or motivic triples); the period-conjecture applications (PS.7: no formal-period algebra);
-the geometric quartic Picard–Fuchs and monodromy comparison and the quintic geometric
-boundary Frobenius (PS.8: no resolved families, marked Gauss–Manin modules or
+the geometric quartic Picard–Fuchs and monodromy comparison, the equivariant reciprocal
+Dwork semistable model and the quintic geometric boundary Frobenius
+(PS.8: no reciprocal Dwork family or equivariant semistable-model carrier,
+resolved families, marked Gauss–Manin modules or
 log-crystalline cohomology); and the motivic Hoffman basis and mixed Tate period
 spanning (PS.9: no mixed Tate category, motivic path torsor or Brown period algebra).
 Scalar matrix identities and README Checks do not replace those geometric headlines.
