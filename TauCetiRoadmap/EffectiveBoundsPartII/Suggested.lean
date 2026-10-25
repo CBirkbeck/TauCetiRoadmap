@@ -142,8 +142,8 @@ theorem exists_logarithmic_small_models :
   sorry
 
 /-- Bounded ordered integer systems represent at most the coefficient-box
-cardinality times the Bezout degree bound in pairwise nonisomorphic number fields
-(README §5.5; Couveignes §4, p.496). A field is represented by an actual
+cardinality times the derived Jacobian-open distinct-point bound in pairwise
+nonisomorphic number fields (README §5.5; Couveignes §4, p.496). A field is represented by an actual
 surjective rational algebra map from the system's Jacobian-open algebra. -/
 theorem bounded_systems_field_class_bound
     (r d C m : ℕ) (hr : 1 ≤ r) (hd : 1 ≤ d)
