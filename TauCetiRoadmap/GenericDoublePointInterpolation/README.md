@@ -584,7 +584,8 @@ The block row transformation has first row (d,−x₁,…,−x_r) and remaining
 rows (0,I_r), hence determinant d≠0. Its source is the chart-trivialized
 first-jet target k^(r+1), and its target is the homogeneous-partial target
 k^(r+1). Applying it at every support preserves rank for every tuple and
-identifies the two nonempty maximal-rank opens. Fixed homogenization identifies
+identifies the two maximal-rank loci, transferring nonemptiness whenever it
+has been established. Fixed homogenization identifies
 the columns with degree-d homogeneous monomials. The identity follows from
 Euler's identity and dehomogenization, without a condition on the support.
 
@@ -592,6 +593,7 @@ Euler's identity and dehomogenization, without a condition on the support.
 
 - For F=X₀²+X₀X₁ at x₁=2, the affine vector is (3,1); the matrix with rows (2,−2),(0,1) gives (4,1), the homogeneous partials. Its determinant is 2.
 - For F=X₀X₁ at x₁=2, the affine vector is (2,1) and the homogeneous vector is (2,1); reversing the sign in the first row would instead give 6 in its first coordinate.
+- For r=2,d=2,n=2, the supports (0,0),(1,0) give rank 5 in both matrices, with kernel spanned by y². Every distinct pair has the square of its joining line in the kernel, and a repeated pair has rank 3, so both rank-6 loci are empty.
 - At d=0 the constant F=1 has affine value 1 and all homogeneous partials zero. In characteristic 2 the form X₀² has the same defect in degree 2; the nonzero-degree characteristic-zero hypotheses exclude both failures.
 
 *Needs:* Fixed-degree homogenization (Layer 0 §0.2); Bounded first-jet evaluation;
