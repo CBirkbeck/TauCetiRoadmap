@@ -68,10 +68,18 @@ potential theory and Galois theory are consumed through the contracts in the ind
   Hilbert irreducibility. The preimage tower, arboreal action and the
   integrally closed coefficient-ring specialization comparison of §5.39
   belong here; that comparison uses the native `Polynomial.Gal` root action.
-- General GIT quotients, all-place adelic equidistribution, bifurcation currents,
-  Banach-contraction decomposition and generic measure entropy require the
-  explicit additional contracts in the indicated layers. They are distinct from set quotients,
-  local measures, Hilbert-space spectral theory and Birkhoff's theorem.
+- ProbabilisticAndMetricNumberTheory §§4.1–4.3 owns pointwise Birkhoff and §5.2
+  finite Shannon entropy. GeometryOfNumbersAndQuadraticArithmetic §4.2 owns
+  measurable partition labels, partition and conditional entropy, itinerary joins,
+  entropy rates and measure entropy. Sections 2.6–2.7 compare their finite-label
+  conventions and add fibre-entropy bounds, Shannon–McMillan–Breiman,
+  endomorphism ergodic decomposition with entropy integration, and comparison
+  with topological entropy. The endomorphism decomposition includes noninvertible
+  maps, beyond the supplier's group-action component kernels.
+- General GIT quotients, all-place adelic equidistribution, bifurcation currents
+  and Banach-contraction decomposition require the explicit additional contracts
+  in the indicated layers. They are distinct from set quotients, local measures
+  and Hilbert-space spectral theory.
 
 Uniform boundedness, dynamical Lehmer and unrestricted dynamical Mordell–Lang
 are conjectural statements, used only under explicitly stated hypotheses. The
@@ -144,7 +152,7 @@ Laplacian. For an oriented nonclassical segment s∈[0,1], extended by retractio
 −∫s dΔ(s)=1, agreeing with the squared-slope energy. Curvature changes by
 +Δφ when a metric is multiplied by exp(−φ).
 
-For singular logarithmic potentials use log 0 = −∞ in the extended-real subharmonic sense, with their locally integrable representatives defining distributions. Poincaré–Lelong is stated for nonzero rational functions. The nonarchimedean sign is μ_f=Δĝ_F+δ_G, with Δlog⁺|T|=δ_G−δ∞. It is opposite to Baker–Rumely's convention. The complex sign is μ_f=Δg_F+ω, with normalized unit-circle angular probability ω and Δlog⁺|z|=ω−δ∞; on C, Δ is 1/(2π) times the Euclidean Laplacian and Δlog|z|=δ₀. The sphere's measure-valued Laplacian is defined on differences of subharmonic potentials with Radon Riesz measures, including the actual escape potential. Arbitrary continuous functions do not have measure-valued Laplacians. Continuous dynamical potentials rule out type-I atoms; they permit the Gauss atom. Measure support and topological entropy use the native library notions; Layer 2 constructs measure entropy on native measurable carriers.
+For singular logarithmic potentials use log 0 = −∞ in the extended-real subharmonic sense, with their locally integrable representatives defining distributions. Poincaré–Lelong is stated for nonzero rational functions. The nonarchimedean sign is μ_f=Δĝ_F+δ_G, with Δlog⁺|T|=δ_G−δ∞. It is opposite to Baker–Rumely's convention. The complex sign is μ_f=Δg_F+ω, with normalized unit-circle angular probability ω and Δlog⁺|z|=ω−δ∞; on C, Δ is 1/(2π) times the Euclidean Laplacian and Δlog|z|=δ₀. The sphere's measure-valued Laplacian is defined on differences of subharmonic potentials with Radon Riesz measures, including the actual escape potential. Arbitrary continuous functions do not have measure-valued Laplacians. Continuous dynamical potentials rule out type-I atoms; they permit the Gauss atom. Measure support and topological entropy use the native library notions; Layer 2 uses GeometryOfNumbersAndQuadraticArithmetic §4.2 measure entropy on native measurable carriers, with natural logarithms and values in [0,+∞].
 
 Y₁(n) is the affine dynatomic scheme, X₁(n) its regular projective characteristic-zero model, and X₀(n) the quotient by cycle rotation. Formal period need not be exact period at a root-of-unity multiplier. The period-three parametrization and the assertion of at most one rational three-cycle are separate targets: the latter uses Morton's elliptic reduction. Poonen type-(3,2) and its dependent exclusions and bounds retain rank J(C₁(3₂))(Q)≤1. The type-(1,3) and type-(2,3) exclusions and the bounds using them also retain rank E11(ℚ)=0 for E11:y²+y=x³−x², independently of the genus-two rank bound. Stoll's six-cycle exclusion retains its genus-four rank hypothesis. No conjecture becomes an unconditional theorem merely by being named as a proposition.
 
@@ -256,6 +264,33 @@ Consume RestrictedPowerSeries §2.4: a nonzero restricted power series over a co
 ([bell-ghioca-tucker-2010](#bell-ghioca-tucker-2010), §1, p. 2; proof of Theorem 4.1, p. 14 (arXiv v1): the closed-disc zero theorem is the final analytic step after interpolation. [Flynn–Poonen–Schaefer](#fps95), §8, Theorem 4, p. 21, states this general bound.)
 
 **Endpoint checks.** The polynomial z(z−1) has last dominant index 2 and exactly two integral zeros. For odd p, the analytic function (1+p)^z−1 has only the zero z=0; at p=2 use 5^z−1. These follow from the injectivity of the exponential on pℤ_p for odd p and on 4ℤ₂. The expansion Σ binom(z,i)p^i is a Mahler expansion, so its binomial coefficients are not the monomial coefficients to which Strassmann applies. At p=2 the continuous function 3^z instead has a parity factor and requires two analytic residue classes.
+
+### From TauCetiRoadmap.ProbabilisticAndMetricNumberTheory — §§4.1–4.3, 5.2
+
+Consume §4.1 `birkhoff_pointwise` and `birkhoff_pointwise_ergodic`, with the
+construction and identification in §§4.2–4.3: on any probability space, for a
+measure-preserving T and integrable real f, native time averages converge almost
+everywhere to conditional expectation on `MeasurableSpace.invariants T`, and to
+the integral when T is ergodic. Consume §5.2 `finiteEntropy` and
+`finiteMutualInformation`, the finite chain rule, independence and alphabet-size
+bounds, with natural logarithms and zero-mass terms equal to zero. Only this
+independent finite probability API is used; its arithmetic applications supply
+no input to Layer 2.
+
+### From TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic — §4.2
+
+Consume the **Entropy and Haar measure on leaves** paragraph's
+`finitePartitionEntropy`, `countablePartitionEntropy`,
+`conditionalPartitionEntropy`, `iteratedPartitionLabel`, `partitionEntropyRate`
+and `measureEntropy`, together with `atomInformation` and
+`conditionalLabelEntropy` for standard Borel labels and their conditional-kernel
+atom evaluation. Consume their measurable-label, chain-rule, relabeling,
+independence and subadditive-limit API. Use probability measures here and natural
+logarithms; the measure entropy retains +∞. Section 2.6 compares the supremum
+over countable finite-entropy labels with that over finite labels, and compares
+the finite-label specialization with ProbabilisticAndMetricNumberTheory §5.2;
+§2.7 adds conditional entropy against a
+sub-σ-algebra and the endomorphism and topological comparison theorems.
 
 ### From TauCetiRoadmap.SchemeAndStackFoundations — §1.17
 
@@ -383,6 +418,21 @@ Consume Lane C, targets 13–15, for the classical Euclidean harmonic and potent
 
 ### From Mathlib and Tau Ceti
 
+Consume `MeasureTheory.Measure.condKernel`, its `IsCondKernel` and Markov-kernel
+instances from `Mathlib/Probability/Kernel/Disintegration/StandardBorel.lean`,
+and `MeasureTheory.Measure.IsCondKernel` and `MeasureTheory.Measure.disintegrate`
+from `Mathlib/Probability/Kernel/Disintegration/Basic.lean`. For a finite measure
+ρ on A×X the chosen kernel requires X nonempty and standard Borel; A needs only a
+measurable structure. The `IsCondKernel` class states the reconstruction identity
+ρ.fst ⊗ₘ K=ρ; it alone imposes neither the Markov property nor pointwise support
+on fibres. Consume also `ProbabilityTheory.condDistrib`,
+`ProbabilityTheory.compProd_map_condDistrib` and
+`ProbabilityTheory.condDistrib_ae_eq_condExp` in
+`Mathlib/Probability/Kernel/CondDistrib.lean`. Its definition is the conditional
+kernel of the joint law in conditioning-variable, observed-variable order.
+Section 2.7 specializes it to an endomorphism's graph, using the supplier's
+conditional-label interface for fibre concentration and the entropy bound.
+
 Analytic-presentation transport uses `Homeomorph` from `Mathlib/Topology/Homeomorph/Defs.lean` and `ContinuousMap` from `Mathlib/Topology/ContinuousMap/Defs.lean`. Consume `MeasureTheory.Measure.map` and `MeasureTheory.Measure.map_map` in `Mathlib/MeasureTheory/Measure/Map.lean`, `MeasureTheory.Measure.map_dirac'` in `Mathlib/MeasureTheory/Measure/Dirac/Basic.lean`, and `MeasureTheory.integral_map` in `Mathlib/MeasureTheory/Integral/Bochner/Basic.lean`, with their measurability hypotheses. The homeomorphisms in §§2.2, 4.1 are measurable in both directions for the Borel structures; their function and measure comparisons use these native operations and laws.
 
 `WeierstrassCurve.Affine.Point.xRep` in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean` supplies the normalized x-coordinate representatives (1,0) at zero and (x,1) at a nonsingular affine point (x,y). The point type includes only nonsingular affine points and the point at infinity; ellipticity is a separate condition, not a field of that type. The Legendre bound explicitly excludes t = 0,1.
@@ -441,7 +491,7 @@ interfaces used below. Their statements and ambient hypotheses govern every use.
 - **`ConjAct.units_smul_def`** — Units of a monoid act on it by conjugation: g • h = g h g⁻¹ (MulDistribMulAction). Module: `Mathlib/GroupTheory/GroupAction/ConjAct.lean`.
 - **`ConjClasses`** — Conjugacy classes of a monoid (quotient by IsConj). Module: `Mathlib/Algebra/Group/Conj.lean`.
 - **`ConjClasses.mk`** — The conjugacy class of an element; mk a = mk b ↔ IsConj a b. Module: `Mathlib/Algebra/Group/Conj.lean`.
-- **`Dynamics.coverEntropy`** — Native EReal-valued topological entropy on a uniform space, using limsup covering growth; the global sphere target uses Set.univ. Module: `Mathlib/Dynamics/TopologicalEntropy/CoverEntropy.lean`.
+- **`Dynamics.coverEntropy`**, **`Dynamics.coverEntropyInf`**, **`Dynamics.coverMincard`** — Native EReal-valued entropy from limsup or liminf covering growth, and the ℕ∞-valued minimal dynamical covering cardinal. The global sphere target uses Set.univ. Module: `Mathlib/Dynamics/TopologicalEntropy/CoverEntropy.lean`.
 - **`Equiv.Perm`** — Permutations of a type. Module: `Mathlib/Logic/Equiv/Defs.lean`.
 - **`Equiv.Perm.sign`** — The sign homomorphism Perm α →* ℤˣ for a finite type with decidable equality. Module: `Mathlib/GroupTheory/Perm/Sign.lean`.
 - **`Field.absoluteGaloisGroup`** — Mathlib's absolute Galois group, the automorphisms of AlgebraicClosure K over K, with the Krull topology. Module: `Mathlib/FieldTheory/AbsoluteGaloisGroup.lean`.
@@ -2415,19 +2465,171 @@ For every finite-place C¹ test φ on a fixed finite closed tree, prove approxim
 
 ### 2.6 Ergodic foundations for measure entropy
 
-Use the native ergodic predicates and conditional-expectation API, and construct the additional finite-partition entropy, conditional entropy, Shannon–McMillan–Breiman and ergodic-decomposition contract specified below. Birkhoff alone does not supply measure entropy.
+Let (X,𝔅,μ) be a probability space with arbitrary measurable structure and T a
+measurable, measure-preserving endomorphism. Use Mathlib `Ergodic`, conditional
+expectation and the pointwise Birkhoff statements in the exact supplier contract.
+For integrable real f their limit is conditional expectation on the invariant
+σ-algebra, and is ∫f dμ when T is ergodic. The average of length zero is zero;
+limits use positive lengths.
 
-Use Mathlib `Ergodic`, measure-preserving transformations, conditional expectation on their native carriers. Prove the pointwise Birkhoff theorem for an integrable real function on a probability space under a measure-preserving transformation: its time averages converge almost everywhere to conditional expectation on the invariant σ-algebra, and to its integral in the ergodic case (Lyubich1983, §7, pp. 374–375, ergodic-theory inputs). The new definition is measure entropy, constructed by the partition target below.
+Represent a finite measurable partition by a measurable label a:X→I with finite
+nonempty discrete alphabet I; its atoms are a⁻¹{i}, including empty atoms. Prove
+that GeometryOfNumbersAndQuadraticArithmetic §4.2's finite partition entropy
+equals ProbabilisticAndMetricNumberTheory §5.2's finite Shannon entropy of a.
+The join has label (a,b), its atoms are intersections, and its conditional chain
+rule is the supplied finite joint-law chain rule. Transport these comparisons
+through bijective relabeling and μ-almost-everywhere equality. The supplied length-n
+itinerary has labels (a(x),…,a(T^[n−1]x)); at n=0 it is the unique empty tuple.
+Write hμ(T,P) for its supplied entropy rate, the limit of Hμ(Pⁿ)/n over n≥1,
+and hμ(T) for the supplied measure entropy. Prove that truncating countable
+finite-entropy labels gives hμ(T)=sup over finite P of hμ(T,P), retaining +∞
+(for a finite truncation Q of P, hμ(T,P)≤hμ(T,Q)+Hμ(P|Q), and the latter
+conditional entropy tends to zero along increasing truncations)
+(Sarig2023, §§4.1–4.3, pp.103–108; Problems 4.8–4.9, p.130; multiply the
+source's base-two entropies by log 2).
 
 **Checks.**
 
-- On a one-point probability space every partition has entropy 0; the empty atom contributes 0log0 = 0.
-- A two-symbol uniform Bernoulli shift has entropy log 2, distinguishing natural from base-two logarithms.
-- The identity on a two-point probability space is measure preserving but not ergodic; measure preservation alone cannot discharge an ergodicity hypothesis.
+- A constant label on a one-point probability space has masses (1,0) after an
+  empty atom is added; both entropy formulas give 0, and the empty itinerary has
+  entropy 0. Alphabet size alone would incorrectly give log 2.
+- Two independent fair bits have joint entropy 2 log 2 and conditional entropy
+  log 2; a fair bit joined with itself has joint entropy log 2 and conditional
+  entropy 0. The pair-label join preserves this distinction.
+- For the fair Bernoulli shift, the coordinate partition has Hμ(Pⁿ)=n log 2,
+  hence rate and measure entropy log 2. For the identity on two equiprobable
+  points, Hμ(Pⁿ)=log 2 for n≥1 and the rate is 0.
+- On that identity system f=(0,2) has averages (0,2) for every positive length:
+  the invariant conditional expectation is (0,2), whereas the integral is 1.
+  For the two-point flip the averages tend to (1,1), as the ergodic supplier
+  statement requires.
+
+*Needs:* ProbabilisticAndMetricNumberTheory §§4.1–4.3, 5.2;
+GeometryOfNumbersAndQuadraticArithmetic §4.2, Entropy and Haar measure on leaves;
+Mathlib measurable spaces, `Ergodic`, conditional expectation and finite sums.
 
 ### 2.7 Measure entropy and maximizing measures
 
-Use Mathlib ergodicity and conditional expectations, with the preceding pointwise Birkhoff theorem, and extend this ergodic theory with finite measurable-partition entropy, natural logarithms and 0log0=0. Require joins, h(T,P)=lim `n⁻¹H(∨_{j<n}T⁻ʲP),` hμ(T)=sup_P h(T,P), fibre disintegration and the conditional-entropy lower bound, hμ(T)≤Dynamics.coverEntropy T univ, Shannon–McMillan–Breiman with the positive-measure Bowen-set estimate, and ergodic decomposition with integration of entropy. These are the exact entropy inputs to Lyubich §7, Lemma 1 and the maximal-entropy proof.
+In the arbitrary measurable probability setting of §2.6, for a finite partition
+P=(Pᵢ) and sub-σ-algebra ℰ⊆𝔅, define Hμ(P|ℰ) as the integral of
+−Σᵢ pᵢ(x)log pᵢ(x), where pᵢ=Eμ[1_(Pᵢ)|ℰ]. The bounded conditional
+probabilities and zero-mass convention make this a finite real integral
+(Sarig2023, Definition 4.2, p.104, converted to natural logarithms).
+
+Its basic API consists of these facts.
+
+- It is independent of conditional-expectation representatives and lies between
+  0 and Hμ(P); for ℰ generated by a finite label it agrees with the supplied
+  conditional partition entropy.
+- Enlarging ℰ decreases Hμ(P|ℰ); conditioning on 𝔅 gives zero, and conditioning
+  on the trivial σ-algebra gives Hμ(P).
+- For finite P,Q, the conditional chain rule is
+  Hμ(P∨Q|ℰ)=Hμ(P|ℰ)+Hμ(Q|ℰ∨σ(P))
+  (Sarig2023, Theorem 4.1 and Proposition 4.2, pp.105–106, with natural logarithms).
+- For a measure-preserving T, the rate hμ(T,P) equals
+  Hμ(P|∨_(j≥1)T⁻ʲσ(P)); the finite future conditional entropies decrease to this
+  value by martingale convergence (Sarig2023, Theorem 4.2, p.108).
+
+**Checks.**
+
+- A one-atom partition has conditional entropy 0 for every ℰ, including empty
+  atoms with pᵢ=0.
+- A fair bit conditioned on the trivial σ-algebra has entropy log 2, while
+  conditioning on the bit itself gives 0; reversing monotonicity fails.
+- For independent fair bits P,Q, Hμ(P∨Q)=2 log 2=log 2+log 2, and
+  Hμ(P∨Q|σ(P))=log 2=0+log 2. For P=Q the second value is 0.
+
+For fibre disintegration additionally assume X nonempty and standard Borel,
+with μ a probability on its specified σ-algebra, and T measurable and
+measure preserving. Let ρ be the graph measure, the image of μ under
+x↦(Tx,x), and let K=ρ.condKernel, of type `ProbabilityTheory.Kernel X X`,
+be its conditional probability kernel from X to X, equivalently
+`ProbabilityTheory.condDistrib id T μ`. The native marginal and reconstruction
+identities give ρ.fst=μ and ρ.fst ⊗ₘ K=ρ; the supplied conditional-label atom
+evaluation gives K(y,{x:Tx=y})=1 for μ-almost every y. Read uniqueness
+μ-almost everywhere. Prove for every
+finite P that Hμ(P|T⁻¹𝔅)=∫ H_(K(y))(P)dμ(y)≤hμ(T,P)≤hμ(T). For μ-almost
+every fibre consisting of exactly d≥1 points with weights 1/d, deduce
+hμ(T)≥log d using a countable separating family of finite partitions; this
+specialization is the input to §§2.67 and 2.85 (Lyubich1983, §5, conditional
+measure lemma and Theorem 4(b), pp.366–367).
+
+**Checks.**
+
+- For the identity on two equiprobable points, ρ has masses 1/2 at (0,0) and
+  (1,1), and K(y)=δ_y, giving fibre entropy 0 and entropy rate 0. The constant
+  kernel K(y)=μ reconstructs the product measure, assigning mass 1/4 to (0,1),
+  so it fails the graph reconstruction identity.
+- For the one-sided fair binary shift, each conditional predecessor has weight
+  1/2, so the first-symbol partition has conditional entropy log 2 and rate
+  log 2. Here T is not invertible.
+- For T constant 0 and μ=δ₀ on {0,1}, ρ=δ_(0,0) and K(0)=δ₀; K(1) may be
+  changed without changing ρ. The fibre above 1 is empty, so concentration
+  cannot be required at every point. The zero measure has total mass 0 and
+  does not meet the probability hypothesis.
+
+In the arbitrary measurable probability setting, prove Shannon–McMillan–Breiman
+for a finite P: −log μ(Pⁿ(x))/n converges almost everywhere to a nonnegative
+integrable, μ-almost-everywhere invariant function g_P, with ∫g_P dμ=hμ(T,P).
+For ergodic T the limit is the
+constant hμ(T,P). The nonergodic statement follows from the same martingale
+information argument using the supplied invariant conditional-expectation
+Birkhoff limit. Zero-mass atoms lie in a null set and do not
+use the totalized real log as their information value (Sarig2023, Theorem 4.3,
+pp.109–110, with natural logarithms). For a continuous T on a nonempty compact
+metric X with its Borel σ-algebra and an invariant Borel probability μ, prove
+the canonical EReal image of hμ(T) is at most `Dynamics.coverEntropy T Set.univ`.
+For ergodic μ and every Borel Y with μ(Y)>0, also prove that this image is at
+most `Dynamics.coverEntropyInf T Y`. Explicitly, the latter is
+lim_(ε↓0) liminf_(n→∞) log r_n(Y,ε)/n, where r_n denotes
+`Dynamics.coverMincard` for T,Y, the entourage dist(x,y)<ε and time n≥1.
+Compactness makes these native covering cardinals finite and Y≠∅ makes them
+positive. Prove that for every ε>0 there is a finite Borel partition of X with
+atom diameters less than ε and μ-null boundaries, by finite covers by balls
+whose spheres have zero measure. One route uses these partitions, the supplied
+Birkhoff theorem for visits near their boundaries, the partition information
+theorem and finite word counts; Lyubich's dimension
+argument gives a second route when X has finite covering dimension
+(Sarig2023, §4.6.3, pp.122–123; Lyubich1983, §7, Lemma 1, pp.379–380).
+
+For nonempty standard Borel X and any measurable measure-preserving endomorphism
+T, construct a conditional probability kernel x↦μ_x whose values
+are T-invariant and ergodic for μ-almost every x. For every bounded measurable
+real u, require ∫u dμ_x=Eμ[u|invariants T](x) almost everywhere; in particular
+μ(A)=∫μ_x(A)dμ(x) for every measurable A. Prove almost-everywhere uniqueness,
+constancy μ_x=μ for ergodic μ, measurability of x↦h_(μ_x)(T), and
+hμ(T)=∫⁻h_(μ_x)(T)dμ(x), with a nonnegative extended integral allowing +∞.
+Use a countable generating algebra to identify the component kernel, then
+identify g_P(x)=h_(μ_x)(T,P), then use increasing finite generating partitions for entropy
+integration (Sarig2023, Theorem 2.5, pp.43–44, and Problem 4.11, p.131;
+Lyubich1983, §7, proof of Theorem 9, p.383, for the maximizing-measure use).
+
+**Checks.**
+
+- For a singleton, the information quotient is 0, both measure and topological
+  entropy are 0, and the component is its Dirac probability. On a fair binary
+  shift, cylinder mass 2⁻ⁿ gives −log(2⁻ⁿ)/n=log 2 for n≥1.
+- On the identity system with two equiprobable points, μ_x=δ_x gives entropy
+  integral 0 and reproduces the conditional expectation (0,2) of u=(0,2).
+  The constant kernel μ gives the value 1 and fails that conditional identity.
+- On the disjoint union of a fixed point and a fair binary shift, with weights
+  1/2 each, the entropy is (log 2)/2. The fixed-point component has positive
+  measure and covering growth 0, so the positive-measure Bowen bound needs
+  ergodicity; the component entropy integral still gives (log 2)/2.
+
+The complex sphere `OnePoint ℂ` has the compact metrizable topology and Borel
+structure of §2.2. A rational map is continuous and hence measurable there;
+every invariant Borel probability therefore satisfies the topological and
+standard Borel hypotheses above. These are the entropy interfaces used by the
+canonical-measure and maximal-entropy arguments.
+
+*Needs:* §2.6's label comparisons and supplied pointwise Birkhoff;
+GeometryOfNumbersAndQuadraticArithmetic §4.2 entropy API; Mathlib conditional
+expectation, martingale convergence, standard Borel conditional kernels and
+`MeasureTheory.Measure.disintegrate`; `Dynamics.coverEntropy`; compact metric
+covering estimates. The entropy-integration route also uses the partition
+information theorem and countable-generator approximation in this section;
+the topological comparisons use its small-diameter partitions with null boundaries.
 
 Applications include [Degree and topological entropy](#267-degree-and-topological-entropy); [Entropy of the canonical measure](#285-entropy-of-the-canonical-measure); [Unique maximal-entropy measure](#290-unique-maximal-entropy-measure); [`µ_{f,∞}` is Lyubich's measure of maximal entropy](#292-µ_f-is-lyubichs-measure-of-maximal-entropy).
 
@@ -3447,7 +3649,7 @@ f∈C(z), algebraic degree d≥2, acting holomorphically on the compact Riemann 
 
 Apply the polynomial-size Bowen-net bound. Native covering/net entropy comparison and limsup of logarithmic growth give the upper bound log d, since log(C_δ m⁵)/m tends to zero. Balance and atomlessness of the transfer probability give uniform weights 1/d on almost every inverse fibre. The generic conditional-entropy inequality gives h_ν(f)≥log d, and the measure-to-topological inequality gives the matching lower bound. This does not use the downstream entropy-equality endpoint.
 
-*Needs:* [Polynomial-size Bowen nets for rational sphere maps](#257-polynomial-size-bowen-nets-for-rational-sphere-maps); [Lyubich transfer limit](#256-lyubich-transfer-limit); `Dynamics.coverEntropy`; Layer 2, Ergodic foundations for measure entropy.
+*Needs:* [Polynomial-size Bowen nets for rational sphere maps](#257-polynomial-size-bowen-nets-for-rational-sphere-maps); [Lyubich transfer limit](#256-lyubich-transfer-limit); `Dynamics.coverEntropy`; [Measure entropy and maximizing measures](#27-measure-entropy-and-maximizing-measures).
 
 ([Lyubich1983](#lyubich1983), §6, planar covering lemma and Proposition 7, pp.368–372; Proposition 8, pp.372–374; Theorem 7 and proof, pp.375–376; Theorem 4, p.367 — Gives the variable-radius nets and polynomial-times-degree Bowen bound. The fixed-net inverse-branch estimate can instead use spherical Montel as described here; Theorem 4 supplies the fibre-entropy lower bound.)
 
@@ -3725,9 +3927,9 @@ The invariant probability `ν_f=μ_{f,∞}` has Kolmogorov–Sinai entropy `h_{�
 
 f∈C(z), algebraic degree d≥2, acting holomorphically on the compact Riemann sphere with spherical topology.
 
-Pushforward invariance follows by duality from balance. Critical points have zero mass since ν is atom-free. Disintegrate ν over the inverse fibres; almost every fibre has d distinct noncritical points, each conditional weight 1/d. The fibre entropy is log d. Use the generic conditional-entropy formula to obtain hν(f)≥log d; combine with the measure-to-topological entropy inequality and the native topological entropy result to obtain equality.
+Pushforward invariance follows by duality from balance. Critical points have zero mass since ν is atom-free. Use §2.7's graph-measure conditional kernel over the inverse fibres; almost every fibre has d distinct noncritical points, each conditional weight 1/d. The fibre entropy is log d. Apply §2.7's fibre-entropy lower bound to obtain hν(f)≥log d; combine with its compact metric measure-to-topological inequality and the native topological entropy result to obtain equality.
 
-*Needs:* [Complex canonical measure comparison and support](#280-complex-canonical-measure-comparison-and-support); [Degree and topological entropy](#267-degree-and-topological-entropy); FuchsianOrbifolds §layer-5-compact-surface-degree-theory-and-fuchsian-applications; Layer 2, Ergodic foundations for measure entropy.
+*Needs:* [Complex canonical measure comparison and support](#280-complex-canonical-measure-comparison-and-support); [Degree and topological entropy](#267-degree-and-topological-entropy); FuchsianOrbifolds §layer-5-compact-surface-degree-theory-and-fuchsian-applications; [Measure entropy and maximizing measures](#27-measure-entropy-and-maximizing-measures).
 
 ([Lyubich1983](#lyubich1983), Proposition 5 and Theorem 4, pp.366–367; Theorem 7, pp.375–376 — Computes fibre weights and entropy, then matches the topological upper bound.)
 
@@ -3799,9 +4001,9 @@ If η is any f-invariant Borel probability on P¹(C) with h_η(f)=log d, then `�
 
 f∈C(z), algebraic degree d≥2, acting holomorphically on the compact Riemann sphere with spherical topology. Invariant means pushforward invariance, not balance; competitors need not be atom-free.
 
-For a distinct ergodic η, singularity with ν and local inverse branches produce a positive-η set whose preferred inverse-branch blocks occur with frequency above the uniform 1/N threshold. Apply the existing Birkhoff target to the indicator of this positive-η set. Count branch words with this excessive frequency using binomial estimates/Stirling: their growth rate is θ<N. The critical-disc Bowen-net construction contributes only a polynomial factor. Lyubich’s positive-measure-set entropy lemma, proved using Shannon–McMillan–Breiman, gives hη(f)<log d. For general invariant η use the generic ergodic decomposition and entropy integration theorem; almost every ergodic component of a maximizing η must maximize and thus equal ν.
+For a distinct ergodic η, singularity with ν and local inverse branches produce a positive-η set whose preferred inverse-branch blocks occur with frequency above the uniform 1/N threshold. Apply ProbabilisticAndMetricNumberTheory §4.1 `birkhoff_pointwise_ergodic` to the indicator of this positive-η set. Count branch words with this excessive frequency using binomial estimates/Stirling: their growth rate is θ<N. The critical-disc Bowen-net construction contributes only a polynomial factor. The positive-measure Bowen estimate of §2.7, proved using Shannon–McMillan–Breiman on the compact metric sphere, gives hη(f)<log d. For general invariant η use §2.7's standard Borel endomorphism decomposition and nonnegative entropy integral; almost every ergodic component of a maximizing η must maximize and thus equal ν.
 
-*Needs:* [Entropy of the canonical measure](#285-entropy-of-the-canonical-measure); [Complex blowing up and inverse branches](#247-complex-blowing-up-and-inverse-branches); `Layer 2, Ergodic foundations for measure entropy/birkhoff-pointwise-ergodic`; Layer 2, Ergodic foundations for measure entropy; [Polynomial-size Bowen nets for rational sphere maps](#257-polynomial-size-bowen-nets-for-rational-sphere-maps).
+*Needs:* [Entropy of the canonical measure](#285-entropy-of-the-canonical-measure); [Complex blowing up and inverse branches](#247-complex-blowing-up-and-inverse-branches); ProbabilisticAndMetricNumberTheory §4.1 `birkhoff_pointwise_ergodic`; [Measure entropy and maximizing measures](#27-measure-entropy-and-maximizing-measures); [Polynomial-size Bowen nets for rational sphere maps](#257-polynomial-size-bowen-nets-for-rational-sphere-maps).
 
 ([Lyubich1983](#lyubich1983), §7, Lemma 1 and Theorem 9 with proof, pp.379–384 — Uses positive-measure Bowen entropy, excess-frequency branch-word counting and ergodic decomposition for uniqueness.)
 
@@ -3829,7 +4031,7 @@ For f of degree d ≥ 2 over ℂ, `µ_{f,∞}` equals the Lyubich / Freire–Lop
 
 d ≥ 2
 
-The corresponding construction and properties give an atom-free balanced probability measure, subject to the sphere Riesz/Laplacian supplier contract. archimedean-measure-identification identifies it with complex-transfer-limit and supplies preimage equidistribution and Julia support. complex-canonical-measure-entropy gives entropy log d, while complex-maximal-entropy-uniqueness establishes uniqueness among invariant probabilities. These are distinct conclusions with distinct suppliers: spherical Montel, repelling density, the Banach contraction splitting, and generic measure entropy require the construction targets in this layer below.
+The corresponding construction and properties give an atom-free balanced probability measure, subject to the sphere Riesz/Laplacian supplier contract. archimedean-measure-identification identifies it with complex-transfer-limit and supplies preimage equidistribution and Julia support. complex-canonical-measure-entropy gives entropy log d, while complex-maximal-entropy-uniqueness establishes uniqueness among invariant probabilities. These conclusions use spherical Montel, repelling density, the Banach contraction splitting, the entropy suppliers of §2.6 and the conditional and topological comparisons of §2.7.
 
 *Needs:* [The archimedean canonical measure: mass, invariance, no atoms](#274-the-archimedean-canonical-measure-mass-invariance-no-atoms); [Complex canonical measure comparison and support](#280-complex-canonical-measure-comparison-and-support); [Entropy of the canonical measure](#285-entropy-of-the-canonical-measure); [Unique maximal-entropy measure](#290-unique-maximal-entropy-measure).
 
@@ -3901,7 +4103,7 @@ For z ↦ z^d over ℂ the Julia set is the unit circle and its canonical measur
 
 ### Dependencies
 
-Layers 0–1 and the Layer 0 power map (§0.27a); TropicalAndBerkovichArithmetic §§0.21–0.23, 1.1–1.3, 3.3, 6.1–6.5 analytic line, potentials, energy and model measures; AlgebraicModuliForArithmeticGeometry §7.10.2 common analytic substrate; ComplexComparisonPartII §C−1.1 complex analytification; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees native analytic geometry, carrier comparisons and potential theory; ConformalMapping local analysis, sphere charts and finite-degree theory; the explicit Riesz, meromorphic Montel, contraction and entropy extensions.
+Layers 0–1 and the Layer 0 power map (§0.27a); TropicalAndBerkovichArithmetic §§0.21–0.23, 1.1–1.3, 3.3, 6.1–6.5 analytic line, potentials, energy and model measures; AlgebraicModuliForArithmeticGeometry §7.10.2 common analytic substrate; ComplexComparisonPartII §C−1.1 complex analytification; Layer 2 The native analytic projective line/Layer 2 Nonarchimedean potential theory and local degrees native analytic geometry, carrier comparisons and potential theory; ConformalMapping local analysis, sphere charts and finite-degree theory; ProbabilisticAndMetricNumberTheory §§4.1–4.3, 5.2 pointwise Birkhoff and finite Shannon entropy; GeometryOfNumbersAndQuadraticArithmetic §4.2 partition labels and entropy; the explicit Riesz, meromorphic Montel, contraction, fibre-entropy, partition-information and entropy-integration extensions.
 
 ## Layer 3: Periodic equations, dynatomic curves and certified arithmetic
 
@@ -10282,9 +10484,28 @@ The proof reduces to λ ≡ 1 and shows p | n repeatedly; nothing in it bounds t
 
 Locator: hutz-2009, Definition 21 and Lemma 22, p. 16 (arXiv v3; the same in v2, p. 13).
 
-x_k = `f^{p^k}(0)` = `F_{k−1}^p(0)` for k ≥ 0 (so x₀ = f(0), not 0), and Lemma 22's recursion holds for 0 ≤ k ≤ e − 2 with its final assertion at k = e − 1 only.
+For a prime p, put F_k=f^[p^k]. Then x_k=F_k(0)=f^[p^k](0) and
+x_(k+1)=(F_k)^[p](0) for every k≥0; every power of a map here denotes
+composition. Thus x₀=f(0), and no predecessor is used at k=0. Lemma 22's
+recursion holds for 0≤k with k+1<e, with its final assertion only at k=e−1.
 
-With x₀ = 0 the formula x_k = `f^{p^k}(x₀)` at k = 0 gives f(0) ≠ 0, and `f^p(x_{k−1})` = `f^{p + p^{k−1}}(0)` ≠ `f^{p^k}(0)` for k ≥ 2; the proof of Lemma 22 uses `x_{k+1}` = F_k^p(x₀), and the base case b₁ ≥ 2 of Lemma 23 needs b₀ = v(f(0)) ≥ 1. The final assertion min(b_k, c_k) ≤ v(p) is proved only for k = e − 1 ('consider (6) with k = e − 1').
+The origin 0 must be distinguished from the sequence's first value x₀.
+The source's expression f^[p](x_(k−1)) evaluates instead to
+f^[p+p^(k−1)](0); this exponent is generally wrong (p=2,k=3 gives 6 rather
+than 8), although the exponents coincide at p=2,k=2. Read the proof of
+Lemma 22 with origin 0 to obtain x_(k+1)=(F_k)^[p](0). The base case b₁≥2
+of Lemma 23 uses b₀=ord(f(0))≥1. Its terminal bound
+min(b_(e−1),c_(e−1))≤ord(p) is obtained from (6) at k=e−1.
+
+**Checks.**
+
+- For p=2 and f(z)=z²+z−2, x₀=−2 and x₁=0, while (F₀)^[2](0)=0.
+  These unequal values rule out a predecessor formula at k=0.
+- For p=2 and f(z)=z+1, (x₀,x₁,x₂,x₃)=(1,2,4,8).
+  At k=2, (F₂)^[2](0)=8=x₃, whereas f^[2](x₂)=6.
+- For p=3 and f(z)=z+1, (x₀,x₁,x₂)=(1,3,9), and
+  (F₀)^[3](0)=3=x₁, (F₁)^[3](0)=9=x₂. These translation checks concern
+  composition indexing alone and assert no periodicity or valuation hypotheses.
 
 ### Correction 10
 
@@ -11040,6 +11261,15 @@ Charles Favre, Juan Rivera-Letelier, *Théorie ergodique des fractions rationnel
 M. Yu. Lyubich, *Entropy properties of rational endomorphisms of the Riemann sphere*. Ergodic Theory and Dynamical Systems 3 (1983), 351–385, publisher PDF
 
 [Source](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/7326EA7C0A92B304EF4068A39C1D0910/S0143385700002030a.pdf/entropy-properties-of-rational-endomorphisms-of-the-riemann-sphere.pdf).
+
+### Sarig2023
+
+Omri Sarig, *Lecture Notes on Ergodic Theory*, author notes dated 3 April 2023.
+Sections 2.3.3 and 4.1–4.3, §4.6.3 and Problems 4.8–4.11; printed page numbers
+are used. The entropy chapter uses base-two logarithms; multiplication by log 2
+gives this roadmap's natural-logarithm convention.
+
+[Source](https://www.weizmann.ac.il/math/sarigo/sites/math.sarigo/files/uploads/ergodicnotes.pdf).
 
 ### fps
 
