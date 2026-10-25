@@ -10,9 +10,10 @@ carriers exist. None of the following headline theorems is statable at these pin
 The cyclotomic/Cartier equivalence requires categories
 of cyclotomic spectra and topological Cartier modules. The cyclotomic trace,
 Dundas–Goodwillie–McCarthy and henselian rigidity require algebraic K-theory and
-THH/TC spectra of rings and stable infinity categories. Continuous localizing
-motives and their refined invariants require dualizable presentable stable
-categories and nuclear ind-categories. These carriers are absent at the pins.
+THH/TC spectra of rings and stable infinity categories. Goodwillie’s rational
+comparison requires nonconnective K-theory and negative cyclic spectra.
+Continuous localizing motives and their refined invariants require dualizable
+presentable stable categories and nuclear ind-categories. These carriers are absent at the pins.
 
 The Snaith and coherent Adams comparisons require the ku and KU ring spectra.
 The even and framed q-Hodge comparisons, finite-coefficient calculation and
