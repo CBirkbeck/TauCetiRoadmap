@@ -23,9 +23,8 @@ The other headlines are not statable at the pins:
   Adams-series calculus, ordered residue kernels and universal counts.
 * The origin constant formula lacks the universal count and its regular extension to
   the paired affine cone.
-* Stable canonical Higgs geometry and the central deformation comparison lack the
-  coarse Higgs scheme, supplied Quot moment chart and its frame-cohomology comparison,
-  character quotient and affine strata.
+* Stable canonical Higgs geometry and its Bialynicki-Birula strata lack the coarse
+  Higgs scheme and the affine-bundle strata of a torus action.
 * The all-characteristic coprime Higgs count lacks canonical stable coarse moduli;
   its absolute bundle-count side is defined below.
 * Higgs purity and the compact Poincare formula lack the actual Higgs carrier and its
@@ -40,7 +39,7 @@ The other headlines are not statable at the pins:
 * The constructible spherical Hall Hopf and primitive Lie algebra theorem lacks
   constructible Euler pushforward on coherent moduli correspondences and the Hall carrier.
 
-Layer 11 also formulates five conjectures; it does not assert their proofs.
+Layer 11 also formulates four conjectures; it does not assert their proofs.
 -/
 
 namespace TauCetiRoadmap.CountingBundlesAndHallAlgebrasOfCurves
