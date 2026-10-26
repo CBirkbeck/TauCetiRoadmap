@@ -8,7 +8,9 @@ theorems against the pinned Mathlib and Tau Ceti APIs, using explicit polynomial
 linear-map, matrix and spectrum definitions.
 
 The degree-at-least-five Alexander–Hirschowitz theorem is stated in affine
-first-jet form as genericDoublePointRank, including the overfilled range.
+first-jet form as genericDoublePointRank, including the overfilled range, and
+the theorem in every degree, with its exceptional cases excluded, as
+alexanderHirschowitzRank.
 The finite codimension-three cubic bases are stated on native submodules and
 homogeneous polynomials. The differential Horace theorem, plane contact theorem
 and general codimension-three cubic recursions are not statable here on the
@@ -240,6 +242,16 @@ theorem quarticDoublePointRank {k : Type u} [Field k] [CharZero k]
     Alexander–Hirschowitz rank over every characteristic-zero field, for every count. -/
 theorem genericDoublePointRank {k : Type u} [Field k] [CharZero k]
     (r d q : ℕ) (hr : 1 ≤ r) (hd : 5 ≤ d) :
+    ∃ P : Fin q → Fin r → k, Function.Injective P ∧
+      (firstJetMatrix P d).rank = min (Nat.choose (r+d) d) (q*(r+1)) := by
+  sorry
+
+/-- Alexander–Hirschowitz theorem in every degree, in affine first-jet form over every
+    characteristic-zero field: outside the quadric range 2 ≤ q ≤ r and the four exceptional
+    triples, some distinct configuration has the expected rank (BO, Theorem 1.1). -/
+theorem alexanderHirschowitzRank {k : Type u} [Field k] [CharZero k]
+    (r d q : ℕ) (hr : 1 ≤ r) (hquadric : ¬(d = 2 ∧ 2 ≤ q ∧ q ≤ r))
+    (hexception : (r, d, q) ∉ [(2, 4, 5), (3, 4, 9), (4, 3, 7), (4, 4, 14)]) :
     ∃ P : Fin q → Fin r → k, Function.Injective P ∧
       (firstJetMatrix P d).rank = min (Nat.choose (r+d) d) (q*(r+1)) := by
   sorry

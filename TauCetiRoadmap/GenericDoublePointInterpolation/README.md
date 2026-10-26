@@ -24,7 +24,8 @@ points in the affine plane have rank 11 in degree 5 although m=N(2,5)=21.
 
 The projective input is the degree-d≥5 range of the Alexander–Hirschowitz
 theorem. The plane, cubic and quartic results are included as the bases of its
-proof, with their exceptional triples stated explicitly. The proof uses
+proof, with their exceptional triples stated explicitly. With the quadric and
+univariate cases they also assemble into the theorem in every degree. The proof uses
 Brambilla–Ottaviani's plane contact argument, codimension-three cubic
 specializations, and differential Horace induction. Couveignes's interpolation
 matrix and integer-box argument give the affine and effective endpoint.
@@ -48,7 +49,8 @@ pushforward and relative generic smoothness (§2.0), the universal length-two
 direction family (§2.4), and plane singular-curve incidence (§3.2). Its compatible
 mixed-specialization theorem (§4.3) concerns the specified Horace family.
 The supply boundary with ArithmeticStatisticsPartV §3.28, mixed trace finite
-fibres, puts the full characteristic-zero double-point theorem, its low-degree
+fibres, puts the full characteristic-zero double-point theorem (§4.8, the
+double-point theorem in every degree), its low-degree
 inputs and its ordinary and differential Horace proof here; that consumer owns
 the mixed-trace Jacobian, exceptional-case exclusion and finite-fibre arguments.
 Section 1.4 gives the homogeneous-partial adapter for this boundary. These
@@ -1490,6 +1492,40 @@ For q=0 the empty matrix has rank 0. The identical rational-minor descent gives 
 
 ([BO line 22, §1, Theorem 1.1, p.1; §6, conclusion, p.19](https://arxiv.org/pdf/math/0701409v2)).
 
+**Double-point theorem in every degree.** Over algebraically closed
+characteristic-zero k, AH(r,d,q) holds for all r≥1 and d,q≥0 except for d=2
+with 2≤q≤r and for (r,d,q)=(2,4,5),(3,4,9),(4,3,7),(4,4,14). For d≥1 the
+homogeneous-partial matrix has the same rank on that open, by the block
+transformation of §1.4. The headline `alexanderHirschowitzRank` states the
+affine first-jet realization over every characteristic-zero field, with the
+same exclusions: some injective P:Fin q→k^r has firstJetMatrix rank
+min(N(r,d),q(r+1)).
+
+Assemble the cases. For d≤1 every injective tuple works: the constant column
+has rank min(1,q(r+1)), and the first jet at one support determines an
+affine-linear polynomial. For d=2 the quadric formula equals
+min(N(r,2),q(r+1)) when q≤1 or q≥r+1. Otherwise use univariate Hermite
+interpolation for r=1, the plane input for r=2, the cubic input for d=3, the
+quartic induction for d=4 and r≥5, and the preceding theorem for d≥5. For d=4
+and r=3,4, delete supports from the full-row-rank witnesses at
+(r,q)=(3,8),(4,13) and add distinct supports to the full-column-rank witnesses
+at (3,10),(4,15). A rational witness keeps its rank in every characteristic-zero
+field, and rank openness on the irreducible space of ordered distinct tuples
+gives the projective open.
+
+**Checks.**
+
+- At (r,d,q)=(2,2,3) the quadric formula gives 6−0=6=min(6,9). At q=2 it gives 5, below min(6,6)=6, and that count is excluded.
+- At (r,d,q)=(1,2,2) the rank is 3=min(3,4): the range 2≤q≤r is empty for r=1, so this count is not excluded, and the conclusion is injectivity rather than surjectivity.
+- At (3,4,8) a subset of a full-row-rank witness has rank 32=min(35,32). At the excluded (3,4,9) the square of the quadric through the nine supports is singular at all of them, so the rank is at most 34<35.
+- At (4,4,15) a superset of a full-column-rank witness has rank 70=min(70,75). At the excluded (4,3,7) the secant cubic of the rational normal quartic through the seven supports is singular at them, so the rank is at most 34<35.
+- For d=0 and two supports in A³ the constant column gives rank 1=min(1,8). All homogeneous partials of a constant vanish, so the homogeneous-partial form needs d≥1.
+- For q=0 the empty matrix has rank 0=min(N(r,d),0).
+
+*Needs:* [Quadrics with prescribed singular points](#31-exact-low-degree-rank-witnesses); [Low-degree near-exception ranks](#31-exact-low-degree-rank-witnesses); [Plane interpolation input](#32-plane-interpolation-through-tangent-and-contact-geometry); [Cubic maximal-rank input](#33-codimension-three-cubic-systems); [Univariate Hermite interpolation](#46-the-univariate-base); [Quartic induction inputs](#47-quartic-induction-and-the-exception-schedule); [Generic characteristic-zero double-point rank](#48-the-projective-endpoint); [Independent subschemes](#23-testing-independence-on-curvilinear-subschemes); [Rank in flat point families](#24-families-and-limits); [Homogeneous partials and affine first jets](#14-matrix-rank-and-projective-restriction).
+
+([BO line 22, §1, Theorem 1.1, p.1, with the exceptional list at BO lines 33–38](https://arxiv.org/pdf/math/0701409v2)).
+
 ### Examples
 
 For (r,d,q)=(3,6,21), the division data are (u,e)=(9,1). For quartics in P⁷, trace length 210 and residual lengths 118,126 match source dimensions 210,120.
@@ -1649,12 +1685,12 @@ variables, so set R=r+1 when consuming this roadmap. For R≥2,d≥2,n≥1 over 
 algebraically closed characteristic-zero field, supply the nonempty open where
 the homogeneous-partial matrix has rank min(choose(d+R−1,R−1),Rn), except for
 quadrics with 2≤n≤R−1 and the tuples (R,d,n)=(3,4,5),(4,4,9),(5,3,7),(5,4,14).
-This is the homogeneous-partial adapter of §1.4 applied to the quadratic formula
-and near-exception quartic bases in §3.1, the plane theorem in §3.2, the cubic
-theorem in §3.3, the higher-dimensional quartic theorem in §4.7 and the
-degree-at-least-five theorem in §4.8; §4.6 supplies R=2. For low-dimensional
-quartics, deletion from and enlargement of the neighboring configurations give
-every nonexceptional count. No degree cutoff d≥5 is imposed on this interface.
+This is the homogeneous-partial adapter of §1.4 applied to the double-point
+theorem in every degree of §4.8, which assembles the quadratic formula and
+near-exception quartic bases in §3.1, the plane theorem in §3.2, the cubic
+theorem in §3.3, the univariate base in §4.6 (R=2), the higher-dimensional
+quartic theorem in §4.7 and the degree-at-least-five theorem in §4.8. No
+degree cutoff d≥5 is imposed on this interface.
 The consumer's Jacobian minor selection, arithmetic exception exclusions and
 finite-fibre bounds use this open and belong to that consumer.
 
