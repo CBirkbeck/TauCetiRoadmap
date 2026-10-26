@@ -17,8 +17,9 @@ The following headline theorems are not statable at the pins:
 * Analytic double-index transport (§2.3) needs oriented analytic annuli, their
   Laurent/logarithmic function spaces and finite-map pullback. Formal Laurent
   series alone do not carry the analytic functions on a general open annulus.
-* Full analytic Coleman extension and the semistable de Rham comparison
-  (§§3.0b–3.0c) need the Coleman function/one-form algebra, component-annulus
+* Full analytic Coleman extension and the full analytic and semistable de Rham
+  comparisons (§§3.0b–3.0c) need the Coleman function/one-form algebra, the
+  overconvergent analytic de Rham complex of a wide open, the component-annulus
   Cech complex and curve de Rham comparison carriers.
 * Wide-open reciprocity and the corrected cup/Frobenius/monodromy comparisons
   (§§3.1a,3.4–3.5) need those cohomology carriers, Coleman end restrictions and
