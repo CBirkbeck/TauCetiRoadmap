@@ -8,13 +8,13 @@ All logarithms are natural. The same Q controls both exponents and the degree th
 
 ## Scope and ownership
 
-This roadmap owns the arithmetic specialization of the compact-model argument: the house body on a number field’s mixed space and its volume; short integral rational bases; the embedding parameter change; the kernel of bounded integral evaluation and its transpose index; the discriminant-sensitive covolume estimate; the short-equation truncation and common arithmetic Jacobian minor; the compatible map from the supplied Jacobian-open algebra to the given field; central-binomial parameter selection; bounded ordered integer systems; the isolated affine point bound `isolatedAffinePoints_ncard_le_pow` and the Jacobian-open point bound `jacobianOpen_points_finite_ncard_le` of §5.5, derived from projective Bézout; and their field-class counting consequence.
+This roadmap owns the arithmetic specialization of the compact-model argument: the house body on a number field’s mixed space and its volume; short integral rational bases; the embedding parameter change; the kernel of bounded integral evaluation as an integer-matrix kernel; the discriminant-sensitive covolume estimate; the short-equation truncation and common arithmetic Jacobian minor; the compatible map from the supplied Jacobian-open algebra to the given field; central-binomial parameter selection; bounded ordered integer systems; the isolated affine point bound `isolatedAffinePoints_ncard_le_pow` and the Jacobian-open point bound `jacobianOpen_points_finite_ncard_le` of §5.5, derived from projective Bézout; and their field-class counting consequence.
 
 Completed/EffectiveBounds Layers 1–2 and the pinned effective-bounds modules supply the discriminant and primitive-polynomial Hermite theory. Their fixed-ambient count, primitive-generator bounds, class-number and unit-square bounds are not targets here. The new count has a degree-sensitive cubic-logarithmic exponent and counts unweighted isomorphism classes. Regulator estimates, monogenicity, integral-basis reduction and enumeration procedures lie outside this Part II.
 
-Generic bounded polynomial carriers, support bases, evaluation, partial differentiation, torsion-free kernel saturation, central binomial coefficients and Catalan numbers are already in the library. GenericDoublePointInterpolation §§0.1, 0.3, 1.3–1.4 and 5.1–5.3 own their coefficient adapters, first jets, generic rank and universal minors; this roadmap specializes them to the conjugates of one arithmetic tuple. GeometryOfNumbersAndQuadraticArithmetic §§0.1–0.3 and 1.1–1.5 own generic Gram–Hadamard, primitive orthogonal covolumes, ordered-product estimates, intrinsic ball volumes and second Minkowski with witnesses. Étaleness of a Jacobian-open localization over any commutative ring is already in Mathlib through submersive presentations. SchemeAndStackFoundations §5.12 owns the projective Bézout inequality. ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”, owns the isomorphism-family quotient, degree and height. These objects are imported by those sections, not reconstructed.
+Generic bounded polynomial carriers, support bases, evaluation, partial differentiation, torsion-free kernel saturation, central binomial coefficients and Catalan numbers are already in the library. GenericDoublePointInterpolation §§0.1, 0.3, 1.3–1.4 and 5.1–5.3 own their coefficient adapters, first jets, generic rank and universal minors; this roadmap specializes them to the conjugates of one arithmetic tuple. SuccessiveMinima §0.1 and Layer 1 own hermitian Gram–Hadamard and the successive minima with one attaining independent family, and record the upper half of Minkowski’s second theorem as a Tau Ceti theorem. GeometryOfNumbersAndQuadraticArithmetic §1.1 owns ordered-product estimates and intrinsic ball volumes. Étaleness of a Jacobian-open localization over any commutative ring is already in Mathlib through submersive presentations. SchemeAndStackFoundations §5.12 owns the projective Bézout inequality. ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”, owns the isomorphism-family quotient, degree and height. These objects are imported by those sections, not reconstructed.
 
-DiophantineApproximationAndTranscendence §2.8, “Saturated kernel-lattice covolume”, owns the covolume formula for W∩𝓞_K^V for arbitrary K-subspaces W. The relation lattice here is the kernel of a particular bounded-monomial evaluation map over ℤ; §§2.2–2.5 retain its evaluation-image index and bound its covolume through the conjugate value matrix and the field discriminant. The general subspace-height formula is not a target here.
+DiophantineApproximationAndTranscendence §2.8, “Saturated kernel-lattice covolume”, owns the covolume formula for W∩𝓞_K^V, which for K=ℚ identifies the covolume of ℤ^ι∩W with `subspaceHeight W`. HeightsAndUnits Layer 2.2, “Integral kernel bases and the minor gcd”, owns `minorGcd` and the identity minorGcd(A)·subspaceHeight(ker A)=√det(AAᵀ) for an integer matrix with ℚ-independent rows. Section 2.2 applies both to the coordinate matrix of bounded evaluation; the arithmetic content here is the comparison of that matrix with the conjugate value matrix and the field discriminant in §2.3.
 
 ## Conventions
 
@@ -24,7 +24,7 @@ The mixed space is ℝ^r₁×ℂ^r₂ with n=r₁+2r₂, carrying Mathlib’s st
 
 Write V_S(r,d) for `MvPolynomial.restrictTotalDegree (Fin r) S d`. Its monomial index consists of exponent vectors α:Fin r→₀ℕ with sum α≤d, and M=choose(d+r,d). The coefficient metric makes these M monomials orthonormal; a polynomial has squared coefficient norm Σα |aα|². Every lower-rank lattice has its intrinsic volume in its real span, with zero-dimensional covolume 1. Thus X²−2 has coefficient norm √5 and value zero at √2; neither its value nor its maximum coefficient is this norm (COU20 line 255, §3, p.493).
 
-First-jet rows index an embedding τ:K→ℂ and either its value or one of r ordinary partial derivatives. There are n(r+1) rows; derivatives include their exponent factors, with no factorial division. Embedding matrices have embedding rows and basis columns. In §2.3, V=AB and the positive Hermitian matrix is V conjugate(V)ᵗ; coefficient Gram matrices are BBᵗ. These row conventions determine both the determinant sign and the transpose map. Mathlib conjugates the first input of its inner product, so VV* is the transpose of the native Gram matrix of the rows; their determinants and diagonal entries agree. For rows (1) and (i), VV* is [[1,−i],[i,1]], while the native Gram matrix is [[1,i],[−i,1]]; both have determinant 0 and diagonal (1,1) (COU20 lines 195, 278–284, §3, pp.491–493; the two-row comparison is a direct calculation).
+First-jet rows index an embedding τ:K→ℂ and either its value or one of r ordinary partial derivatives. There are n(r+1) rows; derivatives include their exponent factors, with no factorial division. Embedding matrices have embedding rows and basis columns. In §2.3, V=AB and the positive Hermitian matrix is V conjugate(V)ᵗ; coefficient Gram matrices are BBᵗ. These row conventions determine both the determinant sign and the shape n×M of the coordinate matrix B. Mathlib conjugates the first input of its inner product, so VV* is the transpose of the native Gram matrix of the rows; their determinants and diagonal entries agree. For rows (1) and (i), VV* is [[1,−i],[i,1]], while the native Gram matrix is [[1,i],[−i,1]]; both have determinant 0 and diagonal (1,1) (COU20 lines 195, 278–284, §3, pp.491–493; the two-row comparison is a direct calculation).
 
 For the explicit model range assume r≥1, d≥5 and M≥n(r+1), and put
 
@@ -50,7 +50,6 @@ Evaluation of integer polynomials at integral κ lands in 𝓞_K. Surjective alg
 - `MvPolynomial.restrictTotalDegree`, `MvPolynomial.mem_restrictTotalDegree` and `MvPolynomial.basisRestrictSupport` in `Mathlib/RingTheory/MvPolynomial/Basic.lean` give the native degree-bounded submodule and support basis. Membership means total degree≤d; it does not mean a separate degree bound in each variable. `MvPolynomial.aeval` in `Mathlib/Algebra/MvPolynomial/Eval.lean` and `MvPolynomial.pderiv` in `Mathlib/Algebra/MvPolynomial/PDeriv.lean` are the actual evaluation and partial-derivative operations. These constructions use a commutative coefficient ring; field-rank arguments explicitly pass to ℚ or ℂ.
 - `MvPolynomial.eq_zero_of_eval_zero_at_prod_finset` in `Mathlib/Combinatorics/Nullstellensatz.lean` applies over any integral domain and a finite variable type: each grid cardinality is strictly greater than the corresponding variable degree. In §1.2 it is applied over ℂ to a pulled-back polynomial with complex coefficients, using D+1 distinct integer images in each coordinate.
 - `Algebra.discr_not_zero_of_basis` and `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two` in `Mathlib/RingTheory/Discriminant.lean` apply to finite separable field extensions and identify basis discriminant with the square of the embedding determinant. Number fields satisfy separability. The field discriminant requires an actual integral basis.
-- `ZLattice.covolume_eq_det_mul_measureReal` and `ZLattice.covolume_div_covolume_eq_relIndex'` in `Mathlib/Algebra/Module/ZLattice/Covolume.lean` compare intrinsic full-lattice covolumes with determinants and with finite relative index. The index comparison is made inside the common real span of the two lattices.
 - `Ideal.Quotient.mk`, `Localization.Away` and their algebra structures give the quotient and localization carriers used by `JacobianOpenAlgebra`. `Algebra.Etale.iff_exists_algEquiv_prod` in `Mathlib/RingTheory/Etale/Field.lean` identifies an étale algebra over a field with a finite product of finite separable field extensions; the index set may be empty. It does not state that a Jacobian localization over an arbitrary ring is finite.
 - `Algebra.PreSubmersivePresentation.naive` and `Algebra.PreSubmersivePresentation.jacobiMatrix_naive`, `Algebra.SubmersivePresentation.localizationAway`, `Algebra.PreSubmersivePresentation.comp` and `Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian` in `Mathlib/RingTheory/Extension/Presentation/Submersive.lean`, `Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension` in `Mathlib/RingTheory/Smooth/StandardSmooth.lean`, and the instance making a standard smooth algebra of relative dimension zero étale in `Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean`. For r polynomials in r variables over a commutative ring R, the naive presentation of R[X]/(E) has Jacobian matrix given by the partial derivatives, its composite with the presentation of the localization away from its Jacobian is submersive of relative dimension zero, and so that localization is étale over R. No finiteness over R follows.
 
@@ -59,21 +58,25 @@ Evaluation of integer polynomials at integral κ lands in 𝓞_K. Surjective alg
 
 ### From Tau Ceti
 
-`NumberField.ncard_setOf_finiteDimensional_abs_discr_le_le` and `NumberField.hermiteCountBound` in `TauCeti/NumberTheory/EffectiveBounds/HermiteCount/Basic.lean` supply Completed/EffectiveBounds Layer 2’s effective fixed-ambient count and its primitive-polynomial bound. Only finiteness and the established arithmetic infrastructure are consumed; the new coefficient system produces a different estimate. `ZLattice.covolume_sq_eq_det_gram` in `TauCeti/Algebra/Module/ZLattice/Covolume.lean` identifies the squared canonical covolume with the Gram determinant of an actual integral lattice basis in a finite-dimensional real inner-product space, including rank zero.
+`NumberField.ncard_setOf_finiteDimensional_abs_discr_le_le` and `NumberField.hermiteCountBound` in `TauCeti/NumberTheory/EffectiveBounds/HermiteCount/Basic.lean` supply Completed/EffectiveBounds Layer 2’s effective fixed-ambient count and its primitive-polynomial bound. Only finiteness and the established arithmetic infrastructure are consumed; the new coefficient system produces a different estimate.
+
+### From TauCetiRoadmap.SuccessiveMinima
+
+Consume §0.1.2, `hermitian_gram_hadamard`: for any finite family v in a normed `RCLike` inner-product space, 0≤Re det Gram(v)≤∏‖vᵢ‖², with no independence assumption and the empty family allowed. Consume §1.5, `exists_successiveMin_witnesses`: for a discrete full lattice L in a finite-dimensional real normed space and a convex body K with 0 in its interior, one real basis of lattice vectors bᵢ has gauge K bᵢ equal to the i-th minimum λᵢ(L,K); it need not be an integral basis. Consume the upper half of Minkowski’s second theorem as SuccessiveMinima records it among its Tau Ceti inputs, `ZLattice.prod_successiveMin_mul_measureReal_le_two_pow_mul_covolume`: (∏ᵢ λᵢ(L,K))·μ(K)≤2^d·covolume(L,μ) for a discrete full L, a centrally symmetric convex body K and an arbitrary additive Haar measure μ. That Tau Ceti module is newer than the pinned Tau Ceti, so `Suggested.lean` does not use it. In dimension one, L=2ℤ and K=[−3,3] give λ₁=2/3 and (2/3)·6=4=2·2, fixing the product direction and the measure convention.
 
 ### From TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic
 
-Consume §0.1.2, `hermitian_gram_hadamard`, and §§0.2.1, 0.2.6, 0.3.3, `primitive_orthogonal_covolume`: in a discrete full self-dual Euclidean lattice Δ, the primitive intersections with a rational subspace and its orthogonal have equal intrinsic covolumes. Standard monomial ℤ^M is self-dual, not merely of covolume one. Its orthogonal intersections are full in their respective spans. The diagonal and antidiagonal intersections in ℤ² both have covolume √2; replacing (1,1) by (2,2) gives 2√2 and fails primitivity.
-
-Consume §1.2.7, `exists_successiveMin_witnesses`, and §1.5.21, `minkowski_second_upper`, for a discrete full lattice in a finite-dimensional real normed space, a centrally symmetric compact convex body with zero in its interior, and one explicit additive Haar measure for both body and lattice. One independent family attains the ordered minima; it need not be an integral basis. In dimension one, L=2ℤ and body [−3,3] give (2/3)·6=2·2=4, fixing the product direction and the measure convention.
-
 Consume §1.1.2, `ordered_product_root_bound`, for a nondecreasing finite sequence with every term≥1; the one-based tail length at i is n+1−i>0. Consume §§1.1.3–1.1.5, `orthonormal_cube_volume`, `inscribed_cube` and `intrinsic_ball_lower_bound`: the intrinsic ℓ-ball has volume at least (2/√ℓ)^ℓ=2^ℓℓ^(−ℓ/2) for ℓ≥1. The coordinate cube has half-side 1/√ℓ, and the orthonormal coordinate equivalence preserves volume. For ℓ=2 the lower volume is 2 and the ball volume is π; using ambient volume on a line in a plane would instead give zero.
+
+### From TauCetiRoadmap.HeightsAndUnits and TauCetiRoadmap.DiophantineApproximationAndTranscendence
+
+Consume HeightsAndUnits Layer 2.2, “Integral kernel bases and the minor gcd”: for an integer matrix A with rows indexed by Fin m, columns by a finite linearly ordered type ι and rows linearly independent over ℚ, `minorGcd A` is the gcd of its m×m minors, `one_le_minorGcd` gives 1≤minorGcd A, and `minorGcd_mul_subspaceHeight_ker` gives minorGcd(A)·subspaceHeight(ker A)=√det(AAᵀ). Consume DiophantineApproximationAndTranscendence §2.8, `kernelLattice_covolume`, at K=ℚ: the saturated lattice ℤ^ι∩W of a rational subspace W has covolume `subspaceHeight W` in its real span with the induced Euclidean volume, including W=0 with covolume 1. For the row [2,2] the kernel generator (1,−1) has covolume √2, while √det(AAᵀ)=√8 and minorGcd=2; dropping the minor gcd would give the wrong √8.
 
 ### From TauCetiRoadmap.GenericDoublePointInterpolation
 
 Consume §0.1’s monomial count M=choose(d+r,d) and coefficient equivalence, and §0.3’s real coefficient metric on the native bounded module. Consume §1.3’s value map, first-jet map and derivative map on the value kernel, with the statement that first-jet surjectivity makes this joint derivative map onto. Section 1.4 identifies these maps with their actual polynomial matrices.
 
-Consume §§5.1–5.3’s generic affine principal open and selected integer maximal minor for r,n≥1, d≥5 and M≥n(r+1). A selected nonzero minor has total degree at most D=dn(r+1), hence each variable degree at most D; its nonvanishing implies distinctness and surjective first jets. The full nonzero-minor construction is an input, not just an unspecified genericity predicate. At one affine point in one variable, columns (1,X) give determinant 1; swapping those columns gives −1. The arithmetic parameter change has complex coefficients, so §1.2 applies Mathlib’s grid theorem over ℂ.
+Consume §§5.1–5.3’s generic affine principal open and selected integer maximal minor for r,n≥1, d≥5 and M≥n(r+1). A selected nonzero minor has total degree at most D=dn(r+1), hence each variable degree at most D; its nonvanishing implies distinctness and surjective first jets. At one affine point in one variable, columns (1,X) give determinant 1; swapping those columns gives −1. The arithmetic parameter change has complex coefficients, so §1.2 applies Mathlib’s grid theorem over ℂ.
 
 ### From TauCetiRoadmap.SchemeAndStackFoundations
 
@@ -85,7 +88,7 @@ Consume Layer 0, “Number fields ordered by discriminant” (anchor `number-fie
 
 ## How to read the build
 
-Layer 0 applies second Minkowski to the house body, with Mathlib’s product volume and discriminant covolume, to obtain a short integral rational basis. Layer 1 moves through its invertible complex embedding matrix to choose bounded integral generators with all first jets onto. Layer 2 builds the arithmetic relation lattice and preserves both its transpose index and its discriminant denominator. Layer 3 applies second Minkowski in the coefficient space, discards exactly n−1 relations and selects one integer Jacobian minor nonzero at every conjugate. Layer 4 combines the explicit coefficients with the actual field component map. Layer 5 chooses parameters depending only on the degree, counts ordered coefficient boxes, derives the isolated-point bound from component degrees and uses it to count field factors. Each *Needs* line names the statement and proof-route inputs separately enough to permit another proof. `Suggested.lean` tests eight headline theorems: short integral rational bases, bounded arithmetic first jets, explicit models, logarithmic models, the isolated affine and Jacobian-open point bounds, bounded-system field-class counts and discriminant counts. The two counting signatures use arbitrary finite families of pairwise nonisomorphic number fields; choosing one representative per class gives exactly the unweighted class-cardinality bounds. The supplier retains ownership of the quotient carrier.
+Layer 0 applies second Minkowski to the house body, with Mathlib’s product volume and discriminant covolume, to obtain a short integral rational basis. Layer 1 moves through its invertible complex embedding matrix to choose bounded integral generators with all first jets onto. Layer 2 identifies the arithmetic relation lattice with an integer-matrix kernel, bounds its covolume through the minor-gcd identity and keeps the discriminant denominator. Layer 3 applies second Minkowski in the coefficient space, discards exactly n−1 relations and selects one integer Jacobian minor nonzero at every conjugate. Layer 4 combines the explicit coefficients with the actual field component map. Layer 5 chooses parameters depending only on the degree, counts ordered coefficient boxes, derives the isolated-point bound from component degrees and uses it to count field factors. Each *Needs* line names the statement and proof-route inputs separately enough to permit another proof. `Suggested.lean` tests eight headline theorems: short integral rational bases, bounded arithmetic first jets, explicit models, logarithmic models, the isolated affine and Jacobian-open point bounds, bounded-system field-class counts and discriminant counts. The two counting signatures use arbitrary finite families of pairwise nonisomorphic number fields; choosing one representative per class gives exactly the unweighted class-cardinality bounds. The supplier retains ownership of the quotient carrier.
 
 ## Layer 0: Short algebraic integers
 
@@ -151,7 +154,7 @@ The API has the following properties.
 - For n=4 one must keep m=3; the exponent bound on the third house is δ^(4/(2·2))=δ. Keeping only two vectors would lose 2m>n.
 - For n=5, m=3, and the third-house estimate is δ^(5/6)≤δ. The fractional tail exponent is not 1 in this case.
 
-*Needs:* §0.1; §0.2; Mathlib `NumberField.one_le_house_of_isIntegral`; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.5.21, upper second Minkowski inequality with an explicit Haar measure; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.2.7, simultaneous attaining witnesses; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.1.2, the ordered-product root bound.
+*Needs:* §0.1; §0.2; Mathlib `NumberField.one_le_house_of_isIntegral`; TauCetiRoadmap.SuccessiveMinima, the upper second Minkowski inequality `ZLattice.prod_successiveMin_mul_measureReal_le_two_pow_mul_covolume` with an explicit Haar measure; TauCetiRoadmap.SuccessiveMinima §1.5, `exists_successiveMin_witnesses`; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.1.2, the ordered-product root bound.
 
 ### 0.4 Products span the field
 
@@ -194,7 +197,7 @@ For ℚ(i), the integer lattice has covolume 1 and the house disk has area π, s
 
 ### Dependencies
 
-Mathlib mixed embeddings, house and discriminant; GeometryOfNumbersAndQuadraticArithmetic §§1.1.2, 1.2.7, 1.5.21. The product-span argument uses only fields and finite-dimensional duality and does not need the other targets of this layer.
+Mathlib mixed embeddings, house and discriminant; SuccessiveMinima §1.5 and its upper second Minkowski inequality; GeometryOfNumbersAndQuadraticArithmetic §1.1.2. The product-span argument uses only fields and finite-dimensional duality and does not need the other targets of this layer.
 
 ## Layer 1: Bounded generators with independent first jets
 
@@ -301,42 +304,41 @@ The API has the following properties.
 
 *Needs:* §1.3; Mathlib `MvPolynomial.restrictTotalDegree`; Mathlib `MvPolynomial.mem_restrictTotalDegree`; Mathlib `MvPolynomial.aeval`; Mathlib `AddSubmonoid.ker_saturated`; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, monomial coefficient equivalence; TauCetiRoadmap.GenericDoublePointInterpolation §0.3, the real coefficient metric; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, bounded monomial count.
 
-### 2.2 Transpose image and its integral index
+### 2.2 Relation covolume through the minor gcd
 
-Define the transpose map with source Hom_ℤ(𝓞_K,ℤ) and target the standard coefficient lattice ℤ^M, by evaluation on every bounded monomial. It lands in the integral orthogonal of the real relation span. The image-dual identification uses the saturated kernel and the perfect standard coordinate pairing; the restriction index is the integral evaluation index.
+Choose an actual integral basis β of 𝓞_K and index the M bounded monomials by Fin M in a fixed linear order. The coordinate matrix B is the integer n×M matrix whose α column holds the β-coordinates of κ^α. Its kernel in ℤ^M is L, and the coefficient metric of §2.1 is the standard Euclidean metric on ℤ^M.
 
-For r,d≥0 and integral κ, assume its degree-d integral evaluation image has rational rank n. All covolumes are intrinsic, including the case M=n and the zero relation space.
+For r,d≥0 and integral κ, assume degree-d rational value evaluation onto K, equivalently that the rows of B are linearly independent over ℚ. All covolumes are intrinsic, including the case M=n and the zero relation space.
 
-Let L⊥=(span_ℝ L)^perp∩ℤ^M. Transpose integral evaluation gives an injection ev_ℤ^*:Hom_ℤ(𝓞_K,ℤ)→ℤ^M, λ↦(λ(κ^α))_α, with image S⊆L⊥ of finite index q≥1. Both have rank n and covol(S)=q covol(L⊥). More precisely q=[𝓞_K:im(ev_ℤ)]. Thus covol(L)=covol(L⊥)≤covol(S), by primitive orthogonal covolume in the standard unimodular coefficient lattice. (COU20 line 269, §3, p. 493, integral orthogonal and transpose evaluation).
+With B as above, L=ℤ^M∩ker B and covol(L)=√det(BBᵗ)/minorGcd(B)≤√det(BBᵗ). The minor gcd equals the index [𝓞_K:im(ev_ℤ)], since the index of the column lattice of a full-rank integer matrix is the gcd of its maximal minors; only minorGcd(B)≥1 is used. Changing β multiplies B on the left by a unimodular matrix and leaves √det(BBᵗ)/minorGcd(B) unchanged. (COU20 line 269, §3, p. 493, where the covolume of L is compared with the transpose evaluation lattice; the minor-gcd form of that comparison is HeightsAndUnits Layer 2.2.)
 
-A proof route is as follows. A functional on 𝓞_K annihilates the kernel after composition with evaluation; therefore its coordinate row lies in the integral orthogonal. Rational surjectivity makes the transpose injective and gives rank n. The saturation and kernel comparison identify L⊥ with the full dual of the evaluation image, using the perfect coordinate pairing on ℤ^M. Restriction from 𝓞_K-dual to image-dual has index [𝓞_K:image]. Apply the built intrinsic relative-index formula to S⊆L⊥ in their common real span. Apply the imported primitive orthogonal-covolume theorem to saturated L in standard self-dual ℤ^M.
+A proof route is as follows. In β-coordinates the integral evaluation of a coefficient vector a is Ba, so L is the integer kernel of B. Rational surjectivity of bounded evaluation makes the rows of B independent over ℚ. The integer kernel of B is the saturated lattice ℤ^M∩ker B_ℚ, whose covolume is `subspaceHeight (ker B_ℚ)` by the K=ℚ case of DiophantineApproximationAndTranscendence §2.8. HeightsAndUnits Layer 2.2 rewrites this as √det(BBᵗ)/minorGcd(B) and gives minorGcd(B)≥1.
 
 The API has the following properties.
 
-- Send λ∈Hom_ℤ(𝓞_K,ℤ) to its values on the evaluated bounded monomials.
-- The α coordinate is λ(κ^α).
-- Full rational evaluation rank makes the transpose map injective.
-- S is contained in L⊥ and has the same rank n.
-- [L⊥:S]=[𝓞_K:im(ev_ℤ)] and covol(S) is this index times covol(L⊥).
-- Changing the integral basis of 𝓞_K changes the generators of S by a unimodular matrix and leaves S and its covolume unchanged.
+- The α column of B is the β-coordinate vector of κ^α, and Ba is the β-coordinate vector of the evaluation of the coefficient vector a; hence ℤ^M∩ker B=L.
+- The rows of B are linearly independent over ℚ exactly when degree-d rational value evaluation is onto K.
+- Changing the integral basis β replaces B by UB with U∈GL_n(ℤ), leaving L, det(BBᵗ) and minorGcd(B) unchanged.
+- covol(L)·minorGcd(B)=√det(BBᵗ), and covol(L)≤√det(BBᵗ).
 
 **Checks.**
 
-- For K=ℚ(√(5)), κ=√(5), d≥1, im(ev_ℤ)=ℤ[√(5)] has index 2 in 𝓞_K, so S has index 2 in L⊥. Setting the index equal to 1 would be false. The same q is the gcd of the maximal minors of the coordinate matrix B=[[1,−1,5],[0,2,0]] of §2.3, namely gcd(2,0,−10)=2, since the index of the column lattice of a full-rank integer matrix is the gcd of its maximal minors.
-- For κ=√(2) in ℚ(√(2)), d≥1, evaluation contains the integral basis 1,√(2); hence S=L⊥. This is the index-one case of the same comparison.
-- For the abstract integer map ℤ→ℤ, z↦2z, the kernel is zero, its integral orthogonal is ℤ, and the dual image is 2ℤ, of covolume 2 rather than 1. This determines the inequality direction 1≤2.
+- For K=ℚ(√5), κ=√5, d=2 and β=(1,(1+√5)/2), the matrix is B=[[1,−1,5],[0,2,0]]. Its 2×2 minors are 2,0,−10 with gcd 2, which is the index of ℤ[√5] in 𝓞_K; det(BBᵗ)=104, and √104/2=√26 is the covolume of L=ℤ(−5,0,1). Taking the minor gcd equal to 1 would give 2√26.
+- For κ=√2 in ℚ(√2), d=1 and β=(1,√2), B=I₂, the relation lattice is zero with covolume 1, and minorGcd=det(BBᵗ)=1. This is the index-one case.
+- For κ=0 in ℚ and d=2, B=(1,0,0) has minor gcd 1 and det(BBᵗ)=1; L has basis X,X² and intrinsic covolume 1.
+- For the 1×1 integer matrix (2), the kernel is zero with covolume 1, while √det(AAᵀ)=2 and minorGcd=2. This determines the inequality direction 1≤2.
 
-*Needs:* §2.1; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §0.3.3, primitive orthogonal covolume; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §§0.2.1, 0.2.6, saturated intersections and their orthogonal lattices; Mathlib `ZLattice.covolume_div_covolume_eq_relIndex'`.
+*Needs:* §2.1; TauCetiRoadmap.HeightsAndUnits Layer 2.2, `minorGcd`, `one_le_minorGcd` and `minorGcd_mul_subspaceHeight_ker`; TauCetiRoadmap.DiophantineApproximationAndTranscendence §2.8, `kernelLattice_covolume`; Mathlib `NumberField.discr_eq_discr` for the existence of an integral basis of 𝓞_K.
 
 ### 2.3 The Gram–discriminant identity
 
-In these formulas * means conjugate transpose. The row-Hermitian matrix VV* is the transpose of Mathlib’s Gram matrix of the rows, so it has the same determinant and diagonal bounds. The numerator is det(VV*), a positive real number viewed in ℂ; the denominator |disc K| is a positive integer viewed in ℝ or ℂ. The integer matrix B has full row rank. Its row family is an actual integral basis of the transpose image S, so its Gram determinant computes the intrinsic squared covolume.
+In these formulas * means conjugate transpose. The row-Hermitian matrix VV* is the transpose of Mathlib’s Gram matrix of the rows, so it has the same determinant and diagonal bounds. The numerator is det(VV*), a positive real number viewed in ℂ; the denominator |disc K| is a positive integer viewed in ℝ or ℂ.
 
 For r,d≥0, integral κ and an actual integral basis β, the matrices have shapes A:n×n, B:n×M, V:n×M. Assume B has row rank n, equivalently rational bounded evaluation is onto.
 
-Choose an actual integral basis β of 𝓞_K. Let A_τ,i=τ(β_i), B_i,α the integer β-coordinates of κ^α, and V_τ,α=τ(κ^α), so V=AB. Then B is real/integer, S=B^t ℤ^n, covol(S)²=det(BB^t), and det(BB^t)=det(V conjugate(V)^t)/|disc K|. Both determinants in the ratio are nonnegative reals; the denominator is nonzero. (COU20 line 278, §3, pp. 493–494, evaluation matrix and determinant computation).
+Let A_τ,i=τ(β_i), B the coordinate matrix of §2.2, and V_τ,α=τ(κ^α), so V=AB. Then det(BBᵗ)=det(V conjugate(V)^t)/|disc K|. Both determinants in the ratio are nonnegative reals; the denominator is nonzero. (COU20 line 278, §3, pp. 493–494, evaluation matrix and determinant computation).
 
-A proof route is as follows. The basis-coordinate identity gives V=AB. Consequently V V*=A(BB^t)A*, where * is conjugate transpose and B is real. Take determinants and use det(A)conjugate(det(A))=|disc K| for the genuine integral basis. The rows of B are an integral basis of S because the transpose is injective. Apply the intrinsic Gram-volume formula, or an orthonormal coordinate determinant, in the row span.
+A proof route is as follows. The basis-coordinate identity gives V=AB. Consequently V V*=A(BB^t)A*, where B is real. Take determinants and use det(A)conjugate(det(A))=|disc K| for the genuine integral basis.
 
 **Checks.**
 
@@ -344,7 +346,7 @@ A proof route is as follows. The basis-coordinate identity gives V=AB. Consequen
 - For ℚ(√5), κ=√5,d=2 and β=(1,(1+√5)/2), B has rows (1,−1,5),(0,2,0). Its Gram determinant is 104. The value Gram matrix is [[31,21],[21,31]], determinant 520, and 520/5=104.
 - Replacing β by the rational basis (1,√5) makes the coordinate Gram determinant 26 and the basis discriminant 20, so 520/20=26. Using the field discriminant 5 with this basis would give the wrong 104.
 
-*Needs:* §2.2; §0.2; Mathlib `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two`; Mathlib `ZLattice.covolume_eq_det_mul_measureReal`; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §0.1.2, Hermitian Gram–Hadamard.
+*Needs:* §2.2; §0.2; Mathlib `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two`; Mathlib `NumberField.discr_eq_discr`.
 
 ### 2.4 Height of monomial values
 
@@ -372,23 +374,23 @@ Assume the explicit model range r≥1, d≥5 and M≥n(r+1).
 
 For G=M[n²d(r+1)]^(2d)δ^(4d), the intrinsic relation covolume satisfies covol(L)≤G^(n/2)/√(|disc K|)≤G^(n/2). The ambient standard monomial lattice is unimodular; all covolumes of L use its ℓ-dimensional real span. (COU20 line 309, §3, p. 494, covolume bound before second Minkowski).
 
-A proof route is as follows. Use primitive orthogonal equality and S⊆L⊥ to bound covol(L) by covol(S). Use the Gram–discriminant identity and imported Hermitian Hadamard inequality to bound det(VV*) by G^n. Take positive square roots, retaining √(|disc K|) in the denominator; use |disc K|≥1 only for the second inequality.
+A proof route is as follows. Bound covol(L) by √det(BBᵗ) using §2.2. Use the Gram–discriminant identity and the imported hermitian Gram–Hadamard inequality on the n rows of V, each of squared norm at most G, to bound det(VV*) by G^n. Take positive square roots, retaining √(|disc K|) in the denominator; use |disc K|≥1 only for the second inequality.
 
 **Checks.**
 
-- For ℚ(√5), κ=√5,d=2, the relation X²−5 has covolume √26, whereas the transpose image has covolume 2√26. Thus √26≤2√26, with the index direction preserved.
+- For ℚ(√5), κ=√5,d=2, the relation X²−5 has covolume √26, whereas √det(BBᵗ)=2√26. Thus √26≤2√26, the factor being the minor gcd 2.
 - For that example det(VV*)=520 and disc K=5, so the transpose bound is √(520/5)=2√26. Omitting the discriminant denominator would give √520 instead.
 - For κ=0 in ℚ and d=2, L has basis X,X² and intrinsic covolume 1. The value matrix is (1,0,0), with Gram determinant and discriminant both 1.
 
-*Needs:* §2.2; §2.3; §2.4; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §0.1.2, Hermitian Gram–Hadamard; Mathlib `NumberField.discr_ne_zero`.
+*Needs:* §2.2; §2.3; §2.4; TauCetiRoadmap.SuccessiveMinima §0.1.2, `hermitian_gram_hadamard`; Mathlib `NumberField.discr_ne_zero`.
 
 ### Examples
 
-For κ=√5 and d=2, L=ℤ(X²−5), covol(L)=√26 and covol(S)=2√26. The genuine integral basis gives det(BBᵗ)=104=520/5. For ℚ(i), det(VV*)=4 but det(VVᵗ)=−4, pinning conjugation again.
+For κ=√5 and d=2, L=ℤ(X²−5), covol(L)=√26=√104/2 with minor gcd 2. The genuine integral basis gives det(BBᵗ)=104=520/5. For ℚ(i), det(VV*)=4 but det(VVᵗ)=−4, pinning conjugation again.
 
 ### Dependencies
 
-Layer 1; GenericDoublePointInterpolation §§0.1, 0.3; GeometryOfNumbersAndQuadraticArithmetic §§0.1.2, 0.2.1, 0.2.6, 0.3.3; Mathlib relative index and embedding determinants; Tau Ceti’s intrinsic Gram-covolume identity. No successive-minimum theorem is used inside this layer.
+Layer 1; GenericDoublePointInterpolation §§0.1, 0.3; HeightsAndUnits Layer 2.2; DiophantineApproximationAndTranscendence §2.8; SuccessiveMinima §0.1.2; Mathlib embedding determinants. No successive-minimum theorem is used inside this layer.
 
 ## Layer 3: Small equations and a common Jacobian minor
 
@@ -418,7 +420,7 @@ The API has the following properties.
 - For an intrinsic line, the unit interval has volume 2 and the ball lower bound is 2¹·1^(−1/2)=2. In a surrounding plane that interval has area zero, which would invalidate the argument.
 - For ℓ=2, the inscribed square has half-side 1/√2, area 2 and vertex norm 1; the disk has area π≥2. Using half-side 1 would put (1,1) outside the ball.
 
-*Needs:* §2.5; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §§1.1.3–1.1.5, intrinsic ball volume; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.5.21, upper second Minkowski inequality with an explicit Haar measure; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.2.7, simultaneous attaining witnesses; TauCetiRoadmap.GenericDoublePointInterpolation §0.3, the real coefficient metric.
+*Needs:* §2.5; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §§1.1.3–1.1.5, intrinsic ball volume; TauCetiRoadmap.SuccessiveMinima, the upper second Minkowski inequality `ZLattice.prod_successiveMin_mul_measureReal_le_two_pow_mul_covolume` with an explicit Haar measure; TauCetiRoadmap.SuccessiveMinima §1.5, `exists_successiveMin_witnesses`; TauCetiRoadmap.GenericDoublePointInterpolation §0.3, the real coefficient metric.
 
 ### 3.2 Dropping exactly n minus one relations
 
@@ -494,7 +496,7 @@ For n=2,ℓ=4, retaining k=3 gives codimension 1. For X²−2 the same chosen de
 
 ### Dependencies
 
-Layers 1–2; GenericDoublePointInterpolation §1.3; GeometryOfNumbersAndQuadraticArithmetic §§1.1.2–1.1.5, 1.2.7, 1.5.21; native polynomial derivatives. The block-codimension argument is elementary linear algebra once joint gradient surjectivity is given.
+Layers 1–2; GenericDoublePointInterpolation §1.3; GeometryOfNumbersAndQuadraticArithmetic §§1.1.2–1.1.5; SuccessiveMinima §1.5 and its upper second Minkowski inequality; native polynomial derivatives. The block-codimension argument is elementary linear algebra once joint gradient surjectivity is given.
 
 ## Layer 4: Explicit field components
 
@@ -730,7 +732,7 @@ The principal exports are the explicit bound of §4.2, the degree-uniform logari
 
 ## Worked examples
 
-**An integral index survives rational surjectivity.** Let K=ℚ(√5), κ=√5, d=2 and β=(1,(1+√5)/2). The evaluated monomials 1,κ,κ² have β-coordinate columns (1,0),(−1,2),(5,0). They span ℤ[√5], of index 2 in 𝓞_K, although their rational span is K. The relation lattice has primitive generator (−5,0,1), hence intrinsic covolume √26. The two transpose rows have Gram matrix [[27,−2],[−2,4]], determinant 104, and covolume 2√26. Thus q=2 and covol(S)=q covol(L⊥). The conjugate value rows have Gram matrix [[31,21],[21,31]], determinant 520=5·104. This simultaneously tests saturation, the genuine integral basis, the index direction and the discriminant denominator in §§2.1–2.5 (COU20 lines 255–290, §3, p.493; the numerical specialization is a direct calculation).
+**An integral index survives rational surjectivity.** Let K=ℚ(√5), κ=√5, d=2 and β=(1,(1+√5)/2). The evaluated monomials 1,κ,κ² have β-coordinate columns (1,0),(−1,2),(5,0). They span ℤ[√5], of index 2 in 𝓞_K, although their rational span is K. The relation lattice has primitive generator (−5,0,1), hence intrinsic covolume √26. The coordinate matrix B=[[1,−1,5],[0,2,0]] has Gram matrix [[27,−2],[−2,4]], determinant 104, and maximal minors 2,0,−10 with gcd 2, so covol(L)=√104/2. The conjugate value rows have Gram matrix [[31,21],[21,31]], determinant 520=5·104. This simultaneously tests saturation, the genuine integral basis, the minor-gcd direction and the discriminant denominator in §§2.1–2.5 (COU20 lines 255–290, §3, p.493; the numerical specialization is a direct calculation).
 
 **The minor selection uses all embedding blocks.** For n=2 and a four-dimensional relation space, keep k=3 independent relations. Their span has codimension 1, so a joint surjection onto two one-dimensional gradient blocks cannot have both retained blocks zero. At codimension 2, taking the kernel of that joint surjection would make both zero. After selecting the same integer equation X²−2, its derivative values at the two conjugates are 2√2 and −2√2. The determinant signs may differ, but both are nonzero. For the nonnormal cubic equation X³−2, the field norm of 3κ² is 108; the same injectivity argument applies without normality (COU20 lines 330–351, §3, p.494).
 
