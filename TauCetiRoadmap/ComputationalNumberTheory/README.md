@@ -1707,7 +1707,7 @@ The character-sum form of this count is imported. For odd q and a₁ = a₃ = 0,
 - W.pointCount = #S(W) + 1 and W.frobeniusTrace = q − #S(W).
 - For odd q and a₁ = a₃ = 0: #S(W) = q + Σ_(x∈F) χ(f(x)), and for every d ∈ F, q − #S(W′) = χ(d)·(q − #S(W)) with W′ = W.quadraticTwistOf 0 (−d/4).
 
-The filtered set is the solution subtype whose `Nat.card` defines W.pointCount (Tau Ceti `WeierstrassCurve.pointCount_def`), and on a finite type the two cardinalities agree; `WeierstrassCurve.frobeniusTrace_def` gives the trace, and Mathlib's `WeierstrassCurve.Affine.equation_iff` unfolds the affine equation to the displayed identity. The comparison rewrites W.pointCount and both traces by the enumeration and then applies EllipticLegendreCharacterInterfaces §§5.1–5.2; the square-root count behind those identities belongs to that roadmap. The comparison with Mathlib's point type on an elliptic model is Tau Ceti's pointCount_eq_card_point. ([Sutherland](#source-sutherland), §7.3, p.2, counting the affine solutions in F_q × F_q and adding the point at infinity.) *Needs:* EllipticLegendreCharacterInterfaces §5.1 (character-sum point count); EllipticLegendreCharacterInterfaces §5.2 (quadratic-twist trace); Tau Ceti `WeierstrassCurve.pointCount_def`; Tau Ceti `WeierstrassCurve.frobeniusTrace_def`; Tau Ceti `WeierstrassCurve.pointCount_eq_card_point`; Tau Ceti `WeierstrassCurve.quadraticTwistOf`; Mathlib `WeierstrassCurve.Affine.equation_iff`; Mathlib `quadraticChar`.
+The filtered set is the solution subtype whose `Nat.card` defines W.pointCount (Tau Ceti `WeierstrassCurve.pointCount_def`), and on a finite type the two cardinalities agree; `WeierstrassCurve.frobeniusTrace_def` gives the trace, and Mathlib's `WeierstrassCurve.Affine.equation_iff` unfolds the affine equation to the displayed identity. The comparison rewrites W.pointCount and both traces by the enumeration and then applies EllipticLegendreCharacterInterfaces §§5.1–5.2; the square-root count behind those identities belongs to that roadmap. The comparison with Mathlib's point type on an elliptic model is Tau Ceti's pointCount_eq_card_point. ([Sutherland](#source-sutherland), §7.3, p.3, counting the affine solutions in F_q × F_q and adding the point at infinity.) *Needs:* EllipticLegendreCharacterInterfaces §5.1 (character-sum point count); EllipticLegendreCharacterInterfaces §5.2 (quadratic-twist trace); Tau Ceti `WeierstrassCurve.pointCount_def`; Tau Ceti `WeierstrassCurve.frobeniusTrace_def`; Tau Ceti `WeierstrassCurve.pointCount_eq_card_point`; Tau Ceti `WeierstrassCurve.quadraticTwistOf`; Mathlib `WeierstrassCurve.Affine.equation_iff`; Mathlib `quadraticChar`.
 
 **Checks.**
 
@@ -2393,7 +2393,7 @@ is essential. The native comparison is
 (`Mathlib.NumberTheory.LSeries.DirichletContinuation`, line 258).
 Define the horizontal Dirichlet argument by
 `S_chi(t)=Im(integral(sigma=infinity to 1/2, L'_chi/L_chi(sigma+i*t)))/pi`,
-using the right-hand limit at a zero ordinate. Prove local integrability, the
+using the right-hand limit at a zero or pole ordinate (for q=1 the path at t=0 meets the pole of ζ at s=1). Prove local integrability, the
 conjugate-character comparison and agreement with the horizontal argument continued
 from the right half-plane. This fixes the direction and avoids choosing an arbitrary
 principal argument at each point (Platt Theorems 3.1–3.2, pp.4–5; Platt lines 227 and 271).
