@@ -87,7 +87,7 @@ The principal-level L² completion and Casimir comparison are constructed in §0
 
 ### From TauCetiRoadmap.AdelicAlgebraicGroups
 
-Section 2.2, quotient-measure and Weil integration, supplies homogeneous quotient integration with its Haar normalizations. Section 5.2, Principal congruence level and GL₂ components for O(2) and SO(2), supplies the component homeomorphism, index set (ℤ/N)ˣ, rational stabilizers Γ(N), positive-determinant convention and finite level actions. Section 0.5a constructs the additional measure comparison, L² completion and Casimir identification on that supplied geometry.
+Section 2.2, quotient-measure and Weil integration, supplies homogeneous quotient integration with its Haar normalizations. Section 5.2, Principal congruence level, GL₂ components for O(2) and SO(2), and Riemann-surface structure and change of level for GL₂ quotients, supplies the component homeomorphism, index set (ℤ/N)ˣ, rational stabilizers Γ(N), positive-determinant convention and right translation [x,a]↦[x,ah] as a map X_U→X_(h⁻¹Uh) between levels, for h∈GL₂(𝔸_f). Section 0.5a uses it at a fixed level only for h∈GL₂(ℤ̂), which normalizes K(N), and constructs the additional measure comparison, L² completion and Casimir identification on that supplied geometry.
 
 ### From TauCetiRoadmap.SmoothRepresentationsOfLocalGroups
 
@@ -256,7 +256,7 @@ The API proves the following facts.
 
 ### 0.5a Principal-level measure, completion and Casimir comparison
 
-For every N≥1 put K(N)={k∈GL₂(ℤ̂):k≡1 mod N}. Construct the component comparison from the right-K(N)·SO(2)-invariant adelic L² space to the Hilbert sum indexed by (ℤ/N)ˣ of L²(XΓ(N),μΓ(N)). Start with the smooth restriction map of AutomorphicFormsOnReductiveGroups §3.1 on the component homeomorphism, index set and stabilizers supplied by AdelicAlgebraicGroups §5.2, in its positive-determinant convention, and prove the quotient integration formula. If the fixed adelic Haar normalization gives c_N μΓ(N) on each component, prove c_N>0 and use restriction multiplied by sqrt(c_N); do not silently identify differently normalized measures. Right finite-adelic translation permutes the components and transports their functions, and the identity component carries the action of SL₂(ℤ)/Γ(N). Extend the comparison to an onto complex-linear isometry by density and L² completion. Its source is the full invariant Hilbert space, not just smooth automorphic forms.
+For every N≥1 put K(N)={k∈GL₂(ℤ̂):k≡1 mod N}. Construct the component comparison from the right-K(N)·SO(2)-invariant adelic L² space to the Hilbert sum indexed by (ℤ/N)ˣ of L²(XΓ(N),μΓ(N)). Start with the smooth restriction map of AutomorphicFormsOnReductiveGroups §3.1 on the component homeomorphism, index set and stabilizers supplied by AdelicAlgebraicGroups §5.2, in its positive-determinant convention, and prove the quotient integration formula. If the fixed adelic Haar normalization gives c_N μΓ(N) on each component, prove c_N>0 and use restriction multiplied by sqrt(c_N); do not silently identify differently normalized measures. The level-preserving action used here is that of GL₂(ℤ̂)/K(N)≅GL₂(ℤ/N): K(N) is normal in GL₂(ℤ̂), so right translation (R(k)f)(g)=f(gk) by k∈GL₂(ℤ̂) preserves right-K(N)-invariance and is unitary for the fixed Haar measure. It permutes the components by multiplying their indices in (ℤ/N)ˣ by det(k) mod N. The elements with det(k)≡1 mod N fix the identity component; choosing γ∈SL₂(ℤ) with γ≡k mod N, R(k) acts on functions there by φ(z)↦φ(γ⁻¹z), so this stabilizer acts through SL₂(ℤ)/Γ(N)≅SL₂(ℤ/N). An element h∈GL₂(𝔸_f) outside the normalizer of K(N) does not act on this space. Its right translation is the map X_(K(N))→X_(h⁻¹K(N)h), [x,a]↦[x,ah], of AdelicAlgebraicGroups §5.2, and R(h) carries right-h⁻¹K(N)h-invariant functions onto right-K(N)-invariant functions, isometrically for the fixed Haar measure: a comparison between conjugate levels, not an operator on one level. Extend the comparison to an onto complex-linear isometry by density and L² completion. Its source is the full invariant Hilbert space, not just smooth automorphic forms.
 
 Prove on compactly supported smooth vectors that the positive weight-zero Casimir corresponds to −y²(∂ₓ²+∂ᵧ²), with the same scalar normalization on both sides. Section 0.2's essential self-adjointness then identifies the transported closures, their actual domains and their spectral projections. Prove that the isometry identifies the cuspidal λ-eigenspace on the identity component with MaassCuspForm(Γ(N),λ) of AutomorphicFormsOnReductiveGroups §4.5, using local regularity and zero constant terms at every cusp. This extends its level-one adelization theorem through its smooth component comparison (lrs95, §1, pp.389–390, classical/adelic eigenvalue dictionary).
 
@@ -264,15 +264,16 @@ The API proves the following facts.
 
 - The quotient integration formula is an equality of integrals for nonnegative measurable functions; it descends through almost-everywhere equality and fixes the L² norm.
 - Smooth compactly supported component functions have dense image, so the extension is onto and its inverse is determined by restriction on that core.
-- The finite actions, cuspidal projections, closed Casimir and quotient Laplacian intertwine, including equality of actual domains.
+- For k∈GL₂(ℤ̂) the comparison carries R(k) to a unitary operator on the Hilbert sum that permutes the summands by det(k) and, when det(k)≡1 mod N, acts on the identity summand through SL₂(ℤ)/Γ(N). It intertwines the cuspidal projections, and the closed Casimir with the quotient Laplacian, including equality of actual domains.
 
 **Checks.**
 
 - At N=1 the one component has area π/3. A constant of value 1 on that component has adelic norm squared c_1π/3 and its image has norm squared (sqrt(c_1))²π/3=c_1π/3; restriction without the scalar would fail when c_1≠1.
-- At N=3 the two components are indexed by 1 and 2 in (ℤ/3)ˣ. A unit of determinant 2 swaps a pair (u,0) with (0,u); their squared norms both equal ‖u‖². Replacing all components by only the identity component would lose this action.
+- At N=3 the two components are indexed by 1 and 2 in (ℤ/3)ˣ. The element k=diag(1,−1)∈GL₂(ℤ̂) has det(k)≡2 mod 3; with representatives 1 and k for the two components, k²=1 gives R(k)(u,0)=(0,u) and R(k)(0,u)=(u,0), all of squared norm ‖u‖². Replacing all components by only the identity component would lose this action.
+- At N=1 let h be diag(p,1) at one prime p and 1 at every other prime. Then h⁻¹(1 1;0 1)h=(1 p⁻¹;0 1)∉GL₂(ℤ_p), so h does not normalize K(1)=GL₂(ℤ̂). The translate R(h)f of a right-GL₂(ℤ̂)-invariant f is invariant under hGL₂(ℤ̂)h⁻¹, which meets GL₂(ℤ̂) in the matrices whose upper-right entry at p is divisible by p. An action of all of GL₂(𝔸_f) on the fixed-level space would contain R(h); the level-preserving group GL₂(ℤ̂)/K(1) excludes it.
 - The local functions 1 and y² give Casimir/Laplacian values 0 and −2y² on both sides. The latter tests the expression on an open chart, without asserting it is a quotient L² vector; the opposite Casimir sign gives +2y² and fails.
 
-*Needs:* §§0.1–0.2; AutomorphicFormsOnReductiveGroups §§3.1 and 4.5; ArithmeticLocallySymmetricSpaces ALS.F.6; FuchsianOrbifolds Layers 0–3; AdelicAlgebraicGroups §§2.2 and 5.2 quotient measures and component geometry; Mathlib L² completion and isometric extension.
+*Needs:* §§0.1–0.2; AutomorphicFormsOnReductiveGroups §§3.1 and 4.5; ArithmeticLocallySymmetricSpaces ALS.F.6; FuchsianOrbifolds Layers 0–3; AdelicAlgebraicGroups §§2.2 and 5.2 quotient measures, component geometry and change of level; Mathlib L² completion and isometric extension.
 
 ### 0.5b Principal-level cusp compactness
 
@@ -336,7 +337,7 @@ The geometric eigenspace gives SO(2)-weight zero, not a reflection parity. Pass 
 
 ### 1.1 Exceptional cuspidal dictionary
 
-For allowed Γ and an eigenvalue 0<λ<1/4, a cuspidal GL₂(Aℚ) unitary representation π occurs after passing to principal level and decomposing the finite-level action. Its archimedean component has SO(2)-weight zero and complementary parameter r∈(0,1/2), with λ=1/4−r². A common sign parity on its two real inducing characters is allowed; π∞ need not be O(2)-spherical.
+For allowed Γ and an eigenvalue 0<λ<1/4, a cuspidal GL₂(Aℚ) unitary representation π occurs after passing to principal level K(N) and decomposing its right-K(N)-invariant cuspidal space. Its archimedean component has SO(2)-weight zero and complementary parameter r∈(0,1/2), with λ=1/4−r². A common sign parity on its two real inducing characters is allowed; π∞ need not be O(2)-spherical.
 
 Assume Γ≤SL₂(ℤ) contains Γ(N) for some N≥1; its effective image acts on ℍ. Metric ds²=(dx²+dy²)/y² has curvature −1; all functions are complex-valued. u is a nonzero positive exceptional eigenfunction.
 
@@ -471,7 +472,7 @@ For a spherical rank-two example with parameters r,−r, the self-pair gamma shi
 
 ### Dependencies
 
-AutomorphicFormsOnReductiveGroups §2.6; AutomorphicLFunctionsAndLocalFactors AL.1–AL.3 with gap:all-prime-self-pair-positivity and gap:self-pair-local-character-transport; Mathlib nonvanishing of Γ; ZerosOfLFunctions Layer 1; Tau Ceti Wiener–Ikehara. This layer does not use the final parameter bound.
+AutomorphicFormsOnReductiveGroups §2.6; AutomorphicLFunctionsAndLocalFactors AL.1–AL.3 for the canonical local and global factors, continuation and functional equations; the local self-pair positivity and analytic character and epsilon transport of §2.0, proved here on those factors; SmoothRepresentationsOfLocalGroups SR.2–SR.3 and SR.5.2 and AutomorphicSpectralTheory §7.0b, finite-place unitary-classification prefix, for §2.0; Mathlib nonvanishing of Γ; ZerosOfLFunctions Layer 1; Tau Ceti Wiener–Ikehara. This layer does not use the final parameter bound.
 
 ## Layer 3: Mellin cutoffs and the exact two-kernel identity
 
