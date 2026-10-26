@@ -2729,7 +2729,9 @@ endomorphism algebra; [ClassFieldTheory, layer
 ### F3.5 Prime-field p-realization Frobenius polynomial
 
 For A/F_p define the prime-field linear dual by D^lin(A)=Hom_ℤp(C(A),ℤ_p), with transpose F and V.
-For f:A→B its covariant map is the transpose C(f)^*:D^lin(A)→D^lin(B). Its API consists of the following laws.
+For f:A→B its covariant map is the transpose C(f)^*:D^lin(A)→D^lin(B). Write
+V_p^lin(A)=D^lin(A)⊗_ℤp ℚ_p for its rationalization, the ambient space of every
+characteristic-prime lattice below; rational quasi-isogenies act on V_p^lin. Its API consists of the following laws.
 
 - Composition is covariant.
 - The finite free double dual recovers C(A).
@@ -2746,7 +2748,7 @@ pp.60–61).
 - For C(f):C(B)→C(A) and C(g):C(C)→C(B), transposition sends C(f)C(g) to
   C(g)^*C(f)^*, giving D^lin(g∘f)=D^lin(g)D^lin(f); the identity marking acts as 1.
 
-For A/F_p the linear Frobenius F on C(A)⊗Q_p, and hence its transpose on D^lin(A), is semisimple
+For A/F_p the linear Frobenius F on C(A)⊗Q_p, and hence its transpose on V_p^lin(A), is semisimple
 and has characteristic polynomial equal to the intrinsic degree-2dim(A) Frobenius polynomial
 P_A(T)∈Z[T] occurring on every V_ℓ(A), ℓ≠p.
 
@@ -2775,9 +2777,16 @@ faithfulness at the characteristic prime.
 ### F3.7 Finite-support lattice tuples are realized over the prime field
 
 Fix A₀/F_p. Let M_ℓ be full π-stable Z_ℓ-lattices in V_ℓ(A₀) for ℓ≠p and M_p a full F,V-stable
-Z_p-lattice in D^lin(A₀), equal to the reference realization lattices T₀,ℓ at all but finitely
-many primes. There exist B/F_p and a rational quasi-isogeny f:B→A₀ with transported realization
-lattices f_ℓ(T_ℓB)=M_ℓ, including D^lin at p.
+Z_p-lattice in V_p^lin(A₀), equal to the reference realization lattices T₀,ℓ=T_ℓ(A₀) and
+T₀,p=D^lin(A₀) at all but finitely many primes. There exist B/F_p and a rational quasi-isogeny
+f:B→A₀ with transported realization lattices f_ℓ(T_ℓB)=M_ℓ, including f_*(D^lin(B))=M_p at p.
+
+**Checks.**
+
+- The marking p⁻¹·id_A₀ transports T₀,p to p⁻¹D^lin(A₀), which lies in V_p^lin(A₀)
+  but not in D^lin(A₀) when dim A₀>0; the ambient space must be rational.
+- For A₀=0 every space is zero and the only tuple is the reference tuple.
+- Taking every M_ℓ and M_p equal to the reference lattices, B=A₀ with the identity marking works.
 
 ([Waterhouse][Waterhouse], §3.1 and Theorem 6.1 proof, printed pp.530–531,550–551
 (PDF pp.11–12,31–32)).
@@ -2857,7 +2866,7 @@ realizations R07.1–R07.2. Prove the resulting integral Hom dictionary in both 
 passing to rational orbits. Over F_p define D_lin = Hom_Zp(C, Z_p) and transpose F and V; this
 is linear duality. Preserve V-integrality as well as F-stability. For a nonreal simple
 prime-field class put K=ℚ(π). Identify each rational realization with the rank-one
-K⊗ℚ_ℓ module, using D^lin at p with F=π and V=p/π. For any order R containing
+K⊗ℚ_ℓ module, using V_p^lin at p with F=π and V=p/π. For any order R containing
 π and p/π, choose the lattice R_ℓ=R⊗ℤ_ℓ at every exceptional prime, including
 p when necessary, and keep the reference lattices elsewhere. The reference
 multiplier orders agree with R_ℓ outside finitely many primes. Apply F3.7 to
