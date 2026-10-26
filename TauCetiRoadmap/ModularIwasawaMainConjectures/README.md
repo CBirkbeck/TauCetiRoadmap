@@ -1274,7 +1274,7 @@ For u = [[1,1],[0,1]], u − 1 has image Z_p·e₁, so the quotient is free of r
 
 The source for this target is [Ashay Burungale, Francesc Castella and Christopher Skinner](https://arxiv.org/abs/2405.00270v2), Remark 1.1.3(i), p.2; Theorem 1.2.2(b), p.3; [Antonio Lei, David Loeffler and Sarah Livia Zerbes](https://arxiv.org/abs/0912.1263v3), assumption (E), p.43; [Aaron Landesman, Ashvin A. Swaminathan, James Tao and Yujie Xu](https://arxiv.org/abs/1607.04698v2), §1, p.1, the g=1 discussion citing Serre IV.3.4 Lemma 3.
 
-*Needs:* §1.2; §1.1; Mathlib `Matrix.SpecialLinearGroup`; `TauCetiRoadmap.EllipticCurves` Layer 2 (the Weil pairing).
+*Needs:* §1.2; §1.1; Mathlib `Matrix.SpecialLinearGroup`; ProfiniteProPGroups Layer 3 (Frattini quotient of the pro-p congruence kernel and the Burnside basis theorem); `TauCetiRoadmap.EllipticCurves` Layer 2 (the Weil pairing).
 
 **Checks.**
 
