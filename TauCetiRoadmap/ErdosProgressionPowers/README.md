@@ -68,11 +68,12 @@ character conductors (Layer 1), split-cubic descent readings and halving
 scale-two order-four point (Layer 4) and the symmetric-cubic and
 quadratic-twist trace identities (Layer 5). This roadmap owns their
 progression applications.
-Martin's bound, the removed-prime inequality, Kraus realization, uniform
-irreducibility and rational-isogeny surjectivity are assigned to
-EllipticModularityEffectiveComparisons EC.0–EC.5 and recorded in
-`gap:effective-modular-comparisons`; the progression applications remain here.
-This obligation supplies no theorem until its full contract is discharged.
+Martin's bound, the removed-prime inequality, the Kraus thresholds and
+realization, uniform irreducibility and rational-isogeny surjectivity are
+owned by EllipticCurveModularityPartII Layers 1–6; the contract EC.0–EC.5
+below records the sections consumed, and the progression applications remain here.
+ComputationalNumberTheory §4.24 owns the absence of real zeros in (0,1) for
+primitive characters of modulus at most 400000.
 HeightsRationalPointsAndObstructions §§5.12 and 6.4 own the shared native Mordell
 finiteness theorem; WeightsInEtaleCohomology R34.5–R34.6 own eigenform purity and
 the bound at every complex embedding. Section 7.1 owns the consecutive-product
@@ -524,38 +525,48 @@ Section 0.7 supplies β≤1−40/(√q(log q)²) for nonprincipal quadratic
 characters modulo q≥3 and positive real zeros, under both BMOR inputs.
 No GRH assumption or omitted numerical hypothesis is substituted for these inputs.
 
-### Required effective modular comparisons
+### From TauCetiRoadmap.EllipticCurveModularityPartII
 
-The obligation `gap:effective-modular-comparisons` requires the following full
-contract assigned to EllipticModularityEffectiveComparisons EC.0–EC.5. Every use
-in Layers 1–2 requires its discharge; the gap supplies no theorem.
+Consume the following effective comparisons, labelled EC.0–EC.5 in Layers 1–2,
+with the hypotheses of the cited sections.
 
-Require EC.0's bound g₀⁺(N)≤(N+1)/12 for every positive level N in the trivial-character weight-two
-newspace, and EC.1's removed-prime inequality for E/ℚ and odd prime ell:
-ell≤(√p+1)^((M₀+1)/6) for prime p≠ell, p∥M and ell dividing the minimal
-discriminant valuation, with irreducible E[ell] and the weight-two lowering
-hypotheses. Require EC.2's Γ₀ index μ(N)=N∏_(q|N)(1+1/q) for N>0 and
-Kraus thresholds F_K(N)=(μ(N)/6+1)^(2g₀⁺(N)),
-G_K(N)=(μ(lcm(N,4))/6+1)², H_K(N)=max(F_K(N),G_K(N)).
-Require EC.3's realization for E/ℚ with full rational two-torsion at the exact
-prime-to-ell residual conductor N, assuming prime ell≥5, irreducibility, Serre weight two and
-ell>H_K(N). Its output is an actual F/ℚ of conductor N with full rational
-two-torsion and F[ell]≅E[ell]. EC.4 requires irreducibility at primes ell≥7
-for full rational two-torsion, and ell≥11 for a nonzero rational two-torsion
-point. EC.5 requires surjectivity at every prime ell>37 for a non-CM rational
-elliptic curve with a nontrivial rational cyclic isogeny. These are shared
-mathematical contracts; the deletion-level and coefficient-prime comparison
-in §1.10 is needed before applying EC.3 to the progression curve.
+| Label | Supplier section | Content consumed here |
+| --- | --- | --- |
+| EC.0 | §1.4 | 12g₀⁺(N)≤N+1 for every positive level N, for the trivial-character weight-two newspace. |
+| EC.1 | §2.2 | For E/ℚ and prime ell≥3 with E[ell] irreducible, ell≤(√p+1)^((M₀+1)/6) for every prime p≠ell with p∥M and ell dividing the minimal discriminant valuation. |
+| EC.2 | §§1.5–1.8 | The sharp thresholds F♯, G♯, H♯ and, by §1.8, F♯(N)≤F_K(N), G♯(N)≤G_K(N), H♯(N)≤H_K(N) for N>0. |
+| EC.3 | §4.7 | For E/ℚ with full rational two-torsion, prime ell≥5, E[ell] irreducible of Serre weight two and prime-to-ell conductor N, and ell>H♯(N): an F/ℚ of conductor exactly N with full rational two-torsion and F[ell]≅E[ell]. |
+| EC.4 | §§5.4–5.5 | Irreducibility of E[ell] for primes ell≥5 under full rational two-torsion, and for primes ell≥11 under a rational point of order two. |
+| EC.5 | §6.18 | Surjectivity onto GL₂(𝔽_ell) for every prime ell>37, for a non-CM E/ℚ with a rational cyclic isogeny of degree greater than one. |
+
+Here μ(N)=N∏_(q|N)(1+1/q) is the Γ₀ index for N>0, and the numerical majorants are
+F_K(N)=(μ(N)/6+1)^(2g₀⁺(N)), G_K(N)=(μ(lcm(N,4))/6+1)², H_K(N)=max(F_K(N),G_K(N)).
+The progression levels are bounded against these majorants; by EC.2 the
+hypothesis ell>H_K(N) implies ell>H♯(N), so EC.3 applies unchanged. The
+deletion-level and coefficient-prime comparison in §1.10 is needed before
+applying EC.3 to the progression curve; the progression local calculations and
+level bounds remain here (BS20, §2, Lemma 2.2 and Theorem 4, pp. 359–360;
+Lemmas 3.3, 3.5, pp. 362–363; Kraus1997, §3.1, Théorème 4, p. 1144;
+Lemos2017v2, Theorem 1.1, p. 2).
+
+### From TauCetiRoadmap.ComputationalNumberTheory
+
+Consume §4.24: for every primitive Dirichlet character χ of modulus q≤400000
+and every real s with 0<s<1, the native continued LFunction(χ,s) is nonzero.
+Its proof combines the bounded-height zero-line theorem §4.22 with the central
+nonvanishing theorem §4.23; the first alone would allow a real zero at s=1/2
+(Platt2013v1, Theorems 7.1–7.2, pp. 14–15; BS20, proof of Proposition 7.2, p. 376).
+For a primitive nonprincipal quadratic conductor 1<N<400000 one has N≥3, so
+0<c*<log 2 gives 0<1−c*/log N; the exceptional interval of §3.1 lies in (0,1)
+and contains no zero.
 
 ### Supplier gaps
 
 The following `gaps` entries specify required inputs not supplied unconditionally
 by the cited contracts. A gap supplies no theorem.
 
-- `gap:effective-modular-comparisons`: requires the complete EC.0–EC.5 contract under Required effective modular comparisons, including the newspace bound, norm inequality, exact Kraus realization, both irreducibility cutoffs and rational-isogeny surjectivity (BS20, §2, Lemma 2.2 and Theorem 4, pp. 359–360; Lemmas 3.3, 3.5, pp. 362–363; Lemos2017v2, Theorem 1.1, p. 2).
 - `gap:numerical-prime-inputs`: supplier `AnalyticNumberTheoryPartI` §§0.3, 0.5, 0.16, 0.25 and 3.2; needs: proofs of the five prime/conductor input hypotheses in the table, before any dependent statement is unconditional (Schoenfeld1976, Note Added in Proof, p. 360; RosserSchoenfeld1962, Theorems 1, 5, 8; RamareRumely1996, Theorems 1, 2.1.1 and Table 1; BS20, Lemma 7.3, p. 375). These sections state conditional estimates, not proofs of the inputs.
 - `gap:numerical-zero-inputs`: supplier `AnalyticNumberTheoryPartI` §0.7; needs: proofs of both BMOR input hypotheses in the table before the literal separation constant 40 is available unconditionally (BMOR2018v3, Proposition 1.11 and its proof, §6.1). The global negative-discriminant classification is included.
-- `gap:small-conductor-zeros`: supplier `AnalyticNumberTheoryPartI` §0.7, the zero-exclusion component of its BMOR finite input; needs: a proof excluding exceptional real zeros for primitive nonprincipal quadratic conductors 1<N<400000 at the same sufficiently small c* as §3.1. That component is a hypothesis, not a proved output. Platt2013v1, Abstract, p. 1 records the published mathematical input (BS20, p. 376); no computation is specified here.
 
 ## How to read the build
 
@@ -859,9 +870,8 @@ p. 359; Theorem 4, p. 360.)
 - The arithmetic data M=33, v₃(Δ_min)=6, v₁₁(Δ_min)=2 and ell=3 give M₀=11; excluding the coefficient prime from the deletion product would give 33. Such data alone supply no elliptic curve or modularity witness.
 - At a removed multiplicative prime p=7 and ell=5, the local split and nonsplit traces are 8≡3 and −8≡2 modulo 5; an unsigned choice would lose the nonsplit branch. At p=ell neither trace-congruence clause applies.
 
-Require `gap:effective-modular-comparisons` for the full
-EllipticModularityEffectiveComparisons EC.0–EC.4 contract, with its exact
-hypotheses in the supplier contracts: Martin's newspace bound, the
+Consume EllipticCurveModularityPartII EC.0–EC.4 from the supplier contracts,
+with their exact hypotheses: Martin's newspace bound, the
 removed-prime inequality, the exact Kraus thresholds and realization, and
 the two irreducibility cutoffs. For rational progression levels use the
 supplier Γ₀ index μ, F_K, G_K and H_K, with the same trivial-character
@@ -876,7 +886,7 @@ and Theorem 4, pp. 359–360; Lemmas 3.3, 3.5, pp. 362–363.)
 - N=1 with g₀⁺(1)=0 gives F_K(1)=1, G_K(1)=4 and H_K(1)=4; replacing the maximum by the first term loses the dyadic constraint.
 - N=11 with g₀⁺(11)=1 gives μ(11)=12, μ(44)=72 and H_K(11)=169; replacing the newspace by a Γ₁ space changes this value.
 
-*Needs:* EllipticCurves Layers 2–4 and Layer 8’s semistable conductor comparison; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; WeightsInEtaleCohomology R34.5–R34.6; ModularForms Layers 2–4, 8 and 10; `gap:effective-modular-comparisons` (EC.0–EC.4); LocalFieldsRamification Layers 3–4; Layer 0's explicit prime estimates only for the later progression level bounds.
+*Needs:* EllipticCurves Layers 2–4 and Layer 8’s semistable conductor comparison; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; WeightsInEtaleCohomology R34.5–R34.6; ModularForms Layers 2–4, 8 and 10; EllipticCurveModularityPartII §§1.4–1.8, 2.2, 4.7 and 5.4–5.5 (EC.0–EC.4); LocalFieldsRamification Layers 3–4; Layer 0's explicit prime estimates only for the later progression level bounds.
 
 ### 1.2 Progression Frey specialization
 
@@ -967,7 +977,7 @@ odd multiplicative primes whose minimal discriminant valuation is divisible
 by ell. Use its wild bound at 2. Apply the supplier explicit Chebyshev
 upper bound at x=k.
 
-*Needs:* §1.3; Layer 0 — signed small-prime factorization; §1.1's modularity witness and residual-conductor wrapper; SerreWeightAndLevelOptimisation §§6.1–6.2; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; `gap:effective-modular-comparisons` (EC.4); Layer 0's explicit prime estimates.
+*Needs:* §1.3; Layer 0 — signed small-prime factorization; §1.1's modularity witness and residual-conductor wrapper; SerreWeightAndLevelOptimisation §§6.1–6.2; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularityPartII §§5.4–5.5 (EC.4); Layer 0's explicit prime estimates.
 
 ([BS20], Lemma 3.3, equation (9), and proof, pp. 361-362; Lemma 3.3 and proof, pp. 361-362; Proof of Lemma 3.3, p.362.)
 
@@ -979,7 +989,7 @@ For S, ell≥11 and q in I(k), E_q has irreducible residual representation reali
 
 Use the rational-two-torsion irreducibility cutoff. Apply level lowering with the second local tests. Keep wild factors at 2 and3 and the kappa^2 exceptional factor; use |kappa|<k^2 and Chebyshev bound.
 
-*Needs:* §1.6; §1.1's modularity witness and residual-conductor wrapper; SerreWeightAndLevelOptimisation §§6.1–6.2; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; `gap:effective-modular-comparisons` (EC.4); Layer 0's explicit prime estimates.
+*Needs:* §1.6; §1.1's modularity witness and residual-conductor wrapper; SerreWeightAndLevelOptimisation §§6.1–6.2; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularityPartII §§5.4–5.5 (EC.4); Layer 0's explicit prime estimates.
 
 ([BS20], Lemma 3.5 and proof, p. 363; Proof of Lemma 3.5, p.363.)
 
@@ -1049,7 +1059,7 @@ At n=d=1 the first model has coefficients (0,2,0,−3,0), while the equal-sum mo
 
 ### Dependencies
 
-Layer 0; `gap:effective-modular-comparisons` (EC.0–EC.4); EllipticLegendreCharacterInterfaces §5.1; WeightsInEtaleCohomology R34.5–R34.6; EllipticCurves Layers 2–4, 8 and its worked Frey example; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
+Layer 0; EllipticCurveModularityPartII §§1.4–1.8, 2.2, 4.7 and 5.4–5.5 (EC.0–EC.4); EllipticLegendreCharacterInterfaces §5.1; WeightsInEtaleCohomology R34.5–R34.6; EllipticCurves Layers 2–4, 8 and its worked Frey example; NeronModelsAndSemistableAbelianVarieties §§5.3g–5.3h; EllipticCurveModularity R29.3, R29.4 and R29.6; SerreWeightAndLevelOptimisation §§6.1–6.3; AutomorphicGaloisRepresentations §1.5; ModularForms Layers 2–4, 8 and 10; EtaleCohomologyFoundations §F.4.0; ArithmeticGaloisRepresentations §1.9 and §§3.1–3.3; LocalFieldsRamification Layers 3–4. Explicit numerical level bounds additionally use the general prime estimates of Layer 0; their proof is independent of the Frey application.
 
 ## Layer 2: Legendre cases and the simultaneous character family
 
@@ -1129,7 +1139,7 @@ pp. 368–372, especially the Case-II point calculation on pp. 371–372.)
 - Its double is (1,0), not the identity; the point has exact order four in characteristic zero.
 - At p=3 the symmetric curve has trace 0; its trace and the geometric supersingular criterion are compared only within their stated characteristic ranges.
 
-Require the EC.5 surjectivity contract in `gap:effective-modular-comparisons`
+Consume the EC.5 surjectivity theorem, EllipticCurveModularityPartII §6.18
 (Lemos2017v2, Theorem 1.1, p. 2). Prove the CM half-parameter image theorem: for the CM λ=1/2
 model the same residual image lies in the normalizer of its CM Cartan and
 is proper at ell>37; specify the CM field, its torsion action and the
@@ -1138,7 +1148,7 @@ consumed from ImaginaryQuadraticClassNumber H3.1. These statements concern
 actual torsion representations. (BS20, §6, final Case-II argument and
 the rational-isogeny surjectivity result cited there, p. 373, and its cited Lemos theorem.)
 
-*Needs:* ModularCurves §4C; EllipticLegendreCharacterInterfaces §§0.1–0.6, 0.8–0.10, 1.2, 1.4–1.5, 2.1, 2.3, 2.5–2.8, 3.1, 3.7, 4.1, 5.1–5.2; Tau Ceti `WeierstrassCurve.quadraticTwistOf` and its point-equivariance comparison; EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); `gap:effective-modular-comparisons` (EC.5); Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
+*Needs:* ModularCurves §4C; EllipticLegendreCharacterInterfaces §§0.1–0.6, 0.8–0.10, 1.2, 1.4–1.5, 2.1, 2.3, 2.5–2.8, 3.1, 3.7, 4.1, 5.1–5.2; Tau Ceti `WeierstrassCurve.quadraticTwistOf` and its point-equivariance comparison; EllipticCurves Layers 2–5 and Layer 6, the `x − θ` Kummer map and its kernel 2E(K); EllipticCurveModularityPartII §6.18 (EC.5); Layer 1 modular comparison; ClassicalArithmeticCompletion §1.51; ImaginaryQuadraticClassNumber H3.1.
 
 ### 2.2 Legendre case partition
 
@@ -1246,7 +1256,7 @@ The parameter −1 lies in Case II. At λ=1/2 the twist-by-2 witness is (1+i,−
 
 ### Dependencies
 
-Layers 0–1; ModularCurves §4C; EllipticLegendreCharacterInterfaces Layers 0–5; `gap:effective-modular-comparisons` (EC.5); EllipticCurves Layers 3, 5–6; ClassicalArithmeticCompletion §§1.51 and 4.41; ImaginaryQuadraticClassNumber H3.1. The numerical projections use Layer 0 prime estimates independently of the later character criteria.
+Layers 0–1; ModularCurves §4C; EllipticLegendreCharacterInterfaces Layers 0–5; EllipticCurveModularityPartII §6.18 (EC.5); EllipticCurves Layers 3, 5–6; ClassicalArithmeticCompletion §§1.51 and 4.41; ImaginaryQuadraticClassNumber H3.1. The numerical projections use Layer 0 prime estimates independently of the later character criteria.
 
 ## Layer 3: The original analytic contradiction criteria
 
@@ -1273,11 +1283,10 @@ Consume §0.18's effective PNT and its exceptional-zero alternative for
 sufficiently large X, retaining its effective absolute threshold.
 (BS20, §7, equations (23)–(26), pp. 373–374.)
 
-The harmonic application additionally requires gap:small-conductor-zeros:
+The harmonic application additionally consumes ComputationalNumberTheory §4.24:
 no primitive nonprincipal real quadratic conductor 1<N<400000 has a zero
-in this same exceptional interval. It is the zero-exclusion component of
-AnalyticNumberTheoryPartI §0.7's BMORFiniteInput, still a hypothesis there.
-All unconditional uses in §§3.2, 4.8 and 6.2 require its discharge; the
+in this same exceptional interval, since 0<c*<log 2 places that interval
+inside (0,1). This handoff is used in §§3.2, 4.8 and 6.2; the
 class-number and regulator components needed for the constant 40 are separate
 obligations in gap:numerical-zero-inputs. No GRH premise is used.
 (BS20, proof of Proposition 7.2, pp. 375–376.)
@@ -1325,7 +1334,7 @@ for these hypotheses (BS20, Lemma 7.3, p. 375).
 - The principal character has a main term of order k and is excluded from a nonprincipal PNT error estimate.
 - Equal characters have diagonal correlation of order k and are excluded from the strict off-diagonal power saving.
 
-*Needs:* AnalyticNumberTheoryPartI §§0.1, 0.17–0.18, 0.24 and 3.2; `gap:small-conductor-zeros`, `gap:numerical-prime-inputs`; the smooth-modulus character-sum bound for the correlation specialization; ClassicalArithmeticCompletion §1.51 for quadratic-conductor support; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's explicit prime estimates and divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
+*Needs:* AnalyticNumberTheoryPartI §§0.1, 0.17–0.18, 0.24 and 3.2; ComputationalNumberTheory §4.24; `gap:numerical-prime-inputs`; the smooth-modulus character-sum bound for the correlation specialization; ClassicalArithmeticCompletion §1.51 for quadratic-conductor support; Mathlib continued L-functions, finite inner-product spaces and prime arithmetic; Layer 0's explicit prime estimates and divisor-subpower bound; Layer 2 only for the progression-specific criteria that follow.
 
 ### 3.2 Harmonic smooth-conductor criterion
 
@@ -1333,9 +1342,9 @@ Prove the harmonic smooth-conductor criterion with the hypotheses and conclusion
 
 For each fixed 0<c1<1 there is an effectively computable k1(c1) such that under H⁺, any finite D subset A(k) with pairwise distinct P(N_a), P(N_a)<(log k)^(1-c1) and sum over D of 1/P(N_a)≥0.166 forces k≤k1(c1). Here P is the native largest prime factor and all selected characters are nonprincipal.
 
-For a nonexceptional character use log N<1.07*(log k)^(1-c1) and the supplier effective PNT: the error is O(k*exp(-c*(log k)^min(c1,1/2))*(log k)^4), contradicting the fixed lower bound for effective large k. If all characters are exceptional, order their conductors; repulsion gives N_j≥N_1^(2^(j-1)), strictly for j≥2. The conductor–largest-prime theorem and 1/0.94<1.07, 2/0.94<2.13 give reciprocal mass<2.13/log N_1, so N_1≤373743<400000. Use the exclusion required by gap:small-conductor-zeros; it supplies no GRH premise.
+For a nonexceptional character use log N<1.07*(log k)^(1-c1) and the supplier effective PNT: the error is O(k*exp(-c*(log k)^min(c1,1/2))*(log k)^4), contradicting the fixed lower bound for effective large k. If all characters are exceptional, order their conductors; repulsion gives N_j≥N_1^(2^(j-1)), strictly for j≥2. The conductor–largest-prime theorem and 1/0.94<1.07, 2/0.94<2.13 give reciprocal mass<2.13/log N_1, so N_1≤373743<400000. ComputationalNumberTheory §4.24 excludes that conductor; no GRH premise is used.
 
-*Needs:* Layer 2 — simultaneous quadratic character family; Layer 0, explicit prime estimates; Layer 3 the largest-prime lower bound for quadratic conductors; AnalyticNumberTheoryPartI §§0.1, 0.17–0.18, 0.24 and 3.2; `gap:small-conductor-zeros`, `gap:numerical-prime-inputs`; Mathlib `Nat.maxPrimeFac`.
+*Needs:* Layer 2 — simultaneous quadratic character family; Layer 0, explicit prime estimates; Layer 3 the largest-prime lower bound for quadratic conductors; AnalyticNumberTheoryPartI §§0.1, 0.17–0.18, 0.24 and 3.2; ComputationalNumberTheory §4.24; `gap:numerical-prime-inputs`; Mathlib `Nat.maxPrimeFac`.
 
 ([BS20], Proposition 7.2, pp. 374-375; §7 proof, p.375; decay exponent for general c1; §7 proof, pp.375–376.)
 
@@ -1533,7 +1542,8 @@ strip Re ρ≥1−c/log T is contained in Re ρ>1−c₀/log T; thus every
 qualifying zero at q≤T, |Im ρ|≤T is real and simple, its primitive character
 is real-valued, and the entire character/zero pair is unique across all moduli.
 Use this fixed c in T(k,c); no existence of an exceptional zero is asserted.
-(IwaniecKowalski2004, Theorem 5.28; BS20, §12, p. 386.)
+(IwaniecKowalski2004, Theorem 5.26, with Theorem 5.28 for the two-real-zero
+repulsion inside the supplier proof; BS20, §12, p. 386.)
 
 Consume AnalyticNumberTheoryPartI §0.7's real-zero separation
 β≤1−40/(√q(log q)²), for nonprincipal quadratic characters modulo q≥3
@@ -2146,12 +2156,12 @@ by `n-d`. Its distinct branch values, the covering degree
 `ell^{k-3}`, and
 `2g-2=kell^{k-1}(1-2/k-1/ell)>0` are the genus requirements.
 
-Layers 1–6 also require the full effective-modular obligation
-`gap:effective-modular-comparisons`; it is not a theorem supplied by its name.
+Layers 1–6 also consume the effective comparisons EC.0–EC.5 of
+EllipticCurveModularityPartII Layers 1–6, with their stated hypotheses.
 All applications of the literal numerical constants retain the seven supplier
 input hypotheses in the contracts table until their discharge. The unconditional
 end theorems require gap:numerical-prime-inputs and gap:numerical-zero-inputs;
-the original route also requires gap:small-conductor-zeros. Conditional supplier
+the original route also consumes ComputationalNumberTheory §4.24. Conditional supplier
 estimates alone do not discharge these obligations.
 
 Finally, prove effectivity alongside the prime-exponent theorem. Record an
@@ -2183,4 +2193,4 @@ The general modular and analytic inputs above retain the hypotheses and numerica
 - **Tenenbaum1995.** Gérald Tenenbaum, *Introduction to Analytic and Probabilistic Number Theory* (1995), Theorems 5, 9 and following remark, as located in BS20, pp. 365, 384.
 - **RahmanRoth.** Mustazee Rahman, *Roth’s theorem on 3-term arithmetic progressions*, as quoted in BS20, §9, equation (36), p. 381.
 - **Bombieri1987.** Enrico Bombieri, *Le grand crible dans la théorie analytique des nombres*, Astérisque 18 (1987 reprint), discussion after Théorème 14.
-- **Platt2013v1.** David J. Platt, *Numerical computations concerning the GRH*, arXiv:1305.3087v1, Abstract, p. 1; published in Math. Comp. 85 (2016). The required consequence is a supplier gap, not a computation target here.
+- **Platt2013v1.** David J. Platt, *Numerical computations concerning the GRH*, arXiv:1305.3087v1, Theorems 7.1–7.2, pp. 14–15; published in Math. Comp. 85 (2016). Its consequence is consumed from ComputationalNumberTheory §4.24; no computation is specified here.
