@@ -9,8 +9,11 @@ uses the native quotient and localization: its actual compatible surjection
 from an etale rational algebra exhibits the number field as a field component.
 
 The headline theorems are short integral rational bases, bounded arithmetic first
-jets, explicit field components, logarithmic models, bounded-system field-class
-counts and cubic-logarithmic discriminant counts. All six are statable at the pins.
+jets, explicit field components, logarithmic models, the isolated affine and
+Jacobian-open distinct-point bounds, bounded-system field-class counts and
+cubic-logarithmic discriminant counts. All eight are statable at the pins.
+Etaleness of the Jacobian-open algebra over the rationals is a consequence of
+Mathlib's submersive presentations and is not repeated as a model condition.
 The two counting theorems use arbitrary finite families of pairwise nonisomorphic
 number fields. These are equivalent to the unweighted class-cardinality bounds
 by choosing one representative per class; ArithmeticStatisticsPartI owns the
@@ -75,7 +78,8 @@ abbrev JacobianOpenAlgebra {r : ℕ} (E : Fin r → MvPolynomial (Fin r) ℤ) :=
     (jacobianPolynomial E))
 
 /-- An integral point generating K, bounded integer equations vanishing there,
-and the actual compatible surjection from their etale Jacobian-open algebra.
+and the actual compatible surjection from their Jacobian-open algebra (etale over
+the rationals for every system, by Mathlib's standard-smooth presentations).
 The surjection exhibits K as an open and closed field factor, since an etale
 algebra over a field is a finite product of finite separable field extensions. -/
 def HasBoundedModel (K : Type*) [Field K] [NumberField K]
@@ -88,7 +92,6 @@ def HasBoundedModel (K : Type*) [Field K] [NumberField K]
       (MvPolynomial.aeval (fun j => (κ j : K)) :
         MvPolynomial (Fin r) ℚ →ₐ[ℚ] K) ∧
     MvPolynomial.aeval (fun j => (κ j : K)) (jacobianPolynomial E) ≠ 0 ∧
-    Algebra.Etale ℚ (JacobianOpenAlgebra E) ∧
     ∃ φ : JacobianOpenAlgebra E →ₐ[ℚ] K,
       Function.Surjective φ ∧
       ∀ f : MvPolynomial (Fin r) ℚ,
@@ -141,12 +144,36 @@ theorem exists_logarithmic_small_models :
           (((n : ℝ) * NumberField.rootDiscr K) ^ (Q * Real.log n)) := by
   sorry
 
+/-- Over an algebraically closed field, r polynomials in r variables of total
+degree at most d have at most d^r isolated affine zeros, counted without
+multiplicity and whatever the dimension of the other components. A point is
+isolated when its maximal ideal is a minimal prime over the ideal of the system
+(README §5.5; Couveignes §4, p.496). -/
+theorem isolatedAffinePoints_ncard_le_pow
+    {F : Type*} [Field F] [IsAlgClosed F] {r d : ℕ}
+    (E : Fin r → MvPolynomial (Fin r) F) (hE : ∀ i, (E i).totalDegree ≤ d) :
+    let Z := {x : Fin r → F |
+      RingHom.ker (MvPolynomial.eval x) ∈ (Ideal.span (Set.range E)).minimalPrimes}
+    Z.Finite ∧ Z.ncard ≤ d ^ r := by
+  sorry
+
+/-- Over an algebraically closed field, the common zeros of r polynomials in r
+variables of total degree at most d at which their Jacobian determinant does not
+vanish form a finite set of at most d^r points (README §5.5). -/
+theorem jacobianOpen_points_finite_ncard_le
+    {F : Type*} [Field F] [IsAlgClosed F] {r d : ℕ}
+    (E : Fin r → MvPolynomial (Fin r) F) (hE : ∀ i, (E i).totalDegree ≤ d) :
+    let Z := {x : Fin r → F | (∀ i, MvPolynomial.eval x (E i) = 0) ∧
+      MvPolynomial.eval x (Matrix.det fun i j => MvPolynomial.pderiv j (E i)) ≠ 0}
+    Z.Finite ∧ Z.ncard ≤ d ^ r := by
+  sorry
+
 /-- Bounded ordered integer systems represent at most the coefficient-box
 cardinality times the derived Jacobian-open distinct-point bound in pairwise
 nonisomorphic number fields (README §5.5; Couveignes §4, p.496). A field is represented by an actual
 surjective rational algebra map from the system's Jacobian-open algebra. -/
 theorem bounded_systems_field_class_bound
-    (r d C m : ℕ) (hr : 1 ≤ r) (hd : 1 ≤ d)
+    (r d C m : ℕ)
     (K : Fin m → Type*) [∀ i, Field (K i)] [∀ i, NumberField (K i)]
     (hsep : Pairwise (fun i j => ¬ Nonempty (K i ≃ₐ[ℚ] K j)))
     (hmodels : ∀ i, ∃ E : Fin r → MvPolynomial (Fin r) ℤ,

@@ -8,13 +8,11 @@ All logarithms are natural. The same Q controls both exponents and the degree th
 
 ## Scope and ownership
 
-This roadmap owns the arithmetic specialization of the compact-model argument: weighted canonical measure on a number field’s mixed space; short integral rational bases; the embedding parameter change; the kernel of bounded integral evaluation and its transpose index; the discriminant-sensitive covolume estimate; the short-equation truncation and common arithmetic Jacobian minor; the compatible map from the supplied Jacobian-open algebra to the given field; central-binomial parameter selection; bounded ordered integer systems; the derived isolated-affine and Jacobian-open distinct-point bounds of §5.5; and their field-class counting consequence.
+This roadmap owns the arithmetic specialization of the compact-model argument: the house body on a number field’s mixed space and its volume; short integral rational bases; the embedding parameter change; the kernel of bounded integral evaluation and its transpose index; the discriminant-sensitive covolume estimate; the short-equation truncation and common arithmetic Jacobian minor; the compatible map from the supplied Jacobian-open algebra to the given field; central-binomial parameter selection; bounded ordered integer systems; the isolated affine point bound `isolatedAffinePoints_ncard_le_pow` and the Jacobian-open point bound `jacobianOpen_points_finite_ncard_le` of §5.5, derived from projective Bézout; and their field-class counting consequence.
 
 Completed/EffectiveBounds Layers 1–2 and the pinned effective-bounds modules supply the discriminant and primitive-polynomial Hermite theory. Their fixed-ambient count, primitive-generator bounds, class-number and unit-square bounds are not targets here. The new count has a degree-sensitive cubic-logarithmic exponent and counts unweighted isomorphism classes. Regulator estimates, monogenicity, integral-basis reduction and enumeration procedures lie outside this Part II.
 
-Generic bounded polynomial carriers, support bases, evaluation, partial differentiation, torsion-free kernel saturation, central binomial coefficients and Catalan numbers are already in the library. GenericDoublePointInterpolation §§0.1, 0.3, 1.3–1.4 and 5.1–5.3 own their coefficient adapters, first jets, generic rank and universal minors; this roadmap specializes them to the conjugates of one arithmetic tuple. GeometryOfNumbersAndQuadraticArithmetic §§0.1–0.3 and 1.1–1.5 own generic Gram–Hadamard, primitive orthogonal covolumes, ordered-product estimates, intrinsic ball volumes and second Minkowski with witnesses. SchemeAndStackFoundations §§0.10 and 5.12 own the generic Jacobian étaleness and Bézout theory. ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”, owns the isomorphism-family quotient, degree and height. These objects are imported by those sections, not reconstructed.
-
-The acceptance signatures use only arithmetic specializations of native carriers. `jacobianPolynomial` and `JacobianOpenAlgebra` restrict the generic presentation to integer equations over ℚ; `HasBoundedModel` specifies its actual arithmetic point and compatible surjection. These definitions introduce no generic étaleness theorem or replacement field-class quotient. The arithmetic relation kernel differs from a class-group relation lattice: its codomain is the additive group of 𝓞_K and its generators are bounded monomials, rather than ideal classes.
+Generic bounded polynomial carriers, support bases, evaluation, partial differentiation, torsion-free kernel saturation, central binomial coefficients and Catalan numbers are already in the library. GenericDoublePointInterpolation §§0.1, 0.3, 1.3–1.4 and 5.1–5.3 own their coefficient adapters, first jets, generic rank and universal minors; this roadmap specializes them to the conjugates of one arithmetic tuple. GeometryOfNumbersAndQuadraticArithmetic §§0.1–0.3 and 1.1–1.5 own generic Gram–Hadamard, primitive orthogonal covolumes, ordered-product estimates, intrinsic ball volumes and second Minkowski with witnesses. Étaleness of a Jacobian-open localization over any commutative ring is already in Mathlib through submersive presentations. SchemeAndStackFoundations §5.12 owns the projective Bézout inequality. ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”, owns the isomorphism-family quotient, degree and height. These objects are imported by those sections, not reconstructed.
 
 DiophantineApproximationAndTranscendence §2.8, “Saturated kernel-lattice covolume”, owns the covolume formula for W∩𝓞_K^V for arbitrary K-subspaces W. The relation lattice here is the kernel of a particular bounded-monomial evaluation map over ℤ; §§2.2–2.5 retain its evaluation-image index and bound its covolume through the conjugate value matrix and the field discriminant. The general subspace-height formula is not a target here.
 
@@ -22,7 +20,7 @@ DiophantineApproximationAndTranscendence §2.8, “Saturated kernel-lattice covo
 
 Let K be a number field in a universe u, n=[K:ℚ]≥1, and 𝓞_K its native ring of integers. Indices of finite families are small; K and fields used for algebraic tests may lie in any universe. The signed integer field discriminant is `NumberField.discr K`. Put δ=`NumberField.rootDiscr K`=|disc K|^(1/n)≥1. Nonzero integral discriminant gives |disc K|≥1; all denominators involving n or disc K are therefore nonzero. An independent family of n integral elements is a rational basis and its ℤ-span can have finite index greater than one; an actual integral basis is named β separately (COU20 line 127, §2, p.490).
 
-The mixed space is ℝ^r₁×ℂ^r₂ with n=r₁+2r₂. Pair real coordinates by xy and complex coordinates by 2 Re(z conjugate(w)); write g for this real inner product. Its canonical measure is μ_can=2^r₂ times standard product volume. The house is the maximum of all complex embedding moduli, using `NumberField.house`. The house body is the product of real intervals and complex disks, not a ball for g. At one complex coordinate z=1 the house is 1 and the g-norm is √2. For ℚ(i), the product-lattice covolume is 1 and its canonical covolume is 2 (COU20 line 104, §2, pp.489–490).
+The mixed space is ℝ^r₁×ℂ^r₂ with n=r₁+2r₂, carrying Mathlib’s standard product volume; no second measure is used on it. The house is the maximum of all complex embedding moduli, using `NumberField.house`. The house body is the product of closed real intervals and closed complex disks, of volume 2^r₁π^r₂, and is not a Euclidean ball. For ℚ(i), the covolume of the integer lattice is 2^(−1)√4=1 (COU20 line 104, §2, pp.489–490, works with the canonical measure, 2^r₂ times this volume; in the standard volume the Minkowski product bound of §0.3 acquires the factor (2/π)^r₂≤1).
 
 Write V_S(r,d) for `MvPolynomial.restrictTotalDegree (Fin r) S d`. Its monomial index consists of exponent vectors α:Fin r→₀ℕ with sum α≤d, and M=choose(d+r,d). The coefficient metric makes these M monomials orthonormal; a polynomial has squared coefficient norm Σα |aα|². Every lower-rank lattice has its intrinsic volume in its real span, with zero-dimensional covolume 1. Thus X²−2 has coefficient norm √5 and value zero at √2; neither its value nor its maximum coefficient is this norm (COU20 line 255, §3, p.493).
 
@@ -46,13 +44,15 @@ Evaluation of integer polynomials at integral κ lands in 𝓞_K. Surjective alg
 ### From Mathlib
 
 - `NumberField.discr`, `NumberField.discr_ne_zero`, `NumberField.discr_eq_discr_of_algEquiv` in `Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean` give the signed field discriminant, its nonvanishing and isomorphism invariance. `NumberField.rootDiscr` in `Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean` is |disc K|^(1/n), and `NumberField.finite_of_discr_bdd` there gives finite bounded-discriminant sets of finite-dimensional intermediate fields of a fixed characteristic-zero ambient field.
-- `NumberField.mixedEmbedding.finrank` and `NumberField.mixedEmbedding.latticeBasis` in `Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean` provide real dimension n and the lattice basis associated to an actual integral basis. `NumberField.mixedEmbedding.covolume_integerLattice` in `Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean` uses standard product volume and equals 2^(−r₂)√|disc K|. It is this same lattice and fundamental domain that §0.2 rescales.
+- `NumberField.mixedEmbedding.finrank` and `NumberField.mixedEmbedding.latticeBasis` in `Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean` provide real dimension n and the lattice basis associated to an actual integral basis. `NumberField.mixedEmbedding.covolume_integerLattice` in `Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean` uses standard product volume and equals 2^(−r₂)√|disc K|.
+- `NumberField.mixedEmbedding.convexBodyLT`, `NumberField.mixedEmbedding.convexBodyLTFactor` and `NumberField.mixedEmbedding.convexBodyLT_volume` in `Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean` give the open product of real intervals and complex disks of radius f(w) and its product volume `convexBodyLTFactor K · ∏ f(w)^mult(w)`, with `convexBodyLTFactor K`=2^r₁π^r₂. `NumberField.discr_eq_discr` in `Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean` computes the field discriminant from any ℤ-basis of 𝓞_K.
 - `NumberField.house`, `NumberField.house_eq_sup'`, `NumberField.house_mul_le`, `NumberField.house_sum_le_sum_house`, `NumberField.house_intCast` and `NumberField.one_le_house_of_isIntegral` in `Mathlib/NumberTheory/NumberField/House.lean` supply the house, its embedding interpretation, product and sum bounds, integer normalization and the bound ≥1 for a nonzero algebraic integer. `NumberField.canonicalEmbedding.norm_le_iff` in `Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean` relates the canonical supremum norm to all embedding moduli.
 - `MvPolynomial.restrictTotalDegree`, `MvPolynomial.mem_restrictTotalDegree` and `MvPolynomial.basisRestrictSupport` in `Mathlib/RingTheory/MvPolynomial/Basic.lean` give the native degree-bounded submodule and support basis. Membership means total degree≤d; it does not mean a separate degree bound in each variable. `MvPolynomial.aeval` in `Mathlib/Algebra/MvPolynomial/Eval.lean` and `MvPolynomial.pderiv` in `Mathlib/Algebra/MvPolynomial/PDeriv.lean` are the actual evaluation and partial-derivative operations. These constructions use a commutative coefficient ring; field-rank arguments explicitly pass to ℚ or ℂ.
 - `MvPolynomial.eq_zero_of_eval_zero_at_prod_finset` in `Mathlib/Combinatorics/Nullstellensatz.lean` applies over any integral domain and a finite variable type: each grid cardinality is strictly greater than the corresponding variable degree. In §1.2 it is applied over ℂ to a pulled-back polynomial with complex coefficients, using D+1 distinct integer images in each coordinate.
 - `Algebra.discr_not_zero_of_basis` and `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two` in `Mathlib/RingTheory/Discriminant.lean` apply to finite separable field extensions and identify basis discriminant with the square of the embedding determinant. Number fields satisfy separability. The field discriminant requires an actual integral basis.
 - `ZLattice.covolume_eq_det_mul_measureReal` and `ZLattice.covolume_div_covolume_eq_relIndex'` in `Mathlib/Algebra/Module/ZLattice/Covolume.lean` compare intrinsic full-lattice covolumes with determinants and with finite relative index. The index comparison is made inside the common real span of the two lattices.
-- `Ideal.Quotient.mk`, `Localization.Away` and their algebra structures give the quotient and localization carriers used by `JacobianOpenAlgebra`. `Algebra.Etale.iff_exists_algEquiv_prod` in `Mathlib/RingTheory/Etale/Field.lean` identifies an étale algebra over a field with a finite product of finite separable field extensions; the index set may be empty. It does not state that a Jacobian localization over an arbitrary ring is finite. Its formally étale companion requires `Algebra.EssFiniteType`; the Jacobian presentation is finitely presented, so that hypothesis holds here.
+- `Ideal.Quotient.mk`, `Localization.Away` and their algebra structures give the quotient and localization carriers used by `JacobianOpenAlgebra`. `Algebra.Etale.iff_exists_algEquiv_prod` in `Mathlib/RingTheory/Etale/Field.lean` identifies an étale algebra over a field with a finite product of finite separable field extensions; the index set may be empty. It does not state that a Jacobian localization over an arbitrary ring is finite.
+- `Algebra.PreSubmersivePresentation.naive` and `Algebra.PreSubmersivePresentation.jacobiMatrix_naive`, `Algebra.SubmersivePresentation.localizationAway`, `Algebra.PreSubmersivePresentation.comp` and `Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian` in `Mathlib/RingTheory/Extension/Presentation/Submersive.lean`, `Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension` in `Mathlib/RingTheory/Smooth/StandardSmooth.lean`, and the instance making a standard smooth algebra of relative dimension zero étale in `Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean`. For r polynomials in r variables over a commutative ring R, the naive presentation of R[X]/(E) has Jacobian matrix given by the partial derivatives, its composite with the presentation of the localization away from its Jacobian is submersive of relative dimension zero, and so that localization is étale over R. No finiteness over R follows.
 
 - `AddSubmonoid.ker_saturated` in `Mathlib/GroupTheory/Subgroup/Saturated.lean` makes the additive kernel of a map into an additive torsion-free monoid saturated under multiplication by natural numbers; the integer version follows using additive inverses. Apply it to bounded evaluation into the torsion-free additive group of 𝓞_K.
 - `Nat.centralBinom`, `Nat.succ_mul_centralBinom_succ` and `Nat.four_pow_le_two_mul_add_one_mul_centralBinom` in `Mathlib/Data/Nat/Choose/Central.lean` give choose(2r,r), its consecutive recurrence and 4^r≤(2r+1)choose(2r,r), including r=0. The native `catalan` and `succ_mul_catalan_eq_centralBinom` in `Mathlib/Combinatorics/Enumerative/Catalan/Basic.lean` give Fᵣ=choose(2r,r)/(r+1) without a new sequence carrier. Section 5.1 selects the least admissible index of this sequence.
@@ -73,11 +73,9 @@ Consume §1.1.2, `ordered_product_root_bound`, for a nondecreasing finite sequen
 
 Consume §0.1’s monomial count M=choose(d+r,d) and coefficient equivalence, and §0.3’s real coefficient metric on the native bounded module. Consume §1.3’s value map, first-jet map and derivative map on the value kernel, with the statement that first-jet surjectivity makes this joint derivative map onto. Section 1.4 identifies these maps with their actual polynomial matrices.
 
-Consume §§5.1–5.3’s generic affine principal open and selected integer maximal minor for r,n≥1, d≥5 and M≥n(r+1). A selected nonzero minor has total degree at most D=dn(r+1), hence each variable degree at most D; its nonvanishing implies distinctness and surjective first jets. The full nonzero-minor construction is an input, not just an unspecified genericity predicate. At one affine point in one variable, columns (1,X) give determinant 1; swapping those columns gives −1. Seven collinear plane points have degree-five first-jet rank 11 rather than 21. The arithmetic parameter change has complex coefficients, so §1.2 uses Mathlib’s grid theorem over ℂ directly; the supplier’s integer-polynomial parameter-pullback statement has different coefficient hypotheses.
+Consume §§5.1–5.3’s generic affine principal open and selected integer maximal minor for r,n≥1, d≥5 and M≥n(r+1). A selected nonzero minor has total degree at most D=dn(r+1), hence each variable degree at most D; its nonvanishing implies distinctness and surjective first jets. The full nonzero-minor construction is an input, not just an unspecified genericity predicate. At one affine point in one variable, columns (1,X) give determinant 1; swapping those columns gives −1. The arithmetic parameter change has complex coefficients, so §1.2 applies Mathlib’s grid theorem over ℂ.
 
 ### From TauCetiRoadmap.SchemeAndStackFoundations
-
-Consume §0.10, `jacobian_etale_algebra`: for r equations in r variables over a commutative ring R, the quotient localized at its Jacobian is an étale finitely presented R-algebra. Here R=ℚ. Mathlib’s field-base classification then supplies finite-dimensionality and finite separable field factors. The component map is constructed here from the given evaluation and the invertibility of its Jacobian; no abstract unmarked field occurrence is used. For X²−2 over ℚ the Jacobian is 2X, its inverse at √2 is √2/4, and the algebra is ℚ(√2). For X² at zero the localization is the zero algebra. Over R=A[t], the presentation tx−1 instead gives A[t,t⁻¹], illustrating why the general-base contract does not assert finiteness.
 
 Consume §5.12, `bezout_inequality`: for two equidimensional closed subschemes V,W of projective space over a field, the sum of the degrees of the reduced irreducible components of V∩W is at most deg(V)deg(W), without a proper-intersection hypothesis. Its multiplicity-weighted equality requires proper intersection. Section 5.5 derives the distinct isolated-affine-point bound by applying this inequality separately to each reduced irreducible component at every cut; the intermediate intersection need not be equidimensional. The degree and component carriers remain those of the supplier.
 
@@ -87,54 +85,49 @@ Consume Layer 0, “Number fields ordered by discriminant” (anchor `number-fie
 
 ## How to read the build
 
-Layer 0 uses the number-field canonical measure and second Minkowski to obtain a short integral rational basis. Layer 1 moves through its invertible complex embedding matrix to choose bounded integral generators with all first jets onto. Layer 2 builds the arithmetic relation lattice and preserves both its transpose index and its discriminant denominator. Layer 3 applies second Minkowski in the coefficient space, discards exactly n−1 relations and selects one integer Jacobian minor nonzero at every conjugate. Layer 4 combines the explicit coefficients with the actual field component map. Layer 5 chooses parameters depending only on the degree, counts ordered coefficient boxes, derives the isolated-point bound from component degrees and uses it to count field factors. Each *Needs* line names the statement and proof-route inputs separately enough to permit another proof. `Suggested.lean` tests six headline theorems: short integral rational bases, bounded arithmetic first jets, explicit models, logarithmic models, bounded-system field-class counts and discriminant counts. The two counting signatures use arbitrary finite families of pairwise nonisomorphic number fields; choosing one representative per class gives exactly the unweighted class-cardinality bounds. The supplier retains ownership of the quotient carrier.
+Layer 0 applies second Minkowski to the house body, with Mathlib’s product volume and discriminant covolume, to obtain a short integral rational basis. Layer 1 moves through its invertible complex embedding matrix to choose bounded integral generators with all first jets onto. Layer 2 builds the arithmetic relation lattice and preserves both its transpose index and its discriminant denominator. Layer 3 applies second Minkowski in the coefficient space, discards exactly n−1 relations and selects one integer Jacobian minor nonzero at every conjugate. Layer 4 combines the explicit coefficients with the actual field component map. Layer 5 chooses parameters depending only on the degree, counts ordered coefficient boxes, derives the isolated-point bound from component degrees and uses it to count field factors. Each *Needs* line names the statement and proof-route inputs separately enough to permit another proof. `Suggested.lean` tests eight headline theorems: short integral rational bases, bounded arithmetic first jets, explicit models, logarithmic models, the isolated affine and Jacobian-open point bounds, bounded-system field-class counts and discriminant counts. The two counting signatures use arbitrary finite families of pairwise nonisomorphic number fields; choosing one representative per class gives exactly the unweighted class-cardinality bounds. The supplier retains ownership of the quotient carrier.
 
 ## Layer 0: Short algebraic integers
 
-### 0.1 Weighted canonical measure
+### 0.1 The house body
 
-Define the canonical measure and pairing on the mixed space, using the standard product Borel structure. The scaling map multiplies the two real directions of every complex coordinate by √2, so its determinant is 2^r₂. The gauge comparison is an equality on the embedded field, while the volume identity holds for all measurable subsets.
+Work in Mathlib’s mixed space ℝ^r₁ × ℂ^r₂ with its standard product volume, the measure in which `NumberField.mixedEmbedding.covolume_integerLattice` is stated. The house body is a product of closed real intervals and closed complex disks, not a Euclidean ball, and its gauge on embedded K is the house.
 
-On the existing mixed space ℝ^r₁ × ℂ^r₂ use the positive definite real pairing g(x,y)=Σ_real x_i y_i+2 Re(Σ_complex x_j conjugate(y_j)). Its Euclidean Haar measure μ_can is 2^r₂ times standard product volume. The house body B={max(|real coordinates|,|complex coordinates|)≤1} has μ_can-volume 2^r₁(2π)^r₂≥2^n. The house gauge is not the norm from g. (COU20 line 104, §2, p. 489, canonical pairing and measure).
+Let B be the set of points of the mixed space all of whose real and complex coordinates have modulus at most 1. Then B is compact, convex, centrally symmetric and has 0 in its interior; its volume is 2^r₁π^r₂; and for x∈K and t≥0 the mixed embedding of x lies in tB if and only if house(x)≤t (COU20 line 104, §2, p. 489, for the house body; the volume normalization is Mathlib’s).
 
-A proof route is as follows. Scale both real coordinates of each complex factor by √(2). This is an isometry from g to the standard Euclidean metric and has real determinant 2^r₂. Use change of variables for Haar volume. The sup body is a product of intervals and complex disks, giving the stated volume. Identify its gauge on embedded K with the built house, since conjugate embeddings have equal modulus.
+A proof route is as follows. B is the closure of the open body `NumberField.mixedEmbedding.convexBodyLT K 1`, whose volume is `convexBodyLTFactor K`=2^r₁π^r₂ by `NumberField.mixedEmbedding.convexBodyLT_volume`. The difference lies in the finite union of the sets on which one coordinate has modulus exactly 1, each a product with a sphere and hence null. Conjugate complex embeddings have equal modulus, so the gauge of B at the embedding of x is the maximum of all embedding moduli, which is `NumberField.house x`.
 
 The API has the following properties.
 
-- μ_can is the Haar measure 2^r₂ times the existing mixed-space volume.
-- For every measurable set S, μ_can(S)=2^r₂ volume(S).
-- A complex coordinate contributes 2 Re(z conjugate(w)); a real coordinate contributes xy.
-- The closed house unit body has volume 2^r₁(2π)^r₂.
-- For x∈K the body gauge of its mixed embedding equals NumberField.house x.
+- B is compact, convex, centrally symmetric and a neighbourhood of 0.
+- The volume of B equals the volume 2^r₁π^r₂ of the open body `convexBodyLT K 1`.
+- For x∈K and t≥0, the mixed embedding of x lies in tB if and only if house(x)≤t.
+- Since n=r₁+2r₂, 2^n·2^(−r₂)/(2^r₁π^r₂)=(2/π)^r₂≤1.
 
 **Checks.**
 
-- For ℚ, the unit body is [−1,1], of canonical volume 2. Omitting the interval’s full length would give 1.
-- For ℚ(i), canonical measure is twice plane area and the unit disk has volume 2π. Omitting the complex weight would give π.
-- For any totally real K, canonical and standard product measures agree. A spurious real-coordinate weight would break this equality.
-- At the complex coordinate z=1, the house gauge is 1 while the g-norm is √(2). Equating gauge and Euclidean norm would give the wrong √2.
+- For ℚ, B=[−1,1] has volume 2. Taking the radius instead of the length of the interval would give 1.
+- For ℚ(i), B is the closed unit disk, of volume π. A measure that doubles each complex coordinate would give 2π and change the constant (2/π)^r₂ to 1.
+- For a totally real field of degree n, B is the cube [−1,1]^n of volume 2^n, and (2/π)^0=1.
+- In ℚ(√2) the mixed embedding of 1 is (1,1): its gauge is house(1)=1, while its Euclidean norm is √2. Equating gauge and Euclidean norm would give the wrong √2.
 
-Canonical volume and the house gauge are tracked separately in both Minkowski applications.
+*Needs:* Mathlib `NumberField.mixedEmbedding.convexBodyLT`, `NumberField.mixedEmbedding.convexBodyLT_volume`; Mathlib `NumberField.house`; Mathlib `NumberField.canonicalEmbedding.norm_le_iff`.
 
-*Needs:* Mathlib `NumberField.mixedEmbedding.finrank`; Mathlib `NumberField.house`; Mathlib `NumberField.canonicalEmbedding.norm_le_iff`.
+### 0.2 Discriminant covolume
 
-### 0.2 Canonical discriminant covolume
+Use an actual integral basis β, rather than the short rational basis constructed in §0.5.
 
-Use an actual integral basis β, rather than the short rational basis constructed in §0.5. The canonical Gram matrix is that of β for g. Rescaling the same fundamental domain, rather than changing the lattice, cancels the two powers of 2.
+The image of 𝓞_K in the mixed space has covolume 2^(−r₂)√(|disc K|)=2^(−r₂)δ^(n/2) for the standard product volume. If β is an actual integral basis and A has rows indexed by complex embeddings and columns β, then |det A|²=|disc K|. (COU20 line 127, §2, p. 490, before the first successive-minima application).
 
-The mixed-embedding lattice of 𝓞_K has canonical covolume √(|disc K|)=δ^(n/2). If β is an actual integral basis and A has rows indexed by embeddings and columns β, its canonical Gram determinant is |det A|²=|disc K|. (COU20 line 127, §2, p. 490, before the first successive-minima application).
-
-A proof route is as follows. Take the existing product-volume identity 2^(−r₂) √(|disc K|) on the existing lattice. Apply the measure-scaling identity to the same fundamental domain, cancelling 2^r₂. For the integral-basis matrix use the embedding-determinant discriminant identity and conjugation to obtain |det A|². Nonzero integer discriminant implies |disc K|≥1, and positive-real-power laws give the δ formula.
+A proof route is as follows. The covolume is Mathlib’s `NumberField.mixedEmbedding.covolume_integerLattice`; nonzero integer discriminant gives |disc K|≥1, and positive-real-power laws give √(|disc K|)=δ^(n/2). For A, `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two` gives disc(β)=det(A)², `NumberField.discr_eq_discr` identifies disc(β) with `NumberField.discr K`, and taking absolute values gives |det A|².
 
 **Checks.**
 
-- For ℚ, the basis (1) has Gram determinant 1 and canonical covolume 1, matching |disc ℚ|=1.
-- For ℚ(i), β=(1,i) has canonical Gram matrix diag(2,2), determinant 4 and covolume 2; standard product covolume is 1. This distinguishes the measures.
+- For ℚ, the basis (1) gives covolume 1 and |det A|²=1=|disc ℚ|.
+- For ℚ(i), r₂=1 and |disc K|=4, so the covolume is 2^(−1)·2=1. With β=(1,i), A=[[1,i],[1,−i]] has det A=−2i, so |det A|²=4=|disc K| while det(A)²=−4=disc K. Omitting the absolute value would give the wrong sign.
 - In ℚ(√5), (1,√5) has discriminant 20 while the actual integral basis (1,(1+√5)/2) has discriminant 5. Substituting the short rational basis into the field-discriminant equality would be false.
 
-For ℚ(i), product covolume is 1 and canonical covolume is 2, whose square is |−4|. A short rational basis cannot replace β in this discriminant formula.
-
-*Needs:* §0.1; Mathlib `NumberField.mixedEmbedding.covolume_integerLattice`; Mathlib `NumberField.mixedEmbedding.latticeBasis`; Mathlib `NumberField.discr_ne_zero`; Mathlib `NumberField.rootDiscr`; Mathlib `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two`.
+*Needs:* Mathlib `NumberField.mixedEmbedding.covolume_integerLattice`; Mathlib `NumberField.mixedEmbedding.latticeBasis`; Mathlib `NumberField.discr_ne_zero`; Mathlib `NumberField.discr_eq_discr`; Mathlib `NumberField.rootDiscr`; Mathlib `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two`.
 
 ### 0.3 More than half a degree of short integers
 
@@ -142,7 +135,7 @@ Choose a simultaneous family attaining the successive minima and order it by hou
 
 There exist ℚ-linearly independent ω_1,…,ω_n∈𝓞_K with nondecreasing houses and product of houses at most δ^(n/2). For m=floor(n/2)+1, all ω_i with i≤m have house at most δ. The family need not be an integral basis. (COU20 line 140, §2, p. 490, first Minkowski application and the choice of m).
 
-A proof route is as follows. Apply the imported second-Minkowski upper product inequality and attaining independent witnesses to the closed house body with canonical volume at least 2^n. Sort the witnesses by gauge, using the built house lower bound 1 on every nonzero algebraic integer. Apply the imported ordered-product root bound: house(ω_i)≤δ^(n/(2(n+1−i))). For i≤m, n≤2(n+1−i) and δ≥1 give the result. Real independence of mixed images implies ℚ-independence; no assertion about the integral span follows.
+A proof route is as follows. Apply the imported second-Minkowski upper product inequality and attaining independent witnesses to the closed house body B of §0.1 and the lattice of §0.2 with the standard product volume: the product of the n houses is at most 2^n·2^(−r₂)δ^(n/2)/(2^r₁π^r₂)=(2/π)^r₂δ^(n/2)≤δ^(n/2). Sort the witnesses by gauge, using the built house lower bound 1 on every nonzero algebraic integer. Apply the imported ordered-product root bound: house(ω_i)≤δ^(n/(2(n+1−i))). For i≤m, n≤2(n+1−i) and δ≥1 give the result. Real independence of mixed images implies ℚ-independence; no assertion about the integral span follows.
 
 The API has the following properties.
 
@@ -150,7 +143,7 @@ The API has the following properties.
 - The coerced family is ℚ-linearly independent; its first m elements span an m-dimensional space.
 - For i≤m, every embedding modulus of ω_i is at most δ.
 - The product of all n houses is at most δ^(n/2).
-- The witness gauge is the existing house, not the weighted Euclidean norm.
+- The witness gauge is the existing house, not a Euclidean norm.
 
 **Checks.**
 
@@ -158,9 +151,7 @@ The API has the following properties.
 - For n=4 one must keep m=3; the exponent bound on the third house is δ^(4/(2·2))=δ. Keeping only two vectors would lose 2m>n.
 - For n=5, m=3, and the third-house estimate is δ^(5/6)≤δ. The fractional tail exponent is not 1 in this case.
 
-The exact m has 2m>n; choosing only floor(n/2) witnesses is insufficient.
-
-*Needs:* §0.2; Mathlib `NumberField.one_le_house_of_isIntegral`; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.5.21, upper second Minkowski inequality with an explicit Haar measure; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.2.7, simultaneous attaining witnesses; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.1.2, the ordered-product root bound.
+*Needs:* §0.1; §0.2; Mathlib `NumberField.one_le_house_of_isIntegral`; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.5.21, upper second Minkowski inequality with an explicit Haar measure; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.2.7, simultaneous attaining witnesses; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.1.2, the ordered-product root bound.
 
 ### 0.4 Products span the field
 
@@ -179,8 +170,6 @@ A proof route is as follows. If the product span is proper, choose a nonzero k-l
 - For the inseparable degree-two extension 𝔽₂(t)/𝔽₂(t²) and V=K, the products 1 and t span K; separability is unnecessary.
 - In the four-dimensional algebra k⁴, the ideal V=k³×0 has dimension 3 and 2·3>4, but its products still lie in that proper ideal. The field hypothesis cannot be replaced by finite algebra.
 
-At equality the assertion fails: V=ℚ in a quadratic field has 2dim V=n but product span ℚ. A finite algebra with zero divisors is not substituted for a field.
-
 *Needs:* Mathlib `Submodule.span`, `Module.finrank` and finite-dimensional dual-space linear algebra.
 
 ### 0.5 Independent delta-squared-short integers
@@ -197,13 +186,11 @@ A proof route is as follows. Take the m small integers and apply product-span to
 - For ℚ(i), (1,i) has houses (1,1), δ=2 and δ²=4, so each inequality reads 1≤4.
 - For ℚ(√5), (1,√5) has houses (1,√5)≤5=δ² but integral index 2; house control does not force a maximal-order basis.
 
-The existence includes ℚ, with α_1=1. Every later field-discriminant computation uses a separate genuine integral basis.
-
 *Needs:* §0.3; §0.4; Mathlib `NumberField.house_eq_sup'`.
 
 ### Examples
 
-For ℚ(i), canonical lattice covolume 2 has square 4=|disc K|, while the short elements 1 and i have house 1≤δ²=4. The products of the one-dimensional rational subspace ℚ still span only ℚ, exhibiting the strict product-span boundary.
+For ℚ(i), the integer lattice has covolume 1 and the house disk has area π, so the Minkowski product bound is 2²·1/π=4/π≤2=δ; the embedding determinant of (1,i) has squared modulus 4=|disc K|, while the short elements 1 and i have house 1≤δ²=4. The products of the one-dimensional rational subspace ℚ still span only ℚ, exhibiting the strict product-span boundary.
 
 ### Dependencies
 
@@ -236,8 +223,6 @@ The API has the following properties.
 - The integral rational basis (1,√(5)) of ℚ(√(5)) is allowed even though its ℤ-span has index 2 in 𝓞_K. An integral-basis-only hypothesis would wrongly reject it.
 - Repeated α entries are rejected by the rational-basis hypothesis; their configuration map is singular. For α=(1,1) the two columns coincide and the determinant is zero.
 
-The inverse matrix is used over ℂ; integrality of its entries is never asserted.
-
 *Needs:* §0.5; Mathlib `Algebra.discr_not_zero_of_basis`; Mathlib `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two`.
 
 ### 1.2 Bounded arithmetic first-jet parameters
@@ -248,7 +233,7 @@ Assume the explicit model range r≥1, d≥5 and M≥n(r+1).
 
 Under r≥1,d≥5,M≥n(r+1), there is u∈{0,…,D}^(n×r), D=dn(r+1), such that the degree-d first-jet map at the n conjugate points of κ(u) is surjective over ℂ. These points are distinct and house(κ_j)≤n²d(r+1)δ². (COU20 line 242, §3, pp. 491–492, maximal minor and integer parameter grid).
 
-A proof route is as follows. Import a nonzero n(r+1)-column maximal minor on the generic affine configuration space and its total-degree bound D. Pull it back by the complex-linear parameter equivalence of §1.1. The pullback is nonzero; linear substitution preserves the total-degree bound D, hence bounds every variable degree by D. Apply the built grid-vanishing lemma over ℂ to the coordinate sets {0,…,D}, each of cardinality D+1. This allows the complex embedding coefficients; the integer-coefficient-only parameter export is not misapplied. The resulting integer tuple has nonzero minor, so first jets are onto and repeated conjugate points are impossible. Insert D into the house bound.
+A proof route is as follows. Import a nonzero n(r+1)-column maximal minor on the generic affine configuration space and its total-degree bound D. Pull it back by the complex-linear parameter equivalence of §1.1. The pullback is nonzero; linear substitution preserves the total-degree bound D, hence bounds every variable degree by D. Apply the built grid-vanishing lemma over ℂ to the coordinate sets {0,…,D}, each of cardinality D+1. The resulting integer tuple has nonzero minor, so first jets are onto and repeated conjugate points are impossible. Insert D into the house bound.
 
 **Checks.**
 
@@ -256,8 +241,6 @@ A proof route is as follows. Import a nonzero n(r+1)-column maximal minor on the
 - For a quadratic field, the zero parameter tuple repeats the two conjugate points and the two value rows coincide, so first-jet rank is deficient. Distinctness must follow from the chosen nonzero minor.
 - A degree-D polynomial given by the product of T−j over 0≤j<D vanishes at D proposed grid values but is nonzero at T=D, with value D!. The grid needs D+1 choices (including D=0, where the empty product is 1).
 - For seven distinct points (i,0), i=0,…,6, in the plane and d=5, the jet rank is 6+5=11 rather than 21; the numerical dimension inequality does not replace genericity.
-
-The grid uses D+1 choices per parameter; D choices do not follow from a degree≤D bound. For seven collinear points in A² at d=5, distinctness and the dimension inequality alone do not imply full jets.
 
 *Needs:* §1.1; TauCetiRoadmap.GenericDoublePointInterpolation §5.3, generic affine Hermite interpolation; TauCetiRoadmap.GenericDoublePointInterpolation §5.3, a nonzero maximal minor; TauCetiRoadmap.GenericDoublePointInterpolation §5.2, degree of a selected first-jet minor; Mathlib `MvPolynomial.eq_zero_of_eval_zero_at_prod_finset`.
 
@@ -277,13 +260,11 @@ A proof route is as follows. Project the full first-jet map onto its n value row
 - At κ=√5 in ℚ(√5), degree-one rational rank is 2 but the integral image is ℤ[√5], of index 2. Rational surjectivity cannot imply integral surjectivity.
 - For κ=0 in a quadratic field, every rational polynomial value is rational, so the image rank is 1<2. A tuple unrelated to the chosen first jets would make the conclusion false.
 
-Tensoring an integral image with ℚ can be onto while its integral index remains greater than one. The morphism Spec K→A^r_ℚ comes from the actual evaluation map.
-
 *Needs:* §1.2; TauCetiRoadmap.GenericDoublePointInterpolation §1.3, the value map; TauCetiRoadmap.GenericDoublePointInterpolation §1.3, first-jet kernel splitting; Mathlib `MvPolynomial.restrictTotalDegree`; Mathlib `MvPolynomial.aeval`.
 
 ### Examples
 
-For ℚ(√5), (1,√5) is an admissible integral rational basis despite index 2. The nonzero embedding determinant is −2√5 up to the chosen embedding order, so the complex parameter map is invertible. Seven collinear plane points have jet rank 11; the parameter box argument must select a nonzero minor.
+For ℚ(√5), (1,√5) is an admissible integral rational basis despite index 2. The nonzero embedding determinant is −2√5 up to the chosen embedding order, so the complex parameter map is invertible.
 
 ### Dependencies
 
@@ -318,8 +299,6 @@ The API has the following properties.
 - The tuple 1/2∈ℚ does not define this map into 𝓞_ℚ=ℤ and is excluded. Its value at X is 1/2, which is not an integer.
 - At κ=0 in a quadratic field and d=2, M=3 and the actual kernel has rank 2, whereas M−n=1. This excludes a rank formula without full rational value rank.
 
-L is considered as a full lattice in its ℓ-dimensional real span, not in all ℝ^M.
-
 *Needs:* §1.3; Mathlib `MvPolynomial.restrictTotalDegree`; Mathlib `MvPolynomial.mem_restrictTotalDegree`; Mathlib `MvPolynomial.aeval`; Mathlib `AddSubmonoid.ker_saturated`; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, monomial coefficient equivalence; TauCetiRoadmap.GenericDoublePointInterpolation §0.3, the real coefficient metric; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, bounded monomial count.
 
 ### 2.2 Transpose image and its integral index
@@ -343,11 +322,9 @@ The API has the following properties.
 
 **Checks.**
 
-- For K=ℚ(√(5)), κ=√(5), d≥1, im(ev_ℤ)=ℤ[√(5)] has index 2 in 𝓞_K, so S has index 2 in L⊥. Setting the index equal to 1 would be false.
+- For K=ℚ(√(5)), κ=√(5), d≥1, im(ev_ℤ)=ℤ[√(5)] has index 2 in 𝓞_K, so S has index 2 in L⊥. Setting the index equal to 1 would be false. The same q is the gcd of the maximal minors of the coordinate matrix B=[[1,−1,5],[0,2,0]] of §2.3, namely gcd(2,0,−10)=2, since the index of the column lattice of a full-rank integer matrix is the gcd of its maximal minors.
 - For κ=√(2) in ℚ(√(2)), d≥1, evaluation contains the integral basis 1,√(2); hence S=L⊥. This is the index-one case of the same comparison.
 - For the abstract integer map ℤ→ℤ, z↦2z, the kernel is zero, its integral orthogonal is ℤ, and the dual image is 2ℤ, of covolume 2 rather than 1. This determines the inequality direction 1≤2.
-
-The direction of the inequality is covol(L)≤covol(S), and q is never silently set to 1.
 
 *Needs:* §2.1; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §0.3.3, primitive orthogonal covolume; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §§0.2.1, 0.2.6, saturated intersections and their orthogonal lattices; Mathlib `ZLattice.covolume_div_covolume_eq_relIndex'`.
 
@@ -367,8 +344,6 @@ A proof route is as follows. The basis-coordinate identity gives V=AB. Consequen
 - For ℚ(√5), κ=√5,d=2 and β=(1,(1+√5)/2), B has rows (1,−1,5),(0,2,0). Its Gram determinant is 104. The value Gram matrix is [[31,21],[21,31]], determinant 520, and 520/5=104.
 - Replacing β by the rational basis (1,√5) makes the coordinate Gram determinant 26 and the basis discriminant 20, so 520/20=26. Using the field discriminant 5 with this basis would give the wrong 104.
 
-Use V conjugate(V)^t, not VV^t, in the positive Hermitian Gram matrix. The short α family is not used as β.
-
 *Needs:* §2.2; §0.2; Mathlib `Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two`; Mathlib `ZLattice.covolume_eq_det_mul_measureReal`; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §0.1.2, Hermitian Gram–Hadamard.
 
 ### 2.4 Height of monomial values
@@ -387,13 +362,11 @@ A proof route is as follows. For each bounded exponent α, the evaluated monomia
 - At κ=0, the constant monomial has value 1 and the other positive-degree monomials vanish. An incorrect bound C₀=0 would give H₀=0 for d>0 and miss that 1.
 - For n=2,r=1,d=5, D=20,C₀=40δ²,H₀=40⁵δ¹⁰ and G=6·40¹⁰δ²⁰. This fixes both discriminant exponents.
 
-H0=[n²d(r+1)]^d δ^(2d); G=M[n²d(r+1)]^(2d)δ^(4d). The constant monomial contributes 1.
-
 *Needs:* §1.2; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, bounded monomial count; Mathlib `NumberField.house_eq_sup'`.
 
 ### 2.5 Covolume of arithmetic relations
 
-The first inequality retains the arithmetic discriminant improvement; the second alone is used in the explicit coefficient estimate. Positivity justifies the square roots and division. These are intrinsic coefficient-space covolumes, independently of the canonical archimedean measure of Layer 0.
+The first inequality retains the arithmetic discriminant improvement; the second alone is used in the explicit coefficient estimate. Positivity justifies the square roots and division. These are intrinsic coefficient-space covolumes, independently of the mixed-space volume of Layer 0.
 
 Assume the explicit model range r≥1, d≥5 and M≥n(r+1).
 
@@ -406,8 +379,6 @@ A proof route is as follows. Use primitive orthogonal equality and S⊆L⊥ to b
 - For ℚ(√5), κ=√5,d=2, the relation X²−5 has covolume √26, whereas the transpose image has covolume 2√26. Thus √26≤2√26, with the index direction preserved.
 - For that example det(VV*)=520 and disc K=5, so the transpose bound is √(520/5)=2√26. Omitting the discriminant denominator would give √520 instead.
 - For κ=0 in ℚ and d=2, L has basis X,X² and intrinsic covolume 1. The value matrix is (1,0,0), with Gram determinant and discriminant both 1.
-
-The coefficient space uses its unweighted monomial Euclidean measure, independently of the earlier canonical measure.
 
 *Needs:* §2.2; §2.3; §2.4; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §0.1.2, Hermitian Gram–Hadamard; Mathlib `NumberField.discr_ne_zero`.
 
@@ -447,8 +418,6 @@ The API has the following properties.
 - For an intrinsic line, the unit interval has volume 2 and the ball lower bound is 2¹·1^(−1/2)=2. In a surrounding plane that interval has area zero, which would invalidate the argument.
 - For ℓ=2, the inscribed square has half-side 1/√2, area 2 and vertex norm 1; the disk has area π≥2. Using half-side 1 would put (1,1) outside the ball.
 
-No step uses the two different archimedean and coefficient measures interchangeably.
-
 *Needs:* §2.5; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §§1.1.3–1.1.5, intrinsic ball volume; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.5.21, upper second Minkowski inequality with an explicit Haar measure; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.2.7, simultaneous attaining witnesses; TauCetiRoadmap.GenericDoublePointInterpolation §0.3, the real coefficient metric.
 
 ### 3.2 Dropping exactly n minus one relations
@@ -464,8 +433,6 @@ A proof route is as follows. For one-based i≤k, ℓ+1−i≥n. Apply the impor
 - For n=2,r=1,d=5, M=6,ℓ=4 and k=3, so the retained codimension is exactly 1=n−1 and the final retained tail has length 2=n.
 - For n=1 one retains all ℓ relations, with codimension zero; discarding one more would change the required strict inequality.
 - For ordered norms (1,2,4,8), n=2,ℓ=4,G=4, the product is 64=ℓ^(ℓ/2)G^(n/2), and the largest retained norm 4 is at most ℓ^(ℓ/(2n))√G=8.
-
-Keeping ℓ−n instead loses the strict codimension inequality needed for a full gradient block. The output bound is ℓ^(ℓ/(2n))√(M)[n²d(r+1)]^d δ^(2d).
 
 *Needs:* §3.1; TauCetiRoadmap.GeometryOfNumbersAndQuadraticArithmetic §1.1.2, the ordered-product root bound.
 
@@ -485,8 +452,6 @@ A proof route is as follows. Use the relation-lattice scalar-extension identific
 - At the same point with d=0, values are onto but the value kernel and derivative rank are both zero. Values alone do not imply first-jet surjectivity.
 - At the two points 0 and 1 in one variable, the value-kernel polynomials X(X−1) and X²(X−1) have derivative columns (−1,1) and (0,1). Their determinant is −1, giving joint rank 2.
 
-Value surjectivity by itself does not imply this derivative statement.
-
 *Needs:* §2.1; §1.2; TauCetiRoadmap.GenericDoublePointInterpolation §1.3, first-jet kernel splitting; TauCetiRoadmap.GenericDoublePointInterpolation §1.3, derivatives on the value kernel.
 
 ### 3.4 A retained family spans one gradient block
@@ -502,8 +467,6 @@ A proof route is as follows. Let Y be the image of W in the product of gradient 
 - For n=2,r=1, the diagonal subspace {(z,z)} of ℂ² has codimension 1 and both block ranks equal 1.
 - For n=2,r=2, the hyperplane defined by the first coordinate being zero has block ranks 1 and 2 and codimension 1<2; at least one block is full, not necessarily all blocks.
 - The zero subspace in ℂ² has codimension 2=n and both one-dimensional projections have rank zero. The strict codimension threshold is essential.
-
-At codimension n this can fail: in (ℂ^r)^n, the product of n fixed hyperplanes has codimension n and every block is proper.
 
 *Needs:* §3.2; §3.3.
 
@@ -523,8 +486,6 @@ A proof route is as follows. Full rank supplies r distinct retained rows and a n
 - For E=X²−2 at √2, the two derivative values are 2√2 and −2√2. Their signs differ, but the same polynomial minor is nonzero at both embeddings.
 - For E=X² at zero the derivative is zero. Vanishing equations without a nonzero minor cannot define the component localization map.
 
-A tuple in a nonnormal cubic field is still covered by injectivity of its embeddings. All selected equations are integral relations, not merely complex linear combinations.
-
 *Needs:* §3.4; §3.2; Mathlib `MvPolynomial.pderiv`.
 
 ### Examples
@@ -543,9 +504,9 @@ For the ordered integer system E, define `jacobianPolynomial` as the determinant
 
 Assume the explicit model range r≥1, d≥5 and M≥n(r+1). E is the r-tuple selected in §3.5.
 
-For the selected integer equations E and J=det(partial_j E_i), form A_E=(ℚ[x_1,…,x_r]/(E_1,…,E_r)) localized away from the class of J. Use the supplied Jacobian-open presentation, which is étale and finitely presented over ℚ and hence a finite product of finite separable field extensions. Since E_i(κ)=0 and J(κ)≠0, polynomial evaluation extends uniquely to a surjective ℚ-algebra map φ:A_E→K. It exhibits Spec K as one open and closed irreducible component of Spec A_E. A_E itself may have other field factors. (COU20 line 354, Proposition 2, p. 495, and §3 pp. 492, 494).
+For the selected integer equations E and J=det(partial_j E_i), form A_E=(ℚ[x_1,…,x_r]/(E_1,…,E_r)) localized away from the class of J. A_E is étale over ℚ by Mathlib’s submersive presentations, and hence a finite product of finite separable field extensions. Since E_i(κ)=0 and J(κ)≠0, polynomial evaluation extends uniquely to a surjective ℚ-algebra map φ:A_E→K. It exhibits Spec K as one open and closed irreducible component of Spec A_E. A_E itself may have other field factors. (COU20 line 354, Proposition 2, p. 495, and §3 pp. 492, 494).
 
-A proof route is as follows. Factor native ℚ-polynomial evaluation through the ideal generated by the E_i using their vanishing. Send the inverted Jacobian to J(κ)^(−1); localization’s universal property gives the actual map, compatible with evaluation. Its image contains the surjective polynomial evaluation image. Apply SchemeAndStackFoundations §0.10 for étaleness and finite presentation over ℚ. Apply the pinned field-base finite-product classification, then identify the compatible surjection to K with a factor projection.
+A proof route is as follows. Factor native ℚ-polynomial evaluation through the ideal generated by the E_i using their vanishing. Send the inverted Jacobian to J(κ)^(−1); localization’s universal property gives the actual map, compatible with evaluation. Its image contains the surjective polynomial evaluation image. For étaleness, the naive presentation of the quotient has Jacobian the class of `jacobianPolynomial E`; composing it with the presentation of the localization away from that class gives a submersive presentation of relative dimension zero, so A_E is standard smooth of relative dimension zero and hence étale over ℚ. Apply the pinned field-base finite-product classification, then identify the compatible surjection to K with a factor projection.
 
 The API has the following properties.
 
@@ -558,6 +519,7 @@ The API has the following properties.
 - φ is onto K because bounded-degree rational values already span K.
 - The supplier’s finite-product equivalence can be chosen with φ the projection to its K factor.
 - The rational polynomial determinant specializes to the evaluated integer derivative determinant in every characteristic-zero field; evaluation commutes with determinants.
+- For every ordered integer system E, of any degree and in any number r≥0 of variables, `JacobianOpenAlgebra E` is étale over ℚ; no selection of the equations is needed.
 - The quotient sends every Eᵢ to zero, and the localization makes the class of its Jacobian a unit. Its universal maps have sources ℚ[X] and the quotient, and target the localized algebra.
 - Permuting two equation rows negates the polynomial Jacobian; its principal open and localized algebra are unchanged by that unit factor. Inverting an arbitrary value, instead of this determinant, would not impose the Jacobian-open condition.
 
@@ -570,12 +532,11 @@ The API has the following properties.
 - For r=1, E=X² and κ=0 in ℚ, the evaluated Jacobian is zero; this point cannot define the localization evaluation. No inverse of that Jacobian can map to a field unit.
 - For E=(X,Y), the two-variable Jacobian matrix is I₂ and its determinant is 1. Swapping the equations gives [[0,1],[1,0]], determinant −1; both localizations invert a unit and define the same quotient.
 - For r=0, the determinant of the empty Jacobian is 1 in every commutative ring; the operation is defined outside the model theorem’s r≥1 range. The empty determinant is 1, including the zero ring where 1=0.
+- Over a general base R=A[t], the one-variable system tX−1 has Jacobian t and Jacobian-open algebra A[t,t⁻¹], which is étale but not finite over R. Finiteness of A_E comes from the field base, not from étaleness alone.
 - In ℚ[ε]/(ε²), E=X² at κ=ε has E(κ)=0 and J(κ)=2ε≠0, but 2ε is not a unit: its square is zero. Thus a general-ring extension requires a unit, and nonvanishing suffices only for the field target.
 - Over 𝔽₂ the integer system X²−X has derivative 1 at both roots, whereas X² has derivative 0. Over 𝔽₃ the derivative of X³−X is 2 at every root. The evaluated integer Jacobian uses no division by 2 or 3; the rational model theorem still assumes a number field.
 
-The universal property fixes φ, not merely an abstract isomorphic field somewhere in A_E.
-
-*Needs:* §3.5; §1.3; TauCetiRoadmap.SchemeAndStackFoundations §0.10, `jacobian_etale_algebra` over ℚ; Mathlib `Algebra.Etale.iff_exists_algEquiv_prod`; Mathlib `MvPolynomial.pderiv`.
+*Needs:* §3.5; §1.3; Mathlib `Algebra.PreSubmersivePresentation.naive`, `Algebra.SubmersivePresentation.localizationAway`, `Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian` and `Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension`; Mathlib `Algebra.Etale.iff_exists_algEquiv_prod`; Mathlib `MvPolynomial.pderiv`.
 
 ### 4.2 Explicit small field models
 
@@ -603,8 +564,6 @@ The API has the following properties.
 - For n=1,r=1,d=5, doubling δ multiplies the explicit bound by 2¹⁰=1024. This checks that the power of δ is 2d rather than d or 4d.
 - The bound definition is total: at n=0,r=1,d=5,δ=1, real division by zero gives exponent 0 and B=0 because the remaining positive-degree factor is 0. This is not a number-field instance and supplies no model theorem.
 
-The theorem allows n=1 and r=1 when the other inequalities hold. It never asserts that r short equations generate the full relation ideal or that the whole zero locus is zero-dimensional.
-
 *Needs:* §1.2; §3.2; §3.5; §4.1.
 
 ### Examples
@@ -613,7 +572,7 @@ The model of X²−2 is the single field ℚ(√2), while (X²−2)(X²−3) giv
 
 ### Dependencies
 
-Layer 1 value surjectivity; Layer 3’s bounded selected equations and common minor; SchemeAndStackFoundations §0.10; Mathlib quotient, localization and étale field-product classification. The component statement needs no Bézout bound.
+Layer 1 value surjectivity; Layer 3’s bounded selected equations and common minor; Mathlib submersive presentations, quotient, localization and étale field-product classification. The component statement needs no Bézout bound.
 
 ## Layer 5: Logarithmic models and discriminant counts
 
@@ -642,8 +601,6 @@ The API has the following properties.
 - r(1)=1>3 log 1=0, so an all-n logarithmic bound is rejected. Thus the eventual qualifier is essential.
 - At n=0 the admissible set contains 1 and its least positive member is 1; the number-field estimates retain n≥1.
 
-The chosen d=r is inserted into Proposition 2 only in the eventual r≥5 range.
-
 *Needs:* Mathlib `Nat.centralBinom`, `Nat.succ_mul_centralBinom_succ`, `Nat.four_pow_le_two_mul_add_one_mul_centralBinom`, `catalan` and `succ_mul_catalan_eq_centralBinom`; elementary real exponential-growth estimates.
 
 ### 5.2 Logarithmic small models
@@ -661,8 +618,6 @@ A proof route is as follows. Choose n above the central-binomial threshold and t
 - The values r(14)=4 and r(15)=5 give M=70 and 252 respectively; the latter satisfies 15·6=90≤252≤360. Only the latter parameter choice meets d≥5.
 - At n=1 the proposed bound r≤Q log n would read 1≤0, so the degree threshold is necessary.
 - At δ=1, the coefficient-height logarithm is Q(log n)²; for δ>1 the added term is Q log n log δ. No division by log δ is used.
-
-The r used in counting is a function only of n, not of K or its discriminant. No numerical value of the absolute constant is claimed.
 
 *Needs:* §4.2; §5.1.
 
@@ -692,8 +647,6 @@ The API has the following properties.
 - For C=0 the only tuple is the zero tuple, independently of d. All coefficient slots are forced to zero.
 - For r=2,d=2 there are six monomials per equation and twelve slots overall; using separate variable degree bounds would incorrectly give eighteen slots. The spurious nine monomials per equation would include X²Y², of total degree 4.
 
-Ordering equations counts every possible tuple and only overcounts models.
-
 *Needs:* Mathlib `MvPolynomial.restrictTotalDegree`; Mathlib `MvPolynomial.mem_restrictTotalDegree`; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, monomial coefficient equivalence; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, bounded monomial count.
 
 ### 5.4 The coefficient-box cardinality
@@ -712,40 +665,37 @@ A proof route is as follows. Use the coefficient-coordinate product equivalence 
 - For B=3.7 the integer coefficient interval is [−3,3] with seven choices, exactly the natural-floor box; a ceiling would give nine.
 - For r=0 the exponent is zero and the count is 1, including C=0; for r=2,d=0,C=1 it is 3²=9.
 
-At r=1 this recovers the familiar (2C+1)^(d+1) count for degree≤d integer polynomials.
-
 *Needs:* §5.3; TauCetiRoadmap.GenericDoublePointInterpolation §0.1, bounded monomial count.
 
 ### 5.5 From finite models to field classes
 
 The headline `bounded_systems_field_class_bound` states the bound on an arbitrary family Kᵢ, i∈Fin m, of pairwise nonisomorphic number fields. Each Kᵢ admits a surjective ℚ-algebra map from `JacobianOpenAlgebra E` for some E∈Box(r,d,C); the conclusion is m≤(2C+1)^(rM)d^r. This is equivalent to the bound for the ordinary finite isomorphism-class family of the supplier: every such family injects into the represented class set, and choosing one representative per represented class gives the converse. Finiteness follows from the finite coefficient box and finite field-factor sets. The finite product for each Jacobian-open algebra may be empty. Over ℚ̄ its geometric point count is the sum of the degrees of the field factors, so it bounds the number of factors as well. The map from a pair (ordered system, field factor) to a class may identify several different pairs; surjectivity onto the represented set is sufficient.
 
-r,d≥1 and C≥0 are integers. The geometric bounds below hold over every algebraically closed field F, in every characteristic; the field-class application uses F=ℚ̄ and the unweighted class carrier of ArithmeticStatisticsPartI, Layer 0.
+r,d,C≥0 are integers. The geometric bounds below hold over every algebraically closed field F, in every characteristic; the field-class application uses F=ℚ̄ and the unweighted class carrier of ArithmeticStatisticsPartI, Layer 0.
 
-**Isolated affine point bound.** For any ordered system of r polynomials Eᵢ∈F[X₁,…,Xᵣ] of total degree at most d, the set of distinct isolated points of its affine zero locus is finite and has cardinality at most d^r, even if other components have positive dimension. This is a derived result here on the supplier's scheme and component carriers; it counts reduced points, without local intersection multiplicities. (COU20 line 425, §4, p.496, isolated points in the final counting argument; derived from SchemeAndStackFoundations §5.12.)
+**Isolated affine point bound.** The headline `isolatedAffinePoints_ncard_le_pow` states: for any ordered system of r polynomials Eᵢ∈F[X₁,…,Xᵣ] of total degree at most d, the set of distinct isolated points of its affine zero locus is finite and has cardinality at most d^r, even if other components have positive dimension. A point x is isolated when its maximal ideal, the kernel of evaluation at x, is a minimal prime over the ideal (E₁,…,Eᵣ); by the Nullstellensatz this means that {x} is an irreducible component of the zero locus. This is a derived result here on the supplier's scheme and component carriers; it counts reduced points, without local intersection multiplicities. (COU20 line 425, §4, p.496, isolated points in the final counting argument; derived from SchemeAndStackFoundations §5.12.)
 
-A proof route is as follows. Homogenize each nonconstant equation to its own positive degree eᵢ≤d in projective r-space. A zero equation leaves the intersection unchanged; a nonzero constant equation makes it empty. Starting with projective space, prove by induction that after j cuts the sum of degrees of all reduced irreducible components is at most d^j. At a nonconstant cut, retain each component contained in the hypersurface; its degree is at most d times its previous degree because d≥1. For every other component, apply the supplier's two-equidimensional-subscheme inequality to that reduced irreducible component and the degree-eᵢ hypersurface. The sum of degrees of the resulting components is at most eᵢ times the old component degree. Take their reduced union and discard duplicate components and components contained in others; degrees are positive, so this only decreases the sum. This handles mixed dimensions without applying the supplier to a nonequidimensional union. Each isolated affine point is a zero-dimensional component of this projective intersection in the affine chart. Over F it has degree one, which proves the bound.
+A proof route is as follows. Homogenize each nonconstant equation to its own positive degree eᵢ≤d in projective r-space. A zero equation leaves the intersection unchanged; a nonzero constant equation makes it empty. Starting with projective space, prove by induction that after j cuts the sum of degrees of all reduced irreducible components is at most d^j. At a nonconstant cut, retain each component contained in the hypersurface; its degree is at most d times its previous degree because d≥1. For every other component, apply the supplier's two-equidimensional-subscheme inequality to that reduced irreducible component and the degree-eᵢ hypersurface. The sum of degrees of the resulting components is at most eᵢ times the old component degree. Take their reduced union and discard duplicate components and components contained in others; degrees are positive, so this only decreases the sum. Each isolated affine point is a zero-dimensional component of this projective intersection in the affine chart. Over F it has degree one, which proves the bound.
 
-**Jacobian-open geometric-point bound.** For the same F,r,d,E, let J_E be the determinant of the ordinary partial-derivative matrix. The set of points x∈F^r with Eᵢ(x)=0 for all i and J_E(x)≠0 is finite and has at most d^r distinct points. The supplier's Jacobian étaleness makes every such point isolated, so the preceding bound applies. For an integer system E, these are exactly the geometric points of `JacobianOpenAlgebra E` after extension from ℚ to ℚ̄. This derived result is the geometric input to the field-class count. (COU20 line 425, §4, p.496; SchemeAndStackFoundations §0.10 and the isolated affine point bound above.)
+**Jacobian-open geometric-point bound.** The headline `jacobianOpen_points_finite_ncard_le` states: for the same F,r,d,E, let J_E be the determinant of the ordinary partial-derivative matrix. The set of points x∈F^r with Eᵢ(x)=0 for all i and J_E(x)≠0 is finite and has at most d^r distinct points. By Mathlib’s submersive presentations over F, the localization of F[X]/(E) away from J_E is étale over F, so its local ring at such a point has dimension zero; the maximal ideal of the point is then minimal over (E), the point is isolated, and the preceding bound applies. For an integer system E, these are exactly the geometric points of `JacobianOpenAlgebra E` after extension from ℚ to ℚ̄. This derived result is the geometric input to the field-class count. (COU20 line 425, §4, p.496; derived from the isolated affine point bound above.)
 
-For r,d≥1 and C≥0, the number of ℚ-isomorphism classes of fields that occur as residue fields of components of Jacobian-open algebras A_E for E∈Box(r,d,C) is at most (2C+1)^(rM) d^r. The same bound holds after restriction to exact degree n and |disc|≤H. This uses a surjection from pairs (equation tuple, field factor) onto the represented classes, not an injection from fields to tuples. (COU20 line 425, §4, p.496, final isolated-point intersection argument; Theorem 2 p.488.)
+For all r,d,C≥0, the number of ℚ-isomorphism classes of fields that occur as residue fields of components of Jacobian-open algebras A_E for E∈Box(r,d,C) is at most (2C+1)^(rM) d^r. The same bound holds after restriction to exact degree n and |disc|≤H. This uses a surjection from pairs (equation tuple, field factor) onto the represented classes, not an injection from fields to tuples. (COU20 line 425, §4, p.496, final isolated-point intersection argument; Theorem 2 p.488.)
 
-A proof route is as follows. For every E∈Box(r,d,C), apply SchemeAndStackFoundations §0.10, `jacobian_etale_algebra` over ℚ, to make A_E étale and finitely presented. Apply the imported field-base finite-etale classification. Its factors give a finite set of residue-field classes; repeated isomorphic factors contribute just one class but can be overcounted. After base change to ℚ̄, apply this section's Jacobian-open geometric-point bound to obtain at most d^r geometric points. Their number is the sum of the factor degrees. Each factor has positive degree, so the number of factors is also at most d^r. Form the finite disjoint union of these factor sets over the coefficient box and map each pair to its field-isomorphism class. Its image is precisely the represented set. Apply the coefficient-box count. Restricting degree or discriminant can only decrease the image size.
+A proof route is as follows. For every E∈Box(r,d,C), A_E is étale and finitely presented over ℚ by §4.1. Apply the imported field-base finite-etale classification. Its factors give a finite set of residue-field classes; repeated isomorphic factors contribute just one class but can be overcounted. After base change to ℚ̄, apply this section's Jacobian-open geometric-point bound to obtain at most d^r geometric points. Their number is the sum of the factor degrees. Each factor has positive degree, so the number of factors is also at most d^r. Form the finite disjoint union of these factor sets over the coefficient box and map each pair to its field-isomorphism class. Its image is precisely the represented set. Apply the coefficient-box count. Restricting degree or discriminant can only decrease the image size.
 
 **Checks.**
 
 - For E=(X²−2)(X²−3)=X⁴−5X²+6, there are four geometric points, two degree-two field factors and two isomorphism classes. Their discriminants 8 and 12 exclude a ℚ-algebra equivalence. For r=1,d=4,C=6, the family size satisfies 2≤13⁵·4=1485172. One model need not mean one field.
-- For E=X(X−1), there are two geometric points and two field factors, both ℚ, giving only one class. A family with two copies of ℚ fails pairwise nonisomorphism; one copy satisfies it and gives 1≤3³·2=54 for r=1,d=2,C=1. Here J=2X−1 has values −1 and 1 at 0 and 1, so A_E≃ℚ×ℚ is étale by the general supplier contract even though d=2<5. Requiring a §3.5 selection would exclude this box system. The factor-to-class map need not be injective.
+- For E=X(X−1), there are two geometric points and two field factors, both ℚ, giving only one class. A family with two copies of ℚ fails pairwise nonisomorphism; one copy satisfies it and gives 1≤3³·2=54 for r=1,d=2,C=1. Here J=2X−1 has values −1 and 1 at 0 and 1, so A_E≃ℚ×ℚ is étale even though d=2<5. The factor-to-class map need not be injective.
 - For E=X², the Jacobian-open algebra is zero: zero geometric points, zero field factors and zero represented classes, consistent with the empty product.
 - For X(X−1),XY, the first projective cut has two lines and component-degree sum 2. The second retains X=0 and cuts X=Z into [1:0:1] and [0:1:0]. The latter point already lies on X=0, so the reduced union has component-degree sum 2≤3≤2·2=4. Only (1,0) is an isolated affine point, with Jacobian determinant X(2X−1)=1 there. Thus the Jacobian-open point count is 1≤4; the line and the point at infinity do not enter that count.
 - For X² over an algebraically closed field of characteristic zero, the affine zero locus has one reduced isolated point, of local length 2, while its Jacobian-open part has zero points. Distinct isolated points, local lengths and Jacobian-open points are different quantities; the bound is not a multiplicity equality.
 - A zero equation has a zero Jacobian row, so its square system has no Jacobian-open points. For the system (0,Y) with d=1 the zero locus is a line: its projective component-degree sum is 1≤1² and its isolated-point count is 0. A nonzero constant equation, such as (1,Y), makes the intersection empty with degree sum and point count 0. Neither equation is treated as a positive-degree hypersurface.
 - Over an algebraic closure of 𝔽₂, X²−X has derivative 1 and two Jacobian-open points, attaining d^r=2; X² has derivative 0 and no Jacobian-open points. Over an algebraic closure of 𝔽₃, X³−X has derivative 2 and three such points, attaining d^r=3. The geometric bounds need no characteristic-zero hypothesis.
+- For r=0 the Jacobian-open algebra is ℚ, with empty Jacobian determinant 1, so every represented field is ℚ and m≤1=(2C+1)^0·d^0. For d=0 and r≥1 every equation is constant, the Jacobian is 0, the algebra is zero and m=0=d^r. The bound therefore holds for all r,d,C≥0. For the geometric bounds at r=0, affine space is one point, the empty system generates the zero ideal of F, and that point is both isolated and Jacobian-open, so both counts are 1=d^0. At d=0 and r≥1 the ideal is zero or the unit ideal, neither of which has a maximal ideal of a point as a minimal prime, and the Jacobian vanishes, so both counts are 0=0^r.
 - The empty family has m=0 and satisfies 0≤(2C+1)^(rM)d^r. For C=0 and r≥1, all equations and their Jacobian vanish, so the localized algebra is zero and no nonempty family admits the required surjections onto fields.
 
-For (X²−2)(X²−3) one equation represents two distinct quadratic classes, so a one-model-one-field argument fails. The derived geometric bounds hold in arbitrary dimension; a plane-only statement would not establish this target. No factor n/#Aut(K) appears in the unweighted class count.
-
-*Needs:* §5.4; §4.1; TauCetiRoadmap.SchemeAndStackFoundations §0.10, `jacobian_etale_algebra` over F for the geometric-point bound and over ℚ for every system of the box; TauCetiRoadmap.SchemeAndStackFoundations §5.12, `bezout_inequality`, for the component-degree induction above; TauCetiRoadmap.ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”; Mathlib `Algebra.Etale.iff_exists_algEquiv_prod`; Mathlib `NumberField.discr_eq_discr_of_algEquiv`.
+*Needs:* §5.4; §4.1; Mathlib submersive presentations over F for the Jacobian-open point bound, as in §4.1; Mathlib `Ideal.minimalPrimes`; TauCetiRoadmap.SchemeAndStackFoundations §5.12, `bezout_inequality`, for the component-degree induction above; TauCetiRoadmap.ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”; Mathlib `Algebra.Etale.iff_exists_algEquiv_prod`; Mathlib `NumberField.discr_eq_discr_of_algEquiv`.
 
 ### 5.6 A cubic-logarithmic discriminant exponent
 
@@ -764,8 +714,6 @@ A proof route is as follows. Finiteness is inherited from the completed Hermite�
 - For n=1,H=1 the actual class count is 1, but r(1)=1 and Q log 1=0; the eventual theorem does not justify its parameter estimate at degree one.
 - At n=2,H=3, the only class is ℚ(√−3), of discriminant −3; ℚ(i) has discriminant −4 and is excluded. A pairwise nonisomorphic family from this sublevel has size at most 1, and one representative attains 1. This tests equivalence of the two counting formulations, outside the eventual range n>Q≥3.
 
-This is an upper bound for exact-degree unweighted isomorphism classes, not a density or an asymptotic equality. The constant is independent of H; the n=1 case is outside the eventual theorem.
-
 *Needs:* §5.2; §5.5; §5.1; TauCetiRoadmap.ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”; Mathlib `NumberField.finite_of_discr_bdd`; Tau Ceti `NumberField.ncard_setOf_finiteDimensional_abs_discr_le_le`.
 
 ### Examples
@@ -774,11 +722,11 @@ The least ranks r(1),r(2),r(14),r(15) are 1,2,4,5. A coefficient box with r=2,d=
 
 ### Dependencies
 
-Layer 4; GenericDoublePointInterpolation §0.1; SchemeAndStackFoundations §0.10 for every system of the box, and §5.12 for §5.5’s derived distinct-point bounds; ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”; the completed Hermite infrastructure. Central-binomial parameter choice and coefficient boxes are independent of the field-component construction.
+Layer 4; GenericDoublePointInterpolation §0.1; §4.1’s étaleness for every system of the box; SchemeAndStackFoundations §5.12 for §5.5’s derived distinct-point bounds; ArithmeticStatisticsPartI, Layer 0, “Number fields ordered by discriminant”; the completed Hermite infrastructure. Central-binomial parameter choice and coefficient boxes are independent of the field-component construction.
 
 ## Downstream consumers
 
-The principal exports are the explicit bound of §4.2, the degree-uniform logarithmic models of §5.2 and the exact-degree class bound of §5.6. Arithmetic-statistics consumers may use their coefficient boxes and their bound on the number of field factors per system; they must retain the unweighted isomorphism-class convention. An application that counts embedded fields instead must supply its separate embedding multiplicity. Generic interpolation and lattice users consume the named supplier roadmaps directly.
+The principal exports are the explicit bound of §4.2, the degree-uniform logarithmic models of §5.2 and the exact-degree class bound of §5.6. Arithmetic-statistics consumers may use their coefficient boxes and their bound on the number of field factors per system; they must retain the unweighted isomorphism-class convention. An application that counts embedded fields instead must supply its separate embedding multiplicity. Generic interpolation and lattice users consume the named supplier roadmaps directly. The distinct-point bounds `isolatedAffinePoints_ncard_le_pow` and `jacobianOpen_points_finite_ncard_le` of §5.5 hold over every algebraically closed field and are available to any consumer that counts isolated or nonsingular zeros without multiplicity, such as the finite-fibre target of ArithmeticStatisticsPartV §3.28; a multiplicity-weighted isolated-intersection bound is a separate, stronger statement.
 
 ## Worked examples
 
