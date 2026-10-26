@@ -76,7 +76,10 @@ potential theory and Galois theory are consumed through the contracts in the ind
   endomorphism ergodic decomposition with entropy integration, and comparison
   with topological entropy. The endomorphism decomposition includes noninvertible
   maps, beyond the supplier's group-action component kernels.
-- General GIT quotients, all-place adelic equidistribution, bifurcation currents
+- ArithmeticGaloisRepresentations §1.11 owns reductive quotients of affine
+  schemes over fields and excellent DVRs. The global quotient over Spec ℤ, the
+  Rat_d stability calculation and the dynamical identifications belong to §0.28.
+- All-place adelic equidistribution, bifurcation currents
   and Banach-contraction decomposition require the explicit additional contracts
   in the indicated layers. They are distinct from set quotients, local measures
   and Hilbert-space spectral theory.
@@ -295,6 +298,10 @@ sub-σ-algebra and the endomorphism and topological comparison theorems.
 ### From TauCetiRoadmap.SchemeAndStackFoundations — §1.17
 
 Consume `IsInvariant`, `IsCategoricalQuotient` and `IsGeometricQuotient` for the SL₂ action groupoid on Rat_d. These predicates do not assert the existence of a reductive quotient; the GIT existence and dynamical application are targets of §0.28.
+
+### From TauCetiRoadmap.ArithmeticGaloisRepresentations — §1.11
+
+Consume the target Reductive quotients over fields and DVRs: for a connected reductive group acting on an integral affine variety over a field, or a reductive group scheme acting on an integral affine flat finite-type scheme over an excellent DVR, the coaction-invariant quotient Spec O(X)^G with finite generation, the universal property for invariant morphisms, normality, surjectivity on geometric points, unique closed orbits in fibres, the closed-image and separation properties, and invariants commuting with flat base change. Over a non-flat reduction only the bijection on geometric points between the special-fibre quotient and the special fibre of the integral quotient is supplied, not an isomorphism of invariant algebras. Section 0.28 applies this to SL₂ acting on Rat_d over ℚ, over 𝔽_p and over ℤ_(p).
 
 ### From TauCetiRoadmap.SchemeAndStackFoundations — Layer 5
 
@@ -1638,13 +1645,13 @@ Applications include Call–Silverman §4 (the function field K̄(T) as a global
 
 ### 0.28 Geometric invariant theory for dynamical moduli
 
-For each integer d ≥ 2, construct Rat_d = `ℙ^{2d+1}` ∖ V(Res), its SL₂-action over ℤ, and the geometric quotient M_d over Spec ℤ. Prove affineness, relative dimension 2d−2 and the projective GIT compactification over ℚ; identify M₂ with A²_ℤ. Construct the coarse critically marked quotient separately from a chosen finite branched parameter cover S_d → M_d carrying a degree-d family on S_d × P¹ and marked critical sections. The latter cover may include further rigidification; it is not required to represent the critically marked moduli functor. The set quotient Rat_d(K)/PGL₂(K) classifies K-conjugacy classes and must be distinguished from geometric moduli points and twists. Use SchemeAndStackFoundations §1.17 `IsInvariant`, `IsCategoricalQuotient` and `IsGeometricQuotient` for the action groupoid, without a second quotient predicate. Construct the required reductive group actions, the Hilbert–Mumford criterion and integral-base quotient existence theorem, then apply them to this action (Silverman, Duke Math. J. 94 (1998), pp.41–77; Levy Theorem 2.2; DeMarco–Mavraki–Ye §2.1, (2.1)).
+For each integer d ≥ 2, construct Rat_d = `ℙ^{2d+1}` ∖ V(Res), its SL₂-action over ℤ, and the geometric quotient M_d over Spec ℤ. Prove affineness, relative dimension 2d−2 and the projective GIT compactification over ℚ; identify M₂ with A²_ℤ. Construct the coarse critically marked quotient over ℚ separately from a chosen finite branched parameter cover S_d → `M_{d,k}` := M_d ×_ℤ k over a number field k: S_d is a quasi-projective variety over k, the morphism is finite and surjective, and S_d carries a degree-d family on S_d × P¹_k whose classifying morphism is S_d → `M_{d,k}`, together with 2d − 2 sections listing its critical points with multiplicity. Analytic applications use the complex base change S_d ×_k ℂ along an embedding k → ℂ, and arithmetic applications use S_d(ℚ̄). The cover may include further rigidification; it is not required to represent the critically marked moduli functor, and no cover is asserted in positive characteristic, where critical points may be inseparable or absent (§0.34). The set quotient Rat_d(K)/PGL₂(K) classifies K-conjugacy classes and must be distinguished from geometric moduli points and twists. Use SchemeAndStackFoundations §1.17 `IsInvariant`, `IsCategoricalQuotient` and `IsGeometricQuotient` for the action groupoid, without a second quotient predicate. Over ℚ, over each 𝔽_p and over each ℤ_(p), take the affine quotient of Rat_d from ArithmeticGaloisRepresentations §1.11 and compare it with the corresponding localization or fibre of M_d through the universal property for invariant morphisms. Construct here the Hilbert–Mumford criterion for the SL₂ action on `ℙ^{2d+1}` and the resulting inclusion of Rat_d in the stable locus, the gluing of the local quotients into the quotient over Spec ℤ with coordinate ring the SL₂-invariants of degree zero in the localization of ℤ[a₀, …, a_d, b₀, …, b_d] at Res (Silverman, Theorem 2.1(d)), and the projective quotient of the semistable locus; then apply them to this action (Silverman, Duke Math. J. 94 (1998), pp.41–77; Levy Theorem 2.2; DeMarco–Mavraki–Ye §2.1, (2.1)).
 
 Applications include [The moduli space M_d(K) of degree-d maps](#029-the-moduli-space-m_dk-of-degree-d-maps); [Critically marked maps and their moduli M_d^cm(K)](#034-critically-marked-maps-and-their-moduli-m_dcmk); [Milnor: M₂ is the affine plane](#040-milnor-m₂-is-the-affine-plane).
 
 Construct the orbit predicates first, then the homogeneous-form map and its degree/resultant contracts. Scheme comparisons and geometric moduli require their listed suppliers; a set quotient over K does not identify all twists with geometric K-points.
 
-Construct the dynamical moduli scheme by the preceding quotient; prove affineness, compatibility with base change, the relative dimension formula and the affine-plane identification in degree two.
+Construct the dynamical moduli scheme by the preceding quotient; prove affineness, the relative dimension formula and the affine-plane identification in degree two. Base change: formation of M_d commutes with flat base change Spec R → Spec ℤ (in particular to ℚ, to number fields and to ℤ_(p)); for the fibre over 𝔽_p only the bijection between geometric points of `Rat_{d,𝔽_p}`/SL₂ and of M_d ×_ℤ 𝔽_p is asserted.
 
 **Checks.**
 
@@ -6893,7 +6900,7 @@ For every semipositive adelic metric φ on O(1) over K with curvature µ: (i) φ
 
 ### 4.49 Critical height as an adelic height and equidistribution of PCF maps in moduli (Yuan–Zhang)
 
-Let d ≥ 2 and choose the finite branched parameter cover S_d → M_d with a degree-d family f on S_d × P¹ and labelled critical sections c₁, …, `c_{2d−2},` as in DeMarco–Mavraki–Ye §2.1. Put ĥ_crit(s) := Σ_i `ĥ_{f_s}(c_i(s)).` (a) This is the height of a nondegenerate nef adelic line bundle on the quasi-projective variety S_d: restrict the f-invariant extension of O(1) to the critical sections and sum. Its archimedean curvature is the bifurcation T_bif. (b) For every generic sequence of PCF parameters in S_d(ℚ̄), the Galois-orbit measures converge to `T_bif^{∧(2d−2)}/mass` at the infinite place. Pushing forward gives the corresponding statement on coarse moduli with the pushed-forward measure.
+Let d ≥ 2 and choose the finite branched parameter cover S_d → `M_{d,k}` over a number field k (§0.28) with a degree-d family f on S_d × P¹ and labelled critical sections c₁, …, `c_{2d−2},` as in DeMarco–Mavraki–Ye §2.1. Put ĥ_crit(s) := Σ_i `ĥ_{f_s}(c_i(s)).` (a) This is the height of a nondegenerate nef adelic line bundle on the quasi-projective variety S_d: restrict the f-invariant extension of O(1) to the critical sections and sum. Its archimedean curvature is the bifurcation T_bif. (b) For every generic sequence of PCF parameters in S_d(ℚ̄), the Galois-orbit measures converge to `T_bif^{∧(2d−2)}/mass` at the infinite place. Pushing forward gives the corresponding statement on coarse moduli with the pushed-forward measure.
 
 d ≥ 2; genericity is in S_d. The chosen cover carries a family, without a fine-moduli universal property. The orbit quotient M_d^cm(K) of Layer 0 is not silently substituted for S_d.
 
@@ -7104,13 +7111,13 @@ Let f be a rational map of degree d ≥ 2 over K and v an infinite place. There 
 
 z not a critical value of any iterate fⁿ; v infinite; Lip for the chordal metric.
 
-The potentials of `µ_{f,w}` − λ_w are Hölder at every place (Hölder continuity of the potential of a canonical measure), so ω(r) ≤ C₀ r^κ at the places of N(ρ_f). F := `f^{-n}(z)` is Galois-stable with |F| = dⁿ and `h_{ρ_f}(F)` = `d^{-n}` ĥ_f(z) (The canonical height of a rational map is the adelic height of its canonical measures). Apply Quantitative equidistribution for adelic measures with Hölder potentials at v with ⟨φ, φ⟩_v ≤ C₁ Lip(φ)² and log|F|/|F| = n log d / dⁿ.
+The potentials of `µ_{f,w}` − λ_w are Hölder at every place (Hölder continuity of the potential of a canonical measure), so ω(r) ≤ C₀ r^κ at the places of N(ρ_f). F := `f^{-n}(z)` is Galois-stable with |F| = dⁿ and `h_{ρ_f}(F)` = `d^{-n}` ĥ_f(z) (The canonical height of a rational map is the adelic height of its canonical measures). Put N := dⁿ. If ∞ ∉ F, apply Quantitative equidistribution for adelic measures with Hölder potentials at v with ⟨φ, φ⟩_v ≤ C₁ Lip(φ)² and log|F|/|F| = n log d / dⁿ. The postcritical hypothesis does not exclude ∞ ∈ F (it holds whenever fⁿ(∞) = z). In that case F′ := F ∖ {∞} is Galois-stable, each of its points has canonical height ĥ_f(z)/N, and [F] = ((N − 1)/N)[F′] + (1/N)δ_∞, so |∫ φ d[F] − ∫ φ d[F′]| ≤ (1/N)|φ(∞) − ∫ φ d[F′]| ≤ Lip(φ) diam(P¹(ℂ))/N. For N ≥ 3 apply the same theorem to F′, with |F′| = N − 1 ≥ N/2 ≥ 2 so that log|F′|/|F′| ≤ 2n log d/N and `|F′|^{−1/κ}` ≤ 2/N; since 1/N ≤ (n/N)^{1/2}, the extra terms are absorbed by enlarging C. For N = 2 (d = 2, n = 1) the left side is at most Lip(φ) diam(P¹(ℂ)), and (n/N)^{1/2} = 2^{−1/2}.
 
 *Needs:* [Quantitative equidistribution for adelic measures with Hölder potentials](#432-quantitative-equidistribution-for-adelic-measures-with-hölder-potentials); [The canonical height of a rational map is the adelic height of its canonical measures](#455-the-canonical-height-of-a-rational-map-is-the-adelic-height-of-its-canonical-measures); [Hölder continuity of the potential of a canonical measure](#417-hölder-continuity-of-the-potential-of-a-canonical-measure).
 
 ([favre-rivera-letelier-2006](#favre-rivera-letelier-2006), Corollaire 1.6, p. 8 — The statement (corrected: square root, and z not postcritical; [Correction 23](#correction-23), [Correction 30](#correction-30)); [favre-rivera-letelier-2006](#favre-rivera-letelier-2006), Proposition 6.5, p. 43 — The Hölder input from Layer 2.)
 
-**Endpoint checks.** f = z², z = 2: the 2ⁿ-th roots of 2 satisfy the bound with the rate `(n/2ⁿ)^{1/2}.` For z a postcritical value the dⁿ-point average with multiplicity is not an average over the set `f^{-n}(z)` ([Correction 30](#correction-30)).
+**Endpoint checks.** f = z², z = 2: the 2ⁿ-th roots of 2 satisfy the bound with the rate `(n/2ⁿ)^{1/2}.` For z a postcritical value the dⁿ-point average with multiplicity is not an average over the set `f^{-n}(z)` ([Correction 30](#correction-30)). For f(t) = t + 1/t over ℚ and z = ∞: the critical points ±1 have orbits in the positive and negative reals respectively, so ∞ is not postcritical, yet f(∞) = ∞ and `f^{-1}(∞)` = {0, ∞}; ∞ lies in every `f^{-n}(∞)`, so the affine-set hypothesis of the quantitative equidistribution theorem fails and the removal of ∞ is needed.
 
 ### 4.62 The square root of the Arakelov–Zhang pairing is a metric (Fili)
 
