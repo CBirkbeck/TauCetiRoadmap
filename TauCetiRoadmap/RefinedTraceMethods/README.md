@@ -2562,9 +2562,10 @@ Provide the following operations and identities.
 
 - Dualizable objects, in particular the unit R, are nuclear: the identity of a dualizable object is trace-class.
 - For arbitrary solid left R-modules M,N, the zero map M→N is trace-class, classified by zero, even when M is not dualizable.
-- Compactness does not make an identity trace-class: for nonzero discrete R the compact generator `Null_R` ≃ `∏_ℕ` R is not dualizable (its dual `Hom_R(Null_R`, R) ≃ `⊕_ℕ` R, Wagner 2.3), so `𝟙_{Null_R}` is not trace-class.
+- Compactness does not make an identity trace-class. For R=𝕊 the compact generator is `Null_𝕊=N^■≃∏_ℕ𝕊`, with dual `Hom(Null_𝕊,𝕊)≃⊕_ℕ𝕊` (Wagner 2.3). The classifier comparison `Hom(Null_𝕊,𝕊)⊗^■Null_𝕊≃⊕_n∏_m𝕊→∏_m⊕_n𝕊≃Hom(Null_𝕊,Null_𝕊)` is, on π₀ at the point, the inclusion of the integer matrices with finitely many nonzero columns into the row-finite ones. The identity matrix is row-finite with infinitely many nonzero columns, so `𝟙_{Null_𝕊}` is not trace-class and `Null_𝕊` is not dualizable.
+- For general R the generator is `Null_R=R⊗^■N^■`, not `∏_ℕR`. Hℚ is the sequential colimit of Hℤ along multiplication by 1, 2, 3, …, and `Hℤ⊗^■N^■≃∏_ℕHℤ`, so π₀ of `Null_{Hℚ}` at the point is `(∏_ℕℤ)⊗ℚ`: the sequences of bounded denominator. The coordinate comparison `Null_{Hℚ}→∏_ℕHℚ` misses `(1/(n+1)!)_n` and is not an equivalence.
 
-Also establish Every dualizable object is nuclear, its identity being trace-class; compact objects need not be (the Check on `Null_R` above).
+Also establish Every dualizable object is nuclear, its identity being trace-class; compact objects need not be (the Check on `Null_𝕊` above).
 
 *Needs:* SolidAnalyticRings §§1.1–1.4 and 2.1–2.4 (light solid spectra, solid tensor product and compact generator); EnhancedDerivedSheaves E5:presentability — compact objects; `CategoryTheory.Limits.PreservesFilteredColimits`.
 
@@ -3788,29 +3789,33 @@ For `A=F_p` pointwise F−1 on `Z_p` is zero, so `π_(−1)TC(F_p)=Z_p`; local v
 
 ### 8.6 Trace Adams operations
 
-**The p-adic Adams operations on traces.** The action of `Z_p^×` on the p-completed circle `K(Z_p,1)` gives functorial coherent E∞ cyclotomic Adams operations on `THH(A;Z_p)`, and hence on the filtered THH, TC⁻, TP and TC. On `C_A` and each Nygaard step the action is trivial; on `C_A{1}` it is scalar multiplication, so γ acts by `γ^i` on each i-th graded piece, for i∈Z in its defined range.
+**The p-adic Adams operations on traces.** Let A be a commutative ring; `C_A` and the graded pieces below are those of quasisyntomic A. For γ∈`Z_p^×` let `ρ_γ` be the automorphism of the p-completed circle `T_p=K(Z_p,1)` that is multiplication by γ on π₁. Since `T→T_p` induces an equivalence of p-completed spherical group rings, a p-complete T-spectrum is a p-complete `T_p`-spectrum, and restriction along `ρ_γ` (§2.1) gives an autoequivalence `X↦ρ_γ^*X` of p-complete T-spectra: the same spectrum with the circle acting through `ρ_γ`. It preserves `C_p`, on which it is multiplication by γ, and induces `ρ_γ` again on `T/C_p≃T`; hence `(ρ_γ^*X)^{tC_p}≃ρ_γ^*(X^{tC_p})`, and `ρ_γ^*` is a symmetric monoidal autoequivalence of p-complete cyclotomic spectra. The Adams operations are natural maps of E∞-algebras in cyclotomic spectra `ψ_γ:THH(A;Z_p)→ρ_γ^*THH(A;Z_p)`, with `ψ_1=id` and coherent identifications `ρ_γ^*(ψ_δ)∘ψ_γ≃ψ_{γδ}`, compatible with the Frobenius under the identification above. Equivalently, `THH(A;Z_p)` is a `Z_p^×`-equivariant object for the action of `Z_p^×` by `ρ^*`, that is, its circle action extends to the semidirect product `T_p⋊Z_p^×` compatibly with the Frobenius. The `ψ_γ` are not endomorphisms in the fixed-circle categories CycSp of §2.8 and `CycSp_T,p` of §3.1: the circle operator B satisfies `ψ_γ∘B=γ·(B∘ψ_γ)`. Restriction along a group automorphism does not change homotopy orbits, homotopy fixed points or Tate constructions; composing with `(ρ_γ^*X)_{hT}≃X_{hT}`, `(ρ_γ^*X)^{hT}≃X^{hT}` and `(ρ_γ^*X)^{tT}≃X^{tT}` gives ordinary coherent `Z_p^×` actions on the filtered spectra `THH(A;Z_p)_{hT}`, `TC⁻(A;Z_p)`, `TP(A;Z_p)` and `TC(A;Z_p)`, compatible with can, `φ^{hT}` and the fibre sequence defining TC, and with the norm `ΣX_{hT}→X^{hT}` once its suspension coordinate, the adjoint sphere of T, carries the degree-γ map induced by `ρ_γ`. On underlying filtered spectra the `ψ_γ` form an ordinary action; the twist enters only through the circle actions on THH and on `THH^{tC_p}`. On `C_A` and each Nygaard step the action is trivial; on `C_A{1}` it is scalar multiplication, so γ acts by `γ^i` on the i-th graded pieces of THH, TC⁻, TP and TC, for every i∈Z in its defined range.
 
 ([BMS](#references), Construction 9.13 and Proposition 9.14, pp. 291–292.)
 
-One proof route is as follows. Identify p-completed THH with the p-completion of the E∞ tensor by `K(Z_p,1)`. Transport the automorphism action through the cyclotomic structure and complete filtered functors. Use universality of Ainf, finite conormal/twist identifications and the equivariant AΩ comparison to compute the action; extend by QRSP descent and left Kan extension.
+One proof route is as follows. Identify p-completed THH with the p-completion of the E∞ tensor `A⊗T_p`. An automorphism of the group `T_p` induces E∞ maps of this tensor that are equivariant only after restricting the target action along it, because translation satisfies `ρ_γ(t·s)=ρ_γ(t)·ρ_γ(s)`; this gives `ψ_γ` and its coherences. The circle-equivariant E∞ maps out of the tensor are determined by their restriction along the unit `A→A⊗T_p` (§2.8), so the two composites `ρ_γ^*(φ_p)∘ψ_γ` and `(ψ_γ)^{tC_p}∘φ_p` into `ρ_γ^*(THH(A;Z_p)^{tC_p})` agree: both restrict on A to the Frobenius extension datum, because reindexing the Tate diagonal along the automorphism γ of `C_p`, with the matching permutation of tensor factors, gives again a lax symmetric monoidal transformation `X→(X^{⊗p})^{tC_p}`, and such a transformation is determined by its value on the sphere. This gives the Frobenius compatibility. Pass to homotopy orbits, homotopy fixed points and Tate constructions by the reindexing identifications, and complete filtered functors. Use universality of Ainf, finite conormal/twist identifications and the equivariant AΩ comparison to compute the action; extend by QRSP descent and left Kan extension.
 
 Provide the following operations and identities.
 
-- There is a coherent `Z_p^×` action on the p-completed trace functors.
+- For each γ∈`Z_p^×` a natural map of E∞-algebras in p-complete cyclotomic spectra `ψ_γ:THH(A;Z_p)→ρ_γ^*THH(A;Z_p)`, with `ψ_1=id` and coherent composites `ρ_γ^*(ψ_δ)∘ψ_γ≃ψ_{γδ}`.
+- The Frobenius `φ_p` intertwines `ψ_γ` with `(ψ_γ)^{tC_p}` under `(ρ_γ^*X)^{tC_p}≃ρ_γ^*(X^{tC_p})`.
+- Reindexing along `ρ_γ` gives ordinary coherent `Z_p^×` actions on `THH(A;Z_p)_{hT}`, `TC⁻(A;Z_p)`, `TP(A;Z_p)` and `TC(A;Z_p)` that commute with can, `φ^{hT}` and the TC fibre sequence, and with the norm when `ρ_γ` acts with degree γ on the adjoint sphere of T.
 - Ring maps commute with every operation `ψ_γ`.
 - `ψ_γ` acts trivially on `C_A` and its Nygaard ideals.
 - On `C_A{i}`, `ψ_γ` is multiplication by `γ^i`.
-- The operations preserve motivic filtrations and commute with can and cyclotomic Frobenius.
+- The operations preserve motivic filtrations.
 
 **Checks.**
 
 - `ψ_1` is the identity operation.
 - On gr¹TP the operation `ψ_γ` is multiplication by γ.
 - On `gr^(−1)TP` the operation is `γ^(−1)`, excluding the wrong uniform γ action.
+- The operations do not commute with the circle action. Take p=3, A=𝔽₃[x] and γ=2. Here `π₀THH(A;Z_3)=A` and `π₁THH(A;Z_3)=Ω¹_A=A·dx`, with B(x)=dx. Weight zero and weight one give `ψ₂(x)=x` and `ψ₂(dx)=2dx`, so `ψ₂(Bx)=2dx=−dx` while `B(ψ₂x)=dx`. Thus `ψ₂` is not a map of T-spectra from `THH(A;Z_3)` to itself; it satisfies `ψ₂B=2·Bψ₂`, which is the circle equivariance into `ρ₂^*THH(A;Z_3)`. Since 2 is its own inverse modulo 3, the choice between γ and γ⁻¹ does not affect this.
+- The norm needs the adjoint twist. For X=Hℤ_p with trivial action and `ψ_γ` the identity, reindexing acts by `γ^j` on `π_{2j}X_{hT}=H_{2j}(BT;ℤ_p)` and by `γ^{−j}` on `π_{−2j}X^{hT}=ℤ_p·t^j`, hence by `γ^k` on `π_{2k}X^{tT}=ℤ_p·t^{−k}`. For k≥1 the norm sequence identifies `π_{2k}X^{tT}` with `π_{2k−2}X_{hT}`, on which the untwisted action is `γ^{k−1}`; the degree-γ map on the adjoint sphere supplies the missing factor γ.
 
 Also establish γ acts trivially in weight zero and by γ in weight one.
 
-*Needs:* AInfCohomology §AI.7.2 (Absolute trace comparison with AΩ); PrismaticCohomologyPartIII §7.0 (twist compatibility of the trace–prismatic comparison); AInfCohomology Layer AI.0:integral (the Breuil–Kisin twist); EnhancedDerivedSheaves E5:abstract — symmetric monoidal infinity category; EnhancedDerivedSheaves E5:presentability — coherent group actions; §2.5 (Geometric realisation of cyclic objects and the circle action); §2.6 (The cyclotomic Frobenius of THH); KTheoryFiniteLocalFields §4.0 (Genuine cyclotomic foundations); AInfCohomology §AI.7.2 (Circle actions, homotopy fixed points and Tate constructions); §2.9 (The Nikolaus–Scholze formula for TC).
+*Needs:* §2.1 (Spectra with an action of a group); §2.1 (Homotopy orbits and homotopy fixed points); §3.1 (Circle-equivariant p-typical cyclotomic spectra); §2.8 (THH is symmetric monoidal; THH of `E_∞-rings)`; AInfCohomology §AI.7.2 (Spectral Tate diagonal); AInfCohomology §AI.7.2 (Absolute trace comparison with AΩ); PrismaticCohomologyPartIII §7.0 (twist compatibility of the trace–prismatic comparison); AInfCohomology Layer AI.0:integral (the Breuil–Kisin twist); EnhancedDerivedSheaves E5:abstract — symmetric monoidal infinity category; EnhancedDerivedSheaves E5:presentability — coherent group actions; §2.5 (Geometric realisation of cyclic objects and the circle action); §2.6 (The cyclotomic Frobenius of THH); KTheoryFiniteLocalFields §4.0 (Genuine cyclotomic foundations); AInfCohomology §AI.7.2 (Circle actions, homotopy fixed points and Tate constructions); §2.9 (The Nikolaus–Scholze formula for TC).
 
 ### 8.7 Characteristic-p TC and syntomic K-sheaves
 
