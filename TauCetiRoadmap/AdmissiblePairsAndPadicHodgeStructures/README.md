@@ -169,9 +169,9 @@ What PadicHodgeTheory must provide (gap:strict-field-serre-openness): Prove Serr
 
 What PadicHodgeTheory must provide (gap:arbitrary-field-full-rank-de-rham): For smooth rigid X over any complete discretely valued L/Q_p with perfect residue field and a Q_p-local system T, prove that a full-rank constant flat bundle E = ν_*(T ⊗ OB_dR) with invertible horizontal comparison determines a unique exhaustive locally split Griffiths-transversal filtration whose associated lattice is T ⊗ B_dR+, compatibly with tensor operations and pullback, independently of admissible-pair type constancy.
 
-### From TauCetiRoadmap.AdicSpacesPartIIPartII
+### From TauCetiRoadmap.AdicSpacesPartV
 
-AdicSpacesPartIIPartII continues AdicSpacesPartII with the Zariski geometry of rigid spaces: Zariski closed subsets and dimension, irreducible components, singular strata, classical and weakly Shilov points, resolution, and the analytic manifold of classical points. Rigid spaces are over a complete field K with a nontrivial rank-one valuation. Each consumed target is assumed with the following hypotheses and conclusion.
+AdicSpacesPartV continues AdicSpacesPartII with the Zariski geometry of rigid spaces: Zariski closed subsets and dimension, irreducible components, singular strata, classical and weakly Shilov points, resolution, and the analytic manifold of classical points. Rigid spaces are over a complete field K with a nontrivial rank-one valuation. Each consumed target is assumed with the following hypotheses and conclusion.
 
 - RZ.0 / local-dimension: dim_x X is the least Krull dimension of an affinoid neighbourhood of x; for Zariski closed Z, dim_z Z is computed on Z_red. RZ.0 / proper-image-zariski-closed: a proper morphism sends |Y| and every Zariski closed subset of Y to Zariski closed subsets.
 - RZ.1 / irreducibility-criterion: a nonempty X is irreducible iff the only Zariski closed subset containing a nonempty open is X; then every proper Zariski closed subset is nowhere dense. RZ.1 / full-dimensional-closed-subset: in irreducible X a Zariski closed Z with dim_z Z=dim X at one z equals X; in smooth M a connected Zariski closed Y with dim_y Y=dim_y M at one y is the connected component of M through y.
@@ -181,7 +181,7 @@ AdicSpacesPartIIPartII continues AdicSpacesPartII with the Zariski geometry of r
 - RZ.5 / resolution-consequences: for L/Q_p complete and S reduced, the resolution S̃→S is proper and surjective with S̃ smooth, an isomorphism over the dense smooth locus, a v-cover after diamondification, and S̃ is connected when S is irreducible.
 - RZ.6 / manifold-of-classical-points: for V smooth of pure dimension m over a complete nonarchimedean F, V(F) is an F-analytic manifold of dimension m and morphisms induce analytic maps with differential df. RZ.6 / constant-rank-theorem: in characteristic zero, an analytic map of constant rank k near a is, in suitable charts, the inclusion of the first k coordinates. RZ.6 / smooth-morphism-submersion: in characteristic zero, a smooth morphism of smooth rigid spaces is a submersion on F-points; orbit maps G(F)→(G/H)(F) are submersions. RZ.6 / subfield-identity-theorem: for complete characteristic-zero fields E⊆C with E closed and the restricted norm, and a smooth algebraic group G over E, an analytic function near 1 in G(C) vanishing on an open subgroup of G(E) vanishes near 1.
 
-Consumed sections: AdicSpacesPartIIPartII RZ.0 / local-dimension; AdicSpacesPartIIPartII RZ.0 / proper-image-zariski-closed; AdicSpacesPartIIPartII RZ.1 / full-dimensional-closed-subset; AdicSpacesPartIIPartII RZ.1 / irreducibility-criterion; AdicSpacesPartIIPartII RZ.2 / rank-loci; AdicSpacesPartIIPartII RZ.2 / singular-stratification; AdicSpacesPartIIPartII RZ.3 / classical-points-rigid-analytic-points; AdicSpacesPartIIPartII RZ.3 / gauss-point-in-closure; AdicSpacesPartIIPartII RZ.3 / rigid-analytic-point; AdicSpacesPartIIPartII RZ.4 / weakly-shilov-avoid-nowhere-dense; AdicSpacesPartIIPartII RZ.4 / weakly-shilov-point; AdicSpacesPartIIPartII RZ.5 / resolution-consequences; AdicSpacesPartIIPartII RZ.6 / constant-rank-theorem; AdicSpacesPartIIPartII RZ.6 / manifold-of-classical-points; AdicSpacesPartIIPartII RZ.6 / smooth-morphism-submersion; AdicSpacesPartIIPartII RZ.6 / subfield-identity-theorem.
+Consumed sections: AdicSpacesPartV RZ.0 / local-dimension; AdicSpacesPartV RZ.0 / proper-image-zariski-closed; AdicSpacesPartV RZ.1 / full-dimensional-closed-subset; AdicSpacesPartV RZ.1 / irreducibility-criterion; AdicSpacesPartV RZ.2 / rank-loci; AdicSpacesPartV RZ.2 / singular-stratification; AdicSpacesPartV RZ.3 / classical-points-rigid-analytic-points; AdicSpacesPartV RZ.3 / gauss-point-in-closure; AdicSpacesPartV RZ.3 / rigid-analytic-point; AdicSpacesPartV RZ.4 / weakly-shilov-avoid-nowhere-dense; AdicSpacesPartV RZ.4 / weakly-shilov-point; AdicSpacesPartV RZ.5 / resolution-consequences; AdicSpacesPartV RZ.6 / constant-rank-theorem; AdicSpacesPartV RZ.6 / manifold-of-classical-points; AdicSpacesPartV RZ.6 / smooth-morphism-submersion; AdicSpacesPartV RZ.6 / subfield-identity-theorem.
 
 ### From TauCetiRoadmap.PerfectoidSpaces
 
@@ -819,7 +819,7 @@ Define rigid analytic subdiamonds, coefficient and G-local systems, integral loc
 
 ### 4.1 Rigid analytic subdiamonds
 
-Fix a complete nonarchimedean extension L/Q_p, with its nontrivial rank-one valuation. Use the rigid analytic points supplied by AdicSpacesPartIIPartII RZ.3 (finite-extension-valued points over L). A rigid analytic diamond is one isomorphic over Spd L to S^diamond for a seminormal rigid analytic L-variety S. A rigid analytic subdiamond is a locally closed subdiamond represented in this way; a closed rigid analytic subdiamond also has closed immersion into the ambient diamond. These notions retain the field of definition.
+Fix a complete nonarchimedean extension L/Q_p, with its nontrivial rank-one valuation. Use the rigid analytic points supplied by AdicSpacesPartV RZ.3 (finite-extension-valued points over L). A rigid analytic diamond is one isomorphic over Spd L to S^diamond for a seminormal rigid analytic L-variety S. A rigid analytic subdiamond is a locally closed subdiamond represented in this way; a closed rigid analytic subdiamond also has closed immersion into the ambient diamond. These notions retain the field of definition.
 
 (HKII, arXiv v2, Definition 2.2.1 and Lemma 2.2.3, pp. 15–16; HKII line 691, HKII line 711).
 
@@ -843,7 +843,7 @@ The consuming constructions use this interface as follows. Layer 5 §5.5: Makes 
 
 **Acceptance.** Do not identify every geometric point with a rigid analytic point.
 
-*Needs:* DiamondsAndVStacks D4 / small-v-sheaves-and-small-v-stacks; DiamondsAndVStacks D4 / spaces-and-surjectivity-for-small-v-stacks; DiamondsAndVStacks D6 / gluing-and-the-diamond-functor; DiamondsAndVStacks D6 / etale-site-comparison; DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness; AdicSpacesPartIIPartII RZ.3 / rigid-analytic-point; AdicSpacesPartIIPartII RZ.3 / classical-points-rigid-analytic-points; AdicSpacesPartIIPartII RZ.3 / gauss-point-in-closure; DiamondsAndVStacks D5 / locally-closed-generalizing-subdiamond.
+*Needs:* DiamondsAndVStacks D4 / small-v-sheaves-and-small-v-stacks; DiamondsAndVStacks D4 / spaces-and-surjectivity-for-small-v-stacks; DiamondsAndVStacks D6 / gluing-and-the-diamond-functor; DiamondsAndVStacks D6 / etale-site-comparison; DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness; AdicSpacesPartV RZ.3 / rigid-analytic-point; AdicSpacesPartV RZ.3 / classical-points-rigid-analytic-points; AdicSpacesPartV RZ.3 / gauss-point-in-closure; DiamondsAndVStacks D5 / locally-closed-generalizing-subdiamond.
 
 ### 4.2 Coefficient and group local systems
 
@@ -978,9 +978,9 @@ For a flat line with its filtration concentrated in degree a, the canonical seco
 - DiamondsAndVStacks D6 / gluing-and-the-diamond-functor.
 - DiamondsAndVStacks D6 / etale-site-comparison.
 - DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness.
-- AdicSpacesPartIIPartII RZ.3 / rigid-analytic-point.
-- AdicSpacesPartIIPartII RZ.3 / classical-points-rigid-analytic-points.
-- AdicSpacesPartIIPartII RZ.3 / gauss-point-in-closure.
+- AdicSpacesPartV RZ.3 / rigid-analytic-point.
+- AdicSpacesPartV RZ.3 / classical-points-rigid-analytic-points.
+- AdicSpacesPartV RZ.3 / gauss-point-in-closure.
 - DiamondsAndVStacks D5 / locally-closed-generalizing-subdiamond.
 - DiamondsAndVStacks D1 / universally-open-std-cover.
 - DiamondsAndVStacks D2 / small-pro-etale-site-and-v-site.
@@ -1084,7 +1084,7 @@ At a classical point pass to the completed algebraic closure of its residue fiel
 
 **Acceptance.** This handles the application of the smooth theorem on a singular base.
 
-*Needs:* §5.3; §4.7; §0.5; DiamondsAndVStacks D6 / gluing-and-the-diamond-functor; DiamondsAndVStacks D6 / etale-site-comparison; DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness; AdicSpacesPartIIPartII RZ.5 / resolution-consequences.
+*Needs:* §5.3; §4.7; §0.5; DiamondsAndVStacks D6 / gluing-and-the-diamond-functor; DiamondsAndVStacks D6 / etale-site-comparison; DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness; AdicSpacesPartV RZ.5 / resolution-consequences.
 
 ### 5.6 Adjoint-weight BB criterion
 
@@ -1118,7 +1118,7 @@ On a reductive GL_2 cell of type (1,0), adjoint weights are −1,0,1 and BB iden
 - DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness.
 - ReductiveGroups Layer 3.
 - Layer 0.
-- AdicSpacesPartIIPartII RZ.5 / resolution-consequences.
+- AdicSpacesPartV RZ.5 / resolution-consequences.
 - ReductiveGroups Layer 2.
 
 ## Layer 6: Neutral families and admissible loci
@@ -1201,7 +1201,7 @@ Descend the Q_p-local system to the étale site and resolve the seminormal rigid
 
 **Acceptance.** Do not apply Liu–Zhu’s finite-Q_p-field rigidity theorem directly over an arbitrary strict field or singular S. The arbitrary-field full-rank criterion is an explicit independent hypothesis. A fixed-type Grassmannian theorem cannot establish its own type hypothesis.
 
-*Needs:* §6.3; §5.5; §4.5; AdicSpacesPartIIPartII RZ.5 / resolution-consequences; DiamondsAndVStacks D6 / gluing-and-the-diamond-functor; DiamondsAndVStacks D6 / etale-site-comparison; DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness; PadicHodgeTheory §§7.1 and 7.4; PadicHodgeTheory §§2.2–2.3; PadicHodgeTheory §7.4.
+*Needs:* §6.3; §5.5; §4.5; AdicSpacesPartV RZ.5 / resolution-consequences; DiamondsAndVStacks D6 / gluing-and-the-diamond-functor; DiamondsAndVStacks D6 / etale-site-comparison; DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness; PadicHodgeTheory §§7.1 and 7.4; PadicHodgeTheory §§2.2–2.3; PadicHodgeTheory §7.4.
 
 ### 6.5 b-rigidified admissible loci
 
@@ -1284,7 +1284,7 @@ On a disconnected base the defining W of a neutral pair remains one globally fix
 - MotivesAndAlgebraicCycles §6.3.
 - Layer 1.
 - Layer 5.
-- AdicSpacesPartIIPartII RZ.5 / resolution-consequences.
+- AdicSpacesPartV RZ.5 / resolution-consequences.
 - DiamondsAndVStacks D6 / gluing-and-the-diamond-functor.
 - DiamondsAndVStacks D6 / etale-site-comparison.
 - DiamondsAndVStacks D6 / seminormal-rigid-full-faithfulness.
@@ -1857,7 +1857,7 @@ Each proper Hodge locus is analytic and nowhere dense, hence avoids weakly Shilo
 
 **Acceptance.** Only infinite residue is used by the Gauss-point step; L⊇Q_p-breve supplies it.
 
-*Needs:* §10.2; §6.4; AdicSpacesPartIIPartII RZ.1 / irreducibility-criterion; AdicSpacesPartIIPartII RZ.1 / full-dimensional-closed-subset; AdicSpacesPartIIPartII RZ.3 / rigid-analytic-point; AdicSpacesPartIIPartII RZ.3 / classical-points-rigid-analytic-points; AdicSpacesPartIIPartII RZ.3 / gauss-point-in-closure; AdicSpacesPartIIPartII RZ.4 / weakly-shilov-point; AdicSpacesPartIIPartII RZ.4 / weakly-shilov-avoid-nowhere-dense; AdicSpacesPartIIPartII RZ.5 / resolution-consequences; `dense_iInter_of_isOpen`; `nonempty_interior_of_iUnion_of_closed`.
+*Needs:* §10.2; §6.4; AdicSpacesPartV RZ.1 / irreducibility-criterion; AdicSpacesPartV RZ.1 / full-dimensional-closed-subset; AdicSpacesPartV RZ.3 / rigid-analytic-point; AdicSpacesPartV RZ.3 / classical-points-rigid-analytic-points; AdicSpacesPartV RZ.3 / gauss-point-in-closure; AdicSpacesPartV RZ.4 / weakly-shilov-point; AdicSpacesPartV RZ.4 / weakly-shilov-avoid-nowhere-dense; AdicSpacesPartV RZ.5 / resolution-consequences; `dense_iInter_of_isOpen`; `nonempty_interior_of_iUnion_of_closed`.
 
 ### Examples
 
@@ -1879,14 +1879,14 @@ The Baire argument uses countably many closed incidence images; the individual l
 - ReductiveGroupsPartII RG2.0 / points-topological-group.
 - ReductiveGroupsPartII RG2.0 / congruence-neighbourhood-basis.
 - ReductiveGroupsPartII RG2.0 / smooth-morphism-open-map.
-- AdicSpacesPartIIPartII RZ.1 / irreducibility-criterion.
-- AdicSpacesPartIIPartII RZ.1 / full-dimensional-closed-subset.
-- AdicSpacesPartIIPartII RZ.3 / rigid-analytic-point.
-- AdicSpacesPartIIPartII RZ.3 / classical-points-rigid-analytic-points.
-- AdicSpacesPartIIPartII RZ.3 / gauss-point-in-closure.
-- AdicSpacesPartIIPartII RZ.4 / weakly-shilov-point.
-- AdicSpacesPartIIPartII RZ.4 / weakly-shilov-avoid-nowhere-dense.
-- AdicSpacesPartIIPartII RZ.5 / resolution-consequences.
+- AdicSpacesPartV RZ.1 / irreducibility-criterion.
+- AdicSpacesPartV RZ.1 / full-dimensional-closed-subset.
+- AdicSpacesPartV RZ.3 / rigid-analytic-point.
+- AdicSpacesPartV RZ.3 / classical-points-rigid-analytic-points.
+- AdicSpacesPartV RZ.3 / gauss-point-in-closure.
+- AdicSpacesPartV RZ.4 / weakly-shilov-point.
+- AdicSpacesPartV RZ.4 / weakly-shilov-avoid-nowhere-dense.
+- AdicSpacesPartV RZ.5 / resolution-consequences.
 - `dense_iInter_of_isOpen`.
 - `nonempty_interior_of_iUnion_of_closed`.
 
@@ -1955,7 +1955,7 @@ Pass to the strict completed maximal unramified extension of the residue field o
 
 **Acceptance.** This proves submersion at the translated lift in the selected smooth stratum; it does not claim smoothness at every original point.
 
-*Needs:* §10.3; §3.3; §6.3; §11.3; §5.5; §5.6; AdicSpacesPartIIPartII RZ.0 / proper-image-zariski-closed; AdicSpacesPartIIPartII RZ.0 / local-dimension; AdicSpacesPartIIPartII RZ.2 / singular-stratification; AdicSpacesPartIIPartII RZ.2 / rank-loci; AdicSpacesPartIIPartII RZ.6 / manifold-of-classical-points; AdicSpacesPartIIPartII RZ.6 / constant-rank-theorem; AdicSpacesPartIIPartII RZ.6 / smooth-morphism-submersion; AdicSpacesPartIIPartII RZ.6 / subfield-identity-theorem; ReductiveGroups Layer 2; AdicSpacesPartIIPartII RZ.1 / irreducibility-criterion; AdicSpacesPartIIPartII RZ.1 / full-dimensional-closed-subset.
+*Needs:* §10.3; §3.3; §6.3; §11.3; §5.5; §5.6; AdicSpacesPartV RZ.0 / proper-image-zariski-closed; AdicSpacesPartV RZ.0 / local-dimension; AdicSpacesPartV RZ.2 / singular-stratification; AdicSpacesPartV RZ.2 / rank-loci; AdicSpacesPartV RZ.6 / manifold-of-classical-points; AdicSpacesPartV RZ.6 / constant-rank-theorem; AdicSpacesPartV RZ.6 / smooth-morphism-submersion; AdicSpacesPartV RZ.6 / subfield-identity-theorem; ReductiveGroups Layer 2; AdicSpacesPartV RZ.1 / irreducibility-criterion; AdicSpacesPartV RZ.1 / full-dimensional-closed-subset.
 
 ### 11.5 Bi-analytic Ax–Lindemann theorem
 
@@ -2003,7 +2003,7 @@ Obtain the group and type by canonical reduction and the rigid-base theorem. Cho
 
 **Acceptance.** This proof shares the orbit argument, not the basicness-dependent infinite-level duality.
 
-*Needs:* §6.3; §6.4; §10.3; §3.3; §5.5; AdicSpacesPartIIPartII RZ.2 / singular-stratification; AdicSpacesPartIIPartII RZ.2 / rank-loci; AdicSpacesPartIIPartII RZ.6 / manifold-of-classical-points; AdicSpacesPartIIPartII RZ.6 / constant-rank-theorem; AdicSpacesPartIIPartII RZ.6 / smooth-morphism-submersion; AdicSpacesPartIIPartII RZ.6 / subfield-identity-theorem.
+*Needs:* §6.3; §6.4; §10.3; §3.3; §5.5; AdicSpacesPartV RZ.2 / singular-stratification; AdicSpacesPartV RZ.2 / rank-loci; AdicSpacesPartV RZ.6 / manifold-of-classical-points; AdicSpacesPartV RZ.6 / constant-rank-theorem; AdicSpacesPartV RZ.6 / smooth-morphism-submersion; AdicSpacesPartV RZ.6 / subfield-identity-theorem.
 
 ### 11.8 Nonbasic Serre–Tate boundary
 
@@ -2045,17 +2045,17 @@ For the upper Borel with b=diag(1,p) and mu=(0,−1), the nonbasic ordinary Serr
 - Layer 10.
 - Layer 3.
 - Layer 5.
-- AdicSpacesPartIIPartII RZ.0 / proper-image-zariski-closed.
-- AdicSpacesPartIIPartII RZ.0 / local-dimension.
-- AdicSpacesPartIIPartII RZ.2 / singular-stratification.
-- AdicSpacesPartIIPartII RZ.2 / rank-loci.
-- AdicSpacesPartIIPartII RZ.6 / manifold-of-classical-points.
-- AdicSpacesPartIIPartII RZ.6 / constant-rank-theorem.
-- AdicSpacesPartIIPartII RZ.6 / smooth-morphism-submersion.
-- AdicSpacesPartIIPartII RZ.6 / subfield-identity-theorem.
+- AdicSpacesPartV RZ.0 / proper-image-zariski-closed.
+- AdicSpacesPartV RZ.0 / local-dimension.
+- AdicSpacesPartV RZ.2 / singular-stratification.
+- AdicSpacesPartV RZ.2 / rank-loci.
+- AdicSpacesPartV RZ.6 / manifold-of-classical-points.
+- AdicSpacesPartV RZ.6 / constant-rank-theorem.
+- AdicSpacesPartV RZ.6 / smooth-morphism-submersion.
+- AdicSpacesPartV RZ.6 / subfield-identity-theorem.
 - ReductiveGroups Layer 2.
-- AdicSpacesPartIIPartII RZ.1 / irreducibility-criterion.
-- AdicSpacesPartIIPartII RZ.1 / full-dimensional-closed-subset.
+- AdicSpacesPartV RZ.1 / irreducibility-criterion.
+- AdicSpacesPartV RZ.1 / full-dimensional-closed-subset.
 
 ## Layer 12: Variations and Shimura applications
 
