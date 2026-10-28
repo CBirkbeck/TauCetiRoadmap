@@ -17,24 +17,10 @@ The series consists of the following eight roadmaps. Each part's README states i
 | [VII](../ArithmeticStatisticsPartVII/README.md) | Quadratic probability models and twist applications. |
 | [VIII](../ArithmeticStatisticsPartVIII/README.md) | Function-field distributions and geometric statistics. |
 
-## Conventions
-
-The conventions of the series are those of [ArithmeticStatisticsPartI, Conventions](../ArithmeticStatisticsPartI/README.md#conventions), together with any further conventions a later part states for its own objects.
-
 ## Exact supplier contracts
 
-### From TauCetiRoadmap.ArithmeticStatisticsPartI–PartVIII
-
-The table in Scope and ownership links the README of each of [ArithmeticStatisticsPartI](../ArithmeticStatisticsPartI/README.md), [ArithmeticStatisticsPartII](../ArithmeticStatisticsPartII/README.md), [ArithmeticStatisticsPartIII](../ArithmeticStatisticsPartIII/README.md), [ArithmeticStatisticsPartIV](../ArithmeticStatisticsPartIV/README.md), [ArithmeticStatisticsPartV](../ArithmeticStatisticsPartV/README.md), [ArithmeticStatisticsPartVI](../ArithmeticStatisticsPartVI/README.md), [ArithmeticStatisticsPartVII](../ArithmeticStatisticsPartVII/README.md) and [ArithmeticStatisticsPartVIII](../ArithmeticStatisticsPartVIII/README.md), so all eight parts precede this page.
+The prerequisites are the eight parts [ArithmeticStatisticsPartI](../ArithmeticStatisticsPartI/README.md), [ArithmeticStatisticsPartII](../ArithmeticStatisticsPartII/README.md), [ArithmeticStatisticsPartIII](../ArithmeticStatisticsPartIII/README.md), [ArithmeticStatisticsPartIV](../ArithmeticStatisticsPartIV/README.md), [ArithmeticStatisticsPartV](../ArithmeticStatisticsPartV/README.md), [ArithmeticStatisticsPartVI](../ArithmeticStatisticsPartVI/README.md), [ArithmeticStatisticsPartVII](../ArithmeticStatisticsPartVII/README.md) and [ArithmeticStatisticsPartVIII](../ArithmeticStatisticsPartVIII/README.md); this page uses no object from them.
 
 ## How to read the build
 
 Read Parts I–III for families, orbit dictionaries and uniform counts. Part IV supplies finite-group probability and moment tools before Part V applies them to field and class-group statistics. Part VI computes Selmer averages. Part VII builds quadratic probability models and their conditional twist consequences. Part VIII proves the geometric and function-field comparisons.
-
-## Downstream consumers
-
-Roadmaps outside the series cite the part that states the object they use.
-
-## References
-
-Each part's References section lists the works that part cites.
