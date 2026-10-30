@@ -4,6 +4,7 @@ import TauCeti.Algebra.Category.ModuleCat.Sheaf.TensorProduct.Closed
 import TauCeti.AlgebraicGeometry.Modules.Differentials.Basic
 import TauCeti.AlgebraicGeometry.Cohomology.Module.Base
 import TauCeti.AlgebraicGeometry.LineBundle.Class
+import TauCeti.AlgebraicGeometry.LineBundle.Functoriality
 
 /-!
 # K3SurfacesAndSymplecticBoundedness: target signatures
@@ -11,7 +12,9 @@ import TauCeti.AlgebraicGeometry.LineBundle.Class
 The roadmap is README.md; this file is not the roadmap. It states the roadmap's
 headline theorems against the pinned APIs: invariance under field extension,
 vanishing of one-forms and vector fields, the Hodge diamond, finite freeness of
-the Picard group, Picard-rank bounds and bounded rank-revealing extensions.
+the Picard group, Picard-rank bounds, bounded rank-revealing extensions, the
+wild-prime bound, rank-22 Picard faithfulness and the universal bound on finite
+automorphism subgroups.
 This is the arbitrary-field and all-characteristic Part II of K3Surfaces.
 Its geometric algebraic specialization and complex/Betti inputs are consumed from
 K3Surfaces Conventions, K0, K0.A and K1–K2 through the adapter in README §1.3.
@@ -43,12 +46,15 @@ The remaining headline theorems are not statable at the pins:
 * §6.0b: numerical restriction and determinant laws for general regular
   Jacobians lack the genus-one surface fibration, regular Jacobian and
   geometric numerical divisor lattice with its intersection pairing.
-* §§6.0–6.4a: supersingular discriminants, height/rank comparisons, genus-one
-  pencils, tame fixed-point counts, wild-prime bounds and rank-22 Picard
-  faithfulness lack the geometric Picard pairing, formal Brauer group and
-  K3 quotient/resolution carriers.
-* §§6.5–6.6: faithful cohomological actions and uniform finite-subgroup bounds
-  lack the integral étale automorphism representation.
+* §§6.0–6.3a: supersingular discriminants, height/rank comparisons, genus-one
+  pencils, tame fixed-point counts and wild fixed-locus alternatives lack the
+  geometric Picard pairing, formal Brauer group and K3 quotient/resolution
+  carriers. The wild-prime bound of §6.4 and the rank-22 Picard faithfulness
+  of §6.4a are stated below on the native automorphism group and line-bundle
+  classes.
+* §6.5: the faithful action on integral étale cohomology lacks the integral
+  étale automorphism representation. The universal finite-subgroup bound of
+  §6.6, whose statement needs only the automorphism group, is stated below.
 * §6.7d: the tame involution lift and its genus-one pencil lack the marked
   equivariant deformation carrier and geometric Picard specialization map.
 * §§6.8a–6.11: invariant-dimension bounds, the tame Mathieu character,
@@ -172,6 +178,45 @@ theorem IsK3.boundedPicardDescent (k : Type u) [Field k] {X : Scheme.{u}}
       Module.finrank ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass
         (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) =
         geometricPicardRank k f := by
+  sorry
+
+/-! ## Layer 6: Finite symplectic actions and universal bounds -/
+
+/-- The wild-prime bound: if a finite subgroup of the automorphism group of a K3
+surface over a field of characteristic p > 0 has order divisible by p, then
+p ≤ 11. The automorphism group is that of the structure morphism in the over
+category; no symplectic hypothesis is needed. Dolgachev–Keum, Theorem 2.1,
+pp.4–10; Keum, p.3. -/
+theorem IsK3.wildPrime_le_eleven (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (hX : IsK3 k f)
+    (G : Subgroup (Aut (Over.mk f))) [Finite G]
+    (hp : ringChar k ≠ 0) (hdvd : ringChar k ∣ Nat.card G) :
+    ringChar k ≤ 11 := by
+  sorry
+
+/-- Rank-22 Picard faithfulness: on a K3 surface over an algebraically closed
+field of positive characteristic whose group of line-bundle classes has rank 22,
+an automorphism whose pullback fixes every line-bundle class is the identity.
+No finite-order assumption is made. Rudakov–Shafarevich, §8, Proposition 3;
+Keum, §6, pp.19–20. -/
+theorem IsK3.picardFaithful_of_rank22 (k : Type u) [Field k] [IsAlgClosed k]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) (hX : IsK3 k f) (hp : ringChar k ≠ 0)
+    (h22 : Module.finrank ℤ (Additive (TauCeti.AlgebraicGeometry.LineBundleClass X)) = 22)
+    (g : Aut (Over.mk f))
+    (hg : ∀ a, TauCeti.AlgebraicGeometry.LineBundleClass.pullback g.hom.left a = a) :
+    g = 1 := by
+  sorry
+
+/-- The universal finite-subgroup bound: every finite subgroup of the
+automorphism group of a K3 surface over any field has order at most the larger
+of |GL₂₂(𝔽₃)| and |GL₂₂(𝔽₅)|, through the faithful action on rank-22 integral
+ℓ-adic cohomology and the odd-prime congruence injection. Keum, Theorem 1.4,
+p.3; Huybrechts, Chapter 17, proof of Lemma 2.6, p.367. -/
+theorem IsK3.finiteSubgroup_card_le (k : Type u) [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) (hX : IsK3 k f)
+    (G : Subgroup (Aut (Over.mk f))) [Finite G] :
+    Nat.card G ≤ max (Nat.card (Matrix.GeneralLinearGroup (Fin 22) (ZMod 3)))
+      (Nat.card (Matrix.GeneralLinearGroup (Fin 22) (ZMod 5))) := by
   sorry
 
 end TauCetiRoadmap.K3SurfacesAndSymplecticBoundedness
