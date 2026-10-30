@@ -85,7 +85,7 @@ Import only §§6.2.1–6.2.2: `TauCeti.LambdaRing.PreLambda`, `TauCeti.LambdaRi
 
 ### From TauCetiRoadmap.KTheoryFiniteLocalFields
 
-Import from its Conventions, for a commutative unital ring R, the multiplicative group `𝕎_N(R)` of units of R[t]/(t^(N+1)) with constant coefficient 1 for N≥1, the group `𝕎(R)` of series in R[[t]] with constant coefficient 1, the Verschiebung `V_n : 𝕎_m(R) → 𝕎_(mn)(R)` induced by t↦tⁿ, and the Teichmüller class (1−at)⁻¹; and from §5.16a the quotient `𝕎_(mn)(R)/V_n𝕎_m(R)` with its truncated-polynomial calculation. Only these series-side objects are imported. The coordinate carrier W_(S_N)(R), the map γ_N out of it, its coefficient, restriction, Verschiebung and Teichmüller compatibilities and the restriction limit are §1.4a here, because they need the coordinate big Witt ring of §1.3.
+Import from its Conventions, for a commutative unital ring R, the multiplicative group `𝕎_N(R)` of units of R[t]/(t^(N+1)) with constant coefficient 1 for N≥1, the group `𝕎(R)` of series in R[[t]] with constant coefficient 1, the Verschiebung `V_n : 𝕎_m(R) → 𝕎_(mn)(R)` induced by t↦tⁿ, and the Teichmüller class (1−at)⁻¹. Only these series-side objects are imported. The coordinate carrier W_(S_N)(R), the map γ_N out of it, its coefficient, restriction, Verschiebung and Teichmüller compatibilities and the restriction limit are §1.4a here, because they need the coordinate big Witt ring of §1.3.
 
 ### From TauCetiRoadmap.EnhancedDerivedSheaves
 
