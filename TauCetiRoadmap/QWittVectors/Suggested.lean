@@ -62,7 +62,7 @@ namespace BigWitt
 
 open scoped BigOperators
 
-/-! ## Layer 1: Big Witt rings and shared homological algebra -/
+/-! ## Layer 1: Big Witt rings and arithmetic fracture -/
 
 /-- A truncation set is a set of positive natural numbers closed under positive divisors.
 The empty truncation set is allowed (Hesselholt, §1). Its positive-divisor
