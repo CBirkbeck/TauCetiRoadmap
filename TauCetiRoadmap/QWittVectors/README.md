@@ -6,13 +6,13 @@
 
 ## Scope and ownership
 
-This roadmap owns the following algebraic library: Layers 1–2 give big Witt rings, their coordinate-to-power-series comparison (§1.4a), the Witt-comonad presentation of arithmetic Λ-rings and its equivalence with special λ-rings (§2.1a), prime sets, perfection and perfect coverage; §§1.9–1.11 supply the cochain-completion and DG-algebra support needed by the q-Witt constructions; Layers 3–5 give absolute and relative q-Witt rings and their exactness, base change and completions; Layer 6 gives the completed coefficient Frobenius; Layer 7 gives positive-degree q-Witt systems; Layer 8 specializes the supplied framed calculus to power series and constructs its h-scaled model; Layers 9–10 supply the algebraic support and smooth torsion conclusions. Arithmetic perfection is not the characteristic-p perfection stated by SchemeAndStackFoundations §§0.24, 0.29.
+This roadmap owns the following algebraic library: Layers 1–2 give big Witt rings, their coordinate-to-power-series comparison (§1.4a), the Witt-comonad presentation of arithmetic Λ-rings and its equivalence with special λ-rings (§2.1a), prime sets, perfection and perfect coverage; Layers 3–5 give absolute and relative q-Witt rings and their exactness, base change and completions; Layer 6 gives the completed coefficient Frobenius; Layer 7 gives positive-degree q-Witt systems; Layer 8 specializes the supplied framed calculus to power series and constructs its h-scaled model; Layers 9–10 supply the algebraic support and smooth torsion conclusions. Arithmetic perfection is not the characteristic-p perfection stated by SchemeAndStackFoundations §§0.24, 0.29.
 
-The p-typical carriers and operations, including ghosts, Teichmüller maps, Frobenius, Verschiebung and coordinate extensionality, are already in the pinned Mathlib, and their adic topology is already in pinned Tau Ceti. Layer 1 constructs the distinct big Witt object and proves its comparison with those carriers; it does not rebuild p-typical vectors. Cyclotomic divisor products, prime expansion and characteristic-p power identities are already in Mathlib; their declarations are listed in the supplier contract, and the residual cyclotomic ideal and completion theory belongs to HabiroCyclotomicCompletions. Kähler differentials and their universal derivation are already in Mathlib, and transport of their bases along formally étale extensions is already in Tau Ceti. Scalar Koszul complexes, derived tensor, derived limits, finite-ideal completion and complete flatness are stated by DerivedModuleAlgebra §§0.K.1, 0.2, 1.1–1.9; DG signs and carriers by DGAInfinity Layers 0–1; enhancement and algebra objects by EnhancedDerivedSheaves §0.3 and Layer E5:abstract. AInfCohomology §AI.1.7 owns Koszul complexes of arbitrary commuting module endomorphisms, their maps and scalar cochain-dual comparison; use that construction throughout. SchemeKTheoryOperations §§6.2.1–6.2.2 owns special λ-rings, their morphisms, integral universal identities and Newton operations; §2.1a gives the Witt-coalgebra equivalence without importing its scheme K-theory applications. Generic ordinary de Rham theory belongs to DerivedDeRhamCohomology §§2.1–2.21, 3.4–3.6. CrystallineCohomology §CR.4.6 owns extension of a differential along an étale degree-zero algebra, and §CR.2.2 owns PD Poincaré and presentation comparison; §9.6a combines these PD foundations with the supplied δ-envelope results for the completed smooth comparison. PrismaticCohomology supplies bounded prisms; PrismaticCohomologyPartII §5.0 owns complete coordinate scaling, divided differences and framed q-de Rham complexes, §5.18 their skew product, and §§3.16, 5.13, 5.19–5.20 the Frobenius and framed comparisons. Sections 8.1–8.4 provide power-series realizations, completed Kähler-form transports and the distinct h-scaled Frobenius; §9.5a verifies the general-base hypotheses and iterates the one-step comparison.
+The p-typical carriers and operations, including ghosts, Teichmüller maps, Frobenius, Verschiebung and coordinate extensionality, are already in the pinned Mathlib, and their adic topology is already in pinned Tau Ceti. Layer 1 constructs the distinct big Witt object and proves its comparison with those carriers; it does not rebuild p-typical vectors. Cyclotomic divisor products, prime expansion and characteristic-p power identities are already in Mathlib; their declarations are listed in the supplier contract, and the residual cyclotomic ideal and completion theory belongs to HabiroCyclotomicCompletions. Kähler differentials and their universal derivation are already in Mathlib, and transport of their bases along formally étale extensions is already in Tau Ceti. Scalar Koszul complexes, derived tensor, derived limits, finite-ideal completion and complete flatness are stated by DerivedModuleAlgebra §§0.K.1, 0.2, 1.1–1.9; DG signs and carriers by DGAInfinity Layers 0–1; enhancement and algebra objects by EnhancedDerivedSheaves §0.3 and Layer E5:abstract. AInfCohomology §AI.1.7 owns Koszul complexes of arbitrary commuting module endomorphisms, their maps and scalar cochain-dual comparison; use that construction throughout. SchemeKTheoryOperations §§6.2.1–6.2.2 owns special λ-rings, their morphisms, integral universal identities and Newton operations; §2.1a gives the Witt-coalgebra equivalence without importing its scheme K-theory applications. Generic ordinary de Rham theory belongs to DerivedDeRhamCohomology §§2.1–2.21, 3.4–3.6. CrystallineCohomology §CR.4.6 owns extension of a differential along an étale degree-zero algebra, and §CR.2.2 owns PD Poincaré and presentation comparison; §9.6a combines these PD foundations with the supplied δ-envelope results for the completed smooth comparison. PrismaticCohomology supplies bounded prisms; PrismaticCohomologyPartII §5.0 owns complete coordinate scaling, divided differences and framed q-de Rham complexes, §5.18 the skew product on framed q-PD envelopes and its intrinsic comparison, and §§3.16, 5.13, 5.19–5.20 the Frobenius and framed comparisons. Sections 8.1–8.4 provide power-series realizations, completed Kähler-form transports and the distinct h-scaled Frobenius; §9.5a verifies the general-base hypotheses and iterates the one-step comparison.
 
 BordismFormalGroups §F6.5 owns the all-prime arithmetic square for spectra and its consequence for detection by rationalization and prime completions. EnhancedDerivedSheaves Layer E5:spectra-comparison transports it to ℤ-module complexes. Section 1.8 keeps the distinct finite-prime square with localization at a specified positive integer N and its coefficient-algebra compatibility.
 
-HabiroCyclotomicCompletions owns integral cyclotomic ideal and completion theory. HabiroRings and HabiroCohomologyFoundations own Habiro rings, gluing, q-Hodge filtrations and descent; RefinedTraceMethods owns refined traces. Intrinsic q-crystalline cohomology and its geometric comparison belong to PrismaticCohomologyPartII §§5.13, 5.18–5.20. Layer 9 constructs framed algebraic cohomology and exports the functorial smooth algebraic de Rham comparison of §9.7. Geometric q-crystalline cohomology remains with PrismaticCohomologyPartII. Filtered-colimit and reflexive-coequalizer preservation are owned once, by §4.5; §5.4 adds only finite-type and Noetherian conclusions. Sections 1.9–1.11 own the additional unbounded cochain-completion, multiplicative regular-parameter Bockstein and differential-ideal quotient targets. They build on DerivedModuleAlgebra §§1.1–1.9, DGAInfinity Layers 0–1 and the additive Bockstein of AInfCohomology §AI.1.4. The continuous group-cohomology Bocksteins `TauCeti.explicitBockstein1` and `TauCeti.integralBockstein` are already in the pinned library, in `TauCeti/RepresentationTheory/Homological/ContCohomology/Bockstein/Basic.lean` and `Integral.lean`; they do not provide the regular-parameter DGA theorem. Section 9.3 is its framed specialization, with a different carrier and parameter. Section 9.6 is the simultaneous induction milestone; §9.7 exports Wagner Proposition 4.2 for every smooth A-algebra, prime and positive index.
+HabiroCyclotomicCompletions owns integral cyclotomic ideal and completion theory. HabiroRings and HabiroCohomologyFoundations own Habiro rings, gluing, q-Hodge filtrations and descent; RefinedTraceMethods owns refined traces. Intrinsic q-crystalline cohomology and its geometric comparison belong to PrismaticCohomologyPartII §§5.13, 5.18–5.20. Layer 9 constructs framed algebraic cohomology and exports the functorial smooth algebraic de Rham comparison of §9.7. Geometric q-crystalline cohomology remains with PrismaticCohomologyPartII. Filtered-colimit and reflexive-coequalizer preservation are owned once, by §4.5; §5.4 adds only finite-type and Noetherian conclusions. The unbounded cochain-completion interface belongs to DerivedModuleAlgebra, Part II, extending §§1.5 and 1.8; the regular-parameter multiplicative Bockstein and differential-ideal quotient interfaces belong to DGAInfinity, Part II, extending Layer 1. Their exact extension contracts are gap:cohomology-completion, gap:dga-bockstein and gap:dga-quotient below. The arbitrary-base finite framed skew product is the PrismaticCohomologyPartII extension gap:framed-skew-product; its intrinsic q-crystalline comparison retains §5.18’s stronger hypotheses. The continuous group-cohomology Bocksteins `TauCeti.explicitBockstein1` and `TauCeti.integralBockstein` are already in the pinned library, in `TauCeti/RepresentationTheory/Homological/ContCohomology/Bockstein/Basic.lean` and `Integral.lean`; they do not provide the regular-parameter DGA theorem. Section 9.3 is its framed specialization, with a different carrier and parameter. Section 9.6 is the simultaneous induction milestone; §9.7 exports Wagner Proposition 4.2 for every smooth A-algebra, prime and positive index.
 
 ## Conventions
 
@@ -47,11 +47,33 @@ The dependency pin is `a91d3aafa8cd3e6bc33dfde0d7677ed0f1625039`. The p-typical 
 
 ### From TauCetiRoadmap.DerivedModuleAlgebra
 
-Import §0.K.1, §0.2, §1.1, §1.2, §1.3, §1.5, §1.7, §1.8, §1.9. Scalar Koszul complexes; derived module tensor and limits; finite-ideal completion, radical invariance and Nakayama; bounded-torsion ordinary comparison; complete flatness and bounded-base complete faithful-flat descent. QWittVectors §1.9 proves the additional cochain comparison.
+Import §0.K.1, §0.2, §1.1, §1.2, §1.3, §1.5, §1.7, §1.8, §1.9. Scalar Koszul complexes; derived module tensor and limits; finite-ideal completion, radical invariance and Nakayama; bounded-torsion ordinary comparison; complete flatness and bounded-base complete faithful-flat descent. The base roadmap supplies module completion; its Part II extension supplies the following cochain interface.
+
+**`gap:cohomology-completion` — DerivedModuleAlgebra, Part II: unbounded cochain completion.** Required extension of §§1.5 and 1.8. For every possibly unbounded ℤ[q]-cochain complex M, h=q−1 and prime p, assume that each M^i and H^i(M) has bounded h-power torsion, is p-torsion-free, and has mod-p reduction with bounded h-power torsion; bounds may depend on i. Require that degreewise ordinary h-completion represents derived h-completion, preserves these three conditions, and gives H^i(LΛ_h M)≅LΛ_h H^i(M) and H^i(LΛ_(p,h) M)≅LΛ_(p,h) H^i(M), naturally in M. These are isomorphisms of discrete cohomology modules; the hypotheses make the completions on the right discrete. (Wagner v5 Lemma 4.25 and proof, pp. 64–65, wagner lines 3198–3227.)
+
+- The comparison commutes with the completion units and maps of cochain complexes.
+- Reduction modulo p of the h-completion is the h-completion of M/p; the same assertion holds for the cohomology modules.
+- Neither boundedness of M nor a uniform torsion bound across all degrees is required.
 
 ### From TauCetiRoadmap.DGAInfinity
 
-Import Layer 0, Layer 1. Signed graded modules, Koszul braiding, associative nonunital, unital and augmented DG algebras, maps, opposites, tensors, cycles, boundaries and cohomology multiplication. The multiplication conditions of §7.1 specialize these carriers. QWittVectors §§1.10–1.11 add regular-parameter multiplicative Bocksteins and differential-ideal quotients on these carriers.
+Import Layer 0, Layer 1. Signed graded modules, Koszul braiding, associative nonunital, unital and augmented DG algebras, maps, opposites, tensors, cycles, boundaries and cohomology multiplication. The multiplication conditions of §7.1 specialize these carriers. The following Part II extensions supply the multiplicative regular-parameter and algebra-ideal interfaces on these carriers; DG-category quotients are a different construction.
+
+**`gap:dga-bockstein` — DGAInfinity, Part II: regular-parameter multiplicative Bocksteins.** Required extension of Layer 1, using AInfCohomology §AI.1.4 for the additive Bockstein. For an associative cochain B-DGA P over a commutative ring B and a scalar f∈B acting injectively on every term, require on H*(P/f) the Bockstein β_f[x]=[y] when dx=fy. Use the additive principal-ideal Bockstein and its line trivialization by f. Require lift independence, square zero, the signed derivation law β_f(xy)=β_f(x)y+(−1)^|x|xβ_f(y), and naturality under B-DGA maps with the same regular parameter. For g,f acting injectively on every term and f=ag, let F:H*(P/f)→H*(P/g) be reduction and V:H*(P/g)→H*(P/f) multiplication by a; require Fβ_fV=β_g. F is a graded algebra map and V a graded additive map. (Wagner v5 §4.16, p. 61, wagner lines 3026–3032; §4.23, p. 64, wagner lines 3178–3194.)
+
+- The source and target of β_f in degree i are H^i(P/f) and H^(i+1)(P/f).
+- Reduction and parameter multiplication compose along chains of divisibilities, compatibly with the displayed Bockstein law.
+- If P is graded commutative and strictly odd alternating, these properties pass to its cohomology and β_f gives its degree-one DGA differential.
+
+The general associative product law follows by lifting cycles and dividing the DG Leibniz identity by the termwise regular scalar; the cited framed application does not impose commutativity on this extension.
+
+**`gap:dga-quotient` — DGAInfinity, Part II: differential-ideal quotients.** Required extension of Layer 1. For an associative cochain B-DGA P over a commutative ring B and a homogeneous two-sided ideal J with d(J)⊆J, require P/J as an associative B-DGA and its projection P→P/J, initial among B-DGA maps out of P killing J. For any homogeneous relations require their least homogeneous two-sided differential ideal. (Wagner v5 Proposition 3.12 and Definition 3.13, pp. 40–41, wagner lines 1956–2010.)
+
+- The quotient differential takes [x] to [dx], and its square and DG Leibniz rule descend.
+- A homogeneous set maps to zero under a DGA map iff its differential ideal does; factorizations through the quotient are unique and compose.
+- Graded commutativity and strict odd alternation descend whenever P has them, including in characteristic two.
+
+The general associative statement uses the intersection of homogeneous two-sided differential ideals and degreewise quotient modules; the cited application is the q-Witt differential ideal.
 
 ### From TauCetiRoadmap.AInfCohomology
 
@@ -91,7 +113,15 @@ Import §0.6 for p-torsion-free Frobenius reconstruction, §0.77 for the q-de Rh
 
 ### From TauCetiRoadmap.PrismaticCohomologyPartII
 
-Import §5.0, `FramedAlgebra.gamma`, `FramedAlgebra.toQFraming`, `QFraming.qDeriv`, `QFraming.qDeRhamComplex` and their coordinate-injective naturality and Frobenius identities. For K=(h), no δ-structure is required; for K=(p,h), retain p-regularity, completeness of P/p and the δ-base with δ(q)=0. Import §5.18, `QDeRham.skewDGA` and its Frobenius-compatible E₁ comparison, §§5.13, 5.19–5.20 for the Frobenius-twisted q-crystalline/prismatic comparison and framing-change cocycles, and §3.16 for the one-step Frobenius/Lη equivalence. Section 5.21 is its smooth ℤ_p specialization. Section 9.5a supplies the distinct arbitrary-perfectly-covered-base specialization and all-α iteration required here.
+Import §5.0, `FramedAlgebra.gamma`, `FramedAlgebra.toQFraming`, `QFraming.qDeriv`, `QFraming.qDeRhamComplex` and their coordinate-injective naturality and Frobenius identities. For K=(h), no δ-structure is required; for K=(p,h), retain p-regularity, completeness of P/p and the δ-base with δ(q)=0. Import §5.18, `QDeRham.skewDGA` and its Frobenius-compatible E₁ comparison for framed q-PD envelopes over D flat over ℤ_p[[h]], with (p,h)-completion, §§5.13, 5.19–5.20 for the Frobenius-twisted q-crystalline/prismatic comparison and framing-change cocycles, and §3.16 for the one-step Frobenius/Lη equivalence. Section 5.21 is its smooth ℤ_p specialization. Section 9.5a supplies the distinct arbitrary-perfectly-covered-base specialization and all-α iteration required here.
+
+**`gap:framed-skew-product` — Arbitrary-base finite framed skew DGA.** Required extension of PrismaticCohomologyPartII §5.0: for every commutative D-algebra E with a finite ordered `QFraming` as specified there, equip its supplied q-de Rham complex C with the unital associative D-DGA product (a e_I)(b e_J)=aγ_I(b)e_I∧e_J, where γ_I is the composite of its commuting coordinate automorphisms and the exterior basis has e_i²=0, including in characteristic two. Retain §5.0's coordinate scaling, regularity and divisibility hypotheses, but require no p-regularity, δ-structure or q-PD datum for this product. The unit is 1 in E=C⁰, the differential is d(a e_I)=∑_i D_i(a)e_i∧e_I, and it obeys square zero and the signed DG Leibniz law. For a D-algebra map between such framed algebras and an injection of coordinate sets intertwining the automorphisms and divided differences, with extra target directions fixing the image, require the induced map C→C′ to preserve differential, product and unit, compatibly with identity and composition. For a framed q-PD envelope in §5.18's range, this product agrees with `QDeRham.skewDGA` by its displayed basis formula; the E₁ comparison is required only in that range. (Wagner v5 §4.8, p. 57, wagner lines 2858–2872; the extension uses §5.0's commuting automorphisms and twisted Leibniz rule.)
+
+**Checks.**
+
+- On E=𝔽₂[T][[h]] over D=𝔽₂[[h]], q=1+h, eT=qTe and d(T²)=hTe. The untwisted rule would give 0, while multiplication by 2 on D has kernel D, excluding the flat ℤ₂[[h]] hypothesis of §5.18.
+- For E=ℤ[X,Y][[h]], (e_X·Y)·X=qXYe_X=e_X·(YX), and d(XY)=Ye_X+Xe_Y has d²=−e_X∧e_Y+e_X∧e_Y=0. With no coordinates C=E and its unit and product are those of E; e_X²=0 also after reduction modulo 2.
+- The coordinate injection ℤ[X][[h]]→ℤ[X,Y][[h]] sends e_X·X=qXe_X to the same expression and has D_Y(X)=0. Merging X,Y into T would send d(XY) to 2Te but d(T²)=(1+q)Te, so the termwise map is excluded.
 
 The following interfaces fix the mathematical contracts and their owners. Each label names the exact supplied interface or local adapter consumed in the build.
 
@@ -105,7 +135,7 @@ The following interfaces fix the mathematical contracts and their owners. Each l
 
 ## How to read the build
 
-Read Layers 1–2 for the integral and arithmetic input, the supplied Koszul convention, arithmetic fracture detection and the support theorems of §§1.9–1.11, Layers 3–4 for the initial absolute and relative systems, Layer 5 for étale and completion comparisons, Layer 6 for the q-fixed overlap used by cyclotomic consumers, and Layers 7–8 for positive-degree and framed calculus. Layer 9 gives the algebraic support of the simultaneous smooth torsion induction and exports the functorial smooth E∞ de Rham comparison for all positive indices. Layer 10 exports smooth integer torsion-freeness and degreewise completion. Every target states its context and source, followed by its public laws, proof route and discriminating checks. The `gap:` labels specify the supplied mathematical interfaces and the PD-presentation adapter; local support results are cited by section.
+Read Layers 1–2 for the integral and arithmetic input, the supplied Koszul convention, and arithmetic fracture detection, Layers 3–4 for the initial absolute and relative systems, Layer 5 for étale and completion comparisons, Layer 6 for the q-fixed overlap used by cyclotomic consumers, and Layers 7–8 for positive-degree and framed calculus. Layer 9 gives the algebraic support of the simultaneous smooth torsion induction and exports the functorial smooth E∞ de Rham comparison for all positive indices. Layer 10 exports smooth integer torsion-freeness and degreewise completion. Every target states its context and source, followed by its public laws, proof route and discriminating checks. The `gap:` labels specify the supplied mathematical interfaces and the PD-presentation adapter; local support results are cited by section.
 
 ## Layer 1: Big Witt rings and shared homological algebra
 
@@ -214,6 +244,8 @@ Taking restriction limits gives the group isomorphism `gamma_infty : (W_{positiv
 
 - For a∈R, γ_N(τ(a))=(1−at)⁻¹ modulo t^(N+1), and γ_∞(τ(a))=(1−at)⁻¹ in R[[t]]. In particular γ_1(a)=1+at modulo t².
 
+- For a commutative unital R and positive m,n, γ_(mn) induces W_(S_(mn))(R)/V_n W_(S_m)(R) ≃ U_(mn)(R)/V_n U_m(R), with V_n on the right given by t↦t^n. The quotient projections commute with γ_(mn), and the comparison is natural in R.
+
 The coefficient and restriction laws follow from the product formula (Hesselholt v3 Proposition 1.14 and Addendum 1.16, pp. 14–15, hesselholt lines 598–600 and 644–655); the Verschiebung and Teichmüller laws use their coordinate definitions (Hesselholt v3 §1 before Lemma 1.3, p. 7, hesselholt lines 292–298, and before Lemma 1.5, p. 8, hesselholt lines 338–341).
 
 *Construction and proof.* The coefficient of t^d in the product is a_d plus an integral polynomial in the coordinates of smaller index, so the product determines a bijection over every R. Prove the group law first over the torsion-free universal polynomial ring, where the logarithmic derivative has coefficients w_n, and then specialize the integral identities to R. Restriction gives the finite quotient comparisons, and compatible finite products give the infinite comparison. The coordinate formula for V_n inserts zeros away from multiples of n, which gives substitution directly. Apply the unitization kernel for nonunital coefficients.
@@ -224,6 +256,7 @@ The coefficient and restriction laws follow from the product formula (Hesselholt
 
 - Over ℤ at N=2, (1,0)+(1,0)=(2,−1), and γ_2(2,−1)=(1−2t)⁻¹(1+t²)⁻¹=1+2t+3t² modulo t³, equal to (1−t)⁻². Componentwise addition would give (2,0), whose image is 1+2t+4t²; using the non-inverted product gives 1−2t+t² instead.
 - Over 𝔽₂ at N=2, (0,1) has ghosts (0,0) but γ_2(0,1)=(1−t²)⁻¹=1+t²≠1 modulo t³. Thus ghost equality in R cannot determine this comparison.
+- For m=1,n=2 over ℤ, V_2(a)=(0,a) maps to 1+at² modulo t³, so both quotient projections kill this element and preserve the first coordinate, equivalently the t coefficient. For n=1 both quotient groups are zero.
 - Over ℤ, γ_1(2)=1+2t modulo t², and γ_2(τ(2))=1+2t+4t² modulo t³. The series 1+2t is a distinct element of U_2(ℤ), with coordinates (2,−4); identifying a Teichmüller class with that linear series fails.
 - Over ℤ with N=4,n=2, x=(1,1) on S_2 has V_2(x)=(0,1,0,1) on S_4. Both γ_4(V_2(x)) and γ_2(x)(t²) are 1+t²+2t⁴ modulo t⁵. For N=3,n=2 the source is S_1 and both sides for x=(1) are 1+t² modulo t⁴. If n>N the source is empty and the image is 1; n=0 is excluded because t↦1 does not preserve the truncation ideal over ℤ.
 - For x=(1,1) over ℤ, γ_2(x)=1+t+2t² modulo t³; reduction to U_1 gives 1+t, and coefficient reduction to 𝔽₂ gives 1+t. These agree with restricting x to (1) and mapping x to (1,1) over 𝔽₂, respectively; retaining the coefficient 2 after coefficient reduction would fail naturality. The identity coefficient map retains (1,1,2) as the three series coefficients.
@@ -280,68 +313,13 @@ For M in the enhanced derived category of ℤ-modules and any positive integer N
 - For M=ℤ,N=2 the square is ℤ→ℤ₂ over ℤ[1/2]→ℚ₂.
 - p-completion alone kills ℤ[1/p]; joint detection needs the localization term.
 
-### 1.9 Unbounded cochain completion
-
-For every possibly unbounded ℤ[q]-cochain complex M, h=q−1 and prime p, assume that each M^i and H^i(M) has bounded h-power torsion, is p-torsion-free, and has mod-p reduction with bounded h-power torsion; bounds may depend on i. Prove that degreewise ordinary h-completion represents derived h-completion, preserves these three conditions, and gives H^i(LΛ_h M)≅LΛ_h H^i(M) and H^i(LΛ_(p,h) M)≅LΛ_(p,h) H^i(M), naturally in M. These are isomorphisms of discrete cohomology modules; the hypotheses make the completions on the right discrete. (Wagner v5 Lemma 4.25 and proof, pp. 64–65, wagner lines 3198–3227.)
-
-- The comparison commutes with the completion units and maps of cochain complexes.
-- Reduction modulo p of the h-completion is the h-completion of M/p; the same assertion holds for the cohomology modules.
-- Neither boundedness of M nor a uniform torsion bound across all degrees is required.
-
-*Construction and proof.* Apply the principal bounded-torsion completion comparison to each term and each cohomology module. The two-term resolution for h^n and the Milnor sequence give a fixed-degree calculation using adjacent degrees only, so degree-dependent bounds suffice. Apply completion to N→N→N/p, with first map multiplication by p, to preserve p-regularity and the mod-p torsion bound. Then complete at p to obtain the (p,h) formula.
-
-*Needs:* DerivedModuleAlgebra §§1.1, 1.3, 1.5, 1.8; EnhancedDerivedSheaves §0.3.
-
-**Checks.**
-
-- For M=[ℤ[h] --h→ ℤ[h]] in degrees 0,1, H⁰=0 and H¹=ℤ; h-completion gives [ℤ[[h]] --h→ ℤ[[h]]] with the same cohomology, and (p,h)-completion gives H¹=ℤ_p. Termwise completion without a cohomology comparison would not establish this claim.
-- Let M^i=ℤ[h]/h^(i+1) for i≥0 and zero otherwise, with zero differential. The h-completion in degree i is M^i and the (p,h)-completed cohomology is ℤ_p[h]/h^(i+1); the bounds i+1 have no common finite bound.
-- For the zero complex every completed cohomology group is zero. For ℤ[1/p] in degree zero with h=0, h-completion is ℤ[1/p] and (p,h)-completion is zero; confusing the two ideals fails.
-
-### 1.10 Multiplicative regular-parameter Bocksteins
-
-For an associative cochain B-DGA P over a commutative ring B and a scalar f∈B acting injectively on every term, give H*(P/f) the Bockstein β_f[x]=[y] when dx=fy. Use the additive principal-ideal Bockstein and its line trivialization by f. Prove lift independence, square zero, the signed derivation law β_f(xy)=β_f(x)y+(−1)^|x|xβ_f(y), and naturality under B-DGA maps with the same regular parameter. For regular g,f with f=ag, let F:H*(P/f)→H*(P/g) be reduction and V:H*(P/g)→H*(P/f) multiplication by a; prove Fβ_fV=β_g. F is a graded algebra map and V a graded additive map. (Wagner v5 §4.16, p. 61, wagner lines 3026–3032; §4.23, p. 64, wagner lines 3178–3194.)
-
-- The source and target of β_f in degree i are H^i(P/f) and H^(i+1)(P/f).
-- Reduction and parameter multiplication compose along chains of divisibilities, compatibly with the displayed Bockstein law.
-- If P is graded commutative and strictly odd alternating, these properties pass to its cohomology and β_f gives its degree-one DGA differential.
-
-*Construction and proof.* Apply AInfCohomology §AI.1.4 to the underlying complex and the principal ideal (f), then trivialize its line factors. Lift two cycles and divide the DG Leibniz identity by the regular scalar f to prove the product rule. For f=ag and dx=gy, d(ax)=fy, which proves the parameter-change law without division by a unit.
-
-*Needs:* AInfCohomology §AI.1.4; DGAInfinity Layers 0–1.
-
-**Checks.**
-
-- For P=ℤ[x]⊗Λ(u), |x|=0, |u|=1, dx=2u, du=0 and f=2, β_2[x]=[u] and β_2[x²]=2[xu]=0. Taking the quotient differential itself would give zero on x.
-- With dx=4u, f=4, g=2 and a=2, Fβ_4V[x]=[2u]=0 in P/2, equal to β_2[x]; dropping V would give [u]≠0.
-- For the same exterior DGA with dx=4u and f=2, β_2[x]=[2u]=0. For f=1 all quotient groups are zero; the construction never divides by f in B.
-- In the matrix DGA M₂(ℤ[x]⊗Λ(u)) with dx=3u, the parameter f=3 gives β_3[(xE₁₂)(xE₂₁)]=[2xuE₁₁], equal to [uE₁₂·xE₂₁+xE₁₂·uE₂₁]; commutativity of P is unnecessary.
-
-### 1.11 Differential-ideal quotients
-
-For an associative cochain B-DGA P over a commutative ring B and a homogeneous two-sided ideal J with d(J)⊆J, construct P/J as an associative B-DGA and its projection P→P/J, initial among B-DGA maps out of P killing J. For any homogeneous relations construct their least homogeneous two-sided differential ideal. (Wagner v5 Proposition 3.12 and Definition 3.13, pp. 40–41, wagner lines 1956–2010.)
-
-- The quotient differential takes [x] to [dx], and its square and DG Leibniz rule descend.
-- A homogeneous set maps to zero under a DGA map iff its differential ideal does; factorizations through the quotient are unique and compose.
-- Graded commutativity and strict odd alternation descend whenever P has them, including in characteristic two.
-
-*Construction and proof.* Intersect all homogeneous two-sided differential ideals containing the relations, then descend the differential and multiplication to the graded quotient. The universal property follows degreewise from quotient modules and the two-sided ideal condition.
-
-*Needs:* DGAInfinity Layers 0–1; Mathlib quotient modules and ring ideals.
-
-**Checks.**
-
-- In ℤ[x]⊗Λ(u) with dx=u, the algebra ideal (x) is not differential because u∉(x); the differential ideal generated by x is (x,u), and its quotient is ℤ with zero differential.
-- With the same P, J=0 gives P and J=P gives the zero DGA. Quotient by (2) gives 𝔽₂[x]⊗Λ(u) with u²=0; the sign rule alone would not force that square to vanish.
-- In the free associative degree-zero algebra ℤ⟨x,y,z⟩ with d=0, the two-sided ideal (x) kills both xy and yx and its quotient is ℤ⟨y,z⟩, where yz≠zy. A left ideal alone need not kill xy.
-
 ### Examples
 
 Divisors of 1, 2, 6 and prime powers distinguish the big indexing from p-typical length. The Checks give the values and their negative controls.
 
 ### Dependencies
 
-Layer 1.1 `BigWitt.TruncationSet`; Layer 1.2 `BigWitt.ghost_image`; Layer 1.3; Layer 1.4; Mathlib `Polynomial`; Mathlib `PowerSeries`; Mathlib `PowerSeries.isUnit_iff_constantCoeff`; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`; Layer 1.5; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §0.K.1; DGAInfinity Layer 0; EnhancedDerivedSheaves §0.3 and Layer E5:spectra-comparison; DerivedModuleAlgebra §1.3; BordismFormalGroups §F6.5. AInfCohomology §§AI.1.4, AI.1.7; DerivedModuleAlgebra §§1.1, 1.3, 1.5, 1.8; DGAInfinity Layers 0–1; Layer 1.9; Layer 1.10; Layer 1.11.
+Layer 1.1 `BigWitt.TruncationSet`; Layer 1.2 `BigWitt.ghost_image`; Layer 1.3; Layer 1.4; Mathlib `Polynomial`; Mathlib `PowerSeries`; Mathlib `PowerSeries.isUnit_iff_constantCoeff`; Mathlib `WittVector`; Mathlib `TruncatedWittVector`; Mathlib `WittVector.ghostComponent_apply`; Mathlib `WittVector.frobenius`; Mathlib `WittVector.verschiebung`; Mathlib `WittVector.teichmuller`; Layer 1.5; SchemeAndStackFoundations §0.23a; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §0.K.1; DGAInfinity Layer 0; EnhancedDerivedSheaves §0.3 and Layer E5:spectra-comparison; DerivedModuleAlgebra §1.3; BordismFormalGroups §F6.5. AInfCohomology §§AI.1.4, AI.1.7; DerivedModuleAlgebra §§1.1, 1.3, 1.5, 1.8; DGAInfinity Layers 0–1.
 
 ## Layer 2: Arithmetic Λ-rings, prime sets and perfection
 
@@ -982,7 +960,7 @@ For every A,R as in 7.1 construct the initial q-V system `Q_m Omega*_{R/A}`. Deg
 
 *Construction and proof.* Induct on m through its proper divisors and quotient the supplied de Rham algebra by the stated differential ideal. All generators have positive degree, preserving degree zero. Lifting polynomial differential expressions proves existence of V and initiality.
 
-*Needs:* Layer 7.1; Layer 1.11.
+*Needs:* Layer 7.1; gap:dga-quotient.
 
 **Checks.**
 
@@ -1095,7 +1073,7 @@ Frobenius is a graded algebra map. Its differential relation has a factor n, vis
 
 ### Dependencies
 
-Layer 4.3; DGAInfinity Layer 0; DGAInfinity Layer 1; `gap:ordinary-derham`; Layer 7.1; Layer 1.11; Layer 7.2; Layer 3.4; Layer 7.3; Layer 5.4; DerivedModuleAlgebra §1.3; `gap:cyclotomic-contract`; Layer 7.4; Layer 1.8; Layer 7.5; Layer 4.4; Layer 7.6; Layer 5.1; CrystallineCohomology §CR.4.6.
+Layer 4.3; DGAInfinity Layer 0; DGAInfinity Layer 1; `gap:ordinary-derham`; Layer 7.1; gap:dga-quotient; Layer 7.2; Layer 3.4; Layer 7.3; Layer 5.4; DerivedModuleAlgebra §1.3; `gap:cyclotomic-contract`; Layer 7.4; Layer 1.8; Layer 7.5; Layer 4.4; Layer 7.6; Layer 5.1; CrystallineCohomology §CR.4.6.
 
 ## Layer 8: Complete framed difference calculus
 
@@ -1142,7 +1120,7 @@ For the realization of §8.1, use the supplied `QFraming.qDeriv` as D_i; its def
 
 ### 8.3 Kähler realization and the h-scaled complex
 
-For the frame of §8.1, let C□ be the supplied `QFraming.qDeRhamComplex` with `QDeRham.skewDGA` multiplication, and construct H□ by replacing its differential by h times that differential. Use AInfCohomology §AI.1.7's Koszul carrier for H□=K(R[[h]];hD_i). Prove the termwise identifications C□^k≅H□^k≅Ω^k_(R/A)[[h]] using the finite ordered coordinate basis. All complexes are nonnegative; A is arbitrary, r≥0. (Wagner v5 §§4.7–4.8, p. 57, wagner lines 2849–2872.)
+For the frame of §8.1, let C□ be the supplied `QFraming.qDeRhamComplex` with the arbitrary-base multiplication of gap:framed-skew-product, and construct H□ by replacing its differential by h times that differential. Use AInfCohomology §AI.1.7's Koszul carrier for H□=K(R[[h]];hD_i). Prove the termwise identifications C□^k≅H□^k≅Ω^k_(R/A)[[h]] using the finite ordered coordinate basis. All complexes are nonnegative; A is arbitrary, r≥0. (Wagner v5 §§4.7–4.8, p. 57, wagner lines 2849–2872.)
 
 - The term comparison sends the ordered supplier basis to dT_I and carries the supplied product to (f dT_I)(g dT_J)=fγ_I(g)dT_I∧dT_J. It preserves units and products; the differential on H□ is h∑D_i(f)dT_i.
 - Reduction modulo h identifies C□ with Ω*_(R/A) with its de Rham differential, and H□ with the same exterior algebra with zero differential. Coordinate one-forms have square zero, including at two; the unreduced product is associative and skew.
@@ -1150,7 +1128,7 @@ For the frame of §8.1, let C□ be the supplied `QFraming.qDeRhamComplex` with 
 
 *Construction and proof.* Apply the finite free Kähler basis transport and its exterior powers to the supplied Koszul complex and skew product. Multiplying a differential by the central scalar h preserves square zero and the DG Leibniz law with the same product. The identifications are on the coefficient ring and the ordered basis, so their product and map compatibilities follow from the displayed transported formula.
 
-*Needs:* Layers 8.1–8.2; AInfCohomology §AI.1.7; PrismaticCohomologyPartII §§5.0, 5.18; gap:ordinary-derham.
+*Needs:* Layers 8.1–8.2; AInfCohomology §AI.1.7; PrismaticCohomologyPartII §5.0; gap:framed-skew-product; gap:ordinary-derham.
 
 **Checks.**
 
@@ -1169,7 +1147,7 @@ For perfectly covered A, prime p and the finite-coordinate étale frame of §8.1
 
 *Construction and proof.* Perfect coverage gives p-torsion-freeness and reduced A/p; these pass to the étale polynomial frame. The series quotient descriptions of §8.1 and their mod-p analogues verify completeness of P/p, P/h and P/(hT_i). Continuous formal étale lifting and torsion-free Frobenius reconstruction give the supplied δ-frame. Transport the C□ map and use its divided-difference Frobenius identity to prove the scaled chain equation; γ_iφ□=φ□γ_i verifies the skew products. These arguments use no q-Witt torsion theorem.
 
-*Needs:* Layers 8.1–8.3, 2.4; PrismaticCohomology §0.6; PrismaticCohomologyPartII §§5.0, 5.18; SchemeAndStackFoundations §§0.29, 4.1.
+*Needs:* Layers 8.1–8.3, 2.4; PrismaticCohomology §0.6; PrismaticCohomologyPartII §5.0; gap:framed-skew-product; SchemeAndStackFoundations §§0.29, 4.1.
 
 **Checks.**
 
@@ -1184,7 +1162,7 @@ For T² the Jackson derivative is (1+q)T; the scaled differential is (q²−1)T 
 
 ### Dependencies
 
-AInfCohomology §AI.1.7; SchemeAndStackFoundations §4.1; Mathlib `PowerSeries`; Layer 8.1; Layer 8.2; `gap:ordinary-derham`; Layer 8.3; Layer 2.4. PrismaticCohomology §0.6; PrismaticCohomologyPartII §§5.0, 5.18. Mathlib `KaehlerDifferential.D`; Tau Ceti `TauCeti.kaehlerBasisOfFormallyEtale`.
+AInfCohomology §AI.1.7; SchemeAndStackFoundations §4.1; Mathlib `PowerSeries`; Layer 8.1; Layer 8.2; `gap:ordinary-derham`; Layer 8.3; Layer 2.4. PrismaticCohomology §0.6; PrismaticCohomologyPartII §5.0; gap:framed-skew-product. Mathlib `KaehlerDifferential.D`; Tau Ceti `TauCeti.kaehlerBasisOfFormallyEtale`.
 
 ## Layer 9: Algebraic support for the smooth torsion induction
 
@@ -1240,7 +1218,7 @@ For a perfectly covered Λ-ring A and étale framing with finitely many coordina
 
 *Construction and proof.* Perfect coverage makes R integer torsion-free; the first h-coefficient of f_m is m, so f_m acts injectively on R[[h]] and all finite free differential terms. Apply the generic Bockstein supplier to H□ and f_m. Its cycle-lift equation fixes the sign, and its change-of-parameter identity for f_d dividing f_m gives Fβ_mV=β_d. This specializes the generic theorem rather than constructing a second DGA Bockstein theory.
 
-*Needs:* Layer 8.3; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; Layer 1.10.
+*Needs:* Layer 8.3; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; gap:dga-bockstein.
 
 **Checks.**
 
@@ -1250,7 +1228,7 @@ For a perfectly covered Λ-ring A and étale framing with finitely many coordina
 
 ### 9.4 Product homotopy for framed cochains
 
-For a commutative ring A and an ordered finite-coordinate étale frame □ of R/A, put H□=K(R[[h]];hD_i), with its skew product from §8.3 and e_i=dT_i. Construct a continuous A[[h]]-bilinear map H of total degree −1 such that for homogeneous α of degree k and β of degree ℓ, αβ−(−1)^(kℓ)βα=d_H H(α,β)+H(d_Hα,β)+(−1)^k H(α,d_Hβ). The same identity holds after quotienting by q^m−1 for every m>0; consequently every signed commutator of closed forms is a boundary. A any commutative ring; R has a specified ordered finite-coordinate étale frame; h=q−1; k,ℓ≥0; m>0 for the quotient identity; no perfect-coverage or torsion hypothesis. (wagner line 2858, §4.8, pp. 57, lines 2858–2872; Lemma 4.17, p. 61, lines 3033–3052 (cohomology conclusion); the product homotopy follows from the skew rules by the displayed telescoping proof).
+For a commutative ring A and an ordered finite-coordinate étale frame □ of R/A, put H□=K(R[[h]];hD_i), with its skew product from §8.3 and gap:framed-skew-product, and e_i=dT_i. Construct a continuous A[[h]]-bilinear map H of total degree −1 such that for homogeneous α of degree k and β of degree ℓ, αβ−(−1)^(kℓ)βα=d_H H(α,β)+H(d_Hα,β)+(−1)^k H(α,d_Hβ). The same identity holds after quotienting by q^m−1 for every m>0; consequently every signed commutator of closed forms is a boundary. A any commutative ring; R has a specified ordered finite-coordinate étale frame; h=q−1; k,ℓ≥0; m>0 for the quotient identity; no perfect-coverage or torsion hypothesis. (wagner line 2858, §4.8, pp. 57, lines 2858–2872; Lemma 4.17, p. 61, lines 3033–3052 (cohomology conclusion); the product homotopy follows from the skew rules by the displayed telescoping proof).
 
 - On ordered basis forms a e_I,b e_J, set H=∑_i H_i, where H_i=0 unless i∈I∩J, and H_i(a e_I,b e_J)=(−1)^|I| T_i `gamma_{J<i}(a)gamma_{I>i}(b)` e_I∧ι_i(e_J); here `gamma_U=prod_{j in U}gamma_j`, J<i={j∈J:j<i}, I>i={j∈I:j>i}, and ∧ and ι_i are the ordinary exterior-basis wedge and signed contraction, with all coefficients on the left.
 
@@ -1260,7 +1238,7 @@ For a commutative ring A and an ordered finite-coordinate étale frame □ of R/
 
 *Construction and proof.* For 0≤s≤r define `mu_s(a e_I,b e_J)=gamma_{J <= s}(a)gamma_{I>s}(b)e_I wedge e_J`, with ordinary exterior-basis wedge. The two equivalent twisted Leibniz formulas for hD_j show that every μ_s is a chain map. The displayed H_i satisfies μ_(i−1)−μ_i=d_H H_i+H_i(d_H⊗1+1⊗d_H), with the tensor differential carrying its cochain sign: in coordinate i use γ_i−id=T_i hD_i, and in each other coordinate use the twisted Leibniz rule and γ_jT_i=T_i for j≠i. Sum over i; μ_0 is the skew product and μ_r is its signed opposite. This proves the identity for all forms before any quotient, not just for degree-zero cocycles.
 
-*Needs:* Layer 8.3.
+*Needs:* Layer 8.3; gap:framed-skew-product.
 
 **Checks.**
 
@@ -1278,9 +1256,9 @@ For A perfectly covered and an étale framing with finitely many coordinates □
 
 - FβV=β, FV=m/d and `VF=[m/d]_{q^d}`; the Teichmüller relation holds by torsion-freeness.
 
-*Construction and proof.* Construct the degree-zero map by the finite arithmetic fracture square, using the polynomial comparison and the framed p-adic lifts on each completed factor. Section 1.9 supplies the cohomology/completion comparison. Reduce ℤ-torsion-freeness to 9.2 by finite-type and flat étale base change; graded commutativity follows from §9.4: the signed commutator of any two closed forms is d_H H(α,β), hence a boundary modulo q^m−1. Torsion-freeness forces odd squares to zero, including at 2, and proves the Teichmüller relation. All constructions remain dependent on the specified frame.
+*Construction and proof.* Construct the degree-zero map by the finite arithmetic fracture square, using the polynomial comparison and the framed p-adic lifts on each completed factor. The DerivedModuleAlgebra, Part II contract gap:cohomology-completion supplies the cohomology/completion comparison. Reduce ℤ-torsion-freeness to 9.2 by finite-type and flat étale base change; graded commutativity follows from §9.4: the signed commutator of any two closed forms is d_H H(α,β), hence a boundary modulo q^m−1. Torsion-freeness forces odd squares to zero, including at 2, and proves the Teichmüller relation. All constructions remain dependent on the specified frame.
 
-*Needs:* Layer 1.8; Layer 9.2; Layer 9.3; Layer 9.4; Layer 5.4; Layer 7.7; Layer 1.9.
+*Needs:* Layer 1.8; Layer 9.2; Layer 9.3; Layer 9.4; Layer 5.4; Layer 7.7; gap:cohomology-completion.
 
 **Checks.**
 
@@ -1374,7 +1352,7 @@ Local framed cohomology is used only as an algebraic tool. Filtered q-Hodge desc
 
 ### Dependencies
 
-Layer 8.4; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §1.7; Layer 9.1; `gap:cyclotomic-contract`; Layer 8.3; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; Layer 1.10; Layer 1.8; Layer 9.2; Layer 9.3; Layer 9.4; Layer 5.4; Layer 7.7; Layer 1.9; Layer 9.5; Layer 9.5a; PrismaticCohomologyPartII §3.16; `gap:ordinary-derham`; Layer 9.6; Layer 9.6a; Layer 3.7; Layer 4.6; `gap:pd-presentation`; CrystallineCohomology §CR.2.2; PrismaticCohomology §§0.6, 0.68–0.69; DerivedDeRhamCohomology §§PD.5–PD.6; EnhancedDerivedSheaves §E5:abstract; DerivedModuleAlgebra §0.2. PrismaticCohomology §§0.77, 1.20; PrismaticCohomologyPartII §§5.0, 5.2, 5.13–5.15, 5.18–5.20; AInfCohomology §§AI.1.1–AI.1.6; DerivedModuleAlgebra §§1.3, 1.8–1.9.
+Layer 8.4; SchemeAndStackFoundations §0.29; DerivedModuleAlgebra §1.7; Layer 9.1; `gap:cyclotomic-contract`; Layer 8.3; DGAInfinity Layer 1; EnhancedDerivedSheaves §0.3; gap:dga-bockstein; Layer 1.8; Layer 9.2; Layer 9.3; Layer 9.4; Layer 5.4; Layer 7.7; gap:cohomology-completion; Layer 9.5; Layer 9.5a; PrismaticCohomologyPartII §3.16; `gap:ordinary-derham`; Layer 9.6; Layer 9.6a; Layer 3.7; Layer 4.6; `gap:pd-presentation`; CrystallineCohomology §CR.2.2; PrismaticCohomology §§0.6, 0.68–0.69; DerivedDeRhamCohomology §§PD.5–PD.6; EnhancedDerivedSheaves §E5:abstract; DerivedModuleAlgebra §0.2. PrismaticCohomology §§0.77, 1.20; PrismaticCohomologyPartII §§5.0, 5.2, 5.13–5.15, 5.18–5.20; AInfCohomology §§AI.1.1–AI.1.6; DerivedModuleAlgebra §§1.3, 1.8–1.9.
 
 ## Layer 10: Smooth q-Witt torsion and completion exports
 
@@ -1423,6 +1401,8 @@ Every positive index and prime is covered. The auxiliary comparisons retain thei
 Layer 9.6; Layer 7.7; Layer 5.4; `gap:cyclotomic-contract`; Layer 10.1; DerivedModuleAlgebra §1.5.
 
 ## Downstream consumers
+
+- **KTheoryFiniteLocalFields**: §1.4a supplies the coordinate-to-power-series comparison used by its §5.16a and the Verschiebung quotient specialization for §5.17; the general coordinate ring and comparison have the same owner here.
 
 - **HabiroCohomologyFoundations**: Layers 2–6 supply relative arithmetic Λ and degree-zero q-Witt theory, especially the completed overlap in Layer 6; Layers 7–10 supply positive-degree operators, complete framed calculus, the functorial smooth de Rham comparison and smooth completion.
 - **HabiroRings**: Layers 1–6: arithmetic Λ-perfection and perfect coverage, relative degree zero, ghosts, base change and q-fixed completed Frobenius overlap, including naturality and linearization coherence under a Λ-map of perfectly covered bases and a compatible map of their étale algebras (§§6.1–6.3). Habiro rings and cyclotomic gluing stay there.
