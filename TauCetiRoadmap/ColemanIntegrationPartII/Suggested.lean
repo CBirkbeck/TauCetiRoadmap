@@ -17,10 +17,10 @@ The following headline theorems are not statable at the pins:
 * Analytic double-index transport (§2.3) needs oriented analytic annuli, their
   Laurent/logarithmic function spaces and finite-map pullback. Formal Laurent
   series alone do not carry the analytic functions on a general open annulus.
-* Full analytic Coleman extension and the full analytic and semistable de Rham
-  comparisons (§§3.0b–3.0c) need the Coleman function/one-form algebra, the
-  overconvergent analytic de Rham complex of a wide open, the component-annulus
-  Cech complex and curve de Rham comparison carriers.
+* The full analytic de Rham comparison, full analytic Coleman extension and
+  semistable de Rham comparison (§§3.0b–3.0c) need the overconvergent analytic
+  de Rham complex of a wide open, the Coleman function/one-form algebra, the
+  component-annulus Cech complex and curve de Rham comparison carriers.
 * Wide-open reciprocity and the corrected cup/Frobenius/monodromy comparisons
   (§§3.1a,3.4–3.5) need those cohomology carriers, Coleman end restrictions and
   their constructed comparison operators.
@@ -74,10 +74,12 @@ noncomputable def edgeDivergence {V E k : Type*} [Field k] [CharZero k]
       (if head e = v then c e / (length e).1 else 0))
 
 /-- Every cochain on a finite multigraph with positive rational lengths over a
-characteristic-zero field has a unique harmonic/exact decomposition. The edge
-orientations respect native incidence; loops, parallel edges and disconnected
-or empty graphs are allowed. Uniqueness is of the two cochains, not of an exact
-potential (Besser, Theorem 4.4; README §1.2 gives the rational-length extension). -/
+characteristic-zero field has a unique harmonic/exact decomposition. The
+incidence hypothesis ties the chosen orientation to the native graph; the
+decomposition itself holds for any two endpoint maps, since its rank argument
+never consults incidence. Loops, parallel edges and disconnected or empty graphs
+are allowed. Uniqueness is of the two cochains, not of an exact potential
+(Besser, Theorem 4.4; README §1.2 gives the rational-length extension). -/
 theorem harmonic_exact_decomposition {V E k : Type*} [Field k] [CharZero k]
     (G : _root_.Graph V E) [Fintype G.vertexSet] [Fintype G.edgeSet]
     (tail head : G.edgeSet → G.vertexSet)

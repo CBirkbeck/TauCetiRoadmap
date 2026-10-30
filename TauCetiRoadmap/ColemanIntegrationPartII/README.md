@@ -6,7 +6,7 @@
 
 This continues **ColemanIntegration**, whose L0 supplies analytic Laurent/logarithmic functions and whose L1 constructs good-reduction Coleman integration. Its polylogarithms and special-value applications remain there. This Part II constructs natural single integration in arbitrary reduction over every closed subfield K⊆ℂ_p, using the geometric Colmez construction of §§4.0–4.0c and closed-field descent. PadicPeriodRings §§1.1–1.2 own the continuous Galois action and Ax–Sen–Tate fixed-closure theorem; §4.0c supplies the closed-subfield adapter and primitive descent. The finite p-adic field specialization uses the abelian logarithm over finite extensions of ℚ_p from AnabelianGeometryAndNonabelianChabauty §5.8. The additional logarithm for arbitrary abelian varieties defined over ℂ_p is §4.0; it agrees with the supplied point-extension logarithm on varieties with a finite p-adic field model.
 
-This roadmap owns harmonic graph normalization and metric refinement, formal logarithmic local algebra and the degree-one index subspace, double/triple indices and their choice laws, wide-open reciprocity, curve cohomology/graph comparisons, harmonic realization, traced local contributions, divisor evaluation and descent. The additional full-analytic-coefficient Coleman extension is §3.0b, with its de Rham comparison in §3.0b1; the analytic logarithmic algebra on complete subfields of ℂ_p is imported from ColemanIntegration L0.20–L0.23. The general analytic coefficient extension is §2.1a. Jacobians over finite extensions of ℚ_p use the imported logarithms; their natural integration/topology bridge is §4.0e. The geometric abelian logarithm of §4.0 additionally allows abelian varieties defined over ℂ_p without a finite p-adic field model. Tate point uniformization is imported; its differential and chart bridge is §7.0. ModularCurves §0F owns finite-presentation finite-locally-free Weil restriction. ReductiveGroupsPartII §§RG2.0a.1–RG2.0a.2 own its norm-open presentation for the multiplicative group, group structure, point identification, changes of basis, smoothness and separable splitting. Section 4.0c keeps the additional invariant trace-form adapter on this supplied scheme to fix descended logarithmic generators in the uniqueness proof.
+This roadmap owns harmonic graph normalization and metric refinement, formal logarithmic local algebra and the degree-one index subspace, double/triple indices and their choice laws, wide-open reciprocity, curve cohomology/graph comparisons, harmonic realization, traced local contributions, divisor evaluation and descent. The additional full-analytic-coefficient Coleman extension is §3.0b1, with its de Rham comparison in §3.0b; the analytic logarithmic algebra on complete subfields of ℂ_p is imported from ColemanIntegration L0.20–L0.23. The general analytic coefficient extension is §2.1a. Jacobians over finite extensions of ℚ_p use the imported logarithms; their natural integration/topology bridge is §4.0e. The geometric abelian logarithm of §4.0 additionally allows abelian varieties defined over ℂ_p without a finite p-adic field model. Tate point uniformization is imported; its differential and chart bridge is §7.0. ModularCurves §0F owns finite-presentation finite-locally-free Weil restriction. ReductiveGroupsPartII §§RG2.0a.1–RG2.0a.2 own its norm-open presentation for the multiplicative group, group structure, point identification, changes of basis, smoothness and separable splitting. Section 4.0c keeps the additional invariant trace-form adapter on this supplied scheme to fix descended logarithmic generators in the uniqueness proof.
 
 AlgebraicCurves Layers 5 and 9 own general DVR completions, point expansions, traced geometric residues and the proper residue theorem. FormalLaurentPuiseux L1–L3 own formal substitutions, differential rules, residue transport, residue-zero primitives and the characteristic-zero scalar kernel. Section 2.0 adds finite analytic-map transport and comparison adapters between these point expansions and convergent meromorphic analytic germs; the underlying formal/analytic residue agreement is ColemanIntegration L0.11 `annulusResidue_laurentSeries`. The polynomial-logarithm extension, its degree-one presentation and the indices remain here.
 
@@ -65,9 +65,9 @@ Import L1's Laurent substitutions for nonzero parameter series of positive order
 
 ### From TauCetiRoadmap.ColemanIntegration
 
-Import L0.A1–L0.A2: `LaurentOn`, `LaurentOn.derivative`, `.restrict`, `.endGerm`, `.pullback`, `laurentSeriesEval` and `LaurentOn.eval_injective`. The coefficient carrier uses complete nontrivially normed ultrametric fields; point evaluation is into ℂ_p and faithfulness retains the radius hypotheses. L0.11–L0.12 supply `annulusResidue`, `exists_laurent_primitive_iff` and vanishing residue for exact forms on genuine open annuli/end germs. In particular L0.11 `annulusResidue_laurentSeries` identifies analytic residue with the formal coefficient −1 for a convergent meromorphic germ with finitely many negative powers on a punctured disc. L0.15–L0.19 supply `padicLogBranch`, `logBranch_sub`, finite-extension/Galois compatibility and its local derivative. L0.20–L0.23 supply `AnnulusLogRing`, `.changeParam`, `.restrict`, `.realize_branch`, `exists_logLaurent_primitive` and `logLaurent_derivative_eq_zero_iff`. Their analytic logarithmic ring has coefficients in a complete subfield of ℂ_p; parameter change retains a unit scale and a strictly small perturbation on the chosen annulus. Its extension beyond that coefficient scope is §2.1a.
+Import L0.A1–L0.A2: `LaurentOn`, `LaurentOn.derivative`, `.restrict`, `.endGerm`, `.pullback`, `laurentSeriesEval` and `LaurentOn.eval_injective`. The coefficient carrier uses complete nontrivially normed ultrametric fields; point evaluation is into ℂ_p and faithfulness retains the radius hypotheses. L0.11–L0.12 supply `annulusResidue`, `exists_laurent_primitive_iff` and vanishing residue for exact forms on genuine open annuli/end germs. In particular L0.11 `annulusResidue_laurentSeries` identifies analytic residue with the formal coefficient −1 for a convergent meromorphic germ with finitely many negative powers on a punctured disc. L0.15–L0.19 supply `padicLogBranch`, the branch-change formula of L0.16 (`log_b(x) - log_a(x) = (b - a) v_p(x)` for nonzero x, so all branches agree on units), finite-extension/Galois compatibility and its local derivative. L0.20–L0.23 supply `AnnulusLogRing`, `.changeParam`, `.restrict`, `.realize_branch` and the logarithmic primitive theorem of L0.22, `existsUnique_logLaurent_primitive`: on an open annulus or end germ every logarithmic Laurent differential has a primitive, unique once its scalar constant coefficient is zero, so the derivation is surjective with kernel the coefficient field. Their analytic logarithmic ring has coefficients in a complete subfield of ℂ_p; parameter change retains a unit scale and a strictly small perturbation on the chosen annulus. Its extension beyond that coefficient scope is §2.1a.
 
-Import L1.2–L1.3 for `wideOpen`, `daggerAlgebra`, `daggerDifferentials` and their ordinary/end restrictions on a good-reduction pair and a cofinal system of strict neighborhoods. Import L1.17–L1.19 for `ColemanFunctions`, `.d_mem`, `.ker_d`, `colemanIntegral`, `d_colemanIntegral`, `colemanIntegral_d`, `definiteIntegral`, `definiteIntegral_add`, `definiteIntegral_tiny` and `definiteIntegral_d`. Their datum carries the base's `(H0)`, `(H1)` and `(Hi)` conditions. L1.17a supplies `colemanCoefficients_exact`, `colemanCoefficients_meromorphicPrimitive` and `colemanCoefficients_restrict_injective` for algebraic coefficient extension. No equality with the full analytic ℂ_p algebra follows from this extension. L1.43 supplies `ColemanFunctions.pullback` and `definiteIntegral_pullback` under its common Frobenius-power, same-reduction cross-map and uniform strict-neighborhood bounds. §§3.0a–3.0b supply the extra component and full-analytic-coefficient comparisons required here.
+Import L1.2–L1.3 for `wideOpen`, `daggerAlgebra`, `daggerDifferentials` and their ordinary/end restrictions on a good-reduction pair and a cofinal system of strict neighborhoods. Import L1.17–L1.19 for `ColemanFunctions`, `.d_mem`, `.ker_d`, `colemanIntegral`, `d_colemanIntegral`, `colemanIntegral_d`, `definiteIntegral`, `definiteIntegral_add`, `definiteIntegral_tiny` and `definiteIntegral_d`. Their datum carries the base's `(H0)`, `(H1)` and `(Hi)` conditions. L1.17a supplies `colemanCoefficients_exact`, `colemanCoefficients_meromorphicPrimitive` and `colemanCoefficients_restrict_injective` for algebraic coefficient extension. No equality with the full analytic ℂ_p algebra follows from this extension. L1.43 supplies `ColemanFunctions.pullback` and `definiteIntegral_pullback` under its common Frobenius-power, same-reduction cross-map and uniform strict-neighborhood bounds. §§3.0a–3.0b1 supply the extra component and full-analytic-coefficient comparisons required here.
 
 ### From TauCetiRoadmap.PadicPeriodRings
 
@@ -75,11 +75,11 @@ Import §1.1 `completedGaloisAction`, the extension of each `ℚ_p`-automorphism
 
 ### From TauCetiRoadmap.AnabelianGeometryAndNonabelianChabauty
 
-Import §5.8, “Abelian logarithms”: `abelianLog.add`, `.derivative`, `.unique`, `.baseChange`, `.functorial` and `.cp` for any abelian variety over finite K/ℚ_p, without a good-reduction hypothesis. Its `colemanAbelian.integral` comparison has good-reduction hypotheses. Here `.cp` extends the points of that same K-defined variety, and does not cover arbitrary varieties defined over ℂ_p. The additional arbitrary-ℂ_p logarithm and finite-model agreement are §4.0; the natural arbitrary-reduction comparison and compact divisor-topology bridge are §4.0e.
+Import §5.8, “Abelian logarithms”: `abelianLog` for any abelian variety over finite K/ℚ_p, without a good-reduction hypothesis, with the facts stated there: it is additive, its differential at zero is the identity, it is determined by its restriction to an open subgroup, it respects abelian-variety homomorphisms over K and finite extensions of K, and it extends to the compatible locally analytic logarithm on all ℂ_p-points. The “Coleman and abelian logarithm comparison” sub-target of §5.8 has good-reduction hypotheses. Here the ℂ_p-point extension covers the points of that same K-defined variety, and does not cover arbitrary varieties defined over ℂ_p. The additional arbitrary-ℂ_p logarithm and finite-model agreement are §4.0; the natural arbitrary-reduction comparison and compact divisor-topology bridge are §4.0e.
 
 ### From TauCetiRoadmap.PadicDifferentialEquationsAndRigidCohomology
 
-Import §RD.4.31 for finite rigid coefficient extension with compatible Frobenius; §RD.4.32 for dagger de Rham cohomology of a smooth affine lift and its lift-independent Frobenius; §RD.4.33 for the proper tube comparison; and §RD.5.76 for finite dimensionality with F-isocrystal coefficients. Use §RD.6.1 `linearFrobenius` with residue field 𝔽_q, q-power Frobenius and coefficient lift the identity, and `linearFrobenius_eq_pow`, `linearFrobenius_natural`, `linearFrobenius_baseChange`: after residue extension of degree f the geometric Frobenius becomes the f-th iterate. Higher powers q=(#κ_K)^r are iterates, and scalar extension alone is distinguished in §3.0c. §§RD.6.86, RD.6.88 and RD.6.92 supply proper weight-one H¹, the curve Gysin sequence and affine-curve weights: boundary eigenvalues are qζ, becoming q after splitting the boundary. The additional semistable Čech/graph comparison is §3.0c; the index/compact-cup comparison is §3.1a.
+Import §RD.4.31 for finite rigid coefficient extension with compatible Frobenius; §RD.4.32 for dagger de Rham cohomology of a smooth affine lift and its lift-independent Frobenius; §RD.4.33 for the proper tube comparison; and §RD.5.76 for finite dimensionality with F-isocrystal coefficients. Use §RD.6.1 `linearFrobenius` with residue field 𝔽_q, q-power Frobenius and coefficient lift the identity, with the laws stated there: over K_0 with a p-power Frobenius structure it is the a-th iterate of the p-power Frobenius, q=p^a; it commutes with pullback along morphisms of 𝔽_q-schemes and with maps induced by morphisms of F-isocrystals; and after base change to the field with q^r elements the linear q^r-Frobenius is F^r⊗1. Hence after residue extension of degree f the geometric Frobenius becomes the f-th iterate. Higher powers q=(#κ_K)^r are iterates, and scalar extension alone is distinguished in §3.0c. §§RD.6.86, RD.6.88 and RD.6.92 supply proper weight-one H¹, the curve Gysin sequence and affine-curve weights: boundary eigenvalues are qζ, becoming q after splitting the boundary. The additional semistable Čech/graph comparison is §3.0c; the index/compact-cup comparison is §3.1a.
 
 ### From TauCetiRoadmap.ResolutionOfSingularitiesCharacteristicZero
 
@@ -87,7 +87,7 @@ Import §6.2 `sncCompactification`: for a smooth quasi-projective finite-type va
 
 ### From TauCetiRoadmap.RigidAnalyticGeometry
 
-Use §1.3 for finite/complete coefficient extension and its tensor comparison, §2.3 for reduction, §6.2 for rigid spaces, discs, annuli, gluing and quasi-separated field extension, §7.3 for quasi-Stein acyclicity, §8.1 for analytification and its compatibility with finite maps and products, and §8.4 for proper GAGA. Carry quasi-separatedness in global rigid base change. These interfaces supply the ambient geometry of component wide opens, not the analytic Coleman algebra or a de Rham comparison; the curve comparison is §3.0b1.
+Use §1.3 for finite/complete coefficient extension and its tensor comparison, §2.3 for reduction, §6.2 for rigid spaces, discs, annuli, gluing and quasi-separated field extension, §7.3 for quasi-Stein acyclicity, §8.1 for analytification and its compatibility with finite maps and products, and §8.4 for proper GAGA. Carry quasi-separatedness in global rigid base change. These interfaces supply the ambient geometry of component wide opens, not the analytic Coleman algebra or a de Rham comparison; the curve comparison is §3.0b.
 
 ### From TauCetiRoadmap.StableReduction
 
@@ -131,7 +131,7 @@ Assume Γ has finite actual vertex and edge sets; ambient types need not be fini
 
 For a finite simple graph and additive commutative coefficient group, define its unit-length divergence on the supplied cochains by summing additive values on outgoing darts. Divergence of the pinned head-minus-tail coboundary is the negative of the Laplacian on the potential; the tail-minus-head differential gives the positive Laplacian. This construction commutes with coefficient embeddings and graph isomorphisms by its finite-sum definition (besser2017 Definitions 4.1–4.3, besser2017 line 528).
 
-For the headline signature choose one orientation of each actual edge of a native multigraph G, with tail and head in its actual vertex set and satisfying G.IsLink. Define `Graph.edgeDifferential` on vertex functions by f ↦ (e ↦ f(tail e)−f(head e)), for any additive commutative coefficient group. For a characteristic-zero field k and positive rational lengths, define `Graph.edgeDivergence` on edge functions by summing c(e)/ℓ(e) at the tail and −c(e)/ℓ(e) at the head. The two edge maps are defined for arbitrary endpoint functions into the actual vertex set; native incidence is a hypothesis of the decomposition theorem. Only the actual edge set is required finite for divergence; both actual vertex and edge sets are finite for harmonic decomposition. The value on the reverse flag is −c(e), including at loops, so this presentation identifies with the flag cochains above.
+For the headline signature choose one orientation of each actual edge of a native multigraph G, with tail and head in its actual vertex set and satisfying G.IsLink. Define `Graph.edgeDifferential` on vertex functions by f ↦ (e ↦ f(tail e)−f(head e)), for any additive commutative coefficient group. For a characteristic-zero field k and positive rational lengths, define `Graph.edgeDivergence` on edge functions by summing c(e)/ℓ(e) at the tail and −c(e)/ℓ(e) at the head. The two edge maps are defined for arbitrary endpoint functions into the actual vertex set. The decomposition theorem carries native incidence as a hypothesis only to tie the orientation to G: its conclusion holds for arbitrary endpoint maps, because the rank argument of §1.2 never consults incidence. Only the actual edge set is required finite for divergence; both actual vertex and edge sets are finite for harmonic decomposition. The value on the reverse flag is −c(e), including at loops, so this presentation identifies with the flag cochains above.
 
 - Both maps are additive; over k they are k-linear.
 - Reorienting an edge negates its cochain coordinate and preserves divergence and the harmonic/exact decomposition.
@@ -168,7 +168,7 @@ Use the hypotheses of §1.1; connectedness and nonemptiness only for a single co
 
 - For each connected component with r vertices, the positive-rational-length multigraph Laplacian has rank r−1, preserved over k. Its unit-length simple-graph specialization follows from Mathlib’s `SimpleGraph.card_connectedComponent_eq_finrank_ker_toLin'_lapMatrix` over ℝ and invariance of rational matrix rank under field extension.
 
-In the oriented-edge signature `Graph.harmonic_exact_decomposition`, every edge function c has a unique pair (h,r) with weighted divergence of h equal to zero, r the edge differential of some vertex potential, and c=h+r. The orientation satisfies G.IsLink on every actual edge, and the lengths are strictly positive rationals. This states the full multigraph decomposition, including disconnected graphs, loops and parallel edges, over every characteristic-zero field; uniqueness is of cochains, not potentials. The unit-length simple-graph case also gives a unique harmonic/exact pair in the supplied multiplicative cochains, where multiplication translates addition.
+In the oriented-edge signature `Graph.harmonic_exact_decomposition`, every edge function c has a unique pair (h,r) with weighted divergence of h equal to zero, r the edge differential of some vertex potential, and c=h+r. The orientation is assumed to satisfy G.IsLink on every actual edge, which ties it to G and is not used in the proof, and the lengths are strictly positive rationals. This states the full multigraph decomposition, including disconnected graphs, loops and parallel edges, over every characteristic-zero field; uniqueness is of cochains, not potentials. The unit-length simple-graph case also gives a unique harmonic/exact pair in the supplied multiplicative cochains, where multiplication translates addition.
 
 - The value-preserving cochain equivalence of §1.1 sends im(d) onto the additive translation of the pinned coboundary range, since negation preserves that range. Transport scalar multiplication to Additive (G.FirstCohomology (Multiplicative k)); the induced quotient equivalence is k-linear and identifies harmonic representatives with this existing quotient. Import FirstCohomology.lift, mk_eq_mk_iff, firstCohomologyMap and firstCohomologyRelabel through the bridge; do not redefine their simple-graph universal properties or functoriality.
 
@@ -184,6 +184,7 @@ Multiply all conductances 1/ℓ by a common positive integer to make them positi
 - On a simple triangle the cochain (1,1,1) has nonzero cycle class in both quotients; on a one-edge tree ±3 are coboundaries in both. The quotient bridge preserves cochain values, while the signed chain comparison negates them.
 - For two parallel edges with the same orientation and lengths (1,2), c=(3,0) decomposes as harmonic h=(1,−2) and exact r=(2,2), with potential (2,0). Divergence of h is (0,0) and (h,r)_ℓ=2−2=0. Discarding one parallel edge changes the decomposition.
 - If positivity were dropped, lengths (1,−1) on two parallel edges would make the nonzero exact cochain (1,1) harmonic: its outgoing current is 1−1=0. Zero lengths are excluded as well. In characteristic 2 even unit lengths give outgoing current 1+1=0 for this exact cochain; characteristic zero admits ℚ₂ while excluding this example.
+- A non-loop edge e whose two endpoint maps both give the same vertex u violates incidence, yet every potential has differential f(u)−f(u)=0 on e and the divergence of c at u is c(e)/ℓ(e)−c(e)/ℓ(e)=0, so (c,0) is still the unique pair. Incidence ties the orientation to the graph; it is not what makes the decomposition true.
 
 ### 1.3 Subdivision with a fixed metric
 
@@ -254,7 +255,7 @@ These formal assertions require a characteristic-zero field k, with no norm or p
 
 - On the analytic subspace restrict the supplied AnnulusLogRing.changeParam, retaining u=az(1+h), |a|=1 and |h|<1. Formally, for u=az(1+h), a≠0 and h∈zk[[z]], choose a scalar δ and transport L_u=L_z+δ+log(1+h) through the full differential-algebra substitution. The broader analytic coefficient/radius-transport statement is §2.1a. Orientation reversal changes both residue and the logarithmic generator.
 
-Use Polynomial (LaurentSeries k) for the formal ring, extending the Laurent derivation by dL=z⁻¹. For w with residue a, apply the supplied residue-zero primitive theorem to w−a z⁻¹ and then add aL. The supplied exact-residue law and Laurent scalar kernel give the logarithmic coefficient and constant kernel. Polynomial coefficient uniqueness proves the degree-one presentation; integration by parts extends the supplied Laurent primitives to the polynomial-logarithm algebra. Restrict the supplied formal substitutions and chain rule after choosing the logarithmic lift δ. On the analytic ring take the degree-one subspace and use exists_logLaurent_primitive and logLaurent_derivative_eq_zero_iff. Compare formal and analytic carriers only for convergent meromorphic germs, via §2.0.
+Use Polynomial (LaurentSeries k) for the formal ring, extending the Laurent derivation by dL=z⁻¹. For w with residue a, apply the supplied residue-zero primitive theorem to w−a z⁻¹ and then add aL. The supplied exact-residue law and Laurent scalar kernel give the logarithmic coefficient and constant kernel. Polynomial coefficient uniqueness proves the degree-one presentation; integration by parts extends the supplied Laurent primitives to the polynomial-logarithm algebra. Restrict the supplied formal substitutions and chain rule after choosing the logarithmic lift δ. On the analytic ring take the degree-one subspace and use the existence and uniqueness clauses of ColemanIntegration L0.22 `existsUnique_logLaurent_primitive`, the uniqueness clause giving the scalar kernel. Compare formal and analytic carriers only for convergent meromorphic germs, via §2.0.
 
 *Needs:* FormalLaurentPuiseux L1–L3, RigidAnalyticGeometry §6.2, Mathlib `LaurentSeries`, Mathlib `LaurentSeries.derivative`, Mathlib `LaurentSeries.hasseDeriv_coeff`, §2.0, ColemanIntegration L0.A1–L0.A2, L0.11–L0.12, L0.20–L0.23.
 
@@ -274,7 +275,7 @@ Assume k complete, nontrivially normed, ultrametric and characteristic zero; A i
 
 - Every logarithmic polynomial differential has a primitive, unique modulo k.
 
-- For complete subfields of ℂ_p these maps agree with exists_logLaurent_primitive, logLaurent_derivative_eq_zero_iff and AnnulusLogRing.changeParam.
+- For complete subfields of ℂ_p these maps agree with the primitive and scalar-kernel clauses of ColemanIntegration L0.22 `existsUnique_logLaurent_primitive` and with `AnnulusLogRing.changeParam`.
 
 Reuse the supplied Laurent coefficient algebra. The ultrametric absolute value restricted to ℚ bounds inverse integers by a fixed power of their real size. An interior-radius margin absorbs this growth. Integrate by parts in L, and prove the kernel coefficientwise by descending degree and the residue obstruction. This is the general-coefficient extension of the supplied analytic theorem; the formal argument stays in §2.1.
 
@@ -364,29 +365,7 @@ Use the formal tubes of the smooth affine component cores and their good-reducti
 - A node xy=π has two opposite end orientations, residues +1 and −1 for dx/x.
 - For a self-node a subdivision gives two genuinely different neighboring domains. The expression F_v−F_v cannot encode a nonzero loop period.
 
-### 3.0b Full analytic Coleman coefficients
-
-For a geometrically connected Coleman wide open U with finite end set, extend the supplied good-reduction dagger Coleman algebra to the actual Coleman function and one-form algebra with full analytic coefficients on U over ℂ_p. Construct its derivation, analytic-function inclusion, products, integration of Coleman one-forms modulo constants, and differential-compatible end restrictions. Define A_col,1 as the subspace of actual Coleman functions with analytic differential. Over finite K/ℚ_p construct the K-defined subalgebra and its finite-extension and Galois maps, whose scalar extensions inject into the full ℂ_p algebra. No equality between an algebraic tensor extension and all analytic ℂ_p coefficients is asserted. (besser-dejeu2012, §8, p. 361, besser-dejeu2012 lines 2520–2547; §9, p. 364, line 2766).
-
-Assume U is a Coleman wide open presented on a cofinal strict-neighborhood system; constant field is the geometric coefficient field; For K-valued assertions K/ℚ_p is finite and the branch and data are K-defined; Pullbacks carry compatible Coleman presentations; restrictions preserve a common domain of convergence.
-
-- The differential kernel on the full Coleman algebra is the scalar field, so two global primitives differ by one constant.
-
-- Every actual Coleman one-form has a global Coleman primitive modulo constants; restrictions of a primitive of an analytic form lie in A_log,1.
-
-- The inclusion from algebraically extended base coefficients is injective and commutes with products, d, primitive classes and end restriction.
-
-Extend the existing word/connection realization using full analytic strict-neighborhood sections and the de Rham basis transported by the comparison c_U of §3.0b1, rather than completing a tensor product by fiat. Reprove faithfulness and the constant kernel on this enlarged coefficient ring by meromorphic pole removal and minimal differential relations. Construct primitive classes in the same unipotent realization. For K-defined data compare local realizations with the supplied algebra by uniqueness. This is the additional full-analytic-coefficient theorem; the base finite/algebraic-coefficient construction is imported.
-
-*Needs:* §3.0a, §3.0b1, ColemanIntegration L1.2, L1.17, L1.17a, L1.18–L1.19, L1.43.
-
-**Checks.**
-
-- For U an affine-line wide open and α transcendental over K with |α|<1, (1−αz)⁻¹ on a suitable strict neighborhood is full analytic data but not a finite K-coefficient tensor sum.
-- A scalar has zero differential; log z has differential dz/z and is not scalar. A locally constant indicator on two residue discs is not a Coleman function.
-- Global primitives of R dS and S dR can be shifted to sum to RS. Unrelated constants at different ends need not come from a global primitive.
-
-### 3.0b1 Full analytic de Rham comparison
+### 3.0b Full analytic de Rham comparison
 
 Let X be a smooth proper connected curve over ℂ_p, let U⊆X^an be a Coleman wide open whose complement is a finite disjoint union of closed discs D_1,…,D_n with n≥1, and let Z={z_1,…,z_n} with z_i∈D_i. Write O†(U)→Ω¹†(U) for the full analytic overconvergent de Rham complex: the colimit, over the cofinal strict-neighborhood system W_r of U, of O(W_r)→Ω¹(W_r) with ℂ_p coefficients. Restriction of algebraic functions and forms on Y=X−Z induces a ℂ_p-linear isomorphism c_U from `H¹_dR(Y/ℂ_p) = Ω¹(Y)/dO(Y)` to the H¹ of this complex, and the kernel of d on O†(U) is ℂ_p. Under c_U:
 
@@ -410,6 +389,28 @@ Each W_r is again X^an minus closed discs about Z. Cover X^an by W_r and slightl
 - For an elliptic curve E with good reduction in Weierstrass form, U the complement of the residue disc of the origin, ω=dx/(2y+a_1x+a_3) and η=xω, the local parameter t=−x/y gives x=t⁻²−a_1t⁻¹+⋯ and ω=(1+a_1t+⋯)dt. The single end residue of η is 0, and with F=t+⋯ the end sum gives [ω]∪[η]=1, so the class of η is nonzero although η has a pole at the origin.
 - For U=ℙ¹ minus the residue discs of 0 and ∞ over ℚ_p with φ(t)=t^p, φ*(dt/t)=p·dt/t in the full complex, matching the scalar-extended eigenvalue p.
 
+### 3.0b1 Full analytic Coleman coefficients
+
+For a geometrically connected Coleman wide open U with finite end set, extend the supplied good-reduction dagger Coleman algebra to the actual Coleman function and one-form algebra with full analytic coefficients on U over ℂ_p. Construct its derivation, analytic-function inclusion, products, integration of Coleman one-forms modulo constants, and differential-compatible end restrictions. Define A_col,1 as the subspace of actual Coleman functions with analytic differential. Over finite K/ℚ_p construct the K-defined subalgebra and its finite-extension and Galois maps, whose scalar extensions inject into the full ℂ_p algebra. No equality between an algebraic tensor extension and all analytic ℂ_p coefficients is asserted. (besser-dejeu2012, §8, p. 361, besser-dejeu2012 lines 2520–2547; §9, p. 364, line 2766).
+
+Assume U is a Coleman wide open presented on a cofinal strict-neighborhood system; constant field is the geometric coefficient field; For K-valued assertions K/ℚ_p is finite and the branch and data are K-defined; Pullbacks carry compatible Coleman presentations; restrictions preserve a common domain of convergence.
+
+- The differential kernel on the full Coleman algebra is the scalar field, so two global primitives differ by one constant.
+
+- Every actual Coleman one-form has a global Coleman primitive modulo constants; restrictions of a primitive of an analytic form lie in A_log,1.
+
+- The inclusion from algebraically extended base coefficients is injective and commutes with products, d, primitive classes and end restriction.
+
+Extend the existing word/connection realization using full analytic strict-neighborhood sections and the de Rham basis transported by the comparison c_U of §3.0b, rather than completing a tensor product by fiat. Reprove faithfulness and the constant kernel on this enlarged coefficient ring by meromorphic pole removal and minimal differential relations. Construct primitive classes in the same unipotent realization. For K-defined data compare local realizations with the supplied algebra by uniqueness. This is the additional full-analytic-coefficient theorem; the base finite/algebraic-coefficient construction is imported.
+
+*Needs:* §3.0a, §3.0b, ColemanIntegration L1.2, L1.17, L1.17a, L1.18–L1.19, L1.43.
+
+**Checks.**
+
+- For U an affine-line wide open and α transcendental over K with |α|<1, (1−αz)⁻¹ on a suitable strict neighborhood is full analytic data but not a finite K-coefficient tensor sum.
+- A scalar has zero differential; log z has differential dz/z and is not scalar. A locally constant indicator on two residue discs is not a Coleman function.
+- Global primitives of R dS and S dR can be shifted to sum to RS. Unrelated constants at different ends need not come from a global primitive.
+
 ### 3.0c Curve cohomology and the graph maps
 
 For X/K smooth proper geometrically connected with finite reduced boundary Z and a split separated regular nodal realization, using the supplied rigid cohomology, finite-dimensionality, scalar-extension and component dagger comparisons, construct the additional curve algebraic/rigid de Rham comparison with the component-annulus Čech total complex. Its degree-one representatives ((ω_v),(f_e)) satisfy d f_e=ω_tail−ω_head and its coboundaries are ((d a_v),(a_tail−a_head)). Prove the graph exact sequence (4.5), restriction maps, and the graph retraction χ represented by f_e−(F_tail−F_head). Define N_ℓ by the harmonic class of ℓ(e)Res_e(ω_tail) using one fixed rational metric, and identify it with geometric monodromy at that valuation scale. Writing Q_K=#κ_K, construct the K-linear q-Frobenius for q=Q_K^r with integer r≥1 and identity coefficient lift via rigid component cohomology and its weight splitting: χφ=χ, Nφ=qN, χN=N, N²=0. Construct ordered proper cup product and its second-kind local-primitive residue formula. The cohomology, cup, χ and N maps respect coefficient extension and admissible common refinements at one valuation scale; Frobenius extension distinguishes scalar extension of an operator from iteration for the enlarged residue field. For nonsplit Z the scalar-extension maps of complexes are defined before choosing a splitting field. (besser2017, §4, (4.2)–(4.7), pp. 13–14, besser2017 lines 586–658; Lemma 4.8, p. 14, line 671; Proposition 4.12 proof, pp. 15–16, lines 777–782).
@@ -424,9 +425,9 @@ Assume K/ℚ_p finite, p any prime; X smooth proper geometrically connected of d
 
 - For finite L/K of residue degree f, let F_K be the Q_K-Frobenius and `phi_{K,r}`=F_K^r. Under the cohomology base-change comparison, F_L=F_K^f⊗1 and `phi_{L,r}`=`phi_{K,r}`^f⊗1 has degree Q_L^r=q^f. The L-linear endomorphism `phi_{K,r}`⊗1 always exists as scalar extension; it is an identity-coefficient q-Frobenius over L only when f divides r, when it equals `F_L^(r/f)`. For f=1 no iterate is needed. χ and N extend at the common valuation scale.
 
-Prove the curve algebraic/logarithmic de Rham and rigid comparison and compute its Mayer–Vietoris complex on the constructed cover. The imported rigid finite-dimensionality theorem and component Frobenius weight decomposition give the weight-zero retraction and linear Q_K-Frobenius with identity coefficient lift; its r-th iterate gives q=Q_K^r. The supplier linearFrobenius_baseChange law gives F_L=F_K^f⊗1; a scalar-extended operator represents the same q-power geometric Frobenius with identity coefficient lift only if that power fixes κ_L. Residue defines monodromy; the metric convention transports the unit-length formula through §1.3. Compute ordered cup by local second-kind primitives. Prove extension and model maps on these complexes and their agreement on refinements; no index identity or §4.2 is used.
+Prove the curve algebraic/logarithmic de Rham and rigid comparison and compute its Mayer–Vietoris complex on the constructed cover. The imported rigid finite-dimensionality theorem and component Frobenius weight decomposition give the weight-zero retraction and linear Q_K-Frobenius with identity coefficient lift; its r-th iterate gives q=Q_K^r. The base-change law of PadicDifferentialEquationsAndRigidCohomology §RD.6.1 gives F_L=F_K^f⊗1; a scalar-extended operator represents the same q-power geometric Frobenius with identity coefficient lift only if that power fixes κ_L. Residue defines monodromy; the metric convention transports the unit-length formula through §1.3. Compute ordered cup by local second-kind primitives. Prove extension and model maps on these complexes and their agreement on refinements; no index identity or §4.2 is used.
 
-*Needs:* §1.3, §3.0a, §3.0b, RigidAnalyticGeometry §§1.3, 6.2, 8.1, StableReduction Layers 0–1, 4–5, 9, PadicDifferentialEquationsAndRigidCohomology §§RD.4.31–RD.4.33, RD.5.76, RD.6.1, RD.6.86, RD.6.88, RD.6.92.
+*Needs:* §1.3, §3.0a, §3.0b1, RigidAnalyticGeometry §§1.3, 6.2, 8.1, StableReduction Layers 0–1, 4–5, 9, PadicDifferentialEquationsAndRigidCohomology §§RD.4.31–RD.4.33, RD.5.76, RD.6.1, RD.6.86, RD.6.88, RD.6.92.
 
 **Checks.**
 
@@ -439,7 +440,7 @@ Prove the curve algebraic/logarithmic de Rham and rigid comparison and compute i
 
 For a connected Coleman wide open U, ω,η analytic one-forms on U and their Coleman primitives F,G, define B_U(ω,η)=`sum_{e in End(U)}` B_e(F|e,G|e), orienting each end by a parameter vanishing in its omitted disc. The value is independent of the two global primitive constants, alternating and agrees under common shrinking of ends. Cohomology factorization, analytic-exact vanishing, rational-core vanishing and logarithmic-unit reciprocity are the subsequent theorems of §3.1a. The same construction allows finitely many punctures by replacing them by sufficiently small omitted discs. (besser2017, Definition 3.8, Proposition 3.9 and Remark 3.10, p. 11, besser2017 line 492).
 
-Assume U is a connected Coleman wide open over a finite extension K/ℚ_p or its complete algebraically closed extension; F,G are global Coleman primitives of analytic differentials, with one branch; Use the actual Coleman algebras and end maps of §§3.0a–3.0b; Over K the wide open is geometrically connected with Coleman constant field K; a larger finite constant field is treated over that field and then by trace; The construction is first made after splitting the finite family of ends over the coefficient field; nonsplit ends are traced by §7.5 and descended by §7.6.
+Assume U is a connected Coleman wide open over a finite extension K/ℚ_p or its complete algebraically closed extension; F,G are global Coleman primitives of analytic differentials, with one branch; Use the actual Coleman algebras and end maps of §§3.0a–3.0b1; Over K the wide open is geometrically connected with Coleman constant field K; a larger finite constant field is treated over that field and then by trace; The construction is first made after splitting the finite family of ends over the coefficient field; nonsplit ends are traced by §7.5 and descended by §7.6.
 
 - The function-level notation B_U(F,G) means the pairing of their differentials, evaluated by the end-sum.
 
@@ -451,7 +452,7 @@ Assume U is a connected Coleman wide open over a finite extension K/ℚ_p or its
 
 Prove global residue cancellation on these Coleman wide opens using the proper residue theorem and the annular restriction maps. Then §2.2 kills global primitive constants and proves alternation. Local analytic disc primitives and the residue theorem prove shrinking across newly filled nonsingular discs. The cohomological and reciprocity properties are proved after this definition in §3.1a.
 
-*Needs:* §2.3, §3.0a, §3.0b, AlgebraicCurves Layers 5 and 9 (proper residue theorem).
+*Needs:* §2.3, §3.0a, §3.0b1, AlgebraicCurves Layers 5 and 9 (proper residue theorem).
 
 **Checks.**
 
@@ -461,9 +462,9 @@ Prove global residue cancellation on these Coleman wide opens using the proper r
 
 ### 3.1a Cohomology and wide-open reciprocity
 
-For a geometrically connected Coleman wide open U with good-reduction compactification C, let B_U be §3.1. Construct the Frobenius-equivariant projection p_U:H¹_dR(U)→H¹_dR(C) splitting proper restriction, and prove B_U(ω,η)=p_U[ω]∪p_U[η]. Hence B_U kills analytic exact forms, factors through H¹_dR(U), vanishes for rational C, and satisfies B_U(F,log f)=0 for every invertible analytic f on U. The supplied component Frobenius spectrum, transported to H¹_dR(U), consists of Weil weight-one eigenvalues and boundary eigenvalues qζ with ζ a root of unity (ζ=1 when the boundary is split); in particular 1/q is absent, the q-eigenspace is in the radical of B_U, and B_U(φ α,φ β)=q B_U(α,β). The assertions hold for full ℂ_p coefficients through the comparison c_U of §3.0b1, which transports the proper/boundary sequence, the cup product and the scalar-extended Frobenius, and for K-defined data over finite K. (besser2017, Proposition 3.9 and proof, p. 11, besser2017 lines 503–515; besser-dejeu2012 Proposition 8.4 proof, p. 362, lines 2594–2617; besser-zerbes2017 §2, p. 4, line 212).
+For a geometrically connected Coleman wide open U with good-reduction compactification C, let B_U be §3.1. Construct the Frobenius-equivariant projection p_U:H¹_dR(U)→H¹_dR(C) splitting proper restriction, and prove B_U(ω,η)=p_U[ω]∪p_U[η]. Hence B_U kills analytic exact forms, factors through H¹_dR(U), vanishes for rational C, and satisfies B_U(F,log f)=0 for every invertible analytic f on U. The supplied component Frobenius spectrum, transported to H¹_dR(U), consists of Weil weight-one eigenvalues and boundary eigenvalues qζ with ζ a root of unity (ζ=1 when the boundary is split); in particular 1/q is absent, the q-eigenspace is in the radical of B_U, and B_U(φ α,φ β)=q B_U(α,β). The assertions hold for full ℂ_p coefficients through the comparison c_U of §3.0b, which transports the proper/boundary sequence, the cup product and the scalar-extended Frobenius, and for K-defined data over finite K. (besser2017, Proposition 3.9 and proof, p. 11, besser2017 lines 503–515; besser-dejeu2012 Proposition 8.4 proof, p. 362, lines 2594–2617; besser-zerbes2017 §2, p. 4, line 212).
 
-Assume U and its Coleman presentation as in §§3.0a–3.1; finite end set and analytic differentials; For Frobenius assertions U descends to finite K/ℚ_p, with a compatible degree-q lift, q=(#κ_K)^r for integer r≥1 and identity coefficient lift; full ℂ_p assertions extend this operator from K through §3.0b1; The invertible analytic f and its logarithmic primitive share the given Coleman domain and branch.
+Assume U and its Coleman presentation as in §§3.0a–3.1; finite end set and analytic differentials; For Frobenius assertions U descends to finite K/ℚ_p, with a compatible degree-q lift, q=(#κ_K)^r for integer r≥1 and identity coefficient lift; full ℂ_p assertions extend this operator from K through §3.0b; The invertible analytic f and its logarithmic primitive share the given Coleman domain and branch.
 
 - B_U(df,η)=0 for analytic f, and the same holds in the other slot.
 
@@ -473,7 +474,7 @@ Assume U and its Coleman presentation as in §§3.0a–3.1; finite end set and a
 
 Use the proper/boundary de Rham sequence and disjoint Frobenius weights to construct p_U. Compute the end-sum by second-kind representatives and prove the compact cup comparison using the local double index, then kill analytic exacts by residue reciprocity. A logarithmic unit has only weight-two boundary class, giving its vanishing. Import the component rigid weight theorem and Gysin sequence, with boundary eigenvalues qζ for nonsplit ends. The cup projection gives the radical and scaling assertions; the positive weights exclude 1/q. This proves the index-dependent claims after the index is defined.
 
-*Needs:* §3.1, §3.0b1, §3.0c, PadicDifferentialEquationsAndRigidCohomology §§RD.6.86, RD.6.88, RD.6.92.
+*Needs:* §3.1, §3.0b, §3.0c, PadicDifferentialEquationsAndRigidCohomology §§RD.6.86, RD.6.88, RD.6.92.
 
 **Checks.**
 
@@ -486,7 +487,7 @@ Use the proper/boundary de Rham sequence and disjoint Frobenius weights to const
 
 For a smooth proper geometrically connected curve X/K with a split regular nodal model and meromorphic ω, remove the poles and choose Coleman primitives F_v on the connected component wide opens. Their differences c_ω(e)=F_head|e−F_tail|e are constants and antisymmetric. Normalize by adding component constants until c_ω is harmonic. At a regular model use unit edge lengths; for subdivisions use the compatible rational metric of §1.3. For a self-node, first take a compatible subdivision giving Coleman component domains; coarsening then adds jumps along its chain, rather than subtracting a primitive from itself. The normalized family exists and is unique up to one common constant, and c_ω is independent of that common constant. The family is a torsor under K, not a distinguished primitive with an invented zero value. (besser-zerbes2017, Equation (1.4) and normalization preceding Theorem 1.1, p. 2, besser-zerbes2017 line 74).
 
-Assume K/ℚ_p finite, p any prime; a fixed branch; X smooth, proper, geometrically connected, dimension one; Chosen split regular nodal realization; pole support separated from the connecting annuli; Component wide opens and their Coleman primitives are those in §§3.0a–3.0b.
+Assume K/ℚ_p finite, p any prime; a fixed branch; X smooth, proper, geometrically connected, dimension one; Chosen split regular nodal realization; pole support separated from the connecting annuli; Component wide opens and their Coleman primitives are those in §§3.0a–3.0b1.
 
 - Normalize any family by projecting its jump cochain and solving for a component potential; no basepoint is selected.
 
@@ -500,7 +501,7 @@ Assume K/ℚ_p finite, p any prime; a fixed branch; X smooth, proper, geometrica
 
 Kernel-of-d equals constants on each connected annulus by Coleman uniqueness. Apply §1.2 to c=h+d a and add a_v to the primitives, producing c−d a=h. Connectedness of the dual graph gives uniqueness modulo one scalar.
 
-*Needs:* §1.2, §2.1, §3.0b, StableReduction Layers 0–1, RigidAnalyticGeometry §§2.3, 6.2, §3.0c.
+*Needs:* §1.2, §2.1, §3.0b1, StableReduction Layers 0–1, RigidAnalyticGeometry §§2.3, 6.2, §3.0c.
 
 **Checks.**
 
@@ -593,17 +594,17 @@ Assume p any prime, including 2 and 3; coefficients ℂ_p; A an abelian variety 
 
 - For every homomorphism f:A→B of abelian varieties over ℂ_p and x∈A(ℂ_p), log_B(f(x))=df_0(log_A(x)).
 
-- If A is obtained from A₀/K with K/ℚ_p finite and a specified base-change identification, log_A agrees on all A(ℂ_p) with the transported abelianLog.cp of AnabelianGeometryAndNonabelianChabauty §5.8, and hence on A₀(L) with its abelianLog for every finite L/K. These comparisons respect homomorphisms and towers.
+- If A is obtained from A₀/K with K/ℚ_p finite and a specified base-change identification, log_A agrees on all A(ℂ_p) with the transported ℂ_p-point extension of `abelianLog` from AnabelianGeometryAndNonabelianChabauty §5.8, and hence on A₀(L) with `abelianLog` itself for every finite L/K. These comparisons respect homomorphisms and towers.
 
 Construct the normalized local analytic logarithm by integrating invariant forms near the identity; its differential is the identity, so it is an analytic group isomorphism after shrinking. Prove the open-quotient torsion theorem for arbitrary A/ℂ_p using the geometric deformation argument of Theorem II.1.9, including varieties without a finite p-adic field model. No compactness of A(ℂ_p) is assumed. For x choose n≥1 with [n]x in the local subgroup and set log_A(x)=n⁻¹ log_V([n]x). Local additivity and common multiples prove independence and additivity. Translation proves local analyticity. A competing homomorphism with the same differential agrees locally, and torsion of the quotient forces global agreement in the characteristic-zero Lie algebra. Apply the same argument to invariant-form evaluations to prove homomorphism compatibility. The transported finite-model logarithm has the required differential and analyticity, so uniqueness gives the comparison on all ℂ_p-points.
 
-*Needs:* JacobianChallenge Layer E, AnabelianGeometryAndNonabelianChabauty §5.8 abelianLog.cp for the finite-model comparison.
+*Needs:* JacobianChallenge Layer E, AnabelianGeometryAndNonabelianChabauty §5.8 `abelianLog` and its ℂ_p-point extension for the finite-model comparison.
 
 **Checks.**
 
 - For dimension-zero A, its point group and Lie algebra are trivial, and log_A is the zero map with the identity differential on the zero space.
 - If [n]x=0 for n≥1 then n log_A(x)=0, hence log_A(x)=0. For positive-dimensional A a small nonzero tangent vector v instead has log_A(exp_A(v))=v≠0. Thus the zero map fails the differential condition and the local inverse is not a global inverse.
-- For A₀/K and x∈A₀(L), with L/K finite, the geometric logarithm has value the embedded supplied `log_{A0,L}`(x), without multiplication by [L:K]. The comparison is also on all A₀(ℂ_p), not only algebraic points.
+- For A₀/K and x∈A₀(L), with L/K finite, the geometric logarithm has value the embedded supplied `abelianLog` of A₀ over L at x, without multiplication by [L:K]. The comparison is also on all A₀(ℂ_p), not only algebraic points.
 - For t∈ℂ_p transcendental over ℚ_p, E_t:y²=x(x−1)(x−t) is smooth and has j=256(1−t+t²)³/(t²(1−t)²), transcendental over ℚ_p. It has no finite p-adic field model, but `log_{E_t}` and invariant-form primitives are covered here, including p=2 and 3. Extending points of a variety defined over a finite p-adic field does not cover this example.
 
 ### 4.0a Natural primitives on abelian varieties
@@ -620,7 +621,7 @@ Assume p any prime; K/ℚ_p finite, or coefficients in ℂ_p with the same unive
 
 - For A,ω defined over finite K/ℚ_p and regular endpoints a,b∈A(K), the rigidified ℂ_p primitive difference F_ω(b)−F_ω(a) belongs to K+K T. Continuous Galois conjugation acts coefficientwise with T fixed. For every finite L/K the same difference on embedded endpoints is its coefficientwise image; these comparisons compose in towers.
 
-Establish the algebraic square identity and its normalized rational-logarithmic primitive geometrically; for K-defined data descend this finite algebraic expression by normalized trace, including traced scalar logarithms. Prove symmetric cocycle splitting by convergent local analytic differences and division in the coefficient field. Over finite K, apply it to this K-valued cocycle on A(K), obtaining a K+K T-valued primitive; completeness keeps the convergent coefficients in K. Subtract the K-defined invariant differential error with the imported abelian logarithm. Over arbitrary A/ℂ_p subtract that error using abelianLogCp of §4.0; its finite-model comparison identifies the two corrections whenever A descends. Run the construction over each finite L/K and over ℂ_p. The common square identity and differential rigidification identify restrictions modulo constants: their difference has zero differential and zero second difference. Its apparent singularities cancel, leaving a locally constant additive map modulo a scalar; properness makes A(K) compact, so this map has finite image and vanishes in the characteristic-zero target. Normalization at a regular K-point identifies the based values. Conjugating the construction transports every coefficient and logarithm, so uniqueness gives Galois equivariance with T fixed. Thus rationality and finite-extension independence precede natural integration, using the finite p-adic field construction rather than an additional completed-field fixed-point theorem. The same uniqueness proves linearity, exact evaluation and algebraic pullback without a semistable graph.
+Establish the algebraic square identity and its normalized rational-logarithmic primitive geometrically; for K-defined data descend this finite algebraic expression by normalized trace, including traced scalar logarithms. Prove symmetric cocycle splitting by convergent local analytic differences and division in the coefficient field. Over finite K, apply it to this K-valued cocycle on A(K), obtaining a K+K T-valued primitive; completeness keeps the convergent coefficients in K. Subtract the K-defined invariant differential error with the imported abelian logarithm. Over arbitrary A/ℂ_p subtract that error using the geometric abelian logarithm log_A of §4.0; its finite-model comparison identifies the two corrections whenever A descends. Run the construction over each finite L/K and over ℂ_p. The common square identity and differential rigidification identify restrictions modulo constants: their difference has zero differential and zero second difference. Its apparent singularities cancel, leaving a locally constant additive map modulo a scalar; properness makes A(K) compact, so this map has finite image and vanishes in the characteristic-zero target. Normalization at a regular K-point identifies the based values. Conjugating the construction transports every coefficient and logarithm, so uniqueness gives Galois equivariance with T fixed. Thus rationality and finite-extension independence precede natural integration, using the finite p-adic field construction rather than an additional completed-field fixed-point theorem. The same uniqueness proves linearity, exact evaluation and algebraic pullback without a semistable graph.
 
 *Needs:* §4.0, AnabelianGeometryAndNonabelianChabauty §5.8 abelianLog, JacobianChallenge Layer E, ColemanIntegration L0.15–L0.19.
 
@@ -756,7 +757,7 @@ Assume K/ℚ_p finite, p any prime; X smooth proper geometrically connected; A t
 
 Construct this subsection’s Abel–Jacobi differential identification from the Jacobian tangent comparison and curve duality, then apply §4.0c naturality, comparing invariant forms with §4.0a and the supplied abelian logarithm. Properness over a locally compact field gives compact rational points. Nonzero holomorphic forms cannot vanish at every point of a residue disc, so choose g evaluation points giving an invertible differential matrix; the analytic inverse theorem makes H open. A locally constant homomorphism from compact H has finite image, which is zero in characteristic zero. Moving and these local sections supply the divisor-topology bridge used in §4.2.
 
-*Needs:* §4.0c, JacobianChallenge Layer B (curve duality) and Layers D–F, AnabelianGeometryAndNonabelianChabauty §5.8 abelianLog.add, abelianLog.derivative, abelianLog.unique, abelianLog.baseChange.
+*Needs:* §4.0c, JacobianChallenge Layer B (curve duality) and Layers D–F, AnabelianGeometryAndNonabelianChabauty §5.8 `abelianLog` (additivity, identity differential, uniqueness from an open subgroup, finite-extension compatibility).
 
 **Checks.**
 
@@ -870,9 +871,9 @@ Use a characteristic-zero field k and the formal ring of §2.1, or its analytic 
 
 - Mixed-pair auxiliary primitives for a linear combination are the same linear combination of the original mixed entries; reverse entries satisfy integration by parts, and a new diagonal entry is recomputed as R²/2.
 
-On the imported analytic AnnulusLogRing use exists_logLaurent_primitive and logLaurent_derivative_eq_zero_iff; on the general-coefficient extension use §2.1a. Only the formal case uses the integration-by-parts induction in k((z))[L], dividing by n+1 or j+1 as appropriate. Choose one entry per unordered labelled pair and define the reverse as RS−I; set the diagonal to R²/2. The constant kernel gives the torsor law. These are new compatible choice data, not another construction of the analytic primitive theorem.
+On the imported analytic `AnnulusLogRing` use the existence and uniqueness clauses of ColemanIntegration L0.22 `existsUnique_logLaurent_primitive`; on the general-coefficient extension use §2.1a. Only the formal case uses the integration-by-parts induction in k((z))[L], dividing by n+1 or j+1 as appropriate. Choose one entry per unordered labelled pair and define the reverse as RS−I; set the diagonal to R²/2. The constant kernel gives the torsor law. These are new compatible choice data, not another construction of the analytic primitive theorem.
 
-*Needs:* §2.1, §2.1a, ColemanIntegration L0.22 exists_logLaurent_primitive, logLaurent_derivative_eq_zero_iff.
+*Needs:* §2.1, §2.1a, ColemanIntegration L0.22 `existsUnique_logLaurent_primitive`.
 
 **Checks.**
 
@@ -970,9 +971,9 @@ Layer 2, characteristic-zero polynomial-logarithm calculus and the base annular 
 
 ### 6.0 Relations among actual Coleman forms
 
-Let A_col,1(U) be the actual Coleman functions with analytic differential in §3.0b, and let Ω¹_col,1(U) be the submodule of actual Coleman forms generated by Gη with G∈A_col,1(U), η analytic. Construct the well-defined symbol map Ω¹_col,1(U)→H¹_dR(U)⊗Ω¹(U), Gη↦[dG]⊗η. For the product presentation m:A_col,1(U)⊗Ω¹(U)→Ω¹_col,1(U), prove ker(m) is contained in the image of A(U)⊗Ω¹(U). Thus equal actual forms have equal symbols. This is a theorem about the actual connection/word realization, not a defining relation imposed on a free module. (besser-dejeu2012, Lemma 9.1 and Proposition 9.2 proof, p. 364, besser-dejeu2012 lines 2769–2789).
+Let A_col,1(U) be the actual Coleman functions with analytic differential in §3.0b1, and let Ω¹_col,1(U) be the submodule of actual Coleman forms generated by Gη with G∈A_col,1(U), η analytic. Construct the well-defined symbol map Ω¹_col,1(U)→H¹_dR(U)⊗Ω¹(U), Gη↦[dG]⊗η. For the product presentation m:A_col,1(U)⊗Ω¹(U)→Ω¹_col,1(U), prove ker(m) is contained in the image of A(U)⊗Ω¹(U). Thus equal actual forms have equal symbols. This is a theorem about the actual connection/word realization, not a defining relation imposed on a free module. (besser-dejeu2012, Lemma 9.1 and Proposition 9.2 proof, p. 364, besser-dejeu2012 lines 2769–2789).
 
-Assume U geometrically connected Coleman wide open with finite ends; coefficients ℂ_p or K-defined data as in §3.0b; All tensors are over the coefficient field; η is analytic; The function/form products and equalities are those of the constructed full Coleman algebra.
+Assume U geometrically connected Coleman wide open with finite ends; coefficients ℂ_p or K-defined data as in §3.0b1; All tensors are over the coefficient field; η is analytic; The function/form products and equalities are those of the constructed full Coleman algebra.
 
 - Every tensor relation among actual products lies in the analytic-function tensors.
 
@@ -980,7 +981,7 @@ Assume U geometrically connected Coleman wide open with finite ends; coefficient
 
 Use the analytic-differential/depth-one part of the full Coleman connection realization. Differentiate a relation Σ_i G_iη_i=0 in its coefficient word expansion; independence of the degree-one de Rham letters gives Σ_i[dG_i]⊗η_i=0. Since G↦[dG] has kernel A(U), exactness of tensoring over a field gives the kernel containment. This supplies the additional relation theorem before the index pairing descends in §6.4.
 
-*Needs:* §3.0b, §3.1a.
+*Needs:* §3.0b1, §3.1a.
 
 **Checks.**
 
@@ -1000,7 +1001,7 @@ Assume U connected and a Coleman wide open with finitely many ends; F,G,H global
 
 Use the global Coleman algebra and integration of its one-forms to construct the pair primitives, then restrict to ends and apply §5.2. Finite end sets make the sum algebraic. Auxiliary-choice independence is proved in §6.2 rather than encoded as an assumed field of the data.
 
-*Needs:* §3.1, §5.2, §3.0b, §3.1a.
+*Needs:* §3.1, §5.2, §3.0b1, §3.1a.
 
 **Checks.**
 
@@ -1034,7 +1035,7 @@ Sum §5.3 and use the residue theorem for the analytic one-form dF. This gives a
 
 ### 6.3 The q-eigenspace vanishing theorem
 
-Let U be a Coleman wide open defined over a finite K/ℚ_p with a degree-q Frobenius lift in the supplied rigid-cohomology sense, q=(#κ_K)^r for integer r≥1 and identity coefficient lift. If φ*[dF]=q[dF] and φ*[dG]=q[dG] in H¹_dR(U), then T_U(F,G;H)=0 for every global Coleman H with analytic differential. The assertion also includes zero classes. It uses the supplied spectrum theorem excluding 1/q from Frobenius on H¹_dR(U), transported by §3.0b1 to the full-coefficient H¹ containing [dH], and the fact that the q-eigenspace is in the radical of B_U. (besser-dejeu2012, Proposition 8.4 and proof, p. 362, besser-dejeu2012 line 2591).
+Let U be a Coleman wide open defined over a finite K/ℚ_p with a degree-q Frobenius lift in the supplied rigid-cohomology sense, q=(#κ_K)^r for integer r≥1 and identity coefficient lift. If φ*[dF]=q[dF] and φ*[dG]=q[dG] in H¹_dR(U), then T_U(F,G;H)=0 for every global Coleman H with analytic differential. The assertion also includes zero classes. It uses the supplied spectrum theorem excluding 1/q from Frobenius on H¹_dR(U), transported by §3.0b to the full-coefficient H¹ containing [dH], and the fact that the q-eigenspace is in the radical of B_U. (besser-dejeu2012, Proposition 8.4 and proof, p. 362, besser-dejeu2012 line 2591).
 
 Use the hypotheses of §6.1; U and data descend to a finite p-adic field; A compatible degree-q Frobenius lift with q=(#κ_K)^r, integer r≥1 and identity coefficient lift, as in §3.0c; Both stated q-eigenclass equations; §3.1a supplies the spectrum and double-pairing radical properties.
 
@@ -1042,7 +1043,7 @@ Use the hypotheses of §6.1; U and data descend to a finite p-adic field; A comp
 
 Write φ*F=qF+r and φ*G=qG+s with analytic r,s, absorbing global constants into r,s. If a slot is analytic, reduce the triple index to the double pairing and use the q-radical property to kill its value when paired with the other q-eigenclass; the three-term identity handles an analytic third slot. Thus the functional H↦T_U(F,G;H) factors through [dH]. The degree law gives qT=q²T(F,G;φ*H), so its functional has reciprocal eigenvalue 1/q. The spectrum exclusion forces it to vanish.
 
-*Needs:* §5.5, §6.2, §3.0c, §3.0b, §3.0b1, §3.1a.
+*Needs:* §5.5, §6.2, §3.0c, §3.0b1, §3.0b, §3.1a.
 
 **Checks.**
 
@@ -1052,9 +1053,9 @@ Write φ*F=qF+r and φ*G=qG+s with analytic r,s, absorbing global constants into
 
 ### 6.4 A pairing on actual Coleman one-forms
 
-Let Ω¹_col,1(U) be the submodule of actual Coleman one-forms generated by G dH for global Coleman G,H with analytic differentials, using the actual Coleman algebra of §3.0b and its multiplication relations. There is a unique k-bilinear pairing P_U:A_col,1(U)×Ω¹_col,1(U)→k with P_U(F,G dH)=T_U(F,G;H). In particular P_U(F,dH)=B_U(F,H). The pairing respects equalities of actual Coleman forms, not only chosen expressions as sums of symbols. (besser-dejeu2012, Lemma 9.1 and Proposition 9.2, p. 364, besser-dejeu2012 line 2769 and line 2776).
+Let Ω¹_col,1(U) be the submodule of actual Coleman one-forms generated by G dH for global Coleman G,H with analytic differentials, using the actual Coleman algebra of §3.0b1 and its multiplication relations. There is a unique k-bilinear pairing P_U:A_col,1(U)×Ω¹_col,1(U)→k with P_U(F,G dH)=T_U(F,G;H). In particular P_U(F,dH)=B_U(F,H). The pairing respects equalities of actual Coleman forms, not only chosen expressions as sums of symbols. (besser-dejeu2012, Lemma 9.1 and Proposition 9.2, p. 364, besser-dejeu2012 line 2769 and line 2776).
 
-Use the hypotheses of §6.1; Use the actual Coleman one-form module of §3.0b and symbol/relation theorem of §6.0; No free module on unrelated formal symbols replaces the Coleman form module.
+Use the hypotheses of §6.1; Use the actual Coleman one-form module of §3.0b1 and symbol/relation theorem of §6.0; No free module on unrelated formal symbols replaces the Coleman form module.
 
 - The values on generators G dH uniquely determine the bilinear pairing.
 
@@ -1078,7 +1079,7 @@ A local auxiliary change survives at an end, while a global change cancels by th
 
 ### Dependencies
 
-Layers 2–3 and 5; full analytic Coleman algebra §3.0b, wide-open Frobenius theorem §3.1a and actual-form relation theorem §6.0.
+Layers 2–3 and 5; full analytic Coleman algebra §3.0b1, wide-open Frobenius theorem §3.1a and actual-form relation theorem §6.0.
 
 ## Layer 7: Branch transport, traces and arbitrary-reduction descent
 
@@ -1116,7 +1117,7 @@ Represent an affine value A+B T by its coefficient pair (A,B)∈k×k; specializa
 
 Evaluate the affine polynomial at λ′ and λ and subtract. Apply the universal logarithm formula for the multiplicative case. For indices, transport formal/analytic logarithms and products and apply the local characterizations; when the transported changes are constants the explicit constant laws apply. No assertion that arbitrary index data are affine in T is made.
 
-*Needs:* §4.0c, §2.2, §5.3, §6.2, ColemanIntegration L0.16 logBranch_sub, L0.23.
+*Needs:* §4.0c, §2.2, §5.3, §6.2, ColemanIntegration L0.16 (branch-change formula), L0.23.
 
 **Checks.**
 
