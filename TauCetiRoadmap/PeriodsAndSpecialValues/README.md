@@ -1435,7 +1435,7 @@ The interface includes the following facts.
 
 ### PS.7.4 The period conjecture and the special-value predicates
 
-For the full localized formal-period algebra P and the evaluation periodEvaluation : P → ℂ of PS.2.1, define PeriodConjecture as injectivity of periodEvaluation: an equality of numerical values implies the corresponding formal relation. It is not implied by the torsor theorem of PS.2.2. Keep it separate from DeligneAlgebraic (PS.1.4), LeadingTermRational (PS.3.3), ETNC (PS.5.2), BlochKatoTamagawa (PS.6.5), BBKRankZeroOne (PS.6.6) and higher-rank BSD (PS.6.3 with unrestricted rank); every exported theorem names exactly the members of this list it assumes. An analytic inequality is a theorem with its stated bounds, and numerical agreement witnesses none of these predicates (HMS, Theorem 0.2, p. 2; Definition 2.8 and Theorem 2.10, pp. 10–11; BF, Conjecture 4, pp. 535–536).
+For the full localized formal-period algebra P and the evaluation periodEvaluation : P → ℂ of PS.2.1, define PeriodConjecture as injectivity of periodEvaluation: an equality of numerical values implies the corresponding formal relation. It is not implied by the torsor theorem of PS.2.2. Keep it separate from DeligneAlgebraic (PS.1.4), LeadingTermRational (PS.3.3), ETNC (PS.5.2), BlochKatoTamagawa (PS.6.5), BBKRankZeroOne (PS.6.6) and higher-rank BSD (PS.6.3 with unrestricted rank); every exported theorem names exactly the members of this list it assumes. An analytic inequality is a theorem with its stated bounds, and numerical agreement witnesses none of these predicates (Kontsevich–Zagier (KZ), §1.2, Conjecture 1, and §4.1, where it is stated for the effective algebra, whose injectivity passes to the localization since every element of P is x/Lⁿ with x ∈ P_eff and evaluates to per(x)/(2πi)ⁿ; HMS, Theorem 0.2, p. 2; Definition 2.8 and Theorem 2.10, pp. 10–11; BF, Conjecture 4, pp. 535–536).
 
 P and periodEvaluation are the full localized constructions, not the effective algebra.
 
@@ -2467,14 +2467,16 @@ The interface includes the following facts.
 
 - A Basis of H_N indexed by {2, 3}-words of weight N.
 - H = H_MT^+.
+- U′ = U_MT: the quotient map U_MT → U′ of PS.9.12 is an isomorphism, hence so is G_MT → G_MT′, the quotient of G_MT acting faithfully on O(₀Π₁); equivalently MT(ℤ) is generated as a Tannakian category by the motivic torsor of paths of PS.9.10. To prove this, note that the image of π : H → A is all of A, while H = H_MT^+ makes the induced map H/ζ^m(2)H → O(U_MT) an isomorphism, so the inclusion A = O(U′) ⊆ O(U_MT) is an equality (B, Conjecture 1, p. 1; end of §7.2, p. 19).
 
 **Checks.**
 
 - H₂ = ℚζ^m(2), H₃ = ℚζ^m(3), and H₅ has basis ζ^m(2, 3), ζ^m(3, 2).
 - H₁ = 0, matching d₁ = 0.
 - The independence is in H, not in the numerical image.
+- In weight 3, H₃ = ℚζ^m(3) and the weight-3 part of H_MT^+ is ℚf₃, so ζ^m(3) maps to c·f₃ with c ≠ 0 (its period ζ(3) is nonzero); hence ζ^a(3) = π(ζ^m(3)) is a nonzero element of A₃ and A₃ = O(U_MT)₃ = ℚf₃. The trivial quotient U′ = 1 has A₃ = 0 and would force Δζ^m(3) = 1 ⊗ ζ^m(3), contradicting PS.9.12's Check.
 
-*Needs:* Layers PS.9.21, PS.9.19 and PS.9.13.
+*Needs:* Layers PS.9.21, PS.9.19, PS.9.14, PS.9.13 and PS.9.12.
 
 ### PS.9.23 Numerical spanning and periods of mixed Tate motives over ℤ
 
@@ -2554,6 +2556,7 @@ The outputs are interfaces for motivic completions and Hasse–Weil functional-e
 - **IKZ** — Kentaro Ihara, Masanobu Kaneko and Don Zagier, *Derivation and double shuffle relations for multiple zeta values*, Compositio Math. 142 (2006), 307–338. [PDF](https://people.mpim-bonn.mpg.de/zagier/files/doi/10.1112/S0010437X0500182X/fulltext.pdf)
 - **IL** — Tau Ceti contributors, *Integral lattices, discriminant forms and primitive embeddings*, TauCetiRoadmap IntegralLattices. [README](https://github.com/TauCetiProject/TauCetiRoadmap/blob/main/Completed/IntegralLattices/README.md)
 - **K** — Kiran S. Kedlaya, *Frobenius structures on hypergeometric equations*, arXiv:1912.13073v3 (2021). Locators refer to this version. [arXiv](https://arxiv.org/pdf/1912.13073v3)
+- **KZ** — Maxim Kontsevich and Don Zagier, *Periods*, in Mathematics Unlimited — 2001 and Beyond, Springer (2001), 771–808, DOI 10.1007/978-3-642-56478-9_39; locators are sections of the IHÉS preprint IHES/M/01/22. [author copy](https://www.ihes.fr/~maxim/TEXTS/Periods.pdf)
 - **LTXZZ** — Yifeng Liu, Yichao Tian, Liang Xiao, Wei Zhang and Xinwen Zhu, *On the Beilinson–Bloch–Kato conjecture for Rankin–Selberg motives*, Invent. Math. 228 (2022), 107–375. [NSF PAR copy](https://par.nsf.gov/servlets/purl/10323568)
 - **LYA** — Bong H. Lian and Shing-Tung Yau, *Arithmetic properties of mirror map and quantum coupling*, arXiv:hep-th/9411234v3 (1994). [arXiv](https://arxiv.org/pdf/hep-th/9411234v3)
 - **LYH** — Bong H. Lian and Shing-Tung Yau, *Mirror maps, modular relations and hypergeometric series I*, arXiv:hep-th/9507151 (1995). [arXiv](https://arxiv.org/pdf/hep-th/9507151)
