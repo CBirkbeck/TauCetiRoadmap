@@ -589,6 +589,7 @@ the half-plane of convergence.
 - `g(u) = e^(βu) cos(γu)`, `γ ≠ 0`: the transform `(s − β)/((s − β)² + γ²)` has only the nonreal
   poles `β ± iγ`; `g` is bounded above by no `C e^(θu)` with `θ < β`, and the windows of bounded
   length on which `g ≤ 0` are not of the form `[U, (1+δ)U]` (6.4, 6.8).
+- In the cosine example take `θ = 1/2`, `β = log(3/2)/log 2` and `γ = π/log 2`. Then `g(u + log 2) = −(3/2)g(u)`. The average `(3g(u) + 2g(u + log 2))/5` vanishes on every window, although `g` fails the bound in 6.8. The weights `(3,2)` give an interior zero in [Crossley’s classification of two-scale filters](https://github.com/leecrossley/dyadic-filter-zeros/blob/51b89142913f7fcf4c657a03f310643666086e84/README.md#L14). [Archived result](https://doi.org/10.5281/zenodo.24412802).
 - At `λ = 4`, `q_4 ≈ 0.935` and `U_4(1) ≈ 1.21` (6.2 (d)); the set `⋃_{j≥1} [2^(2^j), 2^(2^j + 1)]`
   contains `[Y, 2Y]` for arbitrarily large `Y` but has no windows of any exponent `λ > 1` (6.9).
 
