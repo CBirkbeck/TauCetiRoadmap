@@ -732,6 +732,7 @@ a `B`-admissible pair has `q ≡ 3 (mod 8)` and `d ≡ 7 (mod 16)` by definition
 - `E = ℚ(ζ₈)` with `K = ℚ(i)`: `Φ = {σ₁, σ₅}` and `c = σ₇ ∉ Φ`; a real quadratic subfield in place of `K` gives no CM
   type (0.1).
 - `E = ℚ(i)` and `p = 2`: `I_2 = Fr(2^i) = G`, and the mean of `χ_K` over `Fr(2^i)` is `0 = χ₋₄(2)` (0.2).
+- For 0.2(iii), take `E = ℚ(ζ₁₆)⁺(√−547, √−727)`. Of the eight odd characters of `Gal(E/ℚ)`, four have zero mean on `Fr(547)` and the other four have means `1, i, −1, −i`. Their local Euler denominator is `1 − T⁴`. [Crossley’s calculation](https://github.com/leecrossley/theta-race-finite-euler-readout/blob/b01619cac6e661a66587a45af435413592d368d0/PROOF.md#L63) and [archived result](https://doi.org/10.5281/zenodo.24413208).
 - `E = ℚ(√−3, √−7)` with `K = ℚ(√−3)` and `d = 3` satisfies `SplitRamification 3`, with `σ_3 ≠ c`, and fails
   `HostSplitting E` (0.3).
 - The cyclic host of `ψ = 1`, `n = 2`, `(q, d) = (19, 526679)` has conductor `16·19·526679`, `|G| = 16`, `|A| = 4` and
