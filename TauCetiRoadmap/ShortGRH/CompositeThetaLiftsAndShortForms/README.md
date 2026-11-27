@@ -14,7 +14,9 @@ roadmap shows that `B_ϑ φ` is divisible by many primes and is not large.
 The headline theorems are these. (1) *Divisibility at each prime* (4.9). There are numbers `err(p) ≥ 0`,
 zero unless `p` is the level prime `N` or `p < x₁` does not split in `K`, with `Σ_p err(p)·log p ≤ f·a·(log b)³`
 over every finite set of primes, such that for every prime `p` and every embedding `ι : ℂ → ℂ_p` the module of
-integral ramified source forms has a submodule `S` of colength at most `err(p)·dim` on which every composite
+integral ramified source forms has a submodule `S` of colength at most `err(p)·dim` (in the sense of determinants: `S`
+contains a sublattice of that free module whose elementary divisors have total `p`-adic valuation at most
+`err(p)·dim`, 6.1) on which every composite
 lift `B_ϑ` with a twist `ϑ` of modulus prime to `p` has `ι`-adic valuation at least `gain(p) − err(p)`; the
 gain `gain(p) = m(Σ_{τ∈Φ_a} s_p(a, τ) + k·F(p))` is the divisibility that the jets of the theta kernels
 predict. At the exceptional primes `p < x₁` (2.1 (f): the inert primes `p ≢ ±1 (mod m)` for which the order
@@ -43,13 +45,24 @@ Hecke operators through the lifts. Layer 4 applies Layer 1 to the scaled Hecke o
 prime, and proves the divisibility at each prime. Layer 5 bounds the archimedean size of the composite lift
 and shows that short forms span.
 
+The colength in which (1) is stated is a condition on determinants (Conventions), which the route uses because the
+rings `𝒪_ι` of `ι`-integral complex numbers are valuation rings that are not discrete. The standard notions are the
+reference: over a discrete valuation ring, the length of the quotient, which the literature calls the colength; over
+any valuation domain, the elementary divisors of a submodule of a free module. The comparison with both is
+`OneSidedPrimeSumBoundsAndAdmissibleData` §7.3 (d) and (b), in the roadmap that defines the colength: over a valuation
+domain, for a submodule of a free module of finite rank, a colength dividing `z` means containing a sublattice whose
+elementary divisors have product dividing `z`, and over a discrete valuation ring a colength dividing `z` is a length
+of the quotient at most the valuation of `z`. Layer 6 reads 4.8 and 4.9 through this comparison and states (1) in
+terms of elementary divisors; the colength is the form in which the route proves it.
+
 ## Conventions and notation
 
 **Labels.** Under each section heading, `*Origin:*` says where the statement comes from and
 `*Method of the formal proof:*` how [ShortProof] proves it. The pointer `[ShortProof]` names the file and
 declarations of the shorter formal proof (under its directory `src/`) where the statement is proved; its
 hypotheses, ranges and constants are recorded in the statement. Where a statement here is wider than the
-formal proof's, its last sentence says which case the formal proof proves.
+formal proof's, its last sentence says which case the formal proof proves. Layer 6 is not part of the formal proof,
+and its `*Method:*` line is a proof route.
 
 **Data.** `D` denotes admissible data in the sense of OneSidedPrimeSumBoundsAndAdmissibleData §3.2; the
 symbols below are those of that roadmap, recalled here in words. "The size inequalities" are the bounds
@@ -80,7 +93,11 @@ divides `z`" means: every finite family `(φ_1, …, φ_n)` of elements of `M` i
 is *onto `M` modulo `pⁿ` up to colength `c`* if `y(M) ⊆ M` and the colength of `y(M) + pⁿM` in `M` divides
 `p^l` for some natural number `l ≤ c`. These notions, and their behaviour under images, preimages, chains and
 products of endomorphisms (the bounds add), are those of OneSidedPrimeSumBoundsAndAdmissibleData §1.1
-(colength of modules).
+(colength of modules). The name "colength" denotes this condition on determinants; in the literature the colength of a
+submodule `M′ ⊆ M` is the length of `M/M′`. For a submodule `M′` of a free module `M` of finite rank, the condition
+says, over a valuation domain, that `M′` contains `α_1ε′_1, …, α_nε′_n` for a basis `(ε′_i)` of `M` and elements with
+`α_1⋯α_n | z` (6.1 (a)), and over a discrete valuation ring with normalised valuation `v_O`, that `z = 0` or the
+length of `M/M′` is at most `v_O(z)` (OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (b)).
 
 **Valuation rings.** "Valuation domain" means an integral domain whose ideals are totally ordered; a matrix
 over it has a Smith normal form.
@@ -996,6 +1013,20 @@ lift `X_e → X_{e+1}` with datum `t_x(e)`. Forms spherical at `𝔩` are sent t
 (e) the data `t_x(j)` are fixed by the maximal compact subgroup at `𝔩` of `G_f(X_{j+1})`, and for `j < m`
 there are `c_i ∈ 𝒪_ι` with `p^{ν_p}·C_{j+1}(T_{𝔩,𝔯(p)}φ) = Σ_{i≤𝔯(p)} c_i·T_{𝔩,i}(C_{j+1}φ)`.
 
+**In standard terms.** (a) is a case of the unramified theta correspondence at a split place (the datum is the vacuum
+at `𝔩` and the characters are unramified there), written as an identity of Hecke polynomial operators. If `φ`,
+spherical at `𝔩`, is an eigenvector of every `T_{𝔩,i}`, with `H_𝔩(U)φ = H_φ(U)·φ` for a polynomial `H_φ` with
+`H_φ(0) = 1`, then by (a) `H_𝔩(U)(Θ_e^ϑφ) = R(U)·H_φ(z^{t+1}U)·Θ_e^ϑφ`, and comparing the coefficients of the powers
+of `U` shows that `Θ_e^ϑφ`, when it is not zero, is an eigenvector of every `T_{𝔩,i}`: the reciprocal roots of the
+Hecke polynomial of the lift are those of `H_φ`, multiplied by `z^{t+1}`, together with those of `R`. On a space of
+rank `n` the reciprocal roots of a Hecke polynomial are `N𝔩^{(n−1)/2}` times the Satake parameters in the unitary
+normalisation (WeilRepresentationsOnBanachSpacesOfData §9.3, paragraph *In standard terms*); as
+`z^{t+1}·N𝔩^{(n_e−1)/2} = N𝔩^{(n_{e+1}−1)/2}`, the Satake parameters of the lift are those of `φ`, together with the
+reciprocal roots of `R` divided by `N𝔩^{(n_{e+1}−1)/2}`. The same paragraph of WeilRepresentationsOnBanachSpacesOfData
+§9.3, with its §10.7 (b) for the splitting characters, compares the identity of §9.3, on the space of data, with the
+list of parameters of the standard unramified correspondence at a split place. ThetaLiftsForDefiniteUnitaryGroups §2.2
+states that correspondence in Satake form for the type-II model (see Not owned here).
+
 *Needs:* 2.5, 2.6; ThetaLiftChainsAndTheSeesawIdentity §2.8 (the theta kernels of the lifts), §2.12 (weak chain
 data and the data `t_x(j)`); WeilRepresentationsOnBanachSpacesOfData §9.3 (Hecke polynomials pass through a theta lift at a split place
 `w` of norm `q` where the two characters `a`, `b` are unramified and the datum `f` is fixed by the vacuum projection
@@ -1293,6 +1324,15 @@ There are real numbers `err(p)`, one for each natural number `p`, such that:
 with `p ∤ q(ϑ)`, every chain datum `Ψ` for `ϑ` and every `φ ∈ S`, `B_ϑ^Ψ(φ)` has valuation at least
 `gain(p) − err(p)`.
 
+**In standard terms.** The colength in (d) is the condition on determinants of the Conventions. By 6.1 (b),
+`𝓜_ι ∩ 𝒮^ram` is a free `𝒪_ι`-module of rank `dim_ℂ 𝒮^ram`, and (d) says that it has a basis `ε′_1, …, ε′_n` with
+elements `α_1, …, α_n ∈ 𝒪_ι` such that `Σ_i v_p(ι(α_i)) ≤ l ≤ err(p)·D_X` and every `α_iε′_i` lies in `S`, `v_p` being
+the valuation of `ℂ_p` with `v_p(p) = 1`: `S` contains a sublattice of `𝓜_ι ∩ 𝒮^ram` whose elementary divisors have
+total valuation at most `err(p)·D_X`. Over `𝒪_ι`, which is not discrete, a quotient such as `𝒪_ι/p𝒪_ι` has infinite
+length, and (d) asks for no length; over a discrete valuation ring with normalised valuation `v_O` in which `p ≠ 0`,
+and for a submodule of a finitely generated module, a colength dividing `p^l` is a length of the quotient at most
+`l·v_O(p)` (OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (b)).
+
 *Needs:* 2.3, 4.8; OneSidedPrimeSumBoundsAndAdmissibleData §1.1 (colength of modules).
 
 [ShortProof], `New/UpperBound/Divisibility/LocalDivisibility.lean` (`New.Data.exists_err_gaugeLe_compositeLift`)
@@ -1494,6 +1534,88 @@ source weight has at most `fa` boxes, and the size inequalities give the bound. 
 [ShortProof], `New/UpperBound/Size/ShortColumns.lean` (`New.Data.span_isShort_eq_top`, `New.Data.isShort_ramifyingOp`,
 `New.Data.span_isShort_ramifiedSourceForms_eq_top`, `New.Data.sum_height_mul_columnCount_le`)
 
+## Layer 6: Comparison with the standard theory
+
+The route measures the size of a quotient of modules by the colength of the Conventions, a condition on determinants
+that asks for no inclusion and no length, because it works over the rings `𝒪_ι` of `ι`-integral complex numbers: these
+are valuation rings that are not discrete (`v_p(ι(p^{1/k})) = 1/k` for every `k ≥ 1`, `v_p` the valuation of `ℂ_p`
+with `v_p(p) = 1`), and a quotient such as `𝒪_ι/p𝒪_ι` has infinite length. The standard notions are the length of the
+quotient over a discrete valuation ring and, over any valuation domain, the elementary divisors of a submodule of a
+free module of finite rank. The colength is defined in OneSidedPrimeSumBoundsAndAdmissibleData §1.1, and
+OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (Colength, elementary divisors and length) compares it with these
+notions: by its (d), for a submodule of a free module of finite rank over a valuation domain, a colength dividing `z`
+is equivalent to containing a submodule with elementary divisors whose product divides `z`, and by its (b), over a
+discrete valuation ring and for a finitely generated module, a colength dividing `z` is a length of the quotient at
+most the valuation of `z`. 4.8 and 4.9 are stated over `𝒪_ι`, and 6.1 reads them through this comparison; the
+paragraph *In standard terms* of 4.9 states the divisibility at each prime on the standard objects. The Hecke
+operators `T_{𝔩,i}` of 2.6 are the standard double-coset operators, and the paragraph *In standard terms* of 3.5 reads
+its identity of Hecke polynomial operators on Hecke eigenforms. The route does not use this layer.
+
+### 6.1 The divisibility at each prime in terms of elementary divisors
+
+*Origin:* the reading of 4.8 and 4.9 (d) on the standard notions; not part of the formal proof. The colength is
+defined in OneSidedPrimeSumBoundsAndAdmissibleData §1.1, and its comparison with elementary divisors and with the
+length of a quotient is (d) and (b) of OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (Colength, elementary divisors and
+length). The rings `𝒪_ι`, over which 4.8 and 4.9 are stated, are valuation rings that are not discrete, and 6.1 reads
+4.8 and 4.9 through the comparison with elementary divisors, recalled in (a). [ShortProof] proves the implication of
+OneSidedPrimeSumBoundsAndAdmissibleData §1.1 (f), on which §7.3 (d) of that roadmap rests, and states no equivalence.
+
+*Method:* (a) is OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (d) for the basis `ε_1, …, ε_n` of `M`. (b) By
+AdelicUnitaryGroupsAndAlgebraicModularForms §6.6 (b), every class of the level `K₀` of the source forms has a
+representative whose components at the places above `p` are integral with integral inverse. By §6.6 (a) of that
+roadmap, the gauge of the value of a source form at a point is the same at all points of a class (it does not change
+when the point is multiplied on the left by a rational point, the value moving with it, or on the right by an element
+of `K₀`, whose components at the places above `p` are integral with integral inverse), and at such a representative it
+is at most `1` exactly when the coordinates of the value in the integral basis of the source weight lie in `𝒪_ι`. So
+`𝓜_ι` is the module of the source forms whose values at these representatives have their coordinates in `𝒪_ι`. The
+level `K₀` has trivial stabilisers (ThetaLiftChainsAndTheSeesawIdentity §2.10 (a)), so evaluation at the
+representatives is a bijection from `𝒮` onto the families of vectors of the source weight, one for each class
+(AutomorphicFormsOnReductiveGroups §7.5); hence `𝓜_ι` is free of rank `D_X = dim_ℂ 𝒮`, a basis being the forms whose
+family is one vector of the integral basis at one class and `0` at the other classes. A basis of `𝓜_ι` is a basis of
+`𝒮` over `ℂ`: a relation over `ℂ`, divided by a coefficient whose image under `ι` has the largest absolute value,
+becomes a relation over `𝒪_ι` with a coefficient `1`. For `𝒮^ram`, choose a basis of it inside `𝓜_ι` (a nonzero
+multiple of every form lies in `𝓜_ι`), write its coordinates in a basis of `𝓜_ι` as the first columns of a square
+matrix over `𝒪_ι` whose other columns are zero, and write that matrix as `U₁·diag(β_1, …, β_{D_X})·U₂` with `U₁`, `U₂`
+invertible over `𝒪_ι`. The columns of `U₁` at the indices `i` with `β_i ≠ 0` span `𝒮^ram` over `ℂ`; an element of
+`𝓜_ι` is `U₁` applied to an integral coordinate vector, and it lies in `𝒮^ram` exactly when that vector vanishes at
+the other indices, so these columns form a basis of `𝓜_ι ∩ 𝒮^ram`. Then (a), over the valuation ring `𝒪_ι`, for
+`M = 𝓜_ι ∩ 𝒮^ram` and `M′ = S` in 4.9 (d), and for `M = 𝓜_ι` and `M′ = S ∩ 𝓜_ι` in 4.8, gives the stated form: an
+element of `𝒪_ι` divides `p^l` exactly when the valuation of its image under `ι` is at most `l`.
+
+Let `O` be a commutative ring, `M` a free `O`-module with a basis `ε_1, …, ε_n`, `M′ ⊆ M` a submodule and `z ∈ O`.
+(For a submodule `M′` of a module that contains `M`, the colength of `M′` in `M` divides `z` exactly when that of
+`M ∩ M′` does, since the combinations in the definition lie in `M`; the statements below then apply to `M ∩ M′`.)
+
+- (a) *Elementary divisors.* By OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (d), if `O` is a valuation domain, the
+  colength of `M′` in `M` divides `z` exactly when there are a basis `ε′_1, …, ε′_n` of `M` and `α_1, …, α_n ∈ O` with
+  `α_1⋯α_n | z` and `α_iε′_i ∈ M′` for every `i`: `M′` contains a submodule of `M` with elementary divisors
+  `α_1, …, α_n` whose product divides `z`.
+- (b) *The divisibility at each prime.* Let `p` be a prime, `ι : ℂ → ℂ_p`, and `v_p` the valuation of `ℂ_p` with
+  `v_p(p) = 1`. The `𝒪_ι`-modules `𝓜_ι` and `𝓜_ι ∩ 𝒮^ram` are free, of ranks `D_X` and `dim_ℂ 𝒮^ram`, and a basis of
+  either is a basis over `ℂ` of `𝒮`, respectively of `𝒮^ram`. In 4.9 (d), the colength of `S` in `𝓜_ι ∩ 𝒮^ram` divides
+  `p^l` exactly when there are a basis `ε′_1, …, ε′_n` of `𝓜_ι ∩ 𝒮^ram` and `α_1, …, α_n ∈ 𝒪_ι` with
+  `Σ_i v_p(ι(α_i)) ≤ l` and every `α_iε′_i` in `S`; in 4.8 the same holds with `𝓜_ι` in place of `𝓜_ι ∩ 𝒮^ram` and
+  `S ∩ 𝓜_ι` in place of `S`.
+
+Over a discrete valuation ring `O` with normalised valuation `v_O`, for a finitely generated module `M` and a
+submodule `M′ ⊆ M`, the colength of `M′` in `M` divides `z` exactly when the length of `M/M′` is at most the length of
+`O/zO`, which is `v_O(z)` (`∞` for `z = 0`): OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (b). What the colength does
+not record: over a valuation domain it sees `M′` only through the submodules spanned by families `α_1ε′_1, …, α_nε′_n`
+as in (a) that `M′` contains, and of their elementary divisors only the product.
+
+*Needs:* 2.4, 4.8, 4.9; OneSidedPrimeSumBoundsAndAdmissibleData §1.1 (colength of modules);
+OneSidedPrimeSumBoundsAndAdmissibleData §7.3 (b), (d) (over a discrete valuation ring and for a finitely generated
+module `M`, the colength of `N` in `M` divides `z` exactly when the length of `M/(M ∩ N)` is at most that of `O/(z)`;
+over a valuation domain and for `M` free of finite rank, exactly when `M ∩ N` contains a submodule of `M` with
+elementary divisors whose product divides `z`); AdelicUnitaryGroupsAndAlgebraicModularForms §6.6 (a), (b) (the gauge
+is unchanged under rational points and under the points integral above `p`, at which it is at most `1` exactly when
+the coordinates lie in `𝒪_ι`; a rational point moves every point of a definite space into the points integral above
+`p`); ThetaLiftChainsAndTheSeesawIdentity §2.10 (a) (the level `K₀` has trivial stabilisers);
+AutomorphicFormsOnReductiveGroups §7.5 (at a level with trivial stabilisers a form is the family of its values at
+representatives of the classes); ShortGRH background (over a valuation domain a square matrix is a product of an
+invertible matrix, a diagonal matrix and an invertible matrix; [ShortProof]
+`Lib/General/LinearAlgebra/IntegralLattices.lean` (`New.IsValuationPair.smith_normal_form`)).
+
 ## Downstream consumers
 
 - OneSidedPrimeSumBoundsAndAdmissibleData §5.3 (Theorem A) uses the divisibility of the composite lift (4.9), its
@@ -1516,10 +1638,12 @@ source weight has at most `fa` boxes, and the size inequalities give the bound. 
   composite lift (Layers 3 and 4).
 - The explicit class count of the genus of the standard lattice, the size of the composite lift, the passage to
   target forms and the spanning by short forms (Layer 5).
+- The divisibility at each prime read in terms of elementary divisors (Layer 6).
 
 ### Not owned here
 
-- The data, colength of modules, the local prime sums `s_p(y, σ)` with their total (its §4.1, used in 2.1 (b)), the
+- The data, colength of modules with its comparison with elementary divisors and with the length of a quotient (its
+  §7.3 (b), (d)), the local prime sums `s_p(y, σ)` with their total (its §4.1, used in 2.1 (b)), the
   prime sums `s_fin` and Theorem A: OneSidedPrimeSumBoundsAndAdmissibleData.
 - The spaces, weights, theta kernels and their gauges, source forms and ramified source forms, chain data, the
   composite lift, the operator `Up`, the lower chain and the seesaw identity:
@@ -1542,7 +1666,10 @@ source weight has at most `fa` boxes, and the size inequalities give the bound. 
 
 ### From OneSidedPrimeSumBoundsAndAdmissibleData
 
-§1.1 (colength of modules and its behaviour under images, preimages and products); §2.1, §2.2 (the parameters,
+§1.1 (colength of modules and its behaviour under images, preimages and products), §7.3 (b), (d) (over a discrete
+valuation ring the colength predicate is the bound for the length of the quotient, and over a valuation domain, for a
+free module `M` of finite rank, it says that `M ∩ N` contains a submodule of `M` whose elementary divisors have
+product dividing `z`; cited in Layer 6); §2.1, §2.2 (the parameters,
 `χ_K`, the infinite places and the place of an integer); §3.1 to §3.4 (the window for `log N`, admissible data,
 the size inequalities, twists); §4.1 (the prime sums `s_fin`, `s_∞`, `s_main`, `h_main`, `rem` and the error unit
 `u_E`).
@@ -1553,6 +1680,7 @@ the size inequalities, twists); §4.1 (the prime sums `s_fin`, `s_∞`, `s_main`
 §1.5 (`p`-adic gauge bounds for one lift); §2.1, §2.2, §2.6 (the spaces `X_j`, `Y_m`, their weights, the lift
 diagrams, the branching map and the levels `K_j`); §2.5, §2.7, §2.15 (the group `𝖦`, the idempotent `e₀`, the
 forms of principal level and the lower chain); §2.8 (source forms, scalings, ramified source forms and the lifts);
+§2.10 (a) (the level `K₀` has trivial stabilisers, for Layer 6);
 §2.11 to §2.14 (the operator `Up` and the lift laws modulo `N`, chain data, the glued datum at `N`, the lifts
 above `N`).
 
@@ -1563,7 +1691,9 @@ data at `p`); §4.11 (d) (divisibility of Schur entries of jets with charges).
 
 ### From other roadmaps
 
-AutomorphicFormsOnReductiveGroups §7.4, §7.5 (algebraic forms of a level, Hecke operators of double cosets, levels
+AdelicUnitaryGroupsAndAlgebraicModularForms §6.6 (a), (b) (the gauge at the points integral above `p`, and
+representatives integral above `p`, for Layer 6); AutomorphicFormsOnReductiveGroups §7.4, §7.5 (algebraic forms of a
+level, Hecke operators of double cosets, levels
 with trivial stabilisers); AuxiliaryAlgebraAndAnalysisForThetaLifts §1.3 (the weighted combinatorial
 Nullstellensatz with multiplicity); HermitianFormsAndLattices §4.12 (a) (short vectors, linearly independent over
 `E`, in a lattice of the genus of the standard lattice); IntegralRepresentationsOfGeneralLinearGroups §1.1 (i) (the

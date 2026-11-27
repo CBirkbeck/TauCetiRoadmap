@@ -7,7 +7,14 @@ forms of the argument are functions on the adelic points of unitary groups of he
 algebraic modular forms on definite groups, and forms of a discrete-series type on indefinite ones.
 
 This roadmap states the background that the argument uses about these groups and these forms, in the form the
-shorter proof needs. It is used by the roadmaps of the argument and by background roadmaps, among them
+shorter proof needs. The standard theory is the reference for these objects: the unitary group of a hermitian space
+over `E⁺` with its adelic points, the quotient measure, algebraic heights, the Hecke algebra of a compact open
+subgroup, automorphic and cusp forms with a discrete series at infinity, algebraic modular forms with `p`-adic
+coefficients, supercusp forms, and cuspidal automorphic representations with their multiplicities. Layers 1–7 state
+and prove the results on the objects of the shorter proof, which are one way to prove them; Layer 8 states how each of
+these objects is related to the standard one, and the sections that other roadmaps use also state their results on the
+standard objects, in paragraphs headed **In standard terms**.
+It is used by the roadmaps of the argument and by background roadmaps, among them
 WeilRepresentationsOnBanachSpacesOfData, SiegelWeilAndRallisFormulasOnUnitaryGroups and
 GaloisRepresentationsOfUnitaryEigenforms; Layer 7 is used in SecondMomentsOfPoincareSeries. It cites
 HolomorphicDiscreteSeriesOfUnitaryGroups (the real unitary groups and their discrete series),
@@ -15,12 +22,17 @@ IntegralRepresentationsOfGeneralLinearGroups (the weight representations and Gre
 WeilRepresentationsOnBanachSpacesOfData (Weil data, isotropic splittings, Hecke operators at split places) and
 GaloisRepresentationsOfUnitaryEigenforms (Hecke eigenforms), and from earlier roadmaps HermitianFormsAndLattices,
 GeometryOfNumbersAndQuadraticArithmetic, AdelicAlgebraicGroups, DiscreteSeriesCoefficientsAndAutomorphicMetrics and
-RepresentationTheory/CompactGroups.
+RepresentationTheory/CompactGroups. Layer 8 rests on the general roadmaps AdelicAlgebraicGroups (adelic points, Siegel
+sets and heights), AnalyticNumberTheoryPartII (quotient measures), ArithmeticLocallySymmetricSpaces (automorphic forms
+and cusp forms), AutomorphicFormsOnReductiveGroups (discrete series, cuspidal automorphic representations and
+algebraic modular forms) and SmoothRepresentationsOfLocalGroups (Hecke algebras), and on
+HolomorphicDiscreteSeriesOfUnitaryGroups §§9.3, 9.4 for the discrete series of the real unitary groups.
 
 Layer 1 is integration over quotients: an integral over an orbit space is taken on the whole space against a weight
 whose integral along every orbit is one, also for actions that do not come from a subgroup; it includes unfolding,
 quotients in stages, Iwasawa coordinates, and the weighted class sums `∑ f(g)/#(Γ ∩ gKg⁻¹)` that replace integrals
-on definite groups. Layer 2 is the adeles of a totally complex field with the normalisations used: covolume one and
+on definite groups; for a closed unimodular subgroup of a unimodular group the integral is that against the quotient
+measure (8.1). Layer 2 is the adeles of a totally complex field with the normalisations used: covolume one and
 self-duality of `E`, strong approximation omitting finite places, a one-sided Poisson inequality, and the scaling of
 Haar measure by `GL_n`.
 Layer 3 is hermitian spaces that are standard at every finite place and their adelic unitary groups: Landherr's
@@ -28,17 +40,31 @@ theorem in that case, Witt's theorem over the integral finite adeles, splittings
 Iwasawa decomposition, weak approximation and congruence levels. Layer 4 is reduction theory: adelic Minkowski
 theorems, short bases, finite volume and a weak form of Weil's convergence criterion, Mahler's criterion, and the
 integral over a definite quotient as a class sum. Layer 5 is forms of a cusp kernel on indefinite groups: they are
-cuspidal, decay rapidly and are finite in number at each level. Layer 6 is algebraic modular forms: their pairing,
+cuspidal, decay rapidly and are finite in number at each level; for the discrete-series kernels `e_l` with every `l_w`
+of gap `500n³` they are the cusp forms that are images of a highest weight vector of the lowest `K_∞`-type of the
+discrete series `π_l` at infinity under homomorphisms into the cusp forms (8.5). Layer 6 is algebraic modular forms:
+their pairing,
 Hecke eigenforms, their identification with forms on the standard definite space, periods over a block subgroup and
 the `p`-adic gauge. Layer 7 is the comparison of traces of Hecke-type operators on forms of two unitary groups that
 differ only in their signs at the real places; it gives the equality of multiplicities used for the spanning theorem
-(SecondMomentsOfPoincareSeries §2.3).
+(SecondMomentsOfPoincareSeries §2.3). Layer 8 compares these objects with the standard theory: the quotient integral
+with the quotient measure, spaces with adelic frames with unitary groups over `E⁺` and their adelic points, the height
+with algebraic heights, level algebras with Hecke algebras, forms of a discrete-series type with cusp forms, algebraic
+forms with their `p`-adic integral structure, cuspidality at a split place with supercusp forms, and the traces of
+Layer 7 with sums over cuspidal automorphic representations.
 
-The headline theorems are the comparison of traces for test functions cuspidal at a split place (7.13); the
-cuspidality, rapid decay and finite dimension of the forms of a cusp kernel (5.4); Landherr's theorem for spaces with
-adelic frames (3.3 (a)); Mahler's criterion and the integral over a definite quotient as a class sum (4.4); and the
-identification of algebraic modular forms with the forms of a discrete-series type on the standard definite space
-(6.4 (a)).
+The headline theorems are the comparison of traces for test functions cuspidal at a split place (7.13), which in
+standard terms equates, under the hypotheses of 7.13 (the 5040 condition, an even number of infinite places, `n ≥ 2`,
+every `l_w` of gap `500n³ + 10n⁵` for both sign vectors) and for a Hecke function `h` cuspidal at a split place in the
+sense of 7.1 (a supercusp form there, of a special kind, 8.7), the sums of `m_cusp(Π)·tr Π_f(h)` over the cuspidal
+automorphic representations `Π` of the unitary groups of two hermitian spaces with adelic frames that differ only in
+their signs at the real places, whose archimedean component is the discrete series of parameter `l` (8.8); the
+cuspidality, rapid decay and finite dimension of the forms of a cusp kernel (5.4), which for the discrete-series
+kernels `e_l` with every `l_w` of gap `500n³` are cusp forms with a discrete series at infinity (8.5); Landherr's
+theorem for spaces with adelic frames (3.3 (a)), the case of Landherr's theorem for hermitian spaces isometric to the
+standard form at every finite place (8.2); Mahler's criterion and the integral over a definite quotient as a class sum
+(4.4), the latter for the quotient measure (8.1); and the identification of algebraic modular forms with the forms of
+a discrete-series type on the standard definite space (6.4 (a)), which realises them as automorphic forms (8.5).
 
 ## Conventions and notation
 
@@ -75,10 +101,17 @@ Hermitian matrices and forms are conjugate-linear in the first variable: for a r
 | `φ♮` | the function on `G(1)` attached to an algebraic form | 6.1 |
 | test function, `a ⋆ 1_K` | locally constant compactly supported function on `G_f`; the test function of `a ∈ ℂ[G_f]` | 7.1 |
 | `J^V_S(φ)`, `I_γ` | the part of the geometric side with characteristic polynomials in `S`, the orbital integral | 7.1 |
+| `U(J), θ_V` | the unitary group of `(E^n, h_J)` over `E⁺`; the isomorphism `g ↦ xgx⁻¹` of `G(s)` onto its adelic points | 8.2 |
+| `ℋ(G_f, K)` | the Hecke algebra of compactly supported `K`-bi-invariant functions | 8.4 |
+| `c_l, π_l, ζ_l` | `∏_w c_{l_w}` on `G_∞(s)`, the discrete series it generates, its unit vector with coefficient `c_l` | 8.5 |
+| `𝒜_0(U(J)), Π, m_cusp(Π)` | the cusp forms on `U(J)`, a cuspidal automorphic representation `Π_∞ ⊗ Π_f`, its multiplicity | 8.5 |
 
 The discrete-series coefficients `c_λ` of `U(p, q)`, their formal degrees `d(λ)`, the Haar measures on the real
 unitary groups (normalised so that `U(n)` has mass one) and the gap condition on parameters are those of
-HolomorphicDiscreteSeriesOfUnitaryGroups §§1.1, 1.4, 4.1. A doubled parameter `l ∈ ℤ^n` for the signs `s` has *gap `h`*,
+HolomorphicDiscreteSeriesOfUnitaryGroups §§1.1, 1.4, 4.1; for parameters of gap at least `500n³`,
+HolomorphicDiscreteSeriesOfUnitaryGroups Layer 9 (Comparison with the standard theory) identifies `c_λ` and `d(λ)`
+with a coefficient and the formal degree of the discrete series of `U(p, q)` of Harish-Chandra parameter `λ` (its 9.3
+(d), 9.5 (a)), and 8.5 uses it. A doubled parameter `l ∈ ℤ^n` for the signs `s` has *gap `h`*,
 as in HolomorphicDiscreteSeriesOfUnitaryGroups §4.1 (c), if its entries are distinct, congruent to `n − 1` modulo `2`,
 and `|l_i − l_j| ≥ 2h` whenever `s_i ≠ s_j`. The weight representations of Layer 6 are modelled on the polynomial
 representations of `GL_n` with their minor-product bases of IntegralRepresentationsOfGeneralLinearGroups §§1.1, 1.2,
@@ -89,10 +122,13 @@ WeilRepresentationsOnBanachSpacesOfData §3.1.
 Sums over infinite sets of classes are not used: a class sum is taken where the classes are finite in number, and a
 class with infinite stabiliser has weight zero.
 
-**Origin and method.** Every section that states something carries `*Origin:*` (`published:`, `adapted from`,
+**Origin and method.** Every section of Layers 1–7 that states something carries `*Origin:*` (`published:`,
+`adapted from`,
 `particular to this proof:`, `this roadmap's own formulation:`, or `definitions and conventions`) and
 `*Method of the formal proof:*`, which says how the shorter formal proof proves it; `[ShortProof]` names the file and
-declaration of that proof. A contribution may state a result more generally or prove it otherwise. The names `New.…`
+declaration of that proof. The sections of Layer 8, which the formal proof does not contain, carry `*Proof route:*` in
+place of the method of the formal proof and have no `[ShortProof]` line. A contribution may state a result more
+generally or prove it otherwise. The names `New.…`
 after `[ShortProof]` are declarations of that proof, at the repository and commit given in the family index, not of
 Mathlib or Tau Ceti.
 
@@ -113,8 +149,9 @@ domain. Unimodularity compares the quotient integral of a right translate of the
 library has the unfolding identity in Mathlib's model with a fundamental domain and a measure on `G ⧸ Γ`
 (`QuotientGroup.integral_eq_integral_automorphize`); the bridge to the model here is not small.
 
-This device stands in for the invariant measure on the orbit space; no comparison with that measure is used, and later
-sections integrate over quotients only in this sense.
+Layers 1–7 integrate over orbit spaces and over quotients with this device, in their statements and in their proofs;
+they use no measure on the orbit space. For a closed unimodular subgroup of a unimodular group acting by left
+multiplication, 8.1 identifies this integral with the integral against the quotient measure.
 
 Let a group `H` with an s-finite measure `ν` invariant under inversion act measurably on a measure space `(X, μ)`, with
 `μ` s-finite and `H`-invariant. A *cutoff* is a measurable `β : X → [0, ∞]` with `∫_H β(h·x) dν(h) = 1` for every
@@ -151,9 +188,17 @@ discrete cocompact subgroup. If `F ∈ L¹(B)` and `G` is continuous and `B₀`-
 
 AnalyticNumberTheoryPartII §5.3k states Weil's formula for a closed subgroup on whose points the modular characters
 agree, with the quotient measure it determines, and the unfolding over a discrete subgroup of a unimodular group.
-Once its quotient measure is identified with the quotient integral here, it gives the identity of (d) when `G` is
+As its quotient measure is the quotient integral here for unimodular groups (8.1), it gives the identity of (d) when
+`G` is
 unimodular; it gives neither the second sentence of (d) nor (a)–(c), which concern actions that need not come from a
 subgroup acting on its group.
+
+**In standard terms.** For a closed unimodular subgroup `H` of a unimodular second countable locally compact Hausdorff
+group `G`, acting by left multiplication, `∫_{H\G} F` is the integral of `F` against the quotient measure of
+AnalyticNumberTheoryPartII §5.3k for the Haar measures `μ` and `ν`, and integrability over `H\G` is integrability for
+that measure (8.1); for a discrete `Γ` in such a `G`, the identity of (d) is the unfolding identity of §5.3k and
+`vol(Γ\G)` is the total mass of the quotient measure. The quotient integrals over `Γ_V\G(s)`, `Z_γ\G(s)` and
+`(Γ_W ∩ N_a)\N_a` in Layers 4–7 are of this kind.
 
 *Needs:* Mathlib `MeasureTheory.Measure.IsHaarMeasure`, `MeasureTheory.lintegral_prod` (Tonelli),
 `MeasureTheory.integral_prod` (Fubini).
@@ -261,6 +306,13 @@ Let `G` be a group, `Γ, K ⊂ G` subgroups, `π` a representation of `G` on a m
   subgroup, the *compact mean* `e_H v = [H : H_v]⁻¹ ∑_{h ∈ H/H_v} π(h)v` (`H_v ⊂ H` open, fixing `v`).
 
 For `K` compact and `H ⊂ G` open, `vol(H ∩ K)·[K : H ∩ K] = vol(K)` for every left Haar measure.
+
+**In standard terms.** Let `G` be locally profinite, `K` compact and open, `A = ℂ` and `π` smooth. With the Haar
+measure giving `K` volume one, the Hecke operator of a `K`-bi-invariant `f` with finitely many cosets in its support
+is the convolution operator `v ↦ ∫ f(g)π(g)v dg` on `W^K` of the Hecke algebra `ℋ(G, K)` of compactly supported
+`K`-bi-invariant functions, and the operator of `KgK` is the operator of the double coset `KgK` on invariants of
+AutomorphicFormsOnReductiveGroups §0.6; `f ↦ ∑_D f(D)·D` identifies `ℋ(G, K)` with the double-coset ring of
+SmoothRepresentationsOfLocalGroups §SR.1.2 (8.4 (b)).
 
 [ShortProof], `Lib/Adelic/Hecke/Basic.lean` (`New.levelSpace`, `New.heckeFun`, `New.heckeCoset`, `New.classAut`,
 `New.classSum`, `New.relIndex_mul_measure_inf`, `New.heckeFun_eq_sum`, `New.heckeFun_heckeFun`);
@@ -447,7 +499,9 @@ Let `E` be a CM field with a CM type `Φ` (2.1) and `n ≥ 1`.
 - A *hermitian space with an adelic frame of signs `s`* is a pair `V = (J, x)` of a hermitian `J ∈ M_n(E)` and
   `x ∈ GL_n(𝔸)` with `x*Jx = diag(s)` at every infinite place (`J` read through `Φ_w`) and `x*Jx = 1_n` at every
   finite place. So `(E^n, h_J)` has signature `(p, n − p)` at every infinite place and is isometric to the standard
-  form `⟨1, …, 1⟩` at every finite place.
+  form `⟨1, …, 1⟩` at every finite place. Here a *space* is the hermitian space `(E^n, h_J)` of the literature
+  together with the frame `x`, and `G(s)` is, through `g ↦ xgx⁻¹`, the group of adelic points of the unitary group of
+  `(E^n, h_J)` over `E⁺` (8.2).
 - Its *rational points*: `γ ↦ x⁻¹γx` embeds `U(J)(E⁺) = {γ ∈ GL_n(E) : γ*Jγ = J}` in `G(s)`; the image is `Γ_V`, and
   `Γ_{V,f}` is its image in `G_f`. Its *lattice* is `Λ_V = {y ∈ E^n : (x⁻¹y)_f ∈ Ô^n}`, and the *length* `‖y‖_V` is the
   Euclidean norm of the vector `((x⁻¹y)_{w,i})_{w,i} ∈ ℂ^{Φ×n}`.
@@ -460,6 +514,15 @@ Let `E` be a CM field with a CM type `Φ` (2.1) and `n ≥ 1`.
   (1.4) of the double coset of `diag(ϖ_w 1_j, 1_{n−j})` under `GL_n(𝒪_w)`, acting through `ι_w` on the vectors fixed
   by `ι_w(GL_n(𝒪_w))`, as in WeilRepresentationsOnBanachSpacesOfData §9.2.
 - Integrals over `Γ_V\G(s)` are those of 1.1.
+
+**In standard terms.** Through `θ_V(g) = xgx⁻¹` (8.2 (a)), `G(s)`, `G_∞(s)`, `G_f` and `Γ_V` are the adelic,
+archimedean, finite adelic and rational points of the unitary group `U(J)` of `(E^n, h_J)` over `E⁺`, `K₀` is the
+stabiliser of the lattice `x_fÔ^n`, the closure of `Λ_V`, a level is an open subgroup of that stabiliser, integrals
+over `Γ_V\G(s)` are integrals against the quotient measure (8.1), and at a split place `ι_w` and `T_{w,j}` are read in
+`U(J)(E⁺_v) ≅ GL_n(E_w)` (8.2 (b)). The hermitian spaces over `E` that have an adelic frame of signs `s` are exactly
+those isometric to the standard form at every finite place of `E⁺` and of signature `(p, n − p)`,
+`p = #{i : s_i = 1}`, at every real place (8.2 (c)); the unitary groups of other hermitian spaces do not occur in this
+roadmap.
 
 [ShortProof], `Lib/Adelic/Unitary/Defs.lean` (`New.Gf`, `New.G`, `New.GInf`, `New.stdLevel`, `New.IsLevel`,
 `New.Space`, `New.Space.ratEmbed`, `New.Space.Γ`, `New.Space.Γf`, `New.Space.baseLattice`, `New.stdSpace`,
@@ -532,6 +595,12 @@ without the 5040 condition: two spaces with adelic frames of the same signs are 
 every finite place and have the same signature at every real place of `E⁺`, so `a` exists, and `g = x⁻¹ax′` then lies
 in `G(s)` by 3.2 (c). For invertible `K`, (b) is HermitianFormsAndLattices §3.5 (a) with `U = ⟨1⟩`; the degenerate
 case is not covered there.
+
+**In standard terms.** Through 8.2, (a) is the case of Landherr's theorem (HermitianFormsAndLattices §3.1), under the
+5040 condition, for hermitian spaces over `E` that are isometric to the standard form at every finite place of `E⁺`
+and have one signature `(p, n − p)` at every real place: two such spaces with the same `p` are isometric, an isometry
+`a` carries the unitary group `U(J′)` over `E⁺` onto `U(J)` by conjugation, and the second sentence of (a) writes this
+conjugation in `G(s)` through `θ_V` and `θ_{V′}`.
 
 *Needs:* 2.1, 2.3, 3.1, 3.2; Tau Ceti `TauCeti.ClassFieldTheory.cyclicHasseNorm`.
 
@@ -748,7 +817,8 @@ norm at most three times the covering radius span.
 Let `E` be a CM field and `V` a space with an adelic frame of signs `s`. The *first minimum* is
 `λ(V) = min(1, min{‖y‖_V : 0 ≠ y ∈ Λ_V})`, and the *height* of `g ∈ G(s)` is `ht_V(g) = 1/λ(V·g) ≥ 1`. A function `F`
 on `G(s)` has *moderate growth* if `|F(g)| ≤ C·ht_V(g)^B` for some `C`, `B`, and *rapid decay* if `|F(g)|·ht_V(g)^B` is
-bounded for every `B`.
+bounded for every `B`. Here the *height* is the inverse first minimum of the moved lattice; it is not a height in the
+sense of AdelicAlgebraicGroups §3.5, with which 8.3 compares it.
 
 (a) For `0 ≠ d ∈ 𝓞_E` in `𝔇`, every `u ∈ ℂ^{Φ×n}` lies within `(2fn)²/λ(V)` of the image of `(2/d)a` for some
 `a ∈ Λ_V`.
@@ -765,6 +835,12 @@ for every embedding `φ : E → ℂ` and all `i, j`.
 HermitianFormsAndLattices §4.12 (a), applied to the lattice `E^n ∩ gÔ^n` of the standard form (self-dual, so `q = 1`),
 also implies (c), with `√f·n·rd_E` in place of `6N(fn)²`: `rd_E ≤ N` because `N ∈ 𝔇`. It does not give (a) or (b) for
 spaces that are not definite.
+
+**In standard terms.** Through `θ_V(g) = xgx⁻¹` (8.2), `Λ_{V·g}` is the lattice `E^n ∩ θ_V(g)_fx_fÔ^n` with the
+lengths `y ↦ |x_∞⁻¹θ_V(g)_∞⁻¹y|`. For a height `‖·‖` of AdelicAlgebraicGroups §3.5 on `U(J)(𝔸_{E⁺})`, `ht_V` is
+bounded by a power of `‖θ_V(·)‖` everywhere and bounds a power of it on every Siegel set (8.3 (b), (c)); so for left
+`Γ_V`-invariant functions, moderate growth in the sense here is moderate growth in the sense of
+ArithmeticLocallySymmetricSpaces ALS.F.6, and rapid decay in the sense here is rapid decay on Siegel sets (8.3 (d)).
 
 *Needs:* 2.2, 3.1; GeometryOfNumbersAndQuadraticArithmetic §4.4 (item 4.4.14, covering-radius transference).
 
@@ -799,7 +875,8 @@ AdelicAlgebraicGroups §3.4 (finite volume of `G(F)\G(𝔸)^1` for connected lin
 `U(V)` has no characters over `E⁺` and so `U(V)(𝔸)^1 = U(V)(𝔸)`. ThetaKernelsForUnitaryDualPairs §5.7a (Weil's
 convergence criterion for unitary pairs), for a split `W` of dimension `2t`, gives (b) through its bound for majorants
 at `h = 1`; its hypothesis holds because `2t < n` and the Witt index of `V` is at most `n/2`. Both need `G(s)` and the
-quotient integral of 1.1 identified with `U(V)(𝔸)` and its quotient measure; they are general theorems that the formal
+quotient integral of 1.1 identified with `U(V)(𝔸)` and its quotient measure, which 8.2 and 8.1 do; they are general
+theorems that the formal
 proof avoids.
 
 *Needs:* 1.1, 2.2, 2.4, 3.1, 4.1.
@@ -838,8 +915,16 @@ The *mass* of the standard space is `mass(n) = S_{Γ_{I_n,f},K₀}(1) = ∑_{Γ 
 DiscreteSeriesCoefficientsAndAutomorphicMetrics §7.5a states the integration formula of (d), for `F` right invariant
 under `K` and the quotient measure on `G(F)\G(𝔸)`, and the mass with the relation `mass J′ = [J : J′]·mass J`, for
 the connected reductive groups of AutomorphicFormsOnReductiveGroups §7.4 (compact at infinity modulo `A_∞`); with
-`vol(G_∞K) = [K₀ : K]⁻¹` it gives (d) for such `F` once the group and the quotient integral of 1.1 are identified with
-`U(V)(𝔸)` and its quotient measure.
+`vol(G_∞K) = [K₀ : K]⁻¹` it gives (d) for such `F`, the group and the quotient integral of 1.1 being identified with
+`U(V)(𝔸)` and its quotient measure by 8.2 and 8.1.
+
+**In standard terms.** Through 8.2, (a) is one direction of Mahler's compactness criterion for `U(J)`: a subset of
+`U(J)(E⁺)\U(J)(𝔸_{E⁺})` on which the first minima of the lattices `E^n ∩ h_fx_fÔ^n`, for the lengths
+`y ↦ |x_∞⁻¹h_∞⁻¹y|`, are bounded below is relatively compact. When all signs are equal, `h_J` is definite at every
+real place, so `U(J)` is anisotropic over `E⁺`, and (b) is the compactness of `U(J)(E⁺)\U(J)(𝔸_{E⁺})` for anisotropic
+groups of AdelicAlgebraicGroups §3.4 (Adelic reduction and arithmetic quotients). Through 8.1, (d) is the integration
+formula over `U(J)(E⁺)\U(J)(𝔸_{E⁺})` for the quotient measure with `vol(x_fK₀x_f⁻¹) = 1` and mass one on
+`U(J)(E⁺ ⊗_ℚ ℝ) = θ_V(U(n)^Φ)`, and `mass(n)` is the mass of the definite unitary group `U(1_n)` at the level `K₀`.
 
 *Needs:* 1.1, 1.4, 1.5, 3.1, 3.2, 4.2, 4.3.
 
@@ -857,7 +942,10 @@ the connected reductive groups of AutomorphicFormsOnReductiveGroups §7.4 (compa
 Let `E` be a CM field and `V` a space with an adelic frame of signs `s`.
 
 - `F : G(s) → ℂ` is *automorphic* if it is continuous, left `Γ_V`-invariant, and right invariant under an open
-  subgroup of `G_f` (a *level* of `F`).
+  subgroup of `G_f` (a *level* of `F`). Here *automorphic* asks for no more than this; an automorphic form in the
+  sense of ArithmeticLocallySymmetricSpaces ALS.F.6 is moreover smooth, right `K_∞`-finite, finite under the centre of
+  the enveloping algebra and of moderate growth, as the forms of type `e_l` are when every `l_w` has gap `500n³` for
+  `s` (8.5 (a)).
 - For `k` on `G_∞(s)`, right convolution is `R(k)F(g) = ∫_{G_∞} k(z)F(g·z) dz`.
 - An *idempotent kernel* on a unimodular group `H` is a continuous integrable `e` with `e(g⁻¹) = conj e(g)`,
   `e(1) ≠ 0` and `∫_H e(z)e((zx)⁻¹y) dz = (e(x⁻¹)/e(1))·e(y)` for all `x, y` (so `e ∗ e = e`). A *cusp kernel of order
@@ -871,6 +959,17 @@ Let `E` be a CM field and `V` a space with an adelic frame of signs `s`.
   *discrete-series kernel* is `e_l(x) = ∏_w d(l_w)·conj c_{l_w}(x_w)`, with the coefficient `c_λ` and formal degree
   `d(λ)` of HolomorphicDiscreteSeriesOfUnitaryGroups §4.1 (d); *forms of parameter `l`* are forms of type `e_l`.
 - Moderate growth and rapid decay are measured against `ht_V` (4.2).
+
+**In standard terms.** Let every `l_w` have gap `500n³` for `s`. Through 8.2 and 8.5, a form of type `e_l` and level
+`K` is a cusp form on the unitary group `U(J)` of `(E^n, h_J)` over `E⁺` in the sense of
+ArithmeticLocallySymmetricSpaces ALS.F.6, of level `θ_V(K)`, namely the image of the vector `ζ_l` of the lowest
+`K_∞`-type of the discrete series `π_l` of 8.5, the tensor product over `w` of the discrete series of Harish-Chandra
+parameter `l_w/2`, under a `(𝔤, K_∞)`-homomorphism into the cusp forms:
+`𝒜(V, e_l, K) ≅ Hom_{(𝔤,K_∞)}(π_l^{K_∞-fin}, 𝒜_0(U(J))^{θ_V(K)})`, and as a module over the Hecke algebra
+`𝒜(V, e_l, K) ≅ ⊕_Π (Π_f^{θ_V(K)})^{⊕m_cusp(Π)}` over the cuspidal automorphic representations `Π` of `U(J)` with
+`Π_∞ ≅ π_l^{K_∞-fin}` (8.5 (c), (d)). The Petersson product is the `L²` inner product for the quotient measure (8.1
+(b)), and for left `Γ_V`-invariant functions moderate growth and rapid decay are moderate growth in the sense of
+ALS.F.6 and rapid decay on Siegel sets (8.3 (d)).
 
 [ShortProof], `Lib/Adelic/AutomorphicForms/Basic.lean` (`New.Space.IsAutomorphic`, `New.realConv`, `New.typeKernel`,
 `New.Space.IsForm`, `New.Space.petersson`, `New.Space.Form`, `New.Space.formRep`, `New.Space.rapidFunctions`);
@@ -910,6 +1009,13 @@ with `∑_i |W_i(g)| ≤ M` for all `g`, whose sum is left `Γ_V`-invariant and 
 form of type `e` and level `K`. This applies in particular when `∑_{γ∈Γ_V} c(γg) = ∑_i W_i(g)` for a function `c` of
 level `K`.
 
+**In standard terms.** Let every `l_w` have gap `500n³` for `s`. Through 8.5 (b), `R(e_l)` is the orthogonal projector
+of the `θ_V(K)`-fixed part of the cuspidal spectrum of `U(J)` onto the images `T(ζ_l)` of the unit vector `ζ_l` of the
+discrete series `π_l` under intertwiners `T`, which are the forms of type `e_l` and level `K`. The last clause of (c)
+is the self-adjointness of this projector; and the first two identities of (d), for `e = e_l`, are the identities
+`R(e_l)R(x)T(ζ_l) = c_l(x)·T(ζ_l)` and `⟨T(ζ_l), R(x)T′(ζ_l)⟩ = c_l(x)·⟨T(ζ_l), T′(ζ_l)⟩` for the coefficient
+`c_l = ∏_w c_{l_w}` of `π_l` at `ζ_l`, as `conj e_l(x)/e_l(1) = c_l(x)`.
+
 *Needs:* 1.1, 3.1, 5.1; HolomorphicDiscreteSeriesOfUnitaryGroups §§5.4, 6.1 (idempotence, decay and moments of `e_λ`).
 
 [ShortProof], `Lib/Adelic/AutomorphicForms/RealConvolution.lean` (`New.isIdempotentKernel_typeKernel`,
@@ -938,6 +1044,15 @@ pointwise and satisfy `u*σ_s(gv) = u*σ_s v` for all `u, v ∈ A^⊥`.
 left invariant under `Γ_W ∩ N_a`, then `∫_{(Γ_W∩N_a)\N_a} F(g·v·(y, 1)) dv = 0` for every `y ∈ G_∞(s)`.
 
 (b) `(Γ_W ∩ N_a)\N_a` has finite volume if `N_a ⊂ (Γ_W ∩ N_a)·C` for some compact `C`.
+
+**In standard terms.** Let `W = (J_W, x_W)` and `a = x_W⁻¹X` with `X ∈ M_n(E)` of rank at least one and `X*J_WX = 0`.
+Through `θ_W` (8.2), `N_a` is the unipotent radical of the stabiliser in `U(J_W)` of the column span of `X`, a proper
+maximal parabolic subgroup over `E⁺`, and for `g = 1` and `F` left `Γ_W`-invariant the integral in (a) is, by 8.1, a
+positive multiple of the constant term of `F∘θ_W⁻¹` along that parabolic subgroup at `θ_W((y, 1))`
+(ArithmeticLocallySymmetricSpaces ALS.F.6). So for `e = e_l` with every `l_w` of gap `500n³`, (a), applied to a
+bounded continuous left `Γ_W`-invariant function fixed by `R(e_l)` and to its right translates by `G_f`, says that its
+constant terms vanish along all proper maximal parabolic subgroups, the quotients `(Γ_W ∩ N_a)\N_a` being compact for
+rational `X`; 8.5 (a) uses this, through 5.4 (b), to show that the forms of type `e_l` are cusp forms.
 
 *Needs:* 1.1, 3.1, 5.1; HolomorphicDiscreteSeriesOfUnitaryGroups §6.2 (a), (b) (minimal idempotent kernels kill bounded
 radical-invariant functions; dilations along isotropic columns).
@@ -987,7 +1102,17 @@ equal, every automorphic function has rapid decay.
 
 The distance on `G_∞(s)` is that of `∏_w M_n(ℂ)` with the maximum over `w` of the operator norms.
 ArithmeticLocallySymmetricSpaces ALS.F.6 states finite dimension and rapid decay for `K_∞`-finite, `𝔷(𝔤)`-finite cusp
-forms; it does not apply to the forms here without showing that they are such, and is not used.
+forms; for a general cusp kernel `e` it does not apply to the forms of type `e` without showing that they are such;
+the forms of type `e_l` are such when every `l_w` has gap `500n³` (8.5 (a)); the proofs here do not use it.
+
+**In standard terms.** Let `e = e_l` with every `l_w` of gap `500n³` for `s`. Through 8.2 and 8.5 (a), (b) is the
+statement that the bounded automorphic forms on `U(J)` (in the sense of ALS.F.6) of level `θ_V(K)` that are fixed by
+`R(e_l)` are cusp forms. For these forms, the rapid decay of (d) and the finite dimension of (e) are also consequences
+of ArithmeticLocallySymmetricSpaces ALS.F.6 (iii) and (i): rapid decay of cusp forms on Siegel sets, which is rapid
+decay in the sense of 4.2 by 8.3 (d), and finite dimension for a fixed ideal of finite codimension of the centre of
+the enveloping algebra, a fixed finite set of `K_∞`-types and a fixed level; and 8.5 (d) writes `𝒜(V, e_l, K)` through
+the cuspidal automorphic representations with archimedean component `π_l`. The explicit depth in the cusp of (a) and
+(c) has no counterpart there.
 
 *Needs:* 1.1, 3.1, 3.9, 4.1, 4.2, 4.4, 5.1, 5.2, 5.3.
 
@@ -1040,6 +1165,12 @@ coefficient representation is, at each `τ`, the algebraic representation of hig
 conjugate embedding `x ↦ Φ_τ(x̄)`; on `U(J)` it is isomorphic to the contragredient of the one read through `Φ_τ`. So
 in the automorphic realisation of AutomorphicFormsOnReductiveGroups §7.5, where the component at infinity is the dual
 of the (irreducible) coefficient representation, the component at `τ` has highest weight `μ_τ` read through `Φ_τ`.
+
+**In standard terms.** For the standard space `I_n` and a level `K`, extension of the values along a ring homomorphism
+`ι : ℂ → ℂ_p` and the change of values of AutomorphicFormsOnReductiveGroups §7.4 identify the forms of level `K`,
+after extension of scalars to `ℂ_p`, with the module `S(K, W_ι)` of §7.4 for the definite unitary group `U(1_n)` over
+`E⁺` with its `p`-adic coefficient action, the Hecke operators corresponding to those of §7.4 (8.6 (a)); and with all
+signs `+1`, 8.5 realises the forms as automorphic forms on `U(1_n)` (6.4, In standard terms).
 
 [ShortProof], `Lib/Adelic/AutomorphicForms/SmoothAlgebraicForms.lean` (`New.SmoothForm`, `New.Space.weightRep`,
 `New.AlgForm`, `New.algFormRep`, `New.algFormCoeff`, `New.ofAlgForm`, `New.IsHCParam`, `New.hcParameter`);
@@ -1152,9 +1283,19 @@ right `K`-invariant. Then `∫_{Γ\G} Φ·φ♮ = (d·[K₀ : K])⁻¹·S_{Γ_f,
 
 DiscreteSeriesCoefficientsAndAutomorphicMetrics §7.5a gives (b), by its integration formula and Schur orthogonality on
 `U(n)^Φ`, and, for the trivial character, (c), as its comparison clause for the unit vector `⟨v⁺, ·⟩` with
-`vol(G_∞K) = [K₀ : K]⁻¹` (4.4 (c)) and `dim W = d`; both once the automorphic realisation of
-AutomorphicFormsOnReductiveGroups §7.5 is identified with `φ ↦ φ♮` and the quotient integral of 1.1 with its quotient
-measure. That identification, the explicit map of (a) with its inverse, is stated in neither section.
+`vol(G_∞K) = [K₀ : K]⁻¹` (4.4 (c)) and `dim W = d`; both through the identification of the automorphic realisation of
+AutomorphicFormsOnReductiveGroups §7.5 with `φ ↦ φ♮` (In standard terms, below) and of the quotient integral of 1.1
+with its quotient
+measure (8.1). Neither section states the explicit map of (a) with its inverse.
+
+**In standard terms.** With all signs `+1`, `G_∞ = U(n)^Φ` is compact and `U(1_n)` has no proper parabolic subgroup
+over `E⁺`, so every automorphic form on it is a cusp form; the representation `π_l` of 8.5 is finite-dimensional and,
+by 6.2 (c), it is the contragredient `ρ^∨` of `ρ`, the linear form `⟨v⁺, ·⟩` being a unit vector of `ρ^∨` with
+coefficient `∏_τ c_{l_τ}`, matched with `ζ_l`. So (a) is `φ ↦ T_φ(⟨v⁺, ·⟩)`, where `T_φ(L) = φ_L` (6.1); by (a) and
+8.5 (c), `φ ↦ T_φ` is a Hecke-equivariant linear bijection from the algebraic forms onto
+`Hom_{U(n)^Φ}(ρ^∨, 𝒜(U(1_n)))`, which makes explicit the comparison of AutomorphicFormsOnReductiveGroups §7.5 between
+the algebraic forms of the coefficient representation `ρ` and automorphic forms on `U(1_n)` over `E⁺`, read on `G(1)`
+through 8.2. (c) compares the class-sum pairing with the `L²` inner product for the quotient measure (8.1 (b)).
 
 *Needs:* 1.4, 1.5, 4.4, 5.1, 6.1, 6.2; RepresentationTheory/CompactGroups §4.1 (Schur orthogonality).
 
@@ -1203,7 +1344,8 @@ the `g ∈ G_f` whose components at all places above `p` lie in `GL_n(𝒪_w)`. 
 *gauge* `γ_g(ξ)` is the largest `p`-adic absolute value of a coordinate (in the minor-product basis) of
 `ρ_{κ,e}(g⁻¹)ι(ξ)`, `ρ_{κ,e}` the representation of 6.1 over `ℂ_p` (without conjugation), where at the infinite place
 `τ` the element `g⁻¹` acts through its component at the prime of `E` induced by the embedding `x ↦ ι(Φ_τ(x̄))` of `E`
-into `ℂ_p`.
+into `ℂ_p`. In the sense of convex geometry, `γ_g` is the gauge (Minkowski functional) of the `𝒪_{ℂ_p}`-lattice
+`ρ_{κ,e}(g)·(𝒪_{ℂ_p} ⊗ W_ℤ)` at `ι(ξ)`, `W_ℤ` the `ℤ`-span of the minor-product basis (8.6 (b)).
 
 (a) `γ_{γ_f g}(ρ(γ_∞)ξ) = γ_g(ξ)` for rational points `γ` of the standard space; `γ_{gk}(ξ) = γ_g(ξ)` for
 `k ∈ G_f^{(p)}`; `γ_g(cξ) = |ι(c)|_p·γ_g(ξ)`; `γ_g(ξ + ξ′) ≤ max(γ_g(ξ), γ_g(ξ′))`; and for `k ∈ G_f^{(p)}`, `γ_k(ξ) ≤ 1`
@@ -1227,6 +1369,12 @@ most `B`, that of `S_{Γ,K}(f)` is at most `#(Γ\G/K)·B`.
 `⟨φ, φ′⟩ = S_{Γ_f,K_H}(g ↦ ⟨φ(g), φ′(g)⟩)`; if `φ` has gauge at most `1` everywhere for `ι ∘ conj`, `φ′` for `ι`, and `A`
 is a common multiple of the stabiliser orders at `K_H`, then `A·⟨φ, φ′⟩ ∈ 𝔬_ι`.
 
+**In standard terms.** For an algebraic form `φ` on `I_n` of level `K`, `g ↦ ρ_ι(g)⁻¹ι(φ(g))` (8.6) is a form with
+`p`-adic coefficient action in the sense of AutomorphicFormsOnReductiveGroups §7.4 for `U(1_n)` over `E⁺`, and `φ` has
+gauge at most `1` everywhere exactly when this form takes values in the lattice `𝒪_{ℂ_p} ⊗ W_ℤ`, that is, lies in the
+module of §7.4 for that lattice (8.6 (b)). (a) records the behaviour of the lattice under rational points and under
+`G_f^{(p)}`, and (e), (f) are integrality statements for class sums and class-sum pairings of such forms.
+
 *Needs:* 1.4, 1.5, 3.8, 3.9, 4.4, 6.1, 6.3; IntegralRepresentationsOfGeneralLinearGroups §§1.1, 1.3, 2.1 (minor-product
 basis, integral Gram matrix).
 
@@ -1249,11 +1397,16 @@ Let `E` be a CM field, `n ≥ 1`.
   function. For a compact open subgroup `K ⊂ G_f` and `a = ∑ c_b b ∈ ℂ[G_f]`, `a ⋆ 1_K = ∑ c_b 1_{bK}`.
 - For a complex representation `ρ` of a group `G` and a subgroup `K`, the *level algebra* is the subalgebra of the `a ∈ ℂ[G]`
   with `ρ(a)` preserving the `K`-fixed vectors; the *universal level algebra* `𝔄(K)` is the intersection of the level
-  algebras over all complex representations of `G`.
+  algebras over all complex representations of `G`. Here *level algebra* names these subalgebras of the group algebra;
+  SmoothRepresentationsOfLocalGroups §SR.1.2 (Level algebras and the double-coset ring) uses the name for the Hecke
+  algebras of `K`-bi-invariant functions and of double cosets, onto which `a ↦ a ⋆ 1_K` maps `𝔄(K)` when `K` is
+  compact and open (8.4 (b)).
 - For a field `k`, `n ≥ 2` and a subset `∅ ≠ T ⊊ {1, …, n}` with coordinate projector `p_T`, `N_T(k) =
   {1 + p_T Z(1 − p_T) : Z ∈ M_n(k)}`. A test function `φ` on `G_f` is *cuspidal at the split place `w`* if for every such
   `T`, every `t ∈ GL_n(k_w)`, every map `ℓ : M_n(k_w) → GL_n(𝒪_w)` whose reduction is `Z ↦ (1 + p_T Z(1 − p_T))t`, and every
-  `g ∈ G_f`: `∑_{Z∈M_n(k_w)} φ(g·ι_w(ℓ(Z))) = 0`.
+  `g ∈ G_f`: `∑_{Z∈M_n(k_w)} φ(g·ι_w(ℓ(Z))) = 0`. Here *cuspidal at `w`* is a condition on sums over the residue field
+  (8.7 (a) restates it); it makes `φ` a supercusp form at `w` in the sense of 8.7 (b), and it is a strictly stronger
+  condition (8.7 (c)).
 - `g ∈ GL_n(E_w)` has a *simple zero* at `w` if its entries lie in `𝒪_w` and `0` is a simple root of the characteristic
   polynomial of its reduction modulo `w`.
 - For a space `V` of signs `s`, a cusp kernel `k` of order `B ≥ 13n³` on `G_∞(s)` (5.1), a test function `φ` on `G_f`
@@ -1263,6 +1416,13 @@ Let `E` be a CM field, `n ≥ 1`.
 - For `γ ∈ U(J)(E⁺)` with centraliser `Z_γ` in `U(J)(E⁺)` (read in `G(s)` through the frame, a discrete subgroup) and
   a function `k` on `G_∞(s)`, the *orbital integral* is `I_γ(k ⊗ φ) = ∫_{Z_γ\G} (k ⊗ φ)(g⁻¹γg) dg` (1.1).
 - For a level `K`, `𝒜(V, l, K)` is `𝒜(V, e_l, K)` (5.1), on which `ℂ[G_f]` acts by right translation.
+
+**In standard terms.** For a level `K`, `a ↦ a ⋆ 1_K` maps `𝔄(K)` onto the Hecke algebra `ℋ(G_f, K)` of compactly
+supported `K`-bi-invariant functions, and `a` acts on `K`-fixed vectors as that Hecke function (8.4). A test function
+cuspidal at a split place `w` is a supercusp form at `w` (8.7 (b)). Through 8.1 and 8.2, `J^V(k, φ)` is the integral
+over `U(J)(E⁺)\U(J)(𝔸_{E⁺})`, against the quotient measure, of the kernel of `k ⊗ φ` on the diagonal, written as a sum
+over the rational points of `U(J)` and sorted by characteristic polynomials; for `k = e_l` with every `l_w` of gap
+`513n³` and `φ = a ⋆ 1_K` with `a` as in 8.8, it equals the spectral sum of 8.8 (b).
 
 [ShortProof], `Lib/Adelic/TraceFormula/TestFunction.lean` (`New.TestFunction`, `New.convIndicator`, `New.IsCuspidalAt`,
 `New.HasSimpleZero`); `Lib/Adelic/TraceFormula/LevelAlgebra.lean` (`New.levelAlgebra`, `New.levelAction`,
@@ -1288,6 +1448,10 @@ be the tensor product of the label idempotents, `ẽ_c ∈ ℂ[K₀]` its lift b
 places `w_i, w̄_i` (3.9 (c)), and `K(⊥)` the kernel of the reduction. Then for every `b ∈ ℂ[G_f]`, the test function
 `(b·ẽ_c) ⋆ 1_{K(⊥)}` is cuspidal at `w_x`; and the coefficients of `e_c` sum to zero over every coset of `N_T(k_{w_x})`
 (placed at `w_x`) for every proper nonempty `T`.
+
+**In standard terms.** By 8.7 (b), the test functions `(b·ẽ_c) ⋆ 1_{K(⊥)}` are supercusp forms at `w_x`: for every
+`g ∈ G_f`, the function `z ↦ ((b·ẽ_c) ⋆ 1_{K(⊥)})(g·ι_{w_x}(z))` on `GL_n(E_{w_x})` has vanishing integrals along the
+unipotent radicals of all proper parabolic subgroups, after translation on both sides.
 
 *Needs:* 3.9, 7.1; IntegralRepresentationsOfGeneralLinearGroups §§4.4, 5.3 (labels, idempotents, cuspidality of `τ_P`).
 
@@ -1629,10 +1793,489 @@ frames of signs `s`, `s′`, and `l` with each `l_w` of gap `500n³ + 10n⁵` fo
 (7.1), and `w` a split place with `a ⋆ 1_K` cuspidal at `w`. If `T`, `T′` are endomorphisms of `𝒜(V, l, K)` and
 `𝒜(V′, l, K)` acting as `a`, then `tr T = tr T′`.
 
+**In standard terms.** By 8.8 (c), the conclusion is the equality
+`∑_Π m_cusp(Π)·tr Π_f(a ⋆ 1_K) = ∑_{Π′} m_cusp(Π′)·tr Π′_f(a ⋆ 1_K)` over the cuspidal automorphic representations of
+the unitary groups `U(J)` and `U(J′)` over `E⁺`, inner forms of each other, whose archimedean components are the
+discrete series `π_l` for the signs `s` and for the signs `s′`, counted with their cuspidal multiplicities, the finite
+parts being read on `G_f` through the frames (8.2). Here `a ⋆ 1_K` ranges over the Hecke functions of level `K` that
+are cuspidal at the split place `w` in the sense of 7.1, which are supercusp forms at `w` (8.4, 8.7).
+
 *Needs:* 5.2, 5.4, 6.3 (c), 7.1, 7.10, 7.11, 7.12.
 
 [ShortProof], `Lib/Adelic/TraceFormula/CuspidalComparison.lean` (`New.eventually_mem_spanOn_atPlace_mem_localIntGL`,
 `New.exists_auxiliary_place`, `New.trace_eq_of_isCuspidalAt`)
+
+## Layer 8: Comparison with the standard theory
+
+The standard theory is the reference for the objects of this roadmap: the integral against the quotient measure of a
+homogeneous space (8.1), the unitary group of a hermitian space over `E⁺` with its adelic points (8.2), algebraic
+heights and Siegel sets (8.3), the Hecke algebra of a compact open subgroup (8.4), cusp forms with a discrete series
+at infinity (8.5), algebraic modular forms with `p`-adic coefficients (8.6), supercusp forms (8.7), and cuspidal
+automorphic representations with their multiplicities (8.8). This layer states how each object of the route is related
+to its standard counterpart, by an identification or by the implication that holds. The sections of Layers 1–7 that
+other roadmaps use state their results on the standard objects in paragraphs headed **In standard terms**, which rest
+on the sections here. The coefficients `c_λ`, the kernels `e_λ` and the discrete series of the real unitary groups are
+compared with the standard theory in HolomorphicDiscreteSeriesOfUnitaryGroups §§9.3–9.5. [ShortProof] proves none of
+the statements of this layer, and Layers 1–7 do not use them; each section gives a *Proof route:* in place of the
+method of the formal proof.
+
+### 8.1 Quotient integrals by cutoffs and quotient measures
+
+*Origin:* this roadmap's own formulation: the comparison of the quotient integral of 1.1 with the integral against the
+quotient measure of AnalyticNumberTheoryPartII §5.3k, for a closed unimodular subgroup acting by left multiplication
+on a unimodular group.
+
+*Proof route:* As `G` and `H` are unimodular, `μ` and `ν` are right Haar measures and the modular characters of `G`
+and `H` agree on `H` (both are trivial), so AnalyticNumberTheoryPartII §5.3k gives `μ̄` with
+`∫_G f dμ = ∫_{H\G} (∫_H f(hg) dν(h)) dμ̄(Hg)` for every Borel `f : G → [0, ∞]`. For `f = (F̄∘q)·β` the inner integral
+is `F̄(Hg)·∫_H β(hg) dν(h) = F̄(Hg)`, `β` being a cutoff; this is (a) for `F̄ ≥ 0`. Applied to `|F̄|` it gives the
+equivalence of the two integrability conditions, and applied to the positive and negative parts of the real and
+imaginary parts of `F̄` it gives the equality of the integrals. If `F` is a left `H`-invariant Borel function on `G`
+and `U ⊂ ℂ` is open, `q(F⁻¹(U))` and `q(F⁻¹(ℂ ∖ U))` are disjoint analytic subsets of the Polish space `H\G` with
+union `H\G`, hence Borel by Suslin's theorem; so `F = F̄∘q` with `F̄` Borel. In (b), `vol(H\G)` is (a) for `F̄ = 1`,
+and the identity of 1.1 (d) is (a) for `F̄(Γg) = ∑_{γ∈Γ} f(γg)`, which is the unfolding of §5.3k; `G(s)` is unimodular
+because `Γ_V\G(s)` has finite volume (1.1 (d), 4.3 (c)), so (a) applies to `conj F·F′` for forms `F`, `F′`, and right
+translation preserves `μ̄`.
+
+Let `G` be a second countable locally compact Hausdorff group that is unimodular, with Haar measure `μ`, and `H ⊂ G` a
+closed unimodular subgroup with Haar measure `ν` (counting measure when `H` is discrete), acting on `G` by left
+multiplication. Let `q : G → H\G` be the quotient map, `μ̄` the right `G`-invariant measure on `H\G` of
+AnalyticNumberTheoryPartII §5.3k for `μ` and `ν`, and `β` a cutoff (1.1) for this action.
+
+(a) For every Borel `F̄ : H\G → [0, ∞]`, `∫_{H\G} F̄∘q` in the sense of 1.1 equals `∫_{H\G} F̄ dμ̄`. For Borel
+`F̄ : H\G → ℂ`, `F̄∘q` is integrable over `H\G` in the sense of 1.1 if and only if `F̄` is `μ̄`-integrable, and then
+the two integrals are equal. Every left `H`-invariant Borel function on `G` is `F̄∘q` for a Borel `F̄`.
+
+(b) In particular `vol(H\G) = μ̄(H\G)`; for a discrete `Γ ⊂ G`, the identity of 1.1 (d) is the unfolding identity of
+AnalyticNumberTheoryPartII §5.3k; and for a space `V` with an adelic frame, the Petersson product of 5.1 is the inner
+product of `L²(Γ_V\G(s), μ̄)`, on which right translation by `G(s)` is unitary.
+
+The quotient integrals over `Γ_V\G(s)`, over `Z_γ\G(s)` (7.1) and over `(Γ_W ∩ N_a)\N_a` (5.3) are of this kind, these
+groups being unimodular. 1.1 also treats actions that do not come from a subgroup, for which no quotient measure is
+asserted. The measure that the formal proof calls `New.Space.quotMeasure` (4.3) is the measure `βμ` on `G(s)` itself,
+not a measure on the quotient.
+
+*Needs:* 1.1, 4.3, 5.1; AnalyticNumberTheoryPartII §5.3k (Quotient measures and the two quotient conventions).
+
+### 8.2 Spaces with an adelic frame and unitary groups over `E⁺`
+
+*Origin:* this roadmap's own formulation: the comparison of the matrix groups of 3.1 with the adelic points of the
+unitary group of a hermitian space over `E⁺`, an affine algebraic group in the sense of AdelicAlgebraicGroups §1.1,
+and the description of the hermitian spaces that have an adelic frame.
+
+*Proof route:* (a) Put `σ_s = x*Jx`, equal to `diag(s)` at the infinite places and to `1_n` at the finite places. For
+`g ∈ GL_n(𝔸)`, `(xgx⁻¹)*J(xgx⁻¹) = x^{−*}(g*σ_sg)x⁻¹`, so conjugation by `x`, a homeomorphism of `M_n(𝔸)`, carries
+`G(s) = {g : g*σ_sg = σ_s}` onto `{h ∈ GL_n(𝔸) : h*Jh = J}`. By AdelicAlgebraicGroups §1.4 (restriction of scalars on
+adelic points, and the general linear group), `(Res_{E/E⁺}GL_n)(𝔸_{E⁺})` is `GL_n(𝔸_E)` with the units topology, and
+the closed embedding `U(J) ⊂ Res_{E/E⁺}GL_n` makes `U(J)(𝔸_{E⁺})` the closed subgroup cut out by `h*Jh = J`, with the
+subspace topology (Tau Ceti `TauCeti.PointTopology.isClosedEmbedding_comap_of_surjective`); on it `h⁻¹ = J⁻¹h*J` is
+continuous in the entries, so this is the topology from `M_n(𝔸)`, as for `G(s)` (3.2 (a)). `Γ_V` is the image of
+`U(J)(E⁺)` by its definition (3.1). `K₀` is the stabiliser of `Ô^n` in `G_f`; `E^n` is dense in `𝔸_f^n`
+(`IsDedekindDomain.FiniteAdeleRing.denseRange_algebraMap`), so `Λ_V = E^n ∩ x_fÔ^n` is dense in the open set `x_fÔ^n`.
+Haar measures and quotient integrals are transported along `θ_V`, and 8.1 applies on both sides. (b) The conjugation
+of `E ⊗_{E⁺} E⁺_v = E_w × E_{w̄}` exchanges the two factors, so the equation `h*Jh = J` read at `w` expresses the
+component `h_{w̄}` through `h_w`; the projection is therefore a continuous bijective homomorphism with continuous
+inverse. The component of `xι_w(h)x⁻¹` at `w` is `x_whx_w⁻¹` by the definition of `ι_w` (3.1). (c) If `(J, x)` is a
+space, `x_v` is an isometry from the standard form onto `h_J` at each finite place `v` and `x_w` one from `diag(s)` at
+each infinite place. Conversely, choose `y ∈ GL_n(E)` with `y*Jy = diag(a_1, …, a_n)`, `a_i ∈ E⁺^×` (an orthogonal
+basis of `(E^n, h_J)`). At the finite places `v` of `E⁺` that are unramified in `E`, at which every `a_i` is a unit
+and `y` and `y⁻¹` are integral (all but finitely many), each `a_i` is `ū_iu_i` for a unit `u_i` of `E ⊗ 𝒪_{E⁺,v}`,
+because the norm of an unramified quadratic extension of local fields maps units onto units (at a split place take
+`u_i = (a_i, 1)`); then `x_v = y·diag(u_1, …, u_n)⁻¹` is integral with integral inverse and `x_v*Jx_v = 1_n`. At the
+other finite places take any isometry `x_v` from the standard form onto `h_J`, and at each real place, by Sylvester's
+law of inertia, `x_w` with `x_w*Φ_w(J)x_w = diag(s)`. Then `x = (x_v)` lies in `GL_n(𝔸)`.
+
+Let `E` be a CM field and `J ∈ M_n(E)` invertible and hermitian. The *unitary group* `U(J)` of `(E^n, h_J)` over `E⁺`
+is the affine algebraic group over `E⁺` whose points over an `E⁺`-algebra `R` are the `g ∈ GL_n(E ⊗_{E⁺} R)` with
+`g*Jg = J` (in the notation of the Conventions, which is for rings with involution, the group `U(J)(E ⊗_{E⁺} R)`; the
+groups `U(diag s)(ℂ)` and `U(1_n)(𝔸_f)` of 3.1 are written in that notation), a closed subgroup of `Res_{E/E⁺}GL_n`.
+Its adelic points `U(J)(𝔸_{E⁺})`, with the topology of AdelicAlgebraicGroups §1.1, are read through
+`E ⊗_{E⁺} 𝔸_{E⁺} = 𝔸_E` (AdelicAlgebraicGroups §1.4) and `𝔸_E = ℂ^Φ × 𝔸_f` (2.1) as `{h ∈ GL_n(𝔸) : h*Jh = J}`, with
+`U(J)(E⁺)` embedded diagonally; `U(J)(E⁺ ⊗_ℚ ℝ)` and `U(J)(𝔸_{E⁺,f})` are its archimedean and finite adelic points.
+
+(a) Let `V = (J, x)` be a space with an adelic frame of signs `s`. Then `θ_V(g) = xgx⁻¹` is an isomorphism of
+topological groups from `G(s)` onto `U(J)(𝔸_{E⁺})`. It carries `Γ_V` onto `U(J)(E⁺)`, `G_∞(s)` onto `U(J)(E⁺ ⊗_ℚ ℝ)`,
+the compact group `K_∞` of 3.6 onto a maximal compact subgroup of it, `G_f` onto `U(J)(𝔸_{E⁺,f})`, `K₀` onto the
+stabiliser in `U(J)(𝔸_{E⁺,f})` of the `Ô`-lattice `x_fÔ^n`, which is the closure of `Λ_V` in `𝔸_f^n`, and the levels
+onto the open subgroups of that stabiliser. It carries the Haar measure of 3.1 to a Haar measure of `U(J)(𝔸_{E⁺})`
+and, through 8.1, the integral over `Γ_V\G(s)` of 1.1 to the integral over `U(J)(E⁺)\U(J)(𝔸_{E⁺})` against the
+quotient measure of that Haar measure and of counting measure on `U(J)(E⁺)`.
+
+(b) At a split finite place `w`, above the place `v` of `E⁺`, the projection of
+`U(J)(E⁺_v) ⊂ GL_n(E_w) × GL_n(E_{w̄})` to `GL_n(E_w)` is an isomorphism of topological groups, and `θ_V(ι_w(h))` is
+the element of `U(J)(E⁺_v)` with component `x_whx_w⁻¹` at `w`. So `T_{w,j}` is, through `θ_V`, the Hecke operator of
+the double coset of `x_w·diag(ϖ_w1_j, 1_{n−j})·x_w⁻¹` under `x_wGL_n(𝒪_w)x_w⁻¹` in `GL_n(E_w) ≅ U(J)(E⁺_v)`.
+
+(c) There is `x` with `(J, x)` a space with an adelic frame of signs `s` if and only if `(E^n, h_J)` is isometric to
+the standard form `⟨1, …, 1⟩` over `E ⊗_{E⁺} E⁺_v` at every finite place `v` of `E⁺` and has signature `(p, n − p)`,
+`p = #{i : s_i = 1}`, at every real place of `E⁺`.
+
+So the unitary groups of Layers 3–7 are those of the hermitian spaces over `E` of this kind, of the same signature at
+all real places, each with a chosen frame; a hermitian space over `E` that is not isometric to the standard form at
+some finite place, or that has different signatures at two real places, has no adelic frame.
+
+*Needs:* 2.1, 3.1, 3.2, 3.6, 8.1; AdelicAlgebraicGroups §1.1 (Affine points and integral models);
+AdelicAlgebraicGroups §1.4 (Restriction of scalars and concrete groups); Tau Ceti
+`TauCeti.PointTopology.isClosedEmbedding_comap_of_surjective`; Tau Ceti
+`IsDedekindDomain.FiniteAdeleRing.denseRange_algebraMap`.
+
+### 8.3 The height and algebraic heights
+
+*Origin:* this roadmap's own formulation: the comparison of the height `ht_V` of 4.2, the inverse first minimum of the
+moved lattice, with the heights of AdelicAlgebraicGroups §3.5 on `U(J)(𝔸_{E⁺})`: from above everywhere, and from below
+on Siegel sets.
+
+*Proof route:* (a) For `γ ∈ Γ_V`, `xγ = γ′x` with `γ′ ∈ U(J)(E⁺)`, and `y ↦ γ′⁻¹y` is a length-preserving bijection
+from `Λ_{V·γg}` onto `Λ_{V·g}`; right multiplication by `k` replaces `(xg)⁻¹y` by `k⁻¹(xg)⁻¹y`, and `k⁻¹` preserves
+`Ô^n` and the euclidean length. For `y` in a compact `C` there are an integer `M ≥ 1` with `M·y_f⁻¹Ô^n ⊂ Ô^n` and
+`D ≥ 1` with `‖y_∞⁻¹‖ ≤ D`; then `MΛ_{V·g} ⊂ Λ_{V·gy}`, lengths being multiplied by at most `MD`, so
+`λ(V·gy) ≤ MD·λ(V·g)`; the same for `y⁻¹`, which ranges over the compact set `C⁻¹`, applied at `gy`, gives the bound
+of (a). (b) Let `0 ≠ ξ ∈ Λ_{V·g}`, `η = (xg)⁻¹ξ`, and `ξ_i ≠ 0` a coordinate of `ξ`. The product formula for
+`ξ_i ∈ E^×` (normalised absolute values, the square of the absolute value at the complex places) gives
+`1 ≤ ∏_{v finite} max(1, ‖(xg)_v‖_v)·∏_w (‖(xg)_w‖·‖ξ‖_{V·g})²`, since `η_f ∈ Ô^n` and `|η_w| ≤ ‖ξ‖_{V·g}`; so
+`λ(V·g) ≥ H₁(xg)^{−1/(2f)}` with `H₁(y) = ∏_{v finite} max(1, ‖y_v‖_v)·∏_w max(1, ‖y_w‖)²` (entrywise maxima at the
+finite places, operator norms at the infinite ones). Then `H₁(xg) ≤ H₁(θ_V(g))·H₁(x)`, and on
+`U(J)(𝔸_{E⁺}) ⊂ GL_n(𝔸_E)` the function `H₁` is bounded by a power of `‖·‖` (AdelicAlgebraicGroups §3.5, the local
+comparison and the comparison of heights). (c) If `U(J)` is anisotropic over `E⁺`, a Siegel set is compact (`A₀` is
+trivial, `U(J)` having no split central torus), so `‖·‖` is bounded on it, and (c) holds because `ht_V ≥ 1`. Otherwise
+a minimal parabolic subgroup `P₀ = N₀M₀` of `U(J)` over `E⁺` is the stabiliser of a maximal flag `A₁ ⊂ ⋯ ⊂ A_r` of
+isotropic subspaces of `E^n` (`dim A_i = i`, `r ≥ 1` the Witt index of the Witt decomposition,
+HermitianFormsAndLattices §1.2), and `P₀` acts on the line `A₁` by a character `χ` with values in `Res_{E/E⁺}G_m`,
+through `M₀`. The relative root system is of type `C_r` or `BC_r`, and the rational character `N_{E/E⁺}∘χ` of `M₀`,
+twice the first coordinate character of the split torus of a Witt basis, is a combination of all the simple roots with
+positive coefficients; so `⟨N_{E/E⁺}∘χ, H⟩ ≥ c₁‖H‖ − c₂` on `{H ∈ 𝔞₀ : β(H − T₁) > 0 for all β ∈ Δ₀}`. Let
+`θ_V(g) = pak ∈ 𝔖(T₁, ω)` and `0 ≠ e ∈ A₁`. The vectors `te`, `t ∈ E`, satisfy `(xg)⁻¹te = t·χ(pa)⁻¹·x⁻¹k⁻¹e`; as `p`
+and `k` range over compact sets and `|χ(p)|_{𝔸_E} = 1` on `N₀(𝔸)M₀(𝔸)¹`, there are a fractional ideal `𝔞` such that
+`te ∈ Λ_{V·g}` for every `t ∈ 𝔞`, and `D` with `‖te‖_{V·g} ≤ D·max_w |t_w|·|χ(pa)_w|⁻¹`. Minkowski's theorem 4.1 (a),
+for `n = 1` and the idele with components `d₀·|χ(pa)_w|` at the infinite places and a local generator of `𝔞` at the
+finite places, gives `0 ≠ t ∈ 𝔞` with `|t_w| < d₀·|χ(pa)_w|` at every `w`, where `d₀ > 0` is given by
+`d₀^{2f}·∏_w |χ(pa)_w|² = 2·(2rd_E)^f·N(𝔞)`. As `|χ(pa)|_{𝔸_E} = |χ(a)|_{𝔸_E} = exp⟨N_{E/E⁺}∘χ, H₀(a)⟩` and
+`|χ(p_f)|_f` stays in a compact subset of `(0, ∞)`, this gives `λ(V·g) ≤ D′·exp(−(c₁‖H₀(a)‖ − c₂)/(2f))`; with
+`‖pak‖ ≤ C·exp(C‖H₀(a)‖)` (AdelicAlgebraicGroups §3.5, heights on Siegel sets) this is (c). (d) The implications from
+4.2 to the usual notions follow from (b) for moderate growth and from (c) for rapid decay. For the converse
+implications, every `h ∈ U(J)(𝔸_{E⁺})` is `γh′` with `γ ∈ U(J)(E⁺)` and `h′` in one Siegel set `𝔖₀`
+(AdelicAlgebraicGroups §3.4, Siegel sets cover); `F` and `ht_V` are left `Γ_V`-invariant, and (c) on `𝔖₀` bounds
+`‖h′‖^m` by a power of `ht_V`, while (b) bounds `‖h′‖^{−N}` by a negative power of `ht_V`.
+
+Let `E` be a CM field, `V = (J, x)` a space with an adelic frame of signs `s`, `θ_V` and `U(J)` as in 8.2, and `‖·‖` a
+height on `U(J)(𝔸_{E⁺})` in the sense of AdelicAlgebraicGroups §3.5. Siegel sets `𝔖(T₁, ω)` of `U(J)` are those of
+AdelicAlgebraicGroups §3.4, for a minimal parabolic subgroup of `U(J)` over `E⁺` and an admissible maximal compact
+subgroup of `U(J)(𝔸_{E⁺})` (AdelicAlgebraicGroups §3.1).
+
+(a) `ht_V(γgk) = ht_V(g)` for `γ ∈ Γ_V`, `g ∈ G(s)` and `k ∈ K_∞ × K₀` (3.6). For every compact `C ⊂ G(s)` there is
+`c_C ≥ 1` with `ht_V(gy) ≤ c_C·ht_V(g)` for all `g ∈ G(s)` and `y ∈ C`.
+
+(b) There are `C, A > 0` with `ht_V(g) ≤ C·‖θ_V(g)‖^A` for every `g ∈ G(s)`.
+
+(c) For every Siegel set `𝔖` there are `c, a > 0` with `ht_V(g) ≥ c·‖θ_V(g)‖^a` whenever `θ_V(g) ∈ 𝔖`.
+
+(d) Let `F` be a left `Γ_V`-invariant function on `G(s)`. Then `F` has moderate growth in the sense of 4.2 if and only
+if `|F(θ_V⁻¹(h))| ≤ C‖h‖^m` on `U(J)(𝔸_{E⁺})` for some `C` and `m`, which is the bound of moderate growth of
+ArithmeticLocallySymmetricSpaces ALS.F.6 for `F∘θ_V⁻¹`; and `F` has rapid decay in the sense of 4.2 if and only if
+`‖·‖^N·|F∘θ_V⁻¹|` is bounded on every Siegel set for every `N ≥ 0`.
+
+The bound of (c) does not hold on all of `G(s)`: `ht_V` is constant on `Γ_V` by (a), while `‖·‖` is unbounded on
+`U(J)(E⁺)`, which is infinite (it contains the scalars `a/ā`, `a ∈ E^×`) and meets each sublevel set of `‖·‖` in a
+finite set (AdelicAlgebraicGroups §3.5).
+
+*Needs:* 2.1, 3.1, 3.6, 4.1, 4.2, 8.2; HermitianFormsAndLattices §1.2 (the Witt decomposition); AdelicAlgebraicGroups
+§3.1 (Rational parabolics and Iwasawa integration); AdelicAlgebraicGroups §3.4 (Adelic reduction and arithmetic
+quotients); AdelicAlgebraicGroups §3.5 (Algebraic heights); ArithmeticLocallySymmetricSpaces ALS.F.6 (Automorphic
+forms, constant terms and cusp forms).
+
+### 8.4 Hecke operators, level algebras and the Hecke algebra
+
+*Origin:* this roadmap's own formulation: the comparison of the level algebras of 7.1 and the Hecke operators of 1.4
+with the convolution algebra of compactly supported bi-invariant functions and the double-coset ring of
+SmoothRepresentationsOfLocalGroups §SR.1.2, acting on invariants as in AutomorphicFormsOnReductiveGroups §0.6;
+AbelianSchemesWithThetaStructuresAndTheirCohomology §10.5 states the same comparison for the group-ring Hecke algebra
+of that roadmap.
+
+*Proof route:* (a) In the representation of `G` on the finitely supported functions on `G/K` by left translation, the
+point mass `δ_K` at the coset `K` is `K`-fixed and `a` sends it to `a ⋆ 1_K`, read as a function on `G/K`; so
+`a ∈ 𝔄(K)` forces `a ⋆ 1_K` to be left `K`-invariant, and `a` acts by `0` on all `K`-fixed vectors only if
+`a ⋆ 1_K = 0`. Conversely, for `v ∈ W^K`, `π(a)v = ∑_b c_bπ(b)v` depends only on the cosets `bK`, so it equals
+`∑_{gK}(a ⋆ 1_K)(g)π(g)v`, which is `K`-fixed when `a ⋆ 1_K` is left `K`-invariant. (b) With `vol(K) = 1`,
+`1_{gK} ∗ f = f(g⁻¹·)` for a left `K`-invariant `f`; so `(a ⋆ 1_K) ∗ (b ⋆ 1_K) = (ab) ⋆ 1_K` for `b ∈ 𝔄(K)`, and
+`1 ⋆ 1_K = 1_K`. A compactly supported `K`-bi-invariant `f` is `∑_i f(g_i)1_{g_iK}` over finitely many cosets, the
+image of `∑_i f(g_i)g_i`, which lies in `𝔄(K)` by (a). The kernel is described by (a), and
+`∫ 1_{gK}(y)π(y)v dy = π(g)v` for `v ∈ W^K`. SmoothRepresentationsOfLocalGroups §SR.1.2 identifies `1_K ∗ H(G) ∗ 1_K`
+with the double-coset ring through `1_{KgK} ↦ KgK`, with Shimura's product, and `1_{KgK}` acts on `W^K` by
+`v ↦ ∑_{xK⊂KgK} π(x)v`, which is the operator of `KgK` in AutomorphicFormsOnReductiveGroups §0.6. (c) is (a) and (b)
+for `G = G_f`.
+
+Let `G` be a group, `K ⊂ G` a subgroup, `𝔄(K) ⊂ ℂ[G]` the universal level algebra (7.1), and for
+`a = ∑_b c_b b ∈ ℂ[G]` let `a ⋆ 1_K = ∑_b c_b1_{bK}`, a right `K`-invariant function with finitely many cosets `gK` in
+its support.
+
+(a) `a ∈ 𝔄(K)` if and only if `a ⋆ 1_K` is left `K`-invariant. For such `a`, every complex representation `π` of `G`
+on `W` and every `v ∈ W^K`, `π(a)v = π(a ⋆ 1_K)v`, the Hecke operator of 1.4. An element `a ∈ 𝔄(K)` acts by `0` on
+`W^K` for every complex representation if and only if `a ⋆ 1_K = 0`.
+
+(b) Let `G` be locally profinite, `K` compact and open, `dg` the Haar measure with `vol(K) = 1`, and `ℋ(G, K)` the
+algebra of compactly supported `K`-bi-invariant functions under convolution `(f₁ ∗ f₂)(y) = ∫ f₁(z)f₂(z⁻¹y) dz`, with
+unit `1_K` (the algebra `1_K ∗ H(G) ∗ 1_K` of SmoothRepresentationsOfLocalGroups §SR.1.2). Then `a ↦ a ⋆ 1_K` is a
+surjective homomorphism of unital algebras from `𝔄(K)` onto `ℋ(G, K)`, whose kernel consists of the elements acting by
+`0` on `W^K` for every complex representation. For a smooth representation, `π(a ⋆ 1_K)` on `W^K` is the convolution
+operator `v ↦ ∫ (a ⋆ 1_K)(g)π(g)v dg`; and through the isomorphism `f ↦ ∑_D f(D)·D` of `ℋ(G, K)` onto the double-coset
+ring of `(G, K)` over `ℂ` of SmoothRepresentationsOfLocalGroups §SR.1.2 (with Shimura's product), it is the operator
+of `∑_D (a ⋆ 1_K)(D)·D` on invariants of AutomorphicFormsOnReductiveGroups §0.6, in which `KgK = ⊔_i b_iK` acts by
+`v ↦ ∑_i π(b_i)v`.
+
+(c) For a level `K`, an endomorphism of a space of `K`-fixed vectors of a representation of `G_f` acting as `a ∈ 𝔄(K)`
+(7.7, 7.10, 7.12, 7.13) is the operator of the Hecke function `a ⋆ 1_K ∈ ℋ(G_f, K)`, and every element of `ℋ(G_f, K)`
+is such a Hecke function.
+
+An element of `𝔄(K)` records representatives in the group algebra, which no action on `K`-fixed vectors sees: two
+elements with the same `a ⋆ 1_K` act in the same way on every `W^K`.
+
+*Needs:* 1.4, 7.1; SmoothRepresentationsOfLocalGroups §SR.1.2 (Level algebras and the double-coset ring);
+AutomorphicFormsOnReductiveGroups §0.6 (Hecke operators on invariants).
+
+### 8.5 Forms of parameter `l` and cusp forms with a discrete series at infinity
+
+*Origin:* this roadmap's own formulation: the comparison of the forms of type `e_l` of 5.1 with the cusp forms on
+`U(J)` in the sense of ArithmeticLocallySymmetricSpaces ALS.F.6 that are images of the lowest `K`-type of the discrete
+series of parameter `l`, through the rigidity of `c_λ` (HolomorphicDiscreteSeriesOfUnitaryGroups §6.1) and the
+identification of the representation it generates with a discrete series (HolomorphicDiscreteSeriesOfUnitaryGroups
+§9.3 (a), (d)).
+
+*Proof route:* Step 1, one unitary representation at a time. Let `π` be a strongly continuous unitary representation
+of `G_∞(s)` on a Hilbert space. For each `w` the operator `π(e_{l_w})` is self-adjoint, as
+`e_{l_w}(z⁻¹) = conj e_{l_w}(z)`, and idempotent (HolomorphicDiscreteSeriesOfUnitaryGroups §6.1 (a)), hence an
+orthogonal projector; these projectors commute, and `π(e_l)` is their product. Right derivatives along the factor at
+`w` of a vector `π(e_{l_w})u = d(l_w)∫ c_{l_w}(z⁻¹)π(z)u dz` fall on `c_{l_w}`, whose derivatives are integrable
+(HolomorphicDiscreteSeriesOfUnitaryGroups §5.4 (c)); so, by HolomorphicDiscreteSeriesOfUnitaryGroups §§5.2 (d), 5.4
+(b), such a vector is smooth for that factor, `K`-highest of the weight of the lowest `K`-type of `l_w`
+(HolomorphicDiscreteSeriesOfUnitaryGroups §§4.1 (c), 4.2 (b)), and an eigenvector of the Casimir operator with the
+eigenvalue of `c_{l_w}`; conversely HolomorphicDiscreteSeriesOfUnitaryGroups §6.1 (f), with `f = e_{l_w}`, shows that
+every such vector is fixed by `π(e_{l_w})`. Rigidity (HolomorphicDiscreteSeriesOfUnitaryGroups §6.1 (e)) at the place
+`w`, polarised, gives `⟨u, π(z_w)u′⟩ = ⟨u, u′⟩·c_{l_w}(z_w)` for `u, u′` in the image of `π(e_{l_w})`; as the factors
+at the other places commute with `π(e_{l_w})`, induction over the places gives `⟨u, π(z)u′⟩ = ⟨u, u′⟩·c_l(z)` for
+`u, u′` in the image of `π(e_l)`. A cyclic unitary representation is determined, up to a unitary equivalence matching
+the cyclic vectors, by the coefficient of its cyclic vector; so for `u ≠ 0` in that image there is an isometric
+intertwiner `π_l → π` sending `ζ_l` to `u/‖u‖`. For `π = π_l`, a vector of the image orthogonal to `ζ_l` is orthogonal
+to every `π_l(z)ζ_l`, so the image is `ℂζ_l`; an operator commuting with `π_l` commutes with `π_l(e_l)`, preserves
+`ℂζ_l` and is determined by its value there, so `π_l` is irreducible. Hence in general the image of `π(e_l)` is the
+set of the `T(ζ_l)` over the intertwiners `T : π_l → π`, and `T*T` is a scalar; at a single place this is the
+description of `π(e_λ)` in HolomorphicDiscreteSeriesOfUnitaryGroups §9.4 (a), (b), and the induction above extends it
+to the product over the places. Step 2, (a). `F = R(e_l)F`, so `F(gy) = ∫ e_l(y⁻¹z)F(gz) dz` for `y ∈ G_∞(s)`, with
+`e_l(y⁻¹z) = d_l·c_l(z⁻¹y)` (HolomorphicDiscreteSeriesOfUnitaryGroups §5.3 (c)); the derivatives in `y` fall on `c_l`,
+so `F` is smooth with bounded derivatives and an eigenvector of the centre with the eigenvalues it has on the
+coefficient `c_l` of `ζ_l` (HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (b), at each place), and `F` is right
+`K_∞`-finite, the right `K_∞`-translates of `c_l` lying in the span of the coefficients `z ↦ ⟨ζ_l, π_l(z)u⟩`, `u` in
+the finite-dimensional lowest `K_∞`-type. Through `θ_V`, the stabiliser in `U(J)` of a nonzero rational isotropic
+subspace `A` is a proper maximal parabolic subgroup over `E⁺`, every proper maximal parabolic subgroup is of this
+form, and its unipotent radical consists of the elements fixing `A` pointwise and acting trivially on `A^⊥/A`, which
+is the group `N_X` of 5.3 and 5.4 for `X` spanning `A`. With 8.1, 5.4 (b) is therefore the vanishing of the constant
+terms of `F∘θ_V⁻¹` along all proper maximal parabolic subgroups, which is cuspidality in the sense of
+ArithmeticLocallySymmetricSpaces ALS.F.6. Step 3, (b). By 8.1 and 8.2, `L²(Γ_V\G(s))` for the quotient integral of 1.1
+is `L²(U(J)(E⁺)\U(J)(𝔸_{E⁺}))`, a unitary representation of `G(s)`, and its cuspidal subspace and the `K_V`-fixed
+vectors of that subspace are stable under `G_∞(s)`. A form `F` of type `e_l` is bounded and cuspidal (a), hence lies
+there (finite volume, 4.3 (c)), and is fixed by `R(e_l)`, whose action on bounded continuous functions is the integral
+of 5.1; Step 1 gives `T` with `T(ζ_l) = F`. Conversely `T(ζ_l)` is fixed by `R(e_l)` and is a smooth, `K_∞`-finite
+vector of `L²_cusp(U(J))` fixed by `K_V` on which the centre acts by the infinitesimal character of `π_l`; by
+ArithmeticLocallySymmetricSpaces ALS.F.6 (iv) it is a cusp form, hence continuous and bounded (ALS.F.6 (iii)), so
+`T(ζ_l)∘θ_V` lies in `𝒜(V, e_l, K)`. `T` is determined by `T(ζ_l)`, as `ζ_l` is cyclic. Step 4, (c). `π_l^{K_∞-fin}`
+is the irreducible admissible `(𝔤, K_∞)`-module of a discrete series (HolomorphicDiscreteSeriesOfUnitaryGroups §9.3
+(a), (d); AutomorphicFormsOnReductiveGroups §2.4), generated by `ζ_l`. `T` carries it into smooth `K_∞`-finite vectors
+of `L²_cusp(U(J))^{K_V}` on which the centre acts by a character, which are cusp forms by ALS.F.6 (iv). Conversely,
+for a `(𝔤, K_∞)`-homomorphism `S`, `S(ζ_l)` is a smooth vector of `L²_cusp(U(J))^{K_V}` that is, at every place,
+`K`-highest of the weight of the lowest `K`-type and a Casimir eigenvector with the eigenvalue of `c_{l_w}`, as `ζ_l`
+is (Step 1); so it is fixed by `R(e_l)` (Step 1), it is `T(ζ_l)` for some `T` by (b), and `S` agrees with the
+restriction of `T` on the generator `ζ_l`, hence everywhere. Step 5, (d). By AutomorphicFormsOnReductiveGroups §4.2,
+`𝒜_0(U(J))` (the split centre `A_∞` of `U(J)` is trivial) is a direct sum of copies of the cuspidal automorphic
+representations `Π ≅ Π_∞ ⊗ Π_f`, each with multiplicity `m_cusp(Π)`; homomorphisms from the cyclic module
+`π_l^{K_∞-fin}` commute with this direct sum, and `Hom_{(𝔤,K_∞)}(π_l^{K_∞-fin}, Π_∞ ⊗ Π_f^{K_V})` is `Π_f^{K_V}`, a
+finite-dimensional space, if `Π_∞ ≅ π_l^{K_∞-fin}`, and `0` otherwise, by Schur's lemma for irreducible admissible
+`(𝔤, K_∞)`-modules. Finiteness: 5.4 (e).
+
+Let `E` be a CM field, `V = (J, x)` a space with an adelic frame of signs `s`, `θ_V` as in 8.2, and `l = (l_w)` with
+each `l_w` of gap `500n³` for `s`, so that `e_l` is a cusp kernel (5.2 (a)). On `G_∞(s)` put
+`c_l(z) = ∏_w c_{l_w}(z_w)` and `d_l = ∏_w d(l_w)`, so that `e_l = d_l·conj c_l`. Let `π_l` be the right regular
+representation of `G_∞(s)` on the closed subspace of `L²(G_∞(s))` spanned by the right translates of `c_l`, and
+`ζ_l = √d_l·c_l`, a unit vector with `⟨ζ_l, π_l(z)ζ_l⟩ = c_l(z)` (HolomorphicDiscreteSeriesOfUnitaryGroups §5.4 (d),
+(e), at each place). `π_l` is irreducible, and it is the tensor product over `w` of the discrete series of
+`U(diag s) ≅ U(p, n − p)` whose coefficient at a unit vector of the lowest `K`-type is `c_{l_w}`, namely the discrete
+series of Harish-Chandra parameter `l_w/2` (HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (a), (d), which apply
+because gap `500n³` is large gap `0` in the sense of its §4.1 (c)), `ζ_l` lying in its lowest `K_∞`-type, `K_∞` the
+group of 3.6; `π_l^{K_∞-fin}` is its `(𝔤, K_∞)`-module of `K_∞`-finite vectors, `𝔤` the complexified Lie algebra of
+`G_∞(s)`. All of this is read on `U(J)` through `θ_V`. For a level `K` put `K_V = θ_V(K)`. `𝒜_0(U(J))` is the space of
+cusp forms on `U(J)`, and `L²_cusp(U(J))` the cuspidal subspace of `L²(U(J)(E⁺)\U(J)(𝔸_{E⁺}))` for the quotient
+measure of 8.2 (a) (ArithmeticLocallySymmetricSpaces ALS.F.6).
+
+(a) Every `F ∈ 𝒜(V, e_l, K)` is smooth, bounded with all its right derivatives, right `K_∞`-finite, and an eigenvector
+of the centre of the enveloping algebra of `𝔤` with the infinitesimal character of `π_l`; and it is cuspidal, the
+groups `N_X` of 5.4 being, through `θ_V`, the unipotent radicals of the proper maximal parabolic subgroups of `U(J)`
+over `E⁺`. So `F∘θ_V⁻¹` is a cusp form of level `K_V` in the sense of ArithmeticLocallySymmetricSpaces ALS.F.6.
+
+(b) `T ↦ T(ζ_l)∘θ_V` is a linear bijection from the continuous `G_∞(s)`-equivariant linear maps
+`T : π_l → L²_cusp(U(J))^{K_V}` onto `𝒜(V, e_l, K)`. Every nonzero such `T` is a positive multiple of an isometry, and
+`R(e_l)` acts on `L²_cusp(U(J))^{K_V}` as the orthogonal projector onto the image of this bijection.
+
+(c) Restriction to `π_l^{K_∞-fin}` identifies these maps with `Hom_{(𝔤,K_∞)}(π_l^{K_∞-fin}, 𝒜_0(U(J))^{K_V})`. So
+`S ↦ S(ζ_l)∘θ_V` is a linear bijection from `Hom_{(𝔤,K_∞)}(π_l^{K_∞-fin}, 𝒜_0(U(J))^{K_V})` onto `𝒜(V, e_l, K)`, and
+it commutes with right translation by `G_f` (acting on `𝒜_0(U(J))` through `θ_V`), hence with the actions of `𝔄(K)`
+and of `ℋ(G_f, K)` (8.4).
+
+(d) As a module over `ℋ(G_f, K)`, `𝒜(V, e_l, K) ≅ ⊕_Π (Π_f^{K_V})^{⊕m_cusp(Π)}`, the sum over the isomorphism classes
+of cuspidal automorphic representations `Π ≅ Π_∞ ⊗ Π_f` of `U(J)` with `Π_∞ ≅ π_l^{K_∞-fin}`, `m_cusp(Π)` their
+cuspidal multiplicities (AutomorphicFormsOnReductiveGroups §4.2), `Π_f` read on `G_f` through `θ_V`. Only finitely
+many summands are nonzero.
+
+So a form of parameter `l` is the image of the vector `ζ_l` of the lowest `K_∞`-type of `π_l` under an intertwiner
+into the cusp forms, and by (d) it is the sum of its components in the copies of the `Π`, each of which is a form of
+parameter `l`. With all signs `+1`, `G_∞(s)` is compact, `π_l` is finite-dimensional and `U(J)` has no proper
+parabolic subgroup over `E⁺` (6.4, In standard terms).
+
+*Needs:* 1.1, 3.6, 4.3, 5.1, 5.2, 5.3, 5.4, 8.1, 8.2, 8.4; HolomorphicDiscreteSeriesOfUnitaryGroups §§4.1 (c), 4.2
+(b), 5.2 (d), 5.3 (c), 5.4, 6.1 (a), (e), (f) (parameters and `K`-highest vectors, the Casimir eigenvalue, inversion,
+decay and the `L²` model of `c_λ`, idempotence and rigidity); HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (a), (b),
+(d) (the discrete series `π_λ` generated by `c_λ` for a large gap, its infinitesimal character and its lowest `K`-type
+vector), §9.4 (a), (b) (`π(e_λ)` in a unitary representation on a Hilbert space); ArithmeticLocallySymmetricSpaces
+ALS.F.6 (Automorphic forms, constant terms and cusp forms); AutomorphicFormsOnReductiveGroups §2.4 (Temperedness,
+discrete series and Langlands quotients); AutomorphicFormsOnReductiveGroups §4.2 (Cuspidal globalization and actual
+discrete occurrences).
+
+### 8.6 Algebraic modular forms with `p`-adic coefficients, and the gauge
+
+*Origin:* this roadmap's own formulation: the comparison of the algebraic forms of 6.1 on the standard definite space,
+with complex values, and of their gauge (6.6), with the level algebraic modular forms with `p`-adic coefficient action
+of AutomorphicFormsOnReductiveGroups §7.4 and their integral structure.
+
+*Proof route:* (a) For `γ ∈ Γ`, `γ_{(τ)}` is the matrix `ι(Φ_τ(γ̄))`, and in the minor-product basis the matrix
+coefficients of `ρ_{κ,e}` are polynomials with integer coefficients in the entries and the inverse of the determinant,
+compatible with every ring homomorphism (IntegralRepresentationsOfGeneralLinearGroups §§1.1 (f), 1.3 (a), (b)), so
+`ι(ρ(γ_∞)ξ) = ρ_ι(γ)ι(ξ)` and `φ_ι(γh) = ρ_ι(h)⁻¹ρ_ι(γ)⁻¹ρ_ι(γ)ι(φ(h)) = φ_ι(h)`; for `u ∈ K`,
+`φ_ι(hu) = ρ_ι(u)⁻¹φ_ι(h)`. The map is `ι`-semilinear and injective. For representatives `c_i` of the finite set
+`Γ\G_f/K` (4.4 (b)), the evaluation equivalence of AutomorphicFormsOnReductiveGroups §7.4 identifies `S(K, W_ι)` with
+`∏_i W_ι^{K ∩ c_i⁻¹Γc_i}`, and `φ ↦ (φ(c_i))_i` identifies the forms of level `K` with the product of the invariants
+in `W` of the finite stabilisers `Γ ∩ c_iKc_i⁻¹` (injective by 6.3 (a); surjective because `φ(γ_fc_iu) = ρ(γ_∞)ξ_i`,
+`γ ∈ Γ`, `u ∈ K`, is well defined for an invariant `ξ_i`); on the factor of `c_i` the map is `ξ ↦ ρ_ι(c_i)⁻¹ι(ξ)`, and
+invariants of a finite group commute with the extension of scalars along `ι`, the averaging projector having algebraic
+entries that `ι` carries to those of the `p`-adic one. For the Hecke operators, the image of `∑_i φ(·g_i)` is
+`∑_i ρ_ι(·)⁻¹ι(φ(·g_i)) = ∑_i ρ_ι(g_i)φ_ι(·g_i)`. (b) For `u ∈ G_f^{(p)}` the components at the `𝔭_τ` are integral
+with integral inverse, so `ρ_ι(u)` preserves `W_ι°`. By the definition of 6.6, `γ_h(ξ)` is the largest absolute value
+of a coordinate of `ρ_ι(h)⁻¹ι(ξ)` in the minor-product basis; if it is `|c₀|_p` for a coordinate `c₀`, then
+`ι(ξ) ∈ c·ρ_ι(h)W_ι°` holds for `c = c₀` and fails for `|c|_p < |c₀|_p`. So `γ_h(φ(h)) ≤ 1` says `φ_ι(h) ∈ W_ι°`. For
+`g ∈ G_f^{(p)}`, the representatives `g_i ∈ KgK` lie in `G_f^{(p)}`, as `K ⊂ K₀ ⊂ G_f^{(p)}`.
+
+Let `E` be a CM field, `(κ, e)` a weight with representation `ρ_{κ,e}` on `W = W_{κ,e}` (6.1), `W_ℤ ⊂ W` the `ℤ`-span
+of the minor-product basis, `p` a prime and `ι : ℂ → ℂ_p` a ring homomorphism. For each infinite place `τ` let `𝔭_τ`
+be the prime of `E` above `p` induced by the embedding `x ↦ ι(Φ_τ(x̄))`, and for `h ∈ G_f` let `h_{(τ)} ∈ GL_n(ℂ_p)`
+be the image of the component of `h` at `𝔭_τ` under the continuous extension of that embedding to `E_{𝔭_τ}`. Put
+`W_ι = ℂ_p ⊗ W_ℤ ⊃ W_ι° = 𝒪_{ℂ_p} ⊗ W_ℤ`, with `G_f` acting on `W_ι` by `ρ_ι(h) = ρ_{κ,e}((h_{(τ)})_τ)`, the action
+through which 6.6 defines the gauge. By 8.2, `G_f` is the group of finite adelic points of the definite unitary group
+`U(1_n)` over `E⁺`, and `Γ = U(1_n)(E⁺)` is embedded diagonally. For an algebraic form `φ` of weight `(κ, e)` on `I_n`
+put `φ_ι(h) = ρ_ι(h)⁻¹ι(φ(h))`, `ι` applied to the coordinates in the minor-product basis.
+
+(a) For a level `K`, `φ ↦ φ_ι` is an injective `ι`-semilinear map from the algebraic forms of level `K` into the
+module `S(K, W_ι) = {f : G_f → W_ι : f(γhu) = ρ_ι(u)⁻¹f(h) for γ ∈ Γ, u ∈ K}` of AutomorphicFormsOnReductiveGroups
+§7.4 for `U(1_n)`, with coefficients `W_ι` on which `K` acts through `ρ_ι` (through the places `𝔭_τ`); its
+`ℂ_p`-linear extension from `ℂ_p ⊗_{ι,ℂ}` (forms of level `K`) to `S(K, W_ι)` is an isomorphism. It is the change of
+values of §7.4 from Gross's rational model, which the forms of 6.1 are, for the coefficient representation
+`γ ↦ ρ_{κ,e}((Φ_τ(γ̄))_τ)` extended along `ι`. For `g ∈ G_f` with `KgK = ⊔_i g_iK`, the image of `∑_i φ(·g_i)` is
+`∑_i ρ_ι(g_i)φ_ι(·g_i)`, the Hecke operator of `KgK` in §7.4 for the extension `ρ_ι` of the coefficient action to
+`G_f`.
+
+(b) `ρ_ι(G_f^{(p)})` preserves `W_ι°` (`G_f^{(p)}` as in 6.6), and for `h ∈ G_f` and `ξ ∈ W`,
+`γ_h(ξ) = min{|c|_p : c ∈ ℂ_p, ι(ξ) ∈ c·ρ_ι(h)W_ι°}`, the gauge in the sense of convex geometry (the Minkowski
+functional) of the lattice `ρ_ι(h)W_ι°` at `ι(ξ)`. A form `φ` of level `K` has `γ_h(φ(h)) ≤ 1` at every `h ∈ G_f` if
+and only if `φ_ι ∈ S(K, W_ι°)`, the module of §7.4 for the lattice `W_ι°` (for one place,
+IntegralRepresentationsOfGeneralLinearGroups §7.1 (c) identifies the lattice `W_ℤ` with the Weyl lattice of the
+highest weight; for several places `W_ℤ` is the tensor product over `τ` of these lattices); for `g ∈ G_f^{(p)}` the
+Hecke operator of `KgK` preserves these forms.
+
+*Needs:* 1.4, 4.4, 6.1, 6.3, 6.6, 8.2; IntegralRepresentationsOfGeneralLinearGroups §§1.1, 1.2, 1.3 (a), (b) (the
+polynomial model over every ring, the basis of products of minors, Schur matrices with integer polynomial entries);
+IntegralRepresentationsOfGeneralLinearGroups §7.1 (c) (The polynomial model and the Weyl modules);
+AutomorphicFormsOnReductiveGroups §7.4 (Algebraic modular forms with their actual coefficient action).
+
+### 8.7 Test functions cuspidal at a split place and supercusp forms
+
+*Origin:* this roadmap's own formulation: the comparison of cuspidality at a split place (7.1), a condition on sums
+over the residue field, with supercusp forms on `GL_n(E_w)`, the compactly supported locally constant functions whose
+integrals along the unipotent radicals of proper parabolic subgroups vanish.
+
+*Proof route:* (a) Changing the lift `ℓ` of 7.1 at a single `Z₀` by right multiplication with some `k ∈ K_w(1)` and
+subtracting the two sums gives `φ(gι_w(ℓ(Z₀))) = φ(gι_w(ℓ(Z₀)k))` for every `g`, so `φ` is right
+`ι_w(K_w(1))`-invariant. The sum of 7.1 is then `q_w^{n² − |T|(n−|T|)}·∑_{u∈N_T(k_w)} ψ_g(ut)`; replacing `g` by
+`gι_w(ỹ)`, `ỹ` a lift of `y`, turns `ψ_g` into `ψ_g(y·)`, and `N_T(k_w)` is the unipotent radical of the stabiliser of
+the coordinate subspace of `T`. The unipotent radical of every proper parabolic subgroup of `GL_n` over `k_w` contains
+a `GL_n(k_w)`-conjugate of some `N_T(k_w)` as a subgroup, so sums over it are sums of such sums. The converse reads
+the same computation backwards. (b) Let `N` be the unipotent radical of a proper parabolic subgroup `P` of `GL_n` over
+`E_w`. As `GL_n(𝒪_w)` acts transitively on the flags of each type, `P` is conjugate under `GL_n(𝒪_w)` to the
+stabiliser of a flag of coordinate subspaces, and `GL_n(E_w) = P(E_w)GL_n(𝒪_w)` (Iwasawa decomposition). Write
+`z = rk` with `r ∈ P(E_w)`, `k ∈ GL_n(𝒪_w)`, substitute `n ↦ rnr⁻¹` (which multiplies the Haar measure of `N` by a
+positive constant), absorb `yr` and the conjugating element into `g`, and decompose `N(E_w)` into the finitely many
+cosets `n₀N(𝒪_w)` that meet the support; the integral becomes a sum of integrals `∫_{N(𝒪_w)} φ(g′ι_w(nk)) dn`. As
+`φ(g′ι_w(·))` is right `K_w(1)`-invariant on `GL_n(𝒪_w)` and `N(𝒪_w)` maps onto `N(k_w)` with fibres of equal measure,
+each is a positive multiple of `∑_{u∈N(k_w)} ψ_{g′}(uk̄) = 0`. (c) The condition of (b) is two-sided, so right
+translates by elements of `ι_w(GL_n(E_w))` keep it. If all of them were cuspidal at `w`, then by (a) `φ` would be
+right invariant under `ι_w(hK_w(1)h⁻¹)` for every `h ∈ GL_n(E_w)`; these groups contain the elementary matrices
+`1 + tE_{ij}`, `t ∈ E_w`, `i ≠ j` (conjugate `1 + ϖ_wsE_{ij}` by diagonal matrices), which generate `SL_n(E_w)`, so
+`φ` would be right invariant under the closed noncompact subgroup `ι_w(SL_n(E_w))` (3.2 (b)), and a nonzero `φ` would
+not have compact support.
+
+Let `w` be a split finite place of the CM field `E`, `n ≥ 2`, `K_w(1) = 1 + ϖ_wM_n(𝒪_w)`, and `φ` a test function on
+`G_f`. A *supercusp form* on `GL_n(E_w)` is a locally constant compactly supported function `f` with
+`∫_{N(E_w)} f(ynz) dn = 0` for all `y, z ∈ GL_n(E_w)` and the unipotent radical `N` of every proper parabolic subgroup
+of `GL_n` over `E_w`; a *cuspidal function* on `GL_n(k_w)` is a function `ψ` with `∑_{u∈N(k_w)} ψ(yuz) = 0` for all
+`y, z ∈ GL_n(k_w)` and the unipotent radical `N` of every proper parabolic subgroup of `GL_n` over `k_w`.
+
+(a) `φ` is cuspidal at `w` (7.1) if and only if `φ` is right invariant under `ι_w(K_w(1))` and, for every `g ∈ G_f`,
+the function `ψ_g` on `GL_n(k_w)` induced by `t ↦ φ(g·ι_w(t))`, `t ∈ GL_n(𝒪_w)`, is a cuspidal function.
+
+(b) If `φ` is cuspidal at `w`, then for every `g ∈ G_f` the function `z ↦ φ(g·ι_w(z))` on `GL_n(E_w)` is a supercusp
+form.
+
+(c) The converse of (b) fails: if `φ ≠ 0` is cuspidal at `w`, then some right translate `φ(·ι_w(h))`, `h ∈ GL_n(E_w)`,
+has the property of (b) and is not cuspidal at `w`.
+
+So the test functions cuspidal at `w` of 7.2, 7.5, 7.6, 7.10, 7.12 and 7.13 are supercusp forms at `w`, of the kind
+described in (a): right invariant under the principal congruence subgroup at `w` and given there by cuspidal functions
+on `GL_n(k_w)`; 7.5 states its vanishing for that kind.
+
+*Needs:* 3.1, 3.2, 7.1.
+
+### 8.8 Traces on forms of parameter `l` and cuspidal automorphic representations
+
+*Origin:* this roadmap's own formulation: the traces of 7.7, 7.10 and 7.13 written through the cuspidal automorphic
+representations of `U(J)` whose archimedean component is the discrete series of parameter `l`, with their
+multiplicities.
+
+*Proof route:* (a) The isomorphism of 8.5 (c), (d) comes from the decomposition of `𝒜_0(U(J))` into copies of the `Π`,
+which `G_f` and hence `a` preserve; so `T` acts on `𝒜(V, l, K) ≅ ⊕_Π (Π_f^{K_V})^{⊕m_cusp(Π)}` by the restriction of
+`Π_f(a)` to each `Π_f^{K_V}`, which `Π_f(a)` preserves. With `vol(K) = 1`, `Π_f(a ⋆ 1_K) = Π_f(a)Π_f(1_K)`, and
+`Π_f(1_K)` is the projector onto `Π_f^{K_V}`; so the trace of `Π_f(a ⋆ 1_K)` on `Π_f` is that of `Π_f(a)` on
+`Π_f^{K_V}`. For `a ∈ 𝔄(K)` this is 8.4 (a). The sum is finite by 5.4 (e). (b) is 7.7 (b) for the cusp kernel `e_l` of
+order `13n³` (5.2 (a)), with `vol(K) = [K₀ : K]⁻¹` (4.4 (c)), and (a). (c) is (a) for `V` and for `V′`; on the finite
+adelic points, where both are defined through `G_f`, `θ_{V′}∘θ_V⁻¹` is an isomorphism from those of `U(J)` onto those
+of `U(J′)` (8.2 (a)); the two groups are inner forms of each other.
+
+Let `V = (J, x)` be a space with an adelic frame of signs `s`, `l` with each `l_w` of gap `500n³` for `s`, `π_l` as in
+8.5, `K` a level, and `a ∈ ℂ[G_f]` such that right translation by `a` preserves `𝒜(V, l, K)` (for instance `a ∈ 𝔄(K)`,
+7.1), with `T` the endomorphism of `𝒜(V, l, K)` acting as `a`. For a cuspidal automorphic representation
+`Π ≅ Π_∞ ⊗ Π_f` of `U(J)` (8.5 (d)), `Π_f` read on `G_f` through `θ_V`, let `Π_f(a ⋆ 1_K) = ∫ (a ⋆ 1_K)(g)Π_f(g) dg`
+(`vol(K) = 1`), an operator of finite rank.
+
+(a) `tr T = ∑_Π m_cusp(Π)·tr Π_f(a ⋆ 1_K)`, the sum over the isomorphism classes of cuspidal automorphic
+representations `Π` of `U(J)` with `Π_∞ ≅ π_l^{K_∞-fin}`; only finitely many terms are nonzero.
+
+(b) If each `l_w` has gap `513n³` for `s`, then `J^V(e_l, a ⋆ 1_K) = [K₀ : K]⁻¹·∑_Π m_cusp(Π)·tr Π_f(a ⋆ 1_K)`, the
+sum as in (a): the geometric side of 7.1 equals this spectral sum.
+
+(c) Let `V′ = (J′, x′)`, `s′`, `l`, `K`, `a` and `w` be as in 7.13, or as in 7.10 (b). The conclusion `tr T = tr T′`
+there is equivalent to `∑_Π m_cusp(Π)·tr Π_f(a ⋆ 1_K) = ∑_{Π′} m_cusp(Π′)·tr Π′_f(a ⋆ 1_K)`, the second sum over the
+cuspidal automorphic representations `Π′` of `U(J′)` whose archimedean component is `π_l^{K_∞-fin}` for the signs
+`s′`, `Π′_f` read on `G_f` through `θ_{V′}`. In 7.13, `a ∈ 𝔄(K)`, so by 8.4 and 8.7 the functions `a ⋆ 1_K` there are
+the elements of `ℋ(G_f, K)` cuspidal at `w`, and they are supercusp forms at `w`.
+
+The equality of (c) concerns these sums, for test functions cuspidal at `w`; it is not asserted for the terms of a
+single `Π`, nor for all of `ℋ(G_f, K)`.
+
+*Needs:* 4.4, 5.2, 5.4, 7.1, 7.7, 7.10, 7.13, 8.2, 8.4, 8.5, 8.7; AutomorphicFormsOnReductiveGroups §4.2 (Cuspidal
+globalization and actual discrete occurrences).
 
 ## Results taken from other roadmaps
 
@@ -1648,11 +2291,34 @@ frames of signs `s`, `s′`, and `l` with each `l_w` of gap `500n³ + 10n⁵` fo
 - Measures on the real unitary groups, the coefficients `c_λ` with their formal degrees and the gap condition:
   HolomorphicDiscreteSeriesOfUnitaryGroups §§1.1, 1.4, 4.1 (Conventions, 3.1, 5.1); idempotence, decay and moments of
   `e_λ`: its §§5.4, 6.1 (5.2); the vanishing theorem for minimal idempotent kernels: its §6.2 (5.3); `c_λ` on `U(n)`:
-  its §5.3 (6.2); Weyl characters and elliptic orbital integrals: its §§7.1, 7.4 (7.10).
+  its §5.3 (6.2); Weyl characters and elliptic orbital integrals: its §§7.1, 7.4 (7.10); `K`-highest vectors, the
+  Casimir eigenvalue, the `L²` model of `c_λ` and the rigidity of the coefficient: its §§4.1, 4.2, 5.2–5.4, 6.1 (8.5);
+  the comparison of `c_λ`, `d(λ)` and `e_λ` with the discrete series: its §9.3 (a), (b), (d), §9.4 (a), (b), §9.5 (a)
+  (Conventions, 8.5).
+- The Witt decomposition of a hermitian space over a field: HermitianFormsAndLattices §1.2 (3.5, 8.3); Landherr's
+  theorem: its §3.1 (3.3).
+- Quotient measures on homogeneous spaces and the unfolding identity: AnalyticNumberTheoryPartII §5.3k (Quotient
+  measures and the two quotient conventions) (1.1, 8.1).
+- Adelic points of affine algebraic groups with their topology, restriction of scalars and the general linear group:
+  AdelicAlgebraicGroups §1.1 (Affine points and integral models), §1.4 (Restriction of scalars and concrete groups)
+  (8.2); rational parabolic subgroups and admissible maximal compact subgroups, Siegel sets and their covering,
+  compactness of the quotients of anisotropic groups, and algebraic heights: its §3.1 (Rational parabolics and Iwasawa
+  integration), §3.4 (Adelic reduction and arithmetic quotients), §3.5 (Algebraic heights) (4.4, 8.3).
+- Automorphic forms, constant terms, cusp forms, their rapid decay and finite dimension, and the cuspidal spectrum:
+  ArithmeticLocallySymmetricSpaces ALS.F.6 (Automorphic forms, constant terms and cusp forms) (5.1, 5.4, 8.3, 8.5).
+- Hecke operators on invariants: AutomorphicFormsOnReductiveGroups §0.6 (Hecke operators on invariants) (1.4, 8.4);
+  discrete series: its §2.4 (Temperedness, discrete series and Langlands quotients) (8.5); cuspidal automorphic
+  representations and their multiplicities: its §4.2 (Cuspidal globalization and actual discrete occurrences) (8.5,
+  8.8); algebraic modular forms with their coefficient action, and their automorphic realisation: its §7.4 (Algebraic
+  modular forms with their actual coefficient action), §7.5 (Finite stabilizers, base change and automorphic
+  realization) (6.1, 6.4, 8.6).
+- The convolution Hecke algebra of a compact open subgroup and the double-coset ring:
+  SmoothRepresentationsOfLocalGroups §SR.1.2 (Level algebras and the double-coset ring) (1.4, 7.1, 8.4).
 - The weight representations in the model of products of minors, with the integral Gram matrix, irreducibility, Schur
   orthogonality and the highest coefficient: IntegralRepresentationsOfGeneralLinearGroups §§1.1–1.3, 2.1, 2.3 (c), 2.4
   (Conventions, 6.1, 6.2, 6.6); integral branching with multiplicity one: its §3.4 (6.5); Green's cuspidal functions,
-  labels and their idempotents: its §§4.4, 5.3 (Conventions, 7.2).
+  labels and their idempotents: its §§4.4, 5.3 (Conventions, 7.2); the comparison of the minor-product model with the
+  Weyl lattices: its §7.1 (c) (8.6).
 - Weil data of a CM field: WeilRepresentationsOnBanachSpacesOfData §3.1 (Conventions); splittings along isotropic
   frames: its §5.1 (3.5); the Hecke operators `T_{w,j}` at split places, their adjoints and joint eigenvectors: its §9.2
   (3.1, 6.3).
@@ -1675,6 +2341,8 @@ frames of signs `s`, `s′`, and `l` with each `l_w` of gap `500n³ + 10n⁵` fo
 - A number field is discrete and cocompact in its adeles: `TauCeti.GlobalNumberFields.discreteTopology_principalSubgroup`,
   `TauCeti.GlobalNumberFields.compactSpace_quotient_principalSubgroup`.
 - Hasse's norm theorem for cyclic extensions of number fields: `TauCeti.ClassFieldTheory.cyclicHasseNorm`.
+- Pulling back points along a surjective map of algebras is a closed embedding for the point topology, used for the
+  adelic points of `U(J) ⊂ Res_{E/E⁺}GL_n` (8.2): `TauCeti.PointTopology.isClosedEmbedding_comap_of_surjective`.
 - An operator commuting with a group commutes with its group algebra, and the group-algebra map is compatible with
   push-forward: `Representation.commute_asAlgebraHom_of_forall_commute`, `MonoidAlgebra.lift_mapDomain`.
 

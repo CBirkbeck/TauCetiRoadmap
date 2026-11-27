@@ -23,7 +23,24 @@ subgroups. Layer 4 is stated on abstract filling data: it unfolds the second mom
 sums of orbital integrals over rational terms, sorts the terms, and proves the moment bounds, taking the bounds for the
 remaining terms and for the main term from `RemainingAndMainTermsOfSecondMoments`. Layer 5 attaches filling data to
 the data of the argument, identifies the Poincaré map with a Poincaré series of the Bessel function, and draws the
-conclusion.
+conclusion. Layer 6 compares the objects of the route with the standard ones.
+
+The standard theory is the reference for the objects of the route that have a standard counterpart, and Layer 6 states
+the results of the route on the standard objects: the Hecke algebra away from the level is the image of the
+double-coset ring of the group away from the level; under the gap of the parameter that Layer 2 assumes, the principal
+forms are made up of the fixed vectors of the finite parts of the cuspidal automorphic representations whose
+archimedean component is the discrete series of the parameter, taken with their cuspidal multiplicities, and the
+equality of traces on the good forms is equivalent to an equality of sums of these multiplicities over the
+representations with a given component away from the level, each weighted by the dimension of its good vectors; for a
+parameter of large gap, the Bessel average of the discrete series coefficient is the Bessel function of a vector of
+the lowest `K`-type of the discrete series for an equivariant linear map defined on the span of the translates of that
+vector, an element of an algebraic Bessel model; and the Poincaré series of Layer 5 is a Poincaré series in the
+classical form, a sum over the quotients of the rational points by unipotent groups of Bessel functions without
+cutoff. The comparison of `c_λ` with the discrete series belongs to `HolomorphicDiscreteSeriesOfUnitaryGroups` and
+that of forms of a type with automorphic forms to `AdelicUnitaryGroupsAndAlgebraicModularForms`; Layer 6 rests on them
+where it cites them. The objects of the route (spherical elements and good forms, Bessel functions defined by their
+transformation laws, cut functions, series of cut-off functions) are one way to prove these results, and the proofs of
+Layers 1–5 are stated on them.
 
 ## Conventions and notation
 
@@ -71,6 +88,8 @@ inner product space.
 | `A(c, s, c′), ν` | the amplitude sum over a block and the unipotent covolume | 4.2 |
 | `𝒟_main, 𝒟_id` | `D_X²/(deg·mass_r)` and `#R̄₀·D_X` | 4.2 |
 | `𝔼(A, Ω)` | the second moment of a family of blocks over a set `Ω ⊂ Ḡ` | 4.2 |
+| `J^M, 𝕋, 𝔥` | `J_M ∩ G^M`; the double-coset ring of `(G^M, J^M)`; the map from spherical elements onto `𝕋` | 6.1 |
+| `𝒱_a` | the function `𝒲_a` of 5.1 without its cutoff | 6.4 |
 
 Sizes are those of OneSidedPrimeSumBoundsAndAdmissibleData §3.3; the consequences used in Layer 4 are listed in
 4.1 (the standing hypotheses of filling data) and proved for the data in 5.5. Layer 2, 3.14 and Layer 5 also use some
@@ -100,12 +119,16 @@ frame scales of 4.2, as `Λ_i` the weights of 3.3, and in 4.13 a link; `κ` is t
 numbers of 4.1; `β` is a cutoff `β_c` (4.2), the decay of 3.3, the number of 3.9, the mass bound `β_v` of 3.13 and the
 positive-type function of 4.14 (b); `ρ` is a representation and, in 3.1, 3.4, 3.12, 3.13 and 4.7, a radius; `W` is a
 Bessel function, as `W_j` a definite space, and in Layer 1 a vector space; `B` is the frame box `B(ρ)` and elsewhere a
-number or, in 2.4 (b), a sesquilinear form; `M` is the level `p₀p₁` and, in 3.12 (a), a number.
+number or, in 2.4 (b), a sesquilinear form; `M` is the level `p₀p₁` and, in 3.12 (a), a number; `π` is the idele of
+4.1, the representation of `R` of 3.8 and 6.3 and, in 6.1, any representation of `G_f` or of `G^M`; `v` is a place,
+the unit vector of 3.8 and, in 6.1, a vector of such a representation.
 
 **Origin and method.** Every section that states something carries `*Origin:*` (`published:`, `adapted from`,
 `particular to this proof:`, `this roadmap's own formulation:`, or `definitions and conventions`) and
 `*Method of the formal proof:*`, which says how the shorter formal proof proves it; `[ShortProof]` names the file and
-declaration of that proof. A contribution may state a result more generally or prove it otherwise.
+declaration of that proof. The sections of Layer 6, whose statements the formal proof does not contain except where a
+`[ShortProof]` line says so, carry `*Proof route:*` in place of the method. A contribution may state a result more
+generally or prove it otherwise.
 
 ## Layer 1: Spreading maps and second moments
 
@@ -201,6 +224,10 @@ Suppose that for every nonzero `v ∈ 𝔽^e` both `∑_{s : π(s)A₀v = A₀v}
 
 ## Layer 2: Equality of multiplicities
 
+In this layer a *multiplicity* is the dimension of a Hecke eigenpart of the good forms of a hermitian space; in the
+literature it is the multiplicity of an automorphic representation in the space of automorphic forms. 6.2 relates the
+two.
+
 ### 2.1 Spherical Hecke operators away from the level
 
 *Origin:* definitions and conventions.
@@ -220,6 +247,11 @@ finite-dimensional (the background result of the *Needs:* line).
   at `w` and `w̄`; at the other `(w, i)` put `T_{w,i} = 0`.
 - An *eigensystem* is a function `p` on pairs `(w, i)`; the eigenpart `V_p` is the space of principal forms `y` on `V`
   with `T_{w,i} y = p(w, i)·y` for all `(w, i)`.
+
+Here the *Hecke algebra away from `M`* is an algebra of families of operators on the principal forms of all `V` at
+once; in the literature the Hecke algebra away from `M` is the double-coset ring of the Hecke pair `(G^M, J_M ∩ G^M)`,
+equivalently the algebra of compactly supported functions on `G^M` invariant on both sides under `J_M ∩ G^M`, and 6.1
+shows that `𝓗^M` is its image.
 
 *Needs:* ThetaLiftChainsAndTheSeesawIdentity §2.5 (the group `Ḡ` over the chosen places, there `𝖦`), §2.7 (the forms of
 principal level and the level `J_M`); AdelicUnitaryGroupsAndAlgebraicModularForms §§5.2, 5.4 (for a hermitian space `V` over `E`, an open subgroup `K`
@@ -252,6 +284,13 @@ finitely many of them are nonzero and they span the principal forms of `V`.
 (d) For an eigensystem `q` and a finite set `F` of eigensystems there is `T ∈ 𝓗^M` that, on every `V`, is the identity
 on `V_q` and zero on `V_d` for `d ∈ F`, `d ≠ q`.
 
+**In standard terms.** By 6.1 (c), `𝓗^M` is the image of the double-coset ring `𝕋` of the Hecke pair
+`(G^M, J_M ∩ G^M)` acting on the principal forms of every `V` by the Hecke operators on invariants of
+AutomorphicFormsOnReductiveGroups §0.6, and, for `w` split off the level, `T_{w,i}` is the image of the double coset
+of the element `diag(ϖ_w 1_i, 1)` of 2.1. So (a)–(d) are statements about this action of `𝕋`: by (b) it commutes with
+the action of `ℂ[Ḡ]` on the principal forms, and (d) gives an element of `𝕋` that acts on every `V` as the identity on
+`V_q` and as zero on the `V_d`, `d ∈ F`, `d ≠ q`.
+
 *Needs:* 2.1
 
 [ShortProof], `New/Spanning/Multiplicities/HeckeEigensystems.lean` (`New.Data.principalHeckeSplit_mem_heckeAlgebra`,
@@ -275,6 +314,23 @@ Let `V`, `V′` have signs `s`, `s′`, and suppose that at every `v ∈ Φ` the
 patterns: the entries of `l_v` are distinct and of the parity of `r − 1`, and entries of `λ_v` at coordinates of different
 sign are at least `Δ` apart. Then for every `T ∈ 𝓗^M`, `T|_good` on `V` and on `V′` have the same trace, the same
 characteristic polynomial and the same determinant.
+
+**In standard terms.** Hypothesis (H) of 6.2 holds for `V` and for `V′`: by
+AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (d), which applies because `500r³ + 10r⁵ ≤ Δ` on the data, the
+principal forms of `V` are made up of the `J_M`-fixed vectors of the finite parts of the cuspidal automorphic
+representations of `U(V)` whose archimedean component is the discrete series of Harish-Chandra parameters `(λ_v)` for
+the signs of `V`, each taken with its cuspidal multiplicity, and likewise for `V′`. By 6.2 (a) the conclusion of 2.2
+is then equivalent to the equality `𝔫_V = 𝔫_{V′}`: for every irreducible representation of `G^M`, the cuspidal
+multiplicities of the representations whose finite part has that component away from `M`, each weighted by the
+dimension of the good vectors of the finite part at the chosen places, have the same sum on `V` and on `V′`. That
+equality follows from the equality of the cuspidal multiplicities on `V` and on `V′` for every finite part that has
+good vectors, and by 6.2 (c) each such finite part has a type vector, in the sense of
+BaseChangeAndGaloisRepresentationsForUnitaryGroups §13.8a, for a jointly cuspidal family of types at the places below
+the chosen places; the lattices of that section are here those spanned over the integral finite adeles by the frames
+of `V` and of `V′`, which are self-dual because the form is the unit form in the frame at every finite place. So the
+conclusion of 2.2 is a consequence of §13.8a whenever the hypotheses of that section hold as well, which 2.2 does not
+require: `r` odd, `E` unramified over `E⁺` at every finite place, and any two entries of every `λ_v` at least `100r⁴`
+apart, whatever the signs of their coordinates. 2.2 does not determine the multiplicity of each representation.
 
 *Needs:* 2.1a; ThetaLiftChainsAndTheSeesawIdentity §2.5 (`e₀` as a sum over good families of labels, each with a
 primitive label), §2.7 (good forms); FiniteReductiveGroups §5.2 (the character of an irreducible label of degree `r`
@@ -311,6 +367,16 @@ Under the hypotheses of 2.2:
 (b) the parameters `λ_v` have gap `Δ` for the signs of `Y₀` and of every `W_j` (ThetaLiftChainsAndTheSeesawIdentity
 §2.7), so `d_T` is the dimension of the good forms on `W_j` for every `1 ≤ j ≤ m`.
 
+**In standard terms.** Hypothesis (H) of 6.2 holds for `V` and for `V′` (6.2), and 6.2 (b) writes the dimension in (a)
+as `Σ_{Ψ°} 𝔫_V(Ψ°)·dim (Ψ°)^{J^M}_q`, a sum over the irreducible representations `Ψ°` of `G^M` of the weighted
+multiplicities of 6.2 times the dimensions of the `q`-eigenspaces of their `J^M`-fixed vectors; so (a) is the
+consequence, on these eigenspaces, of the equality `𝔫_V = 𝔫_{V′}` that 2.2 gives through 6.2 (a), and (b) is its sum
+over all eigensystems for `V = Y₀`, `V′ = W_j`. With (H) given by AdelicUnitaryGroupsAndAlgebraicModularForms §8.5
+(d), the dimension in (a) is the sum, over the cuspidal automorphic representations of `U(V)` whose archimedean
+component is the discrete series of Harish-Chandra parameters `(λ_v)` for the signs of `V`, of the cuspidal
+multiplicity times the dimension of the space of the good `J_M`-fixed vectors of the finite part on which every
+`T_{w,i}` acts by `q(w, i)`; (a) says that this sum is the same for `V` and for `V′`.
+
 *Needs:* 2.1a, 2.2; ThetaLiftChainsAndTheSeesawIdentity §2.7 (the gap of the target parameter for the signs of `Y₀` and
 of the `W_j`; the target forms and `d_T`)
 
@@ -342,6 +408,11 @@ the series of Rallis' inner product formula for the lift of index `j` of `ϑ` is
 
 The formal proof proves (b) in the case where the `p_i` are the Hecke elements that (a) attaches to the terms of Rallis'
 series, indexed by the cosets of the modulus of the twist.
+
+**In standard terms.** By 6.1 (c) the elements of `𝓗^M` in (a)–(c) are the actions on the principal forms of all `V`
+of elements of the double-coset ring `𝕋` of `(G^M, J^M)`, `J^M = J_M ∩ G^M`; in (a), `p` can be taken to be the action
+of `#(J^MγJ^M/J^M)⁻¹·J^MγJ^M`, where `#(J^MγJ^M/J^M)` is the number of left cosets of `J^M` in `J^MγJ^M`, since the
+translates `kγ`, `k ∈ J^M`, have the matrix coefficients of `γ` on `J^M`-fixed vectors.
 
 *Needs:* 2.1a, 2.2; DeterminantsOfThetaLiftChains §2.2 (a) (the series of Rallis' inner product formula: each term is a
 constant, independent of `V`, times `⟨z, γ y⟩` for a coset representative `γ` supported away from the modulus of the twist)
@@ -385,8 +456,9 @@ Euclidean structure in which the basis is orthonormal. `X₀ = ⟨x_i⟩`.
 - Discrete series: for signs `ε` with `pᴴ J₁ p = diag(ε)` for a fixed unitary matrix `p`, and a doubled Harish-Chandra
   parameter `l = 2λ` for `ε`, `c_λ` (also written `c_l`) is the function on `U(diag ε)`, and on `G₁` through `p`, that
   Flensted-Jensen's integral for the lowest `K`-type of `λ` defines (the second background result of the *Needs:* line
-  gives the formula). It is the matrix coefficient of the discrete series of parameter `λ` at one unit vector, a highest
-  weight vector of the lowest `K`-type, and not the trace over that `K`-type; `deg(λ) = (∫|c_λ|²)⁻¹` is the formal
+  gives the formula). When `l` has a large gap, as defined below, it is the matrix coefficient of the discrete series
+  of Harish-Chandra parameter `λ` at one unit vector, a highest weight vector of the lowest `K`-type, and not the
+  trace over that `K`-type; `deg(λ) = (∫|c_λ|²)⁻¹` is the formal
   degree. `l` has *large gap `A`* if its entries are distinct, of the parity of `r − 1`,
   and entries of `λ` at coordinates of different sign are at least `500r³ + A` apart. Convolution is
   `(F ∗ φ)(y) = ∫ φ(a⁻¹)F(ya) da`.
@@ -404,10 +476,13 @@ of `g` on `{i : t ≤ w_i}`, divided by `det g` for `t ≤ 0`; with `Λ = λ + �
 *Relation to the library.* For the real place, `R = 𝖴H` with the character `ψ` is the Bessel datum of
 GanGrossPrasadUnitaryGroups §1.2 for `F = ℝ`, `E = ℂ`, the flag `⟨e₁⟩ ⊂ ⋯ ⊂ ⟨e₁, …, e_ϱ⟩`, the line `⟨z⟩`,
 `W = X₀` and the additive character `x ↦ exp(x − x̄)` of `ℂ`: `𝖴` is the unipotent radical `N` there, `H` the image
-of `U(W)`, `σ` on `𝖴` the additive map `b` in the coordinates of the basis (up to the choice of the conjugate-linear
-variable of the form), and `ψ = ν` on `𝖴`. That section builds the
+of `U(W)`, `σ` on `𝖴` the additive map `b` in the coordinates of the basis, and `ψ = ν` on `𝖴`, when the datum is
+formed with the form `h′(ξ, ζ) = h(ζ, ξ)`, which is linear in the first variable, as the forms of that roadmap are,
+and has the same unitary group `G₁`; formed with `h` itself, the formula of that section would give `σ̄` and `ψ⁻¹`
+(6.3 (b)). That section builds the
 datum for group schemes over a general field; the definitions above are its real points in matrix coordinates, with
-the Haar measures and the lengths that it does not treat, and it is not cited as a supplier.
+the Haar measures and the lengths that it does not treat. Layers 3–5 do not cite it as a supplier; 6.3 uses this match
+to place the Bessel average of 3.8 in the algebraic Bessel model of GanGrossPrasadUnitaryGroups §2.1.
 DiscreteSeriesCoefficientsAndAutomorphicMetrics §2.4a (b) states the coefficients of the lowest `K`-type of a gapped
 discrete series of `U(p, q)` by an integral formula, in another normalisation of the gap.
 
@@ -479,6 +554,23 @@ Fix a shape, `b ≥ 1`, an integer `f ≥ 1`, a finite nonempty set `I` and a un
 - A *Bessel system* with parameters `(b, f)`: a finite nonempty `I`, continuous `W`, `W♭ : G₁ → ℂ^I`, a number `deg > 0`
   and an irreducible type `ρ` (every matrix commuting with `ρ` is scalar), such that `(W, W♭)` is a cut pair, `W` has a
   Schur bound `(P, #I/deg)` for every `P ≥ b⁵`, `b ≥ 8r`, and `W♭` has local bounds with degree `deg`.
+
+Here a *Bessel function of type `ρ`* is any bounded measurable function with the two transformation laws above,
+attached to no representation of `G₁`: a function in the space induced from the representation of `R` that is `ψ` on
+`𝖴` and `ρ` on `H`. In the literature a Bessel function is the function `y ↦ 𝔟(Π(y)𝔴)` attached to a representation
+`Π` of `G₁`, a smooth vector `𝔴` and an `R`-equivariant linear map `𝔟` on the smooth vectors of `Π`, continuous for
+their topology, which is an element of a Bessel model (GanGrossPrasadUnitaryGroups §2.1).
+
+**In standard terms.** In 3.8 the parameter `l = 2λ` has a large gap, so by HolomorphicDiscreteSeriesOfUnitaryGroups
+§9.3 (d) `c_λ` is the matrix coefficient `g ↦ ⟨𝔳, Π(g)𝔳⟩` of the discrete series `Π` of Harish-Chandra parameter `λ`,
+read on `G₁` through `p` (3.1), at a unit highest weight vector `𝔳` of its lowest `K`-type. By 6.3, the Bessel average
+`W` of 3.8 is then `W(y) = 𝔟_x(Π(y)𝔳)` for a linear map `𝔟_x` on the span of the `Π(g)𝔳` with
+`𝔟_x(Π(uh)𝔴) = ψ(u)ρ(h)𝔟_x(𝔴)` (`u ∈ 𝖴`, `h ∈ H`), which gives an element of the algebraic Bessel model of
+GanGrossPrasadUnitaryGroups §2.1 for the Bessel datum of 3.1 (Relation to the library); the full function of each
+Bessel system constructed in 3.14 is a real multiple of such a `W` (3.14 (c)). This is a Bessel function in the sense
+of the literature except for one point: 6.3 does not show that `𝔟_x` extends to a continuous map on the smooth vectors
+of `Π`. Decay majorants, cut pairs, Schur bounds, local bounds and Bessel systems are notions of the route, with no
+counterpart there.
 
 *Needs:* 3.1; RemainingAndMainTermsOfSecondMoments §6.1 (sieve systems).
 
@@ -1288,6 +1380,11 @@ rescaling of 4.1 at `v` and `p` the unitary matrix of 3.1. For `a = (c, i)` let 
 (c) The algebraic forms on `U(X₀)` of weight `kw` and level `K_X` have dimension `D_X = #Classes·dim(weight kw) > 0`, and
 their values at the class representatives give an isomorphism `φ ↦ (φ_{c,i})` with `ℂ^{Classes × Coord}`.
 
+Here the *Poincaré series* is a sum over all rational points of functions cut off by the `β_c`, as in the adelic form
+for the trivial subgroup cited in the origin; the classical form of a Poincaré series is a sum over the quotient of
+the rational points by a subgroup of a function invariant under that subgroup. 6.4 writes `𝒫φ` in the classical form,
+over the quotients by the unipotent groups `𝖴_c(M)`.
+
 *Needs:* 3.14, 4.1, 4.2, 4.6, 4.9; AutomorphicFormsOnReductiveGroups §7.5 (forms of a level with trivial stabilisers on the
 definite group `U(X₀)`: `S(J, M) ≅ M^h`, which gives (c))
 
@@ -1340,6 +1437,16 @@ the translate of `φ` by `η`.
 Poincaré map of ThetaLiftChainsAndTheSeesawIdentity §2.19 at `(g, t)`, `𝒫^{fill}` the map of 5.1 for the filling data of 5.5, and
 `coords` sends a source form to the values of its translate by the central element of the lattice of `X₀` at the class
 representatives. The Poincaré map `𝒫` of the data is `𝒫_{g,t}` for such a choice.
+
+**In standard terms.** By 6.4 (c), the map `𝒫^{fill}` of (b) sends `φ` to the series
+`Σ_a φ_a Σ_{γ ∈ 𝖴_c(M)\G(E)} 𝒱_a(γ·)`, a Poincaré series in the classical form: a sum over the quotient of the
+rational points by the unipotent group `𝖴_c(M)` of a function `𝒱_a` invariant under that group, which in the real
+point `y` is a coordinate of the Bessel function `W` with no cutoff. So (b) identifies the Poincaré map of the data,
+the Riesz representative of a Bessel period (ThetaLiftChainsAndTheSeesawIdentity §2.19), with this Poincaré series
+composed with `coords`; the comparison of that Poincaré map with the literature is ThetaLiftChainsAndTheSeesawIdentity
+§4.2 (The Poincaré map as the projection of a Poincaré series), which states it, for every archimedean point and
+linear form, as the orthogonal projection to the principal forms of `Y₀` of a Poincaré series along the Bessel
+subgroup.
 
 *Needs:* 5.1, 5.2, 5.5; ThetaLiftChainsAndTheSeesawIdentity §2.19 (the Poincaré map as the Riesz representative of the
 Bessel period); DivisibilityOfThetaDerivatives §1.4 (the Weil data of `E` and its element `ȷ`);
@@ -1461,6 +1568,11 @@ Let `P = (vol(J_M)·ν)^{−1/2}·𝒫 ∘ coords⁻¹`, for the filling data of
 (d) The maps `#Ḡ·e₀ s 𝒫` from the source forms to the target forms, `s ∈ Ḡ`, spread with error `3/(16b²)`: for every space
 `F` of target forms with `dim F = α·d_T`, some `s ∈ Ḡ` has `dim (#Ḡ·e₀ s 𝒫)⁻¹(F) ≤ ((1 + α)/2 + 3/(16b²))·D_X`.
 
+**In standard terms.** By 5.3 (b) and 6.4 (c), `𝒫 ∘ coords⁻¹` is the Poincaré series
+`φ ↦ Σ_a φ_a Σ_{γ ∈ 𝖴_c(M)\G(E)} 𝒱_a(γ·)` of 6.4, in the classical form, for the filling data of 5.5 and `V = Y₀`; so
+`P` in (a)–(c) is `(vol(J_M)·ν)^{−1/2}` times this series, and (d) is a statement on the translates of this series
+composed with `coords`.
+
 *Needs:* 1.2, 4.15, 5.1, 5.3, 5.5, 5.6; ThetaLiftChainsAndTheSeesawIdentity §2.5 (`e₀` and the good families of
 labels), §2.7 (target forms and good forms); RemainingAndMainTermsOfSecondMoments §8.2 (c) (the share of non-allowed
 polynomials and the bad share)
@@ -1469,6 +1581,246 @@ polynomials and the bad share)
 `New.Data.bad_types_rare`, `New.Data.isNearIsometry_e₀_comp_scaledPoincare`,
 `New.Data.sum_hilbertSchmidtNorm_scaledPoincare_sq_le`, `New.Data.targetDim_mul_sum_hilbertSchmidtNorm_sq_le`,
 `New.Data.finrank_targetForms_ne_zero`, `New.Data.isSpread_goodPoincare`)
+
+## Layer 6: Comparison with the standard theory
+
+This layer relates the objects of the route to their standard counterparts and states on the standard objects the
+results of the route that other roadmaps use: the Hecke algebra away from `M` and the double-coset ring (6.1), equal
+traces on the good forms and multiplicities of representations (6.2), the Bessel average and Bessel models (6.3), and
+the Poincaré series of 5.1 and Poincaré series over quotients (6.4). The comparison of `c_λ` with the discrete series
+is HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (Flensted-Jensen's function and the discrete series `π_λ`), and that
+of forms of a type with automorphic forms is AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (Forms of parameter `l`
+and cusp forms with a discrete series at infinity); 6.2 and 6.3 state what they need of them as hypotheses, hypothesis
+(H) of 6.2 and the hypothesis on `c_λ` of 6.3; the first holds by AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (d)
+under the gap of 2.2, the second by HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (d) under the large gap of 3.8. The
+route does not use this layer. Apart from the parts of 6.4 named in its `[ShortProof]` line, the formal proof does not
+contain these statements, and each section gives a `*Proof route:*`.
+
+### 6.1 The Hecke algebra away from `M` and the double-coset ring
+
+*Origin:* this roadmap's own formulation: the comparison of the algebra `𝓗^M` of 2.1, defined through spherical
+elements of the group algebra, with the double-coset ring of the Hecke pair `(G^M, J_M ∩ G^M)` acting on invariants as
+in AutomorphicFormsOnReductiveGroups §0.6.
+
+*Proof route:* (a) In the representation of `G_f` by left translation on the finitely supported functions on
+`G_f/J_M`, the indicator of the coset `J_M` is fixed by `J_M`, so a spherical `a` sends it to a `J_M`-fixed function,
+`gJ_M ↦ Σ_{g′ ∈ gJ_M} a(g′)`; on `G^M` this function is `𝔣_a`, as `gJ_M ∩ G^M = gJ^M` for `g ∈ G^M`. So `𝔣_a` is
+invariant under `J^M` on the left, by its definition on the right, and its support is a finite union of cosets.
+Conversely, for a double coset `J^MgJ^M = ⊔_j b_jJ^M` the element `Σ_j [b_j]` is spherical: on a `J_M`-fixed vector
+`v` the vector `Σ_j π(b_j)v` does not depend on the representatives, is fixed by `J^M`, which permutes the cosets, and
+is fixed by `J_ch`, which commutes with `G^M`; and its function `𝔣` is the indicator of `J^MgJ^M`. So `𝔥` is onto. (b)
+Grouping the terms of `π(a)v = Σ_g a(g)π(g)v` by the cosets `gJ^M` gives `Σ_{gJ^M} 𝔣_a(g)π(g)v = 𝔥(a)·v`; the
+operators of `𝕋` commute with `J_ch` and so preserve `π^{J_M}`. In the permutation representation above, `𝔱 ∈ 𝕋` sends
+the indicator of the coset `J_M` to a function on the cosets `gJ_M`, `g ∈ G^M`, whose value on the cosets in `J^MgJ^M`
+is the coefficient of `J^MgJ^M` in `𝔱`, so this function determines `𝔱`; by (b) and the composition law of §0.6,
+`𝔥(ab)` and `𝔥(a)𝔥(b)` send that indicator to the same function, so `𝔥` is multiplicative, and `𝔥([1])` is the unit
+`J^M`. (c) follows from (a), (b), the composition law of §0.6 and the definition of `𝓗^M`; the left cosets of `J^M` in
+`J^M d_{w,i} J^M` correspond to the left cosets of `GL_r(𝒪_w)` in the double coset of `diag(ϖ_w 1_i, 1)` in
+`GL_r(E_w)`, which define `T_{w,i}`. The last paragraph is SmoothRepresentationsOfLocalGroups §SR.1.2 for the locally
+profinite group `G^M` and its compact open subgroup `J^M`, with `∫_{J^MgJ^M} π(g′)v dg′ = Σ_j π(b_j)v` on a
+`J^M`-fixed vector `v`.
+
+Write `G_f = G^M × G_ch`, with `G_ch` the product of the components of `G_f` at the chosen places, and
+`J_M = J^M × J_ch` accordingly: `J^M = J_M ∩ G^M` is a compact open subgroup of `G^M`, and `J_ch` is the kernel of the
+reduction of the integral points of `G_ch`, whose quotient is `Ḡ`. Let `𝕋` be the double-coset ring over `ℂ` of the
+Hecke pair `(G^M, J^M)` (Mathlib's `HeckeRing`, with basis the double cosets `J^MgJ^M`), acting on the `J^M`-fixed
+vectors of every representation `π` of `G^M` by `J^MgJ^M = ⊔_j b_jJ^M ↦ (v ↦ Σ_j π(b_j)v)`, as in
+AutomorphicFormsOnReductiveGroups §0.6; write `𝔱·v` for this action. For a spherical element `a` away from `M` (2.1)
+put `𝔣_a(g) = Σ_{j ∈ J^M} a(gj)` for `g ∈ G^M`.
+
+(a) `𝔣_a` is invariant under `J^M` on both sides and supported on finitely many double cosets, and
+`𝔥(a) = Σ 𝔣_a(g)·J^MgJ^M`, the sum over the double cosets, defines a surjective homomorphism of algebras `𝔥` from the
+spherical elements away from `M` onto `𝕋`.
+
+(b) For every representation `π` of `G_f` and every `v ∈ π^{J_M}`, `π(a)v = 𝔥(a)·v`, the action of `𝕋` being that of
+the restriction of `π` to `G^M`; this action preserves `π^{J_M}`.
+
+(c) Let `G_f` act by right translation on the forms on `U(V)` of the type `(λ_v)` and of every level, whose
+`J_M`-fixed vectors are the principal forms of `V`. Then `𝔱 ↦ (𝔱·)_V`, the family over all `V` of the actions of `𝔱`
+on the principal forms, is a homomorphism of algebras from `𝕋` onto `𝓗^M`. For `w` split off the level, `T_{w,i}` is
+the image of `J^M d_{w,i} J^M`, with `d_{w,i}` the element `diag(ϖ_w 1_i, 1)` of `GL_r(E_w)` embedded in `G_f` at `w`
+and `w̄` as in 2.1.
+
+With the Haar measure of `G^M` for which `J^M` has volume `1`, the double coset `J^MgJ^M` acts on the `J^M`-fixed
+vectors of a smooth representation `π` as `v ↦ ∫_{J^MgJ^M} π(g′)v dg′`, and `J^MgJ^M ↦ 1_{J^MgJ^M}` identifies `𝕋`
+with the algebra, under convolution, of the compactly supported functions on `G^M` that are invariant on both sides
+under `J^M` (SmoothRepresentationsOfLocalGroups §SR.1.2); so `𝓗^M` is also the image of that algebra.
+
+*Needs:* 2.1; ThetaLiftChainsAndTheSeesawIdentity §2.7 (the principal level `J_M` and the forms of principal level);
+AutomorphicFormsOnReductiveGroups §0.6 (Hecke operators on invariants); SmoothRepresentationsOfLocalGroups §SR.1.2
+(Level algebras and the double-coset ring).
+
+### 6.2 Equal traces on the good forms and multiplicities of representations
+
+*Origin:* this roadmap's own formulation: 2.2 and 2.3 read in terms of the irreducible representations of the finite
+adelic group whose fixed vectors make up the principal forms, under a hypothesis that describes the principal forms in
+this way.
+
+*Proof route:* (H): by AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (d) for the level `J_M`, the principal forms
+of `V` are isomorphic, as a module over the algebra of the compactly supported functions on `G_f` invariant on both
+sides under `J_M`, to the direct sum of the spaces `Ψ^{J_M}`, each taken `𝔪_V(Ψ)` times, over the finite parts `Ψ` of
+the statement, finitely many of them; two of these automorphic representations with isomorphic finite parts are
+isomorphic, their archimedean components being the same. The spherical elements away from `M` and the integral lifts
+of the elements of `Ḡ`, which normalise `J_M`, preserve the `J_M`-fixed vectors of every representation of `G_f`, so
+they act on such vectors through that algebra (AdelicUnitaryGroupsAndAlgebraicModularForms §8.4 (a)), and the
+isomorphism carries their actions. Each `Ψ` is the restricted tensor product of irreducible admissible representations
+of the local groups (AutomorphicFormsOnReductiveGroups §3.5 (Spherical lines and Flath factorization)); the factors at
+the places of `E⁺` below the chosen places make up `Ψ_ch` and the others `Ψ^M`, and both are irreducible because
+`Ψ ≅ Ψ^M ⊗ Ψ_ch` is. Under (H), as `Ψ^{J_M} = (Ψ^M)^{J^M} ⊗ Ψ_ch^{J_ch}`, the good forms of `V` are isomorphic to
+`⊕_Ψ ((Ψ^M)^{J^M} ⊗ e₀Ψ_ch^{J_ch})^{𝔪_V(Ψ)}`, a spherical element `a` acting on the first factor, by `𝔥(a)` (6.1 (b)),
+and `e₀ ∈ ℂ[Ḡ]` on the second. So the element of `𝓗^M` given by `a` has trace `Σ_{Ψ°} 𝔫_V(Ψ°)·tr(𝔥(a) | (Ψ°)^{J^M})`
+on the good forms of `V`, which gives the "if" of (a), and (b) follows in the same way on the joint eigenspaces of the
+`T_{w,i}` in the first factor. For the "only if", finitely many `Ψ°` occur in `𝒮_V` and `𝒮_{V′}`; their `J^M`-fixed
+vectors are nonzero, and finite-dimensional by 2.1 under the gap; the operators of `𝕋` on them are those of the Hecke
+algebra of the level `J^M` (6.1 and SmoothRepresentationsOfLocalGroups §SR.1.2, whose anti-involution exchanges the
+left and the right actions), so by SmoothRepresentationsOfLocalGroups §SR.1.3 they are simple modules over `𝕋`,
+pairwise non-isomorphic. Over `ℂ` an algebra maps onto the product of the endomorphism algebras of finitely many
+pairwise non-isomorphic finite-dimensional simple modules (the density theorem), so their traces are linearly
+independent functions on `𝕋`; as `𝔥` is onto (6.1 (a)), equal traces for every `T ∈ 𝓗^M` give `𝔫_V = 𝔫_{V′}`. In (a),
+the `Ψ` with `e₀Ψ^{J_M} = 0` contribute `0` to `𝔫_V`, which gives the second sentence, and 2.2 gives the third. (c)
+`e₀` is the sum of the `e_c = ⊗_w e_{c_w}` over the good families `c` (ThetaLiftChainsAndTheSeesawIdentity §2.5), so
+`e_cΨ^{J_M} ≠ 0` for one of them, and a nonzero vector of `e_cΨ^{J_M}` is fixed by every `e_{c_w}`; a good family has
+a primitive member, whose character is cuspidal (FiniteReductiveGroups §5.2).
+
+Let `V`, `V′` be as in 2.2, and `G_f = G^M × G_ch`, `J_M = J^M × J_ch`, `𝕋` and `𝔥` as in 6.1; the integral points of
+`G_ch` act on the `J_ch`-fixed vectors of a representation of `G_ch` through their reductions, that is through `Ḡ`.
+*Hypothesis (H) for `V`:* there are a finite set `𝒮_V` of pairwise non-isomorphic representations `Ψ = Ψ^M ⊗ Ψ_ch` of
+`G_f`, with `Ψ^M` and `Ψ_ch` irreducible smooth representations of `G^M` and of `G_ch` and `Ψ^{J_M} ≠ 0`, integers
+`𝔪_V(Ψ) ≥ 1`, and a linear isomorphism from the principal forms of `V` onto `⊕_{Ψ ∈ 𝒮_V} (Ψ^{J_M})^{𝔪_V(Ψ)}` that
+carries the action of every spherical element away from `M`, and the action of `Ḡ`, to their actions on the `Ψ^{J_M}`.
+Put `𝔪_V(Ψ) = 0` for `Ψ ∉ 𝒮_V`, and for an irreducible smooth representation `Ψ°` of `G^M` put
+`𝔫_V(Ψ°) = Σ 𝔪_V(Ψ)·dim(e₀Ψ_ch^{J_ch})`, the sum over the `Ψ ∈ 𝒮_V` with `Ψ^M ≅ Ψ°`.
+
+(H) holds for `V` whenever every `λ_v` has gap `500r³` for the signs of `V`, and so for `V` and for `V′` as in 2.2,
+because `500r³ + 10r⁵ ≤ Δ` on the data (Conventions): by AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (d), `𝒮_V`
+can be taken to be the set of the finite parts `Ψ`, read on `G_f` through the frame of `V` and with `Ψ^{J_M} ≠ 0`, of
+the cuspidal automorphic representations of `U(V)` whose archimedean component is the tensor product over `v ∈ Φ` of
+the discrete series of Harish-Chandra parameter `λ_v` for the signs of `V` (the discrete series whose coefficient at a
+unit vector of its lowest `K`-type is `c_{λ_v}`, HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (d)), with `𝔪_V(Ψ)` the
+cuspidal multiplicity of the representation with finite part `Ψ`. Statements (a)–(c) use (H) for `V` and for `V′` and
+nothing else about these representations.
+
+(a) Every `T ∈ 𝓗^M` has the same trace on the good forms of `V` and of `V′` if and only if `𝔫_V(Ψ°) = 𝔫_{V′}(Ψ°)` for
+every `Ψ°`. This holds when `𝔪_V(Ψ) = 𝔪_{V′}(Ψ)` for every `Ψ` with `e₀Ψ^{J_M} ≠ 0`. The first condition is equivalent
+to the conclusion of 2.2, since `𝓗^M` contains the identity, whose trace is the dimension of the space, and the powers
+of its elements, and the dimension of the space together with the traces of the powers of an operator determine its
+characteristic polynomial and its determinant. By 2.2, both sides of the equivalence hold.
+
+(b) For every eigensystem `q`, the dimension of the good forms of `V` in `V_q` is `Σ_{Ψ°} 𝔫_V(Ψ°)·dim (Ψ°)^{J^M}_q`,
+where `(Ψ°)^{J^M}_q` is the space of the `J^M`-fixed vectors of `Ψ°` on which every `T_{w,i}` acts by `q(w, i)`,
+`T_{w,i}` acting as the element of `𝕋` of 6.1 (c), or as `0` when `T_{w,i} = 0`.
+
+(c) Every `Ψ` with `e₀Ψ^{J_M} ≠ 0` has a nonzero vector that is fixed by `J^M` and lies, at every chosen place `w`, in
+the isotypic part of the irreducible representation of `GL_r(𝔽_w)` of label `c_w`, the integral points at `w` acting
+through their reductions, for one good family `(c_w)` (ThetaLiftChainsAndTheSeesawIdentity §2.5); at least one `c_w`
+is primitive, and the representation of `GL_r(𝔽_w)` of a primitive label is cuspidal.
+
+2.2 and 2.3 do not record the multiplicities `𝔪_V(Ψ)`: the representations of `G_f` with the same component away from
+`M` enter only through `𝔫_V`, each weighted by the dimension of its good vectors at the chosen places.
+
+*Needs:* 2.1, 2.2, 6.1; ThetaLiftChainsAndTheSeesawIdentity §2.5 (`e₀` as a sum over good families of labels, each
+with a primitive label); FiniteReductiveGroups §5.2 (the character of an irreducible label of degree `r` is cuspidal);
+SmoothRepresentationsOfLocalGroups §SR.1.2 (Level algebras and the double-coset ring);
+SmoothRepresentationsOfLocalGroups §SR.1.3 (Smooth representations as Hecke modules);
+AdelicUnitaryGroupsAndAlgebraicModularForms §8.4 (a) (elements of the group algebra that preserve the fixed vectors of
+a level act on them through its Hecke algebra), §8.5 (d) (the forms of a parameter of gap `500r³` and of a level as
+the fixed vectors of the finite parts of cuspidal automorphic representations, with their cuspidal multiplicities);
+HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (d) (for a large gap, `c_λ` is the coefficient of the discrete series of
+Harish-Chandra parameter `λ` at a unit vector of its lowest `K`-type); AutomorphicFormsOnReductiveGroups §3.5
+(Spherical lines and Flath factorization).
+
+### 6.3 The Bessel average as a Bessel function of a unitary representation
+
+*Origin:* this roadmap's own formulation: the Bessel average of 3.8, when `c_λ` is a matrix coefficient of a unitary
+representation of `G₁`, read as the Bessel function of one vector for an `R`-equivariant linear map, an element of the
+algebraic Bessel model of GanGrossPrasadUnitaryGroups §2.1.
+
+*Proof route:* (a) As `Π` is unitary, `c_λ(x⁻¹sy) = ⟨𝔳, Π(x⁻¹sy)𝔳⟩ = ⟨Π(s⁻¹x)𝔳, Π(y)𝔳⟩`, so for `𝔴 = Π(y)𝔳` the
+integrand of `𝔟_x(𝔴)` is that of `W(y)`, which converges absolutely by 3.8 (a); for a finite linear combination `𝔴` of
+vectors `Π(g)𝔳` the integrand is the same combination of these, so `𝔟_x(𝔴)` converges absolutely, is the same
+combination of the `W(g)`, and is linear in `𝔴`. Then `𝔟_x(Π(r)Π(g)𝔳) = W(rg) = π(r)W(g)` for `r ∈ R`, because `W` is
+a Bessel function of type `ρ` (3.8 (a)) and `π(uh) = ψ(u)ρ(h)`; linearity gives the equivariance on `ℋ_𝔳`. (b) For
+`h ∈ H`, `(ρ̄(h)𝔷)ᵀρ(h) = 𝔷ᵀρ(h)⁻¹ρ(h) = 𝔷ᵀ`, as `ρ(h)` is unitary. The form `h′` is linear in the first variable, and
+`e*_a` pairs to `1` with `e_a` and to `0` with the other basis vectors; so for `u ∈ 𝖴` the number
+`h′(u e_{a+1}, e*_a)` is the coefficient of `e_a` in `u e_{a+1}` and `h′(u z, e*_ϱ)` is the coefficient of `e_ϱ` in
+`u z`. Hence the map `b` of GanGrossPrasadUnitaryGroups §1.2 is `σ` on `𝖴`, and `ν = exp(σ − σ̄) = ψ` there for the
+additive character of 3.1. For the other convention, `⟨Π(g)𝔳, 𝔳⟩ = ⟨𝔳̄, Π̄(g)𝔳̄⟩` in the conjugate Hilbert space.
+
+Let `l = 2λ`, `ρ`, `v`, `x`, `π` and `W` be as in 3.8. Let `Π` be a unitary representation of `G₁` on a Hilbert space
+`ℋ` and `𝔳 ∈ ℋ` a unit vector with `c_λ(g) = ⟨𝔳, Π(g)𝔳⟩` for every `g ∈ G₁`, the inner product being conjugate-linear
+in the first variable (Conventions). Such `Π` and `𝔳` exist: `l` has a large gap (3.8), so by
+HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (d) the hypothesis holds for the discrete series of `U(diag ε)` of
+Harish-Chandra parameter `λ`, read on `G₁` through `p` as `c_λ` is (3.1), and a unit vector on the line of its smooth
+vectors that are highest weight vectors of its lowest `K`-type. 6.3 uses nothing about `Π` beyond this hypothesis. If
+instead `c_λ(g) = ⟨Π(g)𝔳, 𝔳⟩` for every `g`, all of 6.3 holds for the complex conjugate representation `Π̄` on the
+conjugate space `ℋ̄` in place of `Π`. Let `ℋ_𝔳 ⊆ ℋ` be the linear span of the vectors `Π(g)𝔳`, `g ∈ G₁`, a subspace
+stable under `Π`.
+
+(a) For every `𝔴 ∈ ℋ_𝔳` the integral `𝔟_x(𝔴) = ∫_R ⟨Π(s⁻¹x)𝔳, 𝔴⟩·π(s)⁻¹v ds ∈ ℂ^I` converges absolutely. The map
+`𝔟_x : ℋ_𝔳 → ℂ^I` is linear, `𝔟_x(Π(r)𝔴) = π(r)𝔟_x(𝔴)` for `r ∈ R` and `𝔴 ∈ ℋ_𝔳`, and `W(y) = 𝔟_x(Π(y)𝔳)` for every
+`y ∈ G₁`; in particular `𝔟_x = 0` exactly when `W = 0`.
+
+(b) Let `ρ̄` be the representation of `H ≅ U(k)` on `ℂ^I` by the complex conjugate matrices, the contragredient of
+`ρ`. The bilinear form `(𝔴, 𝔷) ↦ Σ_{i ∈ I} 𝔷_i·𝔟_x(𝔴)_i` on `ℋ_𝔳 × ℂ^I` takes `(Π(uh)𝔴, ρ̄(h)𝔷)` to `ψ(u)` times its
+value at `(𝔴, 𝔷)`, for `u ∈ 𝖴` and `h ∈ H`: it is an element of the algebraic Bessel model of
+GanGrossPrasadUnitaryGroups §2.1 for the group `R = 𝖴H`, the representations `Π` on `ℋ_𝔳` and `ρ̄` (through the
+projection of `R` onto `H`), and the character of `R` that is `ψ` on `𝖴` and trivial on `H`. That character is the
+character `ν` of the Bessel datum of GanGrossPrasadUnitaryGroups §1.2 named in 3.1 (Relation to the library), when the
+datum is formed with the hermitian form `h′(ξ, ζ) = h(ζ, ξ)`, which is linear in the first variable, as the forms of
+that roadmap are, and has the same unitary group `G₁`: for `h′` the additive map `b` of §1.2 is `σ` on `𝖴`, so `ν = ψ`
+on `𝖴`. Formed with `h` itself, the formula of §1.2 would give `b = σ̄` and `ν = ψ⁻¹` on `𝖴`.
+
+6.3 does not assert that `𝔟_x` is continuous for the topology of the smooth vectors of `Π`, as the analytic Bessel
+model of GanGrossPrasadUnitaryGroups §2.1 requires, and it does not compare the Bessel averages for different `x` and
+`v`.
+
+*Needs:* 3.1, 3.3, 3.8; HolomorphicDiscreteSeriesOfUnitaryGroups §9.3 (d) (for a large gap, `c_λ` is the coefficient
+of the discrete series of Harish-Chandra parameter `λ` at a unit vector of its lowest `K`-type);
+GanGrossPrasadUnitaryGroups §1.2 (Bessel subgroups and their characters); GanGrossPrasadUnitaryGroups §2.1 (Local
+model spaces and pairing conventions).
+
+### 6.4 The Poincaré series of 5.1 as a series over quotients by unipotent groups
+
+*Origin:* adapted from the unfolding of Poincaré series (Petersson (1930)): here, the series of 5.1 over all rational
+points of cut-off functions, written as a series over the quotient of the rational points by the unipotent group
+`𝖴_c(M)` of one function without cutoff.
+
+*Proof route:* (a) For `u ∈ 𝖴_c(M)` one has `h_c⁻¹uh_c ∈ K(M)`, so `ug′ι(η) ∈ h_c·K(M)` exactly when
+`g′ι(η) ∈ h_c·K(M)`. As a term over `(c, 1, c)`, `u` has `∏_v ψ(u_v) = ψ̄_M(1) = 1` by 4.3 (c) with `k = 1`, and each
+`W_v` is a Bessel function (3.3), so `W_i(u_∞y) = W_i(y)`. 4.6 (d), applied to the weight `u ↦ β⁰_c(u_∞y)`, whose sums
+over the right cosets of `𝖴⁰_c(M)` are `1` by 4.2, gives `Σ_u β_c(u_∞y) = 1`. This gives the sum in (a), and the
+invariance of `𝒱_a` follows by reindexing it. (b) If no `δ ∈ G(E)` has `δg′ι(η) ∈ h_c·K(M)`, every term vanishes.
+Otherwise fix such a `δ`: every `γ` with `𝒲_a(γg) ≠ 0` is `γ′⁻¹δ` for a term `γ′` over `(c, 1, c)`, as
+`h_c⁻¹γ′h_c = (h_c⁻¹δg′ι(η))(h_c⁻¹γg′ι(η))⁻¹ ∈ K(M)`, and `|𝒲_a(γg)| ≤ β_c(γ′_∞⁻¹δ_∞y)·∏_v‖W_v((γ′_∞⁻¹δ_∞y)_v)‖`. The
+part `d = c` of the sum in 4.9 (a), for the stable set `G(E)` and `s = 1`, at the point `δ_∞y`, bounds the sum of
+these over `γ′` by a constant independent of the point. (c) Summing the absolutely convergent series of (b) first over
+the right cosets of `𝖴_c(M)` and applying (a) gives the identity and the bound. For another residue domain and other
+weights as in 4.2, with cutoffs `β′_c` and cut-off functions `𝒲′_a`, (a) holds by the same argument, 4.6 (d) being
+stated for every residue domain; and `𝒲′_a(uγg) = β′_c(u_∞γ_∞y)·𝒱_a(γg)` for `u ∈ 𝖴_c(M)`, so that summing first over
+`𝖴_c(M)` gives `Σ_{γ ∈ G(E)} |𝒲′_a(γg)| = Σ_{γ ∈ 𝖴_c(M)\G(E)} |𝒱_a(γg)| ≤ C_a`. So the series of 5.1 formed with the
+`𝒲′_a` converges absolutely, and by (a) for the `𝒲′_a` its sum is the right side of (c); 4.9 (a) is used for one
+choice only.
+
+Let `E` contain a primitive root of unity of order `5040`, let `𝔉` be admissible over `E`, and let `V` fit `𝔉` with
+parameters `(l_v)`, weights `(kw_v)` and `η`, with `g′`, `y`, `𝒲_a` and `𝒫φ` as in 5.1; for `γ ∈ G(E)` the definitions
+of 5.1 and 4.1 give `(γg)′ = γg′`, and the point `y` attached to `γg` is `γ_∞y`. For `a = (c, i)` let
+`𝒱_a(g) = W_i(y)` if `g′·ι(η) ∈ h_c·K(M)`, and `𝒱_a(g) = 0` otherwise: the function `𝒲_a` without its cutoff `β_c`.
+
+(a) For every `g`, `Σ_{u ∈ 𝖴_c(M)} 𝒲_a(ug) = 𝒱_a(g)`, the series converging absolutely; hence `𝒱_a(ug) = 𝒱_a(g)` for
+`u ∈ 𝖴_c(M)`. In `g_∞`, `𝒱_a` depends only on `W_i(y)`, a coordinate of the tensor product `W` of the full functions
+of the Bessel systems (4.2), which transforms under `∏_v 𝖴` by `∏_v ψ` (3.3).
+
+(b) There is `C_a < ∞` with `Σ_{γ ∈ G(E)} |𝒲_a(γg)| ≤ C_a` for every `g`.
+
+(c) For every `φ ∈ ℂ^{Classes × Coord}` and every `g`, `𝒫φ(g) = Σ_a φ_a Σ_{γ ∈ 𝖴_c(M)\G(E)} 𝒱_a(γg)`, where
+`a = (c, i)` and the inner series converges absolutely, with `Σ_{γ ∈ 𝖴_c(M)\G(E)} |𝒱_a(γg)| ≤ C_a`. The right side
+involves no cutoff: for every residue domain and all weights `β⁰_c` as in 4.2, the series of 5.1 formed with them
+converges absolutely and has this sum, so `𝒫φ` is the same for every such choice.
+
+*Needs:* 3.3, 4.1, 4.2, 4.3 (c), 4.6 (d), 4.9 (a), 5.1.
+
+[ShortProof], `New/Spanning/Unfolding/PoincareSeries.lean` (`New.Filling.Fits.tsum_cutBessel_classUnipotent`, the sum
+in (a); `New.Filling.Fits.exists_tsum_enorm_cutBessel_le`, (b))
 
 ## Downstream consumers
 
@@ -1496,6 +1848,8 @@ polynomials and the bad share)
   ranks and links; the second moment of a family of blocks; the unfolded second moment (Layer 4).
 - The Poincaré series of a fitting space, the filling data of the data, the dimension of the target and the second
   moment of the Poincaré map (Layer 5).
+- The comparison of the Hecke algebra away from the level, of the equal traces on good forms, of the Bessel average
+  and of the Poincaré series of a fitting space with their standard counterparts (Layer 6).
 
 ### Not owned here
 
@@ -1512,6 +1866,13 @@ polynomials and the bad share)
 - Moving a quotient from one variable to the other, the finiteness of the forms of given parameters and level,
   formal degrees on the compact groups, and the comparison of traces for a test function cuspidal at a split place:
   AdelicUnitaryGroupsAndAlgebraicModularForms.
+- The comparison of `c_λ` with the discrete series: HolomorphicDiscreteSeriesOfUnitaryGroups. The comparison of forms
+  of a type with automorphic forms: AdelicUnitaryGroupsAndAlgebraicModularForms. The comparison of the Poincaré map
+  with the literature: ThetaLiftChainsAndTheSeesawIdentity.
+- Hecke operators on invariants: AutomorphicFormsOnReductiveGroups. Hecke algebras of a level and smooth
+  representations as Hecke modules: SmoothRepresentationsOfLocalGroups. Bessel data and Bessel models:
+  GanGrossPrasadUnitaryGroups. Equal cuspidal multiplicities of inner forms:
+  BaseChangeAndGaloisRepresentationsForUnitaryGroups.
 
 ## Exact supplier contracts
 
@@ -1520,6 +1881,8 @@ polynomials and the bad share)
 - OneSidedPrimeSumBoundsAndAdmissibleData: §3.2 (the data), §3.3 (their sizes), for 3.14, 5.4 and 5.5.
 - ThetaLiftChainsAndTheSeesawIdentity: §2.1 (`X₀`, `Y₀`, `W_j`), §2.4 (the target parameter and its gap), §2.5 (`𝖦`
   and `e₀`), §2.6 (the level `K_0`), §2.7 (good forms and target forms), §2.8 (source forms), §2.19 (the Poincaré map).
+  §4.2 (The Poincaré map as the projection of a Poincaré series), named in the standard reading of 5.3; §2.5 and §2.7
+  also for 6.1 and 6.2.
 - DivisibilityOfThetaDerivatives: §1.1 (b) (the generator of the different), §1.4 (Weil data), §1.5 (the chosen
   places).
 - DeterminantsOfThetaLiftChains: §2.2 (a) (the series of Rallis' inner product formula), for 2.4; §5.4 (a) (the
@@ -1531,20 +1894,32 @@ polynomials and the bad share)
   degree), for 3.1; §§1.1, 1.6, 2.7 (measures below the Gram fibre), for 3.5; §6.1 (the kernel `e_λ`), for 3.6 and
   3.8; §5.4 (decay and Schur orthogonality), for 3.8 and 3.10; §1.5 (covering bounds for norm balls), for 3.10;
   §7.4 (a) (the formal degree), for 3.14; §2.6 (the Haar measures of `𝖴` and `𝖴⁰`), for 4.8; §§7.1, 7.4 (Weyl's
-  dimension formula and the formal degree on the compact group), for 5.6.
+  dimension formula and the formal degree on the compact group), for 5.6. §9.3 (d) (for a large gap, `c_λ` is the
+  coefficient of the discrete series of Harish-Chandra parameter `λ` at a unit vector of its lowest `K`-type), for
+  6.2, 6.3 and the standard reading of 3.3.
 - AdelicUnitaryGroupsAndAlgebraicModularForms: §§5.2, 5.4 (finiteness of the forms of given parameters and level),
   for 2.1; §7.2, §7.13 (cuspidal test functions and the comparison of traces), for 2.2; §1.1 (e) (moving the
-  quotient), for 5.3; §6.2 (formal degrees), for 5.6.
+  quotient), for 5.3; §6.2 (formal degrees), for 5.6. §8.4 (a) (elements of the group algebra that preserve the fixed
+  vectors of a level act on them through its Hecke algebra) and §8.5 (d) (the forms of a parameter and of a level as
+  the fixed vectors of the finite parts of cuspidal automorphic representations, with their cuspidal multiplicities),
+  for the hypothesis (H) of 6.2 and the standard reading of 2.2 and 2.3.
 
 ### From other roadmaps
 
 - FiniteReductiveGroups §5.2 and §5.7 (the cuspidal character and the central idempotent of an irreducible label),
-  for 2.2.
+  for 2.2; §5.2 also for 6.2.
+- BaseChangeAndGaloisRepresentationsForUnitaryGroups §13.8a (Equal cuspidal multiplicities of inner forms in an odd
+  number of variables), named in the origin and the standard reading of 2.2.
 - HermitianFormsAndLattices §1.1 (b) (Witt extension), for 3.4 and 3.9; §5.5 (masses) and §6.4 (b) (ratios of masses
   in consecutive ranks), for 5.4 and 5.6.
 - DiscreteSeriesCoefficientsAndAutomorphicMetrics §8.3 (formal degrees), for 3.14; §7.5a (the mass of a level), for
   5.6.
-- AutomorphicFormsOnReductiveGroups §7.5 (forms of a level with trivial stabilisers), for 5.1 and 5.6.
+- AutomorphicFormsOnReductiveGroups §7.5 (forms of a level with trivial stabilisers), for 5.1 and 5.6; §0.6 (Hecke
+  operators on invariants), for 6.1; §3.5 (Spherical lines and Flath factorization), for 6.2.
+- SmoothRepresentationsOfLocalGroups §SR.1.2 (Level algebras and the double-coset ring), for 6.1 and 6.2; §SR.1.3
+  (Smooth representations as Hecke modules), for 6.2.
+- GanGrossPrasadUnitaryGroups §1.2 (Bessel subgroups and their characters) and §2.1 (Local model spaces and pairing
+  conventions), for 6.3.
 
 ### From Tau Ceti
 

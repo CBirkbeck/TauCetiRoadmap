@@ -40,12 +40,27 @@ jets along products of minors, and along the entries of Schur matrices, have the
 of degree `l` of the jet series `J_{π_M𝔱_E}` of an indicator datum on `12 × 1` matrices, times `∏_τ l(τ)!` and a
 fixed scalar, has valuation at most `S_p + v_p(t)`, where `S_p` is the divisibility forced at the weights.
 
-There are five layers. Layer 1 is the field `E` and its characters. Layer 2 is the formal group of the CM curve at a
-prime that does not split in `K`: the Frobenius congruence for `θ`, the exponential factor of `θ` at the scale `ϖ`,
+The standard theory is the reference for the objects of this roadmap: Weierstrass's sigma function and the classical
+theta functions of an elliptic curve with complex multiplication, its formal group, the main theorem of complex
+multiplication, the Chowla–Selberg formula, and the Weil representation on Schwartz–Bruhat functions with the theta
+distribution. The roadmap states its results on those objects through the comparison layers of
+ThetaFunctionsAndUnitsOfCMLattices (Layer 6) and WeilRepresentationsOnBanachSpacesOfData (Layer 10), in the paragraphs
+*In standard terms* of the sections that other roadmaps use, and through its own Layer 6: read so, (2) and (3) are
+statements about the derivatives at the origin of classical theta functions of Schwartz–Bruhat functions, made entire
+by the factor `exp(|z|²/2)` and multiplied by one constant of complex absolute value `1` that the comparison does not
+determine, and the rate `γ_p` is the rate of divisibility of the invariant derivatives of functions on the formal
+group of the curve. The objects of the route (the sigma function normalised by its transformation law, the ring
+`𝒪[[y]]` of integral series, the model `𝒮(V)` with its theta functional) are one way to prove these results, and the
+proofs are stated on them.
+
+There are six layers. Layer 1 is the field `E` and its characters. Layer 2 is the CM curve at a prime that does not
+split in `K`, through the ring `𝒪[[y]]` of functions of the formal group law of its coordinate `y` (6.1): the
+Frobenius congruence for `θ`, the exponential factor of `θ` at the scale `ϖ`,
 couplings and the normal form, resolutions of the identity, and the normal form of products of copies of `θ` along a
 resolution. Layer 3 counts the divisibility of jets of series in normal form along products of minors. Layer 4 builds
 the integral vacuum and the standard data from products of theta functions along tight frames and proves the
-integrality and the divisibility of their jets. Layer 5 shows that the bound is attained.
+integrality and the divisibility of their jets. Layer 5 shows that the bound is attained. Layer 6 compares with the
+standard theory what is particular to this roadmap: the formal group law of `y` and the rate `γ_p` of 5.2 on it.
 
 ## Conventions and notation
 
@@ -53,7 +68,8 @@ integrality and the divisibility of their jets. Layer 5 shows that the bound is 
   proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family `ShortGRH`; the line
   "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`) and the declarations
   where it proves the statement. Elsewhere the names of [ShortProof] occur only in entries of *Needs:* lines, which
-  name the file and the declarations of [ShortProof] that prove the result used.
+  name the file and the declarations of [ShortProof] that prove the result used. Layer 6 is not part of the formal
+  proof, and its `*Method:*` line is a proof route.
 - *Primes and valuations.* `p` is a prime and `ι_p : ℂ → ℂ_p` a ring embedding; the statements hold for every choice
   of `ι_p`. `v` is the valuation of `ℂ_p` with `v(p) = 1`, written also `v_p`, `‖x‖ = p^{−v(x)}`, and `𝒪` is the
   valuation ring of `ℂ_p`. A series over `ℂ_p` is *integral* if its coefficients lie in `𝒪`; a complex number `c` is
@@ -355,7 +371,8 @@ function* `σ` of `Λ` is defined by its transformation law, not by the Weierstr
 the odd entire function with `σ′(0) = 1` and
 `σ(z + l) = ε(l)·exp(H(l, z) + H(l, l)/2)·σ(z)` for `l ∈ Λ`, where `ε(l) = 1` if `l ∈ 2Λ` and `ε(l) = −1` otherwise. It is
 the classical Weierstrass sigma function `σ_W` of `Λ` times a Gaussian: `σ(z) = σ_W(z)·exp(−s₂z²/2)`, where `s₂` is the
-constant with `η(l) = s₂l + (π/A)l̄` for the quasi-periods `η` of `σ_W`. The classical `σ_W` is not used: its second
+constant with `η(l) = s₂l + (π/A)l̄` for the quasi-periods `η` of `σ_W`. In the literature "the sigma function" is
+`σ_W`; here it is `σ`. The route does not use the classical `σ_W`: its second
 logarithmic derivative is `−℘`, not `−℘ − s₂`. Put:
 `θ(z) := T^1_tσ(z)/T^1_tσ(0)`, `x(z) := ℘(z + t) − ℘(t)`,
 `y(z) := (℘′(z + t) − a₁x(z))/2`, and `g := −log θ`. Then `θ` is even, `θ(0) = 1`, `θ′(0) = 0`, `σ² = xθ²`, and
@@ -363,7 +380,10 @@ logarithmic derivative is `−℘`, not `−℘ − s₂`. Put:
 `𝒪[[y]]` is the ring of series `G(y)` with `G` integral; at a prime `p` it equals `𝒪[[T]]`, where the formal parameter
 `T` is the part of `y` in the degrees `≡ 1 (mod q_p − 1)`. For linear forms `μ_1, …, μ_k` over
 `ℂ_p` in variables `z`, `𝒪[[y(μz)]]` is the ring of series `G(y(μ_1z), …, y(μ_kz))` with `G` integral, and, for
-exponents `m_j ∈ ℕ`, `θ^m(μz) := ∏_j θ(μ_jz)^{m_j}`.
+exponents `m_j ∈ ℕ`, `θ^m(μz) := ∏_j θ(μ_jz)^{m_j}`. No group law is introduced here: the words "the formal group" in
+the title of this layer refer to the ring `𝒪[[y]]` and the formal parameter `T`, whereas in the literature the formal
+group of the curve is a formal group law at its origin. `𝒪[[y]]` is the ring of functions of the formal group law of
+`y` (6.1 (a)).
 
 *Numbers at a prime.* For a prime `p`: `π_p := √−d` if `p = d` and `π_p := p` otherwise, of valuation `v(π_p) = 1/2`
 if `p = d` and `1` otherwise; `q_p := p²` if `p` is inert in `K` and `q_p := p` otherwise; `ρ_p := v(π_p)/(q_p − 1)`,
@@ -371,6 +391,18 @@ which is `1/(p − 1)`, `1/(p² − 1)`, `1/(2p − 2)` for `p` split, inert, `p
 `0`, `p/(p² − 1)`, `1/(2p − 2)`. `I_p°` is the set of odd `e ≥ 0` if `p` is inert, of all `e ≥ 0` if `p = d`, and is
 empty if `p` splits; `I_p` is the set of its positive elements. Then `γ_p = v(π_p)·Σ_{e∈I_p} p^{−e}`, `0 ≤ γ_p ≤ 1`,
 and a prime that does not split in `K` is odd and at least `13`.
+
+**In standard terms.** By the identity `σ = σ_W·exp(−s₂z²/2)`, `θ(z) = exp(−s₂z²/2 − η(2t)z/2)·σ_W(z + t)/σ_W(t)`,
+where `η(2t)/2 = s₂t + (π/A)t̄` is the value at `t` of the logarithmic derivative of `σ_W`: `θ` is the Gaussian
+`exp(−s₂z²/2)` times the classical function `exp(−η(2t)z/2)·σ_W(z + t)/σ_W(t)` of the half-period `t`, whose square is
+`(℘ − ℘(t))·σ_W²`; and `g″ = s₂ + ℘(z + t)`. The ring `𝒪[[y]]` is the ring of functions, over `𝒪`, of the formal group
+law of `y`, whose invariant derivation is `d/dz` (6.1 (a)). The identity `σ = σ_W·exp(−s₂z²/2)`, with the constant
+`s₂`, is ThetaFunctionsAndUnitsOfCMLattices §6.1 (a), (b); the formula for `θ`, in which the classical function of the
+half-period `t` is written `σ_{W,t}`, is its §6.2 (a); and the formula for `g″` follows from its §6.1 (c). By its §6.4
+(b), (e), the formal group law of `y` is the formal group law of the curve `y² + a₁xy = x³ + x`, formed at its origin
+in the parameter `−x/y`, carried to the point `(0, 0)` of order two by the translation by that point and written in
+the parameter `y`; `𝒪[[y]]` is the ring of integral series in the parameter `−x/y`, read along the uniformisation; and
+`T` is another parameter of the same formal group.
 
 **Checks.** `θ′(0) = 0`, because `θ` is even: `σ` is odd and `t` has order two. With the classical `σ_W` in place of `σ`
 the same formula gives a function with logarithmic derivative `ζ(t) − πt̄/A = s₂t` at `0`, and `s₂ ≠ 0` for the lattices
@@ -760,7 +792,9 @@ of `x` (WeilRepresentationsOnBanachSpacesOfData §3.1), the Weil operators
 `ω(g)`, the theta functional `θ_V`, and the inner product `⟨f, f′⟩` (the mean of `conj(f)f′` over `𝔸_E^n/E^n`). The
 *value* of `f ∈ 𝒮(V)` at an adelic vector `y` is `f(y) := θ_V(ϱ(y)f)`. `V` is *standard* if all its signs are `+1` and its
 point is the identity: `V = E^n` with the form `Σ_i x_iȳ_i`; `Hom(E^n, E^{n′})` is standard with the form of the
-coordinates. The *finite part* `𝒮_f(V)` is the span of the `ϱ_f(x)vac_V`, `x ∈ 𝔸_{E,f}^n`.
+coordinates. The *finite part* `𝒮_f(V)` is the span of the `ϱ_f(x)vac_V`, `x ∈ 𝔸_{E,f}^n`. Here `𝒮(V)` denotes this
+model, a Banach space of integrable functions reproduced by the vacuum, and not the space of Schwartz–Bruhat functions
+that the letter usually denotes.
 
 *Theta functions.* A vector `z ∈ ℂ^{Φ×n}` is read as the adelic vector with finite part `0` and archimedean part
 `(2π·Im τ(ȷ))^{−1/2}·z_{τ,i}` at `(τ, i)` (*Fock coordinates*; for `E = K(ζ)` with the Weil data of 1.4 this is
@@ -776,6 +810,27 @@ with real image `u` and every `z`, `semi(α^{−1}γ)·exp(−(Σ_x conj(u_x)z_x
 *Tight frames.* A finite family `w_i ∈ 𝔞₀` with multiplicities `m_i ∈ ℕ` is a *tight frame of length `M`* if
 `Σ_i m_i·σ(w_i)·conj(τ(w_i)) = M·δ_{στ}` for all infinite places `σ, τ`. Taking each vector `k` times as often gives a
 tight frame of length `kM`; the union of two tight frames is one of the sum of the lengths.
+
+**In standard terms.** In the literature the adelic Weil representation of `V` (of its Heisenberg group and, through a
+splitting character, of its unitary group) is realised on the Schwartz–Bruhat functions on the adelic points `𝒳(𝔸)` of
+a rational Lagrangian subspace, the Schrödinger model, with the theta distribution `ϑ_𝒳`, the sum over the rational
+points of `𝒳`, as invariant functional. By WeilRepresentationsOnBanachSpacesOfData §10.2 (a), (c), for a rational
+Lagrangian decomposition `𝒳 ⊕ 𝒴`, the Haar measure on `𝒳(𝔸)` for which the quotient of `𝒳(𝔸)` by the image of the
+rational points of `𝒳` has measure one, and a vacuum vector `φ_vac` of the Schrödinger model, of norm one for this
+measure, there is an injective linear map `ℐ_𝒳` from that Schwartz–Bruhat space into `𝒮(V)`, with dense image, which
+carries the operators `ϱ_𝒳` of the Schrödinger representation to the operators `ϱ` and `φ_vac` to `vac_V`, and whose
+image contains the finite part; by its §10.7 (c), `ω` is on that image the global Weil representation of the unitary
+group attached to the splitting character `υ⁻¹`; and by its §10.6 (b), (c) there is a constant `𝔠_𝒳`, which that
+section does not determine, with `θ_V(ϱ(y)ℐ_𝒳φ) = 𝔠_𝒳·ϑ_𝒳(ϱ_𝒳(y)φ)` for every adelic vector `y`. For this measure
+`𝔠_𝒳` has complex absolute value `1`; for `c` times this measure, `c > 0`, the map `ℐ_𝒳` is multiplied by `c^{1/2}`
+and the absolute value of `𝔠_𝒳` is `c^{1/2}` (§10.6 of that roadmap). So, for all signs `+1` and `f = ℐ_𝒳φ` in the
+finite part, `Θ_f(z) = 𝔠_𝒳·exp(|z|²/2)·ϑ_𝒳(ϱ_𝒳(z)φ)`, `z` being read as an adelic vector as above: the constant `𝔠_𝒳`
+times the classical theta function of the Schwartz–Bruhat function `φ` at the real Heisenberg point of Fock
+coordinates `z`, times the factor `exp(|z|²/2)` that makes it entire; and `J_c(f)` is the Taylor series at `0` of
+`z ↦ Θ_f(cz)` (4.4 (b)). The statements of Layers 4 and 5 on jets are statements about the derivatives at `0` of these
+functions, the constant `𝔠_𝒳` and the exponential factor included. A complex number of absolute value `1` need not be
+a unit at `ι_p`, so they determine the valuations of the derivatives of `exp(|z|²/2)·ϑ_𝒳(ϱ_𝒳(z)φ)` only up to the
+valuation of `ι_p(𝔠_𝒳)`. They are stated and proved on the model.
 
 *Needs:* 1.4; WeilRepresentationsOnBanachSpacesOfData §§2.1, 3.1, 3.4, 3.6, 3.7, 4.1, 4.2, 4.3 (the adelic Weil representation of a hermitian space `V` over a CM field with Weil
 data `(ȷ, α, υ)`, in the model generated by the vacuum under the adelic Heisenberg group with the cocycle
@@ -819,6 +874,18 @@ area of the conjugate lattice `σ(𝓔)` times `|σ(u_CS)|²` is `π·exp(γ −
 If `α^{−1}u` is integral above `p` for `u ∈ E^n`, the coefficients of `ι_p(𝔣_E)·u†z` are integral.
 (c) For `x, y ∈ 𝔞₀`, `Σ_τ τ(x)·conj(τ(y))` is an integer of `K`, and `Tr_{E/K}(z) ∈ 𝒪_K` when `z·P'(ζ)` is integral.
 (d) If two CM lattices have the same `a₁`, they have the same area.
+
+**In standard terms.** The number `u_CS` comes from the Chowla–Selberg formula in the form with a unit
+(ThetaFunctionsAndUnitsOfCMLattices §§5.2, 5.5), which refines the class-mean form of
+ArithmeticVolumesAndIntegralFormsOnUnitaryShimuraVarieties §8.5 (a): the mean over the ideal classes of `K` of the
+logarithmic periods is `γ + log(2π/√d) − (L′/L)(1, χ_K)`. The classical formula of Chowla and Selberg (1967) writes
+that mean through values of the Gamma function at the fractions `a/d`. The passage between the two expressions of the
+mean is ThetaFunctionsAndUnitsOfCMLattices §6.6 (b):
+`(L′/L)(1, χ_K) = γ + log(2π) − (1/h)·Σ_{a=1}^{d−1}χ_K(a)·log Γ(a/d)`, `h` the class number of `K`. By its §6.6 (c),
+the area of each conjugate lattice `σ(𝓔)` times `|σ(u_CS)|²` is `π·d^{−1/2}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)/h}`, so that
+`Ω = rd_E^{−1}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)/h}`; the statement with one number `u_CS`, a unit at every prime, is finer
+than the classical formula, which evaluates the class mean only. The scale `𝔱_E` and the number `Ω` are defined, and
+(a) is stated, through `(L′/L)(1, χ_K)`.
 
 *Needs:* 1.1, 1.4, 2.1, 4.1; ArithmeticVolumesAndIntegralFormsOnUnitaryShimuraVarieties §8.5 (the Chowla–Selberg
 formula in class-mean form, which the form with a unit refines); ThetaFunctionsAndUnitsOfCMLattices §§5.2, 5.5 (the Chowla–Selberg formula with a
@@ -1016,6 +1083,21 @@ automorphism of `ℂ` are at most `exp(C·q₁²)^n`; and `θ°(finVec(x)) ≠ 0
 (d) For standard `V` and `f ∈ 𝒮(V)`: if `|f(finVec(x))| ≤ M` for all `x ∈ 𝔸_{E,f}^n`, then `|⟨f, f⟩| ≤ M²`. Every
 automorphism of `ℂ` has the absolute values of some automorphism over `K`.
 
+**In standard terms.** The values `θ°(finVec(x)) = θ_V(ϱ(finVec(x))θ°)` are values of the theta functional on
+Heisenberg translates of the multiple `c_vac^n·vac_V` of the vacuum. In the notation of the paragraph *In standard
+terms* of 4.1, `vac_V = ℐ_𝒳(φ_vac)`, where the vacuum vector `φ_vac` of the Schrödinger model, of norm one for the
+measure fixed there and determined up to a factor of absolute value `1`, is a Schwartz–Bruhat function on `𝒳(𝔸)`: the
+product of the vacuum vector of the infinite places, a constant times the exponential of a quadratic form with
+negative definite real part, and of a Schwartz–Bruhat function on the finite adelic points of `𝒳`, whose component at
+all but finitely many finite places is a multiple of the indicator of the intersection of the standard lattice with
+`𝒳(𝔸)` (WeilRepresentationsOnBanachSpacesOfData §10.1 (b), (d), §10.2 (c)); and
+`θ°(finVec(x)) = c_vac^n·𝔠_𝒳·ϑ_𝒳(ϱ_𝒳(finVec(x))φ_vac)` (§10.6 (c) of that roadmap): the theta constants of the
+translates of `φ_vac` by finite adelic points, multiplied by `c_vac^n·𝔠_𝒳`. (b) and (c) say that, for a suitable
+`c_vac`, these multiples are integral at every prime and have conjugates at most `exp(C·q₁²)^n`; they concern the
+product `c_vac^n·𝔠_𝒳`, not `c_vac` alone. The bound for the conjugates in (o) and (b) uses complex multiplication in
+the form of ThetaFunctionsAndUnitsOfCMLattices §5.3, whose standard form is given in the paragraph *In standard terms*
+of 4.7.
+
 *Needs:* 1.4, 2.1, 4.1, 4.2, 4.3 (a), 4.5; ThetaFunctionsAndUnitsOfCMLattices §2.3 (for `d` a prime `≡ 7 (mod 8)` there is a bound,
 depending only on `d`, for `|(T^1_uθ)(0)|` over all CM lattices for `d` and all `u ∈ ℂ`); ThetaFunctionsAndUnitsOfCMLattices §5.3 (complex
 multiplication for theta functions, without the reciprocity law, for `d` a prime `≡ 7 (mod 8)`: if the lattice of `C` is
@@ -1059,6 +1141,17 @@ There is a map `σ ↦ B_σ ∈ 𝔸_{E,f}` on the automorphisms of `ℂ` over `
 `J_{𝔱_E}(ϱ(finVec(x))F)` gives `J_t(ϱ(finVec(B_σx))F′)` with each variable `z_{τ,i}` renamed `z_{σ^{−1}τ,i}`, where
 `σ` permutes `Φ` through `τ ↦ σ∘τ`.
 
+**In standard terms.** The map `σ ↦ B_σ` comes from complex multiplication for translates of `θ` without the
+reciprocity law (ThetaFunctionsAndUnitsOfCMLattices §5.3), which asserts only that some finite adele of `K` describes
+the action of `σ`. By the main theorem of complex multiplication (Shimura (1971), Theorem 5.4), every adele `β` that
+ThetaFunctionsAndUnitsOfCMLattices §5.3 (b) attaches to `σ` is a finite idele of `K` whose inverse has Artin symbol
+`σ` on the maximal abelian extension of `K`, for the Artin map under which a uniformiser acts as the arithmetic
+Frobenius element; and conversely, for every finite idele `κ` with that Artin symbol, the last clause of §5.3 (b)
+holds with `β = κ⁻¹` and the scale that belongs to `κ` (ThetaFunctionsAndUnitsOfCMLattices §6.5 (b), (c)). This
+section asserts the existence of `B_σ` and does not record its relation to the Artin map. In the notation of the
+paragraph *In standard terms* of 4.1, the statement concerns the action of `σ` on the Taylor coefficients of the
+functions `𝔠_𝒳·exp(|z|²/2)·ϑ_𝒳(ϱ_𝒳(z)φ)` attached to the translates of `F` and of `F′`, the constant `𝔠_𝒳` included.
+
 *Needs:* 4.1, 4.2, 4.4, 4.6; ThetaFunctionsAndUnitsOfCMLattices §5.3 (complex multiplication for theta functions, without the reciprocity
 law, for `d` a prime `≡ 7 (mod 8)`: if the lattice of `C` is `Ω₀𝒪_K` and `σ` is an automorphism of `ℂ` over `K`, there
 are `Ω`, a nonzero ideal `𝔠` and a finite adele `β` of `K` such that the conjugate lattice is `Ω𝔠²/N(𝔠)`, of area
@@ -1092,6 +1185,13 @@ data of level `δ` at `p`*, `𝒟_p(V, δ)`, is the span, over the `p`-integral 
 under `ϱ_f(x)` for every `x` that is `δ`-integral above `p`.
 (b) For a finite adelic unitary point `g` of `V` whose components at the places above `p` are integral invertible
 matrices, `ω(1, g)` maps `𝒟_p(V, δ)` into itself.
+
+**In standard terms.** In the notation of the paragraphs *In standard terms* of 4.1 and 4.6,
+`θ° = ℐ_𝒳(c_vac^n·φ_vac)`, and the standard data of level `δ` at `p` are the images under `ℐ_𝒳` of the combinations
+with `p`-integral coefficients of the Schwartz–Bruhat functions `semi(x)·ϱ_𝒳(finVec(x))(c_vac^n·φ_vac)`, `x` a finite
+adelic vector `δ`-integral above `p` (WeilRepresentationsOnBanachSpacesOfData §10.2 (a), (c)). (b) is the stability of
+these combinations under the global Weil representation of the unitary group attached to the splitting character `υ⁻¹`
+(§10.7 (c) of that roadmap), for the finite unitary points that are integral and invertible above `p`.
 
 *Needs:* 4.1, 4.6.
 
@@ -1160,6 +1260,21 @@ coefficients. Then `jet_Q((∏_iθ(μ_iz)^{m_i})^N·H)` is integral.
 (c) Under (b), for `c ∈ ℂ` and `Q` homogeneous of degree `l`:
 `v(ι_p(jet_Q(J_{c·𝔱_E}(f)))) ≥ l·v(ι_p(c/(δ̄·d)))`.
 
+**In standard terms.** In the notation of the paragraph *In standard terms* of 4.1, with `f = ℐ_𝒳φ`, (b) and (c) bound
+from below the valuations of the derivatives at `0`, along polynomials with `p`-integral coefficients, of
+`𝔠_𝒳·exp(|z|²/2)·ϑ_𝒳(ϱ_𝒳(z)φ)`, the constant `𝔠_𝒳` times the classical theta function, made entire, of the
+Schwartz–Bruhat function `φ` of a standard datum, in the Fock coordinates scaled by `δ̄·d·𝔱_E` and by `c·𝔱_E`. A
+derivative at `0` is a Taylor coefficient times a factorial: for the coefficient of `z^k` the bounds are those of (b)
+and (c) less `v(k!)`. In (a), the series of `𝒪[[y(μz)]]` are functions on products of copies of the formal group law
+of `y` (6.1 (a)), pulled back along the forms `μ_i`. By ThetaFunctionsAndUnitsOfCMLattices §6.2 (a),
+`∏_iθ(μ_iz)^{m_i} = exp(−(s₂/2)·Σ_i m_i·μ_i(z)²)·∏_iσ_{W,t}(μ_iz)^{m_i}`, where
+`σ_{W,t}(z) = exp(−η(2t)z/2)·σ_W(z + t)/σ_W(t)` is Weierstrass's function at the half-period `t` (2.1): (a) is the
+integrality of the jets of the `N`-th power of the product of these classical functions with that Gaussian, times `H`.
+It does not hold for the classical functions without the Gaussian: `g″(0) = s₂ + ℘(t)` is integral at `p = 2`
+(ThetaFunctionsAndUnitsOfCMLattices §3.5 (c), `d` being odd), whereas `℘(t) = a₁²/12` is not, `a₁` being a unit at `2`
+(§2.2 (d) of that roadmap); so the second derivative at `0` of `θ(dz)`, which is `−d²·g″(0)`, is integral at `2`, and
+that of `σ_{W,t}(dz)`, which is `−d²·℘(t)`, is not.
+
 *Needs:* 2.1, 2.5, 4.2, 4.4 (a), 4.8, 4.9; ThetaFunctionsAndUnitsOfCMLattices §§3.2, 3.4, 3.5 (for a CM lattice, `d` a prime `≡ 7 (mod 8)`:
 `x ∈ 𝒪[[y]]`; `√−d·g″(0)` is integral at every prime; the multiplier of an isogeny of `C` to itself is integral at every
 prime; `𝒪[[y]]` is stable under `d/dz`).
@@ -1195,6 +1310,14 @@ in the variables `z_{τ,i}`.
 (d) In (c), let `|n| ≤ |n′|`, let `κ` have no column of height strictly between `|n|` and `|n′|`, and let `w` be
 charges for `ev ⊂ Φ` at every `e ∈ I_p°`. Then for all chosen standard fillings `i′`, `i`:
 `v(J_κ(F)_{i′,i}) + W(i′) ≥ D_p(κ^{ev}) + γ_p·(B − B^{ev}) − f·N³·(1 + log_p max(B, 1))`.
+
+**In standard terms.** In the notation of the paragraph *In standard terms* of 4.1, with `f = ℐ_𝒳φ`, `F` is the Taylor
+series at `0`, read in `ℂ_p` through `ι_p`, of `z ↦ Θ_f(c·𝔱_E·z)`, where `Θ_f(z) = 𝔠_𝒳·exp(|z|²/2)·ϑ_𝒳(ϱ_𝒳(z)φ)` is
+the constant `𝔠_𝒳` times the classical theta function, made entire, of the Schwartz–Bruhat function `φ` of a standard
+datum of level one; (b) gives it the normal form of 2.4, and (c) and (d) bound from below, by the predicted
+divisibility of 3.1 less the loss `f·N³·(1 + log_p max(B, 1))`, the valuations of its jets along products of minors
+and along the entries of Schur matrices, at a prime that does not split in `K`. The normal form and the bounds concern
+this series, the constant `𝔠_𝒳` included.
 
 *Needs:* 1.1, 1.4, 2.4, 2.6, 3.3, 3.4, 4.2, 4.8, 4.9.
 
@@ -1263,6 +1386,13 @@ squares in `ℤ_p`. For linear forms `μ_j` and `Θ = ∏θ(μ_jz)^{m_j}` there 
 (c) If one of the forms, `μ_{j₀}`, has unit coefficients, then `val₆(ν) ≤ γ_p·|ν| − Σ_x v(ν_x!)` for every `ν`.
 (d) If there are `a_{xj} ∈ 𝒪` and `s` with `|s| = 1` such that `Σ_j a_{xj}μ_j(z) = s·z_x` for every variable `z_x`,
 then `val₆(ν) ≤ 0` for every `ν`.
+
+**In standard terms.** On the formal group law of `y` (6.1 (a)), whose invariant derivation is `d/dz`, (a) says that
+for every `n` some function over `𝒪` has `n`-th invariant derivative at the origin of valuation at most `n·γ_p`; with
+the lower bound of 6.1 (b), `n·γ_p` is the exact rate of divisibility of these derivatives up to
+`⌊log_p max(n, 1)⌋ + 1`. By 6.1 (c) this is a statement about the formal group of the curve `y² + a₁xy = x³ + x` over
+`𝒪` at its origin, with the invariant derivation dual to `dx/(2y + a₁x)`. The integrality of the group law used in the
+method is the integrality of that formal group law over `𝒪`.
 
 *Needs:* 2.1, 5.1; ThetaFunctionsAndUnitsOfCMLattices §§3.6, 4.3 (for a CM lattice, `d` a prime `≡ 7 (mod 8)`: `y(z₀ + z₁)` is an integral
 series in `y(z₀)` and `y(z₁)`; and the scaled formal parameter of 2.3, `T(ϖz)/ϖ ≡ Σ_j z^{q_p^j} (mod π_p)` with
@@ -1416,6 +1546,15 @@ the indicator of the class `y₀` at the places dividing `𝔪`, and the vacuum 
 prime `p` and every `ι_p` there are `γ` with `Σ_bγ_{τ,b} = l_τ` and `y₀` with
 `v(ι_p(c_vac^{12}·∏_τ l_τ!·coeff_γ J(Ψ_{𝔪,y₀}))) ≤ S_p + v(ι_p(t))`.
 
+**In standard terms.** The indicator datum is the datum modulo `𝔪` of the indicator of the class `y₀` with the Fock
+vector of the constant polynomial, the image `ℐ_𝒳φ` of a Schwartz–Bruhat function `φ`
+(WeilRepresentationsOnBanachSpacesOfData §10.4 (b)). In the notation of the paragraph *In standard terms* of 4.1,
+`J(Ψ_{𝔪,y₀})` is the Taylor series at `0` of `z ↦ 𝔠_𝒳·exp(|z′|²/2)·ϑ_𝒳(ϱ_𝒳(z′)φ)` with `z′ = π_M𝔱_E·z`, the constant
+`𝔠_𝒳` times the classical theta function of `φ`, made entire, at the scale `π_M𝔱_E` of the Fock coordinates; and (e)
+bounds from above, by `S_p + v(ι_p(t))`, the valuation of `c_vac^{12}·∏_τ l_τ!` times one of its coefficients of
+degree `l`, the constant `𝔠_𝒳` included. Its input on the curve is 5.5, which rests on the rate `γ_p` of 5.2, read on
+the formal group law of `y` in 6.1.
+
 *Needs:* 1.5, 4.3a, 4.5, 4.6, 5.1, 5.5; WeilRepresentationsOnBanachSpacesOfData §4.4 (Fourier inversion in the model of 4.1: for standard `V` of
 rank `n`, `δ ∈ E` integral at every finite place with `δδ̄ = N ≠ 0`, and `F ∈ 𝒮(V)` whose theta function is a theta
 function for `δ̄𝔞₀^n`, there are finitely many `y_i ∈ E^n` with `δy_i ∈ 𝔞₀^n`, a family of `N^{f·n}` vectors
@@ -1434,6 +1573,85 @@ relations), §4.1 (the total local prime sum `S_p`).
 `New.Data.exists_integral_isThetaFunction_twelveTaylor_eq`, `New.Data.exists_norm_le_norm_indicatorDatum`,
 `New.Data.exists_le_norm_coeff_indicatorDatum`, `New.Data.norm_map_mul_intVacuum_le`,
 `New.Data.exists_rpow_neg_localPrimeSumTotal_le_norm_coeff`)
+
+## Layer 6: Comparison with the standard theory
+
+The objects that this roadmap takes from ThetaFunctionsAndUnitsOfCMLattices and
+WeilRepresentationsOnBanachSpacesOfData are compared with the standard theory in those roadmaps. In
+ThetaFunctionsAndUnitsOfCMLattices: the sigma function with Weierstrass's (§6.1), the theta function of a CM lattice
+with Weierstrass's function at a half-period and the curve `y² + a₁xy = x³ + x` with the Weierstrass model (§6.2), the
+ring `𝒪[[y]]`, its group law and the formal parameter `T` with the formal group of the curve (§6.4), complex
+multiplication with the main theorem and the Artin map (§6.5), and the Chowla–Selberg formula with a unit with the
+classical formula (§6.6). In WeilRepresentationsOnBanachSpacesOfData: the model `𝒮(V)`, its vacuum and its Heisenberg
+operators with the Schrödinger model, its Schwartz–Bruhat functions and its vacuum vector (§10.1, §10.2), the theta
+functional with the theta distribution, of which it is a multiple by a constant of absolute value `1` that is not
+determined there (§10.6), and the Weil operators with the global Weil representation attached to a splitting character
+(§10.7). The sections of this roadmap that other roadmaps use read their statements through those comparisons in their
+paragraphs *In standard terms* (2.1, 4.1, 4.2, 4.6, 4.7, 4.8, 4.10, 4.11, 5.6). This layer states what is particular
+to this roadmap: the rate `γ_p` of 5.2 as a statement about the invariant derivatives of functions on the formal group
+of the curve over `𝒪`, through the formal group law of the coordinate `y` (6.1). The route does not use this layer.
+
+### 6.1 The formal group law of `y` and the rate `γ_p`
+
+*Origin:* comparison of 5.2 with the divisibility of the invariant derivatives of functions on a formal group, the
+subject of Katz (1981) named in 5.2; not part of the formal proof. [ShortProof] states no such comparison.
+
+*Method:* (a) ThetaFunctionsAndUnitsOfCMLattices §3.6 (b) gives `F_y`. Substituting `y(z₀), y(z₁), y(z₂)` for the
+variables is injective on series over `ℂ_p`, because `y = z + O(z²)` has a compositional inverse; so `F_y` is unique,
+and `F_y(Y₀, 0) = Y₀`, `F_y(Y₀, Y₁) = F_y(Y₁, Y₀)` and `F_y(F_y(Y₀, Y₁), Y₂) = F_y(Y₀, F_y(Y₁, Y₂))` follow from
+`y(0) = 0` and from the commutativity and the associativity of the addition of the `z_i`. The identity
+`y(z₀ + z₁) = F_y(y(z₀), y(z₁))` says that `y` is a homomorphism from the additive formal group law to `F_y` with
+derivative `1` at `0`, that is, the exponential of `F_y`. The derivation `d/dz` commutes with the translations
+`z ↦ z + z₁`, which `y` carries to the translations of `F_y`, so it is the invariant derivation; it maps `𝒪[[y]]` into
+itself (ThetaFunctionsAndUnitsOfCMLattices §3.2 (b)). (b) The upper bound is 5.2 (a). For the lower bound, `g^{(n)}`
+lies in `𝒪[[y]]` and the constant term of a series of `𝒪[[y]]` is integral (ThetaFunctionsAndUnitsOfCMLattices §3.2
+(a), (b)), so `v(g^{(n)}(0)) ≥ 0`; and ThetaFunctionsAndUnitsOfCMLattices §4.3 (f), for some `ϖ′` with `v(ϖ′) = ρ_p`,
+makes `g(ϖ′z)` integral, so `v(coeff_n(g)) ≥ −n·ρ_p`; Legendre's bound `v(n!) ≥ n/(p − 1) − ⌊log_p max(n, 1)⌋ − 1` and
+`γ_p = 1/(p − 1) − ρ_p` (2.1) give `v(n!·coeff_n(g)) ≥ n·γ_p − ⌊log_p max(n, 1)⌋ − 1`. (c)
+ThetaFunctionsAndUnitsOfCMLattices §6.4 (b) gives `y(z₀ + z₁) = Ê^y_C(y(z₀), y(z₁))` with `Ê^y_C` integral at `ι_p`,
+so `F_y` is `Ê^y_C` read through `ι_p` by the uniqueness in (a); it also gives `𝒪[[ξ̂]] = 𝒪[[y]]` and the integrality
+of `𝔶_C` and of its compositional inverse. By §6.4 (a) of that roadmap `log_{Ê_C}(ξ̂) = z`, so substituting `ξ̂` for
+`ξ` carries the invariant derivation of `Ê_C`, the one dual to the expansion of `dx/(2y + a₁x)` (its §6.2 (c)), to
+`d/dz`, and the series of `𝒪[[ξ]]` onto those of `𝒪[[y]]`; then (b) applies. The reduction is §6.4 (d) of that
+roadmap.
+
+Let `C` be a CM lattice, `p` a prime and `ι_p` fixed, and read `y` in `ℂ_p[[z]]`.
+
+- (a) *The formal group law of `y`.* There is exactly one `F_y ∈ 𝒪[[Y₀, Y₁]]` with `y(z₀ + z₁) = F_y(y(z₀), y(z₁))`.
+  It is a commutative formal group law of dimension one over `𝒪`, and `z ↦ y(z)` is its exponential over `ℂ_p`, so
+  that `z`, as a series in `y`, is its logarithm and `dz` is its invariant differential with derivative `1` at the
+  origin. Through `G ↦ G(y)` its ring of functions `𝒪[[Y]]` is `𝒪[[y]]`, and its invariant derivation, the derivation
+  dual to that invariant differential, is `d/dz`: the `n`-th invariant derivative of `g ∈ 𝒪[[y]]` at the origin is
+  `g^{(n)}(0) = n!·coeff_n(g)`.
+- (b) *The rate `γ_p`.* For every `n ≥ 0`, every `g ∈ 𝒪[[y]]` has
+  `v(g^{(n)}(0)) ≥ max(0, n·γ_p − ⌊log_p max(n, 1)⌋ − 1)`, and some `g ∈ 𝒪[[y]]` has `v(g^{(n)}(0)) ≤ n·γ_p`.
+- (c) *On the curve.* `F_y` is the series `Ê^y_C` of ThetaFunctionsAndUnitsOfCMLattices §6.4 read through `ι_p`: the
+  formal group law of the curve `W_C : y² + a₁xy = x³ + x`, formed at its origin in the parameter `ξ = −x/y`, carried
+  to the point `(0, 0)` of order two by the translation by that point and written in the parameter `y`; the series
+  `𝔶_C` of that section is an isomorphism over `𝒪`, with linear coefficient `1`, from the formal group law `Ê_C` of
+  `W_C` in the parameter `ξ` onto `F_y`. Along the uniformisation, `ξ` becomes the Taylor series `ξ̂` of
+  `x/(y + a₁x)`, `𝒪[[ξ̂]] = 𝒪[[y]]`, and the invariant differential `dx/(2y + a₁x)` of `W_C` becomes `dz`. So (b)
+  holds on the formal group of `W_C` over `𝒪` at its origin: for every `n ≥ 0`, the least valuation of the `n`-th
+  derivatives at the origin of the series of `𝒪[[ξ]]`, for the invariant derivation dual to `dx/(2y + a₁x)`, lies
+  between `max(0, n·γ_p − ⌊log_p max(n, 1)⌋ − 1)` and `n·γ_p`. The reduction of `W_C` through `ι_p` is an elliptic
+  curve, ordinary if `p` splits in `K` and supersingular otherwise.
+
+So, up to `⌊log_p max(n, 1)⌋ + 1`, `n·γ_p` is the divisibility of the `n`-th invariant derivatives at the origin of
+the functions on the formal group of the curve over `𝒪`, at every prime `p` and for every `ι_p`. At the primes of
+supersingular reduction the formal group has height two, and `γ_p = p/(p² − 1)` for `p` inert in `K`,
+`γ_p = 1/(2d − 2)` for `p = d` (2.1). At the primes of ordinary reduction, those that split in `K`, among them `2`,
+`3` and the other primes dividing `q₀`, the formal group has height one and `γ_p = 0`: the least valuation is `0` for
+every `n`.
+
+*Needs:* 2.1, 5.2; ThetaFunctionsAndUnitsOfCMLattices §3.2 (for a CM lattice and `d` a prime `≡ 7 (mod 8)`:
+`y = z + O(z²)`, the map `G ↦ G(y)` is injective, the constant term of a series of `𝒪[[y]]` is integral, and `d/dz`
+maps `𝒪[[y]]` into itself), §3.6 (b) (`y(z₀ + z₁) ∈ 𝒪[[y(z₀), y(z₁)]]`), §4.3 (f) (`g(ϖ′z)` is integral for every
+`g ∈ 𝒪[[y]]` and every `ϖ′ ∈ ℂ_p` with `|ϖ′| ≤ p^{−ρ_p}`), §6.2 (c) (the invariant differential `dx/(2y + a₁x)` of
+`W_C` pulls back to `dz` along the uniformisation), §6.4 (a), (b), (d) (`log_{Ê_C}(ξ̂) = z`;
+`y(z₀ + z₁) = Ê^y_C(y(z₀), y(z₁))`, with `Ê^y_C`, `𝔶_C` and its inverse integral at `ι_p` and `𝒪[[y]] = 𝒪[[ξ̂]]`; the
+reduction of `W_C` is an elliptic curve whose formal group has height one if `p` splits in `K` and two otherwise);
+TaylorBoundsAndDepthsOnHeightTwoFormalGroups §4.1 (Legendre's bound
+`v_p(κ!) ≥ |κ|/(p − 1) − #ι·(⌊log_p max(|κ|, 1)⌋ + 1)`, the sharper form of (e)).
 
 ## Downstream consumers
 
@@ -1468,7 +1686,8 @@ relations), §4.1 (the total local prime sum `S_p`).
   Schur matrices to products of minors (Layer 3);
 - the Weil model of a hermitian space over `E` as used by the family, tight frames, the scale `𝔱_E`, jet series, the
   integral vacuum, standard data, and the integrality and divisibility of their jets (Layer 4);
-- least valuations of products of copies and the sharpness of the valuation bound (Layer 5).
+- least valuations of products of copies and the sharpness of the valuation bound (Layer 5);
+- the formal group law of `y` over `𝒪` and the rate `γ_p` for the invariant derivatives of its functions (Layer 6).
 
 ### Not owned here
 
@@ -1478,6 +1697,11 @@ relations), §4.1 (the total local prime sum `S_p`).
 - Legendre's bound for the valuation of a factorial, and the integrality of the exponential of a series whose
   coefficients have valuation at least `1/(p − 1)`: TaylorBoundsAndDepthsOnHeightTwoFormalGroups §4.1;
 - the Chowla–Selberg formula in class-mean form: ArithmeticVolumesAndIntegralFormsOnUnitaryShimuraVarieties §8.5;
+- the comparison of the sigma function, the theta function of a CM lattice, the ring `𝒪[[y]]` and its formal
+  parameter, complex multiplication and the Chowla–Selberg formula with a unit with the standard theory:
+  ThetaFunctionsAndUnitsOfCMLattices Layer 6 (Comparison with the standard theory); the comparison of the model
+  `𝒮(V)`, its vacuum and its theta functional with the Schrödinger model and the theta distribution:
+  WeilRepresentationsOnBanachSpacesOfData Layer 10 (Comparison with the standard theory);
 - the results named `ShortGRH background (…)` on the *Needs:* lines, which [ShortProof] proves in its folder `src/Lib`
   (the exponential of a power series over `ℂ_p` with its additivity and its divisibility and root criteria, and the
   integrability of `exp(C‖w‖ − |w|²/2)`): each names the form used and the declaration of [ShortProof], and is not a

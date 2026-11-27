@@ -8,56 +8,77 @@ about the real unitary groups `U(p, q)` and their discrete series, at the real p
 They enter in four ways.
 
 - Forms on the unitary groups of the argument are fixed, at each real place, by a kernel `e_λ = deg_λ·conj c_λ` (their
-  *type*). Spaces of such forms must consist of cusp forms, and the kernel must be an idempotent (6.1 (a), 6.2).
+  *type*: here the kernel by which a form is fixed, not a `K`-type). Spaces of such forms must consist of cusp forms,
+  and the kernel must be an idempotent (6.1 (a), 6.2). In standard terms, for a parameter of large gap,
+  `e_λ = d(π_λ)·⟨π_λ(g)υ_λ, υ_λ⟩` for the discrete series `π_λ` of Harish-Chandra parameter `λ`, a vector fixed by
+  `π(e_λ)` is a highest weight vector of the lowest `K`-type in the `π_λ`-isotypic part (9.4), and the `K`-finite
+  coefficients of `π_λ` satisfy Harish-Chandra's cusp condition on `U(p, q)`: their integrals along the unipotent
+  radicals of the proper parabolic subgroups vanish (9.7).
 - Theta lifts between spaces of different signatures carry forms of one type to forms of another. This is the local
-  theta correspondence of discrete series at the real places (8.6).
+  theta correspondence of discrete series at the real places (8.6); in standard terms, for matching parameters
+  `l = 2λ`, `l′ = 2λ′` (8.1 (c)), `π_λ` occurs in the completed Fock space of an oscillator pair of the two real
+  unitary groups with multiplicity space `π_{λ′}` (9.9).
 - The spanning theorem bounds a second moment of Poincaré series. Its archimedean factors are Bessel functions on a
   real unitary group `G₁`. Its unfolding needs the Haar measures of `G₁` and of its unipotent subgroups, fibre
-  measures of Gram maps, the big cell of the Bruhat decomposition, and measures on the floors of a tower of
-  subgroups (1.2, 1.3, 2.4, 2.6, 2.7 and Layer 3).
+  measures of Gram maps, the big cell of the Bruhat decomposition, and measures on the floors of a tower of subgroups
+  (1.2, 1.3, 2.4, 2.6, 2.7 and Layer 3). Fibre measures enter through a one-sided relation (1.1 (e)), which is the
+  inequality with the fibre measure where the fibre measures depend continuously on the point (9.10).
 - The comparison of the trace formulas of two inner forms that differ only at the real places needs the formal degree
-  of `e_λ` and the stable sum of its elliptic orbital integrals (7.4).
+  `deg_λ` of `π_λ` and the stable sum of the elliptic orbital integrals of `e_λ`, which for a parameter of large gap
+  `10n⁵` is a sum of values of the complex conjugate of the character of `π_λ` (7.4, 9.5).
 
-Throughout, the roadmap works with one explicit function: Flensted-Jensen's integral `c_λ` over the maximal compact
-subgroup, an average of products of principal minors. For a parameter whose entries of different signs are far
-apart, it is the coefficient of the lowest `K`-type of a discrete series. The shorter proof never constructs a
-discrete series representation. Instead it does four things:
+The standard theory is the reference for these objects: the discrete series `π_λ` of `U(p, q)`
+(AutomorphicFormsOnReductiveGroups §2.4), its lowest `K`-type, formal degree and character, unitary representations on
+Hilbert spaces, holomorphic sections on the bounded symmetric domain, and the oscillator representation of a dual
+pair. Layer 9 states the results of the roadmap on these objects. For a parameter whose entries of different signs are
+far apart, Flensted-Jensen's integral `c_λ` over the maximal compact subgroup, an average of products of principal
+minors, is the coefficient `⟨υ_λ, π_λ(g)υ_λ⟩` of a unit highest weight vector `υ_λ` of the lowest `K`-type of `π_λ`,
+the closure in `L²` of the module that `c_λ` generates is a model of `π_λ`, and `deg_λ` is the formal degree of `π_λ`
+(9.3, 9.5). The objects of the route are one way to prove these results, and the proofs of Layers 4–8 are stated on
+them; [ShortProof] states its results on `c_λ` and identifies no representation with a discrete series. The route does
+four things:
 
 - it proves the properties of `c_λ` that it uses directly from the integral (5.3–5.5);
-- it builds the module that `c_λ` generates inside `L²` (5.4 (e));
+- it builds the module that `c_λ` generates inside `L²` (5.4 (e)), whose closure 9.3 identifies with `π_λ`;
 - it recognises `c_λ` as the coefficient of a `K`-highest vector of the right weight and Casimir value in any unitary
-  representation of polynomial growth (rigidity, 6.1 (e));
-- it states the local theta correspondence as statements about the operators `π(e_λ)` on a Fock space (8.6).
+  representation of polynomial growth (rigidity, 6.1 (e)), and 9.6 shows that such a vector, when it is not zero,
+  generates a copy of `π_λ`;
+- it states the local theta correspondence as statements about the operators `π(e_λ)` on a Fock space (8.6), from
+  which 9.9 derives the decomposition of the `π_λ`-isotypic part of the completed Fock space.
 
-So most sections here are about one function, with explicit gaps and constants, where the literature has theorems
-about representations.
+So most sections of Layers 4–8 are about one function, with explicit gaps and constants, where the literature has
+theorems about representations; Layer 9 states the corresponding results on the representations.
 
 Layer 1 constructs the compact-dual Haar measure on the unitary group `U(J)` of a hermitian involution and computes
-fibre measures of the Gram map. Layer 2 treats the unitary group of `ϱ` hyperbolic planes plus a middle block:
-its floors, the Bessel subgroup, the big cell, the real group `G₁` with its unipotent Haar measures and the bounds
-for Bessel functions. Layer 3 does measure theory at a place: quadrics, Fourier kernels, the complex place and the
+fibre measures of the Gram map. Layer 2 treats the unitary group of `ϱ` hyperbolic planes plus a middle block: its
+floors, the Bessel subgroup, the big cell, the real group `G₁` with its unipotent Haar measures and the bounds for
+Bessel functions. Layer 3 does measure theory at a place: quadrics, Fourier kernels, the complex place and the
 measures of the floors. Layer 4 defines parameters, `c_λ`, `𝔤𝔩_n`-modules and holomorphic functions of a weight, and
-proves the facts about highest vectors that the later layers use. Layer 5 proves the properties of `c_λ`. Layer 6
-proves rigidity, the vanishing of constant terms, the value of `c_λ` in the holomorphic chamber and the location of
-the peaks of bounded holomorphic forms. Layer 7 computes Weyl characters, `K`-type multiplicities, orbital integrals
-and the formal degree. Layer 8 states the local theta correspondence on Fock space.
+proves the facts about highest vectors that Layers 5–9 use. Layer 5 proves the properties of `c_λ`. Layer 6 proves
+rigidity, the vanishing of constant terms, the value of `c_λ` in the holomorphic chamber and the location of the peaks
+of bounded holomorphic forms. Layer 7 computes Weyl characters, `K`-type multiplicities, orbital integrals and the
+formal degree. Layer 8 states the local theta correspondence on Fock space. Layer 9 compares the objects of the route
+with the standard theory and states on the standard objects the results that other roadmaps use.
 
 The statements of this roadmap are used in `SecondMomentsOfPoincareSeries`, `PairsOfFramesAtOnePlace` and
 `RemainingAndMainTermsOfSecondMoments` (Layers 1–3 and 5), in `ThetaLiftChainsAndTheSeesawIdentity` and
-`WeilRepresentationsOnBanachSpacesOfData` (Layers 5, 6 and 8), in `NormsOfThetaLiftsAndExchangeIdentities`
-(Layers 5 and 6), and in `AdelicUnitaryGroupsAndAlgebraicModularForms` (Layers 6 and 7: cusp kernels and the trace
-formula comparison). In turn it cites sections of `OneSidedPrimeSumBoundsAndAdmissibleData`,
+`WeilRepresentationsOnBanachSpacesOfData` (Layers 5, 6 and 8), in `NormsOfThetaLiftsAndExchangeIdentities` (Layers 5
+and 6), and in `AdelicUnitaryGroupsAndAlgebraicModularForms` (Layers 6 and 7: cusp kernels and the trace formula
+comparison). In turn it cites sections of `OneSidedPrimeSumBoundsAndAdmissibleData`,
 `ThetaLiftChainsAndTheSeesawIdentity`, `AdelicUnitaryGroupsAndAlgebraicModularForms`,
-`SiegelWeilAndRallisFormulasOnUnitaryGroups`, `PairsOfFramesAtOnePlace`, `IntegralRepresentationsOfGeneralLinearGroups`
-and `WeilRepresentationsOnBanachSpacesOfData`, and of `RepresentationTheory/ClassicalGroups` and
-`RepresentationTheory/CompactGroups`.
+`SiegelWeilAndRallisFormulasOnUnitaryGroups`, `PairsOfFramesAtOnePlace`,
+`IntegralRepresentationsOfGeneralLinearGroups` and `WeilRepresentationsOnBanachSpacesOfData`, and of
+`RepresentationTheory/ClassicalGroups` and `RepresentationTheory/CompactGroups`; for Layer 9 it cites
+`AutomorphicFormsOnReductiveGroups`, `VonNeumannAlgebras`, `EndoscopicTransferAndUnitaryTraceComparison`,
+`RepresentationTheory/LieGroups` and `AutomorphicBundles`.
 
 ## Conventions and notation
 
 **Labels.** Every section that states something carries `*Origin:*`, which says where the statement comes from, and
 `*Method of the formal proof:*`, which says how the shorter formal proof proves it, as in the family
-`RiemannHypothesisForDirichletLFunctions`. `[ShortProof]` is the shorter formal proof; its pointers are paths under
-its directory `src/`.
+`RiemannHypothesisForDirichletLFunctions`; the sections of Layer 9, which `[ShortProof]` does not contain, carry
+`*Proof route:*` in its place. `[ShortProof]` is the shorter formal proof; its pointers are paths under its directory
+`src/`.
 
 **Forms and matrices.**
 - Hermitian forms are conjugate-linear in the first variable: `h(u, w) = u*Jw` for a hermitian matrix `J`.
@@ -102,6 +123,8 @@ OneSidedPrimeSumBoundsAndAdmissibleData §3.2 and ThetaLiftChainsAndTheSeesawIde
 | `c_λ`, `deg_λ`, `e_λ` | Flensted-Jensen's function, `deg_λ = (∫|c_λ|²)⁻¹`, `e_λ = deg_λ·conj c_λ` | 4.1 |
 | `π(f)` | `∫ f(g)π(g) dg` | 4.2 |
 | `T = (σ, γ, γ′)`, `𝒫` | a Fock datum; polynomials in the variables `z_{rc}` | 8.1 |
+| `V_ν`, `υ_ν` | irreducible representation of `K` of highest weight `ν`; a unit highest weight vector | 9.2 |
+| `π_λ`, `υ_λ`, `ϑ_λ` | discrete series of `G_ε` of Harish-Chandra parameter `λ`; a unit vector of weight `Λ` in its lowest `K`-type; its infinitesimal character | 9.3 |
 
 ## Layer 1: Haar measure on the unitary group of a hermitian involution
 
@@ -140,6 +163,12 @@ every lower semicontinuous `K : X → [0, ∞]` and every `C ∈ [0, ∞]`: if s
 (f) For a hermitian involution `J` of size `r`, a matrix `E ∈ M_{r×m}(ℂ)` and a measure `m` on `U(J)`, say that *`m`
 is below the Gram fibre at `E`* if the image of `m` under `g ↦ gE` is below the fibre measure of `Gram_J` over
 `Gram_J(E)`.
+
+**In standard terms.** The relation of (e) is one-sided: it says that `l` is at most the fibre measure, without
+constructing fibre measures. In the literature the fibre measures of `π` are measures `𝔪_t` carried by the fibres with
+`dx = ∫ 𝔪_t dt`; when such measures exist near `b` and depend continuously on `t` at `b`, a measure is below the fibre
+measure of `π` over `b` exactly when it is at most `𝔪_b` (9.10 (a)). For the Gram map on bases this makes
+`(vol U(r)/2^r)·μ^c_J` the fibre measure over `J` (9.10 (b)).
 
 *Needs:* none.
 
@@ -297,6 +326,12 @@ Then `m ∗ m′` is below the Gram fibre at `E`;
 Gram fibre at `(e_i)_{i∈p}`, `m′` fixes these `e_i` almost everywhere, and the law of `ge_j` under `m′` is below the
 fibre measure of `y ↦ (((Jy)_i)_{i∈p}, h(y, y))` over its value at `e_j`, then `m ∗ m′` is below the Gram fibre at
 `(e_i)_{i∈q}`.
+
+**In standard terms.** By 9.10 (b), statement (a) here says that `(vol U(r)/2^r)·μ^c_J` is the fibre measure of the
+Gram map over `J` at the bases, and that the measures below the Gram fibre at `1` are the measures at most this one.
+(b) and (c) bound fibre measures from below: where `Gram_J` has fibre measures near `Gram_J(E)` depending continuously
+on the point, their conclusion says that the image of `m ∗ m′` under `g ↦ gE` is at most the fibre measure over
+`Gram_J(E)` (9.10 (a)).
 
 *Needs:* 1.1–1.3; ShortGRH background (rules for the relation of 1.1 (e) with a measure `μ` on `X` in place of Lebesgue
 measure (`l` below the fibre measure of `π` for `μ` over `b`), for s-finite measures: if for `t` in a neighbourhood `V`
@@ -516,6 +551,15 @@ unitriangular `(ϱ + 1) × (ϱ + 1)` matrix is the frame block `u_F` of some `u 
 - `W(ny) = ψ_∞(σ(n))·W(y)` for `n ∈ 𝖴`;
 - `W(ι(h)y) = π_K(h)W(y)` for `h ∈ U(k)`.
 
+**In standard terms.** A Bessel function of type `π_K` in this sense is any bounded strongly measurable function with
+the two equivariances; no representation of `G₁` enters its definition, whereas in the literature Bessel functions are
+the functions `y ↦ ℓ(π(y)x)` of a Bessel model. For a unitary representation `π` of `G₁` on a Hilbert space, a smooth
+vector `x` and a continuous linear map `ℓ` from the smooth vectors to `ℂ^I` with `ℓ(π(n)x′) = ψ_∞(σ(n))·ℓ(x′)` for
+`n ∈ 𝖴` and `ℓ(π(ι(h))x′) = π_K(h)·ℓ(x′)` for `h ∈ U(k)` (a Bessel functional for the Bessel subgroup `S = 𝖴·ι(U(k))`,
+with the character `ψ_∞ ∘ σ` of `𝖴` and the type `π_K`; compare GanGrossPrasadUnitaryGroups §1.2 (Bessel subgroups and
+their characters)), the function `y ↦ ℓ(π(y)x)` is continuous and has the two equivariances, so it is a Bessel
+function of type `π_K` exactly when it is bounded. A Bessel function in the sense here need not arise in this way.
+
 *Needs:* 2.1–2.3.
 
 [ShortProof], `Lib/DiscreteSeries/Bessel/Basic` (`New.exists_eq_toBesselH`, `New.exists_besselU_mul_toBesselH`,
@@ -590,6 +634,11 @@ frame. If an s-finite `m` is below the Gram fibre at `F`, then `m ∗ ds ≤ (vo
 (c) the `ϱ`-tuples `e* + e·a + x·c` (`a ∈ M_ϱ(ℂ)`, `c ∈ M_{κ×ϱ}(ℂ)`) are the tuples dual to `e_0, …, e_{ϱ−1}` and
 orthogonal to `z`. Each is `u(e* + e·T/2)` with `u ∈ 𝖴⁰` and `T` hermitian, and for measurable `K ≥ 0`:
 `∫ K(e* + e·a + x·c) da dc = 2^{−ϱ}·∫ ∫_{𝖴⁰} K(u(e* + e·T/2)) dμ⁰(u) dT`.
+
+**In standard terms.** Where the Gram map has fibre measures near `Gram_{J₁}(E)` (resp. `Gram_{J₁}(F)`) depending
+continuously on the point, the hypothesis of (a) (resp. (b)) says that the image of `m` under `g ↦ gE` (resp.
+`g ↦ gF`) is at most the fibre measure over that point (9.10 (a)); the conclusions are inequalities between measures
+on `G₁`.
 
 *Needs:* 1.1–1.6, 2.5, 2.6.
 
@@ -889,6 +938,10 @@ measure of `y ↦ ((h(e_i, y))_{floor(i)<b}, h(y, y))` over its value at `f_b`;
 (c) `η_l` (at the place `ℂ`) and `ι_*(dh)` are invariant under inversion, and `(μ ∗ μ′)⁻¹ = μ′⁻¹ ∗ μ⁻¹` for
 s-finite measures.
 
+**In standard terms.** At a point over which the maps of (a) and (b) have fibre measures depending continuously on the
+point, (a) and (b) say that the measures named there are at most the fibre measures over the values at `f_b` and at
+`e*_a` (9.10 (a)): they bound these fibre measures from below.
+
 *Needs:* 1.1, 2.5, 3.5, 3.6; ShortGRH background (rules for the relation of 1.1 (e) with a measure `μ` on `X` in place
 of Lebesgue measure (`l` below the fibre measure of `π` for `μ` over `b`), for s-finite measures: if for `t` in a
 neighbourhood `V` of `b` the points `ψ_t(p)` of weight `w_t(p) ≠ 0` lie over `t`, `ψ` and `w` are continuous in `t` at
@@ -960,6 +1013,19 @@ derivative of it falls on `α`.
 complex analytic at every `hb` and has `F′(hb) = ∏_τ b_τ^{u_τ}·F(h)`. Here `h ∈ G^Φ` and each `b_τ` is
 `o`-triangular. A variant restricts `h_τ` and `b_τ` to the matrices that commute with a second sign vector `ε′`.
 
+**In standard terms.** For a parameter `l = 2λ` that has a gap, let `π_λ` be the discrete series of `G` of
+Harish-Chandra parameter `λ`, for the positive roots of (c) (AutomorphicFormsOnReductiveGroups §2.4). Its lowest
+`K`-type is the irreducible representation of `K` of highest weight `Λ`, which is the sense in which (c) calls the
+weight `Λ` the lowest `K`-type. For a large gap, `c_λ(g) = ⟨υ_λ, π_λ(g)υ_λ⟩` with `υ_λ` a unit vector of weight `Λ` in
+that `K`-type (9.3 (d)), and this holds already for a gap `h ≥ 120·n·min(p, q)^{3/2}` (9.3 (e)). Also for a large gap,
+`deg_λ` is the formal degree of `π_λ` for `μ^c` (9.5 (a)), and in every strongly continuous unitary representation `π`
+on a Hilbert space, `π(e_λ)` is the orthogonal projection onto the smooth vectors of the `π_λ`-isotypic subspace that
+are `K`-highest of weight `Λ` (9.4). A function holomorphic of weight `u` (f), without the variant, is a holomorphic
+section of a line bundle over an open orbit of `G^Φ` in a product of flag manifolds, and, for `o` with the indices of
+sign `+1` first and each `u_τ` `K`-dominant for `o`, the component along a highest weight vector of a holomorphic
+section of a homogeneous vector bundle on a product of copies of `G/K`, realised as the positive definite `p`-planes
+in a Grassmannian (9.8 (a), (b)).
+
 *Needs:* 1.1.
 
 [ShortProof], `Lib/DiscreteSeries/FlenstedJensen/Defs` (`New.weightMinors`, `New.HCParam.HasGap`,
@@ -1004,6 +1070,11 @@ A `𝔤𝔩_n`-module `M` with a linear `ι : M → X` is the *derivative of `π
 
 (f) For `X` complete and `f` with `f(g)‖g‖^A` integrable, `π(f) = ∫ f(g)π(g) dg`.
 
+**In standard terms.** A *unitary representation of exponent `A`* in the sense of (e) acts on a normed space that need
+not be complete for `B`, by operators that need not be isometries of its norm; in the literature a unitary
+representation acts on a Hilbert space by unitary operators. Completing `X` for `B` passes from the first to the
+second, with the same derivatives and the same operators `π(f)` (9.1).
+
 *Needs:* 1.1, 4.1.
 
 [ShortProof], `Lib/DiscreteSeries/Rigidity/RepresentationsAndCasimirs` (`New.GlModule`, `New.IsUnitaryRep`,
@@ -1046,7 +1117,7 @@ The library has the first half of (b) for `U(n)`: `Matrix.UnitaryGroup.exists_ex
 realised on the bounded symmetric domain, whose `K`-finite part is a lowest-weight module
 (DiscreteSeriesCoefficientsAndAutomorphicMetrics §6.8): here, on products of copies of `U(p, q)`, holomorphy means
 analytic continuation to the products `hb` with `b` triangular (4.1 (f)), in place of the bounded domain. No
-holomorphic discrete series is constructed.
+holomorphic discrete series is constructed in this section; 9.8 relates the two notions.
 
 *Method of the formal proof:* (a): products of minors are analytic on invertible matrices, and they transform under
 triangular factors as in 4.3 (c). (b): the extension is `F′(hb) = ℓ((b_τ^{u_τ}·c_τ(h_τ)x_τ)_τ)`. It is well defined
@@ -1079,6 +1150,16 @@ Then `h ↦ ℓ((c_τ(h_τ)x_τ)_τ)` is holomorphic of weight `u`, in the varia
 
 The library has highest weight vectors of the rational representations of `GL_n(ℂ)`, but no statement on a
 non-compact unitary group.
+
+**In standard terms.** Without the variant (equivalently, for `ε′` with all signs equal), 9.8 (a) makes a function
+holomorphic of weight `u` a holomorphic section of a line bundle over an open orbit of `G^Φ` in a product of flag
+manifolds, and, for `o` with the indices of sign `+1` first and each `u_τ` `K`-dominant for `o`, 9.8 (b) identifies it
+with a holomorphic section of a homogeneous vector bundle over a product of copies of `G/K`, realised as the positive
+definite `p`-planes in a Grassmannian. So (a) and (b), in that case and for `ε′` with all signs equal, say that
+products of minors and coefficients of `K`-highest vectors for `−o` give such sections. In the variant with `ε′ = ε`
+only the restriction to `K` and its continuation to the invertible block diagonal matrices enter; by Borel–Weil
+(RepresentationTheory/LieGroups §8.5) and 9.2, (c) is then Schur orthogonality for the irreducible representation of
+`K` of highest weight `w`.
 
 *Needs:* 4.1, 4.2, 4.3.
 
@@ -1228,10 +1309,18 @@ Let `l` have gap `h`. Prove that:
 `∫_K conj m_ν(k)·c_λ(xkb) dk = 0`.
 
 For a gap `h ≥ 120·n·min(p, q)^{3/2}`, these properties also follow from
-DiscreteSeriesCoefficientsAndAutomorphicMetrics §2.4a (b), which identifies `c_λ` with the lowest-`K`-type
-coefficient of the discrete series of parameter `λ`, together with Schur orthogonality on `K` and Blattner's
-formula. That route presupposes the existence and classification of discrete series; the statement above is about
-one explicit function, for every gap.
+DiscreteSeriesCoefficientsAndAutomorphicMetrics §2.4a (b), which identifies `c_λ` with the lowest-`K`-type coefficient
+of the discrete series of parameter `λ` (9.3 (e)), together with Schur orthogonality on `K` and Blattner's formula.
+That route presupposes the existence and classification of discrete series; the statement above is about one explicit
+function, for every gap.
+
+**In standard terms.** For a large gap, 9.3 (d) identifies `c_λ` with the coefficient `⟨υ_λ, π_λ(g)υ_λ⟩` of the
+discrete series `π_λ`, and 9.3 (e) does so for a gap `h ≥ 120·n·min(p, q)^{3/2}`. Then (a) says that on `K` this is
+the coefficient of the unit highest weight vector `υ_λ` of the lowest `K`-type (9.2 (a)); (c) is the unitarity of
+`π_λ` and, by 9.3 applied to `λ` and to `−λ`, says that `π_{−λ}` is the complex conjugate, that is the contragredient,
+of `π_λ`; and (d), (e) compute the coefficients of the components of `π_λ(b)υ_λ` along the highest weight vectors of
+the representations of `K` of highest weights `Λ` and `ν`, so that, for a large gap, they express that `Λ` occurs once
+in `π_λ` and that no `K`-type of highest weight `ν` with `ν − Λ` outside the root cone of `l` occurs (9.3 (c)).
 
 *Needs:* 4.1, 4.3, 4.4, 5.1, 5.2.
 
@@ -1245,7 +1334,8 @@ one explicit function, for every gap.
 coefficients of cohomologically induced representations* (2007), Thm 1.1: the integral formula for the
 lowest-`K`-type coefficient of a discrete series of `U(p, q)` (compare DiscreteSeriesCoefficientsAndAutomorphicMetrics
 §2.4a): here, polynomial decay with the full exponent `h`, Schur orthogonality with `deg_λ = (∫|c_λ|²)⁻¹`, and a
-unitary model of `U(𝔤)c_λ` in `L²(G)` for a large gap. The discrete series is built from `c_λ`, not assumed.
+unitary model of `U(𝔤)c_λ` in `L²(G)` for a large gap. The discrete series is built from `c_λ`, not assumed; 9.3
+identifies it with `π_λ`.
 
 *Method of the formal proof:* (a) combines `|c_λ(g)| ≤ |det a_g|^{−h/2}`, from Fischer's inequality for determinants
 of positive definite matrices, with `|det a_g| ≥ (‖g‖/2)²`. (c): a right derivative of a smearing falls on the bump
@@ -1281,6 +1371,12 @@ The decay of (a) is used with exponents up to the gap itself. DiscreteSeriesCoef
 `d(k·exp X) = ‖X‖_HS`. This gives only the exponent `h/(8√q₀)` in `‖g‖`, and only for `h ≥ 120·n·q₀^{3/2}` or, for
 the coefficient of one vector, `h > max(8nq₀, npq + 1)`. So that section does not imply (a).
 
+**In standard terms.** For a large gap, the closure of the image of the `L²` model (e) is the discrete series `π_λ`,
+in which `√deg_λ·c_λ` is a unit vector of weight `Λ` of the lowest `K`-type (9.3 (a), (d)); (d) is Schur orthogonality
+for `π_λ` at that vector, `deg_λ` being the formal degree of `π_λ` for `μ^c` (9.5 (a)); (a) and (c) are bounds for the
+coefficient `⟨υ_λ, π_λ(g)υ_λ⟩` of `π_λ` (9.3 (d), and 9.3 (e) for (a) when `h ≥ 120·n·min(p, q)^{3/2}`) and for the
+coefficients `⟨υ_λ, π_λ(g)y⟩` of its `K`-finite smooth vectors `y`.
+
 *Needs:* 1.5, 4.1, 4.2, 4.5, 5.2, 5.3.
 
 [ShortProof], `Lib/DiscreteSeries/FlenstedJensen/SquareIntegrability` (`New.DiscreteSeries.norm_dsCoeff_le_pow`,
@@ -1313,6 +1409,10 @@ with `|c_λ ∘ j|²` integrable. Then for `r ≥ 1`:
 
 (e) for an integer `c > 8n²`, `g ↦ deg_λ(2/‖g‖)^c` is integrable on `G` with integral at most
 `8(2000(n + L + 1)⁶)^{2n²}·2^c`.
+
+**In standard terms.** By 9.3 (d), statements (a)–(d) here are bounds for the coefficient `⟨υ_λ, π_λ(g)υ_λ⟩` of the
+lowest `K`-type of `π_λ` and for its derivatives, and (e) bounds the formal degree `d(π_λ) = deg_λ` (9.5 (a)) times
+the integral of `(2/‖g‖)^c`.
 
 *Needs:* 1.5, 5.4.
 
@@ -1361,6 +1461,14 @@ needed for (a) and (e)):
 (f) under the hypotheses of (e), `π(f)ι(v) = ι(v)` for every `f` with `f(g)‖g‖^A` integrable and
 `∫ f(y)e_λ(y⁻¹g) dy = e_λ(g)` for all `g`.
 
+**In standard terms.** By 9.1, `π` extends to a strongly continuous unitary representation on the completion `ℋ_B` of
+`X` for `B`. By 9.3 (d) and 9.5 (a), `e_λ(g) = d(π_λ)·⟨π_λ(g)υ_λ, υ_λ⟩` for the discrete series `π_λ` and its formal
+degree, and (a) is the idempotence of this function. By 9.4, on `ℋ_B` the operator `π(e_λ)` is the orthogonal
+projection onto the vectors of weight `Λ`, `K`-highest, of the `π_λ`-isotypic subspace. So (c) says that the closed
+span of `π(G)ι(v)` is orthogonal to that subspace; (d) says that `π_λ` occurs in `ℋ_B` and that `ι(v)` has a nonzero
+component in its isotypic subspace; and (e), (f) say that `ι(v)` lies in the image of that projection, and so, when
+`ι(v) ≠ 0`, generates a copy of `π_λ` in which it is a multiple of `υ_λ` (9.6).
+
 *Needs:* 2.8, 4.2, 4.5, 5.2–5.4.
 
 [ShortProof], `Lib/DiscreteSeries/Rigidity/KernelFixes` (`New.HCParam.HasLargeGap.isIdempotentKernel_dsKernel`,
@@ -1401,9 +1509,17 @@ Then `∫ e(g)f(xg) dg = 0` for every `x` and every bounded continuous `f` with 
 - `gA = (1 + c)A`;
 - `w*Jgv = w*Jv` whenever `A*Jv = A*Jw = 0`.
 
-The formal proof does not state that coefficients of integrable discrete series are cusp forms. That theorem follows
-from (a) and (b) with `e = e_λ` (6.1 (a)) and `H` a height on the adelic quotient. The conclusion is drawn in
+The formal proof does not state that coefficients of integrable discrete series are cusp forms. For `π_λ` with a large
+gap, 9.7 deduces that theorem from (a) and (b) with `e = e_λ` (6.1 (a)) and `H(g) = log‖g⁻¹A‖`; with `e = e_λ` and `H`
+a height on the adelic quotient, (a) and (b) give the cuspidality of forms, which is drawn in
 AdelicUnitaryGroupsAndAlgebraicModularForms §§5.2, 5.3, 5.4 (cusp kernels; cuspidality of forms).
+
+**In standard terms.** By 9.7, statements (a) and (b) here give, for a large gap, that the `K`-finite coefficients of
+`π_λ`, `c_λ` among them, and those of its contragredient `π_{−λ}`, `e_λ/deg_λ = c_{−λ}` among them, satisfy
+Harish-Chandra's cusp condition on `G_ε`: their integrals along the unipotent radical of every proper parabolic
+subgroup vanish. The comparison of the forms of type `e_λ` with cusp forms on the adelic group is
+AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (Forms of parameter `l` and cusp forms with a discrete series at
+infinity).
 
 *Needs:* 1.1, 2.8.
 
@@ -1443,6 +1559,15 @@ minor of size `i` and `w_{n+1} = 0`. For `u = (u_τ)` put `m^hol_u(h) = ∏_τ m
 (d) *(the holomorphic chamber)* let `n ≥ 1` and `A ∈ ℕ`. Let `w` be `K`-dominant for `o` with `w_i + γ ≤ w_j` whenever
 `ε_i = 1` and `ε_j = −1`, where `γ > 500n³ + A + n + 1`. Then `l = 2w + 2ρ(−o)` has large gap `A`, and
 `c_λ = m^hol_w` on `G_ε`.
+
+**In standard terms.** By 9.8 (b), a function holomorphic of weight `u`, with each `u_τ` `K`-dominant for `o`, is the
+component along `⊗_τ υ_{u_τ}` of a holomorphic section of a homogeneous vector bundle over a product of copies of
+`G_ε/K_ε`, realised as the positive definite `p`-planes in a Grassmannian; (a) says that `m^hol_u` is such a function,
+(b) is a reproducing formula and (c) a uniqueness statement for them. By 9.8 (c), statement (d) here says that in the
+holomorphic chamber `m^hol_w` is the coefficient `⟨υ_λ, π_λ(g)υ_λ⟩` of the lowest `K`-type of the discrete series
+`π_λ`, `λ = w + ρ(−o)`, a holomorphic discrete series in the sense of DiscreteSeriesCoefficientsAndAutomorphicMetrics
+§6.8 for the complex structure of `G_ε/K_ε` as the set of positive definite planes of 9.8 (b), in which the `E_ij`
+with `ε_i = 1` and `ε_j = −1`, which kill its lowest `K`-type, span `𝔭⁻`.
 
 *Needs:* 4.1, 4.3, 4.4, 5.2, 5.3.
 
@@ -1484,6 +1609,14 @@ following properties:
 - for every adelic `g` the function `h ↦ F(g·(h, 1))` on the real points is holomorphic of weight `u` (4.1 (f)).
 
 Prove that `λ(V_g) ≥ (AA′)^{−1/2}` at every peak `g` of `F`.
+
+**In standard terms.** By 9.8 (b), if some `u_w` is not `K`-dominant for `o` then `F = 0`; otherwise the last
+hypothesis says that at every adelic `g` the function `h ↦ F(g·(h, 1))` is the component along `⊗_w υ_{u_w}` of a
+holomorphic section of the homogeneous vector bundle of weight `u` over the product of the bounded symmetric domains
+of the real points, realised as the planes of dimension the number of signs `+1` on which the hermitian form is
+positive definite. So `F` comes from a bounded holomorphic vector-valued form, invariant under `Γ` and under the
+principal congruence subgroup of level `p`, and the statement locates its peaks away from the cusps, as in Siegel's
+argument cited on the Origin line.
 
 *Needs:* 4.1, 6.3; AdelicUnitaryGroupsAndAlgebraicModularForms §§3.1, 3.9, 4.2 (spaces, first minima, principal
 levels).
@@ -1534,6 +1667,12 @@ dimension as `TauCeti.finrank_rationalWeylFDRep`. It has Schur orthogonality as
 `ContRepresentation.schur_orthogonality_self`. What is missing, and what (a) and (b) need, is the bridge: on `K`,
 `m_ν` is the coefficient of a unit highest weight vector of the irreducible representation of highest weight `ν`.
 Hence `‖m_ν‖²_K = 1/dim` and `χ_ν` is its character.
+
+**In standard terms.** 9.2 states this bridge on the standard objects: for `ν` `K`-dominant for `−l`, `m_ν` on `K` is
+the coefficient `⟨υ_ν, k·υ_ν⟩` of a unit highest weight vector of the irreducible representation `V_ν` of `K` of
+highest weight `ν`, and `χ_ν` is the character of `V_ν`. So (a) is Weyl's character formula for `V_ν` on the diagonal
+torus, and (b) is Weyl's dimension formula `dim V_{λ−ρ} = dim(λ)` for the irreducible representation of `U(n)` of
+highest weight `λ − ρ`.
 
 *Needs:* 1.4, 4.1; RepresentationTheory/ClassicalGroups §§4.2, 5.1 (characters and dimensions of Weyl
 modules); RepresentationTheory/CompactGroups §4.1 (Schur orthogonality);
@@ -1622,7 +1761,7 @@ theory of semisimple groups* (1986), Thm 12.7: the formal degree of a discrete s
 matched with the compact dual to the dimension of the representation of the compact dual with the same infinitesimal
 character (DiscreteSeriesCoefficientsAndAutomorphicMetrics §8.3): here, for `U(p, q)`, a large gap and the explicit
 function `c_λ`. The formal degree is `(∫|c_λ|²)⁻¹`, and the stable sum of the elliptic orbital integrals of `e_λ` is
-computed. No representation occurs.
+computed. No representation occurs in these statements; 9.5 states them for the discrete series `π_λ`.
 
 *Method of the formal proof:* One Laurent polynomial is described in two ways: 7.2 (c) gives the orbital integral,
 times the products of roots `V_c·D^N`, as a Laurent polynomial whose exponents are controlled by the root cone, and
@@ -1642,6 +1781,15 @@ The general theorem is DiscreteSeriesCoefficientsAndAutomorphicMetrics §8.3, wh
 identified with the lowest-`K`-type coefficient of a discrete series and the measures are matched. The shorter proof
 needs only the statement above about one function.
 
+**In standard terms.** By 9.3 and 9.5 (a), `deg_λ` is the formal degree `d(π_λ)` of the discrete series `π_λ` for
+`μ^c`, and `e_λ(g) = d(π_λ)·⟨π_λ(g)υ_λ, υ_λ⟩`. So (a) is the formula `d(π_λ) = dim(λ)` for `U(p, q)` and the Haar
+measure `μ^c` (9.5 (b)); DiscreteSeriesCoefficientsAndAutomorphicMetrics §8.3 gives the same value for the Haar
+measure normalised by the compact dual, so `μ^c` is that measure and (a) is the case of §8.3 for these parameters
+(9.5). By Harish-Chandra's character formula on the compact Cartan subgroup
+(EndoscopicTransferAndUnitaryTraceComparison §2.3 (c)), (b) is equivalent to 9.5 (c): the sum over the permutations
+`σ` of the orbital integrals of `e_λ` at `diag(x∘σ)` is the sum of the values there of the complex conjugate of the
+character of `π_λ`.
+
 *Needs:* 1.4, 4.1, 5.4, 7.1–7.3.
 
 [ShortProof], `Lib/DiscreteSeries/Character/FormalDegree` (`New.Orbital.formalDegree_eq_weylDimensionPoly`,
@@ -1652,6 +1800,10 @@ needs only the statement above about one function.
 Fock data of a real unitary dual pair, matched parameters and joint harmonics. The section results are the block rule
 for parameters, the uniqueness and existence of joint harmonics, the comparison of Casimir operators, Howe's argument,
 and the local correspondence as statements about the operators `π(e_λ)` of an oscillator pair.
+
+The title of the layer names the statements of 8.6, which are about operators on a Fock space; the correspondence of
+representations that they give, in which the multiplicity space of `π_λ` in the completed Fock space is `π_{λ′}`, is
+9.9.
 
 ### 8.1 Fock data, oscillator actions, matching and joint harmonics
 
@@ -1702,6 +1854,19 @@ on `𝓕` (4.2 (e)) with the following properties:
 An *oscillator pair* is an oscillator representation `π` of `G_ε` for `T` and `π′` of `G_{ε′}` for the swap, with `π(g)`
 and `π′(h)` commuting. For `v_Φ` write `Φ`.
 
+**In standard terms.** Here an *oscillator representation* is any representation with the properties of (e), on the
+normed space `𝓕`; in the literature the oscillator representation of the dual pair `(U(ε), U(ε′))` is a unitary
+representation on a Hilbert space. By 9.1, an oscillator representation extends to a strongly continuous unitary
+representation on the completion of `𝓕` for `⟨,⟩`, in which the polynomial vectors are dense
+(WeilRepresentationsOnBanachSpacesOfData §2.2 (d)), and an oscillator pair to two commuting ones. For the pair of
+WeilRepresentationsOnBanachSpacesOfData §2.4 (b), the comparison of `𝓕` with the Fock space of entire functions is
+WeilRepresentationsOnBanachSpacesOfData §10.3, and the representation `ω_η` from which `π` and `π′` come by
+restriction and a twist by powers of the determinant is compared with the Fock model of a local Weil representation in
+§10.7 (d) of that roadmap; when the pair is the factor at an infinite place of the real pair action of two hermitian
+spaces and two automorphic characters of `U(1)` (§6.2 (b) of that roadmap), the same §10.7 (d) identifies the pair
+itself with the Fock model of the local Weil representation of the unitary dual pair at that place, for the splitting
+characters stated there.
+
 *Needs:* 4.1, 4.2; WeilRepresentationsOnBanachSpacesOfData §§1.1, 2.1 (Fock space, form, polynomial vectors).
 
 [ShortProof], `Lib/DiscreteSeries/Theta/FockDualPair` (`New.FockDualPair`, `New.FockDualPair.swap`,
@@ -1745,6 +1910,12 @@ indexed by `T`, columns by `S`, `σ = 1`, row shift `γ` and column shift `n′ 
 - for a common entry `l_c + (n′ mod 2) = l′_r + (n mod 2)`, `s_c ≠ t_r` exactly when it is below `2e`.
 
 The same holds with `⌈·⌉` and the signs of the parities reversed.
+
+**In standard terms.** By (a), when the block rule holds, `l′` and `−l` match for the Fock datum of (a), so 9.9
+applies to every oscillator pair for that datum: the `π_{λ′}`-isotypic subspace of the completed Fock space for `U(T)`
+is `π_{λ′} ⊗̂ π_{−λ}` as a representation of `U(T) × U(S)`, and `π_{−λ}` is the complex conjugate, that is the
+contragredient, of `π_λ` (by 9.3 (d), its coefficient `c_{−λ}` is `conj c_λ`, 5.3 (c)). This roadmap does not compare
+the block rule with the description of the theta correspondence of discrete series by Li (1990).
 
 *Needs:* 4.1, 8.1.
 
@@ -1876,12 +2047,487 @@ DiscreteSeriesCoefficientsAndAutomorphicMetrics §2.4a (b) and the existence of 
 parameters, implies (a)–(c). The shorter proof needs only the statements above. Equal ranks, which matching allows,
 are outside the *Data* of §3.46a.
 
+**In standard terms.** On the completion `ℋ` of `𝓕` (9.1), statements (a)–(c) here give 9.9: the space of the
+`G_ε`-maps from `π_λ` to `ℋ` is, as a representation of `G_{ε′}`, isomorphic to `π_{λ′}`; the `π_λ`-isotypic subspace
+of `ℋ` is `π_λ ⊗̂ π_{λ′}` as a representation of `G_ε × G_{ε′}`; and `π(e_λ)Φ` is a nonzero vector of its line
+`υ_λ ⊗ υ_{λ′}`. So `π_λ` occurs in the restriction of the oscillator pair to `G_ε` with multiplicity space `π_{λ′}`,
+for all matching parameters, equal ranks included. For the pair of WeilRepresentationsOnBanachSpacesOfData §2.4 (b),
+`ℋ` is the Fock space of entire functions on `ℂ^{R×C}` (WeilRepresentationsOnBanachSpacesOfData §10.3), and `π`, `π′`
+come by restriction and a twist by powers of the determinant from the representation that §10.7 (d) of that roadmap
+compares with the Fock model of a local Weil representation; when the pair is the factor at an infinite place of the
+real pair action of two hermitian spaces and two automorphic characters of `U(1)` (§6.2 (b) of that roadmap), §10.7
+(d) identifies `π` and `π′` on `ℋ` with the Fock model of the local Weil representation of the unitary dual pair at
+that place, for the splitting characters stated there.
+
 *Needs:* 5.4, 6.1, 8.1, 8.3–8.5.
 
 [ShortProof], `Lib/DiscreteSeries/Theta/LocalCorrespondence` (`New.OscillatorPair.re_inner_integratedRep_pos`,
 `New.OscillatorPair.integratedRep_integratedRep_eq_self`, `New.OscillatorPair.exists_bump_integratedRep_eq`,
 `New.OscillatorPair.map_integratedRep_dsKernel`, `New.OscillatorPair.isDerivedAction_integratedRep`,
 `New.OscillatorPair.swap`)
+
+## Layer 9: Comparison with the standard theory
+
+This layer relates the objects of the route to the standard objects owned by the general roadmaps of the library, and
+states on the standard objects the results of the route that other roadmaps use: unitary representations on Hilbert
+spaces (9.1); the irreducible representations of `K_ε`, their coefficients and characters (9.2); the discrete series
+`π_λ` of `G_ε` of Harish-Chandra parameter `λ`, whose lowest-`K`-type coefficient is `c_λ` and whose model in
+`L²(G_ε)` is the module of 5.4 (e) (9.3); the `π_λ`-isotypic part of a unitary representation, which `e_λ` cuts out
+(9.4); the formal degree and the character of `π_λ` (9.5); the representation generated by a lowest-`K`-type vector
+(9.6); cusp forms on `G_ε` (9.7); holomorphic sections of homogeneous bundles on flag manifolds and on `G_ε/K_ε`
+(9.8); the `π_λ`-isotypic part of the completed Fock space of an oscillator pair (9.9); fibre measures (9.10).
+[ShortProof] proves none of these statements; each section gives a `*Proof route:*` in place of the method of the
+formal proof. Layers 1–8 do not use this layer. Inner products are conjugate-linear in the first variable, as
+hermitian forms are in the Conventions.
+
+### 9.1 Unitary representations of exponent `A` and their Hilbert completions
+
+*Origin:* comparison of the unitary representations of exponent `A` of 4.2 (e) with strongly continuous unitary
+representations on Hilbert spaces; not part of the formal proof.
+
+*Proof route:* `B(π(g)x, π(g)y) = B(x, y)` and `π(g)π(g⁻¹) = 1`, so `π(g)` extends to a unitary operator of `ℋ_B`. As
+`B` is bounded, `B(y, y) ≤ c‖y‖²` for a constant `c`, so the continuity of `g ↦ π(g)x` in `X` gives its continuity in
+`ℋ_B` for `x ∈ X`; the extended operators being unitary, approximation by vectors of `X` gives strong continuity on
+`ℋ_B`. The same bound carries the derivatives along `ι`, and the Bochner integrals of 4.2 (f), from `X` to `ℋ_B`. For
+(c), a unitary operator has norm `1`, and the smooth vectors of a strongly continuous representation form an invariant
+subspace on which `𝔲(J)` acts by derivatives.
+
+Let `J` be a hermitian involution of size `n`, and `π` a unitary representation of exponent `A` of `U(J)` on a normed
+space `X`, with invariant form `B` (4.2 (e)). Let `ℋ_B` be the Hilbert space completion of `X` for the norm
+`B(x, x)^{1/2}`, into which `X` embeds because `B` is positive definite. Prove that:
+
+(a) each `π(g)` extends to a unitary operator of `ℋ_B`, and these operators form a strongly continuous unitary
+representation of `U(J)` on `ℋ_B`, with `X` a dense invariant subspace on which the inner product is `B`;
+
+(b) if `ρ` is the derivative of `π` along `ι : M → X`, it is also the derivative of the representation of (a) along
+`ι : M → ℋ_B`; and if `X` is complete and `f(g)‖g‖^A` is integrable, the operator `π(f)` of 4.2 (f) is the restriction
+to `X` of the operator `∫ f(g)π(g) dg` of `ℋ_B`;
+
+(c) conversely, a strongly continuous unitary representation of `U(J)` on a Hilbert space is a unitary representation
+of exponent `0` whose invariant form is the inner product, and its space of smooth vectors, with the complex-linear
+extension of the derived action of `𝔲(J)`, is a `𝔤𝔩_n`-module along whose inclusion the representation has this module
+as derivative.
+
+The statements of 6.1 and 8.6 are therefore statements about representations on the Hilbert spaces `ℋ_B`.
+
+*Needs:* 4.2.
+
+### 9.2 Products of principal minors on `K` and the irreducible representations of `K`
+
+*Origin:* comparison of the functions `m_ν` of 4.1 (a) and `χ_ν` of 7.1 on `K = K_ε ≅ U(p) × U(q)` with the matrix
+coefficients and characters of the irreducible representations of `K`; this is the bridge that 7.1 names; not part of
+the formal proof.
+
+*Proof route:* `m_ν` is a product of principal minors and of powers of `det`, a regular function on `GL_n(ℂ)`, so its
+right translates by `K` span a finite-dimensional space. 4.3 (c), with `o = −l`, gives `m_ν(xb) = m_ν(x)·b^ν` for
+invertible block diagonal `(−l)`-triangular `b`, and `m_ν(bx) = b^ν·m_ν(x)` for invertible block diagonal
+`l`-triangular `b`. By the first identity, `m_ν` restricted to `K` is, for the right regular representation, a vector
+of weight `ν` killed by the `E_ab` with `ε_a = ε_b` and `l_b < l_a`, so the representation of `K` that it generates is
+a copy of `V_ν`, and `m_ν(k) = ⟨u, k·υ_ν⟩` for some `u ∈ V_ν`. The second identity, on the diagonal torus, makes `u` a
+vector of weight `ν`, hence a multiple of `υ_ν`, and `m_ν(1) = 1` gives `u = υ_ν`. Schur orthogonality for one
+irreducible representation gives (b); the operator `∫_K y⁻¹ky dy` of `V_ν` is `tr(k|V_ν)/dim V_ν` (Schur's lemma),
+which gives (c).
+
+Let `l ∈ ℤ^n` have distinct entries and let `ν ∈ ℤ^n` be `K`-dominant for `−l` (4.1 (b)). Let `V_ν` be the irreducible
+representation of `K` of highest weight `ν` for the roots `e_a − e_b` with `ε_a = ε_b` and `l_b < l_a`, with a
+`K`-invariant inner product and with action written `y ↦ k·y`, and let `υ_ν` be a unit vector of `V_ν` of weight `ν`
+killed by the `E_ab` with `ε_a = ε_b` and `l_b < l_a` (a vector `K`-highest of weight `ν` in the sense of 4.2 (b)); it
+is unique up to a factor of modulus one. Prove that:
+
+(a) `m_ν(k) = ⟨υ_ν, k·υ_ν⟩` for every `k ∈ K`;
+
+(b) `‖m_ν‖²_K = 1/dim V_ν`;
+
+(c) the function `χ_ν` of 7.1 is the character `k ↦ tr(k|V_ν)` of `V_ν`.
+
+So 7.1 (a) is Weyl's character formula for `V_ν` on the diagonal torus, and 7.1 (b), for all signs `+1`, is Weyl's
+dimension formula `dim V_{λ−ρ} = dim(λ)` for `U(n)`.
+
+*Needs:* 4.1, 4.2, 4.3, 7.1; RepresentationTheory/ClassicalGroups §4.2 (Characters are Schur polynomials), §5.1
+(Dimension comparison); RepresentationTheory/CompactGroups §4.1 (One irreducible).
+
+### 9.3 Flensted-Jensen's function and the discrete series `π_λ`
+
+*Origin:* comparison of `c_λ`, `deg_λ` and the `L²` model of 5.4 (e) with the discrete series of `G_ε` and its
+lowest-`K`-type coefficient, given by the integral formula of Flensted-Jensen, *Discrete series for semisimple
+symmetric spaces* (1980), and Sun, *Matrix coefficients of cohomologically induced representations* (2007), Thm 1.1,
+as on the Origin lines of 5.2–5.4; not part of the formal proof.
+
+*Proof route:* (a) Every element of `U(𝔤)c_λ` is a smearing `∫ α(y⁻¹)R(y)c_λ dy` of `c_λ` by a bump (5.4 (c)), so the
+image lies in the closed span of the right translates. A vector of that span orthogonal to the image defines, through
+its inner products with the `R(g)√deg_λ·f`, a bounded coefficient map on the module of 5.4 (e) (whose derivatives are
+those of 5.4 (e)) that vanishes at `1` on every step of the filtration of `c_λ`; by 4.5 (d), with the Casimir bound of
+5.4 (e) and with 5.4 (b), the vector is orthogonal to every `R(g)υ`, hence zero. 5.4 (d) at `x = 1` gives
+`⟨υ, R(g)υ⟩ = c_λ(g)` and `R(e_λ)υ = υ`. As `e_λ(g⁻¹) = conj e_λ(g)` and `e_λ(x⁻¹)/e_λ(1) = c_λ(x)`, the identity of
+idempotent kernels (6.1 (a)) makes `R(e_λ)` a self-adjoint idempotent on `ℋ_λ` with
+`R(e_λ)R(g)R(e_λ) = c_λ(g)·R(e_λ)`, so its image is `ℂυ`; it commutes with the projection onto a closed invariant
+subspace, so for an orthogonal decomposition of `ℋ_λ` into two closed invariant subspaces, `υ` lies in one of them,
+which is then `ℋ_λ`. The right translates of `c_λ` by `K` lie in a finite-dimensional space (polar formula 5.3 (b),
+`m_Λ` being a regular function on `GL_n(ℂ)`), so `υ` is `K`-finite and `U(𝔤)υ` is a nonzero `(𝔤, K)`-submodule of the
+irreducible Harish-Chandra module of `ℋ_λ` (AutomorphicFormsOnReductiveGroups §2.2), hence equal to it. The `K`-finite
+coefficients of `ℋ_λ` are then two-sided smearings of `c_λ` by bumps, and `c_λ` is square integrable (5.4 (c)), so
+`ℋ_λ` is square integrable in the sense of AutomorphicFormsOnReductiveGroups §2.4 (the split centre of `G` is
+trivial); Schur orthogonality at `υ` (VonNeumannAlgebras Layer 9) gives the formal degree `(∫|c_λ|²)⁻¹ = deg_λ`. (b)
+As for 5.2 (d): near `g₀`, with `a = a_{g₀}`, 5.2 (a) writes `c_λ(g)` as the integral over `k ∈ K` of
+`m_Λ(ak)·conj m_Λ(k)·ψ(k⁻¹a⁻¹gk)/‖m_Λ‖²_K`, with `ψ = 1/m_{−(λ+ρ)}`; the right derivative of `g ↦ ψ(k⁻¹a⁻¹gk)` along
+`Ad(k)Y` is that of `ψ` along `Y`, and `Ad(k)` fixes `𝔷`. By 4.3 (c) with all signs equal and `o = l`,
+`ψ(yb) = b^{λ+ρ}·ψ(y)` for `l`-triangular `b`: `ψ` has weight `λ + ρ` and is killed by the root vectors of the
+positive system of the `e_a − e_b` with `l_a < l_b`, whose half-sum of positive roots is `−ρ`. By
+AutomorphicFormsOnReductiveGroups §2.2, `𝔷` acts on a vector of weight `μ` killed by the root vectors of a positive
+system of half-sum `ρ′` as on the Verma module of highest weight `μ` for that system, by `ϑ_{μ+ρ′}` (a permutation
+matrix carries this positive system to the one fixed there and fixes `𝔷`); so `𝔷` acts on `ψ` by `ϑ_λ`.
+Differentiation under the integral gives the identity, and `υ` lies in the irreducible Harish-Chandra module of `ℋ_λ`.
+(c) By 9.2 (c) and AutomorphicFormsOnReductiveGroups §2.1, the projection onto the `V_ν`-isotypic part of `ℋ_λ` is
+`P_ν = dim V_ν·∫_K conj χ_ν(k)R(k) dk`, so the function integrated in 7.2 (a) is `g ↦ ‖P_νR(g)υ‖²/dim V_ν`; Schur
+orthogonality in `ℋ_λ`, summed over an orthonormal basis of `P_νℋ_λ`, gives `deg_λ·∫_G ‖P_νR(g)υ‖² dg = dim P_νℋ_λ`,
+so that `m·dim V_ν = dim P_νℋ_λ`. (d) AutomorphicFormsOnReductiveGroups §2.4 is used as the classification of the
+discrete series of `G`: every discrete series of `G` is `π_μ` for a regular `μ ∈ ρ + ℤ^n`, unique up to the
+permutations `σ` with `ε∘σ = ε`. So `ℋ_λ ≅ π_μ` for such a `μ`, which a permutation `σ` with `ε∘σ = ε` makes dominant
+for the compact positive roots of `l`. By (b) and AutomorphicFormsOnReductiveGroups §2.2, `μ` is a permutation of `λ`,
+so `ν := μ + ρ(μ)`, with `ρ(μ)` the half-sum of the roots positive on `μ`, is the same permutation of `ν′ := λ + ρ`.
+The lowest `K`-type of `π_μ` has highest weight `ν − 2ρ_c` and occurs in `ℋ_λ`, so by (c)
+`β := ν − ν′ = (ν − 2ρ_c) − Λ` lies in the root cone of `l`; the vector `o = −(l + 2ρ)` in the definition of the root
+cone gives `⟨ν′, β⟩ ≥ 0`, and `|ν|² = |ν′|² + 2⟨ν′, β⟩ + |β|²` with `|ν| = |ν′|` gives `β = 0`. The regular vector
+`ν = ν′` lies in the chambers of `μ` and of `λ`, which therefore agree, so `ρ(μ) = ρ` and `μ = λ`. (A second route: a
+large gap implies the gap of (e), so `c_λ` is the coefficient of a unit vector `υ_λ` of `π_λ`, and `π_λ(g)υ_λ ↦ R(g)υ`
+preserves inner products and extends to a unitary `G`-isomorphism, both representations being generated by these
+vectors.) By (c), `V_Λ` occurs once in `ℋ_λ`; a smooth `K`-highest vector of weight `Λ` lies in the `V_Λ`-isotypic
+part, and those of that part form the line `ℂυ` (5.4 (b)). (e) Relabel the indices so that `l` is decreasing; this
+conjugates `G_ε` by a permutation matrix, preserves `μ^c` (1.2 (b)), and carries `c_λ`, `ρ`, `ρ_c` and `Λ` to the
+objects of the relabelled data, which are those of DiscreteSeriesCoefficientsAndAutomorphicMetrics §2.4a. For a
+positive definite `z ∈ G`, `z⁻¹ = diag(ε)·z·diag(ε)` and `det z = 1`, so by Jacobi's identity for complementary minors
+the trailing principal minor of `z` of size `n − i` equals the leading one `Δ_i(z)`, and the function `Φ_λ` of that
+section is `1/m_{−(λ+ρ)}` at these `z`. By 9.2 (a), (b), `m_Λ(k) = ⟨υ_λ, π_λ(k)υ_λ⟩` for `k ∈ K` and
+`‖m_Λ‖²_K = 1/dim V_Λ`, the `Λ`-isotypic subspace being irreducible under `K` by §2.4a (b). Then the identity of §2.4a
+(b) for `u = v = υ_λ` is, up to complex conjugation of both sides, the polar formula 5.3 (b) for `c_λ(k₁·exp X)` with
+`⟨υ_λ, π_λ(k₁·exp X)υ_λ⟩` in place of `c_λ(k₁·exp X)`; and `G = K·exp 𝔭`.
+
+Let `ε` have `p` signs `+1` and `q` signs `−1`, `n = p + q ≥ 1`, `q₀ = min(p, q)`, `G = G_ε` and `K = K_ε`, with the
+Haar measure `μ^c` (1.2), and let `𝔷` be the centre of `U(𝔤)`, `𝔤 = 𝔤𝔩_n(ℂ)`. For a parameter `l = 2λ` that has a gap
+(4.1 (c)), `λ` is regular and lies in `ρ + ℤ^n`, the character lattice of the diagonal torus shifted by `ρ`. Let `π_λ`
+be the discrete series of `G` of Harish-Chandra parameter `λ`, for the positive roots `e_a − e_b`, `l_b < l_a`, of 4.1
+(c) (AutomorphicFormsOnReductiveGroups §2.4; the diagonal torus is a compact Cartan subgroup, the split centre of `G`
+is trivial, and parameters are taken up to the permutations `σ` with `ε∘σ = ε`). Its infinitesimal character is `ϑ_λ`,
+the character by which `𝔷` acts on the Verma module of highest weight `λ − ρ` (written `χ_λ` in
+AutomorphicFormsOnReductiveGroups §2.2), and its lowest `K`-type is the representation `V_Λ` of `K` of 9.2, of highest
+weight `λ + ρ_n − ρ_c = Λ`, where `ρ_n = ρ − ρ_c` is the half-sum of the noncompact positive roots.
+
+Let `l` have large gap `A` (`A ∈ ℕ`), let `ℋ_λ ⊆ L²(G, μ^c)` be the closure of the image of the `L²` model
+`f ↦ √deg_λ·f` of 5.4 (e), with the right regular representation `R`, and put `υ = √deg_λ·c_λ`. Prove that:
+
+(a) `ℋ_λ` is the closed span of the right translates of `c_λ`, and it is invariant and irreducible under `R`; `υ` is a
+unit vector with `⟨υ, R(g)υ⟩ = c_λ(g)` for every `g ∈ G`, and `R(e_λ)` is the orthogonal projection of `ℋ_λ` onto
+`ℂυ`; the `K`-finite smooth vectors of `ℋ_λ` are the elements of the image of `U(𝔤)c_λ`; and `ℋ_λ` is square
+integrable, a discrete series of `G`, of formal degree `deg_λ` for `μ^c`;
+
+(b) `R_𝔠c_λ = ϑ_λ(𝔠)·c_λ` for every `𝔠 ∈ 𝔷` (right derivatives, 4.1 (e)), so that `ℋ_λ` has infinitesimal character
+`ϑ_λ`;
+
+(c) for `ν` `K`-dominant for `−l`, the multiplicity of `V_ν` in `ℋ_λ` is the integer `m` of 7.2 (a); so `V_Λ` occurs
+once, and every `V_ν` that occurs has `ν − Λ` in the root cone of `l`;
+
+(d) there is a unitary `G`-isomorphism from `π_λ` onto `ℋ_λ`; the smooth vectors of `π_λ` that are `K`-highest of
+weight `Λ` (4.2 (b), for the derived action) form a line, which the isomorphism carries onto `ℂυ`; and for a unit
+vector `υ_λ` of that line, `c_λ(g) = ⟨υ_λ, π_λ(g)υ_λ⟩` and `e_λ(g) = deg_λ·⟨π_λ(g)υ_λ, υ_λ⟩` for every `g ∈ G`;
+
+(e) if `l` has gap `h ≥ 120·n·q₀^{3/2}`, with or without a large gap, then `c_λ(g) = ⟨υ_λ, π_λ(g)υ_λ⟩` for every
+`g ∈ G`, with `υ_λ` a unit vector of weight `Λ` in the lowest `K`-type of `π_λ`.
+
+A large gap `500n³ + A` implies the gap of (e), as `q₀ ≤ n/2`. For parameters of smaller gap this roadmap identifies
+`c_λ` with no coefficient of a representation.
+
+*Needs:* 1.2, 4.1, 4.2, 4.3, 4.5, 5.2, 5.3, 5.4, 6.1, 7.2, 9.2; AutomorphicFormsOnReductiveGroups §2.1 (Compact-finite
+vectors and admissibility), §2.2 (Infinitesimal characters and Harish-Chandra finiteness), §2.4 (Temperedness,
+discrete series and Langlands quotients); VonNeumannAlgebras Layer 9 (Lattice modules and discrete series);
+DiscreteSeriesCoefficientsAndAutomorphicMetrics §2.4a (b) (Lowest-`K`-type coefficients of gapped discrete series of
+`U(p, q)`), for (e).
+
+### 9.4 The idempotent `e_λ` and the `π_λ`-isotypic part of a unitary representation
+
+*Origin:* comparison of the operators `π(e_λ)` of 6.1 and 8.6, and of the forms of type `e_λ`, with the `π_λ`-isotypic
+part of a unitary representation; not part of the formal proof.
+
+*Proof route:* (a) `e_λ(g⁻¹) = conj e_λ(g)` makes `π(e_λ)` self-adjoint, and the identity of idempotent kernels (6.1
+(a)) gives `π(e_λ)π(x)π(e_λ) = (e_λ(x⁻¹)/e_λ(1))·π(e_λ) = c_λ(x)·π(e_λ)`, whose case `x = 1` is idempotence. For `v`
+in the image, `⟨v, π(g)v⟩ = ⟨v, π(e_λ)π(g)π(e_λ)v⟩ = c_λ(g)‖v‖²`; conversely that identity gives
+`⟨v, π(e_λ)v⟩ = deg_λ·∫|c_λ|²·‖v‖² = ‖v‖²`, hence `‖v − π(e_λ)v‖² = 0`. (b) By 9.3 (a), (d), `π_λ(e_λ)υ_λ = υ_λ`, so
+`π(e_λ)Tυ_λ = Tυ_λ`; `υ_λ` is cyclic, so `T` is determined by `Tυ_λ`; for `v ≠ 0` in the image,
+`π_λ(g)υ_λ ↦ ‖v‖⁻¹π(g)v` preserves inner products by (a) and 9.3 (d), hence extends to an isometric `G`-map; `S*T`
+commutes with `π_λ`, so it is a scalar (Schur's lemma), equal to `⟨Sυ_λ, Tυ_λ⟩`. (c) The images of the `T_v`, for `v`
+in an orthonormal basis of `π(e_λ)ℋ`, are mutually orthogonal copies of `π_λ` whose closed sum contains the image of
+every `G`-map, and `v ↦ T_v` is linear; a unitary `U` commuting with `π(G)` preserves `π(e_λ)ℋ`, and `UT_v = T_{Uv}`.
+(d) By (c) and 9.3 (d), the smooth vectors of `π_λ ⊗̂ π(e_λ)ℋ` that are `K`-highest of weight `Λ` are those of
+`υ_λ ⊗ π(e_λ)ℋ`.
+
+Let `l` have large gap `A`, `n ≥ 1`, `π_λ` and `υ_λ` as in 9.3 (d), and `(π, ℋ)` a strongly continuous unitary
+representation of `G` on a Hilbert space, with `π(e_λ) = ∫ e_λ(g)π(g) dg` (`e_λ` is integrable, 5.4 (c)). Prove that:
+
+(a) `π(e_λ)` is an orthogonal projection, `π(e_λ)π(g)π(e_λ) = c_λ(g)·π(e_λ)` for every `g ∈ G`, and its image is the
+set of the `v ∈ ℋ` with `⟨v, π(g)v⟩ = ‖v‖²·c_λ(g)` for every `g`;
+
+(b) `T ↦ Tυ_λ` is a linear bijection from the space of bounded `G`-equivariant maps `π_λ → ℋ` onto `π(e_λ)ℋ`, and
+`S*T = ⟨Sυ_λ, Tυ_λ⟩` for two such maps; in particular `π(e_λ) ≠ 0` exactly when `π_λ` is isomorphic to a
+subrepresentation of `ℋ`;
+
+(c) the `π_λ`-isotypic subspace `ℋ[π_λ]` of `ℋ`, the closed span of the images of the maps of (b), is the closed span
+of `π(G)π(e_λ)ℋ`, and `y ⊗ v ↦ T_v y`, where `T_v` is the map of (b) with `T_vυ_λ = v`, is a unitary isomorphism
+`π_λ ⊗̂ π(e_λ)ℋ → ℋ[π_λ]` (completed tensor product, `G` acting on the first factor); for every unitary operator `U`
+of `ℋ` commuting with `π(G)`, it carries `1 ⊗ U` to `U`;
+
+(d) `π(e_λ)ℋ` is the set of the smooth vectors of `ℋ[π_λ]` that are `K`-highest of weight `Λ`.
+
+For the forms of type `e_λ` of AdelicUnitaryGroupsAndAlgebraicModularForms §5.1, the bounded automorphic `F` with
+`R(e_λ)F = F`, the comparison with automorphic forms is AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (Forms of
+parameter `l` and cusp forms with a discrete series at infinity); (a)–(d) describe the vectors fixed by `π(e_λ)` in
+every unitary representation of `G` on a Hilbert space.
+
+*Needs:* 5.4, 6.1, 9.3.
+
+### 9.5 The formal degree and the character of `π_λ`
+
+*Origin:* comparison of `deg_λ` and of 7.4 with the formal degree and the character of `π_λ`, the formal degree as in
+Harish-Chandra, *Discrete series for semisimple Lie groups II* (1966), Thm 16, and Knapp (1986), Thm 12.7, on the
+Origin line of 7.4; not part of the formal proof.
+
+*Proof route:* (a) Schur orthogonality for the square-integrable irreducible representation `π_λ` (VonNeumannAlgebras
+Layer 9), whose value at `y = y′ = υ_λ` is `∫|c_λ|² = 1/d(π_λ)` by 9.3 (d). (b) 7.4 (a) and 7.1 (b), with 9.2 (b) for
+`U(n)`. (c) By EndoscopicTransferAndUnitaryTraceComparison §2.3 (c), with `q(G) = pq` (`G/K` has real dimension
+`2pq`), `ch π_λ` on the diagonal torus is `(−1)^{pq}` times the alternating sum of the characters `t ↦ t^{λ∘w}` over
+the permutations `w` with `ε∘w = ε`, divided by the Weyl denominator of the positive roots of `l`, which changes sign
+under each transposition of the coordinates. So the sum over `σ ∈ S_n` of `ch π_λ(diag(x∘σ))` is
+`(−1)^{pq}·#{σ : ε∘σ = ε}` times the alternating sum over all of `S_n` divided by the same denominator, that is, by
+Weyl's character formula (7.1 (a) for all signs `+1`, with 9.2 (c)),
+`(−1)^{pq}·#{σ : ε∘σ = ε}·χ^{U(n)}_{λ−ρ}(diag x)`. As `q_ε = pq`, 7.4 (b) is (c).
+
+Let `l` have large gap `A`, `n ≥ 1`, and `π_λ`, `υ_λ` as in 9.3. Prove that:
+
+(a) `∫_G |⟨y, π_λ(g)y′⟩|² dμ^c(g) = ‖y‖²‖y′‖²/deg_λ` for all vectors `y`, `y′` of `π_λ`: `deg_λ` is the formal degree
+`d(π_λ)` of `π_λ` for the Haar measure `μ^c`, in the sense of VonNeumannAlgebras Layer 9, and
+`e_λ(g) = d(π_λ)·⟨π_λ(g)υ_λ, υ_λ⟩`;
+
+(b) if `l` has large gap `10n⁵`, then `d(π_λ) = dim(λ)`, the dimension of the irreducible representation of `U(n)` of
+highest weight `λ − ρ` (9.2 for all signs `+1`);
+
+(c) if `l` has large gap `10n⁵`, then at every `x` in the torus with distinct entries,
+`Σ_{σ∈S_n} ∫_G e_λ(g⁻¹·diag(x∘σ)·g) dμ^c(g) = Σ_{σ∈S_n} conj ch π_λ(diag(x∘σ))`, where `ch π_λ` is the character of
+`π_λ`, a function on the regular set (EndoscopicTransferAndUnitaryTraceComparison §2.3 (b)).
+
+DiscreteSeriesCoefficientsAndAutomorphicMetrics §8.3 gives `d(π_λ) = dim(λ)` for the Haar measure normalised by the
+compact dual `U(n)`; formal degrees being inversely proportional to Haar measures, (b) shows that `μ^c` is that
+normalisation.
+
+*Needs:* 4.1, 7.1, 7.4, 9.2, 9.3; VonNeumannAlgebras Layer 9 (Lattice modules and discrete series);
+EndoscopicTransferAndUnitaryTraceComparison §2.3 (Harish-Chandra's character theory for real reductive groups);
+DiscreteSeriesCoefficientsAndAutomorphicMetrics §8.3 (Formal degree of a discrete series).
+
+### 9.6 Rigidity and the representation generated by a lowest-`K`-type vector
+
+*Origin:* comparison of the rigidity statement 6.1 (e) with the representation that a vector of the lowest `K`-type
+generates, in the setting of the classification of discrete series by their lowest `K`-type cited on the Origin line
+of 6.1; not part of the formal proof.
+
+*Proof route:* By 6.1 (e), `B(ιv, π(g)ιv) = B(ιv, ιv)·c_λ(g)`, an identity in `ℋ_B` (9.1). By 9.4 (a), (b), `ι(v)`
+lies in the image of `π(e_λ)` on `ℋ_B` and is `T(υ_λ)` for a `G`-map `T` that is `B(ιv, ιv)^{1/2}` times an isometry,
+whose image is the closed span of `π(G)ι(v)`. Applying the Casimir operator to the coefficient `g ↦ B(ιv, π(g)ιv)`
+through the derivatives along `ι` (4.2 (e)), with 5.2 (d), gives `c·B(ιv, ιv) = κ_λ·B(ιv, ιv)`. The second statement
+is the first for `X = ℋ`, `B` the inner product, exponent `0` and `M` the smooth vectors (9.1 (c)).
+
+Let `l` have large gap `A` and `n ≥ 1`. Let `π`, `X`, `B`, `ρ` and `ι : M → X` be as in 6.1, with `ℋ_B` the completion
+of 9.1, and let `v ∈ M` be `K`-highest of weight `Λ`, with `ι(Ωv) = c·ι(v)` for a real `c ≥ κ_λ` and `ι(v) ≠ 0`. Prove
+that `c = κ_λ`, that `ι(v)` lies in the image of `π(e_λ)` on `ℋ_B`, and that the closed span of `π(G)ι(v)` in `ℋ_B` is
+isomorphic to `π_λ`, by a unitary `G`-isomorphism carrying `B(ιv, ιv)^{−1/2}·ι(v)` to `υ_λ` (9.3 (d)). In particular,
+if `(π, ℋ)` is a strongly continuous unitary representation of `G` on a Hilbert space and `v ≠ 0` a smooth vector of
+`ℋ`, `K`-highest of weight `Λ`, with `Ωv = cv` for a real `c ≥ κ_λ`, then `c = κ_λ` and the closed span of `π(G)v` is
+isomorphic to `π_λ`, by an isomorphism carrying `v/‖v‖` to `υ_λ`.
+
+The hypothesis bears on one vector: `ℋ_B` need not be irreducible, and the statement describes the representation that
+the vector generates.
+
+*Needs:* 4.2, 5.2, 6.1, 9.1, 9.3, 9.4.
+
+### 9.7 Coefficients of `π_λ` are cusp forms
+
+*Origin:* comparison of 6.2 with the theorem that the coefficients of integrable discrete series are cusp forms
+(Godement (1947); Wallach, *Real reductive groups I* (1988), ch. 7, as on the Origin line of 6.2), for `π_λ`; not part
+of the formal proof.
+
+*Proof route:* Let the columns of a matrix `A_X` be a basis of `X`, and put `H(g) = log‖g⁻¹A_X‖` and `ℓ(g) = log‖g‖`.
+Then `|H(xg) − H(x)| ≤ ℓ(g)`, as `‖g⁻¹‖ = ‖g‖` on `G`, and `|e_λ|·ℓ` is integrable (5.4 (c)). The pairs `(r, c)` with
+`c > 0`, `rA_X = cA_X` and `v*·diag(ε)·r·v′ = v*·diag(ε)·v′` for all `v`, `v′` orthogonal to `X` form a subgroup `D`
+of `G × ℂ^×` with `H(rg) = H(g) − log c` on `D`; its elements `(r, 1)` form `𝖭_X`, and it has the property of 6.2 (a)
+by 6.2 (b). With `e = e_λ` (6.1 (a)), 6.2 (a) gives `∫ e_λ(g)f(xg) dg = 0` for every bounded continuous left
+`𝖭_X`-invariant `f`. For `φ` continuous with compact support take `f(g) = ∫_{𝖭_X} φ(ng) dn`. By 5.4 (a),
+`|c_λ(g)| ≤ (2/‖g‖)^d` for an integer `d > 8n²` (the gap exceeds `8n²`), and 1.5 (b) for the inclusion of `𝖭_X` in `G`
+makes `n ↦ e_λ(xny)` integrable, locally uniformly in `x` and `y`; Fubini's theorem turns the vanishing into
+`∫_G φ(y)·∫_{𝖭_X} e_λ(x⁻¹ny) dn dy = 0` for every `φ`, so the inner integral, continuous in `y`, vanishes.
+`c_λ = conj e_λ/deg_λ`. The `K`-finite smooth vectors of `π_λ` are vectors `π_λ(α̌)υ_λ`, `α̌(g) = α(g⁻¹)`, for bumps
+`α` (9.3 (a), (d) and 5.4 (c)), so the other coefficients are two-sided smearings of `c_λ` by bumps, and the vanishing
+passes to them by Fubini's theorem with the same bounds. For a flag, `𝖭_{X₁}` is a normal subgroup of the unipotent
+radical of its stabiliser, and integrating first over `𝖭_{X₁}` gives the last statement, with integrability from 1.5
+(b).
+
+Let `l` have large gap `A` and `n ≥ 1`. For a nonzero subspace `X ⊆ ℂ^n` isotropic for the form `v*·diag(ε)·v′`, let
+`𝖭_X` be the group of the `r ∈ G` that fix every vector of `X` and have `rv − v ∈ X` for every `v` orthogonal to `X`,
+the unipotent radical of the stabiliser of `X` in `G`, with a Haar measure `dn`. Let `F(g) = ⟨y, π_λ(g)y′⟩` with `y`,
+`y′` `K`-finite smooth vectors of `π_λ`; `c_λ` is such a function (9.3 (d)), and `e_λ = deg_λ·conj c_λ = deg_λ·c_{−λ}`
+(5.3 (c)) is `deg_λ` times such a function for the parameter `−l`, which has the same large gap. Prove that for all
+`x, x′ ∈ G` the function `n ↦ F(xnx′)` is integrable on `𝖭_X` and `∫_{𝖭_X} F(xnx′) dn = 0`; and that the same holds
+along the unipotent radical of the stabiliser in `G` of every isotropic flag `X₁ ⊂ ⋯ ⊂ X_k` with `X₁ ≠ 0`, that is of
+every proper parabolic subgroup of `G`. So the `K`-finite coefficients of `π_λ` satisfy Harish-Chandra's cusp
+condition on `G`: their integrals along the unipotent radical of every proper parabolic subgroup vanish.
+
+The cuspidality of the forms of type `e_λ` on the adelic group is drawn from 6.2 in
+AdelicUnitaryGroupsAndAlgebraicModularForms §§5.2–5.4.
+
+*Needs:* 1.5, 5.3, 5.4, 6.1, 6.2, 9.3.
+
+### 9.8 Holomorphic functions of a weight and holomorphic sections
+
+*Origin:* comparison of 4.1 (f) with holomorphic sections of homogeneous line bundles on flag manifolds and of
+homogeneous vector bundles on the bounded symmetric domain of `U(p, q)`, realised in a Grassmannian, and of 6.3 (d)
+with the holomorphic discrete series (Harish-Chandra (1955–1956); Knapp (1986), Ch. VI, as on the Origin lines of 4.4
+and 6.3); not part of the formal proof.
+
+*Proof route:* (a) For `M ∈ M_n(ℂ)` let `M₋` be its part below the diagonal for the order `o` (the entries `M_ab` with
+`o_b < o_a`); then `M₋ − diag(ε)·M₋*·diag(ε)` lies in `𝔲(diag ε)` and differs from `M` by a matrix whose entries
+`(a, b)` with `o_b < o_a` vanish, the tangent space of `B_o`, so `(g, b) ↦ gb` is a submersion and `G·B_o` is open. If
+`F′(gb) = b^u·F(g)`, the multiplicativity of `b ↦ b^u` on `B_o` gives `F′(xb) = b^u·F′(x)` on `G·B_o`; conversely such
+an `F′`, extended by `0`, makes `F` holomorphic of weight `u`. The holomorphic sections of `L_u = E_{−u}` are the
+holomorphic `f` with `f(xb) = b^u·f(x)` (RepresentationTheory/LieGroups §8.3, for the Borel subgroup `B_o`). (b)
+`𝖹 ⊆ B_o` and `K_ℂ = K·(B_o ∩ K_ℂ)` (Gram–Schmidt in each block), so `𝖯 ⊆ G·B_o` and `G·𝖯 = G·B_o`. An orthonormal
+basis of a positive definite `p`-plane, completed by one of its orthogonal complement, is the matrix of an element of
+`G`; so `G` acts transitively on `𝒟`, with stabiliser `G ∩ 𝖯 = K` at the span of the `e_a` with `ε_a = 1`, and `𝒟` is
+open. For `x ∈ (G·𝖯)^Φ` the function `k ↦ F′(xk)` on `K_ℂ^Φ` is holomorphic with `F′(xkb) = ∏_τ b_τ^{u_τ}·F′(xk)` for
+`o`-triangular `b`, so, when every `u_τ` is `K`-dominant for `o`, by Borel–Weil for `K_ℂ^Φ ≅ (GL_p(ℂ) × GL_q(ℂ))^Φ`
+(RepresentationTheory/LieGroups §8.5) it is `k ↦ Ψ(x)(k·⊗_τυ_{u_τ})` for a unique `Ψ(x)`; if some `u_τ` is not
+`K`-dominant for `o`, a simple compact root `α` has `⟨u_τ, α^∨⟩ < 0`, the line bundle has negative degree on the
+fibres `ℙ¹` of the projection to the corresponding minimal parabolic quotient (RepresentationTheory/LieGroups §8.6),
+and the function is `0`. `𝖹` is normal in `𝖯` and lies in `B_o` with `b^u = 1`, so `Ψ(xp) = Ψ(x)∘p`; finitely many
+values of `F′` determine `Ψ(x)`, so `Ψ` is holomorphic; conversely `F′(x) = Ψ(x)(⊗_τυ_{u_τ})`. (c) 6.3 (d) gives the
+large gap and `c_λ = m^hol_w`; the entries of `λ` of sign `−1` exceed those of sign `+1`, and the computation of `ρ`
+and `ρ_c` gives `Λ = w`; 9.3 (d) gives the coefficient. By (a) and 6.3 (a), the holomorphic extension of `m^hol_w` to
+`G·B_o` is unchanged by right factors `exp(tE_ij)` with `o_i < o_j`, so the complex-linear right derivative
+`R_{E_ij}c_λ` vanishes when `ε_i = 1` and `ε_j = −1`; these `E_ij` span an `Ad(K)`-stable subspace, which therefore
+kills the `K`-span of `υ_λ`.
+
+Let `Φ` be finite, `o` injective and `u = (u_τ)_{τ∈Φ}` with `u_τ ∈ ℤ^n`, and let `B_o` be the group of the
+`o`-triangular matrices (4.1 (b)). Prove that:
+
+(a) `G·B_o` is open in `GL_n(ℂ)`, and a function `F` on `G^Φ` is holomorphic of weight `u` (4.1 (f), without the
+variant) exactly when it is the restriction to `G^Φ` of a holomorphic function `F′` on `(G·B_o)^Φ` with
+`F′(xb) = ∏_τ b_τ^{u_τ}·F′(x)` for `b ∈ B_o^Φ`; `F′` is determined by `F`, and it is a holomorphic section, over the
+open subset `(G·B_o/B_o)^Φ` of a product of flag manifolds `GL_n(ℂ)/B_o`, of the external product of the line bundles
+`L_{u_τ} = E_{−u_τ}` of RepresentationTheory/LieGroups §8.3;
+
+(b) let the indices of sign `+1` come first in the order `o`, let `𝖯` be the stabiliser in `GL_n(ℂ)` of the span of
+the `e_a` with `ε_a = 1`, so that `B_o ⊆ 𝖯 = K_ℂ·𝖹`, with `K_ℂ` the invertible block diagonal matrices and `𝖹` the
+matrices `1 + Y` with `Y_ab = 0` unless `ε_a = 1` and `ε_b = −1`, and let `𝒟` be the set of the `p`-planes on which
+the form `y*·diag(ε)·y` is positive definite, in the Grassmannian `GL_n(ℂ)/𝖯` of `p`-planes. Then `G·B_o = G·𝖯`, `𝒟`
+is open and `gK ↦ g𝖯` identifies `G/K` with `𝒟`. If each `u_τ` is `K`-dominant for `o`, let `V_{u_τ}` be the
+representation of 9.2 for `l = −o`, of highest weight `u_τ`, extended to a holomorphic representation of `K_ℂ` in
+which every `o`-triangular `b ∈ K_ℂ` acts on `υ_{u_τ}` by `b^{u_τ}`, and to `𝖯` trivially on `𝖹`; then `F ↦ Ψ`, with
+`F(g) = Ψ(g)(⊗_τυ_{u_τ})`, is a bijection from the functions holomorphic of weight `u` onto the holomorphic maps
+`Ψ : (G·𝖯)^Φ → ⊗_τV_{u_τ}^*` with `Ψ(xp) = Ψ(x)∘p` for `p ∈ 𝖯^Φ`, that is, in the conventions of AutomorphicBundles
+§§0.5, 0.8, onto the holomorphic sections over `𝒟^Φ` of the external product of the homogeneous bundles
+`GL_n(ℂ) ×^𝖯 V_{u_τ}^*`. If some `u_τ` is not `K`-dominant for `o`, the only function holomorphic of weight `u` is
+`0`;
+
+(c) under the hypotheses of 6.3 (d), with `l = 2w + 2ρ(−o)` and `λ = l/2`: `Λ = w`, the noncompact positive roots of
+`l` are the `e_j − e_i` with `ε_j = −1` and `ε_i = 1`, the lowest `K`-type of `π_λ` is killed by the `E_ij` with
+`ε_i = 1` and `ε_j = −1`, and `m^hol_w(g) = c_λ(g) = ⟨υ_λ, π_λ(g)υ_λ⟩` for `g ∈ G`. So `m^hol_w` is the
+lowest-`K`-type coefficient of `π_λ`, a holomorphic discrete series in the sense of
+DiscreteSeriesCoefficientsAndAutomorphicMetrics §6.8 for the complex structure of `𝒟 ≅ G/K`, in which these `E_ij`
+span `𝔭⁻`.
+
+*Needs:* 4.1, 6.3, 9.2, 9.3; RepresentationTheory/LieGroups §8.3 (Associated coherent lines and the two Borel
+conventions), §8.5 (Borel–Weil in degree zero), §8.6 (Relative rank-one cohomology and the reflection shift);
+AutomorphicBundles §0.5 (Equivariant coefficients on the compact dual), §0.8 (Sections as equivariant functions);
+DiscreteSeriesCoefficientsAndAutomorphicMetrics §6.8 (Holomorphic discrete series as lowest-weight modules).
+
+### 9.9 The local theta correspondence for oscillator pairs
+
+*Origin:* comparison of 8.6 with the decomposition of the oscillator representation under a dual pair and the theta
+correspondence of discrete series (Li (1990), as on the Origin line of 8.6); not part of the formal proof.
+
+*Proof route:* The two extended representations commute, since `π(g)` and `π′(g′)` commute on the dense subspace `𝓕`.
+The gap `500(n + n′)³` of matching parameters is a large gap `A ≥ nn′` both for `G_ε` and for `G_{ε′}`, so 5.4 (c)
+makes `e_λ(g)‖g‖^{nn′}` and `e_{λ′}(g)‖g‖^{nn′}` integrable, the operators of 8.6 on `𝓕` are restrictions of those on
+`ℋ` (9.1 (b)), and `f = e_{λ′}` is allowed in 8.6 (b), as `∫ e_{λ′}(y)e_{λ′}(y⁻¹g) dy = e_{λ′}(g)` (6.1 (a)). By 9.4
+(a), `π(e_λ)` and `π′(e_{λ′})` are commuting orthogonal projections, and joint harmonics exist (8.5 (a)). By 8.6 (a),
+`‖π(e_λ)Φ‖² = ⟨Φ, π(e_λ)Φ⟩ > 0`; by 8.6 (b), `π′(e_{λ′})` fixes `π(e_λ)Φ`, so the closed span of `π′(G_{ε′})π(e_λ)Φ`
+is a copy of `π_{λ′}` in which `π(e_λ)Φ` is a multiple of `υ_{λ′}` (9.4 (a), (b) for `G_{ε′}`), contained in
+`π(e_λ)ℋ`, as `π(e_λ)` commutes with `π′`. By 8.6 (c), `π(e_λ)v_Q` lies in that closed span for every polynomial `Q`;
+the polynomial vectors are dense in `𝓕` (WeilRepresentationsOnBanachSpacesOfData §2.2 (d)), hence in `ℋ`, so `π(e_λ)ℋ`
+is that copy of `π_{λ′}`. Then 9.4 (b), (c) for `G_ε`, with the commuting unitary operators `π′(g′)`, give (a) and
+(b); `π′(e_{λ′})π(e_λ)` is the projection onto `π(e_λ)ℋ ∩ π′(e_{λ′})ℋ`, which corresponds to the line of
+`υ_λ ⊗ υ_{λ′}` and contains `π(e_λ)Φ`.
+
+Let `R`, `C` be nonempty, `T` a Fock datum, `(π, π′)` an oscillator pair for `T` (8.1 (e)), and `l`, `l′` parameters
+of the rows and of the columns that match for `T` (8.1 (c)). Let `ℋ` be the completion of `𝓕` for `⟨,⟩`, with the
+strongly continuous unitary representations of `G_ε` and `G_{ε′}` that extend `π` and `π′` (9.1), and let `π_λ`, `υ_λ`
+and `π_{λ′}`, `υ_{λ′}` be as in 9.3 for `(ε, l)` and for `(ε′, l′)`. Prove that:
+
+(a) the space of the bounded `G_ε`-maps `π_λ → ℋ`, with the inner product `(S, S′) ↦ ⟨Sυ_λ, S′υ_λ⟩` and the action
+`S ↦ π′(g′)∘S` of `G_{ε′}`, is a unitary representation of `G_{ε′}` isomorphic to `π_{λ′}`;
+
+(b) the `π_λ`-isotypic subspace of `ℋ` for `G_ε` is stable under `G_{ε′}` and isomorphic, as a representation of
+`G_ε × G_{ε′}`, to the completed tensor product `π_λ ⊗̂ π_{λ′}`; it lies in the `π_{λ′}`-isotypic subspace of `ℋ` for
+`G_{ε′}`;
+
+(c) for every joint harmonic `Φ` of `l`, `l′`, the vector `π(e_λ)Φ` is nonzero and the isomorphism of (b) carries it
+into the line of `υ_λ ⊗ υ_{λ′}`; `π(e_λ)` is the orthogonal projection onto the subspace corresponding to
+`υ_λ ⊗ π_{λ′}`, and `π′(e_{λ′})π(e_λ)` the orthogonal projection onto that line.
+
+So `π_λ` occurs in the restriction of the oscillator pair to `G_ε`, with multiplicity space `π_{λ′}`. For the pair of
+WeilRepresentationsOnBanachSpacesOfData §2.4 (b), `ℋ` is identified with the Fock space of entire functions on
+`ℂ^{R×C}`, `v_P` going to the polynomial `P` (WeilRepresentationsOnBanachSpacesOfData §10.3 (a), (b)), and `π`, `π′`
+are the restrictions to `U(ε)` and `U(ε′)`, twisted by `det^γ` and `det^{γ′}`, of the representation `ω_η` of the
+unitary group `U(η)` of the signs `η(r, c) = ε_rε′_c`, which that roadmap extends to the Fock space and compares with
+the Fock model of the factor `U(η)` of a local Weil representation (§10.3 (d), §10.7 (d)). When the pair is the factor
+at an infinite place of the real pair action of two hermitian spaces and two automorphic characters of `U(1)` (§6.2
+(b) of that roadmap; `R` with `ε` and `C` with `ε′` are then the index sets and signs of the two spaces, and `γ`,
+`−γ′` the weights of the two characters at that place), §10.7 (d) of that roadmap identifies it, through the Bargmann
+transform, with the Fock model of the local Weil representation at that place of the dual pair of the two unitary
+groups, in the realisation and for the splitting characters stated there. This roadmap does not compare matching (8.1
+(c)), or the block rule (8.2), with the description of the theta correspondence of discrete series by Li (1990).
+
+*Needs:* 5.4, 6.1, 8.1, 8.5, 8.6, 9.1, 9.3, 9.4; WeilRepresentationsOnBanachSpacesOfData §2.2 (d) (density of the
+polynomial vectors), §2.4 (b) (oscillator pairs on matrices), §6.2 (b) (the real pair action), §10.3 (The Fock space
+and the Hilbert space of entire functions), §10.7 (d) (The Weil representation of a pair and the standard splittings).
+
+### 9.10 Measures below the fibre measure and fibre measures
+
+*Origin:* comparison of the relation of 1.1 (e) with fibre measures (Weil, *Sur la formule de Siegel dans la théorie
+des groupes classiques*, no. 6, as on the Origin line of 1.6); not part of the formal proof.
+
+*Proof route:* (a) Suppose `l ≤ 𝔪_b`, and let `K`, `C`, `O` be as in 1.1 (e), with `O ⊆ V`. Then
+`∫_S (∫ K d𝔪_t) dt ≤ C·vol(S)` for every open `S ⊆ O`, hence, by outer regularity of Lebesgue measure, for every
+measurable `S ⊆ O`, so `∫ K d𝔪_t ≤ C` for almost every `t ∈ O`. For `f` continuous with compact support and
+`0 ≤ f ≤ K`, continuity at `b` gives `∫ f d𝔪_b ≤ C`; a lower semicontinuous `K ≥ 0` is the increasing limit of such
+`f`, so `∫ K dl ≤ ∫ K d𝔪_b ≤ C`. Conversely, if `l` is below the fibre measure, then for `f ≥ 0` continuous with
+compact support and `δ > 0` small, `C_δ = sup_{|t−b|<δ} ∫ f d𝔪_t` is finite and `O` the ball of radius `δ` satisfies
+the hypothesis of 1.1 (e) for `K = f` and `C = C_δ`; so `∫ f dl ≤ C_δ`, which tends to `∫ f d𝔪_b`. Then
+`l(U) ≤ 𝔪_b(U)` for open `U`, and `l ≤ 𝔪_b` by outer regularity of `𝔪_b`. (b) 1.3 (b), applied to `K` times the
+indicator of `Gram_J⁻¹(S)`, is the disintegration, since `Gram_J(γσ(T)) = T` on `V`; continuity at `J` holds by
+dominated convergence, `σ` being continuous on `V` and `f` compactly supported; and `σ(J) = 1`.
+
+Let `π : X → B` be a continuous map between finite-dimensional real vector spaces with Lebesgue measures, `b ∈ B`, `V`
+an open neighbourhood of `b`, and `(𝔪_t)_{t∈V}` a family of fibre measures continuous at `b`: measures on `X`, finite
+on compact sets, each `𝔪_t` carried by `π⁻¹(t)`, such that for every measurable `K ≥ 0` on `X` the function
+`t ↦ ∫ K d𝔪_t` is measurable on `V` and `∫_{π⁻¹(S)} K dx = ∫_S (∫ K d𝔪_t) dt` for every open `S ⊆ V`, and such that
+`t ↦ ∫ f d𝔪_t` is continuous at `b` for every continuous compactly supported `f`. Prove that:
+
+(a) a measure `l` on `X` is below the fibre measure of `π` over `b` (1.1 (e)) exactly when `l ≤ 𝔪_b`;
+
+(b) for a hermitian involution `J` of size `r` and `(V, σ)` as in 1.3 (a), the measures
+`𝔪_T = (vol U(r)/2^r)·(the image of μ^c_J under γ ↦ γσ(T))`, `T ∈ V`, form such a family for the Gram map `Gram_J` on
+`M_r(ℂ)` and the point `J`, with `𝔪_J = (vol U(r)/2^r)·μ^c_J`; so a measure `m` on `U(J)` is below the Gram fibre at
+`1` exactly when `m ≤ (vol U(r)/2^r)·μ^c_J`.
+
+The relation of 1.1 (e) is defined at every point, with or without such a family, and the bounds of 1.6 (b), (c), 2.7
+and 3.7 are stated for it.
+
+*Needs:* 1.1, 1.2, 1.3.
 
 ## What the library already provides
 
@@ -1906,9 +2552,23 @@ On Tau Ceti's main branch, later than the revision pinned here:
 ## Results taken from other roadmaps
 
 - Characters of Weyl modules of `GL_n` as Schur polynomials, and their dimensions:
-  RepresentationTheory/ClassicalGroups §§4.2, 5.1 (used by 7.1, which states the bridge to products of minors).
+  RepresentationTheory/ClassicalGroups §§4.2, 5.1 (used by 7.1, which states the bridge to products of minors, and by
+  9.2, which proves it).
 - Schur orthogonality for one irreducible representation of a compact group: RepresentationTheory/CompactGroups §4.1
-  (used by 7.1).
+  (used by 7.1 and 9.2).
+- Isotypic projectors of compact groups, infinitesimal characters and the Harish-Chandra isomorphism, admissibility of
+  irreducible unitary representations, discrete series with their Harish-Chandra parameters, infinitesimal characters
+  and lowest compact types: AutomorphicFormsOnReductiveGroups §§2.1, 2.2, 2.4 (used by 9.3).
+- Square-integrable irreducible unitary representations, Schur orthogonality and the formal degree: VonNeumannAlgebras
+  Layer 9 (used by 9.3 and 9.5).
+- The character of a discrete series on the compact Cartan subgroup: EndoscopicTransferAndUnitaryTraceComparison §2.3
+  (used by 9.5).
+- Line bundles on flag manifolds and their sections as equivariant functions, Borel–Weil in degree zero, and the
+  degree of a line bundle on the fibres of the projection to a minimal parabolic quotient:
+  RepresentationTheory/LieGroups §§8.3, 8.5, 8.6 (used by 9.8).
+- Homogeneous vector bundles on compact duals and their sections as equivariant functions: AutomorphicBundles §§0.5,
+  0.8 (used by 9.8).
+- Bessel subgroups and their characters: GanGrossPrasadUnitaryGroups §1.2 (compared with the Bessel functions of 2.5).
 
 ## References
 

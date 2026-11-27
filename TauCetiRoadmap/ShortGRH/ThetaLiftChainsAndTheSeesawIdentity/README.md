@@ -12,22 +12,58 @@ twists, times a composite lift of the source form, a finite combination of chain
 restricted to the definite space `Y_m ⊂ X_m`, whose data have controlled support, denominators and size. The
 divisibility and the size of the composite lift (CompositeThetaLiftsAndShortForms) then bound the index of the lattice.
 
-The roadmap has three layers. Layer 1 holds the estimates for one theta kernel between definite spaces: the Galois
-conjugates of the Taylor coefficients (jets) of theta functions, archimedean bounds for these conjugates, `p`-adic gauge
-bounds, and the integrality and size of definite theta kernels with data given by functions modulo an ideal. Layer 2
-defines the main objects of the argument, which several roadmaps of this family use: the spaces `X_j`, `Y_j`, `W_j`,
-`V_j` and the grids of spaces, their weights and parameters, the good idempotent `e₀` and the target forms, the source
-forms and the ramified source forms, the lifts between the `X_j` and their chain data, the glued tensor and the composite
-lift, the lower chain `Θ_ϑ` along the `Y_j`, the descent pairs `(W_j, V_j)`, and the Poincaré map `𝒫`. Layer 3 proves
-the seesaw identity by unfolding the pairing of `Θ_ϑ(𝒫φ)` with a form on `Y_m` one pair of lifts at a time, evaluating
-the finite data place by place through lattices of graded spaces, and summing the outer variables over finite cuts.
+The roadmap has four layers. Layer 1 holds the estimates for one theta kernel between definite spaces: the Galois
+conjugates of the Taylor coefficients (jets) of theta functions, archimedean bounds for these conjugates, `p`-adic
+gauge bounds, and the integrality and size of definite theta kernels with data given by functions modulo an ideal.
+Layer 2 defines the main objects of the argument, which several roadmaps of this family use: the spaces `X_j`, `Y_j`,
+`W_j`, `V_j` and the grids of spaces, their weights and parameters, the good idempotent `e₀` and the target forms, the
+source forms and the ramified source forms, the lifts between the `X_j` and their chain data, the glued tensor and the
+composite lift, the lower chain `Θ_ϑ` along the `Y_j`, the descent pairs `(W_j, V_j)`, and the Poincaré map `𝒫`. Layer
+3 proves the seesaw identity by unfolding the pairing of `Θ_ϑ(𝒫φ)` with a form on `Y_m` one pair of lifts at a time,
+evaluating the finite data place by place through lattices of graded spaces, and summing the outer variables over
+finite cuts. Layer 4 compares the objects of the route with the standard ones: it states which steps of the proof of
+the seesaw identity are instances of the seesaw identity of the literature, the Poincaré map as the projection of a
+Poincaré series along a Bessel subgroup, and the lifts between the `X_j` as theta lifts.
 
-**The seesaw identity (3.20).** For the data of OneSidedPrimeSumBoundsAndAdmissibleData §3.2, a linear form `t` on
-the values of the forms on `X_0` and an archimedean point `g` of `U(Y_0)` there is `c ∈ ℂ^×` such that every twist `ϑ`
-has a chain datum `Ψ` (translations in its support vanish at the places not dividing `M q_ϑ` and have `π̄_M x_j`
-integral at the places not dividing `q_ϑ`; values integral away from `q_ϑ`; `Σ_x |σ(Ψ(x))| ≤ M^{3 f m n_m²}` for every
-automorphism `σ` of `ℂ` when `Q(ϑ) = ∅`; glued tensor invariant under the levels) with `Θ_ϑ(𝒫_{g,t}φ) = c·comp_ϑ(Ψ)(φ)`
-for every ramified source form `φ`. Neither side is asserted to be nonzero.
+The standard theory is the reference for the objects of this roadmap: cusp forms on unitary groups that generate
+discrete series at the infinite places, the Weil representation of a unitary dual pair on Schwartz–Bruhat functions
+and its theta lifts, the local theta correspondence of discrete series, Poincaré series, and the seesaw identity of a
+seesaw pair of dual pairs. The route works with forms of a discrete-series type, with a space of data that carries its
+own realisation of the Weil representation, with edges (Fock vectors whose lifts carry forms of one type to forms of
+another), with the Poincaré map defined as a Riesz representative, and with lifts between definite spaces written as
+class sums of jet matrices; its statements and proofs are made on these objects. Layer 4 states the Poincaré map and
+the lifts between definite spaces in standard terms and relates the seesaw identity of this roadmap to that of the
+literature; it rests on the comparisons of the other objects that other roadmaps state. For a parameter that has the
+gap `500n³` in rank `n`, the forms of its discrete-series type are the cusp forms that are images of the vector of the
+lowest `K_∞`-type of the discrete series of the parameter under intertwiners into the cusp forms
+(AdelicUnitaryGroupsAndAlgebraicModularForms §8.5). The space of data contains the image of the Schwartz–Bruhat space
+of a Lagrangian as a dense proper subspace (WeilRepresentationsOnBanachSpacesOfData §10.2), on which the Weil
+representation of a pair is the global Weil representation for explicit splitting characters and its theta kernels are
+multiples of modulus one of the standard theta kernels (§10.7), the lifts by edges being constant multiples of global
+theta lifts of the complex conjugate forms (§10.9). For parameters `l`, `l′` that satisfy the block rule, the discrete
+series of `l′` occurs in the completed Fock space of an oscillator pair of the two real groups with multiplicity space
+the contragredient of the discrete series of `l` (HolomorphicDiscreteSeriesOfUnitaryGroups §8.2 (a), §9.9).
+
+**The seesaw identity (3.20).** For the data of OneSidedPrimeSumBoundsAndAdmissibleData §3.2, a linear form `t` on the
+values of the forms on `X_0` and an archimedean point `g` of `U(Y_0)` there is `c ∈ ℂ^×` such that every twist `ϑ` has
+a chain datum `Ψ` (translations in its support vanish at the places not dividing `M q_ϑ` and have `π̄_M x_j` integral
+at the places not dividing `q_ϑ`; values integral away from `q_ϑ`; `Σ_x |σ(Ψ(x))| ≤ M^{3 f m n_m²}` for every
+automorphism `σ` of `ℂ` when `Q(ϑ) = ∅`; glued tensor invariant under the levels) with
+`Θ_ϑ(𝒫_{g,t}φ) = c·comp_ϑ(Ψ)(φ)` for every ramified source form `φ`. Neither side is asserted to be nonzero. Here *the
+seesaw identity* is this roadmap's name for 3.20, an identity of forms on `U(Y_m)` between a chain of theta lifts
+along the `Y_j` and a combination of chains of theta lifts along the `X_j`, proved by unfolding Bessel periods,
+whereas in the literature the seesaw identity is, for two dual pairs `(G₁, H₁)` and `(G₂, H₂)` in one symplectic space
+with `G₂ ⊂ H₁` and `G₁ ⊂ H₂` (a seesaw pair) and Weil representations of the two pairs that agree on `G₁ × G₂`
+(compatible splitting characters), with one theta kernel, the equality of the pairing of a form on `G₂` with the
+restriction to `G₂` of the theta lift to `H₁` of a form on `G₁` and the pairing of that form on `G₁` with the
+restriction to `G₁` of the theta lift to `H₂` of the form on `G₂`, when the integrals converge absolutely; 4.1 states
+which steps of the proof of 3.20 are instances of it, and for which Weil representations.
+
+**In standard terms.** 3.20 says that the composite of the `m` lifts along `Y_0 → ⋯ → Y_m`, each a multiple of a theta
+lift, of the orthogonal projection to the forms of principal level of a Poincaré series along a Bessel subgroup of
+`U(Y_0)` (4.2) is `c` times the restriction to `U(Y_m) ⊂ U(X_m)` of a combination of composites of theta lifts between
+the definite groups `U(X_0), …, U(X_m)` (4.3); 3.20 gives the precise form. It is not the seesaw identity of the
+literature, and this roadmap does not derive it from that identity.
 
 ## Conventions and notation
 
@@ -36,10 +72,11 @@ statement. Where a section states more than that proof proves, a closing sentenc
 
 **Labels.** Under each section heading, `*Origin:*` says where the statement comes from, in one of the forms
 `published:`, `adapted from … : here, …`, `particular to this proof:`, `this roadmap's own formulation:` or
-`definitions and conventions`, and `*Method of the formal proof:*` says how [ShortProof] proves it. `*Needs:*` lists the
-sections the statement rests on: bare ids for this roadmap, `Name §k.n` for other roadmaps, and `ShortGRH background (…)`
-for a background result that the shorter proof proves in its folder of known results and that no roadmap section states
-in the form used.
+`definitions and conventions`, and `*Method of the formal proof:*` says how [ShortProof] proves it. `*Needs:*` lists
+the sections the statement rests on: bare ids for this roadmap, `Name §k.n` for other roadmaps, and
+`ShortGRH background (…)` for a background result that the shorter proof proves in its folder of known results and
+that no roadmap section states in the form used. In Layer 4 each section gives a `*Proof route:*` from the sections it
+cites in place of the method.
 
 **The data.** Everything is relative to admissible data in the sense of OneSidedPrimeSumBoundsAndAdmissibleData
 §3.2, whose letters are used throughout. `d` is a prime, `K = ℚ(√−d)` with quadratic character `χ_K`, `E = K(ζ)` with
@@ -170,6 +207,40 @@ length `d` and `2[d] = (d − 1, d − 3, …, 1 − d)` the same block with its
 shifted entry has the same sign on both sides, a negative one opposite signs. Two families of parameters *correspond*
 if they satisfy the block rule at every `τ ∈ Φ`.
 
+**Standard objects.** On a space of rank `n`, for a doubled parameter `l` that has the gap `500n³` at every infinite
+place, the forms of the type of `l` and of a level are the cusp forms of that level on the unitary group of the space,
+in the usual sense, that are images of the vector of the lowest `K_∞`-type of the discrete series of `l` under
+intertwiners into the cusp forms, and their space is isomorphic to the sum, with the cuspidal multiplicities, of the
+spaces of vectors fixed by the level in the finite parts of the cuspidal automorphic representations whose archimedean
+component is that discrete series (AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (a), (b), (d)); a form of that
+type is the sum of its components in these representations and need not lie in one of them. An algebraic form of a
+level on a standard definite space has gauge at most `1` at every point exactly when the attached form with `p`-adic
+coefficient action takes its values in the lattice spanned over the ring of integers of `ℂ_p` by the integral basis
+(AdelicUnitaryGroupsAndAlgebraicModularForms §8.6 (b)). For spaces `V`, `V′` of positive rank and a rational
+Lagrangian decomposition of the symplectic space underlying `Hom(V, V′)`, with Lagrangian `𝒳`, the space of data
+`𝒮(Hom(V, V′))` contains the image of the Schwartz–Bruhat space of `𝒳(𝔸)` as a dense proper subspace
+(WeilRepresentationsOnBanachSpacesOfData §10.2 (a), (e)), and the data `v_P ⊗ Φ` with `Φ` in the finite part lie in
+that image (§10.4 (b)); on it `ω_{a,b}` is the global Weil representation of the pair for the splitting characters of
+§10.7 (b), the theta functional is a multiple of modulus one of the theta distribution (§10.6 (b)), and the theta lift
+of a rapidly decreasing automorphic function `y` with the image of a Schwartz–Bruhat function `φ` is a nonzero
+constant times the global theta lift by `φ` of `conj y` (§10.7 (e)); §10.9 reads the lifts by edges and arrows in this
+way. The block rule is adapted from the relation between the parameters of discrete series that correspond under the
+theta lift of Li (1990) (HolomorphicDiscreteSeriesOfUnitaryGroups §8.2). When `l` and `l′` satisfy it for `(γ, γ′)`,
+the parameters `l′` and `−l` match (HolomorphicDiscreteSeriesOfUnitaryGroups §8.2 (a)), and in the completed Fock
+space of every oscillator pair of the Fock datum of that statement, such as the real Weil action of the pair for the
+weights `γ`, `γ′` (WeilRepresentationsOnBanachSpacesOfData §§2.4 (b), 6.2 (b)), the discrete series of `l′` occurs
+with multiplicity space the discrete series of `−l`, the contragredient of the discrete series of `l`
+(HolomorphicDiscreteSeriesOfUnitaryGroups §9.9 (a), (b), and §8.2, In standard terms); these sections state this for
+the block rule itself and do not compare it with the description of the correspondence by Li. For parameters that
+satisfy the block rule, the edge property of a product of joint harmonics comes, through
+WeilRepresentationsOnBanachSpacesOfData §7.2, from the statements on oscillator pairs of
+HolomorphicDiscreteSeriesOfUnitaryGroups §8.6, which are adapted from the same theorem of Li. An edge records
+identities for one Fock vector; it does not identify the theta lift of a representation
+(WeilRepresentationsOnBanachSpacesOfData §10.9 (c)). The entries of the jet matrix of a finite datum `f` are, up to a
+power of the scale, the theta values of the data `v_P ⊗ f` for the Schur coefficient polynomials `P` of the weight
+(WeilRepresentationsOnBanachSpacesOfData §7.5 (c)), and 4.3 states the lift between definite spaces of 2.8 as a theta
+lift.
+
 ### Table of symbols
 
 | Symbol | Meaning | Defined |
@@ -204,6 +275,9 @@ if they satisfy the block rule at every `τ ∈ Φ`.
 | `γ, T_y, η, I_•` | neighbour matrix, residue translations, unit of norm `−1`, rows of `(X ⊔ {e})⁻ ⊕ (X″ ⊔ {e″})` | 3.9 |
 | `W_k, 𝒲_{k+1}` | functions of the unfolding | 3.14 |
 | `Ω_j, mult_j` | cuts and multiplicities of the outer variables | 3.16 |
+| `ω₃, z_⋆, 𝒦, ϰ, ϰ₁, ϰ₂` | joint Weil operator of three spaces, the constant of the theta functional on joins, the joined kernel integrated over the middle group, the characters of `U(1)` in the seesaw of a joined pair | 3.8, 4.1 |
+| `𝔞, 𝔣_φ, Poin, pr_𝒜` | reproducing function at the real places, the function of a source form, Poincaré series along `R_0`, projection to `𝒜(Y_0)` | 4.2 |
+| `P_{t′,ξ}` | Schur coefficient polynomial of a linear form and a vector | 4.3 |
 
 ## Layer 1: Theta kernels between definite spaces
 
@@ -243,6 +317,13 @@ representation `ω` of the finite points on data and a map `Φ ↦ J(Φ)`, the j
 with the same columns), finite points `d`, `d′` and a real `C ≥ 0`, a datum `Φ` *raises gauges by at most `C` from `d`
 to `d′`* if `‖J(ω(g, h)Φ)ξ‖_{hd′} ≤ C·‖ξ‖_{gd}` for all finite `g`, `h` and all `ξ` (the gauge on the left in weight
 `(c, e′)`, on the right in weight `(c, e)`). These data form an additive monoid.
+
+**In standard terms.** `‖ξ‖_g ≤ 1` says that the coordinates of `g^{−1}·ι_p(ξ)` in the integral basis lie in the ring
+of integers of `ℂ_p`. The gauge is that of AdelicUnitaryGroupsAndAlgebraicModularForms §6.6: `‖ξ‖_g` is the gauge, in
+the sense of convex geometry, at `ι_p(ξ)` of the image under `g` of the lattice spanned over the ring of integers of
+`ℂ_p` by the integral basis, and an algebraic form of a level has gauge at most `1` at every point exactly when the
+attached form with `p`-adic coefficient action takes its values in the lattice spanned over that ring by the integral
+basis (AdelicUnitaryGroupsAndAlgebraicModularForms §8.6 (b)).
 
 [ShortProof], `New/UpperBound/Seesaw/AdmissibleCombinations.lean` (`New.Seesaw.IsAdmissibleCombination`,
 `New.Seesaw.IsAdmissibleCoeffs`, `New.Seesaw.integralAway`), `New/UpperBound/Kernels/JetConjugatesAndBounds.lean`
@@ -546,7 +627,8 @@ and its norm); IntegralRepresentationsOfGeneralLinearGroups §3.4 (the form used
 ### 2.3 Inserting a block into a parameter
 
 *Origin:* particular to this proof: a combinatorial criterion under which a parameter and the same parameter with one
-more block correspond; the correspondence of discrete-series parameters under the theta lift is that of Li (1990).
+more block correspond; the block rule is adapted from the correspondence of discrete-series parameters under the theta
+lift of Li (1990).
 
 *Method of the formal proof:* the entries before and after the insertion are compared after the shift by the centre;
 the separation of the centres places the inserted block away from the others, so the signs change only at the
@@ -612,6 +694,14 @@ and `g(i, j + 1)` correspond for the weights `⌊N/2⌋ − κ_{j+o+1}`, and `g�
 parameters of the spaces) for the weights `⌈N/2⌉ − κ_{j+o+1}`. Here `N` is the rank of each node, the signs are those of
 the nodes, and in grid `Ỹ` the ranks are even. In particular `l_Y(j)` and `l_Y(j + 1)` correspond for `j < m`, for the
 weights `⌊N/2⌋ − κ_{j+1}`.
+
+**In standard terms.** That two parameters correspond is the block rule of the Conventions, adapted from the relation
+between the parameters of discrete series that correspond under the theta lift of Li (1990)
+(HolomorphicDiscreteSeriesOfUnitaryGroups §8.2). When `l` and `l′` correspond, at each `τ` the parameters `l′` and
+`−l` match (HolomorphicDiscreteSeriesOfUnitaryGroups §8.2 (a)), and in the completed Fock space of every oscillator
+pair of the Fock datum of that statement the discrete series of `l′` occurs with multiplicity space the discrete
+series of `−l`, the contragredient of the discrete series of `l` (HolomorphicDiscreteSeriesOfUnitaryGroups §9.9 (a),
+(b), and §8.2, In standard terms).
 
 [ShortProof], `New/UpperBound/Objects/Parameters.lean` (`New.Data.GridIndex`, `New.Data.gridSigns`,
 `New.Data.gridParam`, `New.Data.signsY`, `New.Data.paramY`, `New.Data.gridWeight`, `New.Data.gridDiagEquiv`,
@@ -694,6 +784,17 @@ reductions at the chosen places). The *good forms* are `e₀·𝒜(V)`; the *tar
 *Lemma.* For the signs of `Y_0` and of every `W_j`, `2ς` has the gap `Δ` at every `τ`; the type of `2ς` is then a cusp
 kernel of order `Δ/2`, and `𝒜(V)` is finite-dimensional.
 
+**In standard terms.** `𝒜(V)` is the space of the forms of the discrete-series type of `2ς`
+(AdelicUnitaryGroupsAndAlgebraicModularForms §5.1) that are fixed by `J_M`; such forms are cuspidal and rapidly
+decreasing (AdelicUnitaryGroupsAndAlgebraicModularForms §5.4 (b), (d)). As `2ς` has the gap `Δ` for the signs of `V`
+and `Δ = 2r⁸ ≥ 500r³`, `r ≥ 4` being the rank of `V` (OneSidedPrimeSumBoundsAndAdmissibleData §3.2, §3.3 (b)),
+AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 applies: the forms of type `2ς` and of a level on `U(V)` are the cusp
+forms of that level, in the usual sense, that are images of the vector of the lowest `K_∞`-type of the discrete series
+of `2ς` under intertwiners into the cusp forms (§8.5 (a), (b)), and their space is isomorphic to the sum, with the
+cuspidal multiplicities, of the spaces of vectors fixed by the level in the finite parts of the cuspidal automorphic
+representations whose archimedean component is that discrete series (§8.5 (d)); a form of type `2ς` is the sum of its
+components in these representations and need not lie in one of them.
+
 [ShortProof], `New/UpperBound/Objects/Rows.lean` (`New.Data.principalForms`, `New.Data.principalRep`,
 `New.Data.goodForms`, `New.Data.targetForms`, `New.Data.targetDim`, `New.Data.hasGap_signsY_paramW`,
 `New.Data.hasGap_paramW`, `New.Data.isCuspKernel_typeKernel_paramW`).
@@ -724,6 +825,15 @@ jet matrix of the theta function of the translated datum.
   is `[K_j : U_0]^{−1}·Σ_c |Γ ∩ g_cU_0g_c^{−1}|^{−1}·J(ω(g_c, h)Φ)ψ(g_c)` over representatives `g_c` of
   `Γ\U(X_j)(𝔸_f)/U_0` (for `ψ` and `Φ` fixed by `K_j` this is the class sum of ThetaLiftsForDefiniteUnitaryGroups §1.2).
   The finite groups act on its data by `ω`.
+
+**In standard terms.** By 4.3, `L_j^ϑ(Φ)` is the theta lift of the definite pair `(X_j, X_{j+1})` read on
+coefficients: every coefficient of `L_j^ϑ(Φ)ψ` is a power of the scale `π_M·t₀` times a sum of theta lifts
+(Conventions) of coefficients of `ψ` with data `v_P ⊗ Φ`, `P` a Schur coefficient polynomial of the lift weight, every
+theta lift of a coefficient of `ψ` with a datum `v_P ⊗ Φ`, `P` any polynomial, is a coefficient of `L_j^ϑ(Φ)ψ`, and
+the class sum is the integral over the compact quotient `[U(X_j)]`. The data `v_P ⊗ Φ` are images of Schwartz–Bruhat
+functions (WeilRepresentationsOnBanachSpacesOfData §10.4 (b)), and the theta lifts with them are nonzero constant
+multiples of global theta lifts of the complex conjugate functions (WeilRepresentationsOnBanachSpacesOfData §10.7 (e);
+4.3).
 
 [ShortProof], `New/UpperBound/Objects/Columns.lean` (`New.Data.SourceForm`, `New.Data.FormX`, `New.Data.liftKernel`,
 `New.Data.homX`), `New/UpperBound/Size/ShortColumns.lean` (`New.Data.IsScalingAt`, `New.Data.exists_isScalingAt_valuation_pow_iff`,
@@ -863,6 +973,11 @@ takes `φ` to `∏_{i<p}(d_i·#prim_i·∏_{l<2i+2}γ_l)` times the composite of
 
 *Lemma.* `res` is well defined: it carries algebraic forms of weight `μ(X_m)` to algebraic forms of weight `μ(Y_m)`.
 
+**In standard terms.** By 4.3 for each lift, `C_m` applied to a pure tensor of data is a composite of `m` theta lifts
+between the definite groups `U(X_0), …, U(X_m)`, read on coefficients, and `res` restricts a form on `U(X_m)` to
+`U(Y_m) ⊂ U(X_m)` through `h ↦ diag(h, 1)` and applies the branching map `br` and a constant; so `comp_ϑ(Ψ)(φ)` is the
+restriction to `U(Y_m)` of a combination of composites of theta lifts of `φ`.
+
 [ShortProof], `New/UpperBound/Objects/Columns.lean` (`New.Data.Translations`, `New.Data.translateDatum`,
 `New.Data.admissibleTranslations`, `New.Data.supportedTranslations`, `New.Data.gluedDoubleLiftDatum`,
 `New.Seesaw.doubleLiftGluing`, `New.Data.gluedVacuum`, `New.Data.gluedTensor`, `New.Data.plainTensor`,
@@ -950,6 +1065,24 @@ product over the level places and `l < m` of `ψ_{l+1}^ϑ` at the determinant of
 `s ∈ 𝖦` there is an element of `K°(Y_m)`, with reduction `diag(s, 1)` at the chosen places and `1` at `Q(ϑ)`, whose right
 translation takes `Θ_ϑ(y)` to `Θ_ϑ(s·y)`.
 
+**In standard terms.** `Θ_ϑ` is the composite of the lifts `ι_j^ϑ`, each `[K° : J_ϑ(Y_{j−1})]` times the theta lift
+(Conventions) of the pair `(Y_{j−1}, Y_j)` with a datum whose Fock vector is a product of joint harmonics, the last
+form being read as an algebraic form on the definite `U(Y_m)` (2.2 (b)). (a) rests on the edge property of the Fock
+vector `v_{H_j}` for the corresponding parameters `l_Y(j)`, `l_Y(j + 1)` (2.4), which comes, through
+WeilRepresentationsOnBanachSpacesOfData §7.2, from HolomorphicDiscreteSeriesOfUnitaryGroups §8.6, adapted from the
+theta lift of discrete series of Li (1990). By WeilRepresentationsOnBanachSpacesOfData §10.9 (a), `ι_{j+1}^ϑ(f)` is a
+nonzero constant times the global theta lift of `conj f` by a Schwartz–Bruhat function, for the Weil representation of
+the pair `(Y_j, Y_{j+1})` with the splitting characters of WeilRepresentationsOnBanachSpacesOfData §10.7 (b); an edge
+records neither that this lift is nonzero nor which automorphic representations occur in it (§10.9 (c)). For the
+corresponding parameters `l_Y(j)`, `l_Y(j + 1)`, at each `τ` the discrete series of `l_Y(j + 1)` occurs in the
+completed Fock space of every oscillator pair of the Fock datum of HolomorphicDiscreteSeriesOfUnitaryGroups §8.2 (a)
+with multiplicity space the contragredient of the discrete series of `l_Y(j)`
+(HolomorphicDiscreteSeriesOfUnitaryGroups §9.9 (a), (b), and §8.2, In standard terms). As `l_Y(j)` and `l_Y(j + 1)`
+satisfy the block rule (2.4 (c)), `l_Y(j)` has the gap `500n³` for the signs of `Y_j`, `n` being the rank of `Y_j`,
+for every `j ≤ m`; so by AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (a), (b) the forms of type `l_Y(j)` and of a
+level on `U(Y_j)` are the cusp forms of that level, in the usual sense, that are images of the vector of the lowest
+`K_∞`-type of the discrete series of `l_Y(j)` under intertwiners into the cusp forms.
+
 [ShortProof], `New/UpperBound/Objects/RowChain.lean` (`New.Data.FormY`, `New.Data.harmonicY`, `New.Data.datumY`,
 `New.Data.liftY`, `New.Data.lowerChainUpTo`, `New.Data.lowerChain`, `New.Data.isArrow_datumY`,
 `New.Data.lowerChain_mem_levelSpace`, `New.Data.algFormRep_lowerChain`, `New.Data.lowerChain_principalRep`),
@@ -987,8 +1120,14 @@ level places. Attached to it:
   of `α` in the polynomial model of Weyl modules, each variable `y_{τ,i,h}` replaced by the sum of the `x_{τ,i,a}` over
   the basis vectors `a` of `W` of sign `+1` and number `h`, and the polynomial of `β`, with the same substitution over the
   basis vectors of sign `−1` (IntegralRepresentationsOfGeneralLinearGroups §§1.1, 3.2);
-- the *normalised descent* of a form `Ξ` on `V`: `g ↦ Σ_h (class sum over K_O) conj θ(ω(g, (1, h))(v_{P_ξ̄} ⊗ Ψ_bl ⊗ vac))`
-  applied to `Ξ(h)`;
+- the *normalised descent* of a form `Ξ` on `V`:
+  `g ↦ Σ_h (class sum over K_O) conj θ(ω(g, (1, h))(v_{P_ξ̄} ⊗ Ψ_bl ⊗ vac))` applied to `Ξ(h)`; here *descent* means a
+  theta lift in the direction opposite to a lift: for a descent pair, from `U(V)` to `U(W)` with the complex conjugate
+  kernel, by 2.17 (d) and WeilRepresentationsOnBanachSpacesOfData §6.4 (c) a multiple of the adjoint of a theta lift
+  from `U(W)` to `U(V)`; in 3.18 the word names the transposed lift, which has the kernel itself and is applied to
+  forms of the conjugate type; whereas in the literature the word usually names the automorphic descent, which
+  produces cuspidal representations of classical groups from cuspidal representations of general linear groups through
+  Fourier coefficients of residual Eisenstein series and is not used here;
 - the *lift Hecke polynomial*: a form `y` on `V` has the lift Hecke polynomial of a family `z(w) = (z_i(w))_{i≥0}` of
   complex numbers if at every place `w ≠ w̄` such that neither `w` nor `w̄` is a level place, `y` is spherical at `w` and
   `Σ_{0≤i≤|n|}(−T)^i q^{i(i−1)/2} T_{w,i}` (`q = N(w)`, `T_{w,i}` the Hecke operators of the split place `w`,
@@ -1031,6 +1170,12 @@ from the type of `l` (signs `ε`) to the type of `l_O` on the definite `V`, for 
 the transposed lift, from `V` to `W`, of the conjugate of the automorphic form of `Ξ`, with the datum
 `v_{P_{v⁺}} ⊗ Ψ_bl ⊗ vac` of the highest vector `v⁺`.
 
+**In standard terms.** By (d) and WeilRepresentationsOnBanachSpacesOfData §6.4 (c), the normalised descent is
+`dim V_{(c_O,e_O)}·[K° : K_O]` times the adjoint, for the Petersson products with rapidly decreasing automorphic
+functions on `U(W)`, of the theta lift from `U(W)` to `U(V)` with the datum `v_{P_{v⁺}} ⊗ Ψ_bl ⊗ vac`, that is, the
+integral of the automorphic form of `Ξ` against the complex conjugate of the theta kernel of that datum. The edge
+property of (c) is related to the local theta correspondence of discrete series as in 2.15.
+
 [ShortProof], `New/UpperBound/Objects/AuxiliaryPair.lean` (`New.DescentPair.blockDatum_eq_sum_modDatum`,
 `New.DescentPair.omega_blockDatum_eq_smul`, `New.DescentPair.FitsParams.isEdge`,
 `New.DescentPair.FitsParams.exists_isJointHarmonic`, `New.DescentPair.normalizedDescent_eq_smul_star_lift_swap`).
@@ -1052,6 +1197,9 @@ for `i ≥ 1`, `k^-(τ, i) = max(0, min(ς_{r−i−1}(τ), −κ_j(τ) − (t �
 continued to all `i ≥ 0` as in 2.4, `k^+(τ, 0) := 0` and `k^-(τ, i) := 0` for `i ≥ r`, and the character `μ_j⁰ϑ` of
 weight `−κ_j`.
 Then `2ς` fits this pair: `2ς` (signs of `W_j`) and `l_O` correspond for the weights `m − j` and `⌊(r + t)/2⌋ − κ_j`.
+
+**In standard terms.** That `2ς` fits the pair is a statement on the block rule, related to the local theta
+correspondence of discrete series as in 2.4.
 
 [ShortProof], `New/UpperBound/Objects/Rows.lean` (`New.Data.descentPair`, `New.Data.paramsCorrespond_descentPair`,
 `New.Data.fitsParams_descentPair`).
@@ -1078,6 +1226,13 @@ For an archimedean point `g` of `U(Y_0)`, the *Poincaré map* `𝒫 = 𝒫_{g,t}
 (Petersson product conjugate-linear in the first variable; a fixed Haar measure on `R_0(𝔸)`). (a) `𝒫` exists and is unique;
 `𝒫_{g,ct} = c·𝒫_{g,t}`. (b) For a form `z` of the conjugate type on `U(Y_0)`, right invariant under a level `J`:
 `[J_M : J ∩ J_M]·∫_{[U(Y_0)]} z·𝒫φ = Σ_γ ∫_{[R_0]} 𝒲_φ(r)z(r g γ) dr`, over representatives `γ` of `J_M/(J ∩ J_M)`.
+
+**In standard terms.** By 4.2, for every archimedean point `g` and linear form `t`, `𝒫_{g,t}φ` is the orthogonal
+projection to `𝒜(Y_0)` of the Poincaré series along `R_0` of a function on `U(Y_0)(𝔸)` that transforms on the left by
+`ψ_U` under the unipotent radical of `R_0`. At a point and a linear form as in SecondMomentsOfPoincareSeries §5.3 (b),
+the Poincaré map is a combination of the Poincaré series of SecondMomentsOfPoincareSeries §5.1, which
+SecondMomentsOfPoincareSeries §6.4 (c) writes as series over the quotients of the rational points by unipotent groups
+of functions without cutoff.
 
 [ShortProof], `New/UpperBound/Objects/PoincareMap.lean` (`New.Data.besselPeriod`, `New.Data.poincareAt`,
 `New.Data.inner_poincareAt`, `New.Data.poincareAt_smul`, `New.Data.integral_mul_poincareAt`,
@@ -1630,9 +1785,287 @@ twist `ϑ` there is a chain datum `Ψ` for `ϑ` (2.12) with
 
 `Θ_ϑ(𝒫_{g,t}φ) = c·comp_ϑ(Ψ)(φ)` for every `φ ∈ 𝒮_X^{ram}`.
 
+**In standard terms.** By 4.2, `𝒫_{g,t}φ` is the orthogonal projection to `𝒜(Y_0)` of the Poincaré series along `R_0`
+of a function `𝔣_φ` that transforms by `ψ_U` under the unipotent radical of `R_0`; `Θ_ϑ` is the composite of the `m`
+lifts `ι_j^ϑ`, multiples of theta lifts along `Y_0 → ⋯ → Y_m` (2.15); and by 4.3, `comp_ϑ(Ψ)(φ)` is the restriction to
+`U(Y_m) ⊂ U(X_m)`, followed by the branching map, of a combination of composites of theta lifts of `φ` between the
+definite groups `U(X_0), …, U(X_m)`, read on coefficients. So 3.20 says that the composite of the theta lifts along
+the `Y_j` of the projected Poincaré series of `φ` is `c` times the restriction to `U(Y_m)` of a combination of
+composites of theta lifts of `φ` along the `X_j`, with one `c` for all twists and a chain datum controlled as stated.
+It is not the seesaw identity of the literature: 4.1 states the two steps of its proof that are instances of that
+identity, the joining of two lifts in 3.14 (b), for Weil representations of the seesaw pair that differ from those of
+the two lifts by a character of a determinant, and the adjointness of 3.18 (a), and this roadmap does not derive 3.20
+from that identity.
+
 [ShortProof], `New/UpperBound/Seesaw/SeesawIdentity.lean` (`New.Data.seesaw_identity`).
 
 *Needs:* 2.12, 2.15, 2.19, 3.17, 3.19; OneSidedPrimeSumBoundsAndAdmissibleData §3.2 (the data), §3.4 (the twists).
+
+## Layer 4: Comparison with the standard theory
+
+The route states its results on objects of its own: a Poincaré map defined as the Riesz representative of a Bessel
+period, lifts between definite spaces whose kernels are jet matrices, and an identity between two chains of lifts that
+it calls the seesaw identity (3.20). This layer relates them to the standard objects. 4.1 states which steps of the
+proof of 3.20 are instances of the seesaw identity of the literature, for which seesaw pairs, and which steps are of
+another kind; 4.2 states the Poincaré map as the orthogonal projection of a Poincaré series along a Bessel subgroup;
+4.3 states the lifts between the `X_j` as theta lifts with the Fock vectors of Schur coefficient polynomials. It rests
+on comparisons that other roadmaps state and that are not restated here: forms of a discrete-series type and cusp
+forms that generate a discrete series at the infinite places, for parameters of gap `500n³` in rank `n`, in
+AdelicUnitaryGroupsAndAlgebraicModularForms §8.5; the space of data and the Schwartz–Bruhat space, Fock vectors and
+Schwartz vectors, the Weil representation of a pair with its theta kernels and lifts, and edges and arrows, in
+WeilRepresentationsOnBanachSpacesOfData §§10.2, 10.4, 10.7, 10.9; the block rule and the decomposition of the
+completed Fock space of an oscillator pair into discrete series, in HolomorphicDiscreteSeriesOfUnitaryGroups §8.2 (a)
+and §9.9; the Poincaré series of filling data as series over quotients of the rational points, in
+SecondMomentsOfPoincareSeries §6.4. The route does not use this layer.
+
+### 4.1 The seesaw identity of 3.20 and the seesaw identity of the literature
+
+*Origin:* this roadmap's own formulation: the comparison of 3.20, which this roadmap calls the seesaw identity, with
+the seesaw identity of the literature (MetaplecticAutomorphicForms §6.15 (Global see-saw and spectral projection));
+(a) is the step of 3.14 (b) that joins two lifts, which [ShortProof] proves without reference to a seesaw pair.
+
+*Proof route:* (a) By WeilRepresentationsOnBanachSpacesOfData §6.15 (a), (c),
+`θ(ω₃(g, r, k)(f ⋆ f′)) = z_⋆·θ(ω_{a_X,a_{X′}}(g, r)f)·θ(ω_{b_{X′},b_{X″}}(r, k)f′)`. Both factors are continuous and
+invariant under the rational points of their groups (WeilRepresentationsOnBanachSpacesOfData §6.2 (a)), and `[U(X)]`,
+`[U(X′)]`, `[U(X″)]` are compact (AdelicUnitaryGroupsAndAlgebraicModularForms §4.4 (b)), hence of finite volume
+(AdelicUnitaryGroupsAndAlgebraicModularForms §1.1 (d)); every integrand is a continuous function on a compact space,
+so Fubini's theorem applies. Integrating first over `[U(X)]` gives `z_⋆·L_f𝔵(r)·θ(ω_{b_{X′},b_{X″}}(r, k)f′)`, a
+continuous function of `r` invariant under `U(X′)(F)`, and then over `[U(X′)]` gives `z_⋆·L_{f′}(L_f𝔵)(k)`;
+integrating against `𝔶`, over `[U(X″)]` before `[U(X′)]`, gives the second identity. The reading as a seesaw identity
+follows from §6.15 (a), (c) and the characters computed after (a). (b) Both sides of 3.18 (a) are `[K° : J_ϑ(Y_j)]`
+times the integral of `θ(ω(g, h)Φ_j^ϑ)·f(g)·z(h)` over `[U(Y_j)] × [U(Y_{j+1})]`
+(WeilRepresentationsOnBanachSpacesOfData §6.4 (c)), the two sides of the seesaw identity of the stated pair. (c) In
+3.14 (b), the double theta integral of 3.13 carries the datum `Z(sh·(f ⋆ f′))` on `Hom(X′, X⁻ ⊕ X″)`, whose finite
+part is a sum of joins of finite data (3.8 (b); WeilRepresentationsOnBanachSpacesOfData §6.15 (d)) and whose Fock
+vector is a limit of polynomial vectors (WeilRepresentationsOnBanachSpacesOfData §2.2 (d)). A polynomial in the
+variables of `Hom(X′, X⁻ ⊕ X″)` is a sum of products `P^♭·Q`, with `P` a polynomial in the variables of `Hom(X, X′)`,
+`P^♭` the polynomial in the variables of `Hom(X′, X⁻)` obtained from `P` by transposing the variables, and `Q` a
+polynomial in the variables of `Hom(X′, X″)`; and `(v_P ⊗ Φ) ⋆ (v_Q ⊗ Φ′) = v_{P^♭·Q} ⊗ (Φ ⋆ Φ′)` for data `Φ`, `Φ′`
+of the finite parts, because the flip in the join carries `v_P ⊗ Φ` to `v_{P^♭}` inserted into the flip of `Φ`
+(WeilRepresentationsOnBanachSpacesOfData §6.8 (a), all signs being `+1`), the product of data is compatible with real
+insertion (§3.8 (a)), and the Fock vectors of polynomials in the two blocks of variables multiply to the Fock vector
+of the product (§2.1 (d)). For the data `v_{P^♭·Q} ⊗ (Φ ⋆ Φ′)`, (a) with `𝔵` a coefficient of a form and 4.3 (b),
+applied to each of the two lifts, turn that integral into a coefficient of the composite of the two lifts between
+definite spaces, at a linear form that depends linearly on the polynomial. The integral is continuous in the Fock
+vector, and the functions that are coefficients of the composite form a finite-dimensional, hence closed, space; so
+the same holds for every Fock vector, and by linearity for every datum of the finite part. The other steps are read
+off the statements and methods of the sections named.
+
+Let `X`, `X′`, `X″` be standard definite spaces over `E` and `X⁻` the space `X` with its form negated, so that
+`U(X⁻) = U(X)`. Let `a`, `b` be automorphic characters of `U(1)`, `a_X`, `a_{X′}`, `b_{X′}`, `b_{X″}` their rank
+twists (Conventions), `ω₃` the representation of `U(X)(𝔸) × U(X′)(𝔸) × U(X″)(𝔸)` on `𝒮(Hom(X′, X⁻ ⊕ X″))` of
+WeilRepresentationsOnBanachSpacesOfData §6.15 (c) for `a`, `b` (the joint Weil operator of 3.8 (c)), `f ⋆ f′` the join
+(3.8 (b)) of data `f` on `Hom(X, X′)` and `f′` on `Hom(X′, X″)`, and `z_⋆ ≠ 0` the constant of
+WeilRepresentationsOnBanachSpacesOfData §6.15 (a). Write `L_f` for the theta lift (Conventions) from `U(X)` to `U(X′)`
+with the datum `f` for the Weil representation `ω_{a_X,a_{X′}}`, `L_{f′}` for the theta lift from `U(X′)` to `U(X″)`
+with `f′` for `ω_{b_{X′},b_{X″}}`, and `L^t_{f′}` for the transposed lift of `f′`. A *seesaw pair* is a pair of dual
+pairs `(G₁, H₁)`, `(G₂, H₂)` in one symplectic space with `G₂ ⊂ H₁` and `G₁ ⊂ H₂` (MetaplecticAutomorphicForms §3.8
+(Local see-saw identity)). Given Weil representations of the two pairs on one space of data that agree on `G₁ × G₂`
+(compatible splitting characters) and one datum, its *seesaw identity* is the equality, for a function on `[G₁]` and a
+function on `[G₂]` for which the integrals converge absolutely, of the integral over `[G₂]` of the second function
+against the restriction to `G₂` of the theta lift to `H₁` of the first, and the integral over `[G₁]` of the first
+function against the restriction to `G₁` of the theta lift to `H₂` of the second; both are the integral over
+`[G₁] × [G₂]` of the theta kernel against the two functions (MetaplecticAutomorphicForms §6.15 (Global see-saw and
+spectral projection)).
+
+(a) *The seesaw of a joined pair.* For all data `f`, `f′`, every continuous function `𝔵` on `U(X)(𝔸)` left invariant
+under `U(X)(F)` and every `k ∈ U(X″)(𝔸)`,
+`∫_{[U(X)]} 𝔵(g)·∫_{[U(X′)]} θ(ω₃(g, r, k)(f ⋆ f′)) dr dg = z_⋆·L_{f′}(L_f𝔵)(k)`, the two integrations being
+exchangeable. For every continuous function `𝔶` on `U(X″)(𝔸)` left invariant under `U(X″)(F)`, with
+`𝒦(g, k) := ∫_{[U(X′)]} θ(ω₃(g, r, k)(f ⋆ f′)) dr`,
+`∫_{[U(X)] × [U(X″)]} 𝒦(g, k)·𝔵(g)·𝔶(k) dg dk = z_⋆·∫_{[U(X′)]} L_f𝔵(r)·L^t_{f′}𝔶(r) dr`.
+
+Write `υ` also for its restriction to `U(1)(𝔸)`. By WeilRepresentationsOnBanachSpacesOfData §6.15 (c), with the
+characters of the three determinants computed from §6.8 (a) and §3.8 (a),
+`ω₃(g, r, k) = a_{X′}(det g)^{−1}·υ(det g)^{rank X′}·a_X(det r)·b_{X″}(det r)^{−1}·υ(det r)^{−rank X}·b_{X′}(det k)·ω_{1,1}(r, (g, k))`,
+where `ω_{1,1}` is the Weil representation (Conventions) of the pair `(X′, X⁻ ⊕ X″)` with trivial twisting characters,
+`ω_{1,1}(r, h)` being the Weil operator of `x ↦ h·x·r^{−1}`, and `(g, k) ∈ U(X) × U(X″) ⊂ U(X⁻ ⊕ X″)`. Put
+`ϰ₁ := b_{X′}`, `ϰ₂ := a_X^{−1}·b_{X″}·υ^{rank X}` and `ϰ := (a_{X′}·b_{X′})^{−1}·υ^{rank X′}`, automorphic characters
+of `U(1)`. Then `ω₃(g, r, k) = ϰ(det g)·ω_{ϰ₁,ϰ₂}(r, (g, k))`, where `ω_{ϰ₁,ϰ₂}` is the Weil representation of the
+same pair twisted by `ϰ₁`, `ϰ₂`: the character of `det r` is absorbed in the choice of `ϰ₂`, and one character of a
+determinant is left, on `U(X)`. The dual pairs `(G₁, H₁) = (U(X′), U(X⁻ ⊕ X″))` and
+`(G₂, H₂) = (U(X) × U(X″), U(X′) × U(X′))`, the second being the sum of the dual pairs `(U(X), U(X′))` in
+`Hom(X′, X⁻)` and `(U(X″), U(X′))` in `Hom(X′, X″)`, form a seesaw pair in `Hom(X′, X⁻ ⊕ X″)`. Give `(G₁, H₁)` the
+Weil representation `ω_{ϰ₁,ϰ₂}`, and `(G₂, H₂)` the tensor product of the Weil representations `ω_{a_X, ϰ·a_{X′}}` of
+`(X, X′)` and `ω_{b_{X′}, b_{X″}}` of `(X′, X″)`, read on joins; the two agree on `G₁ × G₂`, since by §6.15 (c)
+`ω_{ϰ₁,ϰ₂}(r, (g, k))(f ⋆ f′) = (ω_{a_X, ϰ·a_{X′}}(g, r)f) ⋆ (ω_{b_{X′}, b_{X″}}(r, k)f′)`. For these two
+representations and the datum `f ⋆ f′`: `𝒦(g, k) = ϰ(det g)·𝒦₁(g, k)`, where `𝒦₁` is the restriction to `U(X) × U(X″)`
+of the theta lift to `U(X⁻ ⊕ X″)` of the constant function `1` on `[U(X′)]`; and by §6.15 (a) the theta lift to
+`U(X′) × U(X′)` of the function `(g, k) ↦ ϰ(det g)·𝔵(g)·𝔶(k)` is `(r₁, r₂) ↦ z_⋆·L_f𝔵(r₁)·L^t_{f′}𝔶(r₂)`. So the
+second identity of (a) is, in the realisation of the space of data, the seesaw identity of this seesaw pair for these
+two Weil representations, the datum `f ⋆ f′`, the constant function `1` on `U(X′)` and the function `((ϰ∘det)·𝔵) ⊗ 𝔶`
+on `U(X) × U(X″)`, and the first identity is its form at each point `k`. The tensor product of the Weil
+representations `ω_{a_X, a_{X′}}` and `ω_{b_{X′}, b_{X″}}` of the two lifts themselves is `ω₃` on `G₁ × G₂`, which,
+for `X` and `X″` of positive rank, is a Weil representation of the pair `(X′, X⁻ ⊕ X″)` twisted by two characters only
+if `ϰ = 1`; in the proof of 3.20, where `a = ν_{2i+1}^ϑ`, `b = ν_{2i+2}^ϑ` and the rank `n_{2i+1}` of `X′` is even,
+`ϰ = (ν_{2i+1}^ϑ·ν_{2i+2}^ϑ)^{−1}` has the weight `κ_{2i+1} + κ_{2i+2}` and is not trivial. If `f = v_P ⊗ Φ` and
+`f′ = v_Q ⊗ Φ′` with polynomials `P`, `Q` and data `Φ`, `Φ′` of the finite parts, then `f`, `f′` and `f ⋆ f′` are
+images of Schwartz–Bruhat functions (WeilRepresentationsOnBanachSpacesOfData §10.4 (b), with the identity of joins in
+the Proof route of (c) and §6.15 (d)), and on such data, when `X`, `X′` and `X″` have positive rank, the Weil
+representations of the pairs `(X, X′)`, `(X′, X″)`, `(X′, X⁻ ⊕ X″)` are global Weil representations for the splitting
+characters of WeilRepresentationsOnBanachSpacesOfData §10.7 (b), and their theta kernels are multiples of modulus one
+of the theta kernels of these (§10.7 (e)); a twist by a character of a determinant is a change of splitting character
+(MetaplecticAutomorphicForms §3.3 (Unitary dual-pair splittings)).
+
+(b) *The degenerate seesaw.* For `j < m`, the identity of 3.18 (a) is the seesaw identity of the seesaw pair formed by
+the dual pair `(U(Y_j), U(Y_{j+1}))` in `Hom(Y_j, Y_{j+1})` and the same pair with its members exchanged
+(`G₁ = H₂ = U(Y_j)`, `G₂ = H₁ = U(Y_{j+1})`), with the Weil representation of 2.15 for both and the datum `Φ_j^ϑ`: it
+is the adjointness of the lift `ι_{j+1}^ϑ` and its transposed lift.
+
+(c) *The seesaw in the proof of 3.20.* In the proof of 3.20, (a) is the step of 3.14 (b) at each pair of lifts
+`Y_{2i} → Y_{2i+1} → Y_{2i+2}`, in which the double theta integral of 3.13 over `[U(X)]` and `[U(X′)]`, against the
+joint Weil operator, becomes a coefficient of the composite of the two lifts `X_{2i} → X_{2i+1} → X_{2i+2}`; and (b)
+is 3.18 (a) at each lift. The other steps are of another kind and are not stated here as seesaw identities: they are
+the unfolding of the Bessel periods of theta lifts along the Bessel subgroups (2.19 (b), 3.13, 3.14 (a), through
+WeilRepresentationsOnBanachSpacesOfData §8.8, adapted from Wang (2025), Theorem 4.5), the finite evaluation of the
+data along an isotropic frame (3.8, 3.11, 3.12), the sums over cuts (3.1, 3.16, 3.18 (b)) and Schur orthogonality at
+the top of the chain (3.17), with the lattice statements of 3.2 to 3.7 and 3.15 that these use. This roadmap does not
+derive 3.20 from the seesaw identity of the literature.
+
+*Needs:* 2.15, 2.19, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.11, 3.12, 3.13, 3.14, 3.15, 3.16, 3.17, 3.18, 3.20,
+4.3; WeilRepresentationsOnBanachSpacesOfData §2.1 (the Fock vector of a product of polynomials in two blocks of
+variables), §2.2 (density of the polynomial vectors in the Fock space), §3.8 (products of data and real insertion),
+§6.2 (continuity and invariance under rational points of the theta kernels of a pair), §6.4 (adjointness of a lift and
+its transposed lift), §6.8 (the flip of a pair: its Weil action and its effect on polynomial vectors), §6.15 (two
+edges joined into one datum: the constant `z_⋆`, the joint Weil operator `ω₃`, and the finite parts of joins), §8.8
+(one step of the seesaw unfolding), §10.4 (data that are images of Schwartz–Bruhat functions), §10.7 (the Weil
+representation of a pair and the standard splittings); AdelicUnitaryGroupsAndAlgebraicModularForms §1.1 (quotient
+integrals; compact quotients have finite volume), §4.4 (definite quotients are compact); MetaplecticAutomorphicForms
+§3.3 (Unitary dual-pair splittings), §3.8 (Local see-saw identity), §6.15 (Global see-saw and spectral projection).
+
+### 4.2 The Poincaré map as the projection of a Poincaré series
+
+*Origin:* adapted from Poincaré series of integrable functions (Petersson (1930); Godement (1958), §4, Théorèmes 5 and
+5 bis), as in 2.19: here, for every archimedean point and linear form, the Poincaré map as the orthogonal projection
+to `𝒜(Y_0)` of a Poincaré series along the Bessel subgroup `R_0`, whose Petersson products unfold to the Bessel
+period. [ShortProof] states the comparison at one point and linear form (SecondMomentsOfPoincareSeries §5.3 (b)).
+
+*Proof route:* (a) `𝒲_φ` is continuous and bounded: `|ψ_U| = 1`, and `h ↦ t(ρ_{μ(X_0)}(h_∞)^{−1}φ(h_f))` is continuous
+on the compact `[U(X_0)]` (AdelicUnitaryGroupsAndAlgebraicModularForms §4.4 (b)). For fixed `h` the integrand vanishes
+unless `r_∞ ∈ h_∞·supp(𝔞)^{−1}·g^{−1}` and `r_f ∈ h_f J_M`, a compact subset of `R_0(𝔸)`; this gives the first clause,
+the continuity and the support. Left invariance under `R_0(F)` and the transformation under the unipotent radical
+follow from those of `𝒲_φ` (2.19; the string of `Y_0` has odd length `m − 1`, so all grades are even and `𝒲_φ`
+transforms by `ψ_U` under the whole unipotent radical) and the left invariance of the Haar measure of the unimodular
+group `R_0(𝔸)` (WeilRepresentationsOnBanachSpacesOfData §8.5 (a)); right invariance under `J_M` is that of `1_{J_M}`.
+Put `𝔟(x) := vol(J_M)^{−1}·conj 𝔞(g^{−1}x_∞)·1_{J_M}(x_f)`, so that `𝔣_φ(h) = ∫_{R_0(𝔸)} 𝒲_φ(r)·𝔟(r^{−1}h) dr`. Moving
+the quotient (AdelicUnitaryGroupsAndAlgebraicModularForms §1.1 (e)) for `(s, x) ↦ 𝒲_φ(s)·𝔟(s^{−1}x)·conj y(x)`, `y`
+bounded, measurable and left invariant under `R_0(F)`, whose integral against a cutoff is at most
+`sup|y|·‖𝔞‖_{L¹}·∫_{[R_0]}|𝒲_φ|`, finite because `[R_0]` has finite measure (WeilRepresentationsOnBanachSpacesOfData
+§8.5 (a)), gives the integrability (applied to the absolute values, with `y = 1`) and
+`∫_{R_0(F)\G} 𝔣_φ·conj y = ∫_{[R_0]} 𝒲_φ(s)·∫_G 𝔟(x)·conj y(sx) dx ds`. (b) `𝔣_φ` is bounded: with
+`S := g·supp(𝔞)·J_M`, the support of `𝔟`, the `r ∈ R_0(𝔸)` with `r^{−1}h ∈ S` lie in one left translate of the compact
+set `R_0(𝔸) ∩ S·S^{−1}`, so `|𝔣_φ(h)| ≤ sup|𝒲_φ|·sup|𝔟|·vol(R_0(𝔸) ∩ S·S^{−1})`. As `R_0(𝔸) = R_0(F)·D` for a compact
+`D` (WeilRepresentationsOnBanachSpacesOfData §8.5 (a)), `𝔣_φ` vanishes outside `R_0(F)·C` with `C := D·S`, a compact
+set. If `𝔣_φ(γh) ≠ 0`, the class of `γ` in `R_0(F)\Γ_{Y_0}` contains an element of `Γ_{Y_0} ∩ C·h^{−1}`, and two
+elements of `Γ_{Y_0} ∩ C·h^{−1}` differ on the left by an element of `Γ_{Y_0} ∩ C·C^{−1}`, a finite set because
+`Γ_{Y_0}` is discrete (AdelicUnitaryGroupsAndAlgebraicModularForms §3.2 (a)). So at most `#(Γ_{Y_0} ∩ C·C^{−1})` terms
+are nonzero at `h`, none unless `h ∈ Γ_{Y_0}·C`, and for `h` in a compact set the classes that contribute lie in a
+finite set: this gives the finiteness, the bound, the support and the continuity, and the square-integrability because
+`[U(Y_0)]` has finite volume (AdelicUnitaryGroupsAndAlgebraicModularForms §4.3 (c)). The orbit unfolding of
+AdelicUnitaryGroupsAndAlgebraicModularForms §1.3 (3), for the action of `Γ_{Y_0}` on `Γ_{Y_0}/R_0(F)` and the
+functions `x ↦ 𝔣_φ(γ^{−1}x)·conj y(x)`, gives the first equality. For `y ∈ 𝒜(Y_0)`: `y` is fixed by `J_M`, and
+`R(𝔞)y = R(𝔞)R(e)y = R(𝔞 ∗ e)y = R(e)y = y`, with `R` the right convolution of
+AdelicUnitaryGroupsAndAlgebraicModularForms §5.1 and `(α ∗ β)(w) = ∫ α(z)·β(z^{−1}w) dz`, for which
+`R(α)R(β) = R(α ∗ β)` on bounded functions by Fubini's theorem (`𝔞` is integrable with compact support and `e` is
+integrable); so `∫_G 𝔟(x)·conj y(sx) dx = conj R(𝔞)y(sg) = conj y(sg)`. (c) By (b) and 2.19,
+`⟨y, Poin(𝔣_φ)⟩ = ⟨y, 𝒫_{g,t}φ⟩` for every `y ∈ 𝒜(Y_0)`, and `𝒫_{g,t}φ ∈ 𝒜(Y_0)`. (d) is SecondMomentsOfPoincareSeries
+§5.3 (b) with §5.1.
+
+Let `g` be an archimedean point of `U(Y_0)`, `t` a linear form on `V_{μ(X_0)}`, `R_0` the Bessel subgroup of the
+grading of `Y_0` (3.7) with the Haar measure `dr` of 2.19, and `e` the type kernel of `2ς` for the signs of `Y_0`, a
+cusp kernel (2.7). Give `G := U(Y_0)(𝔸)` the Haar measure of the Petersson product, written as the product of the Haar
+measure of `U(Y_0)(F_∞)` of AdelicUnitaryGroupsAndAlgebraicModularForms §5.1 and a Haar measure of `U(Y_0)(𝔸_f)`. Fix
+a continuous compactly supported function `𝔞` on `U(Y_0)(F_∞)` with `∫ 𝔞(z)·e(z^{−1}w) dz = e(w)` for every `w`,
+written `𝔞 ∗ e = e`. One exists because `e` is a cusp kernel (AdelicUnitaryGroupsAndAlgebraicModularForms §5.1): the
+function `α` of that definition has this property, the convolution there being `(α ∗ β)(w) = ∫ α(z)·β(z^{−1}w) dz`, as
+its identity of idempotent kernels at `x = 1` displays; and if instead `∫ e(z)·α(z^{−1}w) dz = e(w)` for every `w`,
+the function `z ↦ conj α(z^{−1})` has the property, because `e(z^{−1}) = conj e(z)`. For a source form `φ`, with `𝒲_φ`
+as in 2.19 for `t`, put `𝔣_φ(h) := vol(J_M)^{−1}·∫_{R_0(𝔸)} 𝒲_φ(r)·conj 𝔞(g^{−1}r_∞^{−1}h_∞)·1_{J_M}(r_f^{−1}h_f) dr`
+for `h ∈ G`. For a function `𝔣` on `G` left invariant under `R_0(F)`, its *Poincaré series along `R_0`* is
+`Poin(𝔣)(h) := Σ_{γ ∈ R_0(F)\Γ_{Y_0}} 𝔣(γh)`. For a function `𝔥` integrable on `[U(Y_0)]` put
+`pr_𝒜(𝔥) := Σ_i ⟨y_i, 𝔥⟩·y_i`, `(y_i)` an orthonormal basis of `𝒜(Y_0)`; it does not depend on the basis, and on
+square-integrable functions it is the orthogonal projection to `𝒜(Y_0)`.
+
+(a) For each `h` the integral defining `𝔣_φ(h)` is over a compact subset of `R_0(𝔸)`. `𝔣_φ` is continuous, left
+invariant under `R_0(F)`, right invariant under `J_M`, satisfies `𝔣_φ(uh) = ψ_U(u)·𝔣_φ(h)` for every `u` in the
+unipotent radical of `R_0(𝔸)`, vanishes outside `R_0(𝔸)·g·supp(𝔞)·J_M`, and is integrable over `R_0(F)\G`.
+
+(b) At every `h` only finitely many terms of `Poin(𝔣_φ)(h)` are nonzero; `Poin(𝔣_φ)` is continuous, bounded, zero
+outside `Γ_{Y_0}·C` for a compact `C ⊂ G`, and integrable and square-integrable over `[U(Y_0)]`; and for every bounded
+measurable function `y` on `G` left invariant under `Γ_{Y_0}`,
+`∫_{[U(Y_0)]} Poin(𝔣_φ)·conj y = ∫_{R_0(F)\G} 𝔣_φ·conj y`; for `y ∈ 𝒜(Y_0)` both sides are
+`∫_{[R_0]} 𝒲_φ(r)·conj y(rg) dr`.
+
+(c) `𝒫_{g,t}φ = pr_𝒜(Poin(𝔣_φ))`: the Poincaré map is the orthogonal projection to `𝒜(Y_0)` of the Poincaré series
+along `R_0` of `𝔣_φ`. In particular `Poin(𝔣_φ) = 𝒫_{g,t}φ` whenever `Poin(𝔣_φ)` agrees almost everywhere with a form
+in `𝒜(Y_0)`.
+
+(d) At an archimedean point and a linear form as in SecondMomentsOfPoincareSeries §5.3 (b), the Poincaré map is a
+combination of the Poincaré series of SecondMomentsOfPoincareSeries §5.1, series over the rational points of cut-off
+Bessel functions, with no projection; its coefficients are the values at the class representatives of the translate of
+the source form by the central element of the lattice of `X_0`. SecondMomentsOfPoincareSeries §6.4 (c) writes these
+series as series over the quotients of the rational points by unipotent groups of the same functions without cutoff.
+
+*Needs:* 2.7, 2.19, 3.7; AdelicUnitaryGroupsAndAlgebraicModularForms §1.1 (quotient integrals by cutoffs and moving
+the quotient), §1.3 (orbit unfolding), §3.2 (the rational points are discrete), §4.3 (finite volume), §4.4 (definite
+quotients are compact), §5.1 (right convolution, idempotent and cusp kernels, forms of a type);
+WeilRepresentationsOnBanachSpacesOfData §8.5 (cocompactness of the rational Bessel group, unimodularity of `R(𝔸)` and
+finite measure of `[R]`); SecondMomentsOfPoincareSeries §5.1 (Poincaré series of a fitting space and their Petersson
+products), §5.3 (the Poincaré map is a Poincaré series of the Bessel function), §6.4 (the Poincaré series of §5.1 as
+series over quotients by unipotent groups).
+
+### 4.3 The lifts between definite spaces as theta lifts
+
+*Origin:* adapted from Gross (1999), the class set of a group compact at infinity: here, the lift `L_j^ϑ` of 2.8, a
+class sum whose kernel is a jet matrix, as the theta lift of the definite pair `(X_j, X_{j+1})` read on coefficients,
+with the Fock vectors of the Schur coefficient polynomials of the lift weight at the real places.
+
+*Proof route:* (a) The scale `π_M·t₀` is nonzero (DivisibilityOfThetaDerivatives §4.2 (a)).
+WeilRepresentationsOnBanachSpacesOfData §7.5 (c) at `ξ = ξ_i`, multiplied by `ξ_i^*(ψ)(x, g)` and summed over `i`,
+gives `(π_M t₀)^{|c|_j}·Σ_i θ(ω((x, g), (y, h))(v_{P_{t′,ξ_i}} ⊗ Φ))·ξ_i^*(ψ)(x, g) = t′(ρ(y)^{−1}·J(ω(g, h)Φ)·ψ(g))`,
+because `Σ_i ξ_i^*(ψ)(x, g)·ρ(x)ξ_i = ρ(x)ρ(x)^{−1}ψ(g) = ψ(g)`. The right side does not depend on `x`; the left side
+is continuous and left invariant under `U(X_j)(F)` (WeilRepresentationsOnBanachSpacesOfData §6.2 (a), and
+`ψ(γg) = ρ(γ)ψ(g)` for rational `γ`). For an open `U_0 ⊂ K_j` that fixes the right side as a function of `g`,
+AdelicUnitaryGroupsAndAlgebraicModularForms §4.4 (d) gives its integral over `[U(X_j)]` as `[K° : U_0]^{−1}` times the
+class sum over `Γ\U(X_j)(𝔸_f)/U_0` for the measure giving `K°` volume `1`, hence as `[K_j : U_0]^{−1}` times that
+class sum for the measure of the statement: the class sum of 2.8, to which `t′(ρ(y)^{−1}·)` is applied. (b) is
+WeilRepresentationsOnBanachSpacesOfData §7.6 (c) for the jet kernel of 2.8 (WeilRepresentationsOnBanachSpacesOfData
+§7.5 (b)) at the scale `π_M·t₀` and the level `K_j`.
+
+Let `ϑ` be a tame character, `j ≥ 0`, `Φ` a datum in the finite part of `𝒮(Hom(X_j, X_{j+1}))`, and `ω` the Weil
+action of 2.8 on `𝒮(Hom(X_j, X_{j+1}))`, with the characters `(ν_{j+1}^ϑ)_{X_j}`, `(ν_{j+1}^ϑ)_{X_{j+1}}`. Let `ρ` be
+the conjugate actions on the Weyl modules (Conventions) and `|c|_j := Σ_τ Σ_{h < n_{j+1}} h·c_τ(h)` the number of
+boxes of the lift weight `(c, e_j)` of 2.2 (a) in columns of height less than `n_{j+1}`, summed over the infinite
+places. For a linear form `t′` on `V_{μ(X_{j+1})}` and `ξ ∈ V_{μ(X_j)}`, `P_{t′,ξ}` is the Schur coefficient
+polynomial of WeilRepresentationsOnBanachSpacesOfData §7.5 (c) attached to `t′` and `ξ`, for which that section gives
+`(π_M t₀)^{|c|_j}·θ(ω((x, g), (y, h))(v_{P_{t′,ξ}} ⊗ Φ)) = t′(ρ(y)^{−1}·J(ω(g, h)Φ)·ρ(x)ξ)` for archimedean `x`, `y`,
+finite `g`, `h` and the jet matrix `J` of 2.8. Give `[U(X_j)]` the measure of the product of the Haar measure of mass
+one on `U(X_j)(F_∞)` and the Haar measure on `U(X_j)(𝔸_f)` that gives `K_j` volume `1`, and write
+`L_{v ⊗ Φ}(z)(y, h) := ∫_{[U(X_j)]} θ(ω((x, g), (y, h))(v ⊗ Φ))·z(x, g) d(x, g)` for the theta lift (Conventions) of a
+function `z` on `[U(X_j)]` with the datum `v ⊗ Φ`.
+
+(a) For every `ψ ∈ 𝒜_j`, every linear form `t′` on `V_{μ(X_{j+1})}` and every basis `(ξ_i)` of `V_{μ(X_j)}`, with dual
+basis `(ξ_i^*)` and `ξ_i^*(ψ)` the coefficients of `ψ` (Conventions), the coefficient of `L_j^ϑ(Φ)ψ` at `t′` is
+`t′(L_j^ϑ(Φ)ψ) = (π_M t₀)^{|c|_j}·Σ_i L_{v_{P_{t′,ξ_i}} ⊗ Φ}(ξ_i^*(ψ))`.
+
+(b) Conversely, for every polynomial `P` and every linear form `t` on `V_{μ(X_j)}` there is a linear form `t′` on
+`V_{μ(X_{j+1})}`, depending only on `P` and `t`, with `L_{v_P ⊗ Φ}(t(ψ)) = t′(L_j^ϑ(Φ)ψ)` for every `ϑ`, every `Φ` and
+every `ψ ∈ 𝒜_j`.
+
+So the coefficients of `L_j^ϑ(Φ)ψ` span the same space as the theta lifts of the coefficients of `ψ` with the data
+`v_P ⊗ Φ`, `P` a polynomial. The data `v_P ⊗ Φ` are images of Schwartz–Bruhat functions `φ_P`
+(WeilRepresentationsOnBanachSpacesOfData §10.4 (b)), and for every continuous function `z` on `[U(X_j)]` that is right
+invariant under an open subgroup, `L_{v_P ⊗ Φ}(z)` is a nonzero constant times the global theta lift by `φ_P` of
+`conj z`, for the Weil representation of the pair with the splitting characters of
+WeilRepresentationsOnBanachSpacesOfData §10.7 (b) (§10.7 (e)); `φ_P` and the constant depend on the Lagrangian
+decomposition chosen there.
+
+*Needs:* 2.2, 2.8; WeilRepresentationsOnBanachSpacesOfData §6.2 (continuity and invariance under rational points of
+the theta kernels of a pair), §7.5 (the jet kernel of a definite pair and the theta values of Schur coefficient
+polynomials), §7.6 (definite theta lifts as algebraic lifts by jets), §10.4 (data that are images of Schwartz–Bruhat
+functions), §10.7 (theta kernels and lifts as the standard ones); AdelicUnitaryGroupsAndAlgebraicModularForms §4.4
+(integrals over definite quotients as class sums), §6.1 (algebraic modular forms and their coefficients);
+DivisibilityOfThetaDerivatives §4.2 (the jet scale, which is nonzero).
 
 ## Downstream consumers
 
@@ -1662,6 +2095,8 @@ twist `ϑ` there is a chain datum `Ψ` for `ϑ` (2.12) with
   idempotent, levels, good forms and target forms, source forms and ramified source forms, the lifts and chain data,
   the composite lift, the lower chain, descent pairs and the Poincaré map (Layer 2).
 - The seesaw identity and the unfolding that proves it (Layer 3).
+- The relation of the seesaw identity of 3.20 to the seesaw identity of the literature, the Poincaré map as the
+  projection of a Poincaré series, and the lifts between definite spaces as theta lifts (Layer 4).
 
 ### Not owned here
 
@@ -1671,10 +2106,20 @@ twist `ϑ` there is a chain datum `Ψ` for `ϑ` (2.12) with
 - The divisibility and the size of the composite lift: CompositeThetaLiftsAndShortForms.
 - The Weil representation, its Fock and mixed models, theta lifts between discrete-series types, graded spaces with
   their Bessel subgroups, and automorphic forms of a discrete-series type are background results of [ShortProof], in
-  its own realisation (a data space `𝒮(V)` built from Weil data with one splitting character `υ`, twisted by characters
-  of `U(1)`). ThetaKernelsForUnitaryDualPairs §3.45 and §4.4a state the Fock model and the global Weil representation
-  of a unitary pair on Schwartz functions with two splitting characters `χ_V`, `χ_W`; no section states the
-  identification of the two realisations, so the *Needs:* lines here name the realisation used as background.
+  its own realisation (a data space `𝒮(V)` built from Weil data with one splitting character `υ`, twisted by
+  characters of `U(1)`), stated in WeilRepresentationsOnBanachSpacesOfData, HolomorphicDiscreteSeriesOfUnitaryGroups
+  and AdelicUnitaryGroupsAndAlgebraicModularForms. ThetaKernelsForUnitaryDualPairs §3.45 and §4.4a state the Fock
+  model and the global Weil representation of a unitary pair on Schwartz functions with two splitting characters
+  `χ_V`, `χ_W`. The *Needs:* lines here name the realisation the route uses; WeilRepresentationsOnBanachSpacesOfData
+  §10.7 (b) identifies it, on the images of Schwartz–Bruhat functions, with the global Weil representation of
+  ThetaKernelsForUnitaryDualPairs §4.4a for explicit splitting characters, and WeilRepresentationsOnBanachSpacesOfData
+  §10.3 identifies the completion of its Fock space with the Fock space of ThetaKernelsForUnitaryDualPairs §3.45.
+- The comparisons with the standard theory of forms of a discrete-series type, for parameters of gap `500n³` in rank
+  `n`, and of the gauge (AdelicUnitaryGroupsAndAlgebraicModularForms §8.5, §8.6), of the space of data, its Fock
+  vectors, its Weil representation, edges and arrows (WeilRepresentationsOnBanachSpacesOfData §§10.2, 10.4, 10.7,
+  10.9), of the block rule and the decomposition of the completed Fock space of an oscillator pair into discrete
+  series (HolomorphicDiscreteSeriesOfUnitaryGroups §8.2 (a), §9.9), and of the Poincaré series of filling data
+  (SecondMomentsOfPoincareSeries §6.4).
 - SeesawForThetaChains §6.2 (the double step) and §6.14 (the seesaw identity) are the corresponding statements for the
   chain of ThetaChainsOnDefiniteUnitaryGroups. There the identity is between periods: the top period of the column
   chain against a row form is a root of unity, depending on the tuple of characters, times a pairing with a descended
@@ -1700,7 +2145,8 @@ and divisibility of jets).
 ThetaLiftsForDefiniteUnitaryGroups §1.2 (algebraic forms on a definite group and the lift as a class sum), §1.7 (the
 kernel as a Fock pairing); FiniteReductiveGroups §5.7 (the characters and the central idempotent of a label);
 HermitianFormsAndLattices §4.9, §5.2 (lattices and the orders of finite stabilisers);
-IntegralWeylModulesOfGeneralLinearGroups §1.1 (integral branching).
+IntegralWeylModulesOfGeneralLinearGroups §1.1 (integral branching); MetaplecticAutomorphicForms §3.3 (Unitary
+dual-pair splittings), §3.8 (Local see-saw identity), §6.15 (Global see-saw and spectral projection).
 
 ## References
 
@@ -1711,7 +2157,7 @@ IntegralWeylModulesOfGeneralLinearGroups §1.1 (integral branching).
 - R. Goodman, N. Wallach, *Symmetry, Representations, and Invariants*, Graduate Texts in Mathematics 255 (2009):
   Theorem 8.1.1 (2.2).
 - B. Gross, *Algebraic modular forms*, Israel J. Math. 113 (1999), 61–93: the class set of a group compact at infinity
-  (3.1, 3.17; 2.17).
+  (3.1, 3.17, 4.3; 2.17).
 - B. P. J. Wang (Bryan Wang Peng Jun), *Global theta lifting and automorphic periods associated to nilpotent orbits*,
   J. Number Theory 271 (2025), 122–149, arXiv:2311.14234: Theorem 4.5 (3.13).
 - G. Shimura, *Theta functions with complex multiplication*, Duke Math. J. 43 (1976), 673–696 (1.3).
@@ -1723,4 +2169,4 @@ IntegralWeylModulesOfGeneralLinearGroups §1.1 (integral branching).
   HermitianFormsAndLattices §5.2).
 - H. Petersson, *Theorie der automorphen Formen beliebiger reeller Dimension und ihre Darstellung durch eine neue Art
   Poincaréscher Reihen*, Math. Ann. 103 (1930); R. Godement, *Série de Poincaré et Spitzenformen*, Séminaire Henri Cartan
-  10 (1957/58), exposé 10, §4, Théorèmes 5 and 5 bis (2.19).
+  10 (1957/58), exposé 10, §4, Théorèmes 5 and 5 bis (2.19, 4.2).

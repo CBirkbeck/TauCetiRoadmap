@@ -11,15 +11,29 @@ the Weil representation. This roadmap supplies those objects and the laws that t
 (SecondMomentsOfPoincareSeries) and the lower bound (DeterminantsOfThetaLiftChains,
 NormsOfThetaLiftsAndExchangeIdentities, CongruencesOfTwistedThetaLifts) take from it.
 
+The standard theory is the reference for these objects: the Schrödinger model of the Heisenberg group on `L²(𝒳(𝔸))`
+for a Lagrangian `𝒳`, with the Schwartz–Bruhat space `S(𝒳(𝔸))` of its smooth vectors; the global Weil representation
+of a unitary dual pair attached to splitting characters (MetaplecticAutomorphicForms §§3.3, 4.5;
+ThetaKernelsForUnitaryDualPairs §4.4a); the theta distribution `φ ↦ Σ_ξ φ(ξ)`, theta kernels and global theta lifts
+(MetaplecticAutomorphicForms §§5.1, 5.6). The roadmap states its results on these standard objects through Layer 10
+(Comparison with the standard theory); the objects of its route are one way to prove them, and the route's proofs are
+stated on those objects.
+
 The route does not use a Schrödinger model on a Lagrangian. Over a CM field `E` with Weil data (a splitting character
-`υ`, a purely imaginary `ȷ ∈ E` and a finite idele `α`), the vectors of the Weil representation of a hermitian space of
-rank `n` are the integrable functions on `𝔸_E^n` that are reproduced by twisted convolution with a *vacuum* (a Gaussian
-at the infinite places times a twisted indicator of a lattice at the finite places), with the `L¹` norm: a Banach space
-of data. It stands in for the Schwartz–Bruhat space of a polarisation and the Hilbert space of the Schrödinger model;
-no comparison with them is used, and later steps use vectors of this space that are not Schwartz functions (Bochner
-integrals of a vector against a discrete-series coefficient, Fock vectors of finite moment). On it the unitary group
-acts continuously with operator norms bounded by powers of the norm of the group element, the theta functional is a
-continuous linear form, and the moderate growth of theta kernels follows from these two facts alone.
+`υ`, a purely imaginary `ȷ ∈ E` and a finite idele `α`), the vectors of the Weil representation of a hermitian space
+of rank `n` are the integrable functions on `𝔸_E^n` that are reproduced by twisted convolution with a *vacuum* (a
+Gaussian at the infinite places times a twisted indicator of a lattice at the finite places), with the `L¹` norm: a
+Banach space of data, written `𝒮(V)`, which is not the Schwartz–Bruhat space. Through the vacuum vector of a
+Schrödinger model it lies between the two standard spaces, `S(𝒳(𝔸)) ⊂ 𝒮(V) ⊂ L²(𝒳(𝔸))`, each dense in the next and the
+first a proper subspace when the rank is at least one (10.2). On it the unitary group acts by the global Weil
+representation attached to the splitting character `υ⁻¹` (10.7), the theta functional is on `S(𝒳(𝔸))` a multiple of
+modulus one of the theta distribution (10.6), and the finite part, the data modulo an ideal and the real insertions of
+vectors of finite moments into the finite part are images of Schwartz–Bruhat functions (10.2, 10.4), so that on these
+data the theta kernels and theta lifts of the route are standard ones (10.7, 10.9). The route works on the space of
+data: there the unitary group acts continuously with operator norms bounded by powers of the norm of the group
+element, the theta functional is a continuous linear form, and the moderate growth of theta kernels follows from these
+two facts alone; some of its steps use vectors of this space that are not shown to be images of Schwartz–Bruhat
+functions (Bochner integrals of a vector against a discrete-series coefficient).
 
 The headline theorems are these.
 
@@ -53,14 +67,38 @@ vacuum at `w`, the Hecke polynomial operators of the two groups satisfy
 `P^T_w(X/α) = ∏_{l<k}(1 − q_w^l X)·P^S_{w̄}(q_w^k X/β)`, and theta lifts carry Hecke eigenforms with Hecke polynomial
 `p` to Hecke eigenforms with polynomial `∏_{l<k}(1 − q_w^l αX)·p(q_w^k αβ⁻¹X)`.
 
-There are nine layers. Layer 1 is the reproducing model of a Heisenberg datum on a locally compact abelian group and
+**In standard terms.** (1) Through the map `ℐ_𝒳` of 10.2, `ω` is the global Weil representation of `U(V)(𝔸)` attached
+to the splitting character `υ⁻¹` (ThetaKernelsForUnitaryDualPairs §4.4a; 10.7 (c)), on a space between `S(𝒳(𝔸))` and
+`L²(𝒳(𝔸))`, and the invariant form is, on `S(𝒳(𝔸))`, a multiple of the theta distribution, of modulus one for the
+theta functionals of 3.6 (10.6), whose invariance under the rational points is that of the theta functional of §4.4a
+(10.7 (c)). (2) holds for every theta kernel on a Banach space; for the kernel of a pair (6.1) and data in the image
+of `S(𝒳(𝔸))` the kernel is a multiple of modulus one of the theta kernel (MetaplecticAutomorphicForms §5.1) of the
+Weil representation of the pair attached to the splitting characters `a_{|n|}`, `b_{|n′|}` of 6.1, and the lift is the
+corresponding multiple of the global theta lift of the complex conjugate function (MetaplecticAutomorphicForms §5.6,
+where the lift is conjugate-linear; 10.7 (e)). (3) Real data all of whose moments are finite are images of
+Schwartz–Bruhat functions, and bounds for their moments are bounds for the Schwartz seminorms of their real components
+(10.4); for such data (3) is rapid decay of standard theta kernels under the support condition. The statement of 6.6
+uses one moment of the real datum only, and a datum with one finite moment need not be the image of a Schwartz–Bruhat
+function. (4) The lift by the product of joint harmonics with a datum of the finite part is a multiple of modulus one
+of a global theta lift of the conjugate form, and (4) states that it carries forms of the discrete-series type of one
+parameter to forms of the type of the other (10.9); it does not identify the automorphic representations in the lift,
+nor show that the lift is not zero. (5) The seesaw of 7.4 is a proportionality, with an undetermined constant, between
+periods for two families of kernels related by the matching condition of 7.4 (c); it is not the seesaw identity
+(MetaplecticAutomorphicForms §6.15), which is an equality for one kernel restricted to the two dual pairs of a seesaw,
+and neither statement is derived from the other here. (6) Read through Satake parameters (9.3, *In standard terms*),
+the relation of Hecke polynomials is the parameter relation of the split unramified theta correspondence
+(ThetaKernelsForUnitaryDualPairs §3.21a) for the splitting characters of 6.1, proved here on the forms themselves.
+
+There are ten layers. Layer 1 is the reproducing model of a Heisenberg datum on a locally compact abelian group and
 its Weil operators. Layer 2 is the Fock model at the real places. Layer 3 builds the adelic Weil representation over a
 CM field with Weil data, its theta functionals, its vacuum projections and the tame local Gauss sum. Layer 4 reads
 vectors as theta functions. Layer 5 is the mixed model along Witt decompositions and the invariance of the theta
 functional under rational points. Layer 6 is the Weil representation of a unitary dual pair and the laws of its theta
 kernels. Layer 7 is theta lifts between forms: joint harmonics, edges, arrows, the seesaw for periods and the lift
 between definite groups by jets. Layer 8 is graded spaces, Bessel groups, constant terms, unfolding and periods.
-Layer 9 is Hecke operators at split places and their transfer through theta lifts.
+Layer 9 is Hecke operators at split places and their transfer through theta lifts. Layer 10 compares the objects of the
+route with the standard theory: the Schrödinger and Fock models, Schwartz vectors, the theta distribution, the Weil
+representation of a unitary pair for its splitting characters, the mixed model and global theta lifts.
 
 ## Conventions and notation
 
@@ -95,6 +133,10 @@ Layer 9 is Hecke operators at split places and their transfer through theta lift
   `y ↦ f(y) := θ_V(ϱ(y)f)` on `𝔸^n`; the integrable function that `f` is by definition is written `f°` when it is
   meant.
 - *Matrices.* `A*` is the conjugate transpose; matrices act on columns; `M_{a×b}` are `a × b` matrices.
+- *Standard terms.* A paragraph beginning **In standard terms.** after the statement of a section gives its result on
+  the standard objects (the Schrödinger and Fock models, Schwartz–Bruhat functions, the global Weil representation of
+  a unitary pair, the theta distribution, theta kernels and global theta lifts) through Layer 10 (Comparison with the
+  standard theory), which the route does not use.
 
 ### Table of symbols
 
@@ -125,6 +167,12 @@ Layer 9 is Hecke operators at split places and their transfer through theta lift
 | `Λ_x, Λ⁻, Λ⁺` | lattice of a finite point, its intersection with and projection to `X^⊥` | 8.2 |
 | `ψ_U, 𝒲_φ` | unipotent character, equivariant function of an algebraic form | 8.6 |
 | `T_{w,j}, P_w(X), (X; q)_k` | Hecke operators and Hecke polynomial at a split place, `∏_{l<k}(1 − q^l X)` | 9.1, 9.2 |
+| `𝒳 ⊕ 𝒴, ϱ_𝒳, φ_e, ℐ_𝒳` | Lagrangian decomposition, Schrödinger representation, vacuum vector, comparison map | 10.1 |
+| `ψ⁺, W_V, ⟪·,·⟫_J` | character of `𝔸_{E⁺}/E⁺` with `ψ = ψ⁺ ∘ Tr_{E/E⁺}`, symplectic `E⁺`-space of `V`, its form | 10.1 |
+| `φ_vac, ℋ(V)` | vacuum vector of `vac`, completion of `𝒮(V)` | 10.2 |
+| `ℬ_ι, ℬ¹_ι, 𝔟` | Fock space of entire functions, its `L¹` subspace, the map from `𝓕(ε)` | 10.3 |
+| `ϑ_𝒳, 𝔠_𝒳` | theta distribution, its constant against `θ_V` | 10.6 |
+| `η_{E/E⁺}, ω_{ψ⁺, χ_V, χ_W}, δ′` | quadratic character of `E/E⁺`, global Weil representation of a pair, scalar of its realisation | 10.7 |
 
 ## Layer 1: The reproducing model of a Heisenberg datum
 
@@ -151,6 +199,13 @@ Let `W` be a second countable locally compact abelian group with a Haar measure 
   continuous `Δ : G → ℂ` with `Δ(1) = 1` and `Δ(g⁻¹) = conj Δ(g)`; its *cocycle* is
   `c(g, h) = Δ(g)Δ(h)Δ((gh)⁻¹)·∫∫ e(hx)·e(ghy)·β(x, y)·e(x + y) dμ(x) dμ(y)`, and the *Weil operator* of `g` is
   `ω(g)v = Δ(g)·∫_W v(y)·ϱ(gy)e dμ(y)` (a Bochner integral in `M(β, e)`).
+
+**In standard terms.** For a Lagrangian decomposition `W = 𝒳 ⊕ 𝒴`, the vacuum `e` is the coefficient
+`⟨ϱ_𝒳(·)φ_e, φ_e⟩` of a unit vector `φ_e` of the Schrödinger model on `L²(𝒳)`, and the map `ℐ_𝒳 : φ ↦ ⟨ϱ_𝒳(·)φ_e, φ⟩`
+identifies the `φ ∈ L²(𝒳)` whose coefficient is integrable with `M(β, e)`, the Schrödinger representation with `ϱ`,
+and the inner product of `L²(𝒳)` with `⟨·,·⟩` (10.1 (b), (c)). The Weil operators of an action with trivial cocycle
+are then the unitary operators that conjugate the Schrödinger representation as `g` acts on `W` and whose coefficient
+at `φ_e` is `(conj Δ(g))⁻¹` (10.1 (c)).
 
 *Needs:* none.
 
@@ -264,9 +319,9 @@ compact set in finitely many points.
 ## Layer 2: The Fock model at the real places
 
 At a real place the Heisenberg datum is that of `ℂ^ι` with a signed hermitian form, the vacuum is the Gaussian, and the
-group is `U(p, q)`. The Fock space here is an `L¹` space of functions reproduced by the Gaussian; it stands in for the
-Hilbert space of entire functions and the Bargmann transform of ThetaKernelsForUnitaryDualPairs §3.45, and no
-comparison with them is used.
+group is `U(p, q)`. The Fock space here is an `L¹` space of functions reproduced by the Gaussian. It is a dense
+subspace of the Hilbert space of entire functions of ThetaKernelsForUnitaryDualPairs §3.45, onto which the Bargmann
+transform maps the Schrödinger model (10.3); the proofs of this layer are stated on the `L¹` space.
 
 ### 2.1 The Fock model of `U(ε)` and the triviality of its cocycle
 
@@ -299,6 +354,16 @@ on polynomials in variables indexed by `ι`.
   `P_τ` in the variables `(τ, ·)`); for block-diagonal `u = (u_τ)`, `Δ_∞(u) = ∏_τ Δ_∞(u_τ)` and
   `ω(u)(⊗v_τ) = ⊗ω(u_τ)v_τ`. Along a splitting `ι = ι₁ ⊔ ι₂` compatible with the signs, `v_P ⊗ v_Q = v_{PQ}`.
 
+**In standard terms.** Here the *Fock space* `𝓕(ε)` is an `L¹` space of functions on `ℂ^ι`; in the literature the Fock
+space is the Hilbert space of entire functions square-integrable for a Gaussian measure
+(ThetaKernelsForUnitaryDualPairs §3.45 (i)). By 10.3, `v ↦ (z ↦ e^{|z|²/2}v(ζ(z)))` identifies `𝓕(ε)` with the entire
+functions `F` for which `F(z)e^{−|z|²/2}` is integrable, a dense subspace of that Hilbert space on which `⟨·,·⟩` is
+its inner product, and a Bargmann transform identifies the Hilbert space with `L²` of a real Lagrangian subspace, the
+vacuum `e` corresponding to the Gaussian. By 10.7 (d), when `ε` is the sign vector of a hermitian space of 3.4, `ω_ε`
+is the restriction to `𝓕(ε)` of the Fock model of the local Weil representation of `U(ε)` at an infinite place
+attached to the additive character `y ↦ exp(−2πiy)` of `ℝ` and the splitting character `z ↦ z̄/|z|`, and (b) says that
+the normalisation of its operators by `Δ_∞` gives a representation.
+
 *Needs:* 1.1–1.4.
 
 [ShortProof], `Lib/Weil/Fock/Basic` (`New.Fock.realHeisenberg`, `New.Fock.realVac`, `New.Fock.isVacuum_realVac`,
@@ -330,6 +395,10 @@ With the notation of 2.1, for polynomials `P, Q`:
 - (e) If `γ : ℝ → U(ε)` has `γ(0) = 1` and is differentiable at `0` with derivative `Y`, then `t ↦ ω_ε(γ(t))v_P` is
   differentiable at `0` with derivative `v_{dω(Y)P}`, `dω(Y) = Σ_{a,b} Y_{ab}·A_aB_b`.
 
+**In standard terms.** Through the map of 10.3 (a), `v_P` is the polynomial `P` of the Fock space of entire functions:
+(c) is the Fischer inner product of polynomials in that Hilbert space, and (d) is the density of the polynomials, here
+for the norm of `𝓕(ε)`, which bounds the Hilbert norm (10.3 (b)).
+
 *Needs:* 1.2, 2.1, 2.3.
 
 [ShortProof], `Lib/Weil/Fock/PolynomialVectors` (`New.Fock.realWeil_vacVector_apply_zero`,
@@ -360,6 +429,14 @@ has *finite moments* if `M_N(v) < ∞` for all `N`.
   `|ℓ(v)| ≤ S·M_N(v)`. For each `N` there is `C` such that for every `t ≥ 0`, every `ℓ` and every `v`:
   `|ℓ(v)| ≤ C·‖ℓ‖·t^N·M_N(v)`, provided (when `t < 1`) that `|ℓ(f)| ≤ B` holds for every `f` and `B` with
   `|ℓ(f) − ℓ(ϱ(y)f)| ≤ B` for all `‖y‖ ≤ t`.
+
+**In standard terms.** By 10.4 (a), a vector of `𝓕(ε)` has finite moments exactly when it is the image, under the map
+`ℐ_𝒳` of 10.1 (c) for a real Lagrangian decomposition `ℂ^ι = 𝒳 ⊕ 𝒴`, of a Schwartz function on `𝒳`, that is, when it
+is a smooth vector of the Heisenberg representation (MetaplecticAutomorphicForms §0.18); the moments `M_N` then define
+the Schwartz topology. In the family a vector of finite moments is called a *Schwartz vector*; in the literature a
+Schwartz vector is a Schwartz function on a Lagrangian, and 10.4 shows that the two notions correspond under `ℐ_𝒳`.
+(b) is then the density, in the Schwartz space, of the polynomial vectors, which are the images of the products of
+polynomials with the Gaussian `φ_e`.
 
 *Needs:* 1.2, 1.3, 2.1.
 
@@ -546,10 +623,19 @@ Let `E` carry Weil data and `V = (J, x)` be a hermitian space of signature `s` o
   `P^S f := ∫_{Ô^n} ϱ_f(e_{S∪S̄}·y)f dλ(y)`; the *finite part* `𝒮_f(V)` is the linear span (not its closure) of the
   vectors `ϱ_f(z)vac`, `z ∈ 𝔸_f^n`.
 
-The space `𝒮(V)` stands in for the Schwartz–Bruhat space of a polarisation and the Schrödinger model of
-ThetaKernelsForUnitaryDualPairs §4.4a. It is a Banach space (1.2), its vectors are not assumed smooth or rapidly
-decreasing, and the later layers use vectors of it that are not known to be Schwartz functions; no comparison with the
-Schwartz model is used.
+The letter `𝒮` here names the space of data; in the literature `𝒮` or `S` names the Schwartz–Bruhat space of a
+Lagrangian, which 10.2 embeds in `𝒮(V)` as a dense subspace, proper when `n` is nonempty. The space `𝒮(V)` is a Banach
+space (1.2), its vectors are not assumed smooth or rapidly decreasing, and the later layers use vectors of it that are
+not shown to be images of Schwartz–Bruhat functions; the proofs of Layers 1–9 do not use the comparison of Layer 10.
+
+**In standard terms.** For a rational Lagrangian decomposition `𝒳 ⊕ 𝒴` of the symplectic `E⁺`-space `W_V` underlying
+`V` (10.1 (d)), the vacuum vector `φ_vac` of the Schrödinger model gives the map `ℐ_𝒳` of 10.2, under which
+`S(𝒳(𝔸)) ⊂ 𝒮(V) ⊂ L²(𝒳(𝔸))`, each dense in the next and compatibly with the Heisenberg operators, the first inclusion
+being proper when `n` is nonempty; the completion of `𝒮(V)` for `⟨·,·⟩` is `L²(𝒳(𝔸))`, and `𝒮(V)` corresponds to the
+square-integrable functions whose coefficient against `φ_vac` is integrable. `ω_V` is the global Weil representation
+of `U(V)(𝔸)` attached to the splitting character `υ⁻¹` (10.7 (c)); the finite part `𝒮_f(V)` is the image of
+`φ_{vac,∞} ⊗ S(𝒳(𝔸_f))` (10.2 (c)); and the real insertions `v ⊗ f` with `v` of finite moments and `f ∈ 𝒮_f(V)` are
+images of Schwartz–Bruhat functions (10.4 (b)).
 
 *Needs:* 1.1, 1.4, 2.1, 3.1, 3.2; AdelicUnitaryGroupsAndAlgebraicModularForms §3.1 (hermitian spaces, the group
 `G_s`).
@@ -584,6 +670,14 @@ Let `E` carry Weil data and `V` be a hermitian space of signature `s` on `n`.
 ThetaKernelsForUnitaryDualPairs §4.4a constructs the Weil representation of a unitary pair on Schwartz functions for
 every quadratic extension of number fields and every pair of splitting characters, and characterises it; the route
 needs only one unitary group over these CM fields, on the space of data, and obtains the pairs from it in 6.1.
+
+**In standard terms.** Through `ℐ_𝒳` (10.2), `ω_V` is the global Weil representation of `U(V)(𝔸)` of
+ThetaKernelsForUnitaryDualPairs §4.4a attached to `ψ⁺` (with `ψ = ψ⁺ ∘ Tr_{E/E⁺}`) and the splitting character `υ⁻¹`,
+namely the factor `U(V)(𝔸)` of that representation for the pair `(I_1^*, δ′V)` (10.7 (c)); it preserves the image of
+`S(𝒳(𝔸))` and extends to a unitary representation on `L²(𝒳(𝔸))`. The multiplier `Δ` is the normalisation of this
+representation by its coefficient at the vacuum vector: `⟨vac, ω_V(g)vac⟩ = (conj Δ(g))⁻¹` in (b) is that coefficient
+at `φ_vac`. On the image of `S(𝒳(𝔸))`, (b) and (d) are properties of that representation; the bound on `‖ω_V(g)‖`
+concerns the norm of `𝒮(V)`.
 
 *Needs:* 1.3, 1.4, 2.1, 3.2, 3.3, 3.4.
 
@@ -621,6 +715,13 @@ Haar probability measure) is `1`.
   `T(ϱ(x)f) = ϱ(φ(x))T(f)` for all `x`, `f`, `φ(Λ_{V′}) ⊂ Λ_V` and `⟨Tvac, Tvac⟩ = 1`. Then for every theta functional
   `θ` of `V`, `σ ∘ θ ∘ T` is a theta functional of `V′`.
 
+**In standard terms.** For a rational Lagrangian decomposition `𝒳 ⊕ 𝒴` (10.1 (d)), every theta functional is, on the
+image of `S(𝒳(𝔸))` under the map `ℐ_𝒳` of 10.2 (for the measure on `𝒳(𝔸)` normalised there), a multiple of modulus one
+of the theta distribution `ϑ_𝒳(φ) = Σ_{ξ∈𝒳} φ(x⁻¹ξ)`, and that distribution is continuous for the norm of `𝒮(V)` (10.6
+(b)). On these data (b) is Weil's identity `Σ_{γ∈Λ_V} ⟨φ′, ϱ_𝒳(γ)φ⟩ = ϑ_𝒳(φ)·conj ϑ_𝒳(φ′)` (10.6 (a)), and the theta
+function of `f = ℐ_𝒳φ` is `f(y) = 𝔠_𝒳·ϑ_𝒳(ϱ_𝒳(y)φ)` with `|𝔠_𝒳| = 1`, a multiple of the classical theta function of
+`φ` (10.6 (c)).
+
 *Needs:* 1.2, 3.4, 3.5.
 
 [ShortProof], `Lib/Weil/Construction/AdelicRepresentation` (`New.Space.ratVectors`, `New.Space.IsRatInvariant`,
@@ -657,6 +758,13 @@ Let `V` be a hermitian space on `n` and `S` a set of finite places.
   vector of `𝒮_f(V)` fixed by `ϱ_f(gy)` for every `y ∈ Ô^n` is a multiple of `ω_V(g)vac`.
 - (e) `ω_V(g)(v ⊗ f) = (ω(g_∞)v) ⊗ ω_V(g_f)f`. If `P^S f = f` and a bounded linear map `L` vanishes on every
   `v_P ⊗ ϱ_f(y)vac` with `P` a polynomial and `y ∈ 𝔸_f^n` zero at the places of `S ∪ S̄`, then `L(f) = 0`.
+
+**In standard terms.** Through `ℐ_𝒳` (10.2 (c)), `𝒮_f(V)` is the image of `φ_{vac,∞} ⊗ S(𝒳(𝔸_f))`, the vacuum vector
+of the infinite places tensored with the Schwartz–Bruhat functions on the finite adeles, and the vectors
+`ϱ_f(r(q))vac` are the images of the vacuum vector moved by the finite Heisenberg operators; for conjugation-free `S`,
+`P^S` is, in the Schrödinger model of the places of `S ∪ S̄` (10.5 (b)), the orthogonal projection onto the line of
+the box indicator `1_{B_S}`, tensored with the identity. (b) and (c) describe the action of the finite unitary group
+on these vectors in the global Weil representation of 10.7 (c).
 
 *Needs:* 2.2, 3.2, 3.4, 3.5.
 
@@ -797,7 +905,7 @@ under an automorphism `σ` of `ℂ` and a permutation `π` of the places if `σ`
 `J_{t′}(f′)` with the variables renamed by `π`. That `J_a(f)` is the Taylor series of `z ↦ Θ_f(az)` for `f` in the finite
 part of a space of signs `+1` is DivisibilityOfThetaDerivatives §4.4 (b). ThetaLiftsForDefiniteUnitaryGroups
 §1.8 states the translation law for the Bargmann transform of a lattice vector of a definite pair; it is stated here
-because the model differs and no comparison is used.
+on the space of data, the model on which the route works (10.2 (c) and 10.3 (c) relate the two models).
 
 *Needs:* 2.2, 3.6, 3.7, 4.1.
 
@@ -1037,6 +1145,14 @@ Let `S` be conjugation-free. For `Ψ = Σ_y c_y·ρ_S(y)1_{B_S}` (5.3 (c)) and `
   coordinates `D_φ` of 3.8 (b) whose finite part `B` carries `e_{S′}` to `e_S` and `e_{S′∪S̄′}` to `e_{S∪S̄}` maps
   `Ψ·vac` to `(σ ∘ Ψ ∘ B)·vac`.
 
+**In standard terms.** By 10.5, `Ψ·f` is the vector `Ψ ⊗ P^S f` of the Schrödinger model of the places of `S ∪ S̄` for
+the polarisation by the components at `S` and at `S̄` (at a place split in `E`, the type-II model,
+MetaplecticAutomorphicForms §3.2a), tensored with the vectors fixed by `P^S`. (a) gives the Heisenberg operators and
+the inner product of that model, and (b) says that an element `g` of `G_f` equal to `1` outside `S ∪ S̄` acts by
+`Ψ ↦ Ψ ∘ g⁻¹` times `conj χ_𝔸(det_S g) = υ(det_S g)⁻¹|det_S g|^{−1/2}`: at the places of `S`, the law of the Weil
+representation for the splitting character `υ⁻¹` in the type-II model (ThetaKernelsForUnitaryDualPairs §4.4a, split
+places; 10.7 (c)).
+
 *Needs:* 3.7, 3.8, 5.3.
 
 [ShortProof], `Lib/Weil/MixedModel/NamedData` (`New.Space.heisenbergCombination`, `New.Space.schrodingerOp`,
@@ -1048,8 +1164,8 @@ Let `S` be conjugation-free. For `Ψ = Σ_y c_y·ρ_S(y)1_{B_S}` (5.3 (c)) and `
 ### 5.5 Zero terms and slices; the theta functional as a sum of slices
 
 *Origin:* particular to this proof: the zero term and the slices of a vector of the space of data along a Witt
-decomposition, which stand in for the partial Fourier transform of the Schrödinger model (the mixed model), with the
-expansion of the theta functional over rational slices.
+decomposition, which give the mixed model (the partial Fourier transform of the Schrödinger model, 10.8) without a
+Schrödinger model, with the expansion of the theta functional over rational slices.
 
 *Method of the formal proof:* the zero term exists as a bounded map by 1.2 (b), since the mean along the compact
 quotient `𝔸^p/E^p` of the translates of the vacuum is a bounded family; the mixed law is a computation with `β_s` in the
@@ -1077,6 +1193,11 @@ Let `D` be a splitting of `V` over `V₀` along `p` (5.1).
 - (e) For `g` adapted to `t` there is `c ≠ 0` with
   `(ω(g)f)[x] = c·∫ ⟨ϱ(y)vac, f⟩·β₁(2x + a_y, b_y)·|vac(t*(x + a_y))|²·ϱ₀(w_y)vac₀ dμ(y)`, where `gy = la_y + ιw_y + kb_y`
   and `β₁(u, v) = ψ(½ȷv*u)` on `𝔸^p`.
+
+**In standard terms.** By 10.8 (a), the slices identify the completion of `𝒮(V)`, up to the constant of 5.6 (a), with
+the mixed model `L²(𝔸^p; ℋ(V₀))`, and the mixed law of (a) is the action of the Heisenberg operators there. For
+`V₀ = 0` and data `ℐ_𝒳φ`, `𝒳` the Lagrangian spanned by `l`, the slices are `𝔠_𝒳·φ(lx)` (10.8 (b)): they are the
+Schrödinger model of `𝒳`, and the expansion of (c) is the theta distribution `ϑ_𝒳(φ) = Σ_{ξ∈E^p} φ(lξ)`.
 
 *Needs:* 1.2, 1.4, 3.5–3.7, 5.1, 5.4.
 
@@ -1124,6 +1245,14 @@ Let `D` be a splitting of `V` over `V₀` along `p`.
 
 ThetaKernelsForUnitaryDualPairs §3.3b states the Levi and unipotent formulas locally, for a split space of the acting
 group and Schwartz functions; the route needs them adelically, with a core and any `p`, on the space of data.
+
+**In standard terms.** On the image of `S(𝒳(𝔸))` under the map `ℐ_𝒳` of 10.2, (c) is the invariance of the theta
+distribution under the rational points of `U(V)` for the global Weil representation of 10.7 (c), whose theta
+functional is invariant under them (ThetaKernelsForUnitaryDualPairs §4.4a). For a complete splitting (`V₀ = 0`), (b)
+is the pair of Levi and unipotent formulas of a Siegel parabolic subgroup in the Schrödinger model of the Lagrangian
+spanned by `l` (10.8 (b); ThetaKernelsForUnitaryDualPairs §3.3b), with Levi character
+`χ_𝔸(det a)⁻¹ = υ(det a)⁻¹|det a|^{1/2}`. The normalisation (d) fixes `θ_V`, which is `𝔠_𝒳` times the theta
+distribution with `|𝔠_𝒳| = 1` (10.6 (b)).
 
 *Needs:* 3.6, 3.8, 5.1, 5.5; AdelicUnitaryGroupsAndAlgebraicModularForms §3.3 (a) (Landherr's theorem).
 
@@ -1200,6 +1329,16 @@ automorphic characters of `U(1)`.
   idempotent of the places of `𝔪`. The *datum modulo `𝔪`* of `Ψ` and a Fock vector `v` is `v ⊗ (Ψ̃·vac)` (5.4), and the
   *kernel modulo `𝔪`* is `θ^{S,T}_{a,b}[Ψ, P](g, h) = θ_{a,b}(v_P ⊗ (Ψ̃·vac); g, h)` for a polynomial `P` in the
   variables `Φ × n′ × n`.
+
+**In standard terms.** `a_k` is a splitting character of dimension `k`: its restriction to `𝔸_{E⁺}^×` is `η_{E/E⁺}^k`
+(10.7 (a)). For `n`, `n′` nonempty and a rational Lagrangian decomposition `𝒳 ⊕ 𝒴` of the symplectic `E⁺`-space
+underlying `Hom(S, T)` (10.1 (d)), `ω_{a,b}` is, on the image of `S(𝒳(𝔸))` under the map `ℐ_𝒳` of 10.2, the global
+Weil representation `ω_{ψ⁺, a_{|n|}, b_{|n′|}}` of the pair `(S^*, δ′T)` realised on `Hom(S, T)`
+(ThetaKernelsForUnitaryDualPairs §4.4a), and `θ_{a,b}(ℐ_𝒳φ; g, h) = 𝔠_𝒳·θ(g, h; φ)` with `|𝔠_𝒳| = 1` and `θ(g, h; φ)`
+the theta kernel of that representation (MetaplecticAutomorphicForms §5.1; 10.7 (b), (e)). The data `v_P ⊗ (Ψ̃·vac)`
+modulo `𝔪` are images of Schwartz–Bruhat functions (10.4 (b)), so the kernels modulo `𝔪` are, up to `𝔠_𝒳`, standard
+theta kernels, and the laws of 6.2–6.15 are, on such data, laws of the standard Weil representation of the pair and of
+its theta kernels.
 
 *Needs:* 2.1, 3.4, 3.6, 5.4; IdelicReciprocityCountsAndCyclotomicClassGroups §7.1 (characters of `U(1)`, weights, tame
 parts).
@@ -1389,8 +1528,9 @@ Let `S`, `T` be hermitian spaces of signatures `s` on `n` and `s′` on `n′`.
   supported on matrices whose transpose has a left inverse, the same holds with `g`, `h` exchanged.
 
 ThetaKernelsForUnitaryDualPairs §5.7b (i) states rapid decay on Siegel sets for Schwartz data supported on matrices of
-full rank at a split place; the route needs the statement for its data of finite moments, which are not Schwartz
-functions.
+full rank at a split place; the route needs the statement on the space of data, for real data of finite moments and
+uniformly in their moments. By 10.4 such data are images of Schwartz–Bruhat functions, and the moments define the
+Schwartz topology of their real components.
 
 *Needs:* 2.3, 5.3, 5.4, 6.1, 6.2, 6.4, 6.5.
 
@@ -1704,7 +1844,7 @@ Let `V`, `V′`, `V″` be hermitian spaces, `V⁻` the flipped space of `V` (6.
   Heisenberg operators act through the two blocks with an explicit semicharacter factor.
 - (c) For automorphic characters `a`, `b` put `a_V = a·υ_U^{⌊rk V/2⌋}` and likewise for the other spaces and for `b`.
   There is a representation `ω₃` of `G_V × G_{V′} × G_{V″}` on `𝒮(Hom(V′, V⁻ ⊕ V″))` (the Weil representation of
-  `x ↦ g′x(g⁻, g″)⁻¹` times explicit characters of the three determinants) with
+  `x ↦ (g⁻, g″)·x·g′⁻¹` times explicit characters of the three determinants) with
   `ω₃(g, g′, g″)(f ⊛ f′) = (ω_{a_V, a_{V′}}(g, g′)f) ⊛ (ω_{b_{V′}, b_{V″}}(g′, g″)f′)`; the function
   `(g, g′, g″) ↦ θ(ω₃(g, g′, g″)F)` is invariant under the rational points of the first two groups.
 - (d) On finite parts, `⊛` induces an injective map from the tensor product of the finite parts onto the finite part of
@@ -1797,6 +1937,17 @@ ThetaKernelsForUnitaryDualPairs §§3.46a and 5.6a state the theta correspondenc
 equivariant maps of `(𝔤, K)`-modules, with uniqueness and multiplicity one, and the cuspidality of theta integrals of
 cusp forms through the tower property; the route needs neither and uses the statement above.
 
+**In standard terms.** For the kernel of 6.1, a datum `Φ ⊗ f` with `Φ` of finite moments (such as the products of
+joint harmonics of (a), which are polynomial vectors) and `f ∈ 𝒮_f(Hom(S, T))` is the image of a Schwartz–Bruhat
+function `φ` (10.4 (b)), and `L_{Φ⊗f}y` is `𝔠_𝒳` times the global theta lift by `φ` of `conj y`
+(MetaplecticAutomorphicForms §5.6, where the lift is conjugate-linear in the form; with the quotient measure of 6.4)
+for the Weil representation of the pair attached to the splitting characters `a_{|n|}`, `b_{|n′|}` (10.9 (a)). (a)
+then says that the global theta lifts of the conjugates of the forms of type `e_l` are forms of type `e_{l′}`, and
+that the descent carries the conjugate types back; it does not say which automorphic representations occur in the lift
+or that the lift is not zero, and of the archimedean components it gives what the type `e_{l′}` gives: the cuspidal
+automorphic representations in which the lift has a component have the discrete series of parameter `l′` at the
+infinite places (10.9 (c)).
+
 *Needs:* 2.4, 3.7, 6.2, 6.4, 7.1; HolomorphicDiscreteSeriesOfUnitaryGroups §§4.1 (d), 8.1, 8.2, 8.5 (a), 8.6 (block
 rule, joint harmonics, local correspondence); AdelicUnitaryGroupsAndAlgebraicModularForms §5.1 (types, `typeKernel`, cusp
 kernels).
@@ -1832,6 +1983,12 @@ decreasing and `L_φy` is a form of type `e′`.
   `L_{ω(k,k′)φ}` of the right translate of `y` by `k`. If `φ` is also an arrow from `ε′` to `ε` for the exchanged kernel,
   then `∫_{[T]} z·L_φy = ∫_{[S]} y·L^t_φz` for forms `y`, `z` of types `e`, `ε′`; and if `ε′ = conj e′` and
   `e = conj ε`, then `⟨L_φy, x⟩ = ⟨y, conj L^t_φ(conj x)⟩` for forms `x` of type `e′`.
+
+**In standard terms.** By 10.9, when `Φ` has finite moments, `y` lies in an irreducible cuspidal automorphic
+representation `π` of `G_s` and `f ∈ 𝒮_f(Hom(S, T))`, the lift `L_{Φ⊗f}y` of (a) is a form of type `e′` in the global
+theta lift (MetaplecticAutomorphicForms §5.6) of `conj π`, the contragredient of `π`, for the Weil representation of
+the pair attached to `a_{|n|}`, `b_{|n′|}`; (c) is the adjointness of a global theta lift and the descent by the same
+theta kernel.
 
 *Needs:* 6.2, 6.4, 7.2; AdelicUnitaryGroupsAndAlgebraicModularForms §§5.1, 5.4 (d) (forms of a type, rapid decay).
 
@@ -1873,6 +2030,14 @@ edge from `k(d)` to `k′(d)` for the weights `γ`, `γ′`. Write `L_{i,Ψ}` fo
   are `β(r_T)·c_o` for one `β(r_T)`, and (ii) `N(g)·θ^{T′,S′}[Ψ′_{o,i}, p](N(g), x) = M(x)·θ^{S,T}[Ψ_{o,i}, Q](g, M(x))`
   (weights and maps of `N_{o,i}`, `M_{o,i}`). Then there is `β` with
   `Σ_{i∈W_o} u_{o,i}·⟨y_{o,i}, L^t_{T′→S′}(Ψ′_{o,i})f_{o,i}⟩_{N_{o,i}, r} = β·c_o` for every `o`.
+
+**In standard terms.** Through 10.4 (b) and 10.7 (e), the kernels `θ^{S,T}[Ψ, Q]` of (c) are multiples of modulus one
+of standard theta kernels and the lifts are global theta lifts. Here *seesaw* names the proportionality (c). In the
+literature the seesaw identity (Kudla (1984); MetaplecticAutomorphicForms §6.15) is an equality: for one theta kernel
+of a seesaw pair, restricted to its two dual pairs, the pairing of the lift of a form with a second form equals the
+pairing of the first form with the lift of the second. (c) compares two families of kernels that need not be
+restrictions of one kernel, only through the matching condition (ii), and concludes a proportionality with one
+constant `β` for all `o`, without determining `β`.
 
 *Needs:* 2.2, 6.1, 6.4, 6.7, 7.2, 7.3.
 
@@ -2430,6 +2595,23 @@ Schwartz model through Howe's theorem on spherical vectors; the route needs only
 space of data. The pinned libraries have no statement on theta correspondences. On Tau Ceti's main branch, later than
 the revision pinned here: the formal Hecke polynomial of `GL_n` (`TauCeti.glnHeckePolynomial`).
 
+**In standard terms.** Write the Hecke polynomial of `y` at `w` as `p(X) = Π_{j=1}^{n}(1 − q^{(n−1)/2}ς_jX)`. By the
+definition of `P_w` (9.2), `T_{w,i}` then acts on `y` by `q^{i(n−i)/2}` times the `i`-th elementary symmetric function
+of the `ς_j`, so the `ς_j` are the Satake parameters, in the unitary normalisation, of the spherical vector `y`
+(SmoothRepresentationsOfLocalGroups §SR.4.3, the Satake transform of the double coset of `diag(ϖ_w·1_i, 1_{n−i})`).
+The polynomial of (c) is `Π_{j=1}^{m}(1 − q^{(m−1)/2}ς′_jX)` with `(ς′_j)` the `n` numbers `cς_j`,
+`c = a_n(ϖ_w)/b_m(ϖ_w)`, and the `k` numbers `a_n(ϖ_w)q^{(k−1)/2−l}`, `0 ≤ l < k`. This agrees with the relation of
+parameters of the unramified theta correspondence at a split place (ThetaKernelsForUnitaryDualPairs §3.21a (iii)) for
+the pair `(S^*, δ′T)` of 10.7 (b), with `χ_V = a_n`, `χ_W = b_m` and `d − n = k`, read as follows. That relation
+concerns unramified representations `π ⊗ π′` of the two groups that are quotients of the Weil representation, each
+group being read as a general linear group through its action at `w` on `S^*` and on `T`; for `T` this is `ι_w`, and
+on `S^*` the element `ι_w(g)` acts at `w` by the transpose inverse of `g`. The lift of 6.4 is linear in `y`, so for it
+`π` is the contragredient of the representation generated by `y` (the Checks of §3.21a): through `ι_w` its parameters
+are the `ς_j⁻¹`, and read on `S^*` they are the `ς_j` again. So §3.21a (iii) with `α_j = ς_j` gives the list `(ς′_j)`
+for the lift, read through `ι_w`: the contragredient and the passage from `S` to `S^*` cancel, and (c) has no inverse.
+9.3 obtains the relation for forms with a Hecke polynomial, from the operator identity (a), without irreducibility or
+multiplicity one.
+
 *Needs:* 3.7, 5.4, 6.1–6.4, 7.3, 9.1, 9.2; ArithmeticStatisticsPartIV §3.2 (subspace count, `q`-binomial theorem).
 
 [ShortProof], `Lib/Weil/Unramified/HeckeTransfer` (`New.AutChar.frobValue`, `New.heckePolyOp_eq_sum`,
@@ -2438,6 +2620,476 @@ the revision pinned here: the formal Hecke polynomial of `GL_n` (`TauCeti.glnHec
 `New.SiegelWeil.lift_swap_heckePolyOp`, `New.SiegelWeil.hasHeckePolynomial_of_pairing`,
 `New.SiegelWeil.hasHeckePolynomial_formLift`, `New.SiegelWeil.hasHeckePolynomial_of_apply_eq_smul_det`,
 `New.SiegelWeil.hasHeckePolynomial_qPochhammer`)
+
+## Layer 10: Comparison with the standard theory
+
+The standard theory is the reference for the objects of this roadmap: the Schrödinger model of the Heisenberg group on
+`L²` of a Lagrangian, with the Schwartz–Bruhat space of its smooth vectors and its Fock model; the global Weil
+representation of a unitary dual pair attached to splitting characters; the theta distribution, theta kernels and
+global theta lifts; the mixed model; and the unramified theta correspondence (MetaplecticAutomorphicForms, and for
+unitary pairs ThetaKernelsForUnitaryDualPairs §§3.3b, 3.21a, 3.45, 4.4a). This layer states how each object of the
+route is related to its standard counterpart. The space of data is not the Schwartz–Bruhat space: through the vacuum
+vector of a Schrödinger model it lies between that space and the Hilbert space of the model, containing the first as a
+dense subspace, proper when the rank is at least one, and dense in the second (10.1, 10.2); the Fock space of 2.1 is
+likewise a dense subspace of the Hilbert space of entire functions (10.3), and its vectors of finite moments are
+exactly the Schwartz vectors (10.4). Through the map `ℐ_𝒳` of 10.2, the data named above a set of places and the zero
+terms are the Schrödinger model at those places and the mixed model (10.5, 10.8), theta functionals are multiples of
+modulus one of the theta distribution (10.6), the representations of 3.5 and 6.1 are global Weil representations for
+explicit splitting characters (10.7), and lifts by edges are global theta lifts (10.9). The image of `ℐ_𝒳` contains
+the finite part and the real insertions into it of vectors of finite moments (10.4 (b)); on such data the statements
+of Layers 3–9 about the Heisenberg operators, the Weil representations, theta functionals, theta kernels and theta
+lifts are the same statements for the standard objects, and statements about the norm of `𝒮(V)` concern, on the
+standard side, the `L¹` norm of the coefficient against the vacuum vector. The route does not use this layer, and
+[ShortProof] proves none of its statements: in place of the method of the formal proof each section gives a
+`*Route:*`, and it has no line naming declarations of [ShortProof].
+
+### 10.1 The Schrödinger model of a Heisenberg datum and the vector of a vacuum
+
+*Origin:* comparison of the reproducing model of 1.1 with the Schrödinger model of the Heisenberg group and its
+Hilbert space (MetaplecticAutomorphicForms §§0.15, 0.17), through the orthogonality relations of its coefficients; the
+irreducibility in (a) is the scalar-commutant part of the uniqueness theorem of Stone and von Neumann named in 1.2;
+not part of the formal proof.
+
+*Route:* (a) For `s ∈ 𝒳` and `t ∈ 𝒴` the coefficient `⟨φ, ϱ_𝒳(s + t)φ′⟩` is `β(s, t)` times the Fourier transform at
+`t` of `u ↦ conj φ(u)·φ′(u + s)`; Plancherel's theorem on `𝒳` in `u`, followed by integration over `s`, gives the
+orthogonality relation. For `F ∈ L¹(W)` the operator `∫ F(z)ϱ_𝒳(z) dμ(z)` is the integral operator whose kernel is
+`K(u, u + s) = ∫_𝒴 F(s + t)·β(s, t)·β(u, t)² dμ_𝒴(t)`, obtained from `F` by a factor of modulus one, a Fourier
+transform in `t` and a shear; for `F ∈ L¹ ∩ L²` these kernels are dense in `L²(𝒳 × 𝒳)`, so an operator commuting with
+every `ϱ_𝒳(z)` commutes with a dense set of Hilbert–Schmidt operators, hence with every operator of rank one, and is a
+scalar. (b) Let `P = ∫ e(z)ϱ_𝒳(z) dμ(z)`. As `e` is real and even, `P* = P`. Writing
+`ϱ_𝒳(z)ϱ_𝒳(y)ϱ_𝒳(z′) = β(z, y)β(z + y, z′)ϱ_𝒳(z + y + z′)` and substituting `x = z + y + z′`, the identity of the
+vacuum (1.1) gives `Pϱ_𝒳(y)P = e(y)·P`; so `P² = P`, and `P ≠ 0` because its kernel is a transform of `e`. If `ξ`,
+`ξ′` in the range of `P` are orthogonal, then `⟨ξ, ϱ_𝒳(y)ξ′⟩ = e(y)⟨ξ, ξ′⟩ = 0` for every `y`, so one of them is `0`
+by (a): the range of `P` is a line, spanned by a unit vector `φ_e` with `⟨φ_e, ϱ_𝒳(y)φ_e⟩ = e(y)`. Comparing
+`∫ |e|² dμ = 1` (1.2 (a)) with the orthogonality relation for `φ_e` gives `μ = μ_𝒳 × μ_𝒴`. For a unit vector `φ′` with
+the same coefficient the orthogonality relation then gives `⟨ξ, Pξ′⟩ = ⟨ξ, φ′⟩⟨φ′, ξ′⟩`, so `φ′` spans the range of
+`P`. (c) The orthogonality relation with `‖φ_e‖ = 1` makes `ℐ_𝒳` isometric; `ℐ_𝒳 ∘ ϱ_𝒳(y) = ϱ(y) ∘ ℐ_𝒳` follows from
+`ϱ_𝒳(y)* = ϱ_𝒳(−y)` and `β(x, y)β(y, x) = 1`; and `ℐ_𝒳ℐ_𝒳*` is the operator `F ↦ (x ↦ ∫ F(y)β(y, x)e(x − y) dμ(y))`,
+so the range of `ℐ_𝒳` is the space of square-integrable functions reproduced by this kernel. Every `v ∈ M(β, e)` is
+reproduced and square-integrable, as `|v| ≤ ‖v‖` (1.2 (a)); the vectors `ϱ(y)e = ℐ_𝒳(ϱ_𝒳(y)φ_e)` lie in `M(β, e)` and
+span a dense subspace of the range by (a). For the Weil operators, `ℐ_𝒳⁻¹ω(g)ℐ_𝒳` preserves the inner product and
+conjugates `ϱ_𝒳(x)` to `ϱ_𝒳(gx)` (1.3 (b)); two unitary operators with this property differ by a scalar by (a), and
+the scalar is fixed by the coefficient at `φ_e`, which is `⟨e, ω(g)e⟩ = (ω(g)e)(0) = (conj Δ(g))⁻¹` (1.2 (a), 1.3
+(b)). (d) `⟪·,·⟫_J` is alternating because `γ*Jγ ∈ E⁺` and `ȷ̄ = −ȷ`, and it is nondegenerate; `ψ⁺` is
+`y ↦ exp(−2πi·Σ_v y_v)` at the real places times the character of the finite adeles of `E⁺` that is trivial on the
+integral ones and equal to `exp(2πi·Tr_{E⁺/ℚ} a)` at `a ∈ E⁺`, so that `ψ⁺ ∘ Tr_{E/E⁺}` is the character `ψ` of
+AdelicUnitaryGroupsAndAlgebraicModularForms §2.1, and `β_s = ψ⁺(½⟪·,·⟫_s)`; a rational Lagrangian decomposition is a
+Lagrangian decomposition by AnalyticNumberTheoryPartII §5.3h, applied to the perfect pairing of `𝒳` with `𝒴` by
+`⟪·,·⟫_J`. In both cases `e` is a Gaussian at the real places times a locally constant function of compact support at
+the finite places, so the kernel of `P` is a Schwartz–Bruhat function on `𝒳 × 𝒳` (partial Fourier transforms, linear
+changes of variables and multiplication by `β(s, t)` preserve Schwartz–Bruhat functions, AnalyticNumberTheoryPartII
+§§5.3g, 5.3h), and `φ_e = Pφ_e` lies in `S(𝒳)`; for `φ ∈ S(𝒳)`, `ℐ_𝒳φ` is, up to a factor of modulus one and a shear,
+a partial Fourier transform of `(u, s) ↦ conj φ_e(u + s)·φ(u)`, which gives the continuity into `S(W)`; the image is
+dense in `M(β, e)` by 1.2 (b), since it contains every `ϱ(y)e`.
+
+Let `(W, β, μ, e)` be as in 1.1, with `e` a vacuum. A *Lagrangian decomposition* of `W` is `W = 𝒳 ⊕ 𝒴` with closed
+subgroups `𝒳`, `𝒴` such that `β` is `1` on `𝒳 × 𝒳` and on `𝒴 × 𝒴` and `t ↦ β(·, t)²` is an isomorphism of topological
+groups from `𝒴` onto the Pontryagin dual of `𝒳`; `μ_𝒳`, `μ_𝒴` are Haar measures for which
+`F ↦ (t ↦ ∫ F(u)β(u, t)² dμ_𝒳(u))` is unitary from `L²(𝒳)` to `L²(𝒴)`. The *Schrödinger representation* on
+`L²(𝒳) = L²(𝒳, μ_𝒳)` is `(ϱ_𝒳(s + t)φ)(u) = β(s, t)·β(u, t)²·φ(u + s)` (`s, u ∈ 𝒳`, `t ∈ 𝒴`); when `β = ψ(½ω(·, ·))`
+for an alternating form `ω` this is the formula of MetaplecticAutomorphicForms §0.15.
+
+- (a) `ϱ_𝒳` is a representation of `β` (1.1) on `L²(𝒳)` by unitary operators, and for `φ_1, φ_2, φ_3, φ_4 ∈ L²(𝒳)`:
+  `∫_W ⟨φ_1, ϱ_𝒳(z)φ_2⟩·conj⟨φ_3, ϱ_𝒳(z)φ_4⟩ d(μ_𝒳 × μ_𝒴)(z) = ⟨φ_1, φ_3⟩·⟨φ_4, φ_2⟩` (the *orthogonality relation*).
+  A bounded operator on `L²(𝒳)` that commutes with every `ϱ_𝒳(z)` is a scalar; so `ϱ_𝒳` is irreducible.
+- (b) *The vacuum vector.* There is a unit vector `φ_e ∈ L²(𝒳)`, unique up to a factor of modulus one, with
+  `⟨ϱ_𝒳(z)φ_e, φ_e⟩ = e(z)` for every `z ∈ W`. The operator `∫_W e(z)ϱ_𝒳(z) dμ(z)` is the orthogonal projection onto
+  `ℂφ_e`, and `μ = μ_𝒳 × μ_𝒴`.
+- (c) *The comparison map.* `(ℐ_𝒳φ)(x) = ⟨ϱ_𝒳(x)φ_e, φ⟩` defines a unitary isomorphism `ℐ_𝒳` of `L²(𝒳)` onto the
+  closure `ℋ` of `M(β, e)` in `L²(W, μ)`, which is the space of square-integrable `F` with
+  `F(x) = ∫ F(y)β(y, x)e(x − y) dμ(y)` for almost every `x`. It satisfies `ℐ_𝒳(φ_e) = e` and
+  `ℐ_𝒳 ∘ ϱ_𝒳(y) = ϱ(y) ∘ ℐ_𝒳`; the inner product `⟨·,·⟩` of 1.1 is that of `L²(W, μ)`; and `M(β, e)` is the image of
+  the `φ ∈ L²(𝒳)` with `ℐ_𝒳φ ∈ L¹(W, μ)`, with the norm `‖ℐ_𝒳φ‖`. If a group `G` acts as in 1.1 with trivial cocycle,
+  `ℐ_𝒳⁻¹ω(g)ℐ_𝒳` extends to the unique unitary operator `A` of `L²(𝒳)` with `Aϱ_𝒳(x)A⁻¹ = ϱ_𝒳(gx)` for every `x` and
+  `⟨φ_e, Aφ_e⟩ = (conj Δ(g))⁻¹`.
+- (d) *Schwartz–Bruhat vectors.* In the following two cases `e` is a Schwartz–Bruhat function on `W`, `φ_e` lies in
+  the Schwartz–Bruhat space `S(𝒳)` (AnalyticNumberTheoryPartII §§5.3g, 5.3h), and `ℐ_𝒳` is continuous from `S(𝒳)` to
+  `S(W) ⊂ L¹(W, μ)`; so `ℐ_𝒳` maps `S(𝒳)` into `M(β, e)`, with dense image. (i) The Fock datum `(ℂ^ι, β_ε, e, μ)` of
+  2.1, for which `β_ε(x, y) = exp(i·Im(y*εx))`, with `𝒳`, `𝒴` real subspaces on which `Im(y*εx)` vanishes (a *real
+  Lagrangian decomposition* of `ℂ^ι`). (ii) The datum `(𝔸^n, β_s, vac, μ)` of 3.4 for a hermitian space `V = (J, x)`
+  of signature `s` on `n`, with a rational Lagrangian decomposition, defined as follows. Let `ψ⁺` be the character of
+  `𝔸_{E⁺}/E⁺` with `ψ = ψ⁺ ∘ Tr_{E/E⁺}`, and `W_V` the `E⁺`-vector space `E^n` with the alternating form
+  `⟪γ, γ′⟫_J = Tr_{E/E⁺}(ȷ·γ′*Jγ)`. Then `γ ↦ x⁻¹γ` identifies `W_V ⊗_{E⁺} 𝔸_{E⁺}` with `𝔸^n` and `W_V` with `Λ_V`,
+  carries `⟪·,·⟫_J` to `⟪y, y′⟫_s = Tr_{E/E⁺}(ȷ·y′*ε_s y)`, and `β_s = ψ⁺(½⟪·,·⟫_s)`. A *rational Lagrangian
+  decomposition* is `W_V = 𝒳 ⊕ 𝒴` with `E⁺`-subspaces `𝒳`, `𝒴` on which `⟪·,·⟫_J` vanishes; its adelic points
+  `𝒳(𝔸) = x⁻¹(𝒳 ⊗ 𝔸_{E⁺})` and `𝒴(𝔸)` form a Lagrangian decomposition of `𝔸^n`.
+
+*Needs:* 1.1–1.3, 2.1, 3.1, 3.4; AdelicUnitaryGroupsAndAlgebraicModularForms §2.1 (the standard character);
+AnalyticNumberTheoryPartII §5.3g (Local characters, self-dual measures and Fourier inversion), §5.3h (Adelic
+Schwartz–Bruhat functions and Poisson summation); MetaplecticAutomorphicForms §0.15 (Schrödinger representation),
+§0.17 (Hilbert Schrödinger model).
+
+### 10.2 The space of data, the Schwartz–Bruhat space and the Schrödinger model
+
+*Origin:* comparison of the space of data of 3.4 with the Schwartz–Bruhat space `S(𝒳(𝔸))` of a Lagrangian and with the
+Hilbert space `L²(𝒳(𝔸))` of the Schrödinger model (MetaplecticAutomorphicForms §§0.15, 0.17, 0.18); not part of the
+formal proof.
+
+*Route:* (a), (b) are 10.1 (c), (d) for the datum of 3.4, and the inclusion `S(𝒳(𝔸)) ⊂ L²(𝒳(𝔸))` is dense. (c) By 3.4
+the datum is the orthogonal sum (1.4 (a)) of the real and the finite data, and a rational Lagrangian decomposition is
+the product of its components at the infinite places and at the finite places; the product of the two vacuum vectors
+has coefficient `vac` (1.4 (a)), so it is `φ_vac` up to a factor by 10.1 (b), and `ℐ_𝒳` factors. `𝒮_f(V)` is spanned
+by the vectors `ϱ_f(z)vac = semi(z)·ℐ_𝒳(ϱ_𝒳(finVec(z))φ_vac)`, and the Heisenberg operators of finite vectors act on
+the finite factor only; averaging the modulations by a lattice of `𝒴(𝔸_f)` cuts `φ_{vac,f}` down to a multiple of the
+indicator of a small coset, whose translates and modulations span `S(𝒳(𝔸_f))`. At the real places the kernel of the
+projection of 10.1 (b) is a Gaussian integral, hence a constant times the exponential of a quadratic form in
+`(u, u′)`, and it equals `φ_{vac,∞}(u)·conj φ_{vac,∞}(u′)`. At a finite place `v` not above `2`, `½c₀` is integral, so
+`semi` is `1` on `Ô_v^n`, the vacuum is the indicator of `Ô_v^n` there, and `β_f` is `1` on `Ô_v^n × Ô_v^n`; if
+`Ô_v^n = L_𝒳 ⊕ L_𝒴` along the decomposition, the elements of the component of `𝒴(𝔸)` that pair trivially with `L_𝒳`
+under `β_f²` are those of `L_𝒴` (3.2 (a)), so the coefficient of the normalised indicator of `L_𝒳` is the indicator of
+`Ô_v^n`, and 10.1 (b) applies. (d) In the Schrödinger model, invariance under `ϱ_𝒳(finVec(z))` for `z` in an open
+subgroup of `Ô^n` (on a small one `semi` is `1` and `finVec` is a representation) is invariance under the translations
+by an open subgroup of `𝒳(𝔸_f)` together with support in a compact subset of `𝒳(𝔸_f)`; such a vector lies in
+`L²(𝒳_∞) ⊗ F` for a finite-dimensional space `F` of Schwartz–Bruhat functions on `𝒳(𝔸_f)`, and smoothness in the real
+directions means that its components lie in `S(𝒳_∞)` (MetaplecticAutomorphicForms §0.18, for the real symplectic space
+of the infinite places). Neither condition mentions `𝒳`. (e) For `z ∈ 𝒳(𝔸)`, `ϱ(z)vac = ℐ_𝒳(ϱ_𝒳(z)φ_vac)` and
+`ϱ_𝒳(z)φ_vac = φ_vac(· + z)`; the series converges absolutely in `𝒮(V)` because `‖ϱ(z)vac‖ = ‖vac‖`, each term lies in
+`𝒮_f(V)` for `z` finite, and `ℐ_𝒳` is injective on `L²(𝒳(𝔸))`; a Schwartz–Bruhat function on `𝒳(𝔸)` has compact
+support in each finite component.
+
+Let `V = (J, x)`, `ψ⁺`, `W_V` and a rational Lagrangian decomposition `W_V = 𝒳 ⊕ 𝒴` be as in 10.1 (d) (ii), with the
+measures `μ_𝒳`, `μ_𝒴` of 10.1 on `𝒳(𝔸)`, `𝒴(𝔸)` normalised so that `𝒳(𝔸)/x⁻¹𝒳` has measure one for `μ_𝒳`; then
+`𝒴(𝔸)/x⁻¹𝒴` has measure one for `μ_𝒴`. Let `φ_vac ∈ S(𝒳(𝔸))` be the vacuum vector of `vac` (10.1 (b), (d)), `ℐ_𝒳` the
+map of 10.1 (c), and `ℋ(V)` the closure of `𝒮(V)` in `L²(𝔸^n, μ)`, which is the completion of `𝒮(V)` for `⟨·,·⟩`.
+
+- (a) `ℐ_𝒳` is a continuous injective linear map from `S(𝒳(𝔸))` to `𝒮(V)` with dense image; `ℐ_𝒳(φ_vac) = vac`,
+  `ℐ_𝒳 ∘ ϱ_𝒳(y) = ϱ(y) ∘ ℐ_𝒳` for `y ∈ 𝔸^n`, `⟨ℐ_𝒳φ, ℐ_𝒳φ′⟩ = ⟨φ, φ′⟩`, and the functions `ℐ_𝒳φ` are Schwartz–Bruhat
+  functions on `𝔸^n`.
+- (b) `ℐ_𝒳` extends to a unitary isomorphism of `L²(𝒳(𝔸))` onto `ℋ(V)`, the space of square-integrable functions on
+  `𝔸^n` reproduced by `β_s(y, x)vac(x − y)`. Under it `𝒮(V)` corresponds to the `φ ∈ L²(𝒳(𝔸))` whose coefficient
+  `y ↦ ⟨ϱ_𝒳(y)φ_vac, φ⟩` is integrable on `𝔸^n`, normed by the `L¹` norm of that coefficient. The inclusion of `𝒮(V)`
+  in `ℋ(V)` is continuous: `⟨f, f⟩ ≤ ‖f‖²` for `f ∈ 𝒮(V)`, as `|f°| ≤ ‖f‖` (1.2 (a)). So `S(𝒳(𝔸)) ⊂ 𝒮(V) ⊂ L²(𝒳(𝔸))`,
+  with continuous inclusions, each dense in the next and compatibly with the Heisenberg operators.
+- (c) `𝒳(𝔸) = 𝒳_∞ × 𝒳(𝔸_f)`. Through the real and finite coordinates of 3.1, `φ_vac` is, up to a factor of modulus
+  one, `φ_{vac,∞} ⊗ φ_{vac,f}`, the product of the vacuum vectors of the Fock datum of `ℂ^{Φ×n}` (2.1, signs
+  `(w, i) ↦ s_i`, with the real Lagrangian decomposition given by the components of `𝒳` and `𝒴` at the infinite
+  places) and of the finite datum of 3.2; `ℐ_𝒳` is the tensor product of the corresponding maps of 10.1 (c); and `ℐ_𝒳`
+  maps `φ_{vac,∞} ⊗ S(𝒳(𝔸_f))` onto the finite part `𝒮_f(V)`. The factor `φ_{vac,∞}` is a constant times the
+  exponential of a complex quadratic form on `𝒳_∞` with negative definite real part. At every finite place `v` of `E⁺`
+  not above `2` at which, in the finite coordinates, the component `Ô_v^n = Π_{w|v} O_w^n` of `Ô^n` is the sum of its
+  intersections with the components at `v` of `𝒳(𝔸)` and of `𝒴(𝔸)` (this holds for all but finitely many `v`), the
+  component at `v` of `φ_{vac,f}` is a multiple of the indicator of the intersection of `Ô_v^n` with the component of
+  `𝒳(𝔸)`; at the other finite places it is a locally constant function of compact support.
+- (d) `ℐ_𝒳(S(𝒳(𝔸)))` is the space of the `f ∈ ℋ(V)` for which `y ↦ ϱ(realVec(y))f` is infinitely differentiable from
+  `ℂ^{Φ×n}` to `ℋ(V)` and `ϱ(finVec(z))f = f` for every `z` in some open subgroup of `Ô^n`: the smooth vectors of the
+  Heisenberg representation. In particular it does not depend on `𝒳`.
+- (e) Let `n` be nonempty. The image `ℐ_𝒳(S(𝒳(𝔸)))` is a proper subspace of `𝒮(V)`. Let `u` be a finite place of `E⁺`
+  and `z_k ∈ 𝒳(𝔸)` (`k ≥ 1`) vectors that vanish away from `u`, leave every compact set, and make the supports of the
+  functions `φ_vac(· + z_k)` pairwise disjoint. Then `Σ_k 2^{−k}ϱ(z_k)vac` lies in the closure of `𝒮_f(V)` in `𝒮(V)`
+  and is `ℐ_𝒳` of `Σ_k 2^{−k}φ_vac(· + z_k)`, a continuous function whose support does not project into a compact
+  subset of `𝒳(𝔸_f)`, as the support of every Schwartz–Bruhat function does; so it is not the image of a
+  Schwartz–Bruhat function.
+
+*Needs:* 1.2, 1.4, 2.1, 3.1, 3.2, 3.4, 10.1; MetaplecticAutomorphicForms §0.18 (Smooth vectors of the oscillator model).
+
+### 10.3 The Fock space and the Hilbert space of entire functions
+
+*Origin:* comparison of the Fock space of 2.1 with the Fock space of entire functions square-integrable for a Gaussian
+measure and the Bargmann transform, Bargmann (1961) as cited in 2.1 (ThetaKernelsForUnitaryDualPairs §3.45); not part
+of the formal proof.
+
+*Route:* (a) By 2.1 (a) the reproducing identity of `v ∈ 𝓕(ε)` reads `(𝔟v)(z) = ∫ v(y)e(y)·exp(⟨ζ(y), z⟩) dμ(y)` with
+`⟨a, b⟩ = Σ_i conj(a_i)b_i`, an entire function of `z`; `ζ` is a real-linear isometric involution of `ℂ^ι`, so norms
+and inner products transform as stated. Conversely, for `F ∈ ℬ¹_ι` the function `x ↦ e(x)F(ζ(x))` is integrable, and
+it is reproduced because `π^{−|ι|}∫ F(w)e^{−|w|²}exp(⟨w, z⟩) dw = F(z)`: expand `exp(⟨w, z⟩)` in monomials and use the
+orthogonality of monomials on products of circles, the integrals converging absolutely since
+`Re⟨w, z⟩ − |w|²/2 ≤ |z|²/2`. The formula for `ϱ(y)` is 2.1 (a) once more. (b) `|v| ≤ ‖v‖` (1.2 (a)) gives
+`∫ |v|² dμ ≤ ‖v‖²`; the polynomials lie in `ℬ¹_ι`, and the normalised monomials are orthonormal (2.2 (c)) and complete
+in `ℬ_ι` (Taylor expansion). (c) is 10.1 (c) with (a) and (b); a unitary operator intertwining the two Heisenberg
+actions is unique up to a scalar by 10.1 (a). (d) 2.1 (b), 2.2 (a) and 1.3 (b).
+
+Let `ε` be signs on `ι`, and `ζ`, `𝓕(ε)`, `v_P` as in 2.1. Let `ℬ_ι` be the Hilbert space of entire functions `F` on
+`ℂ^ι` with `‖F‖²_ℬ = π^{−|ι|}∫ |F(z)|²e^{−|z|²} dz < ∞`, and `ℬ¹_ι` the space of entire functions `F` with
+`‖F‖₁ = π^{−|ι|}∫ |F(z)|e^{−|z|²/2} dz < ∞`. For `v ∈ 𝓕(ε)` put `(𝔟v)(z) = e^{|z|²/2}·v(ζ(z))`.
+
+- (a) `𝔟` is a linear isometry of `𝓕(ε)` onto `ℬ¹_ι`, with `𝔟(v_P) = P`,
+  `⟨v, w⟩ = π^{−|ι|}∫ conj((𝔟v)(z))·(𝔟w)(z)·e^{−|z|²} dz`, and `𝔟(ϱ(y)v)(z) = exp(⟨ζ(y), z⟩ − |y|²/2)·(𝔟v)(z − ζ(y))`.
+- (b) `ℬ¹_ι ⊂ ℬ_ι` with `‖F‖_ℬ ≤ ‖F‖₁`, and `ℬ¹_ι` is dense in `ℬ_ι`. So `𝔟` extends to a unitary isomorphism of the
+  completion of `𝓕(ε)` for `⟨·,·⟩` onto `ℬ_ι`, the Fock space of ThetaKernelsForUnitaryDualPairs §3.45 (i) in the
+  normalisation of 2.1, in which the vectors `(μ!)^{−1/2}·v_{X^μ}` form an orthonormal basis.
+- (c) For a real Lagrangian decomposition `ℂ^ι = 𝒳 ⊕ 𝒴` (10.1 (d) (i)), `𝔟 ∘ ℐ_𝒳` is a unitary isomorphism of `L²(𝒳)`
+  onto `ℬ_ι` that maps the vacuum vector `φ_e` to the constant `1` and carries `ϱ_𝒳` to the operators of (a); it is
+  the unique unitary operator with these two properties, a Bargmann transform (ThetaKernelsForUnitaryDualPairs §3.45
+  (i)).
+- (d) `ω_ε` extends to a unitary representation of `U(ε)` on `ℬ_ι` whose operators conjugate the operators of (a) as
+  `u` moves `y`, with coefficient `det(u₋₋)⁻¹` at the vacuum `𝔟(e) = 1`. Its identification with the standard Fock
+  model is 10.7 (d).
+
+*Needs:* 1.2, 1.3, 2.1, 2.2, 10.1; ThetaKernelsForUnitaryDualPairs §3.45 (The Fock model and the infinitesimal Weil
+representation).
+
+### 10.4 Vectors of finite moments are the Schwartz vectors
+
+*Origin:* comparison of the moments of 2.3 with the Schwartz seminorms, and of the vectors of finite moments with the
+smooth vectors of the oscillator model (MetaplecticAutomorphicForms §0.18); not part of the formal proof.
+
+*Route:* (a) For `φ ∈ S(𝒳)`, `ℐ_𝒳φ ∈ S(ℂ^ι)` depends continuously on `φ` (10.1 (d)), so each `M_N(ℐ_𝒳φ)` is finite and
+bounded by a Schwartz seminorm of `φ`. Conversely, `y ↦ ϱ_𝒳(y)φ_e` is smooth into `S(𝒳)`, and each Schwartz seminorm
+of `ϱ_𝒳(y)φ_e` is at most `C(1 + ‖y‖)^k` for some `C`, `k`; if `v` has finite moments, the integral
+`∫ v(y)ϱ_𝒳(y)φ_e dμ(y)` therefore converges in `S(𝒳)`, each seminorm of it being bounded by some `M_N(v)`, and its
+value is `ℐ_𝒳⁻¹v` by the superposition of 1.2 (b) (with `w = e`) read through 10.1 (c). Smooth vectors:
+MetaplecticAutomorphicForms §0.18 and the unitary isomorphism of 10.3 (c). Polynomial vectors: by 10.3 (a), (c) they
+are the preimages of the polynomials under a Bargmann transform, which are the products of polynomials with the
+Gaussian `φ_e` (ThetaKernelsForUnitaryDualPairs §3.45 (ii)). (b) By 10.2 (c), `f = ℐ_𝒳(φ_{vac,∞} ⊗ φ_f)` for some
+`φ_f ∈ S(𝒳(𝔸_f))`; the real insertion `v ⊗ f = ∫ v(y)ϱ(realVec(y))f dμ_∞(y)` is then `ℐ_𝒳` of
+`(∫ v(y)ϱ_{𝒳_∞}(y)φ_{vac,∞} dμ_∞(y)) ⊗ φ_f = ℐ_∞⁻¹(v) ⊗ φ_f` by 1.2 (b), and (a) applies; `Ψ̃·vac ∈ 𝒮_f(V)` by 5.4
+(a).
+
+Let `ε`, `𝓕(ε)`, a real Lagrangian decomposition `ℂ^ι = 𝒳 ⊕ 𝒴`, `φ_e` and `ℐ_𝒳` be as in 10.3 (c), and `M_N` the
+moments of 2.3.
+
+- (a) A vector `v ∈ 𝓕(ε)` has finite moments if and only if `v = ℐ_𝒳φ` with `φ ∈ S(𝒳)`, and on `ℐ_𝒳(S(𝒳))` the norms
+  `M_N`, `N ∈ ℕ`, define the topology of `S(𝒳)`. Equivalently, the vectors of finite moments are the vectors of `𝓕(ε)`
+  that are smooth vectors of the Heisenberg representation on the completion `ℬ_ι` (MetaplecticAutomorphicForms
+  §0.18). The polynomial vectors `v_P` are the images of the products of polynomial functions on `𝒳` with `φ_e`.
+- (b) Let `V`, `𝒳 ⊕ 𝒴` be as in 10.2, and `ℐ_∞` the map of 10.1 (c) for the Fock datum of `ℂ^{Φ×n}` with the real
+  Lagrangian decomposition of 10.2 (c). For `v` of finite moments in the Fock space of `ℂ^{Φ×n}` (signs
+  `(w, i) ↦ s_i`) and `f ∈ 𝒮_f(V)` with `ℐ_𝒳⁻¹f = φ_{vac,∞} ⊗ φ_f`, the real insertion `v ⊗ f` (3.4) is
+  `ℐ_𝒳(ℐ_∞⁻¹(v) ⊗ φ_f)`, the image of a Schwartz–Bruhat function. In particular the data `v_P ⊗ (Ψ̃·vac)` modulo `𝔪`
+  of 6.1, and the data `v ⊗ Ψ·vac` of 6.6 with `v` of finite moments, are images of Schwartz–Bruhat functions.
+
+*Needs:* 1.2, 2.1, 2.3, 3.4, 5.4, 6.1, 6.6, 10.1–10.3; MetaplecticAutomorphicForms §0.18 (Smooth vectors of the
+oscillator model); ThetaKernelsForUnitaryDualPairs §3.45 (The Fock model and the infinitesimal Weil representation).
+
+### 10.5 Data named above a set of places and the Schrödinger model of those places
+
+*Origin:* comparison of the Schwartz–Bruhat functions above a set of places (5.3) and the named data (5.4) with the
+Schwartz–Bruhat space of the Schrödinger model of a polarisation at those places, which at a place split in `E` is the
+type-II model (MetaplecticAutomorphicForms §3.2a); not part of the formal proof.
+
+*Route:* (a) `𝔸_S` and `𝔸_{S̄}` are isotropic because `S ∩ S̄ = ∅`, and `ψ₀(z′*z)` pairs them perfectly by the
+self-duality of `Ô` for `ψ₀` (3.2 (a)); with `s = e_Sy`, `t = e_{S̄}y`, the formula of `ρ_S(y)` in 5.3 is that of
+`ϱ_𝒳(s + t)` in 10.1; the coefficient of `1_{B_S}` is computed from 5.3 (b) and the self-duality of `Ô`. (b) 5.4 (a)
+gives the inner products of named data and the action of `ϱ(finVec(e_{S∪S̄}y))`; `P^S` commutes with `ϱ(x)` for `x`
+zero at the places of `S ∪ S̄`, since the commutator of their Heisenberg operators is `β_s(x, y)² = 1`; and named data
+span a dense subspace, because `vac` is fixed by `P^S` (3.7 (d)) and the translates `ϱ(y)vac` span a dense subspace
+(1.2 (b)). (c) 5.4 (b).
+
+Let `V` be a hermitian space on `n`, `S` a conjugation-free set of finite places, `𝔸_S = {z ∈ 𝔸_f^n : e_Sz = z}` and
+`𝔸_{S̄}` likewise, `λ_S` the Haar measure on `𝔸_S` with `λ_S(𝔸_S ∩ Ô^n) = 1`, `ℋ(V)` the completion of `𝒮(V)` (10.2)
+and `ℋ^S(V)` the closure of `P^S𝒮(V)` in it.
+
+- (a) In the finite coordinates (`x_f = αz`, 3.1), `𝔸_S ⊕ 𝔸_{S̄}` is a Lagrangian decomposition (10.1) of the
+  Heisenberg datum `(z, z′) ↦ ψ₀(½(e_{S∪S̄}z′)*(e_{S∪S̄}z))` of the places of `S ∪ S̄`, and `ρ_S` (5.3) is its
+  Schrödinger representation, on functions of `e_Sz`. The Schwartz–Bruhat functions above `S` are its Schwartz–Bruhat
+  space, `⟨·,·⟩_S` is its inner product, and `1_{B_S}` is its vacuum vector for the restriction of the lattice vacuum
+  `e_f` of 3.2 to these places.
+- (b) `Ψ ⊗ f ↦ Ψ·f` extends to a unitary isomorphism `L²(𝔸_S, λ_S) ⊗̂ ℋ^S(V) → ℋ(V)`, which carries `ρ_S(y) ⊗ 1` to
+  `ϱ(finVec(e_{S∪S̄}y))`, `1 ⊗ ϱ(x)` to `ϱ(x)` for `x` zero at the places of `S ∪ S̄`, and `1_{B_S} ⊗ f` to `f`; under
+  it `P^S` is the orthogonal projection onto `ℂ1_{B_S}`, tensored with the identity.
+- (c) So the data named above `S` are the Schrödinger model of the places of `S ∪ S̄` for the polarisation by the
+  components at `S` and at `S̄`, tensored with the vectors fixed by `P^S`; for `S = {w}` with `w` split, this is the
+  type-II model at the place of `E⁺` below `w` (MetaplecticAutomorphicForms §3.2a). In this model 5.4 (b) states that
+  `g ∈ G_f` equal to `1` outside `S ∪ S̄` acts by `Ψ ↦ conj χ_𝔸(det_S g)·(Ψ ∘ g⁻¹)`, with
+  `conj χ_𝔸(d) = υ(d)⁻¹|d|^{−1/2}`.
+
+*Needs:* 1.2, 3.1, 3.2, 3.7, 5.3, 5.4, 10.1, 10.2; MetaplecticAutomorphicForms §3.2a (Split étale Hermitian spaces and
+oscillator comparison).
+
+### 10.6 Theta functionals and the theta distribution
+
+*Origin:* comparison of the theta functionals of 3.6 with the theta distribution of a Lagrangian, Weil (1964) as cited
+in 3.6, which is the functional that defines the theta kernel of MetaplecticAutomorphicForms §5.1; not part of the
+formal proof.
+
+*Route:* (a) `ψ⁺` is trivial on `E⁺` and `⟪·,·⟫_J` is rational on rational vectors, so for rational `γ = a + b` the
+factors `β_s(a, b)` and `β_s(ξ, b)²` (`ξ ∈ 𝒳`) are `1`, and `ϑ_𝒳(ϱ_𝒳(γ)φ) = Σ_ξ φ(ξ + a) = ϑ_𝒳(φ)`. Weil's identity:
+the sum over `b ∈ 𝒴` of `⟨φ′, ϱ_𝒳(a + b)φ⟩` is, by Poisson summation on `𝒳(𝔸)` for the pairing `ψ⁺(⟪·,·⟫)` with `𝒴(𝔸)`
+(AnalyticNumberTheoryPartII §5.3h, self-dual measures, covolume one), `Σ_{ξ∈𝒳} conj φ′(ξ)φ(ξ + a)`, and the sum over
+`a ∈ 𝒳` gives the product. (b) For `φ ∈ S(𝒳(𝔸))`, `ℐ_𝒳φ ∈ S(𝔸^n)` (10.2 (a)) and the Schwartz–Bruhat seminorms of
+`ϱ_𝒳(y)φ_vac` grow polynomially in the real coordinates of `y` and stay in one space of a fixed level for the finite
+coordinates of `y` in a compact set; so `φ = ∫ (ℐ_𝒳φ)(y)·ϱ_𝒳(y)φ_vac dμ(y)` (1.2 (b) through 10.1 (c)) converges in
+`S(𝒳(𝔸))`, and `|ϑ_𝒳(φ)| ≤ B·‖ℐ_𝒳φ‖` with `B` the maximum of `y ↦ |ϑ_𝒳(ϱ_𝒳(y)φ_vac)|`, a continuous function invariant
+under `Λ_V` by (a), hence bounded on the compact `𝔸^n/Λ_V`. By density (10.2 (a)), `ϑ_𝒳 ∘ ℐ_𝒳⁻¹` extends to a
+continuous linear form on `𝒮(V)` invariant under `ϱ(Λ_V)`, which is a multiple of `θ_V` by 3.6 (a); 3.6 (b) for this
+form, compared with Weil's identity, shows that the mean of `|ϑ_𝒳(ℐ_𝒳⁻¹ϱ(x)vac)|²` is `1`, so the multiple has modulus
+one. (c) follows from (b) and `ℐ_𝒳 ∘ ϱ_𝒳(y) = ϱ(y) ∘ ℐ_𝒳`.
+
+Let `V`, `𝒳 ⊕ 𝒴`, `φ_vac` and `ℐ_𝒳` be as in 10.2. The *theta distribution* of `𝒳` is `ϑ_𝒳(φ) = Σ_{ξ∈𝒳} φ(x⁻¹ξ)` for
+`φ ∈ S(𝒳(𝔸))`.
+
+- (a) `ϑ_𝒳` is a continuous linear form on `S(𝒳(𝔸))`, invariant under `ϱ_𝒳(γ)` for `γ ∈ Λ_V`, and
+  `Σ_{γ∈Λ_V} ⟨φ′, ϱ_𝒳(γ)φ⟩ = ϑ_𝒳(φ)·conj ϑ_𝒳(φ′)` for `φ, φ′ ∈ S(𝒳(𝔸))`, the sum converging absolutely (Weil's
+  identity).
+- (b) There is `𝔠_𝒳 ∈ ℂ` with `|𝔠_𝒳| = 1` such that `θ_V(ℐ_𝒳φ) = 𝔠_𝒳·ϑ_𝒳(φ)` for every `φ ∈ S(𝒳(𝔸))`. In particular
+  `|ϑ_𝒳(φ)| ≤ ‖θ_V‖·‖ℐ_𝒳φ‖` (the norm of `𝒮(V)`), and every theta functional of `V` is, on the image of `ℐ_𝒳`, a
+  multiple of modulus one of `ϑ_𝒳 ∘ ℐ_𝒳⁻¹`.
+- (c) For `f = ℐ_𝒳φ` and `y ∈ 𝔸^n`, the theta value of 3.6 (c) is `f(y) = 𝔠_𝒳·ϑ_𝒳(ϱ_𝒳(y)φ)`: the theta function of `f`
+  is `𝔠_𝒳` times the classical theta function of `φ` at the Heisenberg point `y`.
+
+The constant `𝔠_𝒳` depends on `𝒳`, on the phase of `φ_vac` and on the normalisation 5.6 (d) of `θ_V`; it is not
+determined here. The normalisation of `μ_𝒳` in 10.2 is used: for the measures `c·μ_𝒳`, `c⁻¹·μ_𝒴` (`c > 0`), which also
+satisfy 10.1, the map `ℐ_𝒳` is multiplied by `c^{1/2}`, the sum in Weil's identity by `c`, and `|𝔠_𝒳|` becomes
+`c^{1/2}`.
+
+*Needs:* 1.2, 3.6, 10.1, 10.2; AnalyticNumberTheoryPartII §5.3h (Adelic Schwartz–Bruhat functions and Poisson
+summation); MetaplecticAutomorphicForms §5.1 (Theta kernel).
+
+### 10.7 The Weil representation of a pair and the standard splittings
+
+*Origin:* comparison of the Weil representations of 3.5 and 6.1 with the global Weil representation of a unitary pair
+assembled from the local splittings of Kudla (1994) and Harris, Kudla and Sweet (1996) (as cited in 3.3 and 3.5), in
+the form constructed and characterised in ThetaKernelsForUnitaryDualPairs §4.4a; not part of the formal proof.
+
+*Route:* (a) For a primitive `5040`-th root of unity `ζ ∈ E`, `E = E⁺(ζ)` and the discriminant of `ζ` over `E⁺` is
+`(ζ − ζ⁻¹)² = ζ⁻²(ζ² − 1)²`, a unit because `ζ²` has order `2520`, which is not a prime power; so `E/E⁺` is unramified
+at every finite place. Then `υ` and `η_{E/E⁺}` are both trivial on the units of the finite completions of `E⁺` (the
+definition of a splitting character in 3.1, and unramifiedness), both the sign at the real places, both `−1` at a
+uniformiser of a place inert in `E` (Weil data) and both `1` at a uniformiser of a place split in `E` (for `υ`, from
+`υ(x̄) = υ(x)⁻¹`); these elements generate `𝔸_{E⁺}^×`. For `x ∈ 𝔸_{E⁺}^×`, `a_k(x) = a(1)υ(x)^{−k}`. (b) The
+alternating `E⁺`-bilinear forms on `Hom(S, T)` invariant under `U(S) × U(T)` are the forms `Tr_{E/E⁺}(c·H)` for the
+invariant hermitian form `H` and `c` of trace zero, which gives `δ′`. Let `ω′(g, h) = ℐ_𝒳⁻¹ω_{a,b}(g, h)ℐ_𝒳`; it acts
+on `S(𝒳(𝔸))` because `ω_{a,b}(g, h)` conjugates `ϱ(x)` to `ϱ(hxg⁻¹)` (3.5 (b)) and so preserves the smooth vectors of
+10.2 (d). The five conditions of the characterisation in ThetaKernelsForUnitaryDualPairs §4.4a hold for `ω′` with
+`χ_V = a_{|n|}` and `χ_W = b_{|n′|}`, which are splitting characters by (a): (1) is 3.5 (b) for `Hom(S, T)` with 10.1
+(c); (2) is 10.6 (b) with the invariance of `θ_{Hom(S,T)}` under the rational points of the pair (6.2 (a)); (3) is 6.2
+(a) with 10.2 (b); (4): at a place `v = {w, w̄}` of `E⁺` split in `E`, 10.5 for the set of places `{w}` realises the
+type-II model of `v`, and 6.3 (a) with `A = {w}` shows that the functional `φ ↦ φ(0)` of that model is multiplied by a
+positive number times `b_{|n′|}(det g_w)⁻¹·a_{|n|}(det h_w)`, which is condition (4) in the realisation `(X₁^*, δ′X₂)`
+of §4.4a (for `g` equal to `m` at `w`, `det g = y/ȳ` with `y` equal to `det m` at `w` and `1` at `w̄`, so
+`χ̃(det g) = χ(det m)` at `w`); (5) is 10.6 (c) with the joint continuity of 6.2 (a). The characterisation gives (b).
+(c) is (b) for `S = I_1` and `a = b = 1`: on `Hom(I_1, V) = V`, `ω_V(h) = ω_{1,1}(1, h)` and
+`ω_{1,1}(t, 1) = ω_V(t⁻¹·1_n)`, and `a_1 = υ⁻¹`, `b_{|n|} = υ^{−|n|}`; the coefficient at `φ_vac` is 3.5 (b) with 10.1
+(c). (d) The representation of §4.4a is the restricted tensor product of the local representations of
+MetaplecticAutomorphicForms §3.3; `ℐ_𝒳` is the tensor product of the maps of 10.3 (c) at the infinite places and of
+the finite one (10.2 (c), 2.1 (d)), and `ω_V` acts on real insertions through the external product of the `ω_s` (3.5
+(d)); comparing the two sides of (c) on `φ_∞ ⊗ φ_f` for `g` supported at one infinite place gives the first statement,
+with `υ` equal to `z ↦ z/|z|` at `w` (3.1); the same comparison in (b), with 6.2 (b) and `a(u) = u^{γ_w}`,
+`b(u) = u^{γ′_w}` on `U(1)(E_w)`, gives the statement for a pair. The vacuum gives the same splitting character. For
+block diagonal `u ∈ U(s)`, with blocks `u₊₊` and `u₋₋` on the indices of sign `+1` and `−1`,
+`ω_s(u)e = conj det(u₋₋)·e = det(u₋₋)⁻¹·e` (1.3 (b)). With the additive character `x ↦ exp(2πix)` of
+ThetaKernelsForUnitaryDualPairs §3.45, the Heisenberg datum `β_ε` of 2.1, `ε = s`, is that of the symplectic form
+`(x, y) ↦ Im(y*εx)/π` on `ℂ^n`, the complex structure `J = −iε` is positive for it, its holomorphic coordinates are
+`ζ`, and `e` is the coefficient of the vacuum of the Fock model of `J`. As `det_J(u) = det(u₊₊)⁻¹·det(u₋₋)`, one has
+`det(u₋₋)⁻¹ = det_J(u)^{−1/2}·det(u)^{−1/2}`: the factor `det_J^{−1/2}` of §3.45 (ii) times the factor `det^{m/2}`
+contributed by a splitting character `z ↦ (z/|z|)^m`, here with `m = −1` (ThetaKernelsForUnitaryDualPairs §3.46 (iii),
+Route, on each block, with §3.3b, *Orthogonal sums* (b)). (e) is (b) with 10.6 (b) for `Hom(S, T)` and the definition
+of the lift in 6.4.
+
+Let `S`, `T` be hermitian spaces of signatures `s` on `n` and `s′` on `n′` (`n`, `n′` nonempty), `a`, `b` automorphic
+characters of `U(1)`, and `η_{E/E⁺}` the quadratic character of `𝔸_{E⁺}^×` attached to `E/E⁺`. Let `𝒳 ⊕ 𝒴` be a
+rational Lagrangian decomposition of `W_{Hom(S,T)}` (10.1 (d) (ii) for the space `Hom(S, T)` of 6.1) and `ℐ_𝒳` the map
+of 10.2. Write `ω_{ψ⁺, χ_V, χ_W}` for the global Weil representation of ThetaKernelsForUnitaryDualPairs §4.4a of a
+pair `(V, W)` of a Hermitian and a skew-Hermitian space over `E` (in this notation and in `χ_V`, `χ_W`, here and in
+9.3, `V` and `W` are the letters of that section, not a hermitian space of 3.4 or the group of 1.1), attached to `ψ⁺`
+and to splitting characters `χ_V` (governing `U(W)`) and `χ_W` (governing `U(V)`), realised as in the Checks of that
+section for the pair `(X₁^*, δ′X₂)` on `Hom_E(X₁, X₂)` with `(g, h)x = hxg⁻¹`; here `X₁ = S`, `X₂ = T`, and `δ′ ∈ E^×`
+is the element of trace zero for which the trace-symplectic form of MetaplecticAutomorphicForms §3.3 on `S^* ⊗ δ′T` is
+the form `⟪·,·⟫` of `Hom(S, T)`.
+
+- (a) `E/E⁺` is unramified at every finite place, and the restriction of `υ` to `𝔸_{E⁺}^×` is `η_{E/E⁺}`: `υ` and
+  `υ⁻¹` are splitting characters in the sense of MetaplecticAutomorphicForms §3.3 for spaces of odd dimension. For
+  every automorphic character `a` of `U(1)` and `k ∈ ℕ`, the Hecke character `a_k` of 6.1 restricts to `η_{E/E⁺}^k` on
+  `𝔸_{E⁺}^×`.
+- (b) For all `(g, h) ∈ G_s × G_{s′}` and `φ ∈ S(𝒳(𝔸))`:
+  `ω_{a,b}(g, h)(ℐ_𝒳φ) = ℐ_𝒳(ω_{ψ⁺, a_{|n|}, b_{|n′|}}(g, h)φ)`. So `ω_{a,b}` is, on the image of `S(𝒳(𝔸))`, the
+  global Weil representation of the pair `(S^*, δ′T)` attached to `ψ⁺` and the splitting characters
+  `χ_{S^*} = a_{|n|}` and `χ_{δ′T} = b_{|n′|}`; it preserves that image, and its extension to `L²(𝒳(𝔸))` (10.2 (b)) is
+  the extension of that representation.
+- (c) *One group.* For a hermitian space `V` of signature `s` on a nonempty `n`,
+  `ω_V(h)(ℐ_𝒳φ) = ℐ_𝒳(ω_{ψ⁺, υ⁻¹, υ^{−|n|}}(1, h)φ)` for the pair `(I_1^*, δ′V)` on `Hom(I_1, V) = V`: `ω_V` is the
+  global Weil representation of `U(V)(𝔸)` attached to `ψ⁺` and the splitting character `υ⁻¹`, and the scalar `t·1_n`
+  (`t ∈ U(1)(𝔸)`) acts as `t⁻¹ ∈ U(I_1)(𝔸)` does, through the splitting character `υ^{−|n|}`. The multiplier `Δ` is
+  the normalisation of this representation by its coefficient at the vacuum vector:
+  `⟨φ_vac, ω_{ψ⁺, υ⁻¹, υ^{−|n|}}(1, g)φ_vac⟩ = (conj Δ(g))⁻¹`.
+- (d) *Infinite places.* For a hermitian space `V` of signature `s` on a nonempty `n` and each infinite place `w`,
+  `ω_s` (2.1) is, through the Bargmann transform of 10.3 (c), the Fock model of the factor `U(s)` of the local Weil
+  representation at `w` of the pair `(I_1^*, δ′V)` (MetaplecticAutomorphicForms §3.3), attached to the `w`-component
+  `y ↦ exp(−2πiy)` of `ψ⁺` and the splitting character `z ↦ z̄/|z|` of `E_w^× = ℂ^×`, the symplectic space being
+  transported to `ℂ^n` by `realVec`. For a pair `S`, `T` and `a`, `b` of weights `γ`, `γ′`, the factor at `w` of the
+  real pair action `ω_∞` of 6.2 (b), which is the oscillator pair of 2.4 (b) on `n′ × n` matrices with the exponents
+  `γ_w` and `−γ′_w`, is in the same way the Fock model of the local Weil representation at `w` of the pair
+  `(S^*, δ′T)` attached to the `w`-component of `ψ⁺` and the splitting characters `z ↦ (z/|z|)^{2γ_w − |n|}` and
+  `z ↦ (z/|z|)^{2γ′_w − |n′|}`, the `w`-components of `a_{|n|}` and `b_{|n′|}`.
+- (e) *Theta kernels and lifts.* For `φ ∈ S(𝒳(𝔸))`, `θ_{a,b}(ℐ_𝒳φ; g, h) = 𝔠_𝒳·θ(g, h; φ)`, where
+  `θ(g, h; φ) = ϑ_𝒳(ω_{ψ⁺, a_{|n|}, b_{|n′|}}(g, h)φ)` is the theta kernel of MetaplecticAutomorphicForms §5.1 for the
+  representation of (b) and `𝔠_𝒳` is the constant of 10.6 (b) for `Hom(S, T)`. For `y` automorphic and rapidly
+  decreasing on `G_s`, `L_{ℐ_𝒳φ}y(h) = 𝔠_𝒳·∫_{[S]} θ(g, h; φ)·y(g) dg`: the lift of 6.4 is `𝔠_𝒳` times the global
+  theta lift by `φ` of `conj y` (MetaplecticAutomorphicForms §5.6), taken with the quotient measure of 6.4 on `[S]`.
+
+*Needs:* 1.3, 2.1, 2.4, 3.1, 3.5, 6.1–6.4, 10.1–10.3, 10.5, 10.6; ThetaKernelsForUnitaryDualPairs §3.3b (The
+left-action form of the Siegel-parabolic normalisation, and orthogonal sums), §3.45 (The Fock model and the
+infinitesimal Weil representation), §3.46 (Compact dual pairs `(U(n), U(p, q))`), §4.4a (The global Weil
+representation of a unitary pair); MetaplecticAutomorphicForms §3.3 (Unitary dual-pair splittings), §5.1 (Theta
+kernel), §5.6 (Global theta lift).
+
+### 10.8 Zero terms and slices as the mixed model
+
+*Origin:* comparison of the zero terms and slices of 5.5 with the mixed model, the partial Fourier transform of the
+Schrödinger model along a Witt decomposition, and of the laws of 5.6 (b) with the Siegel-parabolic formulas of Kudla
+(1994) and Gan and Ichino (2016), §7.4, as cited in 5.6; not part of the formal proof.
+
+*Route:* (a) By 5.6 (a) the map is `C^{1/2}` times an isometry, and `C > 0` because `ev_D ≠ 0` (5.5 (a)); by the mixed
+law of 5.5 (a) it intertwines `ϱ` with the representation described, the outer tensor product of the Schrödinger
+representation of the hyperbolic part on `L²(𝔸^p)` (10.1, for the decomposition by the frames `l` and `k`) and of `ϱ₀`
+on `ℋ(V₀)`, both irreducible (10.1 (a), 10.2 (b)); so the closed invariant image is everything. (b) `l*Jl = k*Jk = 0`
+and `k*Jl = 1` make `lE^p` and `kE^p` complementary Lagrangians. For `V₀ = 0`, `𝒮(V₀) = ℂ` with `θ_{V₀}` the identity
+(5.6 (d)), so `f[x]` is the mean over `b ∈ 𝔸^p/E^p` of `θ_V(ϱ(kb)ϱ(lx)f)`. For `f = ℐ_𝒳φ`, 10.6 (b) and the formulas
+`ϱ_𝒳(lx)φ = φ(· + lx)` and `(ϱ_𝒳(kb)φ)(u) = β_s(u, kb)²φ(u)` give `𝔠_𝒳·Σ_{ξ∈E^p} ψ(ȷ·b*ξ)·φ(l(ξ + x))`, whose mean
+over `b` is the term `ξ = 0`, as `b ↦ ψ(ȷ·b*ξ)` is a nontrivial character of `𝔸^p/E^p` for `ξ ≠ 0`
+(AdelicUnitaryGroupsAndAlgebraicModularForms §2.2 (b)). The two formulas follow from 5.6 (b); by 10.7 (c) the
+operators are those of the representation of ThetaKernelsForUnitaryDualPairs §4.4a, which satisfies the formulas of
+§3.3b at every place where the acting space is split.
+
+Let `D = (k, l, ι)` be a splitting of `V` over `V₀` along `p` (5.1), `ℋ(V)`, `ℋ(V₀)` the completions of 10.2 and
+`C > 0` the constant of 5.6 (a).
+
+- (a) `f ↦ (x ↦ f[x])` extends to `C^{1/2}` times a unitary isomorphism of `ℋ(V)` onto `L²(𝔸^p; ℋ(V₀))` (for the Haar
+  measure of 5.6 (a)) that carries `ϱ(la + ιw + kb)` (adelic frames, as in 5.1) to
+  `F ↦ (x ↦ ψ(½ȷ·b*(2x + a))·ϱ₀(w)F(x + a))`. So the zero terms and slices realise the mixed model: the Schrödinger
+  model of the hyperbolic part, on `L²(𝔸^p)`, tensored with the model `ℋ(V₀)` of the core.
+- (b) Let `V₀ = 0`, so that `|n| = 2|p|`. Then `𝒳 = lE^p` and `𝒴 = kE^p` form a rational Lagrangian decomposition of
+  `W_V`, and for `φ ∈ S(𝒳(𝔸))` and `x ∈ 𝔸^p`, `(ℐ_𝒳φ)[x] = 𝔠_𝒳·φ(lx)` (`lx` in the adelic frame, `𝔠_𝒳` as in 10.6
+  (b)): the slices of the image of `φ` are the Schrödinger function `φ`. On these data 5.6 (b) reads
+  `(ℐ_𝒳⁻¹ω_V(m(a))ℐ_𝒳φ)(lx) = υ(det a)⁻¹|det a|^{1/2}·φ(la*x)` and `(ℐ_𝒳⁻¹ω_V(n(0, z))ℐ_𝒳φ)(lx) = ψ(−½x*zx)·φ(lx)`:
+  the Levi and unipotent formulas of a Siegel parabolic subgroup in the Schrödinger model of `𝒳`
+  (ThetaKernelsForUnitaryDualPairs §3.3b) for the representation of 10.7 (c). And 5.5 (c) reads
+  `ϑ_𝒳(φ) = Σ_{ξ∈E^p} φ(lξ)`, the definition of the theta distribution.
+
+*Needs:* 5.1, 5.5, 5.6, 10.1, 10.2, 10.6, 10.7; AdelicUnitaryGroupsAndAlgebraicModularForms §2.2 (b) (characters of
+`𝔸/E`); ThetaKernelsForUnitaryDualPairs §3.3b (The left-action form of the Siegel-parabolic normalisation, and
+orthogonal sums), §4.4a (The global Weil representation of a unitary pair).
+
+### 10.9 Edges, arrows and global theta lifts
+
+*Origin:* comparison of the edges and arrows of 7.2 and 7.3 with global theta lifts (MetaplecticAutomorphicForms §5.6)
+and the theta correspondence of discrete series, Li (1990) as cited in 7.2; not part of the formal proof.
+
+*Route:* (a) `φ` is a Schwartz–Bruhat function by 10.4 (b), and the formula is 10.7 (e), the forms of type `e` being
+rapidly decreasing (7.3 (a)); the statements on types are 7.3 (a). (b) The global theta lift of `conj π` is spanned by
+the lifts of the conjugates of its vectors (MetaplecticAutomorphicForms §5.6), and `conj π` is the contragredient of
+the unitary representation `π`.
+
+Let `Φ` be an edge from `e` to `e′` (7.2) for the weights `γ`, `γ′` that has finite moments (for instance a product of
+joint harmonics as in 7.2 (a), a polynomial vector), `a`, `b` automorphic characters of weights `γ`, `γ′`,
+`f ∈ 𝒮_f(Hom(S, T))`, `𝒳 ⊕ 𝒴` a rational Lagrangian decomposition of `W_{Hom(S,T)}`, and `φ = ℐ_𝒳⁻¹(Φ ⊗ f)`, a
+Schwartz–Bruhat function (10.4 (b)).
+
+- (a) For every form `y` of type `e` on `G_s`, `L_{Φ⊗f}y` is `𝔠_𝒳` times the global theta lift by `φ` of `conj y` for
+  the Weil representation `ω_{ψ⁺, a_{|n|}, b_{|n′|}}` (10.7 (e)). So 7.3 (a) states that these global theta lifts
+  carry the forms of type `e` to forms of type `e′`, and that the descents carry the forms of type `conj e′` to forms
+  of type `conj e`.
+- (b) If moreover `y` lies in an irreducible cuspidal automorphic representation `π` of `G_s`, then `L_{Φ⊗f}y` is a
+  form of type `e′` in the global theta lift (MetaplecticAutomorphicForms §5.6) of `conj π`, the contragredient of
+  `π`.
+- (c) An edge does not record that this lift is nonzero, nor that the global theta lift of `conj π` is irreducible or
+  cuspidal. Of the archimedean components it records what the type of the lift records: when `e′ = e_{l′}` for a
+  parameter `l′` with gap `500|n′|³` at every infinite place, as for the types of 7.2 (a), a form of type `e′` is the
+  image of a unit vector of the lowest `K`-type of the tensor product over the infinite places `w` of the discrete
+  series of Harish-Chandra parameter `l′_w/2` under an equivariant map into the cusp forms, and it is the sum of its
+  components in cuspidal automorphic representations with that archimedean component
+  (AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (b)–(d); for a unitary representation of one real group,
+  HolomorphicDiscreteSeriesOfUnitaryGroups §9.4 (b), (d)). So `L_{Φ⊗f}y`, if it is not zero, has all its components in
+  such representations; the same holds for `y` and `e = e_l`. For the parameters of 7.2 (a), the discrete series of
+  Harish-Chandra parameter `l′_w/2` of `U(t)` and `−l_w/2` of `U(s)` occur together, as a completed tensor product, in
+  the completed Fock space of the oscillator pair at each infinite place `w` (HolomorphicDiscreteSeriesOfUnitaryGroups
+  §9.9 (b)); the block rule is not compared with the description of the theta correspondence of discrete series by Li
+  (1990) (as cited in 7.2).
+
+*Needs:* 7.2, 7.3, 10.4, 10.7; MetaplecticAutomorphicForms §5.6 (Global theta lift);
+AdelicUnitaryGroupsAndAlgebraicModularForms §8.5 (b)–(d) (forms of parameter `l` and cusp forms with a discrete series
+at infinity); HolomorphicDiscreteSeriesOfUnitaryGroups §9.4 (b), (d), §9.9 (b) (vectors fixed by `π(e_λ)`, the
+completed Fock space of an oscillator pair).
 
 ## What the library already provides
 
@@ -2467,6 +3119,18 @@ duality of `ℤ`-lattices under projection and intersection (8.2), local determi
   AuxiliaryAlgebraAndAnalysisForThetaLifts §2.2 (c) (commutation of spherical operators);
   DivisibilityOfThetaDerivatives §4.4 (b) (jet series along lines); SiegelWeilAndRallisFormulasOnUnitaryGroups §6.1 (a)
   (line terms, used in 6.11).
+- For the comparison with the standard theory (Layer 10): MetaplecticAutomorphicForms §0.15 (Schrödinger
+  representation), §0.17 (Hilbert Schrödinger model), §0.18 (Smooth vectors of the oscillator model), §3.2a (Split
+  étale Hermitian spaces and oscillator comparison), §3.3 (Unitary dual-pair splittings), §4.5 (Adelic Weil
+  representation), §5.1 (Theta kernel), §5.6 (Global theta lift), §6.15 (Global see-saw and spectral projection);
+  ThetaKernelsForUnitaryDualPairs §3.3b (The left-action form of the Siegel-parabolic normalisation, and orthogonal
+  sums), §3.21a (The unramified unitary theta correspondence), §3.45 (The Fock model and the infinitesimal Weil
+  representation), §3.46 (Compact dual pairs `(U(n), U(p, q))`), §4.4a (The global Weil representation of a unitary
+  pair); AnalyticNumberTheoryPartII §5.3g (Local characters, self-dual measures and Fourier inversion), §5.3h (Adelic
+  Schwartz–Bruhat functions and Poisson summation); SmoothRepresentationsOfLocalGroups §SR.4.3 (The general linear
+  group); AdelicUnitaryGroupsAndAlgebraicModularForms §2.2 (b) (characters of `𝔸/E`), §8.5 (forms of parameter `l` and
+  cusp forms with a discrete series at infinity); HolomorphicDiscreteSeriesOfUnitaryGroups §§9.4, 9.9 (vectors fixed
+  by `π(e_λ)`, the completed Fock space of an oscillator pair).
 
 ## References
 

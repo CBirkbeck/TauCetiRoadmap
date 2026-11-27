@@ -16,20 +16,30 @@ these coefficients is a partial Hecke L-value over a partial Euler product. (2) 
 Weil's range* (2.6). For a split hermitian space `S` of rank `2p` and a space `T` of rank `m > 2p`, on the whole
 Banach space of data of the Weil representation, the zero terms along the rational Lagrangians of `S` have
 summable operator norms, theta has an integrable majorant on `[U(T)]` uniform in the datum, and the mean of
-theta over `[U(T)]` is the sum of the zero terms. Siegel sets for split unitary groups (2.2) and a constancy
-theorem replacing strong approximation (2.7) belong to the same layer. (3) *Siegel's formula and masses*
+theta over `[U(T)]` is the sum of the zero terms, which is the Siegel Eisenstein series at `s₀ = (m − p)/2`; on
+Schwartz–Bruhat data this is a case of Weil's Siegel–Weil formula (7.1). Siegel sets for split unitary groups (2.2)
+and a constancy
+theorem that strong approximation for `SU` implies (2.7, 7.3) belong to the same layer. (3) *Siegel's formula and
+masses*
 (3.2–3.5). Siegel's class-sum formula for the vectors of one norm in the standard definite lattice, and an
-approximate ratio of the masses of the standard lattices in consecutive ranks; local densities bounded by an
+approximate ratio of the masses of the standard lattices in consecutive ranks (for a product test function the
+singular series is `vol(Ô)^n` times a product of local densities, and the ratio of the masses is an explicit constant
+times an L-value, 7.5); local densities bounded by an
 ideal zeta value at one or several places (3.7, 3.8). (4) *Rallis' inner product formula* (4.2–4.6). The doubling
 identity and the inner product formula in Weil's range for rapidly decreasing forms; for sharp data, the
 product of two lifts is a nonzero constant times the pairing with the series of translates, so the lift is
-injective; a reproducing formula by theta lifts to a large definite group. (5) *Singular forms* (5.3). An
+injective. The doubling identity is the Siegel–Weil formula for the doubled pair and the inner product formula is the
+global doubling integral of the doubling method; on Hecke eigenforms the series of translates acts by a partial
+L-value over a partial Euler product, which gives, for sharp data, an identity of the form of the Rallis inner product
+formula with its L-value (7.2). A reproducing formula by theta lifts to a large definite group. (5) *Singular forms*
+(5.3), singular in the sense of 5.1 (c). An
 automorphic function whose partial means are invariant under shears has a vanishing Fourier coefficient along
 the centre of a radical as soon as the coefficients at unimodular indices vanish. (6) *Constant terms and the
 functional equation* (6.8, 6.9). On standard ramified data the constant term along an isotropic line of the
 theta integral of a split tame character is a constant of size `C·L♯(z + 1)` times a theta integral for the
 pair with one hyperbolic plane removed; Tate's argument on the same line gives the continuation of the partial
-L-function of such a character to a real half-line and a functional equation in absolute values.
+L-function of such a character to a real half-line and a functional equation in absolute values, consequences of
+Hecke's continuation and functional equation (7.4).
 
 The users are these. The second moment of Poincaré series uses Siegel's formula, the mass ratio and the ideal
 zeta bounds (`SecondMomentsOfPoincareSeries`, `RemainingAndMainTermsOfSecondMoments`); the local theory of two
@@ -40,29 +50,37 @@ and its exchange identity uses the constancy theorem, the singular forms, the co
 products of L-values and the functional equation (`DeterminantsOfThetaLiftChains`); the Galois representations
 of eigenforms use the inner product formula for sharp data (`GaloisRepresentationsOfUnitaryEigenforms`).
 
-Everything is over a CM field `E` with the Weil data of `WeilRepresentationsOnBanachSpacesOfData §3.1`, in
-particular with a primitive root of unity of order `5040`, so that `E` is unramified over its maximal real
-subfield at every finite place. The hermitian spaces are locally standard (isometric to the identity form at
-every finite place). The Weil representation acts on the Banach space of data
-(`WeilRepresentationsOnBanachSpacesOfData §3.4`), not on Schwartz–Bruhat functions; Eisenstein series appear only
-as sums of zero terms over Lagrangians, and L-functions only as Euler products at real points `x ≥ 1`, with a
-continuation to a real half-line in 6.9. Besides `WeilRepresentationsOnBanachSpacesOfData`, the statements cite
+Everything is over a CM field `E` with the Weil data of `WeilRepresentationsOnBanachSpacesOfData §3.1`, in particular
+with a primitive root of unity of order `5040`, so that `E` is unramified over its maximal real subfield at every
+finite place. The hermitian spaces are locally standard (isometric to the identity form at every finite place). The
+standard theory is the reference for the objects of this roadmap: the Weil representation on Schwartz–Bruhat
+functions, Siegel Eisenstein series, the doubling integral and the L-values of the Rallis inner product formula,
+strong approximation, Hecke L-functions and their functional equation, local densities and the mass formula; Layer 7
+states the results of the roadmap on these objects. The route of Layers 1–6 is one way to prove them, and its proofs
+are stated on its own objects: the Weil representation acts on the Banach space of data
+(`WeilRepresentationsOnBanachSpacesOfData §3.4`), into which the Schwartz–Bruhat functions of a Lagrangian map with
+dense image (`WeilRepresentationsOnBanachSpacesOfData §10.2 (a)`); in the route, Eisenstein series are written as sums
+of zero terms over Lagrangians, and L-functions as Euler products at real points `x ≥ 1`, with a continuation to a
+real half-line in 6.9. Besides `WeilRepresentationsOnBanachSpacesOfData`, the statements cite
 `AdelicUnitaryGroupsAndAlgebraicModularForms` (adelic unitary groups, automorphic forms, class sums),
 `IdelicReciprocityCountsAndCyclotomicClassGroups` (characters of `U(1)` and their L-functions),
 `HolomorphicDiscreteSeriesOfUnitaryGroups` (measures at a place, holomorphic coefficients) and, for Witt's theorem
-over a field, `HermitianFormsAndLattices`.
+over a field, `HermitianFormsAndLattices`; Layer 7 cites in addition the general roadmaps of the standard objects,
+`MetaplecticAutomorphicForms`, `AutomorphicLFunctionsAndLocalFactorsPartII`, `AnalyticNumberTheoryPartI`,
+`AdelicAlgebraicGroups` and `GeometryOfNumbersAndQuadraticArithmetic`.
 
 Layer 1 treats neighbours, the vacuum coefficients and the series of translates. Layer 2 treats Siegel sets,
 the zero terms along Lagrangians and the Siegel–Weil formula in Weil's range, and the constancy theorem.
 Layer 3 treats Siegel's formula for one vector, the masses of the standard lattices, and local densities.
 Layer 4 treats the doubling identity and Rallis' inner product formula. Layer 5 treats singular forms. Layer 6
 treats the constant terms of theta integrals along an isotropic line, Tate's integral and the functional
-equation.
+equation. Layer 7 compares the objects of the route with the standard theory and states the results in its terms.
 
 ## Conventions and notation
 
 **Labels.** Under each section heading, `*Origin:*` says where the statement comes from and
-`*Method of the formal proof:*` how [ShortProof] proves it. The pointer `[ShortProof]` names the file and
+`*Method of the formal proof:*` how [ShortProof] proves it; the sections of Layer 7 are not part of the formal proof
+and give a `*Route:*` in its place. The pointer `[ShortProof]` names the file and
 declarations of the shorter formal proof (under its directory `src/`) where the statement is proved; its
 hypotheses, ranges and constants are recorded in the statement. Where a statement here is wider than the formal
 proof's, its last sentence says which case the formal proof proves. A section that states a modest form of a
@@ -286,6 +304,13 @@ then for every form `y` of type `e` on `S` that is fixed by `J`, `𝒯_A y` is a
 `K₀ ∩ G_f^{A₁∪A₂}`, then `𝒯_{A₁∪A₂} y = 𝒯_{A₁}(𝒯_{A₂} y)`.
 (d) If `b ∘ det` is unramified on `A`, `y` is bounded and fixed by `K₀ ∩ G_f^A`, and `𝒯_A y = 0`, then `y = 0`.
 
+**In standard terms.** If `b ∘ det` is unramified on `A` and `y` is bounded, fixed by `K₀ ∩ G_f^A` and an
+eigenfunction of the spherical Hecke algebra at every place of `E⁺` below `A`, then `𝒯_A y = Z^□_A·y`, where `Z^□_A`
+is the product over those places of the unramified local doubling integrals at `s₀ = (m − n)/2` of
+`MetaplecticAutomorphicForms §6.11` (Local doubling zeta integral), the partial L-value over the partial denominator
+of the doubling method (7.2 (d)); for such a `y ≠ 0`, (d) gives `Z^□_A ≠ 0`. (b)–(d) do not require `y` to be an
+eigenfunction.
+
 *Needs:* 1.1, 1.3; `AdelicUnitaryGroupsAndAlgebraicModularForms §5.1` (forms of a type, Petersson product).
 
 [ShortProof], `Lib/SiegelWeil/UnramifiedSeries/RallisSeries.lean` (`New.SiegelWeil.summable_norm_vacuumCoeff`,
@@ -320,6 +345,13 @@ with `ψ_w = ψ_w̄ = 1`. Then
 `σ_{1,2k,ν·υ₁^k}(complement of D) = L^S(k, ν⁻¹)/∏_{w ∉ D}(1 − ε_w q_w^{−k})⁻¹`.
 Since `E/E⁺` is unramified at the finite places, the denominator is the value at `2k` of the Dedekind zeta
 function of `E⁺` without the Euler factors at the places below `D`.
+
+**In standard terms.** For `n = 1`, `m > 2` and `b ∘ det` unramified on `A`, the constant function `1` is an
+eigenfunction of the spherical Hecke algebras, and `σ_{1,m,b}(A)` is the eigenvalue `Z^□_A` of the series of
+translates on it (7.2 (d), (e)): the product over the places of `E⁺` below `A` of the unramified doubling integrals at
+`s₀ = (m − 1)/2` for the character `b⁻¹` of `U(1)`. (b) and (c) evaluate it, for `m = 2k` and `b = ν·υ₁^k`, as the
+partial Hecke L-value `L^S(k, ν⁻¹)` over the partial Dedekind zeta value of `E⁺` at `2k`: the L-value form of the
+doubling method in rank one.
 
 Outside its set of bad places, `ThetaLiftsForDefiniteUnitaryGroups §5.2` gives the same local factors for
 `n = 1`, `d = 2k`; its bad set contains the places where the additive character ramifies, which (c) does not
@@ -360,7 +392,11 @@ Schrödinger model of `P`* is the slice of `f` at `x` for the splitting of `Hom(
 `θ` on the data of `Hom(0, T)` (`WeilRepresentationsOnBanachSpacesOfData §§5.5, 6.9`);
 it is a continuous linear functional of `f`. The *zero term* along a Lagrangian `Λ` is `ev_Λ(f) = f[0]` for
 `P = P_Λ`; it is the mean of `θ(ϱ(z)f)` over the adelic `z ∈ Hom(S, T)` vanishing on `Λ` modulo the rational
-ones, and `ev_Λ(f) = f[0]` for every complete splitting with Lagrangian `Λ`.
+ones, and `ev_Λ(f) = f[0]` for every complete splitting with Lagrangian `Λ`. Here the *value in the Schrödinger model*
+is a slice followed by `θ`; in the literature it is the value of a Schwartz–Bruhat function in the Schrödinger model
+of the polarisation of `Hom(S, T)` induced by `P`, and on the image of the Schwartz–Bruhat functions the two agree up
+to a constant factor of modulus one (`WeilRepresentationsOnBanachSpacesOfData §10.8 (b)`, for the splitting of
+`Hom(S, T)` induced by `P`; the introduction to Layer 7).
 
 (e) The *normalised torus* of `P` is `A_x = 2^{−f·m·Σ_i x_i}·ω(a_x, 1)` for `x ∈ ℕ^p`.
 
@@ -507,6 +543,18 @@ space of rank `m > 2p` (any signs). Then:
 (c) for every `f ∈ 𝒮(Hom(S, T))` the function `h ↦ θ(ω(1, h)f)` is integrable on `[U(T)]` and
 `∫_{[U(T)]} θ(ω(1, h)f) dh = vol([U(T)])·Σ_Λ ev_Λ(f)`.
 
+**In standard terms.** For a rational Lagrangian `Λ₀`, `g ↦ ev_{Λ₀}(ω(g, 1)f)` is continuous and has the equivariance
+of a section, at `s₀ = (m − p)/2`, of the degenerate principal series of `G(S)` induced from the Siegel parabolic
+subgroup of `Λ₀`; the sum `Σ_Λ ev_Λ(ω(g, 1)f)` is its Siegel Eisenstein series at `g`, absolutely convergent, and (c)
+for the datum `ω(g, 1)f` says that `∫_{[U(T)]} θ(ω(g, h)f) dh` is `vol([U(T)])` times that Eisenstein series at `g`
+(7.1 (a)–(c)). On the images of the Schwartz–Bruhat functions
+(`WeilRepresentationsOnBanachSpacesOfData §§10.2 (a), 10.7 (b), (e), 10.8 (b)`) this is Weil's Siegel–Weil formula in
+Weil's convergent range, in the form of the Corollary of `ThetaKernelsForUnitaryDualPairs §6.4a`
+(`MetaplecticAutomorphicForms §6.4` (Anisotropic Siegel–Weil formula) when `T` is anisotropic), in the case of a CM
+field with Weil data, a locally standard split `S` of rank `2p` and a locally standard `T` of rank `m > 2p`, with
+`G(T)` acting on the values by substitution (7.1 (d)); given (a) and (b), (c) for all data is equivalent to that case
+(7.1 (e)).
+
 For Schwartz–Bruhat data and isotropic `T`, (c) is the case of Weil's range `m > 2d(n)` of
 `ThetaKernelsForUnitaryDualPairs §6.4a` (in its notation; here `m > 2p`), whose statement does not contain the
 bounds (a) and (b), uniform in the datum, that 4.2 uses.
@@ -546,6 +594,14 @@ then `D(levi(t, g))` does not depend on `t ∈ GL_1(𝔸)` for `g ∈ G(W₀)`. 
 plane (`WeilRepresentationsOnBanachSpacesOfData §5.1`) fixes `D`. Then for every set `R` of finite places and every
 `γ ∈ U(W₀)(E)` there is `t ∈ GL_1(𝔸)` such that left translation by the element equal to `levi(t, γ)` at the places
 of `R ∪ R̄` and to `1` at all other places fixes `D`.
+
+**In standard terms.** (a) is a consequence of strong approximation for `SU(W)` with respect to one finite place of
+`E⁺` below `S`, a set of places that does not contain the archimedean ones (`HermitianFormsAndLattices §2.5 (d)`;
+`AdelicAlgebraicGroups §4.2` (Strong approximation and arithmetic closures) states strong approximation for sets of
+places that contain the archimedean ones, which does not suffice here, `D` not being assumed invariant under the
+points of `SU(W)` at the infinite places): it makes every continuous function on `G(W)` that is left invariant under
+`Γ_W` and right invariant under `G_f^S` a function of the determinant, and the torus hypothesis of (a) makes that
+function constant (7.3). (a) does not give strong approximation.
 
 Strong approximation for `SU` (`HermitianFormsAndLattices §2.5 (d)`) also gives (a): it makes `D` a function of
 the determinant, and the torus hypothesis removes that dependence.
@@ -644,6 +700,13 @@ function with compact support on `𝔸_f^n` with `Φ₀(kx) = Φ₀(x)` for `k �
 (b) For a function `c` on `G_f` left invariant under `Γ` and right invariant under `K`,
 `classSum_{Γ,K}(c) = [K₀ : K]·∫_{[U(T)]} c(h_f) dh` for the standard definite space `T`.
 
+**In standard terms.** (a) is Siegel's formula for one vector of the standard definite lattice, written as a class
+sum, with its singular series `δ(Φ₀, α)`: for `Φ₀ = ⊗_v Φ_v` this is `vol(Ô)^n` times the product over the finite
+places `v` of `E⁺` of the local densities `δ_v(Φ_v, α)`, the densities at `α` of the images of the measures `Φ_v(x)dx`
+under `x ↦ x*x`, which at an inert place where `α` is integral, for the indicator of the standard lattice, are the
+hermitian local densities of `GeometryOfNumbersAndQuadraticArithmetic §3.2` (Local densities and Siegel polynomials)
+(7.5 (a)–(c)).
+
 `HermitianFormsAndLattices §6.5 (b)` with `k = 1`, together with `§6.0a`, also implies (a), after the
 archimedean fibre integral of the Gaussian is computed and the fibre measure at the finite places is identified
 with `δ`.
@@ -702,6 +765,11 @@ lattice of `g` is `mass(j)`; and `mass(l) > 0` for every `l`.
 (c) If `8f ≤ 2^u`, `n ≥ 4u + 12`, and `δ(1_{Ô^n}, 1) = x·vol(Ô)^n` with `x ≠ 0`, then `|x − 1| ≤ 2^{−u−1}`.
 (d) If `8f ≤ 2^u` and `j ≥ 4u + 12`, then
 `|log mass(j + 1) − log mass(j) − f·((j + ½)·log rd_E + log j! − (j + 1)·log 2π)| ≤ 2/2^u`.
+
+**In standard terms.** With 7.5 (c), (b) is the exact formula for the ratio of the masses in consecutive ranks,
+`mass(j + 1)/mass(j) = rd_E^{f(2j+1)/2}·(j!/(2π)^{j+1})^f·L(j + 1, η^{j+1})`, `η` the quadratic character of `E/E⁺`:
+the case of the standard lattices of `HermitianFormsAndLattices §6.4 (b)` (7.5 (d)). The number `x` of (c) is
+`L(n, η^n)⁻¹`, and under its hypotheses (d) is equivalent to `|log L(j + 1, η^{j+1})| ≤ 2/2^u`.
 
 `HermitianFormsAndLattices §6.4 (b)` (with `n = j + 1`) also implies (d), with the elementary bound
 `|log L(j + 1, η^{j+1})| ≤ f·log ζ(j + 1)`.
@@ -863,8 +931,9 @@ by cuspidality.
 
 *Method of the formal proof:* the product of the two kernels is the kernel of the doubled pair `(S ⊕ S⁻, T)`,
 `S⁻` being `S` with the form `−J`, at the doubled datum. 2.6 for the split space `S ⊕ S⁻` of rank `2n` turns the
-integral into a sum over its Lagrangians. For a clean datum only the graphs `{(x, δx)}` of the `δ ∈ U(S)(E)` have
-a nonzero zero term, each graph occurs once, and its zero term is the matrix coefficient at `g′⁻¹δg`. The bound
+integral into a sum over its Lagrangians. For a clean datum only the graphs of the `δ ∈ U(S)(E)` have
+a nonzero zero term, each graph occurs once, and the zero term along `{(x, −δx)}` is the matrix coefficient at
+`g′⁻¹δg`. The bound
 comes from 2.6 (a) and (b) for the doubled pair.
 
 Let `2n < m`, let `a`, `b` be automorphic characters of `U(1)`, and `g, g′ ∈ G(S)`.
@@ -873,6 +942,15 @@ Let `2n < m`, let `a`, `b` be automorphic characters of `U(1)`, and `g, g′ ∈
 (b) There is a finite `C`, depending only on `S` and `T`, such that for all `a`, `b`, `f`, `f′`, `g`, `g′` both
 `∫_{[U(T)]} |θ(ω_{a,b}(g′, x)f′)·θ(ω_{a,b}(g, x)f)| dx` and `Σ_{γ ∈ Γ_S} |c_b(f, f′; g′⁻¹γg)|` are at most
 `C·‖ω_{1,b}(g′, 1)f′‖·‖ω_{1,b}(g, 1)f‖`.
+
+**In standard terms.** (a) is the Siegel–Weil formula 2.6 (c) for the doubled pair `(S ⊕ S⁻, T)`, at the doubled datum
+of `ω_{1,b}(g, 1)f` and `ω_{1,b}(g′, 1)f′`, together with the evaluation of the zero terms: the left side is the
+integral over `[U(T)]` of the theta kernel of the doubled pair at that datum, the formula equates it with
+`vol([U(T)])` times the Siegel Eisenstein series of the doubled group at `s₀ = (m − n)/2`, at the identity, and the
+right side is the sum of that series over the rational Lagrangians of `S ⊕ S⁻`, in which, for clean `f`, only the
+graphs of the rational points of `U(S)` contribute (7.2 (b)). In the doubling method the other Lagrangians are removed
+by the cuspidality of the forms instead (`AutomorphicLFunctionsAndLocalFactorsPartII §3.1` (unitary doubling
+identity)).
 
 *Needs:* 2.6, 4.1; `WeilRepresentationsOnBanachSpacesOfData §§3.8, 6.3` (doubled datum, kernels of sums).
 
@@ -896,6 +974,18 @@ Let `2n < m`, `a`, `b` automorphic characters of `U(1)`, `f` a clean datum, `f�
 from `U(S)` to `U(T)` by the kernel of `ω_{a,b}` at `f`, and `y`, `y′` automorphic functions of rapid decay on
 `G(S)`. Then `k(g) = c_b(f, f′; g)·⟨y′, R(g)y⟩` is integrable on `G(S)` and
 `⟨Θ_{f′}y′, Θ_f y⟩ = vol([U(T)])·∫_{G(S)} k(g) dg`.
+
+**In standard terms.** The right side is `vol([U(T)])` times the global doubling integral at `s₀ = (m − n)/2`, in its
+unfolded form, of the Siegel–Weil section of the doubled datum of `f` and `f′` against the functions `(b ∘ det)⁻¹·y`
+and `(b ∘ det)⁻¹·y′`, absolutely convergent (7.2 (c)). The Rallis inner product formula of the literature evaluates
+this integral, on cuspidal Hecke eigenforms and factorisable data, as a partial L-value over a partial denominator
+times an integral over the points that are integral outside a finite set of places
+(`ThetaKernelsForUnitaryDualPairs §6.13a (ii)`, under the integrability hypothesis stated there); 4.3 holds for all
+rapidly decreasing automorphic functions and stops before that evaluation, which on Hecke eigenforms is 7.2 (d), (e).
+Here *inner product formula* names the identities of 4.3 and 4.5 between the Petersson product of two lifts and an
+integral of a matrix coefficient, or the pairing with the series of translates; in the literature the Rallis inner
+product formula is the evaluation in L-value form, which 4.5 gives through 7.2 (e) for sharp data and Hecke
+eigenforms, with the factors for the real places and for the places of `S₀` given only as the constants `C` and `c`.
 
 On cuspidal Hecke eigenforms, with lattice vectors outside a finite set, the L-value form of
 `ThetaKernelsForUnitaryDualPairs §6.13a` and §6.13b evaluates the same integral.
@@ -942,6 +1032,12 @@ off `S₀`, the coefficient `c_b(v ⊗ F, v ⊗ F; x·u·g)` is the product of `
 the indicator of `J ∩ K₀` at `g`, where `Ω(x)` is the real Weil representation of the pair on the Fock space at
 `(x, 1)`, twisted on `G_∞(S)` by the weight `γ′` of `b` (and by any weight on `G_∞(T)`).
 
+**In standard terms.** In (a), for `f` fixed by the projection onto the vacua above `A`,
+`b(det γ)·mc_{m,b}(γ) = Δ(γ)^{−m}` (`γ ∈ G_f^A`) is the value at the block-diagonal point `diag(γ, 1)` of the
+Siegel–Weil section of the doubled datum of `f` and `f`, divided, when `⟨f, f⟩ ≠ 0`, by its value `⟨f, f⟩` at `1`: at
+the places of `E⁺` below `A` the quotient is the spherical section of the doubling method at `s₀ = (m − n)/2`, for the
+stabiliser of the lattice `L ⊕ L` (7.2 (a), (d)).
+
 *Needs:* 1.1, 4.1; `WeilRepresentationsOnBanachSpacesOfData §§3.7, 6.2, 6.3, 6.7` (vacuum projections, integral
 points, real action); `IdelicReciprocityCountsAndCyclotomicClassGroups §§7.1, 7.6` (weight and tame part).
 
@@ -986,6 +1082,14 @@ real convolution of `y` with `x ↦ ⟨v, Ω(x)v⟩` vanishes.
 fixed by `J` and every form `y′` of type `e`.
 (d) In the setting of (c) there is `A ≠ 0`, depending only on the same data as `C`, such that in addition
 `⟨Ly′, Ly⟩ = Σ_{q ∈ G_f/K_{S₀ᶜ}} A·c·mc_{m,b}(r(q))·⟨y′, R(r(q))y⟩`, the sum converging absolutely.
+
+**In standard terms.** If `y` is moreover an eigenfunction of the spherical Hecke algebras at the places of `E⁺` below
+the complement of `S₀`, then `𝒯y = Z^□·y`, with `Z^□` the partial L-value over the partial denominator of the doubling
+method at `s₀ = (m − n)/2`, the products over those places, and (c) reads `⟨Ly′, Ly⟩ = C·c·Z^□·⟨y′, y⟩`: an identity
+of the form of the Rallis inner product formula in Weil's convergent range
+(`ThetaKernelsForUnitaryDualPairs §6.13a (ii)`, for the linear lift), with the factors for the real places and for the
+remaining finite places given by the constant `C`, which is not computed, and the mass `c` (7.2 (d), (e)). The
+injectivity in (c) holds on all forms of type `e` fixed by `J`, eigenforms or not, with no hypothesis on L-values.
 
 `ThetaLiftsForDefiniteUnitaryGroups §3.4` and `§4.2` state injectivity for definite pairs under an invertibility
 or a weight condition; `ThetaKernelsForUnitaryDualPairs §6.13a` (Corollary) states non-vanishing for one eigenform
@@ -1077,6 +1181,11 @@ matrix is `1 + ē_U·uc − e_U·a` with `c` a row with `cu = 0` and `a` any mat
 places of `S ∪ S̄`. A splitting is *adapted* if it is base-adapted as in
 `WeilRepresentationsOnBanachSpacesOfData §5.2` (adelic frames orthonormal at the infinite places, integral at the
 finite places).
+
+Here *singular*, in the titles of this layer, refers to the shear invariance of the partial means in (c), the
+hypothesis of 5.3; in the literature a singular automorphic form is one whose Fourier coefficients along the unipotent
+radical of a Siegel parabolic subgroup vanish at every nondegenerate index (Freitag (1991), *Singular Modular Forms
+and Theta Relations*), a condition that 5.3 does not assume.
 
 [ShortProof], `Lib/SiegelWeil/SingularForms/CentreCoefficients.lean` (`New.Exchange.IsAutFunction`,
 `New.Space.Splitting.lineShift`, `New.Space.Splitting.partialMean`, `New.Space.Splitting.shiftedMean`,
@@ -1180,7 +1289,11 @@ the *plane constant term* `CT(v, y)(u, g)`, at a
 Levi point `(u, g) ∈ GL_1(𝔸) × G(W)` of the stabiliser of the line of `A`, is the mean over the radical of that
 stabiliser modulo its rational points of the theta integral of `(W′, V′)` at the plane datum.
 
-(d) *Cones.* A Fock vector is a *Schwartz vector* if all its moments `∫(1 + ‖y‖)^N|v(y)| dy` are finite. For `z > 0`
+(d) *Cones.* A Fock vector is a *Schwartz vector* if all its moments `∫(1 + ‖y‖)^N|v(y)| dy` are finite (here the name
+means moments of every order; in the literature a Schwartz vector is an element of the Schwartz space of a Schrödinger
+model, the space of the smooth vectors of the Heisenberg representation, and the two notions agree: a Fock vector has
+finite moments of every order exactly when it is the image of a Schwartz function,
+`WeilRepresentationsOnBanachSpacesOfData §10.4 (a)`). For `z > 0`
 and a Fock vector `v` of `Hom(W′, V′)`, `cone_β(z, v) = ∫ ∏_τ (a_τ/|a_τ|)^{2μ_τ}·|a|^z·λ^ℝ_β(a)(Ω(1, κ)v) dκ da`, over
 `κ` in the maximal compact subgroup of `G_∞(V′)` and `a ∈ (ℂ^Φ)^×` with Haar measures, `Ω` the real Weil
 representation of the pair `(W′, V′)` with weight `0` on `G_∞(W′)` and `⌊rk W′/2⌋ − μ` on `G_∞(V′)`;
@@ -1437,6 +1550,21 @@ for `χ_𝔠`.
 `|γ| = C·L♯(z + 1)` and `CT(v, y)(u, g) = γ·I_𝔠(cone(z + 1, v), Φ_y)(g)` for all `v`, `y`, `(u, g)` as in (b).
 (d) If `rk V − n/2 = −(z + 1) < 0`, the same holds with `dualCone(z + 1, v)` in place of `cone(z + 1, v)`.
 
+**In standard terms.** (b)–(d) have the form of the tower property of theta integrals for the constant term along an
+isotropic line (Rallis (1984), *On the Howe duality conjecture*, Theorem I.1.1; for unitary groups Wu (2013),
+*Irreducibility of theta lifting for unitary groups*, Proposition 3.1): the constant term along the line of `A` in
+`W′` of the theta integral over `[U(V′)]` is the sum of a theta integral of the pair `(W, V′)` at the zero term of the
+datum along that line and of a theta integral of the pair `(W, V)` at a Tate integral of the datum along the line of
+`X`. `ThetaKernelsForUnitaryDualPairs §5.7c` states this, on the images of Schwartz–Bruhat functions
+(`WeilRepresentationsOnBanachSpacesOfData §§10.2 (a), 10.4 (b)`), in two ranges of `z₀ = rk V − n/2 + 1`: in (i), with
+its cone at `z₀`, for `z₀ ≥ 1 + r_∞`, where `r_∞ ≥ 1` is the largest Witt index of `V′` at a real place, and for data
+finite under a maximal compact subgroup at the real places; in (ii), with its dual cone at `1 − z₀`, for `1 − z₀ ≥ 2`
+and data regular at a finite split place where the character is nontrivial, as the plane data are at the places of
+`S`. For the plane datum the first of the two terms vanishes, because the slice at `0` of the plane datum along `A` is
+`0`, so that the constant term is the second term, and (c) and (d) evaluate it, with the size of the constant. They do
+so for every `rk V ≤ n`, that is also for `z₀ ∈ {0, 1}` and for `2 ≤ z₀ ≤ r_∞`, and for every Schwartz vector at the
+real places, where §5.7c does not apply.
+
 `ThetaKernelsForUnitaryDualPairs §5.7c` gives the constant term as a sum of two theta integrals for general data in
 ranges that exclude `rk V − n/2 + 1 = 1` and `rk V − n/2 + 1 = 0`; it does not give the size of the constant for
 ramified data uniformly in the character.
@@ -1472,6 +1600,15 @@ there is a real-analytic function `Λ` on `(−k, ∞)` with `Λ(x) = L^S(x, ν)
 `|Λ(1 − z)|·∏_{w ∈ S} q_w^{1/2 − z} = C(z)·L♯(z)` for `1 ≤ z < k + 1`.
 (b) For every such `𝔠` the function `Λ` of (a) satisfies `Λ(j) ≠ 0` for every integer `j > −k`.
 
+**In standard terms.** The base change `ν̃` is a unitary Hecke character of `E` with conductor of norm `∏_{w∈S} q_w²`,
+`L^S(x, ν)`, for `x ≥ 1`, is the value of its finite Hecke L-function `L(s, ν̃)`, an entire function of `s`, and `Λ`
+can be taken to be the restriction of `L(·, ν̃)` to `(−k, ∞)`; then (a) and (b) are consequences of Hecke's
+continuation and functional equation for `ν̃` (`AnalyticNumberTheoryPartI §2.3a` (Hecke continuation and functional
+equation)) and the non-vanishing 6.2 (a), with `C(z) = |D_E|^{z−1/2}·∏_τ Γ_ℂ(z + μ_τ)/Γ_ℂ(1 − z + μ_τ)` (7.4). Here
+*functional equation* names the identity of absolute values in (a), with an unspecified positive factor; in the
+literature it is the identity of completed L-functions, `Λ_H(ν̃, s)` equal to a constant of modulus one times
+`Λ_H(ν̃⁻¹, 1 − s)` on the whole plane (in the notation of §2.3a), of which (a) is the consequence at real points.
+
 `AnalyticNumberTheoryPartI §2.3a` (Hecke's continuation and functional equation for every unitary Hecke character)
 also implies (a) and (b), with the conductor `|D_E|·∏_{w ∈ S} q_w²` and the gamma factors absorbed into `C`, together with
 the non-vanishing 6.2 (a).
@@ -1482,6 +1619,398 @@ space).
 [ShortProof], `Lib/SiegelWeil/Tower/FunctionalEquation.lean` (`New.Exchange.exists_analyticOnNhd_eq_L_mul_gammaIntegral`,
 `New.Exchange.exists_analytic_extension_functional_equation`, `New.Exchange.exists_analytic_extension_ne_zero`,
 `New.Exchange.gammaIntegral_pos`, `New.Exchange.analyticOnNhd_gammaIntegral`)
+
+## Layer 7: Comparison with the standard theory
+
+The standard theory is the reference for the objects of this roadmap: the Weil representation on Schwartz–Bruhat
+functions and its theta kernels, Siegel Eisenstein series and the Siegel–Weil formula, the doubling integral and the
+Rallis inner product formula with its L-value, strong approximation, Hecke L-functions and their functional equation,
+local densities and the mass formula. This layer states how the objects of the route are related to their standard
+counterparts, and states the results of the route on the standard objects: the Siegel–Weil formula 2.6 as a case of
+Weil's formula for the Siegel Eisenstein series (7.1); the doubling identity, the inner product formulas and the
+series of translates as the doubling integral and, on Hecke eigenforms and for sharp data, an identity of the form of
+the Rallis inner product formula with its L-value (7.2); the constancy theorem 2.7 (a) as a consequence of strong
+approximation (7.3); the continuation and functional equation of 6.9 as consequences of Hecke's (7.4); the density of
+Siegel's formula as a product of local densities, and the exact ratio of the masses (7.5). The constant terms of 6.8
+are related to the tower property in 6.8 itself. The route does not use this layer.
+
+The comparison of the space of data with the Schwartz–Bruhat space is
+`WeilRepresentationsOnBanachSpacesOfData §§10.1, 10.2`, and that of the groups `G(S)`, the automorphic functions and
+the forms of a type with the standard ones is `AdelicUnitaryGroupsAndAlgebraicModularForms §8.2 (a)` (`G(S)`, `Γ_S`,
+`G_f` and `K₀` as the adelic, rational and finite adelic points of the unitary group over `E⁺` and the stabiliser of a
+lattice), `§8.1 (b)` (the Petersson product as the inner product of `L²` of the quotient) and `§8.5` (forms of type
+`e_l` as cusp forms). From the first, this layer uses the following. For a locally standard space `V` and a rational
+Lagrangian decomposition `𝕏 ⊕ 𝕐` of the symplectic `E⁺`-space underlying `V`
+(`WeilRepresentationsOnBanachSpacesOfData §10.1 (d)`), `ℐ_𝕏 : S(𝕏(𝔸)) → 𝒮(V)` is the comparison map of
+`WeilRepresentationsOnBanachSpacesOfData §10.2 (a)` from the Schwartz–Bruhat space of `𝕏`
+(`MetaplecticAutomorphicForms §4.5` (Adelic Weil representation)); it is defined up to a factor of modulus one, and it
+is continuous, linear and injective, with dense image. For spaces `S`, `T` of positive ranks `n`, `m` and automorphic
+characters `a`, `b` of `U(1)`, the map `ℐ_𝕏` of `V = Hom(S, T)` satisfies `ω_{a,b}(g, h)ℐ_𝕏(Ψ) = ℐ_𝕏(ω^{std}(g, h)Ψ)`,
+where `ω^{std}` is the global Weil representation of the pair on `S(𝕏(𝔸))` named in
+`WeilRepresentationsOnBanachSpacesOfData §10.7 (b)`, assembled from the local representations of
+`MetaplecticAutomorphicForms §3.3` (Unitary dual-pair splittings): it is attached to the character `ψ⁺` of the adeles
+of `E⁺` with `ψ = ψ⁺ ∘ Tr_{E/E⁺}` and, in the labelling of that section, to the splitting characters `a_n = ã·υ^{−n}`,
+which governs `G(T)`, and `b_m = b̃·υ^{−m}`, which governs `G(S)` (`ã`, `b̃` the base changes). For `ω` of 2.1 (c),
+where `n = 2p`, `a = υ₁^p` and `b = 1`, these are `a_n = 1` and `b_m = υ^{−m}`. For a complete splitting `P` of a
+space `S` into `p` hyperbolic planes (2.1 (a)) and a space `T` of rank `m`, the splitting of `Hom(S, T)` induced by
+`P` (`WeilRepresentationsOnBanachSpacesOfData §6.9`) has core `0`, and
+`WeilRepresentationsOnBanachSpacesOfData §10.8 (b)` applies to it: the maps that vanish on the span of the frame `l`
+of `P` and the maps that vanish on the Lagrangian of `P` form a rational Lagrangian decomposition `𝕏 ⊕ 𝕐` of
+`Hom(S, T)`, the Schwartz–Bruhat functions on `𝕏(𝔸)` are functions of `x ∈ M_{m×p}(𝔸)` in the coordinates of the
+matrix slices of §6.9, and `ℐ_𝕏(Ψ)[x] = c_𝕏·Ψ(x)` for every `Ψ ∈ S(𝕏(𝔸))`, the left side being the value of 2.1 (d)
+and `c_𝕏` the constant of modulus one of `WeilRepresentationsOnBanachSpacesOfData §10.6 (b)`. By §10.6 (b),
+`θ(ℐ_𝕏(Ψ)) = c_𝕏·Σ_ξ Ψ(ξ)` over the rational `ξ` (2.3 (a)), and by
+`WeilRepresentationsOnBanachSpacesOfData §10.7 (e)`, writing `θ^{std}(g, h; Ψ) = Σ_ξ (ω^{std}(g, h)Ψ)(ξ)` for the
+theta kernel of `MetaplecticAutomorphicForms §5.1` (Theta kernel) of `ω^{std}`,
+`θ(ω_{a,b}(g, h)ℐ_𝕏(Ψ)) = c_𝕏·θ^{std}(g, h; Ψ)`. For `ω` of 2.1 (c), these and 2.3 (a) give
+`(ω^{std}(1, h)Ψ)(x) = Ψ(h⁻¹x)`: `G(T)` acts on the Schwartz–Bruhat functions by substitution.
+
+### 7.1 The Siegel–Weil formula of 2.6 and Weil's formula
+
+*Origin:* comparison of 2.6 with the Siegel–Weil formula in Weil's convergent range, Weil (1965): the sum of the zero
+terms over the rational Lagrangians is the Siegel Eisenstein series at its point `s₀`, and on Schwartz–Bruhat data 2.6
+(c) is a case of Weil's formula; not part of the formal proof.
+
+*Route:* (a) An element of `𝒫` is `n(ν)·P_{Λ₀}.levi(a)` (`WeilRepresentationsOnBanachSpacesOfData §5.1 (b)`, the core
+being `0`). The radical element does not change the slice at `0` (`WeilRepresentationsOnBanachSpacesOfData §6.9 (c)`),
+and the Levi element multiplies it by `υ^m(det a)·|det a|^{m/2}` (2.3 (a) at `x = 0`, `h = 1`, where `χ = υ^{−m}`).
+Continuity comes from the joint continuity of `ω` (`WeilRepresentationsOnBanachSpacesOfData §6.2 (a)`) and the
+boundedness of `ev_{Λ₀}`. (b) By 2.1 (d), `ev_Λ(u)` is the mean of `θ(ϱ(z)u)` over the adelic `z ∈ Hom(S, T)`
+vanishing on `Λ`, modulo the rational ones. For `γ ∈ Γ_S`, `ϱ(z)ω(γ, 1) = ω(γ, 1)ϱ(zγ)`
+(`WeilRepresentationsOnBanachSpacesOfData §3.5 (b)`), `θ` is invariant under `ω(γ, 1)`
+(`WeilRepresentationsOnBanachSpacesOfData §6.2 (a)`), and `z ↦ zγ` carries the maps vanishing on `Λ₀` onto those
+vanishing on `γ⁻¹Λ₀`, the rational ones onto the rational ones; so `ev_{Λ₀}(ω(γ, 1)u) = ev_{γ⁻¹Λ₀}(u)`, and
+`u = ω(g, 1)f` gives the identity. The map `𝒫(E)γ ↦ γ⁻¹Λ₀` is well defined and injective because `𝒫(E)` is the
+stabiliser of `Λ₀` in `Γ_S`; it is onto because every Lagrangian is that of a complete splitting (2.1 (a)), and the
+linear map that carries the frames of one complete splitting to those of another is a rational point of `U(S)`.
+Absolute convergence and the bound follow from 2.6 (a) and `|ev_Λ(u)| ≤ ‖ev_Λ‖·‖u‖`. (c) is 2.6 (c) for the datum
+`ω(g, 1)f`, since `ω(1, h)ω(g, 1) = ω(g, h)`. (d) `ℐ_𝕏` intertwines `ω(g, 1)` with the Weil representation of `g` on
+`S(𝕏(𝔸))`, so `sw_{ℐ_𝕏(Ψ)}(g) = c_𝕏·(ω(g)Ψ)(0)`, and the theta kernels are related by the factor `c_𝕏` (the
+introduction to this layer); divide (c) by `c_𝕏`. The measure of total mass one on `[U(T)]` is any Haar measure
+divided by `vol([U(T)])`, and the Tamagawa measure divided by `τ(U(T))`, as in the Corollary. (e) Both sides of 2.6
+(c) are continuous linear forms in `f`: the left side by 2.6 (b), `|∫ θ(ω(1, h)f) dh| ≤ ‖f‖·∫ N`, the right side by
+2.6 (a). They agree on the image of `ℐ_𝕏` by (d) and the Corollary, and that image is dense.
+
+Let `S` be a locally standard space with a complete splitting into `p` hyperbolic planes, `T` a locally standard space
+of rank `m > 2p` (any signs), `ω` as in 2.1 (c), and `s₀ = (m − p)/2`. Fix a rational Lagrangian `Λ₀` of `S`; let
+`𝒫 ⊂ G(S)` be the group of the elements that act on the frame of `P_{Λ₀}` (2.1 (b)), the adelic points of the Siegel
+parabolic subgroup of `Λ₀`, and `𝒫(E) = 𝒫 ∩ Γ_S`. For `f ∈ 𝒮(Hom(S, T))` put `sw_f(g) = ev_{Λ₀}(ω(g, 1)f)` for
+`g ∈ G(S)`, and `Eis(g, sw_f) = Σ_{γ ∈ 𝒫(E)\Γ_S} sw_f(γg)`; `Eis` is defined in the same way for every function on
+`G(S)` left invariant under `𝒫(E)` whose sum converges absolutely.
+(a) `sw_f` is continuous, and if `g ∈ 𝒫` acts on the frame of `P_{Λ₀}` by `a`, then
+`sw_f(gg′) = υ^m(det a)·|det a|^{m/2}·sw_f(g′)` for every `g′`: `sw_f` has the equivariance of the sections, at
+`s = s₀`, of the degenerate principal series of `G(S)` induced from the character `g ↦ υ^m(det a)·|det a|^{s + p/2}`
+of `𝒫` (normalised induction, the modulus of `𝒫` being `|det a|^p`); it is such a section when `f` is the image of a
+Schwartz–Bruhat function (d), and for a general datum it is only continuous.
+(b) For `γ ∈ Γ_S` and `g ∈ G(S)`, `ev_{γ⁻¹Λ₀}(ω(g, 1)f) = sw_f(γg)`, and `𝒫(E)γ ↦ γ⁻¹Λ₀` is a bijection from
+`𝒫(E)\Γ_S` onto the set of rational Lagrangians of `S`. Hence the Siegel Eisenstein series `Eis(g, sw_f)` converges
+absolutely for every `g`, `Eis(g, sw_f) = Σ_Λ ev_Λ(ω(g, 1)f)`, and `|Eis(g, sw_f)| ≤ (Σ_Λ ‖ev_Λ‖)·‖ω(g, 1)f‖`.
+(c) For every `f` and every `g ∈ G(S)`, `∫_{[U(T)]} θ(ω(g, h)f) dh = vol([U(T)])·Eis(g, sw_f)`.
+(d) Let `p ≥ 1`, and let `𝕏 ⊕ 𝕐` be the rational Lagrangian decomposition of `Hom(S, T)` induced by `P_{Λ₀}`, as in
+the introduction to this layer, `Ψ ∈ S(𝕏(𝔸))`, and `sw^{std}_Ψ(g) = (ω(g)Ψ)(0)` the Siegel–Weil section of
+`MetaplecticAutomorphicForms §6.2` (Siegel–Weil section) at `s₀`, `ω(g)` being the Weil representation of `g` on
+`S(𝕏(𝔸))`. Then `sw_{ℐ_𝕏(Ψ)} = c_𝕏·sw^{std}_Ψ`, and (c) for `f = ℐ_𝕏(Ψ)`, divided by `c_𝕏`, reads
+`vol([U(T)])⁻¹·∫_{[U(T)]} θ^{std}(g, h; Ψ) dh = Eis(g, sw^{std}_Ψ)`, the Eisenstein series of §6.2 at `s₀` being its
+absolutely convergent sum. This is the Siegel–Weil formula in Weil's convergent range, in the form of the Corollary of
+`ThetaKernelsForUnitaryDualPairs §6.4a` (`MetaplecticAutomorphicForms §6.4` (Anisotropic Siegel–Weil formula) when `T`
+is anisotropic), in the case where `E/E⁺` is a CM extension with Weil data, the split space is `S`, of rank `2p`, the
+other space is `T`, of rank `m > 2p`, both are locally standard, and the Weil representation is `ω^{std}` of the
+introduction to this layer for `a = υ₁^p` and `b = 1`: the splitting character that governs `G(T)` is trivial, as the
+Corollary requires, so that `G(T)` acts by `(ω^{std}(1, h)Ψ)(x) = Ψ(h⁻¹x)`, and the one that governs `G(S)` is
+`υ^{−m}` in the labelling of `WeilRepresentationsOnBanachSpacesOfData §10.7 (b)`, the equivariance of the Siegel–Weil
+section being that of (a).
+(e) Conversely, that Corollary on the data `ℐ_𝕏(Ψ)`, together with 2.6 (a) and (b), gives 2.6 (c) for every datum.
+
+2.6 concerns the Siegel Eisenstein series only at `s₀`, where it is the absolutely convergent sum of (b); its
+meromorphic continuation in `s` (`AutomorphicLFunctionsAndLocalFactorsPartII §1.3` (degenerate Siegel Eisenstein
+continuation)) is not part of 2.6, and the bounds 2.6 (a), (b), uniform in the datum, are not part of the Corollary.
+
+*Needs:* 2.1, 2.3, 2.6; `WeilRepresentationsOnBanachSpacesOfData §§3.5, 5.1, 6.2, 6.9` (Weil representation, parabolic
+elements, laws of the pair, mixed models of a pair);
+`WeilRepresentationsOnBanachSpacesOfData §§10.1 (d), 10.2 (a), 10.6 (b), 10.7 (b), (e), 10.8 (b)` (rational Lagrangian
+decompositions, the comparison map, the theta distribution, the Weil representation and the theta kernels of a pair,
+slices); `MetaplecticAutomorphicForms §3.3` (Unitary dual-pair splittings), `§4.5` (Adelic Weil representation),
+`§5.1` (Theta kernel), `§6.2` (Siegel–Weil section), `§6.4` (Anisotropic Siegel–Weil formula);
+`ThetaKernelsForUnitaryDualPairs §6.4a` (the Siegel–Weil formula in Weil's convergent range, its Corollary).
+
+### 7.2 The doubling identity, the series of translates and the Rallis inner product formula
+
+*Origin:* comparison of Layer 4 and of the series of translates of 1.4 with the doubling method and the Rallis inner
+product formula in Weil's convergent range (Rallis (1987), *L-functions and the oscillator representation*; Li
+(1992)): the doubling identity is the Siegel–Weil formula for the doubled pair, the inner product formula 4.3 is the
+global doubling integral in its unfolded form, and on Hecke eigenforms the series of translates acts by the partial
+L-value over the partial denominator of the doubling method; not part of the formal proof.
+
+*Route:* (a) `diag(g, 1)` acts on `f^□` through its first block: `ω(diag(g, 1), 1)f^□` is the doubled datum of
+`ω_{1,1}(g, 1)f` and `f′` (`WeilRepresentationsOnBanachSpacesOfData §6.3 (b)`). The zero term along `Λ^□` of the
+doubled datum of `f₁` and `f′` is the matrix coefficient `⟨f′, f₁⟩`: by 2.1 (d) it is the mean, over the adelic
+`z ∈ Hom(S ⊕ S⁻, T)` vanishing on `Λ^□` modulo the rational ones, of `θ(ϱ(z)(f₁ ⊠ f′^⋆))`; such a `z` is a pair
+`(z₁, z₁)`, and `θ(ϱ(z₁)f₁ ⊠ (ϱ(z₁)f′)^⋆) = θ(ϱ(z₁)f₁)·conj θ(ϱ(z₁)f′)`
+(`WeilRepresentationsOnBanachSpacesOfData §§3.8, 6.3 (b), (c)`), whose mean
+`WeilRepresentationsOnBanachSpacesOfData §3.6 (c)` evaluates as `⟨f′, f₁⟩`; for `f₁ = ω_{1,1}(g, 1)f` this is
+`c_1(f, f′; g)`; and `ω_{1,b}(g, 1) = b(det g)⁻¹·ω_{1,1}(g, 1)` (`WeilRepresentationsOnBanachSpacesOfData §6.1`). The
+rest is 7.1 (a) for the pair `(S ⊕ S⁻, T)`, the space `S ⊕ S⁻` having rank `2n` and a complete splitting with
+Lagrangian `Λ^□`. (b) The theta kernel of `f^□_{g,g′}` at `x` is `θ(ω_{1,b}(g, x)f)·conj θ(ω_{1,b}(g′, x)f′)`
+(`WeilRepresentationsOnBanachSpacesOfData §6.3 (b), (c)`), and the factors `a(det x)` of `ω_{a,b}` cancel in the
+integrand of 4.2 (a); then 7.1 (b), (c) for `(S ⊕ S⁻, T)` at `g = 1`, which apply since `2n < m`; the graph
+`{(x, −δx)}` is `diag(δ⁻¹, 1)Λ^□`, so by 7.1 (b) its zero term at `f^□_{g,g′}` is the zero term along `Λ^□` of the
+doubled datum of `ω_{1,b}(δg, 1)f` and `ω_{1,b}(g′, 1)f′`, which is
+`⟨ω_{1,b}(g′, 1)f′, ω_{1,b}(δg, 1)f⟩ = c_b(f, f′; g′⁻¹δg)` by the computation of (a); that the other Lagrangians have
+zero term `0` for clean `f` is the method of 4.2. (c) By (a), `sw_{f^□}(diag(g, 1)) = b(det g)·c_b(f, f′; g)`, and
+`⟨y′_b, R(g)y_b⟩ = b(det g)⁻¹·⟨y′, R(g)y⟩` by the definition of the Petersson product
+(`AdelicUnitaryGroupsAndAlgebraicModularForms §5.1`); multiply. (d) By (a) and 4.4 (a) for the trivial character,
+`sw_{f^□}(diag(γ, 1)) = c_1(f, f; γ) = Δ(γ)^{−m}·⟨f, f⟩`. Since `f` is fixed by the projection onto the vacua above
+`A`, so is `f^□` (`WeilRepresentationsOnBanachSpacesOfData §§3.7 (a), 3.8`), and `ω(k, 1)f^□ = f^□` for `k` in the
+stabiliser of the standard lattice of `S ⊕ S⁻` with component `1` outside the places above `v`
+(`WeilRepresentationsOnBanachSpacesOfData §3.7 (b)`); with 7.1 (a) and the Iwasawa decomposition
+(`AdelicUnitaryGroupsAndAlgebraicModularForms §3.6`), read at the places above `v`, `sw_{f^□}` is there `⟨f, f⟩` times
+the spherical vector. The function `mc_{m,b}` is invariant on both sides under `K₀ ∩ G_v` (1.3 (c)), so, for `A` the
+set of places above `v`,
+`𝒯_{m,b,A}y(g) = ∫_{G_v} mc_{m,b}(h)·y(gh) dh = ∫_{G_v} mc_{m,b}(h)·∫_{K₀∩G_v} y(gkh) dk dh = Z^□_v·y(g)`;
+`|sp_v| ≤ 1` because `y` is bounded, so the integral converges absolutely by 1.4 (a). For general `A`, 1.4 (c) on
+finite unions of such sets and the absolute summability 1.4 (a), with the multiplicativity 1.3 (c), give the
+absolutely convergent product, as in 1.5 (a). `Z^□_v` is the local doubling integral of
+`MetaplecticAutomorphicForms §6.11` for the spherical section of the stabiliser of `L ⊕ L`, the lattice datum of
+`AutomorphicLFunctionsAndLocalFactorsPartII §2.3`, whose value at `diag(h, 1)` is `Δ(h)^{−m}` at `s₀`, and for the
+coefficient `b(det h)⁻¹·sp_v(h)` of the spherical vectors of `Π_v`. The modulus of the spherical section at
+`diag(h, 1)` is `[L : L ∩ h⁻¹L]^{−(s + n/2)}`, which decreases as the real part of `s` grows, so the integral
+converges absolutely for real parts at least `s₀`, and its value at `s₀` is the limit from the right of the value
+`L_v/d_v` that §6.11 gives for the designated spherical data, a rational function of `q_v^{−s}` (at every residue
+characteristic, `AutomorphicLFunctionsAndLocalFactorsPartII §2.3`), whose denominator `d_v(s₀)` is finite and nonzero
+because `m − r > n + 1` for `r < n`. The twist is read off at a split place `v`, with `w` above `v`: there
+`Δ(h)^{−m} = υ_w(det h_w)^m·[L : L ∩ h⁻¹L]^{−m/2}` (`WeilRepresentationsOnBanachSpacesOfData §3.2 (c)`), so the
+integrand of `Z^□_v` is `[L : L ∩ h⁻¹L]^{−m/2}` times the spherical function of the representation
+`σ = Π_v ⊗ (υ_w^m ∘ det)` of `GL_n(E_w)`, and the unramified doubling integral of `GL_n`, the integral of
+`[L : L ∩ h⁻¹L]^{−(s + n/2)}` against the spherical function of `σ`, is
+`L(s + ½, σ)·L(s + ½, σ^∨)·∏_{j=1}^{n} (1 − q_v^{−2s−j})`; for `n = 1` this is the sum of the two geometric series of
+1.5 (b). At an inert place `υ(ϖ_w) = −1`, so `υ_w^m = υ_w^{−m}`, the base changes of `Π_v` and of `Π_v^∨` have the
+same L-factor, and no choice arises. (e) Take for `A` the complement of `S₀` in (d): by 4.4 (e), `K₀ ∩ G_f^{S₀ᶜ} ⊆ J`,
+which fixes `y`, and `b ∘ det` is unramified on `S₀ᶜ`; then 4.5 (c) with `𝒯y = Z^□·y`. For `n = 1` and `y = 1`,
+`sp_v = 1` and `Z^□_v` is the sum of `mc_{m,b}(r(q))` over the cosets of `K_{{w}}`, `w` above `v`, which is the vacuum
+sum of 1.1 (e).
+
+Let `S`, `T` be locally standard of ranks `n`, `m` with `2n < m`, `a`, `b` automorphic characters of `U(1)`, and
+`s₀ = (m − n)/2`. Let `S⁻` be `S` with the opposite form, as in `WeilRepresentationsOnBanachSpacesOfData §6.3 (c)`:
+the same rational space, its frame being that of `S` adjusted at the finite places by an element `u` with `ūu = −1`
+that is a unit of `Ô` (as `WeilRepresentationsOnBanachSpacesOfData §3.8 (b)` requires of the change of coordinates),
+so that `S` and `S⁻` have the same standard lattice `L` and the standard lattice of `S ⊕ S⁻` is `L ⊕ L`. For data
+`f, f′ ∈ 𝒮(Hom(S, T))` their *doubled datum* is `f^□ = f ⊠ f′^⋆ ∈ 𝒮(Hom(S ⊕ S⁻, T))`, where `f′^⋆` is the image of
+`f′` under the conjugate-linear change of coordinates of §6.3 (c), which is the identity in the rational coordinates
+of `Hom(S, T)` and `Hom(S⁻, T)`, times the constant of modulus one given there, so that `θ(f′^⋆) = conj θ(f′)`,
+`ϱ(z)(f′^⋆) = (ϱ(z)f′)^⋆` for every adelic `z ∈ Hom(S, T)`, and `θ(f^□) = θ(f)·conj θ(f′)`: the datum of the method of
+4.2. Let `Λ^□ = {(x, −x)}`, the graph of `−1`, a Lagrangian of `S ⊕ S⁻` (the maps `(z₁, z₂) ∈ Hom(S ⊕ S⁻, T)` that
+vanish on it are the pairs `(z, z)`; along the diagonal `{(x, x)}` the zero term of `f^□` is `⟨f′, ω_{1,1}(−1, 1)f⟩`,
+not `⟨f′, f⟩`), `sw` and `Eis` as in 7.1 for the pair `(S ⊕ S⁻, T)` and `Λ^□`, `diag(g, g′)` the block-diagonal point
+of `G(S ⊕ S⁻)`, `c_1` the coefficient of 4.1 for the trivial character, and `y_b = (b ∘ det)⁻¹·y` for a function `y`
+on `G(S)`.
+(a) *The doubled section.* `sw_{f^□}(diag(g, 1)) = c_1(f, f′; g) = b(det g)·c_b(f, f′; g)` for `g ∈ G(S)`; and
+`sw_{f^□}` has the equivariance of 7.1 (a) for the pair `(S ⊕ S⁻, T)` and `Λ^□`: that of the sections, at `s₀`, of the
+degenerate principal series of `G(S ⊕ S⁻)` induced from `υ^m(det t)·|det t|^{s + n/2}`, `t` being the action on the
+frame of `Λ^□`.
+(b) *The doubling identity.* For `g, g′ ∈ G(S)` let `f^□_{g,g′}` be the doubled datum of `ω_{1,b}(g, 1)f` and
+`ω_{1,b}(g′, 1)f′`. The integrand of 4.2 (a) at `x` is the theta kernel `θ(ω(1, x)f^□_{g,g′})` of the doubled pair
+(`ω` as in 2.1 (c) for `(S ⊕ S⁻, T)`), so the left side of 4.2 (a) is `vol([U(T)])·Eis(1, sw_{f^□_{g,g′}})`, the
+Siegel Eisenstein series of the doubled group at `s₀`, at the identity (7.1 (c)). Its terms are indexed by the
+rational Lagrangians of `S ⊕ S⁻` (7.1 (b)); for clean `f` those that are not graphs of points of `Γ_S` vanish, and the
+graph `{(x, −δx)}` of `−δ`, for `δ ∈ Γ_S`, gives `c_b(f, f′; g′⁻¹δg)`: this is 4.2 (a). In the doubling method the
+Lagrangians that are not graphs are removed by the cuspidality of the forms instead
+(`AutomorphicLFunctionsAndLocalFactorsPartII §3.1` (unitary doubling identity)).
+(c) *The doubling integral.* For clean `f`, any `f′` and automorphic `y`, `y′` of rapid decay, the right side of 4.3
+is `vol([U(T)])·∫_{G(S)} sw_{f^□}(diag(g, 1))·⟨y′_b, R(g)y_b⟩ dg`: the global doubling integral at `s₀` of the section
+`sw_{f^□}` and the functions `y_b`, `y′_b`, in its unfolded form, absolutely convergent by 4.3. For factorisable data
+and forms, this is the integral that `MetaplecticAutomorphicForms §6.12` (Factorization of theta pairings) factors
+into local integrals.
+(d) *The unramified factor.* Let `A` be a set of finite places with `b ∘ det` unramified on `A`; for a place `v` of
+`E⁺` below `A` let `G_v ⊂ G_f` be the group of the points supported on the places above `v`, with the Haar measure
+giving `K₀ ∩ G_v` volume `1`. If `f` is fixed by the projection onto the vacua above `A` and `f^□` is the doubled
+datum of `f` and `f`, then `sw_{f^□}(diag(γ, 1)) = Δ(γ)^{−m}·⟨f, f⟩` for `γ ∈ G_f^A`; and if `⟨f, f⟩ ≠ 0`, the
+restriction of `sw_{f^□}/⟨f, f⟩` to the points of `G(S ⊕ S⁻)` supported above `v` is the spherical vector, with value
+`1` at `1`, for the stabiliser of the standard lattice of `S ⊕ S⁻`. Let `y` be bounded, fixed by `K₀ ∩ G_f^A`, and at
+each such `v` an eigenfunction of the spherical Hecke algebra: `∫_{K₀∩G_v} y(gkh) dk = sp_v(h)·y(g)` for all
+`g ∈ G(S)` and `h ∈ G_v`. Then `𝒯_{m,b,A}y = Z^□_A·y`, where `Z^□_A = ∏_v Z^□_v` converges absolutely and
+`Z^□_v = ∫_{G_v} Δ(h)^{−m}·b(det h)⁻¹·sp_v(h) dh`. `Z^□_v` is the value at `s₀` of the local doubling zeta integral of
+`MetaplecticAutomorphicForms §6.11` (Local doubling zeta integral) for that spherical section and the spherical
+vectors of the unramified representation `Π_v` of `G_v` whose spherical function is `h ↦ b(det h)⁻¹·sp_v(h)` (that of
+`y_b`), and `Z^□_v = L_v(s₀ + ½, BC(Π_v) ⊗ υ^m)/d_v(s₀)`, with the following factors. `L_v(s, BC(Π_v) ⊗ υ^m)` is the
+product over the places `w` of `E` above `v` of the standard L-factors of the unramified base change of `Π_v` to
+`GL_n(E_w)` twisted by `υ_w^m ∘ det`; at a split place `v`, where `G_v` is `GL_n(E_w)` through the component at a
+place `w` above `v` (`AdelicUnitaryGroupsAndAlgebraicModularForms §8.2 (b)`), it is
+`L(s, Π_v ⊗ υ_w^m)·L(s, Π_v^∨ ⊗ υ_w^{−m})`, whichever `w` is chosen.
+`d_v(s) = ∏_{r=0}^{n−1} L_v(2s + n − r, η_v^{m+r})`, so that `d_v(s₀) = ∏_{r=0}^{n−1} L_v(m − r, η_v^{m+r})`, where
+`η_v` is the character of `E⁺_v^×` attached to `E ⊗_{E⁺} E⁺_v` (trivial if `v` splits, unramified with value `−1` at a
+uniformiser `ϖ_v` if `v` is inert) and `L_v(x, η_v^k) = (1 − η_v(ϖ_v)^k·q_v^{−x})⁻¹`, `q_v` the order of the residue
+field of `E⁺_v`: the denominator `d_n(s, χ)` of `AutomorphicLFunctionsAndLocalFactorsPartII §2.2` (unitary unramified
+denominator) for a character `χ` of `(E ⊗_{E⁺} E⁺_v)^×` with restriction `η_v^m` to `E⁺_v^×`, as `υ^m` and `υ^{−m}`
+are. The factor `L_v(s, BC(Π_v) ⊗ υ^m)` is equal to `L_v(s, BC(Π_v^∨) ⊗ υ^{−m})`, the two representations being
+exchanged by the conjugation of `E` over `E⁺` (`AutomorphicLFunctionsAndLocalFactorsPartII §2.3`); at a split place it
+differs in general from `L_v(s, BC(Π_v) ⊗ υ^{−m})`. So `Z^□_A` is the partial L-value over the partial denominator of
+the doubling method, the products running over the places of `E⁺` below `A`.
+(e) *The inner product formula with its L-value.* In the setting of 4.5 (c), let `y` be moreover an eigenfunction of
+the spherical Hecke algebras at the places of `E⁺` below the complement `S₀ᶜ` of `S₀` (the places with at least one
+place of `E` above them outside `S₀`), and `Z^□ = Z^□_{S₀ᶜ}`. Then `⟨Ly′, Ly⟩ = C·c·Z^□·⟨y′, y⟩`: an identity of the
+form of the Rallis inner product formula in Weil's convergent range, a partial L-value over a partial denominator, the
+products over the places of `E⁺` below `S₀ᶜ`, times factors for the real places and for the remaining finite places,
+here the constant `C` and the mass `c`; it has the form of `ThetaKernelsForUnitaryDualPairs §6.13a (ii)` for the
+linear lift. For `n = 1`, `y = 1`, `m = 2k` and `b = ν·υ₁^k`, `Z^□_A` is the vacuum sum `σ_{1,2k,b}(A)` of 1.1 (e),
+and 1.5 (b), (c) evaluate it.
+
+Layer 4 stops before the evaluation of the unramified factor, which it writes as the series of translates, an
+operator, and evaluates only in rank one (1.5); it records the local factors at the real places and at `S₀` only as
+the constants `C` and `c`. Conversely, 4.3 holds for all rapidly decreasing automorphic functions, and the formula in
+L-value form does not give it for functions that are not eigenforms.
+
+*Needs:* 1.1, 1.3, 1.4, 1.5, 2.1, 4.1, 4.2, 4.3, 4.4, 4.5, 7.1;
+`WeilRepresentationsOnBanachSpacesOfData §§3.2, 3.6, 3.7, 3.8, 6.1, 6.3` (the finite multiplier, theta functionals,
+vacuum projections, products of data and changes of coordinates, the pair representation, sums and negation);
+`AdelicUnitaryGroupsAndAlgebraicModularForms §§3.6, 5.1, 8.2 (b)` (Iwasawa decomposition, Petersson product, the
+unitary group at a split place); `MetaplecticAutomorphicForms §6.11` (Local doubling zeta integral), `§6.12`
+(Factorization of theta pairings); `AutomorphicLFunctionsAndLocalFactorsPartII §2.2` (unitary unramified denominator),
+`§2.3` (unramified unitary doubling formula), `§3.1` (unitary doubling identity);
+`ThetaKernelsForUnitaryDualPairs §6.13a` (the Rallis inner product formula in Weil's convergent range).
+
+### 7.3 Strong approximation and the constancy theorem 2.7
+
+*Origin:* comparison of 2.7 (a) with strong approximation for the special unitary group of an isotropic hermitian
+space (the theorem of Kneser and Platonov; Platonov and Rapinchuk (1994), Chapter 7); not part of the formal proof.
+
+*Route:* (a) is `HermitianFormsAndLattices §2.5 (d)` for `SU(W)` and the set `{v}`, read on `G(W)` through
+`AdelicUnitaryGroupsAndAlgebraicModularForms §8.2 (a)`: `W` has rank at least `2`, and `W_v` is isotropic because `W`
+contains `H`. The set `{v}` does not contain the archimedean places, and the strong approximation of
+`AdelicAlgebraicGroups §4.2` (Strong approximation and arithmetic closures), for sets of places that contain them,
+does not give (a). (b) Let `h ∈ SU(W)(𝔸)`. By (a) there are `γ_i ∈ SU(W)(E)` and `ρ_i ∈ SU(W)(E⁺_v)` with
+`γ_iρ_i → h`. As `D` is continuous and left invariant under `Γ_W`, `D(hg) = lim D(ρ_ig) = lim D(g·g⁻¹ρ_ig)`, and
+`g⁻¹ρ_ig` is a finite point supported on the places above `v`, which lie in `S ∪ S̄`; so `D(g·g⁻¹ρ_ig) = D(g)`. Two
+points of `G(W)` with the same determinant differ by a left factor in `SU(W)(𝔸)`. (c) By (b), `D` is left invariant
+under the adelic unipotent radical of the stabiliser of the line of `k`, whose points have determinant `1`; the torus
+hypothesis of 2.7 (a) then gives `D(levi(t, 1)) = D(1)` for every idele `t`. As `det levi(t, 1) = t/t̄` and `t ↦ t/t̄`
+maps the ideles onto `U(1)(𝔸)` (`IdelicReciprocityCountsAndCyclotomicClassGroups §7.1 (a)`), `D` takes the value
+`D(1)` everywhere.
+
+Let `W = H ⊥ W₀` be as in 2.7 and `S` a nonempty set of finite places. Let `w ∈ S`, `v` the place of `E⁺` below `w`,
+`SU(W)(𝔸) ⊂ G(W)` the group of the points of determinant `1`, `SU(W)(E) = SU(W)(𝔸) ∩ Γ_W`, and `SU(W)(E⁺_v)` the group
+of the points of `SU(W)(𝔸)` supported on `{w, w̄}`.
+(a) *Strong approximation.* `SU(W)(E)·SU(W)(E⁺_v)` is dense in `SU(W)(𝔸)`.
+(b) If `D` is a continuous function on `G(W)`, left invariant under `Γ_W` and right invariant under `G_f^S`, then
+`D(hg) = D(g)` for all `h ∈ SU(W)(𝔸)` and `g ∈ G(W)`: `D(g)` depends only on `det g ∈ U(1)(𝔸)`.
+(c) Strong approximation implies 2.7 (a): every `D` that satisfies the hypotheses of 2.7 (a) is constant, and of its
+level hypotheses only the right invariance under `G_f^S` is used.
+
+2.7 (a) does not give strong approximation: it concludes the constancy of the functions that satisfy its level and
+torus hypotheses, not the density (a).
+
+*Needs:* 2.7; `HermitianFormsAndLattices §2.5 (d)` (strong approximation for `SU` with respect to a nonempty finite
+set of places at one of which the group is not compact); `AdelicUnitaryGroupsAndAlgebraicModularForms §8.2 (a)`
+(`G(W)` as the adelic points of the unitary group over `E⁺`);
+`IdelicReciprocityCountsAndCyclotomicClassGroups §7.1 (a)` (`y ↦ y/ȳ` maps the ideles onto `U(1)(𝔸)`).
+
+### 7.4 Hecke's functional equation and the continuation of 6.9
+
+*Origin:* comparison of 6.9 with the continuation and functional equation of Hecke L-functions (Tate (1950), *Fourier
+analysis in number fields and Hecke's zeta-functions*, Main Theorem 4.4.1): the function `Λ` of 6.9 is the finite
+Hecke L-function of the base change, and 6.9 is the functional equation read in absolute values at real points; not
+part of the formal proof.
+
+*Route:* (a) For `w ∈ S` and a unit `x` at `w`, the value of `ν̃` at the idele with component `x` at `w` and `1`
+elsewhere is `ψ_w(x mod w)` (`IdelicReciprocityCountsAndCyclotomicClassGroups §7.6 (a)`, as `ψ_{w̄} = 1`), a
+nontrivial character of the units trivial on those `≡ 1 mod w`. For a unit `x` at `w̄`, the idele with component `x`
+at `w̄` divided by its conjugate is the norm-one point with components `x` at `w̄` and `x̄⁻¹` at `w`, so the value is
+`ψ_w(x̄ mod w)⁻¹`, again of conductor exponent `1`. Outside `S ∪ S̄` the base change is unramified (§7.6 (a)). At an
+idele `y` with finite part `1`, `ν̃(y) = ∏_τ (y_τ/|y_τ|)^{2μ_τ}` (§8.5 (c) with `r = 0`). (b) Both sides are the Euler
+product of `ν̃` over the places outside `S ∪ S̄` (`IdelicReciprocityCountsAndCyclotomicClassGroups §§8.1, 8.5`), the
+factors of §2.3a being `1` at the ramified places. (c) In §2.3a for `ω = ν̃`, the conductor scale is
+`|D_E|·∏_{w∈S} q_w²`, the archimedean factor is `∏_τ Γ_ℂ(s + μ_τ)`, and the completed function `Λ_H(ν̃, s)` is entire,
+as `ν̃` is not of the form `|·|^{it}`; since `1/Γ` is entire, `L(s, ν̃)`, the quotient of `Λ_H(ν̃, s)` by the
+conductor power and the archimedean factor, is entire. As `ν̃⁻¹ = conj ν̃`, the Euler products on `Re s > 1` and the
+uniqueness of continuation give `Λ_H(ν̃⁻¹, s̄) = conj Λ_H(ν̃, s)`, so for real `x` the functional equation of §2.3a
+gives `|Λ_H(ν̃, x)| = |Λ_H(ν̃, 1 − x)|`; for `−min_τ μ_τ < x < 1 + min_τ μ_τ` all the gamma factors are finite and
+positive, and dividing by them and by the conductor powers gives the identity. (d) `Λ`, the restriction of an entire
+function, is real-analytic; `Λ(x) = L^S(x, ν)` for `x > 1` by (b), and at `x = 1` by continuity (6.2 (a)). For
+`1 ≤ z < k + 1 ≤ 1 + min_τ μ_τ`, (c) at `x = z` and `L♯(z) = |L^S(z, ν)|·∏_{w∈S} q_w^{z−1/2}` give
+`|Λ(1 − z)|·∏_{w∈S} q_w^{1/2−z} = C(z)·L♯(z)`, with `C(z) > 0`. For 6.9 (b): `Λ(j) = L^S(j, ν) ≠ 0` for `j ≥ 1` by 6.2
+(a); for `−k < j ≤ 0`, `z = 1 − j` lies in `[1, k + 1)`, and `|Λ(j)|·∏_{w∈S} q_w^{1/2−z} = C(z)·L♯(z) > 0`.
+
+Let `𝔠 = (ν, S)` be a split tame character of weight `μ`, and `ν̃(y) = ν(y/ȳ)` the base change of `ν`.
+(a) `ν̃` is a unitary Hecke character of `E` (a continuous character of `𝔸^×/E^×` of absolute value `1`), with
+component `z ↦ (z/|z|)^{2μ_τ}` at the infinite place of `τ ∈ Φ`, in the coordinate given by `τ`; it is unramified
+outside `S ∪ S̄` and of conductor exponent `1` at each place of `S ∪ S̄`, so that its conductor has norm
+`∏_{w∈S} q_w²`.
+(b) For real `x > 1`, `L^S(x, ν) = L(x, ν̃)`, where `L(s, ν̃) = ∏_w L_w(s, ν̃_w)` is the finite Euler product of
+`AnalyticNumberTheoryPartI §2.3a` (Hecke continuation and functional equation), whose factors at the places of
+`S ∪ S̄` are `1`.
+(c) `L(s, ν̃)` continues to an entire function of `s`, and for real `x` with `−min_τ μ_τ < x < 1 + min_τ μ_τ`,
+`|L(1 − x, ν̃)| = C(x)·|L(x, ν̃)|·∏_{w∈S} q_w^{2x−1}`, where `C(x) = |D_E|^{x−1/2}·∏_τ Γ_ℂ(x + μ_τ)/Γ_ℂ(1 − x + μ_τ)`,
+with `Γ_ℂ` as in §2.3a.
+(d) For `k ∈ ℕ` with `k ≤ μ_τ` for every `τ`, 6.9 (a) holds with `Λ` the restriction of `L(·, ν̃)` to `(−k, ∞)` and
+with the function `C` of (c), which is positive on `[1, k + 1)` and depends only on `E` and `μ`; and 6.9 (b) follows
+from (c) and 6.2 (a). So 6.9 is a consequence of Hecke's continuation and functional equation for `ν̃`, together with
+the non-vanishing 6.2 (a).
+
+6.9 records neither the continuation off the real line, nor the root number of `ν̃` and the argument of `Λ(1 − z)`,
+nor the value of `C`.
+
+*Needs:* 6.2 (a), 6.9; `IdelicReciprocityCountsAndCyclotomicClassGroups §§7.1, 7.6, 8.1, 8.5` (base change, tame
+parts, Euler products, archimedean components); `AnalyticNumberTheoryPartI §2.3a` (Hecke continuation and functional
+equation).
+
+### 7.5 The density of Siegel's formula as a product of local densities, and the masses
+
+*Origin:* comparison of the density `δ` of 3.1 (c) with Siegel's singular series, the product of the local
+representation densities (Siegel (1935); Braun (1941)), and of 3.5 with the exact mass formula, of which its ratios
+are quotients (Gan, Hanke and Yu (2001)); not part of the formal proof.
+
+*Route:* (a) Two characters of `E⁺_v` trivial on `O_v` and on no larger fractional ideal differ by a unit `u`, and
+`z ↦ uz` preserves `dz`. The function `z ↦ ∫ Φ_v(x)·ψ′_v(z·x*x) dx` is the Fourier transform of the image measure;
+`Φ_v` is a finite combination of indicators of classes `x₀ + ϖ_v^c R_v^n`, and the Gauss sum of a class at a frequency
+`z` has modulus at most a constant times `|z|^{−n}` for `|z|` large (a Weyl differencing bound, as in 3.7 (c)), which
+is integrable on `E⁺_v` when `n ≥ 2`. Fourier inversion for a finite measure with integrable Fourier transform, `dz`
+being self-dual for `ψ′_v`, gives the continuous density and its value at `α`. (b) For a finite adele `t` of `E⁺`,
+`ψ_f(t/2)` is the standard character of the finite adeles of `E⁺` at `t`, because the trace of `t` from `E` to `E⁺` is
+`2t`; as the trace maps `R_v` onto `O_v` (`E/E⁺` is unramified), `{z : ψ_f(zÔ) = 1}` is the inverse different of `E⁺`,
+so the measure of 3.1 (c) on `z` is `∏_v N(𝔡_v)⁻¹·dz`, `𝔡_v` the different of `E⁺_v`, and that on `x` is
+`vol(Ô)^n·∏_v dx`. At each `v`, replacing `z` by a generator of `𝔡_v^{−1}` times `z` turns the component at `v` of
+that character into a character `ψ′_v` and multiplies the measure by `N(𝔡_v)`. For almost all `v` (`Φ_v = 1_{R_v^n}`,
+`α ∈ O_v`), the local integrand is `1` on `O_v` and has modulus `q_v^{−en}` at the `z` of order `−e < 0`: at an inert
+place each coordinate gives `(−q_v)^{−e}` (`GeometryOfNumbersAndQuadraticArithmetic §3.2`, the norm Gaussian
+`unramified_hermitian_norm_gaussian`), at a split place `x*x` is a sum of products of the two components and each
+coordinate gives `q_v^{−e}`; so its integral off `O_v` is at most `2q_v^{1−n}`. As `Σ_v q_v^{−2} < ∞`, for `n ≥ 3` the
+product of the integrals of the moduli converges, and the integral over the finite adeles of `E⁺` of the product of
+the local integrands is the product of their integrals (Fubini over finite sets of places and dominated convergence).
+(c) `GeometryOfNumbersAndQuadraticArithmetic §3.2` (the finite Fourier count `hermitian_finite_fourier_count` for a
+source of rank one, and the density `hermitianLocalDensity` as the limit of the normalised counts) writes
+`Den(I_n, ⟨α⟩)` as the limit, as `N → ∞`, of the integral defining `δ_v` restricted to `z ∈ ϖ_v^{−N}O_v`, which is
+`δ_v` by the absolute convergence of (a). For `α = 1` the local integrand is `ψ′_v(−z)` times the `n`-th power of
+`∫_{R_v} ψ′_v(z·x̄x) dx`, which is `1` for `z ∈ O_v` and `(−q_v)^{−e}` (inert) or `q_v^{−e}` (split) for `z` of order
+`−e < 0`; and `∫ ψ′_v(−z) dz` over the `z` of order `−e` is `−1` for `e = 1` and `0` for `e ≥ 2`. So
+`δ_v(1_{R_v^n}, 1)` is `1 − (−q_v)^{−n}` at an inert place and `1 − q_v^{−n}` at a split place, which is
+`L_v(n, η_v^n)⁻¹` in both cases. (d) 3.5 (b), with (c) above for `n = j + 1 ≥ 3`, and `vol(Ô) = 2^f·rd_E^{−f}`
+(`AdelicUnitaryGroupsAndAlgebraicModularForms §2.1`, with `|D_E| = rd_E^{2f}`).
+
+For a finite place `v` of `E⁺` let `O_v` be the integers of `E⁺_v`, `q_v` the order of its residue field,
+`E_v = E ⊗_{E⁺} E⁺_v` (a field if `v` is inert, `E⁺_v × E⁺_v` if `v` splits) with integers `R_v`, `ψ′_v` a character
+of `E⁺_v` trivial on `O_v` and on no larger fractional ideal, and `dz`, `dx` the Haar measures of `E⁺_v` and of
+`E_v^n` that give `O_v` and `R_v^n` volume `1`. For a locally constant compactly supported `Φ_v ≥ 0` on `E_v^n` and
+`α ∈ E⁺_v` put `δ_v(Φ_v, α) = ∫_{E⁺_v} ∫_{E_v^n} Φ_v(x)·ψ′_v(z(x*x − α)) dx dz`. Let `η` be the quadratic character of
+`E/E⁺` (unramified, with `η_v(ϖ_v) = −1` at the inert and `1` at the split places) and
+`L(s, η^n) = ∏_v L_v(s, η_v^n)`.
+(a) If `n ≥ 2`, the outer integral converges absolutely, `δ_v(Φ_v, α)` does not depend on the choice of `ψ′_v`, and it
+is the value at `α` of the continuous density, for `dz`, of the image of the measure `Φ_v(x) dx` under `x ↦ x*x`.
+(b) If `n ≥ 3`, `Φ₀ = ⊗_v Φ_v` with `Φ_v = 1_{R_v^n}` for almost all `v`, and `α ∈ E⁺`, then `∏_v δ_v(Φ_v, α)`
+converges absolutely and `δ(Φ₀, α) = vol(Ô)^n·∏_v δ_v(Φ_v, α)`.
+(c) Let `n ≥ 2`. If `v` is inert and `α ∈ O_v`, `α ≠ 0`, then `δ_v(1_{R_v^n}, α)` is the hermitian local density
+`Den(I_n, ⟨α⟩)` of `GeometryOfNumbersAndQuadraticArithmetic §3.2` (Local densities and Siegel polynomials), for the
+unramified extension `E_v/E⁺_v`, the target `I_n` and the source of rank one and norm `α`. At every `v`,
+`δ_v(1_{R_v^n}, 1) = L_v(n, η_v^n)⁻¹`; hence, for `n ≥ 3`, `δ(1_{Ô^n}, 1) = vol(Ô)^n·L(n, η^n)⁻¹`.
+(d) For `j ≥ 2`, `mass(j + 1)/mass(j) = rd_E^{f(2j+1)/2}·(j!/(2π)^{j+1})^f·L(j + 1, η^{j+1})`. This is the ratio of
+`HermitianFormsAndLattices §6.4 (b)` for the standard lattices of ranks `j` and `j + 1`, since `|D_{E⁺}| = rd_E^f`
+(`E/E⁺` is unramified).
+
+Layer 3 writes the singular series as the one adelic integral `δ` and the masses through ratios; (b) and (c) give the
+product of local densities, and (d) the exact ratio, by which 3.5 (d) is equivalent, under its hypotheses, to
+`|log L(j + 1, η^{j+1})| ≤ 2/2^u`.
+
+*Needs:* 3.1, 3.5, 3.7 (c); `AdelicUnitaryGroupsAndAlgebraicModularForms §2.1` (standard character, Haar measures,
+`vol(Ô)`); `GeometryOfNumbersAndQuadraticArithmetic §3.2` (Local densities and Siegel polynomials);
+`HermitianFormsAndLattices §6.4 (b)` (ratios of masses).
 
 ## What the library already provides
 
@@ -1497,19 +2026,35 @@ zeta function of an ideal class over any number field, `TauCeti.LFunctions.compl
 character); and the L-functions of Hecke characters, `TauCeti.LFunctions.Grossencharacter.lFunctionC`, defined as the
 meromorphic continuation when one exists, whose existence is not proved there in general. A continuation and
 functional equation for Hecke characters in the library would imply 6.9 after identifying the base change of a split
-tame character with a Grössencharacter and its Euler product off `S ∪ S̄`.
+tame character with a Grössencharacter and its Euler product off `S ∪ S̄` (7.4 (a), (b)).
 
 ## Results taken from other roadmaps
 
 Witt's extension theorem over a field with involution, in the matrix form used (left invertible `X`, `Y` with
 `X*JX = Y*JY` satisfy `gX = Y` with `g ∈ U(J)`), is taken from `HermitianFormsAndLattices §1.1 (b)` (in 2.2 and
-6.4), as in `AdelicUnitaryGroupsAndAlgebraicModularForms`. No other result of this part is taken whole from another
+6.4), as in `AdelicUnitaryGroupsAndAlgebraicModularForms`. No other result of the route (Layers 1–6) is taken whole
+from another
 roadmap. The sections that state modest forms of general theorems name, in a closing sentence, the general section
 that also implies them: `HermitianFormsAndLattices §2.5 (d)` (2.7), `§5.4` (1.2 (c), (d)), `§6.0a` and `§6.5 (b)`
 (3.2, 3.3), `§6.4 (b)` (3.5 (d)); `AdelicAlgebraicGroups §3.4` (2.2); `ThetaKernelsForUnitaryDualPairs §6.4a`
 (2.6 (c) for Schwartz–Bruhat data and isotropic `T`); `AnalyticNumberTheoryPartI §2.3a` (6.9). The objects on which
 the statements are made (adelic unitary groups, the Weil representation on the Banach space of data, Hecke characters
 of `U(1)`, discrete series coefficients) are those of the sibling roadmaps named on the `*Needs:*` lines.
+
+Layer 7 rests on the roadmaps of the standard objects:
+`WeilRepresentationsOnBanachSpacesOfData §§10.1 (d), 10.2 (a), 10.4 (a), (b), 10.6 (b), 10.7 (b), (e), 10.8 (b)`, for
+the comparison of the data, the Weil representation, the theta functional and the slices with the Schwartz–Bruhat
+model, and `AdelicUnitaryGroupsAndAlgebraicModularForms §§8.1 (b), 8.2 (a), (b), 8.5`, for the groups and the forms;
+`MetaplecticAutomorphicForms §3.3` (Unitary dual-pair splittings), `§4.5` (Adelic Weil representation), `§5.1` (Theta
+kernel), `§6.2` (Siegel–Weil section), `§6.4` (Anisotropic Siegel–Weil formula), `§6.11` (Local doubling zeta
+integral) and `§6.12` (Factorization of theta pairings), `AutomorphicLFunctionsAndLocalFactorsPartII §1.3` (degenerate
+Siegel Eisenstein continuation), `§2.2` (unitary unramified denominator), `§2.3` (unramified unitary doubling formula)
+and `§3.1` (unitary doubling identity), and `ThetaKernelsForUnitaryDualPairs §§6.4a, 6.13a` (7.1, 7.2);
+`HermitianFormsAndLattices §2.5 (d)` (7.3; `AdelicAlgebraicGroups §4.2` (Strong approximation and arithmetic closures)
+states strong approximation only for sets of places that contain the archimedean ones);
+`AnalyticNumberTheoryPartI §2.3a` (Hecke continuation and functional equation) (7.4);
+`GeometryOfNumbersAndQuadraticArithmetic §3.2` (Local densities and Siegel polynomials) and
+`HermitianFormsAndLattices §6.4 (b)` (7.5).
 
 ## References
 

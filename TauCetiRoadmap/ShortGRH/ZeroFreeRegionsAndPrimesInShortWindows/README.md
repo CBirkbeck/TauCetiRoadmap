@@ -27,17 +27,37 @@ here enter that argument, as [ShortProof] proves it, at four places.
 - The passage from the half-plane to the critical line, and the trivial zeros of imprimitive characters, use the
   reflection of the zeros for every character (1.2).
 
+The published theorems are the reference. Several statements here are weaker or cruder forms of them, in the shape in
+which [ShortProof] proves them directly: the zero-free region of 1.4 is a weaker form of the classical zero-free
+region, the primes of 2.2 and the prime number theorem that 2.1 gives are consequences of the Siegel–Walfisz theorem,
+and the growth bound of 1.3, the reflection of 1.2 and the transformation of 3.2 (a) are weaker forms of the convexity
+bound, the functional equation and the theta transformation formula. Layer 4 states, for each of them, the published
+theorem that implies it, in the range and with the constants that its sections give, with the general roadmap that
+states that theorem (ZerosOfLFunctions, AnalyticNumberTheoryPartI, ExplicitZetaBounds), and it says plainly what the
+zero-density estimate of AnalyticNumberTheoryPartI §1.7 gives for the choice of `d` in 3.5: the choice for `β > 4/5`
+only. The statements of Layers 1–3 are the forms that the route uses, and their proofs do not pass through the
+published theorems.
+
 Layer 1 treats the L-functions of all characters: the functions with the pole removed and the quadratic twists (1.1),
-reflection (1.2), growth near `Re s = 1` (1.3) and the zero-free region (1.4). Layer 2 passes from zero-free regions to
-primes: the Tauberian theorem (2.1) and primes in windows (2.2). Layer 3 gives the zero-density count for quadratic
-twists and the choice of `d` (3.1–3.5).
+reflection (1.2), growth near `Re s = 1` (1.3) and the zero-free region (1.4). Layer 2 passes from zero-free regions
+to primes: the Tauberian theorem (2.1) and primes in windows (2.2). Layer 3 gives the zero-density count for quadratic
+twists and the choice of `d` (3.1–3.5). Layer 4 compares these statements with the standard theorems: the classical
+zero-free region (4.1), the Siegel–Walfisz theorem (4.2), zero-density estimates (4.3), and the convexity bound, the
+functional equation and the theta transformation (4.4).
 
 ## Conventions and notation
 
 **Labels.** Every section that states something carries, under its heading, `*Origin:*` (one of `published:`,
 `adapted from`, `particular to this proof:`, `this roadmap's own formulation:`, `definitions and conventions`) and
 `*Method of the formal proof:*`, how [ShortProof] proves it. The last line of a section names where [ShortProof] proves
-it, as `[ShortProof], path (declarations)`, with the path relative to its directory `src/`.
+it, as `[ShortProof], path (declarations)`, with the path relative to its directory `src/`. The sections of Layer 4,
+which [ShortProof] does not prove, carry `*Proof route:*` in place of the method line, a route for a contributor
+resting on the sections it names, and no [ShortProof] line.
+
+**Standard terms.** A paragraph beginning **In standard terms.**, after the statement of a section that other roadmaps
+use, names the standard theorem of which the section, or what the route draws from it, is a case or a consequence, the
+general roadmap section that owns that theorem, and the section of Layer 4 that makes the implication precise; where
+the roadmap names no such theorem, or one that gives the section in part of its range only, the paragraph says so.
 
 **Statements of the formal proof.** The hypotheses, ranges and constants of a target are those of [ShortProof]; where a
 section states more, its last sentence says which case [ShortProof] proves. Numerals such as `10¹⁰`, `25`, `9δ` are those
@@ -73,6 +93,9 @@ OneSidedPrimeSumBoundsAndAdmissibleData §3.7.
 | `(a/b), n°` | the Jacobi symbol (Legendre symbol when `b` is prime); the odd part of an integer `n ≥ 1` | 3.1 |
 | `w_j, θ_c, Γ_j` | the weight `x^j e^{−πx²}`; the theta series of a sequence `c`; the Mellin transform of `w_j` | 3.1 |
 | `cμ, J_j(c, T)` | the sequence `n ↦ c(n)μ(n)`; the theta tail integral of `c` at `T` | 3.1 |
+| `c₀, β₁` | the constant of the classical zero-free region of ZerosOfLFunctions §6.4; the exceptional zero of a real character, if it has one | 4.1 |
+| `ν(β, H; X)` | the number of primes `d ≤ X` of the class of 3.5 that are bad for `(β, H)` | 4.3 |
+| `ord_s, ε(χ)` | the order of vanishing at `s`; the root number `τ(χ)/(i^j√q)` of a primitive `χ` | 4.4 |
 
 ## Layer 1: L-functions of all Dirichlet characters
 
@@ -134,6 +157,13 @@ a zero at `1 − s` of the completed function of `ψ̄`, and this is a zero of `
 
 Let `χ` be a Dirichlet character modulo `q ≥ 1`, primitive or not, of parity `j`, and let `s ∈ ℂ` with `Re s ≠ 0` and
 `s ≠ 1`. If `L(s, χ) = 0`, then `s + j ∈ {0, −2, −4, …}` (a pole of the gamma factor `Γ_ℝ(s + j)`) or `L(1 − s, χ̄) = 0`.
+
+**In standard terms.** The statement is the form without multiplicities of the reflection that the functional equation
+of the primitive character `ψ` inducing `χ` gives (Mathlib
+`DirichletCharacter.IsPrimitive.completedLFunction_one_sub`), read for `χ` through the deleted Euler factors: for
+every `χ`, primitive or not, `ord_s L(·, χ) = ord_{1−s} L(·, χ̄)` when `0 < Re s < 1` (for primitive `χ` this is the
+clause *Reflection* of RiemannHypothesisStatementsAndConsequences §9.4), and when `Re s < 0` the zeros of `L(·, χ)`
+are the poles of `Γ_ℝ(s + j)`, each simple (4.4 (a)).
 
 RiemannHypothesisStatementsAndConsequences §9.4 has the part with `0 < Re s < 1`: its clause *Reflection* is the
 statement for primitive `χ`, with multiplicities, and its clause *Strip forms* records that an imprimitive character
@@ -212,9 +242,21 @@ Let `χ` be a Dirichlet character modulo `q ≥ 1`, primitive or not.
   `|E_χ′(s)/E_χ(s)| ≤ 2l^{25}`.
 - (c) For all large `l`, depending on `χ`, the conclusion of (b) holds.
 
+**In standard terms.** (b), for `l` beyond an absolute bound, and (c) are consequences of the classical zero-free
+region for every Dirichlet character, ZerosOfLFunctions §6.4, together with the bound
+`|E_χ′/E_χ(s)| ≤ C₁ log²(q(|Im s| + 3)) + 1/|s − β₁|` in a slightly narrower region that the local expansion of `L′/L`
+(AnalyticNumberTheoryPartI §0.30, its paragraph §0.30a) gives there, `β₁` being the exceptional zero of a real `χ`
+(4.1 (a)): for `q ≤ e^l` the region of (b) lies inside the classical one once `l` exceeds an absolute bound, and the
+hypothesis of (b) on real characters excludes an exceptional zero in `[1 − 1/l, 1)` (4.1 (b)). Without that hypothesis
+the conclusion of (b) holds for every character modulo `q ≤ e^l`, for all `l` beyond a bound depending on `c₂`, under
+the supposition that every real zero `β ∈ (0, 1)` of the L-function of a real primitive nonprincipal character of
+conductor `q′` satisfies `(1 − β)·log q′ ≥ c₂`, for one `c₂ > 0`; this supposition, the exclusion of Landau–Siegel
+zeros, is not contained in the classical zero-free region, which allows the exceptional zero (4.1 (c)).
+
 Any fixed exponent in place of `25` serves 2.1 and 2.2. The non-vanishing in (c) also follows from ZerosOfLFunctions
 §6.4 (the region `Re s > 1 − c/log(q(|Im s| + 3))` for every Dirichlet character modulo `q`, with at most one real
-exceptional zero) and `L(1, χ) ≠ 0`; the bound for the logarithmic derivative does not.
+exceptional zero) and `L(1, χ) ≠ 0`; the bound for the logarithmic derivative does not follow from that section alone,
+and follows from it together with AnalyticNumberTheoryPartI §0.30, its paragraph §0.30a (4.1).
 
 *Needs:* 1.1, 1.3; Mathlib `DirichletCharacter.norm_LSeries_product_ge_one`.
 
@@ -256,10 +298,17 @@ Let `R : ℝ → ℝ` be measurable, and let `L` be real with `|R(v) − R(u)| �
 and all large `l`, `F` is complex differentiable at every `s` with `Re s ≥ 1 − l^{−A}` and `|s| ≤ e^l`, and
 `|F(s)| ≤ l^A` there. Then for every natural number `B`, `|R(u)| ≤ u^{−B}` for all large `u`.
 
+**In standard terms.** The theorem is an abstract Tauberian statement, in which no L-function occurs, and it is not
+stated here as a case of a published theorem: the Tauberian theorem of AnalyticNumberTheoryPartIII §12.1 and the
+library's theorems of Newman and of Wiener–Ikehara give limits without a rate (4.2 (c)). What [ShortProof] draws from
+it with 1.4 (c), the prime number theorem `|R_q(y)| ≤ (log y)^{−B}` for every `B` and all large `y`, for the
+remainders `R_q` of OneSidedPrimeSumBoundsAndAdmissibleData §0.1 with `d` an odd prime not dividing `q`, is a
+consequence of the Siegel–Walfisz theorem at the fixed moduli `q` and `qd`, AnalyticNumberTheoryPartI §0.32 (4.2 (a)).
+
 The library's Tauberian theorems of Newman and of Wiener–Ikehara (`TauCeti.LSeries.newmanLaplace_tendsto_integral`,
-`TauCeti.LSeries.wienerIkehara_of_eventually_nonneg`) give limits without a rate and do not serve here; the prime number
-theorem for the remainders `R_q` of OneSidedPrimeSumBoundsAndAdmissibleData §0.1, which [ShortProof] draws from 2.1 and
-1.4 (c), also follows from AnalyticNumberTheoryPartI §0.32 by orthogonality and partial summation.
+`TauCeti.LSeries.wienerIkehara_of_eventually_nonneg`) give limits without a rate and do not serve here; the prime
+number theorem for the remainders `R_q` of OneSidedPrimeSumBoundsAndAdmissibleData §0.1, which [ShortProof] draws from
+2.1 and 1.4 (c), also follows from AnalyticNumberTheoryPartI §0.32 by orthogonality and partial summation (4.2 (a)).
 
 *Needs:* Mathlib `Complex.norm_iteratedDeriv_le_of_forall_mem_sphere_norm_le` (Cauchy's estimates for iterated
 derivatives), `hasDerivAt_integral_of_dominated_loc_of_deriv_le` (differentiation under the integral sign),
@@ -298,6 +347,12 @@ Let `m ≥ 1` with `4 ∣ m`.
   `|E_χ′(s)/E_χ(s)| ≤ X`.
 - (c) Let `A` be a natural number. For all large real `W` (depending on `m` and `A`): for every integer `k ≥ 2` with
   `m^k ≤ W^A` and every real `U` with `W ≤ U ≤ W^A`, there is a prime `p ≡ 1 (mod m^k)` with `U ≤ log p ≤ U + W`.
+
+**In standard terms.** (c) is the case `n = m^k` of a consequence of the Siegel–Walfisz theorem,
+AnalyticNumberTheoryPartI §0.32: for every natural number `A` and all large `W`, depending on `A` only, every integer
+`1 ≤ n ≤ W^A` and every real `U` with `W ≤ U ≤ W^A`, some prime `p ≡ 1 (mod n)` has `U ≤ log p ≤ U + W` (4.2 (b)). The
+hypothesis `4 ∣ m`, the restriction to the powers of one modulus and the dependence of the threshold on `m` belong to
+the route through (a) and (b).
 
 The library's prime number theorem in progressions
 (`NumberField.Chebotarev.primeCount_primesCongruent_isEquivalent_logIntegral`) is for one fixed modulus and does not
@@ -381,7 +436,7 @@ Let `j ∈ {0, 1}`.
 
 HalfIntegralWeightModularForms §4.1 has the Fricke identity, with the Gauss sum, for primitive even characters, and
 LFunctions §§5.4, 6.8 the Mellin representation on `Re s > 1`; they do not give (a) for odd characters or (b) on
-`0 < Re s ≤ 1`.
+`0 < Re s ≤ 1`; 4.4 (c) states the transformation, with the root number, for both parities.
 
 *Needs:* 3.1; Mathlib `HurwitzZeta.evenKernel_functional_equation`, `HurwitzZeta.oddKernel_functional_equation`,
 `hasSum_mellin_pi_mul_sq`, `DirichletCharacter.norm_gaussSum_stdAddChar`.
@@ -481,7 +536,9 @@ is bad for `(β, H)`.
 Let `q ≥ 1`, and let `a` be a class modulo `q` such that every prime `d ≡ a (mod q)` satisfies `d ≡ 7 (mod 8)` and
 `gcd(d, q) = 1` (for instance `8 ∣ q` and `a ≡ 7 (mod 8)` prime to `q`). For real `β` and `H`, call a prime
 `d ≡ a (mod q)` *bad for `(β, H)`* if for some Dirichlet character `ξ` modulo `q` the function `L(s, ξ·(·/d))` has a
-zero `s` with `Re s ≥ β` and `|Im s| ≤ H`.
+zero `s` with `Re s ≥ β` and `|Im s| ≤ H`. The "zero density" of the heading, and the zero-density count of Layer 3,
+is the count (a) of the bad primes `d`, each counted once; in the literature a zero-density estimate counts the zeros
+themselves, with multiplicity, and such a count for the twists bounds this one (4.3).
 
 - (a) For every `δ > 0` and real `H`, the number of primes `d ≤ X` that are bad for `(1/2 + 9δ, H)` is `O(X^{1−δ/2})`
   as `X → ∞`, the constant depending on `q`, `a`, `δ` and `H`.
@@ -489,12 +546,20 @@ zero `s` with `Re s ≥ β` and `|Im s| ≤ H`.
   that is not bad for `(β, H)`: no `L(s, ξ·(·/d))`, `ξ` modulo `q`, vanishes at a point with `Re s ≥ β` and
   `|Im s| ≤ H`. These twists are not principal (1.1 (d)), so `E_{ξ·(·/d)} = L(·, ξ·(·/d))`.
 
-No existing section gives (b) for `β` near `1/2`, which is the range OneSidedPrimeSumBoundsAndAdmissibleData §0.2 uses
+**In standard terms.** A zero-density estimate for the twists `ψ·(·/d)` of the primitive characters `ψ` inducing the
+characters modulo `q`, with a saving `X^{−η}`, `η > 0`, at `β`, gives (b) at `β` (4.3 (a)). The zero-density estimate
+of AnalyticNumberTheoryPartI §1.7 gives one for `β > 4/5`, and so implies (b) for `β > 4/5` and (a) for `δ > 3/89`
+(4.3 (b)). For `1/2 < β ≤ 4/5`, which contains the values near `1/2` that OneSidedPrimeSumBoundsAndAdmissibleData §0.2
+uses, that estimate gives no bound better than the trivial one, and 3.3–3.5 are the route (4.3 (c)).
+
+The zero-density estimates named in 4.3 do not give (b) for `β` near `1/2`, which is the range
+OneSidedPrimeSumBoundsAndAdmissibleData §0.2 uses
 (every `β > 1/2`). AnalyticNumberTheoryPartI §1.7 bounds the number of zeros with `Re ρ ≥ σ`, `|Im ρ| ≤ T` of all
 primitive characters of conductor at most `Q` by `C_ε(Q^{5+ε}T^{3+ε})^{1−σ}`, for `1/2 ≤ σ ≤ 1`. Applied to the primitive
 characters `ψ·(·/d)` of the method above, of conductor at most `qX`, it bounds the number of bad primes `d ≤ X` by
 `O(X^{(5+ε)(1−β)})`; this is `O(X^{1−η})` for some `η > 0`, as the argument for (b) needs, exactly when `β > 4/5`. So
-this count gives (b) for `β > 4/5` only. QuadraticTwistSelectionOverPrimes §2.7c selects primes whose twists have a
+this count gives (b) for `β > 4/5` only (4.3). QuadraticTwistSelectionOverPrimes §2.7c selects primes whose twists
+have a
 zero-free box `Re s > 1 − δ₀` with `δ₀ < 1/12`, under hypotheses on the scales `Y`, `U`, `F`; it does not give (b) for
 `β ≤ 11/12` either.
 
@@ -505,6 +570,258 @@ Mathlib `jacobiSym.quadratic_reciprocity`, `DirichletCharacter.LFunction_changeL
 [ShortProof], `Lib/Analytic/QuadraticTwist` (`New.zero_density_quadTwist`, `New.exists_entireL_quadTwist_ne_zero`;
 steps `New.legendreSym_eq_jacobiSym_ordCompl`, `New.isPrimitive_quadTwist`, `New.exists_card_zero_quadTwist_le`,
 `New.IsBadPrime`)
+
+## Layer 4: Comparison with the standard theory
+
+Several statements of Layers 1–3 are weaker or cruder forms of published theorems, in the shape in which [ShortProof]
+proves them without those theorems. The published theorems are the reference, and this layer states, for each such
+statement, the published theorem that implies it, in the range and with the constants that the section gives, and the
+general roadmap section that states that theorem, where there is one: the classical zero-free region, with its
+possible exceptional zero, for 1.4 (4.1), the Siegel–Walfisz theorem for 2.2 (c) and for the prime number theorem that
+2.1 gives (4.2), and the convexity bound, the functional equation and the theta transformation formula for 1.3, 1.2
+and 3.2 (a) (4.4). For the count of quadratic twists of 3.5 it states what the zero-density estimate of
+AnalyticNumberTheoryPartI §1.7 gives, and the range that it does not reach (4.3). [ShortProof] proves none of the
+sections of this layer; their routes rest on the sections they name.
+
+### 4.1 The classical zero-free region and the region of 1.4
+
+*Origin:* this roadmap's own formulation: the implication from the classical zero-free region of Dirichlet L-functions
+(Montgomery and Vaughan, *Multiplicative Number Theory I* (2007), chapter 11), with the bound for the logarithmic
+derivative that the local expansion of `L′/L` gives inside it, to 1.4.
+
+*Proof route:* (a) Let `ψ` modulo `q′ ∣ q` be the primitive character inducing `χ`. Off `Re s = 0`,
+`L(s, χ) = L(s, ψ)·∏_{p∣q, p∤q′}(1 − ψ(p)p^{−s})` (Mathlib `DirichletCharacter.LFunction_changeLevel`), and on
+`Re s ≥ 1/2` the logarithmic derivative `ψ(p)p^{−s}log p/(1 − ψ(p)p^{−s})` of a deleted factor has absolute value at
+most `log p/(√p − 1) ≤ 3.5 log p`, so the deleted factors change `E_χ′/E_χ` by at most `3.5 log q`; they have no zero
+on `Re s > 0`, so the zeros of `L(·, χ)` there are those of `L(·, ψ)`. Put `ℒ = log(q(|Im s| + 3))`. If `ψ` is
+trivial, `E_χ(s) = (s − 1)ζ(s)` times the deleted factors, and AnalyticNumberTheoryPartI §0.33, in its paragraph
+§0.33a, bounds `ζ′/ζ(s) + 1/(s − 1)` by a constant times `log(|Im s| + 2)`, with no zero of `ζ`, to the right of a
+curve `Re s = 1 − w/log(|Im s| + 2)` with `w > 0` absolute; take `c₁ ≤ w`. Otherwise `ψ` is nonprincipal and `q′ ≥ 3`.
+For `Re s > 2` the Dirichlet series gives `|L′/L(s, ψ)| ≤ −ζ′/ζ(2)`. For `1/2 ≤ Re s ≤ 2`, AnalyticNumberTheoryPartI
+§0.30, in its paragraph §0.30a, writes `L′/L(s, ψ)` as the sum of `m_ρ/(s − ρ)` over the nontrivial zeros `ρ` with
+`|Im ρ − Im s| ≤ 1`, with multiplicities, plus `O(log(q′(|s| + 2))) = O(ℒ)`, at every `s` that is not a zero, with an
+absolute constant; and there are `O(ℒ)` such zeros (ZerosOfLFunctions §4.4, the window being covered by three discs of
+radius `1` centred on `Re s = 1/2`). These zeros are zeros of `L(·, χ)`, so by ZerosOfLFunctions §6.4 at the modulus
+`q` every one of them other than `β₁` has `Re ρ < 1 − c₀/log(q(|Im ρ| + 3))`, and
+`log(q(|Im ρ| + 3)) ≤ log(q(|Im s| + 3)) + log(4/3) ≤ 1.27·ℒ`, as `ℒ ≥ log 3`. With `c₁ ≤ c₀/3`, every `s` with
+`Re s ≥ 1 − c₁/ℒ` has `Re s − Re ρ ≥ c₀/(3ℒ)`, so each such term is at most `3ℒ/c₀` and their sum is `O(ℒ²)`; the term
+of `β₁`, simple by ZerosOfLFunctions §6.4, is `1/(s − β₁)`. The same inequality shows that the region contains no zero
+of `E_χ` other than `β₁`. (b) For `q ≤ e^l` and `|s| ≤ e^l`, `q(|Im s| + 3) ≤ e^{2l+2}`, so the region of 1.4 (b) lies
+in that of (a) once `l^{−25} ≤ c₁/(2l + 2)`. A nonreal `χ` has no exceptional zero. If `χ` is real and `L(·, χ)` has
+no zero in `[1 − 1/l, 1)`, an exceptional zero has `β₁ < 1 − 1/l`, so `|s − β₁| ≥ 1/l − l^{−25} ≥ 1/(2l)` on the
+region of 1.4 (b), and (a) gives `|E_χ′/E_χ(s)| ≤ C₁(2l + 2)² + 2l`, which is at most `2l^{25}` for large `l`. Under
+the hypothesis of 1.4 (b), `|f_χ| ≥ 1/l` on `|z − 1| ≤ 1/l`, and `f_χ` is `L(·, χ)` for nonprincipal `χ`, while for
+principal `χ` the function `L(·, χ)` has no zero in `(0, 1)` (`ζ` has no real zero there, ZerosOfLFunctions §6.2, and
+the deleted factors have none at real points); so the hypothesis excludes a zero in `[1 − 1/l, 1)`. For 1.4 (c), the
+exceptional zero of one fixed `χ`, if there is one, satisfies `β₁ < 1 − 1/l` for all large `l`. (c) A principal
+character has no exceptional zero, so `β₁` is a real zero in `(0, 1)` of `L(·, ψ)`, `ψ` real, primitive and
+nonprincipal of conductor `q′` with `3 ≤ q′ ≤ q ≤ e^l`, and the supposition gives `1 − β₁ ≥ c₂/log q′ ≥ c₂/l`; then
+`β₁ < 1 − l^{−25}` and `|s − β₁| ≥ c₂/l − l^{−25} ≥ c₂/(2l)` on the region of 1.4 (b) for large `l`, so that region
+contains no zero of `E_χ`, and (a) gives the bound `C₁(2l + 2)² + 2l/c₂`, which is at most `2l^{25}` for large `l`.
+
+Let `c₀ > 0` be a constant for which the Dirichlet form of ZerosOfLFunctions §6.4
+(`dirichletLFunction_zeroFreeRegion`) gives: for every Dirichlet character `χ` modulo `q ≥ 1`, primitive or not,
+`L(·, χ)` has no zero in the region `Re s ≥ 1 − c₀/log(q(|Im s| + 3))`, except, when `χ` is real (`χ²` principal), at
+most one zero, real and simple, written `β₁` (the exceptional zero of `χ`).
+
+(a) *The logarithmic derivative in the classical region.* There are absolute constants `0 < c₁ ≤ c₀/3` and `C₁` such
+that, for every Dirichlet character `χ` modulo `q ≥ 1` and every `s ≠ β₁` with `Re s ≥ 1 − c₁/log(q(|Im s| + 3))`:
+`E_χ(s) ≠ 0`, and `|E_χ′(s)/E_χ(s)| ≤ C₁ log²(q(|Im s| + 3)) + 1/|s − β₁|`, the last term being present only when `χ`
+has an exceptional zero.
+
+(b) *1.4 from the classical region.* There is an absolute `l₁` such that for every `l ≥ l₁`, every Dirichlet character
+`χ` modulo `q ≤ e^l` for which, when `χ` is real, `L(·, χ)` has no zero in `[1 − 1/l, 1)`, and every `s` with
+`Re s ≥ 1 − l^{−25}` and `|s| ≤ e^l`: `E_χ(s) ≠ 0` and `|E_χ′(s)/E_χ(s)| ≤ 2l^{25}`. The hypothesis of 1.4 (b) on real
+characters implies the one here; so (a) implies 1.4 (b) for `l ≥ max(l₁, 10¹⁰)`, and 1.4 (c) for every `χ`. The uses
+of 1.4 (b) in 2.2 are at large `l`, where this threshold does not matter.
+
+(c) *Without the hypothesis on real characters.* ZerosOfLFunctions §6.4 places no lower bound on `1 − β₁`, and the
+conclusion of 1.4 (b) fails for a real `χ` whose exceptional zero satisfies `β₁ ≥ 1 − l^{−25}`. A lower bound for
+`1 − β₁` removes the hypothesis: let `c₂ > 0`, and suppose that every real zero `β ∈ (0, 1)` of `L(·, ψ)`, for every
+real primitive nonprincipal Dirichlet character `ψ` of conductor `q′ ≥ 3`, satisfies `(1 − β)·log q′ ≥ c₂`. Then there
+is `l₂`, depending only on `c₂`, such that for every `l ≥ l₂` the conclusion of 1.4 (b) holds for every Dirichlet
+character modulo `q ≤ e^l`, with no hypothesis on real characters. The supposition is the uniform exclusion of
+Landau–Siegel zeros, which AnalyticNumberTheoryPartI §0.34 (Uniform exclusion of Landau–Siegel zeros) states; the
+classical zero-free region does not contain it, and no section of Layers 1–3 uses it.
+
+1.4 records a region of width `l^{−25}` and the bound `2l^{25}`, where (a) gives, for `q ≤ e^l` and `|s| ≤ e^l`, a
+region of width of order `1/l` and a bound of order `l²` away from an exceptional zero; it does not locate an
+exceptional zero.
+
+*Needs:* 1.1, 1.4; ZerosOfLFunctions §6.4 (The region for Hecke L-functions), §6.2 (The region for the Dedekind zeta
+function), §4.4 (The local count for the two families); AnalyticNumberTheoryPartI §0.30 (Rational
+Dirichlet-to-ray-class dictionary), its paragraph §0.30a (Conductor-uniform rational logarithmic-derivative adapter),
+§0.33 (Zero-free zeta strip and logarithmic bounds), its paragraph §0.33a (Derivative and logarithmic-derivative
+bounds right of the curve); Mathlib `DirichletCharacter.LFunction_changeLevel`.
+
+### 4.2 The Siegel–Walfisz theorem, the remainders `R_q` and primes in windows
+
+*Origin:* this roadmap's own formulation: consequences of the Siegel–Walfisz theorem (Montgomery and Vaughan,
+*Multiplicative Number Theory I* (2007), Corollary 11.19) that [ShortProof] obtains instead from 2.1 with 1.4 (c), and
+from 2.2 (a), (b).
+
+*Proof route:* (a) Put `𝓔_q(t) = Σ_{n≤t} λ_q(n) − t/φ(q)`, as in OneSidedPrimeSumBoundsAndAdmissibleData §0.1. For
+`n ≡ 1 (mod q)` prime to `d`, `χ_K(n) = (b/d)` with `b ≡ n (mod d)`; by the Chinese remainder theorem the conditions
+`n ≡ 1 (mod q)`, `n ≡ b (mod d)`, `1 ≤ b < d`, define classes `a_b` modulo `qd` prime to `qd`, so
+`Σ_{n≤t} λ_q(n) = ψ(t; 1, q) − Σ_{1≤b<d} (b/d)·ψ(t; a_b, qd)`. The `ψ` form of AnalyticNumberTheoryPartI §0.32 (its
+signature `siegel_walfisz`), at the fixed moduli `q` and `qd`, gives, for the Chebyshev function
+`ψ(t; a, r) = Σ_{n≤t, n≡a (mod r)} Λ(n)`, `ψ(t; a, r) = t/φ(r) + O_A(t(log t)^{−A})` for every `A`, and
+`Σ_{1≤b<d} (b/d) = 0`; hence `𝓔_q(t) = O_A(t(log t)^{−A})`. By the method of OneSidedPrimeSumBoundsAndAdmissibleData
+§0.1, `R_q(y) = ∫₁^y 𝓔_q(t)t^{−2} dt − c_q`. On `Re s > 1`, partial summation and the Dirichlet series of `λ_q` in
+§0.2 there give `G_q(s) = s∫₁^∞ 𝓔_q(t)t^{−s−1} dt`; for `A > 1` the integral converges absolutely at `s = 1`, `G_q` is
+continuous at `1`, and so `c_q = Re G_q(1) = ∫₁^∞ 𝓔_q(t)t^{−2} dt`. Hence
+`R_q(y) = −∫_y^∞ 𝓔_q(t)t^{−2} dt = O((log y)^{1−A})`. (b) Let `1 ≤ n ≤ W^A` and `W ≤ U ≤ W^A`. At `x = e^U` and at
+`x = e^{U+W}`, `n ≤ (log x)^A`, so the prime-count form of AnalyticNumberTheoryPartI §0.32 (its signature
+`siegel_walfisz_primeCount`), with range exponent `A` and error exponent `A + 2`, gives
+`π(e^{U+W}; 1, n) − π(e^U; 1, n) = (Li(e^{U+W}) − Li(e^U))/φ(n) + O(e^{U+W}U^{−A−2})`. For `W ≥ 1` the main term is at
+least `e^{U+W}/(2(U + W)n) ≥ e^{U+W}/(4U^{A+1})`, which exceeds the error once `U` is large; so some prime
+`p ≡ 1 (mod n)` has `U < log p ≤ U + W`.
+
+(a) *The remainders `R_q`.* Let `q ≥ 1`, let `d` be an odd prime not dividing `q`, and let `λ_q`, `G_q`, `c_q` and
+`R_q = R_q^{(d)}` be as in OneSidedPrimeSumBoundsAndAdmissibleData §0.1. The Siegel–Walfisz theorem,
+AnalyticNumberTheoryPartI §0.32, at the moduli `q` and `qd`, implies: for every `B > 0`, `|R_q(y)| ≤ (log y)^{−B}` for
+all large `y`. This is the prime number theorem for `R_q` that [ShortProof] draws from 2.1 and 1.4 (c), and that
+OneSidedPrimeSumBoundsAndAdmissibleData §6.2 uses at `q = q₀` and `q = 1`.
+
+(b) *Primes in windows.* AnalyticNumberTheoryPartI §0.32 implies: for every natural number `A` and all large real `W`,
+depending on `A` only, for every integer `n` with `1 ≤ n ≤ W^A` and every real `U` with `W ≤ U ≤ W^A`, there is a
+prime `p ≡ 1 (mod n)` with `U ≤ log p ≤ U + W`. With `n = m^k` this is 2.2 (c), for every `m ≥ 1` and with a threshold
+that does not depend on `m`.
+
+(c) *The Tauberian theorem.* 2.1 is an abstract statement, in which no L-function occurs, and this layer names no
+published theorem of which it is a case: the Tauberian theorem of AnalyticNumberTheoryPartIII §12.1 and the library's
+theorems of Newman and of Wiener–Ikehara cited in 2.1 give limits without a rate, and the estimates with error terms
+of AnalyticNumberTheoryPartI §0.18 and §0.32 are derived there from the explicit formula with a zero-free region, and
+in the form stated there also from its §0.34, not from a Tauberian theorem. The comparison is made for what 2.1 gives
+with 1.4 (c) for the remainders, which is (a).
+
+2.2 (c) gives one prime in each window and no count, where (b) comes from an asymptotic count; and the prime number
+theorem for `R_q` records no rate beyond every power of `log y`. (a) and (b) use the Siegel–Walfisz theorem in its
+classical form (Montgomery and Vaughan, Corollary 11.19), which gives the statements of the signatures
+`siegel_walfisz` and `siegel_walfisz_primeCount`, and whose constants and thresholds the published proofs do not make
+effective; so this route gives no effective threshold in (b). (a) uses it at two fixed moduli only, where it is the
+prime number theorem in arithmetic progressions with an error term. AnalyticNumberTheoryPartI §0.32 asks in addition
+for effective constants and thresholds, which it obtains from the exclusion of Landau–Siegel zeros
+(AnalyticNumberTheoryPartI §0.34); (a) and (b) do not use that effectivity and do not depend on that exclusion.
+
+*Needs:* 2.1, 2.2; AnalyticNumberTheoryPartI §0.32 (Siegel–Walfisz theorem), §0.18 (Effective character prime-number
+estimate); AnalyticNumberTheoryPartIII §12.1 (The Hardy–Landau Tauberian theorem);
+OneSidedPrimeSumBoundsAndAdmissibleData §0.1 (The remainders `R_q`), §0.2 (The one-sided criterion), for `λ_q`, `G_q`,
+`c_q` and the Dirichlet series of `λ_q`; Mathlib `legendreSym`.
+
+### 4.3 Zero-density estimates and the count for quadratic twists
+
+*Origin:* this roadmap's own formulation: the count of 3.5 compared with the zero-density estimate of
+AnalyticNumberTheoryPartI §1.7 for Dirichlet L-functions, which implies it for `β > 4/5` and for `δ > 3/89` only.
+
+*Proof route:* (a) is the argument for 3.5 (b): by partial summation a bound `O(X^{1−η})` for the number of bad primes
+up to `X` makes `Σ (log d)/d` over the bad primes converge, while `Σ (log p)/p` over all primes `p ≡ a (mod q)`
+diverges (Mathlib `ArithmeticFunction.vonMangoldt.not_summable_residueClass_prime_div`). (b) Let `d` be bad for
+`(β, H)`, through a character `ξ` modulo `q` and a zero `s` of `L(·, ξ·(·/d))` with `Re s ≥ β` and `|Im s| ≤ H`; then
+`Re s < 1` (Mathlib `DirichletCharacter.LFunction_ne_zero_of_one_le_re`). Let `ψ` modulo `q′ ∣ q` be the primitive
+character inducing `ξ`. Then `ψ·(·/d)` is primitive of conductor `q′d ≤ qX` (ClassicalArithmeticCompletion §§1.5–1.6)
+and induces `ξ·(·/d)`, and `s` is a zero of `L(·, ψ·(·/d))`, the deleted Euler factors having no zero on `Re s > 0`.
+For a fixed `ψ` distinct `d` give distinct characters, so `ν(β, H; X)` is at most `φ(q)` times
+`Σ_{r≤qX} Σ_{χ primitive mod r} N(β, H′, χ)`, where `H′ = max(H, 2)` and `N(σ, H′, χ)` is the number of zeros `ρ` of
+`L(·, χ)` with `σ ≤ Re ρ < 1` and `|Im ρ| ≤ H′`, counted with multiplicity, which AnalyticNumberTheoryPartI §1.7
+bounds by `C_ε((qX)^{5+ε}H′^{3+ε})^{1−β}`. For `β > 4/5` choose `ε` with `(5 + ε)(1 − β) < 1` and apply (a). At
+`β = 1/2 + 9δ`, the inequality `(5 + ε)(1/2 − 9δ) ≤ 1 − δ/2` reads `δ ≥ (3 + ε)/(89 + 18ε)`, which holds for some
+`ε > 0` exactly when `δ > 3/89`. (c) For `β ≤ 4/5` the exponent `(5 + ε)(1 − β)` is at least `(5 + ε)/5 > 1`, and for
+`δ ≤ 3/89` the inequality `(5 + ε)(1/2 − 9δ) ≤ 1 − δ/2`, that is `δ ≥ (3 + ε)/(89 + 18ε)`, fails for every `ε > 0`; of
+the three other statements named in (c), the first two do not reach that range, by their own hypotheses, and the third
+states no zero-density estimate.
+
+Let `q` and `a` be as in 3.5, so that every prime `d ≡ a (mod q)` satisfies `d ≡ 7 (mod 8)` and `gcd(d, q) = 1`. For
+real `β`, `H` and `X ≥ 1` let `ν(β, H; X)` be the number of primes `d ≤ X` with `d ≡ a (mod q)` that are bad for
+`(β, H)` (3.5).
+
+(a) *From a density bound to the choice of `d`.* If `a` is invertible modulo `q` and `ν(β, H; X) = O(X^{1−η})` as
+`X → ∞`, for some `η > 0`, then some prime `d ≡ a (mod q)` is not bad for `(β, H)`.
+
+(b) *What AnalyticNumberTheoryPartI §1.7 gives.* For `1/2 ≤ β ≤ 1`, real `H` and `ε > 0`,
+`ν(β, H; X) = O(X^{(5+ε)(1−β)})`, the constant depending on `q`, `ε` and `H`. Hence 3.5 (b) holds for every `β > 4/5`,
+and 3.5 (a) for every `δ > 3/89`.
+
+(c) *Where the density estimates stop.* For `1/2 < β ≤ 4/5` the bound of (b) has exponent greater than `1` for every
+`ε > 0`, so it is weaker than the trivial bound `ν(β, H; X) ≤ X` and (a) does not apply to it; and for `0 < δ ≤ 3/89`
+its exponent at `β = 1/2 + 9δ` is greater than `1 − δ/2` for every `ε > 0`, so it does not give 3.5 (a). Three further
+statements are close to this count, and none reaches that range: the log-free density of ExplicitZetaBounds §8.4
+counts zeros with `σ ≥ 39/40` only; QuadraticTwistSelectionOverPrimes §2.7c selects primes whose twists have zero-free
+boxes `Re s > 1 − δ₀` with `δ₀ < 1/12` only; and AnalyticNumberTheoryPartII §5.29, the quadratic large sieve, is a
+mean value of sums of real characters with a fourth moment of their L-functions, and states no zero-density estimate.
+A bound `O(X^{1−η})`, with `η > 0` depending on `β`, at every `β > 1/2`, for the number of zeros with `Re s ≥ β` and
+`|Im s| ≤ H` of the twists `ψ·(·/d)` with `d ≤ X`, would give 3.5 (b) for every `β > 1/2` through (a); 3.3–3.5 are the
+route to 3.5 (b) in that range.
+
+3.5 (a) counts the bad primes `d`, each once, where a zero-density estimate counts the zeros of the twists with
+multiplicity and so bounds `ν`.
+
+*Needs:* 3.5; AnalyticNumberTheoryPartI §1.7 (Selberg zero-density input); ClassicalArithmeticCompletion §1.5 (The
+Legendre character modulo an odd prime is primitive), §1.6 (The product of primitive characters of coprime levels is
+primitive); ExplicitZetaBounds §8.4 (Log-free densities for Dirichlet L-functions); QuadraticTwistSelectionOverPrimes
+§2.7c (Twist selection); AnalyticNumberTheoryPartII §5.29 (Quadratic large sieve and primitive real-character moment);
+Mathlib `ArithmeticFunction.vonMangoldt.not_summable_residueClass_prime_div`,
+`DirichletCharacter.LFunction_ne_zero_of_one_le_re`, `DirichletCharacter.LFunction_changeLevel`.
+
+### 4.4 Convexity, the functional equation and the theta transformation
+
+*Origin:* this roadmap's own formulation: 1.3 (b), (c) with other powers of `l`, 1.2 and 3.2 (a) as consequences of
+the convexity bound, of the functional equation of primitive Dirichlet L-functions (Montgomery and Vaughan,
+*Multiplicative Number Theory I* (2007), Corollaries 10.3 and 10.8) and of the transformation formula of the theta
+series of a primitive character (Davenport, *Multiplicative Number Theory*; Montgomery and Vaughan, chapter 10), read
+for imprimitive characters through the deleted Euler factors.
+
+*Proof route:* (a) Let `ψ` modulo `q′` be the primitive character inducing `χ`; then `ψ̄` induces `χ̄`, and the
+deleted Euler factors of both vanish only on `Re s = 0` (Mathlib `DirichletCharacter.LFunction_changeLevel`). For
+`0 < Re s < 1` this gives `ord_s L(·, χ) = ord_s L(·, ψ)` and `ord_{1−s} L(·, χ̄) = ord_{1−s} L(·, ψ̄)`, and the
+clause *Reflection* of RiemannHypothesisStatementsAndConsequences §9.4 gives `ord_s L(·, ψ) = ord_{1−s} L(·, ψ̄)`. For
+`Re s < 0`, Mathlib `DirichletCharacter.IsPrimitive.completedLFunction_one_sub` makes the completed function of `ψ` at
+`s` a nonzero multiple of that of `ψ̄` at `1 − s`, which is `Γ_ℝ(1 − s + j)L(1 − s, ψ̄) ≠ 0` as `Re(1 − s) > 1`; by
+`DirichletCharacter.LFunction_eq_completed_div_gammaFactor`, `L(·, ψ)` is that completed function divided by
+`Γ_ℝ(s + j)`, which has no zero and a simple pole exactly at `s + j ∈ {0, −2, −4, …}`. (b) For nonprincipal `ψ` (so
+`q′ ≥ 3`), ExplicitZetaBounds §3.2 with `η = 1/l` gives `|L(s, ψ)| ≤ (q′|1 + s|/(2π))^{(1+η−σ)/2}ζ(1 + η)` for
+`1 − 1/l ≤ σ ≤ 1 + 1/l`, `σ = Re s`; there the exponent is at most `1/l`, `q′|1 + s|/(2π) ≤ e^{2l}` for `q′ ≤ e^l` and
+`|s| ≤ 3e^l`, and `ζ(1 + 1/l) ≤ 1 + l`, so `|L(s, ψ)| ≤ e²(1 + l)`; for `σ > 1 + 1/l` the Dirichlet series gives
+`|L(s, ψ)| ≤ 1 + l`. For trivial `ψ` the form of that section for `ζ`, with the factor `(s − 1)/s` of `f_χ`, gives
+`|(s − 1)ζ(s)/s| ≤ 9e²(1 + l)` on the same range, as `3|1 + s|/|s| ≤ 9` for `|s| ≥ 1/2`. The deleted factors are at
+most `∏_{p∣q}(1 + p^{−σ}) ≤ exp(e·Σ_{p∣q} 1/p)`, since `p^{1−σ} ≤ e` for `p ≤ q ≤ e^l` and `σ ≥ 1 − 1/l`, and
+`Σ_{p∣q} 1/p ≤ (1/log 2)Σ_{p∣q} (log p)/p ≤ (log log q + C)/log 2 ≤ (log l + C)/log 2` for `q ≥ 2`, with `C` absolute
+(AnalyticNumberTheoryPartI §3.17); so they are at most a fixed power of `l`. Cauchy's estimate on circles of radius
+`1/(2l)` gives the bound for `f_χ′`, as in 1.3 (c). (c) For primitive `χ`, `Σ_{b mod q} χ̄(b)e^{2πibn/q} = χ(n)τ(χ̄)`
+for every integer `n`. As `χ(−1) = (−1)^j`, `n ↦ χ(n)w_j(nu)` is even, so `Σ_{n≥1} χ(n)w_j(nu)` is half the sum over
+`n ∈ ℤ`. Substituting the expansion of `χ(n)` and applying Poisson summation to each function `y ↦ w_j(yu)e^{2πiby/q}`
+(Mathlib's functional equations of the even and odd theta kernels of a residue class, as in 3.2), the Fourier
+transform of `y ↦ y^j e^{−πy²/a}` being `ξ ↦ (−i)^j a^{j+1/2}ξ^j e^{−πaξ²}`, and collecting the terms by `N = qm − b`,
+gives `θ_χ(1/(qt)) = i^j√q τ(χ̄)^{−1}θ_χ̄(t)`, the sign `χ̄(−1) = (−1)^j` of the substitution `N ↦ −N` turning
+`(−i)^j` into `i^j`; and `i^j√q/τ(χ̄) = τ(χ)/(i^j√q)` because `τ(χ)τ(χ̄) = χ(−1)q`.
+
+(a) *The functional equation and 1.2.* Let `χ` be a Dirichlet character modulo `q ≥ 1`, primitive or not, of parity
+`j`, and `ord_s` the order of vanishing at `s`. For `0 < Re s < 1`, `ord_s L(·, χ) = ord_{1−s} L(·, χ̄)`. For
+`Re s < 0`, `ord_s L(·, χ) = 1` if `s + j ∈ {0, −2, −4, …}` and `0` otherwise. With `L(s, χ) ≠ 0` on `Re s ≥ 1`
+(`s ≠ 1`), this gives 1.2, with multiplicities.
+
+(b) *The convexity bound and 1.3.* There are absolute constants `κ ≥ 2` and `l₃` such that for every `l ≥ l₃` and
+every Dirichlet character `χ` modulo `q ≤ e^l`, primitive or not: `|f_χ(s)| ≤ l^κ` for every `s` with `Re s ≥ 1 − 1/l`
+and `|s| ≤ 3e^l`, and `|f_χ′(s)| ≤ 2l^{κ+1}` for every `s` with `Re s ≥ 1 − 1/(2l)` and `|s| ≤ 2e^l`. This is 1.3 (b),
+(c) with `l^κ` and `2l^{κ+1}` in place of `l²` and `2l³`, which serve 1.4 (1.3). For primitive nonprincipal `χ` the
+convexity bound alone gives order `l`; the power `κ` comes from the deleted Euler factors.
+
+(c) *The theta transformation and 3.2 (a).* Let `χ ≠ χ₀` be a primitive Dirichlet character modulo `q` of parity `j`,
+with root number `ε(χ) = τ(χ)/(i^j√q)`, and take the theta series of 3.1 of parity `j`. For every `t > 0`,
+`θ_χ(1/(qt)) = ε(χ)·θ_χ̄(t)`. As `|ε(χ)| = 1` and `θ_χ̄(t)` is the complex conjugate of `θ_χ(t)`, 3.2 (a) is the
+absolute value of this identity: it does not record the root number. For even `χ` the identity is the Fricke identity
+of HalfIntegralWeightModularForms §4.1, with the parameter `t` of that section equal to `1` and `z` on the imaginary
+axis; for odd `χ` it is stated here.
+
+1.2 does not record multiplicities, 1.3 replaces the bound of order `l` for primitive characters by a power of `l`,
+and 3.2 (a) does not record the root number.
+
+*Needs:* 1.1, 1.2, 1.3, 3.1, 3.2; ExplicitZetaBounds §3.2 (Rademacher's convexity bound); AnalyticNumberTheoryPartI
+§3.17 (Logarithmic weight of prime divisors); RiemannHypothesisStatementsAndConsequences §9.4 (Dirichlet characters),
+clause *Reflection*; HalfIntegralWeightModularForms §4.1 (The unary theta series and their modularity); Mathlib
+`DirichletCharacter.LFunction_changeLevel`, `DirichletCharacter.IsPrimitive.completedLFunction_one_sub`,
+`DirichletCharacter.LFunction_eq_completed_div_gammaFactor`, `HurwitzZeta.evenKernel_functional_equation`,
+`HurwitzZeta.oddKernel_functional_equation`, `DirichletCharacter.norm_gaussSum_stdAddChar`.
 
 ## Downstream consumers
 
@@ -566,7 +883,20 @@ On Tau Ceti's main branch, later than the revision pinned here:
   §0.2 (the one-sided criterion), with `g(u) = R_q(e^u)e^u` for the remainder `R_q` of that roadmap, simple poles and
   residues of nonnegative real part at the real points.
 - The primitivity of `ψ·(·/d)` for primitive `ψ` modulo `q′` and an odd prime `d ∤ q′`: ClassicalArithmeticCompletion
-  §§1.5–1.6 (used in 3.5).
+  §§1.5–1.6 (used in 3.5 and 4.3).
+- The classical zero-free region for every Dirichlet character, with at most one exceptional zero, the region for `ζ`,
+  and the local count of zeros: ZerosOfLFunctions §6.4, §6.2, §4.4 (used in 4.1).
+- The local expansion of `L′/L` for primitive characters and the bound for `ζ′/ζ + 1/(s − 1)` to the right of the
+  classical curve: AnalyticNumberTheoryPartI §0.30 (paragraph §0.30a), §0.33 (paragraph §0.33a) (used in 4.1).
+- The Siegel–Walfisz theorem in its `ψ` and prime-count forms: AnalyticNumberTheoryPartI §0.32 (used in 4.2).
+- The zero-density estimate for the primitive characters of bounded conductor: AnalyticNumberTheoryPartI §1.7 (used in
+  4.3).
+- Rademacher's convexity bound for primitive Dirichlet L-functions and for `ζ`: ExplicitZetaBounds §3.2 (used in 4.4).
+- `Σ_{p∣N} (log p)/p ≤ log log N + C` for `N ≥ 2`: AnalyticNumberTheoryPartI §3.17 (used in 4.4).
+- The reflection of the zeros of a primitive L-function in the open strip, with multiplicities:
+  RiemannHypothesisStatementsAndConsequences §9.4, clause *Reflection* (used in 4.4).
+- The Fricke identity of the theta series of a primitive even character: HalfIntegralWeightModularForms §4.1 (used in
+  4.4).
 
 ## References
 

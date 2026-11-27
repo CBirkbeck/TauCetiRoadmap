@@ -1,31 +1,55 @@
 # Integral representations of general linear groups
 
-**Summary.** This roadmap states the background on general linear groups that the shorter proof uses, in the forms
-in which it uses it. It has two halves.
+**Summary.** This roadmap states the background on general linear groups that the shorter proof uses, in the forms in
+which it uses it. The standard theory is the reference for this background: the irreducible representations of
+`GL_N(ℂ)` of a given highest weight and the Weyl and dual Weyl lattices of `GL_N` over the integers; the class
+functions of the finite groups `GL_n(𝔽_q)` under Harish-Chandra induction, with Green's cuspidal characters, the
+Steinberg character and Shintani descent; the Jacquet modules, the Satake isomorphism and the unitary dual of `GL_N`
+over a non-archimedean local field. The roadmap states its results on these standard objects through the comparison of
+Layer 7. The objects of the route, a model in coordinates, a ring of class functions on all square matrices and linear
+forms that are eigenforms at pro-`p` Iwahori level, are one way to prove them, and the proofs of the route, in Layers
+1–6, are stated on them. The route has two halves.
 
 The first half (Layers 1–3) is the theory of the polynomial representations of a product `∏_τ GL(n_τ)` over an
 arbitrary commutative ring, in a model by polynomials in a matrix of variables. The representation of a weight `κ`
-(numbers of columns of each height) is the dual `W_R(κ)` of the module `∇_R(κ)` of polynomials that are
-semi-invariant under upper triangular matrices acting on the columns. This module has a basis of products of minors
-that is the same over every ring (1.2); a family of matrices acts on `W_R(κ)` by its Schur matrix (1.3). Over the
-integers `W_ℤ(κ)` carries an integral, symmetric, positive definite Gram matrix, the restriction of the standard form
-on tensors (2.1). The Fock (Fischer) pairing of polynomials inverts this Gram matrix up to one integer, the hook
-number, which therefore bounds every denominator between the lattice and its dual (2.2). Then come the adjoint formula
-and a bound of Schur matrices by singular values (2.3), Schur's lemma, irreducibility under the compact group and
-Schur orthogonality (2.4), multiplication of semi-invariants (2.5), duals and the invariant pairing of dual weights
-(3.1), mixed weights and their Cartan product (3.2), and integral branching maps from `GL(n + 1)` to
-`GL(n) × GL(1)` (3.3, 3.4), whose norm bound does not see the short columns of the diagram.
+(numbers of columns of each height) is the dual `W_R(κ)` of the module `∇_R(κ)` of polynomials that are semi-invariant
+under upper triangular matrices acting on the columns; for one place it is, over `ℂ`, the irreducible representation
+whose highest weight is the vector of row lengths of `κ`, and over `ℤ` the Weyl lattice of that weight (7.1). The
+module `∇_R(κ)` has a basis of products of minors that is the same over every ring (1.2); a family of matrices acts on
+`W_R(κ)` by its Schur matrix (1.3). Over the integers `W_ℤ(κ)` carries an integral, symmetric, positive definite Gram
+matrix, the restriction of the standard form on tensors (2.1). The Fock (Fischer) pairing of polynomials inverts this
+Gram matrix up to one integer, the hook number, which therefore bounds every denominator between the lattice and its
+dual (2.2). Then come the adjoint formula and a bound of Schur matrices by singular values (2.3), Schur's lemma,
+irreducibility under the compact group and Schur orthogonality (2.4), multiplication of semi-invariants (2.5), duals
+and the invariant pairing of dual weights (3.1), mixed weights and their Cartan product (3.2), and integral branching
+maps from `GL(n + 1)` to `GL(n) × GL(1)` (3.3, 3.4), whose norm bound does not see the short columns of the diagram.
 
 The second half (Layers 4–6) is `GL_n` over finite and over local fields. Over a finite field `k`, Green's cuspidal
 functions and the characters `Ξ_c` attached to squarefree polynomials `c` (labels) are defined by Green's formula in
-the ring of class functions on all square matrices, with parabolic induction as product; no Deligne–Lusztig
-induction is used (Layer 4). They are shown to be orthonormal irreducible characters through lifts to
-`GL_n(k′) ⋊ Gal(k′/k)` for extensions `k′/k`, which also give Shintani lifting of the `Ξ_c` in prime degree
-(Layer 5). Over a non-archimedean local field, Layer 6 states the pro-`p` Iwahori level structure of `GL_N`: a
-decomposition and a twisted conjugacy statement, the operators `U_t`, and *exponents*, linear forms that are
-eigenforms of the `U_t` and stand in for Jacquet modules; Satake's formula on exponents, the fact that a sorted
-unramified exponent is seen by spherical vectors, and chains of roots of the Hecke polynomial of a spherical vector in
-a unitary representation.
+the ring of class functions on all square matrices, with parabolic induction as product; no Deligne–Lusztig induction
+is used (Layer 4). They are shown to be orthonormal irreducible characters through lifts to `GL_n(k′) ⋊ Gal(k′/k)` for
+extensions `k′/k`, which also give Shintani lifting of the `Ξ_c` in prime degree (Layer 5). Over a non-archimedean
+local field, Layer 6 states the pro-`p` Iwahori level structure of `GL_N`: a decomposition and a twisted conjugacy
+statement, the operators `U_t`, and *exponents*, linear forms that are eigenforms of the `U_t`; Satake's formula on
+exponents, the fact that a sorted unramified exponent is seen by spherical vectors, and chains of roots of the Hecke
+polynomial of a spherical vector in a unitary representation.
+
+Layer 7 compares each object of the route with its standard counterpart. For one place the model of Layers 1–3 is the
+Weyl module with its contravariant form, and the hook number is the product of the hook lengths (7.1); the branching
+matrix of 3.4 is nonzero and spans the intertwiners of the multiplicity-free branching rule (7.9). On invertible
+matrices the ring of Layer 4 is the ring of class functions of the groups `GL_n(k)` under Harish-Chandra induction
+(7.2); Green's cuspidal functions of the multiplicative functions on an algebraically closed field are the negatives
+of Green's virtual characters of the Coxeter tori, the `τ_P` are Green's cuspidal characters and the `Ξ_c` their
+Harish-Chandra products (7.3); the inverse `μ` of the constant function is the Steinberg character up to the sign
+`(−1)^n` (7.4); and descent is Shintani descent, the lifts of Layer 5 recording less than Shintani's lift (7.5). The
+pro-`p` Iwahori-fixed vectors are the invariants of the Jacquet module under the diagonal matrices congruent to `1`,
+and the exponents for a character of the torus that is trivial on these matrices are the linear forms on the Jacquet
+module on which the torus acts by that character, the only exponent for any other character being zero (7.6); Satake's
+formula on exponents is, for the operators `T_j` and characters trivial on the units, the action of the spherical
+Hecke algebra on the spherical vector of a principal series, given by the Satake transform, and the roots of the Hecke
+polynomial are the Satake parameters multiplied by `q^{(N−1)/2}` (7.7); the bound and the chains of 6.8 (a), (b) are
+consequences of the classification of the unitary dual (7.8). The paragraphs **In standard terms** of Layers 1–6 state
+the results of the route in these terms.
 
 **Where this sits in the argument.** A one-sided bound for a sum over primes gives a half-plane free of zeros of
 Dirichlet L-functions, and the bound comes from comparing an upper and a lower bound for the covolume of a lattice of
@@ -43,10 +67,11 @@ Shintani lifting and the Iwahori-level statements enter the Galois representatio
 
 ## Conventions and notation
 
-- *Labels.* Under each section heading, `*Origin:*` says where its statement comes from and `*Method of the formal
-  proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family `ShortGRH`; the line
-  "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`) and the declarations
-  where it proves the statement. The names of [ShortProof] occur only on that line.
+- *Labels.* Under each section heading, `*Origin:*` says where its statement comes from and
+  `*Method of the formal proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family
+  `ShortGRH`; the line "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`)
+  and the declarations where it proves the statement. The names of [ShortProof] occur only on that line. The sections
+  of Layer 7 are not statements of [ShortProof]; they carry `*Proof route:*` in place of the method.
 - *Rings and matrices.* `R` is a commutative ring. For finite sets `a`, `b`, `M_{a×b}(R)` is the set of matrices with
   rows `a` and columns `b`; `z*` is the conjugate transpose of a complex matrix and `zᵀ` the transpose; `diag(x)` is
   the diagonal matrix of a vector `x`. `U(n)` is the group of complex unitary matrices with rows and columns `n`, with
@@ -88,6 +113,13 @@ Shintani lifting and the Iwahori-level statements enter the Galois representatio
 | `e_C`, `U_t` | mean over a compact open subgroup `C`; `U_t = e_{I₁}∘ρ(t)` | 6.1 |
 | `ξ_θ` | torus character `t ↦ ∏_i θ_i(t_i)\|t_i\|^{N−1−i}` | 6.1 |
 | `T_j`, `T_{r,j}`, `P_x` | Hecke operators of `GL_N(𝒪)`; partial Hecke sums; Hecke polynomial of a spherical eigenvector | 6.1 |
+| `V_ν` | irreducible rational representation of `GL_N(ℂ)` of highest weight `ν` | 7.1 |
+| `Ind_{a,b}`, `Res_{a,b}` | Harish-Chandra induction from, and restriction to, `GL_a(k) × GL_b(k)` | 7.2 |
+| `St_n` | character of the Steinberg representation of `GL_n(k)` | 7.4 |
+| `Nm_σ`, `Sh_σ` | norm `(δσ)^{ord σ}`; Shintani lift along `σ` | 7.5 |
+| `𝒯`, `𝒩`, `ℬ`, `𝒯₁` | diagonal torus, upper unitriangular and upper triangular subgroups of `GL_N(F)`; `𝒯 ∩ I₁` | 7.6 |
+| `V_𝒩`, `pr_𝒩`, `ρ_𝒩`, `I_ℬ(ξ)` | unnormalised Jacquet module, its projection and torus action; unnormalised principal series | 7.6 |
+| `𝔥`, `𝒮` | spherical Hecke algebra of `GL_N(𝒪)`; normalised Satake transform | 7.7 |
 
 ## Layer 1: Polynomial representations of products of general linear groups over rings
 
@@ -164,6 +196,17 @@ highest-weight vector `v_λ` of that roadmap, `λ` the row lengths of `κ`, and 
 colours `H(κ)` is the product of these numbers over `τ`, the pairing being multiplicative on products of polynomials
 in disjoint sets of variables.
 
+**In standard terms.** For one place, with `GL(n, ℂ)` identified with `GL_N(ℂ)` through the fixed numbering and
+`λ_κ := (λ_κ(0), …, λ_κ(N − 1))`, `ρ_{κ,e}` is the irreducible rational representation of highest weight
+`λ_κ + e·(1, …, 1)` (RepresentationTheory/ClassicalGroups §3.3); for several places it is the external tensor product
+over `τ` of these representations of the groups `GL(n_τ, ℂ)` (7.1 (a)). `⟨·,·⟩_G` is its invariant inner product,
+contravariant and of value `1` at the highest weight vector (7.1 (b)). For one place `∇_ℤ(κ)` is the dual Weyl lattice
+`∇_ℤ(λ_κ)` of IntegralWeylModulesOfGeneralLinearGroups, `P_κ` maps `W_ℤ(κ)` onto its Weyl lattice `Δ_ℤ(λ_κ)` and
+carries `⟨·,·⟩_G` to the normalised Fischer form of that roadmap (7.1 (c)), and `H(κ)` is the product over the places
+of the products of the hook lengths of the diagrams (7.1 (d)). The names agree with the literature: for one place
+`W_R(κ) = W_ℤ(κ) ⊗ R` is the Weyl lattice of highest weight `λ_κ`, tensored with `R` and written in the coordinates
+dual to the basis `(b_i)`, and the hook number is the product of the hook lengths.
+
 *Needs:* Mathlib `MvPolynomial`, `Matrix.det`.
 
 [ShortProof], `Lib/GLn/SchurModule/Basic` (`New.MatrixPoly`, `New.minor`, `New.tableauPoly`, `New.diagramWeight`,
@@ -220,6 +263,13 @@ for the algebra generated by the maximal minors, over any commutative ring (`Tau
 build on. IntegralWeylModulesOfGeneralLinearGroups §0.1 states (a) and (b) for one colour over integral domains, for
 the semistandard family.
 
+**In standard terms.** For one place, `∇_R(κ)` is the module `∇_R(λ_κ)` of IntegralWeylModulesOfGeneralLinearGroups
+(Conventions; 1.1 (c)), which is the dual Weyl lattice for `R = ℤ` and, for `R = ℂ` with `g` acting by `f ↦ f(gᵀ·)`,
+the irreducible representation of highest weight `λ_κ` (7.1 (a), (c)). (b) and (d) give a basis of products of minors
+of it over every commutative ring, of which §0.1 there gives the semistandard form over integral domains, and (c) says
+that the contents of the fillings `I_x` have as generating function the Schur polynomial of the row lengths
+`l(0) ≥ l(1) ≥ ⋯`, as the contents of the semistandard tableaux do.
+
 *Needs:* 1.1 (a)–(c) (minors, weights, semi-invariants), for (e) also 1.1 (d) (the properties asked of the standard
 sets), and for (d) 1.1 (d)–(f) (the standard sets and the blocks `y_τ`); Mathlib `MvPolynomial`, `MonomialOrder`,
 `Matrix.det`.
@@ -274,6 +324,15 @@ character formula of (d) for its own model of the Weyl modules of one `GL_n` in 
 (`TauCeti.diagramSchurPoly_mul_alternant` with `TauCeti.char_weylRepOfShape_diagonal_eq_eval_diagramSchurPoly`); a
 comparison of the two models is not in the library.
 
+**In standard terms.** For square matrices, through 7.1 (a), `S_κ` is the representation of `∏_τ GL(n_τ)` that is the
+external tensor product of the irreducible representations of highest weights `λ_κ(τ, ·)`, written in the basis of the
+model: (a) and (b) say that it is a polynomial representation defined over `ℤ` and compatible with base change, and
+that `ρ_{κ,e}` is its twist by `∏_τ det^{e_τ}`; (d) is Weyl's character formula, the character at `diag(x)` of the
+representation of highest weight `λ_κ` being the Schur polynomial `s_{λ_κ}(x)` (RepresentationTheory/ClassicalGroups
+§4.2); and (f) identifies the representation of a one-row diagram with the symmetric power. For one place and a field
+`R` with an ultrametric absolute value and valuation ring `𝒪_R`, (e) says that the lattice `W_{𝒪_R}(κ)`, the Weyl
+lattice tensored with `𝒪_R` (7.1 (c)), is stable under the matrices with entries in `𝒪_R`.
+
 *Needs:* 1.1, 1.2; Mathlib `Matrix.det`, `Matrix.vandermonde`.
 
 [ShortProof], `Lib/GLn/SchurModule/SchurMatrix` (`New.sum_schur_smul_nablaBasis`, `New.GL.schur_eq_of_expansion`,
@@ -318,6 +377,14 @@ Let `κ` be a weight for `n`.
 (e) Let `R` be an integral domain of characteristic `0`. Then `P_κ` is injective, and for `n ⊂ n′`, `κ` fitting `n`,
 `z_τ ∈ M_{n′_τ×n_τ}(R)` and `ξ ∈ W_R(κ)`: `P_κ(S_κ(z)ξ)(y′) = (P_κ(ξ)·∏_τ det(y_τ)^{d_τ})(zᵀy′)` (the left side for
 `n′`, the right side substituted by `zᵀ`). Over `ℂ`, `P_κ` is onto `∇_ℂ(κ)`.
+
+**In standard terms.** For one place, through 7.1 (c), `G_κ` is the Gram matrix of the normalised Fischer form
+`⟨·,·⟩_{λ_κ}` of IntegralWeylModulesOfGeneralLinearGroups (Conventions), the contravariant form of value `1` at the
+highest weight vector, on the Weyl lattice `Δ_ℤ(λ_κ)`, in the basis that `P_κ` gives it. (b) says that this form is
+integral, symmetric and positive definite, (c) that it is contravariant (`g` and `gᵀ` adjoint), and (d), (e) that
+`P_κ`, the map from `W_ℤ(κ)` to its dual `∇_ℤ(κ)` given by the form, is the inclusion of the Weyl lattice in the dual
+Weyl lattice, injective in characteristic `0` and bijective over `ℂ`; (a) realises the representation inside the
+tensor product, over the columns, of the exterior powers of the standard representation.
 
 *Needs:* 1.1, 1.2, 1.3; Mathlib `Matrix.PosDef`.
 
@@ -367,11 +434,11 @@ the diagrams; the formal proof uses only the bound (b).
 dominant weight of `GL_N` with last entry `0`. By (a), `P_κ` carries the Gram form `⟨·,·⟩_G` on `W_ℂ(κ)` to the
 normalised form `⟨·,·⟩_λ = ⟨·,·⟩_F/⟨v_λ, v_λ⟩_F` of that roadmap on `∇_ℂ(λ)`, and `⟨P_κ(ξ), f⟩_λ = ξ(f)` for
 `ξ ∈ W_ℚ(κ)` and `f ∈ ∇_ℚ(λ)`; so `P_κ(W_ℤ(κ))` is the dual of `∇_ℤ(λ)` for `⟨·,·⟩_λ`, which is the Weyl lattice
-`Δ_ℤ(λ)` by the duality recorded in its Conventions. By 2.1 (e), `P_κ` carries `S_κ(g)` to the action
-`f ↦ f(gᵀ·)` of that roadmap, and `ρ_{κ,e}(g)` to its action for the weight `λ + e·(1, …, 1)`. In these terms
-(a) is the duality of `Δ_ℤ(λ)` and `∇_ℤ(λ)` in coordinates, and (c) says `H·∇_R(λ) ⊂ Δ_R(λ)`, a bound for the same
-inclusion that IntegralWeylModulesOfGeneralLinearGroups §0.3 bounds prime by prime. The sections of this roadmap use
-the coordinates of 1.1 and do not use this identification.
+`Δ_ℤ(λ)` by the duality recorded in its Conventions. By 2.1 (e), `P_κ` carries `S_κ(g)` to the action `f ↦ f(gᵀ·)` of
+that roadmap, and `ρ_{κ,e}(g)` to its action for the weight `λ + e·(1, …, 1)`. In these terms (a) is the duality of
+`Δ_ℤ(λ)` and `∇_ℤ(λ)` in coordinates, and (c) says `H·∇_R(λ) ⊂ Δ_R(λ)`, a bound for the same inclusion that
+IntegralWeylModulesOfGeneralLinearGroups §0.3 bounds prime by prime. The sections of Layers 1–6 use the coordinates of
+1.1 and do not use this identification; 7.1 states it, with the comparison over `ℂ`.
 
 *Needs:* 1.1, 1.2, 2.1, 2.4 (a).
 
@@ -425,6 +492,10 @@ On Tau Ceti's main branch, later than the revision pinned here: a positive defin
 the library's own model of the Weyl modules of one `GL_n` over `ℝ` or `ℂ` (`TauCeti.weylForm`,
 `TauCeti.weylForm_apply_self_pos`, `TauCeti.weylForm_rationalWeylRep_apply`).
 
+**In standard terms.** Through 7.1 (b), `‖·‖_G` is the norm of the invariant inner product of the representation of
+7.1 (a), of value `1` at its highest weight vector: (c) and (d) are its invariance under the unitary groups, for
+`n′ = n` (a) is the contravariance of 7.1 (b), and (b) bounds the operator norm of the action of `z` for these norms.
+
 *Needs:* 1.3, 2.1; AdelicUnitaryGroupsAndAlgebraicModularForms §6.1 (action of rational unitary matrices); Mathlib
 `Matrix.IsHermitian` (spectral theorem, for the singular values).
 
@@ -474,9 +545,16 @@ The library has Schur orthogonality for continuous representations of compact gr
 (c) follows from the first once the Schur matrices are seen as a continuous representation for the Haar probability
 measure. The corresponding roadmap sections are RepresentationTheory/CompactGroups §4.1 (Schur orthogonality for one
 irreducible unitary representation) and RepresentationTheory/ClassicalGroups §3.3 (the rational irreducible
-representations of `GL_n` by highest weight); (a)–(c) would follow from them, for a family by the external tensor
-product over `τ`, given a comparison of the model of 1.1 with the Weyl modules of the library, which no roadmap
-states (see 1.3).
+representations of `GL_n` by highest weight); (a)–(c) also follow from them, for a family by the external tensor
+product over `τ`, through the identification 7.1 (a) of the model of 1.1 with these representations, whose route does
+not use (a)–(c).
+
+**In standard terms.** Through 7.1 (a), (b), (a) is Schur's lemma and (b) the irreducibility of the restriction to
+`U(n)^Φ` of `u ↦ ρ_{κ,e}(ū)`, the complex conjugate of the external tensor product of the representations of highest
+weights `λ_κ(τ, ·) + e_τ·(1, …, 1)`; (c) is Schur orthogonality for it and its invariant inner product
+(RepresentationTheory/CompactGroups §4.1 (One irreducible)), `|B(κ)|` being its dimension; and (d) computes the
+diagonal matrix coefficient of `ρ_{κ,e}` at the weight vector `ev_{y_p}`, of norm `1`, as a product of principal
+minors.
 
 *Needs:* 1.3, 2.1, 2.3 (c); HolomorphicDiscreteSeriesOfUnitaryGroups §4.1 (a) (products of principal minors); Mathlib
 `MeasureTheory.Measure.haar`.
@@ -561,6 +639,12 @@ parameter of one is minus that of the other), together with a clause that evalua
 `(κ′, e′)` through this pairing, which is the subject of AdelicUnitaryGroupsAndAlgebraicModularForms §6.1
 (forms through a highest vector).
 
+**In standard terms.** The row lengths of `κ′` at `τ` are `D_τ − λ_κ(τ, N_τ − 1 − i)`, so through 7.1 (a) `ρ_{κ′,−D}`
+has highest weight `−w₀λ_κ(τ, ·)` at `τ` and is the dual of the representation `S_κ`, which `g ↦ S_κ(g^{−ᵀ})` also
+realises: (a) is an isomorphism between these two realisations of the dual, with integer entries, unimodular and
+isometric for the forms of 7.1 (b), and (c) is the invariant pairing between the representation of weight `(κ, e)` and
+its dual, of weight `(κ′, e′)`, with the denominator `H(κ′)`.
+
 *Needs:* 1.3, 2.1, 2.2; Tau Ceti `Matrix.det_submatrix_comp_inr_eq_sign_mul_det_mul_det_submatrix_comp_inl_nonsing_inv`
 (Jacobi's identity for complementary minors).
 
@@ -596,6 +680,13 @@ column of height `h` with `|a| ≤ h < N` and `κ⁻` none with `|a′| ≤ h < 
 `κ⁺` for the rows `a`), `η ∈ R^{B_{a′}(κ⁻)}` and `g ∈ GL_n(R)^Φ`, put
 `y ⋆_g η := M♭·(S_{κ⁺}(gε_a)y ⊗ S_{κ⁻}(g^{−ᵀ}ε_{a′})η)`. Then `M·(y ⋆_1 η) = S_{κ⁺}(ε_a)y ⊗ S_{κ⁻}(ε_{a′})η`,
 `ρ_{κ^±,−D⁻}(g)·(y ⋆_1 η) = y ⋆_g η`, and over `ℂ`, `‖y ⋆_1 η‖²_G = ‖y‖²_G·‖η‖²_G`.
+
+**In standard terms.** The row lengths of `κ^±` at `τ` are `λ_{κ⁺}(τ, i) + D⁻_τ − λ_{κ⁻}(τ, N − 1 − i)`, so through
+7.1 (a) and 3.1, `ρ_{κ^±,−D⁻}` is the representation of highest weight `λ_{κ⁺}(τ, ·) − w₀λ_{κ⁻}(τ, ·)` at each `τ`,
+and `g ↦ S_{κ⁺}(g) ⊗ S_{κ⁻}(g^{−ᵀ})` is the tensor product of the representation of highest weight `λ_{κ⁺}` with the
+dual of that of highest weight `λ_{κ⁻}`. (a) embeds the first as the Cartan component of the second (Fulton and Harris
+(1991), §15.5), integrally, isometrically for the forms of 7.1 (b) and with an integral left inverse, and (b) is a
+Cartan product of vectors of two smaller groups.
 
 *Needs:* 1.3, 2.1, 2.5, 3.1.
 
@@ -682,6 +773,12 @@ maps with an explicit nonzero constant; its norm bound goes through `dim V_λ` a
 row, so it does not give (b). The multiplicity one behind (c) is, for one `GL_n` and its own model,
 RepresentationTheory/ClassicalGroups §6.1 (`rationalWeyl_branching`).
 
+**In standard terms.** By 7.9, at every `τ` the highest weight of `ρ_{κ₀,e₀}` interlaces that of `ρ_{κ,e}`, the
+matrices `T` of (c) form a line, and `br` spans it: `br ≠ 0`, and through 7.1 (a) `br` is, up to a scalar, the
+`∏_τ GL(n_τ, ℂ)`-equivariant map of the multiplicity-free branching rule (RepresentationTheory/ClassicalGroups §6.1)
+from the representation of `∏_τ GL(n⁺_τ, ℂ)` of highest weights `λ_κ(τ, ·) + e_τ·(1, …, 1)` to that of
+`∏_τ GL(n_τ, ℂ)` of highest weights `λ_{κ₀}(τ, ·) + e₀_τ·(1, …, 1)`, here with integer entries and the norm bound (b).
+
 *Needs:* 1.3, 2.1, 2.2, 2.3 (c), 2.4 (a), 3.3.
 
 [ShortProof], `Lib/GLn/Branching/NormBound` (`New.GL.branchVector`, `New.GL.exists_smul_weylKernel_mul_eq_toPoly`,
@@ -718,6 +815,17 @@ blocks `a`, `x` (upper right) and `b`. `A` is *cuspidal* if `δA(a, b) = 0` when
 (c) For a field `K ⊇ k` and any function `η : K → ℂ`, `β_η(g)` is the sum of `η(α)` over the roots `α ∈ K` of the
 characteristic polynomial of `g`, with multiplicity. With `μ := 𝟙^{−1}` (4.2 (a)) and `·` the pointwise product,
 *Green's cuspidal function* is `C_η := (β_η·μ) ∗ 𝟙`.
+
+**In standard terms.** For finite `k`, by 7.2, restriction to the invertible classes is a ring homomorphism from
+`𝓗(k)` onto the class functions of the groups `GL_n(k)` with Harish-Chandra induction as product (ReductiveGroups
+Layer 7c), the block average of invertible classes is Harish-Chandra restriction, cuspidality in the sense of (b)
+restricts to the usual cuspidality, and `⟨·,·⟩_n` is the usual inner product. By 7.3 (a), if `K` is algebraically
+closed and `η` is a homomorphism on `K^×`, `C_η` restricts on `GL_n(k)` to minus Green's virtual character of the
+Coxeter torus (FiniteReductiveGroups §5.6 (b)); by 7.4, `μ` restricts to `(−1)^n` times the Steinberg character. The
+name *Hall algebra* refers to the form of the product, which is the Hall product of the category of finite-dimensional
+`k[X]`-modules, a class being the module `V` on which `X` acts by `g`; in the literature the Hall algebra of such a
+category is spanned by the isomorphism classes, that is, it consists of the finitely supported functions on classes,
+while `𝓗(k)` consists of all functions.
 
 *Needs:* none.
 
@@ -761,6 +869,11 @@ the block upper triangular matrices for the levels `b`, `g_a` the diagonal block
 `⟨(∏_a A_a|_{n_a})|_{GL_r(k)}, Y⟩_{GL_r(k)} = ⟨(g ↦ ∏_a A_a(g_a)), Y|_{P_b}⟩_{P_b}`, the product `∏_a` on the left taken
 with `∗`. So on `GL_n(k)` the product `∗` is Harish-Chandra (parabolic) induction.
 
+**In standard terms.** By 7.2, on the invertible classes (a) is the ring of class functions of the groups `GL_n(k)`
+under Harish-Chandra induction, (c) the adjunction between Harish-Chandra induction and restriction, and (e) Frobenius
+reciprocity for parabolic induction, by which `∗` is Harish-Chandra induction (ReductiveGroups Layer 7c); (b) and (d)
+are statements on the Harish-Chandra restriction of products.
+
 *Needs:* 4.1; Mathlib `Module.End`, `Submodule`.
 
 [ShortProof], `Lib/LocalGL/Green/HallAlgebra` (`New.Hall.mul_simClassOf`, `New.simClassOf_eq_dualMap`,
@@ -775,8 +888,8 @@ Bourbaki 441 (1973/74), 1.1–1.7, the eigenvalue sums as virtual characters, ex
 characters (as in FiniteReductiveGroups §5.6 (b)), and from Carter, Finite groups of Lie type (1985), the Steinberg
 character times a torus character: here `C_η ∗ 𝟙 = −β_η` with `C_η` cuspidal, in the ring of 4.1, without
 Deligne–Lusztig characters; the vanishing of `μ` off semisimple classes (Krasula, arXiv 2403.05656, Lemma 23; Crapo's
-complementation theorem (1966)) stands in for the Steinberg character, and the inner product of `C_η` with `B·μ` is a
-mean over the torus `L^×`.
+complementation theorem (1966)) is used where the literature uses the Steinberg character, `μ` being on `GL_n(k)` the
+Steinberg character times `(−1)^n` (7.4), and the inner product of `C_η` with `B·μ` is a mean over the torus `L^×`.
 
 *Method of the formal proof:* (a) Evaluated at `g`, the relation `μ ∗ 𝟙 = 1` makes `μ` the Möbius function of the
 modular lattice of `g`-stable subspaces, and a form of Crapo's complementation theorem then shows that this lattice
@@ -856,6 +969,15 @@ with `a = 1`: two admissible `j` differ by a multiple of `Q − 1`, so the two c
 FiniteReductiveGroups §5.2 with §5.6 (b) (which identifies Green's class function with `R_{T_{(n)}}^G`) also implies (a) and
 (b), through Deligne–Lusztig theory; the formal proof avoids it.
 
+**In standard terms.** By 7.3 (b), `τ_P|_{GL_d(k)}` is the irreducible cuspidal character `(−1)^{d−1}R_{T_{(d)}}(θ_P)`
+of FiniteReductiveGroups §5.2 attached to the regular character `θ_P = θ_x|_{𝔽_{q^d}^×}` of `𝔽_{q^d}^×`, whose
+Frobenius orbit depends only on `P`: (a) is its independence of the root and its cuspidality, (b) the orthonormality
+of these characters, distinct `P` giving distinct orbits, and (c) says, through 7.2 (b), that it is orthogonal to the
+trivial character when `P(1) ≠ 0`; (d) is, for `d = 1`, the bijection `x ↦ θ_x|_{𝔽_Q^×}` of the proof of 7.3 (b). The
+name *Green's cuspidal function*, for `C_η` and for `τ_P`, refers to Green's formula, by which they are defined; these
+are not the Green functions `Q_T^G` of FiniteReductiveGroups §5.6, the values of the Deligne–Lusztig characters at
+unipotent elements.
+
 *Needs:* 4.1, 4.2, 4.3.
 
 [ShortProof], `Lib/LocalGL/Green/TauFunctions` (`New.thetaChar`, `New.greenTau`, `New.labelChar`, `New.IsLabel`,
@@ -913,6 +1035,13 @@ FiniteReductiveGroups §5.11 (a), (b) give (b) through Lang's theorem and norm c
 the first part of §5.11 (c); §5.11 is stated for the Frobenius `x ↦ x^{|k₀|}` as generator of `Gal(k′/k₀)`, while (b)
 holds for every `σ` with fixed field `k₀`, that is, for every generator. TensorInductionAndFiniteGroupInputs §6.2 gives
 a form of (c) for a normal subgroup of prime index with a virtual character of norm one on one coset.
+
+**In standard terms.** By 7.5 (a), (b), a class function on `E_n` descends to `X` over the coset of `σ` exactly when
+its values there are the Shintani lift `Sh_σ(X)`, the function `δ ↦ X(γ)` for `γ ∈ GL_n(k₀)` conjugate to
+`δ·σ(δ)⋯σ^{ord σ − 1}(δ)`, which for the Frobenius is the lift of FiniteReductiveGroups §5.11 (a), (b); so (b)
+contains, for every generator `σ`, the bijection of norm classes and the isometry of the Shintani lift.
+`Lift_Z(A, A′)` records only that some `Z`-combination of characters of `E_m` equals `A′` on `GL_m(k′)` and the
+Shintani lifts of `A` on the cosets of the generators of `Γ`, for every `m`.
 
 *Needs:* 4.1, 4.2 (e); GaloisRepresentationsOfUnitaryEigenforms §5.2 (c), (d) (norms onto fixed units, tame actions);
 Tau Ceti `TauCeti.exists_eq_irreducibleCharacter_or_neg` (virtual characters of norm one).
@@ -1006,6 +1135,18 @@ The formal proof states (e) for one fixed choice of `ω`, on an algebraic closur
 and §5.6 (b) also implies (a), and its §5.5 gives the exact degree, through Deligne–Lusztig theory; the formal proof
 avoids it.
 
+**In standard terms.** By 7.3 (c), for a label `c`, `Ξ_c|_{GL_r(k)}` is the Harish-Chandra product of the cuspidal
+characters of FiniteReductiveGroups §5.2 attached to the regular characters `θ_P` of the irreducible factors `P` of
+`c`, which lie in distinct Frobenius orbits; it is the irreducible character that FiniteReductiveGroups §5.4 (d)
+attaches to the Green datum with value the partition `(1)` at these orbits, of degree
+`∏_{1≤i≤r}(q^i − 1)/∏_{P|c}(q^{deg P} − 1)` (7.3 (c)). (a) is its irreducibility and the orthonormality of these
+characters, (b) follows from this degree, and (c) follows from the twist of the cuspidal character attached to a
+regular character `θ` of `𝔽_{q^d}^×` by `χ∘det`, which is the cuspidal character attached to `θ·(χ∘N_{𝔽_{q^d}/k})`
+(FiniteReductiveGroups §5.2), applied to each factor of the Harish-Chandra product; in rank `1` the cuspidal character
+attached to `θ` is `θ`. A *label* here is a polynomial; through `P ↦` (the Frobenius orbit of `θ_P`) it corresponds to
+a label of FiniteReductiveGroups, a function from Frobenius orbits to `ℕ`, with values in `{0, 1}`, and this
+correspondence depends on `ω`.
+
 *Needs:* 4.2, 4.3, 4.4, 5.1 (a), 5.2.
 
 [ShortProof], `Lib/LocalGL/Green/LabelCharacters` (`New.labelChar_X_sub_C`, `New.rankPart_labelChar`,
@@ -1043,6 +1184,18 @@ Let `k ⊂ k′` be finite fields with `[k′ : k] = l` prime, `K ⊇ k′` alge
 
 FiniteReductiveGroups §5.11 (d) states the lift of a cuspidal character in prime degree up to a sign and on the coset of
 the Frobenius, and §5.11 (e) only the label of a constituent for products; they do not give (a).
+
+**In standard terms.** By 7.5 (c), (a) says that for `[k′ : k] = l` prime the irreducible character
+`Ξ_{c′}|_{GL_r(k′)}`, which is invariant under `Gal(k′/k)`, extends to an irreducible character of
+`GL_r(k′) ⋊ Gal(k′/k)` whose values on every coset other than `GL_r(k′)` are the Shintani lift of `Ξ_c|_{GL_r(k)}`:
+`Ξ_c` and `Ξ_{c′}` correspond under Shintani descent, with sign `+1`. For `c` irreducible this implies
+FiniteReductiveGroups §5.11 (d), with `ε = +1`. Through 7.5 (b), (b) follows from the identity
+`Sh_σ(χ∘det) = (χ∘N_{k′/k})∘det` for every `σ ≠ 1` in `Gal(k′/k)`: such a `σ` generates `Gal(k′/k)`, so
+`det Nm_σ(δ) = N_{k′/k}(det δ)`; for the Frobenius it is the identity `Sh_l(χ∘det) = (χ∘N_{k′/k})∘det` of
+FiniteReductiveGroups §5.11 (b). The character `χ′` of `k′^×` with `x_{χ′} = x_χ` is `χ∘N_{k′/k}` (as in the proof of
+7.5 (c)), and `δσ ↦ χ′(det δ)` is a character of `GL_m(k′) ⋊ Gal(k′/k)` whose values on the coset of every `σ ≠ 1` are
+those of `Sh_σ(χ∘det)`; and (c) is the sum, over the `l − 1` cosets other than `GL_n(k′)`, of the isometry of the
+Shintani lift.
 
 *Needs:* 4.4, 5.1, 5.2, 5.3.
 
@@ -1087,6 +1240,17 @@ AdelicUnitaryGroupsAndAlgebraicModularForms §3.1 and WeilRepresentationsOnBanac
 `g𝒪^N` contains the first `r` standard basis vectors; `T_{0,j} = T_j`. For `x ∈ V^{GL_N(𝒪)}` with `T_j x = t_j x` for all `j`, the *Hecke polynomial* of
 `x` is `P_x(X) := Σ_{j=0}^{N} (−1)^j·q^{j(j−1)/2}·t_j·X^{N−j}`, the polynomial `H_{q,N}(t)` of
 GaloisRepresentationsOfUnitaryEigenforms §1.1.
+
+**In standard terms.** By 7.6, `pr_𝒩` identifies `V^{I₁}` with the invariants under `𝒯₁ = 𝒯 ∩ I₁` of the unnormalised
+Jacquet module `V_𝒩` of `V` along the upper triangular Borel subgroup `ℬ = 𝒯𝒩`, the operator `U_t` with the action of
+`t`, and an Iwahori eigenvector for `ξ` with a nonzero vector of `(V_𝒩)^{𝒯₁}` on which `𝒯` acts by `ξ`. An exponent
+for `ξ` is `0` unless `ξ` is trivial on `𝒯₁`, and then it is `ℓ_𝒩∘pr_𝒩∘e_{I₁}` for a unique linear form `ℓ_𝒩` on `V_𝒩`
+with `ℓ_𝒩∘ρ_𝒩(t) = ξ(t)ℓ_𝒩`, or equivalently a `GL_N(F)`-equivariant map from `V` to the unnormalised principal series
+`I_ℬ(ξ)`; `I_ℬ(ξ_θ)` is the normalised principal series of the character `t ↦ ∏_i θ_i(t_i)|t_i|^{(N−1)/2}`. In the
+literature the exponents of `V` are characters of the torus, those by which it acts on quotients of `V_𝒩`; here an
+exponent is a linear form, and a nonzero exponent for `ξ` exists exactly when `ξ` is trivial on `𝒯₁` and is such a
+character. By 7.7 (b), the roots of the Hecke polynomial `P_x` of (d) are the entries of the Satake parameter of the
+eigencharacter of `x` (SmoothRepresentationsOfLocalGroups §SR.4.2 (Spherical parameters)) multiplied by `q^{(N−1)/2}`.
 
 *Needs:* AdelicUnitaryGroupsAndAlgebraicModularForms §§1.4, 1.5, 3.1 (compact means, Hecke operators);
 WeilRepresentationsOnBanachSpacesOfData §9.1 (basic double cosets); GaloisRepresentationsOfUnitaryEigenforms §1.1 (Hecke
@@ -1170,6 +1334,11 @@ diagonal matrices with unit entries, which normalise `I₁`, so that the mean ca
 (c) An exponent `ℓ` for `ξ` satisfies `ℓ∘e_{I₁} = ℓ`, `ℓ∘ρ(k) = ℓ` for `k ∈ I₁`, and `ℓ(ρ(t)z) = ξ(t)·ℓ(z)` for every diagonal `t` with
 unit entries and every `z ∈ V`.
 
+**In standard terms.** Through 7.6 (a), which rests on it, (b) is equivalent to the injectivity on `V^{I₁}` of the
+projection `pr_𝒩` to the Jacquet module, and then every `U_t`, `t ∈ T⁺`, is injective on `V^{I₁}`; (c) says that an
+exponent, a form `ℓ_𝒩∘pr_𝒩∘e_{I₁}` (7.6 (b)), is invariant under `I₁` and transforms by `ξ` under the diagonal
+matrices with unit entries.
+
 *Needs:* 6.1, 6.2.
 
 [ShortProof], `Lib/LocalGL/Iwahori/QuadraticRelation` (`New.conj_monomial_mem_blockParahoric`, `New.quadratic_relation`,
@@ -1216,9 +1385,19 @@ to `ρ(c)T_{r,i}x`, `c` diagonal with entries `1` at the first `r` places and `�
 
 LocalFactorsOfTwistsAndTypes §3.2 (Macdonald's formula for every residue cardinality, extending the formula that
 SmoothRepresentationsOfLocalGroups §SR.4.3 states for `GL_n` over an unramified quadratic extension) gives the Satake
-transform of these double cosets in the Hecke algebra; passing
-from it to (b) needs that an exponent factors through the Jacquet module, which is not stated there. The formal proof
+transform of these double cosets in the Hecke algebra; passing from it to (b) needs that an exponent factors through
+the Jacquet module, which is not stated there and is 7.6 (b); 7.7 (a) makes this passage for `r = 0`. The formal proof
 proves (a)–(d) for `F` the completion of a number field at a finite place.
+
+**In standard terms.** (a) says that `I₁tI₁` is the union of `δ_ℬ(t)^{−1}` cosets, `δ_ℬ` the modulus of the upper
+triangular Borel subgroup, so that through 7.6 (a) its Hecke operator corresponds to `δ_ℬ(t)^{−1}ρ_𝒩(t)` on the
+Jacquet module, as SmoothRepresentationsOfLocalGroups §SR.2.3 (Pairings, canonical lifting, Iwahori invariants and
+Whittaker functionals) states for admissible representations. (b) for `r = 0` and `θ_i` trivial on `𝒪^×` is the case
+of the double cosets of the `T_j` of Satake's formula 7.7 (a):
+`ℓ(f·x) = 𝒮(f)(q^{−(N−1)/2}θ_0(ϖ), …, q^{−(N−1)/2}θ_{N−1}(ϖ))·ℓ(x)` for every `f` in the spherical Hecke algebra, `𝒮`
+the normalised Satake transform, which sends the double coset of `T_j` to `q^{j(N−j)/2}e_j`
+(SmoothRepresentationsOfLocalGroups §SR.4.3 (The general linear group)); if some `θ_i` is not trivial on `𝒪^×`, both
+sides of (b) for `r = 0` vanish. The partial sums `T_{r,j}` with `r > 0`, and (c), (d), are steps of the route.
 
 *Needs:* 6.1, 6.2, 6.4 (c); WeilRepresentationsOnBanachSpacesOfData §9.1 (basic double cosets, duality
 `T_i ↔ T_{N−i}`).
@@ -1270,6 +1449,16 @@ vector fixed by the kernel of `GL_N(𝒪) → GL_N(𝓀)`. Let `χ_1, …, χ_s`
 suppose `Σ_{g∈GL_N(𝓀)} conj(Y(g))·ρ(λ(g))x ≠ 0`. Then the span of `x` contains an Iwahori eigenvector for some `ξ_θ` with `|θ_i(ϖ)|` non-increasing in `i`, and there is a labelling
 `c : {0, …, N − 1} → {1, …, s}` taking each value `a` exactly `m_a` times with `θ_i(ε) = χ_{c(i)}(ε mod 𝔭)` for every unit `ε`.
 
+**In standard terms.** Through 7.6 (b), (c), for characters `θ_i` trivial on `1 + 𝔭` an exponent for `ξ_θ` is a
+`GL_N(F)`-equivariant map `Υ : V → I_ℬ(ξ_θ)`, its value at `v ∈ V` being `Υ(e_{I₁}v)(1)` (for other `θ_i` the only
+exponent is `0`), and an Iwahori eigenvector for `ξ` is a vector of `V^{I₁}` whose image in the Jacquet module `V_𝒩`
+is a nonzero vector on which `𝒯` acts by `ξ`. So (a) says that, for `x` as there, if such a map `Υ` has `Υ(x)(1) ≠ 0`,
+there are a permutation `σ` along which `|θ_{σ(i)}(ϖ)|` does not increase and a map `Υ′` to the principal series
+`I_ℬ(ξ_{θ∘σ})` of the permuted characters with `Υ′(e_{I₁}ρ(σ^{−1})x)(1) ≠ 0`; (b) that, for `ρ`, `B` and `x` as there,
+a character `ξ` trivial on `𝒯₁` by which `𝒯` acts on a nonzero vector of the Jacquet module of the span of `x` is also
+one by which `𝒯` acts on a one-dimensional quotient of that Jacquet module, through the form `B(w, ·)`; and (c), (d)
+combine the two.
+
 *Needs:* 4.1, 4.2 (e), 6.1, 6.2, 6.4.
 
 [ShortProof], `Lib/LocalGL/Iwahori/SortedExponents` (`New.IsExponent.apply_permGL_swap_diagGL_compactMean`,
@@ -1306,6 +1495,12 @@ trivial on units (6.4 (c)), so `ℓ(x)` is the value of `ℓ` on the mean of `x`
 `I₁·diag(ϖ, 1, …, 1)·I₁`.
 
 The formal proof proves (b) for `F` the completion of a number field at a finite place.
+
+**In standard terms.** Through 7.6 (c), (a) says that for `θ_i` trivial on `𝒪^×` with `|θ_0(ϖ)| ≥ ⋯ ≥ |θ_{N−1}(ϖ)|`,
+every nonzero `GL_N(F)`-equivariant map from `V` to `I_ℬ(ξ_θ)`, the normalised principal series of
+`t ↦ ∏_i θ_i(t_i)|t_i|^{(N−1)/2}`, is nonzero on `V^{GL_N(𝒪)}`; so every nonzero subrepresentation of this principal
+series contains its line of `GL_N(𝒪)`-fixed vectors, and the Hecke polynomial of a spherical eigenvector at which such
+an exponent does not vanish is `∏_i (X − θ_i(ϖ))` (7.7 (b), (c)).
 
 *Needs:* 6.1, 6.2, 6.4 (c), 6.5 (a).
 
@@ -1352,6 +1547,12 @@ the bound (a) at the top of a chain nor (b) or (c).
 On Tau Ceti's main branch, later than the revision pinned here: `TauCeti.glnHeckePolynomial`, the same formal
 polynomial as `P_x`.
 
+**In standard terms.** (a) and (b) are consequences of the classification of the irreducible unitarizable
+representations of `GL_N(F)` (Tadić (1986); AutomorphicSpectralTheory §7.0b): by 7.8, the span of `x` is such a
+representation, with a nonzero `GL_N(𝒪)`-fixed vector and Hecke polynomial `P`, and the classification groups the
+roots of `P` into strings `c, cq^{−1}, …, cq^{1−m}` with `|c|² = q^{N+m−2}`, or with `q^{N+m−3} < |c|² < q^{N+m−1}` in
+pairs, which gives (a), with strict inequality, and (b). (c) has no counterpart in 7.8.
+
 *Needs:* 6.1, 6.5 (c), (d); AuxiliaryAlgebraAndAnalysisForThetaLifts §2.2 (b) (adjoints of spherical Hecke operators);
 WeilRepresentationsOnBanachSpacesOfData §9.1 (b) (duality `T_i ↔ T_{N−i}`).
 
@@ -1359,13 +1560,483 @@ WeilRepresentationsOnBanachSpacesOfData §9.1 (b) (duality `T_i ↔ T_{N−i}`).
 `New.Patching.chain_lemma`, `New.Patching.le_norm_sq_of_isRoot_of_not_isRoot_mul`, `New.Patching.isRoot_chain_of_norm`,
 `New.Patching.pairing_aeval_heckeCoset_eq_zero`)
 
+## Layer 7: Comparison with the standard theory
+
+The standard theory is the reference for the objects of this roadmap. For Layers 1–3 it is the theory of the
+irreducible rational representations of `GL_N(ℂ)` (RepresentationTheory/ClassicalGroups) and of the Weyl and dual Weyl
+lattices of `GL_N` over the integers (IntegralWeylModulesOfGeneralLinearGroups); for Layers 4 and 5, the class
+functions of the groups `GL_n(k)` under Harish-Chandra induction (ReductiveGroups Layer 7c), Green's characters and
+Shintani descent (FiniteReductiveGroups §§5.2, 5.4, 5.6 (b), 5.11) and the Steinberg character
+(SmoothRepresentationsOfLocalGroupsPartII §4.1); for Layer 6, the Jacquet modules, the Satake isomorphism and the
+unitary dual of `GL_N(F)` (SmoothRepresentationsOfLocalGroups §§SR.2.1, SR.2.2, SR.2a.1, SR.3.3, SR.4.1–SR.4.3;
+AutomorphicSpectralTheory §7.0b). This layer states how each object of the route is related to its standard
+counterpart, by an identification or by the implication that holds; through it, the paragraphs **In standard terms**
+of Layers 1–6 state the results of the route on the standard objects. The route of Layers 1–6 does not use this layer.
+
+### 7.1 The polynomial model and the Weyl modules
+
+*Origin:* comparison of the model of 1.1 with the irreducible rational representations of `GL_N(ℂ)`
+(RepresentationTheory/ClassicalGroups) and with the Weyl and dual Weyl lattices of
+IntegralWeylModulesOfGeneralLinearGroups; not part of the formal proof.
+
+*Proof route:* (a) For one place, by 1.3 (a), (b), `g ↦ S_κ(g)` is a polynomial representation of `GL_N(ℂ)` and
+`ρ_{κ,e}` a rational one, so `ρ_{κ,e}` is a direct sum of representations `V_ν` (RepresentationTheory/ClassicalGroups
+§§0.4, 3.3). By 1.3 (d) for the fixed numbering, its character at `diag(x)` is `(x_0⋯x_{N−1})^e` times the quotient of
+the two alternants there, which is the Schur polynomial `s_{λ_κ}(x)`. The character of `V_ν` is
+`(x_0⋯x_{N−1})^{ν_{N−1}}` times the Schur polynomial of `ν − ν_{N−1}·(1, …, 1)` (§§4.2, 4.3 there), and after
+multiplication by a common power of `x_0⋯x_{N−1}` these characters are linearly independent (the Schur basis of §4.1
+there); so the sum has the single term `ν = λ_κ + e·(1, …, 1)`. For several places, by 1.3 (b), `S_κ(g)` is the
+Kronecker product over `τ` of the one-place Schur matrices, on `B(κ) = ∏_τ B_τ`, and `∏_τ det(g_τ)^{e_τ}` is the
+product of the twists. (b) Positivity is 2.1 (b) and invariance 2.3 (c), as `|det u_τ| = 1`. For `n′ = n` the
+exponents `d_τ` vanish, and 2.3 (a) with `z = 1` reads `S_κ(w)*G_κ = G_κS_κ(w*)`, which is the contravariance. If
+`(ξ, η) ↦ ξ*Aη` is a hermitian form invariant under the `S_κ(u)`, `G_κ^{−1}A` commutes with them, so it is a scalar by
+2.4 (a), real because `A` and `G_κ` are hermitian. Since `diag(x)·y_p = y_p·diag(x∘p^{−1})` on the first `N_τ` columns
+at each `τ`, the semi-invariance of 1.1 (c) and 1.3 (c) give
+`S_κ(diag(x))ev_{y_p} = ∏_{τ,a} x_{τ,a}^{λ_κ(τ, p_τ(a))}·ev_{y_p}`, which for the fixed numberings is the highest
+weight; and `⟨ev_{y_p}, ev_{y_p}⟩_G = 1` by 2.4 (d). (c) is the relation recorded in 2.2 (*Relation to
+IntegralWeylModulesOfGeneralLinearGroups*): `P_κ` is injective (2.1 (e)); by 2.2 (a) and `H(κ) = ⟨v_κ, v_κ⟩_F` (1.1
+(i)), `⟨P_κ(ξ), P_κ(η)⟩_F = H(κ)·ξ*G_κη`, and `⟨P_κ(ξ), f⟩_{λ_κ} = ξ(f)` for rational `ξ` and `f ∈ ∇_ℚ(κ)`, so
+`P_κ(W_ℤ(κ))` is the dual of `∇_ℤ(λ_κ)` for `⟨·,·⟩_{λ_κ}`, which is `Δ_ℤ(λ_κ)`
+(IntegralWeylModulesOfGeneralLinearGroups, Conventions); the actions correspond by 2.1 (e) with `z = g`. (d) For one
+place `v_κ` is the vector `v_{λ_κ}` of that roadmap, and `⟨v_{λ_κ}, v_{λ_κ}⟩_F` is the product of the hook lengths
+(§3.1, §3.2 (a) there); for several places the Fock pairing is multiplicative over the colours (1.1 (i)).
+
+For one place (`Φ` a point), identify `GL(n, ℂ)` with `GL_N(ℂ)` through the fixed numbering of the rows and put
+`λ_κ := (λ_κ(0), …, λ_κ(N − 1))`, a dominant weight with last entry `0`. For a dominant weight `ν` of `GL_N`, `V_ν` is
+the irreducible rational representation of `GL_N(ℂ)` of highest weight `ν` (RepresentationTheory/ClassicalGroups
+§3.3). For several places the same applies at each `τ`, with the weight `λ_κ(τ, ·)` of `GL(n_τ)`.
+
+(a) *The representation.* For one place, `ρ_{κ,e}` on `ℂ^{B(κ)}` is isomorphic to `V_{λ_κ+e·(1, …, 1)}`; in particular
+`g ↦ S_κ(g)` is the irreducible polynomial representation of highest weight `λ_κ`, whose character at `diag(x)` is the
+Schur polynomial `s_{λ_κ}(x)`. For several places, `ρ_{κ,e}` is isomorphic, as a representation of `∏_τ GL(n_τ, ℂ)`,
+to the external tensor product of the `V_{λ_κ(τ,·)+e_τ·(1, …, 1)}`.
+
+(b) *The form.* `⟨·,·⟩_G` is a positive definite hermitian form on `ℂ^{B(κ)}`, invariant under `ρ_{κ,e}(u)` for
+`u ∈ ∏_τ U(n_τ)` and contravariant: `⟨S_κ(g)ξ, η⟩_G = ⟨ξ, S_κ(g*)η⟩_G` for every family `g` of complex square
+matrices, `g*` the conjugate transpose at each `τ`. Every hermitian form invariant under the `S_κ(u)` is a real
+multiple of it, and `⟨v, v⟩_G = 1` for the highest weight vector `v = ev_{y_p}` of 2.4 (d), `p_τ` the fixed
+numberings.
+
+(c) *The lattices.* For one place, `∇_R(κ)` is the dual Weyl lattice `∇_R(λ_κ)` of
+IntegralWeylModulesOfGeneralLinearGroups (Conventions) for every commutative ring `R` (1.1 (c)), which its §0.1 treats
+for integral domains `R`, and `P_κ` maps `W_ℤ(κ)` isomorphically onto the Weyl lattice `Δ_ℤ(λ_κ)` of that roadmap (its
+Conventions), the dual of the dual Weyl lattice `∇_ℤ(λ_κ)` for the normalised Fischer form `⟨·,·⟩_{λ_κ}`. It carries
+`S_κ(g)` to the action `f ↦ f(gᵀ·)`, `ρ_{κ,e}(g)` to the action of that roadmap for the weight `λ_κ + e·(1, …, 1)`,
+and `⟨·,·⟩_G` to the normalised form: `⟨P_κ(ξ), P_κ(η)⟩_{λ_κ} = ⟨ξ, η⟩_G`. So `W_R(κ) = W_ℤ(κ) ⊗ R` is `Δ_ℤ(λ_κ) ⊗ R`,
+and `G_κ` is the Gram matrix of the contravariant form of the Weyl lattice of value `1` at the highest weight vector,
+in the basis that `P_κ` gives it.
+
+(d) *The hook number.* `H(κ)` is the product over `τ` of the products of the hook lengths of the Young diagrams with
+rows `λ_κ(τ, 0) ≥ λ_κ(τ, 1) ≥ ⋯`.
+
+*Needs:* 1.1, 1.3 (a)–(d), 2.1 (b), (e), 2.2 (a), 2.3 (a), (c), 2.4 (a), (d); RepresentationTheory/ClassicalGroups
+§0.4 (Complete reducibility over `ℂ`), §3.3 (Highest weight and the classification), §4.1 (Schur products and
+representation multiplicities), §4.2 (Characters are Schur polynomials), §4.3 (The rational character is Laurent);
+IntegralWeylModulesOfGeneralLinearGroups (Conventions), §0.1 (Standard bideterminant basis and saturation), §3.1 (The
+Fischer norm of a product of leading minors), §3.2 (The Fischer norm of `v_λ` and the slopes of the Weyl and dual Weyl
+lattices).
+
+### 7.2 The ring of class functions and Harish-Chandra induction
+
+*Origin:* comparison of the ring of 4.1 with the class functions of the finite general linear groups under parabolic
+induction (Green (1955); the Harish-Chandra functors of ReductiveGroups Layer 7c); not part of the formal proof.
+
+*Proof route:* (a) If `g` is invertible, so are `g|_W` and `g|_{V/W}` for every `g`-stable `W`, so the value of
+`A ∗ A′` at an invertible class involves only invertible classes: restriction to the invertible classes is a ring
+homomorphism, onto because a function on the invertible classes extends by zero. For functions `A_a` and a class
+function `Y` on `GL_n(k)`, 4.2 (e) and Frobenius reciprocity for `P_b ⊂ GL_n(k)` give
+`⟨(∏_a A_a|_{n_a})|_{GL_n(k)}, Y⟩_{GL_n(k)} = ⟨Ind_{P_b}^{GL_n(k)}(g ↦ ∏_a A_a(g_a)), Y⟩_{GL_n(k)}`, so the two class
+functions agree; ReductiveGroups Layer 7c identifies Harish-Chandra induction with induction from `P_b` of the
+inflation from its block diagonal quotient. (b) For an invertible class `a` on `V_a` and a class `b` on `V_b`, let `𝒰`
+be the unipotent radical of the stabiliser of `V_a` in `GL(V_a ⊕ V_b)`. The endomorphism with diagonal blocks `a`, `b`
+and upper right block `x` is `diag(a, b)·u` for a unique `u ∈ 𝒰`, and `u` runs over `𝒰` once as `x` runs over
+`Hom(V_b, V_a)`; so `δA(a, b)` is the mean over `𝒰` of `A(diag(a, b)u)`, which is the character form of the
+restriction to the invariants of `𝒰` of ReductiveGroups Layer 7c (the character of these invariants at an element of
+the Levi subgroup is the mean over `u ∈ 𝒰` of the character at its product with `u`). If `a` or `b` is not invertible,
+none of these endomorphisms is, which gives the clause on extensions by zero. (c) is (a) and (b) read on 4.2 (c), (e).
+
+Let `k` be finite and, for `n ≥ 0`, `Cl_n` the space of complex class functions on `GL_n(k)` (`Cl_0 = ℂ`), with the
+inner product `⟨·,·⟩_n`. For `a + b = n`, `Ind_{a,b} : Cl_a ⊗ Cl_b → Cl_n` and `Res_{a,b} : Cl_n → Cl_a ⊗ Cl_b` are
+Harish-Chandra induction from, and restriction to, the block diagonal subgroup `GL_a(k) × GL_b(k)` along the block
+upper triangular matrices, on class functions: the characters of the functors of ReductiveGroups Layer 7c, with
+complex coefficients. A class function on `GL_n(k)` is *cuspidal* if `Res_{a,b}` kills it whenever `a, b ≥ 1`.
+
+(a) *The ring.* `A ↦ (A|_{GL_n(k)})_{n≥0}` is a surjective ring homomorphism from `(𝓗(k), +, ∗)` onto `∏_{n≥0} Cl_n`
+with the product `(f ∗ f′)_n = Σ_{a+b=n} Ind_{a,b}(f_a ⊗ f′_b)`; its kernel is the ideal of the functions that vanish
+on the invertible classes. On `GL_n(k)` the product `∏_a A_a|_{n_a}` of 4.2 (e) is the Harish-Chandra induction of
+`⊗_a A_a|_{GL_{n_a}(k)}` from the block diagonal subgroup of `P_b`.
+
+(b) *Restriction and cuspidality.* For invertible classes `a`, `b` of dimensions `m`, `m′`,
+`δA(a, b) = Res_{m,m′}(A|_{GL_{m+m′}(k)})(a, b)`. So if `A` is cuspidal in the sense of 4.1 (b), every `A|_{GL_n(k)}`
+is cuspidal; and a class function on `GL_n(k)` is cuspidal exactly when its extension by zero to all classes is
+cuspidal in the sense of 4.1 (b). For `f` vanishing off the invertible classes of dimension `d` and `a` invertible of
+dimension `m`, `∂_{d,f}A(a) = ⟨f, Res_{m,d}(A|_{GL_{m+d}(k)})(a, ·)⟩_d`.
+
+(c) On the invertible classes, 4.2 (c) is the adjunction between `Ind_{a,b}` and `Res_{a,b}`, and 4.2 (e) is Frobenius
+reciprocity for parabolic induction.
+
+*Needs:* 4.1, 4.2 (c), (e); ReductiveGroups Layer 7c (Harish–Chandra functors and biadjunctions).
+
+### 7.3 Green's cuspidal functions, Green's characters and the characters of labels
+
+*Origin:* comparison of the functions `C_η`, `τ_P` and `Ξ_c` of 4.1 (c), 4.4 and 5.3 with Green's virtual characters
+of Coxeter tori, Green's cuspidal characters and their Harish-Chandra products (Green (1955), Theorems 2, 9, 12–14;
+FiniteReductiveGroups §§5.2, 5.4, 5.6 (b)); not part of the formal proof.
+
+*Proof route:* (a) By 4.3 (b), `C_η ∗ 𝟙 = −β_η` and `C_η` vanishes in dimension `0`. On `GL_n(k)`, `β_η` is the
+eigenvalue sum `b_{θ̃}^{(n)}` of FiniteReductiveGroups §5.6 (b) for the restriction of `θ̃` to `k̄^×`, the eigenvalues
+of an invertible matrix lying in `k̄^×`, and by 7.2 (a) `C_η ∗ 𝟙` restricts to
+`Σ_{1≤a≤n} Ind_{a,n−a}(C_η|_{GL_a(k)} ⊗ 1)`. §5.6 (b) there writes
+`b_{θ̃}^{(n)} = Σ_{1≤a≤n} Ind_{a,n−a}(R_{T_{(a)}}(θ̃|_{𝔽_{q^a}^×}) ⊗ 1)`. By induction on `n` the terms with `a < n`
+agree, and the terms with `a = n` are the two sides of (a). (b) As `x^{Q−1} = 1` with `Q = q^d` and `ω` is injective,
+`ω` maps `𝔽_Q^×` onto the group of `(Q − 1)`-th roots of unity; for `z₀ ∈ 𝔽_Q^×` with `ω(z₀) = e^{2πi/(Q−1)}`,
+`θ_x|_{𝔽_Q^×}` is the character with `z₀ ↦ ω(x)`. So `x ↦ θ_x|_{𝔽_Q^×}` is an isomorphism from `𝔽_Q^×` onto its group
+of characters, with `θ_{x^q} = θ_x^q`. The roots of `P` are the `d` distinct `x^{q^i}`, so `θ_P` is regular and its
+orbit is the set of the `θ_{x^{q^i}}|_{𝔽_Q^×}`, which determines `P`; orbits of polynomials of different degrees have
+different sizes. Then (a) with `θ̃ = θ_x` and `τ_P = (−1)^d(C_{θ_x})|_d` (4.4) gives the formula. (c)
+`Ξ_c = ∏_i τ_{P_i}` for `∗` (5.3), and 7.2 (a) with the formula of (b) for each `τ_{P_i}` gives the first formula. The
+label of FiniteReductiveGroups with value `1` at the orbits of the `θ_{P_i}` has the Levi subgroup `∏_i GL_{d_i}` and
+the cuspidal character `⊠_i (−1)^{d_i−1}R_{T_{(d_i)}}(θ_{P_i})` (§5.2 there), and §5.4 (b), (d) there, with
+`s_{(1)} = p_1`, identify its Harish-Chandra induction with the irreducible character of the Green datum stated; the
+degree of a character induced from a subgroup is the index times the degree of the inducing character, the index in
+`GL_r(k)` of the block upper triangular subgroup with blocks of sizes `d_1, …, d_s` is
+`∏_{1≤j≤r}(q^j − 1)/∏_{1≤i≤s}∏_{1≤j≤d_i}(q^j − 1)` (the group `GL_n(k)` has `q^{n(n−1)/2}∏_{1≤j≤n}(q^j − 1)`
+elements), and the cuspidal character attached to `θ_{P_i}` has degree `∏_{1≤j<d_i}(q^j − 1)` (§5.2 there).
+
+Let `k` be finite with `q` elements, `K` an algebraically closed field containing `k`, `k̄ ⊂ K` the algebraic closure
+of `k` in `K` and `𝔽_{q^n} ⊂ k̄` its subfield with `q^n` elements, so that the groups `GL_n(k)` and the fields
+`𝔽_{q^n}` are as in FiniteReductiveGroups §5.2. For a character `θ` of `𝔽_{q^n}^×`, `R_{T_{(n)}}(θ)` is Green's
+virtual character of FiniteReductiveGroups §5.6 (b), the Deligne–Lusztig character of the Coxeter torus, whose
+rational points form `𝔽_{q^n}^×`. If `θ` is regular (its conjugates `θ^{q^i}`, `i < n`, are distinct),
+`(−1)^{n−1}R_{T_{(n)}}(θ)` is the irreducible cuspidal character of FiniteReductiveGroups §5.2 attached to `θ`, which
+depends only on the Frobenius orbit of `θ`.
+
+(a) For every homomorphism `θ̃ : K^× → ℂ^×`, every `η : K → ℂ` equal to `θ̃` on `K^×` and every `n ≥ 1`:
+`C_η|_{GL_n(k)} = −R_{T_{(n)}}(θ̃|_{𝔽_{q^n}^×})`.
+
+(b) Let `ω` be as in 4.4, `P ∈ k[X]` monic irreducible of degree `d` with `P(0) ≠ 0`, and `x ∈ k̄` a root of `P`. Then
+`θ_P := θ_x|_{𝔽_{q^d}^×}` (4.4, with `Q = q^d`) is regular, its Frobenius orbit depends only on `P`, and distinct `P`
+give distinct orbits; and `τ_P|_{GL_d(k)} = (−1)^{d−1}R_{T_{(d)}}(θ_P)` is the cuspidal character attached to `θ_P`.
+
+(c) For a label `c` of degree `r` with monic irreducible factors `P_1, …, P_s` of degrees `d_1, …, d_s`,
+`Ξ_c|_{GL_r(k)}` is the Harish-Chandra induced character, from the block diagonal subgroup `∏_i GL_{d_i}(k)`, of
+`⊗_i (−1)^{d_i−1}R_{T_{(d_i)}}(θ_{P_i})`. It is the irreducible character that FiniteReductiveGroups §5.4 (d) attaches
+to the Green datum with value the partition `(1)` at the orbits of the `θ_{P_i}` and the empty partition elsewhere,
+and its degree is `∏_{1≤i≤r}(q^i − 1)/∏_{1≤i≤s}(q^{d_i} − 1)`.
+
+*Needs:* 4.1 (c), 4.3 (b), 4.4, 5.3, 7.2 (a); FiniteReductiveGroups §5.2 (Green's cuspidal characters), §5.4 (b), (d)
+(The characteristic map of a label), §5.6 (b) (Uniformity and Green functions).
+
+### 7.4 The inverse of the constant function and the Steinberg character
+
+*Origin:* comparison of `μ` (4.2 (a), 4.3) with the Steinberg character (SmoothRepresentationsOfLocalGroupsPartII
+§4.1), and of the torus identity 4.3 (f) with the product of the Steinberg character and a character of a torus
+(Carter (1985)); not part of the formal proof.
+
+*Proof route:* (a) `𝟙 − 1` vanishes in dimension `0`, so its `m`-th power under `∗` vanishes in the dimensions below
+`m`, and `μ = Σ_{m≥0}(−1)^m(𝟙 − 1)^m`, the sum being finite in each dimension. In dimension `n` the `m`-th power is
+the sum, over the compositions `(n_1, …, n_m)` of `n` into positive parts, of the products `𝟙|_{n_1} ∗ ⋯ ∗ 𝟙|_{n_m}`,
+which on `GL_n(k)` are the permutation characters `Ind_{P_b}^{GL_n(k)}1` of the groups `P_b` of 4.2 (e) (4.2 (e) with
+all `A_a = 𝟙`, and Frobenius reciprocity). So `μ|_{GL_n(k)}` is the sum over the compositions of
+`(−1)^m·Ind_{P_b}^{GL_n(k)}1`, `m` the number of parts, which is `(−1)^n St_n`. At the class of dimension `0`,
+`μ ∗ 𝟙 = 1` gives the value `1`. (b) is 4.3 (a), (e) read through (a). (c) `μ` takes integer values (by the recursion
+`μ ∗ 𝟙 = 1`), so the left side of 4.3 (f) is `⟨C_η·μ, B⟩_m`, and by Frobenius reciprocity for `L^× ⊂ GL_m(k)` its
+right side is `⟨Ind_{L^×}^{GL_m(k)}(η∘φ), B⟩_m`, for every `B`. The second form follows with (a) and 7.3 (a).
+
+Let `k` be finite with `q` elements. For `n ≥ 1`, `St_n` is the character of the Steinberg representation of `GL_n(k)`
+of SmoothRepresentationsOfLocalGroupsPartII §4.1, for the split group `GL_n` over `k` and its upper triangular Borel
+subgroup: `St_n` is the sum, over the compositions `(n_1, …, n_m)` of `n` into positive parts, of
+`(−1)^{n−m}·Ind_{P_b}^{GL_n(k)}1`, `P_b` the group of block upper triangular matrices with diagonal blocks of sizes
+`n_1, …, n_m` (a standard parabolic subgroup, as in 4.2 (e)); in the alternating sum of that section over the sets of
+simple reflections, the composition with `m` parts corresponds to a set of `n − m` of them.
+
+(a) `μ|_{GL_n(k)} = (−1)^n·St_n` for every `n ≥ 1`, and `μ` is `1` at the class of dimension `0`.
+
+(b) On invertible matrices, 4.3 (a) is therefore the vanishing of `St_n` off the semisimple elements of `GL_n(k)`, and
+4.3 (e) gives `St_n(g) = (−1)^n·∏_{0≤i<d}(−Q^i)` for `g` as there, the multiplication by `z` on a vector space of
+dimension `d` over `k′ = k[z]`, a field with `Q` elements, and `n = d·[k′ : k]`.
+
+(c) For `L`, `φ` and `η` as in 4.3 (f), `L` of degree `m` over `k` and `L^×` acting on `L ≅ k^m` by multiplication:
+`(C_η·μ)|_{GL_m(k)} = Ind_{L^×}^{GL_m(k)}(η∘φ)`. With (a) and 7.3 (a), if `K` is algebraically closed and `η` is a
+homomorphism `θ̃` on `K^×`, this reads `R_{T_{(m)}}(θ̃|_{𝔽_{q^m}^×})·St_m = (−1)^{m−1}·Ind_{L^×}^{GL_m(k)}(θ̃∘φ)`,
+where `𝔽_{q^m} = φ(L)`.
+
+*Needs:* 4.2 (a), (e), 4.3 (a), (e), (f), 7.3 (a); SmoothRepresentationsOfLocalGroupsPartII §4.1 (The Steinberg
+representation of a finite reductive group).
+
+### 7.5 Descent and Shintani's lift
+
+*Origin:* comparison of descent and lifts (5.1, 5.4) with Shintani's norm map and lift (Shintani, J. Math. Soc. Japan
+28 (1976); FiniteReductiveGroups §5.11); not part of the formal proof.
+
+*Proof route:* (a) By 5.1 (b), `δσ` is conjugate by a matrix `g` to some `r(γ)`, `γ ∈ GL_n(k₀)`, and then
+`g·Nm_σ(δ)·g^{−1} = r(γ)^{ord σ} = γ`. Two elements of `GL_n(k₀)` conjugate in `GL_n(k′)` are conjugate in `GL_n(k₀)`
+(rational canonical form). For the Frobenius, FiniteReductiveGroups §5.11 (a) defines the norm class as the class of
+such an element, and §5.11 (b) the lift by its value there. (b) Every element over `σ` is some `δσ`, with
+`(δσ)^{ord σ} = Nm_σ(δ)`. If `Ψ` descends to `X` over the coset of `σ`, conjugating `δσ` by a matrix to `r(γ_δ)` gives
+`Ψ(δσ) = X(γ_δ)`. Conversely, if `Nm_σ(δ) ∈ GL_n(k₀)` one may take `γ_δ = Nm_σ(δ)`. Descent over `k` concerns the `σ`
+with fixed field `k`, which are the generators of `Γ`, and descent over `k′` the element `σ = 1`. The character
+induced from the trivial character of the normal subgroup `GL_m(k′)` is `|Γ|` on it and `0` elsewhere. (c) `c′` is
+squarefree, `k` being perfect, and `c′(0) ≠ 0`. 5.4 (a) gives a character `Ψ` of `E_r` that descends to `Ξ_c` over `k`
+and to `Ξ_{c′}` over `k′`; its restriction to `GL_r(k′)` is irreducible (5.3 (a) over `k′`), so `Ψ` is irreducible,
+and (b) gives its values. Let `c = P` be irreducible of degree `m` with root `x`. If `l ∤ m`, `P` is irreducible over
+`k′`, and `θ_x` formed with `Q′ = q^{lm}` is `θ_P∘N_{𝔽_{q^{lm}}/𝔽_{q^m}}`: if `ω(x) = e^{2πij/(q^m−1)}`, the exponent
+`j(q^{lm} − 1)/(q^m − 1)` is admissible for `Q′`. If `l ∣ m`, `P` is over `k′` the product of `l` irreducible factors
+of degree `m/l` with the roots `x, x^q, …, x^{q^{l−1}}`, formed with the same `Q = q^m`, whose characters are the
+`θ_P^{q^i}`, `i < l`. In both cases 7.3 (b), (c) over `k′`, with the same `ω`, identify `Ξ_{c′}|_{GL_m(k′)}` with the
+representation `τ` of §5.11 (d) for `θ_P`, and 7.3 (b) identifies `Ξ_P|_{GL_m(k)}` with the cuspidal character
+attached to `θ_P`. If `τ̃` is a representation of `E_m` with character `Ψ`, its operator at `Fr` intertwines `τ` with
+`τ∘Fr`, its `l`-th power is `1`, and `Ψ(δFr)` is the trace of `τ(δ)` composed with it.
+
+Let `k ⊂ k′`, `Γ = Gal(k′/k)` and `E_n = GL_n(k′) ⋊ Γ` be as in 5.1, and write `δσ` for the element `(δ, σ)` of `E_n`.
+For `σ ∈ Γ` with fixed field `k₀` and `δ ∈ GL_n(k′)` put `Nm_σ(δ) := δ·σ(δ)⋯σ^{ord σ − 1}(δ) = (δσ)^{ord σ}`.
+
+(a) *Norm classes.* `Nm_σ(δ)` is conjugate in `GL_n(k′)` to an element `γ_δ` of `GL_n(k₀)`, unique up to conjugacy in
+`GL_n(k₀)`. For `X ∈ 𝓗(k₀)` the *Shintani lift* along `σ` is `Sh_σ(X)(δ) := X(γ_δ)`. When `σ` is the Frobenius
+`x ↦ x^{|k₀|}` of `k′/k₀`, the class of `γ_δ` is the norm class of `δ` of FiniteReductiveGroups §5.11 (a), over `k₀`,
+and `Sh_σ(X)` is the Shintani lift of `X|_{GL_n(k₀)}` of §5.11 (b).
+
+(b) *Descent.* A class function `Ψ` on `E_n` descends to `X` over the coset of `σ` (5.1 (a)) exactly when
+`Ψ(δσ) = Sh_σ(X)(δ)` for every `δ ∈ GL_n(k′)`. So `Lift_Z(A, A′)` says that for every `m` some `Z`-combination `Ψ` of
+characters of `E_m` equals `A′` on `GL_m(k′)` and `Sh_σ(A)` on the coset of every generator `σ` of `Γ`. It records
+nothing on the other cosets, and it does not determine `A′` from `A`: if `k′ ≠ k`, adding to `Ψ` the character induced
+from the trivial character of `GL_m(k′)` shows that `Lift_Z(A, A′)` implies `Lift_Z(A, A′ + |Γ|·𝟙)`.
+
+(c) *Labels in prime degree.* Let `[k′ : k] = l` be prime, `ω` an injective character of `K^×` for an algebraically
+closed field `K ⊇ k′`, `c` a label of degree `r` over `k` and `c′` its image in `k′[X]`, a label over `k′`. There is
+an irreducible character `Ψ` of `E_r` equal to `Ξ_{c′}` on `GL_r(k′)` with `Ψ(δσ) = Sh_σ(Ξ_c)(δ)` for every `σ ≠ 1`
+and every `δ`: the irreducible character `Ξ_{c′}|_{GL_r(k′)}`, invariant under `Γ`, has an extension to `E_r` whose
+values on every coset other than `GL_r(k′)` are the Shintani lift of `Ξ_c|_{GL_r(k)}`. For `c = P` irreducible of
+degree `m` this gives FiniteReductiveGroups §5.11 (d) for the regular character `θ_P` of 7.3 (b), with `ε = +1`, the
+operator called `A` there being the operator of the Frobenius `Fr : x ↦ x^q` of `k′/k` (written `F` there) in a
+representation of character `Ψ`: `Ξ_P|_{GL_m(k)}` is the cuspidal character attached to `θ_P`, and
+`Ξ_{c′}|_{GL_m(k′)}` is the representation `τ` of §5.11 (d).
+
+*Needs:* 5.1, 5.3 (a), 5.4 (a), 7.3 (b), (c); FiniteReductiveGroups §5.11 (a), (b), (d) (Shintani descent for `GL_n`).
+
+### 7.6 Exponents and Jacquet modules
+
+*Origin:* comparison of the exponents and Iwahori eigenvectors of 6.1 (c) with the Jacquet modules of
+SmoothRepresentationsOfLocalGroups §SR.2.2, through the comparison of Iwahori-fixed vectors with the Jacquet module
+(Casselman, The unramified principal series of p-adic groups I, Compositio 40 (1980);
+SmoothRepresentationsOfLocalGroups §SR.2.3, there for admissible representations), here for every smooth
+representation by 6.4 (b); not part of the formal proof.
+
+*Proof route:* (a) By 6.2 (a), every element of `I₁` is the product of an upper unitriangular matrix in `I₁` and a
+lower triangular one in `I₁`, so `I₁ = 𝒩₀𝒯₁𝒩̄₁` with `𝒩₀ := 𝒩 ∩ I₁` and `𝒩̄₁` the lower unitriangular matrices with
+entries in `𝔭`, the Haar probability measure of `I₁` being the product of those of the factors; so
+`e_{I₁} = e_{𝒩₀}e_{𝒯₁}e_{𝒩̄₁} = e_{𝒩̄₁}e_{𝒯₁}e_{𝒩₀}`. For `t ∈ T⁺`, `t^{−1}𝒩̄₁t ⊆ 𝒩̄₁`, so `e_{𝒩̄₁}ρ(t)x = ρ(t)x` for
+`x ∈ V^{I₁}`; as `pr_𝒩∘e_{𝒩₀} = pr_𝒩` and `pr_𝒩(x)` is fixed by `𝒯₁`,
+`pr_𝒩(U_t x) = e_{𝒯₁}ρ_𝒩(t)pr_𝒩(x) = ρ_𝒩(t)pr_𝒩(x)`. Surjectivity onto `(V_𝒩)^{𝒯₁}` is Jacquet's lemma for every
+smooth representation (SmoothRepresentationsOfLocalGroups §SR.2a.1, *jacquet-lemma-smooth*; `I₁ = 𝒩̄₁𝒯₁𝒩₀` is in good
+position for `ℬ` and the lower triangular Borel subgroup). Injectivity: if `pr_𝒩(x) = 0`, then `e_C x = 0` for a
+compact open subgroup `C` of `𝒩` (§SR.2.2, *jacquet-lemma*). For the strictly dominant `t` of 6.4 (b) the groups
+`t^{−m}𝒩₀t^m` increase to `𝒩`, so `C ⊆ t^{−m}𝒩₀t^m` for some `m`, and
+`U_t^m x = U_{t^m}x = e_{𝒩̄₁}e_{𝒯₁}ρ(t^m)e_{t^{−m}𝒩₀t^m}x = 0` (6.2 (b)); as `U_t` is injective, `x = 0`. The Hecke
+operator of `I₁tI₁` is `deg(t)U_t` (6.5 (a)), and `deg(t) = δ_ℬ(t)^{−1}`. `T⁺` generates `𝒯` as a group and `ρ_𝒩(t)`
+is invertible, which gives the last clause. (b) For `t ∈ 𝒯₁ ⊂ I₁ ∩ T⁺` the definition of an exponent gives
+`ℓ(x) = ℓ(ρ(t)e_{I₁}x) = ξ(t)ℓ(x)`. For `ℓ_𝒩` as stated, `ℓ := ℓ_𝒩∘pr_𝒩∘e_{I₁}` satisfies
+`ℓ(ρ(t)e_{I₁}x) = ℓ_𝒩(pr_𝒩(U_t e_{I₁}x)) = ξ(t)ℓ(x)` by (a); it vanishes only if `ℓ_𝒩` vanishes on `(V_𝒩)^{𝒯₁}`, hence
+everywhere, as `ℓ_𝒩 = ℓ_𝒩∘e_{𝒯₁}`. Conversely an exponent `ℓ` satisfies `ℓ = ℓ∘e_{I₁}` and `ℓ(U_t v) = ξ(t)ℓ(v)` for
+`v ∈ V^{I₁}`, so `ℓ_𝒩 := ℓ∘(pr_𝒩|_{V^{I₁}})^{−1}∘e_{𝒯₁}` is `ξ`-equivariant under `T⁺`, hence under `𝒯`, and gives
+back `ℓ`. (c) Frobenius reciprocity for smooth induction (SmoothRepresentationsOfLocalGroups §SR.2.1,
+*frobenius-reciprocity*: composition with evaluation at `1`) identifies the maps `Υ` with the linear forms on `V` that
+transform by `ξ` under `ℬ` (`ξ` extended trivially on `𝒩`), `Υ` corresponding to `v ↦ Υ(v)(1)`. Such a form vanishes
+on the kernel of `pr_𝒩`, the span of the `ρ(u)v − v` with `u ∈ 𝒩` (§SR.2.2, *jacquet-module*), so these forms are the
+`𝒯`-equivariant forms `V_𝒩 → ℂ_ξ`, `Υ` corresponding to the form `pr_𝒩(v) ↦ Υ(v)(1)`; compose with (b). Finally
+`δ_ℬ(t)^{1/2} = ∏_i |t_i|^{(N−1)/2−i}`.
+
+Let `ρ` be a smooth complex representation of `GL_N(F)` on `V`. Let `𝒯` be the diagonal torus of `GL_N(F)`, `𝒩` the
+upper unitriangular subgroup, `ℬ = 𝒯𝒩` the upper triangular Borel subgroup and `𝒯₁ := 𝒯 ∩ I₁`, the diagonal matrices
+with entries in `1 + 𝔭`. `V_𝒩` is the unnormalised Jacquet module of `V` along `ℬ`, `pr_𝒩 : V → V_𝒩` the projection
+and `ρ_𝒩` the action of `𝒯` on `V_𝒩` (SmoothRepresentationsOfLocalGroups §SR.2.2, *jacquet-module*), and
+`δ_ℬ(t) = ∏_{i<j}|t_i/t_j|` is the modulus of `ℬ`. For a character `ξ` of `𝒯`, `I_ℬ(ξ)` is the unnormalised principal
+series, on the smooth functions `f` on `GL_N(F)` with `f(bg) = ξ(b)f(g)` for `b ∈ ℬ` (`ξ` extended trivially on `𝒩`),
+`GL_N(F)` acting by right translation.
+
+(a) *Iwahori-fixed vectors.* `pr_𝒩` maps `V^{I₁}` bijectively onto `(V_𝒩)^{𝒯₁}`, and `pr_𝒩(U_t x) = ρ_𝒩(t)·pr_𝒩(x)`
+for `x ∈ V^{I₁}` and `t ∈ T⁺`; so the Hecke operator of `I₁tI₁` corresponds to `δ_ℬ(t)^{−1}ρ_𝒩(t)`. A vector
+`x ∈ V^{I₁}` is an Iwahori eigenvector for `ξ` exactly when `pr_𝒩(x)` is a nonzero vector with
+`ρ_𝒩(t)pr_𝒩(x) = ξ(t)pr_𝒩(x)` for every `t ∈ 𝒯`.
+
+(b) *Exponents.* If `ξ` is not trivial on `𝒯₁`, the only exponent for `ξ` is `0`. If `ξ` is trivial on `𝒯₁`,
+`ℓ_𝒩 ↦ ℓ_𝒩∘pr_𝒩∘e_{I₁}` is a bijection from the linear forms `ℓ_𝒩` on `V_𝒩` with `ℓ_𝒩∘ρ_𝒩(t) = ξ(t)·ℓ_𝒩` for all
+`t ∈ 𝒯` onto the exponents for `ξ`; on `V^{I₁}` the exponent is `ℓ_𝒩∘pr_𝒩`.
+
+(c) *Principal series.* If `ξ` is trivial on `𝒯₁`, `Υ ↦ (x ↦ Υ(e_{I₁}x)(1))` is a bijection from the
+`GL_N(F)`-equivariant linear maps `Υ : V → I_ℬ(ξ)` onto the exponents for `ξ`. For characters `θ_i` of `F^×`, `ξ_θ` is
+`δ_ℬ^{1/2}` times the character `t ↦ ∏_i θ_i(t_i)|t_i|^{(N−1)/2}`, so `I_ℬ(ξ_θ)` is the normalised principal series of
+that character (SmoothRepresentationsOfLocalGroups §SR.2.2, *parabolic-induction*), and `V` has a nonzero exponent for
+`ξ_θ` exactly when the `θ_i` are trivial on `1 + 𝔭` and `V` has a nonzero map to that principal series.
+
+*Needs:* 6.1, 6.2 (a), (b), 6.4 (b), (c), 6.5 (a); SmoothRepresentationsOfLocalGroups §SR.2.1 (Smooth and compact
+induction), §SR.2.2 (Jacquet functors and parabolic induction), §SR.2a.1 (Stabilisation and the second adjunction).
+
+### 7.7 Satake's formula on exponents and the Hecke polynomial
+
+*Origin:* comparison of 6.5 (b) and of the Hecke polynomial of 6.1 (d) with the Satake isomorphism and the Satake
+parameters (SmoothRepresentationsOfLocalGroups §§SR.4.1–SR.4.3), and of 6.7 (a) with the spherical vectors of
+principal series; not part of the formal proof.
+
+*Proof route:* (a) `ξ_θ` is trivial on `𝒯 ∩ GL_N(𝒪)`. By 7.6 (c), `ℓ(x) = Υ(x)(1)` for `x ∈ V^{I₁}` and a map
+`Υ : V → I_ℬ(ξ_θ)`. By 6.2 (a), `GL_N(F) = ℬ·GL_N(𝒪)`, so the `GL_N(𝒪)`-fixed vectors of `I_ℬ(ξ_θ)` are the multiples
+of the function `v₀` with `v₀(bk) = ξ_θ(b)`, and `Υ(x) = ℓ(x)v₀` for `x ∈ V^{GL_N(𝒪)}`. By §SR.4.2
+(*spherical-parameter*), `f` acts on `v₀` by the value of the raw transform `δ_ℬ^{−1/2}𝒮(f)` at the point of `ξ_θ`,
+which is the value of `𝒮(f)` at `(q^{−(N−1)/2}θ_i(ϖ))_i`, because `ξ_θ` takes the value `q^{−(N−1−i)}θ_i(ϖ)` at the
+diagonal matrix with `ϖ` at `i` and `1` elsewhere, and `δ_ℬ^{1/2}` the value `q^{i−(N−1)/2}`. Apply `Υ` to `f·x` and
+evaluate at `1`. The value `q^{j(N−j)/2}e_j(q^{−(N−1)/2}θ_0(ϖ), …) = q^{−j(j−1)/2}e_j(θ_0(ϖ), …)` gives the second
+formula. (b) `𝒮` is an isomorphism onto the symmetric Laurent polynomials (§SR.4.1), which are generated by
+`e_1, …, e_N` and `e_N^{−1}`, so `𝔥` is generated by the indicators of the double cosets of the `T_j` and the inverse
+of that of `T_N`, and `x` is an eigenvector. If `𝔠_j` is the eigenvalue of `𝒮^{−1}(e_j)` and
+`q^{−(N−1)/2}y_0, …, q^{−(N−1)/2}y_{N−1}` are the roots of `X^N − 𝔠_1X^{N−1} + ⋯ + (−1)^N𝔠_N` (`𝔠_N ≠ 0`), the
+eigencharacter is the evaluation of `𝒮(f)` at that point,
+`t_j = q^{j(N−j)/2}e_j(q^{−(N−1)/2}y) = q^{−j(j−1)/2}e_j(y)`, and `P_x(X) = Σ_j (−1)^je_j(y)X^{N−j}`. With (a),
+`ℓ(x) ≠ 0` makes the two characters of `𝔥` equal, and the symmetric functions determine the points up to order. (c)
+The form `x ↦ Υ(e_{I₁}x)(1)` is a nonzero exponent for `ξ_θ` (7.6 (c)); by 6.7 (a) it is nonzero at some
+`x ∈ V^{GL_N(𝒪)}`, where it is `Υ(x)(1)`. For a subrepresentation, apply this to its inclusion.
+
+Let `F`, `𝒪`, `ϖ` and `q` be as in the Conventions, `ρ` a smooth representation of `GL_N(F)` on `V`, and `𝒯`, `ℬ`,
+`I_ℬ` as in 7.6. `𝔥` is the algebra, under convolution, of the compactly supported complex functions on `GL_N(F)`
+invariant on both sides under `GL_N(𝒪)`, acting on `V^{GL_N(𝒪)}` by `f·x := Σ_g f(g)ρ(g)x`, the sum over the cosets
+`g·GL_N(𝒪)`, so that the indicator of a double coset acts by its Hecke operator (6.1 (b)). `𝒮` is its normalised
+Satake transform, onto the symmetric Laurent polynomials in `X_0, …, X_{N−1}`, `X_i` the class of the diagonal matrix
+with `ϖ` at `i` and `1` elsewhere (SmoothRepresentationsOfLocalGroups §SR.4.1); `𝒮` sends the indicator of the double
+coset of `T_j` to `q^{j(N−j)/2}e_j(X_0, …, X_{N−1})` (§SR.4.3).
+
+(a) *Satake's formula on exponents.* Let `θ_0, …, θ_{N−1}` be characters of `F^×` trivial on `𝒪^×` and `ℓ` an exponent
+for `ξ_θ`. For every `x ∈ V^{GL_N(𝒪)}` and `f ∈ 𝔥`,
+`ℓ(f·x) = 𝒮(f)(q^{−(N−1)/2}θ_0(ϖ), …, q^{−(N−1)/2}θ_{N−1}(ϖ))·ℓ(x)`. For the indicator of the double coset of `T_j`
+this is `ℓ(T_j x) = q^{−j(j−1)/2}e_j(θ_0(ϖ), …, θ_{N−1}(ϖ))·ℓ(x)`, the case `r = 0` of 6.5 (b). If some `θ_i` is not
+trivial on `𝒪^×`, `ℓ` vanishes on `V^{GL_N(𝒪)}` (6.4 (c)), and both sides of 6.5 (b) for `r = 0` are `0`.
+
+(b) *The Hecke polynomial.* Let `x ≠ 0` in `V^{GL_N(𝒪)}` satisfy `T_j x = t_j x` for `0 ≤ j ≤ N`. Then `x` is an
+eigenvector of `𝔥`, and there are `y_0, …, y_{N−1} ∈ ℂ^×`, unique up to order, with
+`f·x = 𝒮(f)(q^{−(N−1)/2}y_0, …, q^{−(N−1)/2}y_{N−1})·x` for every `f ∈ 𝔥`: `(q^{−(N−1)/2}y_i)_i` is the Satake
+parameter of the eigencharacter of `x` (§SR.4.2), and `P_x(X) = ∏_i (X − y_i)`. If moreover `ℓ` is as in (a) with
+`ℓ(x) ≠ 0`, the `y_i` are the `θ_i(ϖ)` in some order.
+
+(c) *Spherical vectors of principal series.* If the `θ_i` are trivial on `𝒪^×` and `|θ_0(ϖ)| ≥ ⋯ ≥ |θ_{N−1}(ϖ)|`,
+every nonzero `GL_N(F)`-equivariant map `Υ : V → I_ℬ(ξ_θ)` is nonzero on `V^{GL_N(𝒪)}`; in particular every nonzero
+subrepresentation of `I_ℬ(ξ_θ)` contains its line of `GL_N(𝒪)`-fixed vectors. Through 7.6 (c), the first statement is
+6.7 (a) for `V`.
+
+*Needs:* 6.1, 6.2 (a), 6.4 (c), 6.5 (b), 6.7 (a), 7.6; SmoothRepresentationsOfLocalGroups §SR.4.1 (The Satake
+transform and isomorphism), §SR.4.2 (Spherical parameters), §SR.4.3 (The general linear group).
+
+### 7.8 Chains of roots and the unramified unitary dual
+
+*Origin:* comparison of 6.8 (a), (b) with the classification of the unitary dual of `GL_N` over a `p`-adic field by
+segments (Tadić, Ann. ENS 19 (1986), resting on Bernstein, LNM 1041 (1984); AutomorphicSpectralTheory §7.0b); not part
+of the formal proof.
+
+*Proof route:* (a) By 7.7 (b), `x` is an eigenvector of `𝔥`, and `e_{GL_N(𝒪)}ρ(g)x` is a multiple of the Hecke
+operator of `GL_N(𝒪)gGL_N(𝒪)` applied to `x`, so `V_x^{GL_N(𝒪)} = e_{GL_N(𝒪)}V_x = ℂx`. If `M ⊂ V_x` is a
+subrepresentation other than `V_x`, then `x ∉ M`, so `M^{GL_N(𝒪)} = 0` and `B(x, v) = B(x, e_{GL_N(𝒪)}v) = 0` for
+`v ∈ M`; the vectors `w` with `B(w, M) = 0` form a subrepresentation that contains `x`, hence `V_x`, so `B(v, v) = 0`
+and `v = 0` for `v ∈ M`. (b) First, an irreducible smooth representation `𝔡` of `GL_n(F)`, `n ≥ 1`, that is
+square-integrable modulo the centre (SmoothRepresentationsOfLocalGroups §SR.3.3, *square-integrable-tempered*) and has
+a nonzero `GL_n(𝒪)`-fixed vector `z` has `n = 1`. Indeed `𝔡` is admissible (§SR.3a.1, *admissibility-of-irreducibles*)
+and has an invariant positive definite hermitian form (§SR.3.3), so 6.6 (c) for `GL_n(F)` applies to `z`, with
+`τ = 1`, and gives characters `θ_0, …, θ_{n−1}` of `F^×`, a permutation `σ` with `|θ_{σ(0)}(ϖ)| ≥ ⋯ ≥ |θ_{σ(n−1)}(ϖ)|`
+and an Iwahori eigenvector `z′ ∈ 𝔡` for `ξ_{θ∘σ}`. The scalar matrix `ϖ·1` lies in `T⁺` and acts on `𝔡` by a number of
+absolute value `1`, the central character being unitary; so `|ξ_{θ∘σ}(ϖ·1)| = 1`, that is
+`∏_i |θ_i(ϖ)| = q^{n(n−1)/2}`, and `|θ_{σ(0)}(ϖ)| ≥ q^{(n−1)/2}`. By 7.6 (a) for `GL_n(F)`, the diagonal torus acts by
+`ξ_{θ∘σ}` on the nonzero image of `z′` in the unnormalised Jacquet module of `𝔡` along the upper triangular Borel
+subgroup; so it acts on a nonzero vector of the normalised Jacquet module (§SR.2.2, *jacquet-module*) by the character
+`t ↦ ∏_i θ_{σ(i)}(t_i)|t_i|^{(n−1)/2}` (7.6 (c)), which is therefore one of the central exponents of §SR.3.3, and
+whose absolute value at `diag(ϖ, 1, …, 1)` is `q^{−(n−1)/2}|θ_{σ(0)}(ϖ)| ≥ 1`. If `n ≥ 2`, `diag(ϖ, 1, …, 1)` lies in
+the closed negative cone of the torus (it is in `T⁺`) and not in its compact-times-central part, and this contradicts
+Casselman's criterion (§SR.3.3, *casselman-criterion*). Next, `F = E_w` has characteristic `0`, and by
+AutomorphicSpectralTheory §7.0b (*Unitary and residual-Speh Shintani lift*) the irreducible representation `V_x` of
+(a), with its positive definite invariant hermitian form, is isomorphic to a product, for normalised parabolic
+induction from a block upper triangular parabolic subgroup, of blocks of two kinds: `Speh(𝔡, m)`, the Langlands
+quotient of `|det|^{(m−1)/2}𝔡 × ⋯ × |det|^{−(m−1)/2}𝔡` for an irreducible square-integrable representation `𝔡` of some
+`GL_n(F)` and `m ≥ 1` (the block `u(δ, k)` of that section), and `|det|^s Speh(𝔡, m) × |det|^{−s}Speh(𝔡, m)` with
+`0 < s < 1/2`. As `GL_N(F) = 𝒬·GL_N(𝒪)` for every block upper triangular parabolic subgroup `𝒬` (6.2 (a)), the
+`GL_N(𝒪)`-fixed vectors of a representation induced from `𝒬` are the vectors of the inducing representation fixed by
+the integral points of the block diagonal subgroup (§SR.2.1, *induced-invariants*), and passing to fixed vectors is
+exact (§SR.0.3, *invariants-exact*); so every block, every `Speh(𝔡, m)` that occurs, and every such `𝔡`, has a nonzero
+vector fixed by its integral points. By the first step `n = 1`, and `𝔡` is a unitary character `ϑ` of `F^×` trivial on
+`𝒪^×`. Then `|det|^{s′}Speh(ϑ, m)`, `s′ ∈ {0, s, −s}`, is a quotient of the normalised principal series
+`ϑ|·|^{s′+(m−1)/2} × ⋯ × ϑ|·|^{s′−(m−1)/2}` of `GL_m(F)`, and by induction in stages and the exactness of induction
+(§SR.2.1, *induction-in-stages*, *induction-exactness*; §SR.2.2, *parabolic-induction*) `V_x` is a quotient of the
+normalised principal series of `GL_N(F)` of the character `χ = (χ_0, …, χ_{N−1})` of `𝒯` that lists these characters,
+block after block. The `GL_N(𝒪)`-fixed vectors of that principal series form a line (as in the proof route of 7.7
+(a)), on which `𝔥` acts by `f ↦ 𝒮(f)(χ_0(ϖ), …, χ_{N−1}(ϖ))` (§SR.4.2, *spherical-parameter*), and
+`ℂx = V_x^{GL_N(𝒪)}` is a quotient of this line; so by 7.7 (b) the `q^{−(N−1)/2}y_i` are the `χ_i(ϖ)` in some order.
+The factor `|det|^{s′}Speh(ϑ, m)` contributes the values `ϑ(ϖ)q^{−s′−(m−1)/2+i}`, `0 ≤ i < m`, a string with top
+`ϑ(ϖ)q^{(m−1)/2−s′}`. Multiplying by `q^{(N−1)/2}` gives strings of roots of `P` with tops
+`c = q^{(N−1)/2}ϑ(ϖ)q^{(m−1)/2}` for the blocks of the first kind, and `q^{(N−1)/2}ϑ(ϖ)q^{(m−1)/2±s}` for the two
+factors of a block of the second kind, where `|ϑ(ϖ)| = 1`. (c) If `P(qc) ≠ 0`, `c` is the top of every string that
+contains it, and the tops satisfy `|c|² > q^{N+m−3} ≥ q^{N−2}`. If `|c|² = q^{N−k}` and `c = c₀q^{−i}` with `c₀` the
+top of a string of length `m` and `0 ≤ i < m`, then `|c₀|² = q^{N−k+2i}` is an integral power of `q`, so the string is
+of the first kind, `k = 2i + 2 − m ≤ i + 1`, and `cq^j = c₀q^{j−i}` lies in the string for `0 ≤ j ≤ k − 1`.
+
+Let `E`, `w`, `F = E_w`, `q`, `N`, `ρ`, `B`, `x`, `t_j` and `P = P_x` be as in 6.8, and `𝔥` as in 7.7. A *string* of
+length `m ≥ 1` with top `c ∈ ℂ^×` is the multiset `{c, cq^{−1}, …, cq^{1−m}}`.
+
+(a) The span `V_x` of the vectors `ρ(g)x`, `g ∈ GL_N(F)`, is an irreducible representation of `GL_N(F)` with
+`V_x^{GL_N(𝒪)} = ℂx`, on which `B` is a positive definite invariant hermitian form; its Satake parameter is
+`(q^{−(N−1)/2}y_i)_i` for the roots `y_i` of `P` (7.7 (b)).
+
+(b) *The unramified unitary dual.* The roots of `P`, counted with multiplicity, form a union of strings of two kinds:
+strings of length `m` with top `c` such that `|c|² = q^{N+m−2}`, and pairs of strings of the same length `m` whose
+tops `c`, `c′` have the same argument and satisfy `q^{N+m−3} < |c|² < q^{N+m−1}`, `|c|² ≠ q^{N+m−2}` and
+`|c|²·|c′|² = q^{2(N+m−2)}`.
+
+(c) Hence, if `P(c) = 0` and `P(qc) ≠ 0`, then `|c|² > q^{N−2}`, which is 6.8 (a) with strict inequality; and if
+`P(c) = 0` and `|c|²q^k = q^N` with `k ≥ 1`, then `c, cq, …, cq^{k−1}` are roots of `P`, which is 6.8 (b).
+
+*Needs:* 6.2 (a), 6.6 (c), 6.8, 7.6 (a), (c), 7.7 (b); AutomorphicSpectralTheory §7.0b (Local matching and twisted
+character transfer); SmoothRepresentationsOfLocalGroups §SR.0.3 (Compact open invariants and averaging), §SR.2.1
+(Smooth and compact induction), §SR.2.2 (Jacquet functors and parabolic induction), §SR.3a.1 (Compact and cuspidal
+representations), §SR.3.3 (Tempered representations and the conditional Langlands classification), §SR.4.1 (The Satake
+transform and isomorphism), §SR.4.2 (Spherical parameters).
+
+### 7.9 Integral branching and the branching rule
+
+*Origin:* comparison of 3.4 with the multiplicity-free branching from `GL_N` to `GL_{N−1}`
+(RepresentationTheory/ClassicalGroups §6.1; Goodman and Wallach, Symmetry, Representations, and Invariants (2009),
+Theorem 8.1.1); not part of the formal proof.
+
+*Proof route:* (a) From the definitions, `λ_κ(τ, i) − λ_{κ₀}(τ, i) − κ′_τ(N_τ) = γ_τ(i + 1)` and
+`λ_{κ₀}(τ, i) + κ′_τ(N_τ) − λ_κ(τ, i + 1) = κ′_τ(i + 1)`, both `≥ 0`. (b) Through 7.1 (a), with the rows of `n⁺_τ`
+numbered so that `∗` comes last (another numbering changes the representations by isomorphisms),
+RepresentationTheory/ClassicalGroups §6.1 gives at each `τ` a nonzero `GL(n_τ, ℂ)`-equivariant map from the
+representation of highest weight `λ_κ(τ, ·) + e_τ·(1, …, 1)` to that of highest weight
+`λ_{κ₀}(τ, ·) + e₀_τ·(1, …, 1)`, the second weight interlacing the first by (a); their tensor product over `τ` is a
+nonzero complex matrix `T` as in 3.4 (c). By 3.4 (c), `T` is a multiple of `br`, so `br ≠ 0`, and every matrix as in
+3.4 (c) is a multiple of `br`. By 3.4 (a) with `s = 1`, `br` is equivariant for `∏_τ GL(n_τ, ℂ)`.
+
+Let `n`, `n⁺`, `κ = γ + κ′`, `e`, `κ₀`, `e₀` and `br` be as in 3.4, and at each `τ` let `λ_κ(τ, ·)` be the row lengths
+of `κ` as a weight for `n⁺` and `λ_{κ₀}(τ, ·)` those of `κ₀` as a weight for `n`.
+
+(a) The highest weights interlace: `λ_κ(τ, i) ≥ λ_{κ₀}(τ, i) + κ′_τ(N_τ) ≥ λ_κ(τ, i + 1)` for `0 ≤ i < N_τ`, so that,
+through 7.1 (a), the highest weight `λ_{κ₀}(τ, ·) + e₀_τ·(1, …, 1)` of `ρ_{κ₀,e₀}` at `τ` interlaces the highest
+weight `λ_κ(τ, ·) + e_τ·(1, …, 1)` of `ρ_{κ,e}`.
+
+(b) `br ≠ 0`. The complex matrices `T` with `T·ρ_{κ,e}(diag(u, 1)) = ρ_{κ₀,e₀}(u)·T` for all `u ∈ ∏_τ U(n_τ)` are the
+complex multiples of `br`, and they are the `∏_τ GL(n_τ, ℂ)`-equivariant maps between the representations of 7.1 (a),
+the space of maps of the multiplicity-free branching rule.
+
+*Needs:* 3.4, 7.1 (a); RepresentationTheory/ClassicalGroups §6.1 (`GLₙ ↓ GLₙ₋₁`).
+
 ## Results taken from other roadmaps
 
-No section takes a result from a roadmap outside this family. The sections cite these background roadmaps of the family:
-AdelicUnitaryGroupsAndAlgebraicModularForms §§1.4, 1.5, 3.1, 6.1 (in 2.3 and 6.1),
-HolomorphicDiscreteSeriesOfUnitaryGroups §4.1 (a) (in 2.4), GaloisRepresentationsOfUnitaryEigenforms §§1.1, 5.2 (c), (d)
-(in 5.1 and 6.1), WeilRepresentationsOnBanachSpacesOfData §9.1 (in 6.1, 6.5 and 6.8) and
+No section of Layers 1–6 takes a result from a roadmap outside this family. They cite these background roadmaps of the
+family: AdelicUnitaryGroupsAndAlgebraicModularForms §§1.4, 1.5, 3.1, 6.1 (in 2.3 and 6.1),
+HolomorphicDiscreteSeriesOfUnitaryGroups §4.1 (a) (in 2.4), GaloisRepresentationsOfUnitaryEigenforms §§1.1, 5.2 (c),
+(d) (in 5.1 and 6.1), WeilRepresentationsOnBanachSpacesOfData §9.1 (in 6.1, 6.5 and 6.8) and
 AuxiliaryAlgebraAndAnalysisForThetaLifts §2.2 (b) (in 6.8).
+
+Layer 7 takes results from these general roadmaps: RepresentationTheory/ClassicalGroups §§0.4, 3.3, 4.1, 4.2, 4.3, 6.1
+(in 7.1 and 7.9); ReductiveGroups Layer 7c (in 7.2); SmoothRepresentationsOfLocalGroupsPartII §4.1 (in 7.4);
+SmoothRepresentationsOfLocalGroups §§SR.0.3, SR.2.1, SR.2.2, SR.2a.1, SR.3a.1, SR.3.3, SR.4.1, SR.4.2, SR.4.3 (in 7.6,
+7.7 and 7.8); AutomorphicSpectralTheory §7.0b (in 7.8). It also rests on these roadmaps of the family
+RiemannHypothesisForDirichletLFunctions: IntegralWeylModulesOfGeneralLinearGroups (Conventions), §§0.1, 3.1, 3.2 (in
+7.1) and FiniteReductiveGroups §§5.2, 5.4, 5.6 (b), 5.11 (a), (b), (d) (in 7.3 and 7.5). The paragraphs **In standard
+terms** also name RepresentationTheory/CompactGroups §4.1 (in 2.4) and SmoothRepresentationsOfLocalGroups §SR.2.3 (in
+6.5).
 
 ## What the library already provides
 

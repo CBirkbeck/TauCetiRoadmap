@@ -7,6 +7,20 @@ the sigma function of a lattice, normalised as the odd theta function of the for
 of a CM lattice, the translate of `σ` by `t`; the coordinates `x`, `y` of the model `y² + a₁xy = x³ + x` with origin at
 the image of `t`; and the spaces of theta functions (*sections*) of every degree.
 
+The reference is the standard theory of elliptic curves with complex multiplication by `𝒪_K`, and the roadmap states
+its results on the standard objects through Layer 6 (Comparison with the standard theory). There a CM lattice
+describes an elliptic curve over `ℂ` with complex multiplication by `𝒪_K` and a point of order two on it, given by the
+Weierstrass model `y² + a₁xy = x³ + x` with its origin moved to that point (6.2). The sigma function `σ_Λ` of this
+roadmap is not the function that the name denotes in the literature, Weierstrass's sigma function `σ_W`, but
+`σ_W·exp(−s₂z²/2)` for a constant `s₂ = s₂(Λ)` (6.1), and `θ` is Weierstrass's function at the half-period `t` times
+the same factor (6.2). Torsion values of `σ` are Klein forms, and a value of a Siegel function is a Klein form times a
+twelfth root of the discriminant of the lattice (6.3); the ring of integral series in `y` is that of the formal group
+of the Weierstrass model (6.4); by the main theorem of complex multiplication, the adele of 5.3 is the inverse of a
+finite idele whose Artin symbol, for the Artin map in the arithmetic normalisation, is the given automorphism on the
+maximal abelian extension of `K` (6.5); and the class mean of logarithmic periods of 5.4 is equivalent to the
+Chowla–Selberg formula (6.6). The objects of Layers 1–5 (normalised theta functions, torsion values, the ring
+`𝒪[[y]]`, the adele of 5.3) are one way to prove these results, and the proofs of the route are stated on them.
+
 The argument of the family runs as follows: a one-sided bound for a sum over primes gives a half-plane free of zeros
 of Dirichlet L-functions, and the one-sided bound comes from comparing an upper and a lower bound for the covolume of a
 lattice of theta lifts (OneSidedPrimeSumBoundsAndAdmissibleData). Both bounds rest on the Taylor coefficients of theta
@@ -36,17 +50,32 @@ over `K`, one finite adele of `K` describes how `σ` acts on the Taylor coeffici
 points of `KΩ₀`; and there is one number `u`, a unit at every prime, with
 `area(ℂ/Λ^σ)·|σ(u)|² = π·exp(γ − (L′/L)(1, χ_K))·2π/√d` for every conjugate lattice `Λ^σ`.
 
-There are five layers. Layer 1 is the sigma function of a lattice, the CM lattices and their sections, with the
+**In standard terms.** Write `W_C` for the curve `y² + a₁xy = x³ + x` of a CM lattice, an elliptic curve over `ℂ` with
+complex multiplication by `𝒪_K` (6.2). In (1), `a₁⁴ − 64` is the discriminant of `W_C`; with `Λ = c(ℤτ + ℤ)`,
+`t = c(r°₁τ + r°₂)` and `u = c(r₁τ + r₂)`, `r ∈ ℚ²`, `σ[u]` is the Klein form of `Λ` at `u`, and
+`|ι(σ[u])| = |ι(g_r(τ))|` if `r ∉ ℤ²`, `|ι(θ[u])| = |ι(g_{r+r°}(τ))|` if `r + r° ∉ ℤ²`, for the Siegel functions `g_r`
+(6.3); so (1) says that the discriminant of `W_C` is a unit at every prime and that, for `r ∈ ℚ²` with
+`r, r + r° ∉ ℤ²`, the Siegel values `g_r(τ)`, `g_{r+r°}(τ)` at the CM point `τ` are integral and not both non-units.
+In (2) and (3), `𝒪[[y]]` is the ring of integral series in a parameter of the formal group of `W_C` over `𝒪`, `T` is
+another parameter of it, and `T(π_pz)` is the multiplication by `π_p` of that formal group written in the parameter
+`T`, whose reduction has order `q_p`; so the reduction of `W_C` is ordinary exactly when `p` splits in `K` (6.4). In
+(4), by the main theorem of complex multiplication the adele is the inverse of a finite idele whose Artin symbol, in
+the arithmetic normalisation, is `σ` on the maximal abelian extension of `K` (6.5); and the right side is
+`π·d^{−1/2}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)/h}`, the period of the Chowla–Selberg formula (6.6).
+
+There are six layers. Layer 1 is the sigma function of a lattice, the CM lattices and their sections, with the
 addition and duplication formulas. Layer 2 is the arithmetic of the lattices: their ideal classes, the unit
 discriminant, and their finiteness. Layer 3 is integrality at torsion points and of Taylor series. Layer 4 is the formal
-group at a prime. Layer 5 is Kronecker's limit formula, complex multiplication and the Chowla–Selberg formula.
+group at a prime. Layer 5 is Kronecker's limit formula, complex multiplication and the Chowla–Selberg formula. Layer 6
+compares the objects of Layers 1–5 with the standard theory and states the results on the standard objects.
 
 ## Conventions and notation
 
 - *Labels.* Under each section heading, `*Origin:*` says where its statement comes from and `*Method of the formal
   proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family `ShortGRH`; the line
   "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`) and the declarations
-  where it proves the statement. The names of [ShortProof] occur only on that line.
+  where it proves the statement. The names of [ShortProof] occur only on that line. The sections of Layer 6, which
+  [ShortProof] does not prove, have a `*Proof route:*` in place of the method of the formal proof and no such line.
 - *The field.* `d` is a prime with `d ≡ 7 (mod 8)`, `K = ℚ(√−d)` is the subfield of `ℂ` generated by `√−d := i√d`,
   `𝒪_K` its ring of integers (read inside `ℂ`), `ω := (1 + √−d)/2`, so `𝒪_K = ℤ + ℤω`; `χ_K` is the quadratic
   character of `K`, equal to the Legendre symbol `(·/d)`; `h` is the class number and `Cl(K)` the class group. In the
@@ -89,6 +118,12 @@ group at a prime. Layer 5 is Kronecker's limit formula, complex multiplication a
 | `o(α)` | the order of `y(αz)` in `y` modulo `𝔪` | 4.2 |
 | `T, ϖ, Y` | the formal parameter, the scale, the scaled parameter | 4.3 |
 | `C^σ` | a CM lattice with `a₁(C^σ) = σ(a₁(C))`, fixed for each `σ` | 5.2 |
+| `σ_W, ζ_W, η, s₂` | Weierstrass's sigma function (the canonical product), `σ_W′/σ_W`, the quasi-period map `Λ → ℂ`, the constant with `η(l) = s₂l + (π/A)l̄` | 6.1 |
+| `σ_{W,t}, W_C, P_C, W_Λ, φ_Λ, φ_C, ψ_C` | Weierstrass's function at the half-period `t`, the curve `y² + a₁xy = x³ + x`, its point `(0, 0)`, the normalised Weierstrass model of `Λ`, its uniformisation, the uniformisation of `W_C`, `z ↦ (x(z), y(z))` | 6.2 |
+| `η_ℝ, 𝔨(u; L), σ_L[u], j(L), g_r` | the `ℝ`-linear extension of `η`, the Klein form, the torsion value of `σ_L`, the `j`-invariant `1728g₂³/Δ`, the Siegel function | 6.3 |
+| `ξ, λ_C, Ê_C, 𝔶_C, Ê^y_C, ξ̂, h_a, [α]_C, 𝔱_p` | the parameter `−x/y` at `O`, the expansion of `−1/y`, the formal group law of `W_C` in `ξ`, the expansion of `y` translated by `P_C`, the formal group law in `y`, the Taylor series of `x/(y + a₁x)`, the formal homomorphism of an isogeny, that of `α ∈ 𝒪_K`, the change of parameter from `y` to `T` | 6.4 |
+| `art_K, κ, Ô, κ𝒪_K, Ω_κ` | the Artin map in the arithmetic normalisation, a finite idele, the integral finite adeles, the fractional ideal `K ∩ κÔ`, the scale of the conjugate lattice | 6.5 |
+| `𝒵(τ, s)` | Epstein's zeta function of `ℤτ + ℤ` | 6.6 |
 
 ## Layer 1: Sigma functions, CM lattices and their sections
 
@@ -152,6 +187,14 @@ In particular `σ(z) = 0` exactly for `z ∈ Λ`.
 (d) *Addition.* `σ(u + v)σ(u − v) = (℘(v) − ℘(u))·σ(u)²σ(v)²` for `u, v ∉ Λ`.
 (e) *Duplication.* `σ(2z) = −℘′(z)·σ(z)⁴` for `z ∉ Λ`.
 
+**In standard terms.** In this roadmap *the sigma function* of `Λ` is `σ_Λ`, the normalised odd theta function of (b);
+in the literature the sigma function of a lattice is Weierstrass's canonical product `σ_W` (`latticeSigma` of
+ModularCurvesPartII §1.4a), a different function. By 6.1, `σ_Λ = σ_W·exp(−s₂z²/2)` for the constant `s₂ = s₂(Λ)` with
+`η(l) = s₂l + (π/A)l̄`, `η` the quasi-period map of `σ_W`. Through this identity the law in (b) is the
+quasi-periodicity of `σ_W`, the last clause of (c) is the description of the zeros of `σ_W`, and (d), (e) are
+equivalent to the classical addition and duplication formulas `σ_W(u + v)σ_W(u − v) = (℘(v) − ℘(u))·σ_W(u)²σ_W(v)²`
+and `σ_W(2z) = −℘′(z)·σ_W(z)⁴` (6.1 (c)).
+
 The libraries at the pins have no sigma function. On Tau Ceti's main branch, later than the revision pinned here:
 `PeriodPair.weierstrassSigma`, the classical product, a different function; passing from it to `σ` needs Legendre's
 relation between the periods and the quasi-periods (`η(ω₁)ω₂ − η(ω₂)ω₁ = 2πi`), which neither library has.
@@ -165,7 +208,8 @@ Legendre relation of that section (`η(ω₁)ω₂ − η(ω₂)ω₁ = 2πi = (
 ThetaChainsOnDefiniteUnitaryGroups §3.1c, which that section takes for the lattice `Λ_K` of its §3.1a, with the same
 `s₂`; and for every lattice the twisted translation `T¹_y` of 1.1 is the *Fock translation* `U_y` of
 ThetaChainsOnDefiniteUnitaryGroups §3.1a on `ℂ`, `(U_yf)(z) = f(z + y)·exp(−(π/A)zȳ − (π/(2A))|y|²)`. [ShortProof]
-does not prove this comparison (it needs Legendre's relation), and nothing below uses it.
+does not prove this comparison (it needs Legendre's relation), and Layers 1–5 do not use it; 6.1 states it, with its
+proof.
 
 *Needs:* 1.1; AbelianSchemesWithThetaStructuresAndTheirCohomology §§1.2, 1.3 (Frobenius's formula, base-point-free
 multiples); Mathlib `PeriodPair.weierstrassP_add_coe`, Mathlib `PeriodPair.analyticOnNhd_weierstrassP`, Mathlib
@@ -195,6 +239,18 @@ multiples); Mathlib `PeriodPair.weierstrassP_add_coe`, Mathlib `PeriodPair.analy
 - For `e = (a, b, c) ∈ ℕ³` the *monomial* `M_e := θ^a·σ^{2b}·G^c` has *degree* `deg e := a + 2b + 3c`.
 - An isogeny from `C` to `C′` is an isogeny between their lattices.
 
+**In standard terms.** A CM lattice describes an elliptic curve over `ℂ` with complex multiplication by `𝒪_K` together
+with a point of order two and a scaling (6.2). Through `z ↦ (x(z), y(z))`, `ℂ/Λ` is the curve
+`W_C : y² + a₁xy = x³ + x`, with `0` carried to the point `P_C = (0, 0)`; for the uniformisation with origin at
+infinity, `P_C` is the image of `t`, the only point of order two of `W_C` killed by neither prime of `K` above `2`;
+the endomorphism ring of `W_C` is `𝒪_K`; and every elliptic curve over `ℂ` with endomorphism ring isomorphic to `𝒪_K`
+is isomorphic to some `W_C` (6.2 (c), (d)). Here *CM lattice* names the triple `(Λ, t, a₁)` with its marked point and
+its scaling `℘″(t) = 2`; in the literature a lattice with complex multiplication is any lattice stable under
+multiplication by an order of an imaginary quadratic field, with no marked point and no scaling. The theta function is
+`θ = σ_{W,t}·exp(−s₂z²/2)`, `σ_{W,t}` being Weierstrass's function at the half-period `t` (6.2 (a)), and `x`, `y` are
+the coordinates of `W_C`, which `X = x + ℘(t)`, `Y = y + a₁x/2` carry to those of the normalised Weierstrass model of
+`Λ` (6.2 (b)).
+
 *Relation to the theta function `θ₀` of other roadmaps.* ThetaChainsOnDefiniteUnitaryGroups §3.1c (for the lattice
 `Λ_K`) and GluedTargetAndDivisionInequality §8.24d (for a lattice `Λ = δ·𝔠` in any ideal class) scale a lattice with
 complex multiplication by `𝒪_K` by `Δ(Λ) = 1`, and put `θ₀ := U_{t₀}θ/(U_{t₀}θ)(0)` for the point `t₀` of order two
@@ -203,8 +259,8 @@ So `Λ_C = c·Λ` with `Δ(Λ) = 1` exactly when `c^{−12} = a₁⁴ − 64`; t
 `ωt, ω̄t ∉ Λ_C` single out one point of order two), `σ_{Λ_C}(cz) = c·σ_Λ(z)`, and, by the comparison of 1.2,
 `θ_C(cz) = θ₀(z)` and `(T¹_{cu}θ_C)(cz) = (U_uθ₀)(z)`. By 2.2 (d) the factor `c` is a unit at every prime. The theta
 function `θ_C` is thus the `θ₀` of those sections in another scaling of the lattice; the scaling by `℘″(t) = 2` is kept
-here because the model `y² + a₁xy = x³ + x` of 1.4 depends on it. As in 1.2, [ShortProof] does not prove this
-comparison and nothing below uses it.
+here because the model `y² + a₁xy = x³ + x` of 1.4 depends on it. [ShortProof] does not prove this comparison, which
+rests on that of 1.2, and nothing below uses it.
 
 *Needs:* 1.1, 1.2.
 
@@ -241,6 +297,14 @@ exactly the points of `t + Λ`, all simple.
 (f) For every field `F` and ring homomorphism `ι : ℂ → F`, the Taylor series at `0` of `x`, `y` read through `ι` satisfy
 `y² + ι(a₁)xy = x³ + x`, and, if `F` has characteristic `0`, `x′ = 2y + ι(a₁)x` and `y′ = 1 + 3x² − ι(a₁)y`; the Taylor
 series of `M_e` is `θ^{deg e}·x^b·y^c`.
+
+**In standard terms.** Statements (c) and (d) say, by 6.2 (b) and (c), that `W_C : y² + a₁xy = x³ + x` is carried by
+`X = x + ℘(t)`, `Y = y + a₁x/2` to the normalised Weierstrass model of `Λ` (ModularCurvesPartII §1.1), so that its
+discriminant is `a₁⁴ − 64 = Δ(Λ)`, and that `z ↦ (x(z), y(z))` is the uniformisation of `W_C` followed by the
+translation by its point `(0, 0)` of order two, along which the invariant differential `dx/(2y + a₁x)` pulls back to
+`dz`. By 6.2 (a), the zeros in (a) are those of Weierstrass's function `σ_{W,t}` at the half-period `t`, and (b) and
+(e) are equivalent to the same identities for `σ_{W,t}` and `σ_W`. (f) is the expansion at the point `(0, 0)`, in the
+parameter `y` of the formal group of `W_C` (6.4).
 
 *Needs:* 1.2, 1.3.
 
@@ -409,6 +473,13 @@ at `ι`, and `∏_{𝒞} s(t_𝒞) = (−1)^h`.
 (d) For every CM lattice `C`, every prime `p` and every ring homomorphism `ι : ℂ → ℂ_p`: `|ι(a₁⁴ − 64)| = 1` and
 `|ι(a₁)| ≤ 1`.
 
+**In standard terms.** By 6.3 (c), `s_L(u) = σ_L[u]¹²·Δ(L)`, the twelfth power of the Klein form of `L` at `u` times
+the discriminant; for `L = c(ℤτ + ℤ)` and `u = c(r₁τ + r₂)` it is `g_r(τ)¹²`, `g_r` the level-two Siegel function of
+ImaginaryQuadraticClassNumber §3.2; and the three numbers `s_L(u_i)` are the roots of Weber's cubic
+`(X + 16)³ − j(L)X`, of which (a) gives the sum and the product. The integrality of the three numbers in (c) is also a
+consequence of the integrality of the values of Siegel functions at CM points (6.3 (e)). (d) says that
+`g_{r°}(τ)¹² = a₁⁴ − 64`, for `Λ_C = c(ℤτ + ℤ)` and `t = c(r°₁τ + r°₂)`, is a unit at every prime, `2` included.
+
 The library has Weber's cubic for the level-two Siegel functions, `(X + 16)³ − jX`, whose roots, the twelfth powers of
 those functions, have the same sum `−48` and product `−2¹²`
 (`TauCeti.ModularForm.prod_X_sub_C_siegelFunction_pow_twelve`); as the cubic is monic over `ℤ[j]`, its roots are
@@ -445,6 +516,9 @@ Let `C`, `D` be CM lattices.
 (b) The set `{Λ_C : C a CM lattice for d}` is finite.
 (c) If `Λ_C = Λ_D`, then `area(Λ_C) = area(Λ_D)` and `θ_C = θ_D`.
 (d) There is `M = M(d)` with `|(T¹_uθ_C)(0)| ≤ M` for every CM lattice `C` and every `u ∈ ℂ`.
+
+**In standard terms.** By 6.3 (a), (d), `|(T¹_uθ_C)(0)| = |θ[u]| = |𝔨(u + t; Λ_C)|`, so (d) says that the Klein forms
+`𝔨(·; Λ_C)` of the lattices of all CM lattices for `d` are bounded on `ℂ` by one constant.
 
 On Tau Ceti's main branch, later than the revision pinned here: the correspondence of 2.1 counts the homothety classes
 (`TauCeti.BinaryQuadraticForm.nat_card_cmHomothetyClass`). The statements on the normalised lattices are in neither
@@ -505,6 +579,16 @@ From here on `C` is a CM lattice and `p` any prime.
 `|ι(x(t_{i+1}) − x(t_{j+1}))| = 1`; and `|ι(x′(t_{i+1}))| = 1`.
 (f) If `u` is a torsion point with `|ι(θ[u])| = 1`, then `u ∉ t + Λ` and `x(u)`, `y(u)` are integral at `ι`.
 
+**In standard terms.** By 6.3 (a), (d), the torsion value `σ[u]` is the Klein form `𝔨(u; Λ)`, and `θ[u]` is a root of
+unity times `𝔨(u + t; Λ)` at every torsion point `u`. Write `Λ = c(ℤτ + ℤ)`, `t = c(r°₁τ + r°₂)` and `u = c(r₁τ + r₂)`
+with `r ∈ ℚ²`; for a CM lattice, `τ` is a CM point and, the discriminant being a unit (2.2 (d)),
+`|ι(σ[u])| = |ι(g_r(τ))|` if `r ∉ ℤ²` and `|ι(θ[u])| = |ι(g_{r+r°}(τ))|` if `r + r° ∉ ℤ²`, `g_r` the Siegel functions
+of ImaginaryQuadraticClassNumber §3.2. So (c) says that the values `g_r(τ)` are integral at every `ι`, and that for
+every `r ∈ ℚ²` with `r, r + r° ∉ ℤ²` the two values `g_r(τ)`, `g_{r+r°}(τ)` are not both non-units at `ι`; and (e)
+gives units among the values at the points `t_i`. The integrality in (c) is also a consequence of the integrality of
+the values of Siegel functions at CM points (6.3 (e)); the unit statements of (c) and (e) are particular to this
+roadmap.
+
 *Needs:* 1.4, 1.5, 1.6, 2.2; ArithmeticDynamics §6.3 (the resultant of `(Φ₂, ΨSq₂)` is `Δ(E)²`) and ArithmeticDynamics
 §2.32 (`‖F(x)‖ = ‖x‖^d` for a lift with good reduction): with 1.6 and 2.2 (d), `|F_{ι(a₁)}(w)| = |w|⁴` for all
 `w ∈ ℂ_p²`.
@@ -545,6 +629,11 @@ coefficientwise limits; the constant and linear coefficients of its elements are
 (b) Let `C` be a CM lattice and `y`, `x` its coordinates read through `ι`. Then `y = z + O(z²)`, `x ∈ 𝒪[[y]]`,
 `x = z² + O(z³)`, and `d/dz` maps `𝒪[[y]]` into itself.
 
+**In standard terms.** By 6.4 (b), the Taylor series of `y` is `𝔶_C(ξ̂)`, where `ξ̂`, the Taylor series of
+`x/(y + a₁x)`, is the expansion along the uniformisation of the standard parameter `−x/y` of `W_C` at its origin `O`,
+and `𝔶_C ∈ ξ + ξ²ℤ[a₁][[ξ]]`. For a CM lattice `𝒪[[y]] = 𝒪[[ξ̂]]`: it is the ring of integral series in a parameter of
+the formal group of `W_C` over `𝒪`, and (b) places `x` in it.
+
 *Needs:* 1.4, 2.2 (d); Mathlib `IsAdicComplete.henselianRing` (Hensel for `𝒪[[Z]]` and `(Z)`).
 
 [ShortProof], `Lib/CM/FormalGroup/IntegralParameter` (`New.IsSeriesGenerator`, `New.IsSeriesGenerator.exists_subst_inverse`,
@@ -580,6 +669,9 @@ monomials `M_e` with `c ≤ 1` and `deg e = m`. If `f` is even, `f = Σ_{i ≤ m
 `ι`, and the Taylor series of `f` is `θ^m·R(x)` with `R = Σ R_iX^i`.
 (c) The Taylor series of `f` read through `ι` lies in `θ^m·𝒪[[y]]`.
 
+**In standard terms.** Statement (c) says, by 6.4 (b), that the Taylor series of `f` is `θ^m` times an integral series
+in the parameter `ξ̂` of the formal group of `W_C` over `𝒪`, equivalently in its parameter `y`.
+
 *Needs:* 1.4, 1.5, 3.1, 3.2.
 
 [ShortProof], `Lib/CM/Integrality/IntegralSections` (`New.norm_coeff_le_one_of_norm_eval_le_one`,
@@ -608,6 +700,11 @@ Let `C`, `C′` be CM lattices, `p` a prime, and `a ∈ ℂ` with `aΛ_C ⊂ Λ_
 (d) `|ι(a)| ≤ 1`.
 (e) If `δ ≠ 0`, multiplication by `δ̄` is an isogeny of degree `N` from `Λ_C` to itself, and `δv ∈ Λ_C`, then the Taylor
 series of `z ↦ (T¹_vθ_C)(δ̄z)` lies in `θ_C^N·𝒪[[y_C]]`.
+
+**In standard terms.** By 6.4 (c), the series `h_a ∈ 𝒪[[Z]]` with `y_{C′}(az) = h_a(y_C)`, given by (c), is a
+homomorphism over `𝒪` from the formal group of `W_C` to that of `W_{C′}`, in the parameters `y`, with linear
+coefficient `ι(a)`: the integral formal homomorphism induced by the isogeny `z ↦ az`; (d) is the integrality of that
+coefficient.
 
 The libraries at the pins have no formal series of an isogeny. On Tau Ceti's main branch, later than the revision pinned
 here: over a field, the homomorphism of formal groups induced by an isogeny of Weierstrass curves
@@ -642,6 +739,10 @@ Let now `C` be a CM lattice.
 (b) For `α ∈ 𝒪_K`: `exp(αᾱ·g(z) − g(αz)) = θ(αz)/θ(z)^{αᾱ}` lies in `𝒪[[y]]`. More generally, for every `(δ, s) ∈ ℂ_p²` in
 the closure of `{(ι(α), ι(αᾱ)) : α ∈ 𝒪_K}`: `y(δz) ∈ 𝒪[[y]]` and `exp(s·g(z) − g(δz)) ∈ 𝒪[[y]]`.
 (c) `ι(α(ᾱ − α))·g″(0)/2 ∈ 𝒪` for every `α ∈ 𝒪_K`, and `ι(√−d)·g″(0) ∈ 𝒪`.
+
+**In standard terms.** By 6.1 (c) and 6.2 (a), the complex function `−log θ` has second derivative `℘(z + t) + s₂(Λ)`,
+so (a) is the classical identity `(σ_W′/σ_W)′ = −℘` at `z + t`, read as an identity of series over `ℂ_p`; and
+`g″(0) = ℘(t) + s₂(Λ)`.
 
 On Tau Ceti's main branch, later than the revision pinned here: the classical `(σ′/σ)′ = −℘` for the Weierstrass
 product (`PeriodPair.hasDerivAt_logDeriv_weierstrassSigma`). (a) is stated for the `σ` of 1.2 and as an identity of
@@ -687,6 +788,11 @@ integral constant terms, and those with a unit constant term are invertible in i
 `v(μ_iz) ∈ 𝒪[[y(μz)]]`.
 (b) `y(z₀ + z₁) ∈ 𝒪[[y(z₀), y(z₁)]]`.
 
+**In standard terms.** By 6.4 (b), `y(z₀ + z₁) = Ê^y_C(y(z₀), y(z₁))`, where `Ê^y_C ∈ ℤ[a₁][[Z₀, Z₁]]` is the formal
+group law of `W_C` carried by the translation by the point `(0, 0)` to that point, in the parameter `y`; (b) is the
+integrality of this law at `ι`, `a₁` being integral (2.2 (d)). The change of origin and the identification of the
+analytic addition with the formal group law, named in the next paragraph, are 6.4 (a) and (b).
+
 (b) also follows from the integrality of the formal group law of a Weierstrass curve over its coefficient ring (Tau Ceti
 library, `WeierstrassCurve.formalGroup`) applied to `y² + a₁xy = x³ + x` over `𝒪`, together with two comparisons that
 the library does not have: the change of origin to the point of order two, an integral change of parameter because `a₁`
@@ -703,7 +809,8 @@ is integral, and the identification of the analytic addition with the formal gro
 
 At a prime `p` the multiplication by `π_p` (`√−d` at `d`, `p` otherwise) acts on the parameter `y` by an integral series
 whose reduction has order at most `q_p` (4.2; as in Deuring's criterion, this limits the height of the formal group, here
-at every prime). The part `T` of `y` in the degrees `≡ 1 (mod q_p − 1)` is then a Lubin–Tate parameter:
+at every prime). The part `T` of `y` in the degrees `≡ 1 (mod q_p − 1)` is then a parameter in which the
+multiplication by `π_p` has the first two terms of a Lubin–Tate series:
 `T(π_pz) = π_pT + b₁T^{q_p} + ⋯` with a unit `b₁`, and after the scaling `ϖ^{q_p−1} = −π_p/b₁` the series `T(ϖz)/ϖ` is
 congruent to `Σ_j z^{q_p^j}` modulo `π_p` (4.3).
 
@@ -769,6 +876,14 @@ and `o(α) = 1` if `ι(α)` is a unit.
 (c) If `p` splits in `K`, there are `h ≥ 1` and `α ∈ 𝒪_K` with `αᾱ = p^h` and `|ι(ᾱ)| = 1`.
 (d) `o(π_p) ≤ q_p`.
 
+**In standard terms.** Here the *inseparable degree* `o(α)` is the order of a reduced power series; in the literature
+the inseparable degree is a degree of an isogeny of curves, or of an extension of fields, and `o(α)` is not defined as
+one. By 6.4 (c), `o(α)` is the order of the reduction modulo `𝔪` of the endomorphism `[α]_C` of the formal group of
+`W_C` over `𝒪`, the multiplication by `α`; with 4.3 (d), (d) gives `o(p) = p` if `p` splits in `K` and `o(p) = p²`
+otherwise: the formal group of the reduction of `W_C` has height one or two, and the reduction is supersingular
+exactly when `p` does not split, which is Deuring's criterion (ComplexMultiplicationAndExplicitReciprocity §5.1) for
+it (6.4 (d)).
+
 The library has, over a field, the inseparable degree of an isogeny (`TauCeti.Isogeny.inseparableDegree`, with
 `TauCeti.Isogeny.separableDegree_mul_inseparableDegree`), but no formal series of an isogeny and no reduction of
 isogenies with control of the degree. On Tau Ceti's main branch, later than the revision pinned here: over a field, the
@@ -824,6 +939,10 @@ parameter*).
 (f) For every `ϖ′ ∈ ℂ_p` with `|ϖ′| ≤ p^{−ρ_p}` and every `f ∈ 𝒪[[y]]`, `f(ϖ′z)` is integral; and the coefficients of `f`
 in the degrees `< q_p` are integral.
 
+**In standard terms.** By 6.4 (e), `T` is a parameter of the formal group of `W_C` over `𝒪`
+(`𝒪[[T]] = 𝒪[[y]] = 𝒪[[ξ̂]]`), and `g_p` in (d) is the multiplication by `π_p` of that formal group written in the
+parameter `T`; its reduction has order `q_p`, which gives the heights of 6.4 (d).
+
 *Needs:* 3.2, 3.5, 4.1, 4.2.
 
 [ShortProof], `Lib/CM/FormalGroup/IntegralParameter` (`New.mem_range_seriesToCp_of_rescale_eq`,
@@ -867,6 +986,10 @@ Let `Λ` be a lattice of area `A` and `Δ = Δ(Λ) = g₂³ − 27g₃²`, and l
 `F(s) = (s − 1)·Σ_{0≠l∈Λ} (|l|²/(kA))^{−s}` for `1 < s < 2` (the series converges), `F(1) = πk`, and right derivative at
 `1` equal to `πk·(2γ − log(A/(kπ²)) − (1/6)·log|Δ|)`. Equivalently, as `s ↓ 1`,
 `Σ_{0≠l∈Λ} (|l|²/A)^{−s} = π/(s − 1) + π·(2γ − log(A·|Δ|^{1/6}/π²)) + o(1)`.
+
+**In standard terms.** By 6.6 (a), for `Λ = a(ℤτ + ℤ)` the sum is Epstein's zeta function `𝒵(τ, s)` and the constant
+is `2π(γ − log 2 − (1/2)log Im τ − (1/12)log|Δ(τ)|)`; so this is Kronecker's first limit formula restricted to real
+`s > 1`, a consequence of it, which does not record the continuation of `𝒵(τ, s)` to a neighbourhood of `1`.
 
 *Needs:* 1.1; Mathlib `riemannZeta`, Mathlib `ModularForm.eta` (zeta, eta product); Tau Ceti
 `PeriodPair.exists_lattice_eq_smul_periodPair` (every lattice is `a(ℤτ + ℤ)`); Tau Ceti `UpperHalfPlane.g₂_periodPair`,
@@ -915,6 +1038,13 @@ its point `t_ρ`, in the scaling of 1.3: if `Λ_C = c·Λ` with `Δ(Λ) = 1` as 
 (e) If `a₁(D) = σ(a₁(C))`, then the Taylor series of `θ_D` is `σ` applied to that of `θ_C`; so `Q = 1`, and the Taylor
 series of every monomial of `D` is the conjugate of that of `C`.
 
+**In standard terms.** By 6.2 (b), the curve `W_{C^σ}` of `C^σ` is the conjugate `σ(W_C)` of `W_C` (`σ` applied to
+`a₁`), and (c) chooses a lattice of it normalised as in 1.3; (a) and (e) say that `σ` conjugates coefficientwise the
+expansions at the point `(0, 0)` of the coordinates and of `θ`. For `Λ_C = Ω₀𝒪_K`, the main theorem of complex
+multiplication gives, for every finite idele `κ` whose Artin symbol, in the arithmetic normalisation, is `σ` on the
+maximal abelian extension of `K`, a scale `Ω_κ ∈ ℂ^×` with `Λ_{C^σ} = Ω_κ·κ^{−1}𝒪_K`, where `κ^{−1}𝒪_K` is the
+fractional ideal of `κ^{−1}` (6.5 (a)).
+
 *Needs:* 1.4, 1.5, 2.1; Tau Ceti `PeriodPair.exists_g₂_g₃_eq`, Tau Ceti `PeriodPair.weierstrassPoint_surjective`
 (uniformisation).
 
@@ -957,6 +1087,13 @@ that: `Λ_{C^σ} = {Ω′·a/N(𝔠) : a ∈ 𝔠²}`; `area(ℂ/Λ_{C^σ}) = |�
 applying `σ` to the coefficients of the Taylor series at `0` of `T¹_{xΩ₀}θ_C` gives the Taylor series of
 `T¹_{x′Ω′}θ_{C^σ}`.
 
+**In standard terms.** 5.3 is named after the main theorem of complex multiplication, which it does not contain: it
+gives the action of `σ` through some adele `β`, and is proved without the reciprocity law. By 6.5 (b), which rests on
+that theorem (ShimuraVarieties §5.10; ComplexMultiplicationAndExplicitReciprocity §2.2), every `β` as in (b) is a
+finite idele, `β^{−1}` has Artin symbol `σ` on the maximal abelian extension of `K` (Artin map in the arithmetic
+normalisation), and the fractional ideal of `β` is `𝔠²/N(𝔠)`; by 6.5 (c), for every finite idele `κ` with this Artin
+symbol the last clause of (b) holds with `β = κ^{−1}` and the scale `Ω_κ` of 6.5 (a) in place of `Ω′`.
+
 The main theorem of complex multiplication (ShimuraVarieties §5.10; ComplexMultiplicationAndExplicitReciprocity §2.2)
 describes the action of `σ` on torsion points and the conjugate lattice through the Artin map; it does not state the
 action on the Taylor coefficients of translates of `θ`, which is what is used.
@@ -991,6 +1128,9 @@ Let `d` be a prime `≡ 7 (mod 8)`, `w = 2` the number of units of `𝒪_K`, and
 (b) `(1/h)·Σ_{𝒞} [log(A_𝒞/π) + (1/6)·log|Δ(Λ_𝒞)|] = γ + log(2π/√d) − (L′/L)(1, χ_K)`; equivalently
 `Σ_{𝒞} (2γ − log(A_𝒞·√d/(2π²)) − (1/6)·log|Δ(Λ_𝒞)|) = h·(γ + (L′/L)(1, χ_K))`.
 
+**In standard terms.** By 6.6 (b), `(L′/L)(1, χ_K) = γ + log(2π) − (1/h)·Σ_{a=1}^{d−1}χ_K(a)·log Γ(a/d)`, and (b) is
+equivalent to the Chowla–Selberg formula `∏_{𝒞} A_𝒞·|Δ(Λ_𝒞)|^{1/6}/π = d^{−h/2}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)}`.
+
 The formal proof proves (a) and (b) for lattices `Λ_𝒞` of CM lattices; the general case follows because both sides
 depend only on the homothety class. (b) is the case `D = d` of
 ArithmeticVolumesAndIntegralFormsOnUnitaryShimuraVarieties §8.5 (a): the summand `log(A_𝒞/π) + (1/6)·log|Δ(Λ_𝒞)|` is
@@ -1024,6 +1164,13 @@ Let `d` be a prime `≡ 7 (mod 8)` and `C` a CM lattice. There is `u ∈ ℂ` su
 every ring homomorphism `ι : ℂ → ℂ_p`, and such that for every automorphism `σ` of `ℂ` over `K`
 `area(ℂ/Λ_{C^σ})·|σ(u)|² = π·exp(γ − (L′/L)(1, χ_K))·2π/√d`, with `C^σ` of 5.2 (c).
 
+**In standard terms.** The right side is `π·d^{−1/2}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)/h}` (6.6 (c)). `Λ_{C^σ}` is the
+lattice of periods of the invariant differential `dx/(2y + σ(a₁)x)` of `W_{C^σ} = σ(W_C)` (6.2 (c);
+ModularCurvesPartII §1.4), so this section says that the differential `u·dx/(2y + a₁x)` of `W_C` and each of its
+conjugates `σ(u)·dx/(2y + σ(a₁)x)` have lattices of periods of that covolume. The section is named after the
+Chowla–Selberg formula, which is the evaluation through Gamma values of the class mean of 5.4 (6.6 (b)); the statement
+with one number `u`, a unit at every prime, is a refinement particular to this roadmap.
+
 The right side is `π·Ω_K` in the notation of ArithmeticVolumesAndIntegralFormsOnUnitaryShimuraVarieties §8.5. That
 section's (c) is the mean form for a lattice `Λ₀` with `Δ(Λ₀) = 1`: the mean over the embeddings of
 `log(area(ℂ/Λ₀^s)/π)` is `log Ω_K`. The statement here is finer: one number `u`, a unit at every prime, gives the
@@ -1035,6 +1182,375 @@ area of each conjugate lattice separately.
 `New.QuadField.scaledIdeal_inv_mul_le_iff`, `New.CMLattice.prod_norm_eq_one`,
 `New.CMLattice.scaledIdeal_map_mul_galConjugate_le`, `New.CMLattice.latticeModule_galConjugate_eq_mul`,
 `New.CMLattice.prod_area_mul_norm_disc_galConjugate`, `New.CMLattice.chowla_selberg`)
+
+## Layer 6: Comparison with the standard theory
+
+This layer relates the objects of Layers 1–5 to the standard theory of elliptic curves with complex multiplication,
+owned by the general roadmaps of the library, and states on the standard objects the results that other roadmaps use:
+Weierstrass's sigma function and the oriented Legendre relation (6.1); Weierstrass's function at a half-period, the
+Weierstrass model of a lattice with its uniformisation, and elliptic curves with complex multiplication by `𝒪_K`
+(6.2); Klein forms, Siegel functions and Weber's cubic (6.3); the formal group of the Weierstrass model (6.4); the
+main theorem of complex multiplication and the Artin map (6.5); Kronecker's first limit formula and the Chowla–Selberg
+formula (6.6). [ShortProof] proves none of these statements; each section gives a `*Proof route:*` in place of the
+method of the formal proof.
+
+### 6.1 The sigma function and Weierstrass's sigma function
+
+*Origin:* this roadmap's own formulation: the function `σ_Λ` of 1.2 compared with Weierstrass's sigma function
+`latticeSigma` of ModularCurvesPartII §1.4a, through the oriented Legendre relation of that section.
+
+*Proof route:* (a) `η` is additive and `Λ` spans `ℂ` over `ℝ`, so `η` is the restriction of an `ℝ`-linear map `ℂ → ℂ`,
+which has the form `u ↦ s₂·u + s′·ū` for unique `s₂, s′ ∈ ℂ`. For a positive basis,
+`ω̄₁ω₂ − ω̄₂ω₁ = 2i·Im(ω̄₁ω₂) = 2iA`, so the Legendre relation `η(ω₁)ω₂ − η(ω₂)ω₁ = 2πi`
+(`latticeQuasiPeriod_legendre`) reads `s′·2iA = 2πi`, that is `s′ = π/A`. Then
+`η(ω₂)ω̄₁ − η(ω₁)ω̄₂ = s₂·(ω₂ω̄₁ − ω₁ω̄₂) = 2iA·s₂`. The product gives `σ_W(cz; cΛ) = c·σ_W(z; Λ)`, hence the
+quasi-period of `cΛ` at `cl` is `c^{−1}η(l)`, and `area(ℂ/cΛ) = |c|²A`; comparing the decompositions of `η` for `Λ`
+and for `cΛ` gives `s₂(cΛ) = c^{−2}s₂(Λ)`. (b) Put `f(z) := σ_W(z)·exp(−s₂z²/2)`. For `l = aω₁ + bω₂`, `a + b + ab` is
+even exactly when `a` and `b` are both even, that is when `l ∈ 2Λ`, so the sign `(−1)^{a+b+ab}` of
+`latticeSigma_quasiPeriod` is `ε(l)`. As `s₂(z + l)²/2 − s₂z²/2 = s₂l·(z + l/2)`, (a) gives
+`f(z + l) = ε(l)·exp((η(l) − s₂l)(z + l/2))·f(z) = ε(l)·exp((π/A)·l̄·(z + l/2))·f(z)`. So `f` lies in
+`Θ(H, ε) = Th_1(Λ, ε)` (AbelianSchemesWithThetaStructuresAndTheirCohomology §1.1, and 1.1), `f` is odd and
+`f′(0) = σ_W′(0) = 1`, and `f = σ_Λ` by the uniqueness in 1.2 (b). (c) The factor `exp(−s₂z²/2)` has no zeros. In
+`σ(u + v)σ(u − v)` the factors give `exp(−s₂(u² + v²))`, as in `σ(u)²σ(v)²`, and in `σ(2z)` they give `exp(−2s₂z²)`,
+as in `σ(z)⁴`; so each identity for `σ_Λ` is the identity for `σ_W` multiplied by a function without zeros. Finally
+`σ_Λ′/σ_Λ = ζ_W − s₂z`, and `ζ_W′ = −℘` (ModularCurvesPartII §1.4a).
+
+Let `Λ` be a lattice of area `A` and `σ_W` its Weierstrass sigma function `z·∏_{0≠l∈Λ}(1 − z/l)·exp(z/l + z²/(2l²))`
+(`latticeSigma` of ModularCurvesPartII §1.4a); let `ζ_W := σ_W′/σ_W`, and `η : Λ → ℂ` the quasi-period map of that
+section (`latticeQuasiPeriod`: `ζ_W(z + l) = ζ_W(z) + η(l)` for `z ∉ Λ`). A basis `(ω₁, ω₂)` of `Λ` is *positive* if
+`Im(ω₂/ω₁) > 0`.
+(a) There is exactly one `s₂ = s₂(Λ) ∈ ℂ` such that `η(l) = s₂·l + (π/A)·l̄` for all `l ∈ Λ`. For every positive
+basis, `s₂ = (η(ω₂)ω̄₁ − η(ω₁)ω̄₂)/(2iA)`; and `s₂(cΛ) = c^{−2}·s₂(Λ)` for `c ∈ ℂ^×`.
+(b) `σ_Λ(z) = σ_W(z)·exp(−s₂z²/2)` for all `z ∈ ℂ`.
+(c) `σ_Λ` and `σ_W` have the same zeros, so the last clause of 1.2 (c) says that the zeros of `σ_W` are the points of
+`Λ`. 1.2 (d) and (e) are equivalent to the classical addition and duplication formulas
+`σ_W(u + v)σ_W(u − v) = (℘(v) − ℘(u))·σ_W(u)²σ_W(v)²` for `u, v ∉ Λ` and `σ_W(2z) = −℘′(z)·σ_W(z)⁴` for `z ∉ Λ`. Off
+`Λ`, `(σ_Λ′/σ_Λ)′ = −℘ − s₂`.
+
+So `σ_Λ = σ_W` exactly when `s₂ = 0`. If `iΛ = Λ`, or `ρΛ = Λ` with `ρ² + ρ + 1 = 0`, the homogeneity in (a) gives
+`s₂ = −s₂`, resp. `s₂ = ρs₂`, so `s₂ = 0`; for `Λ = ℤ[i]` (`A = 1`) this says `η(l) = π·l̄`, and the Legendre relation
+for the positive basis `(1, i)` reads `π·i − (−πi)·1 = 2πi`. When `s₂ ≠ 0`, `σ_W` does not lie in `Th_1(Λ, ε)`: its
+factor at `l` is that of `σ_Λ` times `exp(s₂l·(z + l/2))`, which depends on `z` for `l ≠ 0`.
+
+*Needs:* 1.1, 1.2; ModularCurvesPartII §1.4a (Sigma, quasi-periods and the oriented Legendre relation);
+AbelianSchemesWithThetaStructuresAndTheirCohomology §1.1 (Theta functions, Appell–Humbert data and twisted
+translations).
+
+### 6.2 The theta function of a CM lattice and the Weierstrass model
+
+*Origin:* this roadmap's own formulation: the function `θ` of 1.3 compared with Weierstrass's function at a
+half-period; the curve `y² + a₁xy = x³ + x` of 1.4 compared with the normalised Weierstrass model and the
+uniformisation of ModularCurvesPartII §§1.1, 1.2, with the origin moved to a point of order two; and CM lattices
+compared with elliptic curves over `ℂ` with complex multiplication by `𝒪_K`.
+
+*Proof route:* (a) `ζ_W` is odd and `ζ_W(z + 2t) = ζ_W(z) + η(2t)`; at `z = −t` this gives `ζ_W(t) = η(2t)/2`, which
+is `s₂t + (π/A)t̄` by 6.1 (a). Inserting 6.1 (b) in `θ(z) = exp(−(π/A)t̄z)·σ(z + t)/σ(t)` (1.3), the exponents add up
+to `−(π/A)t̄z − s₂tz − s₂z²/2 = −ζ_W(t)z − s₂z²/2`. In each identity of 1.4 (b) and (e) the factors `exp(−s₂z²/2)`
+contributed by the two sides agree, as in 6.1 (c). (b) With `e = ℘(t)`, 1.3 gives `a₁² = 12e` and `g₂ = 12e² − 4`, and
+1.4 (c) gives `g₃ = 4e³ − g₂e`; expanding, `(y + a₁x/2)² − (x + e)³ + (g₂/4)(x + e) + g₃/4 = y² + a₁xy − x³ − x`. The
+quantities `b₂, b₄, b₆, b₈, c₄`, the discriminant and `j` follow from their definitions for
+`(a₁, a₂, a₃, a₄, a₆) = (a₁, 0, 0, 1, 0)`, and `1728g₂³ = (a₁⁴ − 48)³` since `12g₂ = a₁⁴ − 48`. (c) For `z ∉ t + Λ`,
+the definitions of 1.3 give `x(z) + e = ℘(z + t)` and `y(z) + a₁x(z)/2 = ℘′(z + t)/2`, the coordinates of
+`φ_Λ(z + t)`; `φ_Λ` intertwines addition with the group law (ModularCurvesPartII §1.1), `φ_Λ(t) = (e, 0)` is the image
+of `P_C`, and the substitution of (b), an isomorphism of Weierstrass curves, respects the group laws. `x′ = 2y + a₁x`
+(1.4 (d)) and `d℘/dz = ℘′` give the pull-backs of the invariant differential. (d) By ModularCurvesPartII §1.2, the
+holomorphic endomorphisms of `ℂ/Λ` are the maps `z ↦ uz` with `uΛ ⊂ Λ`, and algebraic and analytic morphisms agree;
+for `Λ = c𝔞` (2.1 (a)) the ring `{u : u𝔞 ⊂ 𝔞}` is `𝒪_K`. As `ωω̄ = (1 + d)/4` is even and `ω + ω̄ = 1`, `𝔭` and `𝔭̄`
+are distinct primes of norm `2`, and a point `u` of order two is killed by `𝔭` exactly when `ωu ∈ Λ`. As
+`𝒪_K`-modules, `(1/2)Λ/Λ ≅ 𝔞/2𝔞 ≅ 𝒪_K/2𝒪_K ≅ 𝒪_K/𝔭 × 𝒪_K/𝔭̄`, in which exactly one element lies outside the two
+subgroups killed by `𝔭` and by `𝔭̄`; this is the class of `t` by the definition of a CM lattice (1.3). For the last
+clause: an elliptic curve over `ℂ` is `ℂ/L` for a lattice `L` (ModularCurvesPartII §1.2), its endomorphism ring is
+`{u : uL ⊂ L}`, a subring of `ℂ` isomorphic to `𝒪_K` and hence equal to it (both embeddings of `K` in `ℂ` have image
+`K`); the argument of 2.1 (a) writes `L = u𝔠`, 2.1 (b) gives a CM lattice whose lattice is a complex multiple of `𝔠`,
+hence of `L`, and homothetic lattices give isomorphic curves (ModularCurvesPartII §1.2).
+
+Let `C = (Λ, t, a₁)` be a normalised pointed lattice of area `A`, with `σ_W`, `ζ_W`, `η` and `s₂ = s₂(Λ)` of 6.1, and
+`e := ℘(t)`.
+(a) `θ_C(z) = σ_{W,t}(z)·exp(−s₂z²/2)` for all `z ∈ ℂ`, where `σ_{W,t}(z) := exp(−ζ_W(t)·z)·σ_W(z + t)/σ_W(t)` is
+Weierstrass's function at the half-period `t` (the classical `σ_1, σ_2, σ_3` of the three half-periods), and
+`ζ_W(t) = η(2t)/2`. The identities of 1.4 (b) and (e) are equivalent to the same identities with `θ`, `σ` replaced by
+`σ_{W,t}`, `σ_W`; for instance `θ² = (℘ − e)·σ²` is the classical `σ_{W,t}² = (℘ − e)·σ_W²`.
+(b) `W_C : y² + a₁xy = x³ + x` is a Weierstrass curve over the ring `ℤ[a₁] ⊂ ℂ`, with
+`(a₁, a₂, a₃, a₄, a₆) = (a₁, 0, 0, 1, 0)`, `b₂ = a₁²`, `b₄ = 2`, `b₆ = 0`, `b₈ = −1`, `c₄ = a₁⁴ − 48`, discriminant
+`a₁⁴ − 64 = Δ(Λ)` and `j`-invariant `(a₁⁴ − 48)³/(a₁⁴ − 64) = 1728g₂³/Δ(Λ)`. The substitution `X = x + e`,
+`Y = y + a₁x/2` (`e = a₁²/12`) is an isomorphism of Weierstrass curves over `ℂ` from `W_C` onto the normalised
+Weierstrass model `W_Λ : Y² = X³ − (g₂/4)X − g₃/4` of ModularCurvesPartII §1.1; it maps the point `P_C := (0, 0)` of
+`W_C` to `(e, 0)`, a point of order two.
+(c) Let `φ_Λ : ℂ/Λ → W_Λ(ℂ)` be the uniformisation of ModularCurvesPartII §1.1 (`z ↦ (℘(z), ℘′(z)/2)`, `0 ↦ O`), and
+`φ_C : ℂ/Λ → W_C(ℂ)` its composite with the inverse of the substitution of (b). Then `φ_C(t) = P_C`, and the map
+`ψ_C : ℂ/Λ → W_C(ℂ)` given by `ψ_C(z) := (x(z), y(z))` for `z ∉ t + Λ` and `ψ_C(z) := O` for `z ∈ t + Λ` is
+`ψ_C(z) = φ_C(z + t) = φ_C(z) + P_C`. So `ψ_C` is a bijection with `ψ_C(0) = P_C` that carries addition to the law
+`(Q, Q′) ↦ Q + Q′ + P_C` of `W_C(ℂ)`, whose neutral element is `P_C`: it is the uniformisation of `W_C` with the
+origin moved to the point `P_C` of order two. The invariant differential `dx/(2y + a₁x)` of `W_C` pulls back to `dz`
+along `φ_C` and along `ψ_C`.
+(d) Let `C` be a CM lattice, and `𝔭 := 2𝒪_K + ω𝒪_K`, `𝔭̄ := 2𝒪_K + ω̄𝒪_K` the two primes of `K` above `2`. Through
+`φ_C`, the endomorphisms of `W_C` over `ℂ` are the maps induced by `z ↦ αz`, `α ∈ 𝒪_K`, and their ring is `𝒪_K`. `P_C`
+is the only point of order two of `W_C` killed by neither `𝔭` nor `𝔭̄`, that is, the generator of `W_C[2]` as a module
+over `𝒪_K/2𝒪_K`. Every elliptic curve over `ℂ` whose endomorphism ring is isomorphic to `𝒪_K` is isomorphic to `W_C`
+for some CM lattice `C`.
+
+For `a₁ = 0`, `W_C` is `y² = x³ + x`, of `j`-invariant `1728`: then `℘(t) = 0`, `g₂ = −4` and `g₃ = 0`, the lattice is
+homothetic to `ℤ[i]`, and `t` is the point of order two at which `℘` vanishes.
+
+*Needs:* 1.3, 1.4, 2.1, 6.1; ModularCurvesPartII §1.1 (The normalized lattice Weierstrass model); ModularCurvesPartII
+§1.2 (Pointed elliptic uniformization); Mathlib `WeierstrassCurve`, Mathlib `WeierstrassCurve.VariableChange` (the
+quantities `b₂, …, Δ, j` and changes of variables).
+
+### 6.3 Torsion values, Klein forms and Siegel functions
+
+*Origin:* this roadmap's own formulation: the torsion values of 3.1 and the numbers `s_L(u)` of 2.2 compared with
+Klein forms, the Siegel functions of ImaginaryQuadraticClassNumber §3.2 and the roots of Weber's cubic, in the theory
+of Siegel units (Kubert and Lang, *Modular Units*).
+
+*Proof route:* (a) By 6.1 (a), `η_ℝ(u)·u = s₂u² + (π/A)|u|²`, and 6.1 (b) gives
+`𝔨(u; L) = exp(−π|u|²/(2A))·σ_W(u)·exp(−s₂u²/2) = σ_L[u]`. For the homogeneity, `σ_W(cu; cL) = c·σ_W(u; L)` and the
+quasi-period of `cL` at `cl` is `c^{−1}η(l)` (6.1), so the term `η_ℝ(u)·u` is unchanged. (b) Let `L₀ := ℤτ + ℤ`, with
+the positive basis `(1, τ)`, so that `η(1)τ − η(τ) = 2πi`. The product
+`P(z) := (2πi)^{−1}·exp(η(1)z²/2)·(e^{πiz} − e^{−πiz})·∏_{n≥1}(1 − qⁿe^{2πiz})(1 − qⁿe^{−2πiz})(1 − qⁿ)^{−2}`
+converges normally, is odd, has `P′(0) = 1`, vanishes on `L₀`, and satisfies `P(z + 1) = −exp(η(1)(z + 1/2))·P(z)` and
+`P(z + τ) = −exp((η(1)τ − 2πi)(z + τ/2))·P(z) = −exp(η(τ)(z + τ/2))·P(z)`. These are the factors of
+`latticeSigma_quasiPeriod` for `1` and `τ`, so `P/σ_W` is entire (the zeros of `σ_W` are simple and lie on `L₀`) and
+`L₀`-periodic, hence constant, and `P = σ_W`. For `z = r₁τ + r₂`, `η_ℝ(z) = r₁η(τ) + r₂η(1)` and
+`η(1)z²/2 − η_ℝ(z)·z/2 = (z/2)·r₁·(η(1)τ − η(τ)) = πir₁z`, so
+`2πi·𝔨(z; L₀) = −exp(πi(r₁ − 1)z)·(1 − e^{2πiz})·∏_{n≥1}(1 − qⁿe^{2πiz})(1 − qⁿe^{−2πiz})(1 − qⁿ)^{−2}`; as
+`(r₁ − 1)z = (r₁² − r₁)τ + r₂(r₁ − 1)` and `B₂(r₁) = r₁² − r₁ + 1/6`, this is
+`g_r(τ)·exp(−πiτ/6)·∏_{n≥1}(1 − qⁿ)^{−2}`. In the twelfth power, `(2πi)¹²·q·∏(1 − qⁿ)²⁴ = (2π)¹²Δ(τ) = Δ(L₀)` (the
+product formula, as in 5.1), and the homogeneity of (a) with `Δ(cL₀) = c^{−12}Δ(L₀)` gives
+`g_r(τ)¹² = 𝔨(u; L)¹²·Δ(L)`. (c) Differentiate 1.2 (e) at `u`: `℘′(u) = 0`, and by 1.2 (b)
+`σ′(2u) = ε(2u)·exp(2π|u|²/A) = −exp(2π|u|²/A)`, as `2u ∉ 2L`; so `2σ′(2u) = −℘″(u)σ(u)⁴` gives `σ[u]⁴ = 2/℘″(u)`. In
+the roots `e_i = ℘(u_i)` of `4X³ − g₂X − g₃`: `e₁ + e₂ + e₃ = 0`, `℘″(u_i) = 2(e_i − e_j)(e_i − e_k)` and
+`Δ = 16∏_{i<j}(e_i − e_j)²`; so `8Δ/℘″(u_i)³ = 16(e_j − e_k)²/((e_i − e_j)(e_i − e_k))`, which is
+`144e_i²/((e_i − e_j)(e_i − e_k)) − 64 = s(u_i)` because `e_j + e_k = −e_i`. The elementary symmetric functions of the
+three `s(u_i)` are `−48`, `768 − j(L)` and `−2¹²`, those of the roots of
+`(X + 16)³ − j(L)X = X³ + 48X² + (768 − j(L))X + 4096`. (d) 1.6 (a) gives `T¹_tσ = c₀θ` with `c₀ = (T¹_tσ)(0) = σ[t]`,
+and 3.1 (a) gives `(T¹_tσ)[u] = exp(−πi·Im(ut̄)/A)·σ[u + t]`; 2.2 gives `s(t) = a₁⁴ − 64`. At a torsion point the
+exponential factor is a root of unity, and with `|ι(Δ(Λ))| = 1` (2.2 (d)) the twelfth powers in (b) give the absolute
+values. (e) `Λ_C` is a complex multiple of a fractional ideal of `K` (2.1 (a)), so the ratio `τ` of two of its
+elements lies in `K`; an algebraic integer is integral at every `ι`.
+
+Let `L` be a lattice of area `A`, with `σ_W`, `η` and `s₂` of 6.1, and let `η_ℝ(u) := s₂u + (π/A)ū` for `u ∈ ℂ`, the
+`ℝ`-linear map that extends `η` (6.1 (a)). The *Klein form* of `L` is `𝔨(u; L) := exp(−η_ℝ(u)·u/2)·σ_W(u)`, `u ∈ ℂ`.
+Write `σ_L[u] := exp(−π|u|²/(2A))·σ_L(u)` for every `u ∈ ℂ` (the torsion value of 3.1, in degree one), and
+`j(L) := 1728g₂³/Δ(L)`.
+(a) `𝔨(u; L) = σ_L[u]` for every `u ∈ ℂ`, and `𝔨(cu; cL) = c·𝔨(u; L)` for `c ∈ ℂ^×`.
+(b) Let `L = c(ℤτ + ℤ)` with `Im τ > 0` and `c ∈ ℂ^×`, `q := exp(2πiτ)`, `u = c(r₁τ + r₂)` with
+`r = (r₁, r₂) ∈ ℚ² ∖ ℤ²`, and `g_r` the Siegel function of ImaginaryQuadraticClassNumber §3.2. Then
+`g_r(τ) = 2πi·exp(πiτ/6)·∏_{n≥1}(1 − qⁿ)²·𝔨(r₁τ + r₂; ℤτ + ℤ)`, and `g_r(τ)¹² = σ_L[u]¹²·Δ(L)`.
+(c) If `u` is a point of order two of `L`, then `σ_L[u]⁴ = 2/℘″(u)` and `s_L(u) = 8Δ(L)/℘″(u)³ = σ_L[u]¹²·Δ(L)`. The
+numbers `s_L(u₁)`, `s_L(u₂)`, `s_L(u₃)` at the three points of order two are the roots of Weber's cubic
+`(X + 16)³ − j(L)·X`; by (b), `s_L(c(r₁τ + r₂)) = g_r(τ)¹²` for `r = (0, 1/2)`, `(1/2, 0)`, `(1/2, 1/2)`, in agreement
+with Tau Ceti's `TauCeti.ModularForm.prod_X_sub_C_siegelFunction_pow_twelve`.
+(d) Let `C = (Λ, t, a₁)` be a normalised pointed lattice, `Λ = c(ℤτ + ℤ)` as in (b), and `t = c(r°₁τ + r°₂)`. Then
+`σ[t]⁴ = 1`, `a₁⁴ − 64 = s_Λ(t) = g_{r°}(τ)¹²`, and `θ[u] = σ[t]^{−1}·exp(−πi·Im(ut̄)/A)·σ[u + t]` for every `u ∈ ℂ`,
+so that `|θ[u]| = |𝔨(u + t; Λ)|`. If `C` is a CM lattice, then for every prime `p`, every `ι`, every `r ∈ ℚ²` and
+`u = c(r₁τ + r₂)`: `|ι(σ[u])| = |ι(g_r(τ))|` if `r ∉ ℤ²`, and `|ι(θ[u])| = |ι(g_{r+r°}(τ))|` if `r + r° ∉ ℤ²`.
+(e) If `C` is a CM lattice, `τ` in (d) lies in `K`, and the values of the Siegel functions at `τ` are algebraic
+integers (ImaginaryQuadraticClassNumber §3.2, last target). So the integrality of the three numbers of 2.2 (c) follows
+from (c) and that integrality; and, given 2.2 (d), so does by (d) the integrality of `σ[u]` and `θ[u]` at torsion
+points in 3.1 (c).
+
+For `L = ℤ[i]` (`τ = i`): `℘(i/2) = −℘(1/2)` and `℘((1 + i)/2) = 0`, and (c) gives `s(1/2) = s(i/2) = 8` and
+`s((1 + i)/2) = −64`, the roots of `X³ + 48X² − 960X + 4096 = (X − 8)²(X + 64)` in the Checks of
+ImaginaryQuadraticClassNumber §3.2, with `g_{(0,1/2)}(i)¹² = 8` and `g_{(1/2,1/2)}(i)¹² = −64`.
+
+*Needs:* 1.2, 1.6, 2.1, 2.2, 3.1, 6.1; ModularCurvesPartII §1.4a (Sigma, quasi-periods and the oriented Legendre
+relation); ImaginaryQuadraticClassNumber §3.2 (Siegel functions with exact phases); Tau Ceti
+`UpperHalfPlane.weierstrassCurve_Δ_periodPair` (`Δ` through `Δ(τ)`); Tau Ceti `TauCeti.ModularForm.siegelFunction`,
+Tau Ceti `TauCeti.ModularForm.prod_X_sub_C_siegelFunction_pow_twelve` (Weber's cubic).
+
+### 6.4 The formal group of the Weierstrass model
+
+*Origin:* this roadmap's own formulation: the ring `𝒪[[y]]` of 3.2, the group law of 3.6, the orders `o(α)` of 4.2 and
+the parameter `T` of 4.3 compared with the formal group of the curve `W_C` of 6.2 (Silverman, *The Arithmetic of
+Elliptic Curves*, IV.1 and IV.2), read through the complex uniformisation.
+
+*Proof route:* (a) The coordinates of `φ_C(z)` are `x̃ := 1/x` and `ỹ := −(y + a₁x)/x²`: `φ_C(z) = ψ_C(z + t)` (6.2
+(c)), `x(z + t) = 1/x(z)` (1.4 (b)), and `2y(z + t) = x′(z + t) − a₁x(z + t)` with `x′ = 2y + a₁x` (1.4 (d)). Hence
+`ξ(φ_C(z)) = −x̃/ỹ = x/(y + a₁x)`, which is `z + O(z²)` by 1.4 (d). `φ_C` carries addition to the group law of `W_C`
+(ModularCurvesPartII §1.1 for `φ_Λ`; the substitution of 6.2 (b) is an isomorphism of Weierstrass curves). So, in the
+group of points of `W_C` over the field of fractions of `ℂ[[z₀, z₁]]`, the point with coordinates `x̃(z₀ + z₁)`,
+`ỹ(z₀ + z₁)` is the sum of the points with coordinates `x̃(z₀)`, `ỹ(z₀)` and `x̃(z₁)`, `ỹ(z₁)`: the addition formulas
+hold for complex `z₀`, `z₁`, hence as identities of meromorphic functions and of their Laurent series. By the first
+step of (b), which does not use the present statement, `x̃ = ξ̂/λ_C(ξ̂)` and `ỹ = −1/λ_C(ξ̂)`: the three points are
+the points `(Z/λ_C(Z), −1/λ_C(Z))` for `Z = ξ̂(z₀ + z₁)`, `ξ̂(z₀)`, `ξ̂(z₁)`. `Ê_C` is the expansion of the group law
+at `O` in the parameter `ξ` (EllipticCurves Layer 1, item (i)): the sum of the points `(Z₀/λ_C(Z₀), −1/λ_C(Z₀))` and
+`(Z₁/λ_C(Z₁), −1/λ_C(Z₁))` is the point `(Z/λ_C(Z), −1/λ_C(Z))` with `Z = Ê_C(Z₀, Z₁)`. Substituting `Z_i = ξ̂(z_i)`
+gives `ξ̂(z₀ + z₁) = Ê_C(ξ̂(z₀), ξ̂(z₁))`, a point determining its parameter `ξ`. Over `ℂ`, the formal logarithm is a
+series `log_{Ê_C} = Z + O(Z²)` with `log_{Ê_C}(Ê_C(Z₀, Z₁)) = log_{Ê_C}(Z₀) + log_{Ê_C}(Z₁)` (EllipticCurves Layer 1,
+item (ii)). So `ℓ := log_{Ê_C}(ξ̂) ∈ ℂ[[z]]` satisfies `ℓ(z₀ + z₁) = ℓ(z₀) + ℓ(z₁)`; hence `ℓ = c·z` with `c ∈ ℂ`, and
+`c = 1` because `ℓ = z + O(z²)`: `log_{Ê_C}(ξ̂) = z`. (b) In the coordinates `ξ = −x/y` and `λ = −1/y` the equation of
+`W_C` reads `λ = ξ³ + a₁ξλ + ξλ²`, and `λ_C` is its unique solution in `ξℤ[a₁][[ξ]]`. Both `λ_C(ξ̂)` and the Taylor
+series of `−1/ỹ` solve `λ = ξ̂³ + a₁ξ̂λ + ξ̂λ²` for an unknown `λ ∈ zℂ[[z]]`, whose solution is unique, the right side
+being a contraction for the `z`-adic topology; so they are equal, `x̃ = ξ̂/λ_C(ξ̂)` and `ỹ = −1/λ_C(ξ̂)`. From
+`y = −(ỹ + a₁x̃)/x̃²` (the formulas of (a)), `y = (1 − a₁ξ̂)·λ_C(ξ̂)/ξ̂² = 𝔶_C(ξ̂)`; substituting in (a) gives the law
+for `y`, and both identities hold coefficientwise after `ι` is applied. For a CM lattice `|ι(a₁)| ≤ 1` (2.2 (d)), so
+`𝔶_C`, its compositional inverse and `Ê^y_C` are integral at `ι`, and 3.2 (a) gives `𝒪[[y]] = 𝒪[[ξ̂]]`. (c) By 3.4 (c)
+and 3.2 (a), `y_{C′}(az) = h_a(y_C)` for one `h_a ∈ 𝒪[[Z]]`. Substituting `Z_i = y_C(z_i)`, both sides of
+`Ê^y_{C′}(h_a(Z₀), h_a(Z₁)) = h_a(Ê^y_C(Z₀, Z₁))` become `y_{C′}(a(z₀ + z₁))` by (b), and this substitution is
+injective, `y_C = z + O(z²)` having a compositional inverse; the linear coefficient of `y_{C′}(az)` is `ι(a)`. For
+`C′ = C`, `y(αβz) = [α]_C(y(βz))` and `y((α + β)z) = Ê^y_C(y(αz), y(βz))` give the ring homomorphism, and the clause
+on `o(α)` is its definition in 4.2. (d) `|ι(a₁⁴ − 64)| = 1` (2.2 (d)), so the reduced discriminant is not `0`; `λ_C`,
+`Ê_C`, `𝔶_C` and `Ê^y_C` are given by universal formulas over `ℤ[a₁]`, so their reductions are those of `W̃_C`. By 4.3
+(d), `[π_p]_C` is the series `g_p` in the parameter `T`, and the reduction of `g_p` has order `q_p` (`b₁` is a unit,
+the linear coefficient `π_p` lies in `𝔪`, and the other terms have degree at least `2q_p − 1`); a change of parameter
+`Z ↦ Z + O(Z²)` over `𝒪` does not change orders of reductions (Tau Ceti `PowerSeries.order_subst`), so `o(π_p) = q_p`.
+If `p ≠ d`, `π_p = p`; if `p = d`, `d = −π_d²` and `o(−1) = 1`, so `o(d) = d²` by 4.2 (a). An elliptic curve `E` over
+an algebraically closed field of characteristic `p` is supersingular, that is, has no point of order `p`
+(EllipticCurves Layer 3), exactly when its formal group has height two: `[p]` has degree `p²`, its separable degree is
+the number of points that it kills, and its inseparable degree is the order of its formal series (the statement on the
+formal series of an isogeny named in 4.2), which is the multiplication by `p` of the formal group law. With the
+heights just found this gives the last clause. `a₁` is an algebraic number, because its images under the automorphisms
+of `ℂ` over `K` are finite in number: each is `a₁` of a CM lattice (5.2 (c)), there are finitely many lattices of CM
+lattices (2.3 (b)), and a lattice determines `t` modulo itself (6.2 (d)), hence `a₁² = 12℘(t)`. So `W_C` is a curve
+over the number field `K(a₁)` with complex multiplication by `𝒪_K` and good reduction at the place that `ι` defines,
+and the last clause is the dichotomy between split and non-split primes of ComplexMultiplicationAndExplicitReciprocity
+§5.1 for it. (e) `T ∈ 𝒪[[y]]` (4.3 (d)) gives `𝔱_p ∈ 𝒪[[Z]]`, with linear coefficient `1` as `T` and `y` are both
+`z + O(z²)`; then `g_p(T) = T(π_pz) = 𝔱_p([π_p]_C(y))`, and the injectivity in 3.2 (a) gives
+`g_p = 𝔱_p∘[π_p]_C∘𝔱_p^{−1}`.
+
+Let `C = (Λ, t, a₁)` be a normalised pointed lattice, and `W_C`, `P_C`, `φ_C` as in 6.2. Let `ξ := −x/y`, the
+parameter of `W_C` at `O`; `λ_C(ξ) ∈ ξ³ + ξ⁴ℤ[a₁][[ξ]]` the expansion of `−1/y` in `ξ`; and
+`Ê_C(Z₀, Z₁) ∈ ℤ[a₁][[Z₀, Z₁]]` the formal group law of `W_C` in the parameter `ξ` (EllipticCurves Layer 1, item (i);
+Tau Ceti `WeierstrassCurve.formalGroup`). Put `𝔶_C(ξ) := (1 − a₁ξ)·λ_C(ξ)/ξ² ∈ ξ + ξ²ℤ[a₁][[ξ]]`, the expansion in `ξ`
+of the function `Q ↦ y(Q + P_C) = −(y(Q) + a₁x(Q))/x(Q)²`, and
+`Ê^y_C(Z₀, Z₁) := 𝔶_C(Ê_C(𝔶_C^{−1}(Z₀), 𝔶_C^{−1}(Z₁)))`, a formal group law over `ℤ[a₁]` strictly isomorphic to `Ê_C`
+through `𝔶_C`: the formal group law of `W_C` carried to the point `P_C` by the translation by `P_C`, in the parameter
+`y`. Let `ξ̂ ∈ ℂ[[z]]` be the Taylor series at `0` of `x/(y + a₁x)`.
+(a) `x/(y + a₁x)` is the function `z ↦ ξ(φ_C(z))`; `ξ̂ = z + O(z²)`, `log_{Ê_C}(ξ̂) = z` for the formal logarithm over
+`ℂ`, and `ξ̂(z₀ + z₁) = Ê_C(ξ̂(z₀), ξ̂(z₁))` in `ℂ[[z₀, z₁]]`.
+(b) The Taylor series of `y` is `𝔶_C(ξ̂)`, and `y(z₀ + z₁) = Ê^y_C(y(z₀), y(z₁))` in `ℂ[[z₀, z₁]]`; both identities
+hold with `ι` applied to the coefficients. If `C` is a CM lattice, then for every prime `p` and every `ι` the series
+`𝔶_C`, `𝔶_C^{−1}` and `Ê^y_C` read through `ι` have coefficients in `𝒪`, and `𝒪[[y]] = 𝒪[[ξ̂]]` (3.2): `𝒪[[y]]` is the
+ring of integral series in the parameter `ξ̂` of the formal group of `W_C` over `𝒪`, and 3.6 (b) is the integrality of
+its law `Ê^y_C` in the parameter `y`.
+(c) Let `C`, `C′` be CM lattices, `p` a prime and `a` an isogeny from `C` to `C′`. The series `h_a ∈ 𝒪[[Z]]` with
+`y_{C′}(az) = h_a(y_C)` (3.4 (c)) is a homomorphism of formal group laws over `𝒪` from `Ê^y_C` to `Ê^y_{C′}`, read
+through `ι`, and `h_a = ι(a)Z + O(Z²)`. For `C′ = C` and `α ∈ 𝒪_K` write `[α]_C := h_α`: `α ↦ [α]_C` is a ring
+homomorphism from `𝒪_K` to the endomorphisms of `Ê^y_C` over `𝒪`, and `o(α)` of 4.2 is the order of the reduction of
+`[α]_C` modulo `𝔪`.
+(d) Let `C` be a CM lattice, `p` a prime and `k := 𝒪/𝔪`. The reduction `W̃_C : y² + ā₁xy = x³ + x` of `W_C` through
+`ι` is an elliptic curve over `k`, and the reduction of `Ê^y_C` is the formal group law of `W̃_C` formed in the same
+way. `o(p) = p` if `p` splits in `K`, and `o(p) = p²` otherwise. So the formal group of `W̃_C` has height one if `p`
+splits in `K` and height two otherwise (the height of a formal group law over `k` being the `h` for which its
+multiplication by `p` has order `p^h`), and `W̃_C` is supersingular exactly when `p` does not split in `K`: Deuring's
+criterion (4.2; ComplexMultiplicationAndExplicitReciprocity §5.1) for `W_C` at the place that `ι` defines.
+(e) In the notation of 4.3, `T = 𝔱_p(y)` for one `𝔱_p ∈ Z + Z²𝒪[[Z]]`, so `T` is another parameter of the same formal
+group, and `g_p = 𝔱_p∘[π_p]_C∘𝔱_p^{−1}`: the multiplication by `π_p` written in the parameter `T`.
+
+The expansion `𝔶_C(ξ) = ξ + ξ⁵ + 2a₁ξ⁶ + 3a₁²ξ⁷ + O(ξ⁸)` shows that the Taylor series of `y` and `ξ̂` agree up to
+degree four.
+
+*Needs:* 1.4, 2.2, 2.3, 3.2, 3.4, 4.2, 4.3, 5.2, 6.2; EllipticCurves Layer 1 (isogenies, the dual, the invariant
+differential, and formal groups (AEC II.2, III.4–6, IV)); EllipticCurves Layer 3 (elliptic curves over finite fields —
+the Hasse bound (AEC V.1)); ComplexMultiplicationAndExplicitReciprocity §5.1 (Deuring classification, specialization
+and lifting); ModularCurvesPartII §1.1 (The normalized lattice Weierstrass model); Tau Ceti
+`WeierstrassCurve.formalGroup`; Tau Ceti `PowerSeries.order_subst`.
+
+### 6.5 Complex multiplication and the Artin map
+
+*Origin:* this roadmap's own formulation: the adele of 5.3 (b) identified, through the main theorem of complex
+multiplication for elliptic curves (Shimura, *Introduction to the Arithmetic Theory of Automorphic Functions*, Thm
+5.4; Milne, *Complex Multiplication*, 9.17), with the inverse of a finite idele whose Artin symbol is the given
+automorphism.
+
+*Proof route:* (a) Through `φ_C`, `𝒪_K` acts on `W_C` by the multiplications of `ℂ` (6.2 (d)), so the type of `W_C` is
+the inclusion `K ⊂ ℂ`; its reflex field is `K` and its reflex norm is the identity. `W_{C^σ}` is the conjugate
+`σ(W_C)`, because `a₁(C^σ) = σ(a₁(C))` (5.2 (c)). ComplexMultiplicationAndExplicitReciprocity §2.2 (the normalized
+idele and torsion dictionary, with the arithmetic Artin map), which applies ShimuraVarieties §5.10 and whose `f` is
+here `κ^{−1}`, gives a `K`-linear quasi-isogeny `α` from `W_C` to `W_{C^σ}` with `α(κ^{−1}v) = σ(v)` for every `v` in
+the rational Tate module of `W_C`. By ModularCurvesPartII §1.2, through `φ_C` and `φ_{C^σ}` the quasi-isogeny `α` is
+the multiplication by some `m ∈ ℂ^×`, with `m·Ω₀K = ℚ·Λ_{C^σ}`. Through `φ_C`, the group of torsion points of `W_C` is
+`Ω₀K/Λ_C`, its rational Tate module is `Ω₀𝔸_{K,f}`, its integral Tate module is `Ω₀Ô`, the closure of `Λ_C`, and the
+torsion point `φ_C(xΩ₀)`, `x ∈ K`, is the class of `xΩ₀` in `Ω₀𝔸_{K,f}/Ω₀Ô`. In the same way, through `φ_{C^σ}` the
+rational Tate module of `W_{C^σ}` is `mΩ₀𝔸_{K,f}`, its integral Tate module is the closure `T′` of `Λ_{C^σ}` in it,
+and `mΩ₀K ∩ T′ = Λ_{C^σ}`; `α` acts on the rational Tate modules as the multiplication by `m`. As `σ` is a group
+isomorphism from the torsion points of `W_C` onto those of `W_{C^σ}`, it maps the integral Tate module onto the
+integral Tate module; so `T′ = α(κ^{−1}·Ω₀Ô) = mΩ₀·κ^{−1}Ô`, and
+`Λ_{C^σ} = mΩ₀K ∩ T′ = mΩ₀·(K ∩ κ^{−1}Ô) = Ω_κ·κ^{−1}𝒪_K` for `Ω_κ := mΩ₀`. For `x ∈ K`, `σ` maps the class of
+`v = xΩ₀` to the class of `α(κ^{−1}v) = Ω_κ·κ^{−1}x` modulo `T′ = Ω_κ·κ^{−1}Ô`, which is the class of `x″Ω_κ` for
+every `x″ ∈ K` with `x″ − κ^{−1}x ∈ κ^{−1}Ô`: this is the statement for `φ_C`. Finally `σ` respects the group laws and
+maps `P_C = (0, 0)` to `P_{C^σ} = (0, 0)`, so `ψ_C = φ_C + P_C` (6.2 (c)) gives the statement for `ψ_C`. (b) Let
+`σ_* : ℂ/Λ_C → ℂ/Λ_{C^σ}` be defined by `ψ_{C^σ}∘σ_* = σ∘ψ_C`; by 6.2 (c) it is a group isomorphism, and
+`σ_*(t_C) = t_{C^σ}`, both being sent to `O`. Let `x ∈ K`, `n ≥ 1` with `nx ∈ 𝒪_K`, and `x′ ∈ K ∩ U` as in 5.3 (b). By
+1.5 (d), `F(z) := (T¹_{xΩ₀}θ_C)(nz)` lies in `Sect_{n²}(C)`. By 5.2 (b), with `Q = 1` (5.2 (e)), it has a transport
+`g ∈ Sect_{n²}(C^σ)` whose Taylor series is `σ` applied to that of `F`, which by 5.3 (b) is the Taylor series of
+`(T¹_{x′Ω′}θ_{C^σ})(nz)`; so `g(z) = (T¹_{x′Ω′}θ_{C^σ})(nz)`. Let `z ∈ ℂ`, with `u` and `μ` as in 5.2 (b). For the
+sections `θ_C`, `σ_C²` and `G_C` of `C`, of degrees one, two and three, whose transports are those of `C^σ` (5.2 (e)),
+5.2 (b) gives `θ_{C^σ}(z) = μ·σ(θ_C(u))`, `σ_{C^σ}(z)² = μ²·σ(σ_C(u)²)` and `G_{C^σ}(z) = μ³·σ(G_C(u))`. If
+`θ_{C^σ}(z) ≠ 0`, then `θ_C(u) ≠ 0`, and the quotients `x = σ²/θ²`, `y = G/θ³` (1.4 (b)) give `x_{C^σ}(z) = σ(x_C(u))`
+and `y_{C^σ}(z) = σ(y_C(u))`; if `θ_{C^σ}(z) = 0`, then `u = t_C`, and `ψ_{C^σ}(z)` and `ψ_C(u)` are both `O`. In both
+cases `σ(ψ_C(u)) = ψ_{C^σ}(z)`, that is `u ≡ σ_*^{−1}(z)` modulo `Λ_C`. As `g(z) = μ^{n²}·σ(F(u))` and the set of
+zeros of `F` is stable under `Λ_C`, `g(z) = 0` exactly when `F(σ_*^{−1}(z)) = 0`. By 1.4 (a), the zeros of `g` are the
+`z` with `nz ≡ t_{C^σ} − x′Ω′` and those of `F` the `w` with `nw ≡ t_C − xΩ₀`; as `σ_*` is additive, `x′Ω′ ≡ σ_*(xΩ₀)`
+modulo `Λ_{C^σ}`. By (a), for `x″ ∈ K` with `x″ − κ^{−1}x ∈ κ^{−1}Ô`, `x′Ω′ − x″Ω_κ ∈ Λ_{C^σ} = Ω_κ·κ^{−1}𝒪_K`. Since
+`Ω′·(𝔠²/N(𝔠)) = Ω_κ·κ^{−1}𝒪_K`, `ϱ := Ω′/Ω_κ` lies in `K^×`, and `ϱx′ − κ^{−1}x ∈ κ^{−1}Ô`. Letting `x′` tend to `βx`
+in `K ∩ U` (`K` is dense in `𝔸_{K,f}`), and as `κ^{−1}x + κ^{−1}Ô` is closed, `κ·(ϱβ − κ^{−1})·x ∈ Ô` for every
+`x ∈ K`; taking `x = 1/N` for all `N ≥ 1` gives `ϱβ = κ^{−1}`. The Artin map is trivial on `K^×`, so
+`art_K(β^{−1}) = art_K(ϱκ) = σ|_{K^ab}`, and `β𝒪_K = ϱ^{−1}κ^{−1}𝒪_K = Ω′^{−1}Λ_{C^σ} = 𝔠²/N(𝔠)`. (c) Take `Ω′`, `𝔠`,
+`β` from 5.3 (b) and, for `x`, the neighbourhood `U` of `βx` there; by (b), `ϱU` is a neighbourhood of
+`ϱβx = κ^{−1}x`, and for `x″ ∈ K ∩ ϱU`, `x′ := x″/ϱ` lies in `K ∩ U` and `x′Ω′ = x″Ω_κ`.
+
+Let `C` be a CM lattice with `Λ_C = Ω₀𝒪_K`, `σ` an automorphism of `ℂ` over `K`, and `C^σ` as in 5.2 (c). Let
+`art_K : 𝔸_{K,f}^× → Gal(K^ab/K)` be the Artin map on the finite ideles, normalised so that a uniformiser at a prime
+`𝔭` acts on the extensions unramified at `𝔭` as the arithmetic Frobenius `x ↦ x^{N(𝔭)}`; it is trivial on `K^×`. Let
+`Ô ⊂ 𝔸_{K,f}` be the integral finite adeles and, for a finite idele `κ`, `κ𝒪_K := K ∩ κÔ` its fractional ideal. Let
+`κ` be a finite idele with `art_K(κ) = σ|_{K^ab}`.
+(a) (*The main theorem of complex multiplication.*) There is `Ω_κ ∈ ℂ^×` with `Λ_{C^σ} = Ω_κ·κ^{−1}𝒪_K` such that, for
+all `x, x″ ∈ K` with `x″ − κ^{−1}x ∈ κ^{−1}Ô`, `σ` maps the point `φ_C(xΩ₀)` of `W_C` to the point `φ_{C^σ}(x″Ω_κ)` of
+`W_{C^σ} = σ(W_C)`, and `ψ_C(xΩ₀)` to `ψ_{C^σ}(x″Ω_κ)` (6.2 (c)).
+(b) If `Ω′`, `𝔠`, `β` are as in 5.3 (b), then `ϱ := Ω′/Ω_κ` lies in `K^×` and `β = (ϱκ)^{−1}`. So `β` is a finite
+idele, `art_K(β^{−1}) = σ|_{K^ab}`, and the fractional ideal of `β` is `𝔠²/N(𝔠)`.
+(c) For every `x ∈ K` there is a neighbourhood `U` of `κ^{−1}x` in `𝔸_{K,f}` such that for every `x′ ∈ K ∩ U`,
+applying `σ` to the coefficients of the Taylor series at `0` of `T¹_{xΩ₀}θ_C` gives the Taylor series of
+`T¹_{x′Ω_κ}θ_{C^σ}`: the last clause of 5.3 (b) holds with `β = κ^{−1}` and `Ω_κ` in place of `Ω′`.
+
+5.3 (b) does not record the relation between `β` and `σ` given by the Artin map, which is the content of the
+reciprocity law; the route of 5.3 does not use it.
+
+*Needs:* 1.4, 1.5, 5.2, 5.3, 6.2; ShimuraVarieties §5.10 (Main theorem of complex multiplication);
+ComplexMultiplicationAndExplicitReciprocity §2.2 (Reflex ideals, torsion and polarization); ModularCurvesPartII §1.2
+(Pointed elliptic uniformization); Mathlib `IsDedekindDomain.FiniteAdeleRing` (finite adeles of `K`).
+
+### 6.6 Kronecker's limit formula and the Chowla–Selberg formula
+
+*Origin:* this roadmap's own formulation: 5.1 compared with Kronecker's first limit formula for Epstein's zeta
+function (Siegel, *Lectures on Advanced Analytic Number Theory*, Chapter I, Theorem 1), and 5.4 (b) and the constant
+of 5.5 compared with the Chowla–Selberg formula (Selberg and Chowla, *On Epstein's zeta-function*).
+
+*Proof route:* (a) For `l = c(mτ + n)`, `|l|²/A = |mτ + n|²/Im τ`, as `A = |c|²·Im τ`. `Δ(Λ) = c^{−12}Δ(ℤτ + ℤ)` and
+`Δ(ℤτ + ℤ) = (2π)¹²Δ(τ)` (the product formula, as in 5.1), so `A·|Δ(Λ)|^{1/6} = 4π²·Im τ·|Δ(τ)|^{1/6}`, and the
+constant `π·(2γ − log(A·|Δ|^{1/6}/π²))` of 5.1 becomes the displayed one. If `𝒵(τ, s) − π/(s − 1)` extends
+holomorphically to a neighbourhood of `1` with value `V` at `1`, then for `k > 0` the function
+`F(s) := (s − 1)·k^s·𝒵(τ, s)` of 5.1 is holomorphic at `1`, `F(1) = πk` and `F′(1) = k·(V + π·log k)`, which is the
+right derivative of 5.1 when `V` is the displayed constant. (b) Lerch's formula for the Hurwitz zeta function at `0`,
+`ζ(0, x) = 1/2 − x` and `(∂/∂s)ζ(s, x)|_{s=0} = log Γ(x) − (1/2)log(2π)`, with
+`L(s, χ_K) = d^{−s}·Σ_{a=1}^{d−1}χ_K(a)ζ(s, a/d)` and `Σ_aχ_K(a) = 0`, gives
+`L′(0, χ_K) = −L(0, χ_K)·log d + Σ_{a=1}^{d−1}χ_K(a)·log Γ(a/d)`. `χ_K` is odd and primitive of conductor `d`, with
+root number `1`, so `ℒ(s) := (d/π)^{(s+1)/2}·Γ((s + 1)/2)·L(s, χ_K)` satisfies `ℒ(1 − s) = ℒ(s)`. At `s = 0` this
+gives `L(0, χ_K) = √d·L(1, χ_K)/π`, which is `h` by the class number formula; and its logarithmic derivative, with
+`(Γ′/Γ)(1) = −γ` and `(Γ′/Γ)(1/2) = −γ − 2 log 2`, gives `(L′/L)(1, χ_K) = −(L′/L)(0, χ_K) − log(d/π) + γ + log 2`.
+Inserting `L′(0, χ_K)` gives the identity. Then
+`γ + log(2π/√d) − (L′/L)(1, χ_K) = (1/h)·Σ_aχ_K(a)·log Γ(a/d) − (1/2)·log d`, and `h` times 5.4 (b), exponentiated, is
+the product formula; its second form is (a). (c) By (b), `exp(γ − (L′/L)(1, χ_K)) = (2π)^{−1}·∏_aΓ(a/d)^{χ_K(a)/h}`.
+
+(a) Let `Λ = c(ℤτ + ℤ)` with `Im τ > 0` and `c ∈ ℂ^×`, of area `A`, let `Δ(τ) = q·∏_{n≥1}(1 − qⁿ)²⁴` as in 5.1, and
+for real `s > 1` let `𝒵(τ, s) := Σ_{(m,n)∈ℤ²∖{(0,0)}} (Im τ)^s·|mτ + n|^{−2s}`, Epstein's zeta function of `ℤτ + ℤ`.
+Then `Σ_{0≠l∈Λ}(|l|²/A)^{−s} = 𝒵(τ, s)` and `A·|Δ(Λ)|^{1/6} = 4π²·Im τ·|Δ(τ)|^{1/6}`. So the expansion of 5.1 reads
+`𝒵(τ, s) = π/(s − 1) + 2π·(γ − log 2 − (1/2)·log Im τ − (1/12)·log|Δ(τ)|) + o(1)` as `s ↓ 1`. Kronecker's first limit
+formula states that `𝒵(τ, s) − π/(s − 1)` extends holomorphically to a neighbourhood of `s = 1`, with this constant as
+its value at `1`; it implies 5.1, which does not record that continuation.
+(b) Let `d` be a prime `≡ 7 (mod 8)`. Then `(L′/L)(1, χ_K) = γ + log(2π) − (1/h)·Σ_{a=1}^{d−1}χ_K(a)·log Γ(a/d)`.
+Hence 5.4 (b) is equivalent to the Chowla–Selberg formula
+`∏_{𝒞∈Cl(K)} A_𝒞·|Δ(Λ_𝒞)|^{1/6}/π = d^{−h/2}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)}`, that is, for `Λ_𝒞` homothetic to
+`ℤτ_𝒞 + ℤ`, `∏_{𝒞} 4π·Im τ_𝒞·|Δ(τ_𝒞)|^{1/6} = d^{−h/2}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)}`.
+(c) The right side of 5.5 is `π·exp(γ − (L′/L)(1, χ_K))·2π/√d = π·d^{−1/2}·∏_{a=1}^{d−1}Γ(a/d)^{χ_K(a)/h}`.
+
+For `d = 7` (`h = 1`; `χ_K(a) = 1` for `a = 1, 2, 4` and `−1` for `a = 3, 5, 6`) and `τ = (1 + √−7)/2`, both sides of
+(b) are `4.1641…`, and `(L′/L)(1, χ_K) = 0.0156…`.
+
+*Needs:* 5.1, 5.4, 5.5; ImaginaryQuadraticClassNumber §2.2 (Analytic specialization and the exact constants); Tau Ceti
+`UpperHalfPlane.weierstrassCurve_Δ_periodPair` (`Δ` through `Δ(τ)`); Mathlib
+`DirichletCharacter.IsPrimitive.completedLFunction_one_sub` (the functional equation).
 
 ## What the library already provides
 
@@ -1076,6 +1592,24 @@ On Tau Ceti's main branch, later than the revision pinned here:
   homogenised `(Φ₂, ΨSq₂)` have unit resultant, and a lift with unit resultant multiplies the maximum norm by the power
   `4`. ArithmeticDynamics §6.3 (the resultant bullet) and ArithmeticDynamics §2.32; used in 3.1 for the forms `F_c` of
   1.6 and the curve `y² + a₁xy = x³ + x` over `ℂ_p`.
+- Weierstrass's sigma function, its quasi-periods and the oriented Legendre relation; the normalised Weierstrass model
+  of a lattice, its uniformisation, its endomorphisms and its homotheties; the periods of the invariant differential.
+  ModularCurvesPartII §1.4a (Sigma, quasi-periods and the oriented Legendre relation), §1.1 (The normalized lattice
+  Weierstrass model), §1.2 (Pointed elliptic uniformization) and §1.4 (Invariant differentials and periods); used in
+  6.1–6.5 and in the comparison paragraph of 5.5.
+- The formal group law of a Weierstrass curve over its coefficient ring, and its formal logarithm and exponential over
+  a `ℚ`-algebra. EllipticCurves Layer 1 (isogenies, the dual, the invariant differential, and formal groups (AEC II.2,
+  III.4–6, IV)); used in 6.4.
+- Siegel functions, Weber's cubic and the algebraic integrality of the values of Siegel functions at CM points; the
+  class number formula and the functional equation of `L(s, χ_K)`. ImaginaryQuadraticClassNumber §3.2 (Siegel
+  functions with exact phases) and §2.2 (Analytic specialization and the exact constants); used in 6.3 and 6.6.
+- The main theorem of complex multiplication, in its elliptic case with the arithmetic Artin map. ShimuraVarieties
+  §5.10 (Main theorem of complex multiplication) and ComplexMultiplicationAndExplicitReciprocity §2.2 (Reflex ideals,
+  torsion and polarization); used in 6.5.
+- The notion of a supersingular elliptic curve, and Deuring's criterion for the reduction of an elliptic curve with
+  complex multiplication (ordinary exactly at the primes that split). EllipticCurves Layer 3 (elliptic curves over
+  finite fields — the Hasse bound (AEC V.1)) and ComplexMultiplicationAndExplicitReciprocity §5.1 (Deuring
+  classification, specialization and lifting); used in 6.4.
 
 ## References
 
@@ -1092,13 +1626,13 @@ On Tau Ceti's main branch, later than the revision pinned here:
 - Deuring, *Die Typen der Multiplikatorenringe elliptischer Funktionenkörper* (4.2).
 - NIST DLMF, Chapters 20 and 23 (1.6).
 - B. Gross, *On the periods of abelian varieties*, arXiv 2005.04194 (5.4).
-- Kubert, Lang, *Modular Units* (2.2, 3.1).
+- Kubert, Lang, *Modular Units* (2.2, 3.1, 6.3).
 - Lubin, Tate, *Formal complex multiplication in local fields* (4.3).
-- J. Milne, *Complex Multiplication* (2020), 9.17 (5.3).
+- J. Milne, *Complex Multiplication* (2020), 9.17 (5.3, 6.5).
 - J. Neukirch, *Algebraic Number Theory* (1999), VII.5 and VII.10 (5.4).
-- A. Selberg, S. Chowla, *On Epstein's zeta-function*, J. reine angew. Math. 227 (1967), 86–110 (5.4).
-- G. Shimura, *Introduction to the Arithmetic Theory of Automorphic Functions* (1971), Thm 5.4 (5.3).
-- C. L. Siegel, *Lectures on Advanced Analytic Number Theory* (1961), Chapter I, Theorem 1 (5.1).
-- J. Silverman, *The Arithmetic of Elliptic Curves*: VI (1.2); IV.1 and IV.2 (3.6); without a place (3.4).
+- A. Selberg, S. Chowla, *On Epstein's zeta-function*, J. reine angew. Math. 227 (1967), 86–110 (5.4, 6.6).
+- G. Shimura, *Introduction to the Arithmetic Theory of Automorphic Functions* (1971), Thm 5.4 (5.3, 6.5).
+- C. L. Siegel, *Lectures on Advanced Analytic Number Theory* (1961), Chapter I, Theorem 1 (5.1, 6.6).
+- J. Silverman, *The Arithmetic of Elliptic Curves*: VI (1.2); IV.1 and IV.2 (3.6, 6.4); without a place (3.4).
 - J. Silverman, *Advanced Topics in the Arithmetic of Elliptic Curves* (1994): I.5 (1.2); without a place (2.1).
 - A. Weil, *Elliptic Functions according to Eisenstein and Kronecker* (1976) (1.2).

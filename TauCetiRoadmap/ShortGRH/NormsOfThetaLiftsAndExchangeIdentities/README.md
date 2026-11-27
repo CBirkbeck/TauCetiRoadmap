@@ -15,7 +15,8 @@ determinant of lift `j` twisted by `ϑ^j` (DeterminantsOfThetaLiftChains, Conven
 gives back the main amount `h_main = m·k·h_dir`; it is the only place where `h_dir` enters Theorem C.
 
 The proof compares the twisted lift with the untwisted one through an operator on `𝒜(V_j)`. Three applications of the
-exchange identity of DeterminantsOfThetaLiftChains turn the twist of a theta series on `U(W_j)` into a number `c′_ϑ`,
+exchange identity of DeterminantsOfThetaLiftChains (an identity particular to the route, not the first term identity
+of the regularised Siegel–Weil formula) turn the twist of a theta series on `U(W_j)` into a number `c′_ϑ`,
 whose squared modulus is a constant divided by a product `Γ_j(ϑ)` of Hecke L-values (Layer 4). Gluing the forms that
 carry that series to arbitrary forms on a complementary block `V°` gives a map `glue_ϑ` into `𝒜(V_j)` with
 `c′_ϑ·glue_ϑ^*·Θ_{j,ϑ} = Θ°`, a twist-free map that is injective because products of theta series span (Layers 3, 4, 7).
@@ -23,10 +24,14 @@ The
 glued forms are integral away from the twist, short at the trivial twist, and orthogonal to the false lifts, the forms
 that look like lifts at one Hecke operator and are orthogonal to the lifts (Layers 1, 5). The projection to the lifts
 of a form orthogonal to the false lifts has a denominator at each prime, which the congruences of
-[CongruencesOfTwistedThetaLifts](../CongruencesOfTwistedThetaLifts/README.md) bound. So the Gram determinant
+[CongruencesOfTwistedThetaLifts](../CongruencesOfTwistedThetaLifts/README.md) bound. A bound for the congruence module
+of the space of lifts in the forms integral at that prime gives a bound for this denominator, and the integrality part
+of the denominator is a bound for the part of that congruence module that comes from forms orthogonal to the false
+lifts (Layer 8). So the Gram determinant
 `vol(Θ_{j,ϑ}|𝒢(W_j))` times a determinant of controlled size and denominator is a constant times `Γ_j(ϑ)^d`. The height of `Γ_j` comes from rank-one lifts: a
 critical
-value `L(z, μ⁻¹)` of a Hecke character is the squared norm of the theta lift of `μ` from `U(1)` to a definite `U(2z)`
+value `L(z, μ⁻¹)` of a Hecke character is, up to an explicit nonzero factor, the squared norm of the theta lift of `μ`
+from `U(1)` to a definite `U(2z)`, a rank-one case of the Rallis inner product formula
 (Layer 2), and a test form whose pairing with that lift has exactly the divisibility forced on derivatives of theta
 functions (the sharpness theorem of
 [DivisibilityOfThetaDerivatives](../DivisibilityOfThetaDerivatives/README.md)) bounds the valuation of the twisted
@@ -45,12 +50,17 @@ measures).
 Layer 1 defines point forms, false lifts and the denominator of a projection. Layer 2 treats the lift of a character
 from `U(1)` and its squared norm. Layer 3 sets up gluing and the first factors. Layer 4 proves the three exchanges and
 that products span. Layer 5 proves that periods of false lifts vanish. Layer 6 bounds the heights of ratios of Hecke
-values. Layer 7 builds the comparison operator and proves the cost of one lift.
+values. Layer 7 builds the comparison operator and proves the cost of one lift. Layer 8 compares these objects with
+the standard theory, which is the reference: the denominator of a projection with the congruence module, and the
+algebraic part with the partial Hecke L-value; the sections that other roadmaps use state these readings in paragraphs
+headed *In standard terms*, and the proofs of Layers 1 to 7 are stated on the objects of the route.
 
 ## Conventions and notation
 
 **Roadmaps and sources.** A roadmap name of the family `ShortGRH` refers to that roadmap; every other roadmap name
-refers to the roadmap of that name in the family `RiemannHypothesisForDirichletLFunctions`, unless an area is named.
+refers to the roadmap of that name in the family `RiemannHypothesisForDirichletLFunctions` when that family has one,
+and otherwise to the general roadmap of the library of that name (`PadicFamilies`,
+`AutomorphicPadicLFunctionsPartII`), unless an area is named.
 Citations are by section number, `Name §k.n`; bare numbers are sections of this roadmap. `ShortGRH background (…)` names
 a result that the family uses and that no roadmap section states; it is given in the form used, with the file and
 declaration of `[ShortProof]` that proves it. `[ShortProof]` is the formal proof that the family follows; the pointer
@@ -94,6 +104,17 @@ form `⟨·,·⟩_ρ`, `k⁺`, `k⁻` (also `μ⁺`, `μ⁻`) for its two diagra
 `t = n − r` for the difference of ranks. `λ₁(S g)` is the first minimum, cut at `1`, of the lattice of `S` moved by the
 adelic point `g`.
 
+**Class sums and Petersson products.** The class-sum inner product of algebraic forms is the Petersson product up to a
+positive constant of the level and the weight: if a level `J` of `U(I_n)` acts on two forms of weight `ρ` by the same
+unitary character of finite order, the class sum at `J` of `⟨φ(h), φ′(h)⟩_ρ` is `[K° : J]·dim ρ` times the Petersson
+product of the automorphic forms attached to them, `K°` the stabiliser of the standard lattice
+(AdelicUnitaryGroupsAndAlgebraicModularForms §6.4 (c); this is the comparison that 2.2 uses). Algebraic forms and
+class sums are compared with the standard theory in AdelicUnitaryGroupsAndAlgebraicModularForms §8.1 (b) (the
+Petersson product as the inner product of `L²` for the quotient measure), §8.5 (c) with the paragraph *In standard
+terms* of its §6.4 (the algebraic forms on the standard definite space as automorphic forms), and §8.6 (a), (b)
+(algebraic forms and their gauge as algebraic modular forms with `p`-adic coefficients and the forms with values in a
+lattice).
+
 **Integrality, sizes, heights.** `ι` runs over the pairs of a prime `ℓ` and an isomorphism `ι : ℂ ≃ ℚ̄_ℓ`, read as a
 place of `ℂ` through `ℚ̄_ℓ ⊂ ℂ_ℓ`. A vector of a weight representation is integral at an embedding `ℂ → ℂ_l` at a point
 `h` if its `l`-adic gauge there is at most `1` (ThetaLiftChainsAndTheSeesawIdentity §1.5); a form is integral if all its
@@ -110,9 +131,9 @@ indexed by the `ι` are those of OneSidedPrimeSumBoundsAndAdmissibleData §1.2.
 | `δ_h(v)`, point form | class form, form supported on one class with prescribed finite datum | 1.1 |
 | `⟨·,·⟩_σ, H_w(X), X_*(w)` | conjugated pairing, Hecke polynomial operator, test value | 1.2, 1.3 |
 | false lifts, test forms, `e_1` | forms satisfying the conditions of a lift; integral forms orthogonal to them; idempotent of the label `X − 1` | 1.3 |
-| denominator at most `β` at `ι` | congruence number of a projection | 1.4 |
+| denominator at most `β` at `ι` | bound for the denominators of a projection, compared with the congruence module in 8.1 | 1.4 |
 | `X, O_X, K_X(g), φ_X, J_X` | lift data from `U(1)`, their descent pair, kernel form, lift, level | 2.1 |
-| `φ_{p,ϑ}, n_ν, L^alg(p, ϑ), n_L` | lift of a pair, its denominator, algebraic part, `n_GL·n_ν²` | 2.5 |
+| `φ_{p,ϑ}, n_ν, L^alg(p, ϑ), n_L` | lift of a pair, its denominator, algebraic part (a normalised squared norm, 8.2), `n_GL·n_ν²` | 2.5 |
 | `P(𝔪)` | period of the determinant kernel | 2.7 |
 | `ϖ, R₂, Γ, γ, e_den` | generator of the chosen places, `O_E/ϖ²`, congruence group, glued lattice, denominator exponent | 3.2, 3.3 |
 | `S, W♭, V″, V°, W^add, φ°, 𝖺_c, Λ_i, 𝖥_i` | spaces of the exchanges, carrier, its coefficients, choices, twist-free functions | 3.4, 3.5 |
@@ -126,6 +147,9 @@ indexed by the `ι` are those of OneSidedPrimeSumBoundsAndAdmissibleData §1.2.
 | `T_z, h_X` | twisted central translation, class number of `U(1)` at the level | 6.3 |
 | `𝒜^⊕, glue_ϑ, Θ°, hk` | tuples of forms on `V°`, gluing map, period map, hook number of `μ⁻` | 7.1, 7.2, 7.3 |
 | `U_ϑ, pr U_ϑ` | comparison operator and its compression to the lifts | 7.4, 7.5 |
+| `𝔬_ι, 𝒜(O)_ι, len_ι, 𝒴_ι(Z, e)` | valuation ring of `ι`, forms integral at `ι`, normalised length, integral forms orthogonal to the false lifts | 8.1 |
+| `Cong_ι(Z), Den_ι(Z, e), n_O` | congruence module of `Z`, its part from the forms of `𝒴_ι(Z, e)`, common multiple of the stabiliser orders | 8.1 |
+| `A_p` | the constant of 2.5 (b) for the pair `p` | 8.2 |
 
 ## Layer 1: Tested forms, Hecke adjoints, false lifts and denominators
 
@@ -259,7 +283,8 @@ In the lower bound (b) is used with `Z` the orthogonal complement of a space of 
 
 ### 1.4 The denominator of the projection to a subspace
 
-*Origin:* particular to this proof: a congruence number for a subspace of forms, measured by the determinant of one
+*Origin:* particular to this proof: an analogue of a congruence number for a subspace of forms, measured by the
+determinant of one
 operator that makes the projections of integral forms integral. The first clause of DeterminantsOfThetaLiftChains
 §1.3 (b) is a condition of the same shape for the range of `Θ_{j,ϑ}`, without the condition on the pairings `⟨y′, ·⟩`.
 
@@ -275,6 +300,23 @@ denominator at most `β` at `ι` (for `O` and `e`) if there is an endomorphism `
   embedding `ℂ → ℂ_ℓ`.
 
 Check: for `Z = 0` the condition holds for every `β`, with `Λ = 0` on the zero space, whose determinant is `1`.
+
+The word *denominator* is this roadmap's name for the bound `β`; in the literature the denominators of the projection
+to a space of eigenforms are measured by a congruence module or a congruence ideal (PadicFamilies §1.7 (The congruence
+module of an augmentation), §1.8 (The congruence ideal of an augmentation)), and 8.1 states how the denominator is
+related to the congruence module.
+
+**In standard terms.** In the notation of 8.1 (`𝒜(O)_ι` the forms integral at `ι`, `𝒴_ι(Z, e)` those of them
+orthogonal to the false lifts for `e` and `Z^⊥`), the condition without its clause on the pairings `⟨y′, ·⟩` holds
+exactly when the normalised length of `Den_ι(Z, e) = pr_Z(𝒴_ι(Z, e))/(𝒜(O)_ι ∩ Z)` is at most `dim Z·r·β/log ℓ` (8.1
+(b)); `Den_ι(Z, e)` is a submodule of the congruence module `Cong_ι(Z) = pr_Z(𝒜(O)_ι)/(𝒜(O)_ι ∩ Z)`, which `pr_Z`
+identifies with `𝒜(O)_ι/((𝒜(O)_ι ∩ Z) ⊕ (𝒜(O)_ι ∩ Z^⊥))` (8.1 (a)). A bound for the congruence module gives the whole
+condition: if `(len_ι(Cong_ι(Z)) + dim Z·v_ℓ(n_O))·log ℓ ≤ dim Z·r·β`, with `n_O` a common multiple of the orders
+`#Aut(h)` at the level of `O`, the projection to `Z` has denominator at most `β` at `ι` (8.1 (c)). When `Z` is the
+joint eigenspace of a character of a commutative algebra of endomorphisms of `𝒜(O)_ι` stable under adjoints,
+`Cong_ι(Z)` is the congruence module of that augmentation in the sense of PadicFamilies §1.7 (The congruence module of
+an augmentation) (8.1 (d)). The definition records only the projections of the forms of `𝒴_ι(Z, e)`: it bounds
+`Den_ι(Z, e)`, and the implication stated goes from the congruence module to the denominator.
 
 *Needs:* 1.3; OneSidedPrimeSumBoundsAndAdmissibleData §1.2.
 
@@ -426,6 +468,25 @@ subfield `E⁺` of `E` (the extension `E/E⁺` is unramified at the finite place
 `‖φ_X‖² = C·∏_{w ∈ 𝒞_X}(q_w − 1)·∏_τ ρ(τ)!·dim ρ_O·L^{S}(k, μ_X⁻¹)·(∏_{w ∈ Q_X} q_w)^{2k−1}`,
 with `S` the set of level places of `X` and `L^S` as in the Conventions.
 
+**In standard terms.** (b) is a case of rank one of the Rallis inner product formula in Weil's convergent range
+(Rallis (1984b); for unitary groups J.-S. Li (1992)), with its local factors evaluated. That formula states that, for
+factorisable vectors of an irreducible cuspidal automorphic representation `π` of the smaller group of a dual pair and
+factorisable data, the Petersson product of the theta lifts is, up to a constant fixed by the choice of the measures,
+a partial value of the standard L-function of `π` twisted by the splitting character of the target space, divided by
+the corresponding partial value of the normalising factor of the doubling Eisenstein series, times local doubling zeta
+integrals at the remaining places. Here the smaller group is `U(1)`, on which every automorphic form is cuspidal, the
+vector is the constant function with the characters of `O_X` (2.2 (c)), the target is definite of rank `2k ≥ 4`, the
+L-value is the partial Hecke L-value `L^S(k, μ_X⁻¹)` of the base change at the point `k`, and the partial value of the
+normalising factor is the Euler product of `ζ_{E⁺}(2k)` without the factors at the places of `E⁺` below `S`
+(SiegelWeilAndRallisFormulasOnUnitaryGroups §1.5 (c), §7.2 (d), (e)); what (b) adds is the closed form, for the block
+datum, of the local factors at the places of `X`, which absorb the Euler factors of `ζ_{E⁺}(2k)` at the places below
+`S`, and at the infinite places; with the volumes they make up its constant. ThetaLiftsForDefiniteUnitaryGroups §3.2
+states the formula for definite pairs in every rank, with normalisations that are not matched term by term with those
+here (introduction of this layer). The formula for sharp data on which (b) rests,
+SiegelWeilAndRallisFormulasOnUnitaryGroups §4.5 with its §1.5 (c), is compared with the Rallis inner product formula
+in SiegelWeilAndRallisFormulasOnUnitaryGroups §7.2 (d), (e). The class-sum norm `‖φ_X‖²` is a positive multiple of the
+Petersson norm (Conventions).
+
 *Needs:* 2.1, 2.2; DeterminantsOfThetaLiftChains §2.2; SiegelWeilAndRallisFormulasOnUnitaryGroups §4.5 (the Rallis
 inner product formula for sharp finite data by doubling, with unramified integrals as a sum over cosets), §1.5 (c) (that
 sum on the constant `1`, the vacuum sum, for a source of rank one, a target of rank `2k ≥ 4` and the character
@@ -489,7 +550,11 @@ and the character `νϑ`; write `O_{p,ϑ}` for its descent pair. The lift of the
 `n_ν = M^{4fz}·(M·d)^{j}`, with `d` the integer of `K = ℚ(√−d)` (not `dim 𝒯`), the algebraic part is
 `L^alg(p, ϑ) = ‖φ_{p,ϑ}‖²/Nm Q(ϑ)^{2z−1}`, and the integral algebraic part is `n_L·L^alg(p, ϑ)` with
 `n_L = n_GL·n_ν²`, `n_GL` the common multiple of the orders of stabilisers of ThetaLiftChainsAndTheSeesawIdentity
-§2.10. The pair has empty row if `c(τ) = z` at every `τ`.
+§2.10. The pair has empty row if `c(τ) = z` at every `τ`. The name *algebraic part* is this roadmap's: `L^alg(p, ϑ)`
+is a normalised squared norm, which (b) and 8.2 identify with the partial L-value `L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)` times a
+positive constant independent of `ϑ`; in the literature the algebraic part of a critical Hecke L-value is its quotient
+by a power of `2πi` and a product of CM periods (AutomorphicPadicLFunctionsPartII §5.8 (Katz–Shimura algebraicity for
+totally imaginary extensions)), and that constant is not compared with such a period.
 
 (b) Prove: `φ_{p,ϑ} ≠ 0`; `L^alg(p, ϑ) > 0`; there is `A ≠ 0`, independent of `ϑ`, with
 `n_L·L^alg(p, ϑ) = A·L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)` for every tame character `ϑ`; and
@@ -502,6 +567,14 @@ and the character `νϑ`; write `O_{p,ϑ}` for its descent pair. The lift of the
 
 The rank-one lift of a main pair `p` twisted by `ϑ` in DeterminantsOfThetaLiftChains §1.3 (b) is `φ_{p,ϑ}`, its test
 forms are the test forms of `O_{p,ϑ}` (1.3 (c)), and the line of the lift is `ℂ·φ_{p,ϑ}`.
+
+**In standard terms.** By (b) and 8.2 (a), `L^alg(p, ϑ) = (A_p/n_L)·L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)` for every tame character
+`ϑ`, with `A_p` the positive constant of 8.2, given there in closed form and independent of `ϑ`; and by 8.2 (b) the
+numbers `A_p·L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)` are nonzero algebraic numbers. So the partial L-values `L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)`,
+`ϑ` tame, are algebraic multiples of the one number `A_p⁻¹`: the form that Shimura's algebraicity of critical values
+takes along finite-order twists, with `A_p⁻¹` in the place of a period. `A_p` is not compared with the period of
+AutomorphicPadicLFunctionsPartII §5.8 (Katz–Shimura algebraicity for totally imaginary extensions), and the ratios
+`ratio(p, ϑ, s)` do not involve it.
 
 *Needs:* 1.3, 2.1, 2.2, 2.3; DeterminantsOfThetaLiftChains §1.1; DivisibilityOfThetaDerivatives §1.6, §4.2, §4.6;
 ThetaLiftChainsAndTheSeesawIdentity §2.10; OneSidedPrimeSumBoundsAndAdmissibleData §3.4.
@@ -589,7 +662,10 @@ three exchanges of Layer 4 (the carrier, the choices `i` and the twist-free func
 ### 3.1 One exchange, and class sums at the level of a row stabiliser
 
 *Origin:* particular to this proof: two consequences of the exchange identity (DeterminantsOfThetaLiftChains §3.10)
-for a space `W = E^b ⊕ W′` with a standard definite summand.
+for a space `W = E^b ⊕ W′` with a standard definite summand. The exchange identity is particular to the route: it is
+not the first term identity of the regularised Siegel–Weil formula, its nearest published relative
+(DeterminantsOfThetaLiftChains §3.10, Origin), nor the Rallis inner product formula at equal rank from which 4.2 is
+adapted, and no deduction of it from either is stated.
 
 *Method of the formal proof:* for (b) the datum `χ(det x″)·Ψ′(x″⁻¹x′)` is matched with the product datum
 `χ∘det ⊗ Ψ′`, and the kernel of a product datum on `E^b ⊕ W′` is the product of the kernels of the summands. For (c)
@@ -1333,6 +1409,13 @@ homomorphism `j : ℂ → ℂ_l`, such that `F(ϑ′) = Σ_a c_a·ϑ′(u_a)` fo
 if `F`
 is an integral measure at `Q`, so is `ϑ′ ↦ |F(ϑ′)|²`.
 
+The name *integral measure* is this roadmap's: it is a finite combination of evaluations at points of `U(1)(𝔸)`, on
+the tame characters with one set of places `Q`, with coefficients integral at the primes not dividing `Nm Q`, and no
+compatibility between different `Q` is asked. It is not a `p`-adic measure in the sense of Katz (1978), a bounded
+measure on a Galois group of conductor `p^∞` times a fixed ideal that interpolates critical Hecke L-values
+(AutomorphicPadicLFunctionsPartII §8.5 (Critical Hecke-value interpolation over totally imaginary fields)), and no
+comparison with such a measure is stated.
+
 (b) Prove: `φ_{p,ϑ}(h) = Σ_c k_{p,ϑ}(g_c, h)`, where `k_{p,ϑ}(g, h)` is the vector of the jets, with variables scaled by
 `π_M·t₀`, of the theta function at `(g, h)` of the point datum (the vacuum scaled by `v₀^{2z}` off the level places; at
 the level places the indicator of the columns that reduce to the fixed basis vector at the chosen places and have
@@ -1424,6 +1507,12 @@ classes.
 
 CongruencesOfTwistedThetaLifts §7.2 (e) applies (b) to the line of the lift of a main pair, which gives the second
 clause of DeterminantsOfThetaLiftChains §1.3 (b).
+
+**In standard terms.** In the notation of 8.1, with `W` of rank one and `dim ℂφ ≤ 1`, the hypothesis of (b) on the
+denominator holds with `β = (len_ι(Cong_ι(ℂφ)) + v_ℓ(n_O))·log ℓ`, where `Cong_ι(ℂφ)` is the congruence module of the
+line of the lift in the forms of `𝒜(O)` integral at `ι` and `n_O` is a common multiple of the orders `#Aut(h)` at the
+level of `O` (8.1 (a), (c)). So, when the classes of `U(1)(E)\U(1)(𝔸_f)/J_X` have trivial stabilisers,
+`|ι⟨pr Ξ, pr Ξ′⟩| ≤ ℓ^{len_ι(Cong_ι(ℂφ)) + v_ℓ(n_O) + v_ℓ(h_X)}` for all test forms `Ξ`, `Ξ′` of `O` at `ℓ`.
 
 *Needs:* 1.2, 1.3, 1.4, 2.1, 2.2.
 
@@ -1749,6 +1838,161 @@ OneSidedPrimeSumBoundsAndAdmissibleData §1.2, §3.3, §4.1, §4.2; SecondMoment
 `New.Data.IsComparisonOperator.norm_padic_det_liftCompression_le`,
 `New.Data.IsComparisonOperator.norm_map_det_liftCompression_le`, `New.Data.heightLe_liftDeterminant_ratio`)
 
+## Layer 8: Comparison with the standard theory
+
+The standard theory is the reference for the objects of the route that have a standard counterpart, and this layer
+states how they are related. The denominator of a projection (1.4) is compared in 8.1 with the congruence module of a
+subspace in the lattice of the forms integral at a prime, which, for the eigenspace of an augmentation of a
+commutative algebra of integral endomorphisms stable under adjoints, is the congruence module of that augmentation,
+PadicFamilies §1.7 (The congruence module of an augmentation). The algebraic part of a pair (2.5) is compared in 8.2
+with the partial Hecke L-value of the twisted character. Two further comparisons are stated in other places: the norm
+identity 2.3 (b) is a rank-one case of the Rallis inner product formula, and the formula for sharp data on which it
+rests is compared with that formula in SiegelWeilAndRallisFormulasOnUnitaryGroups §7.2 (d), (e) (paragraph *In
+standard terms* of 2.3); the class-sum inner product of algebraic forms is a positive multiple of the Petersson
+product (Conventions). The exchange identity of DeterminantsOfThetaLiftChains §3.10, which Layers 3 and 4 apply, is
+particular to the route: it is not the first term identity of the regularised Siegel–Weil formula, and no comparison
+with that identity is stated. Layers 1 to 7 do not use this layer.
+
+### 8.1 The denominator of a projection and the congruence module
+
+*Origin:* this roadmap's own formulation: the denominator of 1.4 read through the congruence module of a subspace in
+the lattice of the forms integral at `ι`, and that module identified, for an eigenspace, with the congruence module of
+an augmentation of PadicFamilies §1.7 (The congruence module of an augmentation). [ShortProof] states no such
+comparison.
+
+*Proof route:* (a) Every class of `U(V)(E)\U(V)(𝔸_f)/K_O` has a representative whose components above `ℓ` are integral
+(AdelicUnitaryGroupsAndAlgebraicModularForms §6.6 (b)); the classes are finitely many (§4.4 (b)), and a form is
+determined by its values at the representatives (§6.3 (a)). The gauge is unchanged by the rational points and by the
+points integral above `ℓ`, the character of `K_O` has finite order, and at a point integral above `ℓ` a vector has
+gauge at most `1` exactly when its coordinates lie in `𝔬_ι` (§6.6 (a)). So `𝒜(O)_ι` is the set of the forms whose
+values at the representatives have all their coordinates in `𝔬_ι`: the intersection of `𝒜(O)`, embedded by its values
+at the representatives in a finite product of copies of the weight, with the product of the coordinate lattices, a
+free `𝔬_ι`-module of finite rank. A finitely generated torsion-free module over a valuation ring is free; the quotient
+of that free module by the intersection embeds in a complex vector space, so it is torsion-free, hence free, and the
+intersection is a direct summand, free of rank `dim 𝒜(O)`, which spans `𝒜(O)` because every vector has a nonzero
+multiple in the product of the coordinate lattices. The same argument applies to `𝒜(O)_ι ∩ Z` and to `𝒴_ι(Z, e)`, the
+intersections of `𝒜(O)_ι` with `Z` and with the orthogonal complement of the false lifts. The false lifts for `e` and
+`Z^⊥` lie in `Z^⊥`, so `𝒜(O)_ι ∩ Z ⊆ 𝒴_ι(Z, e)`, and `pr_Z` is the identity there; the images
+`pr_Z(𝒴_ι(Z, e)) ⊆ pr_Z(𝒜(O)_ι)` are finitely generated and torsion-free, hence free, and they contain `𝒜(O)_ι ∩ Z`,
+which spans `Z`. A form `y ∈ 𝒜(O)_ι` has `pr_Z y ∈ 𝒜(O)_ι` exactly when `y − pr_Z y ∈ 𝒜(O)_ι ∩ Z^⊥`, which gives the
+isomorphism; and `len_ι` adds along a chain `𝔐 ⊆ 𝔑 ⊆ 𝔓` of free modules of the same rank, being the valuation of a
+determinant, which gives the inequality. (b) Over a valuation ring every matrix has a Smith normal form, the entry of
+least valuation dividing all the others: there are a basis `(φ_i)` of `pr_Z(𝒴_ι(Z, e))` and nonzero `δ_i ∈ 𝔬_ι` with
+`(δ_i φ_i)` a basis of `𝒜(O)_ι ∩ Z`, and `len_ι(Den_ι(Z, e)) = −Σ_i log_ℓ|ι(δ_i)|`. An endomorphism `Λ` of `Z` makes
+every `Λ(pr_Z y)`, `y ∈ 𝒴_ι(Z, e)`, integral exactly when it maps `pr_Z(𝒴_ι(Z, e))` into `𝒜(O)_ι ∩ Z`, that is, when
+the `i`-th row of its matrix in the basis `(φ_i)` has its entries in `δ_i𝔬_ι`; then `det Λ ∈ (∏_i δ_i)·𝔬_ι`, and
+`Λ = diag(δ_i)` attains `|ι(det Λ)| = ∏_i |ι(δ_i)|`. (c) Take `Λ = n_O·diag(δ_i)`, with `diag(δ_i)` from (b): it keeps
+the projections integral, and `|ι(det Λ)| = ℓ^{−dim Z·v_ℓ(n_O) − len_ι(Den_ι(Z, e))}`, which is at least
+`exp(−dim Z·r·β)` by the hypothesis. For `y ∈ 𝒴_ι(Z, e)` the form `φ = diag(δ_i)(pr_Z y)` is integral at `ι`, and for
+`y′` integral at every embedding `ℂ → ℂ_ℓ`, in particular at `ι` composed with complex conjugation,
+`⟨y′, Λ(pr_Z y)⟩ = n_O·⟨y′, φ⟩` lies in `𝔬_ι` by AdelicUnitaryGroupsAndAlgebraicModularForms §6.6 (f), which applies
+to the level of a descent pair, defined by reductions at places no two of which are equal or conjugate, with a
+character of finite order (ThetaLiftChainsAndTheSeesawIdentity §2.16; AdelicUnitaryGroupsAndAlgebraicModularForms §3.9
+(c)). The bound for `Cong_ι(Z)` gives the one for `Den_ι(Z, e)` by (a). (d) As `𝒜(O)_ι` is torsion-free, its elements
+killed by an ideal of `ℋ` are those of its elements that lie in the subspace of `𝒜(O)` killed by that ideal. For
+`h ∈ ℋ`, `h − aug(h)` lies in `𝔭`, so the subspace killed by `𝔭` is `Z`. Being commutative and stable under adjoints,
+`ℋ` consists of commuting normal operators, so `𝒜(O)` is the orthogonal sum of the joint eigenspaces `Z_χ` of the
+characters `χ` of `ℋ` that occur; `aug`, extended to the complex span of `ℋ`, is one of them, and `Z = Z_aug`. The
+projection `pr_Z` lies in the complex span of `ℋ`, so some nonzero multiple of `pr_Z` by an element of `𝔬_ι` lies in
+`ℋ`, and it annihilates `𝔭`, which acts by `0` on `Z`; so the subspace killed by `Ann_ℋ(𝔭)` lies in `ker pr_Z = Z^⊥`.
+Conversely, for `χ ≠ aug` there is `h ∈ 𝔭` with `χ(h) ≠ 0`, and every `h′ ∈ Ann_ℋ(𝔭)` has `χ(h)·h′y = h′hy = 0` for
+`y ∈ Z_χ`; so `Z^⊥`, the sum of the `Z_χ` with `χ ≠ aug`, is killed by `Ann_ℋ(𝔭)`. Then (a) gives the identification.
+
+Let `O` be a descent pair with `W` of rank `r`, `ℓ` a prime, `ι : ℂ ≃ ℚ̄_ℓ` as in 1.4, and `𝔬_ι` the ring of the
+complex numbers whose image under `ι` has absolute value at most `1`, a valuation ring of `ℂ` with value group `ℓ^ℚ`,
+which is not discrete. `𝒜(O)_ι` is the `𝔬_ι`-module of the forms of `𝒜(O)` integral at `ι`; by
+AdelicUnitaryGroupsAndAlgebraicModularForms §8.6 (b), applied to the level formed by the elements of `K_O` on which
+its character is trivial, these are the forms of `𝒜(O)` whose image under the map `φ ↦ φ_ι` of that section takes its
+values in the lattice spanned over the integers of `ℂ_ℓ` by the minor-product basis of the weight, the integral
+structure of the algebraic modular forms with `ℓ`-adic coefficients. For `𝔬_ι`-modules `𝔐 ⊆ 𝔑`, free of the same
+finite rank, the *normalised length* `len_ι(𝔑/𝔐)` is `−log_ℓ` of the absolute value, after `ι`, of the determinant of
+the matrix that expresses a basis of `𝔐` in a basis of `𝔑`; it does not depend on the bases, and it is the sum of the
+`−log_ℓ|ι(δ)|` over the elementary divisors `δ` of `𝔐` in `𝔑`. For `e ∈ ℂ[G_O]` and a subspace `Z ⊂ 𝒜(O)` with
+orthogonal projection `pr_Z`, `𝒴_ι(Z, e)` is the module of the forms of `𝒜(O)_ι` orthogonal to the false lifts for `e`
+and `Z^⊥` (1.3 (b)); the *congruence module* of `Z` is `Cong_ι(Z) = pr_Z(𝒜(O)_ι)/(𝒜(O)_ι ∩ Z)`, and
+`Den_ι(Z, e) = pr_Z(𝒴_ι(Z, e))/(𝒜(O)_ι ∩ Z)` is its submodule formed by the projections of the forms of `𝒴_ι(Z, e)`.
+`n_O` is a positive common multiple of the orders `#Aut(h)` of the stabilisers of the classes at the level of `O`, and
+`v_ℓ` is the `ℓ`-adic valuation of integers. Prove:
+
+(a) `𝒜(O)_ι` is a free `𝔬_ι`-module of rank `dim 𝒜(O)` that spans `𝒜(O)`;
+`𝒜(O)_ι ∩ Z ⊆ pr_Z(𝒴_ι(Z, e)) ⊆ pr_Z(𝒜(O)_ι)` are free of rank `dim Z`; `pr_Z` induces an isomorphism
+`𝒜(O)_ι/((𝒜(O)_ι ∩ Z) ⊕ (𝒜(O)_ι ∩ Z^⊥)) ≅ Cong_ι(Z)`; and `len_ι(Den_ι(Z, e)) ≤ len_ι(Cong_ι(Z))`.
+
+(b) For a real `β`, these are equivalent: there is an endomorphism `Λ` of `Z` with `|ι(det Λ)| ≥ exp(−dim Z·r·β)` such
+that `Λ(pr_Z y)` is integral at `ι` for every `y ∈ 𝒴_ι(Z, e)`; and `len_ι(Den_ι(Z, e))·log ℓ ≤ dim Z·r·β`. In
+particular, if the projection to `Z` has denominator at most `β` at `ι` (1.4), then
+`len_ι(Den_ι(Z, e))·log ℓ ≤ dim Z·r·β`.
+
+(c) If `(len_ι(Den_ι(Z, e)) + dim Z·v_ℓ(n_O))·log ℓ ≤ dim Z·r·β`, in particular if
+`(len_ι(Cong_ι(Z)) + dim Z·v_ℓ(n_O))·log ℓ ≤ dim Z·r·β`, then the projection to `Z` has denominator at most `β` at
+`ι`.
+
+(d) Let `ℋ` be a commutative `𝔬_ι`-subalgebra of the endomorphisms of `𝒜(O)_ι`, acting on `𝒜(O)` by extension of
+scalars and stable under adjoints for the inner product of `𝒜(O)`; let `aug : ℋ → 𝔬_ι` be a surjective homomorphism of
+`𝔬_ι`-algebras with kernel `𝔭`, and suppose that `Z` is the space of the `y ∈ 𝒜(O)` with `hy = aug(h)y` for every
+`h ∈ ℋ`. Then the elements of `𝒜(O)_ι` killed by `𝔭` are those of `𝒜(O)_ι ∩ Z`, those killed by `Ann_ℋ(𝔭)` are those
+of `𝒜(O)_ι ∩ Z^⊥`, and `Cong_ι(Z)` is the congruence module of PadicFamilies §1.7 (The congruence module of an
+augmentation) of the `ℋ`-module `𝒜(O)_ι` at `aug`, the quotient of `𝒜(O)_ι` by the sum of its submodules killed by `𝔭`
+and by `Ann_ℋ(𝔭)`.
+
+For `Z` the range of `Θ_{j,ϑ}` on `𝒢(W_j)` and `e = e₀`, the condition of (b) is the first clause of
+DeterminantsOfThetaLiftChains §1.3 (b), the clause that 7.5 (b) uses. The denominator records only the projections of
+the integral forms orthogonal to the false lifts, and the pairings of their images with the forms integral at every
+embedding: it bounds `Den_ι(Z, e)`, and the implication stated here goes from a bound for `Cong_ι(Z)` to a bound for
+the denominator.
+
+Check: in `ℂ²` with the standard inner product and the lattice `𝔬_ι²`, the line `Z = ℂ·(1, 1)` has
+`pr_Z(𝔬_ι²) = 𝔬_ι·(1/2, 1/2)`, and `pr_Z(𝔬_ι²)/(𝔬_ι² ∩ Z) ≅ 𝔬_ι/2𝔬_ι` has normalised length `1` if `ℓ = 2` and `0`
+otherwise: `(1, 1)` and `(1, −1)`, which span `Z` and `Z^⊥`, are congruent modulo `2`.
+
+*Needs:* 1.3, 1.4; ThetaLiftChainsAndTheSeesawIdentity §2.16; DeterminantsOfThetaLiftChains §1.3;
+AdelicUnitaryGroupsAndAlgebraicModularForms §3.9 (c), §4.4 (b), §6.3 (a), §6.6 (a), (b), (f), §8.6 (b); PadicFamilies
+§1.7 (The congruence module of an augmentation).
+
+### 8.2 The algebraic part and the partial Hecke L-value
+
+*Origin:* this roadmap's own formulation: the algebraic part of 2.5 as the partial Hecke L-value of the twisted
+character times a constant independent of the twist, in closed form, and the algebraicity of the products of these
+L-values with that constant, the form that Shimura's algebraicity of critical values of Hecke L-functions of CM
+fields, named in the origin of 2.5, takes along finite-order twists. [ShortProof] proves 2.3, 2.5 and 6.1 and states
+no such comparison.
+
+*Proof route:* (a) The lift data `X` of `(p, ϑ)` (2.5 (a)) have `#n = 2z`, the chosen places `𝒞`, the twist places
+`Q(ϑ)`, the row lengths `c(τ) − z` and the character `νϑ`, so 2.3 (b) with `k = z` gives
+`‖φ_X‖² = C·∏_{w∈𝒞}(q_w − 1)·∏_τ (c(τ) − z)!·dim ρ_{O_{p,ϑ}}·L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)·Nm Q(ϑ)^{2z−1}`, `Nm Q(ϑ)` being
+the product of the norms of the places of `Q(ϑ)` (DeterminantsOfThetaLiftChains, Conventions). Multiplying by
+`|v₀^{2z}·(π_M·t₀)^j|²` and dividing by `Nm Q(ϑ)^{2z−1}` gives (a); no factor other than the L-value depends on `ϑ`.
+As the L-value is not `0` (2.5 (b)), the number `A` of 2.5 (b) is determined, and it is `A_p`. (b) By 6.1 (c),
+`n_L·L^alg(p, ϑ) = Σ_a c_a·ϑ(u_a)` with finitely many `u_a ∈ U(1)(𝔸)` and coefficients `c_a` such that `|ι′(c_a)| ≤ 1`
+for every prime `l` not dividing `Nm Q(ϑ)` and every ring homomorphism `ι′ : ℂ → ℂ_l` (the homomorphisms written `j`
+in 6.1; here `j` is the sum of the row lengths). A transcendental number has, for every prime `l`, a ring homomorphism
+`ι′ : ℂ → ℂ_l` that sends it to an element of absolute value above `1`: send it to a transcendental element of `ℂ_l`
+of absolute value above `1` and extend along a transcendence basis, `ℂ_l` being algebraically closed of the same
+transcendence degree as `ℂ`. So every `c_a` is algebraic. A tame character has weight `0` and a tame part supported on
+`Q(ϑ)`, so it is trivial on an open subgroup of the compact group `[U(1)]`, which has finite index, and its values are
+roots of unity. Hence `n_L·L^alg(p, ϑ)` is algebraic, and it is positive by 2.5 (b). At `ϑ = 1` it is integral at
+every `ι` (6.1 (c)); every embedding of a number field into `ℚ̄_ℓ` extends to an isomorphism `ℂ ≃ ℚ̄_ℓ`, so it is an
+algebraic integer. By 2.5 (b) the ratio is the quotient of the values at `ϑ` and at `1`.
+
+Let `D` be the data and `p = (ν, z)` a critical pair with `z ≥ 2`, `ν` of weight `−c`, with the notation of 2.5
+(`j = Σ_τ (c(τ) − z)`, `v₀`, `t₀`, `n_L`). The weight representation `ρ_{O_{p,ϑ}}` has the single row `c(τ) − z` at
+each `τ` and does not depend on `ϑ`, and `C = vol[U(I_{2z})]·vol[U(1)]/ζ_{E⁺}(2z)` is the constant of 2.3 (b) for
+`#n = 2z`. Put `A_p = n_L·|v₀|^{4z}·|π_M·t₀|^{2j}·C·∏_{w∈𝒞}(q_w − 1)·∏_τ (c(τ) − z)!·dim ρ_{O_{p,ϑ}}`, a positive real
+number. Prove:
+
+(a) `n_L·L^alg(p, ϑ) = A_p·L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)` for every tame character `ϑ`; so the number `A` of 2.5 (b) is `A_p`.
+
+(b) For every tame character `ϑ`, `A_p·L^{𝒞∪Q(ϑ)}(z, (νϑ)⁻¹)` is a nonzero algebraic number, and an algebraic integer
+for `ϑ = 1`; hence `ratio(p, ϑ, +1)` (DeterminantsOfThetaLiftChains §1.1) is a nonzero algebraic number.
+
+The constant `A_p` is not compared here with the period by which the literature forms the algebraic part of a critical
+Hecke L-value, a power of `2πi` times a product of CM periods (AutomorphicPadicLFunctionsPartII §5.8 (Katz–Shimura
+algebraicity for totally imaginary extensions)): whether `A_p` times such a period is algebraic is not stated. The
+ratios `ratio(p, ϑ, s)` do not involve `A_p`.
+
+*Needs:* 2.3, 2.5, 6.1; DeterminantsOfThetaLiftChains, Conventions (tame characters, `Nm Q(ϑ)`), §1.1 (the ratio of a
+pair).
+
 ## Downstream consumers
 
 - DeterminantsOfThetaLiftChains §1.3 uses the false lifts and forms orthogonal to them (1.3), the test forms (1.3 (c))
@@ -1772,6 +2016,8 @@ OneSidedPrimeSumBoundsAndAdmissibleData §1.2, §3.3, §4.1, §4.2; SecondMoment
   exchanges; products span (Layers 3 and 4).
 - The vanishing of the periods of false lifts (Layer 5).
 - The comparison operator and the cost of one lift (Layer 7).
+- The comparison of the denominator of a projection with the congruence module, and of the algebraic part with the
+  partial Hecke L-value (Layer 8).
 
 ### Not owned here
 
@@ -1782,6 +2028,10 @@ OneSidedPrimeSumBoundsAndAdmissibleData §1.2, §3.3, §4.1, §4.2; SecondMoment
 - The existence of regular families of twists and the bound for denominators: CongruencesOfTwistedThetaLifts and
   SelmerBoundsForAnticyclotomicTwists.
 - The divisibility of derivatives of theta functions and its sharpness: DivisibilityOfThetaDerivatives.
+- The comparison of the inner product formula for sharp data with the Rallis inner product formula:
+  SiegelWeilAndRallisFormulasOnUnitaryGroups §7.2.
+- The comparison of algebraic forms and class sums with automorphic forms and Petersson products:
+  AdelicUnitaryGroupsAndAlgebraicModularForms §8.1, §8.5, §8.6.
 
 ## Exact supplier contracts
 
@@ -1816,11 +2066,24 @@ CompositeThetaLiftsAndShortForms §2.1, §2.2 (the numbers at a prime, and the p
 SecondMomentsOfPoincareSeries §2.3 (`dim 𝒢(W_j) = dim 𝒯`), §5.7 (c) (`d_T > 0`); FiniteReductiveGroups §5.7
 (idempotents of labels); DiscreteSeriesCoefficientsAndAutomorphicMetrics §7.5a (class-set inner products and the
 Petersson product); SiegelWeilAndRallisFormulasOnUnitaryGroups §1.5 (c), §4.5 (the vacuum sum in rank one as an
-L-value, the inner product formula for sharp data); HolomorphicDiscreteSeriesOfUnitaryGroups §4.1, §5.4, §5.5, §6.3,
+L-value, the inner product formula for sharp data), and its §7.2 (d), (e) for their comparison with the Rallis inner
+product formula; HolomorphicDiscreteSeriesOfUnitaryGroups §4.1, §5.4, §5.5, §6.3,
 §6.4 (products of principal minors, bounds for `c_λ`, peaks of holomorphic forms);
 WeilRepresentationsOnBanachSpacesOfData §5.3, §5.4, §6.9, §8.10, §9.3 (data above a set of places, mixed models,
 vanishing of descents, Hecke polynomials through theta lifts); AdelicUnitaryGroupsAndAlgebraicModularForms §3.6 (the
-Iwasawa decomposition).
+Iwasawa decomposition), §3.9 (c), §4.4 (b), §6.3 (a), §6.4 (c), §6.6 (a), (b), (f) (levels given by reductions at
+finitely many places, finiteness of classes, class sums as Petersson products, the `p`-adic gauge and the integrality
+of class-sum pairings), and its §8.1 (b), §8.5 (c), §8.6 (a), (b) (the Petersson product as the inner product of `L²`
+for the quotient measure, forms of a parameter as cusp forms, algebraic forms and their gauge as algebraic modular
+forms with `p`-adic coefficients and their lattice).
+
+### From general roadmaps of the library
+
+PadicFamilies §1.7 (The congruence module of an augmentation), for 8.1 (d) and the reading of 1.4; PadicFamilies §1.8
+(The congruence ideal of an augmentation), named in 1.4 for what a congruence ideal is.
+AutomorphicPadicLFunctionsPartII §5.8 (Katz–Shimura algebraicity for totally imaginary extensions) and §8.5 (Critical
+Hecke-value interpolation over totally imaginary fields), named in 2.5, 6.1 and 8.2 for what the algebraic part of a
+critical Hecke L-value and a `p`-adic measure are in the literature; no statement of this roadmap rests on them.
 
 ## References
 
