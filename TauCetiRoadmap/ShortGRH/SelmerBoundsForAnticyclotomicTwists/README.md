@@ -9,22 +9,45 @@ untwisted Hecke `L`-values. This roadmap bounds all three.
 
 It proves two things. First, for finitely many `ℓ`-adic representations of main-summand type there is one tame
 anticyclotomic character `τ` of `U(1)` such that every power `τ^j`, `1 ≤ j ≤ m`, has small ramification, makes all the
-twisted Selmer groups short, and keeps the ratios of `L`-values barely divisible by `ℓ` (Layers 1, 2 and 5). The route
-works with Selmer groups modulo `ℓ^M` cut out by linear relations on cocycles. Auxiliary primes are added one at a time,
-each with a linear tie between the values of a cocycle at a tame generator and at a Frobenius element (the descent). All
-twists are then written as one system of equations over a polynomial ring. Restricting to a line and specialising at
-roots of unity of `ℓ`-power order gives the twist. The `L`-values enter through Stickelberger systems: integral elements
-of group rings of class groups of `U(1)` with Euler-factor norm relations. Second, at a place above `ℓ`, it bounds the
-length by which the crystalline cocycles of the dual of a summand fail to be orthogonal, under cup products, to the
-crystalline cocycles of a class of lattices whose Hodge–Tate jumps lie in windows near `0` and near large weights (Layers
-3 and 4). The bound is explicit, linear in the rank of the lattice and uniform in `ℓ`; the power of `ℓ` that makes the
-cup products vanish does not depend on the rank in the essential cases. The proof uses Kisin modules over Kummer charts.
+twisted Selmer groups short, and keeps the ratios of `L`-values barely divisible by `ℓ` (Layers 1, 2 and 5). Through
+the classes of their cocycles, these Selmer groups are the Bloch–Kato Selmer groups of the twisted lattices with
+divisible coefficients, relaxed at the places above the level primes `p₀`, `p₁` that do not lie above `ℓ` and at the
+places where the twist ramifies. The route works with Selmer groups modulo `ℓ^M` cut out by linear relations on
+cocycles: the cocycles vanish at an inertial element that acts by a scalar, and above `ℓ` they obey the linear
+relations that hold on the crystalline cocycles. Auxiliary primes are added one at a time, each with a linear tie
+between the values of a cocycle at a tame generator and at a Frobenius element (the descent). All twists are then
+written as one system of equations over a polynomial ring. Restricting to a line and specialising at roots of unity of
+`ℓ`-power order gives the twist. The `L`-values enter through Stickelberger systems: integral elements of group rings
+of class groups of `U(1)` with Euler-factor norm relations. Second, at a place above `ℓ`, it bounds the length by
+which the crystalline cocycles of the dual of a summand fail to be orthogonal, under cup products, to the crystalline
+cocycles of a class of lattices whose Hodge–Tate jumps lie in windows near `0` and near large weights (Layers 3 and
+4). In standard terms this is the length of the Bloch–Kato group `H¹_f` of the dual of the summand modulo the classes
+whose reductions modulo each power of `ℓ` have zero local Tate cup product with those of `H¹_f` of every lattice of
+the class, under every pairing that is equivariant modulo that power; pairings that are equivariant integrally
+contribute nothing, by the orthogonality of the Bloch–Kato conditions. The bound is explicit, linear in the rank of
+the lattice and uniform in `ℓ`; the power of `ℓ` that makes the cup products vanish does not depend on the rank in the
+essential cases. The proof uses Kisin modules over Kummer charts.
+
+The standard theory is the reference, and Layer 6 states the results on its objects. A module of cocycles that is cut
+out by the crystalline relations of a lattice potentially crystalline above `ℓ`, and normalised at an element acting
+by a scalar `ζ` with `ζ − 1` a unit, maps isomorphically onto a Bloch–Kato Selmer group relaxed at finitely many
+places away from `ℓ`; so the bounds of Layers 2 and 5 for twisted Selmer groups are bounds for Bloch–Kato Selmer
+groups whenever the relations above `ℓ` are crystalline relations. The tied Selmer groups of Layer 1 are submodules of
+such modules of cocycles, cut out by the ties at the auxiliary primes, which belong to the route. Cup-orthogonality
+and the dual defect are read through the local Tate pairing and the Bloch–Kato conditions; and the class of lattices
+given by sets of allowed Hodge–Tate jumps and by the polynomials that kill an inertial type contains the lattices in
+the potentially crystalline representations whose jumps lie in those sets and whose inertial type is that one. The
+modules of cocycles, the cup-orthogonal modules and the classes of lattices are the route's way of proving these
+results, and its proofs are stated on them. The comparison of crystalline representations, crystalline cocycles,
+Hodge–Tate jumps and the linear Frobenius with Fontaine's theory, on which Layer 6 rests, is that of
+CrystallineRepresentationsAndKisinModules.
 
 ## Conventions and notation
 
 The data of the argument are those of OneSidedPrimeSumBoundsAndAdmissibleData §2.1 (the parameters), §2.2 (the field and
 its infinite places), §3.2 (admissible data: ranks, weights, places, level), §3.3 (sizes) and §3.4 (tame characters and
-twists); the letters below follow it, except where the table says otherwise. Layers 1–3 do not use the data: they hold for
+twists); the letters below follow it, except where the table says otherwise. Layers 1–3 and 6 do not use the data:
+they hold for
 any CM field and any prime, and there letters such as `M`, `N`, `m`, `r`, `b`, `d`, `K` have the meaning given in the
 section that uses them. Sections 4.1, 4.2, 4.6, 4.8 (b) and Layer 5 are stated on the data; 4.3–4.5, 4.7 and
 4.8 (a) are general statements about lattices over a local Galois group, placed in Layer 4 because the local loss is
@@ -78,6 +101,8 @@ sizes of complex numbers occur.
 | `v_ρ` | Gauss valuation `v_ρ(Σ_i y_i Y^i) = min_i (v(y_i) + ρ i)` |
 | `Γ`, `j` | a group with a homomorphism `j : Γ → G_{ℚ_p}` of open image (Layer 3) |
 | `Z_f(L)` | crystalline cocycles of a lattice `L` (3.1) |
+| `H¹_f(K_Γ, X)`, `H¹_f(K_Γ, X_B)` | the Bloch–Kato condition on a lattice `X` and on `X ⊗ O/a`, `X ⊗ Frac(O)/O` (Layer 6) |
+| `H¹_{f,S}(E, Bⁿ)` | the Bloch–Kato Selmer group relaxed at the places of `S` not above `ℓ` (6.1) |
 | `𝒞(F, K, U)` | a class of lattices: admissibility, allowed jumps, polynomials killing inertia (3.1) |
 | `L^{⊥𝒬}`, `δ_𝒬(L)` | the cup-orthogonal module and the dual defect (3.1) |
 | `k`, `e`, `f`, `d` | a Kummer chart, its ramification index, residue degree and `d = 0` if `e = 1`, `v_p(e) + 1` otherwise (3.2) |
@@ -155,6 +180,16 @@ places of `E` and `g₀ ∈ G_E`.
   prime data `(φ, γ, λ)` for `ℓ^N`. It satisfies: `P, P̄ ∉ J ∪ S₀`; `P ∤ NP₀`; the data are auxiliary prime data at `P`
   relative to every set contained in `(J ∖ {P₀}) ∪ {w | ℓ}`; `λ(φ) = 0`; `λ_v(φ) = 1` for `v = P₀` and `0` for the other
   `v ∈ J`; and `U_i` holds at `φ` and `φ^{−c}`.
+
+The names follow the route. A *Selmer datum* here is a lattice with local data, whereas the Selmer data of
+SelmerIwasawaCohomology §2.1 (Compact and rational Selmer data) are a global module with local modules, localisation
+maps and local conditions; and the *Selmer groups* here are modules of cocycles cut out by linear relations, whereas
+in the literature a Selmer group is a group of cohomology classes cut out by local conditions. By 6.1 (c), for an
+auxiliary set `Q` for `S₀`, a character `ψ : G_E → O′^×` for `Q` and `B = O′/a` with `a ≠ 0` or `B = Frac(O′)/O′`,
+when the local relations of `T` are crystalline relations of `ρ` (4.1) the map `z ↦ [z]` sends `Sel_Q(Tψ; B)`
+injectively to `H¹(G_E, Bⁿ)`, onto a group that contains the Bloch–Kato Selmer group of `ψρ` relaxed at the places of
+`S_T ∪ Q ∪ Q̄` not above `ℓ`, and that is this Bloch–Kato Selmer group when they are all the crystalline relations of
+`ρ` and `ρ` is potentially crystalline above `ℓ`.
 
 *Needs:* IdelicReciprocityCountsAndCyclotomicClassGroups §§1.1, 1.4, 2.1, 2.2 (the Artin map of a number field `K`, in the geometric normalisation: the continuous
 homomorphism `Art` from the finite ideles of `K` to the abelianised Galois group of `Ω/K` such that, for every
@@ -407,6 +442,11 @@ Let `E` be a CM field, `ℓ` a prime, `S₀` a finite set of finite places and `
   character for `Q`, and `φ` is a Frobenius element at a place above `P`.
 - The *number* of `Y` is `β_Y = v(1(Θ_∅)) + 2r·v(ϑ(g₀) − 1)`; it is finite.
 
+A *Stickelberger system* is any family with these properties. In the literature a Stickelberger element is one
+particular element of the rational group ring of the Galois group of an abelian extension, for `ℚ(ζ_m)/ℚ` the element
+`Σ_a (a₀/m)σ_a^{−1}` (`a₀` the representative of `a` in `[0, m)`); nothing in the definition here asks `Θ_Q` to be of
+that kind. The systems the route uses are those of 5.3, made from the `L`-values of a ramified pair.
+
 *Needs:* 1.1; IdelicReciprocityCountsAndCyclotomicClassGroups §2.2 (the Artin map on finite ideles);
 GaloisRepresentationsOfUnitaryEigenforms §5.3 (Hilbert's Theorem 90 for the finite ideles, applied to the conjugation
 of a CM field: a finite idele of norm one to the totally real subfield is `x/x̄`).
@@ -584,7 +624,12 @@ Colmez's period ring, and `Γ` acts on `B_max ⊗_{ℤ_p} L` diagonally, through
   `𝒞(⊤, ⊥, U)` is the class of lattices crystalline over `Γ` (`F`-almost all means all) with jumps in `U`, with no condition
   on inertia.
 - A property `K` of polynomials over `O` is a *tame type* for `(p, r, N)` if `K(X^e − 1)` holds for
-  `e = lcm_{1≤i≤r}(p^i − 1)` and `K(q)` holds for the image in `O[X]` of some monic `q ∈ ℤ_p[X]` of degree at most `N`.
+  `e = lcm_{1≤i≤r}(p^i − 1)` and `K(q)` holds for the image in `O[X]` of some monic `q ∈ ℤ_p[X]` of degree at most
+  `N`. Here a tame type is a property of polynomials, those allowed to kill an inertia element on the periods, and the
+  tame inertial types of 3.7 are classes of lattices given by such properties; in the literature a tame inertial type
+  is the isomorphism class of a representation of the inertia group, with open kernel and extending to the Weil group,
+  that is trivial on wild inertia, and the tame inertial type of a potentially crystalline representation gives a tame
+  type in the sense here (6.3 (c)).
 - `L^∨(1) = Hom_O(L, O(1))` is the Tate dual, and `Y ⊗ L = Y ⊗_O L` with the diagonal action.
 - A *pairing* `P` of `Y` and `L` modulo `p^m` is the following: an exponent `m`, an element `ψ ∈ (Y ⊗ L)^∨(1)`, a
   `ℤ_p`-linear `f : O → ℤ_p`, and a crystalline cocycle `c` of `(Y ⊗ L)^∨(1)` with `gψ − ψ = p^m c(g)` for all `g`. Its
@@ -604,6 +649,18 @@ Colmez's period ring, and `Γ` acts on `B_max ⊗_{ℤ_p} L` diagonally, through
 - A finite set `V ⊂ ℤ` *fits the windows* `(η, ε, b, W)`, for `η, b, W ≥ 0` and a sign `ε`, if
   `V ⊆ [−η, η] ∪ ε·[b, b + W]`. The *gap condition* `NoMult(p, n, b)` says that `p` divides no nonzero integer within
   distance `n` of `0`, `b` or `−b`.
+
+**In standard terms.** Let `j` be an open embedding, so that `Γ` is the absolute Galois group of the field `K_Γ` fixed
+by `j(Γ)`. Admissibility, crystalline cocycles, jumps and killing polynomials are compared with crystalline and
+potentially crystalline representations, with the Bloch–Kato condition `H¹_f`, with Hodge–Tate weights and with the
+Weil–Deligne representation of Fontaine's recipe in CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with
+the standard theory). For potentially crystalline lattices, a pairing modulo `p^m` is an `O`-linear form whose
+reduction modulo `p^m` is equivariant; the cup product of two crystalline cocycles under it is a coboundary exactly
+when the cup product of their classes modulo `p^m` vanishes in `H²(K_Γ, ℤ/p^m(1))`; and `δ_𝒬(L)` is the length of
+`H¹_f(K_Γ, L)` modulo the classes that are orthogonal in this sense to `H¹_f(K_Γ, Y)` for every `Y ∈ 𝒬` and every
+pairing (6.2). The class `𝒞(⊤, ⊥, U)` contains the lattices in crystalline representations with jumps in `U`, and
+`𝒞(⊥, K, U)` the lattices in potentially crystalline representations with jumps in `U` whose Weil–Deligne
+representation `r` has `Q(r(j(s))) = 0` whenever `K(s, Q)` holds and `j(s)` is inertial (6.3).
 
 *Needs:* CrystallineRepresentationsAndKisinModules §§1.3, 3.1, 3.7 (Colmez's period ring `B_max = B^+[1/μ]`, where `B^+ = A_max[1/p]`, `A_max` is the
 `p`-adic completion of `A_inf[X]/(pX − ξ)` and `μ = [ε] − 1`, with its actions of `G_{ℚ_p}` and of the Frobenius `φ`;
@@ -707,7 +764,10 @@ shows that a power of `z` lifts constants modulo a power of `p` and removes the 
 Let `k` be a Kummer chart of `Γ` with ring `Λ[[z]]`, and `(O, ζ)`, `e`, `f`, `d` as in 3.2. Write `𝕎 = W(ℂ_p^♭)`, `φ`
 for its Frobenius, `τ = [ε^{1/p}] − 1`, `Fil^n = Fil^n B_dR` for `n ∈ ℤ`, and `[P] = 1` if `P` holds, `0` otherwise.
 
-**Kisin modules, orders and depth.** Let `L` be a lattice over `O` that is crystalline over `Γ′`, with a finite set
+**Kisin modules, orders and depth.** The name *Kisin module* is the route's, as in
+CrystallineRepresentationsAndKisinModules §5.6, where it is set against the Breuil–Kisin modules of the literature; no
+section identifies the modules below with those. Let `L` be a lattice over `O` that is crystalline over `Γ′`, with a
+finite set
 `U_L(i) ⊂ ℤ` for each letter `i` that contains the jumps of `L` at the embeddings over `i`.
 
 - `M(L) = 𝕎 ⊗_{ℤ_p} L`, on which `φ` acts through `𝕎` and `Γ` diagonally. `M(L)_i`, the *part at the letter* `i`, is
@@ -1043,6 +1103,13 @@ Let `D` be the data, `ℓ` a prime and `ι : ℂ ≅ ℚ̄_ℓ`.
 - For a finite family of representations `u_x : G → GL_n(O)` and `ρ : G → GL_d(O)`, `Rib(u, ρ; a)` is the module of
   Ribet cocycles of `ρ` with values in `O/a`, in the sense of CongruencesOfTwistedThetaLifts §3.1 (2).
 
+**In standard terms.** Let the reductions of `u` modulo every `ℓ^M` be locally constant, so that the decomposition
+groups act continuously on `Oⁿ`. At a place `v | ℓ`, with `B = O/a` for `a ≠ 0` or `B = Frac(O)/O`, every continuous
+cocycle `D_v → Bⁿ` whose class lies in the Bloch–Kato condition `H¹_f(E_v, Bⁿ)` obeys the crystalline relations of `u`
+supported on `D_v`; and when `u` is potentially crystalline at `v`, the locally constant maps `D_v → Bⁿ` that obey
+them are exactly these cocycles (6.1 (a)). For such `u`, cutting out a module of cocycles by the crystalline relations
+above `ℓ` is imposing the Bloch–Kato conditions above `ℓ` (6.1 (b)).
+
 *Needs:* 3.1; CongruencesOfTwistedThetaLifts §3.1 (Ribet cocycles);
 OneSidedPrimeSumBoundsAndAdmissibleData §2.2 (the field `E`, its infinite places and its CM type),
 §3.2 (the data: `m`, `r`, `k_D`, `t`, `b`, `G_off`, `h₂`, `Δ`, the lift weights `w_j`, the b-places, `M`).
@@ -1182,6 +1249,14 @@ be lattices over `O`, and `𝒞 = 𝒞(F, K, U)` a class, such that:
 Then for every `x` with `L_x ∈ 𝒞`, `len_ℓ δ_𝒞(L_x^∨(1)) ≤ [G_{ℚ_ℓ} : j(Γ)]·rank(L_x)·B_ℓ/x′`, with `x′ = 1` for `x = ∗` and
 `x′ = t` otherwise.
 
+**In standard terms.** Let `K_Γ` be the field fixed by `j(Γ)`, the completion of `e(E)`. By 6.2 (c), `δ_𝒞(L_x^∨(1))`
+is the length of `H¹_f(K_Γ, L_x^∨(1))` modulo the classes whose reductions modulo every `ℓ^m` have zero local Tate cup
+product, under every pairing modulo `ℓ^m`, with the reductions of `H¹_f(K_Γ, Y)` for every `Y ∈ 𝒞`; so the statement
+bounds that length, and by 6.2 (d) only pairings that are not equivariant contribute to it. By 6.3 (a), `𝒞(⊤, ⊥, U)`
+contains the lattices in crystalline representations of `G_{K_Γ}` with jumps in `U`, and `𝒞(⊥, K, U)` the lattices in
+potentially crystalline representations with jumps in `U` whose Weil–Deligne representation `r` has `Q(r(j(s))) = 0`
+whenever `K(s, Q)` holds and `j(s)` is inertial.
+
 *Needs:* 3.7, 4.1, 4.2, 4.4, 4.5.
 
 [ShortProof], `New/Congruences/LocalLoss/CrystallineDefect.lean` (`New.Selmer.summand_defect_le_at_place`,
@@ -1196,14 +1271,22 @@ contains the `u_x` and `L`.
 *Method of the formal proof:* the restriction along `η` of a cocycle of `Rib(u, ρ; ℓ^m)` comes from a crystalline cocycle
 of a lattice of the class. 4.3 gives an equivariant graph, whose lattice is in the class because the class is stable under
 the operations used. A divisibility of indices from local Tate duality for crystalline cocycles then bounds the module of
-such maps modulo the reductions of `Z_f(L)` by `δ_𝒞(L^∨(1))`. Obeying the relations that hold on `Z_f(L)` is weaker than being
-a reduction of `Z_f(L)`.
+such maps modulo the reductions of `Z_f(L)` by `δ_𝒞(L^∨(1))`. A reduction of `Z_f(L)` obeys the relations that hold on
+`Z_f(L)`, and the proof uses only this implication.
 
 Let `j : Γ → G_{ℚ_ℓ}` be an open embedding, `R` the ring of integers of a finite extension of `ℚ_ℓ`, `η : Γ → G` a
 homomorphism, `u_x : G → GL_n(R)` (`x` in a finite set) and `ρ : G → GL_d(R)` representations. Let the lattices of all
 `u_x ∘ η` and the lattice `L` of `ρ ∘ η` lie in a class `𝒞 = 𝒞(F, K, U)`. Prove that, for every `m`, the module `Rib(u, ρ; ℓ^m)`,
 modulo its members whose restriction along `η` obeys all relations that hold on `Z_f(L)`, has length at most
 `δ_𝒞(L^∨(1))`.
+
+**In standard terms.** Let `K_Γ` be the field fixed by `j(Γ)`. By 6.1 (a), applied to the lattice `L` over `R`, which
+is potentially crystalline as a member of a class, a member of `Rib(u, ρ; ℓ^m)` obeys after restriction along `η` the
+relations that hold on `Z_f(L)` exactly when that restriction is a continuous cocycle whose class lies in the
+Bloch–Kato condition `H¹_f(K_Γ, L/ℓ^m)`, the image of `H¹_f(K_Γ, L)`; obeying these relations is then equivalent to
+being a reduction of `Z_f(L)`. So the statement bounds the length of `Rib(u, ρ; ℓ^m)` modulo the members whose
+restriction has its class in the Bloch–Kato condition by `δ_𝒞(L^∨(1))`, which 6.2 (c) reads through the local Tate
+pairing as the length of `H¹_f(K_Γ, L^∨(1))` modulo the classes orthogonal to those of the lattices of `𝒞`.
 
 *Needs:* 3.1, 4.1, 4.3; IdelicReciprocityCountsAndCyclotomicClassGroups §5.2 (local Tate duality for crystalline cocycles, as one divisibility of
 indices. Let `j : Γ → G_{ℚ_ℓ}` be an open embedding, `L` and `L′` potentially crystalline lattices over `ℤ_ℓ` with a
@@ -1241,6 +1324,13 @@ Prove:
    is `⊤` if `w ∤ p₀p₁` and `⊥` otherwise, `U_w(γ)` is the set of members of `τ(ι^{−1} ∘ g^{−1} ∘ e_w)` for a `g` with
    `γ_g = γ`, and `K_w(s, Q)` says that `w | p₀p₁` and that `Q` kills `s` on
    every member of `𝓡`, restricted to the decomposition group at `w`.
+
+**In standard terms.** (a) is the step by which 6.3 (c) passes from a tame inertial type to a tame type. In (b),
+through CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory), `K_w(s, Q)` says that
+`w | p₀p₁` and that `Q(r(s)) = 0` for the Weil–Deligne representation `r` (PadicHodgeTheory §5.3 (Potentially
+semistable periods and Fontaine's recipe)) of every member of `𝓡` restricted to the decomposition group at `w`; the
+membership in a class asserted in (b) is then the case of 6.3 (a) for the lattice `u` of `R ∈ 𝓡`, which is crystalline
+at the places `w ∤ p₀p₁` above `ℓ` and potentially crystalline at the others.
 
 *Needs:* 3.1, 4.1; CongruencesOfTwistedThetaLifts §1.1 (the local conditions: finite type, jumps and killing polynomials
 at a place), §1.2 (conjugate self-dual representations of given level); CrystallineRepresentationsAndKisinModules §2.4 (the
@@ -1379,12 +1469,259 @@ Let `D` be the data, `ℓ` a prime, `ι : ℂ ≅ ℚ̄_ℓ`, and `R_i` (`i` in 
 3. (c) for every ramified pair `(ν, z)` and every sign `s`, its ratio at `ξ` and `s` (Conventions, with `Q_ξ = Q`)
    satisfies `v(ι(|L(z, (νξ^s)^{−1})|/|L(z, ν^{−1})|)) ≤ e'_ℓ`.
 
+**In standard terms.** In (b), for all large `O`, the module is isomorphic, through the classes of its cocycles, to
+the Bloch–Kato Selmer group (SelmerIwasawaCohomology §§2.9, 4.9) of the twisted lattice with coefficients `Frac(O)/O`,
+relaxed at the places above `p₀p₁` that are not above `ℓ` and at the places of `Q ∪ Q̄` (6.1 (b)). Indeed `R_i` is
+unramified outside the places above `ℓp₀p₁` and of finite type, that is potentially crystalline, above `ℓ`
+(CongruencesOfTwistedThetaLifts §§1.2, 1.3); `ψ` is unramified outside `Q ∪ Q̄` and trivial on the decomposition
+groups above `ℓ`, so that the crystalline relations of the twisted lattice are those of the lattice; and `γ` acts by
+`ζ` with `ζ − 1` a unit. So (b) says that, for every `ξ = τ^j` with `1 ≤ j ≤ m`, this Bloch–Kato Selmer group of the
+twist has `len_ℓ ≤ e'_ℓ`.
+
 *Needs:* 2.7, 5.1, 5.2, 5.3; CongruencesOfTwistedThetaLifts §1.3 (main summands), §1.5 (the crystalline Selmer length with
 divisible coefficients; the number `e'_ℓ`), §4.1 (auxiliary twists);
 OneSidedPrimeSumBoundsAndAdmissibleData §3.4 (`m`-fold twists).
 
 [ShortProof], `New/Congruences/Selmer/TwistingTheorem.lean` (`New.Selmer.exists_mFoldTwist_hasDivisibleSelmerLengthLe`,
 `New.Selmer.SelmerDatum.TwistedLengthLe.hasDivisibleSelmerLengthLe`)
+
+## Layer 6: Comparison with the standard theory
+
+The route states its Selmer bounds on modules of cocycles cut out by linear relations, its local losses through cup
+products of cocycles with values in `ℚ̄_p^×`, and its local conditions through classes of lattices given by
+polynomials that kill inertia on the periods. This layer compares them with the standard objects: the Bloch–Kato local
+conditions and Selmer groups (6.1), the local Tate pairing and the orthogonality of the Bloch–Kato conditions (6.2),
+and the Weil–Deligne representations and inertial types of potentially crystalline representations (6.3). It rests on
+two comparisons that other roadmaps state and that are not restated here: that of crystalline and potentially
+crystalline lattices, crystalline cocycles, Hodge–Tate jumps and the linear Frobenius with Fontaine's theory, in
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory), and that of Selmer modules of
+cocycles with Selmer groups of classes, in GaloisRepresentationsOfUnitaryEigenforms Layer 10 (Comparison with the
+standard theory).
+
+Throughout, `(Γ, j)` is a group with an open embedding `j` into `G_{ℚ_p}`, `K_Γ` is the field fixed by `j(Γ)`, and `Γ`
+carries the topology of `j(Γ) = G_{K_Γ}`, whose continuous cohomology is written `H^i(K_Γ, ·)`. The local statements
+6.1 (a) and 6.2 hold, with the same proofs, when `O` is the ring of integers of any finite extension of `ℚ_p`, as in
+3.1; 4.7 uses them for such a ring. A potentially crystalline lattice (3.1) has continuous action
+(CrystallineRepresentationsAndKisinModules §7.2 (e)), and its Tate dual is potentially crystalline
+(CrystallineRepresentationsAndKisinModules §3.6 (c)). For a lattice `X` over `O` with continuous action,
+`H¹_f(K_Γ, X)` is the preimage in `H¹(K_Γ, X)` of the Bloch–Kato condition `H¹_f(K_Γ, X[1/p])`
+(SelmerIwasawaCohomology §4.9 (The Bloch–Kato local condition on `T` and `W`)). For `B = O/a` with `a ≠ 0`, or
+`B = Frac(O)/O`, the module `X_B = X ⊗_O B` is discrete, and its Bloch–Kato condition `H¹_f(K_Γ, X_B)` is the image of
+`H¹_f(K_Γ, X)`, respectively of `H¹_f(K_Γ, X[1/p])`, the forward propagation of SelmerIwasawaCohomology §2.5
+(Propagating local conditions). A *relation* for `X` on `Γ` is a finitely supported function `f` from `Γ` to the
+`O`-linear endomorphisms of `X`; a map `z : Γ → X_B` *obeys* it if `Σ_g f(g)z(g) = 0`, and the relation *holds on* a
+set of maps `Γ → X` if each of them obeys it. For `X = Oⁿ` these are the relations of 1.1.
+
+### 6.1 Selmer groups of cocycles and Bloch–Kato Selmer groups
+
+*Origin:* adapted from the finite local condition `H¹_f` of Bloch and Kato (1990) and the Selmer groups it defines:
+here the comparison of the modules of cocycles of 1.1, 4.1, 4.7 and 5.4, cut out by linear relations, with the
+Bloch–Kato conditions and with Bloch–Kato Selmer groups relaxed at finitely many places away from `ℓ`. [ShortProof]
+states no such comparison.
+
+*Method:* (a) For `B = O/a`, a class of `H¹_f(K_Γ, X_B)` is the image of the class of a continuous cocycle `c : Γ → X`
+whose class in `H¹(K_Γ, X[1/ℓ])` lies in `H¹_f`; such a `c` is a crystalline cocycle, since `B_cris ⊆ B_max`
+compatibly with the actions (CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory)).
+Two cocycles of one class differ by the reduction of a coboundary of `X`, which is crystalline
+(CrystallineRepresentationsAndKisinModules §4.1 (a)); so every cocycle of the class is the reduction of a crystalline
+cocycle, and a relation that holds on `Z_f(X)` holds on the reductions. For `B = Frac(O)/O` the same argument applies
+to `ℓ^k` times a continuous cocycle `Γ → X[1/ℓ]`, which takes values in `X` for some `k` (ArithmeticGaloisDuality
+§R02.1.3 (Lattices, rational and torsion coefficients)), and to the coboundaries of `X[1/ℓ]`. For the converse,
+`Z_f(X)` is finitely generated (CrystallineRepresentationsAndKisinModules §4.2 (a)) and saturated in the maps `Γ → X`
+(§4.1 (a)), so its reduction modulo `ϖ` injects into the maps `Γ → X/ϖ`, and evaluation on some finite set `F ⊆ Γ` is
+injective on that reduction. The values of `Z_f(X)` on `F` then form a direct summand of `X^F`; the relations
+supported on `F` that hold on `Z_f(X)` are the `O`-linear maps `X^F → X` that vanish on that summand; and a map
+`z : Γ → X/a` that obeys them agrees on `F` with the reduction of a crystalline cocycle `c`, unique modulo `a·Z_f(X)`.
+The same holds on `F ∪ {g}` for every `g ∈ Γ`, with the same `c`, so `z` is the reduction of `c`: a continuous cocycle
+(§4.1 (d)) whose class is the image of that of `c`, which lies in `H¹_f(K_Γ, X)` because every crystalline cocycle is
+a continuous cocycle with class in `H¹_f` (CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the
+standard theory), through `φ(B_max) ⊆ B_cris`). A locally constant map into `X_{Frac(O)/O}` takes values in
+`ℓ^{−k}X/X ≅ X/ℓ^k` for some `k`, which reduces it to the case `B = O/ℓ^k`. (b) A coboundary `g ↦ ρ(g)x − x` that
+vanishes at `γ` has `(ζ − 1)x = 0`, so `x = 0`; hence `z ↦ [z]` is injective, and every class has exactly one cocycle
+vanishing at `γ`, obtained by subtracting the coboundary of `(ζ − 1)^{−1}z(γ)`. Outside `S` the inertia groups act
+trivially on `Bⁿ`, so the cocycles of an unramified class vanish on them. Above `ℓ`, (a) at `D_w` shows that the
+cocycles of a class in `H¹_f(E_w, (X_w)_B)` obey the crystalline relations, and, under the hypotheses of the last
+clause, that a locally constant cocycle obeying them has its class there. Without the relation at `γ`, this is the
+passage between Selmer modules of cocycles and Selmer groups of classes of GaloisRepresentationsOfUnitaryEigenforms
+§10.7 (Selmer modules of cocycles and Selmer groups of classes), (a) and (b), for the modules `ℒ_w` of the continuous
+cocycles `D_w → Bⁿ` whose class lies in `H¹_f(E_w, (X_w)_B)`. The relations of that section are all those that hold on
+the `ℒ_w`; they include the crystalline relations by (a), which gives the containment, and under the hypotheses of the
+last clause the crystalline relations alone cut out `ℒ_w`, again by (a), which gives the equality. The relation at `γ`
+does not hold on the coboundaries; it selects the one cocycle of each class that vanishes at `γ`. (c) `ψ` is
+unramified outside `Q ∪ Q̄`, which does not meet `S₀ ⊇ S_T`, and trivial on the decomposition groups above `ℓ`
+(Conventions). So `ψρ` is trivial on the inertia groups outside `S_T ∪ Q ∪ Q̄`; `ψ(γ_*) = 1`, `γ_*` being inertial at
+a place of `S_T`, so `ψρ(γ_*) = ζ_*` with `ζ_* − 1` a unit, as it divides `ζ_*² − 1`; and `ψρ` and `ρ` agree on the
+decomposition groups above `ℓ`. In a basis of `O′` over `O`, `Z_f(ρ ⊗_O O′) = Z_f(ρ) ⊗_O O′`, and a relation with
+coefficients in `O′` holds on it exactly when each of its coordinates holds on `Z_f(ρ)`; so a map into an `O′`-module
+obeys the crystalline relations of `ρ`, with coefficients in `O`, exactly when it obeys those of `ρ ⊗_O O′`. Then (b)
+over `O′` applies, and an injective map of `O′`-modules does not decrease lengths.
+
+Let `ℓ` be a prime, `O` a coefficient ring with uniformiser `ϖ`, and `B` either `O/a` with `a ≠ 0` or `Frac(O)/O`; in
+the local statements `p = ℓ`. In the global statements `E` is a CM field, `ρ : G_E → GL_n(O)` a homomorphism whose
+reductions modulo every `ℓ^M` are locally constant, and `S` a finite set of finite places that contains the places
+above `ℓ`, such that `ρ` is trivial on the inertia groups above the places outside `S`. For `w | ℓ`, the decomposition
+group `D_w` is identified with `G_{E_w}` through the embedding of 4.1 (IdelicReciprocityCountsAndCyclotomicClassGroups
+§1.3 (Decomposition groups as absolute Galois groups of completions)), and `X_w` is `Oⁿ` with the action of `D_w`
+through `ρ`; `Z_f(ρ)_w = Z_f(X_w)` and the crystalline relations of `ρ` are defined as in 4.1, a definition that does
+not involve the data. The *Bloch–Kato Selmer group of `ρ` relaxed at `S`*, `H¹_{f,S}(E, Bⁿ)`, is the group of the
+classes in `H¹(G_E, Bⁿ)` (continuous cohomology, `Bⁿ` discrete with the action through `ρ`) that are unramified at
+every finite place outside `S` and whose restriction to `D_w` lies in `H¹_f(E_w, (X_w)_B)` for every `w | ℓ`. It is
+the Selmer group of SelmerIwasawaCohomology §2.9 (Compact and rational Galois Selmer groups) for the places of `S` and
+the infinite places, which are complex, with the Bloch–Kato conditions above `ℓ` and the relaxed conditions at the
+other places of `S`. Outside `S`, where `ρ` is unramified, the unramified condition is the Bloch–Kato condition
+(SelmerIwasawaCohomology §2.15 (Finite against unramified classes at bad primes), (iv) for `B = Frac(O)/O` and the
+sentence after (iv) for `B = O/a`); so `H¹_{f,S}(E, Bⁿ)` is the Bloch–Kato Selmer group of `ρ` with coefficients `B`,
+relaxed at the places of `S` not above `ℓ`. Prove:
+
+1. (a) (local) let `X` be a lattice over `O` with continuous action of `Γ`. Every continuous cocycle `Γ → X_B` whose
+   class lies in `H¹_f(K_Γ, X_B)` obeys every relation that holds on `Z_f(X)`. If `X` is potentially crystalline,
+   conversely every map `Γ → X_B` that obeys these relations, and that is locally constant when `B = Frac(O)/O`, is a
+   continuous cocycle whose class lies in `H¹_f(K_Γ, X_B)`; for `B = O/a` these maps are exactly the reductions modulo
+   `a` of the crystalline cocycles of `X`;
+2. (b) (global) let `γ ∈ G_E` with `ρ(γ) = ζ·1` and `ζ − 1` a unit of `O`, and let `L` consist of the relation
+   `z(γ) = 0` and of crystalline relations of `ρ` (4.1). Then `z ↦ [z]` maps `Sel(ρ, S, L; B)` (1.1) injectively to
+   `H¹(G_E, Bⁿ)`, and its image contains `H¹_{f,S}(E, Bⁿ)`. If `L` contains every crystalline relation of `ρ` and the
+   restriction of `ρ` to every `D_w`, `w | ℓ`, is potentially crystalline, the image is `H¹_{f,S}(E, Bⁿ)`;
+3. (c) (Selmer data) let `T` be a Selmer datum for `(S₀, g₀)` whose local relations are crystalline relations of
+   `ρ = ρ_T`, `Q` an auxiliary set for `S₀`, `O′ ⊇ O` a coefficient ring, `ψ : G_E → O′^×` a character for `Q`, and
+   `B = O′/a` with `a ≠ 0` or `B = Frac(O′)/O′`. Then `z ↦ [z]` maps `Sel_Q(Tψ; B)` (1.1) injectively to
+   `H¹(G_E, Bⁿ)`, for the action through `ψρ`, with image containing the group `H¹_{f,S}(E, Bⁿ)` of `ψρ` over `O′` for
+   `S = S_T ∪ Q ∪ Q̄`, and equal to it when the local relations of `T` are all the crystalline relations of `ρ` and
+   `ρ` is potentially crystalline above `ℓ`. In particular, if `len_ℓ Sel_Q(Tψ) ≤ b` (1.1), then for all large `O′`
+   the Bloch–Kato Selmer group of `ψρ` with coefficients `Frac(O′)/O′`, relaxed at the places of `S_T ∪ Q ∪ Q̄` not
+   above `ℓ`, has normalised length at most `b`.
+
+A Selmer datum records its condition above `ℓ` only through the relations that hold on its modules `Z_w`. By (a) and
+(b) these give the Bloch–Kato condition when they are all the crystalline relations of a lattice that is potentially
+crystalline above `ℓ`, as for the Selmer data of 5.1, whose lattices lie in representations of finite type above `ℓ`
+(CongruencesOfTwistedThetaLifts §§1.2, 1.3); when they are only some of the crystalline relations they give a
+condition that contains the Bloch–Kato condition.
+
+*Needs:* 1.1, 3.1, 4.1; CrystallineRepresentationsAndKisinModules §4.1 (Crystalline cocycles: coboundaries, extensions
+and reduction modulo `p^m`), §4.2 (The rank of the crystalline cocycles), for the coboundaries, the saturation, the
+continuity of reductions and the finite generation of `Z_f(X)`; CrystallineRepresentationsAndKisinModules §7.5 (The
+crystalline cocycles `Z_f(T)` and the Bloch–Kato condition), (a) and (b), with §7.2 (Crystalline representations),
+(d), for `Z_f(X)` as the module of the continuous cocycles whose class lies in `H¹_f(K_Γ, X[1/ℓ])`;
+GaloisRepresentationsOfUnitaryEigenforms §10.7 (Selmer modules of cocycles and Selmer groups of classes), (a) and (b),
+for the classes of Selmer modules of cocycles; IdelicReciprocityCountsAndCyclotomicClassGroups §1.3 (Decomposition
+groups as absolute Galois groups of completions); CongruencesOfTwistedThetaLifts §§1.2, 1.3 (representations of a
+level and main summands); SelmerIwasawaCohomology §2.5 (Propagating local conditions), §2.9 (Compact and rational
+Galois Selmer groups), §2.15 (Finite against unramified classes at bad primes), §4.9 (The Bloch–Kato local condition
+on `T` and `W`); ArithmeticGaloisDuality §R02.1.3 (Lattices, rational and torsion coefficients).
+
+### 6.2 Cup-orthogonality and the local Tate pairing
+
+*Origin:* adapted from local Tate duality and from the orthogonality of the Bloch–Kato conditions under it
+(PadicHodgeRegulators §1.6 (Local duality of the Bloch–Kato conditions)): here the cup-orthogonal module, the dual
+defect and the cup exponent of 3.1 read through cup products of classes modulo `p^m`. [ShortProof] states no such
+comparison.
+
+*Method:* (a) If `gψ − ψ = p^m c(g)` with `c(g)` in the Tate dual of `Y ⊗ L`, then `1 ⊗ c(g) = g·y − y` for
+`y = p^{−m} ⊗ ψ` in `B_max ⊗ (Y ⊗ L)^∨(1)`, so `c` is a crystalline cocycle, and it is determined by `ψ`. (b) `a` and
+`c` are continuous cocycles (CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory))
+whose reductions modulo `p^m` are continuous cocycles (CrystallineRepresentationsAndKisinModules §4.1 (d)) with
+classes `[a]‾` and `[c]‾`. The 2-cochain of 3.1 is `ε_m` of their cup product through `b_P`, a continuous 2-cocycle
+with values in `μ_{p^m} ⊂ ℚ̄_p^×`. If its class in `H²(K_Γ, μ_{p^m})` vanishes, it is the coboundary of a continuous
+cochain with values in `μ_{p^m}`. Conversely, if it is the coboundary of a continuous cochain with values in `ℚ̄_p^×`,
+its class dies in `H²(K_Γ, ℚ̄_p^×)`, and `H²(K_Γ, μ_{p^m}) → H²(K_Γ, ℚ̄_p^×)` is injective by Hilbert 90 and the
+Kummer sequence (ProfiniteCohomology §9.6 (The Kummer sequence and isomorphism)); the identification
+`H²(K_Γ, μ_{p^m}) ≅ ℤ/p^m` is that of ClassFieldTheory §5.1 (Mathematical interface). (c) `Z_f(X)` is the module of
+the continuous cocycles whose class lies in `H¹_f(K_Γ, X)`, for `X = Y` and `X = L`
+(CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory)); by (b), whether a
+crystalline cocycle lies in `L^{⊥𝒬}` depends only on its class, the coboundaries lie in it, and `Z_f(L)` modulo the
+coboundaries is `H¹_f(K_Γ, L)`. (d) `f∘ψ` is an equivariant pairing `Y × L → ℤ_p(1)`, so it gives an equivariant map
+`L[1/p] → Y[1/p]^*(1)` that carries `H¹_f` into `H¹_f` (PadicHodgeRegulators §1.1 (The Bloch–Kato local conditions
+H¹_e, H¹_f, H¹_g)). `Y[1/p]` is de Rham, being potentially crystalline (CrystallineRepresentationsAndKisinModules §7.3
+(d), through PadicHodgeTheory §5.3 (Potentially semistable periods and Fontaine's recipe)), so `H¹_f(K_Γ, Y[1/p])` and
+`H¹_f(K_Γ, Y[1/p]^*(1))` are orthogonal in `H²(K_Γ, ℚ_p(1))` (PadicHodgeRegulators §1.6). The cup product of `y` and
+`x` through `f∘ψ` in `H²(K_Γ, ℤ_p(1))` therefore maps to `0` in `H²(K_Γ, ℚ_p(1))`; as
+`H²(K_Γ, ℤ_p(1)) = lim_m H²(K_Γ, μ_{p^m}) ≅ ℤ_p` is torsion-free (ArithmeticGaloisDuality §R02.1.2 (Continuous
+cochains into inverse limits), §R02.1.3 (Lattices, rational and torsion coefficients)), it is `0`, and so is its
+reduction `ȳ ∪_P x̄`.
+
+Let `(Γ, j)` be as in the introduction of this layer, `O` a coefficient ring, and `Y`, `L` potentially crystalline
+lattices over `O` (3.1). For a pairing `P` of `Y` and `L` modulo `p^m` (3.1), `b_P` is a `Γ`-equivariant bilinear map
+`Y/p^m × L/p^m → ℤ/p^m(1)`, and `∪_P : H¹(K_Γ, Y/p^m) × H¹(K_Γ, L/p^m) → H²(K_Γ, ℤ/p^m(1))` is the cup product through
+it. For a lattice `X`, `x ↦ x̄` is the reduction `H¹(K_Γ, X) → H¹(K_Γ, X/p^m)`, and `[c]` is the class of a continuous
+cocycle `c`. Prove:
+
+1. (a) an `O`-linear `ψ : Y ⊗ L → O(1)` and a `ℤ_p`-linear `f : O → ℤ_p` are the form and the map of a pairing modulo
+   `p^m` exactly when the reduction of `ψ` modulo `p^m` is `Γ`-equivariant; the cocycle of the pairing is then
+   `g ↦ p^{−m}(gψ − ψ)`, which is always crystalline;
+2. (b) for `a ∈ Z_f(Y)`, `c ∈ Z_f(L)` and a pairing `P` modulo `p^m`, the cup product of `a` and `c` under `P` is a
+   coboundary exactly when `[a]‾ ∪_P [c]‾ = 0` in `H²(K_Γ, ℤ/p^m(1))`, a group identified with `ℤ/p^m` by the
+   invariant;
+3. (c) for a class `𝒬` of potentially crystalline lattices, `Z_f(L) ∩ L^{⊥𝒬}` is the module of the crystalline
+   cocycles whose class lies in `H¹_f(K_Γ, L)^{⊥𝒬}`, the module of the `x ∈ H¹_f(K_Γ, L)` with `ȳ ∪_P x̄ = 0` for
+   every `Y ∈ 𝒬`, every `m ≥ 0`, every pairing `P` of `Y` and `L` modulo `p^m` and every `y ∈ H¹_f(K_Γ, Y)`. Hence
+   `δ_𝒬(L) = len_O(H¹_f(K_Γ, L)/H¹_f(K_Γ, L)^{⊥𝒬})`, and `L` has cup exponent `e` for `𝒬` exactly when
+   `p^e·H¹_f(K_Γ, L) ⊆ H¹_f(K_Γ, L)^{⊥𝒬}`;
+4. (d) if the form `ψ` of `P` is `Γ`-equivariant, then `ȳ ∪_P x̄ = 0` for all `y ∈ H¹_f(K_Γ, Y)` and
+   `x ∈ H¹_f(K_Γ, L)`; so only pairings whose form is equivariant modulo `p^m` without being equivariant can keep a
+   class out of `H¹_f(K_Γ, L)^{⊥𝒬}`.
+
+*Needs:* 3.1; CrystallineRepresentationsAndKisinModules §4.1 (Crystalline cocycles: coboundaries, extensions and
+reduction modulo `p^m`); CrystallineRepresentationsAndKisinModules §7.5 (The crystalline cocycles `Z_f(T)` and the
+Bloch–Kato condition), (a) and (b), §7.2 (Crystalline representations), (c) and (d), and §7.3 (Hodge–Tate jumps), (d),
+for `Z_f` against `H¹_f` and for potentially crystalline lattices, which are de Rham; ProfiniteCohomology §9.6 (The
+Kummer sequence and isomorphism); ClassFieldTheory §5.1 (Mathematical interface), for `H²(K, μ_n) ≅ ℤ/n`;
+ArithmeticGaloisDuality §R02.1.2 (Continuous cochains into inverse limits), §R02.1.3 (Lattices, rational and torsion
+coefficients); PadicHodgeRegulators §1.1 (The Bloch–Kato local conditions H¹_e, H¹_f, H¹_g), §1.6 (Local duality of
+the Bloch–Kato conditions); PadicHodgeTheory §5.3 (Potentially semistable periods and Fontaine's recipe);
+SelmerIwasawaCohomology §4.9 (The Bloch–Kato local condition on `T` and `W`).
+
+### 6.3 Classes of lattices and inertial types
+
+*Origin:* adapted from the Weil–Deligne representation of a potentially crystalline representation and its inertial
+type (PadicHodgeTheory §5.3 (Potentially semistable periods and Fontaine's recipe)): here the membership of their
+lattices in the classes `𝒞(F, K, U)` of 3.1, and the tame types that tame inertial types give. [ShortProof] states no
+such comparison.
+
+*Method:* (a) By CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory), `T` is
+admissible along "near `1`", and along every filter when `V` is crystalline; its jumps are its Hodge–Tate weights in
+the sign of 3.1; and for `j(s)` inertial the operator `β_s` of 3.1 is `1 ⊗ r_V(j(s))` under the identification of
+`B_max ⊗ V` with `B_max` tensor the periods, so that `Q` kills `s` on `T` exactly when `Q(r_V(j(s))) = 0`. For
+crystalline `V`, inertia acts trivially on `D_pst(V)` (PadicHodgeTheory §5.3). (b) With `L`, `L₀`, `O′` and `V′` as in
+the statement, inertia acts on `D_st,L(V′)` linearly over `L₀ ⊗_{ℚ_p} Frac(O′)`, so it preserves each coefficient
+component, and `D_pst(V′)` is the scalar extension of `D_st,L(V′)` (PadicHodgeTheory §5.3), on which inertia acts
+through `D_st,L(V′)`. The Frobenius of `D_st,L(V′)` is bijective, commutes with inertia and with the coefficients, and
+permutes the coefficient components transitively; so a polynomial over `O` kills `r_V(s)` on one component exactly
+when it kills it on `D_st,L(V′)`, that is on `D_pst(V′)`, that is on `D_pst(V)`. This depends only on `τ`, and it does
+not change when `O′` is enlarged. Then (a) applies. (c) `r_V(I)` is finite (PadicHodgeTheory §5.3), and, `τ` being
+tame, it is a quotient of the tame inertia group, so cyclic of order prime to `p`; each `r_V(s)` is semisimple, with
+roots of unity as eigenvalues. An arithmetic Frobenius element `Φ` acts on the tame inertia group by `u ↦ u^q`,
+`q = p^{f_Γ}` (ArithmeticGaloisRepresentations §2.3 (Characters of inertia)), so on a component `r_V(Φ)` conjugates
+`r_V(s)` to `r_V(s)^q`, and the multiset `M` of the `d` eigenvalues of `r_V(s)` there is stable under `y ↦ y^q`. Each
+`y ∈ M` therefore has `y^{q^i} = y` for some `1 ≤ i ≤ d`, that is `y^{p^{f_Γ·i} − 1} = 1` with `f_Γ·i ≤ f_Γ·d`. A
+polynomial over `O` that vanishes at every element of `M` kills `r_V(s)`, so 4.8 (a), with `N = d` and `r = f_Γ·d`,
+gives a tame type for `(p, f_Γ·d, f_Γ·d²)`.
+
+Let `(Γ, j)` be as in the introduction of this layer, `p^{f_Γ}` the order of the residue field of `K_Γ`, `I` the
+inertia group of `K_Γ`, `O` a coefficient ring, `T` a lattice over `O` of rank `d` with continuous action, and
+`V = T[1/p]`. When `V` is potentially crystalline, `r_V` is its Weil–Deligne representation by Fontaine's recipe
+(PadicHodgeTheory §5.3), with monodromy `0`; an element `s ∈ I` acts on `D_pst(V)` by `r_V(s)`. Let `L ⊂ ℚ̄_p` be a
+finite Galois extension of `K_Γ` over which `V` is crystalline, `L₀` its maximal unramified subfield, `O′ ⊇ O` a
+coefficient ring with `L₀ ⊆ Frac(O′)`, and `V′ = V ⊗_{Frac(O)} Frac(O′)`. Then `r_V` is realised on a coefficient
+component of `D_st,L(V′)`, a `Frac(O′)`-space of dimension `d` (PadicHodgeTheory §5.3), and its restriction to `I`
+there, up to isomorphism, is the *inertial type* `τ` of `V`; its isomorphism class does not depend on `L` or on the
+component, and enlarging `O′` extends its scalars. For an inertial type `τ`, `K_τ` is the relation that holds for
+`s ∈ Γ` and `Q ∈ O[X]` exactly when `j(s) ∈ I` and `Q(τ(j(s))) = 0`; it depends only on `τ`. Prove:
+
+1. (a) if `V` is potentially crystalline, the jumps of `T` at every `γ` lie in `U(γ)`, and `K` is a relation such that
+   `K(s, Q)` with `j(s)` inertial implies `Q(r_V(j(s))) = 0` on `D_pst(V)`, then `T ∈ 𝒞(⊥, K, U)`; if moreover `V` is
+   crystalline, `r_V` is trivial on `I` and `T ∈ 𝒞(⊤, K, U)`, in particular `T ∈ 𝒞(⊤, ⊥, U)`;
+2. (b) every lattice in a potentially crystalline representation of inertial type `τ` whose jumps lie in `U` belongs
+   to `𝒞(⊥, K_τ, U)`;
+3. (c) if `τ` is tame (trivial on the wild inertia group), then for every `s` with `j(s)` inertial the property
+   `Q ↦ K_τ(s, Q)` of polynomials over `O` is a tame type for `(p, f_Γ·d, f_Γ·d²)` (3.1).
+
+Membership in a class records, of the inertial type, only which polynomials kill each `τ(s)`, and, of the Hodge–Tate
+weights, only that the jumps, which are the weights in the sign of 3.1, lie in `U`.
+
+*Needs:* 3.1, 4.8; CrystallineRepresentationsAndKisinModules §7.2 (Crystalline representations), (b)–(d), §7.3
+(Hodge–Tate jumps) and §7.4 (The linear Frobenius and the Weil–Deligne representation), (a)–(c), for admissibility,
+jumps and the linear Frobenius against Fontaine's theory; PadicHodgeTheory §5.3 (Potentially semistable periods and
+Fontaine's recipe); ArithmeticGaloisRepresentations §2.3 (Characters of inertia).
 
 ## Downstream consumers
 
@@ -1406,6 +1743,9 @@ OneSidedPrimeSumBoundsAndAdmissibleData §3.4 (`m`-fold twists).
 - Main summand weights, the crystalline loss and the defect bound, and the local loss above `ℓ` on the data (Layer 4).
 - Main summands as Selmer data, the `L`-values of a ramified pair as integral measures and Stickelberger systems, and
   the twisting theorem on the data (Layer 5).
+- The comparison of the Selmer groups of Layer 1 and of the crystalline relations with Bloch–Kato conditions and
+  Bloch–Kato Selmer groups, of cup-orthogonality and dual defects with the local Tate pairing, and of classes of
+  lattices and tame types with inertial types (Layer 6).
 
 ### Not owned here
 
@@ -1422,6 +1762,14 @@ OneSidedPrimeSumBoundsAndAdmissibleData §3.4 (`m`-fold twists).
   finite ideles (GaloisRepresentationsOfUnitaryEigenforms); the period ring `B_max` and crystalline cocycles, Kummer
   charts and Kisin modules, and the rank formula (CrystallineRepresentationsAndKisinModules); Chebotarev's theorem
   (ArithmeticGaloisRepresentations §5.1, with the density of the places of prime norm from Tau Ceti).
+- The comparisons on which Layer 6 rests: crystalline and potentially crystalline lattices, crystalline cocycles,
+  Hodge–Tate jumps and the linear Frobenius against Fontaine's theory (CrystallineRepresentationsAndKisinModules Layer
+  7 (Comparison with the standard theory)), and Selmer modules of cocycles against Selmer groups of classes
+  (GaloisRepresentationsOfUnitaryEigenforms Layer 10 (Comparison with the standard theory)); and the standard objects
+  themselves: Bloch–Kato conditions and Selmer groups (SelmerIwasawaCohomology), their local duality
+  (PadicHodgeRegulators), Fontaine's Weil–Deligne representation (PadicHodgeTheory), the Kummer sequence and the
+  Brauer group (ProfiniteCohomology, ClassFieldTheory), continuous cohomology with lattice and limit coefficients
+  (ArithmeticGaloisDuality) and the tame inertia group (ArithmeticGaloisRepresentations).
 - The results named `ShortGRH background` on the *Needs:* lines: lengths of kernels by maximal minors, Gauss
   valuations, and Teichmüller lifts in the Witt vectors of a finite field with the rank of those Witt vectors. Each
   entry names the form used and where `[ShortProof]` proves it.
@@ -1467,14 +1815,24 @@ data and their sizes); §3.4 (tame characters, twists and `m`-fold twists).
 
 DivisibilityOfThetaDerivatives §1.5 (the chosen places), §1.6 (pairs); DeterminantsOfThetaLiftChains §1.1 (ramified
 pairs and ratios); NormsOfThetaLiftsAndExchangeIdentities §§2.5, 2.7, 6.1 (`L`-values as squared norms and integral
-measures); ThetaLiftChainsAndTheSeesawIdentity §2.10 (the order `n_GL`); IdelicReciprocityCountsAndCyclotomicClassGroups
-§§1.1, 1.4, 2.1, 2.2 (places of `Ω`, Frobenius elements, tame generators, the Artin map), §2.3 (the existence theorem),
-§4.5 (global duality with relations at split primes), §5.2 (local Tate duality for crystalline cocycles), §9.1 (the
-`ℓ`-adic avatar); GaloisRepresentationsOfUnitaryEigenforms §5.3 (Hilbert's Theorem 90 for finite ideles), §9.2 (Selmer
-modules); CrystallineRepresentationsAndKisinModules §1.3 (the period rings), §§2.3, 2.4 (the ring `S_B` as a commutant,
-Kummer charts, the Witt vectors of a finite field in `ℚ̄_ℓ`), §§3.1, 3.4, 3.7 (admissibility, jumps, the linear
-Frobenius), §4.2 (the rank of crystalline cocycles), §§5.6, 5.7, 5.8, 5.9 (Kisin modules);
-ArithmeticGaloisRepresentations §5.1 (Chebotarev's density theorem).
+measures); ThetaLiftChainsAndTheSeesawIdentity §2.10 (the order `n_GL`);
+IdelicReciprocityCountsAndCyclotomicClassGroups §§1.1, 1.4, 2.1, 2.2 (places of `Ω`, Frobenius elements, tame
+generators, the Artin map), §1.3 (decomposition groups as absolute Galois groups of completions), §2.3 (the existence
+theorem), §4.5 (global duality with relations at split primes), §5.2 (local Tate duality for crystalline cocycles),
+§9.1 (the `ℓ`-adic avatar); GaloisRepresentationsOfUnitaryEigenforms §5.3 (Hilbert's Theorem 90 for finite ideles),
+§9.2 (Selmer modules), Layer 10 (Comparison with the standard theory); CrystallineRepresentationsAndKisinModules §1.3
+(the period rings), §§2.3, 2.4 (the ring `S_B` as a commutant, Kummer charts, the Witt vectors of a finite field in
+`ℚ̄_ℓ`), §§3.1, 3.4, 3.7 (admissibility, jumps, the linear Frobenius), §3.6 (admissibility of twisted duals), §4.1
+(crystalline cocycles: coboundaries, saturation, reduction modulo `p^m`), §4.2 (the rank of crystalline cocycles),
+§§5.6, 5.7, 5.8, 5.9 (Kisin modules), Layer 7 (Comparison with the standard theory); ArithmeticGaloisRepresentations
+§5.1 (Chebotarev's density theorem), §2.3 (characters of inertia: arithmetic Frobenius acts on the tame inertia group
+by `u ↦ u^q`); SelmerIwasawaCohomology §2.1 (Selmer data), §2.5 (propagating local conditions), §2.9 (Galois Selmer
+groups), §2.15 (finite against unramified classes), §4.9 (the Bloch–Kato local condition on `T` and `W`);
+PadicHodgeRegulators §1.1 (the Bloch–Kato local conditions), §1.6 (their local duality); PadicHodgeTheory §5.3
+(potentially semistable periods and Fontaine's recipe); ProfiniteCohomology §9.6 (the Kummer sequence and the
+injectivity of `H²(K, μ_n)` in the Brauer group); ClassFieldTheory §5.1 (the Brauer group and `H²(K, μ_n) ≅ ℤ/n`);
+ArithmeticGaloisDuality §R02.1.2 (Tate's inverse-limit theorem), §R02.1.3 (lattice, rational and torsion
+coefficients).
 
 ## References
 

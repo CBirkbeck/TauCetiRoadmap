@@ -6,16 +6,29 @@ the covolume of a lattice of theta lifts (OneSidedPrimeSumBoundsAndAdmissibleDat
 between twisted theta lifts and Galois representations attached to eigenforms on definite unitary groups
 (CongruencesOfTwistedThetaLifts, GaloisRepresentationsOfUnitaryEigenforms). The route cuts these Galois
 representations out of the `p`-adic cohomology of integral models of Kuga–Sato type that it builds itself
-(AbelianSchemesWithThetaStructuresAndTheirCohomology), and this cohomology is not étale cohomology: it is the
-cohomology of functors on test rings of CohomologyOfFunctorsOnTestRings, `Vⁿ(Y) = ℚ_p ⊗ Hⁿ(Y_Ω, ℤ_p)`, computed as
-`Ext` groups of functors. What the construction needs about `Vⁿ(Y)` at a prime `p` is what the primitive, crystalline
-and Hodge–Tate comparison theorems give for étale cohomology: that it is finite-dimensional with a continuous Galois
-action, that it is crystalline at a `p`-adic place where `Y` is smooth, with relations between Frobenius twists of
-maps on the special fibre carried to relations between the linear Frobenius operators, and that the values of the
-Hodge–Tate map on Hodge cohomology are images of vectors of Hodge–Tate weight `h`. This roadmap proves these
-statements for the cohomology of functors directly. Nothing here identifies that cohomology with étale, pro-étale, v-
-or crystalline cohomology; the period map has no integral (`A_inf`) version, and the Hodge–Tate statement is limited
-to the weights of the values of `λ_h`.
+(AbelianSchemesWithThetaStructuresAndTheirCohomology). The reference for that cohomology is `p`-adic étale cohomology
+`Hⁿ_ét(Y_Ω, ℚ_p)` with its Galois action, and what the construction needs about it at a prime `p` is what the
+primitive, crystalline and Hodge–Tate comparison theorems of `p`-adic Hodge theory give: that it is finite-dimensional
+with a continuous Galois action, that it is crystalline at a `p`-adic place where `Y` is smooth, with relations
+between Frobenius twists of maps on the special fibre carried to relations between the linear Frobenius operators, and
+that the values of the Hodge–Tate maps on Hodge cohomology are images of vectors of Hodge–Tate weight `h`.
+
+The route proves these statements for a cohomology that its proofs can handle: the cohomology of functors on test
+rings of CohomologyOfFunctorsOnTestRings, `Vⁿ(Y) = ℚ_p ⊗ Hⁿ(Y_Ω, ℤ_p)`, computed as `Ext` groups of functors, which
+the comparison layer of that roadmap identifies with `p`-adic étale cohomology for proper `Y`. This roadmap proves
+them for `Vⁿ(Y)` directly, with the objects of Layers 1–7, which are one way to prove them and are the objects that
+the route's proofs use; Layer 8 states the results on the standard objects. Through the comparison of `Vⁿ(Y)` with
+`Hⁿ_ét(Y_Ω, ℚ_p)`, finiteness, continuity, the source of the period map, the Hodge–Tate weights and crystallinity
+become statements on étale cohomology (8.1); the vectors of the Hodge–Tate statement lie in the summand of index `h`
+of the Hodge–Tate decomposition (8.2); crystallinity, defined here with the ring `B_max`, is crystallinity in
+Fontaine's sense, and the Frobenius relation is a relation for the crystalline Frobenius on `D_cris` (8.3); and, for
+`p`-complete torsion-free rings, the ideal `𝔡` of 7.3 is the largest divided power ideal, while the envelope of 7.3 is
+the `p`-adic completion of the quotient of the divided power envelope by its `p`-power torsion (8.4). Three objects of
+the route have no stated standard counterpart: the cohomology of functors on `p`-adic tests, which stands in for
+pro-étale or v-cohomology of the generic fibre; the cohomology of points modulo divided powers of 7.4, which stands in
+for crystalline cohomology; and the Hodge–Tate map `λ_h`, which is built as the Hodge–Tate map of the literature is,
+from lifts along a square-zero thickening. The period map has no integral (`A_inf`) version, and the Hodge–Tate
+statement is limited to the weights of the values of `λ_h`.
 
 The headline theorems are these.
 
@@ -43,21 +56,36 @@ valuation ring of a `p`-adic place, charted over `R` and over `Ω` (for instance
 points of the special fibre of `W`, gives `Σ m_i u_i^* ∘ β_i = 0` for the linear Frobenius operators `β_i` on
 `B_max ⊗ Vⁿ(Y)`.
 
-There are seven layers. Layer 1 sets up `p`-adic tests (products of `p`-complete absolutely integrally closed
-valuation rings over `O_C`) and tilting for them. Layer 2 is almost descent for perfect algebras over `O♭`. Layer 3
-is derived completeness and the passage from bijectivity modulo `p` to bijectivity. Layer 4 shows that two `ℓ`-torsion
+**In standard terms.** In (1), `Hⁿ(Y_Ω, 𝔽_p)` is the étale cohomology `Hⁿ_ét(Y_Ω, 𝔽_p)` by
+CohomologyOfFunctorsOnTestRings Layer 8 (Comparison with the standard theory), so its finiteness is a case of the
+finiteness theorem for étale cohomology (5.2); the comparison with tilted coefficients plays the part of the primitive
+comparison theorem of the literature (PadicHodgeTheory §2.7), but its two sides are cohomologies of functors, and no
+section identifies them with the two sides of that theorem. In (2), for proper `Y` the source of the period map is
+`K ⊗ Hⁿ_ét(Y_Ω, ℚ_p)`, where `Hⁿ_ét(Y_Ω, ℚ_p)` is finite-dimensional with a continuous Galois action when `Y` is
+charted over `Ω`, and its target is cohomology on `p`-adic tests (8.1). In (3), `v` is a vector of
+`ℂ_p ⊗ H^{q+h}_ét(Y_Ω, ℚ_p)` of Hodge–Tate weight `h`, and so lies in the summand of index `h` of the Hodge–Tate
+decomposition (8.1, 8.2). In (4), `Hⁿ_ét(Y_Ω, ℚ_p)` is crystalline in Fontaine's sense for the decomposition group,
+and the relation reads `Σ m_i (φ^{a_i} ⊗ u_i^*) = 0` on `D_cris`, `φ` the Frobenius of `B_cris` (8.1, 8.3); for `Y`
+smooth over `R`, this crystallinity is that of PadicHodgeTheory §8.1.
+
+There are eight layers. Layer 1 sets up `p`-adic tests (products of `p`-complete absolutely integrally closed
+valuation rings over `O_C`) and tilting for them. Layer 2 is almost descent for perfect algebras over `O♭`. Layer 3 is
+derived completeness and the passage from bijectivity modulo `p` to bijectivity. Layer 4 shows that two `ℓ`-torsion
 theories with the projective line formula that agree at the point agree on standard étale charts and on charted
-functors, by excision and duality on products of `ℙ¹`. Layer 5 proves the primitive comparison, finiteness
-and continuity, and the period map. Layer 6 builds the Hodge–Tate map and proves the weight statement. Layer 7 proves crystallinity, through
-Wang sequences for root systems of units, divided power envelopes and a comparison on charts, and the Frobenius
-congruence relation.
+functors, by excision and duality on products of `ℙ¹`. Layer 5 proves the primitive comparison, finiteness and
+continuity, and the period map. Layer 6 builds the Hodge–Tate map and proves the weight statement. Layer 7 proves
+crystallinity, through Wang sequences for root systems of units, divided power envelopes and a comparison on charts,
+and the Frobenius congruence relation. Layer 8 compares the objects of the route with the standard ones and states the
+results of Layers 5–7 on étale cohomology, the Hodge–Tate decomposition, `D_cris` and divided power envelopes.
 
 ## Conventions and notation
 
-- *Labels.* Under each section heading, `*Origin:*` says where its statement comes from and `*Method of the formal
-  proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family `ShortGRH`; the line
-  "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`) and the declarations
-  where it proves the statement. The names of [ShortProof] occur only on that line.
+- *Labels.* Under each section heading of Layers 1–7, `*Origin:*` says where its statement comes from and
+  `*Method of the formal proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family
+  `ShortGRH`; the line "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`)
+  and the declarations where it proves the statement. The names of [ShortProof] occur only on that line. The sections
+  of Layer 8 are not proved in [ShortProof]: they have `*Origin:*` and a `*Proof route:*` that says how to prove them
+  from the sections they name, and no [ShortProof] line.
 - *The prime and the period rings.* The prime `p`, `ℂ_p`, `ℚ̄_p`, `O_C`, `G_p`, the cyclotomic character `χ`, the tilt
   `O♭` of `O_C`, `A_inf = W(O♭)`, Fontaine's map `θ`, `ε`, the Teichmüller lift `[·]`, `μ = [ε] − 1`, `τ`, `ξ` (with
   `ξτ = μ` and `ker θ = ξA_inf`), `A_max`, `B_max` and their Frobenius `φ` and action of `G_p` are as in the
@@ -89,6 +117,22 @@ congruence relation.
   an `R`-algebra `k` are as in CohomologyOfFunctorsOnTestRings §1.4 (c), (d), and a proper `R`-scheme whose base change
   to a Noetherian `R`-algebra `k` is smooth of relative dimension `d` has an atlas of dimension `d` on `k`-algebras and
   is charted over `k` (CohomologyOfFunctorsOnTestRings §1.5 (c), (d)). Charted schemes stand in for smooth ones.
+- *Standard objects.* For a scheme `Y` over a ring `R` with a map `R → Ω`, `Hⁿ_ét(Y_Ω, Λ)` is the étale cohomology of
+  `Y_Ω = Y ×_R Ω` with constant coefficients `Λ` (EtaleCohomologyFoundations), and
+  `Hⁿ_ét(Y_Ω, ℚ_p) = ℚ_p ⊗ lim_k Hⁿ_ét(Y_Ω, ℤ/p^k)` is its `p`-adic étale cohomology, which for `Y_Ω` separated of
+  finite type over `Ω` is the cohomology of the rational realization of EtaleCohomologyFoundations §§F.4.2, F.4.5
+  (CohomologyOfFunctorsOnTestRings §8.3 (b)), the limit being finitely generated over `ℤ_p` by §F.4.4; a group acting
+  on `Ω` by `R`-algebra automorphisms acts on them through the maps `Y_Ω → Y_Ω` it induces, as on `Vⁿ(Y)`
+  (CohomologyOfFunctorsOnTestRings §3.4). `A_cris`, `B_cris⁺ = A_cris[1/p]` and `B_cris = B_cris⁺[1/t]`, for
+  Fontaine's period `t`, with their Frobenius `φ`, are those of PadicHodgeTheory §0.4. For a group `Γ` over `G_p` with
+  field `K_Γ` (CrystallineRepresentationsAndKisinModules, Conventions) and a representation `ρ` of `Γ` on a
+  `ℚ_p`-vector space `T`, `D_cris(T) = (B_cris ⊗ T)^Γ`, `Γ` acting by `g ↦ j(g) ⊗ ρ(g)`; it is a vector space over the
+  maximal unramified subfield of `K_Γ`, with the semilinear Frobenius `φ ⊗ 1`. When `T` is finite-dimensional and
+  `ρ = ρ′∘j` for a continuous representation `ρ′` of `j(Γ) = Gal(ℚ̄_p/K_Γ)` on `T`, `ρ` is *crystalline in Fontaine's
+  sense* if `D_cris(T)` has dimension `dim_{ℚ_p} T` over that field; *crystalline* without qualification is the notion
+  of CrystallineRepresentationsAndKisinModules §3.1, through `B_max`. For such `ρ` the two agree
+  (CrystallineRepresentationsAndKisinModules §7.2 (b), (d)); 8.3 applies this to the decomposition group `D_A`, on
+  which `j` is an open embedding.
 
 ### Table of symbols
 
@@ -98,7 +142,7 @@ congruence relation.
 | `A_max, B_max, φ` | the period rings of crystalline representations, and Frobenius | CrystallineRepresentationsAndKisinModules §1.3 |
 | `S♭, x^♯, θ_S, X^` | tilt, untilt, Fontaine's map of `S`, `p`-adic completion | Conventions |
 | `Hⁿ(N, F), H*(N, F), ℤ[Y]` | `Ext` of functors, total `Ext`, free abelian functor | Conventions; CohomologyOfFunctorsOnTestRings §§1.1, 2.2 |
-| `Hⁿ(Y_Ω, Λ), Vⁿ(Y)` | cohomology of a scheme on test rings, `p`-adic cohomology | CohomologyOfFunctorsOnTestRings §§1.3, 3.4 |
+| `Hⁿ(Y_Ω, Λ), Vⁿ(Y)` | cohomology of a scheme on test rings, `p`-adic cohomology on test rings (for proper `Y`, identified with `Hⁿ_ét(Y_Ω, ℚ_p)` in 8.1) | CohomologyOfFunctorsOnTestRings §§1.3, 3.4 |
 | `H^q_Hodge(N)` | Hodge cohomology of a functor on `k`-algebras | CohomologyOfFunctorsOnTestRings §6.1 |
 | cell, `p`-adic test, `S`, `S♭`, `T = S[1/p]` | the test category of this roadmap | 1.1 |
 | `h_b^♭` | `S ↦ Hom_{O♭}(b, S♭)` on `p`-adic tests | 1.1 |
@@ -111,6 +155,11 @@ congruence relation.
 | `(S, M), B_{S,M}, κ_h, λ_h` | Hodge–Tate pairs, `B_S ×_T (T ⊕ M)`, the contraction class, the Hodge–Tate map | 6.2, 6.3 |
 | `𝔡(D)` | `{x : n! ∣ xⁿ for all n}` | 7.3 |
 | `D_S` | `(A_max ⊗_{A_inf} W(S♭))^` | 7.4 |
+| `Hⁿ_ét(Y_Ω, Λ), Hⁿ_ét(Y_Ω, ℚ_p)` | étale and `p`-adic étale cohomology of `Y_Ω` | Conventions |
+| `B_cris, D_cris` | the crystalline period ring of Fontaine and its invariants | Conventions; PadicHodgeTheory §0.4 |
+| `ι_Y` | the comparison `Vⁿ(Y) ≅ Hⁿ_ét(Y_Ω, ℚ_p)` | 8.1 |
+| `F, F_0, f` | the field fixed by `j(D_A)`, its maximal unramified subfield, its residue degree | 8.2, 8.3 |
+| `D_J` | the divided power envelope of `JT` relative to `(S, pS)` | 8.4 |
 
 ## Layer 1: `p`-adic tests and tilting
 
@@ -284,6 +333,12 @@ ring of characteristic `p` (`Algebra.TensorProduct.perfectRing`) and the vanishi
 algebras over such a ring (`TauCeti.isZero_Tor_succ_of_perfectRing`), which the proof uses as ingredients; it has
 no v-descent statement. The almost vanishing of higher v-cohomology of DiamondsAndVStacks §D2.8 is about sheaf
 cohomology on the v-site and gives this statement only through an identification that no roadmap states.
+
+The name *v-descent* in (b) records the part the statement plays in the route. In the literature, v-descent and the
+vanishing, exact or almost, of higher v-cohomology are statements about sheaves for the v-topology on perfectoid
+spaces (DiamondsAndVStacks §§D2.7, D2.8); (b) and (c) are statements about `Ext` groups of functors on perfect
+`O♭`-algebras and on `p`-adic tests, with the maximal ideal `𝔪` in the coefficients where the published statement for
+`O⁺` is an almost vanishing.
 
 *Needs:* 1.1, 1.2, 1.3 (b); CohomologyOfFunctorsOnTestRings §§1.1, 2.3 (covers, Čech descent, relative functors);
 Tau Ceti `Algebra.TensorProduct.perfectRing` (tensor products of perfect algebras perfect).
@@ -498,6 +553,10 @@ over `A` to `Ab` such that, for every set-valued functor `X` on tests over `A`, 
 functor on `k`-algebras with a charting subfunctor (Conventions). Then `P` contains the functor `C ↦ ℤ[X(C)]` on
 tests `C` over `A`, each read as a `k`-algebra through `k → A`.
 
+The clause names *excision*, *Thom retraction* and *Alexander duality* are those of the theorems of étale cohomology
+whose part these clauses play in the route; each clause here is a statement about good pairs for a compared theory,
+not one of those theorems.
+
 *Needs:* 4.1, 4.2; CohomologyOfFunctorsOnTestRings §1.1 (Zariski-local subfunctors, relative functors);
 CohomologyOfFunctorsOnTestRings §5.1 (the class `η`); CohomologyOfFunctorsOnTestRings §4.4 (detection of classes at
 points); CohomologyOfFunctorsOnTestRings §2.4 (Mayer–Vietoris for closed classes); CohomologyOfFunctorsOnTestRings §1.4
@@ -580,6 +639,14 @@ that of the points of `Y` on `p`-adic tests, is bijective. It is induced by `S �
 By 2.1 (c) the hypothesis on `M` holds for `M = N ⊗_{O♭} 𝔪` with `p♭N = 0`, and (a), (b) do not depend on `M`. For
 étale cohomology of proper smooth rigid spaces the published comparison is PadicHodgeTheory §2.7; it is not used.
 
+**In standard terms.** Through CohomologyOfFunctorsOnTestRings §8.2 (a), (c), which holds for every `R`-algebra `Ω`
+and every torsion group of coefficients, `Hⁿ(Y_Ω, 𝔽_p)` is the étale cohomology `Hⁿ_ét(Y_Ω, 𝔽_p)`, and (b) is a case
+of the finiteness of EtaleCohomologyFoundations §F.3 (Finiteness, Artin vanishing and generic acyclicity). Here *the
+primitive comparison theorem* names (d), a bijection between cohomologies of functors with the maximal ideal of `O♭`
+in the coefficients; in the literature it is the almost isomorphism `Hⁱ_ét(X, 𝔽_p) ⊗ O_C/p → Hⁱ(X_proét, O⁺/p)` of
+PadicHodgeTheory §2.7 (Primitive comparison and integral finiteness) for a proper smooth rigid space `X` over `ℂ_p`,
+and no section identifies the two sides of (d) with those of that theorem.
+
 *Needs:* 1.3 (c), (d), 2.1, 4.1, 4.3, 5.1; CohomologyOfFunctorsOnTestRings §§5.4, 5.5 (projective line formula,
 tilted and `ℤ/ℓ`); CohomologyOfFunctorsOnTestRings §5.6 (cohomology on tests over `Ω`).
 
@@ -605,6 +672,11 @@ Let `R` be a ring with a map to `Ω` and `Y` a proper `R`-scheme charted over `�
 (a) `Hⁿ(Y_Ω, ℤ_p)` is a finitely generated `ℤ_p`-module, and `Vⁿ(Y)` is finite-dimensional over `ℚ_p`.
 (b) Let `K` be a field with `R → K → Ω` and `Ω/K` Galois. For every `x ∈ Vⁿ(Y)`, every `N` and every `ℚ_p`-linear
 `l : Vⁿ(Y) → ℚ̄_p^N`, the map `Gal(Ω/K) → ℚ̄_p^N`, `g ↦ l(g x)`, is continuous for the Krull topology on `Gal(Ω/K)`.
+
+**In standard terms.** Here *`p`-adic cohomology* is `Vⁿ(Y)`, a cohomology of functors on test rings; in the
+literature the name refers to `p`-adic étale cohomology `Hⁿ_ét(Y_Ω, ℚ_p)`, with which CohomologyOfFunctorsOnTestRings
+§8.3 identifies `Vⁿ(Y)`, compatibly with the Galois action. Through it, (a) says that `Hⁿ_ét(Y_Ω, ℚ_p)` is
+finite-dimensional and (b) that `Gal(Ω/K)` acts on it continuously (8.1 (a)).
 
 For étale cohomology the corresponding statements are EtaleCohomologyFoundations §F.4.4 and §F.4.6; they are not
 used.
@@ -672,6 +744,11 @@ with `β(ϑ(a ⊗ 1 ⊗ w)) = ϑ(σ(a) ⊗ 1 ⊗ w)` for all `a ∈ K` and all W
 `w_i^p = w_i`, `J_Y ∘ (σ ⊗ g)` is `J_Y` followed by the map that restricts a class along the twist by `j(g)`, pushes
 it along `β`, and pulls it back along the identification of the points of `Y` in `S` with those in `j(g)S`;
 (c) (bijectivity) `J_Y` is bijective when `Y` is proper and charted over `Ω`.
+
+**In standard terms.** Through 8.1 (b), for proper `Y` the source of `J_Y` is `K ⊗_{ℚ_p} Hⁿ_ét(Y_Ω, ℚ_p)` with its
+Galois action. Its target, the cohomology of the points of `Y` on `p`-adic tests with period coefficients, is not
+identified by any section with a pro-étale or v-cohomology group of the generic fibre, so (c) is not stated as a
+period isomorphism of the literature.
 
 *Needs:* 5.2, 5.3, 5.4, 1.3, 2.1; CohomologyOfFunctorsOnTestRings §3.4 (`Vⁿ(Y)` and its Galois action);
 CohomologyOfFunctorsOnTestRings §5.6 (cohomology on tests over a ring).
@@ -793,6 +870,12 @@ coordinates. Then restriction to pairs is bijective in every degree for `N = ℤ
 (d) For such `X` and every Hodge class `x` of degree `q`, `λ_h(x)` is the restriction to pairs of a class of degree
 `q + h` in `H^{q+h}(S ↦ ℤ[X(T)], T)`, and restriction to pairs is injective in each degree.
 
+Here *the Hodge–Tate map* is `λ_h`, with values in `PairH(N)`, a cohomology of functors on Hodge–Tate pairs. In the
+literature the Hodge–Tate map of a proper smooth variety `X` over a finite extension `F` of `ℚ_p` is the inclusion of
+the summand `ℂ_p(−h) ⊗_F H^q(X, Ω^h_X)` into `ℂ_p ⊗ H^{q+h}_ét(X_{ℂ_p}, ℚ_p)` given by the Hodge–Tate decomposition
+(PadicHodgeTheory §8.1). No section identifies `λ_h` with it; 8.2 places in that summand the vectors through which 6.5
+describes the values of `λ_h`.
+
 *Needs:* 6.1, 6.2; CohomologyOfFunctorsOnTestRings §6.1 (Hodge cohomology and its operations);
 CohomologyOfFunctorsOnTestRings §1.4 (étale charts); Mathlib `Algebra.FormallyEtale.comp_bijective` (unique lifts along
 square-zero extensions).
@@ -860,8 +943,15 @@ inverse of `k ≅ ℚ̄_p`, such that
 `(j(g) ⊗ g)v = χ(j(g))^{−h} v` for all `g ∈ D_A`;
 (b) `λ_h(u^* x) = Θ(u^* v)` for every map `u : W → Y` of `R`-schemes.
 
-The decomposition `ℂ_p ⊗ Vⁱ = ⊕_a ℂ_p(−a) ⊗ H^{i−a}(Ω^a)` of PadicHodgeTheory §8.1 is about étale cohomology of rigid
-spaces and is not used.
+**In standard terms.** Through 8.1 (c), `v` is a vector of `ℂ_p ⊗ H^{q+h}_ét(Y_Ω, ℚ_p)` of Hodge–Tate weight `h` for
+`D_A`, and (b) holds with `Θ` composed with the comparison of `ℂ_p ⊗ V^{q+h}(W)` with `ℂ_p ⊗ H^{q+h}_ét(W_Ω, ℚ_p)`. By
+8.2 such a vector lies in the part `F(−h) ⊗_F H^q(Y_F, Ω^h_{Y_F})` of the summand of index `h` of the Hodge–Tate
+decomposition of PadicHodgeTheory §8.1, `F` the field fixed by `j(D_A)` and `Y_F = Y ×_R F`; so the values
+`λ_h(u^* x)` vanish when `H^q(Y_F, Ω^h_{Y_F}) = 0`. No section identifies `λ_h` with the Hodge–Tate map of the
+literature, so 6.5 is not stated as a consequence of the Hodge–Tate decomposition.
+
+The decomposition `ℂ_p ⊗ Vⁱ = ⊕_a ℂ_p(−a) ⊗ H^{i−a}(Ω^a)` of PadicHodgeTheory §8.1 is about étale cohomology; the
+proofs of Layers 1–7 do not use it, and 8.2 uses it to place `v`.
 
 *Needs:* 5.2, 5.5, 6.1, 6.3, 6.4; CohomologyOfFunctorsOnTestRings §6.1 (Hodge cohomology, base change to `k`);
 CrystallineRepresentationsAndKisinModules §3.1 (Hodge–Tate weight of a vector);
@@ -900,6 +990,10 @@ with `ℕ` acting trivially, and of `ℕ`, on which `ℕ` acts by translation. T
 (b) (A criterion.) Let `ψ : 𝒞 → 𝒞'`, `A ∈ 𝒞`, `E ∈ 𝒞'`, `F'` on `𝒞'`, and `Y` on `𝒞 × Bℕ` whose restriction to `𝒞` is
 `Hom(E, ψ(−))`, with `γ` given by precomposition with `g : E → E` and with the map `q : Y → Hom(A, −)` induced by
 `i : ψA → E`. If `F'` is acyclic at `E` along `ψ` and `F'(i)`, `F'(g)` are Koszul-exact, then `q` is a line for `F'∘ψ`.
+
+When `g` fixes the image of `i`, `i` and `g` are Koszul-exact exactly when `0 → X₁ → X₂ → X₂ → 0`, with maps `i` and
+`z ↦ g(z) − z`, is exact: this is the Koszul complex of the single operator `g − 1`, augmented by `i`. The Koszul
+complexes of the Origin line, for toric towers, are those of `d` commuting operators.
 
 *Needs:* CohomologyOfFunctorsOnTestRings §2.2 (long exact sequences of `Ext`). Acyclicity at an object along a
 functor is defined in the conventions.
@@ -979,7 +1073,10 @@ Koszul-exact.
 The divided power envelope `D_(B,γ)(J)` of an ideal relative to a divided power ring, universal for divided power
 morphisms, is DerivedDeRhamCohomology §PD.6. The envelope `Env(T, J)` of (d) is another object: it is `p`-adically
 complete, carries no chosen divided power structure, and is universal only for maps to `p`-complete torsion-free
-algebras that send `J` into `𝔡`. No comparison of the two is stated or used.
+algebras that send `J` into `𝔡`. 8.4 relates the two: when `p` is a non-zero-divisor of `D` and the integers prime to
+`p` are units of `D`, in particular for `D` `p`-complete torsion-free, `𝔡(D)` is the largest divided power ideal of
+`D`; and `Env(T, J)` is the `p`-adic completion of the quotient, by its `p`-power torsion, of the divided power
+envelope of `JT` relative to `(S, pS)`. The route does not use this comparison.
 
 *Needs:* 3.1, 7.1; Mathlib `WittVector`, Mathlib `PerfectRing`.
 
@@ -1030,6 +1127,12 @@ crystalline comparison holds for `Hom_{O_C}(B, −)`.
 `R[X_1, …, X_d] → B`, `X_i ↦ t_i`, étale, the crystalline comparison holds for `Hom_R(B, −)`.
 (e) For `a ∈ ℚ_{≥0}` whose denominator is greater than `1`, `p·([ε^a] − 1)` divides the image of `μ` in `A_max`
 (`ε^a` as in CrystallineRepresentationsAndKisinModules §1.1).
+
+Here *the crystalline comparison holds for `P`* names the bijectivity defined above, between two cohomologies of
+functors. In the literature the crystalline comparison theorem identifies `D_cris` of the `p`-adic étale cohomology of
+a proper smooth scheme over the integers of a `p`-adic field with the crystalline cohomology of its special fibre, `p`
+inverted (PadicHodgeTheory §8.1). The first group of the definition is the cohomology of points over `D/𝔡(D)`, the
+quotient of `D` by its largest divided power ideal (8.4 (a)); no section identifies it with crystalline cohomology.
 
 *Needs:* 1.2, 1.3, 2.1, 3.1, 5.1, 5.4, 7.1, 7.2, 7.3; CrystallineRepresentationsAndKisinModules §§1.1, 1.3 (`A_max`,
 `B_max`, Frobenius, `G_p`, `ε^a`).
@@ -1111,9 +1214,18 @@ CrystallineRepresentationsAndKisinModules §3.1). Suppose that for every field `
 at `(γ_i, a_i)` (CrystallineRepresentationsAndKisinModules §§3.1, 3.7): the `B_max`-linear endomorphism of
 `B_max ⊗ Vⁿ(Y)` that agrees with `φ^{a_i} j(γ_i) ⊗ ρ(γ_i)` on the elements fixed by an open subgroup.
 
+**In standard terms.** Here *crystalline* means crystalline for `B_max` (CrystallineRepresentationsAndKisinModules
+§3.1); in the literature it means crystalline for Fontaine's ring `B_cris`, and for continuous representations of the
+Galois group of a finite extension of `ℚ_p`, hence of `D_A` through `j`, the two agree
+(CrystallineRepresentationsAndKisinModules §7.2 (b), (d)). Through 8.1 (d) and 8.3, (a) says that `Hⁿ_ét(Y_Ω, ℚ_p)`,
+on which `D_A` acts through `j` as `G_F` (`F` the field fixed by `j(D_A)`), is crystalline in Fontaine's sense, and
+(b) that `Σ_i m_i (φ^{a_i} ⊗ u_i^*) = 0` on `D_cris(Hⁿ_ét(Y_Ω, ℚ_p))`, `φ` the Frobenius of `B_cris`. When `Y` is
+smooth over `R`, (a) is the crystallinity, in PadicHodgeTheory §8.1, of the étale cohomology of the proper smooth
+model `Y ×_R O_F` (8.3 (c)); the route proves (a) for charted `Y` without it.
+
 For étale cohomology of proper smooth models, crystallinity with the identification of `D_cris` with crystalline
-cohomology is PadicHodgeTheory §8.1; it is not used, and PadicHodgeTheory states no form of the congruence relation
-(b).
+cohomology is PadicHodgeTheory §8.1; the proofs of Layers 1–7 do not use it (8.3 (c) states how (a) relates to it),
+and PadicHodgeTheory states no form of the congruence relation (b).
 
 *Needs:* 5.5, 7.4, 7.5, 1.2; CrystallineRepresentationsAndKisinModules §§3.1, 3.7 (crystalline, Weil pairs, linear
 Frobenius); CrystallineRepresentationsAndKisinModules §2.4 (a Frobenius in the decomposition group);
@@ -1125,6 +1237,196 @@ decomposition groups, `e` with `j`).
 `New.Variety.exists_primes_over_prod_le`, `New.Variety.cancels_quotient_of_congruenceRelation`,
 `New.Variety.exists_cancels_frobPow_locally`, `New.Variety.exists_period_twist`,
 `New.Variety.ellAdicCohom.isCrystalline_and_linearFrob_rel`)
+
+## Layer 8: Comparison with the standard theory
+
+This layer relates the objects of Layers 1–7 to the standard objects for which they stand in, and states the results
+of Layers 5–7 on the standard objects: `p`-adic étale cohomology with its Galois action, the Hodge–Tate decomposition,
+crystalline representations in Fontaine's sense with `D_cris` and its Frobenius, and divided power ideals and
+envelopes. It rests on CohomologyOfFunctorsOnTestRings Layer 8 (Comparison with the standard theory), which identifies
+the cohomology on test rings of a quasi-compact quasi-separated scheme with its étale cohomology for torsion
+coefficients, and `Vⁿ` of a proper scheme with its `p`-adic étale cohomology, on
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory), which compares crystallinity
+through `B_max` with crystallinity in Fontaine's sense, and on the general roadmaps named in each section. Layers 1–7
+do not use it. As in the Conventions, `Ω` is the fixed algebraic closure of `ℚ`.
+
+### 8.1 `p`-adic cohomology as `p`-adic étale cohomology
+
+*Origin:* comparison with the standard theory: the statements of 5.3, 5.5, 6.5 and 7.6, read in `p`-adic étale
+cohomology through the comparison of CohomologyOfFunctorsOnTestRings Layer 8 (Comparison with the standard theory).
+
+*Proof route:* each clause is the statement it names, carried along `ι`. The maps `ι_Y` are `ℚ_p`-linear isomorphisms
+that commute with pull-back along maps of proper `R`-schemes and with the action of the automorphisms of `Ω` over `R`.
+So `ι_Y` carries finite dimension and the continuity of 5.3 (b) to `Hⁿ_ét(Y_Ω, ℚ_p)` in (a); in (b) it is composed
+with `J_Y`, and 5.5 (b) passes through it by equivariance; in (c), `1 ⊗ ι_Y` carries vectors of weight `h` to vectors
+of weight `h`, and naturality for `u : W → Y` gives `Θ(u^* v) = Θ_ét(u^* v_ét)`. In (d),
+`1 ⊗ ι_Y : B_max ⊗ Vⁿ(Y) → B_max ⊗ Hⁿ_ét(Y_Ω, ℚ_p)` is a `B_max`-linear isomorphism, equivariant for `D_A`, so it maps
+the fixed elements of the source onto those of the target, which gives crystallinity; it intertwines the linear
+Frobenius operators (CrystallineRepresentationsAndKisinModules §3.7 (c)), and with naturality for the `u_i` it carries
+the relation of 7.6 (b).
+
+Let `R` be a ring with a map `R → Ω`. For a proper `R`-scheme `Y`, `ι_Y : Vⁿ(Y) → Hⁿ_ét(Y_Ω, ℚ_p)` is the isomorphism
+of CohomologyOfFunctorsOnTestRings §8.3 (a), (b) for `ℓ = p` and `Ω′ = Ω`, whose hypothesis holds because `p` is
+invertible in `Ω` and `Y_Ω` is proper over `Ω`; it is natural for maps of proper `R`-schemes and equivariant for the
+automorphisms of `Ω` over `R`, which act on both sides as in the Conventions.
+
+(a) (Finiteness and continuity.) If `Y` is proper and charted over `Ω`, then `Hⁿ_ét(Y_Ω, ℚ_p)` is finite-dimensional
+over `ℚ_p`, and for every field `L` with `R → L → Ω` the action of `Gal(Ω/L)` on it is continuous in the sense of 5.3
+(b).
+
+(b) (Period map.) In the situation of 5.5, for proper `Y` the maps
+`J_Y ∘ (1 ⊗ ι_Y)^{−1} : K ⊗_{ℚ_p} Hⁿ_ét(Y_Ω, ℚ_p) → Hⁿ(S ↦ Y(S), Ψ)` are natural for maps of proper `R`-schemes,
+satisfy the equivariance of 5.5 (b) with `g ∈ Γ` acting on `Hⁿ_ét(Y_Ω, ℚ_p)`, and are bijective when `Y` is charted
+over `Ω`.
+
+(c) (Hodge–Tate weights.) In the situation of 6.5, put `v_ét = (1 ⊗ ι_Y)(v) ∈ ℂ_p ⊗ H^{q+h}_ét(Y_Ω, ℚ_p)` and
+`Θ_ét = Θ ∘ (1 ⊗ ι_W)^{−1}`. Then `(j(g) ⊗ g)v_ét = χ(j(g))^{−h} v_ét` for every `g ∈ D_A`, and
+`λ_h(u^* x) = Θ_ét(u^* v_ét)` for every map `u : W → Y` of `R`-schemes.
+
+(d) (Crystallinity and Frobenius.) In the situation of 7.6, the representation `ρ_ét` of `D_A` on `Hⁿ_ét(Y_Ω, ℚ_p)` is
+crystalline (CrystallineRepresentationsAndKisinModules §3.1), and under the hypothesis of 7.6 (b),
+`Σ_i m_i (1 ⊗ u_i^*) ∘ β_i^ét = 0` on `B_max ⊗ Hⁿ_ét(Y_Ω, ℚ_p)`, where `β_i^ét` is the linear Frobenius of `ρ_ét` at
+`(γ_i, a_i)` and `u_i^* : Hⁿ_ét(Y_Ω, ℚ_p) → Hⁿ_ét(W_Ω, ℚ_p)`.
+
+*Needs:* 5.3, 5.5, 6.5, 7.6; CohomologyOfFunctorsOnTestRings §8.3 (`Vⁿ` as `ℓ`-adic étale cohomology, naturally and
+equivariantly); CrystallineRepresentationsAndKisinModules §§3.1, 3.7 (crystalline, weight of a vector, linear
+Frobenius).
+
+### 8.2 Vectors of weight `h` in the Hodge–Tate decomposition
+
+*Origin:* comparison with the standard theory: the Hodge–Tate decomposition of the `p`-adic étale cohomology of a
+proper smooth variety over a finite extension of `ℚ_p` (PadicHodgeTheory §8.1) and the Galois invariants of `ℂ_p(r)`
+(PadicHodgeTheory §0.1), applied to the vectors of 6.5.
+
+*Proof route:* `F` is finite over `ℚ_p` because `j(D_A)` is open, and `Y_F` is proper and smooth over `F` because `Y`
+is proper and smooth over `R`. EtaleCohomologyFoundations §F.2.2 (invariance under extension of separably closed
+fields), applied with coefficients `ℤ/p^m` along `e : Ω → ℚ̄_p` and `ℚ̄_p ⊂ ℂ_p` and passed to the limit over `m`,
+identifies `H^i_ét(Y_Ω, ℚ_p)` with `H^i_ét(Y_{ℂ_p}, ℚ_p)`; since `j(g)∘e = e∘g`, the action of `g ∈ D_A` becomes that
+of `j(g)`. PadicHodgeTheory §8.1 gives the decomposition for `Y_F`, equivariantly for `G_F` (for schemes through the
+algebraic and analytic comparisons stated there). For (a), write `w = Σ_a Σ_s c_{a,s} ⊗ b_{a,s}`, with `(b_{a,s})_s`
+an `F`-basis of `H^{q+h−a}(Y_F, Ω^a_{Y_F})` and `c_{a,s} ∈ ℂ_p(−a)`. Then `w` has weight `h` exactly when
+`g(c_{a,s}) = χ(g)^{−h} c_{a,s}` for all `g ∈ G_F`, for the action of `G_F` on `ℂ_p(−a)`, that is, when `c_{a,s} ⊗ ζ`
+lies in `ℂ_p(h − a)^{G_F}` for a basis `ζ` of `ℚ_p(h)`. As `ℂ_p^{G_F} = F` and `ℂ_p(r)^{G_F} = 0` for `r ≠ 0`
+(PadicHodgeTheory §0.1), this says that `c_{a,s} = 0` for `a ≠ h` and `c_{h,s} ∈ F(−h)`. (b) is (a) for the vector
+`v_ét` of 8.1 (c), with `Θ_ét(0) = 0`.
+
+Let `R, E, A, e, j, k, Y, W, x, q, h` be as in 6.5, `F = K_{D_A}` the field fixed by `j(D_A)`
+(CrystallineRepresentationsAndKisinModules, Conventions), which is `ℚ_p(e(E))`, and `Y_F = Y ×_R F`, along `R → E`
+followed by `e`. Through `e`, `ℂ_p ⊗ H^i_ét(Y_Ω, ℚ_p)` is `ℂ_p ⊗ H^i_ét(Y_{ℂ_p}, ℚ_p)`, with `g ∈ D_A` acting as
+`j(g)`, and the Hodge–Tate decomposition reads `ℂ_p ⊗ H^i_ét(Y_Ω, ℚ_p) = ⊕_a ℂ_p(−a) ⊗_F H^{i−a}(Y_F, Ω^a_{Y_F})`,
+with `D_A` acting on `ℂ_p(−a)` through `j` and trivially on the Hodge cohomology `H^{i−a}(Y_F, Ω^a_{Y_F})` of the
+sheaves of differential forms. The weight of a vector is that of CrystallineRepresentationsAndKisinModules §3.1: a
+vector on which `g` acts by `χ(j(g))^{−h}` has weight `h`. In the convention of PadicHodgeTheory (Conventions), where
+weight `r` counts `ℂ_p(r)`, the summand of index `a` is the part of weight `−a`, with filtration jump `a`; so the
+vectors of weight `h` here lie in the part of weight `−h` there.
+
+(a) A vector `w ∈ ℂ_p ⊗ H^{q+h}_ét(Y_Ω, ℚ_p)` has Hodge–Tate weight `h` for `D_A`
+(CrystallineRepresentationsAndKisinModules §3.1) exactly when it lies in `F(−h) ⊗_F H^q(Y_F, Ω^h_{Y_F})`, where
+`F(−h) = F ⊗_{ℚ_p} ℚ_p(−h) ⊂ ℂ_p(−h)`; these vectors span the summand of index `h` over `ℂ_p`.
+
+(b) The vector `v_ét` of 8.1 (c) lies in `F(−h) ⊗_F H^q(Y_F, Ω^h_{Y_F})`. In particular, if `H^q(Y_F, Ω^h_{Y_F}) = 0`,
+then `λ_h(u^* x) = 0` for every map `u : W → Y` of `R`-schemes.
+
+6.5 does not say which vector of `F(−h) ⊗_F H^q(Y_F, Ω^h_{Y_F})` the vector `v_ét` is: no section identifies `λ_h`
+with the Hodge–Tate map of the literature.
+
+*Needs:* 6.5, 8.1; CrystallineRepresentationsAndKisinModules §3.1 (Hodge–Tate weight of a vector); PadicHodgeTheory
+§8.1 (Proper smooth, crystalline and semistable realizations); PadicHodgeTheory §0.1 (The completed algebraic closure
+and Tate–Sen descent); EtaleCohomologyFoundations §F.2.2 (Smooth base change in the rotated square).
+
+### 8.3 Crystallinity in Fontaine's sense and the crystalline Frobenius
+
+*Origin:* comparison with the standard theory: crystalline representations in Fontaine's sense, defined with `B_cris`,
+and the Frobenius of `D_cris`, compared with 7.6 through CrystallineRepresentationsAndKisinModules Layer 7 (Comparison
+with the standard theory); for smooth models, the crystalline comparison of PadicHodgeTheory §8.1.
+
+*Proof route:* (a) `j` is an open embedding with image `G_F` and `D_A` is closed in `Gal(Ω/K)`, so 5.3 (b) makes `ρ`
+continuous; 7.6 (a) says that `ρ` is crystalline for `B_max`, which CrystallineRepresentationsAndKisinModules §7.2
+(b), (d), applied to `ρ∘j^{−1}` on `G_F` with `T = Vⁿ(Y)`, finite-dimensional by 5.3 (a), turns into crystallinity in
+Fontaine's sense. (b) The map `ι : B_cris → B_max` induced by `A_cris → A_max` of PadicHodgeTheory §0.5 is injective
+and compatible with `φ` and `G_p`, `B_max` being that of CrystallineRepresentationsAndKisinModules §1.3
+(CrystallineRepresentationsAndKisinModules §7.1 (c), (d)). As `Vⁿ(Y)` and `Vⁿ(W)` are free over `ℚ_p`, `ι ⊗ 1` is
+injective on `B_cris ⊗ Vⁿ(Y)` and on `B_cris ⊗ Vⁿ(W)`, and it maps `D_cris(Vⁿ(Y))` onto the elements of
+`B_max ⊗ Vⁿ(Y)` fixed by `D_A` (CrystallineRepresentationsAndKisinModules §7.2 (a), (d)). On these elements `β_i`,
+which agrees there with `φ^{a_i} j(γ_i) ⊗ ρ(γ_i)` (CrystallineRepresentationsAndKisinModules §3.7 (a)), acts as
+`φ^{a_i} ⊗ 1`; so, `1 ⊗ u_i^*` commuting with `φ^{a_i} ⊗ 1`, the operator `Σ_i m_i (1 ⊗ u_i^*) ∘ β_i` of 7.6 (b),
+composed with `ι ⊗ 1` on `D_cris(Vⁿ(Y))`, is `ι ⊗ 1` composed with `Σ_i m_i (φ^{a_i} ⊗ u_i^*)`. If the operator of 7.6
+(b) is zero, the injectivity of `ι ⊗ 1` on `B_cris ⊗ Vⁿ(W)` makes `Σ_i m_i (φ^{a_i} ⊗ u_i^*)` zero on `D_cris(Vⁿ(Y))`;
+conversely, the elements fixed by `D_A` span `B_max ⊗ Vⁿ(Y)` over `B_max` by 7.6 (a), and the operator of 7.6 (b) is
+`B_max`-linear. `j(γ_i)` fixes `F`, so it acts trivially on the residue field `𝔽_{p^f}` of `F` and as
+`x ↦ x^{p^{−a_i}}` on that of `ℚ̄_p`; hence `f` divides `a_i`, and `φ^{a_i}` is linear over `F_0 = W(𝔽_{p^f})[1/p]`.
+Through 8.1 (d) the same holds for `Hⁿ_ét(Y_Ω, ℚ_p)`. (c) `R` maps into `A`, and `e` maps `A` into the integers of
+`ℚ̄_p` and `K` into `F`, so `e` maps `R` into `O_F`; `𝔛` is proper and smooth because `Y` is.
+EtaleCohomologyFoundations §F.2.2, as in 8.2, identifies `Hⁿ_ét(Y_Ω, ℚ_p)` with the étale cohomology of
+`𝔛 ×_{O_F} ℂ_p`, `g ∈ D_A` acting as `j(g)`, and PadicHodgeTheory §8.1 applies to `𝔛`.
+
+Let `R, K, A, e, j, Y, W, ρ` be as in 7.6, `F = K_{D_A}` the field fixed by `j(D_A)`, `f` its residue degree and `F_0`
+its maximal unramified subfield. Through `j`, which identifies `D_A` with `G_F`, a representation of `D_A` is a
+representation of `G_F`; `D_cris` is as in the Conventions.
+
+(a) `ρ` is continuous and crystalline in Fontaine's sense: `D_cris(Vⁿ(Y))` has dimension `dim_{ℚ_p} Vⁿ(Y)` over `F_0`.
+Through 8.1 the same holds for `Hⁿ_ét(Y_Ω, ℚ_p)`.
+
+(b) Let `u_i`, `m_i`, `a_i` and `γ_i` be as in 7.6 (b), without its hypothesis on points. Then `f` divides every
+`a_i`, so that `φ^{a_i}` is `F_0`-linear, and the conclusion of 7.6 (b) holds exactly when
+`Σ_i m_i (φ^{a_i} ⊗ u_i^*) : D_cris(Vⁿ(Y)) → D_cris(Vⁿ(W))` is zero. So under the hypothesis of 7.6 (b),
+`Σ_i m_i (φ^{a_i} ⊗ u_i^*) = 0` on `D_cris(Vⁿ(Y))`, and, through 8.1, on `D_cris(Hⁿ_ét(Y_Ω, ℚ_p))`.
+
+(c) Suppose that `Y` is smooth over `R`. Then `e` maps `R` into the integers `O_F` of `F`, `𝔛 = Y ×_R O_F` is proper
+and smooth over `O_F`, and (a) for `Hⁿ_ét(Y_Ω, ℚ_p)` is the crystallinity, in PadicHodgeTheory §8.1, of the étale
+cohomology of `𝔛 ×_{O_F} ℂ_p`, transported along `e`; that section moreover identifies `D_cris` with
+`Hⁿ_cris(𝔛_κ/W(κ))[1/p]`, `κ` the residue field of `F`, with its Frobenius.
+
+*Needs:* 5.3, 7.6, 8.1; CrystallineRepresentationsAndKisinModules §§7.1, 7.2 (`B_cris` inside `B_max`; crystalline
+representations and their invariants); CrystallineRepresentationsAndKisinModules §§1.3, 3.1, 3.7 (`B_max`,
+crystalline, linear Frobenius); PadicHodgeTheory §0.4 (Crystalline periods and divided Frobenius); PadicHodgeTheory
+§0.5 (Maximal periods, logarithms and semistable periods); PadicHodgeTheory §8.1 (Proper smooth, crystalline and
+semistable realizations); EtaleCohomologyFoundations §F.2.2 (Smooth base change in the rotated square).
+
+### 8.4 The ideal `𝔡` and the envelope `Env` through divided powers
+
+*Origin:* comparison with the standard theory of divided powers (Mathlib `DividedPowers`; DerivedDeRhamCohomology
+§§PD.5, PD.6): the ideal `𝔡(D)` and the envelope `Env(T, J)` of 7.3 described through divided power structures and
+divided power envelopes.
+
+*Proof route:* (a) Write `n! = p^v·c` with `c` prime to `p`; `c` is a unit and `p` a non-zero-divisor, so `γ_n(x)` is
+well defined, and `D` embeds into `D ⊗ ℚ`, where `γ_n(x) = xⁿ/n!`. The identities required of a divided power
+structure (Mathlib `DividedPowers`, with `γ_n` extended by zero outside `𝔡(D)`) hold in `D ⊗ ℚ`, hence in `D`; `𝔡(D)`
+is an ideal (7.3), and `γ_n(x) ∈ 𝔡(D)` for `n ≥ 1` because `γ_n(x)^m = ((nm)!/(n!)^m)·γ_{nm}(x)` and
+`(nm)!/((n!)^m·m!)` is an integer. A divided power structure `δ` satisfies `n!·δ_n(x) = xⁿ`, which gives `I ⊆ 𝔡(D)`
+and `δ_n = γ_n`. As `pⁿ/n! ∈ ℤ_(p)`, `γ_n(pa) = (pⁿ/n!)·aⁿ`, the canonical structure of DerivedDeRhamCohomology §PD.5.
+A ring map `g` has `n!·g(γ_n(x)) = g(x)ⁿ`, so `g(γ_n(x)) = γ_n(g(x))`. (b) By (a), `S → Env(T, J)` is a divided power
+morphism from `(S, pS)` to `(Env(T, J), 𝔡(Env(T, J)))`, and `T → Env(T, J)` sends `J` into `𝔡` (7.3 (d)), so the
+universal property of DerivedDeRhamCohomology §PD.6 gives the morphism. The `ℚ`-algebra `T ⊗ ℚ`, with the divided
+powers `xⁿ/n!` on the whole ring, receives `T` in the same way, which gives `D_J → T ⊗ ℚ`; as `D_J` is generated over
+`T` by the `γ_n(x)`, `x ∈ JT + pT` (DerivedDeRhamCohomology §PD.6), the induced `D_J ⊗ ℚ → T ⊗ ℚ` is inverse to the
+map from `T ⊗ ℚ`. So the image of `D_J` in `D_J ⊗ ℚ = T ⊗ ℚ`, which is `D_J/D_J[p^∞]` (`D_J` being a `ℤ_(p)`-algebra),
+is the `T`-subalgebra generated by the `xⁿ/n!` with `x ∈ JT + pT`; by the binomial formula and `pⁿ/n! ∈ ℤ_(p)` it is
+generated by the `xⁿ/n!` with `x ∈ J`, and its `p`-adic completion is `Env(T, J)` by 7.3 (d). `p`-adic completion
+preserves the surjection `D_J → D_J/D_J[p^∞]`, since the kernels of its reductions modulo the powers of `p` form a
+system with surjective transition maps; so `D_J^` maps onto `Env(T, J)`. In the example, `pT = 0`, so `T` with the
+zero ideal has the universal property of `D_J`, and the image of the `p`-torsion ring `T` in `T ⊗ ℚ` is `0`.
+
+(a) Let `D` be a ring in which `p` is a non-zero-divisor and every integer prime to `p` is a unit, for instance a
+`p`-complete torsion-free ring. For `x ∈ 𝔡(D)` and `n ≥ 0` let `γ_n(x)` be the unique `y ∈ D` with `n!·y = xⁿ`. Then
+`γ` is a divided power structure on `𝔡(D)`, and every divided power structure `δ` on an ideal `I` of `D` has
+`I ⊆ 𝔡(D)` and `δ_n = γ_n` on `I`: `(𝔡(D), γ)` is the largest divided power ideal of `D`, and `γ` is the only divided
+power structure on it. It contains `pD`, on which `γ` is the canonical divided power structure of
+DerivedDeRhamCohomology §PD.5, and every ring map between two such rings is a divided power morphism for `γ`. So
+`D/𝔡(D)`, over which 7.4 and 7.5 take points, is the quotient of `D` by its largest divided power ideal.
+
+(b) Let `S` be a `p`-complete torsion-free ring, `T` an `S`-algebra, `J ⊆ T` a subset, and `D_J` the divided power
+envelope of the ideal `JT` of `T` relative to `(S, pS)` with its canonical divided powers (DerivedDeRhamCohomology
+§PD.6), with `p`-adic completion `D_J^`. The map `T → Env(T, J)` of 7.3 (d) extends to exactly one divided power
+morphism `D_J → (Env(T, J), 𝔡(Env(T, J)))` over `S`, and this morphism identifies `Env(T, J)` with the `p`-adic
+completion of `D_J/D_J[p^∞]`, the quotient of `D_J` by its `p`-power torsion. Hence `D_J^` maps onto `Env(T, J)`,
+isomorphically when `D_J` has no `p`-torsion. The map need not be injective: for `S ≠ 0`, `T = S/pS` and `J` empty,
+`D_J = S/pS ≠ 0` and `Env(T, J) = 0`.
+
+What `Env(T, J)` does not record is the `p`-power torsion of the divided power envelope.
+
+*Needs:* 7.3; DerivedDeRhamCohomology §PD.5 (Compatibility with a base, canonical divided powers and square-zero
+thickenings); DerivedDeRhamCohomology §PD.6 (Divided power envelopes); Mathlib `DividedPowers`.
 
 ## What the library already provides
 
@@ -1170,6 +1472,23 @@ On Tau Ceti's main branch, later than the revision pinned here:
 - `A_inf`, `A_max`, `B_max`, crystalline representations through `B_max`, Weil pairs, the linear Frobenius and
   Hodge–Tate weights of vectors: CrystallineRepresentationsAndKisinModules §§1.1, 1.3, 3.1, 3.7 (period rings,
   crystalline representations).
+- The identification of the cohomology on test rings, and of `Vⁿ(Y)`, with étale cohomology:
+  CohomologyOfFunctorsOnTestRings Layer 8 (Comparison with the standard theory) (Layer 8 and the paragraphs *In
+  standard terms*).
+- The agreement of crystallinity through `B_max` with crystallinity in Fontaine's sense:
+  CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory) (8.3).
+- Étale cohomology, its finiteness, `p`-adic étale cohomology as a limit, the continuity of the Galois action and its
+  invariance under extension of separably closed fields: EtaleCohomologyFoundations §§F.2.2, F.3, F.4.2, F.4.4, F.4.5,
+  F.4.6 (Smooth base change in the rotated square; Finiteness, Artin vanishing and generic acyclicity; Classical
+  realization and finite-level cohomology limits; Integral finiteness, perfectness and derived reduction; Rational
+  realization and finite-dimensional cohomology; Continuous actions and finite-level operation comparison)
+  (Conventions; the paragraphs *In standard terms* of 5.2 and 5.3; 8.2, 8.3).
+- The Galois invariants of `ℂ_p(r)`, `A_cris` and `B_cris` with the map `A_cris → A_max`, and the Hodge–Tate
+  decomposition and crystalline comparison for proper smooth varieties: PadicHodgeTheory §§0.1, 0.4, 0.5, 8.1 (The
+  completed algebraic closure and Tate–Sen descent; Crystalline periods and divided Frobenius; Maximal periods,
+  logarithms and semistable periods; Proper smooth, crystalline and semistable realizations) (8.2, 8.3).
+- Canonical divided powers on `(p)` and divided power envelopes: DerivedDeRhamCohomology §§PD.5, PD.6 (Compatibility
+  with a base, canonical divided powers and square-zero thickenings; Divided power envelopes) (8.4).
 
 ## References
 

@@ -7,18 +7,29 @@ field whose Galois representations have small Selmer groups; the upper bound and
 characters of the CM field, their values and their `L`-functions. This background roadmap states the arithmetic of
 number fields that these steps use and that the class field theory already in the library does not give in the form
 needed: the link between places of one fixed algebraic closure of `ℚ` and completions, the local and global Artin maps
-read at that closure, counts of Galois cocycles that replace local and global duality and the formula of Greenberg and
+read at that closure, counts of Galois cocycles that the route uses in place of local and global duality and the
+formula of Greenberg and
 Wiles, Grunwald's theorem with an extra clause on units, Hecke characters of CM fields and the non-vanishing of their
 `L`-functions on the real half-line `s ≥ 1`, the `ℓ`-adic characters attached to algebraic Hecke characters, and two
 cyclotomic inputs: a nonzero integer of explicit size in all twisted Stickelberger ideals, and a uniform bound for the
-odd classes of a CM field inside a cyclotomic field at every prime.
+odd classes of a CM field inside a cyclotomic field at every prime. The standard theory is the reference: Layer 11
+relates the route's counts of cocycles and its local duality for crystalline cocycles to the standard theorems (by the
+formula of Greenberg and Wiles, the count of trivialised cocycles is equivalent to the vanishing of a dual Selmer
+group, and the inequality for relations follows from the formula; the local duality for crystalline cocycles follows
+from local Tate duality, the local Euler characteristic and the orthogonality of the Bloch–Kato conditions), and
+identifies its odd classes with homomorphisms from the class group for `e = 0` and, for `e > 0` and odd `ℓ`, with the
+part of a Selmer group of classes on which complex conjugation acts by `(−1)^{e+1}`; the route's objects are one way
+to prove these results and are the objects that its proofs use.
 
 The headline theorems are these. (1) *Cocycle counts* (4.4, 4.5): over a totally complex field, a finite Galois module
 killed by `ℓ^r` on which some element central modulo an open normal subgroup `U`, with trivial `ℓ`-adic cyclotomic
 character, acts without nonzero fixed vectors has at most `#M^{#ι+1}` cocycles trivialised at the places above a level
 and at infinity, for `ι` a family of auxiliary primes split for `U`; consequently the module of *relations* (functions
 on `U` with the properties of restrictions of dual cocycles) satisfies
-`#Z(∅)·#M^{#S+r_∞} ≤ #relations·#M·∏_{v∈S} #A_v` (`r_∞` the number of infinite places). No local duality and no dual Selmer group occur. (2) *Grunwald in
+`#Z(∅)·#M^{#S+r_∞} ≤ #relations·#M·∏_{v∈S} #A_v` (`r_∞` the number of infinite places). The route proves (1) without
+local duality and without the dual Selmer group; in standard terms (11.1) the first count is equivalent, by the
+formula of Greenberg and Wiles, to the vanishing of a dual Selmer group, and the inequality follows from that formula,
+the restrictions to `U` of the dual Selmer cocycles being relations. (2) *Grunwald in
 prime exponent* (6.1): over a totally complex field a character of the finite ideles killed by a prime `p` is the
 restriction through the Artin map of a Galois character killed by `p` at finitely many prescribed places, and also on
 the units at every place whose norm is not prime. (3) *Hecke `L`-functions at `s = 1`* (8.4): for a nontrivial Hecke
@@ -31,7 +42,10 @@ fields containing a primitive `5040`-th root of unity in GaloisRepresentationsOf
 classes* (10.7): for a CM field `E ⊂ ℚ(μ_N)` and `t ≥ 0` there is an integer `0 < X ≤ 2^{4(N+t+3)^{27}}·h_E` whose
 valuation bounds, at every prime `ℓ` (`2` included), the length of the module of odd cocycles of `G_E` in `O/ℓ^ν(−e)`
 unramified outside `ℓ` and trivial on the elements of the decomposition groups above `ℓ` with trivial cyclotomic
-character, for all `e < t` and all `ν`.
+character, for all `e < t` and all `ν`. In standard terms (11.3), for `e = 0` this module is `Hom(Cl(E), O/ℓ^ν)`, and
+for `e > 0` and odd `ℓ` it is, through `z ↦ [z]`, the part on which complex conjugation acts by `(−1)^{e+1}` of a
+Selmer group of classes in `H¹(G_E, (O/ℓ^ν)(−e))`; this part contains the same part of the Tate–Shafarevich group of
+`(O/ℓ^ν)(−e)` for the places above `ℓ` and `∞`.
 
 The roadmap is used by the roadmaps of the lower bound: CongruencesOfTwistedThetaLifts (odd classes, relations modulo
 `ℓ`, Selmer modules, avatars) and SelmerBoundsForAnticyclotomicTwists (relations, Selmer cocycles, crystalline local
@@ -50,7 +64,10 @@ totally complex fields. Layer 3 treats cocycles with local conditions at tamely 
 cocycles at split primes, in place of duality. Layer 5 is local duality for crystalline cocycles, as an inequality.
 Layer 6 is Grunwald's theorem in prime exponent and the CM extensions of prime degree built from it. Layer 7 treats
 characters of `U(1)` of a CM field, splitting characters and values of algebraic Hecke characters. Layer 8 treats Hecke
-`L`-functions for real `s ≥ 1`. Layer 9 treats `ℓ`-adic avatars. Layer 10 contains the cyclotomic inputs.
+`L`-functions for real `s ≥ 1`. Layer 9 treats `ℓ`-adic avatars. Layer 10 contains the cyclotomic inputs. Layer 11
+compares the route's objects with the standard ones: relations and trivialised cocycles with the dual Selmer group,
+crystalline cocycles under local duality with the Bloch–Kato conditions, and odd classes with class groups, Selmer
+groups of classes and Tate–Shafarevich groups.
 
 ## Conventions and notation
 
@@ -86,7 +103,8 @@ lengths are `O`-lengths, not divided by the ramification index. `O(e)`, `(O/ℓ^
 `*Method of the formal proof:*` how the shorter formal proof proves it; `[ShortProof]` names the file (under `src/`)
 and declarations where it does. Where the library already has a result or a theory that a section transfers, the
 section says which declaration to build on. Sections cite the other roadmaps of this family by name, with the result
-in words where a section number is not fixed.
+in words where a section number is not fixed. Layer 11 has no counterpart in the formal proof: each of its sections
+gives a `*Proof route:*` from the sections it cites.
 
 ### Table of symbols
 
@@ -115,6 +133,10 @@ in words where a section number is not fixed.
 | `r_θ` | `ℓ`-adic avatar of `(θ, n)` | 9.1 |
 | `Sha_e(O, ν)`, `C(ℓ, e, ψ, ν)` | odd classes of a CM field, odd component over `ℚ` | 10.1 |
 | Stickelberger property of `X` | divisibility at every prime and congruence with twisted Stickelberger sums | 10.1 |
+| `M^*`, `Z¹_{L^⊥}(K, M^*)` | `Hom(M, μ_m)`; dual Selmer cocycles, the cocycles of the dual Selmer group | 11.1 |
+| `F_ι` | local conditions zero above `N`, free at the split places `v_i`, unramified elsewhere | 11.1 |
+| `H¹_f(K, L)`, `A`, `A′` | Bloch–Kato condition on a lattice; its images modulo `ℓ^m` for `L` and `L′` | 11.2 |
+| `H¹_{(ℓ)}(E, ·)`, `Ш¹_S(E, ·)` | classes with the local conditions of the odd classes; Tate–Shafarevich group for `S` the places above `ℓ` and `∞` | 11.3 |
 
 ## Layer 1: Places of the algebraic closure and their completions
 
@@ -414,6 +436,10 @@ endomorphism of `Ω` extending `K → L` and carrying the actions accordingly. I
 (e) *Tame unit.* There is a unit `u ∈ 𝒪_v^×` whose residue generates the multiplicative group of the residue field and
 with `Art_A(u)` the class of the tame generator `γ_A` of 1.4 (d).
 
+**In standard terms.** `Art_A` is the local reciprocity map of `K_v` in the arithmetic normalisation (ClassFieldTheory
+§7.1), composed with inversion and carried to `D_A^ab` by the isomorphism `j` of 1.3 (b); (a)–(e) are statements of
+local class field theory for `K_v`, read at the place `A`.
+
 *Needs:* 1.3, 1.4; ClassFieldTheory §§5.1, 6.1, 7.1 (local invariant, reciprocity, absolute Artin map and the kernel
 identity).
 
@@ -480,6 +506,12 @@ other finite place `v` either `χ(Art_v(x)) = 0`, or `χ` is unramified at `v` a
 (f) *Unramified characters.* If `K^×·U^S = 𝔸_{K,f}^×` and a continuous homomorphism `z : G_K → V` to a discrete abelian
 group vanishes on the complex conjugations, on `D_A` for the places above `S` and on `I_A` for the places above the
 places outside `S`, then `z = 0`.
+
+**In standard terms.** Let `r_K : 𝔸_K^× → G_K^ab` be the Artin map of global class field theory in the arithmetic
+normalisation, trivial on `K^×` (ClassFieldTheory §11.1, in the absolute form named above). For a finite idele `a`,
+`Art_K(a) = r_K(a′)^{−1}`, where `a′` is the idele with finite part `a` and archimedean components `1`; (b) is the
+triviality of `r_K` on `K^×` read through the archimedean symbols (ClassFieldTheory §10.1), (a) and (c)–(e) are
+statements about `r_K` on these ideles, and (f) follows from (a), (b) and (d).
 
 *Needs:* 1.3, 1.5, 2.1; ClassFieldTheory §§10.1, 11.1 (Brauer sequence, global Artin reciprocity); Tau Ceti
 `TauCeti.ClassFieldTheory.ClassFormation.absoluteArtinMap` at `TauCeti.ClassFieldTheory.globalClassFormation` (the
@@ -680,7 +712,10 @@ the places above a level and at infinity. Auxiliary primes split in the field of
 power residue symbols of `N`-units; these give linear relations among the values of cocycles at tame generators, and
 an element central modulo `U` with trivial cyclotomic character and no fixed vectors bounds the count. From the count
 comes a lower bound for the number of *relations*, functions on `U` with the properties of restrictions of dual
-cocycles; this is the form in which the Selmer bounds use the dual side.
+cocycles; this is the form in which the Selmer bounds use the dual side. 11.1 compares these counts with the standard
+theory: by the formula of Greenberg and Wiles, over a totally complex field the count of 4.4 (b) and the equality in
+4.4 (a) are each equivalent to the vanishing of a dual Selmer group, and the inequality of 4.5 (d) follows from that
+formula, the restrictions to `U` of the dual Selmer cocycles being relations.
 
 ### 4.1 Split places, `N`-units and trivialised cocycles
 
@@ -808,6 +843,14 @@ satisfying `(l^r, U, z, 1)` with `χ_l(z) = 1` and
 `[z, g] ∈ U` for every `g ∈ G_K`, and suppose that the Frobenius elements of `s` detect roots. Then
 `0 < #Triv(V) ≤ #V^{#ι+1}`.
 
+**In standard terms.** Over a totally complex field the formula of Greenberg and Wiles (ArithmeticGaloisDuality
+§R02.5.1) gives `#Triv(V) = #V^{#ι}·#Z¹_{F_ι^⊥}(K, V^*)` (11.1 (f)), where `V^* = Hom(V, μ_{l^r})` (`μ_l` in (a)) and
+the dual Selmer conditions `F_ι^⊥` are: no condition at the places above `N`, zero at the `v_i`, unramified classes
+elsewhere. In (b), and in the second statement of (a), the element `z` fixes no nonzero vector of `V^*`, and the
+conclusion is equivalent to the vanishing of the dual Selmer group `H¹_{F_ι^⊥}(K, V^*)`; the route proves this
+vanishing, in the form of the count: in (b) from the central element and the Frobenius elements that detect roots, and
+in (a) from Higman's criterion and the hypothesis on the roots fixed by the `φ_i`.
+
 *Needs:* 4.1, 4.2, 4.3; AuxiliaryAlgebraAndAnalysisForThetaLifts §1.2 (multiplicative functions trivial on the
 modules that satisfy Higman's criterion); Mathlib `Sylow.nonempty`, `Sylow.not_dvd_index` (on the finite quotient
 `G_K/U`).
@@ -857,6 +900,14 @@ number of families `ν ∈ Hom(M, ℚ/ℤ)^ι` with `∑_i ν_i(z(γ_i)) = 0` fo
 for all `g` and no nonzero fixed vector in `M`. If `p` can be avoided, there is a finite set `T ⊃ S` of places prime to `p`
 with `#Z(∅)·#M^{#S + r_∞} ≤ #(relations off T)·#M·∏_{v∈S} #A_v`.
 
+**In standard terms.** (d), which this roadmap calls the Greenberg–Wiles inequality, is a consequence of the formula
+of Greenberg and Wiles (ArithmeticGaloisDuality §R02.5.1), an equality expressing the ratio of the orders of a Selmer
+group and of its dual Selmer group through local terms. By 11.1, for `T` the set of places of `S` and places above
+`m`, restriction to `U` maps the dual Selmer cocycles with values in `Hom(M, μ_m)` into the relations off `T`, with
+kernel the coboundaries, of order `#M`; and over a totally complex field the formula reads
+`#Z(∅)·#M^{#S+r_∞} = #Z¹_{L^⊥}(K, Hom(M, μ_m))·∏_{v∈S} #A_v`. Together these give (d) for that `T` (11.1 (e)), with
+equality exactly when every relation off `T` comes from a dual Selmer cocycle.
+
 The Greenberg–Wiles formula (ArithmeticGaloisDuality §R02.5.1) together with Poitou–Tate duality gives bounds of this
 kind through the restriction of dual Selmer cocycles to `U`; the route needs only the inequality.
 
@@ -884,6 +935,12 @@ Let `κ : G_K → ℤ_ℓ^×` be a continuous character with values `≡ 1 mod 4
 `v`. Then for some finite `T ⊃ S` the reductions modulo `ℓ` of the relations off `T` form a group of order at least
 `ℓ^{k+1}`, `k` the number of places of `S` not above `ℓ`.
 
+**In standard terms.** By 11.1 (b), for `T` containing `S` and the places above `m`, the restrictions to `U` of the
+dual Selmer cocycles with values in `Hom(M, μ_m)`, for the local conditions `L_v` above, are relations off `T`; so the
+conclusion holds for such `T` as soon as these restrictions have at least `ℓ^{k+1}` distinct reductions modulo `ℓ`, a
+lower bound for the dual Selmer side. This roadmap does not derive that bound from the formula of Greenberg and Wiles
+(ArithmeticGaloisDuality §R02.5.1); the route proves the conclusion from 4.4 and 4.5, using four infinite places.
+
 *Needs:* 4.4, 4.5; ArithmeticGaloisRepresentations §5.1 (Chebotarev's density theorem).
 
 [ShortProof], `Lib/ClassField/GreenbergWiles/RelationsModL` (`New.RelationSetting.reductions`,
@@ -894,7 +951,8 @@ Let `κ : G_K → ℤ_ℓ^×` be a continuous character with values `≡ 1 mod 4
 
 The Selmer bounds use local Tate duality only as one divisibility, for groups of crystalline cocycles of lattices in
 perfect duality modulo `ℓ^m`. Crystalline representations, their cocycles, Hodge–Tate jumps and the linear Frobenius
-are those of CrystallineRepresentationsAndKisinModules §3.1 (defined through `B_max`).
+are those of CrystallineRepresentationsAndKisinModules §3.1 (defined through `B_max`). 11.2 derives 5.2 (a)–(d) from
+local Tate duality, the local Euler characteristic and the dimensions and orthogonality of the Bloch–Kato conditions.
 
 ### 5.1 Classes of Galois lattices, cup-orthogonality and the dual defect
 
@@ -932,6 +990,17 @@ of `L` is that of `−u − 1`; (c) the tensor product of lattices in `(F, K, U)
 monic polynomial of degree at most `deg q·deg r` over `ℤ_p` kills `s⁻¹` on the Tate dual of `Y ⊗ L`; (e) a lattice on which
 `Γ` acts through `χ^c` is in the class `(F, ∅, {−c})`; (f) the dual defect vanishes exactly when all crystalline cocycles
 are cup-orthogonal.
+
+**In standard terms.** Let `Γ` be a topological group with an open embedding into `G_{ℚ_p}`, and `K` the fixed field
+of its image. For a potentially crystalline lattice `Y`, such as a lattice in a class, the action of `Γ` is
+continuous, and CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory; its 7.2 (d),
+(e) and 7.5) identifies the crystalline cocycles of `Y` with the continuous cocycles whose classes lie in the
+Bloch–Kato group `H¹_f(K, Y)` (11.2). The reduction modulo `p^m` of a pairing of (3) is an equivariant pairing
+`Y/p^m × L/p^m → μ_{p^m}`, and by 11.2 (a) the cup product under it of two continuous cocycles is a 2-coboundary
+exactly when the cup product of their classes in `H²(K, μ_{p^m}) ≅ ℤ/p^m` vanishes. So, for `L` potentially
+crystalline, a crystalline cocycle of `L` lies in `L^{⊥𝒬}` exactly when, for every `m`, every `Y ∈ 𝒬` and every
+pairing of `Y` and `L` modulo `p^m`, the cup product under that pairing of its class modulo `p^m` with the reduction
+modulo `p^m` of every class of `H¹_f(K, Y)` vanishes.
 
 *Needs:* CrystallineRepresentationsAndKisinModules §§3.1, 3.2, 3.3, 3.4, 3.6, 3.7 (definitions, Tate twists, Hodge
 frames, jumps, admissibility, linear Frobenius).
@@ -972,12 +1041,21 @@ Let `Z_f(L)` be the crystalline cocycles of `L` and `d = rank_{ℤ_ℓ} L`.
 
 (c) Let `H` be a group of maps `Γ → L′` and `S` a group of maps `Γ → V`, such that the elements of `S` and the reductions of
 the elements of `Z_f(L)` are continuous cocycles with some lift whose cup products modulo `ℓ^m` (through `b`) with the
-elements of `H` are 2-coboundaries. Then `[S : S ∩ q(Z_f(L))]` divides `[Z_f(L′) : H ∩ Z_f(L′)]`.
+elements of `H` are 2-coboundaries. Then `[S : S ∩ q(Z_f(L))]` divides `[Z_f(L′) : H ∩ Z_f(L′)]` (an infinite index is
+read as `0`).
 
 (d) Let `(k, A)` be a henselian local field datum (1.1) with `#(𝒪/l) = l^d` for a prime `l`, and `M` a finite discrete module
 killed by a power of `l`, fixed by a subgroup `Q` that contains an `l`-power of every element. Cup-orthogonal groups of
 continuous cocycles `X ⊂ Z¹(Hom(M, Ω^×))`, `W ⊂ Z¹(M)` (cup product into `H²(Γ, Ω^×)`) satisfy `#X·#W ≤ #M^{2+d}`. Over such a
 field there are `n²·#(𝒪/n)` continuous cocycles `Γ → Ω^×` killed by `n`, and `#(k^×/k^{×n})/#μ_n(k) = n·#(𝒪/n)`.
+
+**In standard terms.** By 11.2, (a)–(d) are consequences of local Tate duality and the local Euler characteristic
+(ArithmeticGaloisDuality §R02.4.2, ClassFieldTheory §5.1) together with the dimensions and the orthogonality of the
+Bloch–Kato conditions (PadicHodgeRegulators §§1.5, 1.6): the reductions modulo `ℓ^m` of `Z_f(L)` and `Z_f(L′)` are
+exact annihilators of each other, (c) is one divisibility that this implies, (a) is
+`rank Z_f(L) + rank Z_f(L′) = d(2 + n)`, and (b) and (d) follow from duality and the Euler characteristic alone, (d)
+without the hypothesis on `Q`. Here *local duality for crystalline cocycles* names these consequences; local Tate
+duality itself is the perfectness of the cup-product pairing.
 
 *Needs:* 1.3, 5.1; CrystallineRepresentationsAndKisinModules §§3.4, 4.1, 4.2 (jump duality, reduction, rank formula);
 ClassFieldTheory §5.1 (local duality, for (d)).
@@ -1567,21 +1645,25 @@ CrystallineRepresentationsAndKisinModules §§3.2, 3.4, 3.7, 4.4, 4.5 (Tate twis
 The lower bound charges each prime `ℓ` an error that contains the length of the odd classes of the CM field of the data,
 which lies in a cyclotomic field. This layer bounds them by one integer of explicit size, at every prime, `2` included,
 through Kolyvagin's method for the Euler system of Gauss sums, with Bernoulli numbers replaced by an integer that lies in
-all twisted Stickelberger ideals.
+all twisted Stickelberger ideals. 11.3 compares the odd classes with class groups, Selmer groups of classes and
+Tate–Shafarevich groups.
 
 ### 10.1 Odd classes, components and the Stickelberger property
 
 *Origin:* definitions and conventions.
 
 *Method of the formal proof:* definitions. The route works with these cocycle modules directly and never identifies
-them with Tate–Shafarevich groups or with classes in Galois cohomology.
+them with Tate–Shafarevich groups or with classes in Galois cohomology. 11.3 states the comparison with class groups,
+Selmer groups of classes and Tate–Shafarevich groups.
 
 Let `ℓ` be a prime and `O` as in the Conventions.
 
 1. For a CM field `E`, `e ≥ 0` and `ν ≥ 0`, the *odd classes* `Sha_e(O, ν)` are the odd module `Ш⁻(E, O/ℓ^ν, e)` of
    GaloisRepresentationsOfUnitaryEigenforms §9.2 (cocycles `G_E → (O/ℓ^ν)(−e)` unramified outside `ℓ`, vanishing on `I_A`
    for `e = 0` and on the elements of `D_A` with `χ_ℓ = 1` for `e > 0`, `A` above `ℓ`, and odd under `g ↦ g^c` if `e > 0`);
-   for `e = 0` they are the everywhere unramified homomorphisms `G_E → O/ℓ^ν`.
+   for `e = 0` they are the everywhere unramified homomorphisms `G_E → O/ℓ^ν`. Here *odd classes* and the letter `Sha`
+   name these modules of cocycles; in the literature `Ш¹` denotes a group of classes that vanish at given places, and
+   11.3 (c) compares the two.
 2. For a Dirichlet character `ψ` modulo `N` with values in `O` and `e ≥ 0`, let `Υ = χ_ℓ^e ψ`. The *component*
    `C(ℓ, e, ψ, ν)` is the component of `Υ` with values in `O/ℓ^ν`, as in GaloisRepresentationsOfUnitaryEigenforms §9.2
    (`Υ⁻¹`-cocycles `G_ℚ → O/ℓ^ν` vanishing at `c` and at the elements of `Gal(Ω/ℚ(μ_N))` in inertia away from `ℓ` or in a
@@ -1591,6 +1673,13 @@ Let `ℓ` be a prime and `O` as in the Conventions.
    has `(c^e − 1)(c^{e+1} − 1) | X`, and (ii) for every `c ≡ 1 mod N`, every domain `O` of characteristic `0` and every
    character `ψ` modulo `N` with values in `O` and `ψ(−1) = −(−1)^e` there is `w ∈ O` with
    `(c^{e+1} − 1)X ≡ 2w·∑_{0≤a<Nm} ⌊ca/(Nm)⌋ a^e ψ(a) mod m` for every `m ≥ 1` prime to `c`.
+
+**In standard terms.** By 11.3, `Sha_0(O, ν)` is `Hom(Cl(E), O/ℓ^ν)` through class field theory; for `e > 0` and odd
+`ℓ`, `z ↦ [z]` identifies `Sha_e(O, ν)` with the odd part of a Selmer group of classes in `H¹(G_E, (O/ℓ^ν)(−e))`,
+*odd* meaning that `[z^c] = −[z]`, that is, that complex conjugation, acting on `G_E` and on the coefficients, is
+`(−1)^{e+1}` (for odd `e` this is the part it fixes); this part contains the odd part, in the same sense, of the
+Tate–Shafarevich group `Ш¹_S(E, (O/ℓ^ν)(−e))`, `S` the places above `ℓ` and `∞`, with a quotient of bounded length;
+and for odd `ℓ` and odd `χ_ℓ^e ψ`, `z ↦ [z]` identifies `C(ℓ, e, ψ, ν)` with a Selmer group of classes of `G_ℚ`.
 
 *Needs:* 1.1, 3.1; GaloisRepresentationsOfUnitaryEigenforms §9.2 (odd modules and components).
 
@@ -1799,6 +1888,13 @@ prime `ℓ`, every `O` (Conventions) containing the values of the Dirichlet char
 this holds with `k = y^{20}`, and for `ℓ > y²`, `e ≠ 0` and `0 < X_e ≤ 2^{y^6}`, the length is at most
 `v_O((4φ(N)·4X_e²)^{y^{20}})`.
 
+**In standard terms.** By 11.3 (a), (a) is the bound of the length of `Hom(Cl(E), O/ℓ^ν)` by `v_O(h_E)`. For `e > 0`
+and odd `ℓ`, 11.3 (b) and (c) make the theorem a bound by `v_O(X)` for the length of the odd part of the Selmer group
+`H¹_{(ℓ)}(E, (O/ℓ^ν)(−e))`, and so for that of the odd part of `Ш¹_S(E, (O/ℓ^ν)(−e))`, `S` the places above `ℓ` and
+`∞`; *odd* is taken as in 10.1 and 11.3 (b), complex conjugation acting on these parts by `(−1)^{e+1}`. The bound by
+one integer at every prime is the route's own: it is not derived here from a standard theorem, and no comparison of
+`v_O(X)` with generalised Bernoulli numbers is stated.
+
 BernoulliBoundsForClassGroupEigenspaces §10.1 (b) and UniformWildKernelBounds §7.3 (a) bound minus parts of
 Tate–Shafarevich groups for odd primes only; the route uses this bound at every prime.
 
@@ -1807,6 +1903,296 @@ Tate–Shafarevich groups for odd primes only; the route uses this bound at ever
 [ShortProof], `Lib/Cyclotomic/OddSha` (`New.length_shaOdd_zero_le_addVal_classNumber`, `New.exists_character_components`,
 `New.OddPart.nsmul_shaOdd_eq_zero_of_isStickelbergerBound`, `New.OddPart.length_shaOdd_le_addVal_pow`,
 `New.OddPart.length_shaOdd_le_of_le_sq`, `New.OddPart.length_shaOdd_le_of_sq_lt`, `New.exists_length_shaOdd_le`)
+
+## Layer 11: Comparison with the standard theory
+
+The route works with objects of its own where the literature has standard ones: relations at split primes and counts
+of trivialised cocycles where the standard theory has the dual Selmer group and the formula of Greenberg and Wiles
+(Layer 4), one divisibility for crystalline cocycles where it has local Tate duality and the orthogonality of the
+Bloch–Kato conditions (Layer 5), and modules of odd cocycles where it has class groups, Selmer groups of classes and
+Tate–Shafarevich groups (Layer 10). The standard theory is the reference. This layer states, for each statement of the
+route that records less, the standard theorem that implies it (11.1, 11.2), and the identification where the objects
+agree (11.1 (a), (f), 11.3). For "crystalline" and the crystalline cocycles `Z_f(T)` it uses
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory). The comparison of Selmer
+modules of cocycles in general with Selmer groups of classes is GaloisRepresentationsOfUnitaryEigenforms Layer 10
+(Comparison with the standard theory), its 10.7; 11.3 treats the odd modules and the components directly, oddness not
+being a local condition.
+
+### 11.1 Relations, the dual Selmer group and the Greenberg–Wiles formula
+
+*Origin:* adapted from the formula of Greenberg and Wiles and from the reciprocity law for the local invariants of a
+global Brauer class (ArithmeticGaloisDuality §R02.5.1; ClassFieldTheory §10.1): here written for cocycles, and
+compared with the relations of 4.5 and the trivialised cocycles of 4.1 and 4.4.
+
+*Proof route:* (a) The conditions defining `Z(P)` are conditions on classes, and every coboundary satisfies them: at a
+place `v ∉ S ∪ P`, where `I_A` fixes `M`, a cocycle vanishes on `I_A` exactly when its class is unramified,
+coboundaries vanishing there; at a complex conjugation `c`, which fixes `M`, a cocycle vanishes exactly when its class
+at the real place of `c` is zero; at `v ∈ S`, `L_v` contains the local coboundaries, so the condition is that the
+class at `v` lies in `L̄_v`. (b) Let `w` be a dual Selmer cocycle. As `U` fixes `M^*`, `y_w` is additive on `U`, and
+the cocycle identity gives `w(gug⁻¹) = g·w(u)` for `u ∈ U`, which is the twisted equivariance of a relation; `y_w` is
+locally constant because `U` is open. At a place `v ∉ T` both `M` and `M^*` are unramified and `v ∤ #M`, so `L̄_v^⊥`
+is the group of unramified classes (ArithmeticGaloisDuality §R02.4.2, *Unramified classes are exact annihilators*),
+and `w`, whose restriction to `I_A` is a homomorphism with unramified class, vanishes on `I_A`. Let `B_j` be split
+primes above distinct places `w_j ∉ T`, with Frobenius elements `φ_j ∈ U` and tame generators `γ_j`, and
+`z ∈ Z({w_j})`. The class of `w ∪ z` in `H²(G_K, μ_m)` has local invariant `0` at every place other than the `w_j`: at
+`v ∈ S` because the class of `z` lies in `L̄_v` and that of `w` in `L̄_v^⊥`; at a finite `v ∉ S ∪ {w_j}` because the
+class of `z` is unramified there and that of `w` annihilates the unramified classes; at a real place because `z`
+vanishes at its complex conjugations; at a complex place because the local `H²` is `0`. At `w_j` the decomposition
+group `D_{B_j}` fixes `M` and `μ_m` (its inertia because `w_j ∉ S` and `w_j ∤ m`, the element `φ_j` because it lies in
+`U`), so `z` is a homomorphism on `D_{B_j}` and `w` an unramified one. Let `π` be the uniformiser and `ζ_m` the root
+of unity of the tame generator `γ_j` (4.1 (3)) and `κ` the Kummer character of `π`, `g(π^{1/m}) = ζ_m^{κ(g)}π^{1/m}`;
+tame inertia modulo `m` is generated by the image of `γ_j`, so `z − κ·z(γ_j)` vanishes on inertia, and an unramified
+class pairs to `0` with it. The class of `π` cupped with an unramified character `χ` has invariant `±χ(φ_j)` (the
+normalisation of the invariant in ClassFieldTheory §5.1, `a ∪ δχ` having invariant `v(a)·χ(Frob)`, with the
+compatibility of cup products with the Kummer and Bockstein connecting maps); so the local invariant of `w ∪ z` at
+`w_j` is `ε·w(φ_j)(z(γ_j))`, for a sign `ε` that depends only on the conventions for cup products. The local
+invariants of a global class add up to `0` (ClassFieldTheory §10.1), `H²(G_K, μ_m)` lying in the Brauer group by
+Hilbert 90 (2.4), and `w(φ_j) = y_w(φ_j)` since `φ_j ∈ U`. A cocycle that vanishes on `U` is constant on the cosets of
+`U`, hence inflated from `G_K/U`. (c) For a cocycle `f` of `G_K/U` and `σ̄` the image of `σ`, which is central, the
+identity `f(σ̄δσ̄⁻¹) = f(δ)` reads `(1 − σ̄)f(δ) = (1 − δ)f(σ̄)`; as `1 − σ̄` is invertible on `M^*` and commutes with
+the action, `f` is the coboundary of `−(1 − σ̄)⁻¹f(σ̄)`, and the coboundaries form a group of order
+`#M^*/#(M^*)^{G_K} = #M`. Under the hypotheses of 4.5 (d) the values of an element of `M^*` are roots of unity of
+`ℓ`-power order, which `σ` fixes (`χ_ℓ(σ) = 1`), so `σ` acts on `M^*` by `f ↦ f∘σ⁻¹`, and `σ⁻¹ − 1` is bijective on
+the finite module `M`. (d) In the formula of Greenberg and Wiles (ArithmeticGaloisDuality §R02.5.1) the factor at
+`v ∈ S` is `#L̄_v/#H⁰(K_v, M) = #A_v/#M`, as `A_v` is the preimage of `L̄_v` and the local coboundaries form a group
+of order `#M/#H⁰(K_v, M)`; the factor at a finite `v ∉ S` is `1`, since `M` is unramified at `v` and the unramified
+classes `M/(φ − 1)M` have the order of `M^{φ}`; the factor at each complex place is `1/#M`. With
+`#Z(∅) = #H¹_L(K, M)·#M/#H⁰(K, M)` from (a), and `#Z¹_{L^⊥}(K, M^*) = #H¹_{L^⊥}(K, M^*)·#M/#H⁰(K, M^*)`, every
+coboundary being a dual Selmer cocycle, the formula becomes (d). (e) By (b), (c) and (d), `#Z(∅)·#M^{#S+r_∞}` is `#M`
+times the number of the `y_w` times `∏_{v∈S} #A_v`. When `p` can be avoided, `(m, p) = 1` and no place of `S` divides
+`p`. (f) An element `(f, z)` of `Triv_{X,I}(V)` is the cocycle `z` together with, for one place `x` in each
+`G_K`-orbit of `X`, a solution `f(x)` of `z(g) = g f(x) − f(x)` for `g` in the stabiliser of `x`, the other values
+being `f(gx) = g f(x) − z(g)`. So `z` runs through the cocycles whose class lies in the Selmer group of `F_ι`, inertia
+above the places not dividing `N` lying in `U` and so fixing `V`, and each `z` has `∏_{v | N} #H⁰(K_v, V)·#V^{r_∞}`
+such `f`, the stabiliser in `G_K` of an infinite place of `Ω` being trivial. In the formula of Greenberg and Wiles for
+`F_ι`, the factor at `v_i` is `#H¹(K_{v_i}, V)/#H⁰(K_{v_i}, V) = #H⁰(K_{v_i}, V^*) = #V`, by the local Euler
+characteristic (`v_i ∤ #V`, the primes dividing `#V` dividing `m` and so `N`) and local duality (ClassFieldTheory
+§5.1), as `D_{A_i}`, generated by `I_{A_i} ⊂ U` and `φ_i ∈ U` (1.4 (a)), fixes `V^*`; the factor at a place above `N`
+is `1/#H⁰(K_v, V)`, at the other finite places `1`, at each infinite place `1/#V`; the dual conditions outside `N` and
+the `v_i` are the unramified classes by ArithmeticGaloisDuality §R02.4.2.
+
+Let `K` be a number field and `D` a relation setting for `M` and `m` (4.5), with its set `S`, open normal subgroup
+`U`, places `A_v`, local conditions `L_v`, groups of local cocycles `A_v = L_v ∩ Z¹(D_{A_v}, M)` and Selmer cocycles
+`Z(P)`. Let `M^* = Hom(M, μ_m)` with `(g·f)(a) = g(f(g⁻¹a))`; through `ζ_m^k ↦ k/m`, `ζ_m` the root of unity fixed in
+4.1 (3), it is `Hom(M, ℚ/ℤ)` with `(g·f)(a) = χ_m(g)·f(g⁻¹a)`, as read in 4.5. Let `L̄_v ⊂ H¹(D_{A_v}, M)` be the
+group of classes of `A_v` for `v ∈ S`, the unramified classes for a finite `v ∉ S`, and `0` at a real place, `D_{A_v}`
+being the absolute Galois group of `K_v` by 1.3; let `H¹_L(K, M)` be the Selmer group of these conditions,
+`H¹_{L^⊥}(K, M^*)` the dual Selmer group, with the annihilators `L̄_v^⊥` under the local Tate pairing as conditions
+(ArithmeticGaloisDuality §R02.5.1), and `Z¹_{L^⊥}(K, M^*)` the group of *dual Selmer cocycles*, the continuous
+cocycles `G_K → M^*` whose class lies in `H¹_{L^⊥}(K, M^*)`. For a dual Selmer cocycle `w`, let `y_w` be `w` on `U`
+and `0` outside `U`. Prove:
+
+(a) *Selmer cocycles are the cocycles of a Selmer group.* For every set `P` of finite places, `Z(P)` is the group of
+continuous cocycles `G_K → M` whose class lies in the Selmer group with the conditions `L̄_v` at `v ∈ S`, no condition
+at `v ∈ P ∖ S`, the unramified classes at the other finite places and `0` at the real places. It contains the
+coboundaries, and `#Z(∅) = #H¹_L(K, M)·#M/#H⁰(K, M)`.
+
+(b) *Dual Selmer cocycles give relations.* For every finite set `T` of finite places that contains `S` and the places
+above `m`, `w ↦ y_w` is an additive map from `Z¹_{L^⊥}(K, M^*)` to the relations off `T`. Its kernel is the group of
+dual Selmer cocycles that vanish on `U`, which are inflated from `G_K/U`.
+
+(c) *The kernel.* If some `σ ∈ G_K` with `[σ, g] ∈ U` for every `g ∈ G_K` fixes no nonzero vector of `M^*`, which
+holds under the hypotheses of 4.5 (d), the kernel in (b) is the group of coboundaries `G_K → M^*`, of order `#M`.
+
+(d) *The formula of Greenberg and Wiles for cocycles.* If `K` is totally complex,
+`#Z(∅)·#M^{#S + r_∞} = #Z¹_{L^⊥}(K, M^*)·∏_{v∈S} #A_v`, `r_∞` the number of infinite places of `K`.
+
+(e) *The inequality of 4.5 (d).* Under the hypotheses of 4.5 (d), let `T` be the set of places of `S` and places above
+`m`. Then `#Z(∅)·#M^{#S + r_∞} = #M·#{y_w : w ∈ Z¹_{L^⊥}(K, M^*)}·∏_{v∈S} #A_v ≤ #(relations off T)·#M·∏_{v∈S} #A_v`,
+and `T` consists of places prime to `p` when `p` can be avoided. This is 4.5 (d), with equality exactly when every
+relation off `T` is some `y_w`.
+
+(f) *Trivialised cocycles.* Let `K` be totally complex, `s` split places for `(m, N, I, U, ι)` (4.1), `V` a finite
+discrete `G_K`-module killed by `m` and fixed by `U`, `X` the set of places above `N` and infinity, and
+`V^* = Hom(V, μ_m)`. Let `F_ι` be the local conditions `0` at the places above `N`, all classes at the `v_i`, and the
+unramified classes at the other finite places; the dual conditions `F_ι^⊥` are no condition at the places above `N`,
+`0` at the `v_i`, and the unramified classes at the other finite places. Then
+`#Triv_{X,I}(V) = #V^{#ι}·#Z¹_{F_ι^⊥}(K, V^*) = #V^{#ι+1}·#H¹_{F_ι^⊥}(K, V^*)/#H⁰(K, V^*)`. So `V` has few cocycles
+with exponent `#ι + 1` exactly when `#H¹_{F_ι^⊥}(K, V^*) ≤ #H⁰(K, V^*)`; and if some element of `G_K` fixes no nonzero
+vector of `V^*`, each of `#Triv_{X,I}(V) ≤ #V^{#ι+1}` and `#Triv_{X,I}(V) = #V^{#ι+1}` is equivalent to
+`H¹_{F_ι^⊥}(K, V^*) = 0`.
+
+A relation records a dual cocycle only through its values on `U` and its pairings with Selmer cocycles at split
+primes, and carries no condition at the places of `T`; (b) and (e) are an inclusion and an inequality, and no
+statement here says that every relation is some `y_w`.
+
+*Needs:* 1.3, 1.4, 2.4, 3.1, 4.1, 4.5; ArithmeticGaloisDuality §R02.4.2 (The local terms: the local Tate pairing,
+unramified classes as exact annihilators), §R02.5.1 (The Greenberg–Wiles formula); ClassFieldTheory §§5.1, 10.1 (local
+duality, the local Euler characteristic and the normalisation of the local invariant; the sum of the local invariants
+of a global Brauer class); ProfiniteCohomology §8.3 (Graded commutativity), §8.5 (Connecting maps, as typed diagrams),
+§9.6 (The Kummer sequence and isomorphism).
+
+### 11.2 Local duality of crystalline cocycles and the Bloch–Kato conditions
+
+*Origin:* adapted from local Tate duality and the local Euler characteristic formula (Serre (1997); Milne (2006)) and
+from the orthogonality of the Bloch–Kato conditions under local duality (PadicHodgeRegulators §1.6): here modulo `ℓ^m`
+and for cocycles, and compared with the divisibilities of 5.2.
+
+*Proof route:* (a) The cochain is a 2-cocycle with values in `μ_{ℓ^m}`. The map `H²(K, μ_{ℓ^m}) → H²(K, ℚ̄_ℓ^×)` is
+injective by the Kummer sequence and Hilbert 90 (`H¹(K, ℚ̄_ℓ^×) = 0`; What the library already provides), so being a
+coboundary with values in `ℚ̄_ℓ^×` or in `μ_{ℓ^m}` is the same, and `H²(K, μ_{ℓ^m}) ≅ ℤ/ℓ^m` (ClassFieldTheory §5.1).
+For the reduction of `b` the resulting pairing of classes is the local Tate pairing, which is perfect
+(ArithmeticGaloisDuality §R02.4.2). (b) *Orthogonality:* for `x ∈ H¹_f(K, L)` and `x′ ∈ H¹_f(K, L′)` the cup product
+through `b` lies in `H²(K, ℤ_ℓ(1)) ≅ ℤ_ℓ`, which is torsion-free, and its image in `H²(K, ℚ_ℓ(1)) = ℚ_ℓ` is the
+pairing of the images of `x` and `x′` in `H¹_f(K, V)` and `H¹_f(K, V′)`, which is `0` (PadicHodgeRegulators §1.6);
+reduction modulo `ℓ^m` commutes with cup products, so `A` and `A′` are orthogonal. *Orders:* `H¹_f(K, L)` contains the
+torsion of `H¹(K, L)` and is saturated in it, and the kernel of `H¹(K, L) → H¹(K, V̄)` is `ℓ^m H¹(K, L)`; so
+`A ≅ H¹_f(K, L)/ℓ^m`, of order `ℓ^{m·dim H¹_f(K, V)}·#H¹(K, L)[ℓ^m]`, and the exact sequence
+`0 → H⁰(K, L)/ℓ^m → H⁰(K, V̄) → H¹(K, L)[ℓ^m] → 0` turns this into
+`#A = ℓ^{m(dim H¹_f(K, V) − dim H⁰(K, V))}·#H⁰(K, V̄)`; likewise for `A′`. PadicHodgeRegulators §1.6 and §1.5 give
+`dim H¹_f(K, V) + dim H¹_f(K, V′) = dim H¹(K, V) = nd + dim H⁰(K, V) + dim H⁰(K, V′)`, so
+`#A·#A′ = ℓ^{mnd}·#H⁰(K, V̄)·#H⁰(K, V̄′)`, which is `#H¹(K, V̄)` by the local Euler characteristic and
+`#H²(K, V̄) = #H⁰(K, V̄′)` (ClassFieldTheory §5.1). Under a perfect pairing of finite groups, orthogonal subgroups of
+complementary orders are exact annihilators. *Cocycles:* the reductions of `Z_f(L)` map onto `A` and contain every
+coboundary of `V̄` (CrystallineRepresentationsAndKisinModules §4.1 (d)), so they form the preimage of `A`; likewise
+for `L′`. (c) `Z_f(L)` is an extension of `H¹_f(K, L)` by the coboundaries, a group isomorphic to `L/L^Γ`; it is
+finitely generated and torsion-free, so free of rank `d − dim H⁰(K, V) + dim H¹_f(K, V)`, and
+`[Z_f(L) : ℓ^m Z_f(L)] = ℓ^{m·rank Z_f(L)}`; with the identity of dimensions above, the ranks for `L` and `L′` add up
+to `2d + nd`. For 5.2 (b), `Y^⊥` is by (a) the preimage of the annihilator of the image `Ȳ` of `Y` in `H¹(K, V̄′)`, so
+`#Y^⊥ = #B¹(Γ, V̄)·#H¹(K, V̄)/#Ȳ`, while `#Y ≤ #Ȳ·#B¹(Γ, V̄′)`; with `#B¹(Γ, V̄) = #V̄/#H⁰(K, V̄)` and the Euler
+characteristic, `#Y^⊥·#Y ≤ #V̄·#V̄′·ℓ^{mdn} = ℓ^{md(2+n)}`, and all these orders are powers of `ℓ`. 5.2 (d) is the
+same count for `Γ = Gal(Ω/k)`, the absolute Galois group of the completion `k̂` of `k` through 1.3 (as in the method
+of 5.2), with `M` in place of `V̄`: `#X·#W ≤ #B¹(Γ, Hom(M, Ω^×))·#B¹(Γ, M)·#H¹(k̂, M) = #M²·p^{[k̂ : ℚ_p]·v_p(#M)}`,
+`p` the residue characteristic; the last factor is `#M^d` if `p = l`, as then `#(𝒪/l) = l^{[k̂ : ℚ_l]}`, and it is `1`
+if `p ≠ l`, as then `d = 0`. The two counts at the end of 5.2 (d) follow from the Euler characteristic of `μ_n`, with
+`#H⁰ = #μ_n(k)` and `#H² = n`, and from Kummer theory for `Ω/k` (Hilbert 90, 2.4), `H¹(Γ, μ_n) ≅ k^×/k^{×n}`:
+`#(k^×/k^{×n}) = #μ_n(k)·n·#(𝒪/n)`, and the continuous cocycles `Γ → Ω^×` killed by `n`, which take their values in
+`μ_n`, number `#H¹(Γ, μ_n)·n/#μ_n(k) = n²·#(𝒪/n)`. For 5.2 (c), let `H_f = H ∩ Z_f(L′)` and `H̄` its image in
+`H¹(K, V̄′)`, contained in `A′`. By (a) the classes of the elements of `S` and of `q(Z_f(L))` annihilate `H̄`; the
+annihilator of `H̄` contains `A = A′^⊥` with index `[A′ : H̄]`; as `q(Z_f(L))` is the preimage of `A`,
+`[S : S ∩ q(Z_f(L))]` is the index of `A` in the sum of `A` and the classes of `S`, hence at most `[A′ : H̄]`, which
+is at most `[Z_f(L′) : H_f]` because `Z_f(L′)` maps onto `A′` and `H_f` onto `H̄`. The left side is the order of a
+subquotient of the finite `ℓ`-group of cocycles `Γ → V̄`, and a subgroup of finite index of `Z_f(L′) ≅ ℤ_ℓ^r` has
+index a power of `ℓ`.
+
+Let `ℓ`, `Γ`, `n`, `O`, `L`, `L′`, `b`, `m` and `q` be as in 5.2, `V̄ = L/ℓ^m L` (written `V` in 5.2 (b) and (c)), and
+`K ⊂ ℚ̄_ℓ` the fixed field of the image of `Γ`, so that `Γ = G_K` and `[K : ℚ_ℓ] = n`. Let `V = L ⊗_{ℤ_ℓ} ℚ_ℓ` and
+`V′ = L′ ⊗_{ℤ_ℓ} ℚ_ℓ`, which `b` identifies with `V^*(1)`, `d = dim V`, and `V̄′ = L′/ℓ^m L′`, which the reduction of
+`b` and a primitive `ℓ^m`-th root of unity `ζ`, through `k ↦ ζ^k`, identify with `Hom(V̄, μ_{ℓ^m})`. Let
+`H¹_f(K, V) = ker(H¹(K, V) → H¹(K, B_cris ⊗ V))` be the Bloch–Kato group, `H¹_f(K, L)` its preimage in `H¹(K, L)`, and
+`A ⊂ H¹(K, V̄)` the image of `H¹_f(K, L)`; define `H¹_f(K, L′)` and `A′ ⊂ H¹(K, V̄′)` in the same way. The actions of
+`Γ` on `L` and on `L′` are continuous, as every potentially crystalline action on a finite free `ℤ_ℓ`-module is
+(CrystallineRepresentationsAndKisinModules §7.2 (e)). So `V` and `V′` are continuous representations of `G_K`, and
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory) applies to them through its
+7.2 (d): `V` and `V′` are potentially crystalline in Fontaine's sense (7.2 (c) there), hence de Rham (7.3 (d) there),
+and `Z_f(L)` is the group of continuous cocycles `Γ → L` whose class lies in `H¹_f(K, L)`, the map `c ↦ [c]` carrying
+it onto `H¹_f(K, L)` with kernel the coboundaries (7.5 (a), (b) there), and likewise for `L′`. Prove:
+
+(a) *Cup products and the local pairing.* Let `X`, `Y` be finite discrete `Γ`-modules killed by `ℓ^m` and
+`β : X × Y → μ_{ℓ^m}` a bilinear map with `β(gx, gy) = g·β(x, y)`. For continuous cocycles `x : Γ → X` and
+`y : Γ → Y`, the cochain `(g, h) ↦ β(x(g), g·y(h))` is a 2-coboundary with values in `ℚ̄_ℓ^×` if and only if the cup
+product of the classes of `x` and `y` in `H²(K, μ_{ℓ^m}) ≅ ℤ/ℓ^m` is zero. For `X = V̄`, `Y = V̄′` and the reduction
+of `b`, this cup product is the local Tate pairing `H¹(K, V̄) × H¹(K, V̄′) → ℤ/ℓ^m`, which is perfect. The cup
+products of 5.1 (3) and of 5.2 (b) and (c) are of this kind, up to the order of the factors, which changes the class
+by a sign; in 5.2 (c) the cup product of a lift depends only on its reduction. Those of 5.2 (d), with values in `Ω^×`,
+are read in the same way, Hilbert 90 for `Ω` (2.4) making `H²(Γ, μ_n) → H²(Γ, Ω^×)` injective.
+
+(b) *Exact orthogonality modulo `ℓ^m`.* `A` and `A′` are exact annihilators of each other under the local Tate
+pairing. `q(Z_f(L))` is the group of continuous cocycles `Γ → V̄` whose class lies in `A`, and the reductions of the
+elements of `Z_f(L′)` are the continuous cocycles `Γ → V̄′` whose class lies in `A′`.
+
+(c) *Consequences for 5.2.* `rank_{ℤ_ℓ} Z_f(L) = d − dim H⁰(K, V) + dim H¹_f(K, V)`, and 5.2 (a) is the identity
+`rank Z_f(L) + rank Z_f(L′) = d(2 + n)`, a form of `dim H¹_f(K, V) + dim H¹_f(K, V^*(1)) = dim H¹(K, V)`. 5.2 (b) and
+5.2 (d) follow from local Tate duality and the local Euler characteristic, (d) without the hypothesis on `Q`. Under
+the hypotheses of 5.2 (c), `[S : S ∩ q(Z_f(L))] ≤ [A′ : H̄] ≤ [Z_f(L′) : H ∩ Z_f(L′)]`, `H̄` the image of
+`H ∩ Z_f(L′)` in `H¹(K, V̄′)`; when the last index is finite, each index divides the next (the first is the order of a
+subgroup of the quotient of the annihilator of `H̄` by `A`, a group of order `[A′ : H̄]`, and `A′/H̄` is a quotient of
+`Z_f(L′)/(H ∩ Z_f(L′))`), which is 5.2 (c); when `[Z_f(L′) : H ∩ Z_f(L′)]` is infinite, 5.2 (c) asserts nothing, an
+infinite index being read as `0`, which every integer divides.
+
+5.2 records less than (b): its (c) is one divisibility between indices, and it does not say that the reductions modulo
+`ℓ^m` of `Z_f(L)` and `Z_f(L′)` are exact annihilators of each other.
+
+*Needs:* 1.3, 2.4, 5.1, 5.2; CrystallineRepresentationsAndKisinModules §§4.1, 4.2 (reduction modulo `p^m`; finite
+generation of `Z_f`) and Layer 7 (Comparison with the standard theory), its 7.2, 7.3 and 7.5; PadicHodgeRegulators
+§1.5 (Dimensions of the Bloch–Kato subspaces), §1.6 (Local duality of the Bloch–Kato conditions);
+ArithmeticGaloisDuality §R02.1.2 (Continuous cochains into inverse limits), §R02.1.3 (Lattices, rational and torsion
+coefficients), §R02.4.2 (The local terms: the local Tate pairing), §D7.7.2 (Compatibility of the local pairings for
+`T`, `V`, `W` and `W_M`); ClassFieldTheory §5.1 (local duality, the local Euler characteristic, `H²(K, μ_n) ≅ ℤ/n`);
+ProfiniteCohomology §8.3 (Graded commutativity), §9.5 (Hilbert 90, in two steps), §9.6 (The Kummer sequence and
+isomorphism).
+
+### 11.3 Odd classes, class groups and Selmer groups of classes
+
+*Origin:* adapted from the description of the unramified abelian extensions of a number field by its class group (the
+Hilbert class field, ClassFieldTheory §13.1) and from the Tate–Shafarevich groups of Galois groups with restricted
+ramification (ArithmeticGaloisDuality §R02.4.2): here for the odd classes and the components of 10.1.
+
+*Proof route:* (a) A continuous homomorphism `G_E → O/ℓ^ν` that vanishes on every inertia group cuts out an abelian
+extension of `E` unramified at every finite place, and at the infinite places since `E` is totally complex; it lies in
+the Hilbert class field `H_E`, the largest such extension, and the Artin map identifies `Gal(H_E/E)` with `Cl(E)`, a
+prime going to its arithmetic Frobenius (ClassFieldTheory §13.1); conversely a homomorphism from `Cl(E)`, composed
+with `G_E → Gal(H_E/E)`, vanishes on inertia. The value `χ(Art_E(a)) = −∑_v ord_v(a_v)·χ(Frob_v)` comes from the
+definition of `Art_E` in 2.2 and from 2.1 (a) (units go into inertia, uniformisers to inverses of arithmetic Frobenius
+elements), applied to the coordinates of `χ` in a decomposition of `O/ℓ^ν` into cyclic groups; 1.5 (a) turns it into
+the value at the class of `d(a)`. If the `ℓ`-part of `Cl(E)` is `⊕_i ℤ/ℓ^{a_i}`, then
+`Hom(Cl(E), O/ℓ^ν) ≅ ⊕_i (O/ℓ^ν)[ℓ^{a_i}]` has `O`-length `∑_i min(a_i, ν)·v_O(ℓ) ≤ v_O(h_E)`. (b) `g ↦ g^c` carries
+`I_A` onto `I_{cA}` and `D_A` onto `D_{cA}`, `cA` lying above the same prime as `A`, and preserves `χ_ℓ`; so `z ↦ z^c`
+preserves the conditions defining `Sha_e(O, ν)`, and it fixes every coboundary `g ↦ (χ_ℓ(g)^{−e} − 1)a`. The groups
+`I_A` (`A` not above `ℓ`; 1.4 (b)) and `D_A ∩ ker χ_ℓ` act trivially on `M_e`, so the restriction of a cocycle to them
+is a homomorphism that depends only on its class: the conditions are conditions on classes, and by the
+inflation–restriction sequence the classes at `A` above `ℓ` that vanish on `D_A ∩ ker χ_ℓ` are those inflated from
+`D_A/(D_A ∩ ker χ_ℓ)`. As `2` is invertible in `O/ℓ^ν`, an odd cocycle that is a coboundary is also fixed by
+`z ↦ z^c`, hence `0`; and a class `x` with `[z^c] = −x` for a representative `z` is the class of the odd cocycle
+`(z − z^c)/2`. The action of `c` on `H¹(G_E, M_e)` is `[z] ↦ [g ↦ c·z(cgc)] = (−1)^e[z^c]`. (c) As `M_e` is unramified
+outside `ℓ`, inflation identifies the first cohomology of the Galois group of the maximal extension unramified outside
+`S` with the classes of `G_E` unramified outside `ℓ`, the kernel of `G_E` onto that group being generated by inertia
+groups that fix `M_e`; so `Ш¹_S(E, M_e)` is the kernel of the restriction from `H¹_{(ℓ)}(E, M_e)` to
+`⊕_{v|ℓ} H¹(D_{A_v}, M_e)`, one place `A_v` above each `v`. By (b) a class of `H¹_{(ℓ)}(E, M_e)` restricts at `A_v` to
+a class inflated from `Γ_v = D_{A_v}/(D_{A_v} ∩ ker χ_ℓ) ≅ Gal(E_v(μ_{ℓ^∞})/E_v)`, an open subgroup of `ℤ_ℓ^×`, as
+`E_v` is finite over `ℚ_ℓ`, hence for odd `ℓ` the product of a finite cyclic group of order prime to `ℓ` and a group
+isomorphic to `ℤ_ℓ`. For such a group and a finite `O`-module `N` with a continuous action, `H¹(Γ_v, N)` is the
+cokernel and `H⁰(Γ_v, N)` the kernel of `γ − 1` on the invariants of the finite factor, `γ` a topological generator of
+the factor `ℤ_ℓ`, so they have the same length; and `H⁰(Γ_v, M_e) = H⁰(E_v, M_e)`. With (b), restricted to the parts
+on which `[z] ↦ [z^c]` is `−1`, this gives the inequalities. (d) The subgroups named act trivially on `(O/ℓ^ν)(Υ⁻¹)`:
+`ψ` is trivial on `Gal(Ω/ℚ(μ_N))`, and `χ_ℓ` on `I_A` for `A` not above `ℓ` (1.4 (b)); so the conditions are
+conditions on classes. A coboundary `g ↦ (Υ⁻¹(g) − 1)a` takes the value `−2a` at `c`, so the only coboundary in
+`C(ℓ, e, ψ, ν)` is `0`, and a class with representative `z` contains the element `z + (g ↦ (Υ⁻¹(g) − 1)·z(c)/2)` of
+`C(ℓ, e, ψ, ν)`.
+
+Let `E` be a CM field, `ℓ` a prime, `O` as in the Conventions, `ν ≥ 0`, and `M_e = (O/ℓ^ν)(−e)` for `e ≥ 0`. For a
+cocycle `z : G_E → M_e` let `z^c(g) = z(g^c)`; it is again a cocycle, as `χ_ℓ(g^c) = χ_ℓ(g)`, and `[z] ↦ [z^c]` is an
+involution of `H¹(G_E, M_e)`; for a group of classes stable under it, a superscript `−` denotes the part on which it
+acts by `−1`. Prove:
+
+(a) *`e = 0`: the class group.* `χ ↦ ([𝔭] ↦ χ(Frob_𝔭))`, `Frob_𝔭` an arithmetic Frobenius at a place of `Ω` above the
+prime `𝔭`, is an isomorphism of `O`-modules from `Sha_0(O, ν)` onto `Hom(Cl(E), O/ℓ^ν)`; on finite ideles,
+`χ(Art_E(a))` is minus the value of this homomorphism at the class of the ideal `d(a)` of 1.5 (a). Consequently
+`length_O Sha_0(O, ν) ≤ v_O(h_E)`, which is 10.7 (a).
+
+(b) *`e > 0`, `ℓ` odd: a Selmer group of classes.* Let `H¹_{(ℓ)}(E, M_e)` be the group of classes in `H¹(G_E, M_e)`
+whose restriction to `I_A` is zero for every place `A` of `Ω` not above `ℓ`, and whose restriction to `D_A ∩ ker χ_ℓ`
+is zero for every place `A` above `ℓ` (at such `A`, the classes inflated from `Gal(k_A(μ_{ℓ^∞})/k_A)`). Then `z ↦ [z]`
+is an isomorphism of `O`-modules from `Sha_e(O, ν)` onto `H¹_{(ℓ)}(E, M_e)^−`, the part on which complex conjugation,
+acting on `G_E` by conjugation and on `M_e` by `χ_ℓ(c)^{−e} = (−1)^e`, acts by `(−1)^{e+1}`.
+
+(c) *`e > 0`, `ℓ` odd: the Tate–Shafarevich group.* Let `S` be the set of places of `E` above `ℓ` and `∞`, and
+`Ш¹_S(E, M_e)` the group of ArithmeticGaloisDuality §R02.4.2 (the classes of the Galois group of the maximal extension
+of `E` unramified outside `S` whose restriction to every place of `S` is zero), read in `H¹(G_E, M_e)` by inflation:
+the classes unramified outside `ℓ` whose restriction to `D_A` is zero for every place `A` above `ℓ`. Then
+`Ш¹_S(E, M_e) ⊂ H¹_{(ℓ)}(E, M_e)`, the quotient embeds in `⊕_{v|ℓ} H¹(Gal(E_v(μ_{ℓ^∞})/E_v), M_e)`, and
+`length_O Ш¹_S(E, M_e)^− ≤ length_O Sha_e(O, ν) ≤ length_O Ш¹_S(E, M_e)^− + ∑_{v|ℓ} length_O H⁰(E_v, M_e)`.
+
+(d) *Components, `ℓ` odd.* If `ℓ` is odd and `Υ = χ_ℓ^e ψ` is odd (`Υ(c) = −1`), `z ↦ [z]` is an isomorphism of
+`O`-modules from `C(ℓ, e, ψ, ν)` onto the group of classes in `H¹(G_ℚ, (O/ℓ^ν)(Υ⁻¹))` whose restrictions to the
+subgroups `I_A ∩ Gal(Ω/ℚ(μ_N))`, `A` not above `ℓ`, and `D_A ∩ ker χ_ℓ ∩ Gal(Ω/ℚ(μ_N))`, `A` above `ℓ`, are zero.
+
+The letter `Sha` is the route's: `Sha_0(O, ν)` is `Hom(Cl(E), O/ℓ^ν)`, which can be larger than `Ш¹_S(E, O/ℓ^ν)`, the
+homomorphisms that also vanish on the decomposition groups above `ℓ` (for `E = ℚ(√−23)`, `ℓ = 3`, `O = ℤ_3` and
+`ν ≥ 1`, the first is `ℤ/3` and the second `0`, the primes above `3` being non-principal and the class group of order
+`3`); and for `e > 0` the odd classes vanish above `ℓ` only on the elements with trivial cyclotomic character, so (c)
+is an inclusion with a quotient of bounded length. The superscript `−` refers to `[z] ↦ [z^c]`: on
+`H¹_{(ℓ)}(E, M_e)^−` and on `Ш¹_S(E, M_e)^−` complex conjugation, acting on `G_E` and on `M_e`, is `(−1)^{e+1}`, so
+for odd `e` these are the parts that it fixes, the plus parts in the usual sense. For `ℓ = 2` the map `z ↦ [z]` on
+`Sha_e(O, ν)`, `e > 0`, has as kernel the coboundaries killed by `2`, and no description of its image is stated. The
+integer `X` of 10.7 bounds these modules at every prime; it does not record their orders, and no comparison of
+`v_O(X)` with generalised Bernoulli numbers is stated.
+
+*Needs:* 1.3, 1.4, 1.5, 2.1, 2.2, 10.1; ClassFieldTheory §13.1 (class fields: the Hilbert class field and
+`Gal(H_E/E) ≅ Cl(E)`); ArithmeticGaloisDuality §R02.2.3a (Supplied `H¹` of a procyclic group, applied through
+`Ẑ → ℤ_ℓ`), §R02.3.1 (The group `G_{K,S}`, finiteness and localisation), §R02.4.2 (The local terms: the groups
+`Ш^r_S`); ProfiniteCohomology §5.4 (Inflation-restriction); GaloisRepresentationsOfUnitaryEigenforms §9.2 (odd modules
+and components).
 
 ## What the library already provides
 
@@ -1866,17 +2252,32 @@ the norm of idele classes from an intermediate field; for 2.2 (c)).
   of residue degree above one having density zero (`TauCeti.hasDirichletDensity_higherDegreePrimes`). Used in 4.5, 4.6,
   6.1 and 10.5.
 - Corestriction, Shapiro's lemma, cup products in low degrees, Hilbert 90 and Kummer theory for profinite groups:
-  ProfiniteCohomology Layers 6–9. Used only through class field theory.
+  ProfiniteCohomology Layers 6–9. Used through class field theory, and directly in 11.1 and 11.2 (graded commutativity
+  and the compatibility of cup products with connecting maps, §§8.3, 8.5; Hilbert 90 and the Kummer sequence, §§9.5,
+  9.6).
+- The inflation–restriction sequence: ProfiniteCohomology §5.4 (Inflation-restriction). Used in 11.3.
+- Cohomology with lattice coefficients and the compatibility of the local pairings with the reduction of coefficients:
+  ArithmeticGaloisDuality §R02.1.2 (Continuous cochains into inverse limits), §R02.1.3 (Lattices, rational and torsion
+  coefficients), §D7.7.2 (Compatibility of the local pairings for `T`, `V`, `W` and `W_M`). Used in 11.2.
+- The kernel of `G_K → G_{K,S}` as the closed normal subgroup generated by the inertia groups outside `S`, and the
+  first cohomology of a procyclic group: ArithmeticGaloisDuality §R02.3.1 (The group `G_{K,S}`, finiteness and
+  localisation), §R02.2.3a (Supplied `H¹` of a procyclic group). Used in 11.3.
 - Decomposition and inertia groups and arithmetic Frobenius elements at the maximal ideals of the integral closure, with
   their valuation subrings; the local embedding `G_{K_v} → G_K` onto a decomposition group; finiteness of ramification
   sets; the tame character transported to inertia at a place: ArithmeticGaloisRepresentations §§2.1, 2.1a, 2.2. Used in
   1.2, 1.3 and 1.4, and compared with 1.1 there.
 - Global class field theory: ClassFieldTheory Layers 10–13 (the Brauer sequence and sum of invariants, global
-  reciprocity, existence, the norm index, the Kummer layer of the `S`-units and the cyclic Hasse norm theorem). Used in
-  2.2, 2.3 and 7.2.
+  reciprocity, existence, the norm index, the Kummer layer of the `S`-units and the cyclic Hasse norm theorem, and the
+  Hilbert class field of ClassFieldTheory §13.1). Used in
+  2.2, 2.3, 7.2, 11.1 and 11.3.
 - The absolute global Artin map on `𝔸_K^×`, continuous, with the local Artin maps as components:
   MordellLawrenceVenkatesh §1.8. Used in 2.2.
-- Local class field theory and local duality: ClassFieldTheory §§5.1, 6.1, 7.1. Used in 2.1, 5.2 and 7.2.
+- Local class field theory and local duality: ClassFieldTheory §§5.1, 6.1, 7.1. Used in 2.1, 5.2, 7.2, 11.1 and 11.2.
+- The formula of Greenberg and Wiles, the local Tate pairing, unramified classes as exact annihilators, and the
+  Tate–Shafarevich groups `Ш^r_S` of Galois groups with restricted ramification: ArithmeticGaloisDuality §R02.4.2 (The
+  local terms), §R02.5.1 (The Greenberg–Wiles formula). Used in 4.4, 4.5, 4.6, 5.2, 11.1, 11.2 and 11.3.
+- The dimensions of the Bloch–Kato subspaces and their local duality: PadicHodgeRegulators §1.5 (Dimensions of the
+  Bloch–Kato subspaces), §1.6 (Local duality of the Bloch–Kato conditions). Used in 5.2 and 11.2.
 - The derivative operator of Kolyvagin and its identity: EulerSystemsAndKolyvaginSystems §3.1. Used in 10.4.
 
 ## References

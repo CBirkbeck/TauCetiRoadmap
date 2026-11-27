@@ -9,15 +9,29 @@ representations, for eigenforms on the unitary group of the standard definite he
 weak form that the argument uses, together with the base change, the local information at split places and the
 Taylor–Wiles operators that the argument draws on.
 
-"Attached" is weak here: a continuous semisimple representation whose characteristic polynomials are `ℓ`-adically
-close to the Hecke polynomials at most Frobenius elements, in the sense of a filter on Frobenius data (1.2, 1.5).
-At a place, what is recorded is a polynomial that annihilates the image of a Frobenius or inertia element (on the
-periods, above `ℓ`), not its characteristic polynomial; Weil–Deligne representations do not appear. The construction
-does not pass through base change to `GL_n`: odd rank comes from the cohomology of PEL models
-(AbelianSchemesWithThetaStructuresAndTheirCohomology §9.8), cut down to the right rank by a criterion on free
-Hodge–Tate weights, then reaches all weights by `ℓ`-adic limits, all stably unramified CM fields by quadratic base
-change between definite unitary groups, and every rank by theta lifts to odd rank followed by the cancellation of
-strings of characters.
+The reference for these Galois representations is the standard theory. An eigenform on `U(n)` over a CM field
+containing a primitive `5040`-th root of unity has a nonzero component in an automorphic representation `Π`, and its
+Galois representation is the one attached, in the usual sense, to the base change of `Π` to `GL_n`: continuous and
+semisimple, unramified with the Satake polynomial as characteristic polynomial of Frobenius at the places away from
+`ℓ` where the form is spherical, crystalline at those above `ℓ` with the labelled Hodge–Tate weights given by the
+weight, and compatible with the local Langlands correspondence at the split places away from `ℓ`, and at those above
+`ℓ` for parameters without monodromy whose irreducible constituents are induced from characters of unramified
+extensions. Layer 10 states the results of the roadmap in these terms and says, for each object of the route, how it
+is related to the standard one.
+
+The route works with notions of its own, on which its proofs are stated. "Attached" in the route is weak: a continuous
+semisimple representation whose characteristic polynomials are `ℓ`-adically close to the Hecke polynomials at most
+Frobenius elements, in the sense of a filter on Frobenius data (1.2, 1.5); a representation attached in the usual
+sense is attached in this sense, and when one exists the representations attached in the two senses are the same
+(10.2). At a place, the route records a polynomial that annihilates the image of a Frobenius or inertia element (on
+the periods, above `ℓ`), not its characteristic polynomial; Weil–Deligne representations do not appear in the route,
+and 10.3 reads its local conditions in their terms. The construction does not pass through base change to `GL_n`: odd
+rank comes from the cohomology of PEL models (AbelianSchemesWithThetaStructuresAndTheirCohomology §9.8; that
+cohomology is compared with the standard one in CohomologyOfFunctorsOnTestRings Layer 8 (Comparison with the standard
+theory) and AbelianSchemesWithThetaStructuresAndTheirCohomology Layer 10 (Comparison with the standard theory)), cut
+down to the right rank by a criterion on free Hodge–Tate weights, then reaches all weights by `ℓ`-adic limits, all
+stably unramified CM fields by quadratic base change between definite unitary groups, and every rank by theta lifts to
+odd rank followed by the cancellation of strings of characters.
 
 The headline statements are these.
 
@@ -25,17 +39,27 @@ The headline statements are these.
 eigenform on `U(n)` over `E`, whatever its weight, some `ℓ`-adic representation of rank `n` is attached; at every
 finite place where the form is spherical, every attached representation is unramified, or crystalline above `ℓ`, with
 the Hodge–Tate jumps of the weight, and at a split such place the Hecke polynomial kills geometric Frobenius.
+In standard terms (10.4): every such representation is the one attached in the usual sense to the base change to
+`GL_n` of an automorphic representation in which the form has a nonzero component, unramified with the Satake
+polynomial at Frobenius at the places away from `ℓ` where the form is spherical, and crystalline at those above `ℓ`,
+with the labelled Hodge–Tate weights given by the weight.
 
 (2) *Local–global compatibility at split places* (8.2, 8.4). At a split place where the form is a pro-`p` Iwahori
 eigenvector, or has a depth-zero type given by a label, every attached representation is of finite type, has the
 jumps of the weight, and explicit polynomials built from the eigencharacter, or from the tame characters named by the
 label, kill the corresponding Weil elements, above `ℓ` included.
+In standard terms (10.5): for a pro-`p` Iwahori eigenvector, and for a label whose polynomial splits over the residue
+field, these clauses are consequences of local–global compatibility at split places,
+`WD(r|_{G_{E_w}})^{F-ss} ≅ ι∘rec(Π_w ⊗ |det|^{(1−n)/2})`.
 
 (3) *Base change of prime degree between definite unitary groups* (5.9). For a step `E′/E` (5.1: a Galois extension of
 CM fields of prime degree, with `ζ_5040 ∈ E`, an integer of `E′` of trace `1` to `E`, and a character `μ` of the finite
 ideles of `E` cutting out the norms from `E′`), with `E′` stably unramified, a nonzero form over `E` has a weak base
 change eigenform over `E′`, and, for matching local data under a nonzero trace condition, one (off the places of the
 data) with prescribed eigenvalues of the matching local operators; Iwahori eigencharacters and labels pass to the base change at places with one place above (5.10, 5.11).
+In standard terms (10.6): when the form has a nonzero component in an automorphic representation whose base change to
+`GL_n`, followed by cyclic base change to `E′`, is cuspidal, the descent of that base change to the definite unitary
+group over `E′` contains a weak base change of the form off a finite set of places.
 
 (4) *Taylor–Wiles places* (9.1). At auxiliary places of norm `≡ 1` modulo a power of `ℓ`, off the level, every finite
 subgroup `Δ` of the product of the residual general linear groups has an integral operator `Ψ` on the forms of
@@ -53,6 +77,16 @@ SiegelWeilAndRallisFormulasOnUnitaryGroups and HolomorphicDiscreteSeriesOfUnitar
 CongruencesOfTwistedThetaLifts and SelmerBoundsForAnticyclotomicTwists; its Hilbert 90 statements (5.2, 5.3) are used
 across the background.
 
+For the standard theory of Layer 10 the roadmap rests on AutomorphicGaloisRepresentationsPartII for the Galois
+representations of regular algebraic polarized representations of `GL_n` and their local–global compatibility, on
+EndoscopicTransferAndUnitaryTraceComparison for base change between unitary groups and `GL_n` and for the local
+Langlands correspondence, on PotentialAutomorphyInfrastructurePartII for descent to definite unitary groups and the
+Galois representations of algebraic modular forms on them, on
+RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups for the assembled
+statements for automorphic representations of definite unitary groups, and on
+CrystallineRepresentationsAndKisinModules for the comparison of its crystalline representations, jumps and linear
+Frobenius with Fontaine's notions.
+
 Layer 1 fixes the forms, the filter of most Frobenii, the local conditions and the notion of attached representation.
 Layer 2 is the algebra of semisimple representations, lattices, pseudocharacters and limits of traces. Layer 3 gives
 the congruences that change the weight. Layer 4 gives the criterion on free weights, the Hodge–Tate cocharacter,
@@ -60,6 +94,8 @@ cuspidal types and multiplicity-free sums. Layer 5 is base change of prime degre
 Layer 6 constructs the representations in odd rank, and from those of rank one the local behaviour of the `ℓ`-adic
 avatars of algebraic Hecke characters; Layer 7 constructs the representations in every rank. Layer 8 is local–global
 compatibility at split places. Layer 9 holds the Taylor–Wiles operators and the Selmer modules of cocycles.
+Layer 10 compares the objects of the route with the standard ones and states the results of Layers 5 and 7–9 in
+standard terms.
 
 ## Conventions and notation
 
@@ -84,7 +120,7 @@ Weil pairs and the linearised Frobenius on periods are those of CrystallineRepre
 | Frobenius datum | a triple `(w, A, s)`: `q_w` prime, `A` over `w`, `s` a geometric Frobenius at `A` of norm `q_w` |
 | `ℓ`, `ℚ̄_ℓ`, `ℂ_ℓ`, `ι` | a prime, an algebraic closure of `ℚ_ℓ`, its completion, a fixed field isomorphism `ι : ℂ ≃ ℚ̄_ℓ` |
 | `ℓ`-adic representation | a homomorphism `r : G_E → GL_n(ℚ̄_ℓ)`; continuity is stated separately |
-| semisimple | over a field `k`, `r : G → GL_n(k)` is semisimple if every `x` in the `k`-span of `r(G)` with `tr(x·r(g)) = 0` for all `g` is `0` (non-degeneracy of the trace form) |
+| semisimple | over a field `k`, `r : G → GL_n(k)` is semisimple if every `x` in the `k`-span of `r(G)` with `tr(x·r(g)) = 0` for all `g` is `0` (non-degeneracy of the trace form); in characteristic `0` this is the usual notion, `kⁿ` a direct sum of irreducible representations (10.1) |
 | `𝔸_f`, `Ô` | the finite adeles and the completed integers of `E` |
 | `G_f(n)`, `K₀`, `U(n)(E)` | as in AdelicUnitaryGroupsAndAlgebraicModularForms §3.1: the finite adelic points `{g ∈ GL_n(𝔸_f) : ḡᵀg = 1}` of the unitary group of the standard definite hermitian form `x₁x̄₁ + ⋯ + xₙx̄ₙ`; `K₀ = G_f(n) ∩ GL_n(Ô)`; the rational points |
 | `ι_w`, `K_w` | for split `w`, the embedding `GL_n(E_w) → G_f(n)` of AdelicUnitaryGroupsAndAlgebraicModularForms §3.1 (component `g` at `w`, the component forced by unitarity at `w̄`, `1` elsewhere); for any finite `w`, split or not, `K_w` the elements of `K₀` supported at `w` and `w̄`, and `f` is *spherical at `w`* if `K_w` fixes it, as in WeilRepresentationsOnBanachSpacesOfData §9.2 |
@@ -126,6 +162,12 @@ Let `f : G_f(n) → M` be any function with values in a complex vector space, ac
   `GL_n(𝒪_w) → GL_n(k_w)` fixes `f` through `ι_w`, and `Σ_{x ∈ GL_n(k_w)} conj(Ξ(x))·(ι_w(x̃)f) ≠ 0`, `x̃` a lift of `x`.
 - The jumps `J_κ(σ)` of a weight `κ` in rank `N` are as in the Conventions; at each `σ` they are pairwise distinct.
 
+**In standard terms.** `J_κ(σ)` in rank `n` is the multiset `HT_{ι∘σ}(a)` of `AutomorphicGaloisRepresentationsPartII`
+AG2.0 (The Hodge–Tate multiset attached to a weight: `HT_τ = {a_{ιτ,1} + n − 1, …, a_{ιτ,n}}`) for the weight `a` with
+`a = −w₀λ_v` at `Φ_v` and `a = λ_v` at the other embedding over `v`, which is the weight of the base change to `GL_n`
+of an automorphic representation of `U(n)` of weight `κ`; it is the multiset of labelled Hodge–Tate weights of the
+Galois representation of that base change (10.4 (c)).
+
 *Needs:* AdelicUnitaryGroupsAndAlgebraicModularForms §§1.4, 3.1, 6.1 (level spaces, `G_f(n)`, `ι_w`, forms);
 WeilRepresentationsOnBanachSpacesOfData §§9.1, 9.2 (Hecke operators at split places).
 
@@ -151,6 +193,10 @@ Frobenii over `E`, then for most Frobenius data `y` over `F`, every datum `x` ov
 element are carried by `π` and `φ` to those of `y` lies in `X`;
 (d) if a property of `s` holds for most Frobenius data `(w, A, s)`, it holds on a dense subset of `G_E`; in particular
 most Frobenii at `g` is a proper filter.
+
+**In standard terms.** By (b), a property of all but finitely many places holds for most Frobenius data; the converse
+fails (10.2 (c)). 10.2 compares attachment along this filter with the usual attachment at all but finitely many
+places.
 
 *Needs:* `ArithmeticGaloisRepresentations §5.1` (Chebotarev's density theorem); Tau Ceti
 `NumberField.Chebotarev.infinite_frobeniusPrimeSet_inter_setOf_inertiaDeg_eq_one` (existence form);
@@ -186,6 +232,19 @@ Let `r` be an `ℓ`-adic representation of `G_E` of rank `n` and `A` a place of 
   place `A` over `w`: `r` is good at `A`, has the jumps `J` (or every member occurs), and `P` kills every geometric
   Frobenius at `A` of norm `q_w`.
 
+**In standard terms.** Let `r` be continuous. By 10.3, *good* at `A` means unramified, respectively crystalline in
+Fontaine's sense above `ℓ`, and *of finite type* means that the image of inertia is finite, respectively potentially
+crystalline: in both cases that `r|_{D_A}` has a Weil–Deligne representation with `N = 0`; these are names used here,
+and the literature says unramified or crystalline, and potentially unramified or potentially crystalline. For `r` of
+finite type at `A` and `s` in the Weil group at `A`, with, when `A` lies above `ℓ`, `s⁻¹` acting on the residue field
+of `A` as `x ↦ x^{ℓ^k}` for some `k ≥ 0`, `P` kills `s` exactly when `P` annihilates the operator of `s` in the
+Weil–Deligne representation, as its characteristic polynomial does; above `ℓ` the definition asks nothing at the other
+elements `s`, which every polynomial kills. When `r|_{D_A}` is de Rham, the jumps are the labelled Hodge–Tate weights,
+in the convention in which the cyclotomic character has weight `−1`, the jumps at the coefficient embedding `g` being
+the weights labelled by the embedding `g⁻¹` of the closure of `e(E)`, which is indexed by the complex embedding
+`ι⁻¹ ∘ g⁻¹ ∘ e|_E`. Of the Weil–Deligne representation only annihilating polynomials of its operators are recorded
+here.
+
 *Needs:* CrystallineRepresentationsAndKisinModules §3.1 (crystalline representations, jumps, linear Frobenius);
 IdelicReciprocityCountsAndCyclotomicClassGroups §§1.1, 1.3 (places of `Ω`; embeddings into `ℚ̄_ℓ`).
 
@@ -208,6 +267,15 @@ and `P`, `P′` matrices with `P′P = 1` and `r′(g)P = Pr(φ(g))` for `g ∈ 
 (b) if also `PP′ = 1`, `i : E → E′` satisfies `c(i(x)) = x` on `E`, and the jumps of `r′` at `c⁻¹(A)` are `J ∘ (· ∘ i)`
 (exactly, or with every member occurring), then the jumps of `r` at `A` are `J` in the same sense;
 (c) for `s ∈ S`, a polynomial that kills `s` for `r′` at `c⁻¹(A)` kills `φ(s)` for `r` at `A`.
+
+**In standard terms.** Through 10.3, `P` makes `r` (near `1`, transported along `c`) a subrepresentation of `r′`, an
+isomorphic copy when `PP′ = 1`, and (a)–(c) are the standard facts that finiteness of the image of inertia and
+potential crystallinity pass to subrepresentations and are unchanged by restriction to open subgroups and by transport
+along `c`; that labelled Hodge–Tate weights are unchanged by isomorphism and by restriction to open subgroups, the
+embeddings that index them being transported along `c` and `i`; and that the Weil–Deligne representation of a
+subrepresentation is a sub-object of the Weil–Deligne representation of the larger one, so that a polynomial
+annihilating an operator of the larger one annihilates the corresponding operator of the smaller
+(`PadicHodgeTheory §5.3` above `ℓ`).
 
 *Needs:* 1.3; CrystallineRepresentationsAndKisinModules §§3.2, 3.4, 3.6, 3.7 (restriction, jumps, subobjects, killing
 polynomials).
@@ -233,6 +301,15 @@ Let `P = (P_w)` be a system of complex polynomials indexed by the finite places 
   eigenform for a system `P` (i) has an attached `r : G_E → GL_n(ℚ̄_ℓ)`; and (ii) if `f` is spherical at `w`, every `r`
   attached to `P` is compatible with `f` in rank `N` at every place of `Ω` over `w`. When `N = n` it is written
   `SphCompat(E, n, w)`.
+
+**In standard terms.** A representation attached to `P` in the usual sense, at almost all places (10.2: trivial on
+inertia, with characteristic polynomial `ι(P_w)` at geometric Frobenius, at all but finitely many places of prime
+norm), is attached to `P` in the sense above, and when one exists the representations attached to `P` in the sense
+above are exactly its conjugates (10.2 (b)); attachment in the sense above alone does not tie the characteristic
+polynomial at a given place to `P_w` (10.2 (c)). By 10.3 (c), `r` is compatible with `f` at `A` when `r|_{D_A}` is
+unramified, or crystalline above `ℓ` with the labelled Hodge–Tate weights `J_κ`, and `ι(Q)` is the characteristic
+polynomial of geometric Frobenius on `r`, or on its Weil–Deligne representation above `ℓ`. For the eigenforms of this
+roadmap, 10.4 states these standard properties.
 
 *Needs:* 1.1, 1.2, 1.3.
 
@@ -636,7 +713,9 @@ adele `u` records the places at which this is required.
   identity contains `m`.
 - `R` is *profinite* (in the sense of the formal proof) if every sequence `(x_N)` in `R` has exactly one `L` such that for
   every `M ≠ 0` in `ℕ`, `M` divides `x_N − L` for all `N` in a set of a fixed non-principal ultrafilter on `ℕ`. The ring
-  `Ô` is profinite. This stands in for "`R` is the inverse limit of the `R/MR`", which is not used.
+  `Ô` is profinite. By 10.8 this holds exactly when every `R/MR` with `M ≥ 1` is finite and `R` is their inverse
+  limit; in the literature a profinite ring is any inverse limit of finite rings, which is wider. The route uses the
+  definition with the ultrafilter.
 - Let `R` be a commutative ring with involution `*`, `σ` an endomorphism commuting with `*`, `u ∈ R` (in use the
   idempotent of a set of places), `D ≤ R^×` and `P ∈ R[X]`. A polynomial `z ∈ R[X]` is a *norm root* for `P` (with `u`, `D`)
   if `(1 − u)z = (1 − u)`, and for every unitary `γ` with characteristic polynomial `P`: `det z(A) ∈ D` for every square
@@ -662,6 +741,16 @@ adele `u` records the places at which this is required.
   stabilising `r′⁻¹(L′)`, `r′⁻¹(L′)` open with preimage under `bc` equal to `r⁻¹(L)`, and a level `K` between `r′⁻¹(L′)` and the
   integral elements above `Z` whose cocycles split above `Z`, such that `(F_j ∘ r, F′_j ∘ r′)` match above `Z` at level `K`
   for the indices `j` in a given set.
+
+Here *weak base change* is a relation between forms on the definite unitary groups over `E` and over `E′`, and
+*matching* is the pointwise condition above; in the literature weak base change names a lift to `GL_n` compatible with
+the local base change at almost all places (`EndoscopicTransferAndUnitaryTraceComparison §6.29`), and matching an
+identity of twisted and stable orbital integrals (`EndoscopicTransferAndUnitaryTraceComparison §4.9`).
+
+**In standard terms.** Let `f` have a nonzero component in an automorphic representation whose weak base change to
+`GL_n` is an isobaric sum of cuspidal representations. An automorphic representation over `E′` whose weak base change
+to `GL_n` is the cyclic base change of that one, and which is spherical at the places not split over `E′⁺` above the
+step-unramified places where `f` is spherical, contains a weak base change of `f` in the sense above (10.6).
 
 *Needs:* AdelicUnitaryGroupsAndAlgebraicModularForms §§1.4, 3.1 (operators of functions; `G_f(n)`, levels).
 
@@ -892,6 +981,15 @@ an eigenform for `H`, a weak base change of `f` off `Z`, fixed by `L′` with `o
 `op(F′_{j₀})` of the `L′`-fixed forms. In particular (`Z = ∅`) every nonzero form over `E` has a weak base change eigenform
 off `∅`.
 
+**In standard terms.** If `f` has a nonzero component in an automorphic representation `Π` whose weak base change to
+`GL_n(𝔸_E)`, followed by cyclic base change to `GL_n(𝔸_{E′})`, is cuspidal, the existence of a weak base change
+eigenform off a finite set of places is a consequence of cyclic base change and of descent between definite unitary
+groups and `GL_n` (`EndoscopicTransferAndUnitaryTraceComparison §6.24`,
+`EndoscopicTransferAndUnitaryTraceComparison §6.29`, `PotentialAutomorphyInfrastructurePartII §3.5`), by 10.6 (b);
+that set is empty when the descent has vectors fixed by the `K_u` at the places not split over `E′⁺` above the
+step-unramified places where `f` is spherical (10.6 (a)). 5.9 has no such hypothesis and also prescribes the
+eigenvalues of matching local operators; the route proves it by the twisted trace identity of 5.8, without `GL_n`.
+
 *Needs:* 5.1, 5.4, 5.5, 5.7, 5.8; 1.1.
 
 [ShortProof], `Lib/GaloisRep/BaseChange/PrimeDegreeTransfer` (`New.isLocalMatching_empty`, `New.HasNonzeroTraceAround`, `New.IsHeckeEigenvector`, `New.localFormTranslation`, `New.isWeakBaseChange_of_forall_heckeSplit_eq_smul`, `New.exists_isWeakBaseChange_of_matching`), with the case `Z = ∅` in `Lib/GaloisRep/Main/OddRank` (`New.GaloisRep.exists_weak_baseChange`)
@@ -1108,9 +1206,21 @@ geometric Frobenius of norm `q_w` if `m = 1`) there is `x ∈ E_w^×` of valuati
 `X − ι(θ(x))` killing `s` at `A`; here `θ(x)` is the value of `θ` at the finite idele equal to `x` at `w` and `1`
 elsewhere.
 
+**In standard terms.** (d) is, in odd rank, the consequence of the standard theorem stated in 10.4 (d). By 10.3, (e)
+says that `r_θ|_{D_A}` has a Weil–Deligne representation with `N = 0`, equal to `ι∘θ_w∘Art_A^{−1}` (`θ_w` the
+restriction of `θ` to `E_w^×`), with labelled Hodge–Tate weight `−n_σ` at the embedding to which 10.3 (b) attaches the
+complex embedding `σ` (cyclotomic character of weight `−1`). This is the standard local behaviour of the `ℓ`-adic
+character of an algebraic Hecke character: `AutomorphicGaloisRepresentationsPartII` AG2.0 (The `l`-adic character
+`r_{l,ι}(χ)` of an algebraic Hecke character, its Hodge–Tate numbers and its weight) away from `ℓ` and for the
+weights, and above `ℓ` the rank-one case of AG2.6 (Full polarized local–global compatibility at `ℓ`), which local
+class field theory supplies; `r_θ` is the character of AG2.0 of the Hecke character with finite part `θ`, as both take
+the value `ι(θ(ϖ_w))` at the geometric Frobenius elements of the places away from `ℓ` where `θ` is unramified
+(IdelicReciprocityCountsAndCyclotomicClassGroups §9.1 (a)), which are dense (`ArithmeticGaloisRepresentations §5.1`).
+
 `RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §16.1` states the Galois
 representations of automorphic representations of definite unitary groups through weak base change to `GL_n`, with
-exact characteristic polynomials at every place away from `ℓ` at which the base change is unramified; 7.3 says how the
+exact characteristic polynomials at every place away from `ℓ` at which the base change is unramified; 7.3 and 10.4 say
+how the
 statements here are related to it.
 
 *Needs:* 1.4, 1.5, 1.6, 2.1, 5.1, 5.9, 6.1, 6.3; 1.2; IdelicReciprocityCountsAndCyclotomicClassGroups §§2.1, 7.5, 9.1
@@ -1202,14 +1312,28 @@ of any weight `κ` on `U(n)`, for a system `P`, has an attached `r : G_E → GL_
 attached to `P` is, at every place `A` over `w`, unramified (crystalline if `A` lies above `ℓ`), has the jumps `J_κ` in rank `n`,
 and, if `w` is split with Hecke polynomial `Q`, `ι(Q)` kills every geometric Frobenius at `A`.
 
+**In standard terms.** Let `Π` be an automorphic representation in which `f` has a nonzero component (10.4 (a)) and
+`BC(Π)` its weak base change to `GL_n(𝔸_E)`. Every `r` attached to `P` is conjugate to the representation `r_{ℓ,ι}(Π)`
+of `RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §16.1`, attached in the
+usual sense to `BC(Π)`; at every finite `w` where `f` is spherical it is unramified, with `ι(P_w(BC(Π)_w; X))` as
+characteristic polynomial of geometric Frobenius, if `w ∤ ℓ`, and crystalline with the labelled Hodge–Tate weights
+`J_κ` if `w ∣ ℓ`, with `ι(Q)` as characteristic polynomial of geometric Frobenius on its Weil–Deligne representation
+when `w` is moreover split with Hecke polynomial `Q` (10.4). These properties of `r_{ℓ,ι}(Π)` follow from the standard
+theorems: `EndoscopicTransferAndUnitaryTraceComparison §6.29` for `BC(Π)`, and, for each of its blocks,
+`AutomorphicGaloisRepresentationsPartII` AG2.3 (Arbitrary regular conjugate-self-dual existence), AG2.5 (Comparison of
+the early polynomial with normalized local Langlands) and AG2.6 (Polarized admissibility at the coefficient prime), as
+assembled in §16.1 and in 10.4; for `ℓ` odd with every place above `ℓ` split in `E`,
+`PotentialAutomorphyInfrastructurePartII §3.6` states the same representation with its properties at the split places.
+The statement above is a consequence of them through 10.2 and 10.3; the route proves the statement above without them.
+
 `RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §16.1` is the form through
 weak base change to `GL_n`: for an automorphic representation `Π` of a definite unitary group with algebraic archimedean
 component, over a CM field with `[E⁺:ℚ] ≥ 2`, it gives a continuous semisimple `r_{ℓ,ι}(Π)`, unramified with the exact
 characteristic polynomial `P_w(BC(Π)_w; X)` of Frobenius at every `w ∤ ℓ` at which `BC(Π)_w` is unramified, split or not,
 de Rham with labelled weights `{i − 1 − λ_{τ,i}}` at every `w ∣ ℓ`, and crystalline at each `w ∣ ℓ` at which `BC(Π)_w` is
 unramified. (Its `ι` is an isomorphism `ℚ̄_ℓ ≅ ℂ`, the inverse of the `ι` of this roadmap.) Here `[E⁺:ℚ] ≥ 2` holds, since
-`E` contains `ℚ(ζ_5040)`. The route does not use §16.1, and the statement above is the target; it is nevertheless a
-consequence of §16.1, as follows, up to the two comparisons named in (iv).
+`E` contains `ℚ(ζ_5040)`. The route does not use §16.1, and the statement above is the target of the route; it is also
+a consequence of §16.1, as follows, through the comparisons of 10.3 named in (iv); 10.4 states the result.
 
 (i) *From `f` to `Π`.* By `AutomorphicFormsOnReductiveGroups §7.5` (automorphic realisation of the forms with
 `F(γg) = ρ(γ)F(g)`; `π_∞ ≅ V_ℂ^∨` for irreducible coefficients), an eigenform `f` has a nonzero component in an automorphic
@@ -1232,15 +1356,18 @@ conjugate (2.1 (b)), and the local conditions of 1.3 are unchanged by conjugatio
 at a split `w` the polynomial `ι(Q)` is the characteristic polynomial of geometric Frobenius, so it kills it. For `w ∣ ℓ`:
 §16.1 gives a crystalline representation with labelled weights `{i − 1 − λ_{v,i}}` at `Φ_v` and, since
 `λ_{τ∘c} = −w₀λ_τ`, `{λ_{v,i} + n − i}` at the other embedding, which are the jumps `J_κ` in rank `n`. Reading this in the
-terms of 1.3 needs the agreement of "crystalline" and of the Hodge–Tate jumps of
-CrystallineRepresentationsAndKisinModules §3.1, defined through `B_max`, with the notions of PadicHodgeTheory §§3.3–3.5;
-that agreement is a published theorem which no roadmap states. The signs agree as they stand: in §16.1 and in 3.1 of
+terms of 1.3 is 10.3 (b): it rests on the agreement of "crystalline" and of the Hodge–Tate jumps of
+CrystallineRepresentationsAndKisinModules §3.1, defined through `B_max`, with the notions of PadicHodgeTheory §§3.3–3.5,
+which is CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory). The signs agree as
+they stand: in §16.1 and in 3.1 of
 that roadmap the cyclotomic character has weight, respectively jump, `−1` (in PadicHodgeTheory it has weight `+1`, so
 a jump `u` is a weight `−u` there). The last clause at a split `w ∣ ℓ` (that `ι(Q)` kills the
 linearised Frobenius on the periods) is not in §16.1: it follows from §15.1 of that roadmap applied to each block
 `π_i ⊗ |det|^{s_{ij}}`, whose parameter at `w` is a sum of unramified characters with `N = 0`, which gives
-`WD(D_pst)^{F-ss} ≅ ι⁻¹rec^T` on all of `W_{E_w}`; reading it in the terms of 1.3 needs the comparison of the linearised
-Frobenius of CrystallineRepresentationsAndKisinModules §3.1 with the Frobenius of `WD(D_pst)`, again stated in no roadmap.
+`WD(D_pst)^{F-ss} ≅ ι⁻¹rec^T` on all of `W_{E_w}`; reading it in the terms of 1.3 is again 10.3 (b), through the
+comparison of the linearised
+Frobenius of CrystallineRepresentationsAndKisinModules §3.1 with the Frobenius of `WD(D_pst)` in
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory).
 
 *Needs:* 6.4, 7.1, 7.2; 1.6; IdelicReciprocityCountsAndCyclotomicClassGroups §§8.5, 9.1 (unramified `θ_{k,j}(μ)`;
 `ℓ`-adic avatars).
@@ -1275,6 +1402,10 @@ of the system exists.
 At a split place, level information on the form gives polynomials that kill Frobenius and inertia elements on every
 attached representation. Pro-`p` Iwahori eigencharacters are treated by base change to the spherical case; depth-zero types
 given by labels by base changes in which the place is inert, until the label splits into linear factors.
+
+Here *local–global compatibility* names these statements; in the literature it names the isomorphism
+`WD(r|_{G_{E_w}})^{F-ss} ≅ ι∘rec(Π_w ⊗ |det|^{(1−n)/2})` of Weil–Deligne representations, from which they follow once
+the parameter of `Π_w` is known from the level data of the form (10.5).
 
 ### 8.1 The local action at a split place, parahoric types and labels
 
@@ -1326,6 +1457,15 @@ Suppose `f` is a pro-`p` Iwahori eigenvector at `w` (through `ι_w`) for the tor
 be attached to `P`, `A` a place over `w`, `s ∈ D_A` with `s⁻¹` acting on the residue field of `A` as `x ↦ x^{q_w^k}`, and
 `x ∈ E_w^×` of valuation `k` whose local Artin symbol at `A` is `s`. Then
 (a) `r` is of finite type at `A`, (b) `r` has the jumps `J_κ` at `A`, and (c) `Π_i (X − ι(ξ_i(x)))` kills `s` at `A`.
+
+**In standard terms.** Let `Π` be an automorphic representation in which `f` has a nonzero component (10.4 (a)) and
+`Π_w` its component at `w`, read on `GL_n(E_w)` through `ι_w`; it has an Iwahori eigenvector for the same character,
+so `rec(Π_w ⊗ |det|^{(1−n)/2}) ≅ ⊕_i ξ_i∘Art_{E_w}^{−1}`, with `N = 0` (10.5 (c)). The standard local–global
+compatibility at `w`, `WD(r|_{D_A})^{F-ss} ≅ ι∘rec(Π_w ⊗ |det|^{(1−n)/2})` for every `r` attached to `P` (10.5 (a):
+`AutomorphicGaloisRepresentationsPartII` AG2.5 (Caraiani’s full away-prime compatibility) away from `ℓ`,
+`RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §15.1` above `ℓ`), has
+(a)–(c) as consequences (10.5 (b)): finite type is `N = 0`, the jumps are the labelled Hodge–Tate weights, and
+`Π_i (X − ι(ξ_i(x)))` is the characteristic polynomial of the operator of `s`.
 
 For regular algebraic polarized cuspidal representations of `GL_n` over a CM field,
 `RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §14.1` is the comparison of
@@ -1392,6 +1532,16 @@ Let `E` be a CM field with Weil data, `f` a form of weight `κ` on `U(n)` (`n �
 `Π_x (X − ι(T^a(x)))`, over the roots `x` (with multiplicity) of `c·Π_l (X − x_{χ_l})^{t_l}` in the algebraic closure of `k_w`,
 kills `s` at `A`.
 
+**In standard terms.** Let `Π` be an automorphic representation in which the vector `Σ_x conj(Ξ(x))·ι_w(x̃)f` of 1.1,
+`Ξ` the label, has a nonzero component (as in 10.4 (a)). (b) is the labelled Hodge–Tate weights of 10.4 (c) (10.5
+(b)). (a) and (c) are consequences of the standard local–global compatibility
+`WD(r|_{D_A})^{F-ss} ≅ ι∘rec(Π_w ⊗ |det|^{(1−n)/2})` at `w` (10.5 (a), (b)) and of the following description of the
+parameter `rec(Π_w ⊗ |det|^{(1−n)/2})`: it has `N = 0`, its irreducible constituents are induced from characters of
+the Weil groups of unramified extensions of `E_w`, and its characteristic polynomial at every `s` of tame exponent `a`
+at level `d!` is `Π_x (X − T^a(x))`. When `c` is a product of linear factors over `k_w`, this description follows from
+the form of `Π_w` at Iwahori level, and (a)–(c) are consequences of the standard comparison (10.5 (c), (d)); for
+general `c` the route proves (a)–(c) through the base changes of 5.11, which make the polynomial of the label split.
+
 `RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §14.2` is the depth-zero
 comparison away from `ℓ` for regular algebraic polarized cuspidal representations of `GL_n` over a CM field, at a place
 of depth zero up to twist where the supercuspidal support is pairwise unlinked, with `N = 0` and the isomorphism class
@@ -1420,7 +1570,11 @@ double cosets; a weight on the orbits of `Δ`, equal to `c` divided by the order
 conjugates under `Δ` add up to `c`; the Hecke algebra is closed because integrality is a closed condition.
 
 Let `E` be a CM field, `V` the standard definite space of rank `n`, `κ` a weight and `m ∈ ℕ` (in use `m = ℓ^ν`).
-*Taylor–Wiles places* are Frobenius data at places `w_j` (`j ∈ J` finite), no two equal or conjugate, with `m | q_{w_j} − 1`. *Base data* are a finite set `S₀` of
+*Taylor–Wiles places* are Frobenius data at places `w_j` (`j ∈ J` finite), no two equal or conjugate, with
+`m | q_{w_j} − 1`. In the literature a Taylor–Wiles datum also fixes, at each of its places, an eigenvalue of
+Frobenius on a residual representation (`PotentialAutomorphyInfrastructurePartII §4.1`); the chosen places of such a
+datum of level `N`, when of prime norm, give Taylor–Wiles places here with `m = ℓ^N`. *Base data* are a finite set
+`S₀` of
 places, a space of forms of weight `κ` of a fixed type at `S₀` (kept by every operator commuting with the maximal level at
 `S₀ ∪ S̄₀`, and acted on by an open subgroup through a character of its components there), and an integer `c` divisible by
 `|U(n)(E) ∩ gK₀g⁻¹|` for all `g`. The forms of *base level* are those of the space fixed by `K₀` acting through its
@@ -1446,7 +1600,10 @@ by the operators `T_w^j` on them; its §3.4 gives freeness over the group ring o
 has an element of order `ℓ`, and its §4.1 Taylor–Wiles data for a residual representation with a chosen eigenspace of
 Frobenius. The objects here are different: the forms are complex with an integrality condition through `ι`, the Hecke
 algebra consists of the functions on eigensystems whose action keeps the integral forms, the places carry no residual
-condition, and (b) holds with no hypothesis on the stabilisers.
+condition, and (b) holds with no hypothesis on the stabilisers. If the integral forms were free over the group ring of
+`Δ` (as §3.4 there gives in its setting, for abelian `ℓ`-groups, when no stabiliser has an element of order `ℓ`), the
+projection onto the coefficient of `1` for a basis would have conjugates under `Δ` adding up to the identity, which is
+(b) with `1` in place of `c`; (b) is the form of this that holds for every `Δ`.
 
 *Needs:* 1.2, 7.4, 8.1; AdelicUnitaryGroupsAndAlgebraicModularForms §§1.4, 3.9 (class sums, stabilisers; congruence
 levels); IntegralRepresentationsOfGeneralLinearGroups §6.1 (pro-`p` Iwahori operators `U_t`).
@@ -1458,8 +1615,9 @@ levels); IntegralRepresentationsOfGeneralLinearGroups §6.1 (pro-`p` Iwahori ope
 *Origin:* definitions and conventions.
 
 *Method of the formal proof:* Selmer conditions are linear relations on functions on the Galois group; the modules are
-modules of cocycles, not of classes. They stand in for Selmer groups of classes in Galois cohomology with local
-conditions; no comparison is used.
+modules of cocycles, not of classes. A *Selmer module* here is such a module of cocycles, while in the literature a
+Selmer group is a group of classes in Galois cohomology with local conditions (`SelmerIwasawaCohomology §2.9`); 10.7
+relates the two, and the route uses only the modules of cocycles.
 
 Let `O` be a commutative ring, `ρ : G_E → M_n(O)`, `B` an `O`-module, `S` a set of finite places and `L` a set of relations
 (finitely supported functions `G_E → M_n(O)`; a function `c : G_E → Bⁿ` *obeys* `R` if `Σ_g R(g)c(g) = 0`).
@@ -1476,6 +1634,14 @@ Let `O` be a commutative ring, `ρ : G_E → M_n(O)`, `B` an `O`-module, `S` a s
 - A Galois character `χ` *comes from* `U(1)` (for sets `S`, `I` of places) if it is locally constant and `χ(Art x) = η(x/x̄)`
   for a character `η` of the finite ideles, trivial on `E^×` and on the ideles that are units off `S ∪ S̄` and congruent to `1`
   at the places of `I` off `S ∪ S̄`.
+
+**In standard terms.** Let `ρ` take values in `GL_n(O)`, act continuously on the discrete `Bⁿ` and trivially on it
+through the inertia groups above the places not in `S`, and let the relations of `L` be those that hold on given
+modules `ℒ_v` of local cocycles containing the coboundaries, at finitely many places `v`. Then the Selmer module
+contains the cocycles of the Selmer group of classes with the local conditions `ℒ_v/B¹` and unramified outside `S`,
+and is contained in those of the Selmer group whose local conditions are cut out by the relations; it is the full
+preimage of the first when each `ℒ_v` is cut out by its relations, and in all cases its length bounds the length of
+the first (10.7).
 
 *Needs:* IdelicReciprocityCountsAndCyclotomicClassGroups §§1.1, 2.2 (places, inertia, cyclotomic character; Artin map).
 
@@ -1499,9 +1665,439 @@ injective `f : O/a → B` onto the `a`-torsion of `B`, composition with `f` maps
 of the `a`-torsion of the Selmer module with coefficients `Frac(O)/O`, and so at most its length, the *divisible Selmer
 length*.
 
+**In standard terms.** For relations cut out by local conditions as in 10.7, vanishing on the coboundaries, the
+corresponding map on Selmer groups of classes, `H¹_ℒ(G_E, (O/a)ⁿ) → H¹_ℒ(G_E, (Frac(O)/O)ⁿ)[a]`, is onto, with kernel
+the image of the invariants `((Frac(O)/O)ⁿ)^{G_E}` (10.7 (d)); on modules of cocycles no coboundaries are divided out,
+and the map is bijective.
+
 *Needs:* 9.2.
 
 [ShortProof], `Lib/GaloisRep/Main/DivisibleSelmerModules` (`New.Selmer.range_selmerModuleMapOfInjective`, `New.Selmer.length_torsionBy_selmerModule_divisibleQuot`, `New.Selmer.length_selmerModule_le_divisibleQuot`, `New.Selmer.divisibleSelmerLength`, `New.Selmer.length_le_divisibleSelmerLength`)
+
+## Layer 10: Comparison with the standard theory
+
+The standard theory is the reference for the objects of this roadmap: semisimple representations; Galois
+representations attached at almost all places; unramified, crystalline and potentially crystalline representations,
+with their labelled Hodge–Tate weights and Weil–Deligne representations; base change through `GL_n`; Selmer groups of
+cohomology classes. This layer states how each object of the route is related to its standard counterpart, by an
+identification or by the implication that holds, and states the results of Layers 5 and 7–9 on the standard objects.
+The standard theorems are those of AutomorphicGaloisRepresentationsPartII, EndoscopicTransferAndUnitaryTraceComparison
+and PotentialAutomorphyInfrastructurePartII, assembled for definite unitary groups in
+`RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §§14.1, 15.1, 16.1`; the
+`p`-adic notions of CrystallineRepresentationsAndKisinModules are compared with Fontaine's in
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory). The route does not use this
+layer.
+
+### 10.1 Semisimplicity and the non-degenerate trace form
+
+*Origin:* comparison of the definition of semisimplicity in the Conventions with the usual one; not part of the formal
+proof.
+
+*Route:* (a) an element `x` of the Jacobson radical of `A` makes every `xa`, `a ∈ A`, nilpotent, so `tr(xa) = 0` and
+`x = 0`; a finite-dimensional algebra with zero radical is semisimple, and so is every module over it. (b) the radical
+of `A` acts by zero on every simple module, so a faithful semisimple module makes `A` semisimple; in characteristic
+`0` it stays semisimple after extension of scalars to an algebraic closure `k̄`, where `A ⊗ k̄ ≅ Π_i M_{d_i}(k̄)` acts
+on `k̄ⁿ ≅ ⊕_i (k̄^{d_i})^{m_i}` with every `m_i ≥ 1`, so that `tr(xy) = Σ_i m_i·tr(x_iy_i)`; this form is
+non-degenerate, because the trace form of a matrix algebra is and every `m_i` is invertible in `k̄`, and
+non-degeneracy over `k̄` gives it over `k` (the Gram determinant on a basis of `A`). (c) is a computation.
+
+Let `k` be a field, `G` a group, `r : G → GL_n(k)` a homomorphism and `A ⊆ M_n(k)` the `k`-span of `r(G)`, a subalgebra.
+(a) If `r` is semisimple in the sense of the Conventions (the trace form `(x, y) ↦ tr(xy)` is non-degenerate on `A`),
+then `A` is a semisimple algebra and `kⁿ` is a semisimple representation of `G`, a direct sum of irreducible
+subrepresentations (Mathlib's `IsSemisimpleModule` over the group algebra), in every characteristic.
+(b) If `k` has characteristic `0`, the converse holds: `r` is semisimple in the sense of the Conventions exactly when
+`kⁿ` is a semisimple representation of `G`.
+(c) In characteristic `p > 0` the converse fails: the trivial representation of rank `p` is semisimple, while `A = k`
+and `tr(1) = p = 0`.
+
+*Needs:* none.
+
+### 10.2 Attached representations and attachment at almost all places
+
+*Origin:* comparison of the attachment of 1.5 with the usual one, the property `IsAttached` of
+`AutomorphicGaloisRepresentationsPartII` AG2.0 (A Galois representation attached to `π` at the good places, and its
+functoriality under twist, dual, conjugation and base change); not part of the formal proof.
+
+*Route:* (a) for `w` outside the exceptional set, every Frobenius datum `(w, A, s)` satisfies the bound of 1.5 for
+every `η`, so the condition of 1.2 holds with `O = V`. (b) a representation attached to `P` in the sense of 1.5 has
+the traces of `r₀` (1.6 (b), with (a)); both are semisimple in the sense of the Conventions (10.1 (b) for `r₀`), so
+they are conjugate (2.1 (b)); conversely the conditions of (a) and of 1.5 are unchanged by conjugation. (c) every
+Frobenius datum at `w_k` has `s ∈ H_k = Gal(Ω/E(μ_{ℓ^k}))`; the `H_k` decrease to a closed subgroup of infinite index,
+which has empty interior, so a nonempty open `V` is contained in no `H_K` for `K` large, and then `O = V ∖ H_K` is a
+nonempty open set that meets no Frobenius datum at `w_k` for `k ≥ K`, which is the condition of 1.2 for the stated
+sets. With 1.2 (a), the sets of data at which the bound of 1.5 holds for `P` and for `P′`, which agree off the `w_k`,
+contain most Frobenii together.
+
+Let `E ⊂ Ω` be a number field, `P = (P_w)` a system of complex polynomials indexed by the finite places, and `ℓ`, `ι`
+as in the Conventions. A continuous `r₀ : G_E → GL_n(ℚ̄_ℓ)`, semisimple in the usual sense, is *attached to `P` at
+almost all places* if, for all but finitely many finite places `w` of prime norm, `r₀` is trivial on `I_A` and
+`det(X − r₀(s)) = ι(P_w)` for every place `A` over `w` and every geometric Frobenius `s` at `A` of norm `q_w`. When
+`P_w` is, for all but finitely many `w`, the polynomial `P_w(π_w; X)` of a regular algebraic cuspidal representation
+`π` of `GL_n(𝔸_E)`, the property `IsAttached` of `AutomorphicGaloisRepresentationsPartII` AG2.0, for the isomorphism
+`ι⁻¹ : ℚ̄_ℓ ≅ ℂ`, implies attachment at almost all places; it asks the identity at every finite place outside a finite
+set, of prime norm or not.
+(a) A representation attached to `P` at almost all places is attached to `P` in the sense of 1.5, with `O = V` for
+every `V` in 1.2 and equality in place of the bound by `η`.
+(b) If some `r₀` is attached to `P` at almost all places, a representation `r : G_E → GL_n(ℚ̄_ℓ)` is attached to `P`
+in the sense of 1.5 exactly when `r(g) = Q·r₀(g)·Q⁻¹` for some `Q ∈ GL_n(ℚ̄_ℓ)` and all `g`; every such `r` is then
+attached to `P` at almost all places, with the exceptional places of `r₀`.
+(c) Attachment in the sense of 1.5 alone does not tie the characteristic polynomial at a given place to `P_w`. Let
+`w_1, w_2, …` be distinct places of prime norm with `w_k` split completely in `E(μ_{ℓ^k})`; such a sequence exists, by
+the existence form of Chebotarev's theorem cited in 1.2 applied to the trivial class of `E(μ_{ℓ^k})/E`. Every set of
+Frobenius data that contains all data at the places other than the `w_k` contains most Frobenii, so a system `P′` that
+differs from `P` only at the `w_k` has the same attached representations, in the sense of 1.5, as `P`.
+
+*Needs:* 1.2, 1.5, 1.6, 2.1, 10.1; `AutomorphicGaloisRepresentationsPartII` AG2.0 (A Galois representation attached to
+`π` at the good places, and its functoriality under twist, dual, conjugation and base change).
+
+### 10.3 The local conditions of 1.3 and the standard local conditions
+
+*Origin:* comparison of the local conditions of 1.3 with unramified, crystalline and potentially crystalline
+representations, labelled Hodge–Tate weights and Weil–Deligne representations; not part of the formal proof.
+
+*Route:* (a) By Grothendieck's monodromy theorem (`ArithmeticGaloisRepresentations §2.4`, applied to a model of
+`r|_{D_A}` over a finite extension of `ℚ_ℓ`, 2.2 (a)), `r` agrees on an open subgroup of `I_A` with `exp(t_ℓ(·)N_A)`,
+so `r(I_A)` is finite exactly when `N_A = 0`. The kernels of the powers of `N_A` are stable under `ρ_A(W_A)`, and on
+their successive quotients `r(s)` and `ρ_A(s)` agree, so they have the same characteristic polynomial, which kills
+both (Cayley–Hamilton). (b) `r_A` is continuous on a compact group, so it has a model `V_C` over a finite extension
+`C` of `ℚ_ℓ` (2.2 (a)), and `ℚ̄_ℓⁿ` is the union of the `V_{C′} = V_C ⊗_C C′` over the finite extensions `C′ ⊇ C` in
+`ℚ̄_ℓ`, each a direct sum of copies of `V_C` as a representation over `ℚ_ℓ`. A period of `ℚ̄_ℓⁿ` fixed by a subgroup
+lies in some `B_max ⊗ V_{C′}`, and finitely many fixed periods spanning the image of a basis of `V_C` lie in one of
+them; so `ℚ̄_ℓⁿ` is crystalline, or potentially crystalline, in the sense of CrystallineRepresentationsAndKisinModules
+§3.1 exactly when `V_C` is, its periods fixed near `1` are the union of those of the `V_{C′}`, and its linearised
+Frobenius restricts to theirs. To the `V_{C′}`, read through `j` (§7.2 (d) there),
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory) applies: by its §7.2 (b), (c)
+crystalline and potentially crystalline in the sense of its 3.1 are Fontaine's notions, by its §7.4 (b), (c) its
+linearised Frobenius of `(s, k)` is the operator of `s` of Fontaine's recipe extended linearly to the periods, and by
+its §7.3 (b), (c) its jumps at a coefficient embedding are labelled Hodge–Tate weights. A de Rham representation is
+potentially semistable, and it is potentially crystalline exactly when `N = 0` (`PadicHodgeTheory §5.3`). For the
+labels: a `g`-semilinear map as in 1.3, composed with `g⁻¹`, is linear for the coefficients, and the coefficients in
+`K` act on its target through `g⁻¹|_K`. Two local data at `A` differ by conjugation by an element of `Gal(ℚ̄_ℓ/ℚ_ℓ)`:
+their embeddings differ by an automorphism of the algebraic numbers in `ℚ̄_ℓ` that preserves the valuation, which
+extends by continuity, the algebraic numbers being dense in `ℚ̄_ℓ` (`ℚ̄_ℓ` is generated over `ℚ_ℓ` by the algebraic
+numbers, `ArithmeticGaloisRepresentations §2.1`); all these notions are invariant under such a conjugation. (c)
+follows from (a) and (b).
+
+Let `r : G_E → GL_n(ℚ̄_ℓ)` be continuous, `A` a place of `Ω` over a finite place `w`, and `W_A ⊆ D_A` the elements
+acting on the residue field of `A` by an integral power of `x ↦ x^{q_w}`. If `A` does not lie above `ℓ`, `(ρ_A, N_A)`
+is the Weil–Deligne representation of `r|_{D_A}` (`ArithmeticGaloisRepresentations §2.4`):
+`r(σ) = ρ_A(σ)·exp(t_ℓ(σ)N_A)` for `σ ∈ W_A`, `t_ℓ` extended to `W_A` by a choice of Frobenius lift. If `A` lies above
+`ℓ`, `(e, j)` is a local datum at `A` (1.3), `K ⊆ ℚ̄_ℓ` the closure of `e(E)` and `r_A = r ∘ j⁻¹ : G_K → GL_n(ℚ̄_ℓ)`;
+when `r_A` is potentially semistable, `WD(r_A)` is its Weil–Deligne representation, `σ ∈ W_K` acting on `D_pst(r_A)`
+by `σ̄∘φ^{−α(σ)}` (`PadicHodgeTheory §5.3`); `D_pst(r_A)` is free of rank `n` over `K_0^nr ⊗_{ℚ_ℓ} ℚ̄_ℓ`, these
+operators are linear over that ring, and their characteristic polynomials have coefficients in `ℚ̄_ℓ`: for a finite
+Galois extension `L ⊂ ℚ̄_ℓ` of `K` over which `r_A` is semistable, with maximal unramified subfield `L_0`, they are
+the characteristic polynomials of the same operators on the component of `D_st,L(r_A)` cut out by any one embedding
+`L_0 → ℚ̄_ℓ`, a `ℚ̄_ℓ`-space of dimension `n` (the component of `PadicHodgeTheory §5.3`), the Frobenius `φ` commuting
+with these operators and permuting the components transitively.
+(a) *Away from `ℓ`.* `r` is good at `A` exactly when `r|_{D_A}` is unramified, and of finite type at `A` exactly when
+`r(I_A)` is finite, that is, when `N_A = 0`. For `s ∈ W_A`, `r(s)` and `ρ_A(s)` have the same characteristic
+polynomial, which therefore kills `s` at `A`; when `N_A = 0`, `r(s) = ρ_A(s)`, and `P` kills `s` at `A` exactly when
+`P(ρ_A(s)) = 0`.
+(b) *Above `ℓ`.* Each of the following holds for one local datum at `A` exactly when it holds for every one. `r` is
+good at `A` exactly when `r_A` is crystalline, and of finite type at `A` exactly when `r_A` is potentially
+crystalline, that is, de Rham with `N = 0` in `WD(r_A)`. If `r_A` is potentially crystalline and `s ∈ D_A` is such
+that `(j(s), k)` is a Weil pair for some `k ≥ 0`, the linearised Frobenius of `(s, k)` is the `B_max`-linear extension
+of the operator of `j(s)` in `WD(r_A)`, so `P` kills `s` at `A` exactly when `P` annihilates that operator; in
+particular its characteristic polynomial kills `s`. If `r_A` is de Rham, `r` has the jumps `J` at `A` exactly when,
+for every `g ∈ Gal(ℚ̄_ℓ/ℚ_ℓ)`, the labelled Hodge–Tate weights of `r_A` at the embedding `g⁻¹|_K : K → ℚ̄_ℓ`, in the
+convention in which the cyclotomic character has weight `−1`, form the multiset `J(σ)`, where
+`σ = ι⁻¹ ∘ g⁻¹ ∘ e|_E : E → ℂ` is the *complex embedding attached* to `g⁻¹|_K`.
+(c) *Spherical places.* If at a place `A` over `w` the restriction `r|_{D_A}` is unramified (`A` not above `ℓ`), or
+`r_A` is crystalline with labelled Hodge–Tate weights given by `J` as in (b) (`A` above `ℓ`), and `P` is the
+characteristic polynomial of `r(s)`, respectively of the operator of `j(s)` in `WD(r_A)`, for every geometric
+Frobenius `s` at `A` of norm `q_w`, then `r` is good at `A`, has the jumps `J` at `A`, and `P` kills every such `s`.
+If this holds at every place over `w`, `r` is spherical above `w` with polynomial `P` and the jumps `J`. For `J = J_κ`
+in rank `N` and, at a split `w`, `P = ι(Q)` with `Q` the Hecke polynomial of `f`, the hypothesis at `A` gives the
+compatibility of `r` with `f` at `A` in rank `N` (1.5).
+(d) The conditions of 1.3 record less than the standard objects: of the Weil–Deligne representation they keep only
+polynomials that annihilate its operators, and of finite type asks `N = 0` without recording `N`; a polynomial that
+kills an element need not be the characteristic polynomial of its operator.
+
+*Needs:* 1.3, 2.2; CrystallineRepresentationsAndKisinModules §§7.2, 7.3, 7.4 (crystalline representations; Hodge–Tate
+jumps; the linear Frobenius and the Weil–Deligne representation) of its Layer 7 (Comparison with the standard theory);
+`ArithmeticGaloisRepresentations §2.1` (Decomposition groups); `ArithmeticGaloisRepresentations §2.4` (Arithmetic
+Weil–Deligne adapter); `PadicHodgeTheory §5.3` (Potentially semistable periods and Fontaine's recipe).
+
+### 10.4 The representation attached to an eigenform is the one attached to its base change to `GL_n`
+
+*Origin:* the standard theorem from which 7.3 is adapted (7.3, *Origin*), in its form for definite unitary groups
+through weak base change to `GL_n`; not part of the formal proof.
+
+*Route:* (a) is 7.3 (i). (b) `BC(Π)` and its blocks are given by `EndoscopicTransferAndUnitaryTraceComparison §6.29`
+(`[E⁺:ℚ] ≥ 2`, as `E` contains `ℚ(ζ_5040)`), and `r_{ℓ,ι}(Π)` by
+`RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §16.1`, from
+`AutomorphicGaloisRepresentationsPartII` AG2.3 (Arbitrary regular conjugate-self-dual existence) and AG2.2 (Twisting
+an essentially self-dual form into unitary type) for each block; for `ℓ` odd with every place above `ℓ` split in `E`
+it is also the representation of `PotentialAutomorphyInfrastructurePartII §3.6`, as §16.1 notes. At all but finitely
+many places `w` of prime norm, `w` is split and `f` has Hecke polynomial `P_w` at `w`, and the Satake computation of
+7.3 (ii) gives `P_w(BC(Π)_w; X) = P_w`; so §16.1 gives attachment at almost all places, and 10.2 (b) the rest. (c)
+Away from `ℓ`: §16.1, with `BC(Π)_w` unramified wherever `Π` has a vector fixed by `K_w` (the local matching at split
+and at unramified places of §6.29; `K_w` is hyperspecial at the places not split, `E/E⁺` being unramified), and 7.3
+(ii) at a split `w`. Above `ℓ`: §16.1 gives crystallinity and the labelled weights, which are `J_κ` by the computation
+of 7.3 (iv) (`AutomorphicGaloisRepresentationsPartII` AG2.0 (The Hodge–Tate multiset attached to a weight:
+`HT_τ = {a_{ιτ,1} + n − 1, …, a_{ιτ,n}}`) for the weight `a_σ = −w₀λ_σ` of `BC(Π)`), read through 10.3 (b). At a split
+`w ∣ ℓ`, `BC(Π)_w`, which is `Π_w` read through `ι_w`, is unramified, so its parameter is unramified with `N = 0`
+(`AutomorphicGaloisRepresentationsPartII` AG2.5 (Comparison of the early polynomial with normalized local Langlands)).
+The `π_{i,w}` are tempered (AG2.5 (Temperedness of regular unitary-type cuspidal forms), applied to the conjugate
+self-dual twist of AG2.2, which differs from `π_i` by a unitary character), so `BC(Π)_w` is the Langlands quotient of
+the `π_{i,w} ⊗ |det|^{(d_i−1)/2−j}` (`AutomorphicSpectralTheory §4.14a`, `AutomorphicSpectralTheory §7.0b`,
+`AutomorphicLFunctionsAndLocalFactors §AL.R.4`) and its parameter is the sum of theirs
+(`EndoscopicTransferAndUnitaryTraceComparison §10.26`, `EndoscopicTransferAndUnitaryTraceComparison §10.30`). Hence
+each `rec(π_{i,w})` is unramified with `N = 0`, and `π_{i,w}`, having the parameter of the spherical representation
+with the same Frobenius eigenvalues, is that representation (`rec` is injective on isomorphism classes, §10.26). So
+every block `π_i ⊗ |det|^{s_{ij}}` of §16.1 is regular algebraic, polarized, cuspidal and unramified at `w`, and
+`AutomorphicGaloisRepresentationsPartII` AG2.6 (Polarized admissibility at the coefficient prime), in its Iwahori
+case, and AG2.5 (Comparison of the early polynomial with normalized local Langlands) make its Weil–Deligne
+representation at `w` unramified, with Frobenius polynomial the factor of `P_w(BC(Π)_w; X)` contributed by the block
+(as computed in §16.1); the product of these factors is `ι(Q)`. (d) 10.3 (c), with (b) and (c).
+
+Let `E` be a CM field containing a primitive `5040`-th root of unity, `n ≥ 1`, `κ = (λ_v)` a weight and `f` an
+eigenform of weight `κ` on `U(n)` for a system `P`.
+(a) There is an automorphic representation `Π` of the unitary group of the standard definite hermitian space over
+`E/E⁺` in which `f` has a nonzero component. In the sense of
+`RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §16.1`, `Π` has weight
+`λ_v` at `Φ_v` and `−w₀λ_v` at the other embedding over `v`; at every finite `w` where `f` is spherical it has a
+vector fixed by `K_w`, with the eigenvalues of `f` under the `T_{w,j}` when `w` is split.
+(b) Let `BC(Π) = ⊞_i Speh(π_i, d_i)` be the weak base change of `Π` to `GL_n(𝔸_E)`
+(`EndoscopicTransferAndUnitaryTraceComparison §6.29`) and `r_{ℓ,ι}(Π) = ⊕_{i,j} r_{ℓ,ι}(π_i ⊗ |det|^{s_{ij}})` the
+continuous semisimple representation of §16.1 for the isomorphism `ι⁻¹ : ℚ̄_ℓ ≅ ℂ` (the `ι` of §16.1 and of
+`AutomorphicGaloisRepresentationsPartII` is an isomorphism `ℚ̄_ℓ ≅ ℂ`, the inverse of the `ι` of this roadmap, so that
+`ι⁻¹rec^T` there is `ι∘rec^T` here). It is attached to `P` at almost all places (10.2), so the representations
+attached to `P` in the sense of 1.5 are exactly its conjugates.
+(c) Let `r` be attached to `P`, `w` a finite place at which `f` is spherical and `A` a place over `w`. If `w ∤ ℓ`, `r`
+is unramified at `A` and `det(X − r(s)) = ι(P_w(BC(Π)_w; X))` for every geometric Frobenius `s` at `A` of norm `q_w`;
+if `w` is split and `f` has Hecke polynomial `Q` at `w`, this is `ι(Q)`. If `w ∣ ℓ`, `r_A` (10.3) is crystalline, with
+labelled Hodge–Tate weights at `g⁻¹|_K` (`g ∈ Gal(ℚ̄_ℓ/ℚ_ℓ)`), in the convention in which the cyclotomic character has
+weight `−1`, the multiset `J_κ(ι⁻¹ ∘ g⁻¹ ∘ e|_E)` in rank `n`: `{i − 1 − λ_{v,i}}` when the attached complex embedding
+(10.3 (b)) is `Φ_v`, and `{λ_{v,i} + n − i}` when it is the other embedding over `v`. If moreover `w` is split and `f`
+has Hecke polynomial `Q` at `w`, the operator of `j(s)` in `WD(r_A)` has characteristic polynomial `ι(Q)` for every
+geometric Frobenius `s` at `A` of norm `q_w`.
+(d) By 10.3 (c), (c) says that every `r` attached to `P` is compatible with `f` in rank `n` at every place over every
+`w` at which `f` is spherical; with (b), (a)–(c) give `SphCompat(E, n, w)` for every finite `w`, which for `E` with
+Weil data is the statement of 7.3. `SphCompat` alone does not give (c): a polynomial that kills an operator need not
+be its characteristic polynomial, and (c) comes from (b).
+
+*Needs:* 1.1, 1.5, 7.3, 10.2, 10.3; `AutomorphicFormsOnReductiveGroups §7.5` (Finite stabilizers, base change and
+automorphic realization); `EndoscopicTransferAndUnitaryTraceComparison §6.29` (Public cohomological unitary weak base
+change and descent);
+`RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §16.1` (Galois
+representations of definite unitary groups); `AutomorphicGaloisRepresentationsPartII` AG2.0 (The Hodge–Tate multiset
+attached to a weight: `HT_τ = {a_{ιτ,1} + n − 1, …, a_{ιτ,n}}`), AG2.2 (Twisting an essentially self-dual form into
+unitary type), AG2.3 (Arbitrary regular conjugate-self-dual existence), AG2.5 (Comparison of the early polynomial with
+normalized local Langlands), AG2.5 (Temperedness of regular unitary-type cuspidal forms), AG2.6 (Polarized
+admissibility at the coefficient prime); `AutomorphicSpectralTheory §4.14a` (Number-field `GLₙ` residual blocks);
+`AutomorphicSpectralTheory §7.0b` (Local matching and twisted character transfer);
+`AutomorphicLFunctionsAndLocalFactors §AL.R.4` (`GLₙ` isobaric sums);
+`EndoscopicTransferAndUnitaryTraceComparison §10.26` (The trace-defined Weil–Deligne parameter);
+`EndoscopicTransferAndUnitaryTraceComparison §10.30` (Identification with the classical correspondence);
+`PotentialAutomorphyInfrastructurePartII §3.6` (Galois representations attached to constituents of algebraic modular
+forms).
+
+### 10.5 Local–global compatibility at split places and the clauses of Layer 8
+
+*Origin:* the standard local–global compatibility at split places from which 8.2 and 8.4 are adapted (8.2, *Origin*),
+for definite unitary groups through weak base change to `GL_n`; not part of the formal proof.
+
+*Route:* (a) By 10.4 (b), `r` is conjugate to `r_{ℓ,ι}(Π)`, the sum of the `r_{ℓ,ι}(π_i ⊗ |det|^{s_{ij}})` over the
+blocks of `RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §16.1`, each
+regular algebraic, polarized and cuspidal. Away from `ℓ`, §14.1 of the same roadmap
+(`AutomorphicGaloisRepresentationsPartII` AG2.5 (Caraiani’s full away-prime compatibility), after the twist of AG2.2
+(Twisting an essentially self-dual form into unitary type)) gives the Weil–Deligne representation of each block at `w`
+as `ι∘rec^T` of its component. At the split `w`, `BC(Π)_w = Π_w`
+(`EndoscopicTransferAndUnitaryTraceComparison §6.29`), and the parameter of the component at `w` of the isobaric sum
+of Speh representations `BC(Π)` is the sum, over the blocks, of these parameters, with the twists `s_{ij}` of §16.1:
+the `π_{i,w}` are tempered (`AutomorphicGaloisRepresentationsPartII` AG2.5 (Temperedness of regular unitary-type
+cuspidal forms), applied to the conjugate self-dual twist of AG2.2, which differs from `π_i` by a unitary character),
+the component at `w` of `Speh(π_i, d_i)` is the Langlands quotient of the segment of twists
+`π_{i,w} ⊗ |det|^{(d_i−1)/2−j}`, `0 ≤ j < d_i` (`AutomorphicSpectralTheory §4.14a`,
+`AutomorphicSpectralTheory §7.0b`), the component of the isobaric sum is the Langlands quotient of all these twists
+together (`AutomorphicLFunctionsAndLocalFactors §AL.R.4`), and the parameter of a Langlands quotient is the sum of the
+parameters of its data (`EndoscopicTransferAndUnitaryTraceComparison §10.26`,
+`EndoscopicTransferAndUnitaryTraceComparison §10.30`). Above `ℓ`, the parameter of each block is a summand of
+`rec^T(Π_w)`, so it lies in the class of the hypothesis, and §15.1 of the same roadmap applies to each block. (b) 10.3
+(a), (b), as Frobenius semisimplification keeps characteristic polynomials and `N`; the jumps from the labelled
+weights that §16.1 gives at every `w ∣ ℓ`, read through 10.3 (b) as in 10.4 (c). (c) Let `B = TN` be the upper
+triangular Borel subgroup. For `t ∈ T⁺` (IntegralRepresentationsOfGeneralLinearGroups §6.1 (a)) conjugation by `t`
+contracts `N` and expands the lower unipotent subgroup, so the Iwahori factorisation of `I₁`
+(IntegralRepresentationsOfGeneralLinearGroups §6.2) gives `U_t x = e_{N(𝒪)}Π_w(t)x` for `x` fixed by `I₁`. The image
+of the eigenvector in the Jacquet module of `Π_w` for `N` is therefore an eigenvector of the diagonal torus with
+character `ξ_θ`; it is nonzero, as `U_t` multiplies the eigenvector by `ξ_θ(t) ≠ 0` while, for `t` strictly dominant
+enough, it kills any `I₁`-fixed vector in the kernel of the Jacquet map. The Jacquet module is finite-dimensional, so
+`ξ_θ` is also a quotient of it, and Frobenius reciprocity (`SmoothRepresentationsOfLocalGroups §SR.2.2`) embeds `Π_w`
+in the normalised induction from `B` of the characters `θ_i|·|^{(n−1)/2}` (the character `ξ_θδ_B^{−1/2}`). Grouped by
+the values `|θ_i(ϖ_w)|`, which do not increase, this is induced from tempered representations (unitary principal
+series) of a Levi subgroup twisted by real exponents, the exponents in the order opposite to that of a standard
+module; so the smooth dual of `Π_w` is a quotient of the induction of the inverse characters
+(`SmoothRepresentationsOfLocalGroups §SR.2.2`, contragredients of induced representations), which is a sum of standard
+modules; it is therefore a Langlands quotient with tempered data induced from these inverse characters
+(`SmoothRepresentationsOfLocalGroups §SR.3.3`), whose parameter (`EndoscopicTransferAndUnitaryTraceComparison §10.26`)
+is the sum of the characters `(θ_i|·|^{(n−1)/2})^{−1}∘Art_{E_w}^{−1}`, with `N = 0`, since the characters of one
+tempered block have the same absolute value; and `rec` commutes with duals
+(`EndoscopicTransferAndUnitaryTraceComparison §10.30`), so the parameter of `Π_w` is the sum of the characters
+`(θ_i|·|^{(n−1)/2})∘Art_{E_w}^{−1}`, with `N = 0`. Twisting by `|det|^{(1−n)/2}` gives (c). The component of an
+Iwahori eigenvector `f` in `Π` is, when nonzero, again an Iwahori eigenvector for the same character, and so is the
+corresponding vector of `Π_w`. (d) IntegralRepresentationsOfGeneralLinearGroups §6.6 (d), as in the last step of the
+method of 8.4, gives in the span of the component an Iwahori eigenvector for some `ξ_θ` with `|θ_i(ϖ_w)|`
+non-increasing and with `θ_i` on units the characters named by the roots of `c·Π_l (X − x_{χ_l})^{t_l}`
+(IntegralRepresentationsOfGeneralLinearGroups §4.4 (d)); (c) applies, and the passage from local Artin symbols of
+units to tame exponents (IdelicReciprocityCountsAndCyclotomicClassGroups §§1.4, 2.1), as in the method of 8.4, gives
+the characteristic polynomial at `s`.
+
+Let `E`, `f`, `P` and `Π` be as in 10.4, `w` a split place, `A` a place of `Ω` over `w`, through which `D_A` is
+identified with `G_{E_w}`, and `Π_w` the component of `Π` at `w`, read on `GL_n(E_w)` through `ι_w`. Let
+`rec^T(Π_w) = rec(Π_w ⊗ |det|^{(1−n)/2})`, `rec` the local Langlands correspondence normalised by Artin maps that send
+uniformisers to geometric Frobenius elements (`EndoscopicTransferAndUnitaryTraceComparison §10.30`).
+(a) Let `r` be attached to `P`. If `w ∤ ℓ`, `WD(r|_{D_A})^{F-ss} ≅ ι∘rec^T(Π_w)`, monodromy included. If `w ∣ ℓ`, and
+`rec^T(Π_w)` has `N = 0` and irreducible constituents induced from characters of the Weil groups of unramified
+extensions of `E_w` (for instance, it is a sum of characters with `N = 0`), then `r_A` is potentially crystalline, and
+`WD(r_A)^{F-ss}` and `ι∘rec^T(Π_w)` agree on the Weil group of an unramified extension of `E_w`, in particular on
+inertia; they are isomorphic when `rec^T(Π_w)` is a sum of characters.
+(b) `r` has the jumps `J_κ` at `A`. If `rec^T(Π_w)` has `N = 0` (and, if `w ∣ ℓ`, constituents as in (a)), then `r` is
+of finite type at `A`, and the characteristic polynomial of `ι∘rec^T(Π_w)` at `s` kills `s` at `A` for every
+`s ∈ I_A`, and for every `s ∈ W_A` whose inverse acts on the residue field of `A` as a nonnegative power of
+`x ↦ x^{q_w}` when `w ∤ ℓ` or `rec^T(Π_w)` is a sum of characters. Away from `ℓ`, the last statement holds without the
+hypothesis on `N`.
+(c) If `Π_w` has an Iwahori eigenvector (IntegralRepresentationsOfGeneralLinearGroups §6.1 (c)) for `ξ_θ`, with
+`θ_0, …, θ_{n−1}` characters of `E_w^×` and `|θ_i(ϖ_w)|` non-increasing in `i`, then
+`rec^T(Π_w) ≅ ⊕_i θ_i∘Art_{E_w}^{−1}`, with `N = 0`. In particular, if `f` is a pro-`p` Iwahori eigenvector at `w`
+with the characters `ξ_i` of 8.2 and `Π` contains a nonzero component of `f`, then (a) and (b) give 8.2 (a)–(c), the
+characteristic polynomial of `ι∘rec^T(Π_w)` at `s = Art_A(x)` being `Π_i (X − ι(ξ_i(x)))`.
+(d) If `f` has the product label `(d, c, χ, t)` at `w` (8.1) with `c` a product of linear factors in `k_w[X]`, and `Π`
+contains a nonzero component of the vector `Σ_x conj(Ξ(x))·ι_w(x̃)f` of 1.1, `Ξ` the label, then `rec^T(Π_w)` is a sum
+of characters with `N = 0`, whose characteristic polynomial at every `s ∈ I_A` of tame exponent `a` at level `d!`
+(8.4) is `Π_x (X − T^a(x))`, over the roots `x` of `c·Π_l (X − x_{χ_l})^{t_l}`; so (a) and (b) give 8.4 (a)–(c).
+
+*Needs:* 1.1, 8.1, 8.2, 8.4, 10.3, 10.4; IntegralRepresentationsOfGeneralLinearGroups §§4.4, 6.1, 6.2, 6.6 (names of
+characters; `U_t` and Iwahori eigenvectors; the Iwahori factorisation; sorting exponents);
+IdelicReciprocityCountsAndCyclotomicClassGroups §§1.4, 2.1 (tame inertia; local Artin map at a place);
+`SmoothRepresentationsOfLocalGroups §SR.2.2` (Jacquet functors and parabolic induction);
+`SmoothRepresentationsOfLocalGroups §SR.3.3` (Tempered representations and the conditional Langlands classification);
+`EndoscopicTransferAndUnitaryTraceComparison §6.29` (Public cohomological unitary weak base change and descent);
+`EndoscopicTransferAndUnitaryTraceComparison §10.26` (The trace-defined Weil–Deligne parameter);
+`EndoscopicTransferAndUnitaryTraceComparison §10.30` (Identification with the classical correspondence);
+`AutomorphicSpectralTheory §4.14a` (Number-field `GLₙ` residual blocks); `AutomorphicSpectralTheory §7.0b` (Local
+matching and twisted character transfer); `AutomorphicLFunctionsAndLocalFactors §AL.R.4` (`GLₙ` isobaric sums);
+`AutomorphicGaloisRepresentationsPartII` AG2.2 (Twisting an essentially self-dual form into unitary type), AG2.5
+(Caraiani’s full away-prime compatibility), AG2.5 (Temperedness of regular unitary-type cuspidal forms);
+`RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §14.1` (Polarized
+away-prime comparison), §15.1 (Trivial-monodromy comparison at the coefficient prime for parameters induced from
+unramified extensions), §16.1 (Galois representations of definite unitary groups).
+
+### 10.6 Weak base change and base change through `GL_n`
+
+*Origin:* comparison of the weak base change of 5.1 with cyclic base change for `GL_n` and with base change and
+descent between unitary groups and `GL_n` (Arthur and Clozel (1989); Labesse, *Changement de base CM et séries
+discrètes* (2011), as in 5.9); not part of the formal proof.
+
+*Route:* (a) Realise `Π′` in the forms of weight `κ_{E′}` (`AutomorphicFormsOnReductiveGroups §7.5`) and take for `f′`
+the image of a pure tensor whose component at every place `u` where `Π′_u` has a vector fixed by `K_u` is such a
+vector; `f′` is an eigenform, as `Π′` is unramified at almost all places. Let `w` be step-unramified with `f`
+spherical at `w`, and `u | w`: `E′_u/E_w` is unramified and `BC(Π)_w` is unramified (the local matching at split and
+at unramified places of `EndoscopicTransferAndUnitaryTraceComparison §6.29`), so its unramified local base change, the
+component of `BC_{E′/E}(BC(Π))` at `u` (`EndoscopicTransferAndUnitaryTraceComparison §6.24`), is unramified; when `u`
+is split over `E′⁺` this component is `Π′_u` read through `ι_u` (§6.29), which is therefore spherical, and otherwise
+sphericity is a hypothesis. Let `w` be matched and split, with Hecke polynomial `P` for `f`: `w` splits completely in
+`E′`, every `u | w` is split with `E′_u = E_w`, and the component of the cyclic base change at `u` is that of `BC(Π)`
+at `w` (§6.24); so `Π′_u` and `Π_w`, read through `ι_u` and `ι_w`, are isomorphic and unramified, and the vector fixed
+by `K_u` has the eigenvalues of `f` under the `T_{u,j}`. (b) `PotentialAutomorphyInfrastructurePartII §3.5` (1) over
+`E′`, which is stably unramified (with an auxiliary odd prime every place above which in `E′⁺` splits in `E′`, on
+which the conclusion does not depend), applied to the regular algebraic conjugate self-dual cuspidal
+`BC_{E′/E}(BC(Π))`, gives its descent `Π′`, whose weak base change it is
+(`EndoscopicTransferAndUnitaryTraceComparison §6.29`), with the component of `BC_{E′/E}(BC(Π))` at every split place
+and, at every place not split where that component is unramified, a vector fixed by some hyperspecial maximal compact
+subgroup, which that section does not identify with `K_u`. Its archimedean components are of weight `κ_{E′}`: an
+irreducible representation of the compact group at an infinite place is determined by its infinitesimal character,
+which base change fixes, and `BC_{E′/E}(BC(Π))` has at an infinite place the component of `BC(Π)` at the place below.
+A nonzero form in `Π′` has open stabiliser, which contains `K_u` for all but finitely many `u`; so `Z` is finite. The
+argument of (a) then applies to the places `w ∉ Z ∪ Z̄`, with the component of the pure tensor fixed by `K_u` wherever
+`Π′` has such a vector.
+
+Let `E′/E` be a step with character `μ` (5.1), `E′` stably unramified, `κ` a weight of `E`, and `f ≠ 0` a form of
+weight `κ` on `U(n)` over `E` with a nonzero component in an automorphic representation `Π` of the unitary group over
+`E`. Let `BC(Π)` be the weak base change of `Π` to `GL_n(𝔸_E)` (`EndoscopicTransferAndUnitaryTraceComparison §6.29`),
+suppose that it is an isobaric sum of cuspidal representations, and let `BC_{E′/E}(BC(Π))` be its cyclic base change
+to `GL_n(𝔸_{E′})` (`EndoscopicTransferAndUnitaryTraceComparison §6.24`).
+(a) Let `Π′` be an automorphic representation of the unitary group over `E′` with the archimedean components of weight
+`κ_{E′}`, whose weak base change to `GL_n(𝔸_{E′})` is `BC_{E′/E}(BC(Π))`, and which has a vector fixed by `K_u` at
+every place `u` of `E′` not split over `E′⁺` that lies above a step-unramified place at which `f` is spherical. Then
+`Π′`, realised in the forms of weight `κ_{E′}`, contains an eigenform `f′` that is a weak base change of `f` off `∅`.
+(b) When `BC_{E′/E}(BC(Π))` is cuspidal, there is an automorphic representation `Π′` of the unitary group over `E′`
+with the archimedean components of weight `κ_{E′}` whose weak base change to `GL_n(𝔸_{E′})` is `BC_{E′/E}(BC(Π))`. The
+set `Z` of the places of `E` below some place `u` of `E′`, not split over `E′⁺`, at which `Π′` has no vector fixed by
+`K_u` is finite, and `Π′`, realised in the forms of weight `κ_{E′}`, contains an eigenform that is a weak base change
+of `f` off `Z`. When `Z` is empty, `Π′` is as in (a).
+(c) A weak base change in the sense of 5.1 records only sphericity above the step-unramified places and the Hecke
+polynomials above the matched split places; it asks nothing at the other places.
+
+*Needs:* 5.1; `AutomorphicFormsOnReductiveGroups §7.5` (Finite stabilizers, base change and automorphic realization);
+`EndoscopicTransferAndUnitaryTraceComparison §6.24` (All-place compatibility for supplied global cyclic base change);
+`EndoscopicTransferAndUnitaryTraceComparison §6.29` (Public cohomological unitary weak base change and descent);
+`PotentialAutomorphyInfrastructurePartII §3.5` (Base change and descent between definite unitary groups and `GL_n`).
+
+### 10.7 Selmer modules of cocycles and Selmer groups of classes
+
+*Origin:* comparison of the Selmer modules of 9.2 with Selmer groups in Galois cohomology; not part of the formal proof.
+
+*Route:* (a) A cocycle whose class lies in `H¹_ℒ` is continuous, hence locally constant as `Bⁿ` is discrete; it
+vanishes on `I_A` for `A` over a place not in `S`, because its restriction there is a coboundary and `ρ(I_A)` acts
+trivially; and its restriction to `D_{A_v}` lies in `ℒ_v`, which contains the coboundaries, so it obeys `L_v`. Global
+coboundaries are such cocycles. An element of the Selmer module is a continuous cocycle, unramified outside `S`, whose
+restriction to `D_{A_v}` obeys `L_v`, hence lies in `ℒ̄_v`. (b) and (c) follow. (d) Take the cohomology of
+`0 → Bⁿ[a] → Bⁿ → Bⁿ → 0`, the second map multiplication by `a`. A class of `H¹_ℒ(G_E, Bⁿ)` killed by `a` has a
+representative `c` with `a·c(g) = (g − 1)y`; with `a·y′ = y` (`B` is divisible), `c(g) − (g − 1)y′` takes values in
+`Bⁿ[a]`, still vanishes on the inertia groups outside `S`, and still obeys `L_v`, which gives surjectivity. The kernel
+is the image of the connecting map from `(Bⁿ)^{G_E}`, whose values are coboundaries into `Bⁿ`; these vanish on the
+inertia groups outside `S` and obey the relations. On cocycles, composition with `f` is the bijection of 9.3.
+
+Let `O`, `ρ`, `B`, `S` be as in 9.2, with `ρ : G_E → GL_n(O)` a homomorphism, `B` discrete with every element of `Bⁿ`
+fixed by an open subgroup of `G_E`, and `ρ(I_A)` acting trivially on `Bⁿ` for every place `A` over a place not in `S`.
+Let `T` be a finite set of finite places and, for `v ∈ T`, `A_v` a place of `Ω` over `v` and `ℒ_v` an `O`-module of
+locally constant cocycles `D_{A_v} → Bⁿ` containing the coboundaries. Let `L` be the union of the sets `L_v` of
+relations supported on `D_{A_v}` that every element of `ℒ_v` obeys, and `ℒ̄_v ⊇ ℒ_v` the locally constant cocycles
+that obey `L_v`. Let `H¹_ℒ ⊆ H¹(G_E, Bⁿ)` be the classes unramified at the places not in `S` whose restriction to
+`D_{A_v}` lies in `ℒ_v/B¹(D_{A_v}, Bⁿ)` for every `v ∈ T`, `Z¹_ℒ` the cocycles representing them, and `H¹_{ℒ̄}`,
+`Z¹_{ℒ̄}` the same for the `ℒ̄_v`.
+(a) `B¹(G_E, Bⁿ) ⊆ Z¹_ℒ ⊆ Sel(ρ, S, L; B) ⊆ Z¹_{ℒ̄}`. Hence `c ↦ [c]` maps the Selmer module onto a module between
+`H¹_ℒ` and `H¹_{ℒ̄}`, with kernel `B¹(G_E, Bⁿ) ≅ Bⁿ/(Bⁿ)^{G_E}`.
+(b) If `ℒ_v = ℒ̄_v` for every `v ∈ T`, the Selmer module is `Z¹_ℒ`, the full preimage of `H¹_ℒ`. For `S` finite, `O`
+the ring of integers of a finite extension of `ℚ_ℓ`, `ρ` continuous and `B = O/a` with `a ≠ 0` or `B = Frac(O)/O`,
+`H¹_ℒ` is the Selmer group `Sel_L(E, Bⁿ)` of `SelmerIwasawaCohomology §2.9` for `p = ℓ`, with `Σ` the finite set of
+the places of `S ∪ T` and of the places above `ℓ` and `∞`, and with the local conditions: `ℒ_v/B¹` at the places of
+`T` (intersected with the unramified classes at those not in `S`), all classes at the places of `S` not in `T` and at
+the infinite places, which are complex, and the unramified classes at the other places of `Σ`.
+(c) When the Selmer module has finite length, `len H¹_ℒ ≤ len Sel(ρ, S, L; B) − len(Bⁿ/(Bⁿ)^{G_E})`: a bound for the
+length of the Selmer module bounds that of the Selmer group.
+(d) Let `O` be a discrete valuation ring, `B = Frac(O)/O`, `a ≠ 0` and `f : O/a → B` injective onto `B[a]`. Let `L` be
+a set of relations, each supported on some `D_{A_v}` with `v ∈ T` and vanishing on the coboundaries `D_{A_v} → Bⁿ`,
+and let `H¹_ℒ(G_E, (O/a)ⁿ)` and `H¹_ℒ(G_E, Bⁿ)` be defined as above with, for `ℒ_v`, the cocycles into `(O/a)ⁿ`,
+respectively into `Bⁿ`, that obey the relations of `L` supported on `D_{A_v}`. Then composition with `f` maps
+`H¹_ℒ(G_E, (O/a)ⁿ)` onto `H¹_ℒ(G_E, Bⁿ)[a]`, with kernel the image of `(Bⁿ)^{G_E}`, isomorphic to
+`(Bⁿ)^{G_E}/a·(Bⁿ)^{G_E}`, while on the Selmer modules `Sel(ρ, S, L; O/a)` and `Sel(ρ, S, L; B)` it is the bijection
+onto the `a`-torsion of 9.3.
+
+*Needs:* 9.2, 9.3; `SelmerIwasawaCohomology §2.9` (Compact and rational Galois Selmer groups).
+
+### 10.8 Profinite rings in the sense of 5.1
+
+*Origin:* comparison of the definition of 5.1 with inverse limits of finite rings; not part of the formal proof.
+
+*Route:* Suppose every `R/MR` is finite and `R → lim R/MR` is bijective. For a sequence `(x_N)` and each `M`, the
+classes of the `x_N` in the finite set `R/MR` have a limit along the ultrafilter; these limits are compatible, so they
+are the classes of one `L`, which has the property of 5.1; any two such `L` agree modulo every `MR`, hence are equal.
+Conversely, uniqueness for the constant sequence `0` gives `∩_M MR = 0`; a compatible family `(c_M)` is the family of
+classes of the `L` of a sequence `x_N` lifting `c_{N!}`, since `M | N!` for `N ≥ M` and the cofinite sets belong to a
+non-principal ultrafilter; and an infinite `R/MR` contains a sequence of pairwise distinct classes, which has no `L`,
+as no finite set belongs to the ultrafilter.
+
+A commutative ring `R` is profinite in the sense of 5.1, for one (equivalently every) non-principal ultrafilter on
+`ℕ`, exactly when every `R/MR` with `M ≥ 1` is finite and the map from `R` to the inverse limit of the `R/MR`, over
+the positive integers ordered by divisibility, is bijective: that is, when `R` is the inverse limit of the finite
+rings `R/MR`. In the literature a profinite ring is any inverse limit of finite rings; such a ring need not be
+profinite in the sense of 5.1 (`𝔽_p⟦t⟧`, for which `R/pR = R` is infinite). `ℤ_p`, `Ô` and the finite rings are
+profinite in both senses.
+
+*Needs:* 5.1.
 
 ## What the library already provides
 
@@ -1524,6 +2120,33 @@ On Tau Ceti's main branch, later than the revision pinned here:
   and the image of the units in inertia (6.4, 8.2, 8.3, 8.4): `ClassFieldTheory §6.1`, `ClassFieldTheory §7.1`, read at
   places of `Ω` through IdelicReciprocityCountsAndCyclotomicClassGroups §2.1.
 - Global reciprocity and the cyclic Hasse norm theorem (5.6): `ClassFieldTheory §11.1`, `ClassFieldTheory §13.1`.
+- Galois representations of regular algebraic polarized representations of `GL_n`, their Hodge–Tate weights and their
+  local–global compatibility (10.2, 10.4, 10.5, and 6.4 (e) in standard terms):
+  `AutomorphicGaloisRepresentationsPartII` AG2.0 (A Galois representation attached to `π` at the good places, and its
+  functoriality under twist, dual, conjugation and base change; The Hodge–Tate multiset attached to a weight:
+  `HT_τ = {a_{ιτ,1} + n − 1, …, a_{ιτ,n}}`; The `l`-adic character `r_{l,ι}(χ)` of an algebraic Hecke character, its
+  Hodge–Tate numbers and its weight), AG2.2 (Twisting an essentially self-dual form into unitary type), AG2.3
+  (Arbitrary regular conjugate-self-dual existence), AG2.5 (Comparison of the early polynomial with normalized local
+  Langlands; Caraiani’s full away-prime compatibility; Temperedness of regular unitary-type cuspidal forms), AG2.6
+  (Polarized admissibility at the coefficient prime; Full polarized local–global compatibility at `ℓ`); for definite
+  unitary groups, `PotentialAutomorphyInfrastructurePartII §3.6` and
+  `RiemannHypothesisForDirichletLFunctions/BaseChangeAndGaloisRepresentationsForUnitaryGroups §§14.1, 15.1, 16.1`.
+- Base change between unitary groups and `GL_n`, cyclic base change, the local Langlands correspondence and
+  automorphic realisation (10.4–10.6, and 5.1, 5.9 in standard terms):
+  `EndoscopicTransferAndUnitaryTraceComparison §4.9`, `EndoscopicTransferAndUnitaryTraceComparison §6.24`,
+  `EndoscopicTransferAndUnitaryTraceComparison §6.29`, `EndoscopicTransferAndUnitaryTraceComparison §10.26`,
+  `EndoscopicTransferAndUnitaryTraceComparison §10.30`; `PotentialAutomorphyInfrastructurePartII §3.5`;
+  `AutomorphicFormsOnReductiveGroups §7.5`; for the local components of Speh representations and of isobaric sums,
+  `AutomorphicSpectralTheory §4.14a`, `AutomorphicSpectralTheory §7.0b`,
+  `AutomorphicLFunctionsAndLocalFactors §AL.R.4`.
+- Weil–Deligne representations, Fontaine's recipe, Jacquet modules and the Langlands classification (10.3, 10.5):
+  `ArithmeticGaloisRepresentations §2.1`, `ArithmeticGaloisRepresentations §2.4`, `PadicHodgeTheory §5.3`,
+  `SmoothRepresentationsOfLocalGroups §SR.2.2`, `SmoothRepresentationsOfLocalGroups §SR.3.3`; the comparison of the
+  `p`-adic notions of CrystallineRepresentationsAndKisinModules with Fontaine's is
+  CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory).
+- Selmer groups of cohomology classes and Taylor–Wiles data (10.7, and 9.1 in standard terms):
+  `SelmerIwasawaCohomology §2.9`; `PotentialAutomorphyInfrastructurePartII §3.4`,
+  `PotentialAutomorphyInfrastructurePartII §4.1`.
 
 ## References
 

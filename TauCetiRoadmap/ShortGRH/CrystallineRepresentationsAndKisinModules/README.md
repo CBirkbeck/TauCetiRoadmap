@@ -9,17 +9,33 @@ congruences are themselves pinned down at the places above `ℓ` by `p`-adic Hod
 with prescribed Hodge–Tate jumps and a prescribed action of Weil elements, properties that the route obtains by passing
 to limits of traces.
 
-This roadmap states the `p`-adic Hodge theory the route uses, in the forms in which it uses it. All statements are
-over `ℂ_p` and concern groups `Γ` mapping to `G_p = Gal(ℚ̄_p/ℚ_p)` with open image. Crystalline and potentially
-crystalline representations are defined with Colmez's ring `B_max` alone, by asking that the invariant elements of
-`B_max ⊗ T` span it; Fontaine's ring `B_cris` does not occur. That the two definitions of "crystalline" agree is
-published, but the route does not use it and no roadmap section cited here states it; so "crystalline" in this roadmap
-always means `B_max`-crystalline, and the sections are stated for `B_max`. Three further substitutions shape the
-roadmap: the Weil–Deligne representation of `D_pst` gives way to `B_max`-linear operators `β_{s,m}`, one for each Weil
-element, of which only the annihilating polynomials are recorded; the Bloch–Kato group `H¹_f` gives way to the group
-`Z_f(T)` of crystalline cocycles of a lattice; and Kisin's equivalence of categories gives way to "Kummer charts"
-`Λ⟦z⟧ ⊂ A_inf` together with an existence theorem for frames of crystalline lattices, with explicit clauses on periods,
-Frobenius and the Galois action.
+This roadmap states the `p`-adic Hodge theory the route uses. The reference is the standard theory of the general
+roadmaps: Fontaine's period rings `B_cris ⊂ B_dR` and his crystalline representations (PadicPeriodRings,
+PadicHodgeTheory), the Weil–Deligne representation of `D_pst` given by Fontaine's recipe (PadicHodgeTheory), the
+Bloch–Kato condition `H¹_f` (SelmerIwasawaCohomology, PadicHodgeRegulators), labelled Hodge–Tate weights and the
+Breuil–Kisin embedding `W(k)⟦u⟧ → A_inf` (FiniteFlatGroupsAndIntegralPadicHodgeTheory). Layers 1–6 state this theory
+in the forms in which the route proves and uses it. All their statements are over `ℂ_p` and concern groups `Γ` mapping
+to `G_p = Gal(ℚ̄_p/ℚ_p)` with open image. Crystalline and potentially crystalline representations are defined there
+with Colmez's ring `B_max`, by asking that the invariant elements of `B_max ⊗ T` span it, so that "crystalline" in
+Layers 1–6 means `B_max`-crystalline. Three further objects of the route take the place of standard ones:
+`B_max`-linear operators `β_{s,m}`, one for each Weil element, of which only the annihilating polynomials are
+recorded, in place of the Weil–Deligne representation of `D_pst`; the module `Z_f(T)` of crystalline cocycles of a
+lattice in place of the Bloch–Kato group `H¹_f`; and "Kummer charts" `Λ⟦z⟧ ⊂ A_inf`, with an existence theorem for
+frames of crystalline lattices with explicit clauses on periods, Frobenius and the Galois action, in place of Kisin's
+equivalence of categories.
+
+Layer 7 relates these objects to the standard ones. Inside `B_dR`, `φ(B_max) ⊆ B_cris ⊆ B_max`, so that for `Γ = G_K`,
+`K/ℚ_p` finite, and lattices in continuous representations the invariants for `B_max` and for `B_cris` are the same
+and "crystalline" in the sense of Layer 3 is Fontaine's notion; the Hodge–Tate jumps of a Hodge–Tate representation
+are its labelled Hodge–Tate weights with the opposite sign; for a potentially crystalline representation, `β_{s,m}` is
+the extension of Fontaine's Weil–Deligne operator of `s`, so that a polynomial kills `(s, m)` exactly when it vanishes
+at that operator, and `Z_f(T)` is the module of continuous cocycles whose classes lie in `H¹_f`; and the Breuil–Kisin
+embedding of a uniformiser is a Kummer chart. A potentially crystalline action in the sense of Layer 3 on a finite
+free `ℤ_p`-module is always continuous and acts through the Galois group, so the notion is not wider than Fontaine's
+there. The sections whose statements Layer 7 translates carry a paragraph **In standard terms**, which states their
+result on the standard objects through Layer 7; the objects of Layers 1–6 are one way to prove these results and are
+the objects that the route's proofs use. The modules `N(L)` of Layer 5, called Kisin modules here, are not identified
+with Breuil–Kisin modules.
 
 Layer 1 builds the period rings: `A_inf`, `A_max`, `B⁺`, `B_max`, `B_dR⁺` and `B_dR`, the period `t`, the fundamental
 exact sequence for `B_max`, and Tate's vanishing theorem with its consequences. Layer 2 studies charts in `A_inf` and
@@ -28,7 +44,9 @@ Layer 3 defines admissible, crystalline and potentially crystalline representati
 Frobenius, and proves the parts of Fontaine's theory the route needs. Layer 4 treats the local conditions: the rank of
 the crystalline cocycles, the Artin–Schreier sequence over the tilt, characters trivial on inertia near `1`, and twists.
 Layer 5 is the theory of period matrices, frames and Kisin modules over a Kummer chart, with the radius lemma. Layer 6
-proves that crystallinity, Hodge–Tate jumps and killing polynomials pass to limits of traces.
+proves that crystallinity, Hodge–Tate jumps and killing polynomials pass to limits of traces. Layer 7 compares the
+period rings, crystalline representations, Hodge–Tate jumps, the linear Frobenius, crystalline cocycles and Kummer
+charts with the objects of the general roadmaps.
 
 ## Conventions and notation
 
@@ -74,6 +92,12 @@ and `G_ℓ`, `ℚ̄_ℓ`, `ℂ_ℓ` are `G_p`, `ℚ̄_p`, `ℂ_p` for `p = ℓ`.
 | `β_{s,m}` | the linear Frobenius of a Weil pair | 3.1 |
 | `ι_a, 𝒦_a` | `r ↦ φ^{−a}(r)` from `A_inf` to `B_dR`; the value field of a Kummer chart | 5.1 |
 | `(O, ζ), L, M(L), N(L), a(L)` | coefficients, a jump lattice, its `A_inf`-module and Kisin module, its jump bound | 5.6 |
+| `A_cris, B_cris⁺, B_cris, D_cris(V)` | Fontaine's crystalline periods and invariants (PadicPeriodRings §§4.1, 4.2) | 7.1, 7.2 |
+| `ι, D_max(V)` | the inclusion of `B_cris` in `B_max`; `(B_max ⊗ V)^{G_K}` | 7.1, 7.2 |
+| `W_γ, W{q}` | `ℂ_p ⊗_{E,γ} V`; `W(q)^{G_L}` | 7.3 |
+| `D_pst(V), r_D(w), α(w)` | potentially semistable periods, Fontaine's operator `w̄∘φ^{−α(w)}`, the exponent of arithmetic Frobenius (PadicHodgeTheory §5.3) | 7.4 |
+| `H¹_f(K, V), H¹_f(K, T)` | the Bloch–Kato condition and its preimage on a lattice | 7.5 |
+| `𝔖, π♭, E(u)` | `W(k)⟦u⟧`; compatible `p`-power roots of a uniformiser `π`; its Eisenstein polynomial | 7.6 |
 
 Some objects are defined after a choice; only the properties stated are used. The data of the shorter proof's
 argument (fields, places, sizes) do not occur in this roadmap: its statements are local, apart from the global forms
@@ -83,6 +107,9 @@ of 4.5 and 6.4.
 `particular to this proof:`, `this roadmap's own formulation:`, or `definitions and conventions`) and
 `*Method of the formal proof:*`, which says how the shorter formal proof proves it; `[ShortProof]` names the file and
 declaration of that proof. A contribution may state a result more generally or prove it otherwise.
+
+The sections of Layer 7 state comparisons that the formal proof does not contain. They carry `*Origin:*` and
+`*Proof route:*`, a route through sections of this roadmap and of the general roadmaps, and no `[ShortProof]` line.
 
 ## Layer 1: Period rings over `ℂ_p`
 
@@ -183,12 +210,19 @@ pinned here, has the kernel of `θ` for the integers of a complete algebraically
   `G_p` acts on `B_dR⁺` by continuity.
 - `θ` extends to a ring map `A_max → O_C` with `ξ/p ↦ 0`, to a `ℚ_p`-algebra map `B⁺ → ℂ_p` and to `B_dR⁺ → ℂ_p`.
 
-These are the rings `A_max`, `B⁺_max` and `B_max` of PadicHodgeTheory §0.5, where `B_max` is `B⁺_max[1/t]` for Fontaine's
-`t = log[ε]`. The period `t` of 1.5 (a) is a unit multiple of `pμ` in `A_max`, and Fontaine's `t` is a multiple of it by
-an element of `ℚ_p^×` (the quotient lies in `B_max`, is fixed by `φ`, and lies in `B_dR⁺` because `θ` kills Fontaine's
-`t`, so 1.5 (b), (c) apply); so the two localisations agree. `B_max` stands in for Fontaine's `B_cris`, and
-`B_dR⁺` for the ring `B_dR⁺` of PadicPeriodRings §1.5, built there from Mathlib's `BDeRhamPlus`; no comparison of `B_max`
-with `B_cris`, nor of the two constructions of `B_dR⁺`, is used.
+These are the rings `A_max`, `B⁺_max` and `B_max` of PadicHodgeTheory §0.5, where `B_max` is `B⁺_max[1/t]` for
+Fontaine's `t = log[ε]`. The period `t` of 1.5 (a) is a unit multiple of `pμ` in `A_max`, and Fontaine's `t` is a
+multiple of it by an element of `ℚ_p^×` (the quotient lies in `B_max`, is fixed by `φ`, and lies in `B_dR⁺` because
+`θ` kills Fontaine's `t`, so 1.5 (b), (c) apply); so the two localisations agree. `B_max` plays the part of Fontaine's
+`B_cris` in the route, and `B_dR⁺` is built here as the `ξ`-adic completion of `B⁺`, while the ring `B_dR⁺` of
+PadicPeriodRings §1.5 is built from Mathlib's `BDeRhamPlus`; the route's proofs use no comparison of `B_max` with
+`B_cris`, nor of the two constructions of `B_dR⁺`.
+
+**In standard terms.** By 7.1, `A_max`, `B⁺` and `B_max` are the rings `A_max`, `B_max⁺` and `B_max` of
+PadicHodgeTheory §0.5, with the same Frobenius and maps to `B_dR⁺`, the Galois action and `θ` being the unique
+extensions of those of `A_inf`; `B_dR⁺` and `B_dR` are Mathlib's `BDeRhamPlus` and `BDeRham` of `O_C`
+(PadicPeriodRings §1.5), with the same `θ`, Galois action and filtration; and Fontaine's `B_cris` of PadicPeriodRings
+§4.1 sits in `B_max` with `φ(B_max) ⊆ B_cris ⊆ B_max` inside `B_dR`.
 
 *Needs:* 1.1
 
@@ -281,6 +315,11 @@ divisible by `μ`.
 PadicPeriodRings §4.3 states the sequence `0 → ℚ_p → B_cris^{φ=1} → B_dR/Fil⁰ → 0` for `B_cris`; the surjectivity of
 `φ − 1` contained in (c) is not part of it.
 
+**In standard terms.** By 7.1, `B_dR` is Mathlib's `BDeRham` with its filtration, `B_max^{φ=1} = B_cris^{φ=1}`, and
+the period `t` of (a) is an element of `ℚ_p^×` times Fontaine's `log[ε]`; the second statement of (c) together with
+its first statement for `a = 0` is the exactness of `0 → ℚ_p → B_cris^{φ=1} → B_dR/B_dR⁺ → 0` of PadicPeriodRings §4.3
+(7.1 (g)).
+
 *Needs:* 1.2, 1.4
 
 [ShortProof], `Lib/PadicHodge/PeriodRings/DeRhamPeriods.lean` (`New.Period.exists_tPeriod`, `New.Period.tPeriod`,
@@ -335,9 +374,10 @@ these traces; the route uses only the vanishing of `H⁰` for `i ≠ 0`.
 
 *Origin:* definitions and conventions.
 
-A Kummer chart stands in for the embedding `W(k)⟦u⟧ → A_inf`, `u ↦ [π♭]`, attached to a uniformiser `π` of a `p`-adic
-field and compatible `p`-power roots of it; here `θ(z)` is a uniformiser of the field of the chart (2.4), and no
-comparison with the published constructions is used.
+A Kummer chart generalises the embedding `W(k)⟦u⟧ → A_inf`, `u ↦ [π♭]`, attached to a uniformiser `π` of a `p`-adic
+field and compatible `p`-power roots of it; here `θ(z)` is a uniformiser of the field of the chart (2.4). By 7.6 that
+embedding, for a finite extension `K` of `ℚ_p`, is a Kummer chart for `G_K`; the route's proofs use only the
+properties listed below.
 
 - **Constants.** For `f ≥ 1`, `𝔽_{p^f} ⊆ O♭` is the set of fixed points of `x ↦ x^{p^f}`, a field with `p^f` elements, and
   `Λ = W(𝔽_{p^f}) ⊆ A_inf`.
@@ -436,6 +476,10 @@ power of `z` is `0`.
 
 (f) For `a ∈ A_inf` and `m ≥ 0`: `E^h a = τ^m y` in `B⁺` for some `h` and some `y ∈ S_B` if and only if `a = τ^m s` with `s ∈ S`.
 
+**In standard terms.** For the Kummer chart of a uniformiser of a finite extension `K` of `ℚ_p` (7.6), `S` is the
+image of the Breuil–Kisin ring `𝔖 = W(k)⟦u⟧` of FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.4.1 and `E` is a unit
+multiple of the image of the Eisenstein polynomial, so (a)–(f) are statements on `𝔖` inside `A_inf` and `B⁺`.
+
 *Needs:* 1.4, 2.2
 
 [ShortProof], `Lib/PadicHodge/Kisin/Bicommutant.lean` (`New.Lift.Chart.exists_extendToBPlus`,
@@ -466,6 +510,11 @@ of `K_Γ`, the unit `v` is the value of a unit series `A(X)`, and an element of 
 (b) For every group `(Γ, j)` over `G_p` there is a Kummer chart for `Γ` such that every `j(g)`, `g ∈ Γ`, fixes the chart,
 `ef = [G_p : j(Γ)]`, the chart is unramified if `j(Γ)` contains the inertia group, and `j(Γ)` contains a Frobenius for
 `p^f`.
+
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, the Breuil–Kisin embedding `u ↦ [π♭]` of
+FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.4.1, for any uniformiser `π` of `K` (with `π = −p` when `K/ℚ_p` is
+unramified), is a chart as in (b), with `Γ' = G_K`, `e` and `f` the ramification index and residue degree of `K` (7.6
+(c)).
 
 *Needs:* 2.2
 
@@ -526,9 +575,25 @@ For a `ℤ_p`-algebra `B` with an action of `G_p` (or of `ℕ × G_p`), `Γ` act
   crystalline). A polynomial `P ∈ R[X]` *kills `(s, m)` on `T`* if `T` is potentially crystalline and `P(β_{s,m}) = 0`, the
   coefficients acting on `B_max ⊗ T` through `T`.
 
-Admissibility for `B_max` stands in for Fontaine's admissibility for `B_cris`; `β_{s,m}` stands in for the Weil–Deligne
-representation of `D_pst`, in the form `s ↦ s̄∘φ^m`, and "`P` kills `(s, m)`" for the vanishing of `P` at the Weil–Deligne
-operator of `s`. No comparison with these objects is used.
+Admissibility for `B_max` plays the part of Fontaine's admissibility for `B_cris`; `β_{s,m}` plays the part of the
+Weil–Deligne representation of `D_pst`, in the form `s ↦ s̄∘φ^m`, and "`P` kills `(s, m)`" that of the vanishing of
+`P` at the Weil–Deligne operator of `s`. The words are the route's: *crystalline* here means `B_max`-admissible for
+every `g ∈ Γ`, while in the literature (PadicPeriodRings §4.3) a crystalline representation is a continuous
+representation `V` of `G_K` with `dim_{K_0}(B_cris ⊗ V)^{G_K} = dim V`; `D_pcris(T)` here is a set of periods, while
+in the literature `D_pcris` is a module over `K_0^nr` with Frobenius and Galois action. The route's proofs use only
+the definitions above.
+
+**In standard terms.** Let `K ⊂ ℚ̄_p` be finite over `ℚ_p`, `Γ = G_K` with `j` the inclusion, and `T` a lattice, over
+`ℤ_p` or over the integers of a finite extension `E` of `ℚ_p`, in a finite-dimensional continuous representation `V`.
+Then `T` is crystalline exactly when `V` is crystalline in the sense of PadicPeriodRings §4.3, potentially crystalline
+exactly when `V` becomes crystalline over a finite extension of `K`, and `(B_max ⊗ T)^{G_K}` is `D_cris(V)` (7.2); for
+`V` Hodge–Tate, `jump_γ(T, u)` is the multiplicity of the Hodge–Tate weight `−u` at `γ`, the cyclotomic character
+having weight `+1` (7.3); for `V` potentially crystalline, `D_pcris(T)` is `D_pst(V)`, `β_{s,m}` is the `B_max`-linear
+extension of Fontaine's operator `r_D(s) = s̄∘φ^m` on `D_pst(V)` (PadicHodgeTheory §5.3), and `P` kills `(s, m)`
+exactly when `P(r_D(s)) = 0` (7.4); and for `V` potentially crystalline, `Z_f(T)` is the module of continuous cocycles
+whose classes lie in the Bloch–Kato group `H¹_f(K, V)` (7.5). The same holds for a group over `G_p` acting through `j`
+(7.2 (d)), as every potentially crystalline action on a finite free `ℤ_p`-module does (7.2 (e)), and for coefficients
+in `ℚ̄_p` (7.2 (f), 7.3 (c), 7.4 (e)).
 
 *Needs:* 1.5
 
@@ -559,6 +624,13 @@ particular crystalline representations are potentially crystalline.
 (c) Let `ψ : Γ' → Γ` be a homomorphism with `j∘ψ` of open image. Then `ρ∘ψ` is admissible along a filter `F` on `Γ'` exactly
 when `ρ` is admissible along the image filter `ψ_*F`; if `ρ` is potentially crystalline, so is `ρ∘ψ` (restriction to the Galois
 group of a finite extension).
+
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, and lattices in continuous representations, through 7.2: (a) for
+`F = {Γ}` is the crystallinity of the twists `ℚ_p(c)` (PadicHodgeTheory §3.3) together with the stability of
+crystalline representations under tensor products (PadicHodgeTheory §3.1), and for "near `1`" the same over a finite
+extension; (b) says that a crystalline representation stays crystalline over every finite extension; and (c), for `ψ`
+the inclusion of `G_L` with `L/K` finite, says that restriction to `G_L` preserves crystalline and potentially
+crystalline representations (PadicHodgeTheory §3.5).
 
 *Needs:* 1.5, 3.1
 
@@ -592,6 +664,11 @@ For each `γ : R → ℂ_p` there are `P ∈ GL_ι(ℂ_p)` and `k : ι → ℤ` 
 vectors of weights `k_i` for the matrices `γ(ρ(g))` in `e`; the `k_i` form the multiset of jumps of `T` at `γ`; and the
 `γ`-semilinear maps whose values on `e` are the rows of `P^{−1}` form a `ℂ_p`-basis of all `γ`-semilinear maps `T → ℂ_p`, the
 `i`-th lying in `HT_γ(T, k_i)`. In particular the multiset of jumps at `γ` exists and has `rk_R T` elements.
+
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, `R` the integers of a finite extension `E` of `ℚ_p` and `T` a
+lattice in a continuous potentially crystalline `E`-representation `V`, `V` is de Rham and so Hodge–Tate (7.3 (d)),
+and (b) is the Hodge–Tate decomposition of `ℂ_p ⊗_{E,γ} V` (PadicHodgeTheory §3.3) written in the basis `e`: the `k_i`
+are its Hodge–Tate weights with the opposite sign (7.3 (b)).
 
 *Needs:* 1.5, 1.6, 3.1
 
@@ -645,6 +722,15 @@ cyclotomic character has weight `+1` (a weight `h` counts `ℂ_p(h)`, and the fi
 PadicHodgeTheory, Conventions and §3.2), while by (d) it has the single jump `−1` here; so a jump `u` of 3.1 is a
 weight `−u` there, and has the sign of the filtration jump.
 
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, and continuous Hodge–Tate representations (potentially
+crystalline ones among them), 7.3 makes `jump_γ(T, u)` the multiplicity of the Hodge–Tate weight `−u` at `γ`, with
+label `γ^{−1}|_K` in FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.P7.2. Through it, (b)–(f) are the standard
+behaviour of labelled weights: invariance under extension of the coefficients
+(FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.P7.1), the union over the labels under restriction of scalars, the
+shift under a twist and the negation under duality (PadicHodgeTheory §3.2; FiniteFlatGroupsAndIntegralPadicHodgeTheory
+§R07.P7.2), and the containment of the weights of a subrepresentation of a finite sum in those of the summands; (a) is
+the injectivity of the Hodge–Tate comparison map of PadicHodgeTheory §3.3, read on the dual.
+
 *Needs:* 1.6, 3.1, 3.3; PadicPeriodRings §1.2
 
 [ShortProof], `Lib/PadicHodge/Crystalline/HodgeTateForms.lean` (`New.Period.exists_algHom_lift`,
@@ -676,6 +762,13 @@ Let `F` be a filter on `Γ` each of whose members contains every `g` near `1` (f
 With `B_cris` in place of `B_max`, PadicHodgeTheory §3.1 (Fontaine's formalism for a regular period ring) together with
 PadicPeriodRings §4.3 (regularity of `B_cris`) implies (a) and (b); the route proves only this part, for `B_max`.
 
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, and `F = {Γ}`: the elements of `B_max` fixed by `G_K` are those
+of `K_0` (7.1 (f)), so (a) says that a fraction of elements of `B_max` fixed by `G_K` lies in `K_0`, which is the
+identity `Frac(B_cris)^{G_K} = K_0` of PadicHodgeTheory §0.5 carried to `B_max` by the injective Frobenius of 7.1 (d),
+(e); and (b), for a lattice in a continuous crystalline representation `V`, says that a `K_0`-basis of `D_cris(V)` is
+a `B_max`-basis of `B_max ⊗ V` (7.2 (a), (b)): the comparison isomorphism of PadicPeriodRings §4.3 after extension of
+scalars to `B_max`.
+
 *Needs:* 2.5, 3.1
 
 [ShortProof], `Lib/PadicHodge/Crystalline/Regularity.lean` (`New.Period.fontaine_regularity`,
@@ -703,6 +796,12 @@ whose values span `T'` over `ℤ_p`. If `σ` and `ρ` are admissible along a fil
 `b(σ(g)x)(ρ(g)y) = χ(j(g))^c·b(x)(y)`. Then `T''` is admissible along `F`.
 
 With `B_cris` in place of `B_max`, PadicHodgeTheory §3.1 implies (a)–(c).
+
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, `F = {Γ}` and lattices in continuous representations, 7.2 turns
+(a)–(c) into the closure of Fontaine's crystalline representations under subrepresentations of finite sums, quotients
+of tensor products and twisted duals, which PadicHodgeTheory §3.1 states for the regular ring `B_cris` of
+PadicPeriodRings §4.3; for `F` = "near `1`" it gives the same for potentially crystalline representations, over a
+common finite extension (7.2 (c)).
 
 *Needs:* 3.2, 3.5
 
@@ -751,6 +850,15 @@ from NoncommutativeAndEquivariantIwasawa §F.6, writes the operators as `s̄∘�
 potentially semistable representation is semistable over `K` exactly when inertia acts trivially on `D_pst`, and
 crystalline when moreover `N = 0`. With `B_cris` in place of `B_max` these give (a)–(f) for the operators `s̄∘φ^m`;
 the route proves (a)–(f) directly and uses nothing more.
+
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, and `T` a lattice in a continuous potentially crystalline
+representation `V`, 7.4 identifies `D_pcris(T)` with `D_pst(V)` and `β_{s,m}` with the `B_max`-linear extension of
+Fontaine's operator `r_D(s) = s̄∘φ^m` of PadicHodgeTheory §5.3, `s` being an element of the Weil group with
+`α(s) = −m`. Through it, (a) is the existence of `r_D(s)`; (b) is the multiplicativity of `r_D` and its linearity over
+the coefficients; (c) is the functoriality of `r_D`, its compatibility with tensor products, and the value `p^{md}` at
+`s` of the parameter of `ℚ_p(−d)`, the parameter `ω` of `ℚ_p(1)` taking the value `p^{α(s)} = p^{−m}` there; (d) and
+(e) are its compatibility with subrepresentations and duals; and (f) is the criterion of PadicHodgeTheory §5.3 that a
+potentially crystalline representation is crystalline exactly when inertia acts trivially on `D_pst`.
 
 *Needs:* 1.2, 2.5, 3.2, 3.5, 3.6
 
@@ -801,6 +909,14 @@ group of the `q∘c` contains every coboundary of `V`, and for every open subgro
 crystalline cocycle `c'` of `U`, `q∘c'` is the image under Shapiro's map of a continuous cocycle of `Γ` with values in the
 functions `Γ/U → V` whose sum over `Γ/U` is `q∘c` for some `c ∈ Z_f(T)`: the reductions are stable under corestriction.
 
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, and `T` a lattice in a continuous potentially crystalline
+representation `V`, `Z_f(T)` is the module of continuous cocycles whose classes lie in the Bloch–Kato group
+`H¹_f(K, V)`, and its quotient by the coboundaries is `H¹_f(K, T)` (7.5). Through it, (a) is the containment of the
+coboundaries, the saturation of a preimage of a subspace and the functoriality of `H¹_f` (PadicHodgeRegulators §1.1);
+(b) is a Hodge basis of the de Rham periods (7.3); (c) says that the extension defined by classes of `H¹_f` is
+crystalline, or potentially crystalline, with `V`; and (d) describes the image of `H¹_f(K, T)` modulo `p^m` and its
+stability under corestriction (PadicHodgeRegulators §1.1).
+
 *Needs:* 1.5, 1.6, 3.2, 3.3, 3.4; ProfiniteCohomology §§6.2, 7.2
 
 [ShortProof], `Lib/PadicHodge/BlochKato.lean` (`New.Period.crysCocycles.coboundary_mem`,
@@ -841,6 +957,14 @@ With `B_cris` in place of `B_max`, PadicHodgeRegulators §1.5 (`dim H¹_f(K, V) 
 `Z_f(T)` is then the preimage of `H¹_f(K, T[1/p])` in the continuous cocycles, of rank `(rk T − dim H⁰) + dim H¹_f`; the
 route proves only this count. SelmerIwasawaCohomology §4.9 defines `H¹_f(K, V)` through
 `B_cris` and the condition on a lattice `T` by inverse image, and states the same dimension formula for crystalline `V`.
+
+**In standard terms.** For `Γ = G_K` (`n = [K : ℚ_p]`) and `V = T ⊗ ℚ_p`: by 7.5, `Z_f(T)` is the preimage of
+`H¹_f(K, V)` in the continuous cocycles, of rank `rk T − dim H⁰(K, V) + dim H¹_f(K, V)`, and
+`n·#{u ∈ J : u < 0} = n·dim_K D_dR(V)/Fil⁰` (7.3 (b)). So (a) is equivalent, for this `V`, to the Bloch–Kato formula
+`dim H¹_f(K, V) = n·dim_K D_dR(V)/Fil⁰ + dim H⁰(K, V)`, which PadicHodgeRegulators §1.5 states for every de Rham `V`
+(7.5 (c)); (b) is the case of that formula in which every Hodge–Tate weight of `V` is negative, where `D_dR(V)/Fil⁰`,
+`H⁰(K, V)` and therefore `H¹_f(K, V)` vanish; and (c) follows from the description of `H¹_f` for `ℚ_p(−a)`, `a ≥ 0`,
+in PadicHodgeRegulators §1.8.
 
 *Needs:* 1.5, 1.6, 2.5, 3.4, 4.1
 
@@ -910,6 +1034,13 @@ Weil pair `(s, k)` and `j(g)(y) = (1 ⊗ ν(g)^{−1})·y` for `g` near `1`.
 PadicHodgeTheory §3.3 states that representations with finite image on inertia are de Rham of weight zero; the action of
 Weil pairs in (c), which the route uses for `ℚ̄_p`-valued characters, is not part of it.
 
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, `ν` with values in a finite extension `E ⊂ ℚ̄_p` of `ℚ_p`, and
+`T = ℚ̄_p = E(ν) ⊗_E ℚ̄_p`, `ν` is a continuous character with finite image on inertia, and through 7.2 (f), 7.3 (c),
+(d) and 7.4 (e) clause (c) says: `E(ν)` is potentially crystalline with every Hodge–Tate weight `0` (PadicHodgeTheory
+§3.3), and Fontaine's operator `r_D(s)` on `D_pst(E(ν))` is multiplication by `ν(s)` for every `s` in the Weil group
+with `α(s) ≤ 0`; for `ℚ_p`-valued `ν` this is the parameter `ν|_{W_K}` given by PadicHodgeTheory §5.4 for a character
+finite on inertia.
+
 *Needs:* 1.2, 3.1, 3.4, 3.7
 
 [ShortProof], `Lib/PadicHodge/Characters.lean` (`New.Period.exists_unramified_period`,
@@ -941,6 +1072,14 @@ with `s ∈ D_A` at once, together with the clause away from `ℓ` (if `Q(c·r(s
 conditions of GaloisRepresentationsOfUnitaryEigenforms §1.3 are defined; the identity `β_{s,k}(r') = c·β_{s,k}(r)` is a step
 of that proof. The statements above follow by the same argument, since 3.4 (d),
 3.6 (b) and 3.7 (c) hold for every group over `G_ℓ` and the argument for (c) uses one Weil pair at a time.
+
+**In standard terms.** For `Γ = G_K` with `K/ℚ_ℓ` finite, or a decomposition group read in `G_ℓ` through an embedding
+(7.2 (d)), and continuous `r` and `ν`, through 7.2–7.4, with 7.2 (f), 7.3 (c) and 7.4 (e) for the coefficients `ℚ̄_ℓ`:
+(a) is the stability of crystalline, and of potentially crystalline, representations under tensor products
+(PadicHodgeTheory §3.1); (b) is, for Hodge–Tate `r`, the shift of labelled Hodge–Tate weights under a twist by a
+character (FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.P7.2); and (c) is the multiplicativity of Fontaine's
+Weil–Deligne operators under twisting, `r_D(s)` for `ν·r` being `ν`'s operator at `s` times that of `r`
+(PadicHodgeTheory §5.3).
 
 *Needs:* 3.4, 3.6, 3.7
 
@@ -1104,9 +1243,12 @@ Let `c` be a chart and `t ∈ G_p` fix the chart with `t(z) = [ε]z`. Let `Z ∈
 
 *Origin:* definitions and conventions.
 
-The modules `M(L)` and `N(L)` below stand in for the Breuil–Kisin–Fargues module and the Breuil–Kisin module of a
-crystalline lattice; no comparison with them is used. Let `Γ` be a group over `G_p` and `k` a Kummer chart for `Γ` with
-subgroup `Γ'`.
+The modules `M(L)` and `N(L)` below play the part of the Breuil–Kisin–Fargues module and the Breuil–Kisin module of a
+crystalline lattice. The name *Kisin module* is the route's: here it means the `S`-module `N(L)` cut out of
+`W(C♭) ⊗ L` by conditions on `B_dR`-valued forms, while in the literature (FiniteFlatGroupsAndIntegralPadicHodgeTheory
+§R07.4.2) a Kisin module is a finite free `𝔖`-module with a Frobenius whose linearisation has cokernel killed by a
+power of `E(u)`. No section of this roadmap identifies `N(L)` or `M(L)` with these modules, and the route's proofs use
+no such identification. Let `Γ` be a group over `G_p` and `k` a Kummer chart for `Γ` with subgroup `Γ'`.
 
 - **Letters.** A *letter* is a unit `i` of `𝔽_{p^f}`; `[i] ∈ S` is its Teichmüller lift; there are `p^f − 1` letters, permuted by
   `i ↦ i^p`.
@@ -1129,6 +1271,11 @@ subgroup `Γ'`.
   `Σ_{γ(ζ)=θ([i])} jump_γ(L, u)`.
 - **Jump bound.** `a(L)` is the least `a ≥ 0` such that every jump of `L` as a `ℤ_p`-representation of `Γ'` at `ℤ_p ⊂ ℂ_p` lies in
   `[−a, a]`.
+
+**In standard terms.** For `Γ = G_K`, `K/ℚ_p` finite, the Kummer chart of a uniformiser of 7.6 (with `Γ' = G_K`), and
+`L` with a continuous action, `O` is the ring of integers of a finite extension `E` of `ℚ_p` and a jump lattice is a
+`G_K`-stable `O`-lattice in a crystalline `E`-representation (7.2) whose Hodge–Tate weights at each `γ` lie in `−U_γ`
+(7.3); `a(L)` is the least `a` such that all Hodge–Tate weights of `L ⊗ ℚ_p` lie in `[−a, a]`.
 
 *Needs:* 2.1, 3.1, 5.1; IdelicReciprocityCountsAndCyclotomicClassGroups §5.1
 
@@ -1305,6 +1452,15 @@ with every `X_{η,x}∘w` crystalline with jumps in `[0, h]`. Suppose that for e
 LocalGaloisDeformationRings §3.5 (potentially semistable quotients of a family over a complete local base) does not state
 this limit theorem.
 
+**In standard terms.** For `Δ = G_K`, `K/ℚ_p` finite, and representations `σ∘w` that are continuous, "crystalline with
+jumps in `[0, h]`" is Fontaine's "crystalline with Hodge–Tate weights in `[−h, 0]`" (7.2 (b), (f), 7.3 (c), (d)), so
+(a) and (c) are statements on Fontaine's crystalline representations. The method above reduces (c), through (a) and
+(b), to the case in which every `T/p^kT` is a quotient of a `G_K`-stable lattice in such a representation; limits of
+this kind are the subject of the theorems of Berger (2004) and Liu (2007) cited in the Origin, under their own
+hypotheses on `K` and `p`, and (c) is proved by the method above and uses neither. LocalGaloisDeformationRings §6.11
+defines the torsion crystalline condition, for `K/ℚ_p` unramified, and records that its definition does not give this
+converse.
+
 *Needs:* 2.4, 3.4, 3.6, 6.1
 
 [ShortProof], `Lib/PadicHodge/Limit/CrystallineLimit.lean` (`New.Period.PadicRep`, `New.Period.groupRingHom`,
@@ -1380,6 +1536,18 @@ and `Σ_i a_{η,i}·x_{η,i} → n` along `F`. Then the jumps of `r` at `A` are 
 (c) Let `s ∈ Gal(Ω/E)`, `n ≥ 1`, and `P`, `Q_{η,i}` polynomials over `ℚ̄_ℓ` of degree `< n` such that `Q_{η,i}` kills `s` at `A` on `ρ_{η,i}` and,
 for every `l`, `Σ_i a_{η,i}·coeff_l(Q_{η,i})·tr ρ_{η,i} → coeff_l(P)·tr r` uniformly along `F`. Then `P` kills `s` at `A` on `r`.
 
+**In standard terms.** At a place `A` above `ℓ`, along each embedding `e` inducing `A` the decomposition group acts
+through `G_{K'}` for a finite extension `K'` of `ℚ_ℓ` (7.2 (d)); there, for continuous representations, "good" means
+crystalline in Fontaine's sense (7.2), the jumps of a Hodge–Tate representation, as every good one is, are its
+labelled Hodge–Tate weights with the opposite sign (7.3 (b), (d)), and "`P` kills `s`" means, for `s` in the
+decomposition group whose image lies in the Weil group with `α(s) ≤ 0`, that the representation is potentially
+crystalline there and that `P` vanishes at Fontaine's operator `r_D(s)` on `D_pst` (7.4), the coefficients `ℚ̄_ℓ`
+being treated by 7.2 (f), 7.3 (c) and 7.4 (e); away from `ℓ` the three conditions are already the standard ones. So,
+under the hypotheses above, (a)–(c) say that a representation whose trace is a uniform limit of combinations of traces
+of representations crystalline at `A` is crystalline at `A`, that its labelled Hodge–Tate multiplicities are the
+limits of the corresponding combinations, and that limits of polynomials vanishing at the Weil–Deligne operators of
+`s` vanish at that of `r`. These limit statements are particular to the route.
+
 *Needs:* 3.2, 3.4, 3.7, 6.1, 6.2, 6.3; GaloisRepresentationsOfUnitaryEigenforms §1.3
 
 [ShortProof], `Lib/PadicHodge/Limit/TraceLimit.lean` (`New.GaloisRep.tateTwistHom`,
@@ -1387,6 +1555,352 @@ for every `l`, `Σ_i a_{η,i}·coeff_l(Q_{η,i})·tr ρ_{η,i} → coeff_l(P)·t
 `New.GaloisRep.IsTraceLimit.exists_isCrystallineUpTo_tateTwistHom`, `New.GaloisRep.IsTraceLimit.isCrystalline`,
 `New.GaloisRep.IsTraceLimit.isGoodAt`, `New.GaloisRep.IsTraceLimit.tendsto_jump`, `New.GaloisRep.IsTraceLimit.jumpsRelAt`,
 `New.GaloisRep.IsTraceLimit.isKilledBy`, `New.GaloisRep.IsTraceLimit.polyKillsAt`, `New.GaloisRep.local_clauses_of_trace_limit`)
+
+## Layer 7: Comparison with the standard theory
+
+Throughout this layer `K ⊂ ℚ̄_p` is a finite extension of `ℚ_p` with residue field `k`, maximal unramified subfield
+`K_0` and Galois group `G_K = Gal(ℚ̄_p/K)`, a group over `G_p` through the inclusion. `K_0` lies in `B_cris⁺` through
+`W(k) ⊆ A_inf`, and `σ` is its Frobenius. `A_cris`, `B_cris⁺ = A_cris[1/p]`, `B_cris` and
+`D_cris(V) = (B_cris ⊗_{ℚ_p} V)^{G_K}` are Fontaine's rings and functor (PadicPeriodRings §§4.1, 4.2),
+`log[ε] ∈ A_cris` is Fontaine's period for the `ε` of 1.1, and `D_max(V) = (B_max ⊗_{ℚ_p} V)^{G_K}`. A
+*representation* of `G_K` is a continuous linear action on a finite-dimensional `ℚ_p`-vector space `V`, possibly with
+a commuting action of a `ℤ_p`-algebra `R` (for an `E`-linear representation, `E/ℚ_p` finite, `R = E`); a *lattice* in
+`V` is a `G_K`-stable finitely generated `ℤ_p`-submodule spanning `V`, stable under `R` when `R` is the ring of
+integers of `E`.
+
+### 7.1 The period rings
+
+*Origin:* this roadmap's own formulation: the rings of 1.3 and 1.5 compared with those of PadicHodgeTheory §0.5 and
+PadicPeriodRings §§1.5, 4.1, the inclusions `φ(B_max) ⊆ B_cris ⊆ B_max` inside `B_dR`, the injectivity of `φ` on
+`B_max`, and their consequences for invariants and for the fundamental exact sequence.
+
+*Proof route:* (a) If `p·f = (pX − ξ)·h` in `A_inf[X]`, then `ξh ≡ 0` modulo `p`, and `ξ` is nonzero in the domain
+`A_inf/p = O♭` (1.2 (a), (d)), so `h = ph'` and `f = (pX − ξ)h'`: `A_inf[X]/(pX − ξ)` has no `p`-torsion, and
+`X ↦ ξ/p` maps it isomorphically onto `A_inf[ξ/p] ⊆ A_inf[1/p]`, so the two `p`-adic completions are one ring. Ring
+endomorphisms of `A_max`, and ring maps from `A_max` to `O_C`, are `p`-adically continuous and are determined on
+`A_inf[ξ/p]` by their restriction to `A_inf`, `p` being a non-zero-divisor in the target; so the Frobenius of 1.3 is
+that of PadicHodgeTheory §0.5, and the action of `G_p` and `θ` are the unique extensions of those of `A_inf`. (b) In
+`A_inf[1/p]` and in `B⁺`, `ξ` is a non-zero-divisor and `θ` maps the quotient by `ξ` isomorphically onto `ℂ_p` (1.2
+(b), 1.4 (c)); so the map of (b) is an isomorphism on the graded pieces `ξ^iA_inf[1/p]/ξ^{i+1}` for `i < n`, and
+induction on `n` gives (b). The action of `G_p` on the limit, in 1.3 and in PadicPeriodRings §1.5, extends in both
+cases the action on `A_inf[1/p]`, which preserves `ξA_inf[1/p]`; PadicPeriodRings §1.5 identifies the `ker θ`-adic
+completion of `A_inf[1/p]` with `BDeRhamPlus`, and the lift of `ℚ̄_p` to `B_dR⁺` is unique (PadicHodgeTheory §0.3).
+Writing an element `x` of `A_max` as `Σ_m p^m s_m` with each `s_m` a polynomial in `ξ/p` over `A_inf` gives
+`x = a + (ξ/p)y` with `a ∈ A_inf`, `y ∈ A_max`; iterating, the image of `x` in `B⁺/ξ^nB⁺` is that of an element of
+`p^{1−n}A_inf`, so `A_max → B_dR⁺` is continuous for the canonical topology of PadicPeriodRings §4.1, and it agrees
+with the map of PadicHodgeTheory §0.5, which is continuous and equal to it on `A_inf[ξ/p]`. (c)
+`ξ^n/n! = (p^n/n!)(ξ/p)^n` with `p^n/n! ∈ ℤ_p`, so the envelope of PadicPeriodRings §3 lies in `A_inf[ξ/p]`, which
+gives `A_cris → A_max`; composed with `A_max → B_dR⁺` it is the injective map of PadicPeriodRings §4.1, the two being
+continuous and equal on the envelope. Conversely `φ(ξ) ∈ (p, ξ^p)` (PadicPeriodRings §4.1) and
+`ξ^p/p = (p − 1)!·γ_p(ξ)`, so `φ(ξ/p)` lies in the envelope, and by continuity `φ(A_max) ⊆ A_cris`. (d) `log[ε]` is
+killed by `θ` and has `φ(log[ε]) = p·log[ε]` (PadicPeriodRings §§3, 4.1); `t` is a unit of `B_max` and a uniformiser
+of `B_dR⁺`, so `log[ε]/t` lies in `B_max ∩ B_dR⁺` and is fixed by `φ`; by 1.5 (c) it lies in `ℚ_p`, and it is nonzero.
+As `t` is a unit multiple of `pμ`, `B⁺[1/μ] = B⁺[1/log[ε]]`, and inverting `log[ε]` in (c) gives the statements on
+`B_cris` and `B_max`. (e) If `φ(y) = 0` with `y ∈ B⁺`, then `θ(φ^j y) = 0` for every `j ≥ 1`, so `τ` divides `y` in
+`B⁺` (1.2 (c) with the general clause of 1.4 (c)), and `y/τ` again lies in the kernel since `φ(τ) = μ` is nonzero in
+the domain `B⁺`; so every power of `τ` divides `y`. Modulo `p`, `ξ` is `(ε^{1/p} − 1)^{p−1}`, the image of `τ^{p−1}`,
+so `τ^{p−1} = ξ − pa` with `a ∈ A_inf`, and the last clause of 1.4 (c) gives `y = 0`. On `B_max`, `φ(μ)` is a unit
+(1.4 (b)). (f) An `x ∈ B_max` with `φ(x) = x` lies in `φ(B_max) ⊆ ι(B_cris)`. The ring `B_max^{G_K}` contains
+`ι(B_cris^{G_K}) = K_0` (PadicPeriodRings §4.3), and `φ` maps it injectively and `σ`-semilinearly into
+`ι(B_cris^{G_K}) = K_0`, so it is `K_0`. (g) follows from (b), (d) and (f).
+
+Let `A_cris → A_max` be the map of PadicHodgeTheory §0.5, which sends `γ_n(ξ)` to `(p^n/n!)(ξ/p)^n`, and write `ι` for
+it and for the maps it induces after inverting `p` and `log[ε]`.
+
+(a) (*`A_max` and `B⁺`*) `X ↦ ξ/p` identifies the ring `A_max` of 1.3 with the `p`-adic completion of `A_inf[ξ/p]`,
+the ring `A_max` of PadicHodgeTheory §0.5, and `B⁺` with its `B_max⁺ = A_max[1/p]`, compatibly with the maps from
+`A_inf` and with `φ`; the action of `G_p` and the map `θ` of 1.3 are the unique extensions of those of `A_inf` to
+`A_max`, by ring endomorphisms and by a ring map to `O_C`.
+
+(b) (*`B_dR⁺` and `B_dR`*) For every `n ≥ 1` the map `A_inf[1/p]/ξ^n → B⁺/ξ^nB⁺` is bijective. Hence the ring `B_dR⁺`
+of 1.3 is the `ker θ`-adic completion of `A_inf[1/p]`, which is Mathlib's `BDeRhamPlus` of `O_C` (PadicPeriodRings
+§1.5), and `B_dR` is `BDeRham`, by an isomorphism that is the identity on `A_inf[1/p]` and respects `θ`, the action of
+`G_p`, the filtrations `Fil^n = ξ^nB_dR⁺`, the embeddings of `ℚ̄_p` (1.5 (b) and PadicHodgeTheory §0.3) and the maps
+from `A_max` (1.3 and PadicHodgeTheory §0.5).
+
+(c) (*`A_cris` in `A_max`*) `ι : A_cris → A_max` and `ι : B_cris⁺ → B⁺` are injective and respect `φ`, the action of
+`G_p`, `θ` and the embeddings in `B_dR⁺` (PadicPeriodRings §4.1 and (b)). Moreover `φ(A_max) ⊆ ι(A_cris)` and
+`φ(B⁺) ⊆ ι(B_cris⁺)`.
+
+(d) (*`B_max` and `t`*) The period `t` of 1.5 (a) is `c·log[ε]` for some `c ∈ ℚ_p^×`. Hence `B_max = B⁺[1/μ]` is
+`B_max⁺[1/log[ε]]`, the ring `B_max` of PadicHodgeTheory §0.5, with the same `φ` and embedding in `B_dR`, and with the
+action of `G_p` that extends the one of (a); `ι` extends to an injective map `ι : B_cris → B_max` with the same
+compatibilities; and `φ(B_max) ⊆ ι(B_cris)`. Inside `B_dR`: `φ(B_max) ⊆ B_cris ⊆ B_max`.
+
+(e) (*Frobenius*) `φ` is injective on `B⁺` and on `B_max`.
+
+(f) (*invariants*) `B_max^{φ=1} = ι(B_cris^{φ=1})` and `B_max^{G_K} = ι(B_cris^{G_K}) = K_0`.
+
+(g) (*the fundamental exact sequence*) Through (b), (d) and (f), the second statement of 1.5 (c), together with its
+first statement for `a = 0`, is the exactness of the `G_p`-equivariant sequence
+`0 → ℚ_p → B_cris^{φ=1} → B_dR/B_dR⁺ → 0` of PadicPeriodRings §4.3; each implies the other. The first statement of 1.5
+(c) for `a ≠ 0`, the surjectivity of `φ − 1` on `B_max` with a prescribed class modulo `B_dR⁺`, is not part of that
+sequence.
+
+*Needs:* 1.2, 1.3, 1.4, 1.5; PadicHodgeTheory §0.3 (Natural topologies and Fontaine's t), §0.5 (Maximal periods,
+logarithms and semistable periods); PadicPeriodRings §1.5 (The topological de Rham period rings), §3 (The principal
+Fontaine divided-power envelope), §4.1 (Period carriers and their structure maps), §4.3 (Fixed fields, regularity and
+the fundamental period identity)
+
+### 7.2 Crystalline representations
+
+*Origin:* this roadmap's own formulation: admissibility for `B_max` in the sense of 3.1 compared with Fontaine's
+crystalline representations, defined with `B_cris` (PadicPeriodRings §4.3).
+
+*Proof route:* Since `B_max` is a `ℚ_p`-algebra, `B_max ⊗ T = B_max ⊗_{ℚ_p} V`. As `V` is free over `ℚ_p`, `ι ⊗ 1` and
+`φ ⊗ 1` are injective (7.1 (d), (e)), and both commute with `G_K`; so `ι ⊗ 1` embeds `D_cris(V)` in `D_max(V)`, and
+`φ ⊗ 1` maps `D_max(V)` into `(ι ⊗ 1)(D_cris(V))` (7.1 (d)), `σ`-semilinearly over `K_0`. As `σ` is bijective, `φ ⊗ 1`
+carries `K_0`-independent families to `K_0`-independent families, so
+`dim_{K_0} D_max(V) ≤ dim_{K_0} D_cris(V) ≤ dim V` (PadicPeriodRings §4.3), and the embedding is onto. For the
+injectivity in (a), take a shortest `B_max`-linear relation `Σ_i b_i d_i = 0` among `K_0`-independent
+`d_i ∈ D_max(V)`: subtracting `g(b_1)` times it from `b_1` times its transform by `g ∈ G_K` gives a shorter relation,
+so `b_1·g(b_i) = g(b_1)·b_i` for all `i` and `g`; 3.5 (a) with `F = {Γ}` gives `b_i = b_1a_i` with
+`a_i ∈ B_max^{G_K} = K_0` (7.1 (f)), and `Σ_i a_i d_i = 0` with `a_1 = 1` is impossible. In (b), the comparison
+isomorphism for `B_cris` of PadicPeriodRings §4.3, base-changed along `ι`, shows that `D_max(V)` spans when `V` is
+crystalline; conversely, if `D_max(V)` spans the free `B_max`-module `B_max ⊗_{ℚ_p} V` of rank `dim V`, a `K_0`-basis
+of `D_max(V) = D_cris(V)` has at least `dim V` elements. In (c), an element fixed by `g` for `g` near `1` is fixed by
+an open subgroup of `G_K`, which contains some `G_L`; and when fixed elements span, finitely many of them do, all
+fixed by one `G_L`. (d) is 3.2 (c) for `ψ = j : Γ → G_{K_Γ}`, the image of the filter "near `1`" of `Γ` being the
+filter "near `1`" of `G_{K_Γ}`; the statements on `HT_γ`, `D_pcris`, `β_{s,m}` and `Z_f` follow from the definitions
+in 3.1, which involve `g` only through `j(g)` and `ρ(g) = ρ'(j(g))`. (e) An element `g` with `j(g) = 1` is near `1`
+and acts on `B_max ⊗ T` by the `B_max`-linear map `1 ⊗ ρ(g)`, which fixes `D_pcris(T)`; as `D_pcris(T)` spans
+`B_max ⊗ T`, this map is the identity, and `ρ(g) = 1` because `T → B_max ⊗ T` is injective, `T` being flat over `ℤ_p`
+and `ℤ_p → B_max` injective (1.4 (a)). So `ρ = ρ'∘j`, and `ρ'` is potentially crystalline by 3.2 (c). By 3.3 (b), for
+`R = ℤ_p` or `ℚ_p` and a basis `e` of `T`, with `n` elements, there are `P ∈ GL_n(ℂ_p)` and integers `k_1, …, k_n`
+with `M_e(ρ'(g))·g(P) = P·diag(χ(g)^{−k_i})` for `g` near `1`; when `g` tends to `1`, `g(P)` tends to `P`
+(PadicPeriodRings §1.1) and `χ(g)` to `1`, so `M_e(ρ'(g))` tends to `1`, and the homomorphism `ρ'` is continuous. (f)
+`B_max ⊗ W = (B_max ⊗_{ℚ_p} V) ⊗_E ℚ̄_p`, with `G_K` acting on the first factor; expanding an element in an `E`-basis
+of `ℚ̄_p` shows that it is fixed along `F` exactly when its coefficients are, so
+`Fix_F(B_max ⊗ W) = Fix_F(B_max ⊗ V) ⊗_E ℚ̄_p`. Its `B_max`-span is `S ⊗_E ℚ̄_p`, `S` being the `B_max`-span of
+`Fix_F(B_max ⊗ V)`, an `E`-subspace, and `S ⊗_E ℚ̄_p` is all of `B_max ⊗ W` exactly when `S` is all of
+`B_max ⊗_{ℚ_p} V`. The last statement is ArithmeticGaloisRepresentations §1.5.
+
+Let `V` be a representation of `G_K`, with a commuting action of `R`, and `T` either `V` or a lattice in `V`.
+
+(a) (*the invariants*) `Fix_{{Γ}}(B_max ⊗ T) = D_max(V)`, and `ι ⊗ 1` maps `D_cris(V)` bijectively onto `D_max(V)`,
+compatibly with `φ ⊗ 1`, with the structures of `K_0`-vector space and of `R`-module, and with the comparison maps to
+`B_cris ⊗_{ℚ_p} V` and `B_max ⊗_{ℚ_p} V`. The comparison map `B_max ⊗_{K_0} D_max(V) → B_max ⊗_{ℚ_p} V` is injective.
+
+(b) (*crystalline*) `T` is crystalline in the sense of 3.1 exactly when `V` is crystalline in the sense of
+PadicPeriodRings §4.3, that is, when `dim_{K_0} D_cris(V) = dim_{ℚ_p} V`.
+
+(c) (*potentially crystalline*) `D_pcris(T)` is the union, over the finite extensions `L` of `K` in `ℚ̄_p`, of the
+images under `ι ⊗ 1` of the `D_cris,L(V) = (B_cris ⊗_{ℚ_p} V)^{G_L}`; and `T` is potentially crystalline exactly when
+the restriction of `V` to `G_L` is crystalline for some such `L`.
+
+(d) (*groups acting through `j`*) Let `(Γ, j)` be a group over `G_p` and `ρ = ρ'∘j` for a representation `ρ'` of
+`j(Γ) = G_{K_Γ}`. Then admissibility of `ρ` along a filter `F` is admissibility of `ρ'` along `j_*F`, and (a)–(c) hold
+for `ρ` with `K_Γ` and `ρ'` in place of `K` and `V`. The spaces `HT_γ(T, u)` and `D_pcris(T)` of `ρ` are those of
+`ρ'`; when `T` is potentially crystalline, `β_{s,m}` for `ρ` is `β_{j(s),m}` for `ρ'`; and `Z_f(T)` for `ρ` consists
+of the `c∘j` with `c` in `Z_f(T)` for `ρ'`. This applies to the decomposition group of a place of a number field above
+`p`, read in `G_p` through an embedding of the algebraic closure into `ℚ̄_p` that induces the place.
+
+(e) (*potentially crystalline actions act through `j` and are continuous*) Let `(Γ, j)` be a group over `G_p` and `ρ`
+a linear action of `Γ`, with no continuity assumed, on a module `T` that is free of finite rank over `ℤ_p` or of
+finite dimension over `ℚ_p`. If `ρ` is potentially crystalline in the sense of 3.1, then `ρ = ρ'∘j` for an action `ρ'`
+of `G_{K_Γ}` on `T` that is continuous for the `p`-adic topology of `T`; so `ρ'` is a representation of `G_{K_Γ}` on
+`V = T ⊗ ℚ_p` in the sense of this layer, `T` is `V` or a lattice in it, and (a)–(d) apply. Hence, on such modules,
+the potentially crystalline actions of `Γ` in the sense of 3.1 are exactly the `ρ'∘j` with `ρ'` continuous and `V`
+crystalline over some finite extension of `K_Γ`, and the crystalline ones are those with `V` crystalline, in the sense
+of PadicPeriodRings §4.3.
+
+(f) (*coefficients in `ℚ̄_p`*) Let `E ⊂ ℚ̄_p` be finite over `ℚ_p`, `V` an `E`-linear representation of `G_K` and
+`W = V ⊗_E ℚ̄_p`, with `R = ℚ̄_p`. For every filter `F` on `G_K`, `Fix_F(B_max ⊗ W) = Fix_F(B_max ⊗ V) ⊗_E ℚ̄_p`, and
+`W` is admissible along `F` exactly when `V` is. So `W` is crystalline, respectively potentially crystalline, in the
+sense of 3.1 exactly when `V` is crystalline, respectively crystalline over some finite extension of `K`, in the sense
+of PadicPeriodRings §4.3, and `D_pcris(W) = D_pcris(V) ⊗_E ℚ̄_p`. Every continuous representation of `G_K` on a
+finite-dimensional `ℚ̄_p`-vector space, `ℚ̄_p` having its `p`-adic topology, is such a `W`
+(ArithmeticGaloisRepresentations §1.5).
+
+The definition of 3.1 also applies to modules of other kinds, where PadicPeriodRings §4.3 has no notion: for instance,
+on a module killed by a power of `p`, `B_max ⊗ T = 0`, so every action is crystalline in the sense of 3.1.
+
+*Needs:* 1.4, 3.1, 3.2, 3.3, 3.5, 7.1; PadicPeriodRings §1.1 (The Galois action on `ℂ_p`), §4.2 (The general-base
+invariant functors), §4.3 (Fixed fields, regularity and the fundamental period identity);
+ArithmeticGaloisRepresentations §1.5 (Descent from `ℚ̄_ℓ`)
+
+### 7.3 Hodge–Tate jumps
+
+*Origin:* this roadmap's own formulation: the spaces `HT_γ(T, u)` of 3.1 compared with the Hodge–Tate fixed spaces of
+PadicHodgeTheory §3.3 and the labelled Hodge–Tate weights of FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.P7.1.
+
+*Proof route:* A `γ`-semilinear `f : T → ℂ_p` is the restriction of a unique `ℂ_p`-linear form `F` on `W_γ`, and `f`
+lies in `HT_γ(T, u)` exactly when `F`, as a vector of `W_γ^∨(−u)`, is fixed by `g` for `g` near `1`, that is, by some
+`G_{L'}` with `L'` finite over `L`. These vectors form a `ℚ̄_p`-space, finite-dimensional by 3.4 (a), on which `G_L`
+acts semilinearly with open stabilisers, with `G_L`-invariants `W_γ^∨{−u}`; semilinear descent (PadicHodgeTheory §0.1)
+gives (a). If `V` is Hodge–Tate, so is its restriction to `G_L` (PadicHodgeTheory §3.3), and `W_γ` is a sum of copies
+of the twists `ℂ_p(−q)`; Tate's theorem (1.6 (a)) and `ℂ_p^{G_L} = L` (PadicPeriodRings §1.2) give
+`dim_L W_γ^∨{−u} = dim_L W_γ{u}`, the number of copies of `ℂ_p(−u)`. For `V` de Rham, `gr D_dR(V)` is `D_HT(V)`
+(FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.P7.1), and splitting the comparison isomorphism
+`⊕_q ℂ_p(−q) ⊗_K gr^q D_dR(V) → ℂ_p ⊗_{ℚ_p} V` along the idempotents of `ℂ_p ⊗_{ℚ_p} E` and of `K ⊗_{ℚ_p} E` shows
+that its `γ`-component is `⊕_q ℂ_p(−q) ⊗_{E,γ} gr^q(e_τ D_dR(V))` for the `τ` with `γ∘τ` the inclusion of `K`. (c) is
+3.4 (b) with ArithmeticGaloisRepresentations §1.5. (d): `V` is crystalline over some finite `L` (7.2 (c)), hence
+semistable over `L` (PadicHodgeTheory §3.5), hence potentially semistable and de Rham (PadicHodgeTheory §5.3).
+
+Let `E/ℚ_p` be finite, `V` an `E`-linear representation of `G_K` (`R = E`), `T` either `V` or a lattice in `V` stable
+under the integers `O_E` (then `R = O_E`), and `γ : R → ℂ_p` a `ℤ_p`-algebra map; it extends to `E → ℚ̄_p`. Let
+`L ⊂ ℚ̄_p` be a finite Galois extension of `K` containing `γ(E)`, `W_γ = ℂ_p ⊗_{E,γ} V`, on which `g ∈ G_L` acts by
+`g ⊗ ρ(g)`, `W_γ^∨` its `ℂ_p`-linear dual, and `W{q} = W(q)^{G_L}` as in PadicHodgeTheory §3.3.
+
+(a) For every `u ∈ ℤ`, `HT_γ(T, u)` is `ℚ̄_p ⊗_L W_γ^∨{−u}`, and `jump_γ(T, u) = dim_L W_γ^∨{−u}`.
+
+(b) If `V` is Hodge–Tate, then `jump_γ(T, u) = dim_L W_γ{u}`, the multiplicity of the Hodge–Tate weight `−u` in `W_γ`,
+the cyclotomic character having weight `+1` and jump `−1`. If `V` is de Rham and `E` contains every embedding of `K`,
+then `jump_γ(T, u) = dim_E gr^u(e_τ D_dR(V))` for the embedding `τ = γ^{−1}|_K : K → E`, which is the label of `γ` in
+FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.P7.2: the multiset of jumps of `T` at `γ` is the negative of the
+labelled multiset `HT_τ(V)` of §R07.P7.1. For `E = ℚ_p`, `γ` the inclusion and `V` de Rham,
+`jump(T, u) = dim_K gr^u D_dR(V)`.
+
+(c) A continuous representation of `G_K` on a finite-dimensional `ℚ̄_p`-space, `ℚ̄_p` having its `p`-adic topology, is
+`V_E ⊗_E ℚ̄_p` for some finite `E ⊂ ℚ̄_p` and some `E`-linear representation `V_E` (ArithmeticGaloisRepresentations
+§1.5), and its jumps at `γ : ℚ̄_p → ℂ_p` are those of `V_E` at the restriction of `γ` to `E` (3.4 (b)).
+
+(d) If `T` is potentially crystalline, `V` is de Rham; so (b) applies, and `T` has jumps in `[a, b]` at `γ` exactly
+when the Hodge–Tate weights of `W_γ` lie in `[−b, −a]`.
+
+For `V` not Hodge–Tate, (a) still computes `jump_γ(T, u)`, which is then not a Hodge–Tate multiplicity.
+
+*Needs:* 1.6, 3.1, 3.4, 7.2; PadicHodgeTheory §0.1 (The completed algebraic closure and Tate–Sen descent), §3.3
+(Fontaine's functors and Hodge–Tate descent), §3.5 (Crystalline and semistable classification), §5.3 (Potentially
+semistable periods and Fontaine's recipe); PadicPeriodRings §1.2 (Ax–Sen–Tate fixed points);
+FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.P7.1 (Period functors with finite coefficients), §R07.P7.2 (Labelled
+Sen operators); ArithmeticGaloisRepresentations §1.5 (Descent from `ℚ̄_ℓ`)
+
+### 7.4 The linear Frobenius and the Weil–Deligne representation
+
+*Origin:* this roadmap's own formulation: the operators `β_{s,m}` of 3.1 and 3.7 compared with the Weil–Deligne
+representation of `D_pst` given by Fontaine's recipe (PadicHodgeTheory §5.3).
+
+*Proof route:* As `V` is potentially crystalline, `N = 0` on `D_pst(V)` (PadicHodgeTheory §5.3), so `D_pst(V)` lies in
+`B_cris ⊗_{ℚ_p} V`, the kernel of `N` on `B_st` being `B_cris` (PadicPeriodRings §4.1), and it is the union of the
+`D_cris,L(V)` (PadicPeriodRings §4.2); 7.2 (c) gives the first part of (a). On `D_pst(V)`, `w̄` is the action of
+`w ⊗ ρ(w)` and the Frobenius is `φ ⊗ 1`, and the two commute, so `r_D(s)` agrees with `φ^m j(s) ⊗ ρ(s)`; by the
+uniqueness in 3.7 (a), `β_{s,m}` is its `B_max`-linear extension. An element `c` of `K_0^nr` has
+`s(φ^m(c)) = σ^{α(s)+m}(c) = c`, so `r_D(s)` is `K_0^nr`-linear. Choosing `L` with `V` crystalline over `G_L`,
+`D_pst(V) = K_0^nr ⊗_{L_0} D_cris,L(V)` (PadicHodgeTheory §5.3), and 7.2 (a), (b) for `G_L` give the isomorphism of
+(a). In (c), `P(β_{s,m})` is the `B_max`-linear extension of `P(r_D(s))`, and `D_pst(V)` spans `B_max ⊗_{ℚ_p} V`. In
+(d), if `w ∈ W_K` has `α(w) ≤ 0`, then `(w, −α(w))` is a Weil pair, and otherwise `(w^{−1}, α(w))` is, with
+`r_D(w) = r_D(w^{−1})^{−1}`. In (e), `β_{s,m}` of `V` commutes with the action of `E` (3.7 (b)), so `β_{s,m} ⊗ 1` is
+defined on `B_max ⊗ W = (B_max ⊗_{ℚ_p} V) ⊗_E ℚ̄_p`; it is `B_max`-linear and agrees with `φ^m s ⊗ ρ(s)` on
+`D_pcris(W) = D_pcris(V) ⊗_E ℚ̄_p` (7.2 (f)), so it is `β_{s,m}` for `W` by the uniqueness in 3.7 (a); and
+`D_pst(V) ⊗_E ℚ̄_p` spans `B_max ⊗ W` and injects into it by (a).
+
+Let `V` be a potentially crystalline representation of `G_K` (7.2 (c)), with a commuting action of `R`, and `T` as in
+7.2. Let `D_pst(V)`, the union of the `D_st,L(V)`, carry Fontaine's operators `r_D(w) = w̄∘φ^{−α(w)}` for `w` in the
+Weil group `W_K`, `α(w)` being the exponent of absolute arithmetic Frobenius, as in PadicHodgeTheory §5.3, where `w̄`
+and `φ` are the restrictions of `w ⊗ ρ(w)` and `φ ⊗ 1`; let `K_0^nr ⊆ B_cris⁺` be the union of the fields
+`W(𝔽_{p^f})[1/p]` of 2.1. Here `r_D(w)` is taken on all of `D_pst(V)`, while PadicHodgeTheory §5.3 takes the
+coefficients of `V` in a field `E'` large enough for `L_0` to embed in it, `L` being a finite Galois extension of `K`
+over which `V` is semistable and `L_0` its maximal unramified subfield, and restricts the same formula to the
+component of `D_st,L(V)` cut out by one embedding of `L_0` into `E'`. For such coefficients `D_st,L(V)` is the direct
+sum of these components and spans `D_pst(V)` over `K_0^nr`, `r_D(w)` is linear over `K_0^nr` and over `E'`, and
+`φ ⊗ 1` commutes with `r_D(w)` and with the coefficients and permutes the components transitively; so a polynomial
+over `E'` vanishes at `r_D(w)` on one component exactly when it vanishes on `D_pst(V)`. If `V` is linear over a field
+`E` only, and `E'` is a finite extension of `E` into which `L_0` embeds, then `D_pst(V ⊗_E E') = D_pst(V) ⊗_E E'`, so
+a polynomial over `E` vanishes at `r_D(w)` on `D_pst(V)` exactly when it vanishes at `r_D(w)` on one component of
+`D_st,L(V ⊗_E E')`. An element `s ∈ G_K` forms a Weil pair `(s, m)` exactly when `s ∈ W_K` and `α(s) = −m ≤ 0`.
+
+(a) `D_pst(V)` lies in `B_cris ⊗_{ℚ_p} V`, and `ι ⊗ 1` maps it onto `D_pcris(T)`, compatibly with `φ ⊗ 1` and with the
+actions of `G_K` and of `R`. The map `B_max ⊗_{K_0^nr} D_pst(V) → B_max ⊗_{ℚ_p} V` is an isomorphism.
+
+(b) For every Weil pair `(s, m)` with `s ∈ G_K`, `β_{s,m}(b·x) = b·r_D(s)(x)` for `b ∈ B_max` and `x ∈ D_pst(V)`:
+`β_{s,m}` is the `B_max`-linear extension of Fontaine's operator `r_D(s) = s̄∘φ^m`.
+
+(c) A polynomial `P ∈ R[X]` kills `(s, m)` on `T` exactly when `P(r_D(s)) = 0` on `D_pst(V)`, `R` acting through `V`.
+
+(d) The operators `β_{s,m}`, over all Weil pairs, determine `r_D` on all of `W_K`, and the monodromy operator of
+`D_pst(V)` is `0`; so they determine the Weil–Deligne representation of `V`. The relation "`P` kills `(s, m)`"
+records, for each `s`, only the polynomials over `R` that vanish at `r_D(s)`: it determines neither the conjugacy
+class of `r_D(s)` nor the representation `r_D`.
+
+(e) (*coefficients in `ℚ̄_p`*) Let `V` moreover be `E`-linear for a finite `E ⊂ ℚ̄_p`, and `W = V ⊗_E ℚ̄_p` as in 7.2
+(f). Then `D_pcris(W)` is the image of `D_pst(V) ⊗_E ℚ̄_p`, `β_{s,m}` for `W` is the `B_max`-linear extension of
+`r_D(s) ⊗ 1`, and a polynomial `P ∈ ℚ̄_p[X]` kills `(s, m)` on `W` exactly when `P(r_D(s) ⊗ 1) = 0` on
+`D_pst(V) ⊗_E ℚ̄_p`.
+
+*Needs:* 2.1, 3.1, 3.7, 7.1, 7.2; PadicHodgeTheory §5.3 (Potentially semistable periods and Fontaine's recipe);
+PadicPeriodRings §4.1 (Period carriers and their structure maps), §4.2 (The general-base invariant functors)
+
+### 7.5 The crystalline cocycles `Z_f(T)` and the Bloch–Kato condition
+
+*Origin:* this roadmap's own formulation: the module `Z_f(T)` of 3.1 compared with the Bloch–Kato condition `H¹_f`
+(SelmerIwasawaCohomology §4.9; PadicHodgeRegulators §1.1).
+
+*Proof route:* If `1 ⊗ c(g) = g(y) − y` for all `g`, with `y ∈ B_max ⊗_{ℚ_p} V`, applying `φ ⊗ 1`, which fixes
+`1 ⊗ T`, gives the same identity with `φ(y)`, which lies in `(ι ⊗ 1)(B_cris ⊗_{ℚ_p} V)` (7.1 (d)); so for a continuous
+cocycle `c` the image of its class in `H¹(K, B_cris ⊗_{ℚ_p} V)` is the class of a coboundary. Conversely, if that
+image vanishes, `1 ⊗ c` is the coboundary of some `y ∈ B_cris ⊗_{ℚ_p} V`, and `(ι ⊗ 1)(y)` puts `c` in `Z_f(T)`. When
+`V` is potentially crystalline, every element of `Z_f(T)` is a cocycle (4.1 (a)), continuous because it is `0` modulo
+`p^mT` for `g` near `1` (4.1 (d)). In (b), `c ↦ [c]` maps `Z_f(T)` onto `H¹_f(K, T)` with kernel the coboundaries,
+which lie in `Z_f(T)` (4.1 (a)); `Z_f(T)` is finitely generated (4.2 (a)), and `Z_f(T) ⊗ ℚ_p` is the preimage of
+`H¹_f(K, V)` among the continuous cocycles with values in `V`, every such cocycle having bounded image, so its
+dimension is `dim V − dim H⁰(K, V) + dim H¹_f(K, V)`. In (c), `D_dR(V)/Fil⁰` is the sum of the `gr^u D_dR(V)` with
+`u < 0`, of dimensions `jump(T, u)` over `K` (7.3 (b), (d)).
+
+Let `T` be a lattice in a representation `V` of `G_K`, with `R` as in 7.2, `Z¹(G_K, T)` the continuous `1`-cocycles,
+`B¹(G_K, T)` the coboundaries, `H¹_f(K, V) = ker(H¹(K, V) → H¹(K, B_cris ⊗_{ℚ_p} V))` the Bloch–Kato condition and
+`H¹_f(K, T)` its preimage in `H¹(K, T)` (SelmerIwasawaCohomology §4.9; PadicHodgeRegulators §1.1).
+
+(a) A continuous cocycle `c : G_K → T` lies in `Z_f(T)` exactly when its class in `H¹(K, V)` lies in `H¹_f(K, V)`. If
+`V` is potentially crystalline, `Z_f(T) ⊆ Z¹(G_K, T)`, so `Z_f(T)` is the preimage of `H¹_f(K, V)` in `Z¹(G_K, T)`.
+
+(b) If `V` is potentially crystalline, `c ↦ [c]` gives an exact sequence of `R`-modules
+`0 → B¹(G_K, T) → Z_f(T) → H¹_f(K, T) → 0`, and `rk_{ℤ_p} Z_f(T) = rk T − dim H⁰(K, V) + dim H¹_f(K, V)`.
+
+(c) If `V` is potentially crystalline, the number of negative jumps of `T` at the inclusion `ℤ_p ⊂ ℂ_p`, counted with
+multiplicity, is `dim_K D_dR(V)/Fil⁰`; so, given (b), the rank formula 4.2 (a) for `T` is equivalent to the formula
+`dim H¹_f(K, V) = [K : ℚ_p]·dim_K D_dR(V)/Fil⁰ + dim H⁰(K, V)` for this `V`; PadicHodgeRegulators §1.5 states that
+formula for every de Rham `V`, and 4.2 (a) is its case of potentially crystalline `V`.
+
+`Z_f(T)` records the cocycles and not only their classes: its quotient by the coboundaries is `H¹_f(K, T)`. By 7.2
+(e), every potentially crystalline action of a group over `G_p` on a finite free `ℤ_p`-module is of the kind treated
+in 7.2 (d), with a continuous `ρ'`; so (a)–(c) cover every potentially crystalline lattice, with `K = K_Γ` and the
+cocycles `c∘j`. For actions that do not factor through `j`, `Z_f(T)` has no counterpart in the general roadmaps.
+
+*Needs:* 4.1, 4.2, 7.1, 7.2, 7.3; SelmerIwasawaCohomology §4.9 (The Bloch–Kato local condition on `T` and `W`);
+PadicHodgeRegulators §1.1 (The Bloch–Kato local conditions H¹_e, H¹_f, H¹_g), §1.5 (Dimensions of the Bloch–Kato
+subspaces)
+
+### 7.6 Kummer charts and the Breuil–Kisin embedding
+
+*Origin:* this roadmap's own formulation: the embedding `𝔖 → A_inf` of FiniteFlatGroupsAndIntegralPadicHodgeTheory
+§R07.4.1 read as a chart in the sense of 2.1.
+
+*Proof route:* A ring map `W(k) → W(O♭)` is the Witt functoriality of a map `k → O♭`, whose image consists of fixed
+points of `x ↦ x^{p^f}` and so lies in `𝔽_{p^f}`; this gives (a). In `O_K`, `p = π^e w` with `w` a unit; take
+`w(X) ∈ Λ[X]` with `w(π) = w`. Then `p − X^e w(X)` vanishes at `π`, so it is `c(X)E(X)` (`θ_𝔖` has kernel `E(u)𝔖`,
+§R07.4.1), and modulo `p`, where `E ≡ X^e`, `c ≡ −w` is a unit; put `A = −w(X)`. The image of `E(X)` lies in `ker θ`
+and its image in `O♭` has valuation `1`, that of `ξ`, so it is a unit multiple of `ξ` (1.2 (b)); `[π♭]` is not a unit.
+An element of `G_p` fixes `Λ` pointwise exactly when it fixes the `(p^f − 1)`-th roots of unity (2.4 (a)), that is,
+lies in `G_{K_0}`, and `K = K_0(π)`. Every `X^{p^n} − π` is Eisenstein over the integers of `K`, so `G_K` acts
+transitively on the `p^n`-th roots of `π`, and, by compactness, on the compatible systems of `p`-power roots of `π`;
+`ε^lπ♭` is such a system, so some `g ∈ G_K` has `g([π♭]) = [ε]^l[π♭]`. For `K/ℚ_p` unramified and `π = −p`,
+`E(u) = u + p`, `w = −1` and `A = 1`.
+
+Let `π` be a uniformiser of `K`, `e` and `f` the ramification index and residue degree of `K`, so that `k = 𝔽_{p^f}`,
+`π♭ ∈ O♭` an element with `(π♭)^♯ = π`, and `E(u) ∈ W(k)[u]` the Eisenstein polynomial of `π`. Let
+`𝔖 = W(k)⟦u⟧ → A_inf`, `u ↦ [π♭]`, be the embedding of FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.4.1, which
+commutes with `φ` and has `θ(u) = π`.
+
+(a) Its restriction to `W(k)` is an isomorphism onto `Λ = W(𝔽_{p^f})` of 2.1, so it is a `Λ`-algebra map
+`Λ⟦X⟧ → A_inf` with `X ↦ z = [π♭]`.
+
+(b) There are units `A(X)`, `c(X)` of `Λ⟦X⟧` with `X^e A(X) + p = c(X)·E(X)`, and `A(π) = −p/π^e`. With `ϖ♭ = π♭` and
+these `f`, `e`, `A`, the embedding is a chart; its ring `S` is the image of `𝔖`, and its element `E = z^e A(z) + p` is
+a unit multiple of the image of `E(u)`.
+
+(c) An element of `G_p` fixes this chart exactly when it lies in `G_K`. With `Γ' = G_K` the chart is a Kummer chart
+for `G_K`, `j` being the inclusion, every element of `G_K` fixes it, `ef = [G_p : G_K]`, and `G_K` contains a
+Frobenius for `p^f`; it is unramified when `K/ℚ_p` is unramified and `π = −p`. So, with `π = −p` when `K/ℚ_p` is
+unramified, it has all the properties of 2.4 (b) for `Γ = G_K`.
+
+The relation is one of special case: a Kummer chart for `G_K` need not be of this form, the definition of 2.1 asking
+only for the properties listed there, and the chart of 2.4 (b) is not required to be this one. Over this chart, the
+frame theorems of 5.4 and 5.8 are not identified with Kisin's theorem (FiniteFlatGroupsAndIntegralPadicHodgeTheory
+§R07.4.16), nor `N(L)` with the Breuil–Kisin module of `L` (5.6).
+
+*Needs:* 1.2, 2.1, 2.4; FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.4.1 (The Breuil–Kisin coefficient rings
+`𝔖, 𝒪_ℰ, 𝔖^ur, 𝒪` and `S`)
 
 ## What the library already provides
 
@@ -1412,10 +1926,27 @@ On Tau Ceti's main branch, later than the revision pinned here:
 
 - Ax–Sen–Tate: the elements of `ℂ_p` fixed by a closed subgroup `H ⊆ G_p` form the closure of the fixed field of `H` in `ℚ̄_p`, and those
   fixed by `G_K`, `K/ℚ_p` finite, are the elements of `K`; hence an element fixed by an open subgroup, or by `j(Γ)` for a group over `G_p`,
-  is algebraic, and lies in `K_Γ` in the second case: PadicPeriodRings §1.2 (used in 1.6, 2.2 (f), 3.4 (a), 5.7).
-- The continuous action of `G_p` on `ℂ_p` by isometric automorphisms: PadicPeriodRings §1.1 (used in 1.1).
+  is algebraic, and lies in `K_Γ` in the second case: PadicPeriodRings §1.2 (used in 1.6, 2.2 (f), 3.4 (a), 5.7, 7.3).
+- The continuous action of `G_p` on `ℂ_p` by isometric automorphisms: PadicPeriodRings §1.1 (used in 1.1, 7.2).
 - Corestriction and Shapiro's lemma for continuous cohomology of profinite groups: ProfiniteCohomology §§6.2, 7.2 (used in
   4.1 (d)).
+- Mathlib's `BDeRhamPlus` and `BDeRham` of `O_C` as the `ker θ`-adic completion of `A_inf[1/p]` and its localisation,
+  with `θ`, the Galois action and the canonical topology: PadicPeriodRings §§1.5, 4.1 (used in 7.1).
+- Fontaine's divided-power envelope and the rings `A_cris`, `B_cris⁺`, `B_cris` with `φ`, the estimate
+  `φ(ξ) ∈ (p, ξ^p)`, the period `log[ε]` and the injective map to `B_dR`; the functor `D_cris`; the fixed fields
+  `B_cris^{G_K} = K_0`, regularity, the crystalline predicate and the fundamental exact sequence: PadicPeriodRings
+  §§3, 4.1–4.3 (used in 7.1, 7.2, 7.4).
+- Colmez's rings `A_max`, `B_max⁺`, `B_max` with the map `A_cris → A_max` and the maps to `B_dR⁺`, and the lift of
+  `ℚ̄_p` to `B_dR⁺`: PadicHodgeTheory §§0.3, 0.5 (used in 7.1).
+- Semilinear descent, Hodge–Tate representations and their fixed spaces, semistable representations, `D_pst` and
+  Fontaine's recipe for the Weil–Deligne representation: PadicHodgeTheory §§0.1, 3.3, 3.5, 5.3 (used in 7.3, 7.4).
+- Labelled Hodge–Tate weights and their labels: FiniteFlatGroupsAndIntegralPadicHodgeTheory §§R07.P7.1, R07.P7.2 (used
+  in 7.3); descent of `ℚ̄_p`-representations to a finite coefficient field: ArithmeticGaloisRepresentations §1.5 (used
+  in 7.2, 7.3).
+- The Bloch–Kato condition `H¹_f` on `V` and on a lattice, and its dimension: SelmerIwasawaCohomology §4.9;
+  PadicHodgeRegulators §§1.1, 1.5 (used in 7.5).
+- The Breuil–Kisin embedding `𝔖 = W(k)⟦u⟧ → A_inf`, `u ↦ [π♭]`: FiniteFlatGroupsAndIntegralPadicHodgeTheory §R07.4.1
+  (used in 7.6).
 
 ## Downstream consumers
 
@@ -1432,6 +1963,8 @@ On Tau Ceti's main branch, later than the revision pinned here:
 - AbelianSchemesWithThetaStructuresAndTheirCohomology uses 3.1 and 3.7 for the Galois representations cut out of
   cohomology by an eigensystem.
 - CongruencesOfTwistedThetaLifts uses 4.2 (c) for the cocycles of Tate twists.
+- For each of these roadmaps, Layer 7 states "crystalline", the period rings, the Hodge–Tate jumps, the linear
+  Frobenius and the crystalline cocycles in the terms of the general roadmaps.
 
 ## Scope and ownership
 
@@ -1445,7 +1978,11 @@ On Tau Ceti's main branch, later than the revision pinned here:
 - crystalline cocycles and their rank, the Artin–Schreier sequence over the tilt, characters trivial on inertia near `1`,
   and twists by characters in local form (Layer 4);
 - period matrices, frames, the radius lemma, jump lattices and Kisin modules of Kummer charts (Layer 5);
-- the uniform period bound and the passage of crystallinity, jumps and killing polynomials to limits of traces (Layer 6).
+- the uniform period bound and the passage of crystallinity, jumps and killing polynomials to limits of traces (Layer
+  6);
+- the comparison of these objects with those of the general roadmaps: `B_max` with `B_cris` and `B_dR⁺` with Mathlib's
+  `BDeRhamPlus`, crystalline representations, Hodge–Tate jumps, the linear Frobenius, crystalline cocycles and Kummer
+  charts (Layer 7).
 
 ### Not owned here
 
@@ -1456,7 +1993,12 @@ On Tau Ceti's main branch, later than the revision pinned here:
 - local duality for crystalline cocycles: IdelicReciprocityCountsAndCyclotomicClassGroups §§5.1, 5.2;
 - the comparison of the route's cohomology with `B_max`-crystalline representations: PadicComparisonForFunctorCohomology
   §§5.5, 7.6;
-- Ax–Sen–Tate (PadicPeriodRings §1.2), and the comparison of `B_max` with `B_cris`, which the route does not use.
+- Ax–Sen–Tate (PadicPeriodRings §1.2);
+- Fontaine's rings and functors, `D_pst` and its Weil–Deligne representation, the Bloch–Kato conditions, labelled
+  Hodge–Tate weights and the Breuil–Kisin embedding, which Layer 7 takes from the general roadmaps listed in "Results
+  taken from other roadmaps"; and Breuil–Kisin modules and Kisin's functor
+  (FiniteFlatGroupsAndIntegralPadicHodgeTheory §§R07.4.2, R07.4.16), with which no section of this roadmap compares
+  `N(L)`.
 
 ## References
 

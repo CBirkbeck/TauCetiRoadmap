@@ -15,9 +15,25 @@ The construction avoids a moduli problem. The base is the reduced closure of the
 complex tori in a product of projective spaces, in the manner of the theta-null embedding; the family on it is built from
 dense complex points, its smoothness comes from an upper bound for first-order deformations, and its good reduction from
 an analytic multiplicativity property of theta functions at torsion points. PELModuli builds the moduli problem of
-unitary PEL data and its smooth models; this roadmap does not use it, and 3.2, 6.1, 7.4, 7.5, 8.1 and 8.2 say how their
-objects relate to those of PELModuli. The cohomology is the theory of CohomologyOfFunctorsOnTestRings, which is not
-compared with étale cohomology. Along the way the roadmap states the
+unitary PEL data and its smooth models; this roadmap does not use it, and 3.2, 6.1, 7.4, 7.5, 8.1, 8.2 and Layer 10
+say how their
+objects relate to those of PELModuli; the base of the universal theta family is not compared with a PEL moduli space
+(7.4). The cohomology is the theory of CohomologyOfFunctorsOnTestRings, which that roadmap compares with ℓ-adic étale
+cohomology.
+
+The standard theory is the reference for the objects of the route, and Layer 10 states the results on the standard
+objects: PEL data give unitary PEL data, moduli points up to isomorphism correspond to open and closed parts of the
+double coset spaces of unitary similitude groups that describe the complex points of PEL moduli problems, the theta
+group with a level subgroup gives theta structures, full level structures over `ℂ` are Tate trivialisations, the Hecke
+algebra maps onto the double-coset ring, definite forms are direct sums of spaces of functions on definite unitary
+groups, which are algebraic modular forms when the coefficients are algebraic, types of supercuspidal representations
+given by characters are cuspidal types, the pointwise congruence relation gives an identity of correspondences of the
+form of the congruence relation, and the Galois representations of Layer 9 can be taken to be eigenquotients of ℓ-adic
+étale cohomology, crystalline in Fontaine's sense at the safe places over `ℓ`, with the weights in which the
+eigensystem occurs among their Hodge–Tate weights, the cyclotomic character having weight `−1`. The objects of the
+route are one way to prove these results; the route's proofs are stated on them.
+
+Along the way the roadmap states the
 classical theory of theta functions on complex tori that the route uses elsewhere: Frobenius' dimension formula with the
 irreducibility of the translations by the dual lattice, Schur orthogonality for theta translates, Riemann's theta
 relation, and the existence half of the Appell–Humbert theorem.
@@ -32,24 +48,41 @@ dual lattice `L^⊥` span its endomorphisms.
 maximal ideals lie over primes good for `D`, there is an abelian scheme with `𝓞_E`-action, theta coordinates and level
 points over a smooth projective `R`-scheme of relative dimension `n − 1`, together with a dense family of complex
 points of the base, one for each analytic family of theta tori (5.5) and each parameter, at which the fibre is modelled
-on the theta torus of that family at that parameter.
+on the theta torus of that family at that parameter. "Universal" refers to this dense family of modelled points: the
+family represents no moduli problem, and no moduli property is claimed.
 
 (3) *The model and its congruence relation* (8.4). From such a family, at a neat level, one obtains a tower of reduced
 projective covers of the base with Hecke legs, finite deck groups, complex points described by linear algebra, the
 tangent polynomials at fixed points, and the congruence relation `Σ_A (−1)^r q^{r(r−1)/2} [Frob^{(n−r)f} p_{g_A}] = 0` at
 every safe split place.
 
+**In standard terms.** The model is a structure given by a list of properties (8.2), not a model of a given variety.
+Its congruence relation holds at each point of the special fibre, and it implies, at every safe split place that is
+not inverted in the base ring, an identity of correspondences on the special fibre of the form of the congruence
+relation, `Σ_j (−1)^j q^{j(j−1)/2}·(1 × F^{n−j})_*T_j = 0` for the correspondences `T_j` that the legs of the model
+define and the `q`-power Frobenius `F` (10.7 (c)).
+
 (4) *The Galois representation of an eigensystem* (9.8). For a Hecke eigensystem `θ` at the safe places that occurs in
 a multiset of weights, there is a continuous ℓ-adic representation of `Gal(Ē/E)`, cut out of the total cohomology of
 the base of the model by `θ`, unramified or crystalline at each safe place, with those weights among its Hodge–Tate
 jumps, and with each geometric Frobenius killed by the Hecke polynomial of `θ`.
 
-There are nine layers. Layer 1 is theta functions on complex tori; Layer 2 their sizes at torsion points and the analytic
+**In standard terms.** The representation can be taken to be the largest quotient of `ℚ̄_ℓ ⊗ ⊕_k H^k_ét(Z_Ω, ℚ_ℓ)`,
+the ℓ-adic étale cohomology of the base `Z` of the model, on which the Hecke operators act by `θ` (10.10, 10.12): it
+is unramified at the safe places prime to `ℓ`, with each geometric Frobenius killed by the Hecke polynomial,
+crystalline in Fontaine's sense at the safe places over `ℓ`, with the Hecke polynomial at `w` killing the power
+`φ^{f_w}` of the crystalline Frobenius on `D_cris`, where `q_w = ℓ^{f_w}`, and it has the given weights among its
+Hodge–Tate weights, the cyclotomic character having weight `−1` (10.11). A representation attached to `θ` in the usual
+sense, with the Hecke polynomials as characteristic polynomials and these weights, has these properties (10.12); the
+theorem gives neither the dimension `n` nor the characteristic polynomials.
+
+There are ten layers. Layer 1 is theta functions on complex tori; Layer 2 their sizes at torsion points and the analytic
 form of good reduction; Layer 3 PEL data, theta tori and their theta coordinates. Layer 4 treats abelian schemes, line
 bundle classes and theta structures over a base; Layer 5 complex uniformisation; Layer 6 theta families and objects
 modelled on tori; Layer 7 the universal theta family and the bound for its tangent spaces. Layer 8 builds the Hecke
 elements, the tower and its congruence relation; Layer 9 passes to cohomology, counts fixed points and cuts out the
-Galois representations.
+Galois representations. Layer 10 compares the objects of the route with the standard ones and states the results on
+the standard objects.
 
 ## Conventions and notation
 
@@ -57,7 +90,9 @@ Galois representations.
   proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family `ShortGRH`; the line
   "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`) and the declarations
   where it proves the statement. Its names occur only on that line. Where a section states more than [ShortProof]
-  proves, its last sentence says which case [ShortProof] proves.
+  proves, its last sentence says which case [ShortProof] proves. [ShortProof] proves none of the statements of Layer
+  10; there `*Proof route:*` takes the place of the method of the formal proof, and no closing line names
+  declarations.
 - *Schemes and points.* Schemes are over a base `S`; a `T`-point of an `S`-scheme `X` is an `S`-morphism `T → X`. For a
   ring `C`, `X(C)` are the points with source `Spec C`. A *valuative arc* is a valuation ring `O ⊂ ℂ` with fraction field
   `ℂ` (of any rank, not necessarily Noetherian); `Spec ℂ → Spec O` is its generic point. The *complex points* of an
@@ -86,9 +121,14 @@ Galois representations.
   statements are made on the standard object.
 - *Cohomology.* For a prime `ℓ`, an algebraic closure `Ω` of `ℚ` and a scheme `Y` of finite type over a subring of `Ω`,
   `Vⁿ(Y) = ℚ_ℓ ⊗ Hⁿ(Y_Ω, ℤ_ℓ)` is the `ℓ`-adic cohomology of CohomologyOfFunctorsOnTestRings §§1.3, 3.4 (for
-  `Ω′ = Ω`), with its action of the automorphisms of `Ω` over the base and its pull-backs. It stands in for ℓ-adic étale
-  cohomology; no comparison with étale cohomology is used. "Crystalline" is in the sense of
-  CrystallineRepresentationsAndKisinModules §3.1 (defined through `B_max`).
+  `Ω′ = Ω`), with its action of the automorphisms of `Ω` over the base and its pull-backs. "ℓ-adic cohomology" names
+  this theory here; in the literature the name means ℓ-adic étale cohomology `Hⁿ_ét(Y_Ω, ℚ_ℓ)`. The route uses no
+  comparison between the two; for proper `Y` they agree through CohomologyOfFunctorsOnTestRings Layer 8 (Comparison
+  with the standard theory), and 10.10–10.12 state the results of Layer 9 on étale cohomology. "Crystalline" is in the
+  sense of
+  CrystallineRepresentationsAndKisinModules §3.1 (defined through `B_max`), which
+  CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory) compares with Fontaine's
+  notion; 10.11 states 9.8 in Fontaine's terms.
 
 ### Table of symbols
 
@@ -112,6 +152,8 @@ Galois representations.
 | `τ_{w,j}, 𝓗(𝔑)` | the Hecke elements at a safe place, the Hecke algebra of `K(𝔑)` | 8.1 |
 | `𝓜 = (Z, W_i, p_g, Δ_i, m_α)` | a Kuga–Sato model | 8.2 |
 | `Vⁿ(Y)` | the `ℓ`-adic cohomology of CohomologyOfFunctorsOnTestRings §3.4 | Conventions |
+| `H_β, ψ_β, L_x, G_β, h_J` | the hermitian and the alternating form of a matrix with a frame `x`, its lattice, its similitude group, the `h` of a reflection | 10.1 |
+| `GU¹, U_β, X_β` | the similitudes with multiplier in `Ẑ^×`, the unitary group of `β`, the reflections positive for `β` | 10.2 |
 
 ## Layer 1: Theta functions on complex tori
 
@@ -308,6 +350,9 @@ torsion point `x` is `s_f(x) = v(exp(−B(x, x)/2)·f(x)) = v((U_x f)(0))`, and 
 degree `C`. `(B, χ)` have *good reduction at `v` with level `r`* if they are of ample type, some `N ∈ ℕ` with `v(N) = 1`
 has `N·L^⊥ ⊂ L`, `r ≥ 2` with `v(r) = 1`, and `L` has a multiplicative norm at `v`. A torsion point `w` has the
 *constant `C` in degree `B`* if `φ(y)² ≤ C·sup_x φ(x)φ(x + w)` for every size `φ` of degree `B` and every torsion `y`.
+"Good reduction" names here this analytic condition on the data and the valuation; in the literature good reduction of
+a polarised abelian variety at a valuation is the existence of an abelian scheme over the valuation ring extending it,
+and no statement of this roadmap relates the two.
 
 Let `L` be full.
 (a) Sizes take the same value at torsion points congruent modulo `L`, are bounded, and `‖f‖_v > 0` for `0 ≠ f ∈ Θ(B, χ)`
@@ -427,7 +472,10 @@ point* with `ν` marked vectors is `a = (x, J, P)` with `(x, J)` a signed frame,
 `K ⊂ GL_n(𝔸_f)`, `z ∈ GL_n(E)` is an *isomorphism `a ≅_K b` at level `K`* if `x_b^{−1} z x_a ∈ K`,
 `Φ_{v₀}(z) J_a Φ_{v₀}(z)^{−1} = J_b`, and `zP_{a,i} − P_{b,i}` lies in the image of `Eⁿ ∩ x_b Ôⁿ` for each `i`. A
 *period map for `J`* is an `ℝ`-linear isomorphism `Q : (E ⊗ ℝ)ⁿ → V` that carries the complex structure `iJ` at `v₀`
-(through `Φ_{v₀}`) and `i` at the other infinite places to multiplication by `i`.
+(through `Φ_{v₀}`) and `i` at the other infinite places to multiplication by `i`. `GU` is the group of finite adelic
+points of the unitary similitude group of the standard hermitian form `zᴴy`, with multiplier in `ℚ_{>0}·Ẑ^×`. A moduli
+point is a datum of linear algebra, not a point of a moduli space; 10.2 relates the moduli points up to isomorphism at
+a level to the double cosets that describe the complex points of PEL moduli problems.
 (a) Every `𝓞_E`-linear map `Eⁿ → T_n` is `y ↦ class of hy` for some `h ∈ M_n(𝔸_f)`.
 (b) For `x ∈ GL_n(𝔸_f)` the image of `Eⁿ ∩ xÔⁿ` in `(E ⊗ ℝ)ⁿ` is a full lattice; for a period map `Q`,
 `dim_ℂ V = |n|·f`.
@@ -472,7 +520,10 @@ Relation to PELModuli §M5.5 (unitary PEL data): `ξ` plays the part of `δ` the
 §M5.5 for the hermitian form `(y, z) ↦ zᴴβ_Y y`; for a theta torus this form has signature `(1, n − 1)` at `Φ_{v₀}` and is
 positive definite at the other places of the CM type. PEL data in the sense here fix no hermitian space, since the
 frames and the matrices `β_Y` vary, and they add to the field, the CM type and `ξ` the level `𝔑`, the group `T` with its
-Lagrangian `Λ` and the numerical conditions of the construction. No target of this roadmap compares the two further.
+Lagrangian `Λ` and the numerical conditions of the construction. In the literature a PEL datum is a tuple
+`(B, *, V, ⟨·,·⟩, h)` with a fixed space (PELModuli §§M0.5–M0.6); "PEL data" names here data of the other kind above.
+10.1 attaches to `D` and each matrix with a signed frame unitary data of §M5.5, with an integral lattice whose dual
+quotient is `T`.
 
 [ShortProof], `Lib/Shimura/ThetaModuli/PELThetaTori` (`New.PEL`, `New.Variety.HasPadding`, `New.PEL.levelTorsion`,
 `New.PEL.IsGoodAt`, `New.PEL.rTorsion`); `Lib/Shimura/ThetaModuli/FlatClosure` (`New.Variety.ThetaNull.IsCutDegree`,
@@ -635,6 +686,11 @@ Let `d ≡ 3 (mod 4)`, let `E ⊃ ℚ(√−d)` be a CM field containing the `50
 that for every `𝔑 ≠ 0` in `𝓞_E` divisible by `N` there are PEL data of rank `n` and level `𝔑` with `β = β₀` (for
 `d₀ = d`) that are good at every finite place safe for `𝔑` (8.1). Also: in a finite abelian group with a nondegenerate
 alternating-type pairing of the kind of 3.2, every isotropic subset lies in a subgroup equal to its own annihilator.
+
+**In standard terms.** For every matrix `β` with a signed frame `x`, PEL data of this section give the unitary data of
+PELModuli §M5.5 of 10.1, of signature `(1, n − 1)` at `Φ_{v₀}` and definite at the other places of the CM type, with
+the integral lattice `Eⁿ ∩ xÔⁿ`, whose dual quotient is `T`, of odd order (10.1 (a), (b)). The level, the Lagrangian
+`Λ`, `r`, `i` and goodness at the safe places are conditions of the construction with no counterpart in a PEL datum.
 
 *Needs:* 3.2, 8.1 (safe places, as a definition).
 
@@ -806,7 +862,10 @@ an `R`-point (section) `z` of a commutative group scheme `A` over `R`, a *lift o
 coordinates `X_t` indexed by a finite abelian group `H` whose order is a unit of `R`, a homomorphism
 `η : H → A(R)`, characters `c(s) : H → R^×` with `c(s)(−t) = c(t)(s)`, and a subgroup `Λ ⊂ H`, `N` is a *theta
 structure* if for every `s ∈ H` and sign `±`, the map `y ↦ ±y + η(s)` has a lift to `N` sending `X_t` to
-`c(s)(t)·X_{±(s+t)}`, `X_s = X_0` for `s ∈ Λ`, and `Σ_{l ∈ Λ} c(s)(l)² = 0` for `s ∉ Λ`.
+`c(s)(t)·X_{±(s+t)}`, `X_s = X_0` for `s ∈ Λ`, and `Σ_{l ∈ Λ} c(s)(l)² = 0` for `s ∉ Λ`. In the literature a theta
+structure on `(A, L)` is an isomorphism of the theta group of `L` with a Heisenberg group; "theta structure" names
+here a linear system with the conditions above, and 10.3 (a) obtains such linear systems from the theta group and a
+symmetric level subgroup.
 (a) A lift of `f` from `L` to `L′` exists only if `[L′] = f^*[L]`; if `X′`, `X` are over the same ring `R` and `f` is an
 `R`-morphism with `[L′] = f^*[L]`, an `R`-linear lift exists; a lift along a quasi-compact scheme-theoretically dominant
 `f` is injective; two lifts are proportional (by an element of `R′`) when `X′` is a commutative group scheme over `R′` on
@@ -862,6 +921,10 @@ and through which every homomorphism `W → A(O)` from a finite-dimensional comp
 factors by a `ℂ`-linear map. For a linear system `N` on `X` with coordinates indexed by `ι`, a family `φ : P → X(ℂ)`, a
 lattice `L ⊂ P`, Appell–Humbert data `(B, χ)` for `L` and `θ : P → ℂ^ι`, `N` has *theta coordinates `θ` of type
 `(B, χ)` along `φ`* if each `θ_i ∈ Θ(B, χ)` and `θ(z)` is a vector of homogeneous coordinates of `φ(z)` for every `z`.
+In the literature the uniformisation of a complex abelian variety is the exponential map from its tangent space at `0`
+to its analytification; a uniformisation here includes a universal property in its definition, and by 10.4 (b) that
+exponential is one. By 10.4 (a), when `X` is locally of finite type over `O`, a family is holomorphic at `w` in the
+sense above exactly when it is holomorphic near `w` as a map to the analytification of the generic fibre.
 (a) Jets of holomorphic families exist, are unique, and obey the chain rule; on a commutative group scheme smooth of
 relative dimension `d`, if `φ` is holomorphic at `w` and `mφ` is constant to first order at `w` in a direction for some
 `m ≠ 0`, so is `φ`.
@@ -928,7 +991,9 @@ described by linear maps. It implies (d) once an abelian scheme over `ℂ` in th
 abelian variety (4.1) and a family of complex points that is holomorphic in the sense of 5.1 with a holomorphic map to
 `A^an`: the exponential of §A5.1 is then a surjective holomorphic homomorphism and a local isomorphism, with kernel a
 full lattice, and it is a uniformisation in the sense of 5.1 once every homomorphism `W → V/Λ` that is holomorphic at
-`0` is lifted to `V` through the covering `V → V/Λ`, a step that §A5.1 does not state. The route proves (d) directly on
+`0` is lifted to `V` through the covering `V → V/Λ`, a step that §A5.1 does not state. 10.4 states both steps:
+holomorphy in the sense of 5.1 is holomorphy into the analytification, and the exponential of §A5.1 is a
+uniformisation in the sense of 5.1, so that §A5.1 implies (d). The route proves (d) directly on
 complex points, without analytification.
 
 [ShortProof], `Lib/Shimura/Uniformisation/LieExponential` (`New.exists_lie_exponential`, `New.exists_holomorphic_chart`,
@@ -1104,8 +1169,11 @@ torsion sections by the whole `𝓞_E`-module `T_n ≅ (E/𝓞_E)ⁿ`, with the 
 (read through commutators of lifts, 4.5) prescribed by `ψ_f(ε·m·ξ·zᴴy)` at every complex embedding; over `ℂ` it plays
 the part of a full Tate trivialisation of §M1.4 for the lattice `𝓞_Eⁿ` with the trace form of `ξ` and no excluded
 primes, whereas the level structures of §§M1.5–M1.6 are orbits of such trivialisations under an open compact subgroup,
-away from the primes in `□`, over any locally Noetherian scheme over the good-prime base `S₀` of §M0.10. No target of
-this roadmap identifies the two notions.
+away from the primes in `□`, over any locally Noetherian scheme over the good-prime base `S₀` of §M0.10. Over `ℂ`, for
+an object with a model on a polarised period map, 10.3 (b) identifies the full level structures with those Tate
+trivialisations of §M1.4, for the unitary data of 10.1, that extend the level points; over other bases the two notions
+are not compared. In AbelianSchemesAndArithmeticModuli §A3.8 a full level structure of level `N` is a basis of `A[N]`;
+"full level structure" names here the labelling of all torsion by `T_n` described above.
 
 [ShortProof], `Lib/Shimura/ThetaModuli/ThetaFamilyRigidity` (`New.ThetaFamily`, `New.ThetaObject`,
 `New.ThetaObject.FullLevelStructure`, `New.ThetaObject.FullLevelStructure.exists_pullback`,
@@ -1423,7 +1491,8 @@ Dedekind domain; an `R`-scheme `S` with a projective embedding over `R`, smooth 
 family over `S` (6.1); for each analytic family `f` (5.5) and each `b ∈ ℂ^{n−1}` a complex point `o(f, b)` of `S`,
 these points being dense in `S`; for each `(f, b)` a model (6.2) of the object at `o(f, b)` on the theta torus of `f` at
 `b`; and the condition that the complex points of the abelian scheme obtained from these models are holomorphic in
-`(b, z)` for `b` in the domain of `f`.
+`(b, z)` for `b` in the domain of `f`. "Universal" refers to the modelled points `o(f, b)`; in the literature a
+universal family is one that represents a moduli problem, and no such property is claimed or used.
 
 Let `R` be the localisation of `𝓞_E` at a submonoid of non-zero-divisors, and `D` good over `R` (3.2). Then a universal
 family for `D` over `R` exists.
@@ -1482,7 +1551,9 @@ Relation to PELModuli §M3.4 (complex points of PEL moduli): (a), with 6.3 and 7
 moduli points (adelic frames with a reflection and marked vectors) up to rational isomorphism at a principal level, where
 §M3.4 uses the double cosets `G^{(i)}(ℚ)∖(X × G(𝔸_f)/K)`; the reflection plays the part of the point of `X`, and the
 frames, which are frames for varying matrices `β`, run through the forms that §M3.4 indexes by `ker¹(ℚ, G)`. The two
-descriptions concern different spaces (the fibre powers over the base here, `M_K^ad(ℂ)` there) and are not compared in
+descriptions concern different spaces (the fibre powers over the base here, `M_K^ad(ℂ)` there). 10.2 compares their
+index sets, the moduli points without marked vectors up to isomorphism at a level and the double cosets of §M3.4; the
+spaces themselves are not compared in
 either roadmap.
 
 [ShortProof], `Lib/Shimura/IntegralModel/UniversalFamily` (`New.ThetaFamily.IsPointOf`,
@@ -1548,7 +1619,9 @@ every infinite place, and the trace of `y − 1`, divisible by an ideal of large
 Let `K₀ = ℚ(√−d₀) ⊂ E`. For a group `G`, a subgroup `K` and a commutative ring `k`, an element `a = Σ a_g[g]` of the
 group ring `k[G]` acts on every representation of `G`; its *coset function* is `Σ a_g 1_{gK}`. The *Hecke algebra*
 `𝓗(𝔑)` (over `k`) is the set of `a ∈ k[GL_n(𝔸_f)]` supported on `GU⁺` that map `K(𝔑)`-fixed vectors to
-`K(𝔑)`-fixed vectors in every representation; it is a subalgebra. For a split place `w` with conjugate `w̄`, let
+`K(𝔑)`-fixed vectors in every representation; it is a subalgebra. (In the literature the Hecke algebra of `K(𝔑)` is a
+double-coset ring; `𝓗(𝔑)` maps onto the double-coset ring of the pair `(GU⁺, K(𝔑))`, compatibly with the actions on
+invariants, by 10.5.) For a split place `w` with conjugate `w̄`, let
 `j_w : GL_n(E_w) → GL_n(𝔸_f)` send `h` to the element that is `(hᵀ)^{−1}` at `w`, the conjugate of `h` at `w̄` and `1`
 elsewhere (a unitary element). A finite place `w` of `E` is *safe* for `𝔑` if the place `u` of `K₀` below it contains
 `β₀ − b` for some `b ∈ ℤ` with `β₀ − b` coprime to its conjugate (so `u` splits and has prime norm), `𝔑 ∉ w`, and `𝔑`
@@ -1558,7 +1631,9 @@ cosets in the double coset), and `g_A = c_w^{−j}·j_w(γ_Aᵀ)`, where `c_w` i
 norm to `K₀` of the idele that is a uniformiser at `w` and `1` elsewhere. `τ_{w,j} = Σ_{dim A = j} [g_A]`. An element `f`
 of `𝓗(𝔑)` is *regular* if `y ∈ GL_n(E)` has separable characteristic polynomial whenever the coset function of `f` is
 nonzero at `x^{−1}y^{−1}x` for some `x ∈ GL_n(𝔸_f)`. `𝔑` is *neat* if `𝔑 ≠ 0` and every `y ∈ GL_n(E)` with
-`x^{−1}yx ∈ K(𝔑)` and `Φ_{v₀}(y)ℓΦ_{v₀}(y)^{−1} = ℓ` for a signed frame `(x, ℓ)` is `1`.
+`x^{−1}yx ∈ K(𝔑)` and `Φ_{v₀}(y)ℓΦ_{v₀}(y)^{−1} = ℓ` for a signed frame `(x, ℓ)` is `1`. (In the literature neatness
+of a level is the condition on the eigenvalues of all its elements of PELModuli §M2.2; it implies neatness of `𝔑` in
+this sense, by 10.6.)
 For `P ∈ E[X]` such that `Φ_{v₀}(P)` has `|n|` distinct roots `r_1, …, r_n` (numbered), `j ∈ n`, `μ = r_j`, and
 `α ∈ 𝓞_E^ν`: for each embedding `σ : E → ℂ` let `R_σ` be the multiset of the polynomials `rX` for the roots `r` of
 `σ(P)` that are *Lie roots* and the constants `r` for the others, where the Lie roots are `r = μ` for `σ = Φ_{v₀}`,
@@ -1577,12 +1652,17 @@ for an ideal `I` of `𝓞_E` with `N(I) > (2|n|)^{[E:ℚ]}`, then `y = 1`.
 (e) For `I ≠ 0` the `I`-torsion of `T_n` has `N(I)^{|n|}` elements; and for `𝔑 ≠ 0` and finitely many `(𝔞, g)` with
 `g ∈ GU⁺` there is a level `𝔪` with `g^{−1}K(𝔪)g ⊂ K(𝔑) ∩ K(𝔞)` for all of them.
 
+**In standard terms.** Coset functions map `𝓗(𝔑)` onto the double-coset ring of the Hecke pair `(GU⁺, K(𝔑))`,
+compatibly with the actions on `K(𝔑)`-invariants (10.5); so (a) says that `τ_{w,j}` has an image in that ring, and (b)
+describes the action of that image on `K(𝔑)`-invariants. If `x·K(𝔑)·x^{−1}` is neat in the sense of PELModuli §M2.2
+for a signed frame `(x, ℓ)`, then `𝔑` is neat (10.6).
+
 *Needs:* 3.1; AdelicUnitaryGroupsAndAlgebraicModularForms §3.1 (the Hecke operators `T_{w,j}`);
 WeilRepresentationsOnBanachSpacesOfData §9.1 (single cosets indexed by subspaces).
 
 The library has the Hecke ring of a pair as the double-coset ring with its operators on invariants
-(`HeckeRing`, `HeckeCosetModule.instRingHeckeRing`, `HeckeCoset.heckeSum`), in another model; identifying the group-ring
-subalgebra `𝓗(𝔑)` with it is not done.
+(`HeckeRing`, `HeckeCosetModule.instRingHeckeRing`, `HeckeCoset.heckeSum`), in another model; 10.5 maps the group-ring
+subalgebra `𝓗(𝔑)` onto it, compatibly with the actions on invariants, through coset functions.
 
 Relation to PELModuli §§M2.2–M2.3 (neat subgroups): neatness here is a condition on `𝔑` alone, that the rational
 automorphisms of signed frames at level `K(𝔑)` be trivial, which is what §M2.3 derives from neatness in the sense of
@@ -1590,6 +1670,7 @@ automorphisms of signed frames at level `K(𝔑)` be trivial, which is what §M2
 neatness of `𝔑` here: the eigenvalues of such an automorphism `y` are algebraic integers, as `x^{−1}yx ∈ GL_n(Ô)`, and
 by (c), with `c = 1`, all their conjugates have absolute value `1`; so they are roots of unity, hence `1` under §M2.2;
 and `y`, being unitary for the definite form `Φ_w(β)` at a place `w ≠ v₀`, is then `1`. The converse is not asserted.
+10.6 states this implication for the conjugates `x·K(𝔑)·x^{−1}` in the similitude groups of the unitary data of 10.1.
 
 [ShortProof], `Lib/Shimura/HeckeTower/HeckeData` (`New.Variety.fixedToEigen`, `New.Variety.heckeAlgebra`,
 `New.Variety.IsSafe`, `New.Variety.SafePlace`, `New.Variety.invHeckeIsogeny`, `New.Variety.heckeSum`,
@@ -1621,7 +1702,9 @@ tangent vectors `f(t)` at `y` with `t ↦ c(f(t))` injective and `u(f(t)) = c(f(
 a prime `p` and a set `𝔭 ⊂ R`, the `u_i` *satisfy the congruence relation* with coefficients `m_i` and Frobenius
 exponents `a_i` modulo `𝔭` if for every field `k` of characteristic `p` and every `x ∈ W(k)` whose structure map
 `R → k` kills `𝔭`, the formal sum `Σ_i m_i [u_i(x)∘Frob^{a_i}]` of points of `Z(k)` is zero, `Frob` the map
-`y ↦ y^p` of `k`. *Galois coverings.* `c : W → Z` with a finite group `Δ` acting on `W` is a *Galois covering* as in
+`y ↦ y^p` of `k`. (In the literature the congruence relation is an identity of correspondences on the special fibre;
+the relation here is a condition at each point, which implies the identity of that form for the cycles that the maps
+define, by 10.7.) *Galois coverings.* `c : W → Z` with a finite group `Δ` acting on `W` is a *Galois covering* as in
 CohomologyOfFunctorsOnTestRings §3.5 (`Δ` acts over `Z`, `c` is surjective, and `Δ` acts simply transitively on the
 fibres of `c` on points with values in fields of characteristic `0`).
 
@@ -1644,6 +1727,8 @@ Let `E ⊃ K₀`, `n` a finite set, `𝔑 ∈ 𝓞_E`, `ν ∈ ℕ` and `R ⊂ E
 - (*congruence*) for every safe split place `w` with `q_w = p^f`, every level `i` with all `g_A ∈ s_i`, and every
   `𝔭 ⊂ R` containing the image of `w`: the legs `p_{g_A} : W_i → Z` satisfy the congruence relation modulo `𝔭` with
   coefficients `(−1)^{r_A} q_w^{r_A(r_A−1)/2}` and Frobenius exponents `(|n| − r_A)f`, `r_A = dim A`.
+
+"Model" names this structure given by a list of properties; it is not a model over `R` of a given variety.
 
 Let `𝓜` be a model, `k` a commutative ring and `F` a contravariant functor from `R`-schemes to `k`-modules such that
 for every level `i` the pull-back `F(π_i)` is injective with image containing the `Δ_i`-invariants of `F(W_i)`, and
@@ -1716,6 +1801,13 @@ the image of `w`: maps `u_A` from `C` to the fibre power that translate the comp
 congruence relation modulo `𝔭` with coefficients `(−1)^{r_A} q_w^{r_A(r_A−1)/2}` and Frobenius exponents `(n − r_A)f`.
 (b) For every `ν ≥ 1` there is a model (8.2) for `n`, `d₀`, `𝔑`, `ν` over `R`.
 
+**In standard terms.** The congruence relations of (a) and of the model of (b) hold at each point of the special
+fibre; by 10.7 they imply the corresponding identities of cycles on the special fibre, and for the model, at every
+safe split place `w` such that `R` maps onto `k_w`, an identity of correspondences of the form of the congruence
+relation, `Σ_j (−1)^j q_w^{j(j−1)/2}·(1 × F^{n−j})_*T_j = 0` for the correspondences `T_j` that the legs of the model
+define and the `q_w`-power Frobenius `F` (10.7 (c)). The model of (b) is a structure given by a list of properties
+(8.2), not a Kuga–Sato variety over a PEL moduli space.
+
 *Needs:* 5.5, 7.5, 7.6, 8.1, 8.2, 8.3.
 
 [ShortProof], `Lib/Shimura/IntegralModel/TowerExistence` (`New.Variety.UniversalFamily.GraphClosure.congruenceRelation`,
@@ -1777,7 +1869,10 @@ polynomial, which gives regularity of all powers.
 Let `a = |n|`. For a split place `w`, the *level at `w`* is `{h ∈ GL_a(E_w) : j_w(h) ∈ K(𝔑)}` (8.1), and `I_w ⊂ GL_a(𝒪_w)`
 is the pro-`p` Iwahori subgroup (upper unitriangular modulo `w`). A *cuspidal type* at `w` is a subgroup
 `J ⊂ GL_a(𝒪_w)` with a character `χ : J → ℂ^×` such that for every idempotent `ε ≠ 0, 1` of `M_a(E_w)` some
-`j = 1 + εY(1 − ε) ∈ J` has `χ(j) ≠ 1`. `g ∈ GL_a(𝔸_f)` is *strictly dominant at `w`* if the inverse transpose of `g_w`
+`j = 1 + εY(1 − ε) ∈ J` has `χ(j) ≠ 1`. (In the theory of types a type is attached to an inertial class of
+representations: the irreducible representations containing it are those of the class; "cuspidal type" names here the
+non-triviality condition above, which every type of a supercuspidal class given by a character on a subgroup of
+`GL_a(𝒪_w)` satisfies, by 10.8.) `g ∈ GL_a(𝔸_f)` is *strictly dominant at `w`* if the inverse transpose of `g_w`
 lies in `I_w·diag(s)·I_w` with `i ↦ |s_i|_w` strictly increasing. For a complex representation `π` of `GL_a(𝔸_f)`, a
 vector `v` is a *test vector* for `(w₀, w₁, J, χ)` if `w₀ ≠ w₁` are split places, `𝔑 ∉ w̄₀`, `𝔑 ∈ w₁`, `𝔑 ∉ w̄₁`, the
 level at `w₀` lies in `J ⊂ GL_a(𝒪_{w₀})` with `(J, χ)` a cuspidal type, the level at `w₁` lies in `I_{w₁}`, `v ≠ 0`,
@@ -1788,6 +1883,10 @@ level at `w₀` lies in `J ⊂ GL_a(𝒪_{w₀})` with `(J, χ)` a cuspidal type
 component at `w₁` is `1`, with `π(c)φ = φ`. Then there is `b ∈ 𝓗(𝔑)` such that for every `m ≥ 0`:
 `π((bc)^m)φ ≠ 0`, `(bc)^{m+1}` is regular, and `(bc)^{m+1}` maps `K(𝔑)`-fixed vectors to vectors on which `j_{w₀}(J)`
 acts by `χ`, in every representation.
+
+**In standard terms.** A type of the inertial class of a supercuspidal representation of `GL_a(E_{w₀})` given by a
+smooth character `χ` of an open subgroup `J ⊂ GL_a(𝒪_{w₀})` is a cuspidal type (10.8), so (b) applies to the test
+vectors it defines; the condition of this section singles out no inertial class.
 
 *Needs:* 8.1; IntegralRepresentationsOfGeneralLinearGroups §§6.1, 6.3, 6.4 (`U_t`, its injectivity, twisted conjugacy).
 
@@ -1834,6 +1933,12 @@ classes of `GL_n(E)\GL_n(𝔸_f)/(GU ∩ U)`.
 cosets `GL_n(E)\GL_n(𝔸_f)/K(𝔑)` of definite frames. If moreover `f` is regular and
 `tr ξ(y^{−1}) = Σ_{i ∈ n} ω(char y, i)` whenever `char y` is separable, then the definite count terms of `(f, ω)` have
 finite support and `tr(f | definite forms) = Σ` of the definite count terms over all orbits.
+
+**In standard terms.** The definite forms are the direct sum, over the classes of totally positive definite matrices
+`β` with frames, of spaces of functions on the finite adelic points of the definite unitary groups `U(β)`, which are
+the algebraic modular forms of the rational coefficient model of AutomorphicFormsOnReductiveGroups §7.4 for `U(β)`
+when `ξ` restricts to an algebraic representation of `U(β)` (10.9); `f ∈ 𝓗(𝔑)` acts on them through its image in the
+double-coset ring (10.5), and need not preserve the summands (10.9), and (d) is the trace of that action.
 
 *Needs:* 3.1, 8.1; ShortGRH background (the Mahler–Godement criterion for frames of varying forms: for every compact
 `C₀ ⊂ GL_n(𝔸)` (`𝔸` the adele ring of `E`, AdelicUnitaryGroupsAndAlgebraicModularForms §2.1) there are a finite set
@@ -1905,7 +2010,9 @@ for every `c : W → Z`, tangent polynomials `P_{i,y}` of rank `d` with `P_{i,y}
 for every `α ∈ 𝓞_E^ν` the marked count terms of `(b, 1)` have finite support and the sum of the marked count terms of
 `(b, ω)` is `0` for `ω(P, μ) = coeff_{X^h} p_{2α, P, μ}` (8.1). A system `θ` of complex numbers
 `θ(w, j)`, `w` safe split, *occurs in weight `h`* (for `ν`) if for every finite combination `p = Σ_L c_L τ_L` of words in
-the `τ_{w,j}` with `Σ_L c_L Π_{(w,j) ∈ L} θ(w, j) = 1`, some `b·p`, `b ∈ 𝓗(𝔑)`, is not `h`-null.
+the `τ_{w,j}` with `Σ_L c_L Π_{(w,j) ∈ L} θ(w, j) = 1`, some `b·p`, `b ∈ 𝓗(𝔑)`, is not `h`-null. ("Occurs in weight
+`h`" is a condition on counts of fixed points through their local terms, not the occurrence of `θ` in a cohomology
+group; by 9.8 (c) it makes `h` a Hodge–Tate jump of the eigenquotient there.)
 (a) For `y ∈ GL_n(E)` with separable characteristic polynomial, its marked reflections are reflections, and a reflection
 `J` with `Φ_{v₀}(y)JΦ_{v₀}(y)^{−1} = J` is the marked reflection of `y` at exactly one index.
 (b) If `x^{−1}zx` is integral, `β ∈ 𝓞_E` and `B = 1 − 2βz`, then `B` preserves `Eⁿ ∩ xÔⁿ`, `det B ≠ 0` and
@@ -1957,6 +2064,13 @@ conjugate `ȳ`; scalars `conj(i(x))`, `x ∈ K₀^×`, act by `Π_s s(x)^{−A(s
 jump `z` of `κ` at `σ`, `z + μ ≥ 0`; and for every such `σ`, `z`, every CM type `Ψ` with base place `v₀` with
 `Ψ_{v₀} = σ` and `Ψ_v∘i ≠ s₀` for `v ≠ v₀`, every neat `𝔑` and every test eigenform for `(𝔑, ξ, θ)` (neatness, test
 eigenforms and occurrence taken for `Ψ`), `θ` occurs in weight `z + μ` (for `ν = N + 1`).
+
+**In standard terms.** Through 10.9 (a), a test eigenform is an element of the direct sum of the spaces `M_β` of
+functions on the groups `G_β¹(𝔸_f)`, which are direct sums of spaces of algebraic modular forms on the definite
+unitary groups `U(β)` when `ξ` restricts to algebraic representations of these groups (10.9 (b)), that is a test
+vector at two split places and an eigenvector, with eigenvalues `θ(w, j)`, of the images of the `τ_{w,j}` in the
+double-coset ring (10.5). The conclusion, occurrence in a weight, is the condition on counts of fixed points of 9.5;
+it is not a statement about the standard objects.
 
 *Needs:* 8.1, 9.2, 9.3, 9.4, 9.5; IntegralRepresentationsOfGeneralLinearGroups §§1.1, 1.3 (polynomial representations,
 Schur matrices); HolomorphicDiscreteSeriesOfUnitaryGroups §7.1 (Weyl's character formula);
@@ -2031,15 +2145,502 @@ is an arithmetic Frobenius for `q_w` at `A`;
 linear Frobenius at every such `s`;
 (c) every `h ∈ J` is a Hodge–Tate jump of `ρ` at `A` for every local datum whose complex embedding of `E` is `Φ_{v₀}`.
 
+**In standard terms.** By 10.10 the cohomology `V^k(Z)` is the ℓ-adic étale cohomology `H^k_ét(Z_Ω, ℚ_ℓ)`, compatibly
+with the action of `Gal(Ω/E)` and with the Hecke operators, and the largest quotient `ρ_ét` of
+`ℚ̄_ℓ ⊗ ⊕_{k ≤ 2d} H^k_ét(Z_Ω, ℚ_ℓ)`, `d` the relative dimension of `Z`, on which the Hecke operators act by `ι_ℓθ`
+satisfies (a)–(c) (10.12 (a)). By 10.11, (b) and (c) say that `ρ` is crystalline in Fontaine's sense at the places
+over `ℓ` above safe places, with `P_w(φ^{f_w}) = 0` on `D_cris`, and has every `h ∈ J` among its Hodge–Tate weights,
+the cyclotomic character having weight `−1` (10.11 (c)). The standard theorem of this kind is
+PotentialAutomorphyInfrastructurePartII §3.6, which attaches to a constituent of algebraic modular forms on a definite
+unitary group, under its hypotheses, a semisimple representation of rank `a` whose Frobenius polynomials are Hecke
+polynomials of the same shape; a representation with the properties listed in 10.12 (b) for `θ` and the weights `J`
+satisfies (a)–(c), but this section does not relate `θ` to such forms, and its `ρ` has no controlled dimension.
+
 *Needs:* 8.2, 9.1, 9.5, 9.7; CohomologyOfFunctorsOnTestRings §§3.5, 7.5 (transfer, Woods Hole formula);
 PadicComparisonForFunctorCohomology §§6.5, 7.6 (Hodge–Tate weights, crystallinity, linear Frobenius);
 GaloisRepresentationsOfUnitaryEigenforms §§1.1, 1.3 (Hecke polynomials, local data, jumps).
 
-The representation may be zero when `J` is empty; its dimension is not controlled.
+The representation may be zero when `J` is empty; its dimension is not controlled. The definite article of the title
+names the representation that the proof constructs, the eigenquotient of 9.7 for the cohomology of `Z` (10.12); the
+statement itself asserts only that a representation with (a)–(c) exists.
 
 [ShortProof], `Lib/Shimura/Eigenspace` (`New.Variety.Model.isNullHecke_mul_of_kills_weight`,
 `New.Variety.Model.jumpsRelAt_of_isEigenQuotient`, `New.Variety.Model.aeval_heckePoly_eq_zero_of_isEigenQuotient`,
 `New.Variety.Model.isKilledBy_heckePoly_of_isEigenQuotient`, `New.Variety.Model.exists_galois_rep`)
+
+## Layer 10: Comparison with the standard theory
+
+This layer relates the objects of the route to the standard objects owned by the general roadmaps of the library, and
+states on the standard objects the results of the route that other roadmaps use: unitary PEL data (10.1), the double
+cosets that describe the complex points of PEL moduli spaces (10.2), theta groups and Tate trivialisations (10.3), the
+analytification and the exponential of a complex abelian variety (10.4), the double-coset ring (10.5), neat subgroups
+(10.6), correspondences on the special fibre (10.7), types of supercuspidal representations (10.8), algebraic modular
+forms on definite unitary groups (10.9), ℓ-adic étale cohomology (10.10), Fontaine's crystalline representations and
+Hodge–Tate weights (10.11), and the eigenquotient of étale cohomology as the representation of 9.8 (10.12).
+[ShortProof] proves none of these statements; each section gives a `*Proof route:*` in place of the method of the
+formal proof.
+
+### 10.1 PEL data and unitary PEL data
+
+*Origin:* particular to this roadmap: the dictionary between PEL data in the sense of 3.2, together with a matrix that
+has a signed frame, and the unitary PEL data of PELModuli §M5.5.
+
+*Proof route:* (a) `Φ_v(ξ)` is purely imaginary with positive imaginary part for every `v`, so `ξ̄ = −ξ`. For a
+reflection `J` with `Φ_{v₀}(β)J` positive definite, `J` is self-adjoint for `Φ_{v₀}(β)`, which is therefore positive
+on the line of `J` and negative on its complement; this gives the signature, shows that `h_J(√−1)` preserves `ψ_β`,
+and gives `ψ_β(y, h_J(√−1)y) = 2 Im Φ_{v₀}(ξ)·y_{v₀}ᴴΦ_{v₀}(β)Jy_{v₀} + Σ_{v ≠ v₀} 2 Im Φ_v(ξ)·y_vᴴΦ_v(β)y_v > 0`,
+`y_v` being the component of `y` at `v`. (b) For `y = xa`, `z = xb` with `a, b ∈ 𝔸_fⁿ` one has `zᴴβy = ε·bᴴa`. As `E`
+is dense in `𝔸_f`, `L_x` is dense in `xÔⁿ`, and by the continuity of `ψ_f` the condition `ψ_β(y, L_x) ⊂ ℤ` on
+`y = xa ∈ Eⁿ` becomes `ψ_f(ξ·bᴴ(εa)) = 1` for all `b ∈ Ôⁿ`, that is `[εa] ∈ T`, equivalently `[a] ∈ T`, since `T` is
+stable under `Ẑ^×`; taking `a ∈ Ôⁿ` gives the integrality, and density again makes `L_x^# → T` onto. (c) From
+`β = ε·x^{−H}x^{−1}` one gets `(x^{−1}gx)ᴴ(x^{−1}gx) = ε^{−1}·xᴴ(gᴴβg)x`, so `x^{−1}gx ∈ GU` exactly when
+`gᴴβg ∈ 𝔸_{ℚ,f}^×·β`; the multiplier of an element of `G_β(ℚ)` is positive because `Φ_w(β)` is definite for `w ≠ v₀`.
+(d) A direct computation shows that for every form `B` with `Re B` symmetric, `E_B` is `1/π` times the imaginary part
+of the part of `B` that is conjugate-linear in the first variable, so that `E_B(√−1·u, √−1·w) = E_B(u, w)`. Through
+`Q` this says that `h_ℓ(√−1)` preserves `ψ_{β_Y}`, so `ℓᴴΦ_{v₀}(β_Y)ℓ = Φ_{v₀}(β_Y)` and `Φ_{v₀}(β_Y)ℓ` is hermitian;
+the positivity of the Riemann form, read at each infinite place, makes it and every `Φ_v(β_Y)`, `v ≠ v₀`, positive
+definite. The lattices are those of 3.3 (a), as `{y ∈ Eⁿ : [y]_g = 0} = L_g`.
+
+Let `D` be PEL data (3.2) and `β ∈ M_n(E)` a matrix that has a signed frame (3.1); in this layer `β` is such a matrix,
+as in 3.1, and the element `β` of `D` does not occur. Let `x` be a frame for `β`, with `xᴴβx = ε·1`. Write
+`𝔸_{ℚ,f}^× = ℚ_{>0}·Ẑ^×` for the finite ideles of `ℚ`, `H_β(y, z) = zᴴβy` on `Eⁿ` (linear in `y`),
+`ψ_β(y, z) = Tr_{E/ℚ}(ξ·zᴴβy)`, extended `ℝ`-bilinearly to `(E ⊗ ℝ)ⁿ`, and `L_x = Eⁿ ∩ xÔⁿ`. For a reflection `J` with
+`Φ_{v₀}(β)J` positive definite let `h_J : ℂ → End_ℝ((E ⊗ ℝ)ⁿ)` be the `ℝ`-algebra homomorphism for which `h_J(√−1)`
+acts by `√−1·J` on the factor of `v₀` and by `√−1` on the factor of each `v ≠ v₀`, the factors being identified with
+`ℂⁿ` through `Φ_v` as in 3.1.
+(a) `(E, a ↦ ā, Φ, (Eⁿ, H_β), ξ)` are data of PELModuli §M5.5, with `δ = ξ`, of signature `(1, n − 1)` at `Φ_{v₀}` and
+`(n, 0)` at `Φ_v` for `v ≠ v₀`; their scalar form is `ψ_β`, and `h_J` is an `h` of §M5.5 for them: it commutes with
+`E`, preserves `ψ_β`, and `ψ_β(y, h_J(√−1)y) > 0` for `y ≠ 0`.
+(b) `L_x` is an `𝓞_E`-lattice with `ψ_β(L_x, L_x) ⊂ ℤ`. Its dual `L_x^# = {y ∈ Eⁿ : ψ_β(y, L_x) ⊂ ℤ}` consists of the
+`y` with `[x^{−1}y] ∈ T`, and `y ↦ [x^{−1}y]` induces `L_x^#/L_x ≅ T`; so `[L_x^# : L_x] = #T` is odd, and
+`(𝓞_E, a ↦ ā, L_x, 2π√−1·ψ_β, h_J)` is an integral PEL datum (PELModuli §M0.5).
+(c) The similitude group `G_β` of these data (PELModuli §M0.7) has `G_β(ℚ) = {z ∈ GL_n(E) : zᴴβz ∈ ℚ^×·β}` and
+`G_β(𝔸_f) = {g ∈ GL_n(𝔸_f) : gᴴβg ∈ 𝔸_{ℚ,f}^×·β} = x·GU·x^{−1}`; every element of `G_β(ℚ)` has positive multiplier,
+and `x·K(𝔑)·x^{−1}` is an open compact subgroup of `G_β(𝔸_f)` stabilising `L_x ⊗ Ẑ = xÔⁿ`.
+(d) If `Y = (β_Y, Q, B)` is a polarised period map for `(g, ℓ)` with `ℓ` a reflection (3.3), then `(g, ℓ)` is a signed
+frame for `β_Y`, `E_B(Qy, Qz) = ψ_{β_Y}(y, z)` for `y, z ∈ (E ⊗ ℝ)ⁿ`, `Q` carries `h_ℓ(√−1)` to multiplication by
+`√−1`, and `Λ_0 = Q(L_g)`, `Λ_T = Q(L_g^#)`.
+
+PEL data do not determine these data: the data above depend on the class of `β` for `β ~ zᴴβz`, and the level `𝔑`, the
+group `T` with its Lagrangian `Λ`, the integers `r`, `i` and the numerical conditions of 3.2 are not part of a PEL
+datum. A prime good for `D` may divide the discriminant of `𝓞_E` (7.4), and then it is not a good prime of these data
+in the sense of PELModuli §M0.10.
+
+*Needs:* 3.1, 3.2, 3.3; PELModuli §M0.5 (Integral PEL data); PELModuli §M0.7 (The similitude group); PELModuli §M0.10
+(Bad primes and the good-prime base); PELModuli §M5.5 (Unitary PEL data with prescribed signatures);
+AdelicUnitaryGroupsAndAlgebraicModularForms §2.1 (the adeles).
+
+### 10.2 Moduli points and the double cosets of unitary similitude groups
+
+*Origin:* particular to this roadmap: the comparison of moduli points up to isomorphism at a level (3.1) with the
+double cosets by which PELModuli §M3.4 describes the complex points of PEL moduli problems.
+
+*Proof route:* a frame determines its form among the matrices that are positive definite at an infinite place
+`w ≠ v₀`: if `x` is a frame for `β` and for `β′`, then `β′ = (ε′/ε)·β` with `ε′/ε` an element of `E` that is a unit of
+`Ẑ`, hence `±1`, and positive. If `z : a ≅_K b` and `a`, `b` have frames for `β_a`, `β_b`, then `x_a` is a frame for
+`zᴴβ_bz`, because `x_b^{−1}zx_a ∈ K` scales the standard form by a unit of `Ẑ`; so `zᴴβ_bz = β_a`. For `z ∈ U_β`,
+`(x_β^{−1}zx_β)ᴴ(x_β^{−1}zx_β) = 1`, so the action is defined, and the map of (a) is constant on orbits, `z` itself
+being an isomorphism. It is onto because a signed frame `(x, J)` for `zᴴβz`, `β ∈ 𝓑`, is isomorphic through `z` to
+`(x_βg, Φ_{v₀}(z)JΦ_{v₀}(z)^{−1})` with `g = x_β^{−1}zx ∈ GU¹`, and injective by the two previous remarks. For (b),
+`G_β(ℚ) ∩ G_β¹(𝔸_f) = U_β`, because a positive rational number that is a unit of `Ẑ` is `1`; the `G_β(ℝ)`-class of
+`h_J` consists of the `h_{J′}`, `J′ ∈ X_β`, because the unitary group of `Φ_{v₀}(β)` acts transitively on its positive
+lines and the elements of `G_β(ℝ)` have positive multiplier. So an element of `G_β(ℚ)` relating two points of the
+image lies in `U_β`, and the image is the union of the classes of the double cosets `G_β(ℚ)·y·K_β`, `y ∈ G_β¹(𝔸_f)`.
+
+Let `K ⊂ GU` be a subgroup with `gᴴg ∈ Ẑ^×·1` for every `g ∈ K` (for example `K(𝔑)`, whose elements and their inverses
+are integral), `GU¹ = {g ∈ GU : gᴴg ∈ Ẑ^×·1}`, and `𝓑` a set of representatives, for `β ~ zᴴβz` (`z ∈ GL_n(E)`), of
+the matrices of `M_n(E)` that have a signed frame. For `β ∈ 𝓑` fix a frame `x_β`; let `X_β` be the set of reflections
+`J` with `Φ_{v₀}(β)J` positive definite (they correspond to the positive lines of `Φ_{v₀}(β)`), and
+`U_β = {z ∈ GL_n(E) : zᴴβz = β}`, acting on `X_β × GU¹/K` by `z·(J, gK) = (Φ_{v₀}(z)JΦ_{v₀}(z)^{−1}, x_β^{−1}zx_βgK)`.
+(a) `(J, gK) ↦ (x_βg, J)` induces a bijection from `⊔_{β ∈ 𝓑} U_β\(X_β × GU¹/K)` onto the set of moduli points without
+marked vectors (3.1) modulo isomorphism at level `K`.
+(b) Let `K` be open and compact, `G_β` and `h_J` as in 10.1, `K_β = x_βKx_β^{−1}` and `G_β¹(𝔸_f) = x_β·GU¹·x_β^{−1}`,
+and identify `X_β` with the `G_β(ℝ)`-class of the `h_J` through `J ↦ h_J`. Then `(J, gK) ↦ (h_J, x_βgx_β^{−1}K_β)`
+induces an injection of `U_β\(X_β × GU¹/K)` into `G_β(ℚ)\(X_β × G_β(𝔸_f)/K_β)`, the set of double cosets that
+PELModuli §M3.4 identifies with the part `M_{K_β}^ad(ℂ)^{(1)}` of the complex points of the adelic moduli problem of
+the data of 10.1 (the part whose rational homology is isomorphic to `(Eⁿ, ψ_β)` up to a rational multiple of the
+form). Its image is the union of the classes of the `(h, y)` with `y ∈ G_β(ℚ)·G_β¹(𝔸_f)`, an open and closed subset.
+
+(a) and (b) compare index sets: a moduli point is a frame and a reflection, not an abelian variety with additional
+structure.
+
+*Needs:* 3.1, 10.1; PELModuli §M3.4 (Complex points of PEL moduli).
+
+### 10.3 Theta structures from the theta group, and full level structures as Tate trivialisations
+
+*Origin:* particular to this roadmap: the comparison of the theta structures of 4.5 with the description of the
+sections of a line bundle through its theta group and a level subgroup (D. Mumford, *On the equations defining abelian
+varieties I*, Invent. Math. 1 (1966), §§1–2), and of the full level structures of 6.1 with the Tate trivialisations of
+PELModuli §M1.4.
+
+*Proof route:* (a) By AbelianSchemesAndArithmeticModuli §A3.6 (1)–(3), `G(L)(R)` is a central extension of `η(H)` by
+`R^×` (lifts exist over the local ring `R`), whose commutator `e_L` is a perfect alternating pairing with values in
+the roots of unity of order dividing `#H`; so `Λ` is its own annihilator. As `R` is strictly henselian and `#H` is
+invertible in `R`, every unit of `R` has a `#H`-th root (Hensel's lemma), so every extension of `H` by `R^×` with
+trivial commutator splits, and every character of `Λ` with values in `R^×` extends to `H`. Hence `G(L)(R)` has a
+section over `η` with cocycle `c`, whose commutator `c(s)(t)/c(t)(s)` is `e_L(η(s), η(t))`; it is a homomorphism on
+`Λ`, and multiplying it by a character of `H` makes it agree with `Λ̃` on `Λ`. Its conjugate by `δ_{−1}` and `[−1]` is
+a section with the same cocycle, so the two differ by a character of `H`, trivial on `Λ` because `Λ̃` is stable; that
+character has a square root trivial on `Λ` because `#H` is odd, and correcting by it gives `σ`. By
+AbelianSchemesAndArithmeticModuli §A2.4, `H⁰(A, L)` is free of rank `√#H`; the characters of `Λ` split it into
+eigenspaces of `Λ̃`, which the `σ(t)` permute through `t ↦ e_L(η(t), η(·))|_Λ`, a bijection from `H/Λ` onto the
+characters of `Λ`; so the invariants of `Λ̃` are free of rank one and the `X_t`, `t ∈ H/Λ`, form a basis. The lift of
+`y ↦ y + η(s)` is `σ(s)`, by the cocycle identity. With `ι` the action of `[−1]` through the normalised isomorphism,
+`ισ(t)ι^{−1} = δ_{−1}(σ(t)) = σ(−t)`, and `ι` preserves the invariants of `Λ̃`, so `ιϑ = ε_ϑ·ϑ` with `ε_ϑ ∈ R^×`;
+hence `ε_ϑ^{−1}·ι∘σ(s)` is a lift of `y ↦ −y + η(s)` sending `X_t` to `c(s)(t)·X_{−(s+t)}`. For `s ∉ Λ`,
+`l ↦ c(s)(l)² = e_L(η(s), η(l))` is a nontrivial character of `Λ` whose values `ζ` have `1 − ζ` a unit, their orders
+being invertible in `R`, so its sum over `Λ` vanishes. The `X_t` have no common zero because they span the sections of
+a line bundle generated by its global sections. (b) Through `e`, `A_x^an` is `V/Λ_0` compatibly with `𝓞_E` (6.2 (a),
+10.4); the Rosati condition is `ψ_{β_Y}(cy, z) = ψ_{β_Y}(y, c̄z)` (10.1 (a), (d)), and the determinant condition holds
+because `Lie(A_x)` is `V` with its complex structure, which `Q` identifies with `(E ⊗ ℝ)ⁿ` with `h_ℓ`. By the relation
+of 5.4 to AbelianSchemesAndArithmeticModuli §§A3.5–A3.7, the scalar by which lifts of the translations by two points
+killed by `m` commute on the coordinates of `N_x^{⊗m}` is the polarised Weil pairing `e_{λ,m}` of the two points; for
+`y = ga`, `z = gb` with `a, b ∈ Ôⁿ`, `ψ_{β_Y}(y, z) = Tr_{E/ℚ}(ξ·ε_g·bᴴa)`, so the condition of 6.1 at `ι = id` is the
+equation of §M1.4 for `(T(φ)∘g^{−1}, can∘(ε_φε_g^{−1}))`, and the conditions at the other ring maps `ι : ℂ → ℂ` follow
+with `ε` multiplied by the cyclotomic character of `ι`. A point of the fibre gives back `φ` as its map on torsion
+composed with `g`, an injective `𝓞_E`-linear map.
+
+(a) Let `R` be a strictly henselian local ring, `A` an abelian scheme over `R`, and `L` a relatively ample line bundle
+on `A`, rigidified along `0`, generated by its global sections, and symmetric, with the normalised isomorphism
+`[−1]^*L ≅ L`. Let `H` be a finite abelian group of odd order invertible in `R`, and `η : H → A(R)` a homomorphism
+that identifies the constant group `H_R` with the kernel `K(L)` of the Mumford map. Let `G(L)` be the theta group of
+AbelianSchemesAndArithmeticModuli §A3.6, acting on `H⁰(A, L)` by `(x, ψ)·f = ψ(t_x^*f)`, `e_L` its commutator pairing,
+and `δ_{−1}` the involution of `G(L)` induced by `[−1]` and the normalised isomorphism. Let `Λ ⊂ H` be a subgroup with
+`(#Λ)² = #H` on which `e_L(η(·), η(·))` is trivial, and `Λ̃ ⊂ G(L)(R)` a level subgroup over `η(Λ)` (§A3.6 (5)) stable
+under `δ_{−1}`. Put `c(s)(t) = e_L(η(s), η(t))^{(#H+1)/2}`. Then there are a map `σ : H → G(L)(R)` over `η` with
+`σ(Λ) = Λ̃`, `δ_{−1}(σ(s)) = σ(−s)` and `σ(s)σ(t) = c(s)(t)·σ(s + t)`, and a generator `ϑ` of the module
+`H⁰(A, L)^{Λ̃}`, which is free of rank one; and the sections `X_t = σ(t)·ϑ`, `t ∈ H`, are the coordinates of a linear
+system that is a theta structure (4.5) for `H`, `Λ`, `η` and the characters `c(s)`. The `X_t` with `t` in a set of
+representatives of `H/Λ` form a basis of `H⁰(A, L)`.
+(b) Let `x` be an object over `ℂ` of a theta family (6.1) with structure map `Φ_{v₀}`, and `e` a model of `x` on a
+polarised period map `Y = (β_Y, Q, B)` for `(g, ℓ)` with `ℓ` a reflection (6.2), `gᴴβ_Yg = ε_g·1`. Let `λ = φ_{[N_x]}`
+be the polarisation of `[N_x]`, `i` the action of `𝓞_E` on `A_x`, and `(𝓞_E, a ↦ ā, L_g, 2π√−1·ψ_{β_Y}, h_ℓ)` the
+integral datum of 10.1. Then `(A_x, λ, i)` is a PEL triple for this datum over `Spec ℂ` (PELModuli §M1.2, with no
+excluded primes), and `φ ↦ (T(φ)∘g^{−1}, can∘(ε_φε_g^{−1}))` is a bijection from the full level structures `φ` on `x`
+(6.1, read with `ΦΨ = c·ΨΦ` for lifts `Φ`, `Ψ` of the translations by the sections of `[y]`, `[z]`, the order of 5.4
+(b); `ε_φ` is the unit attached to `ι = id`) onto the points `(α̂, ν(α̂))` of the profinite geometric fibre of the
+pro-system of PELModuli §M1.4 for this triple whose map on torsion, composed with `g`, sends each class killed by `𝔑`
+to its level point. Here `T(φ) : Ôⁿ → T(A_x)` is the map of Tate modules (AbelianSchemesAndArithmeticModuli §A4.1)
+given by `φ` on `T_n = (𝔸_f/Ô)ⁿ`, and `can : Ẑ(1) → T(𝔾_m)(ℂ)` sends `2π√−1·t` to `(exp(2π√−1·t/m))_m`.
+
+(b) compares the two notions of level structure over `ℂ` only; over other rings a full level structure records the
+commutators of lifts at every ring map to `ℂ`, and no comparison is made there.
+
+*Needs:* 4.5, 5.4, 6.1, 6.2, 10.1, 10.4; AbelianSchemesAndArithmeticModuli §A2.4 (Ample cohomology, Riemann–Roch and
+the degree of `φ_L`); AbelianSchemesAndArithmeticModuli §A3.6 (Theta groups and polarized descent);
+AbelianSchemesAndArithmeticModuli §A3.7 (Polarized Weil pairings); AbelianSchemesAndArithmeticModuli §A4.1 (The
+integral Tate module); PELModuli §M1.2 (PEL-type abelian schemes); PELModuli §M1.4 (The pro-system of symplectic Tate
+trivializations).
+
+### 10.4 Holomorphic families, the analytification and the exponential
+
+*Origin:* particular to this roadmap: the comparison of the calculus of 5.1 with the analytification of schemes
+locally of finite type over `ℂ` (ComplexComparisonPartII §C-1.1), and of the uniformisations of 5.1 with the lattice
+uniformisation of AbelianSchemesAndArithmeticModuli §A5.1.
+
+*Proof route:* (a) For an affine open `U = Spec C` of `X` containing the point `φ(w)`, `C ⊗_O ℂ` is generated over `ℂ`
+by finitely many `b_1, …, b_N ∈ C`; the opens `U_ℂ` of this kind form a basis of the topology of `X_ℂ`, and the
+regular functions on `U_ℂ` are the elements of `C ⊗_O ℂ`. So the condition of 5.1 says that `φ` maps a neighbourhood
+of `w` into `U(ℂ)` with the `b_k∘φ` analytic there, that is, holomorphically into the closed analytic subspace of
+`ℂ^N` cut out by the relations among the `b_k`, which is `U_ℂ^an`; a holomorphic map from a manifold to it is a
+morphism to its reduction. Conversely, Zariski opens are open in `X_ℂ^an` and regular functions are holomorphic. The
+jet of `φ` at `w` in the direction `v` is the constant point exactly when `d(b_k∘φ)_w(v) = 0` for all `k`. (b) By
+§A5.1, `exp` is a surjective homomorphism with kernel the full lattice `Λ` and induces an analytic isomorphism
+`V/Λ ≅ A^an`; so it is a holomorphic local isomorphism and, by (a), a holomorphic immersion at every point in the
+sense of 5.1. If `γ : W → A(ℂ)` is additive and holomorphic at `0` in the sense of 5.1, then by (a) and translation it
+is holomorphic on `W`; as `W` is simply connected and `exp` is a covering map, `γ` lifts to a continuous `γ̃ : W → V`
+with `γ̃(0) = 0`, and `γ̃(u + v) − γ̃(u) − γ̃(v)` is a continuous map to the discrete `Λ` that vanishes at `0`, so
+`γ̃` is additive, hence `ℝ`-linear, and holomorphic, hence `ℂ`-linear. Choosing a basis of `V` gives 5.2 (d).
+
+Let `O` be a valuative arc, `X` an `O`-scheme locally of finite type, `X_ℂ` its generic fibre and `X_ℂ^an` the
+analytification of ComplexComparisonPartII §C-1.1, whose points are the complex points of `X`.
+(a) A family `φ : P → X(ℂ)`, `P` a finite-dimensional complex space, is holomorphic at `w` in the sense of 5.1 if and
+only if its restriction to some open neighbourhood `P₀` of `w` is a morphism of complex analytic spaces `P₀ → X_ℂ^an`.
+In that case `φ` is constant to first order at `w` in the direction `v` exactly when the differential of this morphism
+at `w` kills `v`, and `φ` is a holomorphic immersion at `w` exactly when that differential is injective.
+(b) Let `A` be an abelian scheme over `ℂ` (4.1), that is an abelian variety in the sense of
+AbelianSchemesAndArithmeticModuli §A0.1, and `exp : V → A^an` the exponential of AbelianSchemesAndArithmeticModuli
+§A5.1, `V = T₀(A^an)`, with kernel `Λ`. Then `exp`, read as a map `V → A(ℂ)`, is a uniformisation of `A` by `V` with
+lattice `Λ` in the sense of 5.1. In particular §A5.1 implies 5.2 (d).
+
+*Needs:* 4.1, 5.1, 5.2; AbelianSchemesAndArithmeticModuli §A0.1 (Abelian schemes); AbelianSchemesAndArithmeticModuli
+§A5.1 (Lattice uniformization); ComplexComparisonPartII §C-1.1 (Analytic local models and scheme analytification).
+
+### 10.5 The Hecke algebra and the double-coset ring
+
+*Origin:* particular to this roadmap: the comparison of the group-ring Hecke algebra of 8.1 with the double-coset ring
+of the Hecke pair `(GU⁺, K(𝔑))` (G. Shimura, *Introduction to the Arithmetic Theory of Automorphic Functions* (1971),
+ch. 3), acting on invariants as in AutomorphicFormsOnReductiveGroups §0.6.
+
+*Proof route:* in the representation of `GL_n(𝔸_f)` on the formal `k`-linear combinations of the cosets `gK`, an
+element `a` sends the coset `K` to its coset function; as `K` is a `K`-fixed point, `a ∈ 𝓗(𝔑)` makes the coset
+function left `K`-invariant. For `v ∈ π^K`, `π(a)v = Σ_{gK} f_a(g)π(g)v`, which is the operator of `h(a)` in §0.6.
+Conversely, for a function `f` invariant under `K` on both sides with finitely many cosets in its support, contained
+in `GU⁺`, the sum of the `f(g)[g]` over representatives `g` of these cosets lies in `𝓗(𝔑)`, since on a `K`-fixed
+vector `Σ f(g)π(g)v` does not depend on the representatives and is `K`-fixed by the left invariance of `f`; its image
+is `Σ_D f(D)·D`. The operators of §0.6 on the `K`-invariants of the representation on cosets, evaluated at the coset
+`K`, send `T ∈ 𝕋` to its coset function, so they determine `T`; hence `h(ab) = h(a)h(b)` follows from
+`π(ab) = π(a)π(b)` and the composition law of §0.6.
+
+Let `k` be a commutative ring, `K = K(𝔑)`, and `𝕋 = 𝕋(GU⁺, K; k)` the double-coset ring of the Hecke pair `(GU⁺, K)`
+(Mathlib's `HeckeRing`, with basis the double cosets `KgK`, `g ∈ GU⁺`), acting on the `K`-invariants of every
+representation `π` of `GU` on a `k`-module by `KgK ↦ (v ↦ Σ_i π(b_i)v)` for `KgK = ⊔_i b_iK`, as in
+AutomorphicFormsOnReductiveGroups §0.6. For `a ∈ 𝓗(𝔑)` with coset function `f_a` (8.1) put `h(a) = Σ_D f_a(D)·D`, the
+sum over the double cosets `D ⊂ GU⁺`.
+(a) The coset function of every `a ∈ 𝓗(𝔑)` is invariant under `K` on both sides and supported on finitely many double
+cosets contained in `GU⁺`; `h : 𝓗(𝔑) → 𝕋` is a surjective homomorphism of `k`-algebras.
+(b) For every representation `π` of `GL_n(𝔸_f)` on a `k`-module and every `v ∈ π^K`, `π(a)v` is the action of `h(a)`
+on `v`. The kernel of `h` consists of the `a` that act by `0` on the `K`-invariants of every representation.
+
+An element of `𝓗(𝔑)` records a representative in the group ring, which no action on `K`-invariants sees.
+
+*Needs:* 8.1; AutomorphicFormsOnReductiveGroups §0.6 (Hecke operators on invariants).
+
+### 10.6 Neat levels
+
+*Origin:* particular to this roadmap: the comparison of the neatness of 8.1 with neatness in the sense of PELModuli
+§M2.2, stated with its argument after 8.1.
+
+*Proof route:* let `y ∈ GL_n(E)` with `x^{−1}yx ∈ K(𝔑)` fix `ℓ`, for a signed frame `(x, ℓ)` for `β`. By 8.1 (c), with
+`c = 1`, `yᴴβy = β` and every conjugate of every eigenvalue of `y` has absolute value `1`; the eigenvalues are
+algebraic integers, as `x^{−1}yx ∈ GL_n(Ô)`, hence roots of unity (an algebraic integer all of whose conjugates have
+absolute value `1` is a root of unity). In `G_β`, the element `y = x·(x^{−1}yx)·x^{−1}` of `x·K(𝔑)·x^{−1}` has
+multiplier `1`, and the eigenvalues of its component at each prime `p` on `L_x ⊗ ℚ_p` are the images of these roots of
+unity, so they lie in the common torsion of §M2.2 and are `1`. Then `y` is unipotent and unitary for the definite form
+`Φ_w(β)`, `w ≠ v₀`, hence `y = 1`. The eigenvalues and multipliers of the elements of `x·K(𝔑)·x^{−1}` are those of the
+elements of `K(𝔑)`, whatever the signed frame.
+
+Let `𝔑 ≠ 0`, `(x, ℓ)` a signed frame for `β`, and `G_β`, `L_x` the similitude group and lattice of 10.1. Whether the
+open compact subgroup `x·K(𝔑)·x^{−1}` of `G_β(𝔸_f)` is neat in the sense of PELModuli §M2.2, with no excluded primes
+and for the faithful representation on `L_x ⊗ Ẑ` and the multiplier, does not depend on the signed frame; if it is,
+then `𝔑` is neat in the sense of 8.1.
+
+Neatness in the sense of 8.1 constrains only the elements of `GL_n(E)` that fix a reflection and are conjugate into
+`K(𝔑)` by a frame, that is the automorphisms of moduli points (10.2), and not all elements of `K(𝔑)`; the converse
+implication is not asserted.
+
+*Needs:* 8.1, 10.1; PELModuli §M2.2 (Neat open compact subgroups).
+
+### 10.7 The pointwise congruence relation and correspondences on the special fibre
+
+*Origin:* particular to this roadmap: the comparison of the congruence relation of 8.2, a condition at each point of
+the special fibre, with the congruence relation written as an identity of correspondences on the special fibre,
+between the Hecke correspondences and powers of Frobenius.
+
+*Proof route:* (a) Let `ζ` be the generic point of `C` and `x` the geometric point of `W` at `ζ` with values in an
+algebraic closure `k` of `κ(ζ)`; its structure map kills `𝔭`. For a point `u` of `Z_q` with values in `k`,
+`u∘Frob^{f·b}` is `F^b∘u`, as the absolute Frobenius commutes with all morphisms. The relation at `x` says that for
+each `y ∈ Z_q(k)` the `m_i` with `F^{b_i}(u_i(x)) = y` add up to `0`; and two morphisms from the integral scheme `C`
+to the separated `Z_q` that agree at its geometric generic point are equal. (b) Write `[W_q] = Σ_C μ_C·[C]`, `μ_C` the
+multiplicities; by (a), `Σ_i m_i·(c, F^{b_i}∘u_{i,q})_*[C] = 0` for each `C`. (c) is (b) for `c = π_i`, since
+`(π_i, F^b∘p_g)_* = (1 × F^b)_*∘(π_i, p_g)_*` by the functoriality of push-forward, `F` being finite.
+
+Let `R` be a ring with a homomorphism `κ : R → 𝔽_q` onto a finite field, `q = p^f`, and `𝔭 = ker κ`; let `u_i : W → Z`
+(`i` in a finite set `I`) be morphisms of `R`-schemes, `W` of finite type and `Z` separated of finite type over `R`,
+`m_i ∈ ℤ` and `a_i = f·b_i` with `b_i ∈ ℕ`, such that the `u_i` satisfy the congruence relation of 8.2 with
+coefficients `m_i` and Frobenius exponents `a_i` modulo `𝔭`. Write `W_q`, `Z_q` for the fibres over `𝔽_q`, `u_{i,q}`
+for the induced morphisms and `F` for the `q`-power Frobenius endomorphism of `Z_q`, an `𝔽_q`-morphism. For a proper
+morphism of schemes of finite type over `𝔽_q`, `(·)_*` is the push-forward of cycles: an integral closed subscheme
+goes to its image times the degree of the map onto it, or to `0` if the dimension drops; `[W_q]` is the fundamental
+cycle.
+(a) For every irreducible component `C` of `(W_q)_red`, the morphisms `F^{b_i}∘u_{i,q}|_C`, `i ∈ I`, fall into classes
+of equal morphisms, and the `m_i` of each class add up to `0`.
+(b) If `W` is proper over `R`, then for every morphism `c : W_q → Y` to a separated `𝔽_q`-scheme of finite type,
+`Σ_i m_i·(c, F^{b_i}∘u_{i,q})_*[W_q] = 0` in the group of cycles of `Y × Z_q`.
+(c) Let `𝓜` be a model (8.2), `w` a safe split place with `q_w = q`, `κ` extending the reduction `𝓞_E → k_w = 𝔽_q`,
+`i` a level with `g_A ∈ s_i` for every subspace `A ⊂ k_wⁿ`, and `T_A = (π_i, p_{g_A})_*[W_{i,q}]`, a cycle on
+`Z_q × Z_q`. Then `Σ_A (−1)^{r_A} q^{r_A(r_A−1)/2}·(1 × F^{|n|−r_A})_*T_A = 0`, `r_A = dim A`; with
+`T_j = Σ_{dim A = j} T_A` this reads `Σ_{j=0}^{|n|} (−1)^j q^{j(j−1)/2}·(1 × F^{|n|−j})_*T_j = 0`, the Hecke
+polynomial of 9.8 with the correspondences `T_j` in place of the eigenvalues, applied to `F`.
+
+For a single morphism `c`, the identity of (b) does not imply the pointwise relation: let `W = Z` have fibre `W_q`
+consisting of two `𝔽_q`-rational points lying over one point of `Y`, `u_1` the identity, `u_2` the map exchanging the
+two points, `m = (1, −1)` and `b = (0, 0)`; then `(c, u_1)_*[W_q] = (c, u_2)_*[W_q]`, while `[u_1(x)] − [u_2(x)] ≠ 0`
+at both points `x`. So one identity of the form of (b), for a single `c`, records less in general than the pointwise
+relation. The identity of correspondences of (c) is (b) for the single morphism `c = π_i`; no converse of (c) is
+asserted here. The identities of (b) for all `c` together are equivalent to the pointwise relation: for `c` the
+identity of `W_q`, `(c, F^{b_i}∘u_{i,q})_*[C]` is the graph of `F^{b_i}∘u_{i,q}|_C`, and graphs of distinct morphisms
+on `C` are distinct integral subschemes, so (b) gives (a); and (a) gives the congruence relation modulo `𝔭`, since a
+point of `W` with values in a field in which `𝔭` vanishes factors through an irreducible component `C` of `(W_q)_red`.
+
+*Needs:* 8.2.
+
+### 10.8 Cuspidal types and types of supercuspidal representations
+
+*Origin:* particular to this roadmap: the comparison of the cuspidal types of 9.2 with the types of supercuspidal
+representations of the theory of types, through the Bernstein decomposition of SmoothRepresentationsOfLocalGroups
+§SR.3.2.
+
+*Proof route:* suppose that `χ` is trivial on `J ∩ N` for the group `N = 1 + εM_a(E_w)(1 − ε)` of an idempotent
+`ε ≠ 0, 1`, the unipotent radical of the parabolic subgroup `P = MN` that stabilises the image of `ε`. Let `J_M` be
+the image of `P ∩ J` in `M`, `χ_M` the character it inherits from `χ`, `τ` the compact induction of `χ_M` from `J_M`
+to `M` (SmoothRepresentationsOfLocalGroups §SR.2.1) and `v₀ ∈ τ` the function supported on `J_M` with `v₀(1) = 1`. The
+function on `GL_a(E_w)` equal to `δ_P(p)^{1/2}·τ(p)χ(j)v₀` at `pj` (`p ∈ P`, `j ∈ J`) and to `0` off `PJ` is well
+defined, smooth and nonzero, lies in the parabolic induction of `τ`, and `J` acts on it by `χ`. By first adjointness
+(SmoothRepresentationsOfLocalGroups §SR.2.2) every map from a projective generator of the cuspidal factor of §SR.3.2
+to a parabolically induced representation vanishes, the Jacquet modules of that generator being `0`; so the induced
+representation and all its subquotients lie in the complementary factor. The subrepresentation generated by the
+function is finitely generated, so it has an irreducible quotient; the image of the function is a nonzero vector on
+which `J` acts by `χ`, so this quotient contains `χ` and is cuspidal by hypothesis, which is impossible.
+
+Let `w` be a split place, `a = |n|`, `J ⊂ GL_a(𝒪_w)` an open subgroup and `χ : J → ℂ^×` a smooth character such that
+every irreducible smooth complex representation of `GL_a(E_w)` that contains `χ` (has a nonzero vector on which `J`
+acts by `χ`) is cuspidal. Then `(J, χ)` is a cuspidal type at `w` in the sense of 9.2. This applies to every type
+`(J, χ)` of the inertial class of a supercuspidal representation of `GL_a(E_w)` (a compact open subgroup `J` with a
+smooth character `χ` such that the irreducible smooth representations containing `χ` are exactly the unramified twists
+of that representation) with `J ⊂ GL_a(𝒪_w)`.
+
+The condition of 9.2 concerns `(J, χ)` alone and singles out no inertial class; the converse implication is not
+asserted.
+
+*Needs:* 9.2; SmoothRepresentationsOfLocalGroups §SR.2.1 (Smooth and compact induction);
+SmoothRepresentationsOfLocalGroups §SR.2.2 (Jacquet functors and parabolic induction);
+SmoothRepresentationsOfLocalGroups §SR.3.2 (The Bernstein decomposition and centre).
+
+### 10.9 Definite forms and algebraic modular forms on definite unitary groups
+
+*Origin:* particular to this roadmap: the comparison of the definite forms of 9.3 with algebraic modular forms on the
+definite unitary groups of the forms that have frames, in the rational coefficient model of
+AutomorphicFormsOnReductiveGroups §7.4.
+
+*Proof route:* a frame determines its form among the matrices positive definite at an infinite place (10.2, proof
+route), so the set of frames for totally positive definite forms is the disjoint union over `β ∈ 𝓑_def` of the sets
+`GL_n(E)·G_β¹(𝔸_f)·x_β`, and `GL_n(E) ∩ G_β¹(𝔸_f) = U_β`. A definite form is therefore determined by its values on the
+`G_β¹(𝔸_f)·x_β`, and conversely `φ(zhx_β) = ξ(z)ψ_β(h)` defines a definite form, well defined by the last equality and
+right `K(𝔑)`-invariant because `K(𝔑)` lies in `GU¹` (10.2). For (b), `U_β(𝔸_f)` is the kernel of the multiplier on
+`G_β¹(𝔸_f)`, hence normal, so `G_β¹(𝔸_f)` is the disjoint union of the `U_β(𝔸_f)·h_j·K_β`, and a function in `M_β` is
+given freely by its restrictions to them; the set of the `h_j` is finite because the multiplier of `K_β` is open in
+`Ẑ^×`.
+
+Let `𝔑 ≠ 0`, `ξ` a representation of `GL_n(E)` on `W`, `K = K(𝔑)`, and `𝓑_def` a set of representatives, for
+`β ~ zᴴβz`, of the matrices of `M_n(E)` that are positive definite at every infinite place and have a frame (3.1);
+this set is finite, by 9.3 (c) applied, with `U = GL_n(Ô)`, to the signed frames `(x, 1)`: an element `g` of
+`GU ∩ GL_n(Ô)` has `gᴴg ∈ Ẑ^×·1`, so `xg` is a frame for the same form as `x`, and the class of the form of a frame is
+constant on the classes of `GL_n(E)\GL_n(𝔸_f)/(GU ∩ GL_n(Ô))`. For `β ∈ 𝓑_def` fix a frame `x_β`; let
+`U_β = {z ∈ GL_n(E) : zᴴβz = β}`, the rational points of the unitary group `U(β)` of `(Eⁿ, H_β)` over `E⁺`,
+`U_β(𝔸_f) = {u ∈ GL_n(𝔸_f) : uᴴβu = β}` its finite adelic points, `G_β¹(𝔸_f) = {h ∈ GL_n(𝔸_f) : hᴴβh ∈ Ẑ^×·β}` and
+`K_β = x_βKx_β^{−1}`.
+(a) `φ ↦ (ψ_β)_β`, `ψ_β(h) = φ(hx_β)`, is a linear bijection from the definite forms of level `𝔑` with coefficients
+`ξ` (9.3) onto `⊕_{β ∈ 𝓑_def} M_β`, where `M_β` is the space of the `ψ : G_β¹(𝔸_f) → W` with `ψ(uhk) = ξ(u)ψ(h)` for
+`u ∈ U_β` and `k ∈ K_β`.
+(b) For representatives `h_1, …, h_s` of the finite set `U_β(𝔸_f)\G_β¹(𝔸_f)/K_β`, `ψ ↦ (u ↦ ψ(uh_j))_j` identifies
+`M_β` with the direct sum over `j` of the spaces of functions `F : U_β(𝔸_f) → W` with `F(γuk) = ξ(γ)F(u)` for
+`γ ∈ U_β` and `k ∈ U_β(𝔸_f) ∩ h_jK_βh_j^{−1}`. When the restriction of `ξ` to `U_β` is given by an algebraic
+representation of `U(β)`, as for the coefficients of 9.6 (b) when `β = 1`, these are the algebraic modular forms of
+the rational coefficient model of AutomorphicFormsOnReductiveGroups §7.4 for `U(β)` at these levels.
+
+Right translation by `g ∈ GU⁺`, with `c·gᴴg ∈ Ẑ^×·1` for the rational `c > 0` of 3.1, carries the summand of `β` into
+the summand of the class of `c^{−1}β`, which is the summand of `β` exactly when `zᴴβz = cβ` for some `z ∈ GL_n(E)`.
+For the `g_A` of 8.1, `c` is a power of `q_w`; so the Hecke operators of 9.3 need not preserve the summands of (a).
+
+*Needs:* 3.1, 9.3, 10.2; AutomorphicFormsOnReductiveGroups §7.4 (Algebraic modular forms with their actual coefficient
+action).
+
+### 10.10 The cohomology `Vⁿ` as ℓ-adic étale cohomology
+
+*Origin:* particular to this roadmap: the consequences, for the model and for 9.1, of the comparison of
+CohomologyOfFunctorsOnTestRings Layer 8 (Comparison with the standard theory) between `Vⁿ` and ℓ-adic étale
+cohomology.
+
+*Proof route:* the descent hypothesis of 8.2 for `Vⁿ` is CohomologyOfFunctorsOnTestRings §3.5 (b) for the Galois
+coverings `π_i` of the model; it passes to étale cohomology through the identification, which is natural for the legs
+and the deck transformations. As `F(π_{I(w)})` is injective, `t(w, j)` is determined by `F(π_{I(w)})∘t(w, j)`, the sum
+of the pull-backs along the legs over `τ_{w,j}`, so the two families of operators correspond; they commute with the
+automorphisms of `Ω`, which commute with all pull-backs. (b) is 9.1 transported through the identification, natural
+for the `u_i` and equivariant for `Γ`.
+
+Let `R` be a Noetherian ring with a map to `Ω`, `ℓ` a prime, `Γ` a group acting on `Ω` by `R`-algebra automorphisms,
+and, for proper `R`-schemes `Y`, `ι_Y : Vⁿ(Y) ≅ Hⁿ_ét(Y_Ω, ℚ_ℓ)` the identification of CohomologyOfFunctorsOnTestRings
+§8.3 (a), (b), natural in `Y` and compatible with the `R`-algebra automorphisms of `Ω`, which act on both sides by
+pull-back along the automorphisms of `Y_Ω` that they induce. Here `Hⁿ_ét(Y_Ω, ℚ_ℓ)` is the ℓ-adic étale cohomology of
+EtaleCohomologyFoundations §F.4.5, finite-dimensional, with the continuous action of `Gal(Ω/E)` of
+EtaleCohomologyFoundations §F.4.6 when `R ⊂ E`.
+(a) For a model `𝓜` (8.2), the functor `Y ↦ Hⁿ_ét(Y_Ω, ℚ_ℓ)` satisfies the descent hypothesis of 8.2 at every level,
+and `ι_Z` carries the operators `t(w, j)` that 8.2 gives on `Vⁿ(Z)` to those it gives on `Hⁿ_ét(Z_Ω, ℚ_ℓ)`; these
+commute with `Γ`.
+(b) In the setting of 9.1, with `W`, `Y` proper over `R` and `Y` smooth of relative dimension `d`: under the
+hypotheses of 9.1 (a), `Σ_i m_i·u_i^*(g^{−e_i}x) = 0` in `Hⁿ_ét(W_Ω, ℚ_ℓ)` for every `x ∈ Hⁿ_ét(Y_Ω, ℚ_ℓ)`; and the
+inertia group of `A` in `Γ` acts trivially on `Hⁿ_ét(Y_Ω, ℚ_ℓ)`, which is the statement that smooth proper reduction
+makes ℓ-adic cohomology unramified (9.1, Origin).
+
+*Needs:* 8.2, 9.1; CohomologyOfFunctorsOnTestRings §§3.4, 3.5 (`Vⁿ`, transfer for Galois coverings);
+CohomologyOfFunctorsOnTestRings §8.3 (`ℓ`-adic cohomology and `ℓ`-adic étale cohomology); EtaleCohomologyFoundations
+§F.4.5 (Rational realization and finite-dimensional cohomology); EtaleCohomologyFoundations §F.4.6 (Continuous actions
+and finite-level operation comparison).
+
+### 10.11 Crystallinity, the linear Frobenius and Hodge–Tate jumps in Fontaine's terms
+
+*Origin:* particular to this roadmap: the consequences, for 9.8, of the comparison of
+CrystallineRepresentationsAndKisinModules Layer 7 (Comparison with the standard theory) between the notions of its
+§3.1 and Fontaine's.
+
+*Proof route:* `GL_m(ℚ̄_ℓ)` is the countable union of the closed subgroups `GL_m(L)`, `L` finite over `ℚ_ℓ`; by
+Baire's theorem applied to the compact group `Gal(Ω/E)`, the preimage of one of them is an open subgroup, of finite
+index, and the image of the whole group lies in `GL_m(L′)` for the finite extension `L′` generated by the entries of
+the images of coset representatives. The vectors of `B_max ⊗ ρ` fixed by `D_A` are those of `B_max ⊗ ρ_L` tensored
+over `L` with `ℚ̄_ℓ`, so crystallinity, the linear Frobenius and the jumps of `ρ` are those of `ρ_L`, to which
+CrystallineRepresentationsAndKisinModules §§7.2–7.4 apply, through §7.2 (d) for the decomposition group `D_A` and §7.3
+(c) for the jumps. §7.2 (a), (b) identify `D_max = (B_max ⊗ ρ_L)^{D_A}` with `D_cris` compatibly with `φ` and give
+(a); on `D_max` the linear Frobenius at a Weil pair `(s, f_w)` with `s ∈ D_A` is `φ^{f_w}`, because `s` fixes `D_max`
+(§7.4 (b)), and a polynomial kills the `B_max`-linear extension of an endomorphism of `D_max` exactly when it kills
+the endomorphism (§7.4 (c)), which gives (b); a crystalline `ρ_L|_{D_A}` is de Rham (§7.3 (d)), and by §7.3 (b) the
+jump at `h` is the multiplicity of `ℂ_ℓ(−h)`, which gives (c).
+
+Let `ρ` be a continuous representation of `Gal(Ω/E)` on `ℚ̄_ℓ^m` satisfying (b) and (c) of 9.8, for instance the
+representation of 9.8, and `A` a place of `Ω` over `ℓ` above a safe place `w`, with decomposition group `D_A`,
+identified through `A` with the absolute Galois group of the completion `E_w`; let `E_{w,0}` be the maximal unramified
+subfield of `E_w` and `f_w = [E_{w,0} : ℚ_ℓ]`, so that `q_w = ℓ^{f_w}`. Then `ρ` is the scalar extension of a
+representation `ρ_L` on `L^m` for a finite extension `L` of `ℚ_ℓ`, and:
+(a) `ρ_L|_{D_A}` is crystalline in Fontaine's sense: `D_cris = (B_cris ⊗_{ℚ_ℓ} ρ_L)^{D_A}` has dimension
+`dim_{ℚ_ℓ} ρ_L` over `E_{w,0}`;
+(b) `P_w(φ^{f_w}) = 0` on `D_cris ⊗_L ℚ̄_ℓ`, `φ^{f_w}` being the `E_{w,0}`-linear power of the crystalline Frobenius;
+(c) for every `h ∈ J` and every local datum at `A` whose complex embedding of `E` is `Φ_{v₀}` (9.8 (c)), `ℂ_ℓ(−h)`
+occurs in `ℂ_ℓ ⊗_{ℚ̄_ℓ} ρ`, on which `D_A` acts semilinearly through the local datum: `h` is a Hodge–Tate weight of
+`ρ|_{D_A}` in the convention in which the cyclotomic character has Hodge–Tate weight `−1`, and `−h` is one in the
+convention of CrystallineRepresentationsAndKisinModules §7.3 (b), in which the cyclotomic character has weight `+1`.
+Conversely, (a)–(c) give (b) and (c) of 9.8.
+
+*Needs:* 9.7, 9.8; CrystallineRepresentationsAndKisinModules §3.1 (crystallinity, linear Frobenius, Hodge–Tate jumps);
+CrystallineRepresentationsAndKisinModules §7.2 (Crystalline representations), §7.3 (Hodge–Tate jumps), §7.4 (The
+linear Frobenius and the Weil–Deligne representation); ArithmeticGaloisRepresentations §1.5 (Descent from `ℚ̄_ℓ`).
+
+### 10.12 The eigenquotient of étale cohomology
+
+*Origin:* particular to this roadmap: the representation of 9.8 stated on ℓ-adic étale cohomology, and its relation to
+representations attached to an eigensystem in the usual sense.
+
+*Proof route:* (a) `ι_Z` (10.10) is `Gal(Ω/E)`-equivariant and carries the operators `t(w, j)` on `V^k(Z)` to those on
+`H^k_ét(Z_Ω, ℚ_ℓ)` (10.10 (a)), so by the universal property of 9.7 the two eigenquotients are isomorphic. The
+statement of 9.8 asserts only that some representation has (a)–(c); the argument given under 9.8 uses of `ρ` only that
+it is an eigenquotient of the family `V^k(Z)`, `0 ≤ k ≤ 2d`, with these operators and eigenvalues, and is to be
+repeated for it: 9.1 (b), and 9.1 (a) applied to the congruence relation of the model, give (a); the crystallinity of
+`V^k(Z)` with its relation for the linear Frobenius (PadicComparisonForFunctorCohomology §7.6) and 9.7 (b), (c) give
+(b); 9.7 (d), the Hodge–Tate comparison (PadicComparisonForFunctorCohomology §6.5), the fixed point formula
+(CohomologyOfFunctorsOnTestRings §7.5) and 9.5 (c) give (c). 10.11 restates (b) and (c). (b) By the Cayley–Hamilton
+theorem, `P_w(r(s)) = 0` and `P_w(φ^{f_w}) = 0` on `D_cris`, and 10.11 turns the second into the statement on the
+linear Frobenius.
+
+Let `𝓜`, `Z`, `R`, `ℓ`, `ι_ℓ`, `θ` and `J` be as in 9.8, `d` the relative dimension of `Z`, and `ρ_ét` the
+eigenquotient (9.7) of the family `H^k_ét(Z_Ω, ℚ_ℓ)`, `0 ≤ k ≤ 2d`, of representations of `Gal(Ω/E)`, for the
+operators `t(w, j)` of 10.10 (a) and the eigenvalues `ι_ℓθ(w, j)`: the largest quotient of
+`ℚ̄_ℓ ⊗ ⊕_k H^k_ét(Z_Ω, ℚ_ℓ)` on which each `t(w, j)` acts by `ι_ℓθ(w, j)`.
+(a) `ρ_ét` is continuous and satisfies (a), (b) and (c) of 9.8: it is trivial on the inertia groups of the places over
+safe places prime to `ℓ`, with each geometric Frobenius of norm `q_w` killed by `P_w`, crystalline in Fontaine's sense
+at the places over `ℓ` above safe places, with `P_w(φ^{f_w}) = 0` on `D_cris`, and has every `h ∈ J` among its
+Hodge–Tate weights as in 10.11 (c).
+(b) Let `r` be a continuous representation of `Gal(Ω/E)` on `ℚ̄_ℓ^m` such that at every place `A` of `Ω` over a safe
+place `w`: if `ℓ` is a unit at `A`, `r` is trivial on the inertia group of `A` and `P_w` is the characteristic
+polynomial of `r(s)` for each `s` as in 9.8 (a); if `A` lies over `ℓ`, `r|_{D_A}` is crystalline and `P_w` is the
+characteristic polynomial of `φ^{f_w}` on `D_cris`; and every `h ∈ J` is a Hodge–Tate weight of `r|_{D_A}` as in 10.11
+(c). Then `r` satisfies (a)–(c) of 9.8.
+
+So the conclusion of 9.8 follows from the existence of a representation attached to `θ` in the usual sense with the
+weights `J`, while it records neither the dimension of `ρ`, nor its semisimplicity, nor its characteristic
+polynomials: `ρ_ét` may be `0` when `J` is empty, and it is not related here to such an `r`.
+
+*Needs:* 8.2, 9.1, 9.5, 9.7, 9.8, 10.10, 10.11; CohomologyOfFunctorsOnTestRings §§3.5, 7.5 (transfer, Woods Hole
+formula); PadicComparisonForFunctorCohomology §§6.5, 7.6 (Hodge–Tate weights, crystallinity, linear Frobenius);
+GaloisRepresentationsOfUnitaryEigenforms §§1.1, 1.3 (Hecke polynomials, local data, jumps).
 
 ## What the library already provides
 
@@ -2078,6 +2679,35 @@ finite type (in 5.4), `AlgebraicGeometry.Scheme.Hom.existsUnique_section_of_valu
 - Weyl's character formula for `U(n)` (9.6): HolomorphicDiscreteSeriesOfUnitaryGroups §7.1.
 - Isogenies over a base and the factorisation through an isogeny (4.3, 7.3): AbelianSchemesAndArithmeticModuli §A3.1.
 - The Appell–Humbert classification, which implies 5.3: AbelianSchemesAndArithmeticModuli §A5.3.
+- The comparison of `Vⁿ` with ℓ-adic étale cohomology (Conventions, 10.10, 10.12): CohomologyOfFunctorsOnTestRings
+  §8.3 (`ℓ`-adic cohomology and `ℓ`-adic étale cohomology); ℓ-adic étale cohomology, its finite dimensionality and its
+  continuous Galois action (10.10): EtaleCohomologyFoundations §F.4.5 (Rational realization and finite-dimensional
+  cohomology), §F.4.6 (Continuous actions and finite-level operation comparison).
+- The comparison of crystallinity through `B_max`, the linear Frobenius and Hodge–Tate jumps with Fontaine's theory
+  (Conventions, 10.11): CrystallineRepresentationsAndKisinModules §7.2 (Crystalline representations), §7.3 (Hodge–Tate
+  jumps), §7.4 (The linear Frobenius and the Weil–Deligne representation); the descent of representations over `ℚ̄_ℓ`
+  to a finite extension of `ℚ_ℓ` (10.11): ArithmeticGaloisRepresentations §1.5 (Descent from `ℚ̄_ℓ`).
+- PEL data, integral and unitary PEL data, similitude groups, good primes, PEL triples, Tate trivialisations, neat
+  subgroups and the complex points of PEL moduli problems (3.2, 6.1, 10.1–10.3, 10.6): PELModuli §M0.5 (Integral PEL
+  data), §M0.6 (Rational and p-integral PEL data), §M0.7 (The similitude group), §M0.10 (Bad primes and the good-prime
+  base), §M1.2 (PEL-type abelian schemes), §M1.4 (The pro-system of symplectic Tate trivializations), §M2.2 (Neat open
+  compact subgroups), §M3.4 (Complex points of PEL moduli), §M5.5 (Unitary PEL data with prescribed signatures).
+- Abelian schemes over a field, ample cohomology, theta groups and level subgroups, polarised Weil pairings, full
+  level structures, Tate modules and lattice uniformisation (6.1, 10.3, 10.4): AbelianSchemesAndArithmeticModuli §A0.1
+  (Abelian schemes), §A2.4 (Ample cohomology, Riemann–Roch and the degree of `φ_L`), §A3.6 (Theta groups and polarized
+  descent), §A3.7 (Polarized Weil pairings), §A3.8 (Full level structures), §A4.1 (The integral Tate module), §A5.1
+  (Lattice uniformization).
+- The analytification of schemes locally of finite type over `ℂ` (10.4): ComplexComparisonPartII §C-1.1 (Analytic
+  local models and scheme analytification).
+- The double-coset ring of a Hecke pair with its action on invariants, and algebraic modular forms in the rational
+  coefficient model (8.1, 9.3, 10.5, 10.9): AutomorphicFormsOnReductiveGroups §0.6 (Hecke operators on invariants),
+  §7.4 (Algebraic modular forms with their actual coefficient action).
+- Compact and parabolic induction, first adjointness and the splitting off of cuspidal components (10.8):
+  SmoothRepresentationsOfLocalGroups §SR.2.1 (Smooth and compact induction), §SR.2.2 (Jacquet functors and parabolic
+  induction), §SR.3.2 (The Bernstein decomposition and centre).
+- Galois representations attached to constituents of algebraic modular forms on a definite unitary group, the standard
+  theorem named beside 9.8 and not used: PotentialAutomorphyInfrastructurePartII §3.6 (Galois representations attached
+  to constituents of algebraic modular forms).
 
 ## References
 

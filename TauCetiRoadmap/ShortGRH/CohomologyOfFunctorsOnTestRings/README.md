@@ -6,7 +6,12 @@ Galois representations needs: descent and continuity, proper base change over va
 fields, the projective line formula with the first Chern class of `O(1)`, smooth base change from a valuation ring of
 `Ω = ℚ̄` to `Ω`, a transfer for Galois coverings, and, for Hodge cohomology, the Künneth formula, the class of the
 diagonal, a fixed point formula with local terms given by Grothendieck symbols, and the vanishing half of a holomorphic
-Lefschetz formula of Woods Hole type.
+Lefschetz formula of Woods Hole type. On quasi-compact quasi-separated schemes with torsion coefficients this
+cohomology is étale cohomology, its `ℓ`-adic form is `ℓ`-adic étale cohomology when the groups modulo `ℓ` are finite,
+and on separated smooth schemes of finite type over a field its Hodge part is `⊕_p H^q(X, Ω^p)` (Layer 8); through
+these identifications the results are statements on the standard objects, given section by section in the paragraphs
+headed **In standard terms**. Layers 1–7 prove the results for the theory built here; the identification with étale
+cohomology rests on the v-descent of torsion étale cohomology.
 
 The argument of the family runs as follows: a one-sided bound for a sum over primes gives a half-plane free of zeros of
 Dirichlet L-functions, and the one-sided bound comes from comparing an upper and a lower bound for the covolume of a
@@ -28,15 +33,24 @@ takes the Witt vectors of `LC_{𝔽_ℓ}` as coefficients. The Hodge cohomology 
 from `(A, M) ↦ ℤ[X(A ⊕ M)]` to `(A, M) ↦ ⋀_A M` in functors on pairs of a `k`-algebra and a finite free module.
 
 What this roadmap claims, and what it does not. It states the cohomology theories that [ShortProof] defines, and the
-properties of them that the route uses. In the argument these groups do the work of étale cohomology with
-coefficients `ℤ/ℓ` and `ℤ_ℓ` and of the coherent groups `H^q(X, Ω^p)`, but no section of this roadmap identifies them
-with those groups, and no comparison theorem is stated or used: every property below is stated and proved for the
-theories defined here. The standard theories belong to other roadmaps: étale cohomology of schemes is
-EtaleCohomologyFoundations, the cohomology of quasi-coherent sheaves on schemes, of which `H^q(X, Ω^p)` is a case, is
-SchemeAndStackFoundations Layer 2 (§2.6); Dolbeault cohomology of complex manifolds is ComplexKahlerGeometry (§2.4),
-and its holomorphic Lefschetz formula on compact manifolds is IndexTheory (§§8.1–8.3). Where one of them states the
-classical counterpart of a result here, the section names it in a closing sentence; that theorem does not apply to the
-theories of this roadmap.
+properties of them that the route uses. In the argument these groups do the work of étale cohomology with coefficients
+`ℤ/ℓ` and `ℤ_ℓ` and of the coherent groups `H^q(X, Ω^p)`, and the standard theories are the reference: Layer 8 states
+the results of this roadmap on the standard objects. For a quasi-compact quasi-separated scheme and a torsion group
+`Λ` the cohomology on test rings is étale cohomology (8.2); the `ℓ`-adic cohomology on test rings is `ℓ`-adic étale
+cohomology when the groups modulo `ℓ` are finite, as they are for proper schemes over `Ω` (8.3); and the Hodge
+cohomology of a separated smooth scheme of finite type over a field is `⊕_p H^q(X, Ω^p)` (8.4). Proper functors,
+atlases and charted schemes, Galois coverings, the projective line of Layer 5 and the local terms of Layer 7 are
+compared with their standard counterparts in 8.5–8.9. The theories defined here are the route's way of proving the
+results of this roadmap, and the proofs of Layers 1–7 use them: every property in Layers 1–7 is stated and proved for
+them, without Layer 8. Layer 8 itself uses the standard theory: the identification 8.2 rests on the v-descent of
+torsion étale cohomology (PrismaticCohomology §2.0), which is proved there from proper base change, so the statements
+that Layer 8 gives on étale cohomology are not independent of that theorem. The standard theories belong to other
+roadmaps: étale cohomology of schemes is EtaleCohomologyFoundations, the cohomology of quasi-coherent sheaves on
+schemes, of which `H^q(X, Ω^p)` is a case, is SchemeAndStackFoundations Layer 2 (§2.6); Dolbeault cohomology of
+complex manifolds is ComplexKahlerGeometry (§2.4), and its holomorphic Lefschetz formula on compact manifolds is
+IndexTheory (§§8.1–8.3). Where one of them states the standard counterpart of a result here, the section gives the
+result on the standard objects in a paragraph headed **In standard terms**, which names the comparison section of
+Layer 8.
 
 The headline theorems are these.
 
@@ -67,7 +81,20 @@ algebraically closed, `Y` proper and `W` projective over `R`, both with atlases 
 most `d`, then for every `c : W → Y` whose coincidences with the `u_i` are simple, the weight-`h` local terms
 `b_i·[t^h]det(1 − tA)/det(1 − A)` add up to zero.
 
-There are seven layers. Layer 1 defines the cohomology of functors, test rings, the cohomology on test rings, proper
+**In standard terms.** On schemes the headline theorems are statements about the standard theories, through Layer 8.
+For `Y` the functor of points of a proper `A`-scheme `X` (8.5), (1) is proper base change for `X` over the strictly
+henselian `A`: restriction `Hⁿ(X_ét, ℤ/ℓ) → Hⁿ((X ×_A Spec κ_A)_ét, ℤ/ℓ)` to the closed fibre is bijective
+(EtaleCohomologyFoundations §F.2.1; 8.2). For `S` the functor of points of a quasi-compact quasi-separated `A`-scheme
+`X`, (2) is the projective bundle formula for the trivial bundle of rank two on `X` (EtaleCohomologyFoundations §0.9),
+the class `η` corresponding to a unit multiple of the Kummer first Chern class of `O(1)` (8.8). For `Y` quasi-compact,
+separated and smooth of relative dimension `d` over a Noetherian `R`, which is charted (8.6), (3) is a consequence of
+smooth base change along `Spec Ω → Spec A` (EtaleCohomologyFoundations §F.2.2; 8.2), as in 5.6. For `X` separated and
+smooth of finite type over the field (8.6), (4) is an identity in `⊕_p H^d(−, Ω^p)` (8.4); and for a single self-map
+of a smooth projective variety over `ℚ̄` all of whose fixed points `y` have `det(1 − du_y) ≠ 0`, the conclusion of (5)
+is the vanishing of a holomorphic Lefschetz number, the number that the holomorphic Lefschetz formula computes
+(IndexTheory §8.3; 8.9).
+
+There are eight layers. Layer 1 defines the cohomology of functors, test rings, the cohomology on test rings, proper
 functors and charts, and shows that proper schemes, and smooth proper ones, give such functors. Layer 2 holds the
 formal tools for Ext groups of functors: dévissage and the Leray–Hirsch map, products, Čech descent, dense subfunctors and Mayer–Vietoris, excision and transfer, tensoring a degree-two class, and
 `ℓ`-torsion coefficients with closed loci. Layer 3 holds the results particular to test rings: acyclicity, continuity
@@ -75,14 +102,19 @@ along limits, the local-to-global principle and density criteria, `ℓ`-adic coh
 transfer for Galois coverings. Layer 4 proves proper base change through spaces of places of a field. Layer 5 builds
 the first Chern class of `O(1)`, proves the projective line formula and deduces smooth base change. Layer 6 is Hodge
 cohomology up to the fixed point formula. Layer 7 proves that distinct point classes have linearly independent images
-under the Hodge–Tate map and deduces the Woods Hole formula.
+under the Hodge–Tate map and deduces the Woods Hole formula. Layer 8 compares the theories with the standard ones: the
+étale cohomology of test rings, the identification with étale and with `ℓ`-adic étale cohomology, the Hodge cohomology
+of smooth separated schemes, and the standard forms of properness, atlases, Galois coverings, the projective line with
+its class `η`, and the local terms of Layer 7.
 
 ## Conventions and notation
 
 - *Labels.* Under each section heading, `*Origin:*` says where its statement comes from and `*Method of the formal
   proof:*` how [ShortProof] proves it. [ShortProof] is the shorter formal proof of the family `ShortGRH`; the line
   "[ShortProof], `path` (`declarations`)" at the end of a section names the file (under `src/`) and the declarations
-  where it proves the statement. The names of [ShortProof] occur only on that line.
+  where it proves the statement. The names of [ShortProof] occur only on that line. The statements of Layer 8 are not
+  in [ShortProof]: there `*Proof route:*` takes the place of `*Method of the formal proof:*`, and there is no
+  [ShortProof] line.
 - *Rings and functors.* Rings are commutative with `1`. A *functor on rings* is a functor from rings to sets. For a ring
   `A`, `h_A := Hom(A, −)` is the functor represented by `A` (the functor of points of `Spec A`); by the Yoneda lemma a
   point `y ∈ Y(A)` is the same as a map `h_A → Y`. A scheme `X` over a ring `R` is read through its functor of points:
@@ -125,6 +157,7 @@ under the Hodge–Tate map and deduces the Woods Hole formula.
 | `[dg/g]`, `cl(z)` | Grothendieck's symbol, class of a point | 6.3 |
 | `λ_h` | Hodge–Tate map of weight `h` | PadicComparisonForFunctorCohomology §6.3 |
 | `p`-adic tests, `S^♭`, `S[1/p]`, `O_C`, `O^♭` | products of `p`-complete aic valuation rings over `O_C`, their tilts and generic fibres | PadicComparisonForFunctorCohomology §1.1 |
+| `h_X`, `Φ_X`, `c_X` | functor of points of a scheme on rings; sections over the points in test rings; comparison with étale cohomology | Layer 8, 8.2 |
 
 ## Layer 1: Cohomology of functors
 
@@ -226,8 +259,14 @@ rings. A map `u : X → Y` gives `u* : Hⁿ_Λ(Y) → Hⁿ_Λ(X)`; `u` is a *`Λ
   category. A functor `Y` on `A`-algebras has cohomology `Hⁿ(Y|_{Test_A}, LC_Λ)` on tests over `A`, with `LC_Λ` read
   through the forgetful functor `Test_A → Test`.
 
-The groups `Hⁿ_{ℤ/ℓ}(X_{Ω′})` stand in for the étale cohomology groups `Hⁿ(X_{Ω′}, ℤ/ℓ)` of the scheme `X_{Ω′}`; this
-roadmap neither states nor uses a comparison between the two.
+**In standard terms.** For a quasi-compact quasi-separated scheme `X` over `R`, an `R`-algebra `Ω′` and a torsion
+group `Λ`, `X_{Ω′}` is the functor of points of the quasi-compact quasi-separated scheme `X ×_R Spec Ω′`, and 8.2
+identifies `Hⁿ_Λ(X_{Ω′})` with its étale cohomology `Hⁿ((X ×_R Spec Ω′)_ét, Λ)`, compatibly with pull-backs, with the
+action of the `R`-algebra automorphisms of `Ω′`, and with base changes and the loci `Y_{I=0}`, which are functors of
+points of base-changed schemes. In the route the groups `Hⁿ_{ℤ/ℓ}(X_{Ω′})` take the place of the étale cohomology
+groups `Hⁿ(X_{Ω′}, ℤ/ℓ)`, and by 8.2 they are these groups; the proofs of Layers 1–7 do not use the identification.
+For functors that are not functors of points of such schemes, or for `Λ` not torsion, the groups are those defined
+here.
 
 *Needs:* 1.1, 1.2.
 
@@ -247,7 +286,10 @@ roadmap neither states nor uses a comparison between the two.
 closed: for all `x, y ∈ Z(C)` there is an ideal `I` of `C` such that a ring map `f : C → C′` makes `Z(f)(x) = Z(f)(y)`
 exactly when `I ⊆ ker f`; and (ii) it satisfies a valuative criterion with one universal point: there are a ring `T` and
 `a ∈ Z(T)` such that for every algebraically closed field `K`, every valuation ring `O` of `K` and every `z ∈ Z(K)` whose
-structure map sends `D` into `O`, some ring map `T → O` carries `a` to `z` (read in `Z(K)` through `O ⊆ K`).
+structure map sends `D` into `O`, some ring map `T → O` carries `a` to `z` (read in `Z(K)` through `O ⊆ K`). Here
+*proper over `D`* is a condition on functors, with no finiteness condition; in the literature properness is a property
+of morphisms of schemes (separated, of finite type and universally closed), and for the functor of points of a
+`D`-scheme of finite type the two agree (8.5).
 (b) *Separated functors and open subfunctors.* Let `X` be a functor on `k`-algebras. `X` is *separated* if for all
 `x, y ∈ X(A)` there is an ideal `J` of `A` such that `φ : A → B` makes `X(φ)(x) = X(φ)(y)` exactly when `φ(J) = 0`. A
 subfunctor `V ⊆ X` is *open* if every `x ∈ X(A)` has an ideal `I` of `A` such that `X(φ)(x) ∈ V(B)` exactly when
@@ -261,7 +303,10 @@ contain every point of `X` with values in a field.
 themselves, 1.1 (e)) and `ℤ[V]` lies in every closed class of functors `{k-algebras} → Ab` that contains `ℤ[h_R]` for the
 ring `R` of every étale chart (of any dimension) whose coordinates are all units, that is, of every chart étale over a
 torus. A scheme `Y` over `R` is *charted over the `R`-algebra `k`* if the functor of points of `Y` on `k`-algebras has
-a charting subfunctor. Charted schemes stand in for smooth ones; no further property of smoothness is used.
+a charting subfunctor. Charted schemes stand in for smooth ones; no further property of smoothness is used. For a
+quasi-compact separated `k`-scheme, the functor of points on `k`-algebras has an atlas of dimension `d` exactly when
+the scheme is smooth of relative dimension `d` over `k`, and such a scheme is charted over `k` when `k` is Noetherian
+(8.6).
 The functors of points of proper schemes, and of proper schemes that are smooth after base change, give examples of
 these notions (1.5).
 
@@ -295,6 +340,11 @@ of `X` on `k`-algebras has an atlas of dimension `d` (1.4 (c)).
 (d) Let `k` be a Noetherian ring. Every functor on `k`-algebras with an atlas of dimension `d` has a charting
 subfunctor (1.4 (d)). Hence, with (c), `X` is charted over every Noetherian `R`-algebra `k` over which it becomes smooth
 of some relative dimension `d`.
+
+**In standard terms.** (a) is one half of 8.5: for `X` of finite type over `R`, the functor of points is proper over
+`R` exactly when `X → Spec R` is proper. (b)–(d) do not need properness: they hold for every quasi-compact separated
+`X` over `R`, and for such `X` the functor of points on `k`-algebras has an atlas of dimension `d` exactly when
+`X ×_{Spec R} Spec k` is smooth of relative dimension `d` over `k` (8.6).
 
 *Needs:* 1.1, 1.2, 1.4, 2.4.
 
@@ -640,17 +690,22 @@ inclusions and a filtered system of indices `a_j` with an upper bound `a` such t
 `Hⁿ_Λ(V_a)` is the colimit of the `Hⁿ_Λ(V_{a_j})`.
 (c) If there is an affine map `q : h_T → Y` with dense image (1.3), `Λ`-cohomology is continuous over `Y`.
 
+**In standard terms.** For a test ring `B`, 3.1 (a) for `T = h_B` is, through 8.2, the vanishing of the étale
+cohomology of `Spec B` in positive degrees (8.1), and 3.1 (b) and the continuity of 3.2, for the functors of points of
+a cofiltered system of quasi-compact quasi-separated schemes with affine transition maps and torsion `Λ`, are the
+continuity of torsion étale cohomology along such limits (SchemeAndStackFoundations §2.15; Stacks Project, Tag 09YQ).
+For étale cohomology of schemes, v-descent and arc-descent of torsion cohomology are stated in PrismaticCohomology
+§2.0; ArcTopologyAndDescent Layers 3–4 state the general criteria behind them, for finitary functors on qcqs schemes
+(continuity along cofiltered limits with affine transition maps in §3.2, detection of v-descent on aic valuation rings
+in §3.10, the arc-descent criterion in §4.6). Through 8.2 these statements apply to the cohomology of 1.3 of
+quasi-compact quasi-separated schemes with torsion coefficients; the proofs here do not use them.
+
 *Needs:* 1.1, 1.3, 2.3, 3.1.
 
 [ShortProof], `Lib/Cohomology/Etale/FilteredLimits` (`New.Variety.ContinuousUpTo`, `New.Variety.ContinuousUpTo.of_cech`,
 `New.Variety.IsCohomContinuous`, `New.Variety.IsCohomContinuous.of_isRelAffine`,
 `New.Variety.IsCohomContinuous.isFilteredColimit_adjoin`, `New.Variety.IsCohomContinuous.isFilteredColimit_antitoneFamily`,
 `New.Variety.IsCohomContinuous.of_hasCohomDenseImage`)
-
-For étale cohomology of schemes, v-descent and arc-descent of torsion cohomology are stated in PrismaticCohomology
-§2.0; ArcTopologyAndDescent Layers 3–4 state the general criteria behind them, for finitary functors on qcqs schemes
-(continuity along cofiltered limits with affine transition maps in §3.2, detection of v-descent on aic valuation rings
-in §3.10, the arc-descent criterion in §4.6). Those sections do not apply to the cohomology of 1.3.
 
 ### 3.3 The local-to-global principle and density criteria
 
@@ -685,6 +740,11 @@ closed field has dense image.
 algebraically closed field `k` and every `z ∈ Y(k)`, `U` contains every point `x` of `Y` over a test ring such that
 `P_i(z) = P_j(z)` implies `P_i(x) = P_j(x)`. Then `U` is dense for `LC_Λ`.
 
+**In standard terms.** An affine morphism `p : X → Y` of quasi-compact quasi-separated schemes that is onto on points
+with values in valuation rings of algebraically closed fields is a v-cover (PrismaticCohomology §2.0), and through
+8.2, (b) for its functors of points and torsion `Λ` makes its Čech complex compute the étale cohomology of `Y` (1.1
+(b), 2.3 (a)): the v-descent of torsion étale cohomology of PrismaticCohomology §2.0, for such covers.
+
 *Needs:* 1.2, 1.3, 1.4, 2.3, 2.4, 3.1, 3.2.
 
 [ShortProof], `Lib/Cohomology/Etale/ProperFunctors` (`New.Variety.IsZeroLocusFamily`,
@@ -707,13 +767,23 @@ The coefficient *`ℤ_ℓ`* on test rings sends `A` to the ring of `ℓ`-typical
 `ℤ_ℓ`-module. For a ring `R`, an `R`-algebra `Ω′` and a scheme `X` over `R`, put `Vⁿ(X) := ℚ_ℓ ⊗_{ℤ_ℓ} Hⁿ(X_{Ω′}|_Test, ℤ_ℓ)`;
 `X ↦ Vⁿ(X)` is a contravariant functor to `ℚ_ℓ`-vector spaces, and a group `Γ` acting on `Ω′` by `R`-algebra
 automorphisms acts on each `Vⁿ(X)` through the maps `X_{Ω′} → X_{Ω′}` (1.3), commuting with pull-back along maps of
-`R`-schemes. A module over a ring with an element `π` is *derived `π`-complete* as in
+`R`-schemes. Here *`ℓ`-adic cohomology* means `ℚ_ℓ` tensored with this one Ext group; in the literature it means
+`ℚ_ℓ ⊗ lim_k Hⁿ_ét(−, ℤ/ℓ^k)`, and the two agree when the groups modulo `ℓ` are finite (8.3). A module over a ring
+with an element `π` is *derived `π`-complete* as in
 PadicComparisonForFunctorCohomology §3.1.
 (a) For every `k ≥ 1` there is a short exact sequence of coefficients `0 → ℤ_ℓ → ℤ_ℓ → LC_{W_k(𝔽_ℓ)} → 0` whose first map
 is multiplication by `ℓ^k`; for `k = 1` the last term is `LC_{𝔽_ℓ}`.
 (b) For every functor `N` on test rings and every `n`, `Hⁿ(N, ℤ_ℓ)` is derived `ℓ`-complete.
 (c) If `Hⁿ(N, LC_{𝔽_ℓ})` is finite, `Hⁿ(N, ℤ_ℓ)` is a finitely generated `ℤ_ℓ`-module.
 (d) A map that is an equivalence for `LC_{𝔽_ℓ}` induces bijections `ℚ_ℓ ⊗ Hⁿ(−, ℤ_ℓ)` for all `n`.
+
+**In standard terms.** For `X` quasi-compact and quasi-separated over `R` with `Hⁿ` of `(X ×_R Spec Ω′)_ét` modulo `ℓ`
+finite, `Vⁿ(X)` is `ℚ_ℓ ⊗ lim_k Hⁿ((X ×_R Spec Ω′)_ét, ℤ/ℓ^k)`, naturally in `X` and compatibly with the action of `Γ`
+(8.3 (a)). When `Ω′` is a separably closed field in which `ℓ` is invertible and `X ×_R Spec Ω′` is separated of finite
+type over it, for instance for `X` proper over `R` and `Ω′ = Ω`, `Vⁿ(X)` is the `ℓ`-adic étale cohomology
+`Hⁿ(X ×_R Spec Ω′, ℚ_ℓ)` of EtaleCohomologyFoundations §§F.4.2, F.4.5 (8.3 (b)), and for these `X` (c), applied to
+`N = ℤ[X_{Ω′}|_Test]`, is, through 8.2 and 8.3 (a), the finite generation of integral `ℓ`-adic cohomology
+(EtaleCohomologyFoundations §F.4.4).
 
 *Needs:* 1.1, 1.3; PadicComparisonForFunctorCohomology §§3.1, 3.2 (derived completeness, bijectivity modulo `π`).
 
@@ -740,12 +810,22 @@ invariant classes, factor through `c*`.
 
 Let `R` be a ring with a map to `Ω`, and `c : W → Y` a morphism of proper `R`-schemes with a finite group `Δ` acting on
 `W` by automorphisms `a(δ)` over `Y`, such that `c` is surjective and, for every field `K` of characteristic `0`, `Δ`
-acts simply transitively on the fibres of `W(K) → Y(K)` (a *Galois covering* with group `Δ`). Let `ℓ` be a prime and
+acts simply transitively on the fibres of `W(K) → Y(K)` (a *Galois covering* with group `Δ`). Here a *Galois covering*
+is this condition on points: two points of `W(K)` with the same image in `Y(K)` differ by exactly one element of `Δ`,
+and a fibre of `W(K) → Y(K)` may be empty; in the literature a Galois covering with group `Δ` is a finite étale
+morphism making `W` a `Δ`-torsor over `Y`, which is a Galois covering in the present sense (8.7). Let `ℓ` be a prime
+and
 `Vⁿ` the `ℓ`-adic cohomology of 3.4 for `Ω′ = Ω`.
 (a) The pairs of points of `W` over test rings, lying over one point of `Y`, whose tuples `(a(δ)(w))_δ` and
 `(a(δ)(w′))_δ` agree up to a permutation of `Δ` form a dense subfunctor of `W_Ω ×_{Y_Ω} W_Ω` for `LC_Λ`, for every `Λ`.
 (b) Pull-back `c* : Vⁿ(Y) → Vⁿ(W)` is injective for every `n`, and every class of `Vⁿ(W)` fixed by all `a(δ)*` lies in
 its image.
+
+**In standard terms.** A finite étale Galois covering `c : W → Y` of proper `R`-schemes with group `Δ` is a Galois
+covering in the sense above (8.7 (a)), and for it (b) says, through 8.3, that `c*` identifies `Hⁿ(Y ×_R Spec Ω, ℚ_ℓ)`
+with the classes of `Hⁿ(W ×_R Spec Ω, ℚ_ℓ)` fixed by `Δ`, the isomorphism that the Hochschild–Serre spectral sequence
+of the `Δ`-torsor gives (SchemeAndStackFoundations §2.15; 8.7 (b)). The condition of this section is weaker than being
+a finite étale Galois covering (8.7 (c)).
 
 *Needs:* 1.4, 1.5, 2.5, 3.3, 3.4.
 
@@ -845,14 +925,20 @@ algebraically closed fields under `R`. Then `W_T → W_S` is a `ℤ/ℓ`-equival
 set of primes `𝔭` of `T` at which `x` restricts to `0` in `Hⁿ_{ℤ/ℓ}(W_{κ(𝔭)})` is open in `Spec T`, and if it is all of
 `Spec T`, then `x = 0`.
 
+**In standard terms.** Let `X` be a proper `A`-scheme, so that `Y = h_X` is proper over `A` (8.5); its closed fibre
+`Y_{𝔪_A=0}` is the functor of points of `X ×_A Spec κ_A`. Through 8.2, (a) says that restriction
+`Hⁿ(X_ét, ℤ/ℓ) → Hⁿ((X ×_A Spec κ_A)_ét, ℤ/ℓ)` to the closed fibre is bijective. This is a case of proper base change
+(EtaleCohomologyFoundations §F.2.1): étale covers of `Spec A` have sections (8.1 (a)), so `Hⁿ(X_ét, ℤ/ℓ)` is the stalk
+of `Rⁿf_*ℤ/ℓ` at the closed point, `f : X → Spec A`, and §F.2.1 identifies that stalk with the cohomology of the
+closed fibre. For `W` the functor of points of a proper `R`-scheme, (c) is the invariance of its étale cohomology
+under the extension `S → T` of algebraically closed fields, a case of §F.2.2. The proof here avoids the general
+theorems.
+
 *Needs:* 1.2, 1.3, 1.4, 2.3, 2.4, 3.1, 3.2, 3.3, 4.1, 4.2.
 
 [ShortProof], `Lib/Cohomology/ProperBaseChange/Theorem` (`New.Variety.IsProperOver.proper_base_change`,
 `New.Variety.IsProperOver.injective_map_residue`, `New.Variety.IsProperOver.isTestCohomEquiv_field_extension`,
 `New.Variety.IsProperOver.isOpen_zero_set_and_eq_zero`)
-
-For étale cohomology of schemes, (a) is a case of EtaleCohomologyFoundations §F.2.1 and (c) of §F.2.2; those sections
-do not apply to the cohomology of 1.3, and the proof here avoids the general theorem.
 
 ### 4.4 Detection of classes at points
 
@@ -903,9 +989,14 @@ chart. (d) is a definition, made possible by 2.6 (a), which tensors `η` with co
 Let `A` be a ring and `g : C → Test_A` a functor; `G_m(c) := g(c)^×`. `ℙ¹` is the functor on rings that sends `B` to the
 pairs `(u, v) ∈ B²` modulo `(u, v) ~ (u′, v′)` when `(1 + uv)·v′ = v·(1 + u′v′)`, that is, the rows `(1 + uv, v)` up to
 proportionality (the points of the projective line given by such a row; over a local ring these are all its points). In
-this layer `ℙ¹` always means this functor. Put `ℙ¹_g := ℙ¹∘g`; `∫ℙ¹_g` is the category of pairs `(c, x)`,
+this layer `ℙ¹` always means this functor; it is a subfunctor of the functor of points of the scheme `ℙ¹_ℤ`, through
+`(u, v) ↦ [1 + uv : v]`, and the inclusion is a `Λ`-equivalence for every `Λ` (8.8 (a)). Put `ℙ¹_g := ℙ¹∘g`; `∫ℙ¹_g`
+is the category of pairs `(c, x)`,
 `x ∈ ℙ¹(g(c))`, with projection `π : ∫ℙ¹_g → C`.
-- The *Tate module* `𝕋(c)` is the group of homomorphisms `χ : ℚ → g(c)^×` with `χ(1) = 1`.
+- The *Tate module* `𝕋(c)` is the group of homomorphisms `χ : ℚ → g(c)^×` with `χ(1) = 1`. Such a `χ` is a
+  homomorphism `ℚ/ℤ → g(c)^×`, so here the Tate module is the limit of the groups `μ_n(g(c))` over all `n ≥ 1`; in the
+  literature the Tate module `T_ℓ(G_m)` is the limit over the powers of one prime `ℓ`, and `𝕋(c)` is the product of
+  the `T_ℓ(g(c)^×)` over all primes `ℓ` (8.8 (b)).
 - The transition units of the standard rows of the points of `ℙ¹` form a `1`-cocycle from `ℤ[ℙ¹_g]` to `G_m` (the
   cocycle of `O(1)`), with an extension class `o ∈ Ext¹(ℤ[ℙ¹_g], G_m)`. With `k ∈ Ext¹(G_m, 𝕋)` the class of the
   Kummer sequence of (a), `η := o·k ∈ Ext²(ℤ[ℙ¹_g], 𝕋)`.
@@ -921,6 +1012,13 @@ tautological point of `ℙ¹`, followed by `μ_M`. `M` satisfies the *projective
 `0`) and `η_M` (degree `2`) form a Leray–Hirsch basis (2.1 (b), for `φ = π`) at every `S : C → Ab`: every class of
 `H*(S∘π, M∘π)` is `π*(a) + π*(b)·η_M` for unique `a, b ∈ H*(S, M)`. By 2.6 (c), for `S = ℤ[Y]` this reads
 `H*(Y × ℙ¹, M) = H*(Y, M) ⊕ η·H*(Y, M)`.
+
+**In standard terms.** For `g` the identity of the tests over an `A` as in 5.5 (c) and `M = LC` the locally constant
+`ℤ/ℓ`-valued functions, the class `π*(1)·η_M` corresponds through 8.2 to a unit multiple `u·c₁(O(1))` of the Kummer
+first Chern class in `H²((ℙ¹_A)_ét, ℤ/ℓ)` (EtaleCohomologyFoundations §0.9), with `μ_ℓ ≅ ℤ/ℓ` through `ε(1/ℓ)`, and
+the products `π*(b)·η_M` correspond to the cup products of the pull-backs of `b` with `u·c₁(O(1))` (8.8 (c), (d)); the
+Kummer sequence of (a) maps to the `ℓ`-th power sequence `0 → μ_ℓ → G_m → G_m → 0` through `χ ↦ χ(1/ℓ)` (8.8 (b)).
+Which unit `u` occurs is not determined here.
 
 *Needs:* 1.1, 1.2, 2.1, 2.2, 2.6, 2.7.
 
@@ -959,7 +1057,9 @@ basis at `ℤ[h_c]` for every test `c` over `A` in which `𝔪_A` generates the 
 `New.Variety.isLerayHirschBasis_of_forall_isField`, `New.Variety.exists_isLerayHirschBasis_of_isCohomDense`)
 
 For étale cohomology of schemes over a separably closed field, the Künneth formula is EtaleCohomologyFoundations
-§F.2.6; it does not apply to the cohomology of 1.3.
+§F.2.6; through 8.2 it describes the groups of 1.3 of the product over the field of two schemes of finite type over a
+separably closed field, with coefficients in a finite ring killed by an integer invertible in the field, and the proof
+of this section does not use it.
 
 ### 5.3 The perfect projective line
 
@@ -1063,14 +1163,16 @@ functions on `Test_A` satisfies the projective line formula.
 (c) If there is an injective ring map `A → ℂ_ℓ`, `LC` on `Test_A` satisfies the projective line formula: for every
 functor `S` on `Test_A`, every class of `H*(S∘π, LC∘π)` is `π*(a) + π*(b)·η` for unique `a, b ∈ H*(S, LC)`.
 
+**In standard terms.** For `S = ℤ[h_X]`, `X` a quasi-compact quasi-separated `A`-scheme, (c) is the projective bundle
+formula for the trivial bundle of rank two on `X` (EtaleCohomologyFoundations §0.9): through 8.8 (a), 2.6 (c) and 8.2,
+`H*(S∘π, LC∘π)` is `H*((X ×_ℤ ℙ¹_ℤ)_ét, ℤ/ℓ)`, and `b ↦ π*(b)·η` is `b ↦ pr₁*(b) ∪ u·pr₂*c₁(O(1))` for a unit `u` of
+`ℤ/ℓ`, `c₁(O(1))` the Kummer first Chern class (8.8 (c), (d)). The proof here needs only `ℙ¹` and does not use §0.9.
+
 *Needs:* 2.1, 2.3, 2.6, 2.7, 5.1, 5.2, 5.4; PadicComparisonForFunctorCohomology §2.1 (acyclicity of perfect algebras).
 
 [ShortProof], `Lib/Cohomology/ProjectiveLine/ConstantLineFormula` (`New.Variety.isLerayHirschBasis_lineBasis_of_basis`,
 `New.Variety.hasUniversalPoints_structurePt`, `New.Variety.hasLineFormula_of_lerayHirsch_ne_zero`,
 `New.Variety.hasLineFormula_locallyConstant`)
-
-For étale cohomology of schemes, (c) is the case of the trivial bundle of rank two of EtaleCohomologyFoundations §0.9;
-that section does not apply to the cohomology of 1.3, and the proof here needs only `ℙ¹`.
 
 ### 5.6 Smooth base change from a valuation ring of `Ω` to `Ω`
 
@@ -1093,14 +1195,20 @@ on test rings, with the cohomology of the functor of points of `Y` on tests over
 with a map `R → A`, and `Y` a scheme over `R` that is charted over `R` (1.4 (d)). Then pull-back along `Y_Ω → Y_A` is
 bijective on `Hⁿ_{ℤ/ℓ}` for every `n`.
 
+**In standard terms.** Let `Y` be a quasi-compact separated scheme over a Noetherian ring `R`, smooth of relative
+dimension `d`; it is charted over `R` (8.6 (b)). Through (a) and 8.2, (b) says that pull-back
+`Hⁿ((Y ×_R Spec A)_ét, ℤ/ℓ) → Hⁿ((Y ×_R Spec Ω)_ét, ℤ/ℓ)` is bijective. This is a case of smooth base change
+(EtaleCohomologyFoundations §F.2.2) for the smooth `Y ×_R Spec A → Spec A` and `g : Spec Ω → Spec A`: the local rings
+of `A` are strictly henselian with fraction field `Ω` (8.1 (a)), so `Rg_*ℤ/ℓ = ℤ/ℓ`, and §F.2.2 then gives
+`Rh_*ℤ/ℓ = ℤ/ℓ` for `h : Y ×_R Spec Ω → Y ×_R Spec A`. The proof here avoids the general theorem; for charted schemes
+that are not known to be smooth, (b) has no counterpart stated in the general roadmaps, as "charted" is not shown to
+imply smoothness (8.6).
+
 *Needs:* 1.3, 1.4, 2.3, 3.1, 5.5; PadicComparisonForFunctorCohomology §§4.1, 4.2, 4.3 (compared theories, standard étale
 charts).
 
 [ShortProof], `Lib/Cohomology/SmoothBaseChange` (`New.Variety.algToBaseChange`, `New.Variety.isBijective_algToBaseChange`,
 `New.Variety.ComparedTheory.mem_of_isClosedClass_of_isCharting`, `New.Variety.isTestCohomEquiv_baseChangeTransition`)
-
-For étale cohomology of schemes, (b) is a case of EtaleCohomologyFoundations §F.2.2; that section does not apply to the
-cohomology of 1.3, and the proof here avoids the general theorem.
 
 ## Layer 6: Hodge cohomology and the fixed point formula
 
@@ -1127,13 +1235,20 @@ a `k`-algebra `k′`, *base change* `H^q_Hdg(X) → H^q_Hdg(X|_{k′})` restrict
 are formed only when `k` is a field of characteristic `0`: then every `k`-module is flat over `ℤ`, so the coefficient
 `(A, M) ↦ ⋀_A M` has flat values as 2.2 (b) requires, and the products are those of 2.2 with `μ` the multiplication of
 exterior algebras (*cross products*, pulled back along `ℤ[X × X′] → ℤ[X] ⊗ ℤ[X′]`). Hodge cohomology stands in for the
-groups `H^q(X, Ω^p)` (the scaling `s_t` plays the part of the grading by `p`); no comparison with coherent cohomology is
-stated or used.
+groups `H^q(X, Ω^p)` (the scaling `s_t` plays the part of the grading by `p`). Here *Hodge cohomology* names this Ext
+group of functors on Hodge pairs; in the literature it is the coherent cohomology `⊕_{p,q} H^q(X, Ω^p)`, and for a
+separated scheme of finite type and smooth over a field the two agree, with `s_t` acting on `H^q(X, Ω^p)` by `t^p`
+(8.4); the proofs of Layers 6 and 7 do not use this.
 (a) For `g ∈ A` and a localisation `A → A[1/g]`, the morphisms out of `(A[1/g], A[1/g]^ι)` are the morphisms out of
 `(A, A^ι)` whose algebra map inverts `g`.
 (b) Let `k` be a field. For an étale chart `R` of dimension `d` (1.4 (c)) with coordinates `x_i`, there is a unique
 `k`-algebra map `u : R → R ⊕ R^d` lifting the identity with `u(x_i) = (x_i, e_i)`, and `(R, R^d)` with `u` represents
 the functor `(A, M) ↦ Hom_k(R, A ⊕ M)` on Hodge pairs.
+
+**In standard terms.** For `X` a separated `k`-scheme of finite type, smooth over a field `k`,
+`H^q_Hdg(h_X) = ⊕_p H^q(X, Ω^p_{X/k})`, naturally in `X`, with `s_t` acting by `t^p` on the `p`-th summand (8.4). In
+(b) the second component of `u` is the universal derivation for `Ω¹_{R/k} = R^d`, `dx_i ↦ e_i`, so the representing
+pair is `(R, Ω¹_{R/k})` and the Hodge cohomology of `Spec R` is `⋀_R Ω¹_{R/k} = ⊕_p Ω^p_{R/k}` in degree `0`.
 
 *Needs:* 1.1, 1.4, 2.2.
 
@@ -1288,15 +1403,19 @@ and the pull-back of `δ` (base changed to `E`) along the scaled graph is `Σ_{w
 (d) If `X`, `Y` have atlases of dimensions `d` and `1` over a field of characteristic `0` and `z ∈ (X × Y)(k)`, the cross
 product of `cl(z_1)` and `cl(z_2)` is `cl(z)`.
 
+**In standard terms.** For `X` and `W` separated, of finite type and smooth (an atlas of dimension `d` being
+smoothness of relative dimension `d`, 8.6), the classes `δ` and `cl(w)` lie, through 8.4, in `⊕_p H^d(X × X, Ω^p)` and
+`⊕_p H^d(W, Ω^p)`, and (c) is an identity between such classes; the scaled graph is a map of functors on Hodge pairs
+built from `s_t`, not a morphism of schemes. The standard formula of this kind for Dolbeault cohomology of compact
+complex manifolds, the holomorphic Lefschetz formula (IndexTheory §8.3), computes traces, which (c) does not; 8.9
+relates its local terms to the coefficients of the Jacobian ratios `n(w)`.
+
 *Needs:* 1.4, 2.2, 6.1, 6.3, 6.4, 6.5.
 
 [ShortProof], `Lib/Cohomology/Hodge/FixedPointFormula` (`New.Variety.ConstIfCoincident`, `New.Variety.IsCoincidenceSet`,
 `New.Variety.exists_isCoincidenceSet`, `New.Variety.HasJacobianRatio`, `New.Variety.IsTangentPoly.hasJacobianRatio_eval_div`,
 `New.Variety.IsTangentPoly.constIfCoincident`, `New.Variety.scaledGraph`, `New.Variety.exists_diagonal_local_terms`,
 `New.Variety.IsPointSum.cup_pointClass`); `Lib/Cohomology/Etale/Basic` (`New.Variety.IsTangentPoly`)
-
-For Dolbeault cohomology of compact complex manifolds, the holomorphic Lefschetz formula is IndexTheory §8.3; it does not
-apply to the Hodge cohomology of 6.1.
 
 ## Layer 7: Point classes under the Hodge–Tate map, and the Woods Hole formula
 
@@ -1463,19 +1582,381 @@ projective, such that the functors of points of `Y` on `E`-algebras and of `W` o
 is finite and `Σ_{(i,y)∈S} b_i·[t^h]P_{(i,y)}(t) / P_{(i,y)}(1) = 0`. (With `P(t) = P(0)·det(1 − tA)` the term is
 `b_i·[t^h]det(1 − tA)/det(1 − A)`.)
 
+**In standard terms.** Here *the Woods Hole formula, vanishing half* names this implication; in the literature the
+holomorphic Lefschetz (Woods Hole) formula equates an alternating sum of traces on the groups `H^q(Y, Ω^h)` with the
+sum of the local terms. The atlases make `Y ×_R Spec E` smooth over `E` and `W ×_R Spec k` smooth over `k` (8.6), so
+the Hodge classes of the hypothesis are, through 8.4, elements of `⊕_p H^q(Y ×_R Spec E, Ω^p)`. The hypothesis
+concerns the maps `λ_h` of PadicComparisonForFunctorCohomology §6.3. In the setting of
+PadicComparisonForFunctorCohomology §6.5, PadicComparisonForFunctorCohomology Layer 8 (Comparison with the standard
+theory) shows, in its §§8.1 (c) and 8.2, that each value `λ_h(u^* x)` is the image under a semilinear map of `u^* v`,
+for a vector `v` of the summand of index `h` of the Hodge–Tate decomposition of `ℂ_p ⊗ H^{q+h}_ét(Y_Ω, ℚ_p)`; it does
+not identify `λ_h` with the Hodge–Tate map of the literature. For `W = Y` smooth and projective over `ℚ̄`, `c` the
+identity and a single map `u` with weight `1`, all of whose fixed points `y` have `det(1 − du_y) ≠ 0`, the sum of the
+local terms is `(−1)^h Σ_q (−1)^q tr(u* | H^q(Y, Ω^h_{Y/ℚ̄}))` (8.9, from IndexTheory §8.3), so the conclusion is the
+vanishing of this holomorphic Lefschetz number. This section computes no trace and gives no value of the sum when its
+hypothesis fails.
+
 *Needs:* 1.4, 1.5, 6.1, 6.4, 6.6, 7.4; PadicComparisonForFunctorCohomology §6.3 (the Hodge–Tate maps).
 
 [ShortProof], `Lib/Cohomology/WoodsHole` (`Polynomial.exists_dual_eval_mul_eq_coeff_mul`,
 `New.Variety.map_scaledGraph_baseChange_cross`, `New.Variety.sum_mul_hodgeTateMap_scaledGraph_eq_zero`,
 `New.Variety.ellAdicCohom.woods_hole`); `Lib/Cohomology/Etale/Basic` (`New.Variety.IsNullFamily`)
 
-For compact complex manifolds, the holomorphic Lefschetz formula is IndexTheory §8.3; it does not apply to the Hodge
-cohomology of 6.1.
+## Layer 8: Comparison with the standard theory
+
+This layer states the results of the roadmap on the standard objects; Layers 1–7 do not use it. 8.1 computes the étale
+cohomology of test rings, and 8.2 identifies the cohomology of 1.3 with étale cohomology for quasi-compact
+quasi-separated schemes and torsion coefficients. 8.3 identifies the `ℓ`-adic cohomology of 3.4 with `ℓ`-adic étale
+cohomology when the groups modulo `ℓ` are finite, and 8.4 the Hodge cohomology of 6.1 with `⊕_p H^q(X, Ω^p)` for
+separated smooth schemes of finite type over a field. 8.5–8.9 relate proper functors, atlases and charted schemes,
+Galois coverings, the projective line with its class `η`, and the local terms of the Woods Hole formula to proper and
+smooth morphisms, finite étale Galois coverings, the projective bundle formula and the holomorphic Lefschetz formula.
+For a scheme `X`, `h_X` is its functor of points on rings, `B ↦ Hom(Spec B, X)`, which for a scheme over a ring `R` is
+the functor of points on rings of the Conventions; for a `k`-scheme, `h_X` also denotes its functor of points on
+`k`-algebras.
+
+### 8.1 Étale cohomology of test rings
+
+*Origin:* particular to this comparison: the local rings of a test ring are strictly henselian valuation rings, and
+its covers by basic open sets split along idempotents, so its spectrum has no higher étale cohomology.
+
+*Proof route:* (a) For a prime `𝔭` of `A`, the local ring `A_𝔭` is a valuation ring of an algebraically closed field
+(1.2 (c)). It is henselian, since a monic polynomial over `A_𝔭` splits into linear factors whose roots, being integral
+over the integrally closed `A_𝔭`, lie in it, and its residue field `κ(𝔭)` is algebraically closed. So a point of `U`
+over `𝔭` has residue field `κ(𝔭)`; on an affine open `Spec S` of `U` containing it, the resulting map
+`S ⊗_A A_𝔭 → κ(𝔭)` from an étale `A_𝔭`-algebra lifts to `A_𝔭` (SchemeAndStackFoundations §0.14, lifting along a
+henselian pair), and as `S` is of finite presentation over `A` the lift comes from a section of `U` over a basic open
+`D(f) ∋ 𝔭` (SchemeAndStackFoundations §0.9). A cover of `Spec A` by finitely many basic open sets is refined by a
+partition of `Spec A` into finitely many open and closed pieces, each inside one member: for `D(a)` and `D(b)`, 1.2
+(iii) gives an idempotent `e` with `D(b) ⊆ D(a)` where `e = 1` and `D(a) ⊆ D(b)` where `e = 0`, the two pieces are
+spectra of test rings (1.2 (b)), and an induction on the number of members finishes. The sections over the pieces glue
+to a section over `Spec A`. (b) A section over `Spec A` of the target of an epimorphism of étale sheaves lifts on some
+étale cover of `Spec A`, which has a section by (a); so `Γ(Spec A, −)` is exact and its derived functors vanish in
+positive degrees. (c) The sections of a constant sheaf over a scheme are the locally constant functions on it. (d) For
+`Z = Spec R`, ArcTopologyAndDescent §3.10 gives a v-cover `R → ∏_i V_i` by aic valuation domains, and the product is a
+test ring (1.2 (a), (b)); for `Z` quasi-compact quasi-separated, compose with a finite affine open cover, v-covers
+being stable under composition (PrismaticCohomology §2.0), and take the product of the finitely many test rings.
+
+Let `A` be a test ring.
+(a) Every étale surjective morphism `U → Spec A` has a section.
+(b) `Γ(Spec A, −)` is exact on abelian sheaves on the small étale site of `Spec A`, so `Hⁿ((Spec A)_ét, F) = 0` for
+every such sheaf `F` and every `n > 0`.
+(c) For an abelian group `Λ`, the sections over `Spec A` of the constant sheaf `Λ` form the group `LC_Λ(A)` of 1.3. So
+the étale cohomology of `Spec A` with coefficients `Λ` is `LC_Λ(A)` in degree `0` and vanishes in positive degrees,
+naturally in `A` and `Λ`.
+(d) Every quasi-compact quasi-separated scheme `Z` has a v-cover `Spec B → Z` (PrismaticCohomology §2.0) with `B` a
+test ring.
+
+*Needs:* 1.2, 1.3; ArcTopologyAndDescent §3.10 (Aic valuations detect v-descent); PrismaticCohomology §2.0 (Arc
+descent for the comparisons); SchemeAndStackFoundations §0.9 (Limits of schemes, Noetherian approximation and
+spreading out), §0.14 (Henselian pairs: characterisations, permanence, finite étale algebras, Elkik).
+
+### 8.2 Cohomology on test rings and étale cohomology
+
+*Origin:* adapted from the published theory of descent for torsion étale cohomology along v-covers (Bhatt and Mathew,
+*The arc-topology*, Proposition 5.2 and Theorem 5.4): here, the identification of the cohomology of 1.3 with étale
+cohomology, for quasi-compact quasi-separated schemes and torsion coefficients.
+
+*Proof route:* `Φ_X` is exact because inverse images of étale sheaves are exact and `Γ(Spec B, −)` is exact for a test
+ring `B` (8.1 (b)), and it sends the constant sheaf `Λ` to `LC_Λ∘π` by 8.1 (c). Put `F_ét(Z) := RΓ(Z_ét, Λ)` and
+`F_T(Z) := RHom(ℤ[h_Z|_Test], LC_Λ)`, which is the derived limit of `LC_Λ` over the points of `Z` in test rings (2.6
+(b)): two functors from quasi-compact quasi-separated schemes to the derived category of abelian groups, with the
+coherent pull-backs of EtaleCohomologyFoundations §F.1, concentrated in degrees `≥ 0`. The functors `Φ_Z` are exact
+and commute with pull-back along every morphism `g : Z′ → Z`, which is exact on both sides (the inverse image `g*` of
+sheaves, and restriction along `∫h_{Z′} → ∫h_Z`): `Φ_{Z′}(g*F)` is `Φ_Z(F)` restricted along `∫h_{Z′} → ∫h_Z`. Exact
+functors pass to derived categories without a choice of resolutions, so the `Φ_Z` give maps
+`RHom(ℤ, Λ) → RHom(LC_ℤ∘π, LC_Λ∘π) → RHom(ℤ, LC_Λ∘π)` compatible with these pull-backs: a natural map
+`F_ét(Z) → F_T(Z)` whose effect on cohomology is `c_Z`. (i) At `Z = Spec B` with `B` a test ring, both sides are
+`LC_Λ(B)` in degree `0` (8.1 (c); 1.1 (f)), and `c` is the identity there. (ii) Both functors have Čech descent along
+the family of all points `Spec B → Z` of `Z` in test rings. For `F_T`: the map to `h_Z` from the disjoint union of the
+functors `h_B` is onto at every test ring, so its Čech complex resolves `ℤ[h_Z]` (2.3 (a), (b)), and its fibre powers
+are disjoint unions of the functors of points of the fibre products `Spec B_0 ×_Z ⋯ ×_Z Spec B_m` (1.1 (g)). For
+`F_ét`: write `U_i → Z` for the members of the family and `U_{i_0…i_m}` for their fibre products over `Z`, which are
+quasi-compact and quasi-separated because `Z` is quasi-separated. One member `U_0 = Spec B_0 → Z` is a v-cover (8.1
+(d)), and so is its base change `U_0 ×_Z W → W` along every morphism `W → Z` of quasi-compact quasi-separated schemes
+(PrismaticCohomology §2.0); along each of these morphisms `F_ét` has Čech descent, torsion étale cohomology having
+arc-descent, hence v-descent (PrismaticCohomology §2.0, which states descent for one cover of quasi-compact
+quasi-separated schemes at a time). Descent along the whole family follows formally. Let `P_n` be the `(n + 1)`-fold
+fibre power of `U_0` over `Z`, and `C^{m,n} := ∏_{i_0, …, i_m} F_ét(U_{i_0…i_m} ×_Z P_n)`, a bicosimplicial object.
+For fixed `m`, its limit over `n` is `∏_{i_0, …, i_m} F_ét(U_{i_0…i_m})`, by descent along the base changes of
+`U_0 → Z` to the `U_{i_0…i_m}`, products commuting with limits. For fixed `n`, the family of the `U_i ×_Z P_n → P_n`
+has the member `U_0 ×_Z P_n → P_n`, which has a section, so its augmented Čech object is split and the limit of
+`C^{m,n}` over `m` is `F_ét(P_n)`; the limit of these over `n` is `F_ét(Z)`, by descent along `U_0 → Z`. As the two
+iterated limits agree, `F_ét(Z)` is the limit over `m` of `∏_{i_0, …, i_m} F_ét(U_{i_0…i_m})`. These products are
+indexed by sets one universe above that of `Z` (Conventions, *Sizes*) and are formed after lifting. (iii) The cone
+`K(Z)` of `F_ét(Z) → F_T(Z)` is concentrated in degrees `≥ −1` and has the same descent. If `K` vanishes in degrees
+below `m` at every quasi-compact quasi-separated scheme, then by (ii) `H^m(K(Z))` injects into the product of the
+groups `H^m(K(Spec B))`, which vanish by (i); by induction on `m`, `K = 0`, which is (a). For (b): `Φ` commutes with
+inverse images, and an exact functor preserves Yoneda products with extension classes. (c) describes the functors of
+points of base changes and fibres, with 5.6 (a) for tests over `A`.
+
+Let `X` be a quasi-compact quasi-separated scheme. Let `∫h_X` be the category of pairs `(B, x)` of a test ring `B` and
+`x ∈ h_X(B)`, with its projection `π` to test rings (2.6 (b)), and `Φ_X` the functor from abelian sheaves on the small
+étale site of `X` to functors `∫h_X → Ab` sending `F` to `(B, x) ↦ Γ(Spec B, x*F)`; it is exact and sends the constant
+sheaf `Λ` to `LC_Λ∘π`. For an abelian group `Λ` and `n ≥ 0`, let `c_X : Hⁿ(X_ét, Λ) → Hⁿ_Λ(h_X)` be the composite of
+the map `Extⁿ(ℤ, Λ) → Extⁿ(LC_ℤ∘π, LC_Λ∘π)` that `Φ_X` induces, of pull-back along `ℤ → LC_ℤ∘π`, `1 ↦ 1`, and of the
+identification `Extⁿ(ℤ, LC_Λ∘π) = Hⁿ(h_X|_Test, LC_Λ)` of 2.6 (b). The two sides lie in different universes
+(Conventions, *Sizes*), and bijectivity is meant after lifting.
+(a) *Comparison.* If `Λ` is a torsion group, `c_X` is bijective for every `n`.
+(b) `c_X` is natural in `X`, for morphisms of quasi-compact quasi-separated schemes, and in `Λ`, and it commutes with
+the connecting maps of a short exact sequence `0 → Λ′ → Λ → Λ″ → 0`, whose image `0 → LC_{Λ′} → LC_Λ → LC_{Λ″} → 0` is
+exact on test rings (8.1 (b), (c)). In degree `0` it sends a locally constant function `f : X → Λ` to the family of
+the composites `f∘x`.
+(c) For a ring `R`, a quasi-compact quasi-separated scheme `X` over `R` and an `R`-algebra `Ω′`, the functor `X_{Ω′}`
+of 1.3 is `h_{X ×_R Spec Ω′}`, so for torsion `Λ`, `c` identifies `Hⁿ_Λ(X_{Ω′})` with `Hⁿ((X ×_R Spec Ω′)_ét, Λ)`,
+compatibly with the automorphisms of `X ×_R Spec Ω′` induced by the `R`-algebra automorphisms of `Ω′`. For `Y = h_X`,
+the base change `Y_B` and the locus `Y_{I=0}` of 1.3 are the functors of points of `X ×_R Spec B` and
+`X ×_R Spec(R/(I))`, and the cohomology on tests over an `R`-algebra `A` of the functor of points of `X` on
+`A`-algebras is that of `h_{X ×_R Spec A}` (5.6 (a)).
+
+*Needs:* 1.1, 1.3, 2.3, 2.6, 5.6, 8.1; PrismaticCohomology §2.0 (Arc descent for the comparisons);
+EtaleCohomologyFoundations §F.1 (Derived sheaves and coherent diagrams).
+
+### 8.3 `ℓ`-adic cohomology and `ℓ`-adic étale cohomology
+
+*Origin:* adapted from the published theory of `ℓ`-adic cohomology as the limit of torsion cohomology: here, the
+comparison of the Witt-vector coefficient of 3.4 with the coefficients `ℤ/ℓ^k` through 8.2.
+
+*Proof route:* Put `N := ℤ[X_{Ω′}|_Test]` and `M_n := Hⁿ(N, ℤ_ℓ)`. The sequences of 3.4 (a), with
+`LC_{W_k(𝔽_ℓ)} = LC_{ℤ/ℓ^k}`, give exact sequences `0 → M_n/ℓ^k → Hⁿ(N, LC_{ℤ/ℓ^k}) → M_{n+1}[ℓ^k] → 0`, compatible
+with the reductions `ℤ/ℓ^{k+1} → ℤ/ℓ^k`, the transition maps on the groups `M_{n+1}[ℓ^k]` being multiplication by `ℓ`.
+By 8.2 and the hypothesis, `Hⁿ(N, LC_{𝔽_ℓ})` is finite, so `M_n` is a finitely generated `ℤ_ℓ`-module (3.4 (c)) and
+`lim_k M_n/ℓ^k = M_n`. An element of `lim_k M_{n+1}[ℓ^k]` is a sequence `(x_k)` in `M_{n+1}` with `x_k = ℓ·x_{k+1}`
+for all `k`; it is `0`, because `M_{n+1}` is derived `ℓ`-complete (3.4 (b)) and the map `(x_k) ↦ (x_k − ℓ·x_{k+1})` is
+then injective (PadicComparisonForFunctorCohomology §3.1). So `lim_k M_{n+1}[ℓ^k] = 0`; the limit over `k`, with 8.2
+for `Λ = ℤ/ℓ^k` and its naturality in `Λ`, gives (a), and the naturality of 8.2 in `X` gives the compatibilities. For
+(b), the finiteness of every `Hⁱ((X ×_R Spec Ω′)_ét, ℤ/ℓ^k)` is EtaleCohomologyFoundations §F.3
+(`VanishingCycles.finite_H_constantSheaf`). With finite levels the Milnor term vanishes, so
+`lim_k Hⁿ((X ×_R Spec Ω′)_ét, ℤ/ℓ^k)` is the `n`-th cohomology of the classical realization
+`Rlim_k RΓ(X ×_R Spec Ω′, ℤ/ℓ^k)` of §F.4.2; §F.4.5 identifies the rational realization with its tensor product with
+`ℚ_ℓ`, and §F.4.4 gives the finite generation.
+
+Let `ℓ` be a prime, `R` a ring, `Ω′` an `R`-algebra, `X` a quasi-compact quasi-separated scheme over `R` and `n ≥ 0`,
+and suppose that the group `Hⁿ` of `(X ×_R Spec Ω′)_ét` with coefficients `ℤ/ℓ` is finite.
+(a) Push-forward along the reductions `ℤ_ℓ → LC_{ℤ/ℓ^k}` of 3.4 (a), followed by 8.2, is an isomorphism of
+`ℤ_ℓ`-modules `Hⁿ(X_{Ω′}|_Test, ℤ_ℓ) ≅ lim_k Hⁿ((X ×_R Spec Ω′)_ét, ℤ/ℓ^k)`. Hence
+`Vⁿ(X) ≅ ℚ_ℓ ⊗_{ℤ_ℓ} lim_k Hⁿ((X ×_R Spec Ω′)_ét, ℤ/ℓ^k)`, naturally in `X` and compatibly with every `R`-algebra
+automorphism of `Ω′`, which acts on both sides by pull-back along the automorphism of `X ×_R Spec Ω′` that it induces.
+(b) If `Ω′` is a separably closed field in which `ℓ` is invertible and `X ×_R Spec Ω′` is separated and of finite type
+over `Ω′`, for instance if `X` is proper over `R` and `Ω′ = Ω`, the hypothesis holds for every `n`, and the
+isomorphism of (a) identifies `Vⁿ(X)` with the `ℓ`-adic étale cohomology `Hⁿ(X ×_R Spec Ω′, ℚ_ℓ)` of
+EtaleCohomologyFoundations §§F.4.2, F.4.5 for the constant system `(ℤ/ℓ^k)_k`, a finite-dimensional `ℚ_ℓ`-vector
+space; it is natural in `X` and compatible with the `R`-algebra automorphisms of `Ω′`, as in (a), these acting on
+`Hⁿ(X ×_R Spec Ω′, ℚ_ℓ)` through the groups `Hⁿ((X ×_R Spec Ω′)_ét, ℤ/ℓ^k)`. When `Ω′` has characteristic `0`, as `Ω`
+has, every prime `ℓ` is invertible in it: `ℓ` may be the residue characteristic of a valuation ring of `Ω′` or of a
+point of `Spec R`.
+
+*Needs:* 3.4, 8.2; PadicComparisonForFunctorCohomology §3.1 (derived completeness); EtaleCohomologyFoundations §F.3
+(Finiteness, Artin vanishing and generic acyclicity), §F.4.2 (Classical realization and finite-level cohomology
+limits), §F.4.4 (Integral finiteness, perfectness and derived reduction), §F.4.5 (Rational realization and
+finite-dimensional cohomology).
+
+### 8.4 Hodge cohomology and the cohomology of differential forms
+
+*Origin:* adapted from the published theory of the Čech computation of quasi-coherent cohomology on separated schemes
+and of the differentials of an algebra étale over a polynomial ring: here, the identification of the Hodge cohomology
+of 6.1 with the coherent groups `H^q(X, Ω^p)`.
+
+*Proof route:* (i) For an affine open `U = Spec R` of `X` with étale coordinates `x_1, …, x_d`, 6.1 (b), which uses
+only the coordinates, represents `(A, M) ↦ Hom_k(R, A ⊕ M)` by `(R, R^d)`. The second component of `u` is a derivation
+with `x_i ↦ e_i`, hence the universal derivation for the identification `Ω¹_{R/k} = R^d`, `dx_i ↦ e_i`; so `U` has
+Hodge cohomology `⋀_R R^d = ⊕_p Ω^p_{R/k}` in degree `0` and none above (1.1 (f)), and an inclusion of such opens acts
+by restriction of forms. (ii) Cover `X` by finitely many affine opens `U_i` with étale coordinates
+(SchemeAndStackFoundations §0.8, étale coordinates); as `X` is separated, every finite intersection `U_I` is an affine
+open of `U_{min I}`, and the coordinates of `U_{min I}` are étale coordinates on it. (iii) The subfunctor `V ⊆ h_X` of
+points that land in some `U_i` is Zariski-locally everything for the rings `A ⊕ M` (1.1 (e)), `Spec(A ⊕ M) → Spec A`
+being a homeomorphism; so `V` is dense for `⋀` (6.2 (d)) and `V → h_X` is an equivalence for `⋀` (2.4 (b)). (iv) At
+every object, the alternating Čech complex of the subsets `h_{U_i}` is a finite resolution of `ℤ[V]` (2.4 (a), (c)) by
+the projective functors `ℤ[h_{U_I}]`; by (i), `H^q_Hdg(h_X)` is the `q`-th cohomology of the alternating Čech complex
+of the cover with values in `⊕_p Ω^p_{X/k}`. (v) Quasi-coherent cohomology vanishes in positive degrees on the affine
+`U_I` (SchemeAndStackFoundations §2.6), so by Leray's acyclicity theorem for the finite affine cover of the separated
+`X` (SchemeAndStackFoundations §2.2), the alternating and the full Čech complex of a finite cover having the same
+cohomology, this Čech complex computes `⊕_p H^q(X, Ω^p_{X/k})`. Two such covers have a common refinement of the same
+kind, which gives independence of the cover and naturality. The scaling `s_t` is pull-back along the endomorphism
+`(id, t·)` of `(R, R^d)`, which acts on `⋀^p_R R^d` by `t^p`.
+
+Let `k` be a field and `X` a separated `k`-scheme of finite type, smooth over `k`, with its functor of points `h_X` on
+`k`-algebras. For every `q ≥ 0` there is an isomorphism of `k`-vector spaces
+`H^q_Hdg(h_X) ≅ ⊕_{p ≥ 0} H^q(X, Ω^p_{X/k})`, natural for `k`-morphisms of such schemes (pull-back of differential
+forms on the right), which carries the scaling `s_t`, `t ∈ k`, to multiplication by `t^p` on the `p`-th summand. If
+`X = Spec R` with étale coordinates `x_1, …, x_d`, it is in degree `0` the identification `⋀_R R^d = ⊕_p Ω^p_{R/k}`,
+`e_i ↦ dx_i`, of 6.1 (b), and both sides vanish in positive degrees.
+
+*Needs:* 1.1, 2.4, 6.1, 6.2; SchemeAndStackFoundations §0.8 (Flatness over Dedekind bases, spreading out, étale
+coordinates and quasi-sections), §2.2 (Leray and Čech spectral sequences), §2.6 (Quasi-coherent cohomology).
+
+### 8.5 Proper functors and proper morphisms
+
+*Origin:* adapted from the published theory of the valuative criterion of properness: here, the comparison of the
+properness of functors of 1.4 (a) with the properness of morphisms of schemes.
+
+*Proof route:* (a) is 1.5 (a). (b) Condition (i) of 1.4 (a) at all affine schemes says that the pull-back of the
+diagonal of `X` along every map from an affine scheme to `X × X` is a closed immersion, so the diagonal is a closed
+immersion and `X` is separated. Given a valuation ring `O` of a field `K` and a point of `X` over `K` whose structure
+map sends `D` into `O`, take a valuation ring `O′` of an algebraic closure of `K` dominating `O`; condition (ii) gives
+a point of `X` over `O′` extending the given one. This is the existence part of the valuative criterion with an
+extension of the valuation ring allowed, which for a quasi-compact morphism is equivalent to universal closedness; so
+`X → Spec D` is separated, of finite type and universally closed, that is, proper. (c) Condition (i) holds for every
+affine scheme, two maps out of `ℤ̄` agreeing exactly after the maps that kill the ideal generated by the differences
+of their values. For (ii) take `T = ℤ̄` and `a` the identity: a ring map `ℤ̄ → K` lands in every valuation ring `O` of
+`K`, as `O` is integrally closed in `K` and `ℤ̄` is integral over `ℤ`.
+
+Let `D` be a ring and `X` a scheme with a morphism `X → Spec D`, read through `h_X` with its map to `h_D`.
+(a) If `X → Spec D` is proper, `h_X` is proper over `D` (1.4 (a)).
+(b) If `X → Spec D` is of finite type and `h_X` is proper over `D`, then `X → Spec D` is proper.
+(c) Properness of functors asks for no finiteness: for the ring `ℤ̄` of algebraic integers, `h_{ℤ̄}` is proper over
+`ℤ`, while `Spec ℤ̄ → Spec ℤ` is not of finite type and so not proper.
+So for schemes of finite type over `D` the two notions agree, and 3.3 (d), (e), 3.5, 4.1, 4.3 and 4.4 apply to the
+functors of points of all proper `D`-schemes; a functor proper over `D` records no finiteness condition.
+
+*Needs:* 1.4, 1.5; Mathlib `AlgebraicGeometry.IsProper`.
+
+### 8.6 Atlases, charted schemes and smooth morphisms
+
+*Origin:* adapted from the published theory of étale coordinates on smooth schemes: here, the comparison of the
+atlases and charting subfunctors of 1.4 (c), (d) with smoothness.
+
+*Proof route:* As `X` is separated, `h_X` is separated (1.4 (b)), as in 1.5 (b): two points agree exactly after a map
+that kills the ideal of the pull-back of the diagonal. An open subscheme `U` gives the open subfunctor (1.4 (b)) of
+points that land in it, and every open subfunctor of `h_X` is of this form, the ideals of 1.4 (b) at the inclusions of
+the affine opens of `X` defining an open subscheme. If `X` is smooth of relative dimension `d`, every point has an
+affine open neighbourhood `Spec R` étale over `𝔸^d_k` (SchemeAndStackFoundations §0.8, étale coordinates); its
+inclusion, a point of `X(R)`, is injective on points, an open immersion being a monomorphism, with image an open
+subfunctor, and finitely many such opens cover the quasi-compact `X`. Conversely, the locus of an étale chart
+`(R, x_1, …, x_d, y)` is the functor of points of an open subscheme `U`, and `y` identifies `Spec R` with `U`, which
+is therefore étale over `𝔸^d_k`; every point of `X` is the image of a point with values in its residue field, so the
+loci cover `X`. (b) is 1.5 (d) with (a).
+
+Let `k` be a ring, `X` a quasi-compact separated `k`-scheme and `h_X` its functor of points on `k`-algebras.
+(a) `h_X` has an atlas of dimension `d` (1.4 (c)) exactly when `X → Spec k` is smooth of relative dimension `d`.
+(b) If `k` is Noetherian and `X` is smooth of relative dimension `d` over `k`, then `X` is charted over `k` (1.4 (d)).
+So 1.5 (c), (d) hold for every quasi-compact separated scheme `X` over `R` whose base change to `k` is smooth of
+relative dimension `d`, properness being unnecessary, and for such schemes the hypotheses "with an atlas of dimension
+`d`" of Layers 6 and 7 are smoothness of relative dimension `d`. A charting subfunctor records less: no statement here
+derives smoothness from it.
+
+*Needs:* 1.4, 1.5; SchemeAndStackFoundations §0.8 (Flatness over Dedekind bases, spreading out, étale coordinates and
+quasi-sections).
+
+### 8.7 Galois coverings and finite étale Galois coverings
+
+*Origin:* adapted from the published theory of finite étale Galois coverings and of the Hochschild–Serre spectral
+sequence: here, the comparison of the Galois coverings of 3.5 with finite étale torsors.
+
+*Proof route:* (a) `W` is finite over the proper `Y`, hence proper over `R`. A pair of `K`-points of `W` over one
+point of `Y` is a `K`-point of `W ×_Y W ≅ Δ × W`, hence of the form `(a(δ)(w), w)` for exactly one `δ`, `Spec K` being
+connected; `c` is surjective by hypothesis. (b) By 3.5 (b), `c*` is injective and its image contains the fixed
+classes; it consists of fixed classes as `c∘a(δ) = c`. 8.3 (b) applies to the proper `R`-schemes `Y` and `W`,
+naturally, so `c*` and the action of `Δ` correspond. On the standard side, the Hochschild–Serre spectral sequence of
+the `Δ`-torsor `W ×_R Spec Ω → Y ×_R Spec Ω` with coefficients `ℤ/ℓ^k` (SchemeAndStackFoundations §2.15) has its terms
+`H^p(Δ, −)`, `p > 0`, killed by `|Δ|`, so its edge map becomes an isomorphism onto the invariants after the limit over
+`k` and `ℚ_ℓ ⊗ −`. (c) For a field `K` of characteristic `0`, the `K`-points of `Spec ℤ[i]` are the square roots of
+`−1` in `K`, and conjugation exchanges them; `ℤ[i]` is finite over `ℤ`, so `Spec ℤ[i] → Spec ℤ` is proper and
+surjective, and `2 = −i(1 + i)²` is ramified.
+
+Let `R` be a ring with a map to `Ω`, `Y` a proper `R`-scheme and `c : W → Y` a finite étale surjective morphism with a
+finite group `Δ` acting on `W` by automorphisms `a(δ)` over `Y`, such that `Δ × W → W ×_Y W`, `(δ, w) ↦ (a(δ)(w), w)`,
+is an isomorphism: a finite étale Galois covering with group `Δ` in the sense of the literature, `W` being a
+`Δ`-torsor over `Y`.
+(a) `W` is proper over `R`, and `c` is a Galois covering with group `Δ` in the sense of 3.5: for every field `K`, of
+any characteristic, two points of `W(K)` with the same image in `Y(K)` differ by exactly one element of `Δ`.
+(b) For every prime `ℓ`, `c*` is an isomorphism from `Vⁿ(Y)` onto the classes of `Vⁿ(W)` fixed by `Δ`; through 8.3 (b)
+it is the isomorphism `Hⁿ(Y ×_R Spec Ω, ℚ_ℓ) ≅ Hⁿ(W ×_R Spec Ω, ℚ_ℓ)^Δ` of `ℓ`-adic étale cohomology, which the
+Hochschild–Serre spectral sequence also gives.
+(c) The condition of 3.5 is weaker: it concerns only points with values in fields of characteristic `0` and asks
+neither flatness nor étaleness. For instance `Spec ℤ[i] → Spec ℤ`, with `Δ = ℤ/2` acting by `i ↦ −i`, is a Galois
+covering in the sense of 3.5 (for `R = ℤ`) and is ramified at `2`.
+
+*Needs:* 3.5, 8.3; SchemeAndStackFoundations §2.15 (Étale cohomology: Gabber, fields, limits, Hochschild–Serre).
+
+### 8.8 The projective line, the class `η` and the projective bundle formula
+
+*Origin:* adapted from the published theory of the projective bundle formula with the Kummer first Chern class (the
+sources named in 5.5): here, the comparison of the functor `ℙ¹` of 5.1 with the scheme `ℙ¹_ℤ`, of `𝕋` with Tate
+modules, and of `η` with the Kummer first Chern class of `O(1)`.
+
+*Proof route:* (a) The rows `(1 + uv, v)` are unimodular (`(1 + uv) − u·v = 1`), and two unimodular rows give the same
+point of `ℙ¹_ℤ` exactly when they are proportional by a unit, which for these rows is the relation of 5.1. A point of
+`ℙ¹_ℤ` with values in `B` is, on a neighbourhood `D(a)` of a given maximal ideal, a unimodular row `(s, t)` with `s`
+or `t` a unit; it is proportional to `(1 + 0·(t/s), t/s)` in the first case and to `(1 + (s/t − 1)·1, 1)` in the
+second. So the image is Zariski-locally everything, and `LC_Λ` has Zariski descent on test rings (2.4 (g)); for `ℙ^d`
+the same holds with a unit entry of a unimodular vector, the rings being `A ⊕ M` and the coefficient `⋀` (6.2 (d)).
+(b) `ℚ/ℤ` is the union of the `(1/n)ℤ/ℤ`, a homomorphism `ℚ → g(c)^×` with `χ(1) = 1` kills `ℤ`, and `ℚ/ℤ` is the
+direct sum of its `ℓ`-primary parts `ℚ_ℓ/ℤ_ℓ`, so that `Hom(ℚ/ℤ, −)` is the product of the groups `Hom(ℚ_ℓ/ℤ_ℓ, −)`;
+`χ(1/ℓ)^ℓ = χ(1)`. (c) By 5.5 (c) for the constant functor `S = ℤ`, whose cohomology on tests over `A` is `ℤ/ℓ` in
+degree `0` and vanishes above (`A` is initial among tests over `A`; 3.1 (a)), `H²(ℙ¹, LC)` on tests over `A` is cyclic
+of order `ℓ`, generated by `π*(1)·η`. Through (a), 5.6 (a) and 8.2 it is `H²((ℙ¹_A)_ét, ℤ/ℓ)`, which by the projective
+bundle formula over the strictly henselian `Spec A` (EtaleCohomologyFoundations §0.9; 8.1) is generated by `c₁(O(1))`;
+two generators of a cyclic group of order `ℓ` differ by a unit. (d) Cup product with the class `c₁(O(1))` of even
+degree is Yoneda composition with it as a class in `Ext²(ℤ/ℓ, ℤ/ℓ)` (EtaleCohomologyFoundations §0.9: classes are
+shifted morphisms), and the exact functor `Φ` of 8.2 preserves Yoneda composition; so it suffices to compare the
+images of `c₁(O(1))` and of `η_{LC}` in `Ext²(LC∘π, LC∘π)` on the points of `ℙ¹` in tests over `A`. The sequence
+`0 → LC_ℤ → LC_ℤ → LC → 0` of multiplication by `ℓ`, the equivalence `ℤ → LC_ℤ` for coefficients with Zariski descent
+(2.5 (a)) and `H¹((ℙ¹_A)_ét, ℤ/ℓ) = 0` make pull-back along `ℤ → LC` an isomorphism from that group onto
+`H²((ℙ¹_A)_ét, ℤ/ℓ)`, where (c) applies.
+
+(a) The map from the functor `ℙ¹` of 5.1 to the functor of points of the scheme `ℙ¹_ℤ` sending `(u, v)` to the point
+`[1 + uv : v]` is injective, and its image is Zariski-locally everything (1.1 (e), for the rings themselves); the same
+holds for `Y × ℙ¹ ⊆ Y × h_{ℙ¹_ℤ}` for every functor `Y` on rings. So these inclusions are `Λ`-equivalences for every
+abelian group `Λ` (2.4 (b), (g)), and for `X` a quasi-compact quasi-separated scheme and `Λ` torsion, `Hⁿ_Λ(h_X × ℙ¹)`
+is `Hⁿ((X ×_ℤ ℙ¹_ℤ)_ét, Λ)` (8.2). Likewise the functor `ℙ^d` of 7.2 is a subfunctor of the functor of points of
+`ℙ^d_k` on `k`-algebras whose image is Zariski-locally everything, the inclusion is an equivalence for Hodge
+cohomology, and its Hodge cohomology is `⊕_p H^q(ℙ^d_k, Ω^p)` (8.4).
+(b) `𝕋(c) = Hom(ℚ/ℤ, g(c)^×)` is the limit of the groups `μ_n(g(c))` over all `n ≥ 1` and the product over all primes
+`ℓ` of the Tate modules `T_ℓ(g(c)^×) = lim_k μ_{ℓ^k}(g(c))`. The maps `χ ↦ χ(1/ℓ)` send the Kummer sequence of 5.1 (a)
+to the sequence `0 → μ_ℓ → G_m → G_m → 0` of the `ℓ`-th power, by the identity on the last term.
+(c) Let `A` be as in 5.5 (c) and `LC` the locally constant `ℤ/ℓ`-valued functions. Through (a), 5.6 (a) and 8.2, the
+class `π*(1)·η` of 5.5 (c), `1 ∈ H⁰(ℤ, LC)` the constant function, is `u·c₁(O(1))` in `H²((ℙ¹_A)_ét, ℤ/ℓ)` for a unit
+`u` of `ℤ/ℓ`, where `c₁(O(1))` is the Kummer first Chern class (EtaleCohomologyFoundations §0.9) read in `ℤ/ℓ` through
+`μ_ℓ ≅ ℤ/ℓ`, `ε(1/ℓ) ↦ 1`.
+(d) With `A` and `u` as in (c), for every quasi-compact quasi-separated `A`-scheme `X` and `S = ℤ[h_X]` on tests over
+`A`, the identifications of (a), 2.6 (c), 5.6 (a) and 8.2 carry the map `b ↦ π*(b)·η` of 5.5 (c) to
+`b ↦ pr₁*(b) ∪ u·pr₂*c₁(O(1))` on `X ×_ℤ ℙ¹_ℤ`. So 5.5 (c) for `S = ℤ[h_X]` is the projective bundle formula of
+EtaleCohomologyFoundations §0.9 for the trivial bundle of rank two on `X`.
+
+*Needs:* 1.1, 2.4, 2.5, 2.6, 3.1, 5.1, 5.5, 5.6, 6.2, 7.2, 8.1, 8.2, 8.4; EtaleCohomologyFoundations §0.9 (Algebraic
+cycle classes and the projective bundle formula).
+
+### 8.9 Local terms of the Woods Hole formula and the holomorphic Lefschetz formula
+
+*Origin:* adapted from the published theory of the holomorphic Lefschetz fixed point formula (Atiyah and Bott (1968)):
+here, the identification of the local terms of 7.5 with those of that formula for a single self-map.
+
+*Proof route:* (a) `det(1 − tA) = Σ_h (−t)^h tr(⋀^h A)`, and `⋀^h A = 0` for `h` above the dimension. (b) is
+IndexTheory §8.3 for the bundle `E` of holomorphic `h`-forms and `φ` the pull-back of forms, whose value at a fixed
+point `x` is `⋀^h` of the transpose of `df_x`, with trace `tr(⋀^h df_x)`, combined with (a). (c) With `c` the
+identity, the condition `u(f(x)) = c(f(Ax))` of 6.6 says that `A` is `du_y` on the tangent space `T_yY`, so
+`P(t) = det(1 − t·du_y)` is a tangent polynomial of rank `d` with `P(1) ≠ 0`, and the local term of 7.5 at `y` is
+`[t^h]det(1 − t·du_y)/det(1 − du_y)`. The fixed-point scheme of `u` has tangent space `ker(1 − du_y)` at `y`, so it is
+finite and reduced, and for an embedding `ℚ̄ → ℂ` the fixed points of `u` on the compact complex manifold `M = Y(ℂ)`
+(ComplexComparisonPartII §C-1.1) are the images of its `ℚ̄`-points, isolated, with the same derivatives. Flat base
+change from `ℚ̄` to `ℂ` (SchemeAndStackFoundations §2.6), coherent GAGA (ComplexComparisonPartII §C1.9) and the
+Dolbeault theorem (ComplexKahlerGeometry §2.5) identify `H^q(M, Ω^h)` with `H^q(Y, Ω^h_{Y/ℚ̄}) ⊗ ℂ`, compatibly with
+`u*`, and (b) applies.
+
+(a) For an endomorphism `A` of a finite-dimensional vector space with `det(1 − A) ≠ 0` and `h ≥ 0`,
+`[t^h]det(1 − tA)/det(1 − A) = (−1)^h tr(⋀^h A)/det(1 − A)`, which vanishes when `h` exceeds the dimension.
+(b) Let `M` be a compact complex manifold and `f : M → M` holomorphic, with every fixed point `x` isolated and
+`det(1 − df_x) ≠ 0`. Then `Σ_{f(x) = x} [t^h]det(1 − t·df_x)/det(1 − df_x) = (−1)^h Σ_q (−1)^q tr(f* | H^q(M, Ω^h))`,
+`H^q(M, Ω^h)` being the Dolbeault cohomology of the holomorphic `h`-forms.
+(c) Let `Y` be a smooth projective variety of dimension `d` over `ℚ̄` and `u : Y → Y` a morphism with
+`det(1 − du_y) ≠ 0` at every fixed point `y ∈ Y(ℚ̄)`. In 7.5 with `R = E = k = ℚ̄` (embedded in `ℚ̄_p`), `W = Y`, `c`
+the identity and a single map `u_1 = u` with `b_1 = 1`, the pairs of `S` are the fixed points of `u`, each with a
+tangent polynomial `P` of rank `d` with `P(1) ≠ 0`, and the sum of the local terms of weight `h` is the element
+`(−1)^h Σ_q (−1)^q tr(u* | H^q(Y, Ω^h_{Y/ℚ̄}))` of `ℚ̄`.
+So in this case the conclusion of 7.5 is the vanishing of the holomorphic Lefschetz number of `u` on `h`-forms, which
+the formula of (b) computes and 7.5 does not: 7.5 derives that vanishing from its hypothesis on `λ_h`, records no
+value of the sum when the hypothesis fails, and states nothing on traces for correspondences.
+
+*Needs:* 6.6, 7.5, 8.6; IndexTheory §8.3 (The holomorphic Lefschetz formula (I8.3)); SchemeAndStackFoundations §2.6
+(Quasi-coherent cohomology); ComplexComparisonPartII §C-1.1 (Analytic local models and scheme analytification), §C1.9
+(Projective and proper coherent GAGA); ComplexKahlerGeometry §2.4 (Product-domain approximation, the polydisc lemma
+and Dolbeault cohomology), §2.5 (Holomorphic-form sheaves and the Dolbeault theorem).
 
 ## Results taken from other roadmaps
 
 - Derived completeness for a principal ideal: Ext groups of functors with complete torsion-free coefficients are derived
-  complete, and a comparison that is bijective modulo `π` is bijective (used in 3.4):
+  complete, and a comparison that is bijective modulo `π` is bijective (used in 3.4, 8.3):
   PadicComparisonForFunctorCohomology §§3.1, 3.2.
 - `p`-adic tests, their tilts and generic fibres, `O_C`, `O^♭`, acyclicity of perfect algebras, flat base change, the
   passage from almost coefficients to period coefficients, and the tilted theory on `ℓ`-adic tests (used in 5.3–5.5,
@@ -1486,6 +1967,19 @@ cohomology of 6.1.
   PadicComparisonForFunctorCohomology §6.3.
 - Absolutely integrally closed rings: the definition, fields, quotients and localisations (used in 1.2, 4.2):
   ArcTopologyAndDescent §0.1.
+- v-covers, their stability under composition and base change, and arc-descent, hence v-descent, of torsion étale
+  cohomology (used in 8.1, 8.2): PrismaticCohomology §2.0.
+- v-covers of a ring by products of aic valuation domains (used in 8.1): ArcTopologyAndDescent §3.10.
+- Lifting along henselian pairs, spreading out over limits, étale coordinates of smooth morphisms, the vanishing of
+  quasi-coherent cohomology on affine schemes with flat base change, continuity of étale cohomology along limits and
+  the Hochschild–Serre spectral sequence of a finite étale Galois covering (used in 8.1, 8.4, 8.6, 8.7, 8.9):
+  SchemeAndStackFoundations §§0.8, 0.9, 0.14, 2.2, 2.6, 2.15.
+- Étale cohomology with its coherent pull-backs, finiteness modulo `ℓ`, the classical and rational `ℓ`-adic
+  realizations with integral finiteness, and the Kummer first Chern class with the projective bundle formula (used in
+  8.2, 8.3, 8.8); proper and smooth base change and the Künneth formula, the standard counterparts named in 4.3, 5.2
+  and 5.6: EtaleCohomologyFoundations §§F.1, F.2.1, F.2.2, F.2.6, F.3, F.4.2, F.4.4, F.4.5, 0.9.
+- The holomorphic Lefschetz formula, scheme analytification with coherent GAGA, and Dolbeault cohomology (used in
+  8.9): IndexTheory §8.3; ComplexComparisonPartII §§C-1.1, C1.9; ComplexKahlerGeometry §§2.4, 2.5.
 
 ## What the library already provides
 
